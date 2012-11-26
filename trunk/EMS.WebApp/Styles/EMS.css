@@ -1,0 +1,120 @@
+﻿/* General */
+html{margin-top:0px;}
+body {font-family:"Trebuchet MS", Helvetica, sans-serif;font-size:10pt;font-weight:normal;margin:0px;padding:2px;}
+a:link{color: #000000;text-decoration: none;}
+a:visited{color: #505abc;}
+a:hover{color: #1d60ff;text-decoration: underline;}
+a:active{color: #12eb87;}
+input[type="text"],textarea
+{
+	border: 1px default #7f9db9;
+	color: #000000;
+	font-family:"Trebuchet MS", Helvetica, sans-serif;font-size:10pt;
+}
+.textboxuppercase
+{
+	border: 1px default #7f9db9;
+	color: #000000;
+	font-family:"Trebuchet MS", Helvetica, sans-serif;font-size:10pt;
+	text-transform:uppercase;	
+}
+
+input[type="submit"]
+{
+	background-color:#f3f6f8;color:Black;border:solid 1px #c8c8c8; cursor:pointer;font-family:"Trebuchet MS", Helvetica, sans-serif;font-size:10pt;height:28px;
+}
+select
+{
+	border: 1px solid #BBBBBB;background-color: #ffffff;font-family:"Trebuchet MS", Helvetica, sans-serif;font-size:10pt;
+}
+
+fieldset{margin: 5px;padding: 5px; text-align:left;vertical-align:top;}
+fieldset p {margin: 2px 6px 0px 6px;}
+legend {font-size: 1.1em;font-weight: 600;padding: 0px 4px 2px 4px;color:Blue;}
+
+/* Header & Footer */
+#header{margin:0px;width:100%;background:#ffffff url(Images/header.jpg) no-repeat center top; color:#000000;height:55px;border-right:none 0px #328dc4;border-left:none 0px #328dc4;}
+#header .logo{float:left;padding:0px 0px 0px 0px;width:25%;}
+#header .productname{float:left;width:47%;}
+#header .productname h1{color:Black;font-size: 20px; font-weight:bolder; letter-spacing: 2px; margin-top:12px;padding-left:5px;}
+#header .search{float:right;padding:12px 10px 0px 0px;font-size: 12px;width:25%;}
+#header .search a{ color: #000000;}
+#subheader{margin:0px;width:100%;color:#FFFFFF;background-color:Black;height:30px;}
+
+#main {background:#ffffff;width:100%;min-height:390px;margin:0px;color:#000000;padding:0px;}
+#main .main_left{float:left;padding:0px;margin:0px;width:195px;padding:0px;}
+#main .main_container{padding:0px 0px 10px 0px;border-left: none 0px #cccccc;border-right:none 0px #cccccc;border-bottom:none 0px #cccccc;}
+
+#footer{width:100%;height:25px;clear:both;padding:8px 0px 10px 0px;color:#666666;}
+#footer .copyright{float:left;font-size:11px; color:#666666;padding:5px 0px 0px 10px;}
+#footer .disclaimer{float:right;font-size:11px; color:#666666;padding:5px 10px 0px 0px;}
+#footer .disclaimer a{color:#666666;}
+
+#dvheader {font-family:Arial, Helvetica, sans-serif;}
+#dvbody {font-family:Arial, Helvetica, sans-serif;font-size:12px;color:#000000;}
+#dvfooter {font-family:Arial, Helvetica, sans-serif;font-size:12px;color:#000000;}
+
+/* Menu */
+#navbar {margin: 0;padding: 0;height: 1em;z-index:999; }
+#navbar li {list-style: none;float: left; }
+#navbar li a {display: block;padding: 6px 25px 6px 5px;background-color:Black;color: #fff;text-decoration: none;}
+#navbar li a:hover {display: block;padding: 6px 25px 6px 5px;background-color:Black;color: #fff;text-decoration: underline;}
+#navbar li ul {display: none; width: 200px; /* Width to help Opera out */background-color: #69f;}
+#navbar li:hover ul {z-index:999;display: block;position: absolute;margin: 0;padding: 0; }
+#navbar li:hover li {float: none; }
+#navbar li:hover li a {background:none;background-color: #69f;border-bottom: 1px solid #fff;color: #000; }
+#navbar li:hover li a:hover{text-decoration:underline;}
+#navbar li li a:hover {background-color: #8db3ff; }
+
+#headercaption{width:100%;background-color:#328dc4;height:25px;color:White;font-size: 12pt;font-weight:bold;text-align:center;padding-top:2px;}
+.contentheader{font-size:12pt;font-weight:bold;background-color:#ffffff;text-align:left;padding-bottom:4px;}
+
+/* Controls */
+.numerictextbox {text-align:right;}
+.disabledtextbox {background-color:#dfdfdf;}
+.disablednumerictextbox {background-color:#dfdfdf;text-align:right;}
+.label {color:#000000;}
+.radiobutton {color:#000000;}
+.image{cursor:pointer;}
+.panel{background-color:#f0f0f0;}
+.hyperlink{text-decoration:underline;}
+
+.watermark{text-transform:uppercase;width: 221px;background: transparent url('../Images/bg.jpg') no-repeat;color: #747862;height: 20px;border: 0;padding: 4px 8px;margin-bottom: 0px;}
+
+.table{border-collapse:collapse;}
+.table th{border:solid 1px #A1CDF2;font-size:12px; font-weight:bold;color:#36478B;text-align:left;}
+.table td{border:solid 1px #A1CDF2;font-size:12px; font-weight:normal;text-align:left;}
+.tablecaption{font-size: 12pt; font-weight: bold; color: #000000;padding:5px 0px 5px 0px;text-align:center;vertical-align:middle;background-color:#FFC500;}
+.tableheader{font-size:10pt; color:#000000; font-weight:bold;padding-left:10px;text-align: center;}
+.gridviewheader {color:#000000;font-size:12px; font-weight:bold; border:1px solid #e8e8e8; padding:5px; background:-webkit-gradient(linear, left bottom, left top, from(#ccc), to(#fff)); text-align:left;vertical-align:top;}
+.gridviewitem {border:1px solid #e8e8e8;font-size:12px; padding:1px; background-color:#FFFFFF;}
+.gridviewalternateitem {border:1px solid #e8e8e8;font-size:12px; padding:1px; background-color:#f8f8f8;}
+.gridviewemptydatarow {font-size:12px;color:Red; font-weight:bold;}
+.gridviewemptydatarow td {border:none 0px #000000;padding:5px; }
+.gridviewpager{border:1px solid #A1CDF2;}
+.gridviewpager td{font-size: 12px; color:#36478B; font-weight: bold; padding:1px; border:none 0px #000000;background:#add8e6;}
+.gridviewpager table {padding-top:1px; border: opx; text-align: left; }
+.gridviewpager table td{cursor: pointer;padding-right:5px;}
+.gridviewpager a{color: #36478B;font-weight: Bold;font-size: 12px; padding-left:2px;}
+.gridviewpager span {color:#36A7E9; font-size:12px; }
+.gridviewemptydatarowtable{border-collapse:collapse;width:100%;}
+.gridviewemptydatarowtable th{color:#000000;font-size:12px; font-weight:bold; border:1px solid #e8e8e8; padding:5px; background:-webkit-gradient(linear, left bottom, left top, from(#ccc), to(#fff)); text-align:left;vertical-align:top;}
+.gridviewemptydatarowtable td{font-size:12px;color:Red; font-weight:bold;border:solid 1px #e8e8e8;padding:5px;}
+
+/* Miscellaneous */
+.errormessage{color:Red;font-size:8pt;}
+.errormessage1{font-family:Trebuchet MS, Helvetica, sans-serif;font-size:12px;font-weight:bold;color:Red;}
+.logindisclaimer{font-family: Arial, "Trebuchet MS", Georgia, "Times New Roman", Times, serif;font-size: 10px; text-align: justify;vertical-align:bottom; color: #666666;margin-top:20px;}
+/********* For Ajax *********/
+.background{filter: alpha(opacity=40);}
+.progress{position: absolute;z-index: 999;top: 30%;left: 35%;height: 80px;width: 110px;background-color: #659EC7;border: inset 1px #2554C7;}
+.progress #image{position: absolute;left: 35px;top: 10px;}
+.progress #text{position: absolute;left: 10px;top: 50px;color: White;font-weight: bold; font-size: 10pt;}
+
+.asynpanel{border: solid 1px #328dc4;padding: 7px 5px 0px 5px; height: 25px;width:370px;}
+.asynpanel #dvAsyncClose{text-align: right; float: right; width: 50px;}
+.asynpanel #dvAsyncMessage{color:Red;font-size:8pt;float: left; vertical-align: top;width: 310px;}
+
+/* For print */
+.printpanel{background-color:#ffe3cd;position: absolute;padding: 3px;border:solid 1px #0000ff;color: #ffffff;z-index:999;background: -webkit-gradient(linear, left top, left bottom, from(#1e90ff), to(#87cefa)); /* for Safari, Google Chrome */ background: -moz-linear-gradient(top,  #1e90ff,  #87cefa); /* for Firefox */ filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#1e90ff,endColorStr=#87cefa);/* for IE */}
+@media print {.noprint {display:none;}}

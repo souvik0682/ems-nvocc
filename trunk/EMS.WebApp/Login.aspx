@@ -14,8 +14,7 @@
         <div class="asynpanel">
             <div id="dvAsyncClose">
                 <img alt="" src="<%=Page.ResolveClientUrl("~/Images/Close-Button.bmp") %>" style="cursor: pointer;" onclick="ClearErrorState()" /></div>
-            <div id="dvAsyncMessage">
-            </div>
+            <div id="dvAsyncMessage"></div>
         </div>
     </div>
     <div style="float:left; margin: 3% 0% 0% 0%;width:800px;">

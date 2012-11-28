@@ -16,38 +16,38 @@ namespace EMS.WebApp
             //Clears the application cache.
             GeneralFunctions.ClearApplicationCache();
 
-            if (!Request.Path.Contains("ChangePassword.aspx"))
-            {
-                if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
-                {
-                    IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+            //if (!Request.Path.Contains("ChangePassword.aspx"))
+            //{
+            //    if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+            //    {
+            //        IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
 
-                    if (ReferenceEquals(user, null) || user.Id == 0)
-                    {
-                        Response.Redirect("~/Login.aspx");
-                    }
+            //        if (ReferenceEquals(user, null) || user.Id == 0)
+            //        {
+            //            Response.Redirect("~/Login.aspx");
+            //        }
 
-                    //SetAttributes(user);
-                    //ShowMenu(user);
-                }
-                else
-                {
-                    Response.Redirect("~/Login.aspx");
-                }
-            }
-            else
-            {
-                if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
-                {
-                    IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+            //        SetAttributes(user);
+            //        ShowMenu(user);
+            //    }
+            //    else
+            //    {
+            //        Response.Redirect("~/Login.aspx");
+            //    }
+            //}
+            //else
+            //{
+            //    if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+            //    {
+            //        IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
 
-                    if (!ReferenceEquals(user, null) && user.Id > 0)
-                    {
-                        //SetAttributes(user);
-                        //ShowMenu(user);
-                    }
-                }
-            }
+            //        if (!ReferenceEquals(user, null) && user.Id > 0)
+            //        {
+            //            SetAttributes(user);
+            //            ShowMenu(user);
+            //        }
+            //    }
+            //}
         }
 
         protected void Page_Load(object sender, EventArgs e)

@@ -59,7 +59,7 @@
                                     <li id="liImpVoyage" runat="server"><a href="#">Voyage</a></li>
                                 </ul>
                             </li>
-                            <li id="liImpReport" runat="server">
+                            <li id="liImpRpt" runat="server">
                                 <a href="#">Report</a>
                                 <ul>
                                     <li id="li1" runat="server"><a href="#">Import B/L checklist</a></li>
@@ -138,6 +138,71 @@
                                             <li id="li41" runat="server"><a href="#">Exchange Rate mismatch</a></li>
                                         </ul>
                                     </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="liLogistics" runat="server">
+                        <a href="#">Logistics</a>
+                        <ul>
+                            <li id="liLogData" runat="server">
+                                <a href="#">Data</a>
+                                <ul>
+                                    <li id="li62" runat="server"><a href="#">Container</a></li>
+                                    <li id="li63" runat="server"><a href="#">Repairing</a></li>
+                                    <li id="li64" runat="server"><a href="#">On-Hire</a></li>
+                                    <li id="li65" runat="server"><a href="#">Pick-up</a></li>
+                                </ul>
+                            </li>
+                            <li id="liLogRpt" runat="server">
+                                <a href="#">Reports</a>
+                                <ul>
+                                    <li id="li42" runat="server"><a href="#">Container Stock Summary</a></li>
+                                    <li id="li43" runat="server"><a href="#">Container Stock Statement</a></li>
+                                    <li id="li44" runat="server"><a href="#">Pick-up Letter</a></li>
+                                    <li id="li45" runat="server"><a href="#">On-hire Register</a></li>
+                                    <li id="li50" runat="server"><a href="#">Off-hire Register</a></li>
+                                    <li id="li51" runat="server"><a href="#">Damage Register</a></li>
+                                    <li id="li52" runat="server"><a href="#">Container Not moved</a></li>
+                                    <li id="li53" runat="server"><a href="#">Container Age Analysis</a></li>
+                                    <li id="li54" runat="server"><a href="#">Generation of IDTR/Bond Cancellation</a></li>
+                                    <li id="li55" runat="server"><a href="#">Monthly Lift on / lift off statement</a></li>
+                                    <li id="li56" runat="server"><a href="#">Periodic Empty yard rent statement</a></li>
+                                    <li id="li57" runat="server"><a href="#">Repairing Sanction List</a></li>
+                                    <li id="li58" runat="server"><a href="#">Turn Around Report</a></li>
+                                    <li id="li59" runat="server"><a href="#">Container Transfer List</a></li>
+                                    <li id="li60" runat="server"><a href="#">Principal Reports - 4 nos</a></li>
+                                    <li id="li61" runat="server"><a href="#">Container wise View actual date / User</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="liExp" runat="server">
+                        <a href="#">Export</a>
+                        <ul>
+                            <li id="liExpData" runat="server">
+                                <a href="#">Data</a>
+                                <ul>
+                                    <li id="li68" runat="server"><a href="#">Booking</a></li>
+                                    <li id="li69" runat="server"><a href="#">B/L Entry</a></li>
+                                </ul>
+                            </li>
+                            <li id="liExpRpt" runat="server">
+                                <a href="#">Reports</a>
+                                <ul>
+                                    <li id="li73" runat="server"><a href="#">Export Booking Register</a></li>
+                                    <li id="li74" runat="server"><a href="#">Mail to Customer</a></li>
+                                    <li id="li75" runat="server"><a href="#">Mail to CFS/Surviour with cont. list</a></li>
+                                    <li id="li76" runat="server"><a href="#">Cargo Manifest</a></li>
+                                    <li id="li77" runat="server"><a href="#">Freight Manifest</a></li>
+                                    <li id="li78" runat="server"><a href="#">Terminal Discharge Report (TDR)</a></li>
+                                    <li id="li79" runat="server"><a href="#">B/L Printing - ILE</a></li>
+                                    <li id="li80" runat="server"><a href="#">B/L Printing - UAFL</a></li>
+                                    <li id="li81" runat="server"><a href="#">Mate Receipt - Shipping Bill</a></li>
+                                    <li id="li82" runat="server"><a href="#">EGM Hardcopy</a></li>
+                                    <li id="li83" runat="server"><a href="#">Export EDI - Text file</a></li>
+                                    <li id="li84" runat="server"><a href="#">Export MIS</a></li>
+                                    <li id="li85" runat="server"><a href="#">Voyage Wise Commission</a></li>
                                 </ul>
                             </li>
                         </ul>

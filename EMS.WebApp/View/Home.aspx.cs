@@ -13,7 +13,7 @@ namespace EMS.WebApp.View
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            CheckUserAccess();
+            //CheckUserAccess();
         }
 
         private void CheckUserAccess()

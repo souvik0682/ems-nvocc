@@ -82,6 +82,7 @@
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Styles\EMS.css" />
     <Content Include="Unauthorized.aspx" />
+    <Content Include="View\Home.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -136,6 +137,13 @@
     </Compile>
     <Compile Include="Unauthorized.aspx.designer.cs">
       <DependentUpon>Unauthorized.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

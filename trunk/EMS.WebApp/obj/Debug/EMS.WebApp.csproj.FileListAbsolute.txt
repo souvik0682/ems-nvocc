@@ -1,0 +1,17 @@
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.WebApp\bin\EMS.WebApp.dll
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.WebApp\bin\EMS.WebApp.pdb
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.WebApp\bin\EMS.BLL.dll
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.WebApp\bin\EMS.Common.dll
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.WebApp\bin\EMS.Entity.dll
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.WebApp\bin\EMS.Utilities.dll
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.WebApp\bin\EMS.DAL.dll
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.WebApp\bin\EMS.BLL.pdb
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.WebApp\bin\EMS.Common.pdb
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.WebApp\bin\EMS.Entity.pdb
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.WebApp\bin\EMS.Utilities.pdb
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.WebApp\bin\EMS.DAL.pdb
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.WebApp\bin\en-GB\EMS.Utilities.resources.dll
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.WebApp\bin\en-US\EMS.Utilities.resources.dll
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.WebApp\obj\Debug\ResolveAssemblyReference.cache
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.WebApp\obj\Debug\EMS.WebApp.dll
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.WebApp\obj\Debug\EMS.WebApp.pdb

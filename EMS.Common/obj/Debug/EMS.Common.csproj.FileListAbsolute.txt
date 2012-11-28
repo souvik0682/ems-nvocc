@@ -1,0 +1,10 @@
+D:\Visual Studio 2010\EMS\shipping-ems\EMS.Common\bin\Debug\EMS.Common.dll
+D:\Visual Studio 2010\EMS\shipping-ems\EMS.Common\bin\Debug\EMS.Common.pdb
+D:\Visual Studio 2010\EMS\shipping-ems\EMS.Common\obj\Debug\ResolveAssemblyReference.cache
+D:\Visual Studio 2010\EMS\shipping-ems\EMS.Common\obj\Debug\EMS.Common.dll
+D:\Visual Studio 2010\EMS\shipping-ems\EMS.Common\obj\Debug\EMS.Common.pdb
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.Common\bin\Debug\EMS.Common.dll
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.Common\bin\Debug\EMS.Common.pdb
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.Common\obj\Debug\ResolveAssemblyReference.cache
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.Common\obj\Debug\EMS.Common.dll
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.Common\obj\Debug\EMS.Common.pdb

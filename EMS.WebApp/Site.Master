@@ -33,35 +33,113 @@
                     <li id="liMaster" runat="server">
                         <a href="#">Master</a>
                         <ul>
-                            <li id="liUserMst" runat="server"><a href="<%=Page.ResolveClientUrl("~/Security/ManageUser.aspx") %>">User Master</a></li>
-                            <li id="liLocMst" runat="server"><a href="<%=Page.ResolveClientUrl("~/Security/ManageLocation.aspx") %>">Location Master</a></li>
-                            <li id="liAreaMst" runat="server"><a href="<%=Page.ResolveClientUrl("~/Security/ManageArea.aspx") %>">Area Master</a></li>
-                            <li id="liGrMst" runat="server"><a href="<%=Page.ResolveClientUrl("~/Security/ManageGroupCompany.aspx") %>">Group Company Master</a></li>
-                            <li id="liCustMst" runat="server"><a href="<%=Page.ResolveClientUrl("~/Security/ManageCustomer.aspx") %>">Customer Master</a></li>
-                            <li id="liCustAssign" runat="server"><a href="<%=Page.ResolveClientUrl("~/Security/CustomerAssign.aspx") %>">Assign Customer</a></li>
+                            <li id="liMstUser" runat="server"><a href="<%=Page.ResolveClientUrl("~/Security/ManageUser.aspx") %>">User Master</a></li>
+                            <li id="liMstLoc" runat="server"><a href="<%=Page.ResolveClientUrl("~/Security/ManageLocation.aspx") %>">Location Master</a></li>
+                            <li id="liMstCust" runat="server"><a href="<%=Page.ResolveClientUrl("~/Security/ManageCustomer.aspx") %>">Customer Master</a></li>
+                            <li id="liMstLine" runat="server"><a href="#">Line / MLO</a></li>
+                            <li id="liMstVendor" runat="server"><a href="#">Vendor / Address</a></li>
+                            <li id="liMstServiceTax" runat="server"><a href="#">Service Tax</a></li>
+                            <li id="liMstCharge" runat="server"><a href="#">Charge Master</a></li>
+                            <li id="liMstContType" runat="server"><a href="#">Container Type</a></li>
+                            <li id="liMstExRate" runat="server"><a href="#">Exchange Rate</a></li>
+                            <li id="liMstTerminal" runat="server"><a href="#">Terminal Master</a></li>
+                            <li id="liMstCountry" runat="server"><a href="#">Country Master</a></li>
+                            <li id="liMstPort" runat="server"><a href="#">Port Master</a></li>
+                            <li id="liMstHaulage" runat="server"><a href="#">Import Haulage</a></li>
+                            <li id="liMstVessel" runat="server"><a href="#">Vessel</a></li>
                         </ul>
                     </li>
-                    <li id="liTran" runat="server">
-                        <a href="#">Transaction</a>
+                    <li id="liImp" runat="server">
+                        <a href="#">Import</a>
                         <ul>
-                            <li id="liDSC" runat="server"><a href="<%=Page.ResolveClientUrl("~/Security/ManageDailySalesCall.aspx") %>">Daily Sales Call</a></li>
-                            <li id="liImport" runat="server"><a href="<%=Page.ResolveClientUrl("~/Security/ImportData.aspx") %>">Import Data</a></li>
+                            <li id="liImpData" runat="server">
+                                <a href="#">Data</a>
+                                <ul>
+                                    <li id="liImpBL" runat="server"><a href="#">B/L Entry</a></li>
+                                    <li id="liImpVoyage" runat="server"><a href="#">Voyage</a></li>
+                                </ul>
+                            </li>
+                            <li id="liImpReport" runat="server">
+                                <a href="#">Report</a>
+                                <ul>
+                                    <li id="li1" runat="server"><a href="#">Import B/L checklist</a></li>
+                                    <li id="li2" runat="server"><a href="#">Import EDI for Custom - Export to text file</a></li>
+                                    <li id="li3" runat="server"><a href="#">IGM - Form II</a></li>
+                                    <li id="li4" runat="server"><a href="#">IGM - Form C for Hazardous Cargo</a></li>
+                                    <li id="li5" runat="server"><a href="#">Amendment Letter</a></li>
+                                    <li id="li6" runat="server"><a href="#">Letter to File Landing Gurantee</a></li>
+                                    <li id="li7" runat="server"><a href="#">Statistical report</a></li>
+                                    <li id="li8" runat="server"><a href="#">Import Register</a></li>
+                                    <li id="li9" runat="server"><a href="#">Cargo Arrival Notice</a></li>
+                                    <li id="li10" runat="server"><a href="#">Pending DO</a></li>
+                                    <li id="li11" runat="server"><a href="#">Delivery Order (Examin / Final)</a></li>
+                                    <li id="li12" runat="server"><a href="#">Delivery Order (Factory / CFS) Distuffing</a></li>
+                                    <li id="li13" runat="server"><a href="#">Slot/Plot/Empty Letter</a></li>
+                                    <li id="li14" runat="server"><a href="#">Carting Order / Gang Letter</a></li>
+                                    <li id="li15" runat="server"><a href="#">LIST TO FILE LANDING G'TE</a></li>
+                                    <li id="li16" runat="server"><a href="#">SMTP EXTRACT</a></li>
+                                    <li id="li17" runat="server"><a href="#">COPRAR</a></li>
+                                    <li id="li18" runat="server"><a href="#">Advance Container List</a></li>
+                                    <li id="li19" runat="server"><a href="#">EDI IAL</a></li>
+                                    <li id="li20" runat="server"><a href="#">Survey Letter</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#">Reports</a>
+                    <li id="liFin" runat="server">
+                        <a href="#">Finance</a>
                         <ul>
-                            <li id="liDailySCall" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/DailyCallRpt.aspx") %>">Daily Sales Call Report</a></li>
-                            <li id="liCallTypeWiseDaily" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/CallTypeWiseDailyRpt.aspx") %>">Call Type Wise Daily Report</a></li>
-                            <li id="liCallDue" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/CallDueRpt.aspx") %>">Call Due Report</a></li>
-                            <li id="liSpecificCallType" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/SpecificCallTypeRpt.aspx") %>">Specific Call Type Report</a></li>
-                            <li id="liCustWiseCall" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/CustWiseCallRpt.aspx") %>">Customer Wise Call Report</a></li>
-                            <li id="liLineWiseLoc" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/LineWiseLocSummary.aspx") %>">Line Wise Location Summary</a></li>
-                            <li id="liLocWiseLine" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/LocWiseWiseLineSummary.aspx") %>">Location Wise Line Summary</a></li>
-                            <li id="liCustList" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/CustListWithLoc.aspx") %>">Customer List</a></li>
-                            <li id="liCustCall" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/CustCallDetail.aspx") %>">Customer With Call Details</a></li>
-                            <li id="liMisRpt" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/MisRpt.aspx") %>">MIS Report</a></li>
-                            <li id="liMisRptYearly" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/MisRptYearly.aspx") %>">Yearly MIS Report</a></li>
+                            <li id="liFinData" runat="server">
+                                <a href="#">Data</a>
+                                <ul>
+                                    <li id="li23" runat="server">
+                                        <a href="#">Invoice</a>
+                                        <ul>
+                                            <li id="li22" runat="server"><a href="#">1st Invoice</a></li>
+                                            <li id="li25" runat="server"><a href="#">Freight Invoice</a></li>
+                                            <li id="li46" runat="server"><a href="#">Security Deposit Invoice</a></li>
+                                            <li id="li47" runat="server"><a href="#">Pro forma Invoice</a></li>
+                                            <li id="li48" runat="server"><a href="#">Final Invoice</a></li>
+                                            <li id="li49" runat="server"><a href="#">Export Invoice</a></li>
+                                        </ul>
+                                    </li>
+                                    <li id="li24" runat="server"><a href="#">Money Receipt</a></li>
+                                    <li id="li21" runat="server"><a href="#">Credit Note</a></li>
+                                </ul>
+                            </li>
+                            <li id="liFinRpt" runat="server">
+                                <a href="#">Reports</a>
+                                <ul>
+                                    <li id="li26" runat="server">
+                                        <a href="#">Invoice</a>
+                                        <ul>
+                                            <li id="li30" runat="server"><a href="#">Invoice (Regular / Exp. Detention</a></li>
+                                            <li id="li31" runat="server"><a href="#">Import Billing Statement</a></li>
+                                            <li id="li32" runat="server"><a href="#">Import Invoice Register</a></li>
+                                            <li id="li33" runat="server"><a href="#">Export Invoice Register</a></li>
+                                        </ul>
+                                    </li>
+                                    <li id="li27" runat="server"><a href="#">Credit Note</a></li>
+                                    <li id="li28" runat="server">
+                                        <a href="#">Other Report</a>
+                                        <ul>
+                                            <li id="li34" runat="server"><a href="#">Collection Register</a></li>
+                                            <li id="li35" runat="server"><a href="#">Repairing Bill</a></li>
+                                            <li id="li36" runat="server"><a href="#">Freight Certificate</a></li>
+                                            <li id="li37" runat="server"><a href="#">Service Tax Register</a></li>
+                                        </ul>
+                                    </li>
+                                    <li id="li29" runat="server">
+                                        <a href="#">Money Receipt</a>
+                                        <ul>
+                                            <li id="li38" runat="server"><a href="#">Money Receipt</a></li>
+                                            <li id="li39" runat="server"><a href="#">Payment Advice</a></li>
+                                            <li id="li40" runat="server"><a href="#">Detention Collection Statement</a></li>
+                                            <li id="li41" runat="server"><a href="#">Exchange Rate mismatch</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                     <li><a href="<%=Page.ResolveClientUrl("~/Security/ChangePassword.aspx") %>">Change Password</a></li>

@@ -342,4 +342,7 @@
   <data name="ERR00075" xml:space="preserve">
     <value>Please select atleast one record to delete</value>
   </data>
+  <data name="ERR00076" xml:space="preserve">
+    <value>Saving was unsuccessful!</value>
+  </data>
 </root>

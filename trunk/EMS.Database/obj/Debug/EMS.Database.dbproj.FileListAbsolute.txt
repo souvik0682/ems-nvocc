@@ -1,0 +1,8 @@
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.Database\sql\debug\EMS.Database_Script.PreDeployment.sql
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.Database\sql\debug\EMS.Database_Script.PostDeployment.sql
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.Database\sql\debug\EMS.Database_Database.sqlsettings
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.Database\sql\debug\EMS.Database_Database.sqldeployment
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.Database\sql\debug\EMS.Database_Database.sqlcmdvars
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.Database\sql\debug\EMS.Database.deploymanifest
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.Database\sql\debug\EMS.Database.dbschema
+D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.Database\obj\Debug\EMS.Database.dbschema

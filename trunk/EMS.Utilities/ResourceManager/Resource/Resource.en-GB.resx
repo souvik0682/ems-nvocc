@@ -130,219 +130,69 @@
     <value>*The database server was not found or was not accessible.</value>
   </data>
   <data name="ERR00005" xml:space="preserve">
-    <value>Successfully Saved!</value>
-  </data>
-  <data name="ERR00006" xml:space="preserve">
-    <value>Successfully Deleted!</value>
-  </data>
-  <data name="ERR00007" xml:space="preserve">
-    <value>Click to delete this record</value>
-  </data>
-  <data name="ERR00008" xml:space="preserve">
-    <value>Click to edit this record</value>
-  </data>
-  <data name="ERR00009" xml:space="preserve">
-    <value>You do not have permission to perform this operation</value>
-  </data>
-  <data name="ERR00010" xml:space="preserve">
-    <value>Are you sure you want to delete this record (Y/N)?</value>
-  </data>
-  <data name="ERR00011" xml:space="preserve">
-    <value>Location name already exists. Please enter another name.</value>
-  </data>
-  <data name="ERR00012" xml:space="preserve">
-    <value>Location Abbreviation already exists. Please enter another abbreviation.</value>
-  </data>
-  <data name="ERR00013" xml:space="preserve">
-    <value>Area already exists. Please enter another name.</value>
-  </data>
-  <data name="ERR00014" xml:space="preserve">
-    <value>Group Company name already exists. Please enter another name.</value>
-  </data>
-  <data name="ERR00015" xml:space="preserve">
-    <value>User name already exists. Please enter another name.</value>
-  </data>
-  <data name="ERR00016" xml:space="preserve">
-    <value>Type Area</value>
-  </data>
-  <data name="ERR00017" xml:space="preserve">
-    <value>Type Abbreviation</value>
-  </data>
-  <data name="ERR00018" xml:space="preserve">
-    <value>Type Location Name</value>
-  </data>
-  <data name="ERR00019" xml:space="preserve">
-    <value>Type Username</value>
-  </data>
-  <data name="ERR00020" xml:space="preserve">
-    <value>Type First Name</value>
-  </data>
-  <data name="ERR00021" xml:space="preserve">
-    <value>Type Group Name</value>
-  </data>
-  <data name="ERR00022" xml:space="preserve">
-    <value>Type Customer Name</value>
-  </data>
-  <data name="ERR00023" xml:space="preserve">
-    <value>*Invalid EmailId</value>
-  </data>
-  <data name="ERR00024" xml:space="preserve">
-    <value>*Group name cannot be left blank</value>
-  </data>
-  <data name="ERR00025" xml:space="preserve">
-    <value>*Location cannot be left blank</value>
-  </data>
-  <data name="ERR00026" xml:space="preserve">
-    <value>*Area name cannot be left blank</value>
-  </data>
-  <data name="ERR00027" xml:space="preserve">
-    <value>*Customer Type cannot be left blank</value>
-  </data>
-  <data name="ERR00028" xml:space="preserve">
-    <value>*Client Scope cannot be left blank</value>
-  </data>
-  <data name="ERR00029" xml:space="preserve">
-    <value>*Customer name cannot be left blank</value>
-  </data>
-  <data name="ERR00030" xml:space="preserve">
-    <value>*Address cannot be left blank</value>
-  </data>
-  <data name="ERR00031" xml:space="preserve">
-    <value>*Phone no cannot be left blank</value>
-  </data>
-  <data name="ERR00032" xml:space="preserve">
-    <value>*Contact Person name cannot be left blank</value>
-  </data>
-  <data name="ERR00033" xml:space="preserve">
-    <value>*Designation cannot be left blank</value>
-  </data>
-  <data name="ERR00034" xml:space="preserve">
-    <value>*Mobile number cannot be left blank</value>
-  </data>
-  <data name="ERR00035" xml:space="preserve">
-    <value>*Abbreviation Cannot be Left Blank</value>
-  </data>
-  <data name="ERR00036" xml:space="preserve">
-    <value>*Username cannot be left bhank</value>
-  </data>
-  <data name="ERR00037" xml:space="preserve">
-    <value>*First name cannot be left bhank</value>
-  </data>
-  <data name="ERR00038" xml:space="preserve">
-    <value>*Last name cannot be left bhank</value>
-  </data>
-  <data name="ERR00039" xml:space="preserve">
-    <value>*Email Id cannot be left blank</value>
-  </data>
-  <data name="ERR00040" xml:space="preserve">
-    <value>*Role cannot be left blank</value>
-  </data>
-  <data name="ERR00041" xml:space="preserve">
     <value>*Cannot open database requested by the login</value>
   </data>
-  <data name="ERR00042" xml:space="preserve">
+  <data name="ERR00006" xml:space="preserve">
     <value>*Login failed for user</value>
   </data>
-  <data name="ERR00043" xml:space="preserve">
+  <data name="ERR00007" xml:space="preserve">
     <value>* Unable to login. Please try again.</value>
   </data>
-  <data name="ERR00044" xml:space="preserve">
-    <value>*Sales Person Type cannot be left blank</value>
+  <data name="ERR00008" xml:space="preserve">
+    <value>You do not have permission to perform this operation</value>
   </data>
-  <data name="ERR00045" xml:space="preserve">
-    <value>*Account of cannot be left blank</value>
+  <data name="ERR00009" xml:space="preserve">
+    <value>Successfully Saved!</value>
   </data>
-  <data name="ERR00046" xml:space="preserve">
-    <value>Want to Quit?</value>
+  <data name="ERR00010" xml:space="preserve">
+    <value>Successfully Deleted!</value>
   </data>
-  <data name="ERR00047" xml:space="preserve">
-    <value>* Invalid Phone Number</value>
+  <data name="ERR00011" xml:space="preserve">
+    <value>Saving was unsuccessful!</value>
   </data>
-  <data name="ERR00048" xml:space="preserve">
-    <value>* Invalid Mobile Number</value>
+  <data name="ERR00012" xml:space="preserve">
+    <value>Click to delete this record</value>
   </data>
-  <data name="ERR00049" xml:space="preserve">
-    <value>* Pin Code cannot be left blank</value>
+  <data name="ERR00013" xml:space="preserve">
+    <value>Click to edit this record</value>
   </data>
-  <data name="ERR00050" xml:space="preserve">
+  <data name="ERR00014" xml:space="preserve">
+    <value>Are you sure you want to delete this record (Y/N)?</value>
+  </data>
+  <data name="ERR00015" xml:space="preserve">
     <value>Are you sure you want to cancel?</value>
   </data>
-  <data name="ERR00051" xml:space="preserve">
-    <value>* Please select customer</value>
-  </data>
-  <data name="ERR00052" xml:space="preserve">
-    <value>Please select a valid file to import</value>
-  </data>
-  <data name="ERR00053" xml:space="preserve">
-    <value>The user cannot be deleted</value>
-  </data>
-  <data name="ERR00054" xml:space="preserve">
-    <value>The group cannot be deleted</value>
-  </data>
-  <data name="ERR00055" xml:space="preserve">
-    <value>Type Executive Name</value>
-  </data>
-  <data name="ERR00056" xml:space="preserve">
-    <value>Customer Successfully Assigned</value>
-  </data>
-  <data name="ERR00057" xml:space="preserve">
-    <value>* Please select existing user</value>
-  </data>
-  <data name="ERR00058" xml:space="preserve">
-    <value>* Please select new user</value>
-  </data>
-  <data name="ERR00059" xml:space="preserve">
-    <value>* Date can't be blank</value>
-  </data>
-  <data name="ERR00060" xml:space="preserve">
-    <value>Permanent type cannot be edited</value>
-  </data>
-  <data name="ERR00061" xml:space="preserve">
-    <value>Permanent type cannot be deleted</value>
-  </data>
-  <data name="ERR00062" xml:space="preserve">
-    <value>Data earlier than current date cannot be edited</value>
-  </data>
-  <data name="ERR00063" xml:space="preserve">
-    <value>Data earlier than current date cannot be deleted</value>
-  </data>
-  <data name="ERR00064" xml:space="preserve">
-    <value>* Start Date cannot be earlier than current date</value>
-  </data>
-  <data name="ERR00065" xml:space="preserve">
-    <value>Password has been changed successfully.</value>
-  </data>
-  <data name="ERR00066" xml:space="preserve">
-    <value>Your old password is not correct. Please try again.</value>
-  </data>
-  <data name="ERR00067" xml:space="preserve">
-    <value>* Please enter old password</value>
-  </data>
-  <data name="ERR00068" xml:space="preserve">
-    <value>* Please enter new password</value>
-  </data>
-  <data name="ERR00069" xml:space="preserve">
-    <value>* Please retype new password</value>
-  </data>
-  <data name="ERR00070" xml:space="preserve">
-    <value>* New and Confirm password should be same</value>
-  </data>
-  <data name="ERR00071" xml:space="preserve">
-    <value>Password has been reset and send to user's email</value>
-  </data>
-  <data name="ERR00072" xml:space="preserve">
-    <value>Please select customer</value>
-  </data>
-  <data name="ERR00073" xml:space="preserve">
-    <value>Please select sales executive</value>
-  </data>
-  <data name="ERR00074" xml:space="preserve">
-    <value>Are you sure you want to delete (Y/N)?</value>
-  </data>
-  <data name="ERR00075" xml:space="preserve">
+  <data name="ERR00016" xml:space="preserve">
     <value>Please select atleast one record to delete</value>
   </data>
-  <data name="ERR00076" xml:space="preserve">
-    <value>Saving was unsuccessful!</value>
+  <data name="ERR00017" xml:space="preserve">
+    <value>Want to Quit?</value>
+  </data>
+  <data name="ERR00018" xml:space="preserve">
+    <value>* Please enter old password</value>
+  </data>
+  <data name="ERR00019" xml:space="preserve">
+    <value>* Please enter new password</value>
+  </data>
+  <data name="ERR00020" xml:space="preserve">
+    <value>* Please retype new password</value>
+  </data>
+  <data name="ERR00021" xml:space="preserve">
+    <value>* New and Confirm password should be same</value>
+  </data>
+  <data name="ERR00022" xml:space="preserve">
+    <value>Your old password is not correct. Please try again.</value>
+  </data>
+  <data name="ERR00023" xml:space="preserve">
+    <value>Password has been reset and send to user's email</value>
+  </data>
+  <data name="ERR00024" xml:space="preserve">
+    <value>Password has been changed successfully.</value>
+  </data>
+  <data name="ERR00025" xml:space="preserve">
+    <value>The system has encountered an unhandled exception and could not complete your request. &lt;br/&gt;Please contact the system administrator.</value>
+  </data>
+  <data name="ERR00026" xml:space="preserve">
+    <value>*Invalid EmailId</value>
   </data>
 </root>

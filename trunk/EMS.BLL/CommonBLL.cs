@@ -122,7 +122,7 @@ namespace EMS.BLL
         /// <param name="ex">The <see cref="System.Exception"/> object.</param>
         /// <param name="logFilePath">The log file path.</param>
         /// <createdby>Amit Kumar Chandra</createdby>
-        /// <createddate>08/07/2012</createddate>
+        /// <createddate>02/12/2012</createddate>
         public static void HandleException(Exception ex, string logFilePath)
         {
             int userId = 0;

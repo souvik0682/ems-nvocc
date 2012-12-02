@@ -29,13 +29,13 @@
         <div id="subheader">
             <div class="menu">
                 <ul id="navbar">
-                    <li><a href="<%=Page.ResolveClientUrl("~/Security/Home.aspx") %>">Home</a></li>
+                    <li><a href="<%=Page.ResolveClientUrl("~/View/Home.aspx") %>">Home</a></li>
                     <li id="liMaster" runat="server">
                         <a href="#">Master</a>
                         <ul>
-                            <li id="liMstUser" runat="server"><a href="<%=Page.ResolveClientUrl("~/Security/ManageUser.aspx") %>">User Master</a></li>
-                            <li id="liMstLoc" runat="server"><a href="<%=Page.ResolveClientUrl("~/Security/ManageLocation.aspx") %>">Location Master</a></li>
-                            <li id="liMstCust" runat="server"><a href="<%=Page.ResolveClientUrl("~/Security/ManageCustomer.aspx") %>">Customer Master</a></li>
+                            <li id="liMstUser" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageUser.aspx") %>">User Master</a></li>
+                            <li id="liMstLoc" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageLocation.aspx") %>">Location Master</a></li>
+                            <li id="liMstCust" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageCustomer.aspx") %>">Customer Master</a></li>
                             <li id="liMstLine" runat="server"><a href="#">Line / MLO</a></li>
                             <li id="liMstVendor" runat="server"><a href="#">Vendor / Address</a></li>
                             <li id="liMstServiceTax" runat="server"><a href="#">Service Tax</a></li>
@@ -207,7 +207,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="<%=Page.ResolveClientUrl("~/Security/ChangePassword.aspx") %>">Change Password</a></li>
+                    <li><a href="<%=Page.ResolveClientUrl("~/View/ChangePassword.aspx") %>">Change Password</a></li>
                 </ul>            
             </div>
         </div>

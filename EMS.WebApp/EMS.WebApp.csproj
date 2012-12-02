@@ -82,7 +82,14 @@
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Styles\EMS.css" />
     <Content Include="Unauthorized.aspx" />
+    <Content Include="View\AddEditCustomer.aspx" />
+    <Content Include="View\AddEditLocation.aspx" />
+    <Content Include="View\AddEditUser.aspx" />
+    <Content Include="View\ChangePassword.aspx" />
     <Content Include="View\Home.aspx" />
+    <Content Include="View\ManageCustomer.aspx" />
+    <Content Include="View\ManageLocation.aspx" />
+    <Content Include="View\ManageUser.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -138,12 +145,61 @@
     <Compile Include="Unauthorized.aspx.designer.cs">
       <DependentUpon>Unauthorized.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\AddEditCustomer.aspx.cs">
+      <DependentUpon>AddEditCustomer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\AddEditCustomer.aspx.designer.cs">
+      <DependentUpon>AddEditCustomer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddEditLocation.aspx.cs">
+      <DependentUpon>AddEditLocation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\AddEditLocation.aspx.designer.cs">
+      <DependentUpon>AddEditLocation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddEditUser.aspx.cs">
+      <DependentUpon>AddEditUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\AddEditUser.aspx.designer.cs">
+      <DependentUpon>AddEditUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="View\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageCustomer.aspx.cs">
+      <DependentUpon>ManageCustomer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\ManageCustomer.aspx.designer.cs">
+      <DependentUpon>ManageCustomer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageLocation.aspx.cs">
+      <DependentUpon>ManageLocation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\ManageLocation.aspx.designer.cs">
+      <DependentUpon>ManageLocation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageUser.aspx.cs">
+      <DependentUpon>ManageUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\ManageUser.aspx.designer.cs">
+      <DependentUpon>ManageUser.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

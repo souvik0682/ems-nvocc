@@ -59,13 +59,13 @@ namespace EMS.WebApp
                             lblMsg.Text = ResourceManager.GetStringWithoutName("ERR00004");
                             break;
                         case 4060:
-                            lblMsg.Text = ResourceManager.GetStringWithoutName("ERR00041");
+                            lblMsg.Text = ResourceManager.GetStringWithoutName("ERR00005");
                             break;
                         case 18456:
-                            lblMsg.Text = ResourceManager.GetStringWithoutName("ERR00042");
+                            lblMsg.Text = ResourceManager.GetStringWithoutName("ERR00006");
                             break;
                         default:
-                            lblMsg.Text = ResourceManager.GetStringWithoutName("ERR00043");
+                            lblMsg.Text = ResourceManager.GetStringWithoutName("ERR00007");
                             break;
                     }
 
@@ -74,7 +74,7 @@ namespace EMS.WebApp
                 catch (Exception ex)
                 {
                     CommonBLL.HandleException(ex, this.Server.MapPath(this.Request.ApplicationPath).Replace("/", "\\"));
-                    lblMsg.Text = ResourceManager.GetStringWithoutName("ERR00043");
+                    lblMsg.Text = ResourceManager.GetStringWithoutName("ERR00007");
                     lblMsg.Visible = true;
                 }
             }

@@ -49,7 +49,33 @@ namespace EMS.Entity
             set;
         }
 
-        public char IsActive
+        public bool IsActive
+        {
+            get;
+            set;
+        }
+
+        public bool AllowMultipleLoc
+        {
+            get;
+            set;
+        }
+
+        #endregion
+
+        #region IRole Members
+
+        public IRole UserRole
+        {
+            get;
+            set;
+        }
+
+        #endregion
+
+        #region ILocation Members
+
+        public ILocation UserLocation
         {
             get;
             set;
@@ -105,7 +131,8 @@ namespace EMS.Entity
 
         public UserEntity()
         {
-
+            this.UserRole = new RoleEntity();
+            this.UserLocation = new LocationEntity();
         }
 
         public UserEntity(DataTableReader reader)
@@ -114,11 +141,16 @@ namespace EMS.Entity
             this.Name = Convert.ToString(reader["UserName"]);
             this.FirstName = Convert.ToString(reader["FirstName"]);
             this.LastName = Convert.ToString(reader["LastName"]);
+            this.UserRole = new RoleEntity(reader);
+            this.UserLocation = new LocationEntity();
+            this.UserLocation.Id = Convert.ToInt32(reader["LocId"]);
+            this.UserLocation.Name = Convert.ToString(reader["LocName"]);
 
             if (reader["EmailId"] != DBNull.Value)
                 this.EmailId = Convert.ToString(reader["EmailId"]);
 
-            this.IsActive = Convert.ToChar(reader["Active"]);
+            this.IsActive = Convert.ToBoolean(reader["Active"]);
+            this.AllowMultipleLoc = Convert.ToBoolean(reader["AllowMultipleLoc"]);
         }
 
         #endregion

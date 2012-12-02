@@ -40,8 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAddress.cs" />
     <Compile Include="IBase.cs" />
     <Compile Include="ICommon.cs" />
+    <Compile Include="ILocation.cs" />
+    <Compile Include="IRole.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

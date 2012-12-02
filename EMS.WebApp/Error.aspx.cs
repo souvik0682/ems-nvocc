@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using EMS.BLL;
 using EMS.Utilities;
+using EMS.Utilities.ResourceManager;
 
 namespace EMS.WebApp
 {
@@ -54,12 +55,12 @@ namespace EMS.WebApp
                 {
                     if (isSuccess)
                     {
-                        lblErrMessage.Text = string.Format("The system has encountered an unhandled exception and could not complete your request. <br/>Please contact the system administrator.");
+                        lblErrMessage.Text = string.Format(ResourceManager.GetStringWithoutName("ERR00025"));
                         //lblErrMessage.Text = string.Format("The system has encountered an unhandled exception and could not complete your request. <br/>Please contact the system administrator.<br/><br/><br/><b>Error Description:</b><br/><br/>" + baseException);
                     }
                     else
                     {
-                        lblErrMessage.Text = string.Format("The system has encountered an unhandled exception and could not complete your request. <br/>Please contact the system administrator.");
+                        lblErrMessage.Text = string.Format(ResourceManager.GetStringWithoutName("ERR00025"));
                     }
                 }
             }

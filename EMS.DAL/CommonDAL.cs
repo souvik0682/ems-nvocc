@@ -24,7 +24,7 @@ namespace EMS.DAL
         /// <param name="message">The message.</param>
         /// <param name="stackTrace">The stack trace.</param>
         /// <createdby>Amit Kumar Chandra</createdby>
-        /// <createddate>08/07/2012</createddate>
+        /// <createddate>02/12/2012</createddate>
         public static void SaveErrorLog(int userId, string message, string stackTrace)
         {
             string strExecution = "[admin].[uspSaveError]";

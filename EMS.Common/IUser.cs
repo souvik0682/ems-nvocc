@@ -12,7 +12,10 @@ namespace EMS.Common
         string FirstName { get; set; }
         string LastName { get; set; }
         string UserFullName { get; }
+        IRole UserRole { get; set; }
+        ILocation UserLocation { get; set; }
         string EmailId { get; set; }
-        char IsActive { get; set; }
+        bool IsActive { get; set; }
+        bool AllowMultipleLoc { get; set; }
     }
 }

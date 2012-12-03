@@ -163,5 +163,8 @@
     <Build Include="Scripts\Pre-Deployment\Tables\admin.ErrorLog.table.sql">
       <SubType>Code</SubType>
     </Build>
+    <Build Include="Schema Objects\Schemas\common.schema.sql">
+      <SubType>Code</SubType>
+    </Build>
   </ItemGroup>
 </Project>

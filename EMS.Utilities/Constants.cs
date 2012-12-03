@@ -28,6 +28,12 @@ namespace EMS.Utilities
         XML = 3
     }
 
+    public enum PageName
+    {
+        UserMaster = 1,
+        LocationMaster = 2,
+    };
+
     #endregion
 
     public static class Constants

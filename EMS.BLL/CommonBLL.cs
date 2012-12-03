@@ -174,5 +174,65 @@ namespace EMS.BLL
         }
 
         #endregion
+
+        #region Location
+
+        private void SetDefaultSearchCriteriaForLocation(SearchCriteria searchCriteria)
+        {
+            searchCriteria.SortExpression = "Location";
+            searchCriteria.SortDirection = "ASC";
+        }
+
+        public List<ILocation> GetAllLocation(SearchCriteria searchCriteria)
+        {
+            return CommonDAL.GetLocation('N', searchCriteria);
+        }
+
+        public List<ILocation> GetActiveLocation()
+        {
+            SearchCriteria searchCriteria = new SearchCriteria();
+            SetDefaultSearchCriteriaForLocation(searchCriteria);
+            return CommonDAL.GetLocation('Y', searchCriteria);
+        }
+
+        public ILocation GetLocation(int locId)
+        {
+            SearchCriteria searchCriteria = new SearchCriteria();
+            SetDefaultSearchCriteriaForLocation(searchCriteria);
+            return CommonDAL.GetLocation(locId, 'N', searchCriteria);
+        }
+
+        public string SaveLocation(ILocation loc, int modifiedBy)
+        {
+            int result = 0;
+            string errMessage = string.Empty;
+            result = CommonDAL.SaveLocation(loc, modifiedBy);
+
+            switch (result)
+            {
+                case 1:
+                    errMessage = ResourceManager.GetStringWithoutName("ERR00056");
+                    break;
+                case 2:
+                    errMessage = ResourceManager.GetStringWithoutName("ERR00057");
+                    break;
+                default:
+                    break;
+            }
+
+            return errMessage;
+        }
+
+        public void DeleteLocation(int locId, int modifiedBy)
+        {
+            CommonDAL.DeleteLocation(locId, modifiedBy);
+        }
+
+        public List<ILocation> GetLocationByUser(int userId)
+        {
+            return CommonDAL.GetLocationByUser(userId);
+        }
+
+        #endregion
     }
 }

@@ -46,6 +46,7 @@
     <Compile Include="ICustomer.cs" />
     <Compile Include="ILocation.cs" />
     <Compile Include="IRole.cs" />
+    <Compile Include="ISearchCriteria.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

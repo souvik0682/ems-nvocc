@@ -29,6 +29,18 @@ namespace EMS.Entity
             set;
         }
 
+        public int ManagerId
+        {
+            get;
+            set;
+        }
+
+        public string ManagerName
+        {
+            get;
+            set;
+        }
+
         public char IsActive
         {
             get;
@@ -95,6 +107,13 @@ namespace EMS.Entity
             this.LocAddress = new AddressEntity(reader);
             this.Abbreviation = Convert.ToString(reader["LocAbbr"]);
             this.Phone = Convert.ToString(reader["LocPhone"]);
+            
+            if (reader["ManagerId"] != DBNull.Value)
+            {
+                this.ManagerId = Convert.ToInt32(reader["ManagerId"]);
+                this.ManagerName = Convert.ToString(reader["ManagerName"]);
+            }
+
             this.IsActive = Convert.ToChar(reader["Active"]);
         }
 

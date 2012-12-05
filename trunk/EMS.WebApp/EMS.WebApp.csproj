@@ -75,6 +75,7 @@
     <Content Include="Images\trash_icon.gif" />
     <Content Include="Login.aspx" />
     <Content Include="Scripts\Common.js" />
+    <Content Include="Scripts\CustomTextBox.js" />
     <Content Include="Styles\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
@@ -106,6 +107,7 @@
     <Compile Include="Blank.Master.designer.cs">
       <DependentUpon>Blank.Master</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\CustomTextBox.cs" />
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

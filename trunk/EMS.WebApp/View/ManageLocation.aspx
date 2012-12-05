@@ -14,7 +14,7 @@
     </div>
     <div id="headercaption">MANAGE LOCATION</div>
     <center>
-    <div style="width:850px;">        
+    <div style="width:700px;">        
         <fieldset style="width:100%;">
             <legend>Search Location</legend>
             <table>
@@ -75,7 +75,7 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="15%" />    
+                                    <ItemStyle CssClass="gridviewitem" Width="25%" />    
                                     <HeaderTemplate><asp:LinkButton ID="lnkHAbbr" runat="server" CommandName="Sort" CommandArgument="Abbr" Text="Abbr"></asp:LinkButton></HeaderTemplate>                                
                                     <ItemTemplate>
                                         <asp:Label ID="lblAbbr" runat="server"></asp:Label><asp:Label ID="lblInActive" runat="server" CssClass="errormessage" Font-Bold="true" Text=" *"></asp:Label>
@@ -83,17 +83,12 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="25%" />    
+                                    <ItemStyle CssClass="gridviewitem" Width="30%" />    
                                     <HeaderTemplate><asp:LinkButton ID="lnkHLoc" runat="server" CommandName="Sort" CommandArgument="Location" Text="Location"></asp:LinkButton></HeaderTemplate>                                
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="City & Pin">
                                     <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="20%" />                                       
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Location Manager">
-                                    <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="25%" />      
-                                    <HeaderTemplate><asp:LinkButton ID="lnkHMan" runat="server" CommandName="Sort" CommandArgument="Manager" Text="Location Manager"></asp:LinkButton></HeaderTemplate>                                                                 
+                                    <ItemStyle CssClass="gridviewitem" Width="30%" />                                       
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderStyle CssClass="gridviewheader" />

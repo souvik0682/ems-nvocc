@@ -202,25 +202,9 @@ namespace EMS.BLL
             return CommonDAL.GetLocation(locId, 'N', searchCriteria);
         }
 
-        public string SaveLocation(ILocation loc, int modifiedBy)
+        public void SaveLocation(ILocation loc, int modifiedBy)
         {
-            int result = 0;
-            string errMessage = string.Empty;
-            result = CommonDAL.SaveLocation(loc, modifiedBy);
-
-            switch (result)
-            {
-                case 1:
-                    errMessage = ResourceManager.GetStringWithoutName("ERR00056");
-                    break;
-                case 2:
-                    errMessage = ResourceManager.GetStringWithoutName("ERR00057");
-                    break;
-                default:
-                    break;
-            }
-
-            return errMessage;
+            CommonDAL.SaveLocation(loc, modifiedBy);
         }
 
         public void DeleteLocation(int locId, int modifiedBy)

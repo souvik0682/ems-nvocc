@@ -55,7 +55,7 @@ namespace EMS.Entity
             set;
         }
 
-        public bool AllowMultipleLoc
+        public bool AllowMutipleLocation
         {
             get;
             set;
@@ -150,7 +150,7 @@ namespace EMS.Entity
                 this.EmailId = Convert.ToString(reader["EmailId"]);
 
             this.IsActive = Convert.ToBoolean(reader["Active"]);
-            this.AllowMultipleLoc = Convert.ToBoolean(reader["AllowMultipleLoc"]);
+            this.AllowMutipleLocation = Convert.ToBoolean(reader["AllowMutipleLocation"]);
         }
 
         #endregion

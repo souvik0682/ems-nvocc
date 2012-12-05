@@ -96,7 +96,7 @@ namespace EMS.WebApp.View
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 7);
+                GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 6);
 
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
 
@@ -135,7 +135,7 @@ namespace EMS.WebApp.View
                     }
                 }
 
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ManagerName"));
+                //e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ManagerName"));
 
                 // Edit link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
@@ -195,16 +195,6 @@ namespace EMS.WebApp.View
 
         private void SetAttributes()
         {
-            //txtAbbreviation.Attributes.Add("OnFocus", "javascript:js_waterMark_Focus('" + txtAbbreviation.ClientID + "', 'Type Abbreviation')");
-            //txtAbbreviation.Attributes.Add("OnBlur", "javascript:js_waterMark_Blur('" + txtAbbreviation.ClientID + "', 'Type Abbreviation')");
-            //txtAbbreviation.Text = "Type Abbreviation";
-
-
-            //txtLocationName.Attributes.Add("OnFocus", "javascript:js_waterMark_Focus('" + txtLocationName.ClientID + "', 'Type Location Name')");
-            //txtLocationName.Attributes.Add("OnBlur", "javascript:js_waterMark_Blur('" + txtLocationName.ClientID + "', 'Type Location Name')");
-            //txtLocationName.Text = "Type Location Name";
-
-
             txtWMEAbbr.WatermarkText = ResourceManager.GetStringWithoutName("ERR00030");
             txtWMEName.WatermarkText = ResourceManager.GetStringWithoutName("ERR00031");
             //gvwLoc.PageSize = Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]);

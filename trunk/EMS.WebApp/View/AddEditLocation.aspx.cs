@@ -51,17 +51,10 @@ namespace EMS.WebApp.View
             if (!IsPostBack)
             {
                 btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('ManageLocation.aspx','" + ResourceManager.GetStringWithoutName("ERR00017") + "')";
-                txtAddress.Attributes["onkeypress"] = "javascript:return SetMaxLength(this, 200)";
-                revPhone.ValidationExpression = Constants.PHONE_REGX_EXP;
-                revPhone.ErrorMessage = ResourceManager.GetStringWithoutName("ERR00027");
-                rfvName.ErrorMessage = ResourceManager.GetStringWithoutName("ERR00037");
-                rfvAbbr.ErrorMessage = ResourceManager.GetStringWithoutName("ERR00047");
-            }
-
-            if (_locId == -1)
-            {
-                chkActive.Checked = true;
-                chkActive.Enabled = false;
+                txtCAN.Attributes["onkeypress"] = "javascript:return SetMaxLength(this, 300)";
+                txtSlot.Attributes["onkeypress"] = "javascript:return SetMaxLength(this, 300)";
+                txtCarting.Attributes["onkeypress"] = "javascript:return SetMaxLength(this, 300)";
+                txtPickup.Attributes["onkeypress"] = "javascript:return SetMaxLength(this, 300)";
             }
         }
 
@@ -123,13 +116,20 @@ namespace EMS.WebApp.View
 
                 txtAbbr.Text = location.Abbreviation;
                 txtPhone.Text = location.Phone;
+                txtCAN.Text = location.CanFooter;
+                txtSlot.Text = location.SlotFooter;
 
-                //ddlManager.SelectedValue = Convert.ToString(location.ManagerId);
+                if (location.PGRFreeDays.HasValue)
+                    txtPGR.Text = location.PGRFreeDays.Value.ToString();
 
-                if (location.IsActive == 'Y')
-                    chkActive.Checked = true;
-                else
-                    chkActive.Checked = false;
+                txtCustomhouseCode.Text = location.CustomHouseCode;
+                txtGatewayPort.Text = location.GatewayPort;
+                txtICEGATE.Text = location.ICEGateLoginD;
+                txtPCS.Text = location.PCSLoginID;
+                txtISO20.Text = location.ISO20;
+                txtISO40.Text = location.ISO40;
+                txtCarting.Text = location.CartingFooter;
+                txtPickup.Text = location.PickUpFooter;
             }
         }
 
@@ -139,33 +139,27 @@ namespace EMS.WebApp.View
             ILocation loc = new LocationEntity();
             string message = string.Empty;
             BuildLocationEntity(loc);
-            message = commonBll.SaveLocation(loc, _userId);
-
-            if (message == string.Empty)
-            {
-                Response.Redirect("~/View/ManageLocation.aspx");
-            }
-            else
-            {
-                GeneralFunctions.RegisterAlertScript(this, message);
-            }
+            commonBll.SaveLocation(loc, _userId);
+            Response.Redirect("~/View/ManageLocation.aspx");
         }
 
         private void BuildLocationEntity(ILocation loc)
         {
             loc.Id = _locId;
-            loc.Name = txtLocName.Text.Trim().ToUpper();
-            loc.LocAddress.Address = txtAddress.Text.Trim().ToUpper();
-            loc.LocAddress.City = txtCity.Text.Trim().ToUpper();
-            loc.LocAddress.Pin = txtPin.Text.Trim().ToUpper();
-            loc.Abbreviation = txtAbbr.Text.Trim().ToUpper();
-            loc.Phone = txtPhone.Text.Trim().ToUpper();
-            //loc.ManagerId = Convert.ToInt32(ddlManager.SelectedValue);
 
-            if (chkActive.Checked)
-                loc.IsActive = 'Y';
-            else
-                loc.IsActive = 'N';
+            if (!string.IsNullOrEmpty(txtPGR.Text))
+                loc.PGRFreeDays = Convert.ToInt32(txtPGR.Text);
+
+            loc.CanFooter = txtCAN.Text.Trim();
+            loc.SlotFooter = txtSlot.Text.Trim();
+            loc.CartingFooter = txtCarting.Text.Trim();
+            loc.PickUpFooter = txtPickup.Text.Trim();
+            loc.CustomHouseCode = txtCustomhouseCode.Text.Trim();
+            loc.GatewayPort = txtGatewayPort.Text.Trim();
+            loc.ICEGateLoginD = txtICEGATE.Text.Trim();
+            loc.PCSLoginID = txtPCS.Text.Trim();
+            loc.ISO20 = txtISO20.Text.Trim();
+            loc.ISO40 = txtISO40.Text.Trim();
         }
 
         #endregion

@@ -22,13 +22,13 @@ namespace EMS.WebApp.View {
         protected global::System.Web.UI.WebControls.TextBox txtLocName;
         
         /// <summary>
-        /// rfvName control.
+        /// txtCustomhouseCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvName;
+        protected global::System.Web.UI.WebControls.TextBox txtCustomhouseCode;
         
         /// <summary>
         /// txtAddress control.
@@ -40,6 +40,15 @@ namespace EMS.WebApp.View {
         protected global::System.Web.UI.WebControls.TextBox txtAddress;
         
         /// <summary>
+        /// txtGatewayPort control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtGatewayPort;
+        
+        /// <summary>
         /// txtCity control.
         /// </summary>
         /// <remarks>
@@ -47,6 +56,15 @@ namespace EMS.WebApp.View {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCity;
+        
+        /// <summary>
+        /// txtICEGATE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtICEGATE;
         
         /// <summary>
         /// txtPin control.
@@ -58,6 +76,15 @@ namespace EMS.WebApp.View {
         protected global::System.Web.UI.WebControls.TextBox txtPin;
         
         /// <summary>
+        /// txtPCS control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPCS;
+        
+        /// <summary>
         /// txtAbbr control.
         /// </summary>
         /// <remarks>
@@ -67,13 +94,13 @@ namespace EMS.WebApp.View {
         protected global::System.Web.UI.WebControls.TextBox txtAbbr;
         
         /// <summary>
-        /// rfvAbbr control.
+        /// txtISO20 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAbbr;
+        protected global::System.Web.UI.WebControls.TextBox txtISO20;
         
         /// <summary>
         /// txtPhone control.
@@ -85,31 +112,58 @@ namespace EMS.WebApp.View {
         protected global::System.Web.UI.WebControls.TextBox txtPhone;
         
         /// <summary>
-        /// revPhone control.
+        /// txtISO40 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator revPhone;
+        protected global::System.Web.UI.WebControls.TextBox txtISO40;
         
         /// <summary>
-        /// ddlManager control.
+        /// txtCAN control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlManager;
+        protected global::System.Web.UI.WebControls.TextBox txtCAN;
         
         /// <summary>
-        /// chkActive control.
+        /// txtCarting control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkActive;
+        protected global::System.Web.UI.WebControls.TextBox txtCarting;
+        
+        /// <summary>
+        /// txtSlot control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSlot;
+        
+        /// <summary>
+        /// txtPickup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPickup;
+        
+        /// <summary>
+        /// txtPGR control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtPGR;
         
         /// <summary>
         /// btnSave control.

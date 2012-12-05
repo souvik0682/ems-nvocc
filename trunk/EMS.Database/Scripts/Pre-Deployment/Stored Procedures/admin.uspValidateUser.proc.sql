@@ -1,4 +1,5 @@
-﻿/****** Object:  StoredProcedure [admin].[uspValidateUser]    Script Date: 12/02/2012 18:16:09 ******/
+﻿/****** Object:  StoredProcedure [admin].[uspValidateUser]    Script Date: 12/05/2012 22:08:28 ******/
+
 -- =============================================
 -- Author		: Amit Kumar Chandra
 -- Create date  : 02-Dec-2012
@@ -26,7 +27,7 @@ BEGIN
 				ur.FirstName,
 				ur.LastName,
 				ur.emailID,
-				ur.AllowMultipleLoc,
+				ur.AllowMutipleLocation,
 				ur.fk_RoleID AS 'RoleId',
 				ur.fk_LocID AS 'LocId'
 		FROM	dbo.mstUsers ur

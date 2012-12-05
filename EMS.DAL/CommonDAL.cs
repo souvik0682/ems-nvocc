@@ -92,30 +92,27 @@ namespace EMS.DAL
             return loc;
         }
 
-        public static int SaveLocation(ILocation loc, int modifiedBy)
+        public static void SaveLocation(ILocation loc, int modifiedBy)
         {
             string strExecution = "[common].[uspSaveLocation]";
-            int result = 0;
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@LocId", loc.Id);
-                oDq.AddVarcharParam("@LocName", 50, loc.Name);
-                oDq.AddVarcharParam("@LocAddress", 200, loc.LocAddress.Address);
-                oDq.AddVarcharParam("@LocCity", 20, loc.LocAddress.City);
-                oDq.AddVarcharParam("@LocPin", 10, loc.LocAddress.Pin);
-                oDq.AddVarcharParam("@LocAbbr", 3, loc.Abbreviation);
-                oDq.AddVarcharParam("@LocPhone", 30, loc.Phone);
-                oDq.AddIntegerParam("@ManagerId", loc.ManagerId);
-                oDq.AddCharParam("@IsActive", 1, loc.IsActive);
+                oDq.AddIntegerParam("@PGRFreeDays", loc.PGRFreeDays);
+                oDq.AddVarcharParam("@CanFooter", 300, loc.CanFooter);
+                oDq.AddVarcharParam("@SlotFooter", 300, loc.SlotFooter);
+                oDq.AddVarcharParam("@CartingFooter", 300, loc.CartingFooter);
+                oDq.AddVarcharParam("@PickUpFooter", 300, loc.PickUpFooter);
+                oDq.AddVarcharParam("@CustomHouseCode", 6, loc.CustomHouseCode);
+                oDq.AddVarcharParam("@GatewayPort", 6, loc.GatewayPort);
+                oDq.AddVarcharParam("@ICEGateLoginD", 20, loc.ICEGateLoginD);
+                oDq.AddVarcharParam("@PCSLoginID", 8, loc.PCSLoginID);
+                oDq.AddVarcharParam("@ISO20", 4, loc.ISO20);
+                oDq.AddVarcharParam("@ISO40", 4, loc.ISO40);
                 oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
-                oDq.AddIntegerParam("@Result", result, QueryParameterDirection.Output);
                 oDq.RunActionQuery();
-                result = Convert.ToInt32(oDq.GetParaValue("@Result"));
-
             }
-
-            return result;
         }
 
         public static void DeleteLocation(int locId, int modifiedBy)

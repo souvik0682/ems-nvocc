@@ -174,6 +174,15 @@ CREATE SCHEMA [admin]
 
 
 GO
+PRINT N'Creating [common]...';
+
+
+GO
+CREATE SCHEMA [common]
+    AUTHORIZATION [dbo];
+
+
+GO
 PRINT N'Creating [admin].[ErrorLog]...';
 
 
@@ -289,7 +298,8 @@ PRINT N'Creating [admin].[uspValidateUser]...';
 
 
 GO
-/****** Object:  StoredProcedure [admin].[uspValidateUser]    Script Date: 12/02/2012 18:16:09 ******/
+/****** Object:  StoredProcedure [admin].[uspValidateUser]    Script Date: 12/05/2012 22:08:28 ******/
+
 -- =============================================
 -- Author		: Amit Kumar Chandra
 -- Create date  : 02-Dec-2012
@@ -317,7 +327,7 @@ BEGIN
 				ur.FirstName,
 				ur.LastName,
 				ur.emailID,
-				ur.AllowMultipleLoc,
+				ur.AllowMutipleLocation,
 				ur.fk_RoleID AS 'RoleId',
 				ur.fk_LocID AS 'LocId'
 		FROM	dbo.mstUsers ur
@@ -328,6 +338,138 @@ BEGIN
 		WHERE	ur.[UserName] = @UserName 
 		AND		ur.[Password] = @Password 
 		AND 	ur.[UserActive] = 1
+END
+GO
+PRINT N'Creating [common].[uspGetLocation]...';
+
+
+GO
+/****** Object:  StoredProcedure [common].[uspGetLocation]    Script Date: 12/05/2012 22:09:58 ******/
+
+-- =============================================
+-- Author		: Amit Kumar Chandra
+-- Create date	: 03-Dec-2012 
+-- Description  :
+-- =============================================
+CREATE PROCEDURE [common].[uspGetLocation]
+(
+	-- Add the parameters for the stored procedure here
+	@LocId				INT = NULL,
+	@IsActiveOnly		CHAR(1),
+	@SchAbbr			VARCHAR(3) = NULL,
+	@SchLocName			VARCHAR(50) = NULL,
+	@SortExpression		VARCHAR(50),
+	@SortDirection		VARCHAR(4)	
+)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	DECLARE @Sort VARCHAR(4)
+	
+	SELECT @Sort = CASE @SortDirection
+						WHEN '' THEN 'ASC'
+						ELSE @SortDirection
+					END
+					
+	SELECT	 loc.pk_LocID AS 'Id'
+			,loc.LocName AS 'Name'
+			,loc.LocAddress AS 'Address'
+			,loc.LocCity AS 'City'
+			,loc.LocPin AS 'Pin'
+			,loc.LocAbbr
+			,loc.LocPhone
+			,loc.PGRFreeDays
+			,loc.CANFooter
+			,loc.CartingFooter
+			,loc.SlotFooter
+			,loc.PickUpFooter
+			,loc.CustomHouseCode
+			,loc.GatewayPort
+			,loc.ICEGateLoginD
+			,loc.PCSLoginID
+			,loc.ISO20
+			,loc.ISO40
+			,loc.Active
+	FROM	[DSR_MOD].[dbo].[mstLocation] loc
+	WHERE	((ISNULL(@LocId, 0) = 0) OR (loc.pk_LocID = @LocId))
+	AND		((ISNULL(@SchAbbr, '') = '') OR (loc.LocAbbr LIKE '%'+ @SchAbbr + '%'))
+	AND		((ISNULL(@SchLocName, '') = '') OR (loc.LocName LIKE '%'+ @SchLocName + '%'))
+	AND		((@IsActiveOnly = 'N') OR (loc.Active = @IsActiveOnly))
+	AND		loc.IsDeleted = 0
+	ORDER BY 
+			CASE @SortDirection
+				WHEN 'ASC' THEN
+					CASE @SortExpression
+						WHEN 'Abbr' THEN loc.LocAbbr
+						WHEN 'Location' THEN loc.LocName
+						ELSE '1'
+					END 
+			END ASC,
+			CASE @SortDirection
+				WHEN 'DESC' THEN
+					CASE @SortExpression
+						WHEN 'Abbr' THEN loc.LocAbbr
+						WHEN 'Location' THEN loc.LocName
+						ELSE '1'
+					END 
+			END DESC
+END
+GO
+PRINT N'Creating [common].[uspSaveLocation]...';
+
+
+GO
+/****** Object:  StoredProcedure [common].[uspSaveLocation]    Script Date: 12/05/2012 22:10:02 ******/
+
+-- =============================================
+-- Author		: Amit Kumar Chandra
+-- Create date	: 03-Dec-2012 
+-- Description  :
+-- =============================================
+CREATE PROCEDURE [common].[uspSaveLocation]
+(
+	-- Add the parameters for the stored procedure here
+	@LocId				INT,
+	@PGRFreeDays		INT,
+	@CanFooter			VARCHAR(300),
+	@SlotFooter			VARCHAR(300),
+	@CartingFooter		VARCHAR(300),
+	@PickUpFooter		VARCHAR(300),
+	@CustomHouseCode	CHAR(6),
+	@GatewayPort		CHAR(6),
+	@ICEGateLoginD		VARCHAR(20),
+	@PCSLoginID			VARCHAR(8),
+	@ISO20				CHAR(4),
+	@ISO40				CHAR(4),
+	@ModifiedBy			INT
+)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+   
+	UPDATE	[DSR_MOD].[dbo].[mstLocation]
+	SET		 PGRFreeDays = @PGRFreeDays
+			,CanFooter = @CanFooter
+			,SlotFooter = @SlotFooter
+			,CartingFooter = @CartingFooter
+			,PickUpFooter = @PickUpFooter
+			,CustomHouseCode = @CustomHouseCode
+			,GatewayPort = @GatewayPort
+			,ICEGateLoginD = @ICEGateLoginD
+			,PCSLoginID = @PCSLoginID
+			,ISO20 = @ISO20
+			,ISO40 = @ISO40
+			--,fk_UserLastEdited = @ModifiedBy
+			,EditedOn = GETUTCDATE()
+	WHERE	pk_LocID = @LocId
 END
 GO
 -- Refactoring step to update target server with deployed transaction logs

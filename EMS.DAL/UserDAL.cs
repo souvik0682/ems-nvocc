@@ -51,7 +51,7 @@ namespace EMS.DAL
                     user.UserRole.Id = Convert.ToInt32(reader["RoleId"]);
                     user.UserLocation.Id = Convert.ToInt32(reader["LocId"]);
                     user.EmailId = Convert.ToString(reader["emailID"]);
-                    user.AllowMultipleLoc = Convert.ToBoolean(reader["AllowMultipleLoc"]);
+                    user.AllowMutipleLocation = Convert.ToBoolean(reader["AllowMutipleLocation"]);
                 }
 
                 reader.Close();

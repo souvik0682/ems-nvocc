@@ -28,12 +28,26 @@ namespace EMS.Utilities
         XML = 3
     }
 
+<<<<<<< .mine
+    public enum PageName
+    {
+        UserMaster = 1,
+        LocationMaster = 2,
+        AreaMaster = 3,
+        GroupMaster = 4,
+        CustomerMaster = 5,
+        AssignCustomer = 6,
+        DailySalesCall = 7
+    };
+
+=======
     public enum PageName
     {
         UserMaster = 1,
         LocationMaster = 2,
     };
 
+>>>>>>> .r132
     #endregion
 
     public static class Constants

@@ -235,5 +235,185 @@ namespace EMS.BLL
         }
 
         #endregion
+
+        #region Area
+
+        //private void SetDefaultSearchCriteriaForArea(SearchCriteria searchCriteria)
+        //{
+        //    searchCriteria.SortExpression = "Location";
+        //    searchCriteria.SortDirection = "ASC";
+        //}
+
+        //public List<IArea> GetAllArea(SearchCriteria searchCriteria)
+        //{
+        //    return CommonDAL.GetArea('N', searchCriteria);
+        //}
+
+        //public List<IArea> GetActiveArea()
+        //{
+        //    SearchCriteria searchCriteria = new SearchCriteria();
+        //    SetDefaultSearchCriteriaForArea(searchCriteria);
+        //    return CommonDAL.GetArea('Y', searchCriteria);
+        //}
+
+        //public IArea GetArea(int areaId)
+        //{
+        //    SearchCriteria searchCriteria = new SearchCriteria();
+        //    SetDefaultSearchCriteriaForArea(searchCriteria);
+        //    return CommonDAL.GetArea(areaId, 'N', searchCriteria);
+        //}
+
+        //public string SaveArea(IArea area, int modifiedBy)
+        //{
+        //    int result = 0;
+        //    string errMessage = string.Empty;
+        //    result = CommonDAL.SaveArea(area, modifiedBy);
+
+        //    switch (result)
+        //    {
+        //        case 1:
+        //            errMessage = ResourceManager.GetStringWithoutName("ERR00013");
+        //            break;
+        //        default:
+        //            break;
+        //    }
+
+        //    return errMessage;
+        //}
+
+        //public void DeleteArea(int areaId, int modifiedBy)
+        //{
+        //    CommonDAL.DeleteArea(areaId, modifiedBy);
+        //}
+
+        //public List<IArea> GetAreaByLocation(int locId)
+        //{
+        //    return CommonDAL.GetAreaByLocation(locId);
+        //}
+
+        //public List<IArea> GetAreaByLocationAndPinCode(int locId, string pinCode)
+        //{
+        //    return CommonDAL.GetAreaByLocationAndPinCode(locId, pinCode);
+        //}
+
+        #endregion
+
+        #region Group Company
+
+        //private void SetDefaultSearchCriteriaForGroupCompany(SearchCriteria searchCriteria)
+        //{
+        //    searchCriteria.SortExpression = "GroupName";
+        //    searchCriteria.SortDirection = "ASC";
+        //}
+
+        //public List<IGroupCompany> GetActiveGroupCompany()
+        //{
+        //    SearchCriteria searchCriteria = new SearchCriteria();
+        //    SetDefaultSearchCriteriaForGroupCompany(searchCriteria);
+        //    return CommonDAL.GetGroupCompany('Y', searchCriteria);
+        //}
+
+        #endregion
+
+        #region Customer
+
+        //private void SetDefaultSearchCriteriaForCustomer(SearchCriteria searchCriteria)
+        //{
+        //    searchCriteria.SortExpression = "CustName";
+        //    searchCriteria.SortDirection = "ASC";
+        //}
+
+        //public List<ICustomer> GetAllCustomer(SearchCriteria searchCriteria)
+        //{
+        //    return CommonDAL.GetCustomerList('N', searchCriteria);
+        //}
+
+        //public List<ICustomer> GetActiveCustomer(SearchCriteria searchCriteria)
+        //{
+        //    return CommonDAL.GetCustomerList('Y', searchCriteria);
+        //}
+
+        //public List<ICustomer> GetAllCustomer()
+        //{
+        //    SearchCriteria searchCriteria = new SearchCriteria();
+        //    SetDefaultSearchCriteriaForCustomer(searchCriteria);
+        //    return CommonDAL.GetCustomerList('N', searchCriteria);
+        //}
+
+        //public List<ICustomer> GetActiveCustomer()
+        //{
+        //    SearchCriteria searchCriteria = new SearchCriteria();
+        //    SetDefaultSearchCriteriaForCustomer(searchCriteria);
+
+        //    return CommonDAL.GetCustomerList('N', searchCriteria);
+        //}
+
+        //public List<ICustomer> GetCustomerByUser(int userId)
+        //{
+        //    SearchCriteria searchCriteria = new SearchCriteria();
+        //    SetDefaultSearchCriteriaForCustomer(searchCriteria);
+        //    searchCriteria.UserId = userId;
+        //    return CommonDAL.GetCustomerList('N', searchCriteria);
+        //}
+
+        //public ICustomer GetCustomer(int customer)
+        //{
+        //    SearchCriteria searchCriteria = new SearchCriteria();
+        //    SetDefaultSearchCriteriaForCustomer(searchCriteria);
+        //    return CommonDAL.GetCustomer(customer, 'N', searchCriteria);
+        //}
+
+        //public string SaveCustomer(ICustomer customer, int modifiedBy)
+        //{
+        //    int result = 0;
+        //    string errMessage = string.Empty;
+        //    result = CommonDAL.SaveCustomer(customer, modifiedBy);
+
+        //    switch (result)
+        //    {
+        //        case 1:
+        //            errMessage = ResourceManager.GetStringWithoutName("ERR00013");
+        //            break;
+        //        default:
+        //            break;
+        //    }
+
+        //    return errMessage;
+        //}
+
+        //public void DeleteCustomer(int customer, int modifiedBy)
+        //{
+        //    CommonDAL.DeleteCustomer(customer, modifiedBy);
+        //}
+
+        #endregion
+
+        #region Customer Type
+
+        //public List<ICustomerType> GetAllCustomerType()
+        //{
+        //    return CommonDAL.GetCustomerType('N');
+        //}
+
+        //public List<ICustomerType> GetActiveCustomerType()
+        //{
+        //    return CommonDAL.GetCustomerType('Y');
+        //}
+
+        //public ICustomerType GetCustomerType(int custTypeId)
+        //{
+        //    return CommonDAL.GetCustomerType(custTypeId, 'N');
+        //}
+
+        #endregion
+
+        #region User
+
+        //public List<IUser> GetSalesExecutiveNew(int userId)
+        //{
+        //    return CommonDAL.GetSalesExecutiveNew(userId);
+        //}
+
+        #endregion
     }
 }

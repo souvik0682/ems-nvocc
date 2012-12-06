@@ -58,6 +58,83 @@ namespace EMS.DAL
             }
         }
 
+        public static List<IUser> GetUserList(bool isActiveOnly, SearchCriteria searchCriteria)
+        {
+            string strExecution = "[admin].[uspGetUser]";
+            List<IUser> lstUser = new List<IUser>();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBooleanParam("@IsActiveOnly", isActiveOnly);
+                oDq.AddVarcharParam("@SchUserName", 10, searchCriteria.UserName);
+                oDq.AddVarcharParam("@SchFirstName", 30, searchCriteria.FirstName);
+                oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
+                oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    IUser user = new UserEntity(reader);
+                    lstUser.Add(user);
+                }
+
+                reader.Close();
+            }
+
+            return lstUser;
+        }
+
+        public static IUser GetUser(int userId, bool isActiveOnly, SearchCriteria searchCriteria)
+        {
+            string strExecution = "[admin].[uspGetUser]";
+            IUser user = null;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@UserId", userId);
+                oDq.AddBooleanParam("@IsActiveOnly", isActiveOnly);
+                oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
+                oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    user = new UserEntity(reader);
+                }
+
+                reader.Close();
+            }
+
+            return user;
+        }
+
+        public static int SaveUser(IUser user, int companyId, int modifiedBy)
+        {
+            string strExecution = "[admin].[uspSaveUser]";
+            int result = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@UserId", user.Id);
+                oDq.AddVarcharParam("@UserName", 10, user.Name);
+                oDq.AddVarcharParam("@Pwd", 50, user.Password);
+                oDq.AddVarcharParam("@FirstName", 30, user.FirstName);
+                oDq.AddVarcharParam("@LastName", 30, user.LastName);
+                oDq.AddIntegerParam("@RoleId", user.UserRole.Id);
+                oDq.AddIntegerParam("@LocId", user.UserLocation.Id);
+                oDq.AddVarcharParam("@EmailId", 50, user.EmailId);
+                oDq.AddBooleanParam("@IsActive", user.IsActive);
+                oDq.AddBooleanParam("@AllowMutipleLocation", user.AllowMutipleLocation);
+                oDq.AddIntegerParam("@CompanyId", companyId);
+                oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
+                oDq.AddIntegerParam("@Result", result, QueryParameterDirection.Output);
+                oDq.RunActionQuery();
+                result = Convert.ToInt32(oDq.GetParaValue("@Result"));
+            }
+
+            return result;
+        }
+
         public static void DeleteUser(int userId, int modifiedBy)
         {
             string strExecution = "[admin].[uspDeleteUser]";
@@ -83,5 +160,51 @@ namespace EMS.DAL
 
             }
         }
+
+        #region Role
+
+        public static List<IRole> GetRole()
+        {
+            string strExecution = "[admin].[uspGetRole]";
+            List<IRole> lstRole = new List<IRole>();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    IRole role = new RoleEntity(reader);
+                    lstRole.Add(role);
+                }
+
+                reader.Close();
+            }
+
+            return lstRole;
+        }
+
+        public static IRole GetRole(int roleId)
+        {
+            string strExecution = "[admin].[uspGetRole]";
+            IRole role = null;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@RoleId", roleId);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    role = new RoleEntity(reader);
+                }
+
+                reader.Close();
+            }
+
+            return role;
+        }
+
+        #endregion
     }
 }

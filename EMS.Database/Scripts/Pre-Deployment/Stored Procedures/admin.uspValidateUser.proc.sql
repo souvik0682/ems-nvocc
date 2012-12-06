@@ -1,4 +1,4 @@
-﻿/****** Object:  StoredProcedure [admin].[uspValidateUser]    Script Date: 12/05/2012 22:08:28 ******/
+﻿/****** Object:  StoredProcedure [admin].[uspValidateUser]    Script Date: 12/06/2012 23:34:09 ******/
 
 -- =============================================
 -- Author		: Amit Kumar Chandra
@@ -31,15 +31,14 @@ BEGIN
 				ur.fk_RoleID AS 'RoleId',
 				ur.fk_LocID AS 'LocId'
 		FROM	dbo.mstUsers ur
-				INNER JOIN DSR.dbo.mstRoles ro
+				INNER JOIN dbo.mstRoles ro
 					ON ur.fk_RoleID = ro.pk_RoleID
-				INNER JOIN 	DSR.dbo.mstLocation lo
+				INNER JOIN 	[DSR].[dbo].[mstLocation] lo
 					ON ur.fk_LocID = lo.pk_LocID
 		WHERE	ur.[UserName] = @UserName 
 		AND		ur.[Password] = @Password 
 		AND 	ur.[UserActive] = 1
+		AND		ur.[IsDeleted] = 0
 END
 
 GO
-
-

@@ -11,7 +11,13 @@ namespace EMS.Entity
     {
         #region IRole Members
 
-        public string RoleType
+        public bool? LocationSpecific
+        {
+            get;
+            set;
+        }
+
+        public bool? RoleStatus
         {
             get;
             set;
@@ -47,8 +53,11 @@ namespace EMS.Entity
             this.Id = Convert.ToInt32(reader["RoleId"]);
             this.Name = Convert.ToString(reader["RoleName"]);
 
-            if (reader["RoleType"] != DBNull.Value)
-                this.RoleType = Convert.ToString(reader["RoleType"]);
+            if (reader["LocationSpecific"] != DBNull.Value)
+                this.LocationSpecific = Convert.ToBoolean(reader["LocationSpecific"]);
+
+            if (reader["RoleStatus"] != DBNull.Value)
+                this.RoleStatus = Convert.ToBoolean(reader["RoleStatus"]);
         }
 
         #endregion

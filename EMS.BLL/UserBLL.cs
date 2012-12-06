@@ -42,9 +42,67 @@ namespace EMS.BLL
             return userId;
         }
 
-        public bool ChangePassword(IUser user)
+        public static int GetLoggedInUserRoleId()
         {
-            return UserDAL.ChangePassword(user);
+            int roleId = 0;
+
+            if (!ReferenceEquals(System.Web.HttpContext.Current.Session[Constants.SESSION_USER_INFO], null))
+            {
+                IUser user = (IUser)System.Web.HttpContext.Current.Session[Constants.SESSION_USER_INFO];
+
+                if (!ReferenceEquals(user, null) && user.Id > 0)
+                {
+                    if (!ReferenceEquals(user.UserRole, null))
+                    {
+                        roleId = user.UserRole.Id;
+                    }
+                }
+            }
+
+            return roleId;
+        }
+
+        private void SetDefaultSearchCriteriaForUser(SearchCriteria searchCriteria)
+        {
+            searchCriteria.SortExpression = "UserName";
+            searchCriteria.SortDirection = "ASC";
+        }
+
+        public List<IUser> GetAllUserList(SearchCriteria searchCriteria)
+        {
+            return UserDAL.GetUserList(false, searchCriteria);
+        }
+
+        public List<IUser> GetActiveUserList()
+        {
+            SearchCriteria searchCriteria = new SearchCriteria();
+            SetDefaultSearchCriteriaForUser(searchCriteria);
+            return UserDAL.GetUserList(true, searchCriteria);
+        }
+
+        public IUser GetUser(int userId)
+        {
+            SearchCriteria searchCriteria = new SearchCriteria();
+            SetDefaultSearchCriteriaForUser(searchCriteria);
+            return UserDAL.GetUser(userId, false, searchCriteria);
+        }
+
+        public string SaveUser(IUser user, int modifiedBy)
+        {
+            int result = 0;
+            string errMessage = string.Empty;
+            result = UserDAL.SaveUser(user, Constants.DEFAULT_COMPANY_ID, modifiedBy);
+
+            switch (result)
+            {
+                case 1:
+                    errMessage = ResourceManager.GetStringWithoutName("ERR00060");
+                    break;
+                default:
+                    break;
+            }
+
+            return errMessage;
         }
 
         public void DeleteUser(int userId, int modifiedBy)
@@ -52,10 +110,29 @@ namespace EMS.BLL
             UserDAL.DeleteUser(userId, modifiedBy);
         }
 
+        public bool ChangePassword(IUser user)
+        {
+            return UserDAL.ChangePassword(user);
+        }
+
         public void ResetPassword(IUser user, int modifiedBy)
         {
             user.Password = GetDefaultPassword();
             UserDAL.ResetPassword(user, modifiedBy);
         }
+
+        #region Role
+
+        public List<IRole> GetRole()
+        {
+            return UserDAL.GetRole();
+        }
+
+        public IRole GetRole(int roleId)
+        {
+            return UserDAL.GetRole(roleId);
+        }
+
+        #endregion
     }
 }

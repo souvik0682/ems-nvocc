@@ -171,5 +171,402 @@ namespace EMS.DAL
         }
 
         #endregion
+
+        #region Area
+
+        //public static List<IArea> GetArea(char isActiveOnly, SearchCriteria searchCriteria)
+        //{
+        //    string strExecution = "[common].[uspGetArea]";
+        //    List<IArea> lstArea = new List<IArea>();
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddCharParam("@IsActiveOnly", 1, isActiveOnly);
+        //        oDq.AddVarcharParam("@SchLocName", 50, searchCriteria.LocName);
+        //        oDq.AddVarcharParam("@SchAreaName", 50, searchCriteria.AreaName);
+        //        oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
+        //        oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
+        //        DataTableReader reader = oDq.GetTableReader();
+
+        //        while (reader.Read())
+        //        {
+        //            IArea area = new AreaEntity(reader);
+        //            lstArea.Add(area);
+        //        }
+
+        //        reader.Close();
+        //    }
+
+        //    return lstArea;
+        //}
+
+        //public static IArea GetArea(int areaId, char isActiveOnly, SearchCriteria searchCriteria)
+        //{
+        //    string strExecution = "[common].[uspGetArea]";
+        //    IArea area = null;
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddIntegerParam("@AreaId", areaId);
+        //        oDq.AddCharParam("@IsActiveOnly", 1, isActiveOnly);
+        //        oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
+        //        oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
+        //        DataTableReader reader = oDq.GetTableReader();
+
+        //        while (reader.Read())
+        //        {
+        //            area = new AreaEntity(reader);
+        //        }
+
+        //        reader.Close();
+        //    }
+
+        //    return area;
+        //}
+
+        //public static int SaveArea(IArea area, int modifiedBy)
+        //{
+        //    string strExecution = "[common].[uspSaveArea]";
+        //    int result = 0;
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddIntegerParam("@AreaId", area.Id);
+        //        oDq.AddVarcharParam("@AreaName", 50, area.Name);
+        //        oDq.AddVarcharParam("@PinCode", 10, area.PinCode);
+        //        oDq.AddIntegerParam("@LocId", area.Location.Id);
+        //        oDq.AddCharParam("@IsActive", 1, area.IsActive);
+        //        oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
+        //        oDq.AddIntegerParam("@Result", result, QueryParameterDirection.Output);
+        //        oDq.RunActionQuery();
+        //        result = Convert.ToInt32(oDq.GetParaValue("@Result"));
+        //    }
+
+        //    return result;
+        //}
+
+        //public static void DeleteArea(int areaId, int modifiedBy)
+        //{
+        //    string strExecution = "[common].[uspDeleteArea]";
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddIntegerParam("@AreaId", areaId);
+        //        oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
+        //        oDq.RunActionQuery();
+        //    }
+        //}
+
+        //public static List<IArea> GetAreaByLocation(int locId)
+        //{
+        //    string strExecution = "[common].[uspGetAreaByLocation]";
+        //    List<IArea> lstArea = new List<IArea>();
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddIntegerParam("@LocId", locId);
+        //        DataTableReader reader = oDq.GetTableReader();
+
+        //        while (reader.Read())
+        //        {
+        //            IArea area = new AreaEntity(reader);
+        //            lstArea.Add(area);
+        //        }
+
+        //        reader.Close();
+        //    }
+
+        //    return lstArea;
+        //}
+
+        //public static List<IArea> GetAreaByLocationAndPinCode(int locId, string pinCode)
+        //{
+        //    string strExecution = "[common].[uspAreaByLocationAndPinCode]";
+        //    List<IArea> lstArea = new List<IArea>();
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddIntegerParam("@LocId", locId);
+        //        oDq.AddVarcharParam("@PinCode", 10, pinCode);
+        //        DataTableReader reader = oDq.GetTableReader();
+
+        //        while (reader.Read())
+        //        {
+        //            IArea area = new AreaEntity(reader);
+        //            lstArea.Add(area);
+        //        }
+
+        //        reader.Close();
+        //    }
+
+        //    return lstArea;
+        //}
+
+        #endregion
+
+        #region Group Company
+
+        //public static List<IGroupCompany> GetGroupCompany(char isActiveOnly, SearchCriteria searchCriteria)
+        //{
+        //    string strExecution = "[common].[uspGetGroupCompany]";
+        //    List<IGroupCompany> lstGroupCompany = new List<IGroupCompany>();
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddCharParam("@IsActiveOnly", 1, isActiveOnly);
+        //        oDq.AddVarcharParam("@SchGroupName", 50, searchCriteria.GroupName);
+        //        oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
+        //        oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
+        //        DataTableReader reader = oDq.GetTableReader();
+
+        //        while (reader.Read())
+        //        {
+        //            IGroupCompany groupCompany = new GroupCompanyEntity(reader);
+        //            lstGroupCompany.Add(groupCompany);
+        //        }
+
+        //        reader.Close();
+        //    }
+
+        //    return lstGroupCompany;
+        //}
+
+        #endregion
+
+        #region Customer
+
+        //public static List<ICustomer> GetCustomerList(char isActiveOnly, SearchCriteria searchCriteria)
+        //{
+        //    string strExecution = "[common].[uspGetCustomerList]";
+        //    List<ICustomer> lstCustomer = new List<ICustomer>();
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddIntegerParam("@UserId", searchCriteria.UserId);
+        //        oDq.AddCharParam("@IsActiveOnly", 1, isActiveOnly);
+        //        oDq.AddVarcharParam("@SchLocAbbr", 3, searchCriteria.LocAbbr);
+        //        oDq.AddVarcharParam("@SchCustName", 60, searchCriteria.CustomerName);
+        //        oDq.AddVarcharParam("@SchGroupName", 50, searchCriteria.GroupName);
+        //        oDq.AddVarcharParam("@SchExecutiveName", 50, searchCriteria.ExecutiveName);
+        //        oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
+        //        oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
+        //        DataTableReader reader = oDq.GetTableReader();
+
+        //        while (reader.Read())
+        //        {
+        //            ICustomer customer = new CustomerEntity(reader);
+        //            lstCustomer.Add(customer);
+        //        }
+
+        //        reader.Close();
+        //    }
+
+        //    return lstCustomer;
+        //}
+
+        //public static List<ICustomer> GetCustomer(char isActiveOnly, SearchCriteria searchCriteria)
+        //{
+        //    string strExecution = "[common].[uspGetCustomer]";
+        //    List<ICustomer> lstCustomer = new List<ICustomer>();
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddCharParam("@IsActiveOnly", 1, isActiveOnly);
+        //        oDq.AddVarcharParam("@SchLocAbbr", 3, searchCriteria.LocAbbr);
+        //        oDq.AddVarcharParam("@SchCustName", 60, searchCriteria.CustomerName);
+        //        oDq.AddVarcharParam("@SchGroupName", 50, searchCriteria.GroupName);
+        //        oDq.AddIntegerParam("@SalesExecutiveId", searchCriteria.UserId);
+        //        oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
+        //        oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
+        //        DataTableReader reader = oDq.GetTableReader();
+
+        //        while (reader.Read())
+        //        {
+        //            ICustomer customer = new CustomerEntity(reader);
+        //            lstCustomer.Add(customer);
+        //        }
+
+        //        reader.Close();
+        //    }
+
+        //    return lstCustomer;
+        //}
+
+        //public static ICustomer GetCustomer(int customerId, char isActiveOnly, SearchCriteria searchCriteria)
+        //{
+        //    string strExecution = "[common].[uspGetCustomer]";
+        //    ICustomer customer = null;
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddIntegerParam("@CustId", customerId);
+        //        oDq.AddCharParam("@IsActiveOnly", 1, isActiveOnly);
+        //        oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
+        //        oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
+        //        DataTableReader reader = oDq.GetTableReader();
+
+        //        while (reader.Read())
+        //        {
+        //            customer = new CustomerEntity(reader);
+        //        }
+
+        //        reader.Close();
+        //    }
+
+        //    return customer;
+        //}
+
+        //public static int SaveCustomer(ICustomer customer, int modifiedBy)
+        //{
+        //    string strExecution = "[common].[uspSaveCustomer]";
+        //    int result = 0;
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddIntegerParam("@CustId", customer.Id);
+        //        oDq.AddIntegerParam("@GroupId", customer.Group.Id);
+        //        oDq.AddIntegerParam("@LocId", customer.Location.Id);
+        //        oDq.AddIntegerParam("@AreaId", customer.Area.Id);
+        //        oDq.AddIntegerParam("@CustTypeId", customer.CustType.Id);
+        //        oDq.AddCharParam("@CorporateOrLocal", 1, customer.CorporateOrLocal);
+        //        oDq.AddVarcharParam("@CustomerName", 60, customer.Name);
+        //        oDq.AddVarcharParam("@Address", 200, customer.Address.Address);
+        //        oDq.AddVarcharParam("@City", 50, customer.Address.City);
+        //        oDq.AddVarcharParam("@Pin", 10, customer.Address.Pin);
+        //        oDq.AddVarcharParam("@Phone1", 50, customer.Phone1);
+        //        oDq.AddVarcharParam("@Phone2", 50, customer.Phone2);
+        //        oDq.AddVarcharParam("@ContactPerson1", 50, customer.ContactPerson1.Name);
+        //        oDq.AddVarcharParam("@ContactDesignation1", 50, customer.ContactPerson1.Designation);
+        //        oDq.AddVarcharParam("@ContactMobile1", 15, customer.ContactPerson1.Mobile);
+        //        oDq.AddVarcharParam("@ContactEmailId1", 50, customer.ContactPerson1.EmailId);
+        //        oDq.AddVarcharParam("@ContactPerson2", 50, customer.ContactPerson2.Name);
+        //        oDq.AddVarcharParam("@ContactDesignation2", 50, customer.ContactPerson2.Designation);
+        //        oDq.AddVarcharParam("@ContactMobile2", 15, customer.ContactPerson2.Mobile);
+        //        oDq.AddVarcharParam("@ContactEmailId2", 50, customer.ContactPerson2.EmailId);
+        //        oDq.AddVarcharParam("@CustomerProfile", 500, customer.CustomerProfile);
+        //        oDq.AddVarcharParam("@PAN", 10, customer.PAN);
+        //        oDq.AddVarcharParam("@TAN", 15, customer.TAN);
+        //        oDq.AddVarcharParam("@BIN", 15, customer.BIN);
+        //        oDq.AddVarcharParam("@IEC", 15, customer.IEC);
+        //        oDq.AddIntegerParam("@SalesExecutiveId", customer.SalesExecutiveId);
+        //        oDq.AddCharParam("@IsActive", 1, customer.IsActive);
+        //        oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
+        //        oDq.AddIntegerParam("@Result", result, QueryParameterDirection.Output);
+        //        oDq.RunActionQuery();
+        //        result = Convert.ToInt32(oDq.GetParaValue("@Result"));
+        //    }
+
+        //    return result;
+        //}
+
+        //public static void DeleteCustomer(int customerId, int modifiedBy)
+        //{
+        //    string strExecution = "[common].[uspDeleteCustomer]";
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddIntegerParam("@CustId", customerId);
+        //        oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
+        //        oDq.RunActionQuery();
+        //    }
+        //}
+
+        //public static List<ICustomer> GetCustomerByUser(int salesExecutiveId)
+        //{
+        //    string strExecution = "[common].[uspGetCustomerByUser]";
+        //    List<ICustomer> lstCustomer = new List<ICustomer>();
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddIntegerParam("@SalesExecutiveId", salesExecutiveId);
+        //        DataTableReader reader = oDq.GetTableReader();
+
+        //        while (reader.Read())
+        //        {
+        //            ICustomer customer = new CustomerEntity(reader);
+        //            lstCustomer.Add(customer);
+        //        }
+
+        //        reader.Close();
+        //    }
+
+        //    return lstCustomer;
+        //}
+
+        #endregion
+
+        #region Customer Type
+
+        //public static List<ICustomerType> GetCustomerType(char isActiveOnly)
+        //{
+        //    string strExecution = "[common].[uspGetCustomerType]";
+        //    List<ICustomerType> lstCustomerType = new List<ICustomerType>();
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddCharParam("@IsActiveOnly", 1, isActiveOnly);
+        //        DataTableReader reader = oDq.GetTableReader();
+
+        //        while (reader.Read())
+        //        {
+        //            ICustomerType customerType = new CustomerTypeEntity(reader);
+        //            lstCustomerType.Add(customerType);
+        //        }
+
+        //        reader.Close();
+        //    }
+
+        //    return lstCustomerType;
+        //}
+
+        //public static ICustomerType GetCustomerType(int custTypeId, char isActiveOnly)
+        //{
+        //    string strExecution = "[common].[uspGetCustomerType]";
+        //    ICustomerType customerType = null;
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddIntegerParam("@CustTypeId", custTypeId);
+        //        oDq.AddCharParam("@IsActiveOnly", 1, isActiveOnly);
+        //        DataTableReader reader = oDq.GetTableReader();
+
+        //        while (reader.Read())
+        //        {
+        //            customerType = new CustomerTypeEntity(reader);
+        //        }
+
+        //        reader.Close();
+        //    }
+
+        //    return customerType;
+        //}
+
+        #endregion
+
+        #region User
+
+        //public static List<IUser> GetSalesExecutiveNew(int userId)
+        //{
+        //    string strExecution = "[common].[uspGetSalesExecutiveNew]";
+        //    List<IUser> lstUser = new List<IUser>();
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddIntegerParam("@UserId", userId);
+        //        DataTableReader reader = oDq.GetTableReader();
+
+        //        while (reader.Read())
+        //        {
+        //            IUser user = new UserEntity(reader);
+        //            lstUser.Add(user);
+        //        }
+
+        //        reader.Close();
+        //    }
+
+        //    return lstUser;
+        //}
+
+        #endregion
     }
 }

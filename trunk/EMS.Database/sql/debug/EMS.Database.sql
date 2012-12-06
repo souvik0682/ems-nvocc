@@ -236,6 +236,150 @@ BEGIN
 		SET @Result = 0
 END
 GO
+PRINT N'Creating [admin].[uspDeleteUser]...';
+
+
+GO
+/****** Object:  StoredProcedure [admin].[uspDeleteUser]    Script Date: 12/06/2012 23:37:38 ******/
+
+-- =============================================
+-- Author		: Amit Kumar Chandra
+-- Create date	: 06-Dec-2012 
+-- Description  :
+-- =============================================
+CREATE PROCEDURE [admin].[uspDeleteUser]
+(
+	-- Add the parameters for the stored procedure here
+	@UserId		INT,
+	@ModifiedBy INT
+)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	UPDATE	 dbo.mstUsers
+	SET		 IsDeleted = 1
+	WHERE	 pk_UserID = @UserId
+END
+GO
+PRINT N'Creating [admin].[uspGetRole]...';
+
+
+GO
+/****** Object:  StoredProcedure [admin].[uspGetRole]    Script Date: 12/06/2012 23:38:41 ******/
+
+--exec [common].[uspGetRole]
+
+-- =============================================
+-- Author		: Amit Kumar Chandra
+-- Create date	: 06-Dec-2012 
+-- Description  :
+-- =============================================
+CREATE PROCEDURE [admin].[uspGetRole]
+(
+	-- Add the parameters for the stored procedure here
+	@RoleId INT = NULL
+)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT	 pk_RoleID AS 'RoleId'
+			,RoleName
+			,LocationSpecific
+			,RoleStatus
+	FROM	dbo.mstRoles
+	WHERE	((ISNULL(@RoleId, 0) = 0) OR (pk_RoleID = @RoleId))
+END
+GO
+PRINT N'Creating [admin].[uspGetUser]...';
+
+
+GO
+/****** Object:  StoredProcedure [admin].[uspGetUser]    Script Date: 12/06/2012 23:39:30 ******/
+
+-- =============================================
+-- Author		: Amit Kumar Chandra
+-- Create date	: 06-Dec-2012
+-- Description	:
+-- =============================================
+CREATE PROCEDURE [admin].[uspGetUser]
+(
+	-- Add the parameters for the stored procedure here
+	@UserId			INT = NULL,
+	@IsActiveOnly	BIT,
+	@SchUserName	VARCHAR(10) = NULL,
+	@SchFirstName	VARCHAR(30) = NULL,
+	@SortExpression VARCHAR(20),
+	@SortDirection  VARCHAR(4)
+)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	DECLARE @Sort VARCHAR(4)
+	
+	SELECT @Sort = CASE @SortDirection
+						WHEN '' THEN 'ASC'
+						ELSE @SortDirection
+					END
+					
+	SELECT	 us.pk_UserID AS 'UserId'
+			,us.UserName
+			,us.FirstName
+			,us.LastName
+			,us.fk_RoleID AS 'RoleId'
+			,ro.RoleName
+			,us.fk_LocID AS 'LocId'
+			,lo.LocName
+			,us.emailID
+			,us.UserActive
+			,us.AllowMutipleLocation
+	FROM	dbo.mstUsers us
+			INNER JOIN dbo.mstRoles ro
+				ON us.fk_RoleID = ro.pk_RoleID
+			INNER JOIN [DSR].[dbo].[mstLocation] lo
+				ON us.fk_LocID = lo.pk_LocID
+	WHERE	((ISNULL(@UserId, 0) = 0) OR (us.pk_UserID = @UserId))
+	--AND		us.Active = 'Y'
+	AND		((@IsActiveOnly = 0) OR (us.UserActive = @IsActiveOnly))
+	AND		((ISNULL(@SchUserName, '') = '') OR (us.UserName LIKE '%'+ @SchUserName + '%'))
+	AND		((ISNULL(@SchFirstName, '') = '') OR (us.FirstName LIKE '%'+ @SchFirstName + '%'))
+	AND		us.IsDeleted = 0
+	ORDER BY 
+			CASE @SortDirection
+				WHEN 'ASC' THEN
+					CASE @SortExpression
+						WHEN 'UserName' THEN UserName
+						WHEN 'RoleName' THEN FirstName
+						WHEN 'FirstName' THEN FirstName
+						WHEN 'LastName' THEN LastName
+						WHEN 'LocName' THEN FirstName
+						ELSE '1'
+					END 
+			END ASC,
+			CASE @SortDirection
+				WHEN 'DESC' THEN
+					CASE @SortExpression
+						WHEN 'UserName' THEN UserName
+						WHEN 'RoleName' THEN FirstName
+						WHEN 'FirstName' THEN FirstName
+						WHEN 'LastName' THEN LastName
+						WHEN 'LocName' THEN FirstName
+						ELSE '1'
+					END 
+			END DESC	
+END
+GO
 PRINT N'Creating [admin].[uspResetPassword]...';
 
 
@@ -294,11 +438,104 @@ BEGIN
 	VALUES(@UserId, @ErrorMessage, @StackTrace, GETUTCDATE())
 END
 GO
+PRINT N'Creating [admin].[uspSaveUser]...';
+
+
+GO
+/****** Object:  StoredProcedure [admin].[uspSaveUser]    Script Date: 12/06/2012 23:42:30 ******/
+
+-- =============================================
+-- Author		: Amit Kumar Chandra
+-- Create date	: 06-Dec-2012 
+-- Description  :
+-- =============================================
+CREATE PROCEDURE [admin].[uspSaveUser]
+(
+	-- Add the parameters for the stored procedure here
+	@UserId					INT,
+	@UserName				VARCHAR(10),
+	@Pwd					VARCHAR(50),
+	@FirstName				VARCHAR(30),
+	@LastName				VARCHAR(30),
+	@RoleId					INT,
+	@LocId					INT,
+	@EmailId				VARCHAR(50) = NULL,
+	@IsActive				BIT,
+	@AllowMutipleLocation	BIT,
+	@CompanyId				INT,
+	@ModifiedBy				INT,
+	@Result					INT = NULL OUT
+)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+   
+	IF EXISTS(SELECT 1 FROM dbo.mstUsers WHERE pk_UserID <> @UserId AND UserName = @UserName)
+	BEGIN
+		SET @Result = 1
+	END
+	ELSE
+	BEGIN
+		SET @Result = 0	
+	END
+	
+	IF @Result = 0
+	BEGIN
+		IF(@UserId>0)
+			BEGIN
+				UPDATE	 dbo.mstUsers
+				SET		 UserName = @UserName
+						,FirstName = @FirstName
+						,LastName = @LastName
+						,fk_RoleID = @RoleId
+						,fk_LocID = @LocId
+						,emailID = @EmailId
+						,UserActive = @IsActive
+						,AllowMutipleLocation = @AllowMutipleLocation
+						,fk_companyid = @CompanyId
+				WHERE	 pk_UserID = @UserId
+			END
+		ELSE
+			BEGIN
+				INSERT INTO dbo.mstUsers
+				(
+					 UserName
+					,[Password]
+					,FirstName
+					,LastName
+					,fk_RoleID
+					,fk_LocID
+					,emailID
+					,UserActive
+					,AllowMutipleLocation
+					,fk_companyid
+				)
+				VALUES
+				(
+					 @UserName
+					,@Pwd
+					,@FirstName
+					,@LastName
+					,@RoleId
+					,@LocId
+					,@EmailId
+					,1
+					,@AllowMutipleLocation
+					,@CompanyId
+				)
+			END
+	END
+END
+GO
 PRINT N'Creating [admin].[uspValidateUser]...';
 
 
 GO
-/****** Object:  StoredProcedure [admin].[uspValidateUser]    Script Date: 12/05/2012 22:08:28 ******/
+/****** Object:  StoredProcedure [admin].[uspValidateUser]    Script Date: 12/06/2012 23:34:09 ******/
 
 -- =============================================
 -- Author		: Amit Kumar Chandra
@@ -331,20 +568,51 @@ BEGIN
 				ur.fk_RoleID AS 'RoleId',
 				ur.fk_LocID AS 'LocId'
 		FROM	dbo.mstUsers ur
-				INNER JOIN DSR.dbo.mstRoles ro
+				INNER JOIN dbo.mstRoles ro
 					ON ur.fk_RoleID = ro.pk_RoleID
-				INNER JOIN 	DSR.dbo.mstLocation lo
+				INNER JOIN 	[DSR].[dbo].[mstLocation] lo
 					ON ur.fk_LocID = lo.pk_LocID
 		WHERE	ur.[UserName] = @UserName 
 		AND		ur.[Password] = @Password 
 		AND 	ur.[UserActive] = 1
+		AND		ur.[IsDeleted] = 0
+END
+GO
+PRINT N'Creating [common].[uspDeleteLocation]...';
+
+
+GO
+/****** Object:  StoredProcedure [common].[uspDeleteLocation]    Script Date: 12/06/2012 23:41:00 ******/
+-- =============================================
+-- Author		: Amit Kumar Chandra
+-- Create date	: 03-Dec-2012 
+-- Description  :
+-- =============================================
+CREATE PROCEDURE [common].[uspDeleteLocation]
+(
+	-- Add the parameters for the stored procedure here
+	@LocId		INT,
+	@ModifiedBy INT
+)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	UPDATE	[DSR].[dbo].[mstLocation]
+	SET		 IsDeleted = 1
+			,fk_UserLastEdited = @ModifiedBy
+			,EditedOn = GETUTCDATE()
+	WHERE	pk_LocID = @LocId
 END
 GO
 PRINT N'Creating [common].[uspGetLocation]...';
 
 
 GO
-/****** Object:  StoredProcedure [common].[uspGetLocation]    Script Date: 12/05/2012 22:09:58 ******/
+/****** Object:  StoredProcedure [common].[uspGetLocation]    Script Date: 12/06/2012 23:36:34 ******/
 
 -- =============================================
 -- Author		: Amit Kumar Chandra
@@ -394,7 +662,7 @@ BEGIN
 			,loc.ISO20
 			,loc.ISO40
 			,loc.Active
-	FROM	[DSR_MOD].[dbo].[mstLocation] loc
+	FROM	[DSR].[dbo].[mstLocation] loc
 	WHERE	((ISNULL(@LocId, 0) = 0) OR (loc.pk_LocID = @LocId))
 	AND		((ISNULL(@SchAbbr, '') = '') OR (loc.LocAbbr LIKE '%'+ @SchAbbr + '%'))
 	AND		((ISNULL(@SchLocName, '') = '') OR (loc.LocName LIKE '%'+ @SchLocName + '%'))
@@ -455,7 +723,7 @@ BEGIN
 
     -- Insert statements for procedure here
    
-	UPDATE	[DSR_MOD].[dbo].[mstLocation]
+	UPDATE	[DSR].[dbo].[mstLocation]
 	SET		 PGRFreeDays = @PGRFreeDays
 			,CanFooter = @CanFooter
 			,SlotFooter = @SlotFooter

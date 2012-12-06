@@ -141,7 +141,10 @@ namespace EMS.Entity
             this.Name = Convert.ToString(reader["UserName"]);
             this.FirstName = Convert.ToString(reader["FirstName"]);
             this.LastName = Convert.ToString(reader["LastName"]);
-            this.UserRole = new RoleEntity(reader);
+            this.UserRole = new RoleEntity();
+            this.UserRole.Id = Convert.ToInt32(reader["RoleId"]);
+            this.UserRole.Name = Convert.ToString(reader["RoleName"]);
+
             this.UserLocation = new LocationEntity();
             this.UserLocation.Id = Convert.ToInt32(reader["LocId"]);
             this.UserLocation.Name = Convert.ToString(reader["LocName"]);
@@ -149,7 +152,7 @@ namespace EMS.Entity
             if (reader["EmailId"] != DBNull.Value)
                 this.EmailId = Convert.ToString(reader["EmailId"]);
 
-            this.IsActive = Convert.ToBoolean(reader["Active"]);
+            this.IsActive = Convert.ToBoolean(reader["UserActive"]);
             this.AllowMutipleLocation = Convert.ToBoolean(reader["AllowMutipleLocation"]);
         }
 

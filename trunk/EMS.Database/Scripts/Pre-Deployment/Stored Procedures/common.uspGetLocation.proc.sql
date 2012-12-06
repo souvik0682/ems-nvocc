@@ -1,4 +1,4 @@
-﻿/****** Object:  StoredProcedure [common].[uspGetLocation]    Script Date: 12/05/2012 22:09:58 ******/
+﻿/****** Object:  StoredProcedure [common].[uspGetLocation]    Script Date: 12/06/2012 23:36:34 ******/
 
 -- =============================================
 -- Author		: Amit Kumar Chandra
@@ -74,5 +74,3 @@ BEGIN
 END
 
 GO
-
-

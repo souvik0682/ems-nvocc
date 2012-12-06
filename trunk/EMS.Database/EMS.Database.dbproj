@@ -172,5 +172,20 @@
     <Build Include="Scripts\Pre-Deployment\Stored Procedures\common.uspSaveLocation.proc.sql">
       <SubType>Code</SubType>
     </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\admin.uspDeleteUser.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\admin.uspGetRole.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\admin.uspGetUser.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\common.uspDeleteLocation.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\admin.uspSaveUser.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
   </ItemGroup>
 </Project>

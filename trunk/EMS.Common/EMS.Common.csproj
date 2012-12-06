@@ -41,13 +41,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAddress.cs" />
+    <Compile Include="IArea.cs" />
     <Compile Include="IBase.cs" />
     <Compile Include="ICommon.cs" />
+    <Compile Include="IContactPerson.cs" />
     <Compile Include="ICustomer.cs" />
+    <Compile Include="ICustomerType.cs" />
+    <Compile Include="IGroupCompany.cs" />
+    <Compile Include="IImportHaulage.cs" />
     <Compile Include="ILocation.cs" />
     <Compile Include="IRole.cs" />
     <Compile Include="ISearchCriteria.cs" />
     <Compile Include="IUser.cs" />
+    <Compile Include="IVendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

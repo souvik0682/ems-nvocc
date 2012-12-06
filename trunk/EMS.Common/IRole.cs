@@ -7,6 +7,7 @@ namespace EMS.Common
 {
     public interface IRole : IBase<int>
     {
-        string RoleType { get; set; }
+        bool? LocationSpecific { get; set; }
+        bool? RoleStatus { get; set; }
     }
 }

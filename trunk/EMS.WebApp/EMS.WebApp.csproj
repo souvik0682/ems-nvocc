@@ -83,6 +83,8 @@
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Styles\EMS.css" />
     <Content Include="Unauthorized.aspx" />
+    <Content Include="vendor-add-edit.aspx" />
+    <Content Include="vendor-list.aspx" />
     <Content Include="View\AddEditCustomer.aspx" />
     <Content Include="View\AddEditLocation.aspx" />
     <Content Include="View\AddEditUser.aspx" />
@@ -146,6 +148,20 @@
     </Compile>
     <Compile Include="Unauthorized.aspx.designer.cs">
       <DependentUpon>Unauthorized.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="vendor-add-edit.aspx.cs">
+      <DependentUpon>vendor-add-edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vendor-add-edit.aspx.designer.cs">
+      <DependentUpon>vendor-add-edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="vendor-list.aspx.cs">
+      <DependentUpon>vendor-list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vendor-list.aspx.designer.cs">
+      <DependentUpon>vendor-list.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\AddEditCustomer.aspx.cs">
       <DependentUpon>AddEditCustomer.aspx</DependentUpon>

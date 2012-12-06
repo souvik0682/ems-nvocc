@@ -38,6 +38,27 @@ namespace EMS.DAL
             }
         }
 
+
+        /// <summary>
+        /// Common method to populate all the dropdownlist throughout the application
+        /// </summary>
+        /// <param name="Number">Unique Number</param>
+        /// <returns>DataTable</returns>
+        /// <createdby>Rajen Saha</createdby>
+        /// <createddate>01/12/2012</createddate>
+        public static DataTable PopulateDropdown(int Number, int? Filter)
+        {
+            string strExecution = "[dbo].[spPopulateDropDownList]";
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@Number", Number);
+                oDq.AddIntegerParam("@Filter", Filter.Value);
+                
+                return oDq.GetTable();
+            }
+        }
+
         #endregion
 
         #region Location

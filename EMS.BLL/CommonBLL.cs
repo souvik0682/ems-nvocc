@@ -9,6 +9,8 @@ using EMS.Utilities.ResourceManager;
 using EMS.Utilities;
 using EMS.Utilities.Cryptography;
 using System.Net.Mail;
+using System.Data;
+using System.Web.UI.WebControls;
 
 namespace EMS.BLL
 {
@@ -171,6 +173,21 @@ namespace EMS.BLL
                     //}
                 }
             }
+        }
+
+        /// <summary>
+        /// Common method to populate all the dropdownlist throughout the application
+        /// </summary>
+        /// <param name="Number">Unique Number</param>
+        /// <returns>DataTable</returns>
+        /// <createdby>Rajen Saha</createdby>
+        /// <createddate>01/12/2012</createddate>
+        public static void PopulateDropdown(int Number, DropDownList ddl, int? Filter)
+        {
+            ddl.DataSource = CommonDAL.PopulateDropdown(Number,Filter);
+            ddl.DataValueField="Value";
+            ddl.DataTextField = "Text";
+            ddl.DataBind();            
         }
 
         #endregion

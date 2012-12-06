@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Cryptography\Encryption.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="GeneralFunctions.cs" />
     <Compile Include="ReportManager\LocalReportManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

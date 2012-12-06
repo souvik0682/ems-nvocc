@@ -291,4 +291,13 @@
   <data name="ERR00057" xml:space="preserve">
     <value>Location Abbreviation already exists. Please enter another abbreviation.</value>
   </data>
+  <data name="ERR00058" xml:space="preserve">
+    <value>Are you sure you want to reset password?</value>
+  </data>
+  <data name="ERR00059" xml:space="preserve">
+    <value>The user cannot be deleted</value>
+  </data>
+  <data name="ERR00060" xml:space="preserve">
+    <value>User name already exists. Please enter another name.</value>
+  </data>
 </root>

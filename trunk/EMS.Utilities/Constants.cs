@@ -28,7 +28,6 @@ namespace EMS.Utilities
         XML = 3
     }
 
-<<<<<<< .mine
     public enum PageName
     {
         UserMaster = 1,
@@ -40,14 +39,19 @@ namespace EMS.Utilities
         DailySalesCall = 7
     };
 
-=======
-    public enum PageName
+    public enum UserRole
     {
-        UserMaster = 1,
-        LocationMaster = 2,
-    };
+        Admin = 2,
+        Management = 3,
+        ImportUsers = 4,
+        CFS = 5,
+        Manager = 6,
+        Surveyors = 7,
+        EmptyYard = 8,
+        ExportUsers = 10,
+        Logistics = 12
+    }
 
->>>>>>> .r132
     #endregion
 
     public static class Constants
@@ -68,6 +72,8 @@ namespace EMS.Utilities
         public const string SORT_EXPRESSION = "SortExpression";
         public const string SORT_DIRECTION = "SortDirection";
         public const string DEFAULT_PASSWORD = "EMS123";
+        public const int DEFAULT_COMPANY_ID = 1;
+
         #endregion
 
         #region Session Variables

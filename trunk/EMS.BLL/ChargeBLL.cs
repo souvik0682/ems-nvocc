@@ -18,6 +18,34 @@ namespace EMS.BLL
     {
         #region Haulage Charge
 
+        private void SetDefaultSearchCriteriaForHaulageCharge(SearchCriteria searchCriteria)
+        {
+            searchCriteria.SortExpression = "Location";
+            searchCriteria.SortDirection = "ASC";
+        }
+
+        public List<IImportHaulage> GetHaulageCharge(SearchCriteria searchCriteria)
+        {
+            return ChargeDAL.GetHaulageCharge(searchCriteria);
+        }
+
+        public IImportHaulage GetHaulageCharge(int haulageChgID)
+        {
+            SearchCriteria searchCriteria = new SearchCriteria();
+            SetDefaultSearchCriteriaForHaulageCharge(searchCriteria);
+            return ChargeDAL.GetHaulageCharge(haulageChgID, searchCriteria);
+        }
+
+        public void SaveHaulageCharge(IImportHaulage haulageChgID, int modifiedBy)
+        {
+            ChargeDAL.SaveHaulageCharge(haulageChgID, modifiedBy);
+        }
+
+        public void DeleteHaulageCharge(int haulageChgID, int modifiedBy)
+        {
+            ChargeDAL.DeleteHaulageCharge(haulageChgID, modifiedBy);
+        }
+
         #endregion
 
         #region Exchange Rate

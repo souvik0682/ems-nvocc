@@ -300,4 +300,13 @@
   <data name="ERR00060" xml:space="preserve">
     <value>User name already exists. Please enter another name.</value>
   </data>
+  <data name="ERR00061" xml:space="preserve">
+    <value>Type Location From</value>
+  </data>
+  <data name="ERR00062" xml:space="preserve">
+    <value>Type Location To</value>
+  </data>
+  <data name="ERR00063" xml:space="preserve">
+    <value>Type Container Size</value>
+  </data>
 </root>

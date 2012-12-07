@@ -42,11 +42,11 @@
                             <li id="liMst_ServiceTax" runat="server"><a href="#">Service Tax</a></li>
                             <li id="liMst_Charge" runat="server"><a href="#">Charge Master</a></li>
                             <li id="liMst_ContType" runat="server"><a href="#">Container Type</a></li>
-                            <li id="liMst_ExRate" runat="server"><a href="#">Exchange Rate</a></li>
+                            <li id="liMst_ExRate" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageExchRate.aspx") %>">Exchange Rate</a></li>
                             <li id="liMst_Terminal" runat="server"><a href="#">Terminal Master</a></li>
                             <li id="liMst_Country" runat="server"><a href="#">Country Master</a></li>
                             <li id="liMst_Port" runat="server"><a href="#">Port Master</a></li>
-                            <li id="liMst_Haulage" runat="server"><a href="#">Import Haulage</a></li>
+                            <li id="liMst_Haulage" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageHaulageCharge.aspx") %>">Import Haulage</a></li>
                             <li id="liMst_Vessel" runat="server"><a href="#">Vessel</a></li>
                         </ul>
                     </li>

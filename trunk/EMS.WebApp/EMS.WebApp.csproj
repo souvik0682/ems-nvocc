@@ -89,9 +89,15 @@
     <Content Include="View\AddEditLocation.aspx" />
     <Content Include="View\AddEditUser.aspx" />
     <Content Include="View\ChangePassword.aspx" />
+    <Content Include="View\AddEditExchRate.aspx" />
+    <Content Include="View\AddEditHaulageCharge.aspx" />
+    <Content Include="View\AddEditRole.aspx" />
+    <Content Include="View\ManageHaulageCharge.aspx" />
     <Content Include="View\Home.aspx" />
     <Content Include="View\ManageCustomer.aspx" />
+    <Content Include="View\ManageExchRate.aspx" />
     <Content Include="View\ManageLocation.aspx" />
+    <Content Include="View\ManageRole.aspx" />
     <Content Include="View\ManageUser.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -191,6 +197,34 @@
     <Compile Include="View\ChangePassword.aspx.designer.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\AddEditExchRate.aspx.cs">
+      <DependentUpon>AddEditExchRate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\AddEditExchRate.aspx.designer.cs">
+      <DependentUpon>AddEditExchRate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddEditHaulageCharge.aspx.cs">
+      <DependentUpon>AddEditHaulageCharge.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\AddEditHaulageCharge.aspx.designer.cs">
+      <DependentUpon>AddEditHaulageCharge.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddEditRole.aspx.cs">
+      <DependentUpon>AddEditRole.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\AddEditRole.aspx.designer.cs">
+      <DependentUpon>AddEditRole.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageHaulageCharge.aspx.cs">
+      <DependentUpon>ManageHaulageCharge.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\ManageHaulageCharge.aspx.designer.cs">
+      <DependentUpon>ManageHaulageCharge.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -205,12 +239,26 @@
     <Compile Include="View\ManageCustomer.aspx.designer.cs">
       <DependentUpon>ManageCustomer.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\ManageExchRate.aspx.cs">
+      <DependentUpon>ManageExchRate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\ManageExchRate.aspx.designer.cs">
+      <DependentUpon>ManageExchRate.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\ManageLocation.aspx.cs">
       <DependentUpon>ManageLocation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="View\ManageLocation.aspx.designer.cs">
       <DependentUpon>ManageLocation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageRole.aspx.cs">
+      <DependentUpon>ManageRole.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\ManageRole.aspx.designer.cs">
+      <DependentUpon>ManageRole.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\ManageUser.aspx.cs">
       <DependentUpon>ManageUser.aspx</DependentUpon>

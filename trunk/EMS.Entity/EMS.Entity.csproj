@@ -46,6 +46,7 @@
     <Compile Include="CustomerEntity.cs" />
     <Compile Include="CustomerTypeEntity.cs" />
     <Compile Include="GroupCompanyEntity.cs" />
+    <Compile Include="ImportHaulage.cs" />
     <Compile Include="LocationEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleEntity.cs" />

@@ -12,6 +12,10 @@ namespace EMS.Entity
     {
         #region Public Properties
 
+        public string LocationFrom { get; set; }
+        public string LocationTo { get; set; }
+        public string ContainerSize { get; set; }
+
         public string LocAbbr
         {
             get;

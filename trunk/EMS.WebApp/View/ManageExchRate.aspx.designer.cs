@@ -22,13 +22,13 @@ namespace EMS.WebApp.View {
         protected global::System.Web.UI.WebControls.TextBox txtDate;
         
         /// <summary>
-        /// txtWMELocFrom control.
+        /// txtWMEDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender txtWMELocFrom;
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender txtWMEDate;
         
         /// <summary>
         /// btnSearch control.
@@ -85,12 +85,12 @@ namespace EMS.WebApp.View {
         protected global::System.Web.UI.UpdatePanel upExchange;
         
         /// <summary>
-        /// gvwHaulage control.
+        /// gvwExch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvwHaulage;
+        protected global::System.Web.UI.WebControls.GridView gvwExch;
     }
 }

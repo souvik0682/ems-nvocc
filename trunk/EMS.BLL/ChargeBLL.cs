@@ -52,7 +52,7 @@ namespace EMS.BLL
 
         private void SetDefaultSearchCriteriaForExchangeRate(SearchCriteria searchCriteria)
         {
-            searchCriteria.SortExpression = "Location";
+            searchCriteria.SortExpression = "Date";
             searchCriteria.SortDirection = "ASC";
         }
 

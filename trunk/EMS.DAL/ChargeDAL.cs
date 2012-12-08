@@ -108,7 +108,9 @@ namespace EMS.DAL
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                //oDq.AddDateTimeParam("@ExchangeDate", searchCriteria.LocName);
+                if (searchCriteria.Date.HasValue)
+                    oDq.AddDateTimeParam("@SchExchangeDate", searchCriteria.Date.Value);
+
                 oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
                 oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
                 DataTableReader reader = oDq.GetTableReader();
@@ -127,7 +129,7 @@ namespace EMS.DAL
 
         public static IExchangeRate GetExchangeRate(int exchangeRateID, SearchCriteria searchCriteria)
         {
-            string strExecution = "[common].[uspGetExchangeRate]";
+            string strExecution = "[chg].[uspGetExchangeRate]";
             IExchangeRate chg = null;
 
             using (DbQuery oDq = new DbQuery(strExecution))

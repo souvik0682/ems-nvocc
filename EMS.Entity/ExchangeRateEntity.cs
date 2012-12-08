@@ -80,10 +80,10 @@ namespace EMS.Entity
 
         public ExchangeRateEntity(DataTableReader reader)
         {
-            this.ExchangeRateID = Convert.ToInt32(reader["ExchangeRateID"]);
+            this.ExchangeRateID = Convert.ToInt32(reader["ExchRateID"]);
             this.CompanyID = Convert.ToInt32(reader["CompanyID"]);
-            this.ExchangeDate = Convert.ToDateTime(reader["ExchangeDate"]);
-            this.USDExchangeRate = Convert.ToDecimal(reader["USDExchangeRate"]);
+            this.ExchangeDate = Convert.ToDateTime(reader["ExchDate"]);
+            this.USDExchangeRate = Convert.ToDecimal(reader["USDXchRate"]);
             this.FreeDays = Convert.ToInt32(reader["FreeDays"]);
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -15,10 +16,11 @@ namespace EMS.WebApp.View
 {
     public partial class ManageExchRate : System.Web.UI.Page
     {
-       #region Private Member Variables
+        #region Private Member Variables
 
         private int _userId = 0;
         private bool _hasEditAccess = true;
+        private IFormatProvider _culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"].ToString());
 
         #endregion
 
@@ -48,14 +50,14 @@ namespace EMS.WebApp.View
             upExchange.Update();
         }
 
-        protected void gvwHaulage_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void gvwExch_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             int newIndex = e.NewPageIndex;
-            gvwHaulage.PageIndex = e.NewPageIndex;
+            gvwExch.PageIndex = e.NewPageIndex;
             SaveNewPageIndex(e.NewPageIndex);
             LoadExchangeRate();
         }
-        protected void gvwHaulage_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void gvwExch_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName.Equals("Sort"))
             {
@@ -92,7 +94,7 @@ namespace EMS.WebApp.View
             }
         }
 
-        protected void gvwHaulage_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void gvwExch_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
@@ -100,7 +102,7 @@ namespace EMS.WebApp.View
 
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
 
-                e.Row.Cells[0].Text = ((gvwHaulage.PageSize * gvwHaulage.PageIndex) + e.Row.RowIndex + 1).ToString();
+                e.Row.Cells[0].Text = ((gvwExch.PageSize * gvwExch.PageIndex) + e.Row.RowIndex + 1).ToString();
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ExchangeDate"));
                 e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "USDExchangeRate"));
                 e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "FreeDays"));
@@ -163,10 +165,10 @@ namespace EMS.WebApp.View
 
         private void SetAttributes()
         {
-            txtWMELocFrom.WatermarkText = ResourceManager.GetStringWithoutName("ERR00061");
+            txtWMEDate.WatermarkText = ResourceManager.GetStringWithoutName("ERR00068");
 
-            //gvwHaulage.PageSize = Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]);
-            gvwHaulage.PagerSettings.PageButtonCount = Convert.ToInt32(ConfigurationManager.AppSettings["PageButtonCount"]);
+            //gvwExch.PageSize = Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]);
+            gvwExch.PagerSettings.PageButtonCount = Convert.ToInt32(ConfigurationManager.AppSettings["PageButtonCount"]);
         }
 
         private void LoadExchangeRate()
@@ -180,11 +182,11 @@ namespace EMS.WebApp.View
                     BuildSearchCriteria(searchCriteria);
                     ChargeBLL chargeBll = new ChargeBLL();
 
-                    gvwHaulage.PageIndex = searchCriteria.PageIndex;
-                    if (searchCriteria.PageSize > 0) gvwHaulage.PageSize = searchCriteria.PageSize;
+                    gvwExch.PageIndex = searchCriteria.PageIndex;
+                    if (searchCriteria.PageSize > 0) gvwExch.PageSize = searchCriteria.PageSize;
 
-                    gvwHaulage.DataSource = chargeBll.GetHaulageCharge(searchCriteria);
-                    gvwHaulage.DataBind();
+                    gvwExch.DataSource = chargeBll.GetExchangeRate(searchCriteria);
+                    gvwExch.DataBind();
                 }
             }
         }
@@ -200,7 +202,7 @@ namespace EMS.WebApp.View
         private void RedirecToAddEditPage(int id)
         {
             string encryptedId = GeneralFunctions.EncryptQueryString(id.ToString());
-            Response.Redirect("~/View/AddEditHaulageCharge.aspx?id=" + encryptedId);
+            Response.Redirect("~/View/AddEditExchRate.aspx?id=" + encryptedId);
         }
 
         private void BuildSearchCriteria(SearchCriteria criteria)
@@ -221,7 +223,10 @@ namespace EMS.WebApp.View
 
             criteria.SortExpression = sortExpression;
             criteria.SortDirection = sortDirection;
-            criteria.LocAbbr = (txtDate.Text == ResourceManager.GetStringWithoutName("ERR00061")) ? string.Empty : txtDate.Text.Trim();
+
+            if (!string.IsNullOrEmpty(txtDate.Text) && txtDate.Text != ResourceManager.GetStringWithoutName("ERR00068"))
+                criteria.Date = Convert.ToDateTime(txtDate.Text.Trim(), _culture);
+
             Session[Constants.SESSION_SEARCH_CRITERIA] = criteria;
         }
 
@@ -243,8 +248,8 @@ namespace EMS.WebApp.View
                     else
                     {
                         //txtDate.Text = criteria.AreaName;
-                        gvwHaulage.PageIndex = criteria.PageIndex;
-                        gvwHaulage.PageSize = criteria.PageSize;
+                        gvwExch.PageIndex = criteria.PageIndex;
+                        gvwExch.PageSize = criteria.PageSize;
                         ddlPaging.SelectedValue = criteria.PageSize.ToString();
                         isCriteriaExists = true;
                     }

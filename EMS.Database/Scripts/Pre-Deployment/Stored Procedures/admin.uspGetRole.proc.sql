@@ -10,7 +10,11 @@
 CREATE PROCEDURE [admin].[uspGetRole]
 (
 	-- Add the parameters for the stored procedure here
-	@RoleId INT = NULL
+	@RoleId			INT = NULL,
+	@IsActiveOnly	BIT,
+	@SchRole		VARCHAR(50) = NULL,
+	@SortExpression VARCHAR(20),
+	@SortDirection  VARCHAR(4)
 )
 AS
 BEGIN
@@ -23,8 +27,12 @@ BEGIN
 			,RoleName
 			,LocationSpecific
 			,RoleStatus
+			,RoleStatus AS 'Active'
 	FROM	dbo.mstRoles
 	WHERE	((ISNULL(@RoleId, 0) = 0) OR (pk_RoleID = @RoleId))
+	--AND		((@IsActiveOnly = 0) OR (Active = @IsActiveOnly))
+	AND		((ISNULL(@SchRole, '') = '') OR (RoleName LIKE '%'+ @SchRole + '%'))
+	ORDER BY RoleName
 END
 
 GO

@@ -16,6 +16,7 @@ namespace EMS.Entity
         public string LocationTo { get; set; }
         public string ContainerSize { get; set; }
         public string RoleName { get; set; }
+        public DateTime? Date { get; set; }
 
         public string LocAbbr
         {

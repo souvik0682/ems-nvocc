@@ -312,4 +312,16 @@
   <data name="ERR00064" xml:space="preserve">
     <value>Type Role</value>
   </data>
+  <data name="ERR00065" xml:space="preserve">
+    <value>*Date cannot be left blank</value>
+  </data>
+  <data name="ERR00066" xml:space="preserve">
+    <value>*Rate cannot be left blank</value>
+  </data>
+  <data name="ERR00067" xml:space="preserve">
+    <value>*Free Days cannot be left blank</value>
+  </data>
+  <data name="ERR00068" xml:space="preserve">
+    <value>Type Exchange Rate</value>
+  </data>
 </root>

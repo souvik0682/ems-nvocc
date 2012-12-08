@@ -45,9 +45,9 @@
     <Compile Include="ContactPersonEntity.cs" />
     <Compile Include="CustomerEntity.cs" />
     <Compile Include="CustomerTypeEntity.cs" />
-    <Compile Include="ExchangeRate.cs" />
+    <Compile Include="ExchangeRateEntity.cs" />
     <Compile Include="GroupCompanyEntity.cs" />
-    <Compile Include="ImportHaulage.cs" />
+    <Compile Include="ImportHaulageEntity.cs" />
     <Compile Include="LocationEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleEntity.cs" />

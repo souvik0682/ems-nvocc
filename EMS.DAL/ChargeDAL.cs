@@ -34,7 +34,7 @@ namespace EMS.DAL
 
                 while (reader.Read())
                 {
-                    IImportHaulage chg = new ImportHaulage(reader);
+                    IImportHaulage chg = new ImportHaulageEntity(reader);
                     lstChg.Add(chg);
                 }
 
@@ -58,7 +58,7 @@ namespace EMS.DAL
 
                 while (reader.Read())
                 {
-                    chg = new ImportHaulage(reader);
+                    chg = new ImportHaulageEntity(reader);
                 }
 
                 reader.Close();

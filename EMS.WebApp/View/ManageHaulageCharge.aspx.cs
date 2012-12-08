@@ -45,7 +45,7 @@ namespace EMS.WebApp.View
         {
             SaveNewPageIndex(0);
             LoadHaulageCharge();
-            upLoc.Update();
+            upHaulage.Update();
         }
 
         protected void gvwHaulage_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -135,7 +135,7 @@ namespace EMS.WebApp.View
             int newPageSize = Convert.ToInt32(ddlPaging.SelectedValue);
             SaveNewPageSize(newPageSize);
             LoadHaulageCharge();
-            upLoc.Update();
+            upHaulage.Update();
         }
 
         #endregion

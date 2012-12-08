@@ -35,7 +35,7 @@
                 </tr>
             </table>              
         </fieldset>
-        <asp:UpdateProgress ID="uProgressLoc" runat="server" AssociatedUpdatePanelID="upLoc">
+        <asp:UpdateProgress ID="uProgressHaulage" runat="server" AssociatedUpdatePanelID="upHaulage">
             <ProgressTemplate>
                 <div class="progress">
                     <div id="image">
@@ -58,7 +58,7 @@
                 <asp:Button ID="btnAdd" runat="server" Text="Add New Location" Width="130px" OnClick="btnAdd_Click" />
             </div><br />            
             <div>
-                <asp:UpdatePanel ID="upLoc" runat="server" UpdateMode="Conditional">
+                <asp:UpdatePanel ID="upHaulage" runat="server" UpdateMode="Conditional">
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="btnSearch" EventName="Click" />
                         <asp:AsyncPostBackTrigger ControlID="ddlPaging" EventName="SelectedIndexChanged" />

@@ -7,7 +7,7 @@ using EMS.Common;
 
 namespace EMS.Entity
 {
-    public class ImportHaulage : IImportHaulage, ICommon
+    public class ImportHaulageEntity : IImportHaulage, ICommon
     {
         #region IImportHaulage Members
 
@@ -91,12 +91,12 @@ namespace EMS.Entity
 
         #region Constructors
 
-        public ImportHaulage()
+        public ImportHaulageEntity()
         {
 
         }
 
-        public ImportHaulage(DataTableReader reader)
+        public ImportHaulageEntity(DataTableReader reader)
         {
             this.HaulageChgID = Convert.ToInt32(reader["HaulageChgID"]);
             this.LocationFrom = Convert.ToInt32(reader["LocationFrom"]);

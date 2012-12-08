@@ -7,7 +7,7 @@ using EMS.Common;
 
 namespace EMS.Entity
 {
-    public class ExchangeRate : IExchangeRate, ICommon
+    public class ExchangeRateEntity : IExchangeRate, ICommon
     {
         #region IExchangeRate Members
 
@@ -73,12 +73,12 @@ namespace EMS.Entity
 
         #region Constructors
 
-        public ExchangeRate()
+        public ExchangeRateEntity()
         {
 
         }
 
-        public ExchangeRate(DataTableReader reader)
+        public ExchangeRateEntity(DataTableReader reader)
         {
             this.ExchangeRateID = Convert.ToInt32(reader["ExchangeRateID"]);
             this.CompanyID = Convert.ToInt32(reader["CompanyID"]);

@@ -76,13 +76,13 @@ namespace EMS.WebApp.View {
         protected global::System.Web.UI.WebControls.Button btnSearch;
         
         /// <summary>
-        /// uProgressLoc control.
+        /// uProgressHaulage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress uProgressLoc;
+        protected global::System.Web.UI.UpdateProgress uProgressHaulage;
         
         /// <summary>
         /// fsList control.
@@ -112,13 +112,13 @@ namespace EMS.WebApp.View {
         protected global::System.Web.UI.WebControls.Button btnAdd;
         
         /// <summary>
-        /// upLoc control.
+        /// upHaulage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upLoc;
+        protected global::System.Web.UI.UpdatePanel upHaulage;
         
         /// <summary>
         /// gvwHaulage control.

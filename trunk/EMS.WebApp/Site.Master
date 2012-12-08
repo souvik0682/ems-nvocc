@@ -35,6 +35,7 @@
                         <a href="#">Master</a>
                         <ul>
                             <li id="liMst_User" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageUser.aspx") %>">User Master</a></li>
+                            <li id="liMst_Role" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageRole.aspx") %>">Role Master</a></li>
                             <li id="liMst_Loc" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageLocation.aspx") %>">Location Master</a></li>
                             <li id="liMst_Cust" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageCustomer.aspx") %>">Customer Master</a></li>
                             <li id="liMst_Line" runat="server"><a href="#">Line / MLO</a></li>

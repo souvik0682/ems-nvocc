@@ -23,6 +23,12 @@ namespace EMS.Entity
             set;
         }
 
+        public bool Active
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region IBase<int> Members
@@ -58,6 +64,8 @@ namespace EMS.Entity
 
             if (reader["RoleStatus"] != DBNull.Value)
                 this.RoleStatus = Convert.ToBoolean(reader["RoleStatus"]);
+
+            this.Active = Convert.ToBoolean(reader["Active"]);
         }
 
         #endregion

@@ -309,4 +309,7 @@
   <data name="ERR00063" xml:space="preserve">
     <value>Type Container Size</value>
   </data>
+  <data name="ERR00064" xml:space="preserve">
+    <value>Type Role</value>
+  </data>
 </root>

@@ -226,9 +226,9 @@ namespace EMS.WebApp.View
 
             criteria.SortExpression = sortExpression;
             criteria.SortDirection = sortDirection;
-            criteria.LocAbbr = (txtLocFrom.Text == ResourceManager.GetStringWithoutName("ERR00061")) ? string.Empty : txtLocFrom.Text.Trim();
-            criteria.LocName = (txtLocTo.Text == ResourceManager.GetStringWithoutName("ERR00062")) ? string.Empty : txtLocTo.Text.Trim();
-            criteria.LocName = (txtLocTo.Text == ResourceManager.GetStringWithoutName("ERR00063")) ? string.Empty : txtSize.Text.Trim();
+            criteria.LocationFrom = (txtLocFrom.Text == ResourceManager.GetStringWithoutName("ERR00061")) ? string.Empty : txtLocFrom.Text.Trim();
+            criteria.LocationTo = (txtLocTo.Text == ResourceManager.GetStringWithoutName("ERR00062")) ? string.Empty : txtLocTo.Text.Trim();
+            criteria.ContainerSize = (txtLocTo.Text == ResourceManager.GetStringWithoutName("ERR00063")) ? string.Empty : txtSize.Text.Trim();
             Session[Constants.SESSION_SEARCH_CRITERIA] = criteria;
         }
 
@@ -249,9 +249,9 @@ namespace EMS.WebApp.View
                     }
                     else
                     {
-                        txtLocFrom.Text = criteria.LocAbbr;
-                        txtLocTo.Text = criteria.LocName;
-                        txtSize.Text = criteria.LocAbbr;
+                        txtLocFrom.Text = criteria.LocationFrom;
+                        txtLocTo.Text = criteria.LocationTo;
+                        txtSize.Text = criteria.ContainerSize;
                         gvwHaulage.PageIndex = criteria.PageIndex;
                         gvwHaulage.PageSize = criteria.PageSize;
                         ddlPaging.SelectedValue = criteria.PageSize.ToString();

@@ -15,6 +15,8 @@ namespace EMS.DAL
         {
         }
 
+        #region User
+        
         public static bool ChangePassword(IUser user)
         {
             string strExecution = "[admin].[uspChangePassword]";
@@ -161,15 +163,21 @@ namespace EMS.DAL
             }
         }
 
+        #endregion
+
         #region Role
 
-        public static List<IRole> GetRole()
+        public static List<IRole> GetRole(bool isActiveOnly, SearchCriteria searchCriteria)
         {
             string strExecution = "[admin].[uspGetRole]";
             List<IRole> lstRole = new List<IRole>();
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
+                oDq.AddBooleanParam("@IsActiveOnly",isActiveOnly);
+                oDq.AddVarcharParam("@SchRole", 50, searchCriteria.RoleName);
+                oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
+                oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
                 DataTableReader reader = oDq.GetTableReader();
 
                 while (reader.Read())
@@ -184,7 +192,7 @@ namespace EMS.DAL
             return lstRole;
         }
 
-        public static IRole GetRole(int roleId)
+        public static IRole GetRole(int roleId, bool isActiveOnly, SearchCriteria searchCriteria)
         {
             string strExecution = "[admin].[uspGetRole]";
             IRole role = null;
@@ -192,6 +200,9 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@RoleId", roleId);
+                oDq.AddBooleanParam("@IsActiveOnly", isActiveOnly);
+                oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
+                oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
                 DataTableReader reader = oDq.GetTableReader();
 
                 while (reader.Read())
@@ -203,6 +214,30 @@ namespace EMS.DAL
             }
 
             return role;
+        }
+
+        public static void SaveRole(IRole role, int modifiedBy)
+        {
+            string strExecution = "[admin].[uspSaveRole]";
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@RoleId", role.Id);
+                oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
+                oDq.RunActionQuery();
+            }
+        }
+
+        public static void DeleteRole(int roleId, int modifiedBy)
+        {
+            string strExecution = "[admin].[uspDeleteRole]";
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@RoleId", roleId);
+                oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
+                oDq.RunActionQuery();
+            }
         }
 
         #endregion

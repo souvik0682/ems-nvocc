@@ -76,6 +76,15 @@ namespace EMS.WebApp {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMst_User;
         
         /// <summary>
+        /// liMst_Role control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMst_Role;
+        
+        /// <summary>
         /// liMst_Loc control.
         /// </summary>
         /// <remarks>

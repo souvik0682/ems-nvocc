@@ -50,6 +50,35 @@ namespace EMS.BLL
 
         #region Exchange Rate
 
+        private void SetDefaultSearchCriteriaForExchangeRate(SearchCriteria searchCriteria)
+        {
+            searchCriteria.SortExpression = "Location";
+            searchCriteria.SortDirection = "ASC";
+        }
+
+        public List<IExchangeRate> GetExchangeRate(SearchCriteria searchCriteria)
+        {
+            return ChargeDAL.GetExchangeRate(searchCriteria);
+        }
+
+        public IExchangeRate GetExchangeRate(int exchangeRateID)
+        {
+            SearchCriteria searchCriteria = new SearchCriteria();
+            SetDefaultSearchCriteriaForExchangeRate(searchCriteria);
+            return ChargeDAL.GetExchangeRate(exchangeRateID, searchCriteria);
+        }
+
+        public void SaveExchangeRate(IExchangeRate exchangeRate, int modifiedBy)
+        {
+            exchangeRate.CompanyID = Constants.DEFAULT_COMPANY_ID;
+            ChargeDAL.SaveExchangeRate(exchangeRate, modifiedBy);
+        }
+
+        public void DeleteExchangeRate(int exchangeRateID, int modifiedBy)
+        {
+            ChargeDAL.DeleteExchangeRate(exchangeRateID, modifiedBy);
+        }
+
         #endregion
     }
 }

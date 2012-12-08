@@ -15,6 +15,7 @@ namespace EMS.Entity
         public string LocationFrom { get; set; }
         public string LocationTo { get; set; }
         public string ContainerSize { get; set; }
+        public string RoleName { get; set; }
 
         public string LocAbbr
         {
@@ -115,6 +116,7 @@ namespace EMS.Entity
 
         public void Clear()
         {
+            this.RoleName = string.Empty;
             this.AreaName = string.Empty;
             this.CustomerName = string.Empty;
             this.ExecutiveName = string.Empty;

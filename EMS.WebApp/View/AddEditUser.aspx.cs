@@ -169,7 +169,7 @@ namespace EMS.WebApp.View
         private void PopulateRole()
         {
             UserBLL userBll = new UserBLL();
-            List<IRole> lstRole = userBll.GetRole();
+            List<IRole> lstRole = userBll.GetActiveRole();
             GeneralFunctions.PopulateDropDownList(ddlRole, lstRole, "Id", "Name", true);
         }
 

@@ -125,8 +125,8 @@ namespace EMS.WebApp.View
             haulage.LocationFrom = Convert.ToInt32(ddlLocFrom.SelectedValue);
             haulage.LocationTo = Convert.ToInt32(ddlLocTo.SelectedValue);
             haulage.ContainerSize = ddlSize.SelectedValue;
-            haulage.WeightFrom = Convert.ToDouble(txtWeightFrom.Text);
-            haulage.WeightTo = Convert.ToDouble(txtWeightTo.Text);
+            haulage.WeightFrom = Convert.ToDecimal(txtWeightFrom.Text);
+            haulage.WeightTo = Convert.ToDecimal(txtWeightTo.Text);
         }
 
         #endregion

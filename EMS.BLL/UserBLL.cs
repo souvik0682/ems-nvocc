@@ -14,6 +14,8 @@ namespace EMS.BLL
 {
     public class UserBLL
     {
+        #region User
+
         public static string GetDefaultPassword()
         {
             return Encryption.Encrypt(Constants.DEFAULT_PASSWORD);
@@ -121,16 +123,43 @@ namespace EMS.BLL
             UserDAL.ResetPassword(user, modifiedBy);
         }
 
+        #endregion
+
         #region Role
 
-        public List<IRole> GetRole()
+        private void SetDefaultSearchCriteriaForRole(SearchCriteria searchCriteria)
         {
-            return UserDAL.GetRole();
+            searchCriteria.SortExpression = "Role";
+            searchCriteria.SortDirection = "ASC";
+        }
+
+        public List<IRole> GetAllRole(SearchCriteria searchCriteria)
+        {
+            return UserDAL.GetRole(false, searchCriteria);
+        }
+
+        public List<IRole> GetActiveRole()
+        {
+            SearchCriteria searchCriteria = new SearchCriteria();
+            SetDefaultSearchCriteriaForRole(searchCriteria);
+            return UserDAL.GetRole(true, searchCriteria);
         }
 
         public IRole GetRole(int roleId)
         {
-            return UserDAL.GetRole(roleId);
+            SearchCriteria searchCriteria = new SearchCriteria();
+            SetDefaultSearchCriteriaForRole(searchCriteria);
+            return UserDAL.GetRole(roleId, false, searchCriteria);
+        }
+
+        public void SaveRole(IRole role, int modifiedBy)
+        {
+            UserDAL.SaveRole(role, modifiedBy);
+        }
+
+        public void DeleteRole(int roleId, int modifiedBy)
+        {
+            UserDAL.DeleteRole(roleId, modifiedBy);
         }
 
         #endregion

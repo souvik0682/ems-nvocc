@@ -9,5 +9,6 @@ namespace EMS.Common
     {
         bool? LocationSpecific { get; set; }
         bool? RoleStatus { get; set; }
+        bool Active { get; set; }
     }
 }

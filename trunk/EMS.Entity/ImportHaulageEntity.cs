@@ -1,29 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using EMS.Common;
+using System.Data;
 
 namespace EMS.Entity
 {
-    public class ImportHaulageEntity : IImportHaulage, ICommon
+    public class ImportHaulageEntity:IImportHaulage
     {
-        #region IImportHaulage Members
-
         public int HaulageChgID
         {
             get;
             set;
         }
 
-        public int LocationFrom
+        public string LocationFrom
         {
             get;
             set;
         }
 
-        public int LocationTo
+        public string LocationTo
         {
             get;
             set;
@@ -35,19 +33,19 @@ namespace EMS.Entity
             set;
         }
 
-        public decimal WeightFrom
+        public double WeightFrom
         {
             get;
             set;
         }
 
-        public decimal WeightTo
+        public double WeightTo
         {
             get;
             set;
         }
 
-        public decimal HaulageRate
+        public double HaulageRate
         {
             get;
             set;
@@ -59,9 +57,17 @@ namespace EMS.Entity
             set;
         }
 
-        #endregion
+        public string LFCode
+        {
+            get;
+            set;
+        }
 
-        #region ICommon Members
+        public string LTCode
+        {
+            get;
+            set;
+        }
 
         public int CreatedBy
         {
@@ -87,27 +93,32 @@ namespace EMS.Entity
             set;
         }
 
-        #endregion
 
-        #region Constructors
 
         public ImportHaulageEntity()
         {
 
         }
 
+
         public ImportHaulageEntity(DataTableReader reader)
         {
-            this.HaulageChgID = Convert.ToInt32(reader["HaulageChgID"]);
-            this.LocationFrom = Convert.ToInt32(reader["LocationFrom"]);
-            this.LocationTo = Convert.ToInt32(reader["LocationTo"]);
             this.ContainerSize = Convert.ToString(reader["ContainerSize"]);
-            this.WeightFrom = Convert.ToDecimal(reader["WeightFrom"]);
-            this.WeightTo = Convert.ToDecimal(reader["WeightTo"]);
-            this.HaulageRate = Convert.ToDecimal(reader["HaulageRate"]);
+            this.HaulageChgID = Convert.ToInt32(reader["HaulageChgID"]);
+            this.HaulageRate = Convert.ToDouble(reader["HaulageRate"]);
             this.HaulageStatus = Convert.ToBoolean(reader["HaulageStatus"]);
+            this.LocationFrom = Convert.ToString(reader["LocationFrom"]);
+            this.LocationTo = Convert.ToString(reader["LocationTo"]);
+            this.WeightFrom = Convert.ToDouble(reader["WeightFrom"]);
+            this.WeightTo = Convert.ToDouble(reader["WeightTo"]);
+            this.LFCode = Convert.ToString(reader["LFCode"]);
+            this.LTCode = Convert.ToString(reader["LTCode"]);
         }
 
-        #endregion
+
+
+
+
+       
     }
 }

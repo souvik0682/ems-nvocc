@@ -42,7 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonDAL.cs" />
+<<<<<<< .mine
+    <Compile Include="ImportHaulageDAL.cs" />
+=======
     <Compile Include="ChargeDAL.cs" />
+>>>>>>> .r168
     <Compile Include="DBManager\DataConnection.cs" />
     <Compile Include="DBManager\DbManagerBase.cs" />
     <Compile Include="DBManager\DbQuery.cs" />

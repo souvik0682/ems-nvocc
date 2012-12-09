@@ -37,7 +37,7 @@ namespace EMS.DAL
 
         public static void ValidateUser(IUser user)
         {
-            string strExecution = "[admin].[uspValidateUser]";
+            string strExecution = "[dbo].[uspValidateUser]";
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {

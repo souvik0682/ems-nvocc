@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="vendor-list.aspx.cs" Inherits="EMS.WebApp.vendor_list" %>
+    CodeBehind="ImportHaulage-list.aspx.cs" Inherits="EMS.WebApp.ImportHaulage_list" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -10,33 +10,43 @@
             <div id="dvAsyncClose">
                 <img alt="" src="../../Images/Close-Button.bmp" style="cursor: pointer;" onclick="ClearErrorState()" /></div>
             <div id="dvAsyncMessage">
+            
             </div>
         </div>
     </div>
     <div id="headercaption">
-        MANAGE VENDOR</div>
+        MANAGE IMPORT HAULAGE CHARGES</div>
     <center>
-        <div style="width: 850px;">
+        <div style="width: 850px; ">
             <fieldset style="width: 100%;">
-                <legend>Search Vendor</legend>
+                <legend>Search</legend>
                 <table>
                     <tr>
                         <td>
-                            <asp:TextBox ID="txtVendorName" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
+                            <asp:TextBox ID="txtFrom" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters"
-                                FilterMode="ValidChars" ValidChars=" " TargetControlID="txtVendorName">
+                                FilterMode="ValidChars" ValidChars=" " TargetControlID="txtFrom">
                             </cc1:FilteredTextBoxExtender>
-                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtVendorName"
-                                WatermarkText="Vendor Name">
+                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtFrom"
+                                WatermarkText="Location From">
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
-                            <asp:TextBox ID="txtLocationName" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
+                            <asp:TextBox ID="txtTo" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
-                                FilterMode="ValidChars" ValidChars=" " TargetControlID="txtLocationName">
+                                FilterMode="ValidChars" ValidChars=" " TargetControlID="txtTo">
                             </cc1:FilteredTextBoxExtender>
-                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="txtLocationName"
-                                WatermarkText="Location Name">
+                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="txtTo"
+                                WatermarkText="Location To">
+                            </cc1:TextBoxWatermarkExtender>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtSize" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
+                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
+                                FilterMode="ValidChars" ValidChars=" " TargetControlID="txtSize">
+                            </cc1:FilteredTextBoxExtender>
+                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender3" runat="server" TargetControlID="txtSize"
+                                WatermarkText="Container Size">
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
@@ -57,7 +67,7 @@
                 </ProgressTemplate>
             </asp:UpdateProgress>
             <fieldset id="fsList" runat="server" style="width: 100%; min-height: 100px;">
-                <legend>Vendor List</legend>
+                <legend>Import Haulage Charge List</legend>
                 <div style="float: right; padding-bottom: 5px;">
                     Results Per Page:<asp:DropDownList ID="ddlPaging" runat="server" Width="50px" AutoPostBack="true"
                         OnSelectedIndexChanged="ddlPaging_SelectedIndexChanged">
@@ -67,10 +77,11 @@
                         <asp:ListItem Text="100" Value="100" />
                     </asp:DropDownList>
                     &nbsp;&nbsp;
-                    <asp:Button ID="btnAdd" runat="server" Text="Add New Vendor" Width="130px" OnClick="btnAdd_Click" />
+                    <asp:Button ID="btnAdd" runat="server" Text="Add New Import Haulage Charge" Width="200px"
+                        OnClick="btnAdd_Click" />
                 </div>
                 <div>
-                    <span class="errormessage">* Indicates Inactive Location(s)</span>
+                    <span class="errormessage">&nbsp;</span>
                 </div>
                 <br />
                 <div>
@@ -80,14 +91,15 @@
                             <asp:AsyncPostBackTrigger ControlID="ddlPaging" EventName="SelectedIndexChanged" />
                         </Triggers>
                         <ContentTemplate>
-                            <asp:GridView ID="gvwVendor" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                                BorderStyle="None" BorderWidth="0" OnPageIndexChanging="gvwVendor_PageIndexChanging"
-                                OnRowDataBound="gvwVendor_RowDataBound" OnRowCommand="gvwVendor_RowCommand" Width="100%">
+                            <asp:GridView ID="gvwImportHaulage" runat="server" AutoGenerateColumns="false" AllowPaging="true"
+                                BorderStyle="None" BorderWidth="0" OnPageIndexChanging="gvwImportHaulage_PageIndexChanging"
+                                OnRowDataBound="gvwImportHaulage_RowDataBound" OnRowCommand="gvwImportHaulage_RowCommand"
+                                Width="100%">
                                 <PagerSettings Mode="NumericFirstLast" Position="TopAndBottom" />
                                 <PagerStyle CssClass="gridviewpager" />
                                 <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
                                 <EmptyDataTemplate>
-                                    No Location(s) Found</EmptyDataTemplate>
+                                    No Record(s) Found</EmptyDataTemplate>
                                 <Columns>
                                     <asp:TemplateField HeaderText="Sl#">
                                         <HeaderStyle CssClass="gridviewheader" />
@@ -97,30 +109,49 @@
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="15%" />
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkHType" runat="server" CommandName="Sort" CommandArgument="Type"
-                                                Text="Type"></asp:LinkButton></HeaderTemplate>
+                                            <asp:LinkButton ID="lnkHLocationFrom" runat="server" CommandName="Sort" CommandArgument="LocationFrom"
+                                                Text="Location From"></asp:LinkButton></HeaderTemplate>
                                         <ItemTemplate>
-                                            <asp:Label ID="lblType" runat="server"></asp:Label>
+                                            <asp:Label ID="lblLocationFrom" runat="server"></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Location">
+                                    <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="25%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="15%" />
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkHLoc" runat="server" CommandName="Sort" CommandArgument="Location"
-                                                Text="Location"></asp:LinkButton></HeaderTemplate>
+                                            <asp:LinkButton ID="lnkHLocationTo" runat="server" CommandName="Sort" CommandArgument="LocationTo"
+                                                Text="Location To"></asp:LinkButton></HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblLocationTo" runat="server"></asp:Label>
+                                        </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Name">
+                                    <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="20%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkHName" runat="server" CommandName="Sort" CommandArgument="Name"
-                                                Text="Name"></asp:LinkButton></HeaderTemplate>
+                                            <asp:LinkButton ID="lnkHContainerSize" runat="server" CommandName="Sort" CommandArgument="ContainerSize"
+                                                Text="Container Size"></asp:LinkButton></HeaderTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lnkHWeightFrom" runat="server" CommandName="Sort" CommandArgument="WeightFrom"
+                                                Text="Weight From"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Address">
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="25%" />
-                                       
+                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lnkHWeightTo" runat="server" CommandName="Sort" CommandArgument="WeightTo"
+                                                Text="Weight To"></asp:LinkButton></HeaderTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Address">
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lnkHRate" runat="server" CommandName="Sort" CommandArgument="HaulageRate"
+                                                Text="Rate"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />

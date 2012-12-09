@@ -26,22 +26,22 @@ namespace EMS.WebApp
         void Application_Error(object sender, EventArgs e)
         {
             // Code that runs when an unhandled error occurs
-            if (HttpContext.Current.Session != null)
-            {
-                Exception ex = Server.GetLastError();
+            //if (HttpContext.Current.Session != null)
+            //{
+            //    Exception ex = Server.GetLastError();
 
-                if ((ex.GetType() == typeof(HttpUnhandledException)))
-                {
-                    Session[Constants.SESSION_ERROR] = ex.GetBaseException();
-                }
-                else
-                {
-                    Session[Constants.SESSION_ERROR] = ex;
-                }
+            //    if ((ex.GetType() == typeof(HttpUnhandledException)))
+            //    {
+            //        Session[Constants.SESSION_ERROR] = ex.GetBaseException();
+            //    }
+            //    else
+            //    {
+            //        Session[Constants.SESSION_ERROR] = ex;
+            //    }
 
-                Server.ClearError();
-                Server.Transfer("~/Error.aspx");
-            }
+            //    Server.ClearError();
+            //    Server.Transfer("~/Error.aspx");
+            //}
         }
 
         void Session_Start(object sender, EventArgs e)

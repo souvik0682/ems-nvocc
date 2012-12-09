@@ -24,7 +24,7 @@ namespace EMS.WebApp
 
                     if (ReferenceEquals(user, null) || user.Id == 0)
                     {
-                        Response.Redirect("~/Login.aspx");
+                        //Response.Redirect("~/Login.aspx");
                     }
 
                     SetAttributes(user);
@@ -32,7 +32,7 @@ namespace EMS.WebApp
                 }
                 else
                 {
-                    Response.Redirect("~/Login.aspx");
+                    //Response.Redirect("~/Login.aspx");
                 }
             }
             else

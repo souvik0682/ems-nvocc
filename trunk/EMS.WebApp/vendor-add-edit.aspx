@@ -9,7 +9,8 @@
     <div>
         <div id="headercaption">
             ADD / EDIT VENDOR</div>
-        <center>
+        <center>   
+             
             <fieldset style="width: 400px;">
                 <legend>Add / Edit Vendor</legend>
                 <table border="0" cellpadding="2" cellspacing="3">

@@ -27,8 +27,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMS.DAL", "EMS.DAL\EMS.DAL.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMS.Common", "EMS.Common\EMS.Common.csproj", "{DEAA8F62-9F75-48A1-AD97-9FAE417E238F}"
 EndProject
+<<<<<<< .mine
+Project("{C8D11400-126E-41CD-887F-60BD40844F9E}") = "EMS.DB", "EMS.DB\EMS.DB.dbproj", "{67CBC824-A49E-4E9B-A947-360F3DFE65C3}"
+EndProject
+=======
 Project("{C8D11400-126E-41CD-887F-60BD40844F9E}") = "EMS.Database", "EMS.Database\EMS.Database.dbproj", "{67CBC824-A49E-4E9B-A947-360F3DFE65C3}"
 EndProject
+>>>>>>> .r164
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

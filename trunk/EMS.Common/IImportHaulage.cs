@@ -8,8 +8,10 @@ namespace EMS.Common
     public interface IImportHaulage : ICommon
     {
         int HaulageChgID { get; set; }
-        int LocationFrom { get; set; }
-        int LocationTo { get; set; }
+        string LocationFrom { get; set; }
+        string LFCode { get; set; }
+        string LocationTo { get; set; }
+        string LTCode { get; set; }
         string ContainerSize { get; set; }
         decimal WeightFrom { get; set; }
         decimal WeightTo { get; set; }

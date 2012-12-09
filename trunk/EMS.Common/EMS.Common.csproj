@@ -46,12 +46,17 @@
     <Compile Include="IAddress.cs" />
     <Compile Include="IArea.cs" />
     <Compile Include="IBase.cs" />
+    <Compile Include="ICharge.cs" />
     <Compile Include="ICommon.cs" />
     <Compile Include="IContactPerson.cs" />
     <Compile Include="ICustomer.cs" />
+<<<<<<< .mine
+    <Compile Include="IImportHaulage.cs" />
+=======
     <Compile Include="ICustomerType.cs" />
     <Compile Include="IGroupCompany.cs" />
     <Compile Include="IImportHaulage.cs" />
+>>>>>>> .r166
     <Compile Include="ILocation.cs" />
     <Compile Include="IRole.cs" />
     <Compile Include="ISearchCriteria.cs" />

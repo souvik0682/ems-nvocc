@@ -1,0 +1,8 @@
+D:\Projects\Tapas Roy\Ben Line\ems-NVOCC\EMS.DB\sql\debug\EMS.DB_Script.PreDeployment.sql
+D:\Projects\Tapas Roy\Ben Line\ems-NVOCC\EMS.DB\sql\debug\EMS.DB_Script.PostDeployment.sql
+D:\Projects\Tapas Roy\Ben Line\ems-NVOCC\EMS.DB\sql\debug\EMS.DB_Database.sqlsettings
+D:\Projects\Tapas Roy\Ben Line\ems-NVOCC\EMS.DB\sql\debug\EMS.DB_Database.sqldeployment
+D:\Projects\Tapas Roy\Ben Line\ems-NVOCC\EMS.DB\sql\debug\EMS.DB_Database.sqlcmdvars
+D:\Projects\Tapas Roy\Ben Line\ems-NVOCC\EMS.DB\sql\debug\EMS.DB.deploymanifest
+D:\Projects\Tapas Roy\Ben Line\ems-NVOCC\EMS.DB\sql\debug\EMS.DB.dbschema
+D:\Projects\Tapas Roy\Ben Line\ems-NVOCC\EMS.DB\obj\Debug\EMS.DB.dbschema

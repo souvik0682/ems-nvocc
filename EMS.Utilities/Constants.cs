@@ -39,6 +39,9 @@ namespace EMS.Utilities
         DailySalesCall = 7
     };
 
+<<<<<<< .mine
+   
+=======
     public enum UserRole
     {
         Admin = 2,
@@ -52,6 +55,7 @@ namespace EMS.Utilities
         Logistics = 12
     }
 
+>>>>>>> .r171
     #endregion
 
     public static class Constants

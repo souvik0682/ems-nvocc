@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using EMS.Common;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace EMS.Entity
 {
@@ -152,8 +153,24 @@ namespace EMS.Entity
             if (reader["EmailId"] != DBNull.Value)
                 this.EmailId = Convert.ToString(reader["EmailId"]);
 
-            this.IsActive = Convert.ToBoolean(reader["UserActive"]);
-            this.AllowMutipleLocation = Convert.ToBoolean(reader["AllowMutipleLocation"]);
+            if (HasColumn(reader, "UserActive") && reader["UserActive"] != DBNull.Value) this.IsActive = Convert.ToBoolean(reader["UserActive"]);
+            if (HasColumn(reader, "AllowMutipleLocation") && reader["AllowMutipleLocation"] != DBNull.Value) this.IsActive = Convert.ToBoolean(reader["AllowMutipleLocation"]);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private bool HasColumn(DataTableReader reader, string columnName)
+        {
+            try
+            {
+                return reader.GetOrdinal(columnName) >= 0;
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
         }
 
         #endregion

@@ -86,7 +86,7 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="14%" />
+                                    <ItemStyle CssClass="gridviewitem" Width="15%" />
                                     <HeaderTemplate><asp:LinkButton ID="lnkHLoc" runat="server" Text="Location" CommandName="Sort" CommandArgument="Location"></asp:LinkButton></HeaderTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
@@ -100,24 +100,17 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Group Company">
                                     <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="16%" />                          
+                                    <ItemStyle CssClass="gridviewitem" Width="18%" />                          
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Executive Name">
                                     <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="16%" />                          
+                                    <ItemStyle CssClass="gridviewitem" Width="18%" />                          
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />                                    
                                     <ItemTemplate>
                                         <asp:ImageButton ID="btnEdit" runat="server" CommandName="Edit" ImageUrl="~/Images/edit.png" Height="16" Width="16" />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField>
-                                    <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />                                    
-                                    <ItemTemplate>
-                                        <asp:ImageButton ID="btnRemove" runat="server" CommandName="Remove" ImageUrl="~/Images/remove.png" Height="16" Width="16" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

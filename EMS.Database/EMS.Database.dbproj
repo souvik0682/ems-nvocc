@@ -193,5 +193,26 @@
     <Build Include="Scripts\Pre-Deployment\Stored Procedures\chg.uspGetExchangeRate.proc.sql">
       <SubType>Code</SubType>
     </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\common.uspAreaByLocationAndPinCode.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\common.uspGetGroupCompany.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\common.uspGetCustomerType.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\common.uspGetSalesExecutiveNew.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\common.uspGetLocationByUser.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\common.uspGetCustomer.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\common.uspGetCustomerList.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
   </ItemGroup>
 </Project>

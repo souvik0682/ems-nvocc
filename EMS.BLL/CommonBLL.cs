@@ -291,77 +291,77 @@ namespace EMS.BLL
         //    return CommonDAL.GetAreaByLocation(locId);
         //}
 
-        //public List<IArea> GetAreaByLocationAndPinCode(int locId, string pinCode)
-        //{
-        //    return CommonDAL.GetAreaByLocationAndPinCode(locId, pinCode);
-        //}
+        public List<IArea> GetAreaByLocationAndPinCode(int locId, string pinCode)
+        {
+            return CommonDAL.GetAreaByLocationAndPinCode(locId, pinCode);
+        }
 
         #endregion
 
         #region Group Company
 
-        //private void SetDefaultSearchCriteriaForGroupCompany(SearchCriteria searchCriteria)
-        //{
-        //    searchCriteria.SortExpression = "GroupName";
-        //    searchCriteria.SortDirection = "ASC";
-        //}
+        private void SetDefaultSearchCriteriaForGroupCompany(SearchCriteria searchCriteria)
+        {
+            searchCriteria.SortExpression = "GroupName";
+            searchCriteria.SortDirection = "ASC";
+        }
 
-        //public List<IGroupCompany> GetActiveGroupCompany()
-        //{
-        //    SearchCriteria searchCriteria = new SearchCriteria();
-        //    SetDefaultSearchCriteriaForGroupCompany(searchCriteria);
-        //    return CommonDAL.GetGroupCompany('Y', searchCriteria);
-        //}
+        public List<IGroupCompany> GetActiveGroupCompany()
+        {
+            SearchCriteria searchCriteria = new SearchCriteria();
+            SetDefaultSearchCriteriaForGroupCompany(searchCriteria);
+            return CommonDAL.GetGroupCompany('Y', searchCriteria);
+        }
 
         #endregion
 
         #region Customer
 
-        //private void SetDefaultSearchCriteriaForCustomer(SearchCriteria searchCriteria)
-        //{
-        //    searchCriteria.SortExpression = "CustName";
-        //    searchCriteria.SortDirection = "ASC";
-        //}
+        private void SetDefaultSearchCriteriaForCustomer(SearchCriteria searchCriteria)
+        {
+            searchCriteria.SortExpression = "CustName";
+            searchCriteria.SortDirection = "ASC";
+        }
 
-        //public List<ICustomer> GetAllCustomer(SearchCriteria searchCriteria)
-        //{
-        //    return CommonDAL.GetCustomerList('N', searchCriteria);
-        //}
+        public List<ICustomer> GetAllCustomer(SearchCriteria searchCriteria)
+        {
+            return CommonDAL.GetCustomerList('N', searchCriteria);
+        }
 
-        //public List<ICustomer> GetActiveCustomer(SearchCriteria searchCriteria)
-        //{
-        //    return CommonDAL.GetCustomerList('Y', searchCriteria);
-        //}
+        public List<ICustomer> GetActiveCustomer(SearchCriteria searchCriteria)
+        {
+            return CommonDAL.GetCustomerList('Y', searchCriteria);
+        }
 
-        //public List<ICustomer> GetAllCustomer()
-        //{
-        //    SearchCriteria searchCriteria = new SearchCriteria();
-        //    SetDefaultSearchCriteriaForCustomer(searchCriteria);
-        //    return CommonDAL.GetCustomerList('N', searchCriteria);
-        //}
+        public List<ICustomer> GetAllCustomer()
+        {
+            SearchCriteria searchCriteria = new SearchCriteria();
+            SetDefaultSearchCriteriaForCustomer(searchCriteria);
+            return CommonDAL.GetCustomerList('N', searchCriteria);
+        }
 
-        //public List<ICustomer> GetActiveCustomer()
-        //{
-        //    SearchCriteria searchCriteria = new SearchCriteria();
-        //    SetDefaultSearchCriteriaForCustomer(searchCriteria);
+        public List<ICustomer> GetActiveCustomer()
+        {
+            SearchCriteria searchCriteria = new SearchCriteria();
+            SetDefaultSearchCriteriaForCustomer(searchCriteria);
 
-        //    return CommonDAL.GetCustomerList('N', searchCriteria);
-        //}
+            return CommonDAL.GetCustomerList('N', searchCriteria);
+        }
 
-        //public List<ICustomer> GetCustomerByUser(int userId)
-        //{
-        //    SearchCriteria searchCriteria = new SearchCriteria();
-        //    SetDefaultSearchCriteriaForCustomer(searchCriteria);
-        //    searchCriteria.UserId = userId;
-        //    return CommonDAL.GetCustomerList('N', searchCriteria);
-        //}
+        public List<ICustomer> GetCustomerByUser(int userId)
+        {
+            SearchCriteria searchCriteria = new SearchCriteria();
+            SetDefaultSearchCriteriaForCustomer(searchCriteria);
+            searchCriteria.UserId = userId;
+            return CommonDAL.GetCustomerList('N', searchCriteria);
+        }
 
-        //public ICustomer GetCustomer(int customer)
-        //{
-        //    SearchCriteria searchCriteria = new SearchCriteria();
-        //    SetDefaultSearchCriteriaForCustomer(searchCriteria);
-        //    return CommonDAL.GetCustomer(customer, 'N', searchCriteria);
-        //}
+        public ICustomer GetCustomer(int customer)
+        {
+            SearchCriteria searchCriteria = new SearchCriteria();
+            SetDefaultSearchCriteriaForCustomer(searchCriteria);
+            return CommonDAL.GetCustomer(customer, 'N', searchCriteria);
+        }
 
         //public string SaveCustomer(ICustomer customer, int modifiedBy)
         //{
@@ -395,10 +395,10 @@ namespace EMS.BLL
         //    return CommonDAL.GetCustomerType('N');
         //}
 
-        //public List<ICustomerType> GetActiveCustomerType()
-        //{
-        //    return CommonDAL.GetCustomerType('Y');
-        //}
+        public List<ICustomerType> GetActiveCustomerType()
+        {
+            return CommonDAL.GetCustomerType('Y');
+        }
 
         //public ICustomerType GetCustomerType(int custTypeId)
         //{
@@ -409,10 +409,10 @@ namespace EMS.BLL
 
         #region User
 
-        //public List<IUser> GetSalesExecutiveNew(int userId)
-        //{
-        //    return CommonDAL.GetSalesExecutiveNew(userId);
-        //}
+        public List<IUser> GetSalesExecutiveNew(int userId)
+        {
+            return CommonDAL.GetSalesExecutiveNew(userId);
+        }
 
         #endregion
     }

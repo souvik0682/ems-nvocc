@@ -85,22 +85,14 @@
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Styles\EMS.css" />
     <Content Include="Unauthorized.aspx" />
-<<<<<<< .mine
-    <Content Include="UserControl\PortList.ascx" />
     <Content Include="vendor-add-edit.aspx" />
     <Content Include="vendor-list.aspx" />
-=======
-    <Content Include="vendor-add-edit.aspx" />
-    <Content Include="vendor-list.aspx" />
->>>>>>> .r172
     <Content Include="View\AddEditCustomer.aspx" />
     <Content Include="View\AddEditLocation.aspx" />
     <Content Include="View\AddEditUser.aspx" />
     <Content Include="View\ChangePassword.aspx" />
     <Content Include="View\AddEditExchRate.aspx" />
-    <Content Include="View\AddEditHaulageCharge.aspx" />
     <Content Include="View\AddEditRole.aspx" />
-    <Content Include="View\ManageHaulageCharge.aspx" />
     <Content Include="View\Home.aspx" />
     <Content Include="View\ManageCustomer.aspx" />
     <Content Include="View\ManageExchRate.aspx" />
@@ -177,14 +169,6 @@
     <Compile Include="Unauthorized.aspx.designer.cs">
       <DependentUpon>Unauthorized.aspx</DependentUpon>
     </Compile>
-<<<<<<< .mine
-    <Compile Include="UserControl\PortList.ascx.cs">
-      <DependentUpon>PortList.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControl\PortList.ascx.designer.cs">
-      <DependentUpon>PortList.ascx</DependentUpon>
-    </Compile>
     <Compile Include="vendor-add-edit.aspx.cs">
       <DependentUpon>vendor-add-edit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -199,22 +183,6 @@
     <Compile Include="vendor-list.aspx.designer.cs">
       <DependentUpon>vendor-list.aspx</DependentUpon>
     </Compile>
-=======
-    <Compile Include="vendor-add-edit.aspx.cs">
-      <DependentUpon>vendor-add-edit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="vendor-add-edit.aspx.designer.cs">
-      <DependentUpon>vendor-add-edit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="vendor-list.aspx.cs">
-      <DependentUpon>vendor-list.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="vendor-list.aspx.designer.cs">
-      <DependentUpon>vendor-list.aspx</DependentUpon>
-    </Compile>
->>>>>>> .r172
     <Compile Include="View\AddEditCustomer.aspx.cs">
       <DependentUpon>AddEditCustomer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -250,26 +218,12 @@
     <Compile Include="View\AddEditExchRate.aspx.designer.cs">
       <DependentUpon>AddEditExchRate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="View\AddEditHaulageCharge.aspx.cs">
-      <DependentUpon>AddEditHaulageCharge.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="View\AddEditHaulageCharge.aspx.designer.cs">
-      <DependentUpon>AddEditHaulageCharge.aspx</DependentUpon>
-    </Compile>
     <Compile Include="View\AddEditRole.aspx.cs">
       <DependentUpon>AddEditRole.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="View\AddEditRole.aspx.designer.cs">
       <DependentUpon>AddEditRole.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="View\ManageHaulageCharge.aspx.cs">
-      <DependentUpon>ManageHaulageCharge.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="View\ManageHaulageCharge.aspx.designer.cs">
-      <DependentUpon>ManageHaulageCharge.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>

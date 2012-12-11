@@ -11,6 +11,12 @@ namespace EMS.Entity
     {
         #region IMenu Members
 
+        public int MenuID
+        {
+            get;
+            set;
+        }
+
         public int MainID
         {
             get;
@@ -29,17 +35,7 @@ namespace EMS.Entity
             set;
         }
 
-        #endregion
-
-        #region IBase<int> Members
-
-        public int Id
-        {
-            get;
-            set;
-        }
-
-        public string Name
+        public string MenuName
         {
             get;
             set;

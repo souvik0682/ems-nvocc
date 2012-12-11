@@ -5,15 +5,10 @@ using System.Text;
 
 namespace EMS.Common
 {
-    public interface IRoleMenu
+    public interface IRoleMenu : IMenu, IRole
     {
         int MenuAccessID { get; set; }
         int CompanyID { get; set; }
-        int RoleID { get; set; }
-        int MenuID { get; set; }
-        int MainID { get; set; }
-        int SubID { get; set; }
-        int SubSubID { get; set; }
         bool CanAdd { get; set; }
         bool CanEdit { get; set; }
         bool CanDelete { get; set; }

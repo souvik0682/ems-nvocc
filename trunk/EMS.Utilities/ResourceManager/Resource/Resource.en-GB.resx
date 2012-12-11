@@ -324,4 +324,13 @@
   <data name="ERR00068" xml:space="preserve">
     <value>Type Exchange Rate</value>
   </data>
+  <data name="ERR00069" xml:space="preserve">
+    <value>Type Executive Name</value>
+  </data>
+  <data name="ERR00070" xml:space="preserve">
+    <value>Click to view customer detail</value>
+  </data>
+  <data name="ERR00071" xml:space="preserve">
+    <value>*Account of cannot be left blank</value>
+  </data>
 </root>

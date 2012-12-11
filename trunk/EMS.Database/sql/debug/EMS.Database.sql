@@ -174,6 +174,15 @@ CREATE SCHEMA [admin]
 
 
 GO
+PRINT N'Creating [chg]...';
+
+
+GO
+CREATE SCHEMA [chg]
+    AUTHORIZATION [dbo];
+
+
+GO
 PRINT N'Creating [common]...';
 
 

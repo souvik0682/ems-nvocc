@@ -23,36 +23,6 @@ namespace EMS.Entity
             set;
         }
 
-        public int RoleID
-        {
-            get;
-            set;
-        }
-
-        public int MenuID
-        {
-            get;
-            set;
-        }
-
-        public int MainID
-        {
-            get;
-            set;
-        }
-
-        public int SubID
-        {
-            get;
-            set;
-        }
-
-        public int SubSubID
-        {
-            get;
-            set;
-        }
-
         public bool CanAdd
         {
             get;
@@ -79,6 +49,78 @@ namespace EMS.Entity
 
         #endregion
 
+        #region IMenu Members
+
+        public int MenuID
+        {
+            get;
+            set;
+        }
+
+        public int MainID
+        {
+            get;
+            set;
+        }
+
+        public int SubID
+        {
+            get;
+            set;
+        }
+
+        public int SubSubID
+        {
+            get;
+            set;
+        }
+
+        public string MenuName
+        {
+            get;
+            set;
+        }
+
+        #endregion
+
+        #region IRole Members
+
+        public bool? LocationSpecific
+        {
+            get;
+            set;
+        }
+
+        public bool? RoleStatus
+        {
+            get;
+            set;
+        }
+
+        public bool Active
+        {
+            get;
+            set;
+        }
+
+        #endregion
+
+        #region IBase<int> Members
+
+        public int Id
+        {
+            get;
+            set;
+        }
+
+        public string Name
+        {
+            get;
+            set;
+        }
+
+        #endregion
+
         #region Constructors
 
         public RoleMenuEntity()
@@ -90,7 +132,7 @@ namespace EMS.Entity
         {
             this.MenuAccessID = Convert.ToInt32(reader["MenuAccessID"]);
             this.CompanyID = Convert.ToInt32(reader["CompanyID"]);
-            this.RoleID = Convert.ToInt32(reader["RoleID"]);
+            this.Id = Convert.ToInt32(reader["RoleID"]);
             this.MenuID = Convert.ToInt32(reader["MenuID"]);
             this.MainID = Convert.ToInt32(reader["MainID"]);
             this.SubID = Convert.ToInt32(reader["SubID"]);
@@ -99,6 +141,7 @@ namespace EMS.Entity
             this.CanEdit = Convert.ToBoolean(reader["CanEdit"]);
             this.CanDelete = Convert.ToBoolean(reader["CanDelete"]);
             this.CanView = Convert.ToBoolean(reader["CanView"]);
+            this.MenuName = Convert.ToString(reader["MenuName"]);
         }
 
         #endregion

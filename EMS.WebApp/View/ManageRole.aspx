@@ -64,24 +64,20 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Role">
                                     <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="50%" />                                    
+                                    <ItemStyle CssClass="gridviewitem" Width="65%" />                                    
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Status">
                                     <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="20%" />                                    
-                                </asp:TemplateField>
-                                <asp:TemplateField>
-                                    <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Center" VerticalAlign="Middle" />                                    
+                                    <ItemStyle CssClass="gridviewitem" Width="15%" />                                    
                                     <ItemTemplate>
-                                        <asp:ImageButton ID="btnEdit" runat="server" CommandName="Edit" ImageUrl="~/Images/edit.png" Height="16" Width="16" />
+                                        <asp:LinkButton ID="lnkStatus" runat="server"></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Center" VerticalAlign="Middle" />                                    
                                     <ItemTemplate>
-                                        <asp:ImageButton ID="btnRemove" runat="server" CommandName="Remove" ImageUrl="~/Images/remove.png" Height="16" Width="16" />
+                                        <asp:ImageButton ID="btnEdit" runat="server" CommandName="Edit" ImageUrl="~/Images/edit.png" Height="16" Width="16" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

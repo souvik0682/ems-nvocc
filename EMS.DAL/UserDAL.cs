@@ -16,7 +16,7 @@ namespace EMS.DAL
         }
 
         #region User
-        
+
         public static bool ChangePassword(IUser user)
         {
             string strExecution = "[admin].[uspChangePassword]";
@@ -174,7 +174,7 @@ namespace EMS.DAL
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                oDq.AddBooleanParam("@IsActiveOnly",isActiveOnly);
+                oDq.AddBooleanParam("@IsActiveOnly", isActiveOnly);
                 oDq.AddVarcharParam("@SchRole", 50, searchCriteria.RoleName);
                 oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
                 oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
@@ -238,6 +238,42 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
                 oDq.RunActionQuery();
             }
+        }
+
+        public static void ChangeRoleStatus(int roleId, bool status, int modifiedBy)
+        {
+            string strExecution = "[admin].[uspChangeRoleStatus]";
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@RoleId", roleId);
+                oDq.AddBooleanParam("@RoleStatus", status);
+                oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
+                oDq.RunActionQuery();
+            }
+        }
+
+        public static List<IRoleMenu> GetMenuByRole(int roleId, int mainId)
+        {
+            string strExecution = "[admin].[uspGetMenuByRole]";
+            List<IRoleMenu> lstMenu = new List<IRoleMenu>();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@RoleId", roleId);
+                oDq.AddIntegerParam("@MainId", mainId);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    IRoleMenu menu = new RoleMenuEntity(reader);
+                    lstMenu.Add(menu);
+                }
+
+                reader.Close();
+            }
+
+            return lstMenu;
         }
 
         #endregion

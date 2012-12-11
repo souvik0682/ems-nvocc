@@ -162,6 +162,16 @@ namespace EMS.BLL
             UserDAL.DeleteRole(roleId, modifiedBy);
         }
 
+        public void ChangeRoleStatus(int roleId, bool status, int modifiedBy)
+        {
+            UserDAL.ChangeRoleStatus(roleId, status, modifiedBy);
+        }
+
+        public List<IRoleMenu> GetMenuByRole(int roleId, int mainId)
+        {
+            return UserDAL.GetMenuByRole(roleId, mainId);
+        }
+
         #endregion
     }
 }

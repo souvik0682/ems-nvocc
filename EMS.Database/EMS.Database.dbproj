@@ -214,7 +214,10 @@
     <Build Include="Scripts\Pre-Deployment\Stored Procedures\common.uspGetCustomerList.proc.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Scripts\Pre-Deployment\Stored Procedures\uspChangeRoleStatus.proc.sql">
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\admin.uspChangeRoleStatus.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\admin.uspGetMenuByRole.proc.sql">
       <SubType>Code</SubType>
     </Build>
   </ItemGroup>

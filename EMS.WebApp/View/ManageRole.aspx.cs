@@ -86,9 +86,21 @@ namespace EMS.WebApp.View
             {
                 RedirecToAddEditPage(Convert.ToInt32(e.CommandArgument));
             }
-            else if (e.CommandName == "Remove")
+            //else if (e.CommandName == "Remove")
+            //{
+            //    DeleteRole(Convert.ToInt32(e.CommandArgument));
+            //}
+            else if (e.CommandName == "Status")
             {
-                DeleteRole(Convert.ToInt32(e.CommandArgument));
+                string[] arg = Convert.ToString(e.CommandArgument).Split('|');
+
+                if (arg.Length > 1)
+                {
+                    if (Convert.ToInt32(arg[1]) == 1)
+                        ChangeRoleStatus(Convert.ToInt32(arg[0]), true);
+                    else
+                        ChangeRoleStatus(Convert.ToInt32(arg[0]), false);
+                }
             }
         }
 
@@ -96,36 +108,47 @@ namespace EMS.WebApp.View
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 5);
+                GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 4);
 
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
 
                 e.Row.Cells[0].Text = ((gvwRole.PageSize * gvwRole.PageIndex) + e.Row.RowIndex + 1).ToString();
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Name"));
 
+                LinkButton lnkStatus = (LinkButton)e.Row.FindControl("lnkStatus");
+                lnkStatus.CommandName = "Status";
+
                 if (Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Active")))
-                    e.Row.Cells[2].Text = "Active";
+                {
+                    lnkStatus.Text = "Active";
+                    lnkStatus.ToolTip = "Click to deactivate";
+                    lnkStatus.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Id")) + "|0";
+                }
                 else
-                    e.Row.Cells[2].Text = "Inactive";
+                {
+                    lnkStatus.Text = "Inactive";
+                    lnkStatus.ToolTip = "Click to activate";
+                    lnkStatus.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Id")) + "|1";
+                }
 
                 // Edit link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
                 btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00013");
                 btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Id"));
 
-                //Delete link
-                ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
-                btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
-                btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Id"));
+                ////Delete link
+                //ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                //btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
+                //btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Id"));
 
                 if (_hasEditAccess)
                 {
-                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
+                    //btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
                 }
                 else
                 {
                     btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
-                    btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
+                    //btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
                 }
             }
         }
@@ -192,12 +215,19 @@ namespace EMS.WebApp.View
             }
         }
 
-        private void DeleteRole(int locId)
+        //private void DeleteRole(int roleId)
+        //{
+        //    UserBLL userBll = new UserBLL();
+        //    userBll.DeleteRole(roleId, _userId);
+        //    LoadRole();
+        //    ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00010") + "');</script>", false);
+        //}
+
+        private void ChangeRoleStatus(int roleId, bool status)
         {
-            UserBLL userBll = new UserBLL();
-            userBll.DeleteRole(locId, _userId);
+            new UserBLL().ChangeRoleStatus(roleId, status, _userId);
             LoadRole();
-            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00010") + "');</script>", false);
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Status successfully changed');</script>", false);
         }
 
         private void RedirecToAddEditPage(int id)

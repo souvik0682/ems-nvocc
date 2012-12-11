@@ -39,7 +39,6 @@ namespace EMS.WebApp.View
         protected void btnSave_Click(object sender, EventArgs e)
         {
             SaveLocation();
-
         }
 
         #endregion

@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IImportHaulage.cs" />
     <Compile Include="IRoleMenu.cs" />
     <Compile Include="IMenu.cs" />
     <Compile Include="IExchangeRate.cs" />

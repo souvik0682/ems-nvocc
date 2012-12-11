@@ -16,5 +16,11 @@ namespace EMS.Common
         int Sequence { get; set; }
         bool RateChangeable { get; set; }
         bool ChargeActive { get; set; }
+        bool IsFreightComponent { get; set; }
+        DateTime EffectDt { get; set; }
+        bool IsWashing { get; set; }
+        bool PrincipleSharing { get; set; }
+        int Currency { get; set; }
+        bool ServiceTax { get; set; }
     }
 }

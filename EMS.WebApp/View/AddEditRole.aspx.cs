@@ -142,7 +142,10 @@ namespace EMS.WebApp.View
 
             //ScriptManager sManager = ScriptManager.GetCurrent(this);
 
-            row.Cells[0].Text = ((gvw.PageSize * gvw.PageIndex) + row.RowIndex + 1).ToString();
+            ((Label)row.FindControl("lblSlNo")).Text = ((gvw.PageSize * gvw.PageIndex) + row.RowIndex + 1).ToString();
+            ((HiddenField)row.FindControl("hdnAccessId")).Value = Convert.ToString(DataBinder.Eval(row.DataItem, "MenuAccessID"));
+            ((HiddenField)row.FindControl("hdnMenuId")).Value = Convert.ToString(DataBinder.Eval(row.DataItem, "MenuID"));
+
             row.Cells[1].Text = Convert.ToString(DataBinder.Eval(row.DataItem, "MenuName"));
 
             //Add
@@ -173,6 +176,12 @@ namespace EMS.WebApp.View
         private void LoadData()
         {
             UserBLL userBll = new UserBLL();
+            IRole role = userBll.GetRole(_roleId);
+
+            if (!ReferenceEquals(role, null))
+            {
+                txtRole.Text=role.Name;
+            }
 
             gvwMst.DataSource = userBll.GetMenuByRole(_roleId, (int)MainMenuItem.Master);
             gvwMst.DataBind();
@@ -192,17 +201,63 @@ namespace EMS.WebApp.View
 
         private void SaveRole()
         {
-            CommonBLL commonBll = new CommonBLL();
-            ILocation loc = new LocationEntity();
+            UserBLL userBll = new UserBLL();
+            List<RoleMenuEntity> lstRoleMenu = new List<RoleMenuEntity>();
+            IRole role = new RoleEntity();
+
             string message = string.Empty;
-            BuildLocationEntity(loc);
-            commonBll.SaveLocation(loc, _userId);
-            Response.Redirect("~/View/ManageRole.aspx");
+            BuildRoleEntity(role);
+            BuildRoleMenuEntity(lstRoleMenu);
+            message = userBll.SaveRole(lstRoleMenu, role, _userId);
+
+            if (message == string.Empty)
+                Response.Redirect("~/View/ManageRole.aspx");
+            else
+                GeneralFunctions.RegisterAlertScript(this, message);
         }
 
-        private void BuildLocationEntity(ILocation loc)
+        private void BuildRoleEntity(IRole role)
         {
+            role.Id = _roleId;
+            role.Name = txtRole.Text.Trim();
+        }
 
+        private void BuildRoleMenu(List<RoleMenuEntity> lstRoleMenu, GridView gvw)
+        {
+            for (int index = 0; index < gvw.Rows.Count; index++)
+            {
+                RoleMenuEntity roleMenu = new RoleMenuEntity();
+
+                HiddenField hdnAccessId = (HiddenField)gvw.Rows[index].FindControl("hdnAccessId");
+                HiddenField hdnMenuId = (HiddenField)gvw.Rows[index].FindControl("hdnMenuId");
+                CheckBox chkAdd = (CheckBox)gvw.Rows[index].FindControl("chkAdd");
+                CheckBox chkEdit = (CheckBox)gvw.Rows[index].FindControl("chkEdit");
+                CheckBox chkDel = (CheckBox)gvw.Rows[index].FindControl("chkDel");
+                CheckBox chkView = (CheckBox)gvw.Rows[index].FindControl("chkView");
+
+                int menuAccessId = 0;
+                int menuId = 0;
+                int.TryParse(hdnAccessId.Value, out menuAccessId);
+                int.TryParse(hdnMenuId.Value, out menuId);
+
+                roleMenu.MenuAccessID = menuAccessId;
+                roleMenu.MenuID = menuId;
+                roleMenu.CanAdd = chkAdd.Checked;
+                roleMenu.CanEdit = chkEdit.Checked;
+                roleMenu.CanDelete = chkDel.Checked;
+                roleMenu.CanView = chkView.Checked;
+
+                lstRoleMenu.Add(roleMenu);
+            }
+        }
+
+        private void BuildRoleMenuEntity(List<RoleMenuEntity> lstRoleMenu)
+        {
+            BuildRoleMenu(lstRoleMenu, gvwMst);
+            BuildRoleMenu(lstRoleMenu, gvwImp);
+            BuildRoleMenu(lstRoleMenu, gvwFin);
+            BuildRoleMenu(lstRoleMenu, gvwLog);
+            BuildRoleMenu(lstRoleMenu, gvwExp);
         }
 
         #endregion

@@ -40,6 +40,11 @@
                                                 <asp:TemplateField HeaderText="Sl#">
                                                     <HeaderStyle CssClass="gridviewheader" />
                                                     <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblSlNo" runat="server"></asp:Label>
+                                                        <asp:HiddenField ID="hdnAccessId" runat="server" />
+                                                        <asp:HiddenField ID="hdnMenuId" runat="server" />
+                                                    </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Pages">
                                                     <HeaderStyle CssClass="gridviewheader" />
@@ -92,6 +97,11 @@
                                                 <asp:TemplateField HeaderText="Sl#">
                                                     <HeaderStyle CssClass="gridviewheader" />
                                                     <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblSlNo" runat="server"></asp:Label>
+                                                        <asp:HiddenField ID="hdnAccessId" runat="server" />
+                                                        <asp:HiddenField ID="hdnMenuId" runat="server" />
+                                                    </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Pages">
                                                     <HeaderStyle CssClass="gridviewheader" />
@@ -144,6 +154,11 @@
                                                 <asp:TemplateField HeaderText="Sl#">
                                                     <HeaderStyle CssClass="gridviewheader" />
                                                     <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblSlNo" runat="server"></asp:Label>
+                                                        <asp:HiddenField ID="hdnAccessId" runat="server" />
+                                                        <asp:HiddenField ID="hdnMenuId" runat="server" />
+                                                    </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Pages">
                                                     <HeaderStyle CssClass="gridviewheader" />
@@ -196,6 +211,11 @@
                                                 <asp:TemplateField HeaderText="Sl#">
                                                     <HeaderStyle CssClass="gridviewheader" />
                                                     <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblSlNo" runat="server"></asp:Label>
+                                                        <asp:HiddenField ID="hdnAccessId" runat="server" />
+                                                        <asp:HiddenField ID="hdnMenuId" runat="server" />
+                                                    </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Pages">
                                                     <HeaderStyle CssClass="gridviewheader" />
@@ -248,6 +268,11 @@
                                                 <asp:TemplateField HeaderText="Sl#">
                                                     <HeaderStyle CssClass="gridviewheader" />
                                                     <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblSlNo" runat="server"></asp:Label>
+                                                        <asp:HiddenField ID="hdnAccessId" runat="server" />
+                                                        <asp:HiddenField ID="hdnMenuId" runat="server" />
+                                                    </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Pages">
                                                     <HeaderStyle CssClass="gridviewheader" />

@@ -44,7 +44,7 @@
                 <tr>
                     <td>Role:<span class="errormessage1">*</span></td>
                     <td>
-                        <asp:DropDownList ID="ddlRole" runat="server" AutoPostBack="false" OnSelectedIndexChanged="ddlRole_SelectedIndexChanged"></asp:DropDownList><br />
+                        <asp:DropDownList ID="ddlRole" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlRole_SelectedIndexChanged"></asp:DropDownList><br />
                         <span id="spnRole" runat="server" class="errormessage" style="display:none;"></span>
                         <%--<asp:RequiredFieldValidator ID="rfvRole" runat="server" CssClass="errormessage" ControlToValidate="ddlRole" InitialValue="0" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
                     </td>

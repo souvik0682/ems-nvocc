@@ -45,16 +45,19 @@ namespace EMS.WebApp.View
 
         protected void ddlRole_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //ddlLoc.Enabled = false;
-            //IRole role = new UserBLL().GetRole(Convert.ToInt32(ddlRole.SelectedValue));
+            ddlLoc.Enabled = false;
+            ddlMultiLoc.Enabled = false;    
 
-            //if (!ReferenceEquals(role, null))
-            //{
-            //    if (role.LocationSpecific.HasValue && role.LocationSpecific.Value)
-            //    {
-            //        ddlLoc.Enabled = true;
-            //    }
-            //}
+            IRole role = new UserBLL().GetRole(Convert.ToInt32(ddlRole.SelectedValue));
+
+            if (!ReferenceEquals(role, null))
+            {
+                if (role.LocationSpecific.HasValue && role.LocationSpecific.Value)
+                {
+                    ddlLoc.Enabled = true;
+                    ddlMultiLoc.Enabled = true;
+                }
+            }
         }
 
         #endregion
@@ -82,7 +85,8 @@ namespace EMS.WebApp.View
 
             if (!IsPostBack)
             {
-                //ddlLoc.Enabled = false;
+                ddlLoc.Enabled = false;
+                ddlMultiLoc.Enabled = false;
                 //rfvUserName.ErrorMessage = ResourceManager.GetStringWithoutName("ERR00036");
                 //rfvFName.ErrorMessage = ResourceManager.GetStringWithoutName("ERR00037");
                 //rfvLName.ErrorMessage = ResourceManager.GetStringWithoutName("ERR00038");
@@ -241,12 +245,28 @@ namespace EMS.WebApp.View
                 isValid = false;
                 spnRole.Style["display"] = "";
             }
-
-            if (user.UserLocation.Id == 0)
+            else
             {
-                isValid = false;
-                spnLoc.Style["display"] = "";
+                if (user.UserRole.LocationSpecific.HasValue && user.UserRole.LocationSpecific.Value)
+                {
+                    if (user.UserLocation.Id == 0)
+                    {
+                        isValid = false;
+                        spnLoc.Style["display"] = "";
+                    }
+                }
             }
+
+            //if (user.UserLocation.Id == 0)
+            //{
+            //    isValid = false;
+            //    spnLoc.Style["display"] = "";
+            //}
+            //else
+            //{
+            //    if(user.UserRole.LocationSpecific.Value)
+            //        user.UserRole.
+            //}
 
             return isValid;
         }
@@ -286,6 +306,18 @@ namespace EMS.WebApp.View
             user.EmailId = txtEmail.Text.Trim().ToUpper();
             user.UserRole.Id = Convert.ToInt32(ddlRole.SelectedValue);
             user.UserLocation.Id = Convert.ToInt32(ddlLoc.SelectedValue);
+
+            IRole role = new UserBLL().GetRole(Convert.ToInt32(ddlRole.SelectedValue));
+
+            user.UserRole.LocationSpecific = false;
+
+            if (!ReferenceEquals(role, null))
+            {
+                if (role.LocationSpecific.HasValue && role.LocationSpecific.Value)
+                {
+                    user.UserRole.LocationSpecific = true;
+                }
+            }
 
             if (ddlMultiLoc.SelectedValue == "1")
                 user.AllowMutipleLocation = true;

@@ -216,16 +216,24 @@ namespace EMS.DAL
             return role;
         }
 
-        public static void SaveRole(IRole role, int modifiedBy)
+        public static int SaveRole(IRole role, int companyID, string xmlDoc, int modifiedBy)
         {
             string strExecution = "[admin].[uspSaveRole]";
+            int result = 0;
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                oDq.AddIntegerParam("@RoleId", role.Id);
+                oDq.AddIntegerParam("@RoleID", role.Id);
+                oDq.AddVarcharParam("@RoleName", 50, role.Name);
+                oDq.AddIntegerParam("@CompanyId", companyID);
+                oDq.AddNVarcharParam("@XMLDoc", xmlDoc);
                 oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
+                oDq.AddIntegerParam("@Result", result, QueryParameterDirection.Output);
                 oDq.RunActionQuery();
+                result = Convert.ToInt32(oDq.GetParaValue("@Result"));
             }
+
+            return result;
         }
 
         public static void DeleteRole(int roleId, int modifiedBy)

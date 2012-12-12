@@ -152,9 +152,23 @@ namespace EMS.BLL
             return UserDAL.GetRole(roleId, false, searchCriteria);
         }
 
-        public void SaveRole(IRole role, int modifiedBy)
+        public string SaveRole(List<RoleMenuEntity> lstRoleMenu, IRole role, int modifiedBy)
         {
-            UserDAL.SaveRole(role, modifiedBy);
+            int result = 0;
+            string errMessage = string.Empty;
+            string xmlDoc = GeneralFunctions.Serialize(lstRoleMenu);
+            result = UserDAL.SaveRole(role, Constants.DEFAULT_COMPANY_ID, xmlDoc, modifiedBy);
+
+            switch (result)
+            {
+                case 1:
+                    errMessage = ResourceManager.GetStringWithoutName("ERR00072");
+                    break;
+                default:
+                    break;
+            }
+
+            return errMessage;
         }
 
         public void DeleteRole(int roleId, int modifiedBy)

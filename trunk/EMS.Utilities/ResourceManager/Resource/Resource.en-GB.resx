@@ -333,4 +333,7 @@
   <data name="ERR00071" xml:space="preserve">
     <value>*Account of cannot be left blank</value>
   </data>
+  <data name="ERR00072" xml:space="preserve">
+    <value>Role name already exists. Please enter another name.</value>
+  </data>
 </root>

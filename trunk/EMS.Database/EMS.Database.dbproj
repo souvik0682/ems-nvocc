@@ -223,5 +223,8 @@
     <Build Include="Scripts\Pre-Deployment\Stored Procedures\admin.uspSaveRole.proc.sql">
       <SubType>Code</SubType>
     </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\admin.uspGetMenuAccessByUser.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
   </ItemGroup>
 </Project>

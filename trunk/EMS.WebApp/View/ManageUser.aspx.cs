@@ -18,7 +18,10 @@ namespace EMS.WebApp.View
         #region Private Member Variables
 
         private int _userId = 0;
-        private bool _hasEditAccess = true;
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
 
         #endregion
 
@@ -26,6 +29,7 @@ namespace EMS.WebApp.View
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            RetriveParameters();
             CheckUserAccess();
             SetAttributes();
 
@@ -144,13 +148,13 @@ namespace EMS.WebApp.View
                 }
                 else
                 {
-                    if (_hasEditAccess)
+                    if (_canDelete)
                     {
                         btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
                     }
                     else
                     {
-                        btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
+                        //btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
                         btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
                     }
                 }
@@ -168,6 +172,12 @@ namespace EMS.WebApp.View
         #endregion
 
         #region Private Methods
+
+        private void RetriveParameters()
+        {
+            _userId = UserBLL.GetLoggedInUserId();
+            UserBLL.GetMenuAccessByUser(_userId, (int)PageName.UserMaster, out _canAdd, out _canEdit, out _canDelete, out _canView);
+        }
 
         private void CheckUserAccess()
         {
@@ -188,6 +198,11 @@ namespace EMS.WebApp.View
             else
             {
                 Response.Redirect("~/Login.aspx");
+            }
+
+            if (!_canView)
+            {
+                Response.Redirect("~/Unauthorized.aspx");
             }
         }
 

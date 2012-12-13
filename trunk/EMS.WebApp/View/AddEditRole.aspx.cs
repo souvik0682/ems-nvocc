@@ -18,6 +18,11 @@ namespace EMS.WebApp.View
 
         private int _userId = 0;
         private int _roleId = 0;
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
+
         private enum MainMenuItem
         {
             Master = 1,
@@ -96,6 +101,15 @@ namespace EMS.WebApp.View
         {
             if (!IsPostBack)
             {
+                if (_roleId == -1) //Add mode
+                {
+                    if (!_canAdd) btnSave.Visible = false;
+                }
+                else
+                {
+                    if (!_canEdit) btnSave.Visible = false;
+                }
+
                 btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('ManageRole.aspx','" + ResourceManager.GetStringWithoutName("ERR00017") + "')";
                 rfvRole.ErrorMessage = ResourceManager.GetStringWithoutName("ERR00052");
             }
@@ -104,6 +118,7 @@ namespace EMS.WebApp.View
         private void RetriveParameters()
         {
             _userId = UserBLL.GetLoggedInUserId();
+            UserBLL.GetMenuAccessByUser(_userId, (int)PageName.RoleMaster, out _canAdd, out _canEdit, out _canDelete, out _canView);
 
             if (!ReferenceEquals(Request.QueryString["id"], null))
             {
@@ -122,14 +137,19 @@ namespace EMS.WebApp.View
                     Response.Redirect("~/Login.aspx");
                 }
 
-                //if (user.UserRole.Id != (int)UserRole.Admin)
-                //{
-                //    Response.Redirect("~/Unauthorized.aspx");
-                //}
+                if (user.UserRole.Id != (int)UserRole.Admin)
+                {
+                    Response.Redirect("~/Unauthorized.aspx");
+                }
             }
             else
             {
                 Response.Redirect("~/Login.aspx");
+            }
+
+            if (!_canView)
+            {
+                Response.Redirect("~/Unauthorized.aspx");
             }
 
             if (_roleId == 0)

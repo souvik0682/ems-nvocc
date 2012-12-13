@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace DSR.WebApp
+namespace EMS.WebApp
 {
     public partial class Unauthorized : System.Web.UI.Page
     {

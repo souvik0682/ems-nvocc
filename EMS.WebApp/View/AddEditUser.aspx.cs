@@ -19,6 +19,10 @@ namespace EMS.WebApp.View
 
         private int _userId = 0;
         private int _uId = 0;
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
 
         #endregion
 
@@ -46,7 +50,7 @@ namespace EMS.WebApp.View
         protected void ddlRole_SelectedIndexChanged(object sender, EventArgs e)
         {
             ddlLoc.Enabled = false;
-            ddlMultiLoc.Enabled = false;    
+            ddlMultiLoc.Enabled = false;
 
             IRole role = new UserBLL().GetRole(Convert.ToInt32(ddlRole.SelectedValue));
 
@@ -72,6 +76,8 @@ namespace EMS.WebApp.View
             {
                 Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["id"].ToString()), out _uId);
             }
+
+            UserBLL.GetMenuAccessByUser(_userId, (int)PageName.UserMaster, out _canAdd, out _canEdit, out _canDelete, out _canView);
         }
 
         private void SetAttributes()
@@ -85,6 +91,15 @@ namespace EMS.WebApp.View
 
             if (!IsPostBack)
             {
+                if (_uId == -1) //Add mode
+                {
+                    if (!_canAdd) btnSave.Visible = false;
+                }
+                else
+                {
+                    if (!_canEdit) btnSave.Visible = false;
+                }
+
                 ddlLoc.Enabled = false;
                 ddlMultiLoc.Enabled = false;
                 //rfvUserName.ErrorMessage = ResourceManager.GetStringWithoutName("ERR00036");
@@ -141,6 +156,11 @@ namespace EMS.WebApp.View
 
             if (_uId == 0)
                 Response.Redirect("~/View/ManageUser.aspx");
+
+            if (!_canView)
+            {
+                Response.Redirect("~/Unauthorized.aspx");
+            }
         }
 
         //private bool IsSalesRole(int roleId)

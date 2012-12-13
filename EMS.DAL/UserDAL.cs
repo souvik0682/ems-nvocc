@@ -284,6 +284,28 @@ namespace EMS.DAL
             return lstMenu;
         }
 
+        public static IRoleMenu GetMenuAccessByUser(int userId, int menuId)
+        {
+            string strExecution = "[admin].[uspGetMenuAccessByUser]";
+            IRoleMenu roleMenu = null;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@UserId", userId);
+                oDq.AddIntegerParam("@MenuId", menuId);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    roleMenu = new RoleMenuEntity(reader);
+                }
+
+                reader.Close();
+            }
+
+            return roleMenu;
+        }
+
         #endregion
     }
 }

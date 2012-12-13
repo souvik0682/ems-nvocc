@@ -186,6 +186,24 @@ namespace EMS.BLL
             return UserDAL.GetMenuByRole(roleId, mainId);
         }
 
+        public static void GetMenuAccessByUser(int userId, int menuId, out bool canAdd, out bool canEdit, out bool canDelete, out bool canView)
+        {
+            canAdd = false;
+            canEdit = false;
+            canDelete = false;
+            canView = false;
+
+            IRoleMenu roleMenuAccess = UserDAL.GetMenuAccessByUser(userId, menuId);
+
+            if (!ReferenceEquals(roleMenuAccess, null))
+            {
+                canAdd = roleMenuAccess.CanAdd;
+                canEdit = roleMenuAccess.CanEdit;
+                canDelete = roleMenuAccess.CanDelete;
+                canView = roleMenuAccess.CanView;
+            }
+        }
+
         #endregion
     }
 }

@@ -51,7 +51,6 @@
                         <asp:ListItem Text="50" Value="50" />
                         <asp:ListItem Text="100" Value="100" />
                     </asp:DropDownList>&nbsp;&nbsp;
-                <asp:Button ID="btnAdd" runat="server" Text="Add New Location" Width="130px" OnClick="btnAdd_Click" />
             </div>
             <div>
                 <span class="errormessage">* Indicates Inactive Location(s)</span>

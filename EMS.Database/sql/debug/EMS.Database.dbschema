@@ -285,6 +285,436 @@ END]]></Value>
 				<Property Name="HeaderContents" Value="/****** Object:  StoredProcedure [admin].[uspChangePassword]    Script Date: 12/02/2012 18:13:27 ******/&#xD;&#xA;&#xD;&#xA;-- =============================================&#xD;&#xA;-- Author&#x9;&#x9;: Amit Kumar Chandra&#xD;&#xA;-- Create date&#x9;: 02-Dec-2012 &#xD;&#xA;-- Description  :&#xD;&#xA;-- =============================================&#xD;&#xA;CREATE PROCEDURE [admin].[uspChangePassword]&#xD;&#xA;(&#xD;&#xA;&#x9;-- Add the parameters for the stored procedure here&#xD;&#xA;&#x9;@UserId&#x9;&#x9;INT,&#xD;&#xA;&#x9;@OldPwd&#x9;&#x9;VARCHAR(50),&#xD;&#xA;&#x9;@NewPwd&#x9;&#x9;VARCHAR(50),&#xD;&#xA;&#x9;@Result&#x9;&#x9;BIT OUT&#xD;&#xA;)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
+		<Element Type="ISql100Procedure" Name="[admin].[uspDeleteUser]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	UPDATE	 dbo.mstUsers
+	SET		 IsDeleted = 1
+	WHERE	 pk_UserID = @UserId
+END]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[admin].[uspDeleteUser].[@UserId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References Name="[admin]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspDeleteUser].[@UserId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspDeleteUser].[@ModifiedBy]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="287" />
+				<Property Name="Length" Value="677" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/****** Object:  StoredProcedure [admin].[uspDeleteUser]    Script Date: 12/06/2012 23:37:38 ******/&#xD;&#xA;&#xD;&#xA;-- =============================================&#xD;&#xA;-- Author&#x9;&#x9;: Amit Kumar Chandra&#xD;&#xA;-- Create date&#x9;: 06-Dec-2012 &#xD;&#xA;-- Description  :&#xD;&#xA;-- =============================================&#xD;&#xA;CREATE PROCEDURE [admin].[uspDeleteUser]&#xD;&#xA;(&#xD;&#xA;&#x9;-- Add the parameters for the stored procedure here&#xD;&#xA;&#x9;@UserId&#x9;&#x9;INT,&#xD;&#xA;&#x9;@ModifiedBy INT&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[admin].[uspGetRole]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT	 pk_RoleID AS 'RoleId'
+			,RoleName
+			,LocationSpecific
+			,RoleStatus
+			,RoleStatus AS 'Active'
+	FROM	dbo.mstRoles
+	WHERE	((ISNULL(@RoleId, 0) = 0) OR (pk_RoleID = @RoleId))
+	--AND		((@IsActiveOnly = 0) OR (Active = @IsActiveOnly))
+	AND		((ISNULL(@SchRole, '') = '') OR (RoleName LIKE '%'+ @SchRole + '%'))
+	ORDER BY RoleName
+END]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[admin].[uspGetRole].[@RoleId]" />
+				</Entry>
+				<Entry>
+					<References Name="[admin].[uspGetRole].[@SchRole]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References Name="[admin]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspGetRole].[@RoleId]">
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA[NULL]]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspGetRole].[@IsActiveOnly]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspGetRole].[@SchRole]">
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA[NULL]]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspGetRole].[@SortExpression]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="20" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspGetRole].[@SortDirection]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="4" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="316" />
+				<Property Name="Length" Value="1079" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/****** Object:  StoredProcedure [admin].[uspGetRole]    Script Date: 12/06/2012 23:38:41 ******/&#xD;&#xA;&#xD;&#xA;--exec [common].[uspGetRole]&#xD;&#xA;&#xD;&#xA;-- =============================================&#xD;&#xA;-- Author&#x9;&#x9;: Amit Kumar Chandra&#xD;&#xA;-- Create date&#x9;: 06-Dec-2012 &#xD;&#xA;-- Description  :&#xD;&#xA;-- =============================================&#xD;&#xA;CREATE PROCEDURE [admin].[uspGetRole]&#xD;&#xA;(&#xD;&#xA;&#x9;-- Add the parameters for the stored procedure here&#xD;&#xA;&#x9;@RoleId&#x9;&#x9;&#x9;INT = NULL,&#xD;&#xA;&#x9;@IsActiveOnly&#x9;BIT,&#xD;&#xA;&#x9;@SchRole&#x9;&#x9;VARCHAR(50) = NULL,&#xD;&#xA;&#x9;@SortExpression VARCHAR(20),&#xD;&#xA;&#x9;@SortDirection  VARCHAR(4)&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[admin].[uspGetUser]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	DECLARE @Sort VARCHAR(4)
+	
+	SELECT @Sort = CASE @SortDirection
+						WHEN '' THEN 'ASC'
+						ELSE @SortDirection
+					END
+					
+	SELECT	 us.pk_UserID AS 'UserId'
+			,us.UserName
+			,us.FirstName
+			,us.LastName
+			,us.fk_RoleID AS 'RoleId'
+			,ro.RoleName
+			,us.fk_LocID AS 'LocId'
+			,lo.LocName
+			,us.emailID
+			,us.UserActive
+			,us.AllowMutipleLocation
+	FROM	dbo.mstUsers us
+			INNER JOIN dbo.mstRoles ro
+				ON us.fk_RoleID = ro.pk_RoleID
+			INNER JOIN [DSR].[dbo].[mstLocation] lo
+				ON us.fk_LocID = lo.pk_LocID
+	WHERE	((ISNULL(@UserId, 0) = 0) OR (us.pk_UserID = @UserId))
+	--AND		us.Active = 'Y'
+	AND		((@IsActiveOnly = 0) OR (us.UserActive = @IsActiveOnly))
+	AND		((ISNULL(@SchUserName, '') = '') OR (us.UserName LIKE '%'+ @SchUserName + '%'))
+	AND		((ISNULL(@SchFirstName, '') = '') OR (us.FirstName LIKE '%'+ @SchFirstName + '%'))
+	AND		us.IsDeleted = 0
+	ORDER BY 
+			CASE @SortDirection
+				WHEN 'ASC' THEN
+					CASE @SortExpression
+						WHEN 'UserName' THEN UserName
+						WHEN 'RoleName' THEN FirstName
+						WHEN 'FirstName' THEN FirstName
+						WHEN 'LastName' THEN LastName
+						WHEN 'LocName' THEN FirstName
+						ELSE '1'
+					END 
+			END ASC,
+			CASE @SortDirection
+				WHEN 'DESC' THEN
+					CASE @SortExpression
+						WHEN 'UserName' THEN UserName
+						WHEN 'RoleName' THEN FirstName
+						WHEN 'FirstName' THEN FirstName
+						WHEN 'LastName' THEN LastName
+						WHEN 'LocName' THEN FirstName
+						ELSE '1'
+					END 
+			END DESC	
+END]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry>
+					<References Name="[admin].[uspGetUser].[@SortDirection]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[admin].[uspGetUser].[@UserId]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[admin].[uspGetUser].[@IsActiveOnly]" />
+				</Entry>
+				<Entry>
+					<References Name="[admin].[uspGetUser].[@SchUserName]" />
+				</Entry>
+				<Entry>
+					<References Name="[admin].[uspGetUser].[@SchFirstName]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[admin].[uspGetUser].[@SortExpression]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry />
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References Name="[admin]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspGetUser].[@UserId]">
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA[NULL]]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspGetUser].[@IsActiveOnly]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspGetUser].[@SchUserName]">
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA[NULL]]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="10" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspGetUser].[@SchFirstName]">
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA[NULL]]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="30" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspGetUser].[@SortExpression]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="20" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspGetUser].[@SortDirection]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="4" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="282" />
+				<Property Name="Length" Value="2251" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/****** Object:  StoredProcedure [admin].[uspGetUser]    Script Date: 12/06/2012 23:39:30 ******/&#xD;&#xA;&#xD;&#xA;-- =============================================&#xD;&#xA;-- Author&#x9;&#x9;: Amit Kumar Chandra&#xD;&#xA;-- Create date&#x9;: 06-Dec-2012&#xD;&#xA;-- Description&#x9;:&#xD;&#xA;-- =============================================&#xD;&#xA;CREATE PROCEDURE [admin].[uspGetUser]&#xD;&#xA;(&#xD;&#xA;&#x9;-- Add the parameters for the stored procedure here&#xD;&#xA;&#x9;@UserId&#x9;&#x9;&#x9;INT = NULL,&#xD;&#xA;&#x9;@IsActiveOnly&#x9;BIT,&#xD;&#xA;&#x9;@SchUserName&#x9;VARCHAR(10) = NULL,&#xD;&#xA;&#x9;@SchFirstName&#x9;VARCHAR(30) = NULL,&#xD;&#xA;&#x9;@SortExpression VARCHAR(20),&#xD;&#xA;&#x9;@SortDirection  VARCHAR(4)&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
 		<Element Type="ISql100Procedure" Name="[admin].[uspResetPassword]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
@@ -474,6 +904,348 @@ END]]></Value>
 				<Property Name="HeaderContents" Value="/****** Object:  StoredProcedure [admin].[uspSaveError]    Script Date: 12/02/2012 18:15:36 ******/&#xD;&#xA;&#xD;&#xA;-- =============================================&#xD;&#xA;-- Author&#x9;&#x9;: Amit Kumar Chandra&#xD;&#xA;-- Create date&#x9;: 02-Dec-2012&#xD;&#xA;-- Description&#x9;:&#x9;&#xD;&#xA;-- =============================================&#xD;&#xA;CREATE PROCEDURE [admin].[uspSaveError]&#xD;&#xA;(&#xD;&#xA;&#x9;-- Add the parameters for the stored procedure here&#xD;&#xA;&#x9;@UserId&#x9;&#x9;&#x9;INT,&#xD;&#xA;&#x9;@ErrorMessage&#x9;VARCHAR(255),&#x9;&#xD;&#xA;&#x9;@StackTrace&#x9;&#x9;VARCHAR(MAX)&#xD;&#xA;)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
+		<Element Type="ISql100Procedure" Name="[admin].[uspSaveUser]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+   
+	IF EXISTS(SELECT 1 FROM dbo.mstUsers WHERE pk_UserID <> @UserId AND UserName = @UserName)
+	BEGIN
+		SET @Result = 1
+	END
+	ELSE
+	BEGIN
+		SET @Result = 0	
+	END
+	
+	IF @Result = 0
+	BEGIN
+		IF(@UserId>0)
+			BEGIN
+				UPDATE	 dbo.mstUsers
+				SET		 UserName = @UserName
+						,FirstName = @FirstName
+						,LastName = @LastName
+						,fk_RoleID = @RoleId
+						,fk_LocID = @LocId
+						,emailID = @EmailId
+						,UserActive = @IsActive
+						,AllowMutipleLocation = @AllowMutipleLocation
+						,fk_companyid = @CompanyId
+				WHERE	 pk_UserID = @UserId
+			END
+		ELSE
+			BEGIN
+				INSERT INTO dbo.mstUsers
+				(
+					 UserName
+					,[Password]
+					,FirstName
+					,LastName
+					,fk_RoleID
+					,fk_LocID
+					,emailID
+					,UserActive
+					,AllowMutipleLocation
+					,fk_companyid
+				)
+				VALUES
+				(
+					 @UserName
+					,@Pwd
+					,@FirstName
+					,@LastName
+					,@RoleId
+					,@LocId
+					,@EmailId
+					,1
+					,@AllowMutipleLocation
+					,@CompanyId
+				)
+			END
+	END
+END]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[admin].[uspSaveUser].[@UserId]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[admin].[uspSaveUser].[@UserName]" />
+				</Entry>
+				<Entry>
+					<References Name="[admin].[uspSaveUser].[@Result]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[admin].[uspSaveUser].[@FirstName]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[admin].[uspSaveUser].[@LastName]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[admin].[uspSaveUser].[@RoleId]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[admin].[uspSaveUser].[@LocId]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[admin].[uspSaveUser].[@EmailId]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[admin].[uspSaveUser].[@IsActive]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[admin].[uspSaveUser].[@AllowMutipleLocation]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[admin].[uspSaveUser].[@CompanyId]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[admin].[uspSaveUser].[@Pwd]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References Name="[admin]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspSaveUser].[@UserId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspSaveUser].[@UserName]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="10" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspSaveUser].[@Pwd]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspSaveUser].[@FirstName]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="30" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspSaveUser].[@LastName]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="30" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspSaveUser].[@RoleId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspSaveUser].[@LocId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspSaveUser].[@EmailId]">
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA[NULL]]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspSaveUser].[@IsActive]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspSaveUser].[@AllowMutipleLocation]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspSaveUser].[@CompanyId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspSaveUser].[@ModifiedBy]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[admin].[uspSaveUser].[@Result]">
+						<Property Name="IsOutput" Value="True" />
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA[NULL]]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="285" />
+				<Property Name="Length" Value="1916" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/****** Object:  StoredProcedure [admin].[uspSaveUser]    Script Date: 12/06/2012 23:42:30 ******/&#xD;&#xA;&#xD;&#xA;-- =============================================&#xD;&#xA;-- Author&#x9;&#x9;: Amit Kumar Chandra&#xD;&#xA;-- Create date&#x9;: 06-Dec-2012 &#xD;&#xA;-- Description  :&#xD;&#xA;-- =============================================&#xD;&#xA;CREATE PROCEDURE [admin].[uspSaveUser]&#xD;&#xA;(&#xD;&#xA;&#x9;-- Add the parameters for the stored procedure here&#xD;&#xA;&#x9;@UserId&#x9;&#x9;&#x9;&#x9;&#x9;INT,&#xD;&#xA;&#x9;@UserName&#x9;&#x9;&#x9;&#x9;VARCHAR(10),&#xD;&#xA;&#x9;@Pwd&#x9;&#x9;&#x9;&#x9;&#x9;VARCHAR(50),&#xD;&#xA;&#x9;@FirstName&#x9;&#x9;&#x9;&#x9;VARCHAR(30),&#xD;&#xA;&#x9;@LastName&#x9;&#x9;&#x9;&#x9;VARCHAR(30),&#xD;&#xA;&#x9;@RoleId&#x9;&#x9;&#x9;&#x9;&#x9;INT,&#xD;&#xA;&#x9;@LocId&#x9;&#x9;&#x9;&#x9;&#x9;INT,&#xD;&#xA;&#x9;@EmailId&#x9;&#x9;&#x9;&#x9;VARCHAR(50) = NULL,&#xD;&#xA;&#x9;@IsActive&#x9;&#x9;&#x9;&#x9;BIT,&#xD;&#xA;&#x9;@AllowMutipleLocation&#x9;BIT,&#xD;&#xA;&#x9;@CompanyId&#x9;&#x9;&#x9;&#x9;INT,&#xD;&#xA;&#x9;@ModifiedBy&#x9;&#x9;&#x9;&#x9;INT,&#xD;&#xA;&#x9;@Result&#x9;&#x9;&#x9;&#x9;&#x9;INT = NULL OUT&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
 		<Element Type="ISql100Procedure" Name="[admin].[uspValidateUser]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
@@ -493,17 +1265,18 @@ BEGIN
 				ur.FirstName,
 				ur.LastName,
 				ur.emailID,
-				ur.AllowMultipleLoc,
+				ur.AllowMutipleLocation,
 				ur.fk_RoleID AS 'RoleId',
 				ur.fk_LocID AS 'LocId'
 		FROM	dbo.mstUsers ur
-				INNER JOIN DSR.dbo.mstRoles ro
+				INNER JOIN dbo.mstRoles ro
 					ON ur.fk_RoleID = ro.pk_RoleID
-				INNER JOIN 	DSR.dbo.mstLocation lo
+				INNER JOIN 	[DSR].[dbo].[mstLocation] lo
 					ON ur.fk_LocID = lo.pk_LocID
 		WHERE	ur.[UserName] = @UserName 
 		AND		ur.[Password] = @Password 
 		AND 	ur.[UserActive] = 1
+		AND		ur.[IsDeleted] = 0
 END]]></Value>
 			</Property>
 			<Relationship Name="BodyDependencies">
@@ -532,6 +1305,7 @@ END]]></Value>
 				<Entry>
 					<References Name="[admin].[uspValidateUser].[@Password]" />
 				</Entry>
+				<Entry />
 				<Entry />
 			</Relationship>
 			<Relationship Name="Owner">
@@ -574,11 +1348,744 @@ END]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="287" />
-				<Property Name="Length" Value="1145" />
+				<Property Name="CreateOffset" Value="289" />
+				<Property Name="Length" Value="1180" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="/****** Object:  StoredProcedure [admin].[uspValidateUser]    Script Date: 12/02/2012 18:16:09 ******/&#xD;&#xA;-- =============================================&#xD;&#xA;-- Author&#x9;&#x9;: Amit Kumar Chandra&#xD;&#xA;-- Create date  : 02-Dec-2012&#xD;&#xA;-- Description&#x9;: &#xD;&#xA;-- =============================================&#xD;&#xA;CREATE PROCEDURE [admin].[uspValidateUser]&#xD;&#xA;&#x9;-- Add the parameters for the stored procedure here&#xD;&#xA;(&#xD;&#xA;&#x9;@UserName NVARCHAR(100),&#xD;&#xA;&#x9;@Password NVARCHAR(100)&#xD;&#xA;)&#xD;&#xA;AS" />
+				<Property Name="HeaderContents" Value="/****** Object:  StoredProcedure [admin].[uspValidateUser]    Script Date: 12/06/2012 23:34:09 ******/&#xD;&#xA;&#xD;&#xA;-- =============================================&#xD;&#xA;-- Author&#x9;&#x9;: Amit Kumar Chandra&#xD;&#xA;-- Create date  : 02-Dec-2012&#xD;&#xA;-- Description&#x9;: &#xD;&#xA;-- =============================================&#xD;&#xA;CREATE PROCEDURE [admin].[uspValidateUser]&#xD;&#xA;&#x9;-- Add the parameters for the stored procedure here&#xD;&#xA;(&#xD;&#xA;&#x9;@UserName NVARCHAR(100),&#xD;&#xA;&#x9;@Password NVARCHAR(100)&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql90Schema" Name="[chg]">
+			<Relationship Name="Authorizer">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[chg].[uspGetExchangeRate]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT	 fk_ExchRateID AS 'ExchRateID'
+			,fk_CompanyID AS 'CompanyID'
+			,ExchDate
+			,USDXchRate
+			,FreeDays
+	FROM	dbo.mstExchangeRate
+	WHERE	((ISNULL(fk_ExchRateID, 0) = 0) OR (fk_ExchRateID = @ExchangeRateID))
+	AND		((ISNULL(@SchExchangeDate, '') = '') OR (ExchDate =  + @SchExchangeDate))
+	ORDER BY fk_ExchRateID DESC
+END]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[chg].[uspGetExchangeRate].[@ExchangeRateID]" />
+				</Entry>
+				<Entry>
+					<References Name="[chg].[uspGetExchangeRate].[@SchExchangeDate]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References Name="[chg]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[chg].[uspGetExchangeRate].[@ExchangeRateID]">
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA[NULL]]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[chg].[uspGetExchangeRate].[@SchExchangeDate]">
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA[NULL]]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[date]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[chg].[uspGetExchangeRate].[@SortExpression]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="20" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[chg].[uspGetExchangeRate].[@SortDirection]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="4" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="290" />
+				<Property Name="Length" Value="1031" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/****** Object:  StoredProcedure [chg].[uspGetExchangeRate]    Script Date: 12/08/2012 23:05:26 ******/&#xD;&#xA;&#xD;&#xA;-- =============================================&#xD;&#xA;-- Author&#x9;&#x9;: Amit Kumar Chandra&#xD;&#xA;-- Create date&#x9;: 08-Dec-2012 &#xD;&#xA;-- Description  :&#xD;&#xA;-- =============================================&#xD;&#xA;CREATE PROCEDURE [chg].[uspGetExchangeRate]&#xD;&#xA;(&#xD;&#xA;&#x9;-- Add the parameters for the stored procedure here&#xD;&#xA;&#x9;@ExchangeRateID&#x9;&#x9;INT = NULL,&#xD;&#xA;&#x9;@SchExchangeDate&#x9;DATE = NULL,&#xD;&#xA;&#x9;@SortExpression VARCHAR(20),&#xD;&#xA;&#x9;@SortDirection  VARCHAR(4)&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql90Schema" Name="[common]">
+			<Relationship Name="Authorizer">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[common].[uspDeleteLocation]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	UPDATE	[DSR].[dbo].[mstLocation]
+	SET		 IsDeleted = 1
+			,fk_UserLastEdited = @ModifiedBy
+			,EditedOn = GETUTCDATE()
+	WHERE	pk_LocID = @LocId
+END]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspDeleteLocation].[@ModifiedBy]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspDeleteLocation].[@LocId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References Name="[common]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspDeleteLocation].[@LocId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspDeleteLocation].[@ModifiedBy]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="290" />
+				<Property Name="Length" Value="759" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/****** Object:  StoredProcedure [common].[uspDeleteLocation]    Script Date: 12/06/2012 23:41:00 ******/&#xD;&#xA;-- =============================================&#xD;&#xA;-- Author&#x9;&#x9;: Amit Kumar Chandra&#xD;&#xA;-- Create date&#x9;: 03-Dec-2012 &#xD;&#xA;-- Description  :&#xD;&#xA;-- =============================================&#xD;&#xA;CREATE PROCEDURE [common].[uspDeleteLocation]&#xD;&#xA;(&#xD;&#xA;&#x9;-- Add the parameters for the stored procedure here&#xD;&#xA;&#x9;@LocId&#x9;&#x9;INT,&#xD;&#xA;&#x9;@ModifiedBy INT&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[common].[uspGetLocation]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	DECLARE @Sort VARCHAR(4)
+	
+	SELECT @Sort = CASE @SortDirection
+						WHEN '' THEN 'ASC'
+						ELSE @SortDirection
+					END
+					
+	SELECT	 loc.pk_LocID AS 'Id'
+			,loc.LocName AS 'Name'
+			,loc.LocAddress AS 'Address'
+			,loc.LocCity AS 'City'
+			,loc.LocPin AS 'Pin'
+			,loc.LocAbbr
+			,loc.LocPhone
+			,loc.PGRFreeDays
+			,loc.CANFooter
+			,loc.CartingFooter
+			,loc.SlotFooter
+			,loc.PickUpFooter
+			,loc.CustomHouseCode
+			,loc.GatewayPort
+			,loc.ICEGateLoginD
+			,loc.PCSLoginID
+			,loc.ISO20
+			,loc.ISO40
+			,loc.Active
+	FROM	[DSR].[dbo].[mstLocation] loc
+	WHERE	((ISNULL(@LocId, 0) = 0) OR (loc.pk_LocID = @LocId))
+	AND		((ISNULL(@SchAbbr, '') = '') OR (loc.LocAbbr LIKE '%'+ @SchAbbr + '%'))
+	AND		((ISNULL(@SchLocName, '') = '') OR (loc.LocName LIKE '%'+ @SchLocName + '%'))
+	AND		((@IsActiveOnly = 'N') OR (loc.Active = @IsActiveOnly))
+	AND		loc.IsDeleted = 0
+	ORDER BY 
+			CASE @SortDirection
+				WHEN 'ASC' THEN
+					CASE @SortExpression
+						WHEN 'Abbr' THEN loc.LocAbbr
+						WHEN 'Location' THEN loc.LocName
+						ELSE '1'
+					END 
+			END ASC,
+			CASE @SortDirection
+				WHEN 'DESC' THEN
+					CASE @SortExpression
+						WHEN 'Abbr' THEN loc.LocAbbr
+						WHEN 'Location' THEN loc.LocName
+						ELSE '1'
+					END 
+			END DESC
+END]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry>
+					<References Name="[common].[uspGetLocation].[@SortDirection]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspGetLocation].[@LocId]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspGetLocation].[@SchAbbr]" />
+				</Entry>
+				<Entry>
+					<References Name="[common].[uspGetLocation].[@SchLocName]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspGetLocation].[@IsActiveOnly]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspGetLocation].[@SortExpression]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References Name="[common]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspGetLocation].[@LocId]">
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA[NULL]]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspGetLocation].[@IsActiveOnly]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="1" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[char]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspGetLocation].[@SchAbbr]">
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA[NULL]]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="3" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspGetLocation].[@SchLocName]">
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA[NULL]]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspGetLocation].[@SortExpression]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspGetLocation].[@SortDirection]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="4" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="289" />
+				<Property Name="Length" Value="2047" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/****** Object:  StoredProcedure [common].[uspGetLocation]    Script Date: 12/06/2012 23:36:34 ******/&#xD;&#xA;&#xD;&#xA;-- =============================================&#xD;&#xA;-- Author&#x9;&#x9;: Amit Kumar Chandra&#xD;&#xA;-- Create date&#x9;: 03-Dec-2012 &#xD;&#xA;-- Description  :&#xD;&#xA;-- =============================================&#xD;&#xA;CREATE PROCEDURE [common].[uspGetLocation]&#xD;&#xA;(&#xD;&#xA;&#x9;-- Add the parameters for the stored procedure here&#xD;&#xA;&#x9;@LocId&#x9;&#x9;&#x9;&#x9;INT = NULL,&#xD;&#xA;&#x9;@IsActiveOnly&#x9;&#x9;CHAR(1),&#xD;&#xA;&#x9;@SchAbbr&#x9;&#x9;&#x9;VARCHAR(3) = NULL,&#xD;&#xA;&#x9;@SchLocName&#x9;&#x9;&#x9;VARCHAR(50) = NULL,&#xD;&#xA;&#x9;@SortExpression&#x9;&#x9;VARCHAR(50),&#xD;&#xA;&#x9;@SortDirection&#x9;&#x9;VARCHAR(4)&#x9;&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[common].[uspSaveLocation]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+   
+	UPDATE	[DSR].[dbo].[mstLocation]
+	SET		 PGRFreeDays = @PGRFreeDays
+			,CanFooter = @CanFooter
+			,SlotFooter = @SlotFooter
+			,CartingFooter = @CartingFooter
+			,PickUpFooter = @PickUpFooter
+			,CustomHouseCode = @CustomHouseCode
+			,GatewayPort = @GatewayPort
+			,ICEGateLoginD = @ICEGateLoginD
+			,PCSLoginID = @PCSLoginID
+			,ISO20 = @ISO20
+			,ISO40 = @ISO40
+			--,fk_UserLastEdited = @ModifiedBy
+			,EditedOn = GETUTCDATE()
+	WHERE	pk_LocID = @LocId
+END]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspSaveLocation].[@PGRFreeDays]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspSaveLocation].[@CanFooter]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspSaveLocation].[@SlotFooter]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspSaveLocation].[@CartingFooter]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspSaveLocation].[@PickUpFooter]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspSaveLocation].[@CustomHouseCode]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspSaveLocation].[@GatewayPort]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspSaveLocation].[@ICEGateLoginD]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspSaveLocation].[@PCSLoginID]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspSaveLocation].[@ISO20]" />
+				</Entry>
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspSaveLocation].[@ISO40]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[common].[uspSaveLocation].[@LocId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References Name="[common]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspSaveLocation].[@LocId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspSaveLocation].[@PGRFreeDays]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspSaveLocation].[@CanFooter]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="300" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspSaveLocation].[@SlotFooter]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="300" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspSaveLocation].[@CartingFooter]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="300" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspSaveLocation].[@PickUpFooter]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="300" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspSaveLocation].[@CustomHouseCode]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="6" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[char]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspSaveLocation].[@GatewayPort]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="6" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[char]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspSaveLocation].[@ICEGateLoginD]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="20" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspSaveLocation].[@PCSLoginID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="8" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspSaveLocation].[@ISO20]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="4" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[char]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspSaveLocation].[@ISO40]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="4" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[char]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[common].[uspSaveLocation].[@ModifiedBy]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="290" />
+				<Property Name="Length" Value="1384" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/****** Object:  StoredProcedure [common].[uspSaveLocation]    Script Date: 12/05/2012 22:10:02 ******/&#xD;&#xA;&#xD;&#xA;-- =============================================&#xD;&#xA;-- Author&#x9;&#x9;: Amit Kumar Chandra&#xD;&#xA;-- Create date&#x9;: 03-Dec-2012 &#xD;&#xA;-- Description  :&#xD;&#xA;-- =============================================&#xD;&#xA;CREATE PROCEDURE [common].[uspSaveLocation]&#xD;&#xA;(&#xD;&#xA;&#x9;-- Add the parameters for the stored procedure here&#xD;&#xA;&#x9;@LocId&#x9;&#x9;&#x9;&#x9;INT,&#xD;&#xA;&#x9;@PGRFreeDays&#x9;&#x9;INT,&#xD;&#xA;&#x9;@CanFooter&#x9;&#x9;&#x9;VARCHAR(300),&#xD;&#xA;&#x9;@SlotFooter&#x9;&#x9;&#x9;VARCHAR(300),&#xD;&#xA;&#x9;@CartingFooter&#x9;&#x9;VARCHAR(300),&#xD;&#xA;&#x9;@PickUpFooter&#x9;&#x9;VARCHAR(300),&#xD;&#xA;&#x9;@CustomHouseCode&#x9;CHAR(6),&#xD;&#xA;&#x9;@GatewayPort&#x9;&#x9;CHAR(6),&#xD;&#xA;&#x9;@ICEGateLoginD&#x9;&#x9;VARCHAR(20),&#xD;&#xA;&#x9;@PCSLoginID&#x9;&#x9;&#x9;VARCHAR(8),&#xD;&#xA;&#x9;@ISO20&#x9;&#x9;&#x9;&#x9;CHAR(4),&#xD;&#xA;&#x9;@ISO40&#x9;&#x9;&#x9;&#x9;CHAR(4),&#xD;&#xA;&#x9;@ModifiedBy&#x9;&#x9;&#x9;INT&#xD;&#xA;)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 	</Model>

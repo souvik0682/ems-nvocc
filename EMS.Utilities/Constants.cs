@@ -30,11 +30,10 @@ namespace EMS.Utilities
 
     public enum PageName
     {
-        UserMaster = 1,
-        LocationMaster = 2,
-        AreaMaster = 3,
-        GroupMaster = 4,
-        CustomerMaster = 5,
+        UserMaster = 28,
+        RoleMaster = 113,
+        LocationMaster = 29,
+        CustomerMaster = 30,
         AssignCustomer = 6,
         DailySalesCall = 7
     };

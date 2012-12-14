@@ -14,7 +14,7 @@ namespace EMS.Utilities
             TerminalCode = 3,
             Port = 4,
             ContainerSize = 5,
-
+            Line = 6
         }
 
 
@@ -29,6 +29,12 @@ namespace EMS.Utilities
             Port_Ground = 4,
             Slab = 5
 
+        }
+
+        public enum Currency
+        {
+            DOLLER = 1,
+            INR = 2
         }
     }
 }

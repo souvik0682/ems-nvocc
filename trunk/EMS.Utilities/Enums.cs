@@ -33,7 +33,7 @@ namespace EMS.Utilities
 
         public enum Currency
         {
-            DOLLER = 1,
+            DOLLAR = 1,
             INR = 2
         }
     }

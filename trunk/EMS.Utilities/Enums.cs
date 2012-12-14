@@ -13,7 +13,18 @@ namespace EMS.Utilities
             Location = 2,
             TerminalCode = 3,
             Port = 4,
-            ContainerSize = 5
+            ContainerSize = 5,
+
+        }
+
+        public enum ChargeType
+        {
+            Per_Unit = 1,
+            Per_Document = 2,
+            Detention = 3,
+            Port_Ground = 4,
+            Slab = 5
+
         }
     }
 }

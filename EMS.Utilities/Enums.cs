@@ -17,6 +17,10 @@ namespace EMS.Utilities
 
         }
 
+
+        /// <summary>
+        /// Use "_" as a seperator for item having more than one word
+        /// </summary>
         public enum ChargeType
         {
             Per_Unit = 1,

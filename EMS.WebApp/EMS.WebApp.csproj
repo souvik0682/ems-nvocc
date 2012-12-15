@@ -270,8 +270,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Equipment\" />
+    <Folder Include="Export\" />
+    <Folder Include="Finance\" />
+    <Folder Include="Import\" />
+    <Folder Include="Master\" />
     <Folder Include="RDLC\" />
     <Folder Include="Reports\" />
+    <Folder Include="Transaction\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Blank.Master" />

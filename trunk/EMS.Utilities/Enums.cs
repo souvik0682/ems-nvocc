@@ -30,11 +30,25 @@ namespace EMS.Utilities
             Slab = 5
 
         }
-
         public enum Currency
         {
             DOLLAR = 1,
             INR = 2
         }
+
+        public enum ImportExportGeneral
+        {
+            Import = 1,
+            Export = 2,
+            General = 3
+        }
+
+        public enum WashingType
+        {
+            General=1,
+            Heavy=2,
+            Chemical=3
+        }
+        
     }
 }

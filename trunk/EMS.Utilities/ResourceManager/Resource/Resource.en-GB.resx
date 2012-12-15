@@ -336,4 +336,7 @@
   <data name="ERR00072" xml:space="preserve">
     <value>Role name already exists. Please enter another name.</value>
   </data>
+  <data name="ERR00073" xml:space="preserve">
+    <value>Data already exists for this day. </value>
+  </data>
 </root>

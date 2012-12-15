@@ -68,10 +68,24 @@ namespace EMS.BLL
             return ChargeDAL.GetExchangeRate(exchangeRateID, searchCriteria);
         }
 
-        public void SaveExchangeRate(IExchangeRate exchangeRate, int modifiedBy)
+        public string SaveExchangeRate(IExchangeRate exchangeRate, int modifiedBy)
         {
             exchangeRate.CompanyID = Constants.DEFAULT_COMPANY_ID;
-            ChargeDAL.SaveExchangeRate(exchangeRate, modifiedBy);
+
+            int result = 0;
+            string errMessage = string.Empty;
+            result = ChargeDAL.SaveExchangeRate(exchangeRate, modifiedBy);
+
+            switch (result)
+            {
+                case 1:
+                    errMessage = ResourceManager.GetStringWithoutName("ERR00073");
+                    break;
+                default:
+                    break;
+            }
+
+            return errMessage;
         }
 
         public void DeleteExchangeRate(int exchangeRateID, int modifiedBy)

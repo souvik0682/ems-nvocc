@@ -31,11 +31,20 @@ namespace EMS.Utilities
     public enum PageName
     {
         UserMaster = 28,
-        RoleMaster = 113,
         LocationMaster = 29,
         CustomerMaster = 30,
-        AssignCustomer = 6,
-        DailySalesCall = 7
+        LineMSOMaster = 31,
+        AddressMaster = 32,
+        ServiceTaxMaster = 33,
+        ChargeMaster = 34,
+        ContainerTypeMaster = 35,
+        ExchangeRateMaster = 36,
+        TerminalMaster = 37,
+        CountryMaster = 38,
+        PortMaster = 39,
+        ImportHaulageChargeMaster = 40,
+        VesselMaster = 41,
+        RoleMaster = 113
     };
 
     public enum UserRole

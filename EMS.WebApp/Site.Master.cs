@@ -53,6 +53,8 @@ namespace EMS.WebApp
         protected void Page_Load(object sender, EventArgs e)
         {
             Page.Header.DataBind();
+            this.Page.ClientScript.RegisterClientScriptInclude(this.GetType(), "Common", this.ResolveClientUrl("~/Scripts/Common.js"));
+            this.Page.ClientScript.RegisterClientScriptInclude(this.GetType(), "CustomTextBox", this.ResolveClientUrl("~/Scripts/CustomTextBox.js"));
         }
 
         protected void lnkLogout_Click(object sender, EventArgs e)

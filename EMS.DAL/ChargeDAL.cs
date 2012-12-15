@@ -150,9 +150,10 @@ namespace EMS.DAL
             return chg;
         }
 
-        public static void SaveExchangeRate(IExchangeRate chg, int modifiedBy)
+        public static int SaveExchangeRate(IExchangeRate chg, int modifiedBy)
         {
-            string strExecution = "[chg].[uspExchangeRate]";
+            string strExecution = "[chg].[uspSaveExchangeRate]";
+            int result = 0;
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
@@ -162,8 +163,12 @@ namespace EMS.DAL
                 oDq.AddDecimalParam("@USDExchangeRate", 10, 2, chg.USDExchangeRate);
                 oDq.AddIntegerParam("@FreeDays", chg.FreeDays);
                 oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
+                oDq.AddIntegerParam("@Result", result, QueryParameterDirection.Output);
                 oDq.RunActionQuery();
+                result = Convert.ToInt32(oDq.GetParaValue("@Result"));
             }
+
+            return result;
         }
 
         public static void DeleteExchangeRate(int exchangeRateID, int modifiedBy)
@@ -173,7 +178,6 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@ExchangeRateID", exchangeRateID);
-                oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
                 oDq.RunActionQuery();
             }
         }

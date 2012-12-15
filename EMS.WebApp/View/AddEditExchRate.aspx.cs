@@ -20,6 +20,10 @@ namespace EMS.WebApp.View
 
         private int _userId = 0;
         private int _exchRateId = 0;
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
         private IFormatProvider _culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"].ToString());
 
         #endregion
@@ -51,7 +55,16 @@ namespace EMS.WebApp.View
         {
             if (!IsPostBack)
             {
-                btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('ManageLocation.aspx','" + ResourceManager.GetStringWithoutName("ERR00017") + "')";
+                if (_exchRateId == -1) //Add mode
+                {
+                    if (!_canAdd) btnSave.Visible = false;
+                }
+                else
+                {
+                    if (!_canEdit) btnSave.Visible = false;
+                }
+
+                btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('ManageExchRate.aspx','" + ResourceManager.GetStringWithoutName("ERR00017") + "')";
                 rfvDate.ErrorMessage = ResourceManager.GetStringWithoutName("ERR00065");
                 rfvRate.ErrorMessage = ResourceManager.GetStringWithoutName("ERR00066");
                 rfvFreeDays.ErrorMessage = ResourceManager.GetStringWithoutName("ERR00067");
@@ -61,6 +74,7 @@ namespace EMS.WebApp.View
         private void RetriveParameters()
         {
             _userId = UserBLL.GetLoggedInUserId();
+            UserBLL.GetMenuAccessByUser(_userId, (int)PageName.ExchangeRateMaster, out _canAdd, out _canEdit, out _canDelete, out _canView);
 
             if (!ReferenceEquals(Request.QueryString["id"], null))
             {
@@ -89,6 +103,11 @@ namespace EMS.WebApp.View
                 Response.Redirect("~/Login.aspx");
             }
 
+            if (!_canView)
+            {
+                Response.Redirect("~/Unauthorized.aspx");
+            }
+
             if (_exchRateId == 0)
                 Response.Redirect("~/View/ManageExchRate.aspx");
         }
@@ -111,8 +130,12 @@ namespace EMS.WebApp.View
             IExchangeRate exchRate = new ExchangeRateEntity();
             string message = string.Empty;
             BuildExchangeRateEntity(exchRate);
-            chargeBll.SaveExchangeRate(exchRate, _userId);
-            Response.Redirect("~/View/ManageExchRate.aspx");
+            message = chargeBll.SaveExchangeRate(exchRate, _userId);
+
+            if (message == string.Empty)
+                Response.Redirect("~/View/ManageExchRate.aspx");
+            else
+                GeneralFunctions.RegisterAlertScript(this, message);
         }
 
         private void BuildExchangeRateEntity(IExchangeRate exchRate)

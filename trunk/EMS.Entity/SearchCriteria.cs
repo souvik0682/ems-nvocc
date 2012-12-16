@@ -18,6 +18,11 @@ namespace EMS.Entity
         public string RoleName { get; set; }
         public DateTime? Date { get; set; }
 
+        public string ChargeName { get; set; }
+        public string ChargeType { get; set; }
+        public string LineName { get; set; }
+
+
         public string LocAbbr
         {
             get;

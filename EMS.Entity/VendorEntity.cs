@@ -103,7 +103,7 @@ namespace EMS.Entity
         }
         #endregion
 
-         #region Constructors
+        #region Constructors
 
         public VendorEntity()
         {
@@ -122,9 +122,9 @@ namespace EMS.Entity
             this.VendorId = Convert.ToInt32(reader["Id"]);
             this.VendorName = Convert.ToString(reader["Name"]);
             this.VendorSalutation = Convert.ToInt32(reader["Salutation"]);
-            this.VendorType = Convert.ToString(reader["Type"]);                        
-        }       
+            this.VendorType = Convert.ToString(reader["Type"]);
+        }
 
-        #endregion        
+        #endregion
     }
 }

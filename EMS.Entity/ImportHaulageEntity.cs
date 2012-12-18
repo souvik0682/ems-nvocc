@@ -7,7 +7,7 @@ using System.Data;
 
 namespace EMS.Entity
 {
-    public class ImportHaulageEntity:IImportHaulage
+    public class ImportHaulageEntity : IImportHaulage
     {
         public int HaulageChgID
         {
@@ -119,6 +119,6 @@ namespace EMS.Entity
 
 
 
-       
+
     }
 }

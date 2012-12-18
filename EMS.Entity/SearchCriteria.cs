@@ -19,7 +19,7 @@ namespace EMS.Entity
         public DateTime? Date { get; set; }
 
         public string ChargeName { get; set; }
-        public string ChargeType { get; set; }
+        public char ChargeType { get; set; }
         public string LineName { get; set; }
 
 

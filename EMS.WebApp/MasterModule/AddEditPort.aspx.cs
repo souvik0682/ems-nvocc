@@ -32,7 +32,7 @@ namespace EMS.WebApp.MasterModule
             {
                 portId = GeneralFunctions.DecryptQueryString(Request.QueryString["id"]);
                 ClearText();
-                btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('ManagePort.aspx','" + ResourceManager.GetStringWithoutName("ERR00046") + "')";
+                btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('ManagePort.aspx','" + ResourceManager.GetStringWithoutName("ERR00017") + "')";
                 txtPortName.Attributes["onkeypress"] = "javascript:return SetMaxLength(this, 200)";
                 if (portId != "-1")
                     LoadData(portId);

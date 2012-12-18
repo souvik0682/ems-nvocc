@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonBLL.cs" />
+    <Compile Include="DBInteraction.cs" />
     <Compile Include="ImportHaulageBLL.cs" />
     <Compile Include="ChargeBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -17,7 +17,7 @@ namespace EMS.DAL
 
         public static int AddEditVndor(IVendor Vendor)
         {
-            string strExecution = "[dbo].[spAddEditVendor]";
+            string strExecution = "[mst].[spAddEditVendor]";
             int Result = 0;
 
             using (DbQuery oDq = new DbQuery(strExecution))
@@ -48,7 +48,7 @@ namespace EMS.DAL
 
         public static List<IVendor> GetVendor(SearchCriteria searchCriteria, int ID)
         {
-            string strExecution = "[dbo].[spGetVendor]";
+            string strExecution = "[mst].[spGetVendor]";
             List<IVendor> lstVnd = new List<IVendor>();
 
             using (DbQuery oDq = new DbQuery(strExecution))
@@ -72,7 +72,7 @@ namespace EMS.DAL
 
         public static IVendor GetVendor(int ID)
         {
-            string strExecution = "[dbo].[spGetVendor]";
+            string strExecution = "[mst].[spGetVendor]";
             //List<IVendor> lstVnd = new List<IVendor>();
             IVendor Vnd = null;
             using (DbQuery oDq = new DbQuery(strExecution))
@@ -93,7 +93,7 @@ namespace EMS.DAL
 
         public static int DeleteVndor(int VendorId)
         {
-            string strExecution = "[dbo].[spDeleteVendor]";
+            string strExecution = "[mst].[spDeleteVendor]";
             int Result = 0;
 
             using (DbQuery oDq = new DbQuery(strExecution))

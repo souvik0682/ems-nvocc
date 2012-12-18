@@ -5,11 +5,11 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using DSR.BLL;
-using DSR.Common;
-using DSR.Entity;
-using DSR.Utilities;
-using DSR.Utilities.ResourceManager;
+using EMS.BLL;
+using EMS.Common;
+using EMS.Entity;
+using EMS.Utilities;
+using EMS.Utilities.ResourceManager;
 
 namespace DSR.WebApp.Security
 {

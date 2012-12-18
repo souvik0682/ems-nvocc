@@ -57,8 +57,7 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="import-haulage-chrg-add-edit.aspx" />
-    <Content Include="ImportHaulage-list.aspx" />
+    <Content Include="CustomControls\DatePicker.ascx" />
     <Content Include="Error.aspx" />
     <Content Include="FileNotFound.aspx" />
     <Content Include="Images\bg.jpg" />
@@ -76,6 +75,25 @@
     <Content Include="Images\remove.png" />
     <Content Include="Images\trash_icon.gif" />
     <Content Include="Login.aspx" />
+    <Content Include="MasterModule\AddEditCountry.aspx" />
+    <Content Include="MasterModule\AddEditLine.aspx" />
+    <Content Include="MasterModule\AddEditPort.aspx" />
+    <Content Include="MasterModule\AddEditSTax.aspx" />
+    <Content Include="MasterModule\charge-add-edit.aspx" />
+    <Content Include="MasterModule\charge-list.aspx" />
+    <Content Include="MasterModule\Image\Chrysanthemum.jpg" />
+    <Content Include="MasterModule\Image\Defaultlogo.png" />
+    <Content Include="MasterModule\Image\Hydrangeas.jpg" />
+    <Content Include="MasterModule\Image\Tulips.jpg" />
+    <Content Include="MasterModule\import-haulage-chrg-add-edit.aspx" />
+    <Content Include="MasterModule\ImportHaulage-list.aspx" />
+    <Content Include="MasterModule\ManageCountry.aspx" />
+    <Content Include="MasterModule\ManageLine.aspx" />
+    <Content Include="MasterModule\ManageLoc.aspx" />
+    <Content Include="MasterModule\ManagePort.aspx" />
+    <Content Include="MasterModule\ManageServTax.aspx" />
+    <Content Include="MasterModule\vendor-add-edit.aspx" />
+    <Content Include="MasterModule\vendor-list.aspx" />
     <Content Include="Scripts\Common.js" />
     <Content Include="Scripts\CustomTextBox.js" />
     <Content Include="Styles\Site.css" />
@@ -85,8 +103,6 @@
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Styles\EMS.css" />
     <Content Include="Unauthorized.aspx" />
-    <Content Include="vendor-add-edit.aspx" />
-    <Content Include="vendor-list.aspx" />
     <Content Include="View\AddEditCustomer.aspx" />
     <Content Include="View\AddEditLocation.aspx" />
     <Content Include="View\AddEditUser.aspx" />
@@ -115,19 +131,12 @@
     <Compile Include="Blank.Master.designer.cs">
       <DependentUpon>Blank.Master</DependentUpon>
     </Compile>
-    <Compile Include="import-haulage-chrg-add-edit.aspx.cs">
-      <DependentUpon>import-haulage-chrg-add-edit.aspx</DependentUpon>
+    <Compile Include="CustomControls\DatePicker.ascx.cs">
+      <DependentUpon>DatePicker.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="import-haulage-chrg-add-edit.aspx.designer.cs">
-      <DependentUpon>import-haulage-chrg-add-edit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ImportHaulage-list.aspx.cs">
-      <DependentUpon>ImportHaulage-list.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ImportHaulage-list.aspx.designer.cs">
-      <DependentUpon>ImportHaulage-list.aspx</DependentUpon>
+    <Compile Include="CustomControls\DatePicker.ascx.designer.cs">
+      <DependentUpon>DatePicker.ascx</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\CustomTextBox.cs" />
     <Compile Include="Error.aspx.cs">
@@ -143,6 +152,111 @@
     </Compile>
     <Compile Include="FileNotFound.aspx.designer.cs">
       <DependentUpon>FileNotFound.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\AddEditCountry.aspx.cs">
+      <DependentUpon>AddEditCountry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\AddEditCountry.aspx.designer.cs">
+      <DependentUpon>AddEditCountry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\AddEditLine.aspx.cs">
+      <DependentUpon>AddEditLine.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\AddEditLine.aspx.designer.cs">
+      <DependentUpon>AddEditLine.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\AddEditPort.aspx.cs">
+      <DependentUpon>AddEditPort.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\AddEditPort.aspx.designer.cs">
+      <DependentUpon>AddEditPort.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\AddEditSTax.aspx.cs">
+      <DependentUpon>AddEditSTax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\AddEditSTax.aspx.designer.cs">
+      <DependentUpon>AddEditSTax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\charge-add-edit.aspx.cs">
+      <DependentUpon>charge-add-edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\charge-add-edit.aspx.designer.cs">
+      <DependentUpon>charge-add-edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\charge-list.aspx.cs">
+      <DependentUpon>charge-list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\charge-list.aspx.designer.cs">
+      <DependentUpon>charge-list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\import-haulage-chrg-add-edit.aspx.cs">
+      <DependentUpon>import-haulage-chrg-add-edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\import-haulage-chrg-add-edit.aspx.designer.cs">
+      <DependentUpon>import-haulage-chrg-add-edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\ImportHaulage-list.aspx.cs">
+      <DependentUpon>ImportHaulage-list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\ImportHaulage-list.aspx.designer.cs">
+      <DependentUpon>ImportHaulage-list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\ManageCountry.aspx.cs">
+      <DependentUpon>ManageCountry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\ManageCountry.aspx.designer.cs">
+      <DependentUpon>ManageCountry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\ManageLine.aspx.cs">
+      <DependentUpon>ManageLine.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\ManageLine.aspx.designer.cs">
+      <DependentUpon>ManageLine.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\ManageLoc.aspx.cs">
+      <DependentUpon>ManageLoc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\ManageLoc.aspx.designer.cs">
+      <DependentUpon>ManageLoc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\ManagePort.aspx.cs">
+      <DependentUpon>ManagePort.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\ManagePort.aspx.designer.cs">
+      <DependentUpon>ManagePort.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\ManageServTax.aspx.cs">
+      <DependentUpon>ManageServTax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\ManageServTax.aspx.designer.cs">
+      <DependentUpon>ManageServTax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\vendor-add-edit.aspx.cs">
+      <DependentUpon>vendor-add-edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\vendor-add-edit.aspx.designer.cs">
+      <DependentUpon>vendor-add-edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\vendor-list.aspx.cs">
+      <DependentUpon>vendor-list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\vendor-list.aspx.designer.cs">
+      <DependentUpon>vendor-list.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -168,20 +282,6 @@
     </Compile>
     <Compile Include="Unauthorized.aspx.designer.cs">
       <DependentUpon>Unauthorized.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="vendor-add-edit.aspx.cs">
-      <DependentUpon>vendor-add-edit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="vendor-add-edit.aspx.designer.cs">
-      <DependentUpon>vendor-add-edit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="vendor-list.aspx.cs">
-      <DependentUpon>vendor-list.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="vendor-list.aspx.designer.cs">
-      <DependentUpon>vendor-list.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\AddEditCustomer.aspx.cs">
       <DependentUpon>AddEditCustomer.aspx</DependentUpon>
@@ -274,7 +374,6 @@
     <Folder Include="Export\" />
     <Folder Include="Finance\" />
     <Folder Include="Import\" />
-    <Folder Include="Master\" />
     <Folder Include="RDLC\" />
     <Folder Include="Reports\" />
     <Folder Include="Transaction\" />

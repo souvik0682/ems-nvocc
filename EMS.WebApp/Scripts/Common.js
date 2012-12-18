@@ -184,3 +184,29 @@ function showPrintPanel(imgId, dvId) {
     dvPrint.style.left = (getLeftPosition(imgPrint) - 118) + 'px';
     dvPrint.style.display = '';
 }
+function IsDecimal(ctrl) {
+    var value = document.getElementById(ctrl.id).value;
+    var validChars = "0123456789.";
+    var strChar;
+    var result = true;
+
+    if (value.length == 0) return false;
+
+    for (i = 0; i < value.length && result; i++) {
+        strChar = value.charAt(i);
+
+        if (validChars.indexOf(strChar) == -1) {
+            result = false;
+        }
+    }
+
+    if (!result) {
+        alert('Please enter a valid decimal value');
+        document.getElementById(ctrl.id).value = "";
+        ctrl.focus();
+        return false;
+    }
+    else {
+        return true;
+    }
+}

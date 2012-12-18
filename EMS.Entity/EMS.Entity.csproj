@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="AddressEntity.cs" />
     <Compile Include="AreaEntity.cs" />
+    <Compile Include="ChargeEntity.cs" />
+    <Compile Include="ChargeRateEntity.cs" />
     <Compile Include="ContactPersonEntity.cs" />
     <Compile Include="MenuEntity.cs" />
     <Compile Include="CustomerEntity.cs" />

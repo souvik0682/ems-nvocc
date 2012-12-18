@@ -48,7 +48,7 @@ namespace EMS.DAL
         /// <createddate>01/12/2012</createddate>
         public static DataTable PopulateDropdown(int Number, int? Filter)
         {
-            string strExecution = "[dbo].[spPopulateDropDownList]";
+            string strExecution = "[common].[spPopulateDropDownList]";
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {

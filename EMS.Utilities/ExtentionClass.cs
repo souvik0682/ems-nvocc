@@ -18,5 +18,12 @@ namespace EMS.Utilities
                return System.IO.Path.GetFileName(imgUpload.PostedFile.FileName);
          
        }
+
+       public static decimal TryParseBlankAsZero(string value) // this is not an extention
+       {
+           decimal returnVal=decimal.Zero;
+           Decimal.TryParse(value, out returnVal);
+            return returnVal;
+       }
     }
 }

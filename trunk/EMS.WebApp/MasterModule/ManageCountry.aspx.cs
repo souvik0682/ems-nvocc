@@ -109,22 +109,22 @@ namespace EMS.WebApp.MasterModule
 
                 // Edit link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
-                btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00008");
+                btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00013");
                 btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "pk_countryId"));
 
                 //Delete link
                 ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
-                btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00007");
+                btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
                 btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "pk_Countryid"));
 
                 if (_hasEditAccess)
                 {
-                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00010") + "');";
+                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
                 }
                 else
                 {
-                    btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00009") + "');return false;";
-                    btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00009") + "');return false;";
+                    btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
+                    btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
                 }
             }
         }
@@ -154,8 +154,8 @@ namespace EMS.WebApp.MasterModule
            //// txtLocationName.Text = "Type Country Name";
 
 
-            txtWMEAbbr.WatermarkText = ResourceManager.GetStringWithoutName("ERR00017");
-            txtWMEName.WatermarkText = ResourceManager.GetStringWithoutName("ERR00018");
+            txtWMEAbbr.WatermarkText = ResourceManager.GetStringWithoutName("ERR00030");
+            txtWMEName.WatermarkText = ResourceManager.GetStringWithoutName("ERR00031");
             gvwLoc.PageSize = Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]);
             gvwLoc.PagerSettings.PageButtonCount = Convert.ToInt32(ConfigurationManager.AppSettings["PageButtonCount"]);
         }
@@ -199,7 +199,7 @@ namespace EMS.WebApp.MasterModule
             DBInteraction dinteract = new DBInteraction();
             dinteract.DeleteCountry(locId);
             LoadData();
-            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00006") + "');</script>", false);
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00010") + "');</script>", false);
         }
 
         private void RedirecToAddEditPage(int id)
@@ -227,8 +227,8 @@ namespace EMS.WebApp.MasterModule
 
             criteria.SortExpression = sortExpression;
             criteria.SortDirection = sortDirection;
-            criteria.LocAbbr = (txtCountryId.Text == ResourceManager.GetStringWithoutName("ERR00017")) ? string.Empty : txtCountryId.Text.Trim();
-            criteria.LocName = (txtLocationName.Text == ResourceManager.GetStringWithoutName("ERR00018")) ? string.Empty : txtLocationName.Text.Trim();
+            criteria.LocAbbr = (txtCountryId.Text == ResourceManager.GetStringWithoutName("ERR00030")) ? string.Empty : txtCountryId.Text.Trim();
+            criteria.LocName = (txtLocationName.Text == ResourceManager.GetStringWithoutName("ERR00031")) ? string.Empty : txtLocationName.Text.Trim();
             Session[Constants.SESSION_SEARCH_CRITERIA] = criteria;
         }
 
@@ -242,7 +242,7 @@ namespace EMS.WebApp.MasterModule
 
                 if (!ReferenceEquals(criteria, null))
                 {
-                    if (criteria.CurrentPage != PageName.LocationMaster)
+                    if (criteria.CurrentPage != PageName.CountryMaster)
                     {
                         criteria.Clear();
                         SetDefaultSearchCriteria(criteria);

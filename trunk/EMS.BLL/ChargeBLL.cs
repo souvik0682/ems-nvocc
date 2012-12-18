@@ -48,6 +48,44 @@ namespace EMS.BLL
 
         #endregion
 
+        #region
+        public int AddEditCharge(ICharge Charge)
+        {
+            return ChargeDAL.AddEditCharge(Charge);
+        }
+
+        public int AddEditChargeRates(IChargeRate ChargeRate)
+        {
+            return ChargeDAL.AddEditChargeRates(ChargeRate);
+        }
+
+        public ICharge GetChargeDetails(int ChargesID)
+        {
+            return ChargeDAL.GetChargeDetails(ChargesID);
+        }
+
+        public List<IChargeRate> GetChargeRates(int ChargesID)
+        {
+            return ChargeDAL.GetChargeRates(ChargesID);
+        }
+
+        public static DataTable GetAllCharges(SearchCriteria searchCriteria, int CompanyId)
+        {
+            return ChargeDAL.GetAllCharges(searchCriteria, CompanyId);
+        }
+
+        public static int DeleteCharge(int ChargeId)
+        {
+            return ChargeDAL.DeleteCharge(ChargeId);
+        }
+
+        public static int DeleteChargeRate(int ChargeRateId)
+        {
+            return ChargeDAL.DeleteChargeRate(ChargeRateId);
+        }
+
+        #endregion
+
         #region Exchange Rate
 
         private void SetDefaultSearchCriteriaForExchangeRate(SearchCriteria searchCriteria)

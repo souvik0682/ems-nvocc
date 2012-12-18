@@ -16,6 +16,6 @@ namespace EMS.Common
         double WeightFrom { get; set; }
         double WeightTo { get; set; }
         double HaulageRate { get; set; }
-        bool HaulageStatus { get; set; }       
+        bool HaulageStatus { get; set; }
     }
 }

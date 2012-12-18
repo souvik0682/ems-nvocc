@@ -10,7 +10,7 @@ namespace EMS.Common
         int ChargesID { get; set; }
         int CompanyID { get; set; }
         string ChargeDescr { get; set; }
-        char ChargeType { get; set; }
+        int ChargeType { get; set; }
         char IEC { get; set; }
         int NVOCCID { get; set; }
         int Sequence { get; set; }
@@ -22,5 +22,8 @@ namespace EMS.Common
         bool PrincipleSharing { get; set; }
         int Currency { get; set; }
         bool ServiceTax { get; set; }
+        List<IChargeRate> ChargeRates { get; set; }
+
+        string ConvertListToXML(List<IChargeRate> Items);
     }
 }

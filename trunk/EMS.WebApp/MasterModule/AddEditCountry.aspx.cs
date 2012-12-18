@@ -33,7 +33,7 @@ namespace EMS.WebApp.MasterModule
             {
                 countryId = GeneralFunctions.DecryptQueryString(Request.QueryString["id"]);
                 ClearText();
-                btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('ManageCountry.aspx','" + ResourceManager.GetStringWithoutName("ERR00046") + "')";
+                btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('ManageCountry.aspx','" + ResourceManager.GetStringWithoutName("ERR00017") + "')";
                 txtCountryName.Attributes["onkeypress"] = "javascript:return SetMaxLength(this, 200)";
                 if (countryId != "-1")
                     LoadData(countryId);

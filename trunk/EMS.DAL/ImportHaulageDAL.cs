@@ -17,7 +17,7 @@ namespace EMS.DAL
 
         public static int AddEditImportHAulageChrg(IImportHaulage ImportHaulage)
         {
-            string strExecution = "[dbo].[spAddEditImportHaulageChrg]";
+            string strExecution = "[mst].[spAddEditImportHaulageChrg]";
             int Result = 0;
 
             using (DbQuery oDq = new DbQuery(strExecution))
@@ -28,7 +28,7 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@ContainerSize", 2, ImportHaulage.ContainerSize);
                 oDq.AddDecimalParam("@WeightFrom", 12, 2, Convert.ToDecimal(ImportHaulage.WeightFrom));
                 oDq.AddDecimalParam("@WeightTo", 12, 2, Convert.ToDecimal(ImportHaulage.WeightTo));
-                oDq.AddDecimalParam("@HaulageRate", 12,2, Convert.ToDecimal(ImportHaulage.HaulageRate));
+                oDq.AddDecimalParam("@HaulageRate", 12, 2, Convert.ToDecimal(ImportHaulage.HaulageRate));
                 oDq.AddBooleanParam("@HaulageStatus", ImportHaulage.HaulageStatus);
                 if (ImportHaulage.HaulageChgID <= 0)
                 {
@@ -46,7 +46,7 @@ namespace EMS.DAL
 
         public static List<IImportHaulage> GetImportHaulage(SearchCriteria searchCriteria, int ID)
         {
-            string strExecution = "[dbo].[spGetImportHaulageCharge]";
+            string strExecution = "[mst].[spGetImportHaulageCharge]";
             List<IImportHaulage> lstImportHAulage = new List<IImportHaulage>();
 
             using (DbQuery oDq = new DbQuery(strExecution))
@@ -72,7 +72,7 @@ namespace EMS.DAL
 
         public static IImportHaulage GetImportHaulage(int ID)
         {
-            string strExecution = "[dbo].[spGetImportHaulageCharge]";
+            string strExecution = "[mst].[spGetImportHaulageCharge]";
             IImportHaulage oIH = null;
             using (DbQuery oDq = new DbQuery(strExecution))
             {
@@ -90,7 +90,7 @@ namespace EMS.DAL
 
         public static int DeleteImportHaulage(int ImportHaulageId)
         {
-            string strExecution = "[dbo].[spDeleteImportHaulageChrg]";
+            string strExecution = "[mst].[spDeleteImportHaulageChrg]";
             int Result = 0;
 
             using (DbQuery oDq = new DbQuery(strExecution))

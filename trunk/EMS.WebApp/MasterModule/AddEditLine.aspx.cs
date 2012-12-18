@@ -31,7 +31,7 @@ namespace EMS.WebApp.MasterModule
             {
                 NVOCCId = GeneralFunctions.DecryptQueryString(Request.QueryString["id"]);
                 ClearText();
-                btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('ManageLine.aspx','" + ResourceManager.GetStringWithoutName("ERR00046") + "')";
+                btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('ManageLine.aspx','" + ResourceManager.GetStringWithoutName("ERR00017") + "')";
                 txtLineName.Attributes["onkeypress"] = "javascript:return SetMaxLength(this, 50)";
                 if (NVOCCId != "-1")
                     LoadData(NVOCCId);

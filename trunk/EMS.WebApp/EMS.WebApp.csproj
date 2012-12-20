@@ -94,6 +94,7 @@
     <Content Include="MasterModule\ManageServTax.aspx" />
     <Content Include="MasterModule\vendor-add-edit.aspx" />
     <Content Include="MasterModule\vendor-list.aspx" />
+    <Content Include="Reports\ImpBLChkLst.aspx" />
     <Content Include="Scripts\Common.js" />
     <Content Include="Scripts\CustomTextBox.js" />
     <Content Include="Styles\Site.css" />
@@ -258,6 +259,13 @@
     <Compile Include="MasterModule\vendor-list.aspx.designer.cs">
       <DependentUpon>vendor-list.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\ImpBLChkLst.aspx.cs">
+      <DependentUpon>ImpBLChkLst.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ImpBLChkLst.aspx.designer.cs">
+      <DependentUpon>ImpBLChkLst.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -374,8 +382,6 @@
     <Folder Include="Export\" />
     <Folder Include="Finance\" />
     <Folder Include="Import\" />
-    <Folder Include="RDLC\" />
-    <Folder Include="Reports\" />
     <Folder Include="Transaction\" />
   </ItemGroup>
   <ItemGroup>
@@ -401,6 +407,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="RDLC\ImpBLChkLst.rdlc" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

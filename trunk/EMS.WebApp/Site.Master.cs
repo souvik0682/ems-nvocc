@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using EMS.Utilities;
 using EMS.Common;
+using EMS.BLL;
 
 namespace EMS.WebApp
 {
@@ -15,6 +16,8 @@ namespace EMS.WebApp
         {
             //Clears the application cache.
             GeneralFunctions.ClearApplicationCache();
+
+            SetUserAccess();
 
             if (!Request.Path.Contains("ChangePassword.aspx"))
             {
@@ -76,6 +79,81 @@ namespace EMS.WebApp
         private void ShowMenu(IUser user)
         {
 
+        }
+
+        private void SetUserAccess()
+        {
+            int menuId = 0;
+            int userId = 0;
+
+            userId = UserBLL.GetLoggedInUserId();
+            menuId = GetMenuIdByPath();            
+
+            IUserPermission userPermission = UserBLL.GetMenuAccessByUser(userId, menuId);
+            Session[Constants.SESSION_USER_PERMISSION] = userPermission;
+        }
+
+        private int GetMenuIdByPath()
+        {
+            int menuId = 0;
+
+            switch (Request.Path)
+            {
+                // Master
+                case "/View/ManageUser.aspx":
+                case "/View/AddEditUser.aspx":
+                    menuId = (int)PageName.UserMaster;
+                    break;
+                case "/View/ManageRole.aspx":
+                case "/View/AddEditRole.aspx":
+                    menuId = (int)PageName.RoleMaster;
+                    break;
+                case "/View/ManageLocation.aspx":
+                case "/View/AddEditLocation.aspx":
+                    menuId = (int)PageName.LocationMaster;
+                    break;
+                case "/View/ManageCustomer.aspx":
+                case "/View/AddEditCustomer.aspx":
+                    menuId = (int)PageName.CustomerMaster;
+                    break;
+                case "/MasterModule/ManageLine.aspx":
+                case "/MasterModule/AddEditLine.aspx":
+                    menuId = (int)PageName.LineMSOMaster;
+                    break;
+                case "/MasterModule/vendor-list.aspx":
+                case "/MasterModule/vendor-add-edit.aspx":
+                    menuId = (int)PageName.AddressMaster;
+                    break;
+                case "/View/ManageServTax.aspx":
+                case "/View/AddEditSTax.aspx":
+                    menuId = (int)PageName.ServiceTaxMaster;
+                    break;
+                case "/View/charge-list.aspx":
+                case "/View/charge-add-edit.aspx":
+                    menuId = (int)PageName.ChargeMaster;
+                    break;
+                //Container type
+                case "/View/ManageExchRate.aspx":
+                case "/View/AddEditExchRate.aspx":
+                    menuId = (int)PageName.ExchangeRateMaster;
+                    break;
+                //Terminal
+                case "/MasterModule/ManageCountry.aspx":
+                case "/MasterModule/AddEditCountry.aspx":
+                    menuId = (int)PageName.CountryMaster;
+                    break;
+                case "/MasterModule/ManagePort.aspx":
+                case "/MasterModule/AddEditPort.aspx":
+                    menuId = (int)PageName.PortMaster;
+                    break;
+                case "/MasterModule/ImportHaulage-list.aspx":
+                case "/MasterModule/import-haulage-chrg-add-edit.aspx":
+                    menuId = (int)PageName.ImportHaulageChargeMaster;
+                    break;
+                //Vessel master
+            }
+
+            return menuId;
         }
     }
 }

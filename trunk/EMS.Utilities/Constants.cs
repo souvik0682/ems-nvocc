@@ -89,6 +89,7 @@ namespace EMS.Utilities
         public const string SESSION_SEARCH_CRITERIA = "SearchCriteria";
         public const string SESSION_USER_INFO = "UserInfo";
         public const string SESSION_ERROR = "ErrorInfo";
+        public const string SESSION_USER_PERMISSION = "UserPermission";
 
         #endregion
 

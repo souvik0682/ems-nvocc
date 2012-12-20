@@ -35,8 +35,8 @@
                 <td style="border: solid 1px #000000; padding: 2px;">
                     <table border="0" cellpadding="0" cellspacing="0" align="center">
                         <tr>
-                            <td valign="top" style="padding:5px;">
-                                <img src="<%=Page.ResolveClientUrl("~/Images/MUST_PIC1.jpg") %>" height="337" width="400" alt="" />
+                            <td valign="top" style="padding:5px;width:400px;">
+                                <img src="<%=Page.ResolveClientUrl("~/Images/MUST_PIC1.jpg") %>" style="display:none;" height="337" width="400" alt="" />
                             </td>
                             <td align="left" valign="top">&nbsp;</td>
                             <td style="padding:0px 5px 0px 5px;" valign="top">

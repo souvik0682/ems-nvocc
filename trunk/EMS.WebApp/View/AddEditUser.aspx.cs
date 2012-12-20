@@ -72,12 +72,13 @@ namespace EMS.WebApp.View
         {
             _userId = UserBLL.GetLoggedInUserId();
 
+            //Get user permission.
+            UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+
             if (!ReferenceEquals(Request.QueryString["id"], null))
             {
                 Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["id"].ToString()), out _uId);
-            }
-
-            UserBLL.GetMenuAccessByUser(_userId, (int)PageName.UserMaster, out _canAdd, out _canEdit, out _canDelete, out _canView);
+            }            
         }
 
         private void SetAttributes()

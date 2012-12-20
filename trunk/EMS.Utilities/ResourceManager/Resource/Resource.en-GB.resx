@@ -339,4 +339,7 @@
   <data name="ERR00073" xml:space="preserve">
     <value>Data already exists for this day. </value>
   </data>
+  <data name="ERR00074" xml:space="preserve">
+    <value>Are you sure you want to change role status?</value>
+  </data>
 </root>

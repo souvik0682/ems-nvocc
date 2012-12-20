@@ -1,4 +1,4 @@
-﻿/****** Object:  StoredProcedure [admin].[uspGetMenuAccessByUser]    Script Date: 12/13/2012 22:01:44 ******/
+﻿/****** Object:  StoredProcedure [admin].[uspGetMenuAccessByUser]    Script Date: 12/21/2012 00:34:03 ******/
 
 --exec [admin].[uspGetMenuAccessByUser] 1, 28
 
@@ -41,8 +41,11 @@ BEGIN
 	FROM	dbo.mstRoleMenuAccess RMA
 			INNER JOIN dbo.mstMenu MEN
 				ON RMA.fk_MenuID = MEN.pk_MenuID
+			INNER JOIN dbo.mstRoles ROL
+				ON RMA.fk_RoleID = ROL.pk_RoleID
 	WHERE	fk_RoleID = @RoleId
 	AND		RMA.fk_MenuID = @MenuId
+	AND		ROL.RoleStatus = 1
 END
 
 GO

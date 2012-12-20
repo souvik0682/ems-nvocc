@@ -154,7 +154,7 @@ namespace EMS.Entity
                 this.EmailId = Convert.ToString(reader["EmailId"]);
 
             if (HasColumn(reader, "UserActive") && reader["UserActive"] != DBNull.Value) this.IsActive = Convert.ToBoolean(reader["UserActive"]);
-            if (HasColumn(reader, "AllowMutipleLocation") && reader["AllowMutipleLocation"] != DBNull.Value) this.IsActive = Convert.ToBoolean(reader["AllowMutipleLocation"]);
+            if (HasColumn(reader, "AllowMutipleLocation") && reader["AllowMutipleLocation"] != DBNull.Value) this.AllowMutipleLocation = Convert.ToBoolean(reader["AllowMutipleLocation"]);
         }
 
         #endregion

@@ -1,4 +1,4 @@
-﻿/****** Object:  StoredProcedure [admin].[uspGetUser]    Script Date: 12/06/2012 23:39:30 ******/
+﻿/****** Object:  StoredProcedure [admin].[uspGetUser]    Script Date: 12/21/2012 00:36:09 ******/
 
 -- =============================================
 -- Author		: Amit Kumar Chandra
@@ -35,7 +35,7 @@ BEGIN
 			,us.LastName
 			,us.fk_RoleID AS 'RoleId'
 			,ro.RoleName
-			,us.fk_LocID AS 'LocId'
+			,ISNULL(us.fk_LocID, 0) AS 'LocId'
 			,lo.LocName
 			,us.emailID
 			,us.UserActive
@@ -43,7 +43,7 @@ BEGIN
 	FROM	dbo.mstUsers us
 			INNER JOIN dbo.mstRoles ro
 				ON us.fk_RoleID = ro.pk_RoleID
-			INNER JOIN [DSR].[dbo].[mstLocation] lo
+			LEFT OUTER JOIN [DSR].[dbo].[mstLocation] lo
 				ON us.fk_LocID = lo.pk_LocID
 	WHERE	((ISNULL(@UserId, 0) = 0) OR (us.pk_UserID = @UserId))
 	--AND		us.Active = 'Y'

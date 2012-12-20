@@ -74,7 +74,9 @@ namespace EMS.WebApp.View
         private void RetriveParameters()
         {
             _userId = UserBLL.GetLoggedInUserId();
-            UserBLL.GetMenuAccessByUser(_userId, (int)PageName.ExchangeRateMaster, out _canAdd, out _canEdit, out _canDelete, out _canView);
+
+            //Get user permission.
+            UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
 
             if (!ReferenceEquals(Request.QueryString["id"], null))
             {

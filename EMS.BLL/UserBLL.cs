@@ -186,21 +186,59 @@ namespace EMS.BLL
             return UserDAL.GetMenuByRole(roleId, mainId);
         }
 
-        public static void GetMenuAccessByUser(int userId, int menuId, out bool canAdd, out bool canEdit, out bool canDelete, out bool canView)
+        //public static void GetMenuAccessByUser(int userId, int menuId, out bool canAdd, out bool canEdit, out bool canDelete, out bool canView)
+        //{
+        //    canAdd = false;
+        //    canEdit = false;
+        //    canDelete = false;
+        //    canView = false;
+
+        //    IRoleMenu roleMenuAccess = UserDAL.GetMenuAccessByUser(userId, menuId);
+
+        //    if (!ReferenceEquals(roleMenuAccess, null))
+        //    {
+        //        canAdd = roleMenuAccess.CanAdd;
+        //        canEdit = roleMenuAccess.CanEdit;
+        //        canDelete = roleMenuAccess.CanDelete;
+        //        canView = roleMenuAccess.CanView;
+        //    }
+        //}
+
+        public static IUserPermission GetMenuAccessByUser(int userId, int menuId)
+        {
+            IUserPermission userPermission = new UserPermission();
+
+            IRoleMenu roleMenuAccess = UserDAL.GetMenuAccessByUser(userId, menuId);
+
+            if (!ReferenceEquals(roleMenuAccess, null))
+            {
+                userPermission.CanAdd = roleMenuAccess.CanAdd;
+                userPermission.CanEdit = roleMenuAccess.CanEdit;
+                userPermission.CanDelete = roleMenuAccess.CanDelete;
+                userPermission.CanView = roleMenuAccess.CanView;
+            }
+
+            return userPermission;
+        }
+
+        public static void GetUserPermission(out bool canAdd, out bool canEdit, out bool canDelete, out bool canView)
         {
             canAdd = false;
             canEdit = false;
             canDelete = false;
             canView = false;
 
-            IRoleMenu roleMenuAccess = UserDAL.GetMenuAccessByUser(userId, menuId);
-
-            if (!ReferenceEquals(roleMenuAccess, null))
+            if (!ReferenceEquals(System.Web.HttpContext.Current.Session[Constants.SESSION_USER_PERMISSION], null))
             {
-                canAdd = roleMenuAccess.CanAdd;
-                canEdit = roleMenuAccess.CanEdit;
-                canDelete = roleMenuAccess.CanDelete;
-                canView = roleMenuAccess.CanView;
+                IUserPermission userPermission = (IUserPermission)System.Web.HttpContext.Current.Session[Constants.SESSION_USER_PERMISSION];
+
+                if (!ReferenceEquals(userPermission, null))
+                {
+                    canAdd = userPermission.CanAdd;
+                    canEdit = userPermission.CanEdit;
+                    canDelete = userPermission.CanDelete;
+                    canView = userPermission.CanView;
+                }
             }
         }
 

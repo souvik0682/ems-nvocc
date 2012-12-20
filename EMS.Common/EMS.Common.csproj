@@ -58,6 +58,7 @@
     <Compile Include="IRole.cs" />
     <Compile Include="ISearchCriteria.cs" />
     <Compile Include="IUser.cs" />
+    <Compile Include="IUserPermission.cs" />
     <Compile Include="IVendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -16,8 +16,8 @@
             <div class="logo">
                 <img alt="" src="<%=Page.ResolveClientUrl("~/Images/logo_benline.jpg") %>" height="55" />
             </div>  
-            <div class="productname">
-                <center><img alt="" src="<%=Page.ResolveClientUrl("~/Images/MUST_LOGO1.jpg") %>" height="55" width="300" /></center>
+            <div class="productname" style="margin-top:10px;">
+                <center><span style="color:Red;font-weight:bold;font-size:16pt;">LINER APPLICATION</span></center>
             </div>
             <div class="search">
                 <div style="text-align: right;">

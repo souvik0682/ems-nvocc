@@ -121,6 +121,7 @@ namespace EMS.WebApp.View
 
                 LinkButton lnkStatus = (LinkButton)e.Row.FindControl("lnkStatus");
                 lnkStatus.CommandName = "Status";
+                lnkStatus.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00074") + "');";
 
                 if (Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Active")))
                 {
@@ -172,7 +173,9 @@ namespace EMS.WebApp.View
         private void RetriveParameters()
         {
             _userId = UserBLL.GetLoggedInUserId();
-            UserBLL.GetMenuAccessByUser(_userId, (int)PageName.RoleMaster, out _canAdd, out _canEdit, out _canDelete, out _canView);
+
+            //Get user permission.
+            UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
         }
 
         private void CheckUserAccess()

@@ -84,7 +84,7 @@ namespace EMS.Entity
             this.CompanyID = Convert.ToInt32(reader["CompanyID"]);
             this.ExchangeDate = Convert.ToDateTime(reader["ExchDate"]);
             this.USDExchangeRate = Convert.ToDecimal(reader["USDXchRate"]);
-            this.FreeDays = Convert.ToInt32(reader["FreeDays"]);
+            //this.FreeDays = Convert.ToInt32(reader["FreeDays"]);
         }
 
         #endregion

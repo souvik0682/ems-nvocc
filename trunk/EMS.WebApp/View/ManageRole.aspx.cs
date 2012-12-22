@@ -45,6 +45,11 @@ namespace EMS.WebApp.View
             RedirecToAddEditPage(-1);
         }
 
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            txtRole.Text = string.Empty;
+        }
+
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             SaveNewPageIndex(0);

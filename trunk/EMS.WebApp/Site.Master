@@ -35,14 +35,12 @@
                             <li id="liMst_User" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageUser.aspx") %>">User Master</a></li>
                             <li id="liMst_Role" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageRole.aspx") %>">Role Master</a></li>
                             <li id="liMst_Loc" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageLocation.aspx") %>">Location Master</a></li>
-                            <li id="liMst_Cust" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageCustomer.aspx") %>">Customer Master</a></li>
+                            <li id="liMst_Cust" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageCustomer.aspx") %>">Customer Display</a></li>
                             <li id="liMst_Line" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManageLine.aspx") %>">Line / MLO</a></li>
                             <li id="liMst_Vendor" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/vendor-list.aspx") %>">Vendor / Address</a></li>
                             <li id="liMst_ServiceTax" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManageServTax.aspx") %>">Service Tax</a></li>
-                            <li id="liMst_Charge" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/charge-list.aspx") %>">Charge Master</a></li>
-                            <li id="liMst_ContType" runat="server"><a href="#">Container Type</a></li>
-                            <li id="liMst_ExRate" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageExchRate.aspx") %>">Exchange Rate</a></li>
-                            <li id="liMst_Terminal" runat="server"><a href="#">Terminal Master</a></li>
+                            <li id="liMst_Charge" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/charge-list.aspx") %>">Charge Master</a></li>                            
+                            <li id="liMst_ExRate" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageExchRate.aspx") %>">Exchange Rate</a></li>                            
                             <li id="liMst_Country" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManageCountry.aspx") %>">Country Master</a></li>
                             <li id="liMst_Port" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManagePort.aspx") %>">Port Master</a></li>
                             <li id="liMst_Haulage" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ImportHaulage-list.aspx") %>">Import Haulage</a></li>

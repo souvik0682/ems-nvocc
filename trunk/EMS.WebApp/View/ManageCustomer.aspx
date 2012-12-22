@@ -14,7 +14,7 @@
     </div>
     <div id="headercaption">MANAGE CUSTOMER</div>
     <center>
-    <div style="width:950px;">        
+    <div style="width:955px;">        
         <fieldset style="width:100%;">
             <legend>Search Customer</legend>
             <table>
@@ -35,7 +35,7 @@
                         <asp:TextBox ID="txtExec" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                         <cc1:TextBoxWatermarkExtender ID="txtWMEExec" runat="server" TargetControlID="txtExec" WatermarkText="Type Executive Name" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                     </td>
-                    <td><asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" OnClick="btnSearch_Click" /></td>
+                    <td><asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="60px" OnClick="btnSearch_Click" />&nbsp;<asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="button" Width="60px" OnClick="btnReset_Click" /></td>
                 </tr>
             </table>
         </fieldset>
@@ -81,16 +81,16 @@
                             </EmptyDataTemplate>
                             <Columns>
                                 <asp:TemplateField HeaderText="Sl#">
-                                    <HeaderStyle CssClass="gridviewheader" />
+                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
                                     <ItemStyle CssClass="gridviewitem" Width="4%" />
                                 </asp:TemplateField>
                                 <asp:TemplateField>
-                                    <HeaderStyle CssClass="gridviewheader" />
+                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
                                     <ItemStyle CssClass="gridviewitem" Width="15%" />
                                     <HeaderTemplate><asp:LinkButton ID="lnkHLoc" runat="server" Text="Location" CommandName="Sort" CommandArgument="Location"></asp:LinkButton></HeaderTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
-                                    <HeaderStyle CssClass="gridviewheader" />
+                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
                                     <ItemStyle CssClass="gridviewitem" Width="40%" />      
                                     <HeaderTemplate><asp:LinkButton ID="lnkHName" runat="server" Text="Customer Name" CommandName="Sort" CommandArgument="CustName"></asp:LinkButton></HeaderTemplate>              
                                     <ItemTemplate>
@@ -99,11 +99,11 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Group Company">
-                                    <HeaderStyle CssClass="gridviewheader" />
+                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
                                     <ItemStyle CssClass="gridviewitem" Width="18%" />                          
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Executive Name">
-                                    <HeaderStyle CssClass="gridviewheader" />
+                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
                                     <ItemStyle CssClass="gridviewitem" Width="18%" />                          
                                 </asp:TemplateField>
                                 <asp:TemplateField>

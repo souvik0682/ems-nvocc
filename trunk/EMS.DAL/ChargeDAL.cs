@@ -338,7 +338,7 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@CompanyID", chg.CompanyID);
                 oDq.AddDateTimeParam("@ExchangeDate", chg.ExchangeDate);
                 oDq.AddDecimalParam("@USDExchangeRate", 10, 2, chg.USDExchangeRate);
-                oDq.AddIntegerParam("@FreeDays", chg.FreeDays);
+                //oDq.AddIntegerParam("@FreeDays", chg.FreeDays);
                 oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
                 oDq.AddIntegerParam("@Result", result, QueryParameterDirection.Output);
                 oDq.RunActionQuery();

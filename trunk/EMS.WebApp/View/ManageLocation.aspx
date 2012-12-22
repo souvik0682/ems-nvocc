@@ -27,7 +27,7 @@
                         <asp:TextBox ID="txtLocationName" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                         <cc1:TextBoxWatermarkExtender ID="txtWMEName" runat="server" TargetControlID="txtLocationName" WatermarkText="Type Location Name" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                     </td>
-                    <td><asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" OnClick="btnSearch_Click" /></td>
+                    <td><asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" OnClick="btnSearch_Click" />&nbsp;<asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="button" Width="100px" OnClick="btnReset_Click" /></td>
                 </tr>
             </table>              
         </fieldset>
@@ -69,11 +69,11 @@
                             <EmptyDataTemplate>No Location(s) Found</EmptyDataTemplate>
                             <Columns>
                                 <asp:TemplateField HeaderText="Sl#">
-                                    <HeaderStyle CssClass="gridviewheader" />
+                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
                                     <ItemStyle CssClass="gridviewitem" Width="5%" />                                    
                                 </asp:TemplateField>
                                 <asp:TemplateField>
-                                    <HeaderStyle CssClass="gridviewheader" />
+                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
                                     <ItemStyle CssClass="gridviewitem" Width="25%" />    
                                     <HeaderTemplate><asp:LinkButton ID="lnkHAbbr" runat="server" CommandName="Sort" CommandArgument="Abbr" Text="Abbr"></asp:LinkButton></HeaderTemplate>                                
                                     <ItemTemplate>
@@ -81,12 +81,12 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
-                                    <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="30%" />    
+                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                    <ItemStyle CssClass="gridviewitem" Width="35%" />    
                                     <HeaderTemplate><asp:LinkButton ID="lnkHLoc" runat="server" CommandName="Sort" CommandArgument="Location" Text="Location"></asp:LinkButton></HeaderTemplate>                                
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="City & Pin">
-                                    <HeaderStyle CssClass="gridviewheader" />
+                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
                                     <ItemStyle CssClass="gridviewitem" Width="30%" />                                       
                                 </asp:TemplateField>
                                 <asp:TemplateField>
@@ -94,13 +94,6 @@
                                     <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />                                    
                                     <ItemTemplate>
                                         <asp:ImageButton ID="btnEdit" runat="server" CommandName="Edit" ImageUrl="~/Images/edit.png" Height="16" Width="16" />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField>
-                                    <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />                                    
-                                    <ItemTemplate>
-                                        <asp:ImageButton ID="btnRemove" runat="server" CommandName="Remove" ImageUrl="~/Images/remove.png" Height="16" Width="16" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

@@ -224,10 +224,10 @@ namespace EMS.BLL
             CommonDAL.SaveLocation(loc, modifiedBy);
         }
 
-        public void DeleteLocation(int locId, int modifiedBy)
-        {
-            CommonDAL.DeleteLocation(locId, modifiedBy);
-        }
+        //public void DeleteLocation(int locId, int modifiedBy)
+        //{
+        //    CommonDAL.DeleteLocation(locId, modifiedBy);
+        //}
 
         public List<ILocation> GetLocationByUser(int userId)
         {

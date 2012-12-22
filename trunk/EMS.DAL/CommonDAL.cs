@@ -136,17 +136,17 @@ namespace EMS.DAL
             }
         }
 
-        public static void DeleteLocation(int locId, int modifiedBy)
-        {
-            string strExecution = "[common].[uspDeleteLocation]";
+        //public static void DeleteLocation(int locId, int modifiedBy)
+        //{
+        //    string strExecution = "[common].[uspDeleteLocation]";
 
-            using (DbQuery oDq = new DbQuery(strExecution))
-            {
-                oDq.AddIntegerParam("@LocId", locId);
-                oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
-                oDq.RunActionQuery();
-            }
-        }
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddIntegerParam("@LocId", locId);
+        //        oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
+        //        oDq.RunActionQuery();
+        //    }
+        //}
 
         public static List<ILocation> GetLocationByUser(int userId)
         {

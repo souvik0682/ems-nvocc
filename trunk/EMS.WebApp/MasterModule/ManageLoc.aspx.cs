@@ -86,10 +86,10 @@ namespace DSR.WebApp.Security
             {
                 RedirecToAddEditPage(Convert.ToInt32(e.CommandArgument));
             }
-            else if (e.CommandName == "Remove")
-            {
-                DeleteLocation(Convert.ToInt32(e.CommandArgument));
-            }
+            //else if (e.CommandName == "Remove")
+            //{
+            //    DeleteLocation(Convert.ToInt32(e.CommandArgument));
+            //}
         }
 
         protected void gvwLoc_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -231,13 +231,13 @@ namespace DSR.WebApp.Security
             }
         }
 
-        private void DeleteLocation(int locId)
-        {
-            CommonBLL commonBll = new CommonBLL();
-            commonBll.DeleteLocation(locId, _userId);
-            LoadLocation();
-            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00006") + "');</script>", false);
-        }
+        //private void DeleteLocation(int locId)
+        //{
+        //    CommonBLL commonBll = new CommonBLL();
+        //    commonBll.DeleteLocation(locId, _userId);
+        //    LoadLocation();
+        //    ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00006") + "');</script>", false);
+        //}
 
         private void RedirecToAddEditPage(int id)
         {

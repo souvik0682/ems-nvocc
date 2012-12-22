@@ -58,24 +58,6 @@ namespace EMS.WebApp.View {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvRate;
         
         /// <summary>
-        /// txtFreeDays control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::EMS.WebApp.CustomControls.CustomTextBox txtFreeDays;
-        
-        /// <summary>
-        /// rfvFreeDays control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFreeDays;
-        
-        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>

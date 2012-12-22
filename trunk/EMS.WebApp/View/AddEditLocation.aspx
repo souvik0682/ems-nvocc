@@ -18,7 +18,7 @@
                     <td style="width:19%;">Location Name:</td>
                     <td style="width:28%;"><asp:TextBox ID="txtLocName" runat="server" CssClass="textboxuppercase" Enabled="false" MaxLength="50" Width="250" TabIndex="1"></asp:TextBox></td>
                     <td style="width:6%;"></td>
-                    <td style="width:19%;">Customhouse Code:</td>
+                    <td style="width:19%;">Custom House Code:</td>
                     <td style="width:28%;"><asp:TextBox ID="txtCustomhouseCode" runat="server" CssClass="textboxuppercase" MaxLength="6" Width="250" TabIndex="10"></asp:TextBox></td>
                 </tr>
                 <tr>

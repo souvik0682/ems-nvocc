@@ -52,6 +52,12 @@ namespace EMS.WebApp.View
             upLoc.Update();
         }
 
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            txtAbbreviation.Text = string.Empty;
+            txtLocationName.Text = string.Empty;
+        }
+
         protected void gvwLoc_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             int newIndex = e.NewPageIndex;
@@ -90,17 +96,17 @@ namespace EMS.WebApp.View
             {
                 RedirecToAddEditPage(Convert.ToInt32(e.CommandArgument));
             }
-            else if (e.CommandName == "Remove")
-            {
-                DeleteLocation(Convert.ToInt32(e.CommandArgument));
-            }
+            //else if (e.CommandName == "Remove")
+            //{
+            //    DeleteLocation(Convert.ToInt32(e.CommandArgument));
+            //}
         }
 
         protected void gvwLoc_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 6);
+                GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 5);
 
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
 
@@ -146,20 +152,20 @@ namespace EMS.WebApp.View
                 btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00013");
                 btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Id"));
 
-                //Delete link
-                ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
-                btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
-                btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Id"));
+                ////Delete link
+                //ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                //btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
+                //btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Id"));
 
-                if (_canDelete)
-                {
-                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
-                }
-                else
-                {
-                    //btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
-                    btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
-                }
+                //if (_canDelete)
+                //{
+                //    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
+                //}
+                //else
+                //{
+                //    //btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
+                //    btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
+                //}
             }
         }
 
@@ -238,13 +244,13 @@ namespace EMS.WebApp.View
             }
         }
 
-        private void DeleteLocation(int locId)
-        {
-            CommonBLL commonBll = new CommonBLL();
-            commonBll.DeleteLocation(locId, _userId);
-            LoadLocation();
-            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00010") + "');</script>", false);
-        }
+        //private void DeleteLocation(int locId)
+        //{
+        //    CommonBLL commonBll = new CommonBLL();
+        //    commonBll.DeleteLocation(locId, _userId);
+        //    LoadLocation();
+        //    ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00010") + "');</script>", false);
+        //}
 
         private void RedirecToAddEditPage(int id)
         {

@@ -244,5 +244,8 @@
     <Build Include="Schema Objects\Schemas\trn.schema.sql">
       <SubType>Code</SubType>
     </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\chg.uspSaveExchangeRate.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
   </ItemGroup>
 </Project>

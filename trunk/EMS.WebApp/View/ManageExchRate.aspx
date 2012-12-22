@@ -12,7 +12,7 @@
     </div>
     <div id="headercaption">MANAGE EXCHANGE RATE</div>
     <center>
-    <div style="width:600px;">        
+    <div style="width:500px;">        
         <fieldset style="width:100%;">
             <legend>Search Exchange Rate</legend>
             <table>
@@ -21,7 +21,7 @@
                         <asp:TextBox ID="txtDate" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                         <cc1:TextBoxWatermarkExtender ID="txtWMEDate" runat="server" TargetControlID="txtDate" WatermarkText="Type Exchange Date" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                     </td>
-                    <td><asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" OnClick="btnSearch_Click" /></td>
+                    <td><asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" OnClick="btnSearch_Click" />&nbsp;<asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="button" Width="100px" OnClick="btnReset_Click" /></td>
                 </tr>
             </table>              
         </fieldset>
@@ -59,20 +59,16 @@
                             <EmptyDataTemplate>No Data Found</EmptyDataTemplate>
                             <Columns>
                                 <asp:TemplateField HeaderText="Sl#">
-                                    <HeaderStyle CssClass="gridviewheader" />
+                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
                                     <ItemStyle CssClass="gridviewitem" Width="5%" />                                    
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Date">
-                                    <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="30%" />    
+                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                    <ItemStyle CssClass="gridviewitem" Width="40%" />    
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="USD To INR Conversion Rate">
-                                    <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="35%" />    
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Free Days">
-                                    <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="20%" />    
+                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Right" />
+                                    <ItemStyle CssClass="gridviewitem" HorizontalAlign="Right" Width="45%" />    
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderStyle CssClass="gridviewheader" />

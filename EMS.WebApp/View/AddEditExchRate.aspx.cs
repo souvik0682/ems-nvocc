@@ -67,7 +67,7 @@ namespace EMS.WebApp.View
                 btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('ManageExchRate.aspx','" + ResourceManager.GetStringWithoutName("ERR00017") + "')";
                 rfvDate.ErrorMessage = ResourceManager.GetStringWithoutName("ERR00065");
                 rfvRate.ErrorMessage = ResourceManager.GetStringWithoutName("ERR00066");
-                rfvFreeDays.ErrorMessage = ResourceManager.GetStringWithoutName("ERR00067");
+                //rfvFreeDays.ErrorMessage = ResourceManager.GetStringWithoutName("ERR00067");
             }
         }
 
@@ -122,7 +122,7 @@ namespace EMS.WebApp.View
             {
                 txtDate.Text = exchRate.ExchangeDate.ToString(Convert.ToString(ConfigurationManager.AppSettings["DateFormat"]));
                 txtRate.Text = exchRate.USDExchangeRate.ToString();
-                txtFreeDays.Text = exchRate.FreeDays.ToString();
+                //txtFreeDays.Text = exchRate.FreeDays.ToString();
             }
         }
 
@@ -145,7 +145,7 @@ namespace EMS.WebApp.View
             exchRate.ExchangeRateID = _exchRateId;
             exchRate.ExchangeDate = Convert.ToDateTime(txtDate.Text, _culture);
             exchRate.USDExchangeRate = Convert.ToDecimal(txtRate.Text);
-            exchRate.FreeDays = Convert.ToInt32(txtFreeDays.Text);
+            //exchRate.FreeDays = Convert.ToInt32(txtFreeDays.Text);
 
         }
 

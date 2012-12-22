@@ -26,13 +26,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Free Days:<span class="errormessage1">*</span></td>
-                    <td>
-                        <cc1:CustomTextBox ID="txtFreeDays" runat="server" CssClass="numerictextbox" Type="Numeric" MaxLength="2" Width="50"></cc1:CustomTextBox>
-                        <asp:RequiredFieldValidator ID="rfvFreeDays" runat="server" CssClass="errormessage" ControlToValidate="txtFreeDays" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>
-                    </td>
-                </tr>
-                <tr>
                     <td colspan="2">
                         <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" OnClick="btnSave_Click" />&nbsp;&nbsp;<asp:Button ID="btnBack" runat="server" CssClass="button" Text="Back"/>
                     </td>

@@ -139,15 +139,6 @@ namespace EMS.WebApp {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMst_Charge;
         
         /// <summary>
-        /// liMst_ContType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMst_ContType;
-        
-        /// <summary>
         /// liMst_ExRate control.
         /// </summary>
         /// <remarks>
@@ -155,15 +146,6 @@ namespace EMS.WebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMst_ExRate;
-        
-        /// <summary>
-        /// liMst_Terminal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMst_Terminal;
         
         /// <summary>
         /// liMst_Country control.

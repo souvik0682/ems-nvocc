@@ -54,6 +54,11 @@ namespace EMS.WebApp.View
             upExchange.Update();
         }
 
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            txtDate.Text = string.Empty;
+        }
+
         protected void gvwExch_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             int newIndex = e.NewPageIndex;
@@ -102,14 +107,17 @@ namespace EMS.WebApp.View
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 6);
+                GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 5);
 
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
 
+                DateTime dt = Convert.ToDateTime(DataBinder.Eval(e.Row.DataItem, "ExchangeDate"), _culture);
+                bool isEarlierDate = (DateTime.Compare(dt, System.DateTime.Now.Date) < 0) ? true : false;               
+
                 e.Row.Cells[0].Text = ((gvwExch.PageSize * gvwExch.PageIndex) + e.Row.RowIndex + 1).ToString();
-                e.Row.Cells[1].Text = Convert.ToDateTime(DataBinder.Eval(e.Row.DataItem, "ExchangeDate"), _culture).ToString(Convert.ToString(ConfigurationManager.AppSettings["DateFormat"]));
+                e.Row.Cells[1].Text = dt.ToString(Convert.ToString(ConfigurationManager.AppSettings["DateFormat"]));
                 e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "USDExchangeRate"));
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "FreeDays"));
+                //e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "FreeDays"));
 
                 // Edit link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
@@ -123,7 +131,10 @@ namespace EMS.WebApp.View
 
                 if (_canDelete)
                 {
-                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
+                    if (isEarlierDate) //No delete of exchange rate less than today’s date
+                        btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00075") + "');return false;";
+                    else
+                        btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
                 }
                 else
                 {

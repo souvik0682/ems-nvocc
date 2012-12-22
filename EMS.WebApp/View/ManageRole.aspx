@@ -12,7 +12,7 @@
     </div>
     <div id="headercaption">MANAGE ROLE</div>
     <center>
-    <div style="width:400px;">        
+    <div style="width:475px;">        
         <fieldset style="width:100%;">
             <legend>Search Role</legend>
             <table>
@@ -21,7 +21,7 @@
                         <asp:TextBox ID="txtRole" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                         <cc1:TextBoxWatermarkExtender ID="txtWMERole" runat="server" TargetControlID="txtRole" WatermarkText="Type Role" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                     </td>
-                    <td><asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" OnClick="btnSearch_Click" /></td>
+                    <td><asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" OnClick="btnSearch_Click" />&nbsp;<asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="button" Width="100px" OnClick="btnReset_Click" /></td>
                 </tr>
             </table>              
         </fieldset>
@@ -59,15 +59,15 @@
                             <EmptyDataTemplate>No Role(s) Found</EmptyDataTemplate>
                             <Columns>
                                 <asp:TemplateField HeaderText="Sl#">
-                                    <HeaderStyle CssClass="gridviewheader" />
+                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
                                     <ItemStyle CssClass="gridviewitem" Width="10%" />                                    
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Role">
-                                    <HeaderStyle CssClass="gridviewheader" />
+                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
                                     <ItemStyle CssClass="gridviewitem" Width="65%" />                                    
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Status">
-                                    <HeaderStyle CssClass="gridviewheader" />
+                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
                                     <ItemStyle CssClass="gridviewitem" Width="15%" />                                    
                                     <ItemTemplate>
                                         <asp:LinkButton ID="lnkStatus" runat="server"></asp:LinkButton>

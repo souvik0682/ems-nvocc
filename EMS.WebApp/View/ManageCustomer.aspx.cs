@@ -51,6 +51,14 @@ namespace EMS.WebApp.View
             upCust.Update();
         }
 
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            txtLoc.Text = string.Empty;
+            txtCustName.Text = string.Empty;
+            txtGrComp.Text = string.Empty;
+            txtExec.Text = string.Empty;
+        }
+
         protected void gvwCust_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             int newIndex = e.NewPageIndex;

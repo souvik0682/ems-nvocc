@@ -1,4 +1,4 @@
-﻿/****** Object:  StoredProcedure [admin].[uspGetRole]    Script Date: 12/06/2012 23:38:41 ******/
+﻿/****** Object:  StoredProcedure [admin].[uspGetRole]    Script Date: 12/22/2012 10:35:04 ******/
 
 --exec [common].[uspGetRole]
 
@@ -30,9 +30,12 @@ BEGIN
 			,RoleStatus AS 'Active'
 	FROM	dbo.mstRoles
 	WHERE	((ISNULL(@RoleId, 0) = 0) OR (pk_RoleID = @RoleId))
+	AND		Display = 1
 	--AND		((@IsActiveOnly = 0) OR (Active = @IsActiveOnly))
 	AND		((ISNULL(@SchRole, '') = '') OR (RoleName LIKE '%'+ @SchRole + '%'))
 	ORDER BY RoleName
 END
 
 GO
+
+

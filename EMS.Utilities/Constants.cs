@@ -84,7 +84,7 @@ namespace EMS.Utilities
         public const string NOT_AVAILABLE_TEXT = "Not Available";
         public const string SORT_EXPRESSION = "SortExpression";
         public const string SORT_DIRECTION = "SortDirection";
-        public const string DEFAULT_PASSWORD = "EMS123";
+        public const string DEFAULT_PASSWORD = "nvocc";
         public const int DEFAULT_COMPANY_ID = 1;
 
         #endregion

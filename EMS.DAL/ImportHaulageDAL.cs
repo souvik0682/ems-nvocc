@@ -100,5 +100,18 @@ namespace EMS.DAL
             }
             return Result;
         }
+
+        public static DataTable GetAllPort(string Initial)
+        {
+            string strExecution = "[mst].[getPortList]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@InitialChar", 250, Initial);
+                myDataTable = oDq.GetTable();
+            }
+            return myDataTable;
+        }
     }
 }

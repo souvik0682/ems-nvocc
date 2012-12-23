@@ -35,7 +35,7 @@
                             <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                         </asp:DropDownList>
                     </td>
-                    <td colspan="2" style="vertical-align:top;"><asp:Button ID="btnShow" runat="server" Text="Show" CssClass="button" OnClientClick="javascript:return validateData();" OnClick="btnShow_Click" /></td>
+                    <td colspan="2" style="vertical-align:top;"><asp:Button ID="btnShow" runat="server" Text="Show" CssClass="button" OnClick="btnShow_Click" /></td>
                 </tr>
             </table>
         </fieldset>

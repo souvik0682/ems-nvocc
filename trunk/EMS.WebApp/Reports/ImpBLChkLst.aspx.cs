@@ -9,6 +9,8 @@ using EMS.Utilities.ReportManager;
 using Microsoft.Reporting.WebForms;
 using System.Configuration;
 using EMS.BLL;
+using EMS.Entity.Report;
+using System.Data;
 
 namespace EMS.WebApp.Reports
 {
@@ -35,7 +37,7 @@ namespace EMS.WebApp.Reports
 
         protected void btnShow_Click(object sender, EventArgs e)
         {
-
+            GenerateReport();
         }
 
         #endregion
@@ -60,33 +62,21 @@ namespace EMS.WebApp.Reports
 
         private void GenerateReport()
         {
-            //ReportBLL cls = new ReportBLL();
-            //ICallDetail callDetail = new CallDetailEntity();
-            //LocalReportManager reportManager = new LocalReportManager(rptViewer, "DailyCallRpt", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
-            //string rptName = "DailyCallRpt.Rdlc";
-            //DateTime fromDate;
-            //DateTime toDate;
-            //fromDate = Convert.ToDateTime(txtFromDt.Text, _culture);
-            //toDate = Convert.ToDateTime(txtToDt.Text, _culture);
+            ReportBLL cls = new ReportBLL();
+            List<ImpBLChkLstEntity> lstEntity = ReportBLL.GetImportBLCheckList();
+            LocalReportManager reportManager = new LocalReportManager(rptViewer, "ImpBLChkLst", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
+            string rptName = "ImpBLChkLst.rdlc";
 
-            //BuildEntity(callDetail);
-            //IEnumerable<ICallDetail> lst = cls.GetDailyCallData(fromDate, toDate, callDetail, _userId);
+            rptViewer.Reset();
+            rptViewer.LocalReport.Dispose();
+            rptViewer.LocalReport.DataSources.Clear();
+            rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
 
-            //rptViewer.Reset();
-            //rptViewer.LocalReport.Dispose();
-            //rptViewer.LocalReport.DataSources.Clear();
-            //rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
-
-            ////rptViewer.LocalReport.ReportPath = Server.MapPath("/" + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName);
-            //rptViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportDataSet", lst));
-            //rptViewer.LocalReport.SetParameters(new ReportParameter("CompanyName", Convert.ToString(ConfigurationManager.AppSettings["CompanyName"])));
-            //rptViewer.LocalReport.SetParameters(new ReportParameter("FromDate", txtFromDt.Text));
-            //rptViewer.LocalReport.SetParameters(new ReportParameter("ToDate", txtToDt.Text));
-            //rptViewer.LocalReport.SetParameters(new ReportParameter("Location", ddlLoc.SelectedItem.Text));
-            //rptViewer.LocalReport.SetParameters(new ReportParameter("SalesPerson", ddlSales.SelectedItem.Text));
-            //rptViewer.LocalReport.SetParameters(new ReportParameter("Prospect", ddlPros.SelectedItem.Text));
-            //rptViewer.LocalReport.SetParameters(new ReportParameter("CallType", ddlType.SelectedItem.Text));
-            //rptViewer.LocalReport.Refresh();
+            //rptViewer.LocalReport.ReportPath = Server.MapPath("/" + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName);
+            rptViewer.LocalReport.DataSources.Add(new ReportDataSource("RptDataSet", lstEntity));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("CompanyName", Convert.ToString(ConfigurationManager.AppSettings["CompanyName"])));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("ReportDate", "test"));
+            rptViewer.LocalReport.Refresh();
         }
 
         #endregion

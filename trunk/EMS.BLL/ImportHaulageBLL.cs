@@ -6,6 +6,7 @@ using EMS.DAL;
 using EMS.Common;
 using EMS.Entity;
 using EMS.Utilities;
+using System.Data;
 
 namespace EMS.BLL
 {
@@ -29,6 +30,11 @@ namespace EMS.BLL
         public static int DeleteVndor(int ImportHaulageId)
         {
             return ImportHaulageDAL.DeleteImportHaulage(ImportHaulageId);
+        }
+
+        public static DataTable GetAllPort(string Initial)
+        {
+            return ImportHaulageDAL.GetAllPort(Initial);
         }
     }
 }

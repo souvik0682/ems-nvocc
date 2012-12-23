@@ -60,6 +60,7 @@
     <Content Include="CustomControls\DatePicker.ascx" />
     <Content Include="Error.aspx" />
     <Content Include="FileNotFound.aspx" />
+    <Content Include="GetLocation.asmx" />
     <Content Include="Images\bg.jpg" />
     <Content Include="Images\BLA-logo.bmp" />
     <Content Include="Images\Close-Button.bmp" />
@@ -107,6 +108,7 @@
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Styles\EMS.css" />
+    <Content Include="Styles\StyleSheet.css" />
     <Content Include="Unauthorized.aspx" />
     <Content Include="View\AddEditCustomer.aspx" />
     <Content Include="View\AddEditLocation.aspx" />
@@ -157,6 +159,10 @@
     </Compile>
     <Compile Include="FileNotFound.aspx.designer.cs">
       <DependentUpon>FileNotFound.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetLocation.asmx.cs">
+      <DependentUpon>GetLocation.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="MasterModule\AddEditCountry.aspx.cs">
       <DependentUpon>AddEditCountry.aspx</DependentUpon>

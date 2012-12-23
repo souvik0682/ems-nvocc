@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using EMS.Utilities.ReportManager;
 using Microsoft.Reporting.WebForms;
 using System.Configuration;
+using EMS.BLL;
 
 namespace EMS.WebApp.Reports
 {
@@ -17,6 +18,10 @@ namespace EMS.WebApp.Reports
 
         private IFormatProvider _culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"].ToString());
         private int _userId = 0;
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
 
         #endregion
 
@@ -24,7 +29,8 @@ namespace EMS.WebApp.Reports
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            RetriveParameters();
+            CheckUserAccess();
         }
 
         protected void btnShow_Click(object sender, EventArgs e)
@@ -35,6 +41,22 @@ namespace EMS.WebApp.Reports
         #endregion
 
         #region Private Methods
+
+        private void RetriveParameters()
+        {
+            _userId = UserBLL.GetLoggedInUserId();
+
+            //Get user permission.
+            UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+        }
+
+        private void CheckUserAccess()
+        {
+            if (!_canView)
+            {
+                Response.Redirect("~/Unauthorized.aspx");
+            }
+        }
 
         private void GenerateReport()
         {

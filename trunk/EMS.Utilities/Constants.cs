@@ -30,6 +30,11 @@ namespace EMS.Utilities
 
     public enum PageName
     {
+        ImportBLChklst = 6,
+        IGMFormII = 8,
+        IGMFormC = 9,
+        FileLandingGuranteeLetter = 12,
+        ImportRegister = 14,
         UserMaster = 28,
         LocationMaster = 29,
         CustomerMaster = 30,
@@ -44,7 +49,7 @@ namespace EMS.Utilities
         PortMaster = 39,
         ImportHaulageChargeMaster = 40,
         VesselMaster = 41,
-        RoleMaster = 113
+        RoleMaster = 113,
     };
 
     public enum UserRole

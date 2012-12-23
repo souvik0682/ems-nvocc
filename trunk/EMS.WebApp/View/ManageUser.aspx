@@ -70,11 +70,11 @@
                         <EmptyDataTemplate>No User(s) Found</EmptyDataTemplate>
                         <Columns>
                             <asp:TemplateField HeaderText="Sl#">
-                                <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                <HeaderStyle CssClass="gridviewheader" />
                                 <ItemStyle CssClass="gridviewitem" Width="5%" />                                    
                             </asp:TemplateField>
                             <asp:TemplateField>
-                                <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                <HeaderStyle CssClass="gridviewheader" />
                                 <ItemStyle CssClass="gridviewitem" Width="15%" />    
                                 <HeaderTemplate><asp:LinkButton ID="lnkHName" runat="server" CommandName="Sort" CommandArgument="UserName" Text="User Name"></asp:LinkButton></HeaderTemplate>                                
                                 <ItemTemplate>
@@ -82,22 +82,22 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField>
-                                <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                <HeaderStyle CssClass="gridviewheader" />
                                 <ItemStyle CssClass="gridviewitem" Width="13%" />
                                 <HeaderTemplate><asp:LinkButton ID="lnkHRole" runat="server" CommandName="Sort" CommandArgument="RoleName" Text="User Role"></asp:LinkButton></HeaderTemplate>                                    
                             </asp:TemplateField>
                             <asp:TemplateField>
-                                <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                <HeaderStyle CssClass="gridviewheader" />
                                 <ItemStyle CssClass="gridviewitem" Width="15%" />           
                                 <HeaderTemplate><asp:LinkButton ID="lnkHFN" runat="server" CommandName="Sort" CommandArgument="FirstName" Text="First Name"></asp:LinkButton></HeaderTemplate>                         
                             </asp:TemplateField>
                             <asp:TemplateField>
-                                <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                <HeaderStyle CssClass="gridviewheader" />
                                 <ItemStyle CssClass="gridviewitem" Width="15%" />   
                                 <HeaderTemplate><asp:LinkButton ID="lnkHLN" runat="server" CommandName="Sort" CommandArgument="LastName" Text="Last Name"></asp:LinkButton></HeaderTemplate>                                 
                             </asp:TemplateField>
                             <asp:TemplateField>
-                                <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                <HeaderStyle CssClass="gridviewheader" />
                                 <ItemStyle CssClass="gridviewitem" Width="13%" />       
                                 <HeaderTemplate><asp:LinkButton ID="lnkHLoc" runat="server" CommandName="Sort" CommandArgument="LocName" Text="Location"></asp:LinkButton></HeaderTemplate>                             
                             </asp:TemplateField>

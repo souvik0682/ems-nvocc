@@ -69,11 +69,11 @@
                             <EmptyDataTemplate>No Location(s) Found</EmptyDataTemplate>
                             <Columns>
                                 <asp:TemplateField HeaderText="Sl#">
-                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                    <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="5%" />                                    
                                 </asp:TemplateField>
                                 <asp:TemplateField>
-                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                    <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="25%" />    
                                     <HeaderTemplate><asp:LinkButton ID="lnkHAbbr" runat="server" CommandName="Sort" CommandArgument="Abbr" Text="Abbr"></asp:LinkButton></HeaderTemplate>                                
                                     <ItemTemplate>
@@ -81,12 +81,12 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
-                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                    <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="35%" />    
                                     <HeaderTemplate><asp:LinkButton ID="lnkHLoc" runat="server" CommandName="Sort" CommandArgument="Location" Text="Location"></asp:LinkButton></HeaderTemplate>                                
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="City & Pin">
-                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                    <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="30%" />                                       
                                 </asp:TemplateField>
                                 <asp:TemplateField>

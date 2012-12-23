@@ -94,6 +94,10 @@
     <Content Include="MasterModule\ManageServTax.aspx" />
     <Content Include="MasterModule\vendor-add-edit.aspx" />
     <Content Include="MasterModule\vendor-list.aspx" />
+    <Content Include="Reports\IGMForm2.aspx" />
+    <Content Include="Reports\IGMFormC.aspx" />
+    <Content Include="Reports\FileLandingGurantee.aspx" />
+    <Content Include="Reports\ImportRegister.aspx" />
     <Content Include="Reports\ImpBLChkLst.aspx" />
     <Content Include="Scripts\Common.js" />
     <Content Include="Scripts\CustomTextBox.js" />
@@ -259,6 +263,34 @@
     <Compile Include="MasterModule\vendor-list.aspx.designer.cs">
       <DependentUpon>vendor-list.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\IGMForm2.aspx.cs">
+      <DependentUpon>IGMForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\IGMForm2.aspx.designer.cs">
+      <DependentUpon>IGMForm2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\IGMFormC.aspx.cs">
+      <DependentUpon>IGMFormC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\IGMFormC.aspx.designer.cs">
+      <DependentUpon>IGMFormC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\FileLandingGurantee.aspx.cs">
+      <DependentUpon>FileLandingGurantee.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\FileLandingGurantee.aspx.designer.cs">
+      <DependentUpon>FileLandingGurantee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ImportRegister.aspx.cs">
+      <DependentUpon>ImportRegister.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ImportRegister.aspx.designer.cs">
+      <DependentUpon>ImportRegister.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\ImpBLChkLst.aspx.cs">
       <DependentUpon>ImpBLChkLst.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -409,7 +441,11 @@
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="RDLC\FileLandingGurantee.rdlc" />
+    <EmbeddedResource Include="RDLC\IGMForm2.rdlc" />
+    <EmbeddedResource Include="RDLC\IGMFormC.rdlc" />
     <EmbeddedResource Include="RDLC\ImpBLChkLst.rdlc" />
+    <EmbeddedResource Include="RDLC\ImportRegister.rdlc" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

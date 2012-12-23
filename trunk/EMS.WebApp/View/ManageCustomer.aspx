@@ -81,16 +81,16 @@
                             </EmptyDataTemplate>
                             <Columns>
                                 <asp:TemplateField HeaderText="Sl#">
-                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                    <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="4%" />
                                 </asp:TemplateField>
                                 <asp:TemplateField>
-                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                    <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="15%" />
                                     <HeaderTemplate><asp:LinkButton ID="lnkHLoc" runat="server" Text="Location" CommandName="Sort" CommandArgument="Location"></asp:LinkButton></HeaderTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
-                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                    <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="40%" />      
                                     <HeaderTemplate><asp:LinkButton ID="lnkHName" runat="server" Text="Customer Name" CommandName="Sort" CommandArgument="CustName"></asp:LinkButton></HeaderTemplate>              
                                     <ItemTemplate>
@@ -99,11 +99,11 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Group Company">
-                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                    <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="18%" />                          
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Executive Name">
-                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                    <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="18%" />                          
                                 </asp:TemplateField>
                                 <asp:TemplateField>

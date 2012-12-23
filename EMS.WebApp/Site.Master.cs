@@ -145,23 +145,23 @@ namespace EMS.WebApp
             {
                 menuId = (int)PageName.ImportHaulageChargeMaster;
             }
-            else if (Request.Path.Contains("/MasterModule/ImpBLChkLst.aspx"))
+            else if (Request.Path.Contains("/Reports/ImpBLChkLst.aspx"))
             {
                 menuId = (int)PageName.ImportBLChklst;
             }
-            else if (Request.Path.Contains("/MasterModule/IGMForm2.aspx"))
+            else if (Request.Path.Contains("/Reports/IGMForm2.aspx"))
             {
                 menuId = (int)PageName.IGMFormII;
             }
-            else if (Request.Path.Contains("/MasterModule/IGMFormC.aspx"))
+            else if (Request.Path.Contains("/Reports/IGMFormC.aspx"))
             {
                 menuId = (int)PageName.IGMFormC;
             }
-            else if (Request.Path.Contains("/MasterModule/FileLandingGurantee.aspx"))
+            else if (Request.Path.Contains("/Reports/FileLandingGurantee.aspx"))
             {
                 menuId = (int)PageName.FileLandingGuranteeLetter;
             }
-            else if (Request.Path.Contains("/MasterModule/ImportRegister.aspx"))
+            else if (Request.Path.Contains("/Reports/ImportRegister.aspx"))
             {
                 menuId = (int)PageName.ImportRegister;
             }

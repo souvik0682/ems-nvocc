@@ -103,9 +103,9 @@ namespace EMS.WebApp.MasterModule
             }
             else
             {
-                if (dbinteract.IsUnique("finInvoice", "InvoiceDate", txtStDate.Text) && ddlStatus.SelectedIndex == 1)
+                if (dbinteract.IsUnique("finInvoice", "InvoiceDate", txtStDate.Text) )
                 {
-                    GeneralFunctions.RegisterAlertScript(this, "This Date has been already used for Invoice. It can not be Inactive");
+                    GeneralFunctions.RegisterAlertScript(this, "This Date has been already used for Invoice. It can not be edited");
                     return;
                 }
 

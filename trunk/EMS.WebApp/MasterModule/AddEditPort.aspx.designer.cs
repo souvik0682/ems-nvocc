@@ -85,6 +85,15 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.TextBox txtAdd2;
         
         /// <summary>
+        /// txtExportPort control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtExportPort;
+        
+        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>

@@ -27,6 +27,16 @@ namespace EMS.BLL
             return returnval;
 
         }
+
+
+        public DataSet PopulateDDLDS(string tableName, string textField, string valuefield)
+        {
+
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery("Select [" + textField + "] ListItemValue, [" + valuefield + "] ListItemText from dbo." + tableName, true);
+
+            return dquery.GetTables();
+
+        }
         #endregion
 
         #region country
@@ -92,7 +102,7 @@ namespace EMS.BLL
 
         }
 
-        public int AddEditPort(int userID, int pk_PortId, string PortName, string PortCode, bool ICDIndicator, string PortAddressee, string Address2, string Address3, bool isEdit)
+        public int AddEditPort(int userID, int pk_PortId, string PortName, string PortCode, bool ICDIndicator, string PortAddressee, string Address2, string Address3,string ExportPort, bool isEdit)
         {
             string ProcName = "admin.prcAddEditPort";
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
@@ -104,6 +114,7 @@ namespace EMS.BLL
             dquery.AddVarcharParam("@PortAddressee", 50, PortAddressee);
             dquery.AddVarcharParam("@Address2", 50, Address2);
             dquery.AddVarcharParam("@Address3", 50, Address3);
+            dquery.AddVarcharParam("@ExportPort", 3, ExportPort);
             dquery.AddBooleanParam("@isEdit", isEdit);
 
             return dquery.RunActionQuery();
@@ -192,6 +203,45 @@ namespace EMS.BLL
             return dquery.RunActionQuery();
 
         }
+        #endregion
+
+        #region country
+
+        public DataSet GetVessel(int vesselId,int vesselPrefix, string vesselName,string vesselFlag,int countryId)
+        {
+            string ProcName = "prcGetVessel";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            //dquery.AddIntegerParam("@pk_countryId", Convert.ToInt32(sqlParam[0]));
+            //dquery.AddVarcharParam("@CountryName", 200, Convert.ToString(sqlParam[1]));
+
+
+            return dquery.GetTables();
+        }
+
+        public void DeleteVessel(int vesselId)
+        {
+            string ProcName = "prcDeleteVessel";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+            dquery.AddIntegerParam("@pk_vesselId", vesselId);
+            dquery.RunActionQuery();
+
+        }
+        //public DataSet get
+        //public int AddEditCountry(int userID, int pk_CountryID, string CountryName, string CountryAbbr, bool isEdit)
+        //{
+        //    string ProcName = "prcAddEditCountry";
+        //    DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+        //    dquery.AddIntegerParam("@userID", userID);
+        //    dquery.AddIntegerParam("@pk_CountryId", pk_CountryID);
+        //    dquery.AddVarcharParam("@CountryName", 200, CountryName);
+        //    dquery.AddVarcharParam("@CountryAbbr", 5, CountryName);
+        //    dquery.AddBooleanParam("@isEdit", isEdit);
+
+        //    return dquery.RunActionQuery();
+
+        //}
+
         #endregion
 
     }

@@ -82,26 +82,26 @@
                                     <ItemStyle CssClass="gridviewitem" Width="2%" />                                       
                                 </asp:TemplateField>
 
-                                <asp:TemplateField HeaderText="Start Date">
-                                    <HeaderStyle CssClass="gridviewheader" />
+                                <asp:TemplateField HeaderText="Start Date"  >
+                                    <HeaderStyle CssClass="gridviewheader"/>
                                     <ItemStyle CssClass="gridviewitem" Width="20%" />                                       
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Tax %">
-                                    <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="20%" />      
+                                    <HeaderStyle CssClass="gridviewheader_num"  />
+                                    <ItemStyle CssClass="gridviewitem" Width="20%" HorizontalAlign="Right"  />      
                                    <%-- <HeaderTemplate><asp:LinkButton ID="lnkHMan" runat="server" CommandName="Sort" CommandArgument="Manager" Text="Location Manager"></asp:LinkButton></HeaderTemplate>                                                                 --%>
                                 </asp:TemplateField>
                                  <asp:TemplateField HeaderText="Cess %">
-                                    <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="20%" />                                       
+                                    <HeaderStyle CssClass="gridviewheader_num"/>
+                                    <ItemStyle CssClass="gridviewitem" Width="20%" HorizontalAlign="Right"/>                                       
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Additional Cess %">
-                                    <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="20%" />                                       
+                                    <HeaderStyle CssClass="gridviewheader_num" />
+                                    <ItemStyle CssClass="gridviewitem" Width="20%" HorizontalAlign="Right"/>                                       
                                 </asp:TemplateField>
                                  <asp:TemplateField HeaderText="Status">
                                     <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="20%" />                                       
+                                    <ItemStyle CssClass="gridviewitem" Width="20%" HorizontalAlign="Left"/>                                       
                                 </asp:TemplateField>
 
                                 <asp:TemplateField>

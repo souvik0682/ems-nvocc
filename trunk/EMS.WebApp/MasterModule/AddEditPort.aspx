@@ -59,6 +59,13 @@
                    </td>
                 </tr>
                 
+                  <tr>
+                    <td>Export Port:</td>
+                    <td><asp:TextBox ID="txtExportPort" runat="server" CssClass="textboxuppercase" 
+                            MaxLength="3" Width="250" TextMode="SingleLine"></asp:TextBox><br />
+                   </td>
+                </tr>
+                
               
                 <tr>
                     <td colspan="2">

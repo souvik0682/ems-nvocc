@@ -17,20 +17,20 @@
             <table border="0" cellpadding="2" cellspacing="3">
                 <tr>
                     <td style="width:140px;">Tax %:<span class="errormessage1">*</span></td>
-                    <td><asp:TextBox ID="txtTax" runat="server" CssClass="textboxuppercase" MaxLength="50" Width="250" onkeyup="IsDecimal(this)"></asp:TextBox><br />
+                    <td><asp:TextBox ID="txtTax" runat="server" CssClass="textboxuppercase" style="text-align:right" MaxLength="50" Width="250" onkeyup="IsDecimal(this)"></asp:TextBox><br />
                         <asp:RequiredFieldValidator ID="rfvName" runat="server" CssClass="errormessage" 
                             ControlToValidate="txtTax" Display="Dynamic" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator></td>
                 </tr>
                 
                 <tr>
                     <td>Cess %:</td>
-                    <td><asp:TextBox ID="txtCess" runat="server" CssClass="textboxuppercase" MaxLength="10" Width="250" onkeyup="IsDecimal(this)"></asp:TextBox><br />
+                    <td><asp:TextBox ID="txtCess" runat="server" style="text-align:right" CssClass="textboxuppercase" MaxLength="10" Width="250" onkeyup="IsDecimal(this)"></asp:TextBox><br />
                     </td>
                 </tr>
 
                 <tr>
                     <td>Additional Cess %:</td>
-                    <td><asp:TextBox ID="txtAddiCess" runat="server" CssClass="textboxuppercase" MaxLength="10" Width="250" onkeyup="IsDecimal(this)"></asp:TextBox><br /></td>
+                    <td><asp:TextBox ID="txtAddiCess" runat="server" style="text-align:right" CssClass="textboxuppercase" MaxLength="10" Width="250" onkeyup="IsDecimal(this)"></asp:TextBox><br /></td>
                 </tr>
 
                   <tr>

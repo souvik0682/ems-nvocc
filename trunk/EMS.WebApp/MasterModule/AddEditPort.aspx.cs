@@ -68,7 +68,7 @@ namespace EMS.WebApp.MasterModule
                 txtPortAddressee.Text = ds.Tables[0].Rows[0]["PortAddressee"].ToString();
                 txtAdd1.Text = ds.Tables[0].Rows[0]["Address2"].ToString();
                 txtAdd2.Text = ds.Tables[0].Rows[0]["Address3"].ToString();
-
+                txtExportPort.Text = ds.Tables[0].Rows[0]["ExportPort"].ToString();
 
             }
         }
@@ -91,7 +91,7 @@ namespace EMS.WebApp.MasterModule
                     GeneralFunctions.RegisterAlertScript(this, "Port Code must be unique. The given code has already been used for another port. Please try with another one.");
                     return;
                 }
-            int result = dbinteract.AddEditPort(_userId, Convert.ToInt32(portId), txtPortName.Text.Trim(), txtPortCode.Text, ddlICD.SelectedIndex == 0 ? false : true, txtPortAddressee.Text, txtAdd1.Text, txtAdd2.Text, isedit);
+            int result = dbinteract.AddEditPort(_userId, Convert.ToInt32(portId), txtPortName.Text.Trim(), txtPortCode.Text, ddlICD.SelectedIndex == 0 ? false : true, txtPortAddressee.Text, txtAdd1.Text, txtAdd2.Text,txtExportPort.Text, isedit);
 
 
             if (result > 0)

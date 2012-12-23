@@ -59,15 +59,15 @@
                             <EmptyDataTemplate>No Role(s) Found</EmptyDataTemplate>
                             <Columns>
                                 <asp:TemplateField HeaderText="Sl#">
-                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                    <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="10%" />                                    
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Role">
-                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                    <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="65%" />                                    
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Status">
-                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                    <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="15%" />                                    
                                     <ItemTemplate>
                                         <asp:LinkButton ID="lnkStatus" runat="server"></asp:LinkButton>

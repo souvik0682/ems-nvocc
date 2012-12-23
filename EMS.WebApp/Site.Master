@@ -60,21 +60,21 @@
                             <li id="liIR" runat="server">
                                 <a href="#">Report</a>
                                 <ul>
-                                    <li id="liIR_BL" runat="server"><a href="#">Import B/L checklist</a></li>
+                                    <li id="liIR_BL" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ImpBLChkLst.aspx") %>">Import B/L checklist</a></li>
                                     <li id="liIR_EDI" runat="server"><a href="#">Import EDI for Custom - Export to text file</a></li>
-                                    <li id="liIR_IGM" runat="server"><a href="#">IGM - Form II</a></li>
-                                    <li id="liIR_IGMC" runat="server"><a href="#">IGM - Form C for Hazardous Cargo</a></li>
+                                    <li id="liIR_IGM" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/IGMForm2.aspx") %>">IGM - Form II</a></li>
+                                    <li id="liIR_IGMC" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/IGMFormC.aspx") %>">IGM - Form C for Hazardous Cargo</a></li>
                                     <li id="liIR_Amend" runat="server"><a href="#">Amendment Letter</a></li>
                                     <li id="liIR_Land" runat="server"><a href="#">Letter to File Landing Gurantee</a></li>
                                     <li id="liIR_Stat" runat="server"><a href="#">Statistical report</a></li>
-                                    <li id="liIR_IR" runat="server"><a href="#">Import Register</a></li>
+                                    <li id="liIR_IR" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ImportRegister.aspx") %>">Import Register</a></li>
                                     <li id="liIR_CAN" runat="server"><a href="#">Cargo Arrival Notice</a></li>
                                     <li id="liIR_PDO" runat="server"><a href="#">Pending DO</a></li>
                                     <li id="liIR_DOExamin" runat="server"><a href="#">Delivery Order (Examin / Final)</a></li>
                                     <li id="liIR_DOFactory" runat="server"><a href="#">Delivery Order (Factory / CFS) Distuffing</a></li>
                                     <li id="liIR_Slot" runat="server"><a href="#">Slot/Plot/Empty Letter</a></li>
                                     <li id="liIR_Carting" runat="server"><a href="#">Carting Order / Gang Letter</a></li>
-                                    <li id="liIR_FileLanding" runat="server"><a href="#">LIST TO FILE LANDING G'TE</a></li>
+                                    <li id="liIR_FileLanding" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/FileLandingGurantee.aspx") %>">LIST TO FILE LANDING G'TE</a></li>
                                     <li id="liIR_SMTP" runat="server"><a href="#">SMTP EXTRACT</a></li>
                                     <li id="liIR_Coprar" runat="server"><a href="#">COPRAR</a></li>
                                     <li id="liIR_ACL" runat="server"><a href="#">Advance Container List</a></li>

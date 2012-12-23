@@ -91,7 +91,8 @@ legend {font-size: 1.1em;font-weight: 600;padding: 0px 4px 2px 4px;color:Blue;}
 .table td{border:solid 1px #A1CDF2;font-size:12px; font-weight:normal;text-align:left;}
 .tablecaption{font-size: 12pt; font-weight: bold; color: #000000;padding:5px 0px 5px 0px;text-align:center;vertical-align:middle;background-color:#FFC500;}
 .tableheader{font-size:10pt; color:#000000; font-weight:bold;padding-left:10px;text-align: center;}
-.gridviewheader {color:#000000;font-size:12px; font-weight:bold; border:1px solid #e8e8e8; padding:5px; background:-webkit-gradient(linear, left bottom, left top, from(#ccc), to(#fff));vertical-align:top;}
+.gridviewheader {color:#000000;font-size:12px; font-weight:bold; border:1px solid #e8e8e8; padding:5px; background:-webkit-gradient(linear, left bottom, left top, from(#ccc), to(#fff));text-align:left;vertical-align:top;}
+.gridviewheader_num {color:#000000;font-size:12px; font-weight:bold; border:1px solid #e8e8e8; padding:5px; background:-webkit-gradient(linear, left bottom, left top, from(#ccc), to(#fff)); text-align:right;vertical-align:top;}
 .gridviewitem {border:1px solid #e8e8e8;font-size:12px; padding:1px; background-color:#FFFFFF;}
 .gridviewalternateitem {border:1px solid #e8e8e8;font-size:12px; padding:1px; background-color:#f8f8f8;}
 .gridviewemptydatarow {font-size:12px;color:Red; font-weight:bold;}

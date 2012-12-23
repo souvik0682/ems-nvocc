@@ -59,15 +59,15 @@
                             <EmptyDataTemplate>No Data Found</EmptyDataTemplate>
                             <Columns>
                                 <asp:TemplateField HeaderText="Sl#">
-                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                    <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="5%" />                                    
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Date">
-                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                    <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="40%" />    
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="USD To INR Conversion Rate">
-                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Right" />
+                                    <HeaderStyle CssClass="gridviewheader_num" />
                                     <ItemStyle CssClass="gridviewitem" HorizontalAlign="Right" Width="45%" />    
                                 </asp:TemplateField>
                                 <asp:TemplateField>

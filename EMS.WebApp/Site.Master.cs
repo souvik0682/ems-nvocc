@@ -87,7 +87,7 @@ namespace EMS.WebApp
             int userId = 0;
 
             userId = UserBLL.GetLoggedInUserId();
-            menuId = GetMenuIdByPath();            
+            menuId = GetMenuIdByPath();
 
             IUserPermission userPermission = UserBLL.GetMenuAccessByUser(userId, menuId);
             Session[Constants.SESSION_USER_PERMISSION] = userPermission;
@@ -97,61 +97,130 @@ namespace EMS.WebApp
         {
             int menuId = 0;
 
-            switch (Request.Path)
+            if (Request.Path.Contains("/View/ManageUser.aspx") || Request.Path.Contains("/View/AddEditUser.aspx"))
             {
-                // Master
-                case "/View/ManageUser.aspx":
-                case "/View/AddEditUser.aspx":
-                    menuId = (int)PageName.UserMaster;
-                    break;
-                case "/View/ManageRole.aspx":
-                case "/View/AddEditRole.aspx":
-                    menuId = (int)PageName.RoleMaster;
-                    break;
-                case "/View/ManageLocation.aspx":
-                case "/View/AddEditLocation.aspx":
-                    menuId = (int)PageName.LocationMaster;
-                    break;
-                case "/View/ManageCustomer.aspx":
-                case "/View/AddEditCustomer.aspx":
-                    menuId = (int)PageName.CustomerMaster;
-                    break;
-                case "/MasterModule/ManageLine.aspx":
-                case "/MasterModule/AddEditLine.aspx":
-                    menuId = (int)PageName.LineMSOMaster;
-                    break;
-                case "/MasterModule/vendor-list.aspx":
-                case "/MasterModule/vendor-add-edit.aspx":
-                    menuId = (int)PageName.AddressMaster;
-                    break;
-                case "/View/ManageServTax.aspx":
-                case "/View/AddEditSTax.aspx":
-                    menuId = (int)PageName.ServiceTaxMaster;
-                    break;
-                case "/View/charge-list.aspx":
-                case "/View/charge-add-edit.aspx":
-                    menuId = (int)PageName.ChargeMaster;
-                    break;
-                //Container type
-                case "/View/ManageExchRate.aspx":
-                case "/View/AddEditExchRate.aspx":
-                    menuId = (int)PageName.ExchangeRateMaster;
-                    break;
-                //Terminal
-                case "/MasterModule/ManageCountry.aspx":
-                case "/MasterModule/AddEditCountry.aspx":
-                    menuId = (int)PageName.CountryMaster;
-                    break;
-                case "/MasterModule/ManagePort.aspx":
-                case "/MasterModule/AddEditPort.aspx":
-                    menuId = (int)PageName.PortMaster;
-                    break;
-                case "/MasterModule/ImportHaulage-list.aspx":
-                case "/MasterModule/import-haulage-chrg-add-edit.aspx":
-                    menuId = (int)PageName.ImportHaulageChargeMaster;
-                    break;
-                //Vessel master
+                menuId = (int)PageName.UserMaster;
             }
+            else if (Request.Path.Contains("/View/ManageRole.aspx") || Request.Path.Contains("/View/AddEditRole.aspx"))
+            {
+                menuId = (int)PageName.RoleMaster;
+            }
+            else if (Request.Path.Contains("/View/ManageLocation.aspx") || Request.Path.Contains("/View/AddEditLocation.aspx"))
+            {
+                menuId = (int)PageName.LocationMaster;
+            }
+            else if (Request.Path.Contains("/View/ManageCustomer.aspx") || Request.Path.Contains("/View/AddEditCustomer.aspx"))
+            {
+                menuId = (int)PageName.CustomerMaster;
+            }
+            else if (Request.Path.Contains("/MasterModule/ManageLine.aspx") || Request.Path.Contains("/MasterModule/AddEditLine.aspx"))
+            {
+                menuId = (int)PageName.LineMSOMaster;
+            }
+            else if (Request.Path.Contains("/MasterModule/vendor-list.aspx") || Request.Path.Contains("/MasterModule/vendor-add-edit.aspx"))
+            {
+                menuId = (int)PageName.AddressMaster;
+            }
+            else if (Request.Path.Contains("/View/ManageServTax.aspx") || Request.Path.Contains("/View/AddEditSTax.aspx"))
+            {
+                menuId = (int)PageName.ServiceTaxMaster;
+            }
+            else if (Request.Path.Contains("/View/charge-list.aspx") || Request.Path.Contains("/View/charge-add-edit.aspx"))
+            {
+                menuId = (int)PageName.ChargeMaster;
+            }
+            else if (Request.Path.Contains("/View/ManageExchRate.aspx") || Request.Path.Contains("/View/AddEditExchRate.aspx"))
+            {
+                menuId = (int)PageName.ExchangeRateMaster;
+            }
+            else if (Request.Path.Contains("/MasterModule/ManageCountry.aspx") || Request.Path.Contains("/MasterModule/AddEditCountry.aspx"))
+            {
+                menuId = (int)PageName.CountryMaster;
+            }
+            else if (Request.Path.Contains("/MasterModule/ManagePort.aspx") || Request.Path.Contains("/MasterModule/AddEditPort.aspx"))
+            {
+                menuId = (int)PageName.PortMaster;
+            }
+            else if (Request.Path.Contains("/MasterModule/ImportHaulage-list.aspx") || Request.Path.Contains("/MasterModule/import-haulage-chrg-add-edit.aspx"))
+            {
+                menuId = (int)PageName.ImportHaulageChargeMaster;
+            }
+            else if (Request.Path.Contains("/MasterModule/ImpBLChkLst.aspx"))
+            {
+                menuId = (int)PageName.ImportBLChklst;
+            }
+            else if (Request.Path.Contains("/MasterModule/IGMForm2.aspx"))
+            {
+                menuId = (int)PageName.IGMFormII;
+            }
+            else if (Request.Path.Contains("/MasterModule/IGMFormC.aspx"))
+            {
+                menuId = (int)PageName.IGMFormC;
+            }
+            else if (Request.Path.Contains("/MasterModule/FileLandingGurantee.aspx"))
+            {
+                menuId = (int)PageName.FileLandingGuranteeLetter;
+            }
+            else if (Request.Path.Contains("/MasterModule/ImportRegister.aspx"))
+            {
+                menuId = (int)PageName.ImportRegister;
+            }
+
+            //switch (Request.Path)
+            //{
+            //    // Master
+            //    case "/View/ManageUser.aspx":
+            //    case "/View/AddEditUser.aspx":
+            //        menuId = (int)PageName.UserMaster;
+            //        break;
+            //    case "/View/ManageRole.aspx":
+            //    case "/View/AddEditRole.aspx":
+            //        menuId = (int)PageName.RoleMaster;
+            //        break;
+            //    case "/View/ManageLocation.aspx":
+            //    case "/View/AddEditLocation.aspx":
+            //        menuId = (int)PageName.LocationMaster;
+            //        break;
+            //    case "/View/ManageCustomer.aspx":
+            //    case "/View/AddEditCustomer.aspx":
+            //        menuId = (int)PageName.CustomerMaster;
+            //        break;
+            //    case "/MasterModule/ManageLine.aspx":
+            //    case "/MasterModule/AddEditLine.aspx":
+            //        menuId = (int)PageName.LineMSOMaster;
+            //        break;
+            //    case "/MasterModule/vendor-list.aspx":
+            //    case "/MasterModule/vendor-add-edit.aspx":
+            //        menuId = (int)PageName.AddressMaster;
+            //        break;
+            //    case "/View/ManageServTax.aspx":
+            //    case "/View/AddEditSTax.aspx":
+            //        menuId = (int)PageName.ServiceTaxMaster;
+            //        break;
+            //    case "/View/charge-list.aspx":
+            //    case "/View/charge-add-edit.aspx":
+            //        menuId = (int)PageName.ChargeMaster;
+            //        break;
+            //    //Container type
+            //    case "/View/ManageExchRate.aspx":
+            //    case "/View/AddEditExchRate.aspx":
+            //        menuId = (int)PageName.ExchangeRateMaster;
+            //        break;
+            //    //Terminal
+            //    case "/MasterModule/ManageCountry.aspx":
+            //    case "/MasterModule/AddEditCountry.aspx":
+            //        menuId = (int)PageName.CountryMaster;
+            //        break;
+            //    case "/MasterModule/ManagePort.aspx":
+            //    case "/MasterModule/AddEditPort.aspx":
+            //        menuId = (int)PageName.PortMaster;
+            //        break;
+            //    case "/MasterModule/ImportHaulage-list.aspx":
+            //    case "/MasterModule/import-haulage-chrg-add-edit.aspx":
+            //        menuId = (int)PageName.ImportHaulageChargeMaster;
+            //        break;
+            //    //Vessel master
+            //}
 
             return menuId;
         }

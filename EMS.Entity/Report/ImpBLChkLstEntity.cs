@@ -317,6 +317,12 @@ namespace EMS.Entity.Report
             set;
         }
 
+        public Int64 FooterId
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region Constructors
@@ -330,6 +336,9 @@ namespace EMS.Entity.Report
         {
             if (HasColumn(reader, "BLId") && reader["BLId"] != DBNull.Value)
                 this.BLId = Convert.ToInt64(reader["BLId"]);
+
+            if (HasColumn(reader, "FooterId") && reader["FooterId"] != DBNull.Value)
+                this.FooterId = Convert.ToInt64(reader["FooterId"]);
 
             if (HasColumn(reader, "IGMBLNumber") && reader["IGMBLNumber"] != DBNull.Value)
                 this.IGMBLNumber = Convert.ToString(reader["IGMBLNumber"]);

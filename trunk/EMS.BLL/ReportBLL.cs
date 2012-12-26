@@ -11,14 +11,14 @@ namespace EMS.BLL
 {
     public class ReportBLL
     {
-        public static List<ImpBLChkLstEntity> GetImportBLCheckList()
+        public static List<ImpBLChkLstEntity> GetImportBLCheckList(int lineId, int locId, Int64 voyageId, Int64 vesselId)
         {
-            return ReportDAL.GetImportBLCheckList();
+            return ReportDAL.GetImportBLCheckList(lineId, locId, voyageId, vesselId);
         }
 
-        //public static DataTable GetImportBLCheckList()
-        //{
-        //    return ReportDAL.GetImportBLCheckList();
-        //}
+        public static List<ImpRegisterEntity> GetImportRegister(int lineId, int locId, Int64 voyageId, Int64 vesselId)
+        {
+            return ReportDAL.GetImportRegister(lineId, locId, voyageId, vesselId);
+        }
     }
 }

@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using EMS.BLL;
+using EMS.Common;
+using EMS.Entity.Report;
+using EMS.Utilities;
 using EMS.Utilities.ReportManager;
 using Microsoft.Reporting.WebForms;
-using System.Configuration;
-using EMS.BLL;
-using EMS.Utilities;
 
 namespace EMS.WebApp.Reports
 {
@@ -32,11 +35,16 @@ namespace EMS.WebApp.Reports
         {
             RetriveParameters();
             CheckUserAccess();
+
+            if (!IsPostBack)
+            {
+                PopulateControls();
+            }
         }
 
         protected void btnShow_Click(object sender, EventArgs e)
         {
-
+            GenerateReport();
         }
 
         #endregion
@@ -59,35 +67,51 @@ namespace EMS.WebApp.Reports
             }
         }
 
+        private void PopulateControls()
+        {
+            PopulateLocation();
+            PopulateLine();
+        }
+
+        private void PopulateLocation()
+        {
+            List<ILocation> lstLoc = new CommonBLL().GetActiveLocation();
+
+            ddlLoc.DataValueField = "Id";
+            ddlLoc.DataTextField = "Name";
+            ddlLoc.DataSource = lstLoc;
+            ddlLoc.DataBind();
+            ddlLoc.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
+        }
+
+        private void PopulateLine()
+        {
+            BLL.DBInteraction dbinteract = new BLL.DBInteraction();
+            DataSet ds = dbinteract.GetNVOCCLine(-1, string.Empty);
+            ddlLine.DataValueField = "pk_NVOCCID";
+            ddlLine.DataTextField = "NVOCCName";
+            ddlLine.DataSource = ds;
+            ddlLine.DataBind();
+            ddlLine.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
+        }
+
         private void GenerateReport()
         {
-            //ReportBLL cls = new ReportBLL();
-            //ICallDetail callDetail = new CallDetailEntity();
-            //LocalReportManager reportManager = new LocalReportManager(rptViewer, "DailyCallRpt", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
-            //string rptName = "DailyCallRpt.Rdlc";
-            //DateTime fromDate;
-            //DateTime toDate;
-            //fromDate = Convert.ToDateTime(txtFromDt.Text, _culture);
-            //toDate = Convert.ToDateTime(txtToDt.Text, _culture);
+            ReportBLL cls = new ReportBLL();
+            List<ImpBLChkLstEntity> lstEntity = ReportBLL.GetImportBLCheckList(Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue), 1, 1);
+            LocalReportManager reportManager = new LocalReportManager(rptViewer, "ImportRegister", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
+            string rptName = "ImportRegister.rdlc";
 
-            //BuildEntity(callDetail);
-            //IEnumerable<ICallDetail> lst = cls.GetDailyCallData(fromDate, toDate, callDetail, _userId);
+            rptViewer.Reset();
+            rptViewer.LocalReport.Dispose();
+            rptViewer.LocalReport.DataSources.Clear();
+            rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
 
-            //rptViewer.Reset();
-            //rptViewer.LocalReport.Dispose();
-            //rptViewer.LocalReport.DataSources.Clear();
-            //rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
-
-            ////rptViewer.LocalReport.ReportPath = Server.MapPath("/" + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName);
-            //rptViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportDataSet", lst));
-            //rptViewer.LocalReport.SetParameters(new ReportParameter("CompanyName", Convert.ToString(ConfigurationManager.AppSettings["CompanyName"])));
-            //rptViewer.LocalReport.SetParameters(new ReportParameter("FromDate", txtFromDt.Text));
-            //rptViewer.LocalReport.SetParameters(new ReportParameter("ToDate", txtToDt.Text));
-            //rptViewer.LocalReport.SetParameters(new ReportParameter("Location", ddlLoc.SelectedItem.Text));
-            //rptViewer.LocalReport.SetParameters(new ReportParameter("SalesPerson", ddlSales.SelectedItem.Text));
-            //rptViewer.LocalReport.SetParameters(new ReportParameter("Prospect", ddlPros.SelectedItem.Text));
-            //rptViewer.LocalReport.SetParameters(new ReportParameter("CallType", ddlType.SelectedItem.Text));
-            //rptViewer.LocalReport.Refresh();
+            //rptViewer.LocalReport.ReportPath = Server.MapPath("/" + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName);
+            rptViewer.LocalReport.DataSources.Add(new ReportDataSource("RptDataSet", lstEntity));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("CompanyName", Convert.ToString(ConfigurationManager.AppSettings["CompanyName"])));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("ReportDate", System.DateTime.Now.ToString("MMMM dd, yyyy") + " at " + System.DateTime.Now.ToString("HH:MM tt")));
+            rptViewer.LocalReport.Refresh();
         }
 
         #endregion

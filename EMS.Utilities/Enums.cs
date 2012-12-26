@@ -14,7 +14,8 @@ namespace EMS.Utilities
             TerminalCode = 3,
             Port = 4,
             ContainerSize = 5,
-            Line = 6
+            Line = 6,
+            ContainerMovementStatus = 7
         }
 
 
@@ -45,10 +46,10 @@ namespace EMS.Utilities
 
         public enum WashingType
         {
-            General=1,
-            Heavy=2,
-            Chemical=3
+            General = 1,
+            Heavy = 2,
+            Chemical = 3
         }
-        
+
     }
 }

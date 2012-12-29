@@ -16,9 +16,14 @@ namespace EMS.BLL
             return ReportDAL.GetImportBLCheckList(lineId, locId, voyageId, vesselId);
         }
 
-        public static List<ImpRegisterEntity> GetImportRegister(int lineId, int locId, Int64 voyageId, Int64 vesselId)
+        public static List<ImpRegisterEntity> GetImportRegisterHeader(int lineId, int locId, Int64 voyageId, Int64 vesselId)
         {
-            return ReportDAL.GetImportRegister(lineId, locId, voyageId, vesselId);
+            return ReportDAL.GetImportRegisterHeader(lineId, locId, voyageId, vesselId);
+        }
+
+        public static List<ImpRegisterEntity> GetImportRegisterFooter(int lineId, int locId, Int64 voyageId, Int64 vesselId)
+        {
+            return ReportDAL.GetImportRegisterFooter(lineId, locId, voyageId, vesselId);
         }
     }
 }

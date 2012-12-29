@@ -45,6 +45,7 @@
     <Compile Include="ChargeEntity.cs" />
     <Compile Include="ChargeRateEntity.cs" />
     <Compile Include="ContactPersonEntity.cs" />
+    <Compile Include="Report\ImpRegisterSummaryEntity.cs" />
     <Compile Include="Report\ImpRegisterEntity.cs" />
     <Compile Include="Report\ImpBLChkLstEntity.cs" />
     <Compile Include="MenuEntity.cs" />

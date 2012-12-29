@@ -136,6 +136,37 @@ namespace EMS.DAL
             return lstEntity;
         }
 
+        public static List<ImpRegisterSummaryEntity> GetImportRegisterSummary(int lineId, int locId, DateTime dischargeFrom, DateTime dischargeTo)
+        {
+            string strExecution = "[report].[uspGetImportRegisterSummary]";
+            List<ImpRegisterSummaryEntity> lstEntity = new List<ImpRegisterSummaryEntity>();
+            ImpRegisterSummaryEntity entity = null;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@NVOCCId", lineId);
+                oDq.AddIntegerParam("@LocId", locId);
+                oDq.AddDateTimeParam("@DischargeFrom", dischargeFrom);
+                oDq.AddDateTimeParam("@DischargeTo", dischargeTo);
+
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    entity = new ImpRegisterSummaryEntity();
+
+                    entity.Location = Convert.ToString(reader["Location"]);
+                    entity.Line = Convert.ToString(reader["Line"]);
+                    entity.BLNo = Convert.ToString(reader["ImpLineBLNo"]);
+
+                    lstEntity.Add(entity);
+                }
+            }
+
+
+            return lstEntity;
+        }
+
         #endregion
 
         #region Private Methods

@@ -25,5 +25,10 @@ namespace EMS.BLL
         {
             return ReportDAL.GetImportRegisterFooter(lineId, locId, voyageId, vesselId);
         }
+
+        public static List<ImpRegisterSummaryEntity> GetImportRegisterSummary(int lineId, int locId, DateTime dischargeFrom, DateTime dischargeTo)
+        {
+            return ReportDAL.GetImportRegisterSummary(lineId, locId, dischargeFrom, dischargeTo);
+        }
     }
 }

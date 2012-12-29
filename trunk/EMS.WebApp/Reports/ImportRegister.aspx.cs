@@ -98,7 +98,9 @@ namespace EMS.WebApp.Reports
         private void GenerateReport()
         {
             ReportBLL cls = new ReportBLL();
-            List<ImpBLChkLstEntity> lstEntity = ReportBLL.GetImportBLCheckList(Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue), 1, 1);
+            List<ImpRegisterEntity> lstHeader = ReportBLL.GetImportRegisterHeader(Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue), 1, 1);
+            List<ImpRegisterEntity> lstFooter = ReportBLL.GetImportRegisterFooter(Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue), 1, 1);
+
             LocalReportManager reportManager = new LocalReportManager(rptViewer, "ImportRegister", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
             string rptName = "ImportRegister.rdlc";
 
@@ -108,9 +110,14 @@ namespace EMS.WebApp.Reports
             rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
 
             //rptViewer.LocalReport.ReportPath = Server.MapPath("/" + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName);
-            rptViewer.LocalReport.DataSources.Add(new ReportDataSource("RptDataSet", lstEntity));
+            rptViewer.LocalReport.DataSources.Add(new ReportDataSource("HeaderDataSet", lstHeader));
+            rptViewer.LocalReport.DataSources.Add(new ReportDataSource("FooterDataSet", lstFooter));
             rptViewer.LocalReport.SetParameters(new ReportParameter("CompanyName", Convert.ToString(ConfigurationManager.AppSettings["CompanyName"])));
-            rptViewer.LocalReport.SetParameters(new ReportParameter("ReportDate", System.DateTime.Now.ToString("MMMM dd, yyyy") + " at " + System.DateTime.Now.ToString("HH:MM tt")));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("Location", ddlLoc.SelectedItem.Text));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("Line", ddlLine.SelectedItem.Text));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("Vessel", txtVessel.Text));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("Voyage", txtVoyage.Text));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("ReportType", string.Empty));
             rptViewer.LocalReport.Refresh();
         }
 

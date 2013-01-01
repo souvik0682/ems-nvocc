@@ -259,5 +259,14 @@
     <Build Include="Scripts\Pre-Deployment\Stored Procedures\report.uspGetImportRegisterFooter.proc.sql">
       <SubType>Code</SubType>
     </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\common.uspGetVoyageList.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\common.uspGetVesselList.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Scripts\Pre-Deployment\Stored Procedures\report.uspGetImportSummary.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
   </ItemGroup>
 </Project>

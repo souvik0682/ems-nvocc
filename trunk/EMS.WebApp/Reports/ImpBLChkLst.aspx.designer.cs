@@ -13,6 +13,24 @@ namespace EMS.WebApp.Reports {
     public partial class ImpBLChkLst {
         
         /// <summary>
+        /// hdnVessel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnVessel;
+        
+        /// <summary>
+        /// hdnVoyage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnVoyage;
+        
+        /// <summary>
         /// ddlLoc control.
         /// </summary>
         /// <remarks>
@@ -31,24 +49,6 @@ namespace EMS.WebApp.Reports {
         protected global::System.Web.UI.WebControls.DropDownList ddlLine;
         
         /// <summary>
-        /// txtVoyage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtVoyage;
-        
-        /// <summary>
-        /// aceVoyage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.AutoCompleteExtender aceVoyage;
-        
-        /// <summary>
         /// txtVessel control.
         /// </summary>
         /// <remarks>
@@ -65,6 +65,24 @@ namespace EMS.WebApp.Reports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.AutoCompleteExtender aceVessel;
+        
+        /// <summary>
+        /// txtVoyage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtVoyage;
+        
+        /// <summary>
+        /// aceVoyage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender aceVoyage;
         
         /// <summary>
         /// btnShow control.

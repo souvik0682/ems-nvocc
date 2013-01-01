@@ -17,6 +17,34 @@ namespace EMS.DAL
 
         #region Common
 
+        public static DataTable GetVoyageList(string prefixText)
+        {
+            string strExecution = "[common].[uspGetVoyageList]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@InitialChar", 100, prefixText);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+
+        public static DataTable GetVesselList(string prefixText)
+        {
+            string strExecution = "[common].[uspGetVesselList]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@InitialChar", 100, prefixText);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+
         /// <summary>
         /// Saves the error log.
         /// </summary>
@@ -57,7 +85,7 @@ namespace EMS.DAL
                 
                 return oDq.GetTable();
             }
-        }
+        } 
 
         #endregion
 

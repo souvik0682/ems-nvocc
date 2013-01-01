@@ -18,6 +18,16 @@ namespace EMS.BLL
     {
         #region Common
 
+        public static DataTable GetVoyageList(string prefixText)
+        {
+            return CommonDAL.GetVoyageList(prefixText);
+        }
+
+        public static DataTable GetVesselList(string prefixText)
+        {
+            return CommonDAL.GetVesselList(prefixText);
+        }
+
         #region Email
 
         public static bool SendMail(string from, string displayName, string mailTo, string cc, string subject, string body, string mailServerIP)

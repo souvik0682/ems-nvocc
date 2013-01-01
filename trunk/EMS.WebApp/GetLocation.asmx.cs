@@ -37,5 +37,33 @@ namespace EMS.WebApp
             }
             return PortNames;
         }
+
+        [WebMethod]
+        public string[] GetVoyageList(string prefixText, int count)
+        {
+            DataTable dt = CommonBLL.GetVoyageList(prefixText);
+            string[] voyageNos = new string[dt.Rows.Count];
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                voyageNos[i] = AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(Convert.ToString(dt.Rows[i]["VoyageNo"]), Convert.ToString(dt.Rows[i]["VoyageID"]));
+            }
+
+            return voyageNos;
+        }
+
+        [WebMethod]
+        public string[] GetVesselList(string prefixText, int count)
+        {
+            DataTable dt = CommonBLL.GetVesselList(prefixText);
+            string[] vesselNames = new string[dt.Rows.Count];
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                vesselNames[i] = AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(Convert.ToString(dt.Rows[i]["VesselName"]), Convert.ToString(dt.Rows[i]["VesselID"]));
+            }
+
+            return vesselNames;
+        }
     }
 }

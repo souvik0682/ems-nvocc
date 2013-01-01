@@ -44,7 +44,23 @@ namespace EMS.WebApp.Reports
 
         protected void btnShow_Click(object sender, EventArgs e)
         {
-            GenerateReport();
+            try
+            {
+                string message = string.Empty;
+
+                if (ValidateData(out message))
+                {
+                    GenerateReport();
+                }
+                else
+                {
+                    GeneralFunctions.RegisterAlertScript(this, message);
+                }
+            }
+            catch (Exception ex)
+            {
+                GeneralFunctions.RegisterErrorAlertScript(this, ex.Message);
+            }
         }
 
         #endregion
@@ -95,10 +111,88 @@ namespace EMS.WebApp.Reports
             ddlLine.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
         }
 
+        private bool ValidateData(out string message)
+        {
+            bool isValid = true;
+            int slNo = 1;
+            message = GeneralFunctions.FormatAlertMessage("Please correct the following errors:");
+
+            if (string.IsNullOrEmpty(txtVessel.Text))
+            {
+                isValid = false;
+                message += GeneralFunctions.FormatAlertMessage(slNo, "Please select vessel name");
+                slNo++;
+            }
+
+            if (string.IsNullOrEmpty(txtVoyage.Text))
+            {
+                isValid = false;
+                message += GeneralFunctions.FormatAlertMessage(slNo, "Please select voyage no");
+                slNo++;
+            }
+
+            //Validate selected voyage name and vessel no.
+            Int64 voyageId = GetSelectedVoyageId();
+            Int64 vesselId = GetSelectedVesselId();
+
+            if (vesselId == 0)
+            {
+                isValid = false;
+                message += GeneralFunctions.FormatAlertMessage(slNo, "Please select valid vessel name");
+                slNo++;
+            }
+
+            if (voyageId == 0)
+            {
+                isValid = false;
+                message += GeneralFunctions.FormatAlertMessage(slNo, "Please select valid voyage no");
+                slNo++;
+            }            
+
+            if (!isValid)
+            {
+                GeneralFunctions.RegisterAlertScript(this, message);
+            }
+
+            return isValid;
+        }
+
+        private Int64 GetSelectedVoyageId()
+        {
+            string voyage = txtVoyage.Text.Trim();
+            int startIndex = voyage.IndexOf('(');
+            int endIndex = voyage.IndexOf(')');
+            Int64 voyageId = 0;
+
+            if (startIndex > 0 && endIndex > 0 && endIndex > startIndex)
+            {
+                Int64.TryParse(voyage.Substring(startIndex + 1, endIndex - startIndex - 1), out voyageId);
+            }
+
+            return voyageId;
+        }
+
+        private Int64 GetSelectedVesselId()
+        {
+            string vessel = txtVessel.Text.Trim();
+            int startIndex = vessel.IndexOf('(');
+            int endIndex = vessel.IndexOf(')');
+            Int64 vesselId = 0;
+
+            if (startIndex > 0 && endIndex > 0 && endIndex > startIndex)
+            {
+                Int64.TryParse(vessel.Substring(startIndex + 1, endIndex - startIndex - 1), out vesselId);
+            }
+
+            return vesselId;
+        }
+
         private void GenerateReport()
         {
             ReportBLL cls = new ReportBLL();
-            List<ImpBLChkLstEntity> lstEntity = ReportBLL.GetImportBLCheckList(Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue), 1, 1);
+            Int64 vesselId = GetSelectedVesselId();
+            Int64 voyageId = GetSelectedVoyageId();
+            List<ImpBLChkLstEntity> lstEntity = ReportBLL.GetImportBLCheckList(Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue), voyageId, vesselId);
             LocalReportManager reportManager = new LocalReportManager(rptViewer, "ImpBLChkLst", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
             string rptName = "ImpBLChkLst.rdlc";
 

@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="EMS.WebApp.Login"
-    MasterPageFile="~/Blank.Master" Title=":: EMS :: Login" %>
+    MasterPageFile="~/Blank.Master" Title=":: Liner :: Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
@@ -67,7 +67,7 @@
                                                 <asp:Label ID="lblMsg" runat="server" CssClass="errormessage" Visible="false"></asp:Label>
                                             </p>
                                             <p class="logindisclaimer">
-                                                Disclaimer:BLA hereby disclaims any and all liability to any individual / organization/ person for any loss or damage caused to them for any action taken on the basis of the general information available on the web site which may be due to omission, clerical errors or for any other reason whatsoever. EMS will not be responsible for any damages your business/ individual may suffer. We make no warranties of any kind, expressed or implied for information we provide. We reserve the right to revise the policies at any time. All end-users of us must adhere to the above policies.
+                                                Disclaimer:BLA hereby disclaims any and all liability to any individual / organization/ person for any loss or damage caused to them for any action taken on the basis of the general information available on the web site which may be due to omission, clerical errors or for any other reason whatsoever. BLA will not be responsible for any damages your business/ individual may suffer. We make no warranties of any kind, expressed or implied for information we provide. We reserve the right to revise the policies at any time. All end-users of us must adhere to the above policies.
                                             </p>
                                         </fieldset>
                                     </ContentTemplate>

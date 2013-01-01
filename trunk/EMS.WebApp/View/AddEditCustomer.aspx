@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddEditCustomer.aspx.cs" Inherits="EMS.WebApp.View.AddEditCustomer" MasterPageFile="~/Site.Master" Title=":: EMS :: Add / Edit Customer" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddEditCustomer.aspx.cs" Inherits="EMS.WebApp.View.AddEditCustomer" MasterPageFile="~/Site.Master" Title=":: Liner :: Add / Edit Customer" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script src="../Scripts/Common.js" type="text/javascript"></script>
     <script type="text/javascript" language="javascript">

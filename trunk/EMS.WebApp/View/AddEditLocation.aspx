@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddEditLocation.aspx.cs" Inherits="EMS.WebApp.View.AddEditLocation" MasterPageFile="~/Site.Master" Title=":: EMS :: Add / Edit Location" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddEditLocation.aspx.cs" Inherits="EMS.WebApp.View.AddEditLocation" MasterPageFile="~/Site.Master" Title=":: Liner :: Add / Edit Location" %>
 <%@ Register Assembly="EMS.WebApp" Namespace="EMS.WebApp.CustomControls" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script src="../Scripts/Common.js" type="text/javascript"></script>

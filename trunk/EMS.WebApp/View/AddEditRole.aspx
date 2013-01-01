@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddEditRole.aspx.cs" Inherits="EMS.WebApp.View.AddEditRole"
-    MasterPageFile="~/Site.Master" Title=":: EMS :: Add / Edit Role" %>
+    MasterPageFile="~/Site.Master" Title=":: Liner :: Add / Edit Role" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">

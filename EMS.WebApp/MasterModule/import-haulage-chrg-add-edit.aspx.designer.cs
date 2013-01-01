@@ -13,13 +13,13 @@ namespace EMS.WebApp.MasterModule {
     public partial class import_haulage_chrg_add_edit {
         
         /// <summary>
-        /// ddlLocation control.
+        /// hdnFromLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlLocation;
+        protected global::System.Web.UI.WebControls.HiddenField hdnFromLocation;
         
         /// <summary>
         /// txtFromLocation control.
@@ -38,6 +38,15 @@ namespace EMS.WebApp.MasterModule {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.AutoCompleteExtender autoComplete1;
+        
+        /// <summary>
+        /// hdnToLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnToLocation;
         
         /// <summary>
         /// txtToLocation control.

@@ -32,7 +32,7 @@ namespace EMS.WebApp.MasterModule
             {
                 ListItem Li = null;
                 //Li = new ListItem("Select", "0");
-                PopulateDropDown((int)Enums.DropDownPopulationFor.Port, ddlLocation, 0);
+                //PopulateDropDown((int)Enums.DropDownPopulationFor.Port, ddlLocation, 0);
                 //ddlLocation.Items.Insert(0, Li);
 
                 //Li = new ListItem("Select", "0");
@@ -53,9 +53,12 @@ namespace EMS.WebApp.MasterModule
             ImportHaulageEntity oImportHaulage = (ImportHaulageEntity)ImportHaulageBLL.GetImportHaulage(Convert.ToInt32(hdnHaulageChrgID.Value));
 
             //ddlFromLocation.SelectedIndex = Convert.ToInt32(ddlFromLocation.Items.IndexOf(ddlFromLocation.Items.FindByValue(oImportHaulage.LocationFrom)));
-            txtFromLocation.Text = ddlLocation.Items.FindByValue(oImportHaulage.LocationFrom).Text;
+            hdnFromLocation.Value = oImportHaulage.LocationFrom.Substring(oImportHaulage.LocationFrom.IndexOf('|') + 1);
+            txtFromLocation.Text = oImportHaulage.LocationFrom.Substring(0, oImportHaulage.LocationFrom.IndexOf('|'));
             //ddlToLocation.SelectedIndex = Convert.ToInt32(ddlToLocation.Items.IndexOf(ddlToLocation.Items.FindByValue(oImportHaulage.LocationTo)));
-            txtToLocation.Text = ddlLocation.Items.FindByValue(oImportHaulage.LocationTo).Text;
+
+            hdnToLocation.Value = oImportHaulage.LocationTo.Substring(oImportHaulage.LocationTo.IndexOf('|') + 1);
+            txtToLocation.Text = oImportHaulage.LocationTo.Substring(0, oImportHaulage.LocationTo.IndexOf('|'));
 
             ddlContainerSize.SelectedIndex = Convert.ToInt32(ddlContainerSize.Items.IndexOf(ddlContainerSize.Items.FindByText(oImportHaulage.ContainerSize)));
 
@@ -88,8 +91,8 @@ namespace EMS.WebApp.MasterModule
 
                 oImportHaulageEntity.ContainerSize = ddlContainerSize.SelectedItem.Text;
                 oImportHaulageEntity.HaulageRate = Convert.ToDouble(txtRate.Text);
-                oImportHaulageEntity.LocationFrom = ddlLocation.Items.FindByText(txtFromLocation.Text).Value;
-                oImportHaulageEntity.LocationTo = ddlLocation.Items.FindByText(txtToLocation.Text).Value;
+                oImportHaulageEntity.LocationFrom = hdnFromLocation.Value;
+                oImportHaulageEntity.LocationTo = hdnToLocation.Value;
                 oImportHaulageEntity.WeightFrom = Convert.ToDouble(txtWFrom.Text.Trim());
                 oImportHaulageEntity.WeightTo = Convert.ToDouble(txtWTo.Text.Trim());
                 oImportHaulageEntity.HaulageStatus = true;

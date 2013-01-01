@@ -2,7 +2,19 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-  
+  <script type="text/javascript">
+      function AutoCompleteItemSelected(sender, e) {
+          
+          if (sender._id == "AutoCompleteEx") {
+              var hdnFromLocation = $get('<%=hdnFromLocation.ClientID %>');
+              hdnFromLocation.value = e.get_value();
+          }
+          else if (sender._id == "AutoCompleteEx2") {
+              var hdnToLocation = $get('<%=hdnToLocation.ClientID %>');
+              hdnToLocation.value = e.get_value();
+          }
+      }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
   
@@ -27,15 +39,16 @@
                                 WarningIconImageUrl="">
                             </cc1:ValidatorCalloutExtender>
                             <br />--%>
-                            <asp:DropDownList ID="ddlLocation" runat="server" Width="255" Visible="false">
-                            </asp:DropDownList>
+                            <%--<asp:DropDownList ID="ddlLocation" runat="server" Width="255" Visible="false">
+                            </asp:DropDownList>--%>
+                            <asp:HiddenField ID="hdnFromLocation" runat="server" />
                             <asp:TextBox runat="server" ID="txtFromLocation" Width="250" autocomplete="off" />
                             <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx" ID="autoComplete1"
                                 TargetControlID="txtFromLocation" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
                                 MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
                                 CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
                                 CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
-                                ShowOnlyCurrentWordInCompletionListItem="true">
+                                ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected">
                                 <Animations>
                                         <OnShow>
                                             <Sequence>
@@ -86,13 +99,14 @@
                                 WarningIconImageUrl="">
                             </cc1:ValidatorCalloutExtender>
                             <br />--%>
+                            <asp:HiddenField ID="hdnToLocation" runat="server" />
                             <asp:TextBox runat="server" ID="txtToLocation" Width="250" autocomplete="off" />
                             <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx2" ID="autoComplete2"
                                 TargetControlID="txtToLocation" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
                                 MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
                                 CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
                                 CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
-                                ShowOnlyCurrentWordInCompletionListItem="true">
+                                ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected">
                                 <Animations>
                                         <OnShow>
                                             <Sequence>

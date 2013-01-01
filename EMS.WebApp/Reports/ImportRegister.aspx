@@ -17,13 +17,45 @@
                 return false;
             }
 
+            if (document.getElementById('<%=txtVessel.ClientID %>').value == '') {
+                alert('Please select vessel');
+                return false;
+            }
+
+            if (document.getElementById('<%=txtVoyage.ClientID %>').value == '') {
+                alert('Please select voyage');
+                return false;
+            }
+
             return true;
+        }
+
+        function getSelectedVesselId(source, eventArgs) {
+            var hdnVessel = document.getElementById('<%=hdnVessel.ClientID %>');
+            var selVal = eventArgs.get_value();
+
+            hdnVessel.value = '';
+
+            if (selVal != '')
+                hdnVessel.value = selVal;
+        }
+
+        function getSelectedVoyageId(source, eventArgs) {
+            var hdnVoyage = document.getElementById('<%=hdnVoyage.ClientID %>');
+            var selVal = eventArgs.get_value();
+
+            hdnVoyage.value = '';
+
+            if (selVal != '')
+                hdnVoyage.value = selVal;
         }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
 <center>
     <div style="padding-top: 10px;">
+        <asp:HiddenField ID="hdnVessel" runat="server" />
+        <asp:HiddenField ID="hdnVoyage" runat="server" />
         <fieldset style="width:964px;height:65px;">
             <table>
                 <tr>
@@ -55,59 +87,13 @@
                 </tr>
                 <tr>
                     <td class="label" style="padding-right:5px;vertical-align:top;">
-                        Voyage:
+                        Vessel:<span class="errormessage">*</span>
                     </td>
                     <td style="padding-right:20px;vertical-align:top;">
-                        <asp:TextBox runat="server" ID="txtVoyage" Width="200" autocomplete="off" />
-                        <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx1" ID="aceVoyage"
-                            TargetControlID="txtVoyage" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
-                            MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
-                            CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
-                            CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
-                            ShowOnlyCurrentWordInCompletionListItem="true">
-                            <Animations>
-                                    <OnShow>
-                                        <Sequence>
-                                            <%-- Make the completion list transparent and then show it --%>
-                                            <OpacityAction Opacity="0" />
-                                            <HideAction Visible="true" />
-                            
-                                            <%--Cache the original size of the completion list the first time
-                                                the animation is played and then set it to zero --%>
-                                            <ScriptAction Script="
-                                                // Cache the size and setup the initial size
-                                                var behavior = $find('AutoCompleteEx1');
-                                                if (!behavior._height) {
-                                                    var target = behavior.get_completionList();
-                                                    behavior._height = target.offsetHeight - 2;
-                                                    target.style.height = '0px';
-                                                }" />
-                            
-                                            <%-- Expand from 0px to the appropriate size while fading in --%>
-                                            <Parallel Duration=".4">
-                                                <FadeIn />
-                                                <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteEx1')._height" />
-                                            </Parallel>
-                                        </Sequence>
-                                    </OnShow>
-                                    <OnHide>
-                                        <%-- Collapse down to 0px and fade out --%>
-                                        <Parallel Duration=".4">
-                                            <FadeOut />
-                                            <Length PropertyKey="height" StartValueScript="$find('AutoCompleteEx1')._height" EndValue="0" />
-                                        </Parallel>
-                                    </OnHide>
-                            </Animations>
-                        </cc1:AutoCompleteExtender>
-                    </td>
-                    <td class="label" style="padding-right:5px;vertical-align:top;">
-                        Vessel
-                    </td>
-                    <td style="padding-right:20px;vertical-align:top;">
-                        <asp:TextBox runat="server" ID="txtVessel" Width="200" autocomplete="off" />
+                        <asp:TextBox runat="server" ID="txtVessel" MaxLength="100" Width="200" autocomplete="off" />
                         <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx2" ID="aceVessel"
-                            TargetControlID="txtVessel" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
-                            MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
+                            TargetControlID="txtVessel" ServicePath="~/GetLocation.asmx" ServiceMethod="GetVesselList"
+                            MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20" OnClientItemSelected="getSelectedVesselId"
                             CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
                             CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
                             ShowOnlyCurrentWordInCompletionListItem="true">
@@ -141,6 +127,52 @@
                                         <Parallel Duration=".4">
                                             <FadeOut />
                                             <Length PropertyKey="height" StartValueScript="$find('AutoCompleteEx2')._height" EndValue="0" />
+                                        </Parallel>
+                                    </OnHide>
+                            </Animations>
+                        </cc1:AutoCompleteExtender>
+                    </td>
+                    <td class="label" style="padding-right:5px;vertical-align:top;">
+                        Voyage:<span class="errormessage">*</span>
+                    </td>
+                    <td style="padding-right:20px;vertical-align:top;">
+                        <asp:TextBox runat="server" ID="txtVoyage" MaxLength="100" Width="200" autocomplete="off" />
+                        <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx1" ID="aceVoyage"
+                            TargetControlID="txtVoyage" ServicePath="~/GetLocation.asmx" ServiceMethod="GetVoyageList"
+                            MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20" OnClientItemSelected="getSelectedVoyageId"
+                            CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
+                            CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
+                            ShowOnlyCurrentWordInCompletionListItem="true">
+                            <Animations>
+                                    <OnShow>
+                                        <Sequence>
+                                            <%-- Make the completion list transparent and then show it --%>
+                                            <OpacityAction Opacity="0" />
+                                            <HideAction Visible="true" />
+                            
+                                            <%--Cache the original size of the completion list the first time
+                                                the animation is played and then set it to zero --%>
+                                            <ScriptAction Script="
+                                                // Cache the size and setup the initial size
+                                                var behavior = $find('AutoCompleteEx1');
+                                                if (!behavior._height) {
+                                                    var target = behavior.get_completionList();
+                                                    behavior._height = target.offsetHeight - 2;
+                                                    target.style.height = '0px';
+                                                }" />
+                            
+                                            <%-- Expand from 0px to the appropriate size while fading in --%>
+                                            <Parallel Duration=".4">
+                                                <FadeIn />
+                                                <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteEx1')._height" />
+                                            </Parallel>
+                                        </Sequence>
+                                    </OnShow>
+                                    <OnHide>
+                                        <%-- Collapse down to 0px and fade out --%>
+                                        <Parallel Duration=".4">
+                                            <FadeOut />
+                                            <Length PropertyKey="height" StartValueScript="$find('AutoCompleteEx1')._height" EndValue="0" />
                                         </Parallel>
                                     </OnHide>
                             </Animations>

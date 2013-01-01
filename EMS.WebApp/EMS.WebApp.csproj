@@ -95,6 +95,7 @@
     <Content Include="MasterModule\ManageServTax.aspx" />
     <Content Include="MasterModule\vendor-add-edit.aspx" />
     <Content Include="MasterModule\vendor-list.aspx" />
+    <Content Include="Reports\ImportSummary.aspx" />
     <Content Include="Reports\IGMForm2.aspx" />
     <Content Include="Reports\IGMFormC.aspx" />
     <Content Include="Reports\FileLandingGurantee.aspx" />
@@ -268,6 +269,13 @@
     </Compile>
     <Compile Include="MasterModule\vendor-list.aspx.designer.cs">
       <DependentUpon>vendor-list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ImportSummary.aspx.cs">
+      <DependentUpon>ImportSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ImportSummary.aspx.designer.cs">
+      <DependentUpon>ImportSummary.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\IGMForm2.aspx.cs">
       <DependentUpon>IGMForm2.aspx</DependentUpon>
@@ -452,6 +460,7 @@
     <EmbeddedResource Include="RDLC\IGMFormC.rdlc" />
     <EmbeddedResource Include="RDLC\ImpBLChkLst.rdlc" />
     <EmbeddedResource Include="RDLC\ImportRegister.rdlc" />
+    <EmbeddedResource Include="RDLC\ImportSummary.rdlc" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

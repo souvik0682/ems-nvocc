@@ -138,7 +138,7 @@ namespace EMS.DAL
 
         public static List<ImpRegisterSummaryEntity> GetImportRegisterSummary(int lineId, int locId, DateTime dischargeFrom, DateTime dischargeTo)
         {
-            string strExecution = "[report].[uspGetImportRegisterSummary]";
+            string strExecution = "[report].[uspGetImportSummary]";
             List<ImpRegisterSummaryEntity> lstEntity = new List<ImpRegisterSummaryEntity>();
             ImpRegisterSummaryEntity entity = null;
 
@@ -158,6 +158,30 @@ namespace EMS.DAL
                     entity.Location = Convert.ToString(reader["Location"]);
                     entity.Line = Convert.ToString(reader["Line"]);
                     entity.BLNo = Convert.ToString(reader["ImpLineBLNo"]);
+                    entity.VesselName = Convert.ToString(reader["VesselName"]);
+                    entity.VoyageNo = Convert.ToString(reader["VoyageNo"]);
+                    entity.DischargeDate = Convert.ToDateTime(reader["DischargeDate"]);
+                    entity.BLNo = Convert.ToString(reader["BLNo"]);
+                    entity.TEU = Convert.ToInt32(reader["TEU"]);
+                    entity.FEU = Convert.ToInt32(reader["FEU"]);
+                    entity.TotalTEU = Convert.ToInt32(reader["TotalTEU"]);
+                    entity.InvoiceReference = Convert.ToString(reader["InvoiceReference"]);
+                    if (reader["DO"] != DBNull.Value) entity.DO = Convert.ToDecimal(reader["DO"]);
+                    if (reader["Docs"] != DBNull.Value) entity.Docs = Convert.ToDecimal(reader["Docs"]);
+                    if (reader["Survey"] != DBNull.Value) entity.Survey = Convert.ToDecimal(reader["Survey"]);
+                    if (reader["Washing"] != DBNull.Value) entity.Washing = Convert.ToDecimal(reader["Washing"]);
+                    if (reader["Others"] != DBNull.Value) entity.Others = Convert.ToDecimal(reader["Others"]);
+                    entity.SecurityInvoice = Convert.ToString(reader["SecurityInvoice"]);
+                    if (reader["SecurityDeposit"] != DBNull.Value) entity.SecurityDeposit = Convert.ToDecimal(reader["SecurityDeposit"]);
+                    entity.LastInvoice = Convert.ToString(reader["LastInvoice"]);
+                    if (reader["DetentionUSD"] != DBNull.Value) entity.DetentionUSD = Convert.ToDecimal(reader["DetentionUSD"]);
+                    if (reader["DetentionINR"] != DBNull.Value) entity.DetentionINR = Convert.ToDecimal(reader["DetentionINR"]);
+                    if (reader["Repairing"] != DBNull.Value) entity.Repairing = Convert.ToDecimal(reader["Repairing"]);
+                    if (reader["LastInvoiceOtherCharge"] != DBNull.Value) entity.LastInvoiceOtherCharge = Convert.ToDecimal(reader["LastInvoiceOtherCharge"]);
+                    if (reader["TotalCharge"] != DBNull.Value) entity.TotalCharge = Convert.ToDecimal(reader["TotalCharge"]);
+                    if (reader["TotalReceipt"] != DBNull.Value) entity.TotalReceipt = Convert.ToDecimal(reader["TotalReceipt"]);
+                    if (reader["Refund"] != DBNull.Value) entity.Refund = Convert.ToDecimal(reader["Refund"]);
+                    entity.Remarks = Convert.ToString(reader["Remarks"]);
 
                     lstEntity.Add(entity);
                 }

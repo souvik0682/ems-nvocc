@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageCustomer.aspx.cs" Inherits="EMS.WebApp.View.ManageCustomer" MasterPageFile="~/Site.Master" Title=":: EMS :: Manage Customer" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageCustomer.aspx.cs" Inherits="EMS.WebApp.View.ManageCustomer" MasterPageFile="~/Site.Master" Title=":: Liner :: Manage Customer" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script src="../Scripts/Common.js" type="text/javascript"></script>
@@ -58,8 +58,7 @@
                         <asp:ListItem Text="30" Value="30" />
                         <asp:ListItem Text="50" Value="50" />
                         <asp:ListItem Text="100" Value="100" />
-                    </asp:DropDownList>&nbsp;&nbsp;
-                <asp:Button ID="btnAdd" runat="server" Text="Add New Customer" CssClass="button" Width="130px" OnClick="btnAdd_Click" />
+                    </asp:DropDownList>
             </div>
             <div>
                 <span class="errormessage">* Indicates Inactive Customer(s)</span>

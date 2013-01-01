@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddEditExchRate.aspx.cs" Inherits="EMS.WebApp.View.AddEditExchRate" MasterPageFile="~/Site.Master" Title=":: EMS :: Add / Edit Exchange Rate" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddEditExchRate.aspx.cs" Inherits="EMS.WebApp.View.AddEditExchRate" MasterPageFile="~/Site.Master" Title=":: Liner :: Add / Edit Exchange Rate" %>
 <%@ Register Assembly="EMS.WebApp" Namespace="EMS.WebApp.CustomControls" TagPrefix="cc1" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ChangePassword.aspx.cs" Inherits="EMS.WebApp.View.ChangePassword" MasterPageFile="~/Site.Master" Title=":: EMS :: Change Password" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ChangePassword.aspx.cs" Inherits="EMS.WebApp.View.ChangePassword" MasterPageFile="~/Site.Master" Title=":: Liner :: Change Password" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>

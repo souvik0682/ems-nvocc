@@ -59,7 +59,8 @@ namespace EMS.WebApp.View
         {
             if (!IsPostBack)
             {
-                btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('ManageCustomer.aspx','" + ResourceManager.GetStringWithoutName("ERR00017") + "')";
+                //btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('ManageCustomer.aspx','" + ResourceManager.GetStringWithoutName("ERR00017") + "')";
+                btnBack.OnClientClick = "javascript:window.location.href='ManageCustomer.aspx';return false;";
 
                 txtAddress.Attributes["onkeypress"] = "javascript:return SetMaxLength(this, 200)";
                 txtProfile.Attributes["onkeypress"] = "javascript:return SetMaxLength(this, 500)";

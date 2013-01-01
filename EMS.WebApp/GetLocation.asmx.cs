@@ -31,9 +31,14 @@ namespace EMS.WebApp
         {
             DataTable dt = ImportHaulageBLL.GetAllPort(prefixText);
             string[] PortNames = new string[dt.Rows.Count];
+
+            string s = string.Empty;
+
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                PortNames[i] = dt.Rows[i]["PortName"].ToString();
+                //PortNames[i] = dt.Rows[i]["PortName"].ToString();
+                s = AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(dt.Rows[i]["PortName"].ToString(), dt.Rows[i]["PortId"].ToString());
+                PortNames[i] = s;
             }
             return PortNames;
         }

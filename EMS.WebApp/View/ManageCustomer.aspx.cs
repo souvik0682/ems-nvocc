@@ -39,11 +39,6 @@ namespace EMS.WebApp.View
             }
         }
 
-        protected void btnAdd_Click(object sender, EventArgs e)
-        {
-            RedirecToAddEditPage(-1);
-        }
-
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             SaveNewPageIndex(0);

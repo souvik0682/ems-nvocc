@@ -17,7 +17,7 @@ namespace EMS.WebApp
             //Clears the application cache.
             GeneralFunctions.ClearApplicationCache();
 
-           // SetUserAccess();
+            SetUserAccess();
 
             if (!Request.Path.Contains("ChangePassword.aspx"))
             {

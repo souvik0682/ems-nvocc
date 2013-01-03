@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -17,6 +19,8 @@ namespace EMS.WebApp.MasterModule
         private int _userId = 0;
         private bool _hasEditAccess = true;
         private string ServTaxId = "";
+        private IFormatProvider _culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"].ToString());
+
         #endregion
 
 
@@ -103,7 +107,7 @@ namespace EMS.WebApp.MasterModule
             }
             else
             {
-                if (dbinteract.IsUnique("finInvoice", "InvoiceDate", txtStDate.Text) )
+                if (dbinteract.IsUnique("finInvoice", "InvoiceDate", txtStDate.Text))
                 {
                     GeneralFunctions.RegisterAlertScript(this, "This Date has been already used for Invoice. It can not be edited");
                     return;
@@ -115,7 +119,7 @@ namespace EMS.WebApp.MasterModule
 
             bool isedit = ServTaxId != "-1" ? true : false;
 
-            int result = dbinteract.AddEditSTax(_userId, Convert.ToInt32(ServTaxId),Convert.ToDateTime(txtStDate.Text), ExtentionClass.TryParseBlankAsZero(txtAddiCess.Text), ExtentionClass.TryParseBlankAsZero(txtCess.Text), ExtentionClass.TryParseBlankAsZero(txtTax.Text), ddlStatus.SelectedIndex == 0 ? true : false, isedit);
+            int result = dbinteract.AddEditSTax(_userId, Convert.ToInt32(ServTaxId), Convert.ToDateTime(txtStDate.Text, _culture), ExtentionClass.TryParseBlankAsZero(txtAddiCess.Text), ExtentionClass.TryParseBlankAsZero(txtCess.Text), ExtentionClass.TryParseBlankAsZero(txtTax.Text), ddlStatus.SelectedIndex == 0 ? true : false, isedit);
 
 
             if (result > 0)

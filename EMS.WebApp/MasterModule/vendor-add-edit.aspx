@@ -63,7 +63,7 @@
                             Name<span class="errormessage1">*</span> :
                         </td>
                         <td>
-                            <asp:TextBox ID="txtName" runat="server" Width="250"></asp:TextBox>
+                            <asp:TextBox ID="txtName" runat="server" Width="250" style="text-transform:uppercase;"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="Please enter name"
                                 Display="None" ControlToValidate="txtName" ValidationGroup="vgVendor"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender4" runat="server" TargetControlID="rfvName" WarningIconImageUrl="" >
@@ -75,7 +75,7 @@
                             Address :
                         </td>
                         <td>
-                            <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" Width="250"></asp:TextBox>
+                            <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" Width="250" style="text-transform:uppercase;"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -83,7 +83,7 @@
                             CFS Code :
                         </td>
                         <td>
-                            <asp:TextBox ID="txtCfsCode" runat="server" Width="250" Enabled="false"></asp:TextBox>
+                            <asp:TextBox ID="txtCfsCode" runat="server" Width="250" Enabled="false" style="text-transform:uppercase;"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>

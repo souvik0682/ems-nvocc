@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CustomControls\DatePicker.ascx" />
+    <Content Include="Equipment\container-movement-entry.aspx" />
+    <Content Include="Equipment\container-movement.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="FileNotFound.aspx" />
     <Content Include="GetLocation.asmx" />
@@ -147,6 +149,20 @@
       <DependentUpon>DatePicker.ascx</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\CustomTextBox.cs" />
+    <Compile Include="Equipment\container-movement-entry.aspx.cs">
+      <DependentUpon>container-movement-entry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Equipment\container-movement-entry.aspx.designer.cs">
+      <DependentUpon>container-movement-entry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Equipment\container-movement.aspx.cs">
+      <DependentUpon>container-movement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Equipment\container-movement.aspx.designer.cs">
+      <DependentUpon>container-movement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -424,7 +440,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Equipment\" />
     <Folder Include="Export\" />
     <Folder Include="Finance\" />
     <Folder Include="Import\" />
@@ -470,7 +485,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1707</DevelopmentServerPort>
+          <DevelopmentServerPort>24120</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

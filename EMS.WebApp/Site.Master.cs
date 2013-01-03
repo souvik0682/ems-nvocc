@@ -165,6 +165,10 @@ namespace EMS.WebApp
             {
                 menuId = (int)PageName.ImportRegister;
             }
+            else if (Request.Path.Contains("/Reports/CargoArrivalNotice.aspx"))
+            {
+                menuId = (int)PageName.CargoArrivalNotice;
+            }
 
             //switch (Request.Path)
             //{

@@ -71,7 +71,7 @@
                                     <li id="liIR_Land" runat="server"><a href="#">Letter to File Landing Gurantee</a></li>
                                     <li id="liIR_Stat" runat="server"><a href="#">Statistical report</a></li>
                                     <li id="liIR_IR" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ImportRegister.aspx") %>">Import Register</a></li>
-                                    <li id="liIR_CAN" runat="server"><a href="#">Cargo Arrival Notice</a></li>
+                                    <li id="liIR_CAN" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/CargoArrivalNotice.aspx") %>">Cargo Arrival Notice</a></li>
                                     <li id="liIR_PDO" runat="server"><a href="#">Pending DO</a></li>
                                     <li id="liIR_DOExamin" runat="server"><a href="#">Delivery Order (Examin / Final)</a></li>
                                     <li id="liIR_DOFactory" runat="server"><a href="#">Delivery Order (Factory / CFS) Distuffing</a></li>

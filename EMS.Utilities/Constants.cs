@@ -35,6 +35,7 @@ namespace EMS.Utilities
         IGMFormC = 9,
         FileLandingGuranteeLetter = 12,
         ImportRegister = 14,
+        CargoArrivalNotice = 15,
         UserMaster = 28,
         LocationMaster = 29,
         CustomerMaster = 30,

@@ -97,6 +97,7 @@
     <Content Include="MasterModule\ManageServTax.aspx" />
     <Content Include="MasterModule\vendor-add-edit.aspx" />
     <Content Include="MasterModule\vendor-list.aspx" />
+    <Content Include="Reports\CargoArrivalNotice.aspx" />
     <Content Include="Reports\ImportSummary.aspx" />
     <Content Include="Reports\IGMForm2.aspx" />
     <Content Include="Reports\IGMFormC.aspx" />
@@ -286,6 +287,13 @@
     <Compile Include="MasterModule\vendor-list.aspx.designer.cs">
       <DependentUpon>vendor-list.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\CargoArrivalNotice.aspx.cs">
+      <DependentUpon>CargoArrivalNotice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CargoArrivalNotice.aspx.designer.cs">
+      <DependentUpon>CargoArrivalNotice.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\ImportSummary.aspx.cs">
       <DependentUpon>ImportSummary.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -470,6 +478,7 @@
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="RDLC\CargoArrivalNotice.rdlc" />
     <EmbeddedResource Include="RDLC\FileLandingGurantee.rdlc" />
     <EmbeddedResource Include="RDLC\IGMForm2.rdlc" />
     <EmbeddedResource Include="RDLC\IGMFormC.rdlc" />

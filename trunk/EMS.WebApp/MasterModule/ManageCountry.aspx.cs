@@ -144,9 +144,9 @@ namespace EMS.WebApp.MasterModule
 
         private void SetAttributes()
         {
-           // txtCountryId.Attributes.Add("OnFocus", "javascript:js_waterMark_Focus('" + txtCountryId.ClientID + "', 'Type CountryId')");
-           // txtCountryId.Attributes.Add("OnBlur", "javascript:js_waterMark_Blur('" + txtCountryId.ClientID + "', 'Type CountryId')");
-           // //txtCountryId.Text = "Type CountryId";
+           // txtCountryAbbr.Attributes.Add("OnFocus", "javascript:js_waterMark_Focus('" + txtCountryAbbr.ClientID + "', 'Type CountryId')");
+           // txtCountryAbbr.Attributes.Add("OnBlur", "javascript:js_waterMark_Blur('" + txtCountryAbbr.ClientID + "', 'Type CountryId')");
+           // //txtCountryAbbr.Text = "Type CountryId";
 
 
            // txtLocationName.Attributes.Add("OnFocus", "javascript:js_waterMark_Focus('" + txtLocationName.ClientID + "', 'Type Country Name')");
@@ -154,8 +154,8 @@ namespace EMS.WebApp.MasterModule
            //// txtLocationName.Text = "Type Country Name";
 
 
-            txtWMEAbbr.WatermarkText = ResourceManager.GetStringWithoutName("ERR00030");
-            txtWMEName.WatermarkText = ResourceManager.GetStringWithoutName("ERR00031");
+            //txtWMEAbbr.WatermarkText = ResourceManager.GetStringWithoutName("ERR00030");
+           // txtWMEName.WatermarkText = ResourceManager.GetStringWithoutName("ERR00031");
             gvwLoc.PageSize = Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]);
             gvwLoc.PagerSettings.PageButtonCount = Convert.ToInt32(ConfigurationManager.AppSettings["PageButtonCount"]);
         }
@@ -176,11 +176,12 @@ namespace EMS.WebApp.MasterModule
                     if (searchCriteria.PageSize > 0) gvwLoc.PageSize = searchCriteria.PageSize;
 
                     BLL.DBInteraction dbinteract = new BLL.DBInteraction();
-                    int countryId = string.IsNullOrEmpty(txtCountryId.Text) ? -1 :Convert.ToInt32(txtCountryId.Text);
+                    //int countryId = string.IsNullOrEmpty(txtCountryAbbr.Text) ? -1 :Convert.ToInt32(txtCountryAbbr.Text);
                     string countryName = string.IsNullOrEmpty(txtLocationName.Text) ? "" : txtLocationName.Text;
+                    string countryAbbr = string.IsNullOrEmpty(txtCountryAbbr.Text) ? "" : txtCountryAbbr.Text;
                     try
                     {
-                        gvwLoc.DataSource = dbinteract.GetCountry(countryId, countryName);
+                        gvwLoc.DataSource = dbinteract.GetCountry(-1,countryName,countryAbbr);
                     }
                     catch (Exception ex)
                     {
@@ -227,7 +228,7 @@ namespace EMS.WebApp.MasterModule
 
             criteria.SortExpression = sortExpression;
             criteria.SortDirection = sortDirection;
-            criteria.LocAbbr = (txtCountryId.Text == ResourceManager.GetStringWithoutName("ERR00030")) ? string.Empty : txtCountryId.Text.Trim();
+            criteria.LocAbbr = (txtCountryAbbr.Text == ResourceManager.GetStringWithoutName("ERR00030")) ? string.Empty : txtCountryAbbr.Text.Trim();
             criteria.LocName = (txtLocationName.Text == ResourceManager.GetStringWithoutName("ERR00031")) ? string.Empty : txtLocationName.Text.Trim();
             Session[Constants.SESSION_SEARCH_CRITERIA] = criteria;
         }
@@ -249,7 +250,7 @@ namespace EMS.WebApp.MasterModule
                     }
                     else
                     {
-                        txtCountryId.Text = criteria.LocAbbr;
+                        txtCountryAbbr.Text = criteria.LocAbbr;
                         txtLocationName.Text = criteria.LocName;
                         gvwLoc.PageIndex = criteria.PageIndex;
                         gvwLoc.PageSize = criteria.PageSize;

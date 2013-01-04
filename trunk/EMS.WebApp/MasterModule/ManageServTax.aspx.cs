@@ -60,47 +60,39 @@ namespace EMS.WebApp.MasterModule
         }
         protected void gvwLoc_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            try
+            if (e.CommandName.Equals("Sort"))
             {
-                if (e.CommandName.Equals("Sort"))
+                if (ViewState[Constants.SORT_EXPRESSION] == null)
                 {
-                    if (ViewState[Constants.SORT_EXPRESSION] == null)
+                    ViewState[Constants.SORT_EXPRESSION] = e.CommandArgument.ToString();
+                    ViewState[Constants.SORT_DIRECTION] = "ASC";
+                }
+                else
+                {
+                    if (ViewState[Constants.SORT_EXPRESSION].ToString() == e.CommandArgument.ToString())
                     {
-                        ViewState[Constants.SORT_EXPRESSION] = e.CommandArgument.ToString();
-                        ViewState[Constants.SORT_DIRECTION] = "ASC";
+                        if (ViewState[Constants.SORT_DIRECTION].ToString() == "ASC")
+                            ViewState[Constants.SORT_DIRECTION] = "DESC";
+                        else
+                            ViewState[Constants.SORT_DIRECTION] = "ASC";
                     }
                     else
                     {
-                        if (ViewState[Constants.SORT_EXPRESSION].ToString() == e.CommandArgument.ToString())
-                        {
-                            if (ViewState[Constants.SORT_DIRECTION].ToString() == "ASC")
-                                ViewState[Constants.SORT_DIRECTION] = "DESC";
-                            else
-                                ViewState[Constants.SORT_DIRECTION] = "ASC";
-                        }
-                        else
-                        {
-                            ViewState[Constants.SORT_DIRECTION] = "ASC";
-                            ViewState[Constants.SORT_EXPRESSION] = e.CommandArgument.ToString();
-                        }
+                        ViewState[Constants.SORT_DIRECTION] = "ASC";
+                        ViewState[Constants.SORT_EXPRESSION] = e.CommandArgument.ToString();
                     }
+                }
 
-                    LoadData();
-                }
-                else if (e.CommandName == "Edit")
-                {
-                    RedirecToAddEditPage(Convert.ToInt32(e.CommandArgument));
-                }
-                //else if (e.CommandName == "Remove")
-                //{
-                //    DeletLine(Convert.ToInt32(e.CommandArgument));
-                //}
+                LoadData();
             }
-            catch (Exception ex)
+            else if (e.CommandName == "Edit")
             {
-                CommonBLL.HandleException(ex, this.Server.MapPath(this.Request.ApplicationPath).Replace("/", "\\"));
-                throw ex;
+                RedirecToAddEditPage(Convert.ToInt32(e.CommandArgument));
             }
+            //else if (e.CommandName == "Remove")
+            //{
+            //    DeletLine(Convert.ToInt32(e.CommandArgument));
+            //}
         }
 
         protected void gvwLoc_RowDataBound(object sender, GridViewRowEventArgs e)

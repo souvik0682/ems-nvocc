@@ -13,58 +13,58 @@ namespace EMS.WebApp.MasterModule {
     public partial class import_haulage_chrg_add_edit {
         
         /// <summary>
-        /// hdnFromLocation control.
+        /// ddlFromLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnFromLocation;
+        protected global::System.Web.UI.WebControls.DropDownList ddlFromLocation;
         
         /// <summary>
-        /// txtFromLocation control.
+        /// rfvFLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFromLocation;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFLocation;
         
         /// <summary>
-        /// autoComplete1 control.
+        /// ValidatorCalloutExtender1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.AutoCompleteExtender autoComplete1;
+        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender1;
         
         /// <summary>
-        /// hdnToLocation control.
+        /// ddlToLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnToLocation;
+        protected global::System.Web.UI.WebControls.DropDownList ddlToLocation;
         
         /// <summary>
-        /// txtToLocation control.
+        /// rfvTLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtToLocation;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTLocation;
         
         /// <summary>
-        /// autoComplete2 control.
+        /// ValidatorCalloutExtender2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.AutoCompleteExtender autoComplete2;
+        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender2;
         
         /// <summary>
         /// ddlContainerSize control.

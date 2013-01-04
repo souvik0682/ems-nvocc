@@ -1,23 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="import-haulage-chrg-add-edit.aspx.cs" MasterPageFile="~/Site.Master" Inherits="EMS.WebApp.MasterModule.import_haulage_chrg_add_edit" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-  <script type="text/javascript">
-      function AutoCompleteItemSelected(sender, e) {
-          
-          if (sender._id == "AutoCompleteEx") {
-              var hdnFromLocation = $get('<%=hdnFromLocation.ClientID %>');
-              hdnFromLocation.value = e.get_value();
-          }
-          else if (sender._id == "AutoCompleteEx2") {
-              var hdnToLocation = $get('<%=hdnToLocation.ClientID %>');
-              hdnToLocation.value = e.get_value();
-          }
-      }
-    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
-  
     <div>
         <div id="headercaption">
             ADD / EDIT IMPORT HAULAGE</div>
@@ -30,7 +15,7 @@
                             Location From<span class="errormessage1">*</span> :
                         </td>
                         <td>
-                           <%-- <asp:DropDownList ID="ddlFromLocation" runat="server" Width="255">
+                            <asp:DropDownList ID="ddlFromLocation" runat="server" Width="255">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="rfvFLocation" runat="server" ErrorMessage="Please select location"
                                 Display="None" ControlToValidate="ddlFromLocation" ValidationGroup="vgHaulage"
@@ -38,51 +23,6 @@
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server" TargetControlID="rfvFLocation"
                                 WarningIconImageUrl="">
                             </cc1:ValidatorCalloutExtender>
-                            <br />--%>
-                            <%--<asp:DropDownList ID="ddlLocation" runat="server" Width="255" Visible="false">
-                            </asp:DropDownList>--%>
-                            <asp:HiddenField ID="hdnFromLocation" runat="server" />
-                            <asp:TextBox runat="server" ID="txtFromLocation" Width="250" autocomplete="off" />
-                            <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx" ID="autoComplete1"
-                                TargetControlID="txtFromLocation" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
-                                MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
-                                CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
-                                CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
-                                ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected">
-                                <Animations>
-                                        <OnShow>
-                                            <Sequence>
-                                                <%-- Make the completion list transparent and then show it --%>
-                                                <OpacityAction Opacity="0" />
-                                                <HideAction Visible="true" />
-                            
-                                                <%--Cache the original size of the completion list the first time
-                                                    the animation is played and then set it to zero --%>
-                                                <ScriptAction Script="
-                                                    // Cache the size and setup the initial size
-                                                    var behavior = $find('AutoCompleteEx');
-                                                    if (!behavior._height) {
-                                                        var target = behavior.get_completionList();
-                                                        behavior._height = target.offsetHeight - 2;
-                                                        target.style.height = '0px';
-                                                    }" />
-                            
-                                                <%-- Expand from 0px to the appropriate size while fading in --%>
-                                                <Parallel Duration=".4">
-                                                    <FadeIn />
-                                                    <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteEx')._height" />
-                                                </Parallel>
-                                            </Sequence>
-                                        </OnShow>
-                                        <OnHide>
-                                            <%-- Collapse down to 0px and fade out --%>
-                                            <Parallel Duration=".4">
-                                                <FadeOut />
-                                                <Length PropertyKey="height" StartValueScript="$find('AutoCompleteEx')._height" EndValue="0" />
-                                            </Parallel>
-                                        </OnHide>
-                                </Animations>
-                            </cc1:AutoCompleteExtender>
                         </td>
                     </tr>
                     <tr>
@@ -90,7 +30,7 @@
                             Location To<span class="errormessage1">*</span> :
                         </td>
                         <td>
-                           <%-- <asp:DropDownList ID="ddlToLocation" runat="server" Width="255">
+                            <asp:DropDownList ID="ddlToLocation" runat="server" Width="255">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="rfvTLocation" runat="server" ErrorMessage="Please select location"
                                 Display="None" ControlToValidate="ddlToLocation" ValidationGroup="vgHaulage"
@@ -98,49 +38,6 @@
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender2" runat="server" TargetControlID="rfvTLocation"
                                 WarningIconImageUrl="">
                             </cc1:ValidatorCalloutExtender>
-                            <br />--%>
-                            <asp:HiddenField ID="hdnToLocation" runat="server" />
-                            <asp:TextBox runat="server" ID="txtToLocation" Width="250" autocomplete="off" />
-                            <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx2" ID="autoComplete2"
-                                TargetControlID="txtToLocation" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
-                                MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
-                                CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
-                                CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
-                                ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected">
-                                <Animations>
-                                        <OnShow>
-                                            <Sequence>
-                                                <%-- Make the completion list transparent and then show it --%>
-                                                <OpacityAction Opacity="0" />
-                                                <HideAction Visible="true" />
-                            
-                                                <%--Cache the original size of the completion list the first time
-                                                    the animation is played and then set it to zero --%>
-                                                <ScriptAction Script="
-                                                    // Cache the size and setup the initial size
-                                                    var behavior = $find('AutoCompleteEx2');
-                                                    if (!behavior._height) {
-                                                        var target = behavior.get_completionList();
-                                                        behavior._height = target.offsetHeight - 2;
-                                                        target.style.height = '0px';
-                                                    }" />
-                            
-                                                <%-- Expand from 0px to the appropriate size while fading in --%>
-                                                <Parallel Duration=".4">
-                                                    <FadeIn />
-                                                    <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteEx2')._height" />
-                                                </Parallel>
-                                            </Sequence>
-                                        </OnShow>
-                                        <OnHide>
-                                            <%-- Collapse down to 0px and fade out --%>
-                                            <Parallel Duration=".4">
-                                                <FadeOut />
-                                                <Length PropertyKey="height" StartValueScript="$find('AutoCompleteEx2')._height" EndValue="0" />
-                                            </Parallel>
-                                        </OnHide>
-                                </Animations>
-                            </cc1:AutoCompleteExtender>
                         </td>
                     </tr>
                     <tr>
@@ -201,7 +98,7 @@
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender6" runat="server" TargetControlID="rfvRate"
                                 WarningIconImageUrl="">
                             </cc1:ValidatorCalloutExtender>
-                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" TargetControlID="txtRate"
+                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" TargetControlID="txtRate"
                                 FilterMode="ValidChars" FilterType="Numbers">
                             </cc1:FilteredTextBoxExtender>
                         </td>

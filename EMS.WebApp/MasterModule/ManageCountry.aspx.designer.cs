@@ -13,13 +13,13 @@ namespace EMS.WebApp.MasterModule {
     public partial class ManageCountry {
         
         /// <summary>
-        /// txtCountryId control.
+        /// txtCountryAbbr control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCountryId;
+        protected global::System.Web.UI.WebControls.TextBox txtCountryAbbr;
         
         /// <summary>
         /// txtWMEAbbr control.

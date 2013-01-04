@@ -52,13 +52,6 @@ namespace EMS.WebApp.MasterModule
             }
         }
 
-        protected void btnRefresh_Click(object sender, EventArgs e)
-        {
-            txtLocationName.Text = string.Empty;
-            txtVendorName.Text = string.Empty;
-            LoadLocation();
-        }
-
         protected void gvwVendor_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             int newIndex = e.NewPageIndex;

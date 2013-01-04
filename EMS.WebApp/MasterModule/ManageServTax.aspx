@@ -100,8 +100,8 @@
                                     <ItemStyle CssClass="gridviewitem" Width="20%" HorizontalAlign="Right"/>                                       
                                 </asp:TemplateField>
                                  <asp:TemplateField HeaderText="Status">
-                                    <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="20%" HorizontalAlign="Left"/>                                       
+                                    <HeaderStyle HorizontalAlign="Center" CssClass="gridviewheader_center"  />
+                                    <ItemStyle CssClass="gridviewitem" Width="20%" HorizontalAlign="Center"/>                                       
                                 </asp:TemplateField>
 
                                 <asp:TemplateField>

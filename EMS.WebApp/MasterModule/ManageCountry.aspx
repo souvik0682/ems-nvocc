@@ -22,8 +22,8 @@ Inherits="EMS.WebApp.MasterModule.ManageCountry" %>
             <table>
                 <tr>
                     <td>
-                        <asp:TextBox ID="txtCountryId" runat="server" CssClass="watermark" ForeColor="#747862" onkeyup=IsNumeric(this)></asp:TextBox>
-                        <cc1:TextBoxWatermarkExtender ID="txtWMEAbbr" runat="server" TargetControlID="txtCountryId" WatermarkText="Type CountryId" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
+                        <asp:TextBox ID="txtCountryAbbr" runat="server" CssClass="watermark" ForeColor="#747862" ></asp:TextBox>
+                        <cc1:TextBoxWatermarkExtender ID="txtWMEAbbr" runat="server" TargetControlID="txtCountryAbbr" WatermarkText="Type Country Abbr" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                     </td>
                     <td>
                         <asp:TextBox ID="txtLocationName" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>

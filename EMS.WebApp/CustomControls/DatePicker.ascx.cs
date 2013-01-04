@@ -10,6 +10,7 @@ namespace EMS.WebApp.CustomControls
     public partial class DatePIcker : System.Web.UI.UserControl
     {
         public  DateTime dt;
+        public string DBDate=string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -30,9 +31,20 @@ namespace EMS.WebApp.CustomControls
                 ddlMonth.SelectedIndex = DateTime.Now.Month-1;
                 ddlYear.SelectedIndex = DateTime.Now.Year - 1975;
             }
+              string _dt = ddlDay.SelectedValue + "/" + ddlMonth.SelectedValue + "/" + ddlYear.SelectedValue;
+                dt = Convert.ToDateTime(_dt);
 
-            string _dt = ddlDay.SelectedValue + "/" + ddlMonth.SelectedValue + "/" + ddlYear.SelectedValue;
-            dt = Convert.ToDateTime(_dt);
+            if (!string.IsNullOrEmpty(DBDate))
+            {
+                char separator='-';
+                if (DBDate.Contains('/'))
+                    separator = '/';
+                ddlYear.SelectedValue = DBDate.Split(separator)[2];
+                ddlMonth.SelectedValue = DBDate.Split(separator)[1];
+                ddlDay.SelectedValue = DBDate.Split(separator)[0];
+            }
+            
+
         }
 
         protected void btnPick_Click(object sender, EventArgs e)

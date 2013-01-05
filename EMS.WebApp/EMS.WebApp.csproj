@@ -57,6 +57,10 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CustomControls\AutoComplete.asmx" />
+    <Content Include="CustomControls\AutoComplete.aspx" />
+    <Content Include="CustomControls\AutoCompleteCountry.ascx" />
+    <Content Include="CustomControls\AutoCompletepPort.ascx" />
     <Content Include="CustomControls\DatePicker.ascx" />
     <Content Include="Equipment\container-movement-entry.aspx" />
     <Content Include="Equipment\container-movement.aspx" />
@@ -135,12 +139,27 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\AutoComplete.cs" />
     <Compile Include="Blank.Master.cs">
       <DependentUpon>Blank.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Blank.Master.designer.cs">
       <DependentUpon>Blank.Master</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\AutoCompleteCountry.ascx.cs">
+      <DependentUpon>AutoCompleteCountry.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomControls\AutoCompleteCountry.ascx.designer.cs">
+      <DependentUpon>AutoCompleteCountry.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\AutoCompletepPort.ascx.cs">
+      <DependentUpon>AutoCompletepPort.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomControls\AutoCompletepPort.ascx.designer.cs">
+      <DependentUpon>AutoCompletepPort.ascx</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\DatePicker.ascx.cs">
       <DependentUpon>DatePicker.ascx</DependentUpon>

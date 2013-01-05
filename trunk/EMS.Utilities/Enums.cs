@@ -52,5 +52,13 @@ namespace EMS.Utilities
             Chemical = 3
         }
 
+        public enum Salutation
+        {
+            Mr = 1,
+            Ms = 2,
+            Dr = 3,
+            M_s = 4
+        }
+
     }
 }

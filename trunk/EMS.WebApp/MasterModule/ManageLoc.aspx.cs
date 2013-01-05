@@ -233,10 +233,10 @@ namespace DSR.WebApp.Security
 
         private void DeleteLocation(int locId)
         {
-            CommonBLL commonBll = new CommonBLL();
-            commonBll.DeleteLocation(locId, _userId);
-            LoadLocation();
-            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00006") + "');</script>", false);
+            //CommonBLL commonBll = new CommonBLL();
+            //commonBll.DeleteLocation(locId, _userId);
+            //LoadLocation();
+            //ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00006") + "');</script>", false);
         }
 
         private void RedirecToAddEditPage(int id)

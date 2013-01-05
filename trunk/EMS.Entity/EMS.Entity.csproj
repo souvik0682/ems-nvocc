@@ -63,6 +63,8 @@
     <Compile Include="UserEntity.cs" />
     <Compile Include="UserPermission.cs" />
     <Compile Include="VendorEntity.cs" />
+    <Compile Include="Vessel.cs" />
+    <Compile Include="VoyageEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EMS.Common\EMS.Common.csproj">

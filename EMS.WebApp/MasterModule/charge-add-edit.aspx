@@ -7,7 +7,7 @@
         <div id="headercaption">
             ADD / EDIT CHARGE</div>
         <center>
-            <fieldset style="width: 85%;">
+            <fieldset style="width: 75%;">
                 <legend>Add / Edit Charge</legend>
                 <table border="0" cellpadding="2" cellspacing="3" width="100%">
                     <tr>
@@ -243,7 +243,7 @@
                                             </cc1:ValidatorCalloutExtender>
                                         </FooterTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Rate / BL">
+                                    <asp:TemplateField HeaderText="Rate/BL">
                                         <ItemTemplate>
                                             <asp:Label ID="lblRatePerBl" runat="server" Text='<%# Eval("RatePerBL")%>'></asp:Label></ItemTemplate>
                                         <FooterTemplate>
@@ -254,7 +254,7 @@
                                             </cc1:ValidatorCalloutExtender>
                                         </FooterTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Rate / TEU">
+                                    <asp:TemplateField HeaderText="Rate/TEU">
                                         <ItemTemplate>
                                             <asp:Label ID="lblRatePerTEU" runat="server" Text='<%# Eval("RatePerTEU")%>'></asp:Label>
                                         </ItemTemplate>
@@ -266,7 +266,7 @@
                                             </cc1:ValidatorCalloutExtender>
                                         </FooterTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Rate / FEU">
+                                    <asp:TemplateField HeaderText="Rate/FEU">
                                         <ItemTemplate>
                                             <asp:Label ID="lblRatePerFEU" runat="server" Text='<%# Eval("RatePerFEU")%>'></asp:Label>
                                         </ItemTemplate>
@@ -278,7 +278,7 @@
                                             </cc1:ValidatorCalloutExtender>
                                         </FooterTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Sharing / BL">
+                                    <asp:TemplateField HeaderText="Share/BL">
                                         <ItemTemplate>
                                             <asp:Label ID="lblSharingBL" runat="server" Text='<%# Eval("SharingBL")%>'></asp:Label>
                                         </ItemTemplate>
@@ -290,7 +290,7 @@
                                             </cc1:ValidatorCalloutExtender>
                                         </FooterTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Sharing / TEU">
+                                    <asp:TemplateField HeaderText="Share/TEU">
                                         <ItemTemplate>
                                             <asp:Label ID="lblSharingTEU" runat="server" Text='<%# Eval("SharingTEU")%>'></asp:Label>
                                         </ItemTemplate>
@@ -302,7 +302,7 @@
                                             </cc1:ValidatorCalloutExtender>
                                         </FooterTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Sharing / FEU">
+                                    <asp:TemplateField HeaderText="Shar/FEU">
                                         <ItemTemplate>
                                             <asp:Label ID="lblSharingFEU" runat="server" Text='<%# Eval("SharingFEU")%>'></asp:Label>
                                         </ItemTemplate>

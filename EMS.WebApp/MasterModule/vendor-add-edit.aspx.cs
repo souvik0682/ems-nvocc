@@ -39,6 +39,16 @@ namespace EMS.WebApp.MasterModule
                 PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlLocationID, 0);
                 ddlLocationID.Items.Insert(0, Li);
 
+                #region Salutation
+                foreach (Enums.Salutation r in Enum.GetValues(typeof(Enums.Salutation)))
+                {
+                    Li = new ListItem("Select", "0");
+                    ListItem item = new ListItem(Enum.GetName(typeof(Enums.Salutation), r).Replace('_', '/'), ((int)r).ToString());
+                    ddlSalutation.Items.Add(item);
+                }
+                ddlSalutation.Items.Insert(0, Li);
+                #endregion
+
                 if (hdnVendorID.Value != "0")
                     LoadData();
             }

@@ -30,15 +30,7 @@ namespace EMS.WebApp.MasterModule {
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFLocation;
         
-        /// <summary>
-        /// rfvFLocation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFLocation;
-        
+                
         /// <summary>
         /// ValidatorCalloutExtender1 control.
         /// </summary>
@@ -48,15 +40,7 @@ namespace EMS.WebApp.MasterModule {
         /// </remarks>
         protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender1;
         
-        /// <summary>
-        /// autoComplete1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender1;
-        
+              
         /// <summary>
         /// ddlToLocation control.
         /// </summary>
@@ -75,15 +59,7 @@ namespace EMS.WebApp.MasterModule {
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTLocation;
         
-        /// <summary>
-        /// rfvTLocation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTLocation;
-        
+             
         /// <summary>
         /// ValidatorCalloutExtender2 control.
         /// </summary>
@@ -93,14 +69,7 @@ namespace EMS.WebApp.MasterModule {
         /// </remarks>
         protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender2;
         
-        /// <summary>
-        /// autoComplete2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender2;
+      
         
         /// <summary>
         /// ddlContainerSize control.

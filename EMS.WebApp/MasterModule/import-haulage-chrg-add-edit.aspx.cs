@@ -32,8 +32,8 @@ namespace EMS.WebApp.MasterModule
             {
                 ListItem Li = null;
                 //Li = new ListItem("Select", "0");
-                //PopulateDropDown((int)Enums.DropDownPopulationFor.Port, ddlFromLocation, 0);
-                //ddlFromLocation.Items.Insert(0, Li);
+                //PopulateDropDown((int)Enums.DropDownPopulationFor.Port, ddlLocation, 0);
+                //ddlLocation.Items.Insert(0, Li);
 
                 //Li = new ListItem("Select", "0");
                 //PopulateDropDown((int)Enums.DropDownPopulationFor.Port, ddlToLocation, 0);
@@ -52,8 +52,14 @@ namespace EMS.WebApp.MasterModule
         {
             ImportHaulageEntity oImportHaulage = (ImportHaulageEntity)ImportHaulageBLL.GetImportHaulage(Convert.ToInt32(hdnHaulageChrgID.Value));
 
-            ddlFromLocation.SelectedIndex = Convert.ToInt32(ddlFromLocation.Items.IndexOf(ddlFromLocation.Items.FindByValue(oImportHaulage.LocationFrom)));
-            ddlToLocation.SelectedIndex = Convert.ToInt32(ddlToLocation.Items.IndexOf(ddlToLocation.Items.FindByValue(oImportHaulage.LocationTo)));
+            //ddlFromLocation.SelectedIndex = Convert.ToInt32(ddlFromLocation.Items.IndexOf(ddlFromLocation.Items.FindByValue(oImportHaulage.LocationFrom)));
+            hdnFromLocation.Value = oImportHaulage.LocationFrom.Substring(oImportHaulage.LocationFrom.IndexOf('|') + 1);
+            txtFromLocation.Text = oImportHaulage.LocationFrom.Substring(0, oImportHaulage.LocationFrom.IndexOf('|'));
+            //ddlToLocation.SelectedIndex = Convert.ToInt32(ddlToLocation.Items.IndexOf(ddlToLocation.Items.FindByValue(oImportHaulage.LocationTo)));
+
+            hdnToLocation.Value = oImportHaulage.LocationTo.Substring(oImportHaulage.LocationTo.IndexOf('|') + 1);
+            txtToLocation.Text = oImportHaulage.LocationTo.Substring(0, oImportHaulage.LocationTo.IndexOf('|'));
+
             ddlContainerSize.SelectedIndex = Convert.ToInt32(ddlContainerSize.Items.IndexOf(ddlContainerSize.Items.FindByText(oImportHaulage.ContainerSize)));
 
 
@@ -85,8 +91,8 @@ namespace EMS.WebApp.MasterModule
 
                 oImportHaulageEntity.ContainerSize = ddlContainerSize.SelectedItem.Text;
                 oImportHaulageEntity.HaulageRate = Convert.ToDouble(txtRate.Text);
-                oImportHaulageEntity.LocationFrom = ddlFromLocation.SelectedValue;
-                oImportHaulageEntity.LocationTo = ddlToLocation.SelectedValue;
+                oImportHaulageEntity.LocationFrom = hdnFromLocation.Value;
+                oImportHaulageEntity.LocationTo = hdnToLocation.Value;
                 oImportHaulageEntity.WeightFrom = Convert.ToDouble(txtWFrom.Text.Trim());
                 oImportHaulageEntity.WeightTo = Convert.ToDouble(txtWTo.Text.Trim());
                 oImportHaulageEntity.HaulageStatus = true;
@@ -141,8 +147,8 @@ namespace EMS.WebApp.MasterModule
         void ClearAll()
         {
             ddlContainerSize.SelectedIndex = 0;
-            ddlFromLocation.SelectedIndex = 0;
-            ddlToLocation.SelectedIndex = 0;
+            txtFromLocation.Text = string.Empty;
+            txtToLocation.Text = string.Empty;
             hdnHaulageChrgID.Value = "0";
             txtRate.Text = string.Empty;
             txtWFrom.Text = string.Empty;

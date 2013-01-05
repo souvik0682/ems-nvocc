@@ -47,10 +47,6 @@
                         </td>
                         <td>
                             <asp:DropDownList ID="ddlSalutation" runat="server" Width="255">
-                                <asp:ListItem Selected="True" Text="Select" Value="0"></asp:ListItem>
-                                <asp:ListItem Text="Mr." Value="1"></asp:ListItem>
-                                <asp:ListItem Text="Ms." Value="2"></asp:ListItem>
-                                <asp:ListItem Text="Dr." Value="3"></asp:ListItem>
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>

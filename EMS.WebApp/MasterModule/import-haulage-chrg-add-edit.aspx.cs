@@ -31,13 +31,13 @@ namespace EMS.WebApp.MasterModule
             if (!Page.IsPostBack)
             {
                 ListItem Li = null;
-                Li = new ListItem("Select", "0");
-                PopulateDropDown((int)Enums.DropDownPopulationFor.Port, ddlFromLocation, 0);
-                ddlFromLocation.Items.Insert(0, Li);
+                //Li = new ListItem("Select", "0");
+                //PopulateDropDown((int)Enums.DropDownPopulationFor.Port, ddlFromLocation, 0);
+                //ddlFromLocation.Items.Insert(0, Li);
 
-                Li = new ListItem("Select", "0");
-                PopulateDropDown((int)Enums.DropDownPopulationFor.Port, ddlToLocation, 0);
-                ddlToLocation.Items.Insert(0, Li);
+                //Li = new ListItem("Select", "0");
+                //PopulateDropDown((int)Enums.DropDownPopulationFor.Port, ddlToLocation, 0);
+                //ddlToLocation.Items.Insert(0, Li);
 
                 Li = new ListItem("Select", "0");
                 PopulateDropDown((int)Enums.DropDownPopulationFor.ContainerSize, ddlContainerSize, 0);

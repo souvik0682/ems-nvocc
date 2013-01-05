@@ -13,7 +13,7 @@
         </div>
     </div>
     <div id="headercaption">
-        MANAGE IMPORT HAULAGE CHARGES</div>
+        MANAGE HAULAGE CHARGES</div>
     <center>
         <div style="width: 850px; ">
             <fieldset style="width: 100%;">
@@ -65,7 +65,7 @@
                 </ProgressTemplate>
             </asp:UpdateProgress>
             <fieldset id="fsList" runat="server" style="width: 100%; min-height: 100px;">
-                <legend>Import Haulage Charge List</legend>
+                <legend>Haulage Charge List</legend>
                 <div style="float: right; padding-bottom: 5px;">
                     Results Per Page:<asp:DropDownList ID="ddlPaging" runat="server" Width="50px" AutoPostBack="true"
                         OnSelectedIndexChanged="ddlPaging_SelectedIndexChanged">
@@ -75,7 +75,7 @@
                         <asp:ListItem Text="100" Value="100" />
                     </asp:DropDownList>
                     &nbsp;&nbsp;
-                    <asp:Button ID="btnAdd" runat="server" Text="Add New Import Haulage Charge" Width="200px"
+                    <asp:Button ID="btnAdd" runat="server" Text="Add Haulage Charge" Width="150px"
                         OnClick="btnAdd_Click" />
                 </div>
                 <div>

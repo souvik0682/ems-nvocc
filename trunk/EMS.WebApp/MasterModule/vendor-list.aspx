@@ -94,6 +94,7 @@
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                        
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHType" runat="server" CommandName="Sort" CommandArgument="Type"
                                                 Text="Type"></asp:LinkButton></HeaderTemplate>

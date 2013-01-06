@@ -54,10 +54,10 @@ namespace EMS.Utilities
 
         public enum Salutation
         {
-            Mr = 1,
-            Ms = 2,
-            Dr = 3,
-            M_s = 4
+            MR = 1,
+            MS = 2,
+            DR = 3,
+            M_S = 4
         }
 
     }

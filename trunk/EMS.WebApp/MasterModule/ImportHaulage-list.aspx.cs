@@ -52,6 +52,14 @@ namespace EMS.WebApp.MasterModule
             }
         }
 
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {            
+            txtFrom.Text = string.Empty;
+            txtTo.Text = string.Empty;
+            txtSize.Text = string.Empty;
+            LoadImportHaulage();
+        }
+
         protected void gvwImportHaulage_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             int newIndex = e.NewPageIndex;

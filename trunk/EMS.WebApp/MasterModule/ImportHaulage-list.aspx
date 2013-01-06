@@ -15,7 +15,7 @@
     <div id="headercaption">
         MANAGE HAULAGE CHARGES</div>
     <center>
-        <div style="width: 850px; ">
+        <div style="width: 880px; ">
             <fieldset style="width: 100%;">
                 <legend>Search</legend>
                 <table>
@@ -39,7 +39,7 @@
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
-                            <asp:TextBox ID="txtSize" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
+                            <asp:TextBox ID="txtSize" runat="server" CssClass="watermark" ForeColor="#747862" ></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
                                 FilterMode="ValidChars" ValidChars=" " TargetControlID="txtSize">
                             </cc1:FilteredTextBoxExtender>
@@ -48,8 +48,10 @@
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
-                            <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px"
+                            <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="70px"
                                 OnClick="btnSearch_Click" />
+                            <asp:Button ID="btnRefresh" runat="server" Text="Refresh" CssClass="button" Width="70px"
+                                OnClick="btnRefresh_Click" />
                         </td>
                     </tr>
                 </table>

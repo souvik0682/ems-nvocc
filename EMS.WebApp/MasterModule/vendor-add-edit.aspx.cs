@@ -27,6 +27,9 @@ namespace EMS.WebApp.MasterModule
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+            _userId = user == null ? 0 : user.Id;
+
             RetriveParameters();
             if (!Page.IsPostBack)
             {
@@ -112,26 +115,36 @@ namespace EMS.WebApp.MasterModule
 
                 if (hdnVendorID.Value == "0") // Insert
                 {
-                    oVendorEntity.CreatedBy = 1;// oUserEntity.Id;
+                    oVendorEntity.CreatedBy = _userId;// oUserEntity.Id;
                     oVendorEntity.CreatedOn = DateTime.Today.Date;
-                    oVendorEntity.ModifiedBy = 1;// oUserEntity.Id;
+                    oVendorEntity.ModifiedBy = _userId;// oUserEntity.Id;
                     oVendorEntity.ModifiedOn = DateTime.Today.Date;
 
+                    switch (oVendorBll.AddEditVndor(oVendorEntity))
+                    {
+                        case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
+                            break;
+                        case 1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
+                            ClearAll();
+                            break;
+                    }
                 }
                 else // Update
                 {
                     oVendorEntity.VendorId = Convert.ToInt32(hdnVendorID.Value);
-                    oVendorEntity.ModifiedBy = 2;// oUserEntity.Id;
+                    oVendorEntity.ModifiedBy = _userId;// oUserEntity.Id;
                     oVendorEntity.ModifiedOn = DateTime.Today.Date;
+
+                    switch (oVendorBll.AddEditVndor(oVendorEntity))
+                    {
+                        case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
+                            break;
+                        case 1: Response.Redirect("~/MasterModule/vendor-list.aspx");
+                            break;
+                    }
                 }
 
-                switch (oVendorBll.AddEditVndor(oVendorEntity))
-                {
-                    case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
-                        break;
-                    case 1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
-                        break;
-                }
+
             }
         }
 
@@ -169,6 +182,18 @@ namespace EMS.WebApp.MasterModule
         protected void btnBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/MasterModule/vendor-list.aspx");
+        }
+
+        void ClearAll()
+        {
+            ddlLocationID.SelectedIndex = 0;
+            ddlSalutation.SelectedIndex = 0;
+            ddlTerminalCode.SelectedIndex = 0;
+            ddlVendorType.SelectedIndex = 0;
+            txtAddress.Text = string.Empty;
+            txtCfsCode.Text = string.Empty;
+            txtName.Text = string.Empty;
+            hdnVendorID.Value = "0";
         }
     }
 }

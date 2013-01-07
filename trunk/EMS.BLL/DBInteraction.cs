@@ -68,7 +68,7 @@ namespace EMS.BLL
             return Convert.ToDecimal(dquery.GetScalar());
         }
 
-       
+
 
         #endregion
 
@@ -88,7 +88,7 @@ namespace EMS.BLL
 
         public void DeleteCountry(int countryId)
         {
-            string ProcName = "prcDeleteCountry";
+            string ProcName = "admin.prcDeleteCountry";
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
             dquery.AddIntegerParam("@pk_countryId", countryId);
             dquery.RunActionQuery();
@@ -97,7 +97,7 @@ namespace EMS.BLL
 
         public int AddEditCountry(int userID, int pk_CountryID, string CountryName, string CountryAbbr, bool isEdit)
         {
-            string ProcName = "prcAddEditCountry";
+            string ProcName = "admin.prcAddEditCountry";
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
             dquery.AddIntegerParam("@userID", userID);
             dquery.AddIntegerParam("@pk_CountryId", pk_CountryID);
@@ -169,7 +169,7 @@ namespace EMS.BLL
             return dquery.GetTables();
         }
 
-        public int AddEditLine(int userID, int pk_NVOCCId, string NVOCCName, int DefaultFreeDays, string ContAgentCode, string logoPath, bool isEdit)
+        public int AddEditLine(int userID, int pk_NVOCCId, string NVOCCName, int DefaultFreeDays, string ContAgentCode, decimal ImpCommsn, decimal ExpCommsn, char ExpBook, string logoPath, bool isEdit)
         {
             string ProcName = "admin.prcAddEditLine";
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
@@ -178,6 +178,9 @@ namespace EMS.BLL
             dquery.AddVarcharParam("@NVOCCName", 50, NVOCCName);
             dquery.AddIntegerParam("@DefaultFreeDays", DefaultFreeDays);
             dquery.AddVarcharParam("@ContAgentCode", 10, ContAgentCode);
+            dquery.AddDecimalParam("@ImportCommission", 6, 2, ImpCommsn);
+            dquery.AddDecimalParam("@ExportCommission", 6, 2, ExpCommsn);
+            dquery.AddCharParam("@ExportBooking", 1, ExpBook);
             dquery.AddVarcharParam("@logoPath", 150, logoPath);
             dquery.AddBooleanParam("@isEdit", isEdit);
 
@@ -302,7 +305,7 @@ namespace EMS.BLL
             dquery.AddIntegerParam("@fk_VesselID", voyage.fk_VesselID);
             dquery.AddIntegerParam("@fl_TerminalID", voyage.fl_TerminalID);
             dquery.AddVarcharParam("@VoyageNo", 10, voyage.VoyageNo);
-            dquery.AddDecimalParam("@ImpXChangeRate",6,2, voyage.ImpXChangeRate);
+            dquery.AddDecimalParam("@ImpXChangeRate", 6, 2, voyage.ImpXChangeRate);
             dquery.AddVarcharParam("@IGMNo", 10, voyage.IGMNo);
             dquery.AddVarcharParam("@CallSign", 14, voyage.CallSign);
             dquery.AddDateTimeParam("@IGMDate", voyage.IGMDate);
@@ -350,15 +353,30 @@ namespace EMS.BLL
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
 
             dquery.AddIntegerParam("@pk_VoyageID", VoyageId);
-            dquery.AddCharParam("@VoyageType",1, voyageType.ToCharArray()[0]);
+            dquery.AddCharParam("@VoyageType", 1, voyageType.ToCharArray()[0]);
             dquery.AddVarcharParam("@vesselName", 70, VesselName);
-            dquery.AddVarcharParam("@VoyageNo",10, voyageNo);
+            dquery.AddVarcharParam("@VoyageNo", 10, voyageNo);
             dquery.AddVarcharParam("@IGMNo", 10, igmNo);
 
             return dquery.GetTables();
         }
 
-        
+
+        #endregion
+
+        #region Import_ExportText
+
+        public DataSet GetImportEDIforCustom(int VoyageId, int VesselID)
+        {
+            string ProcName = "prcGetEDICustom";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            dquery.AddIntegerParam("@pk_VoyageID", VoyageId);
+            dquery.AddIntegerParam("@pk_VesselID", VesselID);
+
+            return dquery.GetTables();
+        }
+
         #endregion
 
 

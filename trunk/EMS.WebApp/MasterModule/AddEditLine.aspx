@@ -1,4 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddEditLine.aspx.cs" Inherits="EMS.WebApp.MasterModule.AddEditLine" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+    CodeBehind="AddEditLine.aspx.cs" Inherits="EMS.WebApp.MasterModule.AddEditLine" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script src="../Scripts/Common.js" type="text/javascript"></script>
     <script type="text/javascript" language="javascript">
@@ -29,7 +31,25 @@
 
                 <tr>
                     <td>Default Free Days:</td>
-                    <td><asp:TextBox ID="txtFreeDays" runat="server" CssClass="textboxuppercase" MaxLength="10" Width="250" onkeyup=IsNumeric(this)></asp:TextBox><br /></td>
+                    <td><asp:TextBox ID="txtFreeDays" runat="server" CssClass="textboxuppercase" MaxLength="10" Width="250" onkeyup="IsNumeric(this)"></asp:TextBox><br /></td>
+                </tr>
+
+                 <tr>
+                    <td>Import Commission:</td>
+                    <td><asp:TextBox ID="txtImpCommsn" runat="server" CssClass="textboxuppercase" MaxLength="10" Width="250" onkeyup="IsDecimal(this)"></asp:TextBox><br /></td>
+                </tr>
+
+                 <tr>
+                    <td>Export Commission:</td>
+                    <td><asp:TextBox ID="txtExportCommission" runat="server" CssClass="textboxuppercase" MaxLength="10" Width="250" onkeyup="IsDecimal(this)"></asp:TextBox><br /></td>
+                </tr>
+                  <tr>
+                    <td>Export Booking:</td>
+                    <td><asp:DropDownList ID="ddlExpBook" runat="server">
+                    <asp:ListItem Value="y">Yes</asp:ListItem>
+                    <asp:ListItem Value="n">No</asp:ListItem>
+                    </asp:DropDownList>
+                    <br /></td>
                 </tr>
 
                   <tr>

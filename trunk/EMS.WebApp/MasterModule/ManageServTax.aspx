@@ -18,7 +18,7 @@
         MANAGE SERVICE TAX</div>
     <center>
     <div style="width:850px;">        
-        <fieldset style="width:100%;">
+        <fieldset style="width:60%;">
             <legend>Search Service Tax</legend>
             <table>
                 <tr>
@@ -42,7 +42,7 @@
                 </div>
             </ProgressTemplate>        
         </asp:UpdateProgress>
-        <fieldset id="fsList" runat="server" style="width:100%;min-height:100px;">
+        <fieldset id="fsList" runat="server" style="width:60%;min-height:100px;">
             <legend>Service Tax List</legend>
             <div style="float:right;padding-bottom:5px;">
                 Results Per Page:<asp:DropDownList ID="ddlPaging" runat="server" Width="50px" AutoPostBack="true" 

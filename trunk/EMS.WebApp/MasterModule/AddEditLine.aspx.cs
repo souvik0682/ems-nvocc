@@ -64,6 +64,11 @@ namespace EMS.WebApp.MasterModule
                 txtLineName.Text = ds.Tables[0].Rows[0]["NVOCCName"].ToString();
                 txtFreeDays.Text = Convert.ToString(ds.Tables[0].Rows[0]["DefaultFreeDays"]);
                 txtContact.Text = Convert.ToString(ds.Tables[0].Rows[0]["ContAgentCode"]);
+
+                txtImpCommsn.Text = Convert.ToString(ds.Tables[0].Rows[0]["ImportCommission"]);
+                txtExportCommission.Text = Convert.ToString(ds.Tables[0].Rows[0]["ExportCommission"]);
+                ddlExpBook.SelectedValue = Convert.ToString(ds.Tables[0].Rows[0]["ExportBooking"]);
+
                 imgLogo.ImageUrl = string.IsNullOrEmpty(Convert.ToString(ds.Tables[0].Rows[0]["LogoPath"])) ? "~/MasterModule/Image/Defaultlogo.png" : ds.Tables[0].Rows[0]["LogoPath"].ToString();
                 hdnLogo.Value = imgLogo.ImageUrl;
 
@@ -96,8 +101,10 @@ namespace EMS.WebApp.MasterModule
             }
             else
                 hdnLogo.Value = "";
-
-            int result = dbinteract.AddEditLine(_userId, Convert.ToInt32(NVOCCId), txtLineName.Text.Trim(), string.IsNullOrEmpty(txtFreeDays.Text) ? -1 :  Convert.ToInt32(txtFreeDays.Text), txtContact.Text, hdnLogo.Value, isedit);
+            decimal impComm = Convert.ToDecimal(txtImpCommsn.Text);
+            decimal expCommsn = Convert.ToDecimal(txtExportCommission.Text);
+            char ExpBook =  ddlExpBook.SelectedValue.ToCharArray()[0];
+            int result = dbinteract.AddEditLine(_userId, Convert.ToInt32(NVOCCId), txtLineName.Text.Trim(), string.IsNullOrEmpty(txtFreeDays.Text) ? -1 :  Convert.ToInt32(txtFreeDays.Text), txtContact.Text,impComm,expCommsn,ExpBook, hdnLogo.Value, isedit);
 
 
             if (result > 0)

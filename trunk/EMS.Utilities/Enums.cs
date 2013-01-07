@@ -25,11 +25,11 @@ namespace EMS.Utilities
         /// </summary>
         public enum ChargeType
         {
-            Per_Unit = 1,
-            Per_Document = 2,
-            Detention = 3,
-            Port_Ground = 4,
-            Slab = 5
+            PER_UNIT = 1,
+            PER_DOCUMENT = 2,
+            DETENTION = 3,
+            PORT_GROUND = 4,
+            SLAB = 5
 
         }
         public enum Currency
@@ -40,16 +40,16 @@ namespace EMS.Utilities
 
         public enum ImportExportGeneral
         {
-            Import = 1,
-            Export = 2,
-            General = 3
+            IMPORT = 1,
+            EXPORT = 2,
+            GENERAL = 3
         }
 
         public enum WashingType
         {
-            General = 1,
-            Heavy = 2,
-            Chemical = 3
+            GENERAL = 1,
+            HEAVY = 2,
+            CHEMICAL = 3
         }
 
         public enum Salutation

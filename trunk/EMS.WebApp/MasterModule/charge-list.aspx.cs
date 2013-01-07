@@ -64,6 +64,15 @@ namespace EMS.WebApp.MasterModule
             }
         }
 
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {
+            txtChargeName.Text = string.Empty;
+            txtLine.Text = string.Empty;
+            ddlChargeType.SelectedIndex = 0;
+            LoadCharge();
+        }
+
+
         protected void gvwCharge_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             int newIndex = e.NewPageIndex;
@@ -122,7 +131,8 @@ namespace EMS.WebApp.MasterModule
 
                 e.Row.Cells[2].Text = ddlIEC.Items.FindByValue(Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ImportExport"))).Text;
 
-                e.Row.Cells[3].Text = ((Enums.ChargeType)Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "ChargeType"))).ToString().Replace("_", " ");
+                if (!string.IsNullOrEmpty(Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChargeType"))))
+                    e.Row.Cells[3].Text = ((Enums.ChargeType)Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "ChargeType"))).ToString().Replace("_", " ");
 
                 e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Line"));
 
@@ -130,22 +140,22 @@ namespace EMS.WebApp.MasterModule
 
                 // Edit link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
-                btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00013");
+                //btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00008");
                 btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChargeId"));
 
                 //Delete link
                 ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
-                btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
+                //btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00007");
                 btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChargeId"));
 
                 if (_hasEditAccess)
                 {
-                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
+                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00010") + "');";
                 }
                 else
                 {
-                    btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
-                    btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
+                    btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00009") + "');return false;";
+                    btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00009") + "');return false;";
                 }
             }
         }
@@ -226,7 +236,7 @@ namespace EMS.WebApp.MasterModule
         {
             ChargeBLL.DeleteCharge(ChargeId);
             LoadCharge();
-            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00010") + "');</script>", false);
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00006") + "');</script>", false);
         }
 
         private void RedirecToAddEditPage(int id)

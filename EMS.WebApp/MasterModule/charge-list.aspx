@@ -44,6 +44,8 @@
                         <td>
                             <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px"
                                 OnClick="btnSearch_Click" />
+                            <asp:Button ID="btnRefresh" runat="server" Text="Reset" CssClass="button" Width="100px"
+                                OnClick="btnRefresh_Click" />
                         </td>
                     </tr>
                 </table>

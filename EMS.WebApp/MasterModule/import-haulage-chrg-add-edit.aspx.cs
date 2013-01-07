@@ -17,6 +17,7 @@ namespace EMS.WebApp.MasterModule
         ImportHaulageEntity oImportHaulageEntity;
         ImportHaulageBLL oImportHaulageBll;
         UserEntity oUserEntity;
+        
 
         #region Private Member Variables
 
@@ -27,6 +28,9 @@ namespace EMS.WebApp.MasterModule
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+            _userId = user == null ? 0 : user.Id;
+
             RetriveParameters();
             if (!Page.IsPostBack)
             {
@@ -99,30 +103,39 @@ namespace EMS.WebApp.MasterModule
 
                 if (hdnHaulageChrgID.Value == "0") // Insert
                 {
-                    oImportHaulageEntity.CreatedBy = 1;// oUserEntity.Id;
+                    oImportHaulageEntity.CreatedBy = _userId;// oUserEntity.Id;
                     oImportHaulageEntity.CreatedOn = DateTime.Today.Date;
-                    oImportHaulageEntity.ModifiedBy = 1;// oUserEntity.Id;
+                    oImportHaulageEntity.ModifiedBy = _userId;// oUserEntity.Id;
                     oImportHaulageEntity.ModifiedOn = DateTime.Today.Date;
 
+                    switch (oImportHaulageBll.AddEditImportHAulageChrg(oImportHaulageEntity))
+                    {
+                        case -1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00076");
+                            break;
+                        case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
+                            ClearAll();
+                            break;
+                        case 1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
+                            ClearAll();
+                            break;
+                    }
                 }
                 else // Update
                 {
                     oImportHaulageEntity.HaulageChgID = Convert.ToInt32(hdnHaulageChrgID.Value);
-                    oImportHaulageEntity.ModifiedBy = 2;// oUserEntity.Id;
+                    oImportHaulageEntity.ModifiedBy = _userId;// oUserEntity.Id;
                     oImportHaulageEntity.ModifiedOn = DateTime.Today.Date;
-                }
-
-                switch (oImportHaulageBll.AddEditImportHAulageChrg(oImportHaulageEntity))
-                {
-                    case -1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00070");
-                        break;
-                    case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
-                        ClearAll();
-                        break;
-                    case 1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
-                        ClearAll();
-                        break;
-                }
+                    //
+                    switch (oImportHaulageBll.AddEditImportHAulageChrg(oImportHaulageEntity))
+                    {
+                        case -1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00076");
+                            break;
+                        case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");                            
+                            break;
+                        case 1: Response.Redirect("~/MasterModule/ImportHaulage-list.aspx"); 
+                            break;
+                    }
+                }               
 
 
             }

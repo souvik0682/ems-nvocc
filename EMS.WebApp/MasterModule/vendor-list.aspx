@@ -40,7 +40,7 @@
                         <td>
                             <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px"
                                 OnClick="btnSearch_Click" />
-                            <asp:Button ID="btnRefresh" runat="server" Text="Refresh" CssClass="button" Width="100px"
+                            <asp:Button ID="btnRefresh" runat="server" Text="Reset" CssClass="button" Width="100px"
                                 OnClick="btnRefresh_Click" />
                         </td>
                     </tr>
@@ -87,7 +87,7 @@
                                 <PagerStyle CssClass="gridviewpager" />
                                 <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
                                 <EmptyDataTemplate>
-                                    No Location(s) Found</EmptyDataTemplate>
+                                    No Record(s) Found</EmptyDataTemplate>
                                 <Columns>
                                     <asp:TemplateField HeaderText="Sl#">
                                         <HeaderStyle CssClass="gridviewheader" />

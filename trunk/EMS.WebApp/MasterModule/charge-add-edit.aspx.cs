@@ -19,11 +19,15 @@ namespace EMS.WebApp.MasterModule
         ChargeRateEntity oEntity;
         ChargeEntity oChargeEntity;
         private int _locId = 0;
+        private int _userId = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             //string[] Names = new string[5] { "A", "A", "A", "A", "A" };
             //dgChargeRates.DataSource = Names;
+
+            IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+            _userId = user == null ? 0 : user.Id;
 
             RetriveParameters();
             if (!Page.IsPostBack)
@@ -282,30 +286,35 @@ namespace EMS.WebApp.MasterModule
 
                 if (hdnChargeID.Value == "0") //insert
                 {
-                    oChargeEntity.CreatedBy = 1;// oUserEntity.Id;
+                    oChargeEntity.CreatedBy = _userId;// oUserEntity.Id;
                     oChargeEntity.CreatedOn = DateTime.Today.Date;
-                    oChargeEntity.ModifiedBy = 1;// oUserEntity.Id;
+                    oChargeEntity.ModifiedBy = _userId;// oUserEntity.Id;
                     oChargeEntity.ModifiedOn = DateTime.Today.Date;
 
                     hdnChargeID.Value = oChargeBLL.AddEditCharge(oChargeEntity).ToString();
 
                     if (hdnChargeID.Value != "0")
+                    {
                         lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
+                        //ClearAll();
+                    }
                     else
+                    {
                         lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
+                    }
 
                 }
                 else   //update
                 {
                     oChargeEntity.ChargesID = Convert.ToInt32(hdnChargeID.Value);
-                    oChargeEntity.ModifiedBy = 2;// oUserEntity.Id;
+                    oChargeEntity.ModifiedBy = _userId;// oUserEntity.Id;
                     oChargeEntity.ModifiedOn = DateTime.Today.Date;
 
                     switch (oChargeBLL.AddEditCharge(oChargeEntity))
                     {
                         case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
                             break;
-                        case 1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
+                        case 1: Response.Redirect("~/MasterModule/charge-list.aspx");
                             break;
                     }
                 }
@@ -500,6 +509,8 @@ namespace EMS.WebApp.MasterModule
                 Label lblSharingFEU = (Label)Row.FindControl("lblSharingFEU");
 
                 ddlFLocation.SelectedIndex = ddlFLocation.Items.IndexOf(ddlFLocation.Items.FindByValue(hdnLocationId.Value));
+                PopulateDropDown((int)Enums.DropDownPopulationFor.TerminalCode, ddlFTerminal, Convert.ToInt32(ddlFLocation.SelectedValue));
+
                 ddlFTerminal.SelectedIndex = ddlFTerminal.Items.IndexOf(ddlFTerminal.Items.FindByValue(hdnTerminalId.Value));
                 ddlFWashingType.SelectedIndex = ddlFWashingType.Items.IndexOf(ddlFWashingType.Items.FindByValue(hdnWashingTypeId.Value));
 
@@ -581,6 +592,35 @@ namespace EMS.WebApp.MasterModule
         }
         protected void rdbServiceTaxApplicable_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+        }
+
+        void ClearAll()
+        {
+            hdnChargeID.Value = "0";
+            ddlChargeType.SelectedIndex = 0;
+            ddlCurrency.SelectedIndex = 0;
+            ddlImportExportGeneral.SelectedIndex = 0;
+            ddlLine.SelectedIndex = 0;
+            ddlMLocation.SelectedIndex = 0;
+            ddlMTerminal.SelectedIndex = 0;
+            ddlMWashingType.SelectedIndex = 0;
+
+            rdbFreightComponent.SelectedIndex = 0;
+            rdbPrincipleSharing.SelectedIndex = 0;
+            rdbRateChange.SelectedIndex = 0;
+            rdbServiceTaxApplicable.SelectedIndex = 0;
+            rdbWashing.SelectedIndex = 0;
+
+            txtChargeName.Text = string.Empty;
+            txtDisplayOrder.Text = string.Empty;
+            txtEffectDate.Text = string.Empty;
+
+            oChargeRates = new List<ChargeRateEntity>();
+            ChargeRateEntity Ent = new ChargeRateEntity();
+            oChargeRates.Add(Ent);
+            dgChargeRates.DataSource = oChargeRates;
+            dgChargeRates.DataBind();
 
         }
     }

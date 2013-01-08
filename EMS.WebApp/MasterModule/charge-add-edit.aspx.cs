@@ -286,7 +286,7 @@ namespace EMS.WebApp.MasterModule
 
 
 
-                if (hdnChargeID.Value == "0") //insert
+                if (Convert.ToInt32(hdnChargeID.Value) <= 0) //insert
                 {
                     oChargeEntity.CreatedBy = _userId;// oUserEntity.Id;
                     oChargeEntity.CreatedOn = DateTime.Today.Date;
@@ -295,10 +295,14 @@ namespace EMS.WebApp.MasterModule
 
                     hdnChargeID.Value = oChargeBLL.AddEditCharge(oChargeEntity).ToString();
 
-                    if (hdnChargeID.Value != "0")
+                    if (Convert.ToInt32(hdnChargeID.Value) > 0)
                     {
                         lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
                         //ClearAll();
+                    }
+                    else if (hdnChargeID.Value == "-1")
+                    {
+                        lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00076");
                     }
                     else
                     {
@@ -317,6 +321,8 @@ namespace EMS.WebApp.MasterModule
                         case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
                             break;
                         case 1: Response.Redirect("~/MasterModule/charge-list.aspx");
+                            break;
+                        case -1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00076");
                             break;
                     }
                 }

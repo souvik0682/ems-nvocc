@@ -34,6 +34,7 @@ namespace EMS.WebApp.MasterModule
             {
                 fillAllDropdown();
                 //dgChargeRates.DataBind();
+                DefaulSelection();
 
                 if (hdnChargeID.Value != "0")
                 {
@@ -81,11 +82,11 @@ namespace EMS.WebApp.MasterModule
             #region Currency
             foreach (Enums.Currency r in Enum.GetValues(typeof(Enums.Currency)))
             {
-                Li = new ListItem("Select", "0");
+                //Li = new ListItem("Select", "0");
                 ListItem item = new ListItem(Enum.GetName(typeof(Enums.Currency), r).Replace('_', ' '), ((int)r).ToString());
                 ddlCurrency.Items.Add(item);
             }
-            ddlCurrency.Items.Insert(0, Li);
+            //ddlCurrency.Items.Insert(0, Li);
             #endregion
 
             #region ImportExportGeneral
@@ -99,9 +100,13 @@ namespace EMS.WebApp.MasterModule
             #endregion
 
             #region Line
-            Li = new ListItem("Select", "0");
+
             PopulateDropDown((int)Enums.DropDownPopulationFor.Line, ddlLine, 0);
+            Li = new ListItem("Select", "0");
             ddlLine.Items.Insert(0, Li);
+
+            Li = new ListItem("N/A", "-1");
+            ddlLine.Items.Insert(1, Li);
             #endregion
 
             #region Master list of Location, Terminal, WashinfType
@@ -395,6 +400,11 @@ namespace EMS.WebApp.MasterModule
                 }
                 ddlFWashingType.Items.Insert(0, Li);
 
+                //if (rdbWashing.SelectedItem.Value == "0")
+                //{
+                //    ddlFWashingType.Enabled = false;
+                //}
+
             }
         }
         protected void dgChargeRates_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -622,6 +632,15 @@ namespace EMS.WebApp.MasterModule
             dgChargeRates.DataSource = oChargeRates;
             dgChargeRates.DataBind();
 
+        }
+
+        void DefaulSelection()
+        {
+            rdbFreightComponent.SelectedIndex = 1;
+            rdbPrincipleSharing.SelectedIndex = 0;
+            rdbRateChange.SelectedIndex = 1;
+            rdbServiceTaxApplicable.SelectedIndex =0;
+            rdbWashing.SelectedIndex = 1;
         }
     }
 }

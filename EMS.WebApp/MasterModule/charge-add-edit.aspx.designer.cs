@@ -226,7 +226,7 @@ namespace EMS.WebApp.MasterModule {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDisplayOrder;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtDisplayOrder;
         
         /// <summary>
         /// rdbRateChange control.

@@ -34,8 +34,9 @@ namespace EMS.Utilities
         }
         public enum Currency
         {
-            DOLLAR = 1,
-            INR = 2
+            INR = 1,
+            DOLLAR = 2
+            
         }
 
         public enum ImportExportGeneral

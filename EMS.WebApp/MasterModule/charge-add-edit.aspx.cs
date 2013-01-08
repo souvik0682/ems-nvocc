@@ -102,11 +102,8 @@ namespace EMS.WebApp.MasterModule
             #region Line
 
             PopulateDropDown((int)Enums.DropDownPopulationFor.Line, ddlLine, 0);
-            Li = new ListItem("Select", "0");
+            Li = new ListItem("NA", "0");
             ddlLine.Items.Insert(0, Li);
-
-            Li = new ListItem("N/A", "-1");
-            ddlLine.Items.Insert(1, Li);
             #endregion
 
             #region Master list of Location, Terminal, WashinfType
@@ -503,7 +500,7 @@ namespace EMS.WebApp.MasterModule
                 HiddenField hdnFId = (HiddenField)FootetRow.FindControl("hdnFId");
 
 
-                GridViewRow Row = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer);
+                GridViewRow Row = (GridViewRow)(((ImageButton)e.CommandSource).NamingContainer);
                 HiddenField hdnLocationId = (HiddenField)Row.FindControl("hdnLocationId");
                 HiddenField hdnTerminalId = (HiddenField)Row.FindControl("hdnTerminalId");
                 HiddenField hdnWashingTypeId = (HiddenField)Row.FindControl("hdnWashingTypeId");
@@ -541,7 +538,7 @@ namespace EMS.WebApp.MasterModule
             #region Delete
             if (e.CommandArgument == "Delete")
             {
-                GridViewRow Row = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer);
+                GridViewRow Row = (GridViewRow)(((ImageButton)e.CommandSource).NamingContainer);
                 HiddenField hdnId = (HiddenField)Row.FindControl("hdnId");
                 ChargeBLL.DeleteChargeRate(Convert.ToInt32(hdnId.Value));
                 FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
@@ -574,9 +571,24 @@ namespace EMS.WebApp.MasterModule
             }
             else
             {
-                txtSharingBL.ReadOnly = false;
-                txtSharingTEU.ReadOnly = false;
-                txtSharingFEU.ReadOnly = false;
+                switch (ddlChargeType.SelectedValue)
+                {
+                    case "1":
+                    case "3":
+                    case "4":
+                        txtSharingBL.ReadOnly = true;
+                        txtSharingTEU.ReadOnly = false;
+                        txtSharingFEU.ReadOnly = false;
+                        break;
+                    case "2":
+                    case "5":
+                        txtSharingBL.ReadOnly = false;
+                        txtSharingTEU.ReadOnly = true;
+                        txtSharingFEU.ReadOnly = true;
+                        break;
+                }
+
+
             }
         }
         protected void rdbWashing_SelectedIndexChanged(object sender, EventArgs e)
@@ -639,8 +651,163 @@ namespace EMS.WebApp.MasterModule
             rdbFreightComponent.SelectedIndex = 1;
             rdbPrincipleSharing.SelectedIndex = 0;
             rdbRateChange.SelectedIndex = 1;
-            rdbServiceTaxApplicable.SelectedIndex =0;
+            rdbServiceTaxApplicable.SelectedIndex = 0;
             rdbWashing.SelectedIndex = 1;
+        }
+
+        protected void ddlChargeType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList ddlChargeType = (DropDownList)sender;
+            GridViewRow FootetRow = dgChargeRates.FooterRow;
+
+
+            TextBox txtLow = (TextBox)FootetRow.FindControl("txtLow");
+            TextBox txtHigh = (TextBox)FootetRow.FindControl("txtHigh");
+            TextBox txtRatePerBL = (TextBox)FootetRow.FindControl("txtRatePerBL");
+            TextBox txtRatePerTEU = (TextBox)FootetRow.FindControl("txtRatePerTEU");
+            TextBox txtRateperFEU = (TextBox)FootetRow.FindControl("txtRateperFEU");
+
+            TextBox txtSharingBL = (TextBox)FootetRow.FindControl("txtSharingBL");
+            TextBox txtSharingTEU = (TextBox)FootetRow.FindControl("txtSharingTEU");
+            TextBox txtSharingFEU = (TextBox)FootetRow.FindControl("txtSharingFEU");
+
+            RequiredFieldValidator rfvLow = (RequiredFieldValidator)FootetRow.FindControl("rfvLow");
+            RequiredFieldValidator rfvHigh = (RequiredFieldValidator)FootetRow.FindControl("rfvHigh");
+            RequiredFieldValidator rfvRatePerBl = (RequiredFieldValidator)FootetRow.FindControl("rfvRatePerBl");
+            RequiredFieldValidator rfvRatePerTEU = (RequiredFieldValidator)FootetRow.FindControl("rfvRatePerTEU");
+            RequiredFieldValidator rfvRatePerFEU = (RequiredFieldValidator)FootetRow.FindControl("rfvRatePerFEU");
+
+
+            switch (ddlChargeType.SelectedValue)
+            {
+                case "1":
+                    txtRatePerTEU.Enabled = true;
+                    txtRateperFEU.Enabled = true;
+                    txtRatePerBL.Enabled = false;
+                    txtRatePerBL.Text = "0.00";
+                    txtLow.Enabled = false;
+                    txtLow.Text = "0.00";
+                    txtHigh.Enabled = false;
+                    txtHigh.Text = "0.00";
+
+                    rfvRatePerTEU.Enabled = true;
+                    rfvRatePerFEU.Enabled = true;
+                    rfvLow.Enabled = false;
+                    rfvHigh.Enabled = false;
+                    rfvRatePerBl.Enabled = false;
+
+                    if (rdbPrincipleSharing.SelectedItem.Value == "0")
+                    {
+                        txtSharingFEU.ReadOnly = true;
+                        txtSharingTEU.ReadOnly = true;
+                        txtSharingBL.ReadOnly = true;
+                    }
+                    else
+                    {
+                        txtSharingFEU.ReadOnly = false;
+                        txtSharingTEU.ReadOnly = false;
+                        txtSharingBL.ReadOnly = true;
+                    }
+
+                    break;
+
+                case "2":
+                    txtRatePerBL.Enabled = true;
+
+                    txtRatePerTEU.Enabled = false;
+                    txtRatePerTEU.Text = "0.00";
+                    txtRateperFEU.Enabled = false;
+                    txtRateperFEU.Text = "0.00";
+                    txtLow.Enabled = false;
+                    txtLow.Text = "0.00";
+                    txtHigh.Enabled = false;
+                    txtHigh.Text = "0.00";
+
+                    rfvRatePerBl.Enabled = true;
+                    rfvLow.Enabled = false;
+                    rfvHigh.Enabled = false;
+                    rfvRatePerTEU.Enabled = false;
+                    rfvRatePerFEU.Enabled = false;
+
+                    if (rdbPrincipleSharing.SelectedItem.Value == "0")
+                    {
+                        txtSharingBL.ReadOnly = true;
+                        txtSharingFEU.ReadOnly = true;
+                        txtSharingTEU.ReadOnly = true;
+                    }
+                    else
+                    {
+                        txtSharingBL.ReadOnly = false;
+                        txtSharingFEU.ReadOnly = true;
+                        txtSharingTEU.ReadOnly = true;
+                    }
+
+                    break;
+
+                case "3":
+                case "4":
+                    txtLow.Enabled = true;
+                    txtHigh.Enabled = true;
+                    txtRatePerTEU.Enabled = true;
+                    txtRateperFEU.Enabled = true;
+
+                    txtRatePerBL.Enabled = false;
+                    txtRatePerBL.Text = "0.00";
+
+                    rfvLow.Enabled = true;
+                    rfvHigh.Enabled = true;
+
+                    rfvRatePerBl.Enabled = false;
+                    rfvRatePerTEU.Enabled = true;
+                    rfvRatePerFEU.Enabled = true;
+
+                    if (rdbPrincipleSharing.SelectedItem.Value == "0")
+                    {
+                        txtSharingFEU.ReadOnly = true;
+                        txtSharingTEU.ReadOnly = true;
+                        txtSharingBL.ReadOnly = true;
+                    }
+                    else
+                    {
+                        txtSharingFEU.ReadOnly = false;
+                        txtSharingTEU.ReadOnly = false;
+                        txtSharingBL.ReadOnly = true;
+                    }
+
+                    break;
+                case "5":
+                    txtLow.Enabled = true;
+                    txtHigh.Enabled = true;
+                    txtRatePerBL.Enabled = true;
+
+                    txtRatePerTEU.Enabled = false;
+                    txtRatePerTEU.Text = "0.00";
+                    txtRateperFEU.Enabled = false;
+                    txtRateperFEU.Text = "0.00";
+
+
+                    rfvLow.Enabled = true;
+                    rfvHigh.Enabled = true;
+
+                    rfvRatePerBl.Enabled = true;
+                    rfvRatePerTEU.Enabled = false;
+                    rfvRatePerFEU.Enabled = false;
+
+                    if (rdbPrincipleSharing.SelectedItem.Value == "0")
+                    {
+                        txtSharingBL.ReadOnly = true;
+                        txtSharingFEU.ReadOnly = true;
+                        txtSharingTEU.ReadOnly = true;
+                    }
+                    else
+                    {
+                        txtSharingBL.ReadOnly = false;
+                        txtSharingFEU.ReadOnly = true;
+                        txtSharingTEU.ReadOnly = true;
+                    }
+
+                    break;
+            }
         }
     }
 }

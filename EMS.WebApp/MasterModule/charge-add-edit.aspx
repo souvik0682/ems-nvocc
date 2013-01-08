@@ -2,13 +2,25 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="EMS.WebApp" Namespace="EMS.WebApp.CustomControls" TagPrefix="cc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+<script language="javascript" type="text/javascript">
+    function checkDate(sender, args) {
+        if (sender._selectedDate < new Date()) {
+            alert("You cannot select a day earlier than today!");
+            sender._selectedDate = new Date();
+            // set the date back to the current date
+            //sender._textbox.set_Value(sender._selectedDate.format(sender._format))
+            sender._textbox.set_Value("")
+        }
+    }
+
+</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
     <div>
         <div id="headercaption">
             ADD / EDIT CHARGE</div>
         <center>
-            <fieldset style="width: 75%;">
+            <fieldset style="width: 85%;">
                 <legend>Add / Edit Charge</legend>
                 <table border="0" cellpadding="2" cellspacing="3" width="100%">
                     <tr>
@@ -18,7 +30,7 @@
                         <td style="width: 375px;">
                             <asp:TextBox ID="txtEffectDate" runat="server" Width="250" ReadOnly="true"></asp:TextBox>
                             <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtEffectDate"
-                                PopupPosition="BottomLeft" TargetControlID="txtEffectDate" Format="dd/MM/yyyy">
+                                PopupPosition="BottomLeft" TargetControlID="txtEffectDate" Format="dd/MM/yyyy" OnClientDateSelectionChanged="checkDate">
                             </cc1:CalendarExtender>
                             <asp:RequiredFieldValidator ID="rfvDate" runat="server" ErrorMessage="Please select date"
                                 ControlToValidate="txtEffectDate" Display="None" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
@@ -98,7 +110,8 @@
                             Charge Type<span class="errormessage1">*</span> :
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlChargeType" runat="server" Width="255">
+                            <asp:DropDownList ID="ddlChargeType" runat="server" Width="255" 
+                                AutoPostBack="true" onselectedindexchanged="ddlChargeType_SelectedIndexChanged">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="rfvChargeType" runat="server" ErrorMessage="Please select charge type"
                                 Display="None" ControlToValidate="ddlChargeType" ValidationGroup="vgCharge" InitialValue="0"></asp:RequiredFieldValidator>
@@ -144,15 +157,15 @@
                     </tr>
                     <tr>
                         <td>
-                            Line<span class="errormessage1">*</span> :
+                            Line<span class="errormessage1"></span> :
                         </td>
                         <td>
                             <asp:DropDownList ID="ddlLine" runat="server" Width="255">
                             </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="rfvLine" runat="server" ErrorMessage="Please select line"
+                           <%-- <asp:RequiredFieldValidator ID="rfvLine" runat="server" ErrorMessage="Please select line"
                                 Display="None" ControlToValidate="ddlLine" InitialValue="0" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender18" runat="server" TargetControlID="rfvLine">
-                            </cc1:ValidatorCalloutExtender>
+                            </cc1:ValidatorCalloutExtender>--%>
                         </td>
                         <td>
                             Is Freight Component ?<span class="errormessage1">*</span> :
@@ -319,8 +332,15 @@
                                         FooterStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
                                             <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("ChargesRateID")%>' />
-                                            <asp:LinkButton ID="lnkEdit" runat="server" CommandArgument="Edit">Edit</asp:LinkButton>&nbsp;&nbsp;
-                                            <asp:LinkButton ID="lnkDelete" runat="server" CommandArgument="Delete">Delete</asp:LinkButton>
+
+                                             <asp:ImageButton ID="lnkEdit" runat="server" CommandArgument="Edit" ImageUrl="~/Images/edit.png"
+                                                Height="16" Width="16" ToolTip="Edit" />&nbsp;&nbsp;
+
+                                                <asp:ImageButton ID="lnkDelete" runat="server" CommandArgument="Delete" ImageUrl="~/Images/remove.png"
+                                                Height="16" Width="16" ToolTip="Delete" />
+
+                                          <%--  <asp:LinkButton ID="lnkEdit" runat="server" CommandArgument="Edit">Edit</asp:LinkButton>
+                                            <asp:LinkButton ID="lnkDelete" runat="server" CommandArgument="Delete">Delete</asp:LinkButton>--%>
                                         </ItemTemplate>
                                         <FooterTemplate>
                                             <asp:HiddenField ID="hdnFId" runat="server" Value="0" />

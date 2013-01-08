@@ -265,24 +265,6 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.DropDownList ddlLine;
         
         /// <summary>
-        /// rfvLine control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLine;
-        
-        /// <summary>
-        /// ValidatorCalloutExtender18 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender18;
-        
-        /// <summary>
         /// rdbFreightComponent control.
         /// </summary>
         /// <remarks>

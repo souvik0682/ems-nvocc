@@ -345,4 +345,7 @@
   <data name="ERR00075" xml:space="preserve">
     <value>Exchange rate earlier than today’s date cannot be deleted</value>
   </data>
+  <data name="ERR00076" xml:space="preserve">
+    <value>Record already exists!</value>
+  </data>
 </root>

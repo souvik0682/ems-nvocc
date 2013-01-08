@@ -28,7 +28,7 @@ namespace EMS.Utilities
             PER_UNIT = 1,
             PER_DOCUMENT = 2,
             DETENTION = 3,
-            PORT_GROUND = 4,
+            PORT_GROUND_RENT = 4,
             SLAB = 5
 
         }

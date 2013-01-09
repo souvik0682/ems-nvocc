@@ -10,6 +10,7 @@ using System.Xml.Serialization;
 
 namespace EMS.Entity
 {
+    [Serializable]
     public class ChargeRateEntity : IChargeRate
     {
         [XmlAnyElement]

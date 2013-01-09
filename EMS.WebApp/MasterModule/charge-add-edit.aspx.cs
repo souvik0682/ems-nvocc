@@ -34,16 +34,19 @@ namespace EMS.WebApp.MasterModule
             {
                 fillAllDropdown();
                 //dgChargeRates.DataBind();
-                DefaulSelection();
+
 
                 if (hdnChargeID.Value != "0")
                 {
-
-                    FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
                     FillChargeDetails(Convert.ToInt32(hdnChargeID.Value));
+                    FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
+                    WashingSelection(rdbWashing);
+                    SharingSelection(rdbPrincipleSharing);
+                    ShowHideControlofFooter(ddlChargeType);
                 }
                 else
                 {
+                    DefaulSelection();
                     oChargeRates = new List<ChargeRateEntity>();
                     ChargeRateEntity Ent = new ChargeRateEntity();
                     oChargeRates.Add(Ent);
@@ -352,9 +355,10 @@ namespace EMS.WebApp.MasterModule
             rdbServiceTaxApplicable.Items.FindByValue(oChargeEntity.ServiceTax.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
             rdbFreightComponent.Items.FindByValue(oChargeEntity.IsFreightComponent.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
             rdbWashing.Items.FindByValue(oChargeEntity.IsWashing.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
-            WashingSelection(rdbWashing);
+            //WashingSelection(rdbWashing);
+            string ss = oChargeEntity.PrincipleSharing.ToString().ToLower() == "true" ? "1" : "0";
             rdbPrincipleSharing.Items.FindByValue(oChargeEntity.PrincipleSharing.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
-            SharingSelection(rdbPrincipleSharing);
+            //SharingSelection(rdbPrincipleSharing);
             rdbRateChange.Items.FindByValue(oChargeEntity.RateChangeable.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
 
             hdnChargeID.Value = oChargeEntity.ChargesID.ToString();
@@ -461,10 +465,18 @@ namespace EMS.WebApp.MasterModule
 
                     //Header change & CBM/TON selection to be implemented below
                     oEntity.RateActive = true;
-                    oEntity.RatePerFEU = Convert.ToDecimal(txtRateperFEU.Text);
-                    oEntity.RatePerTEU = Convert.ToDecimal(txtRatePerTEU.Text);
-                    oEntity.RatePerCBM = Convert.ToDecimal(txtRateperFEU.Text);
-                    oEntity.RatePerTON = Convert.ToDecimal(txtRatePerTEU.Text);
+                    if (ddlChargeType.SelectedValue == "6") //If LCL selected, then data will go to CBM & TON
+                    {
+                        oEntity.RatePerCBM = Convert.ToDecimal(txtRateperFEU.Text);
+                        oEntity.RatePerTON = Convert.ToDecimal(txtRatePerTEU.Text);
+                    }
+                    else
+                    {
+                        oEntity.RatePerFEU = Convert.ToDecimal(txtRateperFEU.Text);
+                        oEntity.RatePerTEU = Convert.ToDecimal(txtRatePerTEU.Text);
+                    }
+
+
 
 
                     if (hdnFId.Value == "0") //Inser in local list
@@ -476,7 +488,7 @@ namespace EMS.WebApp.MasterModule
                         oEntity.ChargesRateID = Convert.ToInt32(hdnFId.Value);
                         oChargeBLL.AddEditChargeRates(oEntity);
                     }
-                    FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
+                    FillChargeRate(Convert.ToInt32(hdnChargeID.Value));                   
 
                 }
                 else
@@ -550,6 +562,10 @@ namespace EMS.WebApp.MasterModule
                 FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
             }
             #endregion
+
+            WashingSelection(rdbWashing);
+            SharingSelection(rdbPrincipleSharing);
+            ShowHideControlofFooter(ddlChargeType);
         }
         protected void rdbPrincipleSharing_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -663,9 +679,16 @@ namespace EMS.WebApp.MasterModule
 
         protected void ddlChargeType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //ShowHideControlofFooter(sender);
             DropDownList ddlChargeType = (DropDownList)sender;
-            GridViewRow FootetRow = dgChargeRates.FooterRow;
+            ShowHideControlofFooter(ddlChargeType);
+        }
 
+        private void ShowHideControlofFooter(DropDownList ddlChargeType)
+        {
+            //DropDownList ddlChargeType = (DropDownList)sender;
+            GridViewRow FootetRow = dgChargeRates.FooterRow;
+            GridViewRow HeaderRow = dgChargeRates.HeaderRow;
 
             TextBox txtLow = (TextBox)FootetRow.FindControl("txtLow");
             TextBox txtHigh = (TextBox)FootetRow.FindControl("txtHigh");
@@ -682,6 +705,17 @@ namespace EMS.WebApp.MasterModule
             RequiredFieldValidator rfvRatePerBl = (RequiredFieldValidator)FootetRow.FindControl("rfvRatePerBl");
             RequiredFieldValidator rfvRatePerTEU = (RequiredFieldValidator)FootetRow.FindControl("rfvRatePerTEU");
             RequiredFieldValidator rfvRatePerFEU = (RequiredFieldValidator)FootetRow.FindControl("rfvRatePerFEU");
+            
+            RequiredFieldValidator rfvSharingBL = (RequiredFieldValidator)FootetRow.FindControl("rfvSharingBL");
+            RequiredFieldValidator rfvSharingTEU = (RequiredFieldValidator)FootetRow.FindControl("rfvSharingTEU");
+            RequiredFieldValidator rfvSharingFEU = (RequiredFieldValidator)FootetRow.FindControl("rfvSharingFEU");
+                
+                
+
+            HeaderRow.Cells[6].Text = "Rate/TEU";
+            HeaderRow.Cells[7].Text = "Rate/FEU";
+            HeaderRow.Cells[9].Text = "Share/TEU";
+            HeaderRow.Cells[10].Text = "Share/FEU";
 
 
             switch (ddlChargeType.SelectedValue)
@@ -692,9 +726,9 @@ namespace EMS.WebApp.MasterModule
                     txtRatePerBL.Enabled = false;
                     txtRatePerBL.Text = "0.00";
                     txtLow.Enabled = false;
-                    txtLow.Text = "0.00";
+                    txtLow.Text = "0";
                     txtHigh.Enabled = false;
-                    txtHigh.Text = "0.00";
+                    txtHigh.Text = "0";
 
                     rfvRatePerTEU.Enabled = true;
                     rfvRatePerFEU.Enabled = true;
@@ -707,12 +741,21 @@ namespace EMS.WebApp.MasterModule
                         txtSharingFEU.ReadOnly = true;
                         txtSharingTEU.ReadOnly = true;
                         txtSharingBL.ReadOnly = true;
+
+                        rfvSharingBL.Enabled = false;
+                        rfvSharingFEU.Enabled = false;
+                        rfvSharingTEU.Enabled = false;
+
                     }
                     else
                     {
                         txtSharingFEU.ReadOnly = false;
                         txtSharingTEU.ReadOnly = false;
                         txtSharingBL.ReadOnly = true;
+
+                        rfvSharingBL.Enabled = false;
+                        rfvSharingFEU.Enabled = true;
+                        rfvSharingTEU.Enabled = true;
                     }
 
                     break;
@@ -725,9 +768,9 @@ namespace EMS.WebApp.MasterModule
                     txtRateperFEU.Enabled = false;
                     txtRateperFEU.Text = "0.00";
                     txtLow.Enabled = false;
-                    txtLow.Text = "0.00";
+                    txtLow.Text = "0";
                     txtHigh.Enabled = false;
-                    txtHigh.Text = "0.00";
+                    txtHigh.Text = "0";
 
                     rfvRatePerBl.Enabled = true;
                     rfvLow.Enabled = false;
@@ -740,12 +783,19 @@ namespace EMS.WebApp.MasterModule
                         txtSharingBL.ReadOnly = true;
                         txtSharingFEU.ReadOnly = true;
                         txtSharingTEU.ReadOnly = true;
+                        rfvSharingBL.Enabled = false;
+                        rfvSharingFEU.Enabled = false;
+                        rfvSharingTEU.Enabled = false;
                     }
                     else
                     {
                         txtSharingBL.ReadOnly = false;
                         txtSharingFEU.ReadOnly = true;
                         txtSharingTEU.ReadOnly = true;
+
+                        rfvSharingBL.Enabled = true;
+                        rfvSharingFEU.Enabled = false;
+                        rfvSharingTEU.Enabled = false;
                     }
 
                     break;
@@ -772,12 +822,20 @@ namespace EMS.WebApp.MasterModule
                         txtSharingFEU.ReadOnly = true;
                         txtSharingTEU.ReadOnly = true;
                         txtSharingBL.ReadOnly = true;
+                        rfvSharingBL.Enabled = false;
+                        rfvSharingFEU.Enabled = false;
+                        rfvSharingTEU.Enabled = false;
                     }
                     else
                     {
                         txtSharingFEU.ReadOnly = false;
                         txtSharingTEU.ReadOnly = false;
                         txtSharingBL.ReadOnly = true;
+
+                        rfvSharingBL.Enabled = false;
+                        rfvSharingFEU.Enabled = true;
+                        rfvSharingTEU.Enabled = true;
+
                     }
 
                     break;
@@ -804,12 +862,62 @@ namespace EMS.WebApp.MasterModule
                         txtSharingBL.ReadOnly = true;
                         txtSharingFEU.ReadOnly = true;
                         txtSharingTEU.ReadOnly = true;
+                        rfvSharingBL.Enabled = false;
+                        rfvSharingFEU.Enabled = false;
+                        rfvSharingTEU.Enabled = false;
                     }
                     else
                     {
                         txtSharingBL.ReadOnly = false;
                         txtSharingFEU.ReadOnly = true;
                         txtSharingTEU.ReadOnly = true;
+
+                        rfvSharingBL.Enabled = true;
+                        rfvSharingFEU.Enabled = false;
+                        rfvSharingTEU.Enabled = false;
+                    }
+
+                    break;
+
+                case "6":
+
+                    HeaderRow.Cells[6].Text="Rate/CBM";
+                    HeaderRow.Cells[7].Text = "Rate/TON";
+                    HeaderRow.Cells[9].Text = "Share/CBM";
+                    HeaderRow.Cells[10].Text = "Share/TON";
+
+                    txtRatePerTEU.Enabled = true;
+                    txtRateperFEU.Enabled = true;
+                    txtRatePerBL.Enabled = false;
+                    txtRatePerBL.Text = "0.00";
+                    txtLow.Enabled = false;
+                    txtLow.Text = "0";
+                    txtHigh.Enabled = false;
+                    txtHigh.Text = "0";
+
+                    rfvRatePerTEU.Enabled = true;
+                    rfvRatePerFEU.Enabled = true;
+                    rfvLow.Enabled = false;
+                    rfvHigh.Enabled = false;
+                    rfvRatePerBl.Enabled = false;
+
+                    if (rdbPrincipleSharing.SelectedItem.Value == "0")
+                    {
+                        txtSharingFEU.ReadOnly = true;
+                        txtSharingTEU.ReadOnly = true;
+                        txtSharingBL.ReadOnly = true;
+                        rfvSharingBL.Enabled = false;
+                        rfvSharingFEU.Enabled = false;
+                        rfvSharingTEU.Enabled = false;
+                    }
+                    else
+                    {
+                        txtSharingFEU.ReadOnly = false;
+                        txtSharingTEU.ReadOnly = false;
+                        txtSharingBL.ReadOnly = true;
+                        rfvSharingBL.Enabled = false;
+                        rfvSharingFEU.Enabled = true;
+                        rfvSharingTEU.Enabled = true;
                     }
 
                     break;

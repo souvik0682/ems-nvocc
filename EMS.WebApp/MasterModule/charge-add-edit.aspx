@@ -190,18 +190,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                        </td>
-                        <td style="height: 80px;">
-                            <asp:HiddenField ID="hdnChargeID" runat="server" Value="0" />
-                            <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="vgCharge" OnClick="btnSave_Click" />&nbsp;&nbsp;<asp:Button
-                                ID="btnBack" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
-                                OnClick="btnBack_Click" />
-                            <asp:Label ID="lblMessage" runat="server"></asp:Label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4">
+                        <td colspan="4" style="padding-top: 30px;">
                             <asp:GridView ID="dgChargeRates" runat="server" AutoGenerateColumns="false" ShowFooter="true"
                                 OnItemCommand="dgChargeRates_ItemCommand" OnItemDataBound="dgChargeRates_ItemDataBound"
                                 OnRowCommand="dgChargeRates_RowCommand" OnRowDataBound="dgChargeRates_RowDataBound">
@@ -246,7 +235,8 @@
                                             <asp:Label ID="lblLow" runat="server" Text='<%# Eval("Low")%>'></asp:Label>
                                         </ItemTemplate>
                                         <FooterTemplate>
-                                            <cc2:CustomTextBox ID="txtLow" runat="server" Width="50" Type="Numeric" Style="text-align: right;"></cc2:CustomTextBox>
+                                            <cc2:CustomTextBox ID="txtLow" runat="server" Width="50" Type="Numeric" Style="text-align: right;"
+                                                Text="0"></cc2:CustomTextBox>
                                             <asp:RequiredFieldValidator ID="rfvLow" runat="server" ErrorMessage="Please enter low slab"
                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtLow"></asp:RequiredFieldValidator>
                                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender2" runat="server" TargetControlID="rfvLow">
@@ -257,7 +247,8 @@
                                         <ItemTemplate>
                                             <asp:Label ID="lblHigh" runat="server" Text='<%# Eval("High")%>'></asp:Label></ItemTemplate>
                                         <FooterTemplate>
-                                            <cc2:CustomTextBox ID="txtHigh" runat="server" Width="50" Type="Numeric" Style="text-align: right;"></cc2:CustomTextBox>
+                                            <cc2:CustomTextBox ID="txtHigh" runat="server" Width="50" Type="Numeric" Style="text-align: right;"
+                                                Text="0"></cc2:CustomTextBox>
                                             <asp:RequiredFieldValidator ID="rfvHigh" runat="server" ErrorMessage="Please enter high slab"
                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtHigh"></asp:RequiredFieldValidator>
                                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvHigh">
@@ -269,7 +260,7 @@
                                             <asp:Label ID="lblRatePerBl" runat="server" Text='<%# Eval("RatePerBL")%>'></asp:Label></ItemTemplate>
                                         <FooterTemplate>
                                             <cc2:CustomTextBox ID="txtRatePerBL" runat="server" Width="90" Type="Decimal" MaxLength="10"
-                                                Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
+                                                Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox>
                                             <asp:RequiredFieldValidator ID="rfvRatePerBl" runat="server" ErrorMessage="Please enter rate / BL"
                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtRatePerBL"></asp:RequiredFieldValidator>
                                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender4" runat="server" TargetControlID="rfvRatePerBl">
@@ -278,11 +269,18 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Rate/TEU" ItemStyle-HorizontalAlign="Right">
                                         <ItemTemplate>
-                                            <asp:Label ID="lblRatePerTEU" runat="server" Text='<%# Eval("RatePerTEU")%>'></asp:Label>
+                                            <% if (ddlChargeType.SelectedValue == "6")
+                                               { %>
+                                            <asp:Label ID="lblRatePerTEU" runat="server" Text='<%# Eval("RatePerCBM")%>'></asp:Label>
+                                            <% }
+                                               else
+                                               {%>
+                                            <asp:Label ID="Label1" runat="server" Text='<%# Eval("RatePerTEU")%>'></asp:Label>
+                                            <%} %>
                                         </ItemTemplate>
                                         <FooterTemplate>
                                             <cc2:CustomTextBox ID="txtRatePerTEU" runat="server" Width="90" Type="Decimal" MaxLength="10"
-                                                Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
+                                                Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox>
                                             <asp:RequiredFieldValidator ID="rfvRatePerTEU" runat="server" ErrorMessage="Please enter rate"
                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtRatePerTEU"></asp:RequiredFieldValidator>
                                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender5" runat="server" TargetControlID="rfvRatePerTEU">
@@ -291,11 +289,18 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Rate/FEU" ItemStyle-HorizontalAlign="Right">
                                         <ItemTemplate>
-                                            <asp:Label ID="lblRatePerFEU" runat="server" Text='<%# Eval("RatePerFEU")%>'></asp:Label>
+                                            <% if (ddlChargeType.SelectedValue == "6")
+                                               { %>
+                                            <asp:Label ID="lblRatePerFEU" runat="server" Text='<%# Eval("RatePerTON")%>'></asp:Label>
+                                            <% }
+                                               else
+                                               {%>
+                                            <asp:Label ID="Label2" runat="server" Text='<%# Eval("RatePerFEU")%>'></asp:Label>
+                                            <%} %>
                                         </ItemTemplate>
                                         <FooterTemplate>
                                             <cc2:CustomTextBox ID="txtRateperFEU" runat="server" Width="90" Type="Decimal" MaxLength="10"
-                                                Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
+                                                Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox>
                                             <asp:RequiredFieldValidator ID="rfvRatePerFEU" runat="server" ErrorMessage="Please enter rate"
                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtRateperFEU"></asp:RequiredFieldValidator>
                                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender6" runat="server" TargetControlID="rfvRatePerFEU">
@@ -308,7 +313,7 @@
                                         </ItemTemplate>
                                         <FooterTemplate>
                                             <cc2:CustomTextBox ID="txtSharingBL" runat="server" Width="90" Type="Decimal" MaxLength="10"
-                                                Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
+                                                Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox>
                                             <asp:RequiredFieldValidator ID="rfvSharingBL" runat="server" ErrorMessage="Please enter shared rate"
                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtSharingBL"></asp:RequiredFieldValidator>
                                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender7" runat="server" TargetControlID="rfvSharingBL">
@@ -321,7 +326,7 @@
                                         </ItemTemplate>
                                         <FooterTemplate>
                                             <cc2:CustomTextBox ID="txtSharingTEU" runat="server" Width="90" Type="Decimal" MaxLength="10"
-                                                Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
+                                                Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox>
                                             <asp:RequiredFieldValidator ID="rfvSharingTEU" runat="server" ErrorMessage="Please enter shared rate"
                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtSharingTEU"></asp:RequiredFieldValidator>
                                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender8" runat="server" TargetControlID="rfvSharingTEU">
@@ -334,7 +339,7 @@
                                         </ItemTemplate>
                                         <FooterTemplate>
                                             <cc2:CustomTextBox ID="txtSharingFEU" runat="server" Width="90" Type="Decimal" MaxLength="10"
-                                                Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
+                                                Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox>
                                             <asp:RequiredFieldValidator ID="rfvSharingFEU" runat="server" ErrorMessage="Please enter shared rate"
                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtSharingFEU"></asp:RequiredFieldValidator>
                                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender9" runat="server" TargetControlID="rfvSharingFEU">
@@ -354,7 +359,7 @@
                                         </ItemTemplate>
                                         <FooterTemplate>
                                             <asp:HiddenField ID="hdnFId" runat="server" Value="0" />
-                                            <asp:Button ID="lnkAdd" runat="server" CommandArgument="Save" Text="Save" Font-Bold="true"
+                                            <asp:Button ID="lnkAdd" runat="server" CommandArgument="Save" Text="Add" Font-Bold="true"
                                                 ValidationGroup="vgGridFooter" />
                                         </FooterTemplate>
                                     </asp:TemplateField>
@@ -363,6 +368,17 @@
                                 <RowStyle Wrap="true" />
                                 <FooterStyle BackColor="GrayText" HorizontalAlign="Center" />
                             </asp:GridView>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td >
+                            <asp:HiddenField ID="hdnChargeID" runat="server" Value="0" />
+                            <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="vgCharge" OnClick="btnSave_Click" />&nbsp;&nbsp;<asp:Button
+                                ID="btnBack" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
+                                OnClick="btnBack_Click" />
+                            <asp:Label ID="lblMessage" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr style="display: none;">

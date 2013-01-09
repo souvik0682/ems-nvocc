@@ -169,5 +169,12 @@ namespace EMS.Entity
         //    serializer.Serialize(xmlWriter, Items);
         //    return stringWriter.ToString();
         //}
+
+        [XmlAnyElement]
+        public int SlNo
+        {
+            get;
+            set;
+        }
     }
 }

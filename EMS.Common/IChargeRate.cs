@@ -7,6 +7,7 @@ namespace EMS.Common
 {
     public interface IChargeRate
     {
+        int SlNo { get; set; }
         int ChargesRateID { get; set; }
         int ChargesID { get; set; }
         int LocationId { get; set; }

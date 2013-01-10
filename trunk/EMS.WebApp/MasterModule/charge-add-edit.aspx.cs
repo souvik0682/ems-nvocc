@@ -20,6 +20,7 @@ namespace EMS.WebApp.MasterModule
         ChargeEntity oChargeEntity;
         private int _locId = 0;
         private int _userId = 0;
+        List<IChargeRate> Rates = new List<IChargeRate>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -46,7 +47,7 @@ namespace EMS.WebApp.MasterModule
                 }
                 else
                 {
-                    DefaulSelection();
+                    DefaultSelection();
                     oChargeRates = new List<ChargeRateEntity>();
                     ChargeRateEntity Ent = new ChargeRateEntity();
                     oChargeRates.Add(Ent);
@@ -270,6 +271,25 @@ namespace EMS.WebApp.MasterModule
                 oChargeEntity = new ChargeEntity();
                 oChargeBLL = new ChargeBLL();
 
+
+                if (rdbRateChange.SelectedItem.Value == "0")
+                {
+                    if (ViewState["ChargeRates"] == null)
+                    {
+                        lblMessage.Text = "Please enter rates!";
+                        return;
+                    }
+                    else
+                    {
+                        Rates = (List<IChargeRate>)ViewState["ChargeRates"];
+                        if (Rates.Count() <= 0)
+                        {
+                            lblMessage.Text = "Please enter rates!";
+                            return;
+                        }
+                    }
+                }
+
                 oChargeEntity.ChargeActive = true;
                 oChargeEntity.ChargeDescr = txtChargeName.Text.Trim();
                 oChargeEntity.ChargeType = Convert.ToInt32(ddlChargeType.SelectedValue);
@@ -300,8 +320,9 @@ namespace EMS.WebApp.MasterModule
 
                     if (Convert.ToInt32(hdnChargeID.Value) > 0)
                     {
+                        AddRates();
                         lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
-                        //ClearAll();
+                        ClearAll();
                     }
                     else if (hdnChargeID.Value == "-1")
                     {
@@ -323,11 +344,33 @@ namespace EMS.WebApp.MasterModule
                     {
                         case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
                             break;
-                        case 1: Response.Redirect("~/MasterModule/charge-list.aspx");
+                        case 1:
+                            AddRates();
+                            Response.Redirect("~/MasterModule/charge-list.aspx");
                             break;
                         case -1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00076");
                             break;
                     }
+                }
+
+            }
+        }
+
+        void AddRates()
+        {
+            Rates = (List<IChargeRate>)ViewState["ChargeRates"];
+
+            if (Rates.Count > 0)
+            {
+                oChargeBLL = new ChargeBLL();
+                //Deactivate all existing record
+
+                oChargeBLL.DeactivateAllRatesAgainstChargeId(Convert.ToInt32(hdnChargeID.Value));
+
+                foreach (IChargeRate Rate in Rates)
+                {
+                    Rate.ChargesID = Convert.ToInt32(hdnChargeID.Value);
+                    oChargeBLL.AddEditChargeRates(Rate);
                 }
             }
         }
@@ -369,13 +412,18 @@ namespace EMS.WebApp.MasterModule
         {
             //oChargeRates = new List<ChargeRateEntity>();
             oChargeBLL = new ChargeBLL();
-            List<IChargeRate> Rates = new List<IChargeRate>();
+            Rates = new List<IChargeRate>();
             Rates = oChargeBLL.GetChargeRates(ChargesID);
             if (Rates.Count <= 0)
             {
                 IChargeRate rt = new ChargeRateEntity();
                 Rates.Add(rt);
             }
+            else
+            {
+                ViewState["ChargeRates"] = Rates;
+            }
+
             dgChargeRates.DataSource = Rates;
             dgChargeRates.DataBind();
         }
@@ -416,85 +464,106 @@ namespace EMS.WebApp.MasterModule
         }
         protected void dgChargeRates_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            if (ViewState["ChargeRates"] == null)
+            {
+                ViewState["ChargeRates"] = Rates;
+            }
+            else
+            {
+                Rates = (List<IChargeRate>)ViewState["ChargeRates"];
+            }
+
 
             #region Save
             if (e.CommandArgument == "Save")
             {
-                if (hdnChargeID.Value != "0")
+                //if (hdnChargeID.Value != "0")
+                //{
+                oChargeBLL = new ChargeBLL();
+                GridViewRow Row = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
+
+                TextBox txtHigh = (TextBox)Row.FindControl("txtHigh");
+                TextBox txtLow = (TextBox)Row.FindControl("txtLow");
+
+                //if (Convert.ToDecimal(txtHigh.Text) < Convert.ToDecimal(txtLow.Text))
+                //{
+                //    ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00069") + "');</script>", false);
+                //    return;
+                //}
+
+
+                DropDownList ddlFLocation = (DropDownList)Row.FindControl("ddlFLocation");
+                DropDownList ddlFTerminal = (DropDownList)Row.FindControl("ddlFTerminal");
+                DropDownList ddlFWashingType = (DropDownList)Row.FindControl("ddlFWashingType");
+
+                //TextBox txtHigh = (TextBox)Row.FindControl("txtHigh");
+                //TextBox txtLow = (TextBox)Row.FindControl("txtLow");
+                TextBox txtRatePerBL = (TextBox)Row.FindControl("txtRatePerBL");
+                TextBox txtRatePerTEU = (TextBox)Row.FindControl("txtRatePerTEU");
+                TextBox txtRateperFEU = (TextBox)Row.FindControl("txtRateperFEU");
+                TextBox txtSharingBL = (TextBox)Row.FindControl("txtSharingBL");
+                TextBox txtSharingTEU = (TextBox)Row.FindControl("txtSharingTEU");
+                TextBox txtSharingFEU = (TextBox)Row.FindControl("txtSharingFEU");
+                HiddenField hdnFId = (HiddenField)Row.FindControl("hdnFId");
+                HiddenField hdnId = (HiddenField)Row.FindControl("hdnId");
+                HiddenField hdnFSlno = (HiddenField)Row.FindControl("hdnFSlno");
+
+                oEntity = new ChargeRateEntity();
+                oEntity.ChargesID = Convert.ToInt32(hdnChargeID.Value);
+                oEntity.High = Convert.ToInt32(txtHigh.Text);
+                oEntity.LocationId = Convert.ToInt32(ddlFLocation.SelectedValue);
+                oEntity.Low = Convert.ToInt32(txtLow.Text);
+                oEntity.RatePerBL = Convert.ToDecimal(txtRatePerBL.Text);
+                oEntity.SharingBL = Convert.ToDecimal(txtSharingBL.Text);
+                oEntity.SharingFEU = Convert.ToDecimal(txtSharingFEU.Text);
+                oEntity.SharingTEU = Convert.ToDecimal(txtSharingTEU.Text);
+                oEntity.WashingType = Convert.ToInt32(ddlFWashingType.SelectedValue);
+                if (ddlFTerminal.Items.Count > 0 && ddlFTerminal.SelectedIndex > 0)
+                    oEntity.TerminalId = Convert.ToInt32(ddlFTerminal.SelectedValue);
+
+                //Header change & CBM/TON selection to be implemented below
+                oEntity.RateActive = true;
+                if (ddlChargeType.SelectedValue == "6") //If LCL selected, then data will go to CBM & TON
                 {
-                    oChargeBLL = new ChargeBLL();
-                    GridViewRow Row = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
-
-                    TextBox txtHigh = (TextBox)Row.FindControl("txtHigh");
-                    TextBox txtLow = (TextBox)Row.FindControl("txtLow");
-
-                    if (Convert.ToDecimal(txtHigh.Text) < Convert.ToDecimal(txtLow.Text))
-                    {
-                        ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00069") + "');</script>", false);
-                        return;
-                    }
-
-
-                    DropDownList ddlFLocation = (DropDownList)Row.FindControl("ddlFLocation");
-                    DropDownList ddlFTerminal = (DropDownList)Row.FindControl("ddlFTerminal");
-                    DropDownList ddlFWashingType = (DropDownList)Row.FindControl("ddlFWashingType");
-
-                    //TextBox txtHigh = (TextBox)Row.FindControl("txtHigh");
-                    //TextBox txtLow = (TextBox)Row.FindControl("txtLow");
-                    TextBox txtRatePerBL = (TextBox)Row.FindControl("txtRatePerBL");
-                    TextBox txtRatePerTEU = (TextBox)Row.FindControl("txtRatePerTEU");
-                    TextBox txtRateperFEU = (TextBox)Row.FindControl("txtRateperFEU");
-                    TextBox txtSharingBL = (TextBox)Row.FindControl("txtSharingBL");
-                    TextBox txtSharingTEU = (TextBox)Row.FindControl("txtSharingTEU");
-                    TextBox txtSharingFEU = (TextBox)Row.FindControl("txtSharingFEU");
-                    HiddenField hdnFId = (HiddenField)Row.FindControl("hdnFId");
-                    HiddenField hdnId = (HiddenField)Row.FindControl("hdnId");
-
-                    oEntity = new ChargeRateEntity();
-                    oEntity.ChargesID = Convert.ToInt32(hdnChargeID.Value);
-                    oEntity.High = Convert.ToInt32(txtHigh.Text);
-                    oEntity.LocationId = Convert.ToInt32(ddlFLocation.SelectedValue);
-                    oEntity.Low = Convert.ToInt32(txtLow.Text);
-                    oEntity.RatePerBL = Convert.ToDecimal(txtRatePerBL.Text);
-                    oEntity.SharingBL = Convert.ToDecimal(txtSharingBL.Text);
-                    oEntity.SharingFEU = Convert.ToDecimal(txtSharingFEU.Text);
-                    oEntity.SharingTEU = Convert.ToDecimal(txtSharingTEU.Text);
-                    oEntity.WashingType = Convert.ToInt32(ddlFWashingType.SelectedValue);
-                    if (ddlFTerminal.Items.Count > 0 && ddlFTerminal.SelectedIndex > 0)
-                        oEntity.TerminalId = Convert.ToInt32(ddlFTerminal.SelectedValue);
-
-                    //Header change & CBM/TON selection to be implemented below
-                    oEntity.RateActive = true;
-                    if (ddlChargeType.SelectedValue == "6") //If LCL selected, then data will go to CBM & TON
-                    {
-                        oEntity.RatePerCBM = Convert.ToDecimal(txtRateperFEU.Text);
-                        oEntity.RatePerTON = Convert.ToDecimal(txtRatePerTEU.Text);
-                    }
-                    else
-                    {
-                        oEntity.RatePerFEU = Convert.ToDecimal(txtRateperFEU.Text);
-                        oEntity.RatePerTEU = Convert.ToDecimal(txtRatePerTEU.Text);
-                    }
-
-
-
-
-                    if (hdnFId.Value == "0") //Inser in local list
-                    {
-                        oChargeBLL.AddEditChargeRates(oEntity);
-                    }
-                    else //Update local list
-                    {
-                        oEntity.ChargesRateID = Convert.ToInt32(hdnFId.Value);
-                        oChargeBLL.AddEditChargeRates(oEntity);
-                    }
-                    FillChargeRate(Convert.ToInt32(hdnChargeID.Value));                   
-
+                    oEntity.RatePerCBM = Convert.ToDecimal(txtRateperFEU.Text);
+                    oEntity.RatePerTON = Convert.ToDecimal(txtRatePerTEU.Text);
                 }
                 else
                 {
-                    ClientScript.RegisterClientScriptBlock(typeof(Page), "myscript", "alert('Please enter the charge detail first')", true);
+                    oEntity.RatePerFEU = Convert.ToDecimal(txtRateperFEU.Text);
+                    oEntity.RatePerTEU = Convert.ToDecimal(txtRatePerTEU.Text);
                 }
+
+                if (Convert.ToInt32(hdnFSlno.Value) >= 0)
+                {
+                    Rates.RemoveAt(Convert.ToInt32(hdnFSlno.Value));
+                    Rates.Insert(Convert.ToInt32(hdnFSlno.Value), oEntity);
+                }
+                else
+                {
+                    Rates.Add(oEntity);
+                }
+
+
+                ViewState["ChargeRates"] = Rates;
+                FillRates();
+
+                ////if (hdnFId.Value == "0") //Inser in local list
+                ////{
+                ////    oChargeBLL.AddEditChargeRates(oEntity);
+                ////}
+                ////else //Update local list
+                ////{
+                ////    oEntity.ChargesRateID = Convert.ToInt32(hdnFId.Value);
+                ////    oChargeBLL.AddEditChargeRates(oEntity);
+                ////}
+                ////FillChargeRate(Convert.ToInt32(hdnChargeID.Value));                   
+
+                //}
+                //else
+                //{
+                //    ClientScript.RegisterClientScriptBlock(typeof(Page), "myscript", "alert('Please enter the charge detail first')", true);
+                //}
 
             }
             #endregion
@@ -516,6 +585,7 @@ namespace EMS.WebApp.MasterModule
                 TextBox txtSharingTEU = (TextBox)FootetRow.FindControl("txtSharingTEU");
                 TextBox txtSharingFEU = (TextBox)FootetRow.FindControl("txtSharingFEU");
                 HiddenField hdnFId = (HiddenField)FootetRow.FindControl("hdnFId");
+                HiddenField hdnFSlno = (HiddenField)FootetRow.FindControl("hdnFSlno");
 
 
                 GridViewRow Row = (GridViewRow)(((ImageButton)e.CommandSource).NamingContainer);
@@ -549,6 +619,7 @@ namespace EMS.WebApp.MasterModule
                 txtSharingTEU.Text = lblSharingTEU.Text;
                 txtSharingFEU.Text = lblSharingFEU.Text;
                 hdnFId.Value = hdnId.Value.ToString();
+                hdnFSlno.Value = Row.RowIndex.ToString();
 
             }
             #endregion
@@ -558,15 +629,47 @@ namespace EMS.WebApp.MasterModule
             {
                 GridViewRow Row = (GridViewRow)(((ImageButton)e.CommandSource).NamingContainer);
                 HiddenField hdnId = (HiddenField)Row.FindControl("hdnId");
-                ChargeBLL.DeleteChargeRate(Convert.ToInt32(hdnId.Value));
-                FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
+                //ChargeBLL.DeleteChargeRate(Convert.ToInt32(hdnId.Value));
+                //FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
+                Rates = (List<IChargeRate>)ViewState["ChargeRates"];
+                //Rates[Row.RowIndex].RateActive = false;
+                Rates.RemoveAt(Row.RowIndex);
+                ViewState["ChargeRates"] = Rates;
+                FillRates();
+
             }
             #endregion
+
+
 
             WashingSelection(rdbWashing);
             SharingSelection(rdbPrincipleSharing);
             ShowHideControlofFooter(ddlChargeType);
         }
+
+        void FillRates()
+        {
+            Rates = (List<IChargeRate>)ViewState["ChargeRates"];
+            IEnumerable<IChargeRate> Rts = from IChargeRate rt in Rates
+                                           where rt.RateActive == true
+                                           select rt;
+
+            dgChargeRates.DataSource = Rts.ToList();
+            dgChargeRates.DataBind();
+
+            if (Rts.Count() <= 0)
+            {
+                IChargeRate rt = new ChargeRateEntity();
+                Rates.Add(rt);
+
+                dgChargeRates.DataSource = Rates;
+                dgChargeRates.DataBind();
+            }
+
+
+        }
+
+
         protected void rdbPrincipleSharing_SelectedIndexChanged(object sender, EventArgs e)
         {
             RadioButtonList rdl = (RadioButtonList)sender;
@@ -650,15 +753,17 @@ namespace EMS.WebApp.MasterModule
             ddlMTerminal.SelectedIndex = 0;
             ddlMWashingType.SelectedIndex = 0;
 
-            rdbFreightComponent.SelectedIndex = 0;
-            rdbPrincipleSharing.SelectedIndex = 0;
-            rdbRateChange.SelectedIndex = 0;
-            rdbServiceTaxApplicable.SelectedIndex = 0;
-            rdbWashing.SelectedIndex = 0;
+            //rdbFreightComponent.SelectedIndex = 0;
+            //rdbPrincipleSharing.SelectedIndex = 0;
+            //rdbRateChange.SelectedIndex = 0;
+            //rdbServiceTaxApplicable.SelectedIndex = 0;
+            //rdbWashing.SelectedIndex = 0;
 
             txtChargeName.Text = string.Empty;
             txtDisplayOrder.Text = string.Empty;
             txtEffectDate.Text = string.Empty;
+
+            DefaultSelection();
 
             oChargeRates = new List<ChargeRateEntity>();
             ChargeRateEntity Ent = new ChargeRateEntity();
@@ -668,7 +773,7 @@ namespace EMS.WebApp.MasterModule
 
         }
 
-        void DefaulSelection()
+        void DefaultSelection()
         {
             rdbFreightComponent.SelectedIndex = 1;
             rdbPrincipleSharing.SelectedIndex = 0;
@@ -705,12 +810,12 @@ namespace EMS.WebApp.MasterModule
             RequiredFieldValidator rfvRatePerBl = (RequiredFieldValidator)FootetRow.FindControl("rfvRatePerBl");
             RequiredFieldValidator rfvRatePerTEU = (RequiredFieldValidator)FootetRow.FindControl("rfvRatePerTEU");
             RequiredFieldValidator rfvRatePerFEU = (RequiredFieldValidator)FootetRow.FindControl("rfvRatePerFEU");
-            
+
             RequiredFieldValidator rfvSharingBL = (RequiredFieldValidator)FootetRow.FindControl("rfvSharingBL");
             RequiredFieldValidator rfvSharingTEU = (RequiredFieldValidator)FootetRow.FindControl("rfvSharingTEU");
             RequiredFieldValidator rfvSharingFEU = (RequiredFieldValidator)FootetRow.FindControl("rfvSharingFEU");
-                
-                
+
+
 
             HeaderRow.Cells[6].Text = "Rate/TEU";
             HeaderRow.Cells[7].Text = "Rate/FEU";
@@ -881,7 +986,7 @@ namespace EMS.WebApp.MasterModule
 
                 case "6":
 
-                    HeaderRow.Cells[6].Text="Rate/CBM";
+                    HeaderRow.Cells[6].Text = "Rate/CBM";
                     HeaderRow.Cells[7].Text = "Rate/TON";
                     HeaderRow.Cells[9].Text = "Share/CBM";
                     HeaderRow.Cells[10].Text = "Share/TON";

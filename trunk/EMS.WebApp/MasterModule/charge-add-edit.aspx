@@ -269,14 +269,8 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Rate/TEU" ItemStyle-HorizontalAlign="Right">
                                         <ItemTemplate>
-                                            <% if (ddlChargeType.SelectedValue == "6")
-                                               { %>
-                                            <asp:Label ID="lblRatePerTEU" runat="server" Text='<%# Eval("RatePerCBM")%>'></asp:Label>
-                                            <% }
-                                               else
-                                               {%>
-                                            <asp:Label ID="Label1" runat="server" Text='<%# Eval("RatePerTEU")%>'></asp:Label>
-                                            <%} %>
+                                            <asp:Label ID="lblRatePerTEU" runat="server" Text='<%# ddlChargeType.SelectedValue == "6" ? Eval("RatePerCBM") : Eval("RatePerTEU") %>'></asp:Label>
+                                            
                                         </ItemTemplate>
                                         <FooterTemplate>
                                             <cc2:CustomTextBox ID="txtRatePerTEU" runat="server" Width="90" Type="Decimal" MaxLength="10"
@@ -289,14 +283,8 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Rate/FEU" ItemStyle-HorizontalAlign="Right">
                                         <ItemTemplate>
-                                            <% if (ddlChargeType.SelectedValue == "6")
-                                               { %>
-                                            <asp:Label ID="lblRatePerFEU" runat="server" Text='<%# Eval("RatePerTON")%>'></asp:Label>
-                                            <% }
-                                               else
-                                               {%>
-                                            <asp:Label ID="Label2" runat="server" Text='<%# Eval("RatePerFEU")%>'></asp:Label>
-                                            <%} %>
+                                            <asp:Label ID="lblRatePerFEU" runat="server" Text='<%#  ddlChargeType.SelectedValue == "6" ? Eval("RatePerTON") : Eval("RatePerFEU") %>'></asp:Label>
+                                            
                                         </ItemTemplate>
                                         <FooterTemplate>
                                             <cc2:CustomTextBox ID="txtRateperFEU" runat="server" Width="90" Type="Decimal" MaxLength="10"
@@ -349,6 +337,7 @@
                                     <asp:TemplateField HeaderText="Action" ItemStyle-Font-Bold="true" ItemStyle-HorizontalAlign="Center"
                                         FooterStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
+                                            <asp:HiddenField ID="hdnSlno" runat="server" Value='<%# Eval("SlNo")%>' />
                                             <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("ChargesRateID")%>' />
                                             <asp:ImageButton ID="lnkEdit" runat="server" CommandArgument="Edit" ImageUrl="~/Images/edit.png"
                                                 Height="16" Width="16" ToolTip="Edit" />&nbsp;&nbsp;
@@ -358,6 +347,7 @@
                                             <asp:LinkButton ID="lnkDelete" runat="server" CommandArgument="Delete">Delete</asp:LinkButton>--%>
                                         </ItemTemplate>
                                         <FooterTemplate>
+                                            <asp:HiddenField ID="hdnFSlno" runat="server" Value="-1" />
                                             <asp:HiddenField ID="hdnFId" runat="server" Value="0" />
                                             <asp:Button ID="lnkAdd" runat="server" CommandArgument="Save" Text="Add" Font-Bold="true"
                                                 ValidationGroup="vgGridFooter" />
@@ -378,7 +368,7 @@
                             <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="vgCharge" OnClick="btnSave_Click" />&nbsp;&nbsp;<asp:Button
                                 ID="btnBack" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
                                 OnClick="btnBack_Click" />
-                            <asp:Label ID="lblMessage" runat="server"></asp:Label>
+                            <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
                         </td>
                     </tr>
                     <tr style="display: none;">

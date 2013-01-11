@@ -128,12 +128,12 @@
                                             <asp:LinkButton ID="lnkHLine" runat="server" CommandName="Sort" CommandArgument="Line"
                                                 Text="Line"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="13%" />
-                                        <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkHDisplayOrder" runat="server" CommandName="Sort" CommandArgument="DisplayOrder"
-                                                Text="Display Order"></asp:LinkButton></HeaderTemplate>
+                                    <asp:TemplateField HeaderText="Order">
+                                        <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Center" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center"  />
+                                         <%--<HeaderTemplate>
+                                           <asp:LinkButton style="text-align:right;" ID="lnkHDisplayOrder" runat="server" CommandName="Sort" CommandArgument="DisplayOrder"
+                                                Text="Display Order"></asp:LinkButton></HeaderTemplate>--%>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />

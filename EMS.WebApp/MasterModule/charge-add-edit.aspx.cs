@@ -124,137 +124,14 @@ namespace EMS.WebApp.MasterModule
             ddlMWashingType.Items.Insert(0, Li);
             #endregion
 
-            //
-            //
-            //
-
-            //#region DataGrid Footer Dropdown
-
-            //foreach (DataGridItem oItem in dgChargeRates.Items)
-            //{
-
-            //}
-            //#endregion
+           
         }
 
         void PopulateDropDown(int Number, DropDownList ddl, int? Filter)
         {
             CommonBLL.PopulateDropdown(Number, ddl, Filter);
         }
-
-
-        protected void dgChargeRates_ItemCommand(object source, DataGridCommandEventArgs e)
-        {
-            //#region Save
-            //if (e.CommandArgument == "Save")
-            //{
-            //    if (hdnChargeID.Value != "0")
-            //    {
-            //        oChargeBLL = new ChargeBLL();
-
-            //        DropDownList ddlFLocation = (DropDownList)e.Item.FindControl("ddlFLocation");
-            //        DropDownList ddlFTerminal = (DropDownList)e.Item.FindControl("ddlFTerminal");
-            //        DropDownList ddlFWashingType = (DropDownList)e.Item.FindControl("ddlFWashingType");
-
-            //        TextBox txtHigh = (TextBox)e.Item.FindControl("txtHigh");
-            //        TextBox txtLow = (TextBox)e.Item.FindControl("txtLow");
-            //        TextBox txtRatePerBL = (TextBox)e.Item.FindControl("txtRatePerBL");
-            //        TextBox txtRatePerTEU = (TextBox)e.Item.FindControl("txtRatePerTEU");
-            //        TextBox txtRateperFEU = (TextBox)e.Item.FindControl("txtRateperFEU");
-            //        TextBox txtSharingBL = (TextBox)e.Item.FindControl("txtSharingBL");
-            //        TextBox txtSharingTEU = (TextBox)e.Item.FindControl("txtSharingTEU");
-            //        TextBox txtSharingFEU = (TextBox)e.Item.FindControl("txtSharingFEU");
-            //        HiddenField hdnFId = (HiddenField)e.Item.FindControl("hdnFId");
-            //        HiddenField hdnId = (HiddenField)e.Item.FindControl("hdnId");
-
-            //        oEntity = new ChargeRateEntity();
-            //        oEntity.ChargesID = Convert.ToInt32(hdnChargeID.Value);
-            //        oEntity.High = Convert.ToInt32(txtHigh.Text);
-            //        oEntity.LocationId = Convert.ToInt32(ddlFLocation.SelectedValue);
-            //        oEntity.Low = Convert.ToInt32(txtLow.Text);
-            //        oEntity.RatePerBL = Convert.ToDecimal(txtRatePerBL.Text);
-            //        oEntity.SharingBL = Convert.ToDecimal(txtSharingBL.Text);
-            //        oEntity.SharingFEU = Convert.ToDecimal(txtSharingFEU.Text);
-            //        oEntity.SharingTEU = Convert.ToDecimal(txtSharingTEU.Text);
-            //        oEntity.WashingType = Convert.ToInt32(ddlFWashingType.SelectedValue);
-            //        if (ddlFTerminal.Items.Count > 0 && ddlFTerminal.SelectedIndex > 0)
-            //            oEntity.TerminalId = Convert.ToInt32(ddlFTerminal.SelectedValue);
-
-            //        //Header change & CBM/TON selection to be implemented below
-            //        oEntity.RateActive = true;
-            //        oEntity.RatePerFEU = Convert.ToDecimal(txtRateperFEU.Text);
-            //        oEntity.RatePerTEU = Convert.ToDecimal(txtRatePerTEU.Text);
-            //        oEntity.RatePerCBM = Convert.ToDecimal(txtRateperFEU.Text);
-            //        oEntity.RatePerTON = Convert.ToDecimal(txtRatePerTEU.Text);
-
-
-            //        if (hdnFId.Value == "0") //Inser in local list
-            //        {
-            //            oChargeBLL.AddEditChargeRates(oEntity);
-            //        }
-            //        else //Update local list
-            //        {
-            //            oEntity.ChargesRateID = Convert.ToInt32(hdnFId.Value);
-            //            oChargeBLL.AddEditChargeRates(oEntity);
-            //        }
-            //        FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
-
-            //    }
-            //    else
-            //    {
-            //        ClientScript.RegisterClientScriptBlock(typeof(Page), "myscript", "alert('Please enter the charge detail first')", true);
-            //    }
-
-            //}
-            //#endregion
-
-            //#region Edit
-            //if (e.CommandArgument == "Edit")
-            //{
-            //    HiddenField hdnLocationId = (HiddenField)e.Item.FindControl("hdnLocationId");
-            //    HiddenField hdnTerminalId = (HiddenField)e.Item.FindControl("hdnTerminalId");
-            //    HiddenField hdnWashingTypeId = (HiddenField)e.Item.FindControl("hdnWashingTypeId");
-
-            //    GridViewRow Row = dgChargeRates.FooterRow;
-
-
-            //}
-            //#endregion
-
-            //#region Delete
-            //if (e.CommandArgument == "Delete")
-            //{
-            //    HiddenField hdnId = (HiddenField)e.Item.FindControl("hdnId");
-            //    ChargeBLL.DeleteChargeRate(Convert.ToInt32(hdnId.Value));
-            //    FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
-            //}
-            //#endregion
-
-        }
-
-        protected void dgChargeRates_ItemDataBound(object sender, DataGridItemEventArgs e)
-        {
-            //if (e.Item.ItemType == ListItemType.Footer)
-            //{
-            //    ListItem Li;
-            //    DropDownList ddlFLocation = (DropDownList)e.Item.FindControl("ddlFLocation");
-
-            //    DropDownList ddlFWashingType = (DropDownList)e.Item.FindControl("ddlFWashingType");
-
-            //    Li = new ListItem("Select", "0");
-            //    PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlFLocation, 0);
-            //    ddlFLocation.Items.Insert(0, Li);
-
-            //    foreach (Enums.WashingType r in Enum.GetValues(typeof(Enums.WashingType)))
-            //    {
-            //        Li = new ListItem("Select", "0");
-            //        ListItem item = new ListItem(Enum.GetName(typeof(Enums.WashingType), r).Replace('_', ' '), ((int)r).ToString());
-            //        ddlFWashingType.Items.Add(item);
-            //    }
-            //    ddlFWashingType.Items.Insert(0, Li);
-
-            //}
-        }
+  
 
         protected void ddlLocationID_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -436,7 +313,7 @@ namespace EMS.WebApp.MasterModule
 
         protected void dgChargeRates_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.Footer)
+            if (e.Row.RowType == DataControlRowType.Header)
             {
                 ListItem Li;
                 DropDownList ddlFLocation = (DropDownList)e.Row.FindControl("ddlFLocation");
@@ -571,7 +448,7 @@ namespace EMS.WebApp.MasterModule
             #region Edit
             if (e.CommandArgument == "Edit")
             {
-                GridViewRow FootetRow = dgChargeRates.FooterRow;
+                GridViewRow FootetRow = dgChargeRates.HeaderRow;
 
                 DropDownList ddlFLocation = (DropDownList)FootetRow.FindControl("ddlFLocation");
                 DropDownList ddlFTerminal = (DropDownList)FootetRow.FindControl("ddlFTerminal");
@@ -678,7 +555,7 @@ namespace EMS.WebApp.MasterModule
 
         private void SharingSelection(RadioButtonList rdl)
         {
-            GridViewRow Row = dgChargeRates.FooterRow;
+            GridViewRow Row = dgChargeRates.HeaderRow;
             TextBox txtSharingBL = (TextBox)Row.FindControl("txtSharingBL");
             TextBox txtSharingTEU = (TextBox)Row.FindControl("txtSharingTEU");
             TextBox txtSharingFEU = (TextBox)Row.FindControl("txtSharingFEU");
@@ -724,7 +601,7 @@ namespace EMS.WebApp.MasterModule
 
         private void WashingSelection(RadioButtonList rdl)
         {
-            GridViewRow Row = dgChargeRates.FooterRow;
+            GridViewRow Row = dgChargeRates.HeaderRow;
             DropDownList ddlFWashingType = (DropDownList)Row.FindControl("ddlFWashingType");
 
             if (rdl.SelectedItem.Value == "0")
@@ -792,7 +669,7 @@ namespace EMS.WebApp.MasterModule
         private void ShowHideControlofFooter(DropDownList ddlChargeType)
         {
             //DropDownList ddlChargeType = (DropDownList)sender;
-            GridViewRow FootetRow = dgChargeRates.FooterRow;
+            GridViewRow FootetRow = dgChargeRates.HeaderRow;
             GridViewRow HeaderRow = dgChargeRates.HeaderRow;
 
             TextBox txtLow = (TextBox)FootetRow.FindControl("txtLow");

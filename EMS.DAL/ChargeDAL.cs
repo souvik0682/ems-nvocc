@@ -274,6 +274,18 @@ namespace EMS.DAL
             return Result;
         }
 
+        public static void DeactivateAllRatesAgainstChargeId(int ChargeId)
+        {            
+            string strExecution = "[mst].[spChargeRateStatusUpdate]";
+            //int Result = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@ChargesId", ChargeId);
+                oDq.RunActionQuery();
+            }
+        }
+
         #endregion
 
         #region Exchange Rate

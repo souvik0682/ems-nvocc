@@ -98,7 +98,7 @@
                             <asp:Label ID="lblMessage" runat="server"></asp:Label>
                             <asp:HiddenField ID="hdnVendorID" runat="server" Value="0" />
                             <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" ValidationGroup="vgVendor" />&nbsp;&nbsp;<asp:Button
-                                ID="btnBack" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown" OnClick="btnBack_Click"  />
+                                ID="btnBack" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown" OnClick="btnBack_Click"  OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
                         </td>
                     </tr>
                 </table>

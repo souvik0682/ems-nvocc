@@ -208,7 +208,7 @@
                             <asp:HiddenField ID="hdnHaulageChrgID" runat="server" Value="0" />
                             <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" ValidationGroup="vgHaulage" />&nbsp;&nbsp;<asp:Button
                                 ID="btnBack" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
-                                OnClick="btnBack_Click" />
+                                OnClick="btnBack_Click"  OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
                         </td>
                     </tr>
                 </table>

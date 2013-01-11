@@ -22,7 +22,7 @@
         <div id="headercaption">
             ADD / EDIT CHARGE</div>
         <center>
-            <fieldset style="width: 85%;">
+            <fieldset style="width: 90%;">
                 <legend>Add / Edit Charge</legend>
                 <table border="0" cellpadding="2" cellspacing="3" width="100%">
                     <tr>
@@ -385,7 +385,7 @@
                                     </asp:TemplateField>
                                 </Columns>
                                 <HeaderStyle Font-Bold="true" HorizontalAlign="Center" BackColor="GrayText" />
-                                <RowStyle Wrap="true" BorderColor="WhiteSmoke" />
+                                <RowStyle Wrap="true" />
                                 <FooterStyle BackColor="GrayText" HorizontalAlign="Center" />
                             </asp:GridView>
                         </td>

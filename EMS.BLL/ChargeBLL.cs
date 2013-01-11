@@ -48,7 +48,7 @@ namespace EMS.BLL
 
         #endregion
 
-        #region
+        #region Charge
         public int AddEditCharge(ICharge Charge)
         {
             return ChargeDAL.AddEditCharge(Charge);
@@ -82,6 +82,11 @@ namespace EMS.BLL
         public static int DeleteChargeRate(int ChargeRateId)
         {
             return ChargeDAL.DeleteChargeRate(ChargeRateId);
+        }
+
+        public void DeactivateAllRatesAgainstChargeId(int ChargeId)
+        {
+            ChargeDAL.DeactivateAllRatesAgainstChargeId(ChargeId);
         }
 
         #endregion

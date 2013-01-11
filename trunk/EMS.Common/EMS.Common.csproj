@@ -60,6 +60,7 @@
     <Compile Include="IUser.cs" />
     <Compile Include="IUserPermission.cs" />
     <Compile Include="IVendor.cs" />
+    <Compile Include="IVesselVoyageEDI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

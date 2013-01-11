@@ -13,9 +13,9 @@ namespace EMS.Entity
         public int fl_TerminalID { get; set; }
         public string VoyageNo { get; set; }
         public string IGMNo { get; set; }
-        public DateTime IGMDate { get; set; }
-        public DateTime LandingDate { get; set; }
-        public DateTime? AddLandingDate { get; set; }
+        public DateTime? IGMDate { get; set; }
+        public DateTime? LandingDate { get; set; }
+        public Nullable<DateTime> AddLandingDate { get; set; }
         public string VoyageType { get; set; }
         public string LGNo { get; set; }
         public string AltLGNo { get; set; }
@@ -26,7 +26,7 @@ namespace EMS.Entity
         public string MotherDaughterDtl { get; set; }
         public string TotalLines { get; set; }
         public string CargoDesc { get; set; }
-        public DateTime ETADate { get; set; }
+        public DateTime? ETADate { get; set; }
         public string ETATime { get; set; }
         public int LightHouseDue { get; set; }
         public string SameButtonCargo { get; set; }
@@ -38,23 +38,23 @@ namespace EMS.Entity
         public string CallSign { get; set; }
         public decimal ImpXChangeRate { get; set; }
         public string PCCNo { get; set; }
-        public DateTime PCCDate { get; set; }
+        public DateTime? PCCDate { get; set; }
         public string VIANo { get; set; }
         public string VCN { get; set; }
-        public DateTime SailDate { get; set; }
-        public DateTime ETD { get; set; }
+        public DateTime? SailDate { get; set; }
+        public DateTime? ETD { get; set; }
         public decimal ExpXchangeRate { get; set; }
         public DateTime CutOffDate { get; set; }
         public int EGMNo { get; set; }
-        public DateTime EGMDate { get; set; }
+        public DateTime? EGMDate { get; set; }
         public string BondNo { get; set; }
         public string VesselApplNo { get; set; }
-        public DateTime VesselAppDate { get; set; }
+        public DateTime? VesselAppDate { get; set; }
         public decimal BondAmount { get; set; }
         public decimal BondBalance { get; set; }
         public string VesselSerial { get; set; }
-        public DateTime dtAdded { get; set; }
-        public DateTime dtEdited { get; set; }
+        public DateTime? dtAdded { get; set; }
+        public DateTime? dtEdited { get; set; }
         public int fk_UserAdded { get; set; }
         public int fk_UserEdited { get; set; }
         public bool VoyageStatus { get; set; }

@@ -57,14 +57,14 @@
 
                   <tr>
                     <td>Shipping Line Code:</td>
-                    <td><asp:TextBox ID="txtShipLineCode" runat="server" CssClass="textboxuppercase" 
+                    <td><asp:TextBox ID="txtShipLineCode" runat="server" CssClass="textboxuppercase" ReadOnly="true"
                             MaxLength="10" Width="250" TextMode="MultiLine"></asp:TextBox><br />
                    </td>
                 </tr>
                 
                   <tr>
                     <td>PAN No:</td>
-                    <td><asp:TextBox ID="txtPan" runat="server" CssClass="textboxuppercase" 
+                    <td><asp:TextBox ID="txtPan" runat="server" CssClass="textboxuppercase" ReadOnly="true"
                             MaxLength="50" Width="250" TextMode="SingleLine"></asp:TextBox><br />
                    </td>
                 </tr>

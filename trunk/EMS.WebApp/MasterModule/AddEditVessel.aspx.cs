@@ -36,11 +36,22 @@ namespace EMS.WebApp.MasterModule
                 BLL.DBInteraction dbinteract = new BLL.DBInteraction();
                 GeneralFunctions.PopulateDropDownList(ddlVesselPrefix, dbinteract.PopulateDDLDS("mstVesselPrefix", "pk_VesselPrefixID", "VesselPrefix"));
                 btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('ManageVessel.aspx','" + ResourceManager.GetStringWithoutName("ERR00017") + "')";
-
+                LoadShip_Tax(_userId, dbinteract);
                 if (VesselId != "-1")
                     LoadData(VesselId);
             }
         }
+
+        private void LoadShip_Tax(int _userId, BLL.DBInteraction dbinteract)
+        {
+            System.Data.DataSet ds = dbinteract.GetShipLine_Tax(_userId);
+            txtPan.Text = ds.Tables[0].Rows[0]["PANNo"].ToString();
+            txtShipLineCode.Text = ds.Tables[0].Rows[0]["ShippingLineCode"].ToString();
+
+
+        }
+
+
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
@@ -66,15 +77,11 @@ namespace EMS.WebApp.MasterModule
             if (!ReferenceEquals(ds, null) && ds.Tables[0].Rows.Count > 0)
             {
                 txtAgentCode.Text = ds.Tables[0].Rows[0]["AgentCode"].ToString();
-               // txtCallSign.Text = ds.Tables[0].Rows[0]["CallSign"].ToString();
                 txtIMO.Text = ds.Tables[0].Rows[0]["IMONumber"].ToString();
-               // ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text = ds.Tables[0].Rows[0]["Lastport"].ToString();
-                //txtlastPort.Text = ds.Tables[0].Rows[0]["Lastport"].ToString();
                 txtMasterCode.Text = ds.Tables[0].Rows[0]["MasterName"].ToString();
-                txtPan.Text = ds.Tables[0].Rows[0]["PAN"].ToString();
-                txtShipLineCode.Text = ds.Tables[0].Rows[0]["ShippingLineCode"].ToString();
+                //txtPan.Text = ds.Tables[0].Rows[0]["PAN"].ToString();
+                //txtShipLineCode.Text = ds.Tables[0].Rows[0]["ShippingLineCode"].ToString();
                 ((TextBox)AutoCompleteCountry1.FindControl("txtCountry")).Text = ds.Tables[0].Rows[0]["flag"].ToString();
-
                 txtVesselName.Text = ds.Tables[0].Rows[0]["VesselName"].ToString();
                 ddlVesselPrefix.SelectedValue = ds.Tables[0].Rows[0]["fk_VesselPrefixID"].ToString();
             }
@@ -82,7 +89,7 @@ namespace EMS.WebApp.MasterModule
         private void ClearText()
         {
             txtAgentCode.Text = "";
-          //  txtCallSign.Text = "";
+            //  txtCallSign.Text = "";
             txtIMO.Text = "";
             // txtlastPort.Text = "";
             txtMasterCode.Text = "";
@@ -125,7 +132,7 @@ namespace EMS.WebApp.MasterModule
             //    GeneralFunctions.RegisterAlertScript(this, "Last_Port_Called is Invalid. Please rectify.");
             //    return;
             //}
-             if (vessel.VesselFlag == 0)
+            if (vessel.VesselFlag == 0)
             {
                 GeneralFunctions.RegisterAlertScript(this, "Vessel_Flag is Invalid. Please rectify.");
                 return;

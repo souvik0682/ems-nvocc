@@ -112,13 +112,40 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.TextBox txtIGMNo;
         
         /// <summary>
-        /// dtIGM control.
+        /// txtDtIGM control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::EMS.WebApp.CustomControls.DatePIcker dtIGM;
+        protected global::System.Web.UI.WebControls.TextBox txtDtIGM;
+        
+        /// <summary>
+        /// dtIGM_ control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender dtIGM_;
+        
+        /// <summary>
+        /// txtdtLand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtdtLand;
+        
+        /// <summary>
+        /// dtLand_ control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender dtLand_;
         
         /// <summary>
         /// trLandDate control.
@@ -128,15 +155,6 @@ namespace EMS.WebApp.MasterModule {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableRow trLandDate;
-        
-        /// <summary>
-        /// dtLand control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::EMS.WebApp.CustomControls.DatePIcker dtLand;
         
         /// <summary>
         /// txtLGNo control.
@@ -202,13 +220,22 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.TextBox txtCallSign;
         
         /// <summary>
-        /// dtETA control.
+        /// txtdtETA control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::EMS.WebApp.CustomControls.DatePIcker dtETA;
+        protected global::System.Web.UI.WebControls.TextBox txtdtETA;
+        
+        /// <summary>
+        /// dtETA_ control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender dtETA_;
         
         /// <summary>
         /// txtTime control.
@@ -274,13 +301,22 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.DropDownList ddlCrewEffList;
         
         /// <summary>
-        /// dtAddLand control.
+        /// txtdtAddLand control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::EMS.WebApp.CustomControls.DatePIcker dtAddLand;
+        protected global::System.Web.UI.WebControls.TextBox txtdtAddLand;
+        
+        /// <summary>
+        /// dtAddLand_ control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender dtAddLand_;
         
         /// <summary>
         /// txtAltLGNo control.
@@ -301,13 +337,22 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.TextBox txtPCCNo;
         
         /// <summary>
-        /// dtPCC control.
+        /// txtdtPCC control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::EMS.WebApp.CustomControls.DatePIcker dtPCC;
+        protected global::System.Web.UI.WebControls.TextBox txtdtPCC;
+        
+        /// <summary>
+        /// dtPCC_ control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender dtPCC_;
         
         /// <summary>
         /// txtVIA control.

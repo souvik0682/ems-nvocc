@@ -81,11 +81,14 @@
     <Content Include="Images\PleaseWait.gif" />
     <Content Include="Images\remove.png" />
     <Content Include="Images\trash_icon.gif" />
+    <Content Include="Import\EDI_Custom.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="MasterModule\AddEditCountry.aspx" />
     <Content Include="MasterModule\AddEditLine.aspx" />
     <Content Include="MasterModule\AddEditPort.aspx" />
     <Content Include="MasterModule\AddEditSTax.aspx" />
+    <Content Include="MasterModule\AddEditVessel.aspx" />
+    <Content Include="MasterModule\AddEditVoyage.aspx" />
     <Content Include="MasterModule\charge-add-edit.aspx" />
     <Content Include="MasterModule\charge-list.aspx" />
     <Content Include="MasterModule\Image\Chrysanthemum.jpg" />
@@ -99,6 +102,8 @@
     <Content Include="MasterModule\ManageLoc.aspx" />
     <Content Include="MasterModule\ManagePort.aspx" />
     <Content Include="MasterModule\ManageServTax.aspx" />
+    <Content Include="MasterModule\ManageVessel.aspx" />
+    <Content Include="MasterModule\MangeVoyage.aspx" />
     <Content Include="MasterModule\vendor-add-edit.aspx" />
     <Content Include="MasterModule\vendor-list.aspx" />
     <Content Include="Reports\CargoArrivalNotice.aspx" />
@@ -201,6 +206,13 @@
       <DependentUpon>GetLocation.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Import\EDI_Custom.aspx.cs">
+      <DependentUpon>EDI_Custom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Import\EDI_Custom.aspx.designer.cs">
+      <DependentUpon>EDI_Custom.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MasterModule\AddEditCountry.aspx.cs">
       <DependentUpon>AddEditCountry.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -228,6 +240,20 @@
     </Compile>
     <Compile Include="MasterModule\AddEditSTax.aspx.designer.cs">
       <DependentUpon>AddEditSTax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\AddEditVessel.aspx.cs">
+      <DependentUpon>AddEditVessel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\AddEditVessel.aspx.designer.cs">
+      <DependentUpon>AddEditVessel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\AddEditVoyage.aspx.cs">
+      <DependentUpon>AddEditVoyage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\AddEditVoyage.aspx.designer.cs">
+      <DependentUpon>AddEditVoyage.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterModule\charge-add-edit.aspx.cs">
       <DependentUpon>charge-add-edit.aspx</DependentUpon>
@@ -291,6 +317,20 @@
     </Compile>
     <Compile Include="MasterModule\ManageServTax.aspx.designer.cs">
       <DependentUpon>ManageServTax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\ManageVessel.aspx.cs">
+      <DependentUpon>ManageVessel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\ManageVessel.aspx.designer.cs">
+      <DependentUpon>ManageVessel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\MangeVoyage.aspx.cs">
+      <DependentUpon>MangeVoyage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\MangeVoyage.aspx.designer.cs">
+      <DependentUpon>MangeVoyage.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterModule\vendor-add-edit.aspx.cs">
       <DependentUpon>vendor-add-edit.aspx</DependentUpon>
@@ -469,7 +509,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Export\" />
     <Folder Include="Finance\" />
-    <Folder Include="Import\" />
+    <Folder Include="Import\EDIFile\" />
     <Folder Include="Transaction\" />
   </ItemGroup>
   <ItemGroup>

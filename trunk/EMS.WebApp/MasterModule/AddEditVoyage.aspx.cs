@@ -51,7 +51,7 @@ namespace EMS.WebApp.MasterModule
                 {
                     if (txtExcRate.Text.Trim() == "")
                     {
-                        txtExcRate.Text = hdntxtExcRate.Value = dbinteract.GetExchnageRate(dtLand.dt).ToString();
+                        txtExcRate.Text = hdntxtExcRate.Value = dbinteract.GetExchnageRate(Convert.ToDateTime(txtdtLand.Text)).ToString();
                     }
                     trLandDate.Style.Add("display", " ");
                 }
@@ -113,12 +113,13 @@ namespace EMS.WebApp.MasterModule
                   ddlShipStoreSubmitted.SelectedValue = ds.Tables[0].Rows[0]["ShipStoreSubmitted"].ToString();
                   ddlTerminalID.SelectedValue = ds.Tables[0].Rows[0]["fl_TerminalID"].ToString();
 
-                  dtETA.DBDate = ds.Tables[0].Rows[0]["ETADate"].ToString();
-                  dtAddLand.DBDate = ds.Tables[0].Rows[0]["AddLandingDate"].ToString();
-                  dtIGM.DBDate = ds.Tables[0].Rows[0]["IGMDate"].ToString();
-                  dtLand.DBDate = ds.Tables[0].Rows[0]["LandingDate"].ToString();
-                  dtPCC.DBDate = ds.Tables[0].Rows[0]["PCCDate"].ToString();
-
+                  
+                  txtdtETA.Text = ds.Tables[0].Rows[0]["ETADate"].ToString().Split(' ')[0];
+                  txtdtLand.Text = ds.Tables[0].Rows[0]["AddLandingDate"].ToString().Split(' ')[0];
+                  txtDtIGM.Text = ds.Tables[0].Rows[0]["IGMDate"].ToString().Split(' ')[0];
+                  txtdtLand.Text = ds.Tables[0].Rows[0]["LandingDate"].ToString().Split(' ')[0];
+                  txtdtPCC.Text = ds.Tables[0].Rows[0]["PCCDate"].ToString().Split(' ')[0];
+                  //txtdtAddLand.Text = ds.Tables[0].Rows[0]["__"].ToString();
                   string port = ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text = ds.Tables[0].Rows[0]["lastport"].ToString();
                          port = ((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text = ds.Tables[0].Rows[0]["lastport1"].ToString(); 
                          port = ((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text = ds.Tables[0].Rows[0]["lastport2"].ToString();
@@ -167,11 +168,11 @@ namespace EMS.WebApp.MasterModule
             voyage.ShipStoreSubmitted = ddlShipStoreSubmitted.SelectedValue;
             voyage.fl_TerminalID = Convert.ToInt32(ddlTerminalID.SelectedValue);
             voyage.VesselType = ddlVesselType.SelectedValue;
-            voyage.AddLandingDate =  dtAddLand.dt;
-            voyage.ETADate = dtETA.dt;
-            voyage.IGMDate = dtIGM.dt;
-            voyage.LandingDate = dtLand.dt;
-            voyage.PCCDate = dtPCC.dt;
+            voyage.AddLandingDate = string.IsNullOrEmpty(txtdtAddLand.Text.Trim()) ? (Nullable<DateTime>)null : Convert.ToDateTime(txtdtAddLand.Text);
+            voyage.ETADate = string.IsNullOrEmpty(txtdtETA.Text.Trim()) ? (Nullable<DateTime>)null : Convert.ToDateTime(txtdtETA.Text);
+            voyage.IGMDate = string.IsNullOrEmpty(txtDtIGM.Text.Trim()) ? (Nullable<DateTime>)null : Convert.ToDateTime(txtDtIGM.Text);
+            voyage.LandingDate = string.IsNullOrEmpty(txtdtLand.Text.Trim()) ? (Nullable<DateTime>)null : Convert.ToDateTime(txtdtLand.Text);
+            voyage.PCCDate = string.IsNullOrEmpty(txtdtPCC.Text.Trim()) ? (Nullable<DateTime>)null : Convert.ToDateTime(txtdtPCC.Text);
 
             string port = ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
             port = port.Contains(',') && port.Split(',').Length >= 1 ? port.Split(',')[1].Trim() : "";

@@ -145,6 +145,14 @@ namespace EMS.WebApp
             {
                 menuId = (int)PageName.ImportHaulageChargeMaster;
             }
+            else if (Request.Path.Contains("/MasterModule/ManageVessel.aspx"))
+            {
+                menuId = (int)PageName.VesselMaster;
+            }
+            else if (Request.Path.Contains("/MasterModule/MangeVoyage.aspx"))
+            {
+                menuId = (int)PageName.Voyage;
+            }
             else if (Request.Path.Contains("/Reports/ImpBLChkLst.aspx"))
             {
                 menuId = (int)PageName.ImportBLChklst;

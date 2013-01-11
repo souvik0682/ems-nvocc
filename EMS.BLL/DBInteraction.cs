@@ -40,7 +40,7 @@ namespace EMS.BLL
         public DataSet PopulateDDLDS(string tableName, string textField, string valuefield, bool isDSR)
         {
 
-            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery("Select [" + textField + "] ListItemValue, [" + valuefield + "] ListItemText from " + tableName, true);
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery("Select [" + textField + "] ListItemValue, [" + valuefield + "] ListItemText from " + tableName + " order by ListItemText", true);
 
             return dquery.GetTables();
 
@@ -68,6 +68,12 @@ namespace EMS.BLL
             return Convert.ToDecimal(dquery.GetScalar());
         }
 
+        public DataSet GetShipLine_Tax(int userid)
+        {
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery("prcGetShipLine_Tax");
+            dquery.AddIntegerParam("@userid", userid);
+            return dquery.GetTables();
+        }
 
 
         #endregion
@@ -376,6 +382,9 @@ namespace EMS.BLL
 
             return dquery.GetTables();
         }
+
+       
+        
 
         #endregion
 

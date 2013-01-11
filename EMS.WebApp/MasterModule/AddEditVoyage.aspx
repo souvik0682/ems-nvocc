@@ -5,7 +5,9 @@
     TagPrefix="uc1" %>
 <%@ Register Src="../CustomControls/AutoCompletepPort.ascx" TagName="AutoCompletepPort"
     TagPrefix="uc2" %>
-<%@ Register Src="../CustomControls/DatePicker.ascx" TagName="DatePicker" TagPrefix="uc3" %>
+<%--<%@ Register Src="../CustomControls/DatePicker.ascx" TagName="DatePicker" TagPrefix="uc3" %>--%>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc2" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script src="../Scripts/Common.js" type="text/javascript"></script>
     <script type="text/javascript" language="javascript">
@@ -98,17 +100,21 @@
               <tr>
                     <td style="width:140px;">IGM Date:</td>
                     <td>
-                        <uc3:DatePicker ID="dtIGM" runat="server" />
+                       <%-- <uc3:DatePicker ID="dtIGM" runat="server" />--%>
+                        <asp:TextBox ID="txtDtIGM" runat="server"></asp:TextBox>
+                        <cc2:CalendarExtender ID="dtIGM_" TargetControlID="txtDtIGM" runat="server" />
                    </td>
                 </tr>
-              <tr runat="server" id="trLandDate">
+              <tr  >
                     <td style="width:140px;">Landing Date:</td>
                     <td>
-                        <uc3:DatePicker ID="dtLand" runat="server" />
+                        <%--<uc3:DatePicker ID="dtLand" runat="server" />--%>
+                         <asp:TextBox ID="txtdtLand" runat="server"></asp:TextBox>
+                        <cc2:CalendarExtender ID="dtLand_" TargetControlID="txtdtLand" runat="server" />
                    </td>
                 </tr>
               
-              <tr>
+              <tr runat="server" id="trLandDate">
                     <td style="width:140px;">Landing Gurantee No.</td>
                     <td><asp:TextBox ID="txtLGNo" runat="server" CssClass="textboxuppercase" MaxLength="40" Width="250"></asp:TextBox><br />
                    </td>
@@ -168,8 +174,9 @@
               
         <tr>
                     <td style="width:140px;">ETA Date </td>
-                    <td> <uc3:DatePicker ID="dtETA" runat="server" />
-                      
+                    <td> <%--<uc3:DatePicker ID="dtETA" runat="server" />--%>
+                        <asp:TextBox ID="txtdtETA" runat="server"></asp:TextBox>
+                        <cc2:CalendarExtender ID="dtETA_" TargetControlID="txtdtETA" runat="server" />
                    </td>
                 </tr>
          <tr>
@@ -180,7 +187,7 @@
                 </tr>
         <tr>
                     <td style="width:140px;">Light house Due</td>
-                    <td><asp:TextBox ID="txtLightHouse" runat="server" CssClass="textboxuppercase" MaxLength="5" Width="250"  onkeyup="IsNumeric(this)"></asp:TextBox><br />
+                    <td><asp:TextBox ID="txtLightHouse" runat="server" style="text-align:right" CssClass="textboxuppercase" MaxLength="5" Width="250"  onkeyup="IsNumeric(this)"></asp:TextBox><br />
                    </td>
                 </tr>
         <tr>
@@ -231,7 +238,9 @@
                 <tr id="AdLand" style="display:none">
                     <td style="width:140px;">Add. Landing Date:</td>
                     <td>
-                        <uc3:DatePicker ID="dtAddLand" runat="server" />
+                        <%--<uc3:DatePicker ID="dtAddLand" runat="server" />--%>
+                          <asp:TextBox ID="txtdtAddLand" runat="server"></asp:TextBox>
+                        <cc2:CalendarExtender ID="dtAddLand_" TargetControlID="txtdtAddLand" runat="server" />
                    </td>
                 </tr>
       
@@ -248,7 +257,10 @@
                 </tr>
         <tr>
                     <td style="width:140px;">PCC Date</td>
-                    <td> <uc3:DatePicker ID="dtPCC" runat="server" /><br />
+                    <td> <%--<uc3:DatePicker ID="dtPCC" runat="server" />--%>
+                     <asp:TextBox ID="txtdtPCC" runat="server"></asp:TextBox>
+                        <cc2:CalendarExtender ID="dtPCC_" TargetControlID="txtdtPCC" runat="server" />
+                    <br />
                    </td>
                 </tr>
         <tr>

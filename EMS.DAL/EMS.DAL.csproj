@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="CommonDAL.cs" />
     <Compile Include="ContainerTranDAL.cs" />
+    <Compile Include="EDIDAL.cs" />
     <Compile Include="ImportHaulageDAL.cs" />
     <Compile Include="ChargeDAL.cs" />
     <Compile Include="DBManager\DataConnection.cs" />

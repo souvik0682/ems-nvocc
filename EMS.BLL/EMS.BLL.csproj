@@ -44,6 +44,7 @@
     <Compile Include="CommonBLL.cs" />
     <Compile Include="ContainerTranBLL.cs" />
     <Compile Include="DBInteraction.cs" />
+    <Compile Include="EDIBLL.cs" />
     <Compile Include="ImportHaulageBLL.cs" />
     <Compile Include="ChargeBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

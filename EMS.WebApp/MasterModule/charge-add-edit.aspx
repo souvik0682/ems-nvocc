@@ -190,13 +190,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="padding-top: 30px; border:none;">
+                        <td colspan="4" style="padding-top: 30px; border: none;">
                             <asp:GridView ID="dgChargeRates" runat="server" AutoGenerateColumns="false" ShowFooter="false"
                                 OnItemCommand="dgChargeRates_ItemCommand" OnItemDataBound="dgChargeRates_ItemDataBound"
                                 OnRowCommand="dgChargeRates_RowCommand" OnRowDataBound="dgChargeRates_RowDataBound">
                                 <Columns>
                                     <asp:TemplateField HeaderText="Location">
-                                        
                                         <ItemTemplate>
                                             <asp:HiddenField ID="hdnLocationId" runat="server" Value='<%# Eval("LocationId")%>' />
                                             <%# (Eval("LocationId").ToString() == "0" ? string.Empty : ddlMLocation.Items.FindByValue(Eval("LocationId").ToString()).Text)%></ItemTemplate>
@@ -209,7 +208,7 @@
                                                 InitialValue="0"></asp:RequiredFieldValidator>
                                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server" TargetControlID="rfvLocation">
                                             </cc1:ValidatorCalloutExtender>
-                                            <br />
+                                            <br /><br />
                                             Location
                                         </HeaderTemplate>
                                     </asp:TemplateField>
@@ -221,7 +220,8 @@
                                         <HeaderTemplate>
                                             <asp:DropDownList ID="ddlFTerminal" runat="server" Width="120">
                                             </asp:DropDownList>
-                                            <br />Terminal
+                                            <br /><br />
+                                            Terminal
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Washing Type">
@@ -232,7 +232,7 @@
                                         <HeaderTemplate>
                                             <asp:DropDownList ID="ddlFWashingType" runat="server" Width="120" Enabled="false">
                                             </asp:DropDownList>
-                                            <br />
+                                            <br /><br />
                                             Washing Type
                                         </HeaderTemplate>
                                     </asp:TemplateField>
@@ -247,7 +247,7 @@
                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtLow"></asp:RequiredFieldValidator>
                                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender2" runat="server" TargetControlID="rfvLow">
                                             </cc1:ValidatorCalloutExtender>
-                                            <br />
+                                            <br /><br />
                                             Low
                                         </HeaderTemplate>
                                     </asp:TemplateField>
@@ -261,7 +261,7 @@
                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtHigh"></asp:RequiredFieldValidator>
                                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvHigh">
                                             </cc1:ValidatorCalloutExtender>
-                                            <br />
+                                            <br /><br />
                                             High
                                         </HeaderTemplate>
                                     </asp:TemplateField>
@@ -275,7 +275,7 @@
                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtRatePerBL"></asp:RequiredFieldValidator>
                                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender4" runat="server" TargetControlID="rfvRatePerBl">
                                             </cc1:ValidatorCalloutExtender>
-                                            <br />
+                                            <br /><br />
                                             Rate/BL
                                         </HeaderTemplate>
                                     </asp:TemplateField>
@@ -290,8 +290,8 @@
                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtRatePerTEU"></asp:RequiredFieldValidator>
                                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender5" runat="server" TargetControlID="rfvRatePerTEU">
                                             </cc1:ValidatorCalloutExtender>
-                                            <br />
-                                            Rate/TEU
+                                            <br /><br />
+                                            <asp:Label ID="lblFRateTeu" runat="server" Text="Rate/TEU"></asp:Label>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Rate/FEU" ItemStyle-HorizontalAlign="Right">
@@ -305,8 +305,8 @@
                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtRateperFEU"></asp:RequiredFieldValidator>
                                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender6" runat="server" TargetControlID="rfvRatePerFEU">
                                             </cc1:ValidatorCalloutExtender>
-                                            <br />
-                                            Rate/FEU
+                                            <br /><br />
+                                            <asp:Label ID="lblFRateFeu" runat="server" Text="Rate/FEU"></asp:Label>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Share/BL" ItemStyle-HorizontalAlign="Right">
@@ -320,7 +320,7 @@
                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtSharingBL"></asp:RequiredFieldValidator>
                                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender7" runat="server" TargetControlID="rfvSharingBL">
                                             </cc1:ValidatorCalloutExtender>
-                                            <br />
+                                            <br /><br />
                                             Share/BL
                                         </HeaderTemplate>
                                     </asp:TemplateField>
@@ -335,8 +335,8 @@
                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtSharingTEU"></asp:RequiredFieldValidator>
                                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender8" runat="server" TargetControlID="rfvSharingTEU">
                                             </cc1:ValidatorCalloutExtender>
-                                            <br />
-                                            Share/TEU
+                                            <br /><br />
+                                            <asp:Label ID="lblFShareTeu" runat="server" Text="Share/TEU"></asp:Label>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Shar/FEU" ItemStyle-HorizontalAlign="Right">
@@ -350,8 +350,8 @@
                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtSharingFEU"></asp:RequiredFieldValidator>
                                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender9" runat="server" TargetControlID="rfvSharingFEU">
                                             </cc1:ValidatorCalloutExtender>
-                                            <br />
-                                            Shar/FEU
+                                            <br /><br />
+                                            <asp:Label ID="lblFShareFeu" runat="server" Text="Shar/FEU"></asp:Label>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Edit" ItemStyle-Font-Bold="true" ItemStyle-HorizontalAlign="Center"
@@ -360,25 +360,28 @@
                                             <asp:HiddenField ID="hdnSlno" runat="server" Value='<%# Eval("SlNo")%>' />
                                             <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("ChargesRateID")%>' />
                                             <asp:ImageButton ID="lnkEdit" runat="server" CommandArgument="Edit" ImageUrl="~/Images/edit.png"
-                                                Height="16" Width="16" ToolTip="Edit" />                                        
+                                                Height="16" Width="16" ToolTip="Edit" />
                                         </ItemTemplate>
                                         <HeaderTemplate>
                                             <asp:HiddenField ID="hdnFSlno" runat="server" Value="-1" />
                                             <asp:HiddenField ID="hdnFId" runat="server" Value="0" />
                                             <asp:Button ID="lnkAdd" runat="server" CommandArgument="Save" Text="Add" Font-Bold="true"
                                                 ValidationGroup="vgGridFooter" Height="24" />
-                                                <br />
-                                                Edit
+                                            <br /><br />
+                                            Edit
                                         </HeaderTemplate>
                                     </asp:TemplateField>
-
-                                   <asp:TemplateField HeaderText="Delete" ItemStyle-Font-Bold="true" ItemStyle-HorizontalAlign="Center"
-                                        FooterStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Bottom">
-                                        <ItemTemplate>                                           
+                                    <asp:TemplateField HeaderText="Delete" ItemStyle-Font-Bold="true" ItemStyle-HorizontalAlign="Center"
+                                        FooterStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Top">
+                                        <ItemTemplate>
                                             <asp:ImageButton ID="lnkDelete" runat="server" CommandArgument="Delete" ImageUrl="~/Images/remove.png"
                                                 Height="16" Width="16" ToolTip="Delete" />
                                         </ItemTemplate>
-                                        
+                                        <HeaderTemplate>
+                                            <asp:Button ID="lnkCancel" runat="server" CommandArgument="Cancel" Text="Cancel" Font-Bold="true" Height="24" />
+                                            <br /> <br />
+                                            Edit
+                                        </HeaderTemplate>
                                     </asp:TemplateField>
                                 </Columns>
                                 <HeaderStyle Font-Bold="true" HorizontalAlign="Center" BackColor="GrayText" />

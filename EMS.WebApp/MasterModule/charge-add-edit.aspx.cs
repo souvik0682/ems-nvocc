@@ -124,14 +124,14 @@ namespace EMS.WebApp.MasterModule
             ddlMWashingType.Items.Insert(0, Li);
             #endregion
 
-           
+
         }
 
         void PopulateDropDown(int Number, DropDownList ddl, int? Filter)
         {
             CommonBLL.PopulateDropdown(Number, ddl, Filter);
         }
-  
+
 
         protected void ddlLocationID_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -517,7 +517,46 @@ namespace EMS.WebApp.MasterModule
             }
             #endregion
 
+            #region Cancel
+            if (e.CommandArgument == "Cancel")
+            {
+                GridViewRow Row = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
+                TextBox txtHigh = (TextBox)Row.FindControl("txtHigh");
+                TextBox txtLow = (TextBox)Row.FindControl("txtLow");
+                DropDownList ddlFLocation = (DropDownList)Row.FindControl("ddlFLocation");
+                DropDownList ddlFTerminal = (DropDownList)Row.FindControl("ddlFTerminal");
+                DropDownList ddlFWashingType = (DropDownList)Row.FindControl("ddlFWashingType");
 
+                TextBox txtRatePerBL = (TextBox)Row.FindControl("txtRatePerBL");
+                TextBox txtRatePerTEU = (TextBox)Row.FindControl("txtRatePerTEU");
+                TextBox txtRateperFEU = (TextBox)Row.FindControl("txtRateperFEU");
+                TextBox txtSharingBL = (TextBox)Row.FindControl("txtSharingBL");
+                TextBox txtSharingTEU = (TextBox)Row.FindControl("txtSharingTEU");
+                TextBox txtSharingFEU = (TextBox)Row.FindControl("txtSharingFEU");
+                HiddenField hdnFId = (HiddenField)Row.FindControl("hdnFId");                
+                HiddenField hdnFSlno = (HiddenField)Row.FindControl("hdnFSlno");
+
+                txtHigh.Text = "0";
+                txtLow.Text = "0";
+                ddlFLocation.SelectedIndex = 0;
+                if (ddlFTerminal.Items.Count > 0)
+                {
+                    //ddlFTerminal.SelectedIndex = 0;
+                    ddlFTerminal.Items.Clear();
+                    //ddlFTerminal.Enabled = false;
+                }
+                ddlFWashingType.SelectedIndex = 0;
+                txtRatePerBL.Text = "0.00";
+                txtRatePerTEU.Text = "0.00";
+                txtRateperFEU.Text = "0.00";
+                txtSharingBL.Text = "0.00";
+                txtSharingTEU.Text = "0.00";
+                txtSharingFEU.Text = "0.00";
+
+                hdnFId.Value = "0";
+                hdnFSlno.Value = "0";
+            }
+            #endregion
 
             WashingSelection(rdbWashing);
             SharingSelection(rdbPrincipleSharing);
@@ -682,6 +721,12 @@ namespace EMS.WebApp.MasterModule
             TextBox txtSharingTEU = (TextBox)FootetRow.FindControl("txtSharingTEU");
             TextBox txtSharingFEU = (TextBox)FootetRow.FindControl("txtSharingFEU");
 
+            Label lblFRateTeu = (Label)FootetRow.FindControl("lblFRateTeu");
+            Label lblFRateFeu = (Label)FootetRow.FindControl("lblFRateFeu");
+            Label lblFShareTeu = (Label)FootetRow.FindControl("lblFShareTeu");
+            Label lblFShareFeu = (Label)FootetRow.FindControl("lblFShareFeu");
+
+
             RequiredFieldValidator rfvLow = (RequiredFieldValidator)FootetRow.FindControl("rfvLow");
             RequiredFieldValidator rfvHigh = (RequiredFieldValidator)FootetRow.FindControl("rfvHigh");
             RequiredFieldValidator rfvRatePerBl = (RequiredFieldValidator)FootetRow.FindControl("rfvRatePerBl");
@@ -694,10 +739,14 @@ namespace EMS.WebApp.MasterModule
 
 
 
-            HeaderRow.Cells[6].Text = "Rate/TEU";
-            HeaderRow.Cells[7].Text = "Rate/FEU";
-            HeaderRow.Cells[9].Text = "Share/TEU";
-            HeaderRow.Cells[10].Text = "Share/FEU";
+            //HeaderRow.Cells[6].Text = "Rate/TEU";
+            lblFRateTeu.Text = "Rate/TEU";
+            //HeaderRow.Cells[7].Text = "Rate/FEU";
+            lblFRateFeu.Text = "Rate/FEU";
+            //HeaderRow.Cells[9].Text = "Share/TEU";
+            lblFShareTeu.Text = "Share/TEU";
+            //HeaderRow.Cells[10].Text = "Share/FEU";
+            lblFShareFeu.Text = "Share/FEU";
 
 
             switch (ddlChargeType.SelectedValue)
@@ -863,10 +912,14 @@ namespace EMS.WebApp.MasterModule
 
                 case "6":
 
-                    HeaderRow.Cells[6].Text = "Rate/CBM";
-                    HeaderRow.Cells[7].Text = "Rate/TON";
-                    HeaderRow.Cells[9].Text = "Share/CBM";
-                    HeaderRow.Cells[10].Text = "Share/TON";
+                    //HeaderRow.Cells[6].Text = "Rate/CBM";
+                    lblFRateTeu.Text = "Rate/CBM";
+                    //HeaderRow.Cells[7].Text = "Rate/TON";
+                    lblFRateFeu.Text = "Rate/TON";
+                    //HeaderRow.Cells[9].Text = "Share/CBM";
+                    lblFShareTeu.Text = "Share/CBM";
+                    //HeaderRow.Cells[10].Text = "Share/TON";
+                    lblFShareFeu.Text = "Share/TON";
 
                     txtRatePerTEU.Enabled = true;
                     txtRateperFEU.Enabled = true;

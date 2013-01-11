@@ -533,7 +533,7 @@ namespace EMS.WebApp.MasterModule
                 TextBox txtSharingBL = (TextBox)Row.FindControl("txtSharingBL");
                 TextBox txtSharingTEU = (TextBox)Row.FindControl("txtSharingTEU");
                 TextBox txtSharingFEU = (TextBox)Row.FindControl("txtSharingFEU");
-                HiddenField hdnFId = (HiddenField)Row.FindControl("hdnFId");                
+                HiddenField hdnFId = (HiddenField)Row.FindControl("hdnFId");
                 HiddenField hdnFSlno = (HiddenField)Row.FindControl("hdnFSlno");
 
                 txtHigh.Text = "0";
@@ -575,10 +575,11 @@ namespace EMS.WebApp.MasterModule
 
             if (Rts.Count() <= 0)
             {
+                List<IChargeRate> EmptyRates = new List<IChargeRate>();
                 IChargeRate rt = new ChargeRateEntity();
-                Rates.Add(rt);
+                EmptyRates.Add(rt);
 
-                dgChargeRates.DataSource = Rates;
+                dgChargeRates.DataSource = EmptyRates;
                 dgChargeRates.DataBind();
             }
 

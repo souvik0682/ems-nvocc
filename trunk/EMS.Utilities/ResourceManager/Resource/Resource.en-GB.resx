@@ -349,6 +349,6 @@
     <value>Record already exists!</value>
   </data>
   <data name="ERR00077" xml:space="preserve">
-    <value>From value can not be greater than to value.</value>
+    <value>Low value can not be greater than high value.</value>
   </data>
 </root>

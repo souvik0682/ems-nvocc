@@ -237,8 +237,8 @@ namespace EMS.WebApp.MasterModule
         {
             Rates = (List<IChargeRate>)ViewState["ChargeRates"];
 
-            if (Rates.Count > 0)
-            {
+            //if (Rates.Count > 0)
+            //{
                 oChargeBLL = new ChargeBLL();
                 //Deactivate all existing record
 
@@ -249,7 +249,7 @@ namespace EMS.WebApp.MasterModule
                     Rate.ChargesID = Convert.ToInt32(hdnChargeID.Value);
                     oChargeBLL.AddEditChargeRates(Rate);
                 }
-            }
+            //}
         }
 
         void FillChargeDetails(int ChargesID)

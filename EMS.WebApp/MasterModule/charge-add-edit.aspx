@@ -380,7 +380,7 @@
                                         <HeaderTemplate>
                                             <asp:Button ID="lnkCancel" runat="server" CommandArgument="Cancel" Text="Cancel" Font-Bold="true" Height="24" />
                                             <br /> <br />
-                                            Edit
+                                            Delete
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                 </Columns>

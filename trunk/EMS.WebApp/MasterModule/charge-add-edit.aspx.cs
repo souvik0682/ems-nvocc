@@ -485,11 +485,11 @@ namespace EMS.WebApp.MasterModule
                 TextBox txtHigh = (TextBox)Row.FindControl("txtHigh");
                 TextBox txtLow = (TextBox)Row.FindControl("txtLow");
 
-                //if (Convert.ToDecimal(txtHigh.Text) < Convert.ToDecimal(txtLow.Text))
-                //{
-                //    ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00069") + "');</script>", false);
-                //    return;
-                //}
+                if (Convert.ToDecimal(txtHigh.Text) < Convert.ToDecimal(txtLow.Text))
+                {
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00077") + "');</script>", false);
+                    return;
+                }
 
 
                 DropDownList ddlFLocation = (DropDownList)Row.FindControl("ddlFLocation");

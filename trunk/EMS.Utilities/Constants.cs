@@ -30,6 +30,7 @@ namespace EMS.Utilities
 
     public enum PageName
     {
+        Voyage = 4,
         ImportBLChklst = 6,
         IGMFormII = 8,
         IGMFormC = 9,

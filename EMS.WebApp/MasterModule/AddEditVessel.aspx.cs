@@ -26,8 +26,7 @@ namespace EMS.WebApp.MasterModule
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
-            _userId = user == null ? 0 : user.Id;
+            _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
 
             if (!IsPostBack)
             {
@@ -36,9 +35,11 @@ namespace EMS.WebApp.MasterModule
                 BLL.DBInteraction dbinteract = new BLL.DBInteraction();
                 GeneralFunctions.PopulateDropDownList(ddlVesselPrefix, dbinteract.PopulateDDLDS("mstVesselPrefix", "pk_VesselPrefixID", "VesselPrefix"));
                 btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('ManageVessel.aspx','" + ResourceManager.GetStringWithoutName("ERR00017") + "')";
-                LoadShip_Tax(_userId, dbinteract);
+               
                 if (VesselId != "-1")
                     LoadData(VesselId);
+
+                LoadShip_Tax(_userId, dbinteract);
             }
         }
 

@@ -11,7 +11,7 @@ using EMS.Utilities.ResourceManager;
 using EMS.Entity;
 using EMS.Common;
 
-namespace EMS.WebApp
+namespace EMS.WebApp.MasterModule
 {
     public partial class vendor_list : System.Web.UI.Page
     {
@@ -39,7 +39,7 @@ namespace EMS.WebApp
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             //RedirecToAddEditPage(-1);
-            Response.Redirect("~/vendor-add-edit.aspx");
+            Response.Redirect("~/MasterModule/vendor-add-edit.aspx");
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -117,22 +117,22 @@ namespace EMS.WebApp
 
                 // Edit link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
-                btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00008");
+                btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00013");
                 btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "VendorId"));
 
                 //Delete link
                 ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
-                btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00007");
+                btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
                 btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "VendorId"));
 
                 if (_hasEditAccess)
                 {
-                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00010") + "');";
+                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
                 }
                 else
                 {
-                    btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00009") + "');return false;";
-                    btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00009") + "');return false;";
+                    btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
+                    btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
                 }
             }
         }
@@ -213,13 +213,13 @@ namespace EMS.WebApp
         {
             VendorBLL.DeleteVndor(locId);
             LoadLocation();
-            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00006") + "');</script>", false);
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00010") + "');</script>", false);
         }
 
         private void RedirecToAddEditPage(int id)
         {
             string encryptedId = GeneralFunctions.EncryptQueryString(id.ToString());
-            Response.Redirect("~/vendor-add-edit.aspx?id=" + encryptedId);
+            Response.Redirect("~/MasterModule/vendor-add-edit.aspx?id=" + encryptedId);
         }
 
         private void BuildSearchCriteria(SearchCriteria criteria)
@@ -318,5 +318,6 @@ namespace EMS.WebApp
         }
 
         #endregion
+
     }
 }

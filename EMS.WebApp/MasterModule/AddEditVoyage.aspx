@@ -49,7 +49,7 @@
                        <tr>
                     <td>Location:<span class="errormessage1">*</span></td>
                     <td>
-                      <asp:DropDownList ID="ddlLoc" runat="server" Width="90%" AutoPostBack="True" 
+                      <asp:DropDownList ID="ddlLoc" runat="server" Width="100%" AutoPostBack="True" 
                             onselectedindexchanged="ddlLoc_SelectedIndexChanged"></asp:DropDownList>
                     </td>
                 </tr>
@@ -64,7 +64,7 @@
               <tr>
                     <td style="width:140px;">Vessel Name:<span class="errormessage1">*</span></td>
                     <td>
-                         <asp:DropDownList ID="ddlVessel" runat="server" Width="90%">
+                         <asp:DropDownList ID="ddlVessel" runat="server" Width="100%">
                         </asp:DropDownList>
                         <br />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" CssClass="errormessage" 
@@ -79,14 +79,14 @@
               <tr>
                     <td>Terminal ID:</td>
                     <td>
-                      <asp:DropDownList ID="ddlTerminalID" runat="server" Width="90%" 
+                      <asp:DropDownList ID="ddlTerminalID" runat="server" Width="100%" 
                            ></asp:DropDownList>
                     </td>
                 </tr>
               <tr>
                     <td>Vessel Type:</td>
                     <td>
-                      <asp:DropDownList ID="ddlVesselType" runat="server" Width="90%">
+                      <asp:DropDownList ID="ddlVesselType" runat="server" Width="100%">
                           <asp:ListItem Value="C">Cargo</asp:ListItem>
                           <asp:ListItem Value="E">Empty</asp:ListItem>
                       </asp:DropDownList>
@@ -101,7 +101,7 @@
                     <td style="width:140px;">IGM Date:</td>
                     <td>
                        <%-- <uc3:DatePicker ID="dtIGM" runat="server" />--%>
-                        <asp:TextBox ID="txtDtIGM" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtDtIGM" runat="server" CssClass="textboxuppercase" Width="250"></asp:TextBox>
                         <cc2:CalendarExtender ID="dtIGM_" TargetControlID="txtDtIGM" runat="server" />
                    </td>
                 </tr>
@@ -109,22 +109,22 @@
                     <td style="width:140px;">Landing Date:</td>
                     <td>
                         <%--<uc3:DatePicker ID="dtLand" runat="server" />--%>
-                         <asp:TextBox ID="txtdtLand" runat="server"></asp:TextBox>
+                         <asp:TextBox ID="txtdtLand" runat="server" CssClass="textboxuppercase" Width="250"></asp:TextBox>
                         <cc2:CalendarExtender ID="dtLand_" TargetControlID="txtdtLand" runat="server" />
                    </td>
                 </tr>
               
               <tr runat="server" id="trLandDate">
-                    <td style="width:140px;">Landing Gurantee No.</td>
+                    <td style="width:140px;">Land Gurantee No.</td>
                     <td><asp:TextBox ID="txtLGNo" runat="server" CssClass="textboxuppercase" MaxLength="40" Width="250"></asp:TextBox><br />
                    </td>
                 </tr>
         
               <tr>
                     <td style="width:140px;">Last Port Called.</td>
-                    <td onkeyup="CheckAdditional()">
+                    <td  onkeyup="CheckAdditional()">
                        
-                       
+                    
                         <uc2:AutoCompletepPort ID="AutoCompletepPort1" runat="server" />
                        
                        
@@ -133,7 +133,7 @@
                   <tr>
                     <td>Maritime List:</td>
                     <td>
-                      <asp:DropDownList ID="ddlMaritime" runat="server" Width="90%">
+                      <asp:DropDownList ID="ddlMaritime" runat="server" Width="100%">
                           <asp:ListItem Value="1">Yes</asp:ListItem>
                           <asp:ListItem Value="0">No</asp:ListItem>
                       </asp:DropDownList>
@@ -146,19 +146,19 @@
                 </tr>
 			  <tr>
                     <td style="width:140px;">Port Last but One</td>
-                    <td>
+                    <td >
                         <uc2:AutoCompletepPort ID="AutoCompletepPort2" runat="server" />
-                     <br />
+                   
                    
                    </td>
                 </tr>
                  <tr>
                     <td style="width:140px;">Port Last but Two</td>
-                    <td>  
+                    <td  >  
                        
                         <uc2:AutoCompletepPort ID="AutoCompletepPort3" runat="server" />
                        
-                        <br />
+                      
                    </td>
                 </tr>
                
@@ -175,7 +175,7 @@
         <tr>
                     <td style="width:140px;">ETA Date </td>
                     <td> <%--<uc3:DatePicker ID="dtETA" runat="server" />--%>
-                        <asp:TextBox ID="txtdtETA" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtdtETA" runat="server" CssClass="textboxuppercase" Width="250"></asp:TextBox>
                         <cc2:CalendarExtender ID="dtETA_" TargetControlID="txtdtETA" runat="server" />
                    </td>
                 </tr>
@@ -187,13 +187,13 @@
                 </tr>
         <tr>
                     <td style="width:140px;">Light house Due</td>
-                    <td><asp:TextBox ID="txtLightHouse" runat="server" style="text-align:right" CssClass="textboxuppercase" MaxLength="5" Width="250"  onkeyup="IsNumeric(this)"></asp:TextBox><br />
+                    <td><asp:TextBox ID="txtLightHouse" runat="server" style="text-align:right" CssClass="textboxuppercase" MaxLength="10" Width="250"  onkeyup="IsNumeric(this)"></asp:TextBox><br />
                    </td>
                 </tr>
         <tr>
                     <td>Same Button Cargo:</td>
                     <td>
-                      <asp:DropDownList ID="ddlSameButton" runat="server" Width="90%">
+                      <asp:DropDownList ID="ddlSameButton" runat="server" Width="100%">
                           <asp:ListItem Value="1">Yes</asp:ListItem>
                           <asp:ListItem Value="0">No</asp:ListItem>
                       </asp:DropDownList>
@@ -202,7 +202,7 @@
         <tr>
                     <td>Ship Store Submitted:</td>
                     <td>
-                      <asp:DropDownList ID="ddlShipStoreSubmitted" runat="server" Width="90%">
+                      <asp:DropDownList ID="ddlShipStoreSubmitted" runat="server" Width="100%">
                           <asp:ListItem Value="1">Yes</asp:ListItem>
                           <asp:ListItem Value="0">No</asp:ListItem>
                       </asp:DropDownList>
@@ -211,7 +211,7 @@
         <tr>
                     <td>Crew List:</td>
                     <td>
-                      <asp:DropDownList ID="ddlCrewList" runat="server" Width="90%">
+                      <asp:DropDownList ID="ddlCrewList" runat="server" Width="100%">
                           <asp:ListItem Value="1">Yes</asp:ListItem>
                           <asp:ListItem Value="0">No</asp:ListItem>
                       </asp:DropDownList>
@@ -220,7 +220,7 @@
         <tr>
                     <td>Passenger List:</td>
                     <td>
-                      <asp:DropDownList ID="ddlPessengerList" runat="server" Width="90%">
+                      <asp:DropDownList ID="ddlPessengerList" runat="server" Width="100%">
                           <asp:ListItem Value="1">Yes</asp:ListItem>
                           <asp:ListItem Value="0">No</asp:ListItem>
                       </asp:DropDownList>
@@ -229,7 +229,7 @@
         <tr>
                     <td>Crew Effective List:</td>
                     <td>
-                      <asp:DropDownList ID="ddlCrewEffList" runat="server" Width="90%">
+                      <asp:DropDownList ID="ddlCrewEffList" runat="server" Width="100%">
                           <asp:ListItem Value="1">Yes</asp:ListItem>
                           <asp:ListItem Value="0">No</asp:ListItem>
                       </asp:DropDownList>
@@ -239,7 +239,7 @@
                     <td style="width:140px;">Add. Landing Date:</td>
                     <td>
                         <%--<uc3:DatePicker ID="dtAddLand" runat="server" />--%>
-                          <asp:TextBox ID="txtdtAddLand" runat="server"></asp:TextBox>
+                          <asp:TextBox ID="txtdtAddLand" runat="server" CssClass="textboxuppercase" Width="250"></asp:TextBox>
                         <cc2:CalendarExtender ID="dtAddLand_" TargetControlID="txtdtAddLand" runat="server" />
                    </td>
                 </tr>
@@ -256,9 +256,9 @@
                    </td>
                 </tr>
         <tr>
-                    <td style="width:140px;">PCC Date</td>
+                    <td style="width:140px;" >PCC Date</td>
                     <td> <%--<uc3:DatePicker ID="dtPCC" runat="server" />--%>
-                     <asp:TextBox ID="txtdtPCC" runat="server"></asp:TextBox>
+                     <asp:TextBox ID="txtdtPCC" runat="server" CssClass="textboxuppercase" Width="250"></asp:TextBox>
                         <cc2:CalendarExtender ID="dtPCC_" TargetControlID="txtdtPCC" runat="server" />
                     <br />
                    </td>

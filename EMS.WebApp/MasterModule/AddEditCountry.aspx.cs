@@ -27,12 +27,12 @@ namespace EMS.WebApp.MasterModule
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
-            _userId = user==null?0: user.Id;
+            _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
             if (!IsPostBack)
             {
                 countryId = GeneralFunctions.DecryptQueryString(Request.QueryString["id"]);
                 ClearText();
+
                 btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('ManageCountry.aspx','" + ResourceManager.GetStringWithoutName("ERR00017") + "')";
                 txtCountryName.Attributes["onkeypress"] = "javascript:return SetMaxLength(this, 200)";
                 if (countryId != "-1")

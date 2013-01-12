@@ -1,6 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="ImportHaulage-list.aspx.cs" Inherits="EMS.WebApp.ImportHaulage_list" %>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ImportHaulage-list.aspx.cs" MasterPageFile="~/Site.Master" Inherits="EMS.WebApp.MasterModule.ImportHaulage_list" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -15,9 +13,9 @@
         </div>
     </div>
     <div id="headercaption">
-        MANAGE IMPORT HAULAGE CHARGES</div>
+        MANAGE HAULAGE CHARGES</div>
     <center>
-        <div style="width: 850px; ">
+        <div style="width: 880px; ">
             <fieldset style="width: 100%;">
                 <legend>Search</legend>
                 <table>
@@ -41,7 +39,7 @@
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
-                            <asp:TextBox ID="txtSize" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
+                            <asp:TextBox ID="txtSize" runat="server" CssClass="watermark" ForeColor="#747862" ></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
                                 FilterMode="ValidChars" ValidChars=" " TargetControlID="txtSize">
                             </cc1:FilteredTextBoxExtender>
@@ -50,8 +48,10 @@
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
-                            <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px"
+                            <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="70px"
                                 OnClick="btnSearch_Click" />
+                            <asp:Button ID="btnRefresh" runat="server" Text="Reset" CssClass="button" Width="70px"
+                                OnClick="btnRefresh_Click" />
                         </td>
                     </tr>
                 </table>
@@ -67,7 +67,7 @@
                 </ProgressTemplate>
             </asp:UpdateProgress>
             <fieldset id="fsList" runat="server" style="width: 100%; min-height: 100px;">
-                <legend>Import Haulage Charge List</legend>
+                <legend>Haulage Charge List</legend>
                 <div style="float: right; padding-bottom: 5px;">
                     Results Per Page:<asp:DropDownList ID="ddlPaging" runat="server" Width="50px" AutoPostBack="true"
                         OnSelectedIndexChanged="ddlPaging_SelectedIndexChanged">
@@ -77,7 +77,7 @@
                         <asp:ListItem Text="100" Value="100" />
                     </asp:DropDownList>
                     &nbsp;&nbsp;
-                    <asp:Button ID="btnAdd" runat="server" Text="Add New Import Haulage Charge" Width="200px"
+                    <asp:Button ID="btnAdd" runat="server" Text="Add Haulage Charge" Width="150px"
                         OnClick="btnAdd_Click" />
                 </div>
                 <div>

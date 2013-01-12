@@ -11,7 +11,7 @@ using EMS.Utilities.ResourceManager;
 using EMS.Entity;
 using EMS.Common;
 
-namespace EMS.WebApp
+namespace EMS.WebApp.MasterModule
 {
     public partial class ImportHaulage_list : System.Web.UI.Page
     {
@@ -39,7 +39,7 @@ namespace EMS.WebApp
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             //RedirecToAddEditPage(-1);
-            Response.Redirect("~/import-haulage-chrg-add-edit.aspx");
+            Response.Redirect("~/MasterModule/import-haulage-chrg-add-edit.aspx");
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -50,6 +50,14 @@ namespace EMS.WebApp
                 LoadImportHaulage();
                 upLoc.Update();
             }
+        }
+
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {            
+            txtFrom.Text = string.Empty;
+            txtTo.Text = string.Empty;
+            txtSize.Text = string.Empty;
+            LoadImportHaulage();
         }
 
         protected void gvwImportHaulage_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -107,9 +115,9 @@ namespace EMS.WebApp
                 e.Row.Cells[0].Text = ((gvwImportHaulage.PageSize * gvwImportHaulage.PageIndex) + e.Row.RowIndex + 1).ToString();
                 //e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Abbreviation"));
 
-                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LocationFrom")) + "<br/><font style='font-size:x-small;font-weight:bold;'>CODE : (" + Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LFCode")) + ")</font>";
+                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LocationFrom"));// +"<br/><font style='font-size:x-small;font-weight:bold;'>CODE : (" + Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LFCode")) + ")</font>";
 
-                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LocationTo")) + "<br/><font style='font-size:x-small;font-weight:bold;'>CODE : (" + Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LTCode")) + ")</font>";
+                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LocationTo"));// +"<br/><font style='font-size:x-small;font-weight:bold;'>CODE : (" + Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LTCode")) + ")</font>";
 
                 e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerSize"));
 
@@ -121,22 +129,22 @@ namespace EMS.WebApp
 
                 // Edit link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
-                btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00008");
+                btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00013");
                 btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "HaulageChgID"));
 
                 //Delete link
                 ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
-                btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00007");
+                btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
                 btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "HaulageChgID"));
 
                 if (_hasEditAccess)
                 {
-                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00010") + "');";
+                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
                 }
                 else
                 {
-                    btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00009") + "');return false;";
-                    btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00009") + "');return false;";
+                    btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
+                    btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
                 }
             }
         }
@@ -204,13 +212,13 @@ namespace EMS.WebApp
         {
             ImportHaulageBLL.DeleteVndor(locId);
             LoadImportHaulage();
-            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00006") + "');</script>", false);
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00010") + "');</script>", false);
         }
 
         private void RedirecToAddEditPage(int id)
         {
             string encryptedId = GeneralFunctions.EncryptQueryString(id.ToString());
-            Response.Redirect("~/import-haulage-chrg-add-edit.aspx?id=" + encryptedId);
+            Response.Redirect("~/MasterModule/import-haulage-chrg-add-edit.aspx?id=" + encryptedId);
         }
 
         private void BuildSearchCriteria(SearchCriteria criteria)

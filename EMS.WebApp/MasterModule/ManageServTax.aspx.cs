@@ -31,7 +31,8 @@ namespace EMS.WebApp.MasterModule
             {
                 RetrieveSearchCriteria();
                 loadDDL(Convert.ToDateTime("1900-1-1"));
-                LoadData();
+                SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+                LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             }
         }
 
@@ -47,7 +48,8 @@ namespace EMS.WebApp.MasterModule
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             SaveNewPageIndex(0);
-            LoadData();
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             upLoc.Update();
         }
 
@@ -56,7 +58,8 @@ namespace EMS.WebApp.MasterModule
             int newIndex = e.NewPageIndex;
             gvwLoc.PageIndex = e.NewPageIndex;
             SaveNewPageIndex(e.NewPageIndex);
-            LoadData();
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection); 
         }
         protected void gvwLoc_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -83,7 +86,8 @@ namespace EMS.WebApp.MasterModule
                     }
                 }
 
-                LoadData();
+                SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+                LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             }
             else if (e.CommandName == "Edit")
             {
@@ -127,7 +131,8 @@ namespace EMS.WebApp.MasterModule
         {
             int newPageSize = Convert.ToInt32(ddlPaging.SelectedValue);
             SaveNewPageSize(newPageSize);
-            LoadData();
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             upLoc.Update();
         }
 
@@ -169,7 +174,7 @@ namespace EMS.WebApp.MasterModule
             gvwLoc.PagerSettings.PageButtonCount = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PageButtonCount"]);
         }
 
-        private void LoadData()
+        private void LoadData(string SortExp, string direction)
         {
 
            
@@ -190,7 +195,12 @@ namespace EMS.WebApp.MasterModule
                     
                     try
                     {
-                        gvwLoc.DataSource = dbinteract.GetSTax(-1, Convert.ToDateTime(ddlTaxDate.SelectedValue));
+                        System.Data.DataSet ds = dbinteract.GetSTax(-1, Convert.ToDateTime(ddlTaxDate.SelectedValue));
+                        System.Data.DataView dv = new System.Data.DataView(ds.Tables[0]);
+                        if (!string.IsNullOrEmpty(SortExp) && !string.IsNullOrEmpty(direction))
+                            dv.Sort = SortExp + " " + direction;
+                        gvwLoc.DataSource = dv;
+                       
                     }
                     catch (Exception ex)
                     {
@@ -208,7 +218,8 @@ namespace EMS.WebApp.MasterModule
         {
             DBInteraction dinteract = new DBInteraction();
             dinteract.DeleteLine(pk_STaxID);
-            LoadData();
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00010") + "');</script>", false);
         }
 
@@ -229,11 +240,7 @@ namespace EMS.WebApp.MasterModule
                 sortExpression = Convert.ToString(ViewState[Constants.SORT_EXPRESSION]);
                 sortDirection = Convert.ToString(ViewState[Constants.SORT_DIRECTION]);
             }
-            else
-            {
-                sortExpression = "Location";
-                sortDirection = "ASC";
-            }
+           
 
             criteria.SortExpression = sortExpression;
             criteria.SortDirection = sortDirection;
@@ -314,5 +321,26 @@ namespace EMS.WebApp.MasterModule
         }
 
         #endregion
+
+        protected void gvwLoc_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            SearchCriteria criteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            if (criteria.SortDirection == "ASC")
+            {
+                criteria.SortDirection = "DESC";
+                LoadData(criteria.SortExpression, criteria.SortDirection);
+            }
+            else
+            {
+                criteria.SortDirection = "ASC";
+                LoadData(criteria.SortExpression, criteria.SortDirection);
+            }
+        }
+
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {
+            ddlTaxDate.SelectedIndex = 0;
+            btnSearch_Click(sender, e);
+        }
     }
 }

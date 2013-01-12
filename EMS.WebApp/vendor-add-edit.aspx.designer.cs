@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EMS.WebApp {
+namespace EMS.WebApp.MasterModule {
     
     
-    public partial class vendor_add_edit1 {
+    public partial class vendor_add_edit {
         
         /// <summary>
         /// ddlVendorType control.

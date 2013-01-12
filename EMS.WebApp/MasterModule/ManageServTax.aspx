@@ -28,7 +28,8 @@
                     <td>
                         
                     </td>
-                    <td><asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" OnClick="btnSearch_Click" /></td>
+                    <td><asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" OnClick="btnSearch_Click" />
+                      <asp:Button ID="btnRefresh" runat="server" Text="Reset" CssClass="button" Width="100px" onclick="btnRefresh_Click"  /></td>
                 </tr>
             </table>              
         </fieldset>
@@ -44,7 +45,7 @@
         </asp:UpdateProgress>
         <fieldset id="fsList" runat="server" style="width:60%;min-height:100px;">
             <legend>Service Tax List</legend>
-            <div style="float:right;padding-bottom:5px;">
+            <div style="float:right;padding-bottom:5px;margin-top: -10px">
                 Results Per Page:<asp:DropDownList ID="ddlPaging" runat="server" Width="50px" AutoPostBack="true" 
                         OnSelectedIndexChanged="ddlPaging_SelectedIndexChanged">
                         <asp:ListItem Text="10" Value="10" />
@@ -64,7 +65,7 @@
                     <ContentTemplate>
                     <asp:Label runat="server" ID="lblErrorMsg" Text=""></asp:Label>
                         <asp:GridView ID="gvwLoc" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                BorderStyle="None" BorderWidth="0" OnPageIndexChanging="gvwLoc_PageIndexChanging"
+                BorderStyle="None" BorderWidth="0" OnPageIndexChanging="gvwLoc_PageIndexChanging" AllowSorting="true" onsorting="gvwLoc_Sorting"
                 OnRowDataBound="gvwLoc_RowDataBound" OnRowCommand="gvwLoc_RowCommand" Width="100%">
                 <pagersettings mode="NumericFirstLast" position="TopAndBottom" />
                 <pagerstyle cssclass="gridviewpager" />
@@ -82,7 +83,7 @@
                                     <ItemStyle CssClass="gridviewitem" Width="2%" />                                       
                                 </asp:TemplateField>
 
-                                <asp:TemplateField HeaderText="Start Date"  >
+                                <asp:TemplateField HeaderText="Start Date" SortExpression="StartDate" >
                                     <HeaderStyle CssClass="gridviewheader"/>
                                     <ItemStyle CssClass="gridviewitem" Width="20%" />                                       
                                 </asp:TemplateField>

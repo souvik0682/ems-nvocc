@@ -22,7 +22,7 @@
               <tr>
                     <td>Vessel Prefix:<span class="errormessage1">*</span></td>
                     <td>
-                      <asp:DropDownList ID="ddlVesselPrefix" runat="server" Width="90%"></asp:DropDownList>
+                      <asp:DropDownList ID="ddlVesselPrefix" runat="server" Width="100%"></asp:DropDownList>
                     </td>
                 </tr>
 
@@ -36,9 +36,9 @@
                 <tr>
                     <td>Vessel Flag:<span class="errormessage1">*</span></td>
                     <td style="width:50%">
-                        <br />
+                      
                         <uc1:AutoCompleteCountry ID="AutoCompleteCountry1" runat="server"  />
-                        <br />
+                       
                    </td>
                 </tr>
                 
@@ -51,26 +51,26 @@
                   <tr>
                     <td>IMO Number</td>
                     <td><asp:TextBox ID="txtIMO" runat="server" CssClass="textboxuppercase" 
-                            MaxLength="14" Width="250" TextMode="MultiLine"></asp:TextBox><br />
+                            MaxLength="14" Width="250" ></asp:TextBox><br />
                    </td>
                 </tr>
 
                   <tr>
                     <td>Shipping Line Code:</td>
                     <td><asp:TextBox ID="txtShipLineCode" runat="server" CssClass="textboxuppercase" ReadOnly="true"
-                            MaxLength="10" Width="250" TextMode="MultiLine"></asp:TextBox><br />
+                            MaxLength="10" Width="250" ></asp:TextBox><br />
                    </td>
                 </tr>
                 
                   <tr>
                     <td>PAN No:</td>
                     <td><asp:TextBox ID="txtPan" runat="server" CssClass="textboxuppercase" ReadOnly="true"
-                            MaxLength="50" Width="250" TextMode="SingleLine"></asp:TextBox><br />
+                            MaxLength="15" Width="250" TextMode="SingleLine"></asp:TextBox><br />
                    </td>
                 </tr>
 
                   <tr>
-                    <td>Master's Code:</td>
+                    <td>Master Name:</td>
                     <td><asp:TextBox ID="txtMasterCode" runat="server" CssClass="textboxuppercase" 
                             MaxLength="50" Width="250" TextMode="MultiLine"></asp:TextBox><br />
                    </td>

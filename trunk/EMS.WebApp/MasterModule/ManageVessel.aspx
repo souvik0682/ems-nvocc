@@ -24,28 +24,23 @@
             <legend>Search Vessel</legend>
             <table cellpadding="0" cellspacing="0" width="100%" border="0">
                 <tr>
-                    <td style="width:25%">
+                    <td style="width:20%">
                        <asp:DropDownList ID="ddlVesselPrefix" runat="server" Width="90%"></asp:DropDownList>
                     </td>
                    
-                    <td style="width:25%">
+                    <td style="width:20%">
                         <asp:TextBox ID="txtVesselName" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                         <cc1:TextBoxWatermarkExtender ID="txtWMEName" runat="server" TargetControlID="txtVesselName" WatermarkText="Type Vessel Name" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                     </td>
                     
-                    <td style="width:35%" align="center">
-                    <table width="" border="0">
-                    <tr>
-                     <td> Vessel Flag:</td>
-                     <td> <uc1:AutoCompleteCountry ID="AutoCompleteCountry1" runat="server" /></td>
-                    </tr>
-                      <%--  <asp:TextBox ID="txtVesselFlag" runat="server" CssClass="watermark" ForeColor="#747862" ></asp:TextBox>
-                        <cc1:TextBoxWatermarkExtender ID="txtWMEFlag" runat="server" TargetControlID="txtVesselFlag" WatermarkText="Type Vessel Flag" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>--%>
-                      
-                        </table>
+                    <td style="width:30%" align="center" >
+                   
+                      <uc1:AutoCompleteCountry ID="AutoCompleteCountry1" runat="server" />
+                    
                     </td>
                    
-                    <td style="width:12%"><asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" OnClick="btnSearch_Click" /></td>
+                    <td style="width:30%; text-align:right"><asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" OnClick="btnSearch_Click" />
+                      <asp:Button ID="btnRefresh" runat="server" Text="Reset" CssClass="button" Width="100px" onclick="btnRefresh_Click"  /></td>
                 </tr>
             </table>              
         </fieldset>
@@ -61,7 +56,7 @@
         </asp:UpdateProgress>
         <fieldset id="fsList" runat="server" style="width:100%;min-height:100px;">
             <legend>Vessel List</legend>
-            <div style="float:right;padding-bottom:5px;">
+            <div style="float:right;padding-bottom:5px;margin-top: -10px">
                 Results Per Page:<asp:DropDownList ID="ddlPaging" runat="server" Width="50px" AutoPostBack="true" 
                         OnSelectedIndexChanged="ddlPaging_SelectedIndexChanged">
                         <asp:ListItem Text="10" Value="10" />
@@ -71,7 +66,8 @@
                     </asp:DropDownList>&nbsp;&nbsp;
                 <asp:Button ID="btnAdd" runat="server" Text="Add New Vessel" Width="130px" OnClick="btnAdd_Click" />
             </div>
-          <br />            
+          <br />    
+                
             <div>
                 <asp:UpdatePanel ID="upLoc" runat="server" UpdateMode="Conditional">
                     <Triggers>
@@ -81,7 +77,7 @@
                     <ContentTemplate>
                     <asp:Label runat="server" ID="lblErrorMsg" Text=""></asp:Label>
                         <asp:GridView ID="gvwLoc" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                BorderStyle="None" BorderWidth="0" OnPageIndexChanging="gvwLoc_PageIndexChanging"
+                BorderStyle="None" BorderWidth="0" OnPageIndexChanging="gvwLoc_PageIndexChanging" AllowSorting="true" onsorting="gvwLoc_Sorting"
                 OnRowDataBound="gvwLoc_RowDataBound" OnRowCommand="gvwLoc_RowCommand" Width="100%">
                 <pagersettings mode="NumericFirstLast" position="TopAndBottom" />
                 <pagerstyle cssclass="gridviewpager" />
@@ -103,16 +99,16 @@
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="15%" />                                       
                                 </asp:TemplateField>--%>
-                                <asp:TemplateField HeaderText="Vessel Prefix">
+                                <asp:TemplateField HeaderText="Vessel Prefix" SortExpression="VesselPrefix">
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="10%" />      
                                    <%-- <HeaderTemplate><asp:LinkButton ID="lnkHMan" runat="server" CommandName="Sort" CommandArgument="Manager" Text="Location Manager"></asp:LinkButton></HeaderTemplate>                                                                 --%>
                                 </asp:TemplateField>
-                                 <asp:TemplateField HeaderText="Vessel Name">
+                                 <asp:TemplateField HeaderText="Vessel Name" SortExpression="VesselName">
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="15%" />                                       
                                 </asp:TemplateField>
-                                 <asp:TemplateField HeaderText="Flag">
+                                 <asp:TemplateField HeaderText="Flag" SortExpression="flag">
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="15%" />                                       
                                 </asp:TemplateField>

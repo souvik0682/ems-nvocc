@@ -31,17 +31,17 @@
 
                 <tr>
                     <td>Default Free Days:</td>
-                    <td><asp:TextBox ID="txtFreeDays" runat="server" CssClass="textboxuppercase" MaxLength="10" Width="250" onkeyup="IsNumeric(this)"></asp:TextBox><br /></td>
+                    <td><asp:TextBox ID="txtFreeDays" runat="server" CssClass="textboxuppercase" style="text-align:right" MaxLength="10" Width="250" onkeyup="IsNumeric(this)"></asp:TextBox><br /></td>
                 </tr>
 
                  <tr>
                     <td>Import Commission:</td>
-                    <td><asp:TextBox ID="txtImpCommsn" runat="server" CssClass="textboxuppercase" MaxLength="10" Width="250" onkeyup="IsDecimal(this)"></asp:TextBox><br /></td>
+                    <td><asp:TextBox ID="txtImpCommsn" runat="server" CssClass="textboxuppercase" MaxLength="10" style="text-align:right" Width="250" onkeyup="IsDecimal(this)"></asp:TextBox><br /></td>
                 </tr>
 
                  <tr>
                     <td>Export Commission:</td>
-                    <td><asp:TextBox ID="txtExportCommission" runat="server" CssClass="textboxuppercase" MaxLength="10" Width="250" onkeyup="IsDecimal(this)"></asp:TextBox><br /></td>
+                    <td><asp:TextBox ID="txtExportCommission" runat="server" CssClass="textboxuppercase" style="text-align:right" MaxLength="10" Width="250" onkeyup="IsDecimal(this)"></asp:TextBox><br /></td>
                 </tr>
                   <tr>
                     <td>Export Booking:</td>

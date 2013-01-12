@@ -27,13 +27,13 @@ namespace EMS.WebApp.MasterModule
 
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
             SetAttributes();
 
             if (!IsPostBack)
             {
                 RetrieveSearchCriteria();
-                LoadData();
+                LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             }
         }
 
@@ -45,7 +45,8 @@ namespace EMS.WebApp.MasterModule
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             SaveNewPageIndex(0);
-            LoadData();
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             upLoc.Update();
         }
 
@@ -54,7 +55,8 @@ namespace EMS.WebApp.MasterModule
             int newIndex = e.NewPageIndex;
             gvwLoc.PageIndex = e.NewPageIndex;
             SaveNewPageIndex(e.NewPageIndex);
-            LoadData();
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
         }
         protected void gvwLoc_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -81,11 +83,12 @@ namespace EMS.WebApp.MasterModule
                     }
                 }
 
-                LoadData();
+                SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+                LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             }
             else if (e.CommandName == "Edit")
             {
-             RedirecToAddEditPage(Convert.ToInt32(e.CommandArgument));
+                RedirecToAddEditPage(Convert.ToInt32(e.CommandArgument));
             }
             else if (e.CommandName == "Remove")
             {
@@ -134,7 +137,8 @@ namespace EMS.WebApp.MasterModule
         {
             int newPageSize = Convert.ToInt32(ddlPaging.SelectedValue);
             SaveNewPageSize(newPageSize);
-            LoadData();
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             upLoc.Update();
         }
 
@@ -144,23 +148,23 @@ namespace EMS.WebApp.MasterModule
 
         private void SetAttributes()
         {
-           // txtCountryAbbr.Attributes.Add("OnFocus", "javascript:js_waterMark_Focus('" + txtCountryAbbr.ClientID + "', 'Type CountryId')");
-           // txtCountryAbbr.Attributes.Add("OnBlur", "javascript:js_waterMark_Blur('" + txtCountryAbbr.ClientID + "', 'Type CountryId')");
-           // //txtCountryAbbr.Text = "Type CountryId";
+            // txtCountryAbbr.Attributes.Add("OnFocus", "javascript:js_waterMark_Focus('" + txtCountryAbbr.ClientID + "', 'Type CountryId')");
+            // txtCountryAbbr.Attributes.Add("OnBlur", "javascript:js_waterMark_Blur('" + txtCountryAbbr.ClientID + "', 'Type CountryId')");
+            // //txtCountryAbbr.Text = "Type CountryId";
 
 
-           // txtLocationName.Attributes.Add("OnFocus", "javascript:js_waterMark_Focus('" + txtLocationName.ClientID + "', 'Type Country Name')");
-           // txtLocationName.Attributes.Add("OnBlur", "javascript:js_waterMark_Blur('" + txtLocationName.ClientID + "', 'Type Country Name')");
-           //// txtLocationName.Text = "Type Country Name";
+            // txtLocationName.Attributes.Add("OnFocus", "javascript:js_waterMark_Focus('" + txtLocationName.ClientID + "', 'Type Country Name')");
+            // txtLocationName.Attributes.Add("OnBlur", "javascript:js_waterMark_Blur('" + txtLocationName.ClientID + "', 'Type Country Name')");
+            //// txtLocationName.Text = "Type Country Name";
 
 
             //txtWMEAbbr.WatermarkText = ResourceManager.GetStringWithoutName("ERR00030");
-           // txtWMEName.WatermarkText = ResourceManager.GetStringWithoutName("ERR00031");
+            // txtWMEName.WatermarkText = ResourceManager.GetStringWithoutName("ERR00031");
             gvwLoc.PageSize = Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]);
             gvwLoc.PagerSettings.PageButtonCount = Convert.ToInt32(ConfigurationManager.AppSettings["PageButtonCount"]);
         }
 
-        private void LoadData()
+        private void LoadData(string SortExp, string direction)
         {
             lblErrorMsg.Text = "";
             if (!ReferenceEquals(Session[Constants.SESSION_SEARCH_CRITERIA], null))
@@ -170,7 +174,7 @@ namespace EMS.WebApp.MasterModule
                 if (!ReferenceEquals(searchCriteria, null))
                 {
                     BuildSearchCriteria(searchCriteria);
-                    
+
 
                     gvwLoc.PageIndex = searchCriteria.PageIndex;
                     if (searchCriteria.PageSize > 0) gvwLoc.PageSize = searchCriteria.PageSize;
@@ -181,7 +185,12 @@ namespace EMS.WebApp.MasterModule
                     string countryAbbr = string.IsNullOrEmpty(txtCountryAbbr.Text) ? "" : txtCountryAbbr.Text;
                     try
                     {
-                        gvwLoc.DataSource = dbinteract.GetCountry(-1,countryName,countryAbbr);
+                        System.Data.DataSet ds = dbinteract.GetCountry(-1, countryName, countryAbbr);
+                        System.Data.DataView dv = new System.Data.DataView(ds.Tables[0]);
+                        if (!string.IsNullOrEmpty(SortExp) && !string.IsNullOrEmpty(direction))
+                            dv.Sort = SortExp + " " + direction;
+                        gvwLoc.DataSource = dv;
+
                     }
                     catch (Exception ex)
                     {
@@ -189,7 +198,7 @@ namespace EMS.WebApp.MasterModule
                         gvwLoc.DataSource = null;
                         lblErrorMsg.Text = "Error Occured.Please try again.";
                     }
-                    
+
                     gvwLoc.DataBind();
                 }
             }
@@ -199,14 +208,15 @@ namespace EMS.WebApp.MasterModule
         {
             DBInteraction dinteract = new DBInteraction();
             dinteract.DeleteCountry(locId);
-            LoadData();
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00010") + "');</script>", false);
         }
 
         private void RedirecToAddEditPage(int id)
         {
             string encryptedId = GeneralFunctions.EncryptQueryString(id.ToString());
-            
+
             Response.Redirect("~/MasterModule/AddEditCountry.aspx?id=" + encryptedId);
         }
 
@@ -222,8 +232,8 @@ namespace EMS.WebApp.MasterModule
             }
             else
             {
-                sortExpression = "Location";
-                sortDirection = "ASC";
+                
+              //  sortDirection = "ASC";
             }
 
             criteria.SortExpression = sortExpression;
@@ -306,5 +316,25 @@ namespace EMS.WebApp.MasterModule
         }
 
         #endregion
+
+        protected void gvwLoc_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            SearchCriteria criteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            if (criteria.SortDirection == "ASC")
+            {
+                criteria.SortDirection = "DESC";
+                LoadData(criteria.SortExpression, criteria.SortDirection);
+            }
+            else
+            {
+                criteria.SortDirection = "ASC";
+                LoadData(criteria.SortExpression, criteria.SortDirection);
+            }
+        }
+
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/MasterModule/ManageCountry.aspx");
+        }
     }
 }

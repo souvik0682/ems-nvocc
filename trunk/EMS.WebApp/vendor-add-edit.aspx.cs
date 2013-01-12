@@ -10,9 +10,9 @@ using EMS.Entity;
 using EMS.Utilities;
 using EMS.Utilities.ResourceManager;
 
-namespace EMS.WebApp
+namespace EMS.WebApp.MasterModule
 {
-    public partial class vendor_add_edit1 : System.Web.UI.Page
+    public partial class vendor_add_edit : System.Web.UI.Page
     {
         VendorEntity oVendorEntity;
         VendorBLL oVendorBll;
@@ -27,6 +27,9 @@ namespace EMS.WebApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+            _userId = user == null ? 0 : user.Id;
+
             RetriveParameters();
             if (!Page.IsPostBack)
             {
@@ -38,6 +41,16 @@ namespace EMS.WebApp
                 Li = new ListItem("Select", "0");
                 PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlLocationID, 0);
                 ddlLocationID.Items.Insert(0, Li);
+
+                #region Salutation
+                foreach (Enums.Salutation r in Enum.GetValues(typeof(Enums.Salutation)))
+                {
+                    Li = new ListItem("Select", "0");
+                    ListItem item = new ListItem(Enum.GetName(typeof(Enums.Salutation), r).Replace('_', '/'), ((int)r).ToString());
+                    ddlSalutation.Items.Add(item);
+                }
+                ddlSalutation.Items.Insert(0, Li);
+                #endregion
 
                 if (hdnVendorID.Value != "0")
                     LoadData();
@@ -102,26 +115,36 @@ namespace EMS.WebApp
 
                 if (hdnVendorID.Value == "0") // Insert
                 {
-                    oVendorEntity.CreatedBy = 1;// oUserEntity.Id;
+                    oVendorEntity.CreatedBy = _userId;// oUserEntity.Id;
                     oVendorEntity.CreatedOn = DateTime.Today.Date;
-                    oVendorEntity.ModifiedBy = 1;// oUserEntity.Id;
+                    oVendorEntity.ModifiedBy = _userId;// oUserEntity.Id;
                     oVendorEntity.ModifiedOn = DateTime.Today.Date;
 
+                    switch (oVendorBll.AddEditVndor(oVendorEntity))
+                    {
+                        case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
+                            break;
+                        case 1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
+                            ClearAll();
+                            break;
+                    }
                 }
                 else // Update
                 {
                     oVendorEntity.VendorId = Convert.ToInt32(hdnVendorID.Value);
-                    oVendorEntity.ModifiedBy = 2;// oUserEntity.Id;
+                    oVendorEntity.ModifiedBy = _userId;// oUserEntity.Id;
                     oVendorEntity.ModifiedOn = DateTime.Today.Date;
+
+                    switch (oVendorBll.AddEditVndor(oVendorEntity))
+                    {
+                        case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
+                            break;
+                        case 1: Response.Redirect("~/MasterModule/vendor-list.aspx");
+                            break;
+                    }
                 }
 
-                switch (oVendorBll.AddEditVndor(oVendorEntity))
-                {
-                    case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
-                        break;
-                    case 1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
-                        break;
-                }
+
             }
         }
 
@@ -158,7 +181,19 @@ namespace EMS.WebApp
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/vendor-list.aspx");
+            Response.Redirect("~/MasterModule/vendor-list.aspx");
+        }
+
+        void ClearAll()
+        {
+            ddlLocationID.SelectedIndex = 0;
+            ddlSalutation.SelectedIndex = 0;
+            ddlTerminalCode.SelectedIndex = 0;
+            ddlVendorType.SelectedIndex = 0;
+            txtAddress.Text = string.Empty;
+            txtCfsCode.Text = string.Empty;
+            txtName.Text = string.Empty;
+            hdnVendorID.Value = "0";
         }
     }
 }

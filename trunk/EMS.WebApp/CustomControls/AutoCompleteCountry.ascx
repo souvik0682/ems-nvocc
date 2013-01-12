@@ -1,27 +1,19 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AutoCompleteCountry.ascx.cs"
     Inherits="EMS.WebApp.CustomControls.AutoCompleteExtender" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-<link href="../CustomControls/StyleSheet.css" rel="stylesheet" type="text/css" />
 
 
-<style >
-    .watermark1
-    {
-        text-transform: uppercase;
-        
-        color: #747862;
-        height: 20px;
-        border: 0.5;
-        padding: 1px 1px;
-        margin-bottom: 0px;
-        width:auto;
-    }
+
+<style type="text/css" >
+   
+    
+
 </style>
 <div>
 
-    <asp:TextBox runat="server" ID="txtCountry" Width="98%" autocomplete="off" />
+    <asp:TextBox runat="server" ID="txtCountry" Width="98%" autocomplete="off" style="color: #747862;" CssClass="textboxuppercase" />
     <cc1:TextBoxWatermarkExtender ID="txtWMEName" runat="server" TargetControlID="txtCountry"
-        WatermarkText="Type Country" WatermarkCssClass="watermark1">
+        WatermarkText="TYPE COUNTRY" WatermarkCssClass="watermark">
     </cc1:TextBoxWatermarkExtender>
     <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx1" ID="autoCompleteCopuntry"
         TargetControlID="txtCountry" ServicePath="AutoComplete.asmx" ServiceMethod="GetCountryList"

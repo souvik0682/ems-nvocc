@@ -1,6 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="vendor-list.aspx.cs" Inherits="EMS.WebApp.vendor_list" %>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="vendor-list.aspx.cs" MasterPageFile="~/Site.Master" Inherits="EMS.WebApp.MasterModule.vendor_list" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -42,6 +40,8 @@
                         <td>
                             <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px"
                                 OnClick="btnSearch_Click" />
+                            <asp:Button ID="btnRefresh" runat="server" Text="Reset" CssClass="button" Width="100px"
+                                OnClick="btnRefresh_Click" />
                         </td>
                     </tr>
                 </table>
@@ -69,8 +69,8 @@
                     &nbsp;&nbsp;
                     <asp:Button ID="btnAdd" runat="server" Text="Add New Vendor" Width="130px" OnClick="btnAdd_Click" />
                 </div>
-                <div>
-                    <span class="errormessage">* Indicates Inactive Location(s)</span>
+                <div style="height:30px;">&nbsp;
+                    <span class="errormessage" style="display:none;">* Indicates Inactive Location(s)</span>
                 </div>
                 <br />
                 <div>
@@ -87,7 +87,7 @@
                                 <PagerStyle CssClass="gridviewpager" />
                                 <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
                                 <EmptyDataTemplate>
-                                    No Location(s) Found</EmptyDataTemplate>
+                                    No Record(s) Found</EmptyDataTemplate>
                                 <Columns>
                                     <asp:TemplateField HeaderText="Sl#">
                                         <HeaderStyle CssClass="gridviewheader" />
@@ -96,6 +96,7 @@
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                        
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHType" runat="server" CommandName="Sort" CommandArgument="Type"
                                                 Text="Type"></asp:LinkButton></HeaderTemplate>

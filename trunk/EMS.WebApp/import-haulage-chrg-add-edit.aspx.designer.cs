@@ -7,19 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EMS.WebApp {
+namespace EMS.WebApp.MasterModule {
     
     
     public partial class import_haulage_chrg_add_edit {
         
         /// <summary>
-        /// ddlFromLocation control.
+        /// hdnFromLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlFromLocation;
+        protected global::System.Web.UI.WebControls.HiddenField hdnFromLocation;
+        
+        /// <summary>
+        /// txtFromLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFromLocation;
         
         /// <summary>
         /// rfvFLocation control.
@@ -40,13 +49,31 @@ namespace EMS.WebApp {
         protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender1;
         
         /// <summary>
-        /// ddlToLocation control.
+        /// autoComplete1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlToLocation;
+        protected global::AjaxControlToolkit.AutoCompleteExtender autoComplete1;
+        
+        /// <summary>
+        /// hdnToLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnToLocation;
+        
+        /// <summary>
+        /// txtToLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtToLocation;
         
         /// <summary>
         /// rfvTLocation control.
@@ -65,6 +92,15 @@ namespace EMS.WebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender2;
+        
+        /// <summary>
+        /// autoComplete2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender autoComplete2;
         
         /// <summary>
         /// ddlContainerSize control.
@@ -100,7 +136,7 @@ namespace EMS.WebApp {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtWFrom;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtWFrom;
         
         /// <summary>
         /// rfvWFrom control.
@@ -127,7 +163,7 @@ namespace EMS.WebApp {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtWTo;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtWTo;
         
         /// <summary>
         /// rfvWTo control.
@@ -154,7 +190,7 @@ namespace EMS.WebApp {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRate;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtRate;
         
         /// <summary>
         /// rfvRate control.

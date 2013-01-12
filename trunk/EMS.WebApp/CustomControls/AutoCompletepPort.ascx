@@ -1,30 +1,23 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AutoCompletepPort.ascx.cs"    Inherits="EMS.WebApp.CustomControls.AutoCompletePort" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AutoCompletepPort.ascx.cs"
+    Inherits="EMS.WebApp.CustomControls.AutoCompletePort" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc2" %>
 <link href="../CustomControls/StyleSheet.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
-    .watermark1
-    {
-        text-transform: uppercase;
-        color: #747862;
-        height: 20px;
-        border: 0.5;
-        padding: 1px 1px;
-        margin-bottom: 0px;
-    }
+  
 </style>
-
-<div>
-    <asp:TextBox runat="server" ID="txtPort" Width="98%" autocomplete="off" />
-    <cc2:textboxwatermarkextender id="txtWMEName1" runat="server" targetcontrolid="txtPort"
-        watermarktext="Type Port" watermarkcssclass="watermark1"></cc2:textboxwatermarkextender>
- 
-    <cc2:autocompleteextender runat="server"  ID="AutoPort"
-        targetcontrolid="txtPort" servicepath="AutoComplete.asmx" servicemethod="GetPortList"
-        minimumprefixlength="2" completioninterval="1000" enablecaching="true" completionsetcount="20"
-        completionlistcssclass="autocomplete_completionListElement" completionlistitemcssclass="autocomplete_listItem"
-        completionlisthighlighteditemcssclass="autocomplete_highlightedListItem" delimitercharacters=";, :"
-        showonlycurrentwordincompletionlistitem="true">
-       <%-- <Animations>
+<table width="100%" cellpadding="0" cellspacing="0" style="vertical-align: bottom">
+    <tr>
+        <td style="vertical-align: bottom">
+            <asp:TextBox runat="server" ID="txtPort" Width="98%" autocomplete="off" CssClass="textboxuppercase" />
+            <cc2:TextBoxWatermarkExtender ID="txtWMEName1" runat="server" TargetControlID="txtPort"
+                WatermarkText="TYPE PORT" WatermarkCssClass="watermark">
+            </cc2:TextBoxWatermarkExtender>
+            <cc2:AutoCompleteExtender runat="server" ID="AutoPort" TargetControlID="txtPort"
+                ServicePath="AutoComplete.asmx" ServiceMethod="GetPortList" MinimumPrefixLength="2"
+                CompletionInterval="1000" EnableCaching="true" CompletionSetCount="20" CompletionListCssClass="autocomplete_completionListElement"
+                CompletionListItemCssClass="autocomplete_listItem" CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem"
+                DelimiterCharacters=";, :" ShowOnlyCurrentWordInCompletionListItem="true">
+                <%-- <Animations>
                     <OnShow>
                         <Sequence>
                            
@@ -44,7 +37,7 @@
                             
                             <Parallel Duration=".4">
                                 <FadeIn />--%>
-                         <%--       <%--<Length PropertyKey="height" StartValue="0" EndValueScript="$get('<%=RandNo %>').._height" />
+                <%--       <%--<Length PropertyKey="height" StartValue="0" EndValueScript="$get('<%=RandNo %>').._height" />
                             </Parallel>
                         </Sequence>
                     </OnShow>
@@ -56,9 +49,10 @@
                         </Parallel>
                     </OnHide>
         </Animations>--%>
-    </cc2:autocompleteextender>
- 
-</div>
+            </cc2:AutoCompleteExtender>
+        </td>
+    </tr>
+</table>
 <%--<script type="text/javascript">
     function GetID() {
         return '<%=RandNo %>';

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EMS.WebApp {
+namespace EMS.WebApp.MasterModule {
     
     
     public partial class vendor_list {

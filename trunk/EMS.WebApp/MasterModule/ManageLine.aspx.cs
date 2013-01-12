@@ -8,6 +8,7 @@ using EMS.Entity;
 using EMS.Utilities;
 using EMS.Utilities.ResourceManager;
 using EMS.BLL;
+using System.Data;
 
 namespace EMS.WebApp.MasterModule
 {
@@ -24,13 +25,13 @@ namespace EMS.WebApp.MasterModule
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
             SetAttributes();
 
             if (!IsPostBack)
             {
                 RetrieveSearchCriteria();
-                LoadData();// portId=-1 means for all
+                LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);// portId=-1 means for all
             }
         }
 
@@ -42,7 +43,8 @@ namespace EMS.WebApp.MasterModule
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             SaveNewPageIndex(0);
-            LoadData();
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection); 
             upLoc.Update();
         }
 
@@ -51,7 +53,8 @@ namespace EMS.WebApp.MasterModule
             int newIndex = e.NewPageIndex;
             gvwLoc.PageIndex = e.NewPageIndex;
             SaveNewPageIndex(e.NewPageIndex);
-            LoadData();
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
         }
         protected void gvwLoc_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -78,7 +81,8 @@ namespace EMS.WebApp.MasterModule
                     }
                 }
 
-                LoadData();
+                SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+                LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             }
             else if (e.CommandName == "Edit")
             {
@@ -133,7 +137,8 @@ namespace EMS.WebApp.MasterModule
         {
             int newPageSize = Convert.ToInt32(ddlPaging.SelectedValue);
             SaveNewPageSize(newPageSize);
-            LoadData();
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             upLoc.Update();
         }
 
@@ -159,7 +164,7 @@ namespace EMS.WebApp.MasterModule
             gvwLoc.PagerSettings.PageButtonCount = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PageButtonCount"]);
         }
 
-        private void LoadData()
+        private void LoadData(string SortExp, string direction)
         {
             string nvocc = string.IsNullOrEmpty(txtLine.Text) ? "" : txtLine.Text.Trim();
 
@@ -181,7 +186,12 @@ namespace EMS.WebApp.MasterModule
 
                     try
                     {
-                        gvwLoc.DataSource = dbinteract.GetNVOCCLine(-1, nvocc);
+                        DataSet ds= dbinteract.GetNVOCCLine(-1, nvocc);
+                        System.Data.DataView dv = new System.Data.DataView(ds.Tables[0]);
+                        if (!string.IsNullOrEmpty(SortExp) && !string.IsNullOrEmpty(direction))
+                            dv.Sort = SortExp + " " + direction;
+                        gvwLoc.DataSource = dv;
+                        
                     }
                     catch (Exception ex)
                     {
@@ -199,7 +209,8 @@ namespace EMS.WebApp.MasterModule
         {
             DBInteraction dinteract = new DBInteraction();
             dinteract.DeleteLine(pk_NVOCCId);
-            LoadData();
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00010") + "');</script>", false);
         }
 
@@ -220,11 +231,7 @@ namespace EMS.WebApp.MasterModule
                 sortExpression = Convert.ToString(ViewState[Constants.SORT_EXPRESSION]);
                 sortDirection = Convert.ToString(ViewState[Constants.SORT_DIRECTION]);
             }
-            else
-            {
-                sortExpression = "Location";
-                sortDirection = "ASC";
-            }
+            
 
             criteria.SortExpression = sortExpression;
             criteria.SortDirection = sortDirection;
@@ -305,5 +312,27 @@ namespace EMS.WebApp.MasterModule
         }
 
         #endregion
+
+     
+
+        protected void gvwLoc_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            SearchCriteria criteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            if (criteria.SortDirection == "ASC")
+            {
+                criteria.SortDirection = "DESC";
+                LoadData(criteria.SortExpression, criteria.SortDirection);
+            }
+            else
+            {
+                criteria.SortDirection = "ASC";
+                LoadData(criteria.SortExpression, criteria.SortDirection);
+            }
+        }
+
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/MasterModule/ManageLine.aspx");
+        }
     }
 }

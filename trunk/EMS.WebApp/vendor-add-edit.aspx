@@ -1,5 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="vendor-add-edit.aspx.cs" Inherits="EMS.WebApp.vendor_add_edit1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="vendor-add-edit.aspx.cs"  MasterPageFile="~/Site.Master" Inherits="EMS.WebApp.MasterModule.vendor_add_edit" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
@@ -48,10 +47,6 @@
                         </td>
                         <td>
                             <asp:DropDownList ID="ddlSalutation" runat="server" Width="255">
-                                <asp:ListItem Selected="True" Text="Select" Value="0"></asp:ListItem>
-                                <asp:ListItem Text="Mr." Value="1"></asp:ListItem>
-                                <asp:ListItem Text="Ms." Value="2"></asp:ListItem>
-                                <asp:ListItem Text="Dr." Value="3"></asp:ListItem>
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
@@ -64,7 +59,7 @@
                             Name<span class="errormessage1">*</span> :
                         </td>
                         <td>
-                            <asp:TextBox ID="txtName" runat="server" Width="250"></asp:TextBox>
+                            <asp:TextBox ID="txtName" runat="server" Width="250" style="text-transform:uppercase;"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="Please enter name"
                                 Display="None" ControlToValidate="txtName" ValidationGroup="vgVendor"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender4" runat="server" TargetControlID="rfvName" WarningIconImageUrl="" >
@@ -76,7 +71,7 @@
                             Address :
                         </td>
                         <td>
-                            <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" Width="250"></asp:TextBox>
+                            <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" Width="250" style="text-transform:uppercase;"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -84,7 +79,7 @@
                             CFS Code :
                         </td>
                         <td>
-                            <asp:TextBox ID="txtCfsCode" runat="server" Width="250" Enabled="false"></asp:TextBox>
+                            <asp:TextBox ID="txtCfsCode" runat="server" Width="250" Enabled="false" style="text-transform:uppercase;"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -103,7 +98,7 @@
                             <asp:Label ID="lblMessage" runat="server"></asp:Label>
                             <asp:HiddenField ID="hdnVendorID" runat="server" Value="0" />
                             <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" ValidationGroup="vgVendor" />&nbsp;&nbsp;<asp:Button
-                                ID="btnBack" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown" OnClick="btnBack_Click"  />
+                                ID="btnBack" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown" OnClick="btnBack_Click"  OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
                         </td>
                     </tr>
                 </table>

@@ -26,7 +26,8 @@ namespace EMS.WebApp.MasterModule
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            ((AjaxControlToolkit.TextBoxWatermarkExtender)AutoCompleteCountry1.FindControl("txtWMEName")).WatermarkText="TYPE VESSEL FLAG";
+            
             SetAttributes();
 
             if (!IsPostBack)
@@ -38,7 +39,8 @@ namespace EMS.WebApp.MasterModule
                 //ddlLocation.Items[0].Text = "Select Country";
                 GeneralFunctions.PopulateDropDownList(ddlVesselPrefix, dbInteract.PopulateDDLDS("mstVesselPrefix", "pk_VesselPrefixID", "VesselPrefix"));
                 ddlVesselPrefix.Items[0].Text = "Select Prefix";
-                LoadData();// VesselId=-1 means for all
+                SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+                LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
                 
             }
         }
@@ -51,7 +53,8 @@ namespace EMS.WebApp.MasterModule
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             SaveNewPageIndex(0);
-            LoadData();
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             upLoc.Update();
         }
 
@@ -60,7 +63,8 @@ namespace EMS.WebApp.MasterModule
             int newIndex = e.NewPageIndex;
             gvwLoc.PageIndex = e.NewPageIndex;
             SaveNewPageIndex(e.NewPageIndex);
-            LoadData();
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
         }
         protected void gvwLoc_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -87,7 +91,8 @@ namespace EMS.WebApp.MasterModule
                     }
                 }
 
-                LoadData();
+                SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+                LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             }
             else if (e.CommandName == "Edit")
             {
@@ -143,7 +148,8 @@ namespace EMS.WebApp.MasterModule
         {
             int newPageSize = Convert.ToInt32(ddlPaging.SelectedValue);
             SaveNewPageSize(newPageSize);
-            LoadData();
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             upLoc.Update();
         }
 
@@ -172,7 +178,7 @@ namespace EMS.WebApp.MasterModule
             gvwLoc.PagerSettings.PageButtonCount = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PageButtonCount"]);
         }
 
-        private void LoadData()
+        private void LoadData(string SortExp, string direction)
         {
             BLL.DBInteraction dbinteract = new BLL.DBInteraction();
             int VesselPrefix = Convert.ToInt32(ddlVesselPrefix.SelectedValue);
@@ -197,7 +203,12 @@ namespace EMS.WebApp.MasterModule
 
                     try
                     {
-                        gvwLoc.DataSource = dbinteract.GetVessel(-1, VesselPrefix, VesselName, vesselFlag);
+                        System.Data.DataSet ds = dbinteract.GetVessel(-1, VesselPrefix, VesselName, vesselFlag);
+                        System.Data.DataView dv = new System.Data.DataView(ds.Tables[0]);
+                        if (!string.IsNullOrEmpty(SortExp) && !string.IsNullOrEmpty(direction) && SortExp!="Location")
+                            dv.Sort = SortExp + " " + direction;
+                        gvwLoc.DataSource = dv;
+                        
                     }
                     catch (Exception ex)
                     {
@@ -215,7 +226,8 @@ namespace EMS.WebApp.MasterModule
         {
             DBInteraction dinteract = new DBInteraction();
             dinteract.DeleteVessel(VesselId);
-            LoadData();
+            SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00010") + "');</script>", false);
         }
 
@@ -322,5 +334,30 @@ namespace EMS.WebApp.MasterModule
         }
 
         #endregion
+
+
+        protected void gvwLoc_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            SearchCriteria criteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            if (criteria.SortDirection == "ASC")
+            {
+                criteria.SortDirection = "DESC";
+                LoadData(criteria.SortExpression, criteria.SortDirection);
+            }
+            else
+            {
+                criteria.SortDirection = "ASC";
+                LoadData(criteria.SortExpression, criteria.SortDirection);
+            }
+        }
+
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {
+            
+            //txtVesselName.Text = "";
+            //ddlVesselPrefix.SelectedIndex = 0;
+           //btnSearch_Click(sender, e);
+            Response.Redirect("~/MasterModule/ManageVessel.aspx");
+        }
     }
 }

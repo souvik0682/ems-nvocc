@@ -22,28 +22,29 @@
             <legend>Search Voyage</legend>
             <table cellpadding="0" cellspacing="0" width="100%" border="0">
                 <tr>
-                   <td style="width:25%">
-                        <asp:TextBox ID="txtVesselName" runat="server" CssClass="watermark"  ForeColor="#747862"></asp:TextBox>
-                        <cc1:TextBoxWatermarkExtender ID="txtWMEName" runat="server" TargetControlID="txtVesselName" WatermarkText="Type Vessel Name" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
+                   <td style="width:10%">
+                        <asp:TextBox ID="txtVesselName" runat="server" CssClass="watermark"   ForeColor="#747862"></asp:TextBox>
+                        <cc1:TextBoxWatermarkExtender ID="txtWMEName" runat="server"  TargetControlID="txtVesselName" WatermarkText="Type Vessel Name" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                     </td>
                     
-                    <td style="width:25%">
+                    <td style="width:10%">
                         <asp:TextBox ID="txtVoyageNo" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                         <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtVoyageNo" WatermarkText="Type Voyage No." WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                     </td>
-                      <td style="width:25%">
+                      <td style="width:10%">
                         <asp:TextBox ID="txtIGMNo" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                         <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="txtIGMNo" WatermarkText="Type IGM No." WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                     </td>
-                    <td style="width:25%">
-                       <asp:DropDownList ID="ddlVoyageType" runat="server" Width="90%">
+                    <td style="width:30%">
+                       <asp:DropDownList ID="ddlVoyageType" runat="server" Width="100%">
                         <asp:ListItem Value="I">Import</asp:ListItem>
                         <asp:ListItem Value="E">Export</asp:ListItem>
                         <asp:ListItem Value="A">All</asp:ListItem>
                        </asp:DropDownList>
                     </td>
 
-                    <td style="width:12%"><asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" OnClick="btnSearch_Click" /></td>
+                    <td style="width:40%; text-align:right"><asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="70px" OnClick="btnSearch_Click" />
+                    <asp:Button ID="btnRefresh" runat="server" Text="Reset" CssClass="button" Width="70px" onclick="btnRefresh_Click"  /></td>
                 </tr>
             </table>              
         </fieldset>
@@ -59,7 +60,7 @@
         </asp:UpdateProgress>
         <fieldset id="fsList" runat="server" style="width:100%;min-height:100px;">
             <legend>Voyage List</legend>
-            <div style="float:right;padding-bottom:5px;">
+            <div style="float:right;padding-bottom:5px;margin-top: -10px">
                 Results Per Page:<asp:DropDownList ID="ddlPaging" runat="server" Width="50px" AutoPostBack="true" 
                         OnSelectedIndexChanged="ddlPaging_SelectedIndexChanged">
                         <asp:ListItem Text="10" Value="10" />
@@ -79,7 +80,7 @@
                     <ContentTemplate>
                     <asp:Label runat="server" ID="lblErrorMsg" Text=""></asp:Label>
                         <asp:GridView ID="gvwLoc" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                BorderStyle="None" BorderWidth="0" OnPageIndexChanging="gvwLoc_PageIndexChanging"
+                BorderStyle="None" BorderWidth="0" OnPageIndexChanging="gvwLoc_PageIndexChanging" AllowSorting="true" onsorting="gvwLoc_Sorting"
                 OnRowDataBound="gvwLoc_RowDataBound" OnRowCommand="gvwLoc_RowCommand" Width="100%">
                 <pagersettings mode="NumericFirstLast" position="TopAndBottom" />
                 <pagerstyle cssclass="gridviewpager" />
@@ -97,32 +98,32 @@
                                     <ItemStyle CssClass="gridviewitem" Width="2%" />                                       
                                 </asp:TemplateField>
 
-                                <asp:TemplateField HeaderText="Location">
+                                <asp:TemplateField HeaderText="Location" SortExpression="LocName">
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="13%" />                                       
                                 </asp:TemplateField>
 
-                                <asp:TemplateField HeaderText="Voyage No">
+                                <asp:TemplateField HeaderText="Voyage No" SortExpression="VoyageNo">
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="9%" />      
                                 </asp:TemplateField>
 
-                                 <asp:TemplateField HeaderText="Vessel Name">
+                                 <asp:TemplateField HeaderText="Vessel Name" SortExpression="VesselName">
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="15%" />                                       
                                 </asp:TemplateField>
 
-                                 <asp:TemplateField HeaderText="IGM No">
+                                 <asp:TemplateField HeaderText="IGM No" SortExpression="IGMNo">
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="9%" />                                       
                                 </asp:TemplateField>
 
-                                 <asp:TemplateField HeaderText="IGM Date">
+                                 <asp:TemplateField HeaderText="IGM Date" SortExpression="IGMDate">
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="10%" />                                       
                                 </asp:TemplateField>
 
-                                 <asp:TemplateField HeaderText="Landing Date">
+                                 <asp:TemplateField HeaderText="Landing Date" SortExpression="LandingDate">
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="11%" />                                       
                                 </asp:TemplateField>

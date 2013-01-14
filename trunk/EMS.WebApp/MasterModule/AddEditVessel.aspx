@@ -72,7 +72,7 @@
                   <tr>
                     <td>Master Name:</td>
                     <td><asp:TextBox ID="txtMasterCode" runat="server" CssClass="textboxuppercase" 
-                            MaxLength="50" Width="250" TextMode="MultiLine"></asp:TextBox><br />
+                            MaxLength="50" Width="250" TextMode="SingleLine"></asp:TextBox><br />
                    </td>
                 </tr>
                 

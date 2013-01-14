@@ -31,7 +31,7 @@ namespace EMS.WebApp.MasterModule
 
             if (!IsPostBack)
             {
-                RetrieveSearchCriteria();
+               RetrieveSearchCriteria();
                 SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
                 LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
             }
@@ -267,28 +267,28 @@ namespace EMS.WebApp.MasterModule
         {
             bool isCriteriaExists = false;
 
-            if (!ReferenceEquals(Session[Constants.SESSION_SEARCH_CRITERIA], null))
-            {
-                SearchCriteria criteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            //if (!ReferenceEquals(Session[Constants.SESSION_SEARCH_CRITERIA], null))
+            //{
+            //    SearchCriteria criteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
 
-                if (!ReferenceEquals(criteria, null))
-                {
-                    if (criteria.CurrentPage != PageName.LocationMaster)
-                    {
-                        criteria.Clear();
-                        SetDefaultSearchCriteria(criteria);
-                    }
-                    else
-                    {
-                        txtPortCode.Text = criteria.LocAbbr;
-                        txtPortName.Text = criteria.LocName;
-                        gvwLoc.PageIndex = criteria.PageIndex;
-                        gvwLoc.PageSize = criteria.PageSize;
-                        ddlPaging.SelectedValue = criteria.PageSize.ToString();
-                        isCriteriaExists = true;
-                    }
-                }
-            }
+            //    if (!ReferenceEquals(criteria, null))
+            //    {
+            //        if (criteria.CurrentPage != PageName.LocationMaster)
+            //        {
+            //            criteria.Clear();
+            //            SetDefaultSearchCriteria(criteria);
+            //        }
+            //        else
+            //        {
+            //            txtPortCode.Text = criteria.LocAbbr;
+            //            txtPortName.Text = criteria.LocName;
+            //            gvwLoc.PageIndex = criteria.PageIndex;
+            //            gvwLoc.PageSize = criteria.PageSize;
+            //            ddlPaging.SelectedValue = criteria.PageSize.ToString();
+            //            isCriteriaExists = true;
+            //        }
+            //    }
+            //}
 
             if (!isCriteriaExists)
             {

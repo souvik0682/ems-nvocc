@@ -235,28 +235,28 @@ namespace EMS.WebApp.MasterModule
         {
             bool isCriteriaExists = false;
 
-            if (!ReferenceEquals(Session[Constants.SESSION_SEARCH_CRITERIA], null))
-            {
-                SearchCriteria criteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+            //if (!ReferenceEquals(Session[Constants.SESSION_SEARCH_CRITERIA], null))
+            //{
+            //    SearchCriteria criteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
 
-                if (!ReferenceEquals(criteria, null))
-                {
-                    if (criteria.CurrentPage != PageName.LocationMaster)
-                    {
-                        criteria.Clear();
-                        SetDefaultSearchCriteria(criteria);
-                    }
-                    else
-                    {
-                        // txtVesselFlag.Text = criteria.LocAbbr;
-                        txtVesselName.Text = criteria.LocName;
-                        gvwLoc.PageIndex = criteria.PageIndex;
-                        gvwLoc.PageSize = criteria.PageSize;
-                        ddlPaging.SelectedValue = criteria.PageSize.ToString();
-                        isCriteriaExists = true;
-                    }
-                }
-            }
+            //    if (!ReferenceEquals(criteria, null))
+            //    {
+            //        if (criteria.CurrentPage != PageName.LocationMaster)
+            //        {
+            //            criteria.Clear();
+            //            SetDefaultSearchCriteria(criteria);
+            //        }
+            //        else
+            //        {
+            //            // txtVesselFlag.Text = criteria.LocAbbr;
+            //            txtVesselName.Text = criteria.LocName;
+            //            gvwLoc.PageIndex = criteria.PageIndex;
+            //            gvwLoc.PageSize = criteria.PageSize;
+            //            ddlPaging.SelectedValue = criteria.PageSize.ToString();
+            //            isCriteriaExists = true;
+            //        }
+            //    }
+            //}
 
             if (!isCriteriaExists)
             {

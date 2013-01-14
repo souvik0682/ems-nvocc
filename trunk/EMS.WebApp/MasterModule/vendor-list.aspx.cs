@@ -319,5 +319,12 @@ namespace EMS.WebApp.MasterModule
 
         #endregion
 
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {
+            txtLocationName.Text = string.Empty;
+            txtVendorName.Text = string.Empty;
+            LoadLocation();
+        }
+
     }
 }

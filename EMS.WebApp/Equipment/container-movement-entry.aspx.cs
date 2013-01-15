@@ -10,22 +10,25 @@ using EMS.Entity;
 using EMS.Utilities.ResourceManager;
 using EMS.Common;
 using System.Data;
+using System.Text;
 
 
 namespace EMS.WebApp.Equipment
 {
     public partial class container_movement_entry : System.Web.UI.Page
-    {       
+    {
+
+        private int _ContainerMovementId = 0;
 
         protected void Page_Load(object sender, EventArgs e)
-        {          
+        {
 
-            //    RetriveParameters();
+            RetriveParameters();
             if (!Page.IsPostBack)
             {
                 fillAllDropdown();
 
-                if (lblTranCode.Text == string.Empty && hdnContainerId.Value == "0")
+                if (lblTranCode.Text == string.Empty && hdnContainerTransactionId.Value == "0")
                 {
                     DataTable Dt = CreateDataTable();
                     DataRow dr = Dt.NewRow();
@@ -34,50 +37,117 @@ namespace EMS.WebApp.Equipment
                     gvSelectedContainer.DataBind();
 
                 }
-                //        //dgChargeRates.DataBind();
+                else
+                {
+                    ContainerTranBLL oContainerTranBLL = new ContainerTranBLL();
+                    SearchCriteria searchCriteria = new SearchCriteria();
+                    DataSet ds = new DataSet();
 
-                //        if (hdnChargeID.Value != "0")
-                //        {
-
-                //            FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
-                //            FillChargeDetails(Convert.ToInt32(hdnChargeID.Value));
-                //        }
-                //        else
-                //        {
-                //            oChargeRates = new List<ChargeRateEntity>();
-                //            ChargeRateEntity Ent = new ChargeRateEntity();
-                //            oChargeRates.Add(Ent);
-                //            dgChargeRates.DataSource = oChargeRates;
-                //            dgChargeRates.DataBind();
-                //        }
-
+                    if (!string.IsNullOrEmpty(hdnContainerTransactionId.Value))
+                    {
+                        ds = oContainerTranBLL.GetContainerTransactionList(searchCriteria, Convert.ToInt32(hdnContainerTransactionId.Value));
+                    }
+                    else if(!string.IsNullOrEmpty(lblTranCode.Text))
+                    {
+                        searchCriteria.StringOption4 = lblTranCode.Text;
+                        ds = oContainerTranBLL.GetContainerTransactionList(searchCriteria, 0);
+                    }
+                    FillHeaderDetail(ds.Tables[0]);
+                    FillContainers(ds.Tables[1]);
+                }
             }
-        }        
+        }
 
-        //private void RetriveParameters()
-        //{
-        //    //_userId = UserBLL.GetLoggedInUserId();
+        void FillHeaderDetail(DataTable dt)
+        {
+            if (dt.Rows.Count > 0)
+            {
+                txtDate.Text = Convert.ToDateTime(dt.Rows[0]["MovementDate"].ToString()).ToShortDateString();
+                ddlFromStatus.SelectedIndex = ddlFromStatus.Items.IndexOf(ddlFromStatus.Items.FindByValue(dt.Rows[0]["FromStatus"].ToString()));
+                ActionOnFromStatusChange();
 
-        //    if (!ReferenceEquals(Request.QueryString["id"], null))
-        //    {
-        //        Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["id"].ToString()), out _locId);
-        //        hdnChargeID.Value = _locId.ToString();
-        //    }
-        //}
+                ddlToStatus.SelectedIndex = ddlToStatus.Items.IndexOf(ddlToStatus.Items.FindByValue(dt.Rows[0]["ToStatus"].ToString()));
+                ActionOnToStatusChange();
+                
+                ddlFromLocation.SelectedIndex = ddlFromLocation.Items.IndexOf(ddlFromLocation.Items.FindByValue(dt.Rows[0]["FromLocation"].ToString()));
+                ActionOnFromLocationChange();
+
+                ddlTolocation.SelectedIndex = ddlTolocation.Items.IndexOf(ddlTolocation.Items.FindByValue(dt.Rows[0]["ToLocation"].ToString()));
+                ddlEmptyYard.SelectedIndex = ddlEmptyYard.Items.IndexOf(ddlEmptyYard.Items.FindByValue(dt.Rows[0]["EmptyYard"].ToString()));
+
+                txtTeus.Text = dt.Rows[0]["TEUs"].ToString();
+                txtFEUs.Text = dt.Rows[0]["FEUs"].ToString();
+                txtNarration.Text = dt.Rows[0]["Narration"].ToString();
+                lblTranCode.Text = dt.Rows[0]["TransactionCode"].ToString();
+            }
+        }
+
+        void FillContainers(DataTable dt)
+        {
+            DataTable oTable = CreateDataTable();
+            
+
+            foreach (DataRow Row in dt.Rows)
+            {
+                DataRow Dr = oTable.NewRow();
+
+                Dr["OldTransactionId"] = "0";
+                Dr["NewTransactionId"] = Row["TranId"];
+                Dr["ContainerNo"] = Row["ContainerNo"];
+                Dr["FromStatus"] = ddlFromStatus.Items.FindByValue(Row["FromStatus"].ToString()).Text;
+                Dr["ToStatus"] = ddlFromStatus.Items.FindByValue(Row["ToStatus"].ToString()).Text; 
+                Dr["LandingDate"] = Row["LandingDate"];
+                Dr["ChangeDate"] = Row["MovementDate"];
+
+                oTable.Rows.Add(Dr);
+            }
+            gvSelectedContainer.DataSource = oTable;
+            gvSelectedContainer.DataBind();
+
+        }
+
+        private void RetriveParameters()
+        {
+            //_userId = UserBLL.GetLoggedInUserId();
+
+            if (!ReferenceEquals(Request.QueryString["id"], null))
+            {
+                Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["id"].ToString()), out _ContainerMovementId);
+                hdnContainerTransactionId.Value = _ContainerMovementId.ToString();
+            }
+            else if (!ReferenceEquals(Request.QueryString["tcode"], null))
+            {
+                lblTranCode.Text = GeneralFunctions.DecryptQueryString(Request.QueryString["tcode"].ToString());
+            }
+        }
 
         void fillAllDropdown()
         {
             ListItem Li = null;
 
-            #region ChargeType
+            #region FromStatus
 
             Li = new ListItem("Select", "0");
             PopulateDropDown((int)Enums.DropDownPopulationFor.ContainerMovementStatus, ddlFromStatus, 0);
             ddlFromStatus.Items.Insert(0, Li);
+            ddlFromStatus.Items.Remove(ddlFromStatus.Items.FindByText("ONBR"));
+            #endregion
+
+            #region FromLocation
+
+            Li = new ListItem("Select", "0");
+            PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlFromLocation, 0);
+            ddlFromLocation.Items.Insert(0, Li);
 
             #endregion
 
+            #region ToLocation
 
+            Li = new ListItem("Select", "0");
+            PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlTolocation, 0);
+            ddlTolocation.Items.Insert(0, Li);
+
+            #endregion
         }
 
         void PopulateDropDown(int Number, DropDownList ddl, int? Filter)
@@ -87,26 +157,38 @@ namespace EMS.WebApp.Equipment
 
         protected void ddlFromStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ActionOnFromStatusChange();
+        }
+
+        private void ActionOnFromStatusChange()
+        {
             ListItem Li = new ListItem("Select", "0");
             PopulateDropDown((int)Enums.DropDownPopulationFor.ContainerMovementStatus, ddlToStatus, Convert.ToInt32(ddlFromStatus.SelectedValue));
             ddlToStatus.Items.Insert(0, Li);
+
+
+            if (ddlFromStatus.SelectedItem.Text == "RCVE")
+            {
+                ddlEmptyYard.Enabled = true;
+            }
+            else
+            {
+                ddlEmptyYard.Enabled = false;
+            }
         }
 
         protected void ddlToStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlFromStatus.SelectedItem.Text == "DCHE" && ddlToStatus.SelectedItem.Text == "RCVE")
-            {
-                //Populate Empty Yard
-                ListItem Li = new ListItem();
-                #region VendorList
-                Li = new ListItem("Select", "0");
-                PopulateDropDown((int)Enums.DropDownPopulationFor.VendorList, ddlEmptyYard, 0);
-                ddlEmptyYard.Items.Insert(0, Li);
-                #endregion
+            ActionOnToStatusChange();
 
+        }
+
+        private void ActionOnToStatusChange()
+        {
+            if (ddlToStatus.SelectedItem.Text == "RCVE" || ddlFromStatus.SelectedItem.Text == "RCVE")
+            {
                 ddlEmptyYard.Enabled = true;
                 rfvEmptyYard.Enabled = true;
-                ddlEmptyYard.SelectedIndex = 0;
             }
             else
             {
@@ -118,25 +200,28 @@ namespace EMS.WebApp.Equipment
 
             if (ddlToStatus.SelectedItem.Text == "TRFE")
             {
-                txtToLocation.Enabled = true;
+                //txtToLocation.Enabled = true;
+                ddlTolocation.Enabled = true;
                 rfvToLocation.Enabled = true;
-                hdnToLocation.Value = "0";
+                //hdnToLocation.Value = "0";
             }
             else
             {
-                txtToLocation.Enabled = false;
-                txtToLocation.Text = string.Empty;
+                //txtToLocation.Enabled = false;
+                //txtToLocation.Text = string.Empty;
+                ddlTolocation.SelectedIndex = 0;
+                ddlTolocation.Enabled = false;
                 rfvToLocation.Enabled = false;
-                hdnToLocation.Value = "0";
+                //hdnToLocation.Value = "0";
             }
-
         }
 
-        protected void txtFromLocation_TextChanged(object sender, EventArgs e)
+        void fillContainer(int EmptyYardId)
         {
             DataTable dt = new DataTable();
-            dt = ContainerTranBLL.GetContainerTransactionListFiltered(Convert.ToInt16(ddlFromStatus.SelectedValue), Convert.ToInt32(hdnFromLocation.Value));
-            
+            ContainerTranBLL oContainerTranBLL = new ContainerTranBLL();
+            dt = oContainerTranBLL.GetContainerTransactionListFiltered(Convert.ToInt16(ddlFromStatus.SelectedValue), EmptyYardId);
+
             gvContainer.DataSource = dt;
             gvContainer.DataBind();
         }
@@ -148,18 +233,19 @@ namespace EMS.WebApp.Equipment
             foreach (GridViewRow Row in gvContainer.Rows)
             {
                 DataRow dr = Dt.NewRow();
-                
+
                 CheckBox chkContainer = (CheckBox)Row.FindControl("chkContainer");
 
                 if (chkContainer.Checked == true)
                 {
-                    HiddenField hdnTransactionId = (HiddenField)Row.FindControl("hdnTransactionId");
+                    HiddenField hdnOldTransactionId = (HiddenField)Row.FindControl("hdnOldTransactionId");
                     HiddenField hdnStatus = (HiddenField)Row.FindControl("hdnStatus");
                     HiddenField hdnLandingDate = (HiddenField)Row.FindControl("hdnLandingDate");
                     Label lblContainerNo = (Label)Row.FindControl("lblContainerNo");
                     Label lblContainerSize = (Label)Row.FindControl("lblContainerSize");
 
-                    dr["TransactionId"] = hdnTransactionId.Value;
+                    dr["OldTransactionId"] = hdnOldTransactionId.Value;
+                    dr["NewTransactionId"] = "0";
                     dr["ContainerNo"] = lblContainerNo.Text;
                     dr["FromStatus"] = hdnStatus.Value;
                     dr["LandingDate"] = hdnLandingDate.Value;
@@ -180,7 +266,10 @@ namespace EMS.WebApp.Equipment
             DataTable Dt = new DataTable();
             DataColumn dc;
 
-            dc = new DataColumn("TransactionId");
+            dc = new DataColumn("OldTransactionId");
+            Dt.Columns.Add(dc);
+
+            dc = new DataColumn("NewTransactionId");
             Dt.Columns.Add(dc);
 
             dc = new DataColumn("ContainerNo");
@@ -200,345 +289,137 @@ namespace EMS.WebApp.Equipment
             return Dt;
         }
 
+        protected void ddlEmptyYard_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlFromStatus.SelectedItem.Text == "RCVE")
+            {
+                //fillContainer(Convert.ToInt32(ddlEmptyYard.SelectedValue));
+                //btnShow.Enabled = true;
+                //btnShow.Attributes.Add("style", "background-color:transparent;cursor:pointer;");
+            }
+        }
+
+        protected void ddlFromLocation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ActionOnFromLocationChange();
+
+        }
+
+        private void ActionOnFromLocationChange()
+        {
+            ListItem Li = new ListItem("Select", "0");
+            PopulateDropDown((int)Enums.DropDownPopulationFor.VendorList, ddlEmptyYard, Convert.ToInt32(ddlFromLocation.SelectedValue));
+            ddlEmptyYard.Items.Insert(0, Li);
+        }
+
+        protected void btnShow_Click(object sender, EventArgs e)
+        {
+            if (ddlFromStatus.SelectedItem.Text == "RCVE")
+            {
+                fillContainer(Convert.ToInt32(ddlEmptyYard.SelectedValue));
+            }
+            else
+            {
+                fillContainer(0);
+            }
+
+            ModalPopupExtender1.Show();
+
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                ContainerTranBLL oContainerTranBLL = new ContainerTranBLL();
+                string TranCode = string.Empty;
+                int Result = oContainerTranBLL.AddEditContainerTransaction(out TranCode, lblTranCode.Text, GenerateContainerXMLString(),
+                    Convert.ToInt32(ddlToStatus.SelectedValue), Convert.ToInt32(txtTeus.Text), Convert.ToInt32(txtFEUs.Text), Convert.ToDateTime(txtDate.Text),
+                    Convert.ToString(txtNarration.Text), Convert.ToInt32(ddlFromLocation.SelectedValue), Convert.ToInt32(ddlTolocation.SelectedValue),
+                    Convert.ToInt32(ddlEmptyYard.SelectedValue), 1, DateTime.Now.Date, 1, DateTime.Now.Date);
 
 
-        //protected void ddlLocationID_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    DropDownList ddlFLocation = (DropDownList)sender;
-        //    GridViewRow item = (GridViewRow)((DropDownList)sender).NamingContainer;
-        //    DropDownList ddlFTerminal = (DropDownList)item.FindControl("ddlFTerminal");
-        //    PopulateDropDown((int)Enums.DropDownPopulationFor.TerminalCode, ddlFTerminal, Convert.ToInt32(ddlFLocation.SelectedValue));
-        //}
+                switch (Result)
+                {
+                    case 1:
+                        lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
+                        if (string.IsNullOrEmpty(lblTranCode.Text))
+                        {
+                            lblTranCode.Text = TranCode;
+                            ClearAll();
+                        }
+                        else
+                        {
+                            Response.Redirect("container-movement.aspx");
+                        }
 
-        //protected void btnSave_Click(object sender, EventArgs e)
-        //{
-        //    //if (Page.IsValid)
-        //    //{
-        //    //    oChargeEntity = new ChargeEntity();
-        //    //    oChargeBLL = new ChargeBLL();
+                        break;
+                    case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
+                        break;
+                }
 
-        //    //    oChargeEntity.ChargeActive = true;
-        //    //    oChargeEntity.ChargeDescr = txtChargeName.Text.Trim();
-        //    //    oChargeEntity.ChargeType = Convert.ToInt32(ddlChargeType.SelectedValue);
+            }
+        }
 
-        //    //    //This ID will be the companyid of the currently loggedin user
-        //    //    oChargeEntity.CompanyID = 1;
-        //    //    oChargeEntity.Currency = Convert.ToInt32(ddlCurrency.SelectedValue);
-        //    //    oChargeEntity.EffectDt = Convert.ToDateTime(txtEffectDate.Text.Trim());
-        //    //    oChargeEntity.IEC = Convert.ToChar(ddlImportExportGeneral.SelectedValue);
-        //    //    oChargeEntity.IsFreightComponent = Convert.ToBoolean(Convert.ToInt32(rdbFreightComponent.SelectedItem.Value));
-        //    //    oChargeEntity.IsWashing = Convert.ToBoolean(Convert.ToInt32(rdbWashing.SelectedItem.Value));
-        //    //    oChargeEntity.NVOCCID = Convert.ToInt32(ddlLine.SelectedValue);
-        //    //    oChargeEntity.PrincipleSharing = Convert.ToBoolean(Convert.ToInt32(rdbPrincipleSharing.SelectedItem.Value));
-        //    //    oChargeEntity.RateChangeable = Convert.ToBoolean(Convert.ToInt32(rdbRateChange.SelectedItem.Value));
-        //    //    oChargeEntity.Sequence = Convert.ToInt32(txtDisplayOrder.Text.Trim());
-        //    //    oChargeEntity.ServiceTax = Convert.ToBoolean(Convert.ToInt32(rdbServiceTaxApplicable.SelectedItem.Value));
+        string GenerateContainerXMLString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<Conts>");
 
+            foreach (GridViewRow gvRow in gvSelectedContainer.Rows)
+            {
+                HiddenField hdnOldTransactionId = (HiddenField)gvRow.FindControl("hdnOldTransactionId");
+                HiddenField hdnCurrentTransactionId = (HiddenField)gvRow.FindControl("hdnCurrentTransactionId");
+                CheckBox chkItem = (CheckBox)gvRow.FindControl("chkItem");
 
+                sb.Append("<Cont>");
 
-        //    //    if (hdnChargeID.Value == "0") //insert
-        //    //    {
-        //    //        oChargeEntity.CreatedBy = 1;// oUserEntity.Id;
-        //    //        oChargeEntity.CreatedOn = DateTime.Today.Date;
-        //    //        oChargeEntity.ModifiedBy = 1;// oUserEntity.Id;
-        //    //        oChargeEntity.ModifiedOn = DateTime.Today.Date;
+                sb.Append("<Oid>" + hdnOldTransactionId.Value + "</Oid>");
+                sb.Append("<Nid>" + hdnCurrentTransactionId.Value + "</Nid>");
+                sb.Append("<Stats>" + chkItem.Checked.ToString() + "</Stats>");
 
-        //    //        hdnChargeID.Value = oChargeBLL.AddEditCharge(oChargeEntity).ToString();
+                sb.Append("</Cont>");
 
-        //    //        if (hdnChargeID.Value != "0")
-        //    //            lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
-        //    //        else
-        //    //            lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
+            }
 
-        //    //    }
-        //    //    else   //update
-        //    //    {
-        //    //        oChargeEntity.ChargesID = Convert.ToInt32(hdnChargeID.Value);
-        //    //        oChargeEntity.ModifiedBy = 2;// oUserEntity.Id;
-        //    //        oChargeEntity.ModifiedOn = DateTime.Today.Date;
+            sb.Append("</Conts>");
 
-        //    //        switch (oChargeBLL.AddEditCharge(oChargeEntity))
-        //    //        {
-        //    //            case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
-        //    //                break;
-        //    //            case 1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
-        //    //                break;
-        //    //        }
-        //    //    }
-        //    //}
-        //}
+            return sb.ToString();
+        }
 
-        //void FillChargeDetails(int ChargesID)
-        //{
-        //    oChargeEntity = new ChargeEntity();
-        //    oChargeBLL = new ChargeBLL();
-        //    oChargeEntity = (ChargeEntity)oChargeBLL.GetChargeDetails(ChargesID);
+        void ClearAll()
+        {
+            txtDate.Text = string.Empty;
+            txtFEUs.Text = string.Empty;
+            txtNarration.Text = string.Empty;
+            txtTeus.Text = string.Empty;
 
+            ddlFromLocation.SelectedIndex = 0;
+            ddlFromStatus.SelectedIndex = 0;
+            ddlToStatus.SelectedIndex = 0;
 
-        //    //oChargeEntity.ChargeActive = true;
-        //    txtChargeName.Text = oChargeEntity.ChargeDescr;
-        //    ddlChargeType.SelectedIndex = ddlChargeType.Items.IndexOf(ddlChargeType.Items.FindByValue(oChargeEntity.ChargeType.ToString()));
+            if (ddlEmptyYard.Items.Count > 0)
+                ddlEmptyYard.SelectedIndex = 0;
 
-        //    //This ID will be the companyid of the currently loggedin user
-        //    //oChargeEntity.CompanyID = 1;
-        //    ddlCurrency.SelectedIndex = ddlCurrency.Items.IndexOf(ddlCurrency.Items.FindByValue(oChargeEntity.Currency.ToString()));
-        //    txtEffectDate.Text = oChargeEntity.EffectDt.ToShortDateString();
-        //    ddlImportExportGeneral.SelectedIndex = ddlImportExportGeneral.Items.IndexOf(ddlImportExportGeneral.Items.FindByValue(oChargeEntity.IEC.ToString()));
-        //    ddlLine.SelectedIndex = ddlLine.Items.IndexOf(ddlLine.Items.FindByValue(oChargeEntity.NVOCCID.ToString()));
-        //    txtDisplayOrder.Text = oChargeEntity.Sequence.ToString();
+            if (ddlTolocation.Items.Count > 0)
+                ddlTolocation.SelectedIndex = 0;
 
+            //hdnChargeID.Value = string.Empty;
+            hdnContainerTransactionId.Value = string.Empty;
+            //lblTranCode.Text = string.Empty;
 
-        //    rdbServiceTaxApplicable.Items.FindByValue(oChargeEntity.ServiceTax.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
-        //    rdbFreightComponent.Items.FindByValue(oChargeEntity.IsFreightComponent.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
-        //    rdbWashing.Items.FindByValue(oChargeEntity.IsWashing.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
-        //    WashingSelection(rdbWashing);
-        //    rdbPrincipleSharing.Items.FindByValue(oChargeEntity.PrincipleSharing.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
-        //    SharingSelection(rdbPrincipleSharing);
-        //    rdbRateChange.Items.FindByValue(oChargeEntity.RateChangeable.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
+            DataTable Dt = CreateDataTable();
+            DataRow dr = Dt.NewRow();
+            Dt.Rows.Add(dr);
+            gvSelectedContainer.DataSource = Dt;
+            gvSelectedContainer.DataBind();
 
-        //    hdnChargeID.Value = oChargeEntity.ChargesID.ToString();
+        }
 
-
-        //}
-        //void FillChargeRate(int ChargesID)
-        //{
-        //    //oChargeRates = new List<ChargeRateEntity>();
-        //    oChargeBLL = new ChargeBLL();
-        //    List<IChargeRate> Rates = new List<IChargeRate>();
-        //    Rates = oChargeBLL.GetChargeRates(ChargesID);
-        //    if (Rates.Count <= 0)
-        //    {
-        //        IChargeRate rt = new ChargeRateEntity();
-        //        Rates.Add(rt);
-        //    }
-        //    dgChargeRates.DataSource = Rates;
-        //    dgChargeRates.DataBind();
-        //}
-        //protected void btnBack_Click(object sender, EventArgs e)
-        //{
-        //    Response.Redirect("~/charge-list.aspx");
-        //}
-
-
-
-        //protected void dgChargeRates_RowDataBound(object sender, GridViewRowEventArgs e)
-        //{
-        //    if (e.Row.RowType == DataControlRowType.Footer)
-        //    {
-        //        ListItem Li;
-        //        DropDownList ddlFLocation = (DropDownList)e.Row.FindControl("ddlFLocation");
-
-        //        DropDownList ddlFWashingType = (DropDownList)e.Row.FindControl("ddlFWashingType");
-
-        //        Li = new ListItem("Select", "0");
-        //        PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlFLocation, 0);
-        //        ddlFLocation.Items.Insert(0, Li);
-
-        //        foreach (Enums.WashingType r in Enum.GetValues(typeof(Enums.WashingType)))
-        //        {
-        //            Li = new ListItem("Select", "0");
-        //            ListItem item = new ListItem(Enum.GetName(typeof(Enums.WashingType), r).Replace('_', ' '), ((int)r).ToString());
-        //            ddlFWashingType.Items.Add(item);
-        //        }
-        //        ddlFWashingType.Items.Insert(0, Li);
-
-        //    }
-        //}
-        //protected void dgChargeRates_RowCommand(object sender, GridViewCommandEventArgs e)
-        //{
-
-        //    #region Save
-        //    if (e.CommandArgument == "Save")
-        //    {
-        //        if (hdnChargeID.Value != "0")
-        //        {
-        //            oChargeBLL = new ChargeBLL();
-        //            GridViewRow Row = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
-
-        //            TextBox txtHigh = (TextBox)Row.FindControl("txtHigh");
-        //            TextBox txtLow = (TextBox)Row.FindControl("txtLow");
-
-        //            if (Convert.ToDecimal(txtHigh.Text) < Convert.ToDecimal(txtLow.Text))
-        //            {
-        //                ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00069") + "');</script>", false);
-        //                return;
-        //            }
-
-
-        //            DropDownList ddlFLocation = (DropDownList)Row.FindControl("ddlFLocation");
-        //            DropDownList ddlFTerminal = (DropDownList)Row.FindControl("ddlFTerminal");
-        //            DropDownList ddlFWashingType = (DropDownList)Row.FindControl("ddlFWashingType");
-
-        //            //TextBox txtHigh = (TextBox)Row.FindControl("txtHigh");
-        //            //TextBox txtLow = (TextBox)Row.FindControl("txtLow");
-        //            TextBox txtRatePerBL = (TextBox)Row.FindControl("txtRatePerBL");
-        //            TextBox txtRatePerTEU = (TextBox)Row.FindControl("txtRatePerTEU");
-        //            TextBox txtRateperFEU = (TextBox)Row.FindControl("txtRateperFEU");
-        //            TextBox txtSharingBL = (TextBox)Row.FindControl("txtSharingBL");
-        //            TextBox txtSharingTEU = (TextBox)Row.FindControl("txtSharingTEU");
-        //            TextBox txtSharingFEU = (TextBox)Row.FindControl("txtSharingFEU");
-        //            HiddenField hdnFId = (HiddenField)Row.FindControl("hdnFId");
-        //            HiddenField hdnId = (HiddenField)Row.FindControl("hdnId");
-
-        //            oEntity = new ChargeRateEntity();
-        //            oEntity.ChargesID = Convert.ToInt32(hdnChargeID.Value);
-        //            oEntity.High = Convert.ToInt32(txtHigh.Text);
-        //            oEntity.LocationId = Convert.ToInt32(ddlFLocation.SelectedValue);
-        //            oEntity.Low = Convert.ToInt32(txtLow.Text);
-        //            oEntity.RatePerBL = Convert.ToDecimal(txtRatePerBL.Text);
-        //            oEntity.SharingBL = Convert.ToDecimal(txtSharingBL.Text);
-        //            oEntity.SharingFEU = Convert.ToDecimal(txtSharingFEU.Text);
-        //            oEntity.SharingTEU = Convert.ToDecimal(txtSharingTEU.Text);
-        //            oEntity.WashingType = Convert.ToInt32(ddlFWashingType.SelectedValue);
-        //            if (ddlFTerminal.Items.Count > 0 && ddlFTerminal.SelectedIndex > 0)
-        //                oEntity.TerminalId = Convert.ToInt32(ddlFTerminal.SelectedValue);
-
-        //            //Header change & CBM/TON selection to be implemented below
-        //            oEntity.RateActive = true;
-        //            oEntity.RatePerFEU = Convert.ToDecimal(txtRateperFEU.Text);
-        //            oEntity.RatePerTEU = Convert.ToDecimal(txtRatePerTEU.Text);
-        //            oEntity.RatePerCBM = Convert.ToDecimal(txtRateperFEU.Text);
-        //            oEntity.RatePerTON = Convert.ToDecimal(txtRatePerTEU.Text);
-
-
-        //            if (hdnFId.Value == "0") //Inser in local list
-        //            {
-        //                oChargeBLL.AddEditChargeRates(oEntity);
-        //            }
-        //            else //Update local list
-        //            {
-        //                oEntity.ChargesRateID = Convert.ToInt32(hdnFId.Value);
-        //                oChargeBLL.AddEditChargeRates(oEntity);
-        //            }
-        //            FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
-
-        //        }
-        //        else
-        //        {
-        //            ClientScript.RegisterClientScriptBlock(typeof(Page), "myscript", "alert('Please enter the charge detail first')", true);
-        //        }
-
-        //    }
-        //    #endregion
-
-        //    #region Edit
-        //    if (e.CommandArgument == "Edit")
-        //    {
-        //        GridViewRow FootetRow = dgChargeRates.FooterRow;
-
-        //        DropDownList ddlFLocation = (DropDownList)FootetRow.FindControl("ddlFLocation");
-        //        DropDownList ddlFTerminal = (DropDownList)FootetRow.FindControl("ddlFTerminal");
-        //        DropDownList ddlFWashingType = (DropDownList)FootetRow.FindControl("ddlFWashingType");
-        //        TextBox txtLow = (TextBox)FootetRow.FindControl("txtLow");
-        //        TextBox txtHigh = (TextBox)FootetRow.FindControl("txtHigh");
-        //        TextBox txtRatePerBL = (TextBox)FootetRow.FindControl("txtRatePerBL");
-        //        TextBox txtRatePerTEU = (TextBox)FootetRow.FindControl("txtRatePerTEU");
-        //        TextBox txtRateperFEU = (TextBox)FootetRow.FindControl("txtRateperFEU");
-        //        TextBox txtSharingBL = (TextBox)FootetRow.FindControl("txtSharingBL");
-        //        TextBox txtSharingTEU = (TextBox)FootetRow.FindControl("txtSharingTEU");
-        //        TextBox txtSharingFEU = (TextBox)FootetRow.FindControl("txtSharingFEU");
-        //        HiddenField hdnFId = (HiddenField)FootetRow.FindControl("hdnFId");
-
-
-        //        GridViewRow Row = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer);
-        //        HiddenField hdnLocationId = (HiddenField)Row.FindControl("hdnLocationId");
-        //        HiddenField hdnTerminalId = (HiddenField)Row.FindControl("hdnTerminalId");
-        //        HiddenField hdnWashingTypeId = (HiddenField)Row.FindControl("hdnWashingTypeId");
-        //        HiddenField hdnId = (HiddenField)Row.FindControl("hdnId");
-
-        //        Label lblLow = (Label)Row.FindControl("lblLow");
-        //        Label lblHigh = (Label)Row.FindControl("lblHigh");
-        //        Label lblRatePerBl = (Label)Row.FindControl("lblRatePerBl");
-        //        Label lblRatePerTEU = (Label)Row.FindControl("lblRatePerTEU");
-        //        Label lblRatePerFEU = (Label)Row.FindControl("lblRatePerFEU");
-        //        Label lblSharingBL = (Label)Row.FindControl("lblSharingBL");
-        //        Label lblSharingTEU = (Label)Row.FindControl("lblSharingTEU");
-        //        Label lblSharingFEU = (Label)Row.FindControl("lblSharingFEU");
-
-        //        ddlFLocation.SelectedIndex = ddlFLocation.Items.IndexOf(ddlFLocation.Items.FindByValue(hdnLocationId.Value));
-        //        ddlFTerminal.SelectedIndex = ddlFTerminal.Items.IndexOf(ddlFTerminal.Items.FindByValue(hdnTerminalId.Value));
-        //        ddlFWashingType.SelectedIndex = ddlFWashingType.Items.IndexOf(ddlFWashingType.Items.FindByValue(hdnWashingTypeId.Value));
-
-
-        //        txtLow.Text = lblLow.Text;
-        //        txtHigh.Text = lblHigh.Text;
-        //        txtRatePerBL.Text = lblRatePerBl.Text;
-        //        txtRatePerTEU.Text = lblRatePerTEU.Text;
-        //        txtRateperFEU.Text = lblRatePerFEU.Text;
-        //        txtSharingBL.Text = lblSharingBL.Text;
-        //        txtSharingTEU.Text = lblSharingTEU.Text;
-        //        txtSharingFEU.Text = lblSharingFEU.Text;
-        //        hdnFId.Value = hdnId.Value.ToString();
-
-        //    }
-        //    #endregion
-
-        //    #region Delete
-        //    if (e.CommandArgument == "Delete")
-        //    {
-        //        GridViewRow Row = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer);
-        //        HiddenField hdnId = (HiddenField)Row.FindControl("hdnId");
-        //        ChargeBLL.DeleteChargeRate(Convert.ToInt32(hdnId.Value));
-        //        FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
-        //    }
-        //    #endregion
-        //}
-        //protected void rdbPrincipleSharing_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    RadioButtonList rdl = (RadioButtonList)sender;
-        //    SharingSelection(rdl);
-        //}
-
-        //private void SharingSelection(RadioButtonList rdl)
-        //{
-        //    GridViewRow Row = dgChargeRates.FooterRow;
-        //    TextBox txtSharingBL = (TextBox)Row.FindControl("txtSharingBL");
-        //    TextBox txtSharingTEU = (TextBox)Row.FindControl("txtSharingTEU");
-        //    TextBox txtSharingFEU = (TextBox)Row.FindControl("txtSharingFEU");
-
-        //    if (rdl.SelectedItem.Value == "0")
-        //    {
-        //        txtSharingBL.ReadOnly = true;
-        //        txtSharingBL.Text = "0.0";
-
-        //        txtSharingTEU.ReadOnly = true;
-        //        txtSharingTEU.Text = "0.0";
-
-        //        txtSharingFEU.ReadOnly = true;
-        //        txtSharingFEU.Text = "0.0";
-        //    }
-        //    else
-        //    {
-        //        txtSharingBL.ReadOnly = false;
-        //        txtSharingTEU.ReadOnly = false;
-        //        txtSharingFEU.ReadOnly = false;
-        //    }
-        //}
-        //protected void rdbWashing_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    RadioButtonList rdl = (RadioButtonList)sender;
-        //    WashingSelection(rdl);
-        //}
-
-        //private void WashingSelection(RadioButtonList rdl)
-        //{
-        //    GridViewRow Row = dgChargeRates.FooterRow;
-        //    DropDownList ddlFWashingType = (DropDownList)Row.FindControl("ddlFWashingType");
-
-        //    if (rdl.SelectedItem.Value == "0")
-        //    {
-        //        ddlFWashingType.SelectedIndex = 0;
-        //        ddlFWashingType.Enabled = false;
-        //    }
-        //    else
-        //    {
-        //        ddlFWashingType.Enabled = true;
-        //    }
-        //}
-        //protected void rdbServiceTaxApplicable_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-
-        //}
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("container-movement.aspx");
+        }
 
     }
 }

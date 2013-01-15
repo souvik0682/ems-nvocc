@@ -3,28 +3,14 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <script type="text/javascript">
-        function AutoCompleteItemSelected(sender, e) {
-
-            if (sender._id == "AutoCompleteEx") {
-                var hdnFromLocation = $get('<%=hdnFromLocation.ClientID %>');
-                hdnFromLocation.value = e.get_value();
-            }
-            else if (sender._id == "AutoCompleteEx2") {
-                var hdnToLocation = $get('<%=hdnToLocation.ClientID %>');
-                hdnToLocation.value = e.get_value();
-            }
-        }
-
-       
-    </script>
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
     <div>
         <div id="headercaption">
             ADD / EDIT CONTAINER MOVEMENT</div>
         <center>
-            <fieldset style="width: 85%;">
+            <fieldset style="width: 70%;">
                 <legend>Add / Edit Container Transaction</legend>
                 <table border="0" cellpadding="2" cellspacing="3" width="100%">
                     <tr>
@@ -33,14 +19,14 @@
                         </td>
                         <td style="width: 375px;">
                             <asp:Label ID="lblTranCode" runat="server"></asp:Label>
-                            <asp:HiddenField ID="hdnContainerId" runat="server" Value="0" />
+                            <asp:HiddenField ID="hdnContainerTransactionId" runat="server" Value="0" />
                         </td>
                         <td>
                             Activity Date<span class="errormessage1">*</span> :
                         </td>
                         <td>
                             <asp:TextBox ID="txtDate" runat="server" Width="250"></asp:TextBox>
-                            <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtDate"
+                            <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtDate" Format="dd/MM/yyyy"
                                 TargetControlID="txtDate">
                             </cc1:CalendarExtender>
                             <asp:RequiredFieldValidator ID="rfvDate" runat="server" ErrorMessage="Please enter date"
@@ -80,51 +66,10 @@
                             From Location<span class="errormessage1">*</span> :
                         </td>
                         <td>
-                            <asp:HiddenField ID="hdnFromLocation" runat="server" Value="0" />
-                            <asp:TextBox ID="txtFromLocation" runat="server" Width="250" AutoPostBack="true"
-                                OnTextChanged="txtFromLocation_TextChanged"></asp:TextBox>
-                            <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx" ID="autoComplete1"
-                                TargetControlID="txtFromLocation" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
-                                MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
-                                CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
-                                CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
-                                ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected">
-                                <Animations>
-                                        <OnShow>
-                                            <Sequence>
-                                                <%-- Make the completion list transparent and then show it --%>
-                                                <OpacityAction Opacity="0" />
-                                                <HideAction Visible="true" />
-                            
-                                                <%--Cache the original size of the completion list the first time
-                                                    the animation is played and then set it to zero --%>
-                                                <ScriptAction Script="
-                                                    // Cache the size and setup the initial size
-                                                    var behavior = $find('AutoCompleteEx');
-                                                    if (!behavior._height) {
-                                                        var target = behavior.get_completionList();
-                                                        behavior._height = target.offsetHeight - 2;
-                                                        target.style.height = '0px';
-                                                    }" />
-                            
-                                                <%-- Expand from 0px to the appropriate size while fading in --%>
-                                                <Parallel Duration=".4">
-                                                    <FadeIn />
-                                                    <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteEx')._height" />
-                                                </Parallel>
-                                            </Sequence>
-                                        </OnShow>
-                                        <OnHide>
-                                            <%-- Collapse down to 0px and fade out --%>
-                                            <Parallel Duration=".4">
-                                                <FadeOut />
-                                                <Length PropertyKey="height" StartValueScript="$find('AutoCompleteEx')._height" EndValue="0" />
-                                            </Parallel>
-                                        </OnHide>
-                                </Animations>
-                            </cc1:AutoCompleteExtender>
+                            <asp:DropDownList ID="ddlFromLocation" runat="server" Width="255" 
+                                onselectedindexchanged="ddlFromLocation_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                             <asp:RequiredFieldValidator ID="rfvFromLocation" runat="server" ErrorMessage="Please enter from location"
-                                ControlToValidate="txtFromLocation" Display="None" ValidationGroup="vgContainer"></asp:RequiredFieldValidator>
+                                ControlToValidate="ddlFromLocation" Display="None" InitialValue="0" ValidationGroup="vgContainer"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender11" runat="server" TargetControlID="rfvFromLocation">
                             </cc1:ValidatorCalloutExtender>
                         </td>
@@ -132,50 +77,9 @@
                             To Location:
                         </td>
                         <td>
-                            <asp:HiddenField ID="hdnToLocation" runat="server" Value="0" />
-                            <asp:TextBox ID="txtToLocation" runat="server" Width="250" Enabled="false"></asp:TextBox>
-                            <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx2" ID="autoComplete2"
-                                TargetControlID="txtToLocation" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
-                                MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
-                                CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
-                                CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
-                                ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected">
-                                <Animations>
-                                        <OnShow>
-                                            <Sequence>
-                                                <%-- Make the completion list transparent and then show it --%>
-                                                <OpacityAction Opacity="0" />
-                                                <HideAction Visible="true" />
-                            
-                                                <%--Cache the original size of the completion list the first time
-                                                    the animation is played and then set it to zero --%>
-                                                <ScriptAction Script="
-                                                    // Cache the size and setup the initial size
-                                                    var behavior = $find('AutoCompleteEx2');
-                                                    if (!behavior._height) {
-                                                        var target = behavior.get_completionList();
-                                                        behavior._height = target.offsetHeight - 2;
-                                                        target.style.height = '0px';
-                                                    }" />
-                            
-                                                <%-- Expand from 0px to the appropriate size while fading in --%>
-                                                <Parallel Duration=".4">
-                                                    <FadeIn />
-                                                    <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteEx2')._height" />
-                                                </Parallel>
-                                            </Sequence>
-                                        </OnShow>
-                                        <OnHide>
-                                            <%-- Collapse down to 0px and fade out --%>
-                                            <Parallel Duration=".4">
-                                                <FadeOut />
-                                                <Length PropertyKey="height" StartValueScript="$find('AutoCompleteEx2')._height" EndValue="0" />
-                                            </Parallel>
-                                        </OnHide>
-                                </Animations>
-                            </cc1:AutoCompleteExtender>
+                            <asp:DropDownList ID="ddlTolocation" runat="server" Width="255" Enabled="false"></asp:DropDownList>
                             <asp:RequiredFieldValidator ID="rfvToLocation" runat="server" ErrorMessage="Please enter to location"
-                                ControlToValidate="txtToLocation" Display="None" ValidationGroup="vgContainer" Enabled="false"></asp:RequiredFieldValidator>
+                                ControlToValidate="ddlTolocation" Display="None" ValidationGroup="vgContainer" Enabled="false"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender10" runat="server" TargetControlID="rfvToLocation">
                             </cc1:ValidatorCalloutExtender>
                         </td>
@@ -185,7 +89,7 @@
                             No. Of TEUs<span class="errormessage1">*</span> :
                         </td>
                         <td>
-                            <asp:TextBox ID="txtTeus" runat="server" Width="250"></asp:TextBox>
+                            <asp:TextBox ID="txtTeus" runat="server" Width="250" style="text-align:right;"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="txtTeus"
                                 FilterMode="ValidChars" FilterType="Numbers">
                             </cc1:FilteredTextBoxExtender>
@@ -198,7 +102,7 @@
                             No. Of FEUs<span class="errormessage1">*</span> :
                         </td>
                         <td>
-                            <asp:TextBox ID="txtFEUs" runat="server" Width="250"></asp:TextBox>
+                            <asp:TextBox ID="txtFEUs" runat="server" Width="250" style="text-align:right;"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" TargetControlID="txtFEUs"
                                 FilterMode="ValidChars" FilterType="Numbers">
                             </cc1:FilteredTextBoxExtender>
@@ -213,13 +117,14 @@
                             Narration :
                         </td>
                         <td>
-                            <asp:TextBox ID="txtNarration" runat="server" Width="250" TextMode="MultiLine"></asp:TextBox>
+                            <asp:TextBox ID="txtNarration" runat="server" Width="250" TextMode="MultiLine" style="text-transform:uppercase;"></asp:TextBox>
                         </td>
                         <td valign="top">
-                            Empty Yard :
+                            Empty Yard <span class="errormessage1">*</span>:
                         </td>
                         <td valign="top">
-                            <asp:DropDownList ID="ddlEmptyYard" runat="server" Enabled="false" Width="255">
+                            <asp:DropDownList ID="ddlEmptyYard" runat="server" Enabled="false" Width="255" 
+                                onselectedindexchanged="ddlEmptyYard_SelectedIndexChanged" AutoPostBack="true">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="rfvEmptyYard" runat="server" ErrorMessage="Please select yard location"
                                 Display="None" ControlToValidate="ddlEmptyYard" InitialValue="0" ValidationGroup="vgContainer"
@@ -232,8 +137,9 @@
                         <td colspan="3">
                         </td>
                         <td>
-                            <asp:Button ID="btnShow" runat="server" Text="Show Container" />
-                            <cc1:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="btnShow"
+                            <asp:Button ID="btnShow" runat="server" Text="Show Container" onclick="btnShow_Click" ValidationGroup="vgContainer" />
+                            <asp:Button ID="Button1" runat="server" style="display:none;" />
+                            <cc1:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="Button1" 
                                 PopupControlID="pnlContainer" Drag="true" BackgroundCssClass="ModalPopupBG" CancelControlID="btnCancel">
                             </cc1:ModalPopupExtender>
                         </td>
@@ -241,31 +147,32 @@
                     <tr>
                         <td colspan="4">
                             <asp:GridView ID="gvSelectedContainer" runat="server" AutoGenerateColumns="false"
-                                ShowFooter="false" Width="80%">
+                                ShowFooter="false" Width="100%">
                                 <Columns>
                                     <asp:TemplateField HeaderText="Container No">
                                         <ItemTemplate>
-                                            <asp:HiddenField ID="hdnTransactionId" runat="server" Value='<%# Eval("TransactionId") %>' />
+                                            <asp:HiddenField ID="hdnOldTransactionId" runat="server" Value='<%# Eval("OldTransactionId") %>' />
+                                            <asp:HiddenField ID="hdnCurrentTransactionId" runat="server" Value='<%# Eval("NewTransactionId") %>' />
                                             <%# Eval("ContainerNo")%></ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Current Status">
+                                    <asp:TemplateField HeaderText="Previous Status">
                                         <ItemTemplate>
                                             <%# Eval("FromStatus")%>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Landing Date">
                                         <ItemTemplate>
-                                            <%# Eval("LandingDate")%>
+                                            <%# Eval("LandingDate").ToString() == "" ? " " : Convert.ToDateTime(Eval("LandingDate")).ToShortDateString()%>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Changed Status">
+                                    <asp:TemplateField HeaderText="Current Status">
                                         <ItemTemplate>
                                             <%# Eval("ToStatus")%>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Date of Change">
                                         <ItemTemplate>
-                                            <%# Eval("ChangeDate")%>
+                                            <%# Eval("ChangeDate").ToString() == "" ? " " : Convert.ToDateTime(Eval("ChangeDate")).ToShortDateString()%>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Select All" ItemStyle-HorizontalAlign="Center">
@@ -288,9 +195,11 @@
                         <td>
                         </td>
                         <td>
-                            <asp:HiddenField ID="hdnChargeID" runat="server" Value="0" />
-                            <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="vgContainer" />&nbsp;&nbsp;<asp:Button
-                                ID="btnBack" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown" />
+                            <%--<asp:HiddenField ID="hdnChargeID" runat="server" Value="0" />--%>
+                            <asp:Button ID="btnSave" runat="server" Text="Save" 
+                                ValidationGroup="vgContainer" onclick="btnSave_Click" />&nbsp;&nbsp;<asp:Button
+                                ID="btnBack" runat="server" CssClass="button" Text="Back" 
+                                ValidationGroup="vgUnknown" onclick="btnBack_Click"  OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
                             <asp:Label ID="lblMessage" runat="server"></asp:Label>
                         </td>
                     </tr>
@@ -306,7 +215,7 @@
                         <Columns>
                             <asp:TemplateField HeaderText="Container No" HeaderStyle-Width="50%">
                                 <ItemTemplate>
-                                    <asp:HiddenField ID="hdnTransactionId" runat="server" Value='<%# Eval("TransactionId") %>' />
+                                    <asp:HiddenField ID="hdnOldTransactionId" runat="server" Value='<%# Eval("TransactionId") %>' />
                                     <asp:HiddenField ID="hdnStatus" runat="server" Value='<%# Eval("Status") %>' />
                                     <asp:HiddenField ID="hdnLandingDate" runat="server" Value='<%# Eval("LandingDate") %>' />
                                     <asp:Label ID="lblContainerNo" runat="server" Text='<%# Eval("ContainerNo")%>'></asp:Label>
@@ -334,3 +243,5 @@
         </center>
     </asp:Panel>
 </asp:Content>
+
+

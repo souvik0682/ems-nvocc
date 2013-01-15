@@ -22,13 +22,13 @@ namespace EMS.WebApp.Equipment {
         protected global::System.Web.UI.WebControls.Label lblTranCode;
         
         /// <summary>
-        /// hdnContainerId control.
+        /// hdnContainerTransactionId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnContainerId;
+        protected global::System.Web.UI.WebControls.HiddenField hdnContainerTransactionId;
         
         /// <summary>
         /// txtDate control.
@@ -121,31 +121,13 @@ namespace EMS.WebApp.Equipment {
         protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender16;
         
         /// <summary>
-        /// hdnFromLocation control.
+        /// ddlFromLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnFromLocation;
-        
-        /// <summary>
-        /// txtFromLocation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFromLocation;
-        
-        /// <summary>
-        /// autoComplete1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.AutoCompleteExtender autoComplete1;
+        protected global::System.Web.UI.WebControls.DropDownList ddlFromLocation;
         
         /// <summary>
         /// rfvFromLocation control.
@@ -166,31 +148,13 @@ namespace EMS.WebApp.Equipment {
         protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender11;
         
         /// <summary>
-        /// hdnToLocation control.
+        /// ddlTolocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnToLocation;
-        
-        /// <summary>
-        /// txtToLocation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtToLocation;
-        
-        /// <summary>
-        /// autoComplete2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.AutoCompleteExtender autoComplete2;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTolocation;
         
         /// <summary>
         /// rfvToLocation control.
@@ -328,6 +292,15 @@ namespace EMS.WebApp.Equipment {
         protected global::System.Web.UI.WebControls.Button btnShow;
         
         /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
+        
+        /// <summary>
         /// ModalPopupExtender1 control.
         /// </summary>
         /// <remarks>
@@ -344,15 +317,6 @@ namespace EMS.WebApp.Equipment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvSelectedContainer;
-        
-        /// <summary>
-        /// hdnChargeID control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnChargeID;
         
         /// <summary>
         /// btnSave control.

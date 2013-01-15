@@ -1,4 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="container-movement.aspx.cs" Inherits="EMS.WebApp.Equipment.container_movement" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+    CodeBehind="container-movement.aspx.cs" Inherits="EMS.WebApp.Equipment.container_movement" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -14,7 +16,7 @@
     <div id="headercaption">
         MANAGE CONTAINER MOVEMENT</div>
     <center>
-        <div style="width: 850px;">
+        <div style="width: 80%;">
             <fieldset style="width: 100%;">
                 <legend>Search Container</legend>
                 <table>
@@ -39,8 +41,8 @@
                         </td>
                         <td>
                             <asp:TextBox ID="txtVoyage" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
-                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters"
-                                FilterMode="ValidChars" ValidChars=" " TargetControlID="txtVoyage">
+                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" FilterMode="InvalidChars"
+                                InvalidChars="<>-" TargetControlID="txtVoyage">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender3" runat="server" TargetControlID="txtVoyage"
                                 WatermarkText="Voyage">
@@ -49,6 +51,8 @@
                         <td>
                             <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px"
                                 OnClick="btnSearch_Click" />
+                            <asp:Button ID="btnRefresh" runat="server" Text="Reset" CssClass="button" Width="100px"
+                                OnClick="btnRefresh_Click" />
                         </td>
                     </tr>
                 </table>
@@ -127,7 +131,7 @@
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHIDate" runat="server" CommandName="Sort" CommandArgument="Date"
                                                 Text="Date"></asp:LinkButton></HeaderTemplate>
-                                      <%--  <ItemTemplate>
+                                        <%--  <ItemTemplate>
                                             <%# Eval("Date")%>
                                         </ItemTemplate>--%>
                                     </asp:TemplateField>
@@ -137,7 +141,7 @@
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHVessel" runat="server" CommandName="Sort" CommandArgument="Vessel"
                                                 Text="Vessel"></asp:LinkButton></HeaderTemplate>
-                                      <%--  <ItemTemplate>
+                                        <%--  <ItemTemplate>
                                             <%# Eval("Vessel")%></ItemTemplate>--%>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
@@ -146,7 +150,7 @@
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHVoyage" runat="server" CommandName="Sort" CommandArgument="Voyage"
                                                 Text="Voyage"></asp:LinkButton></HeaderTemplate>
-                                      <%--  <ItemTemplate>
+                                        <%--  <ItemTemplate>
                                             <%# Eval("Voyage")%>
                                         </ItemTemplate>--%>
                                     </asp:TemplateField>
@@ -156,7 +160,7 @@
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHLandingDate" runat="server" CommandName="Sort" CommandArgument="LandingDate"
                                                 Text="Landing Date"></asp:LinkButton></HeaderTemplate>
-                                      <%--  <ItemTemplate>
+                                        <%--  <ItemTemplate>
                                             <%# Eval("LandingDate")%>
                                         </ItemTemplate>--%>
                                     </asp:TemplateField>

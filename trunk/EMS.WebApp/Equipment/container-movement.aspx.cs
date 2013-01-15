@@ -32,14 +32,14 @@ namespace EMS.WebApp.Equipment
             if (!IsPostBack)
             {
                 RetrieveSearchCriteria();
-                LoadCharge(0);
+                LoadContainer(0);
             }
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             //RedirecToAddEditPage(-1);
-            Response.Redirect("~/container-movement-add-edit.aspx");
+            Response.Redirect("container-movement-entry.aspx");
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace EMS.WebApp.Equipment
             if (Page.IsValid)
             {
                 SaveNewPageIndex(0);
-                LoadCharge(0);
+                LoadContainer(0);
                 upLoc.Update();
             }
         }
@@ -57,7 +57,7 @@ namespace EMS.WebApp.Equipment
             int newIndex = e.NewPageIndex;
             gvwContainerTran.PageIndex = e.NewPageIndex;
             SaveNewPageIndex(e.NewPageIndex);
-            LoadCharge(0);
+            LoadContainer(0);
         }
         protected void gvwContainerTran_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -84,7 +84,7 @@ namespace EMS.WebApp.Equipment
                     }
                 }
 
-                LoadCharge(0);
+                LoadContainer(0);
             }
             else if (e.CommandName == "Edit")
             {
@@ -92,7 +92,7 @@ namespace EMS.WebApp.Equipment
             }
             else if (e.CommandName == "Remove")
             {
-                DeleteLocation(Convert.ToInt32(e.CommandArgument));
+                DeleteTransaction(Convert.ToInt32(e.CommandArgument));
             }
         }
 
@@ -108,15 +108,17 @@ namespace EMS.WebApp.Equipment
 
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerNo"));
 
-                e.Row.Cells[2].Text = ddlIEC.Items.FindByValue(Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Status"))).Text;
+                //e.Row.Cells[2].Text = ddlIEC.Items.FindByValue(Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Status"))).Text;
+                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Status"));
 
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Date"));
+                e.Row.Cells[3].Text = Convert.ToDateTime(DataBinder.Eval(e.Row.DataItem, "Date")).ToShortDateString();
 
                 e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Vessel"));
 
                 e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Voyage"));
 
-                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LandingDate"));
+                string Ld = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LandingDate"));
+                e.Row.Cells[6].Text = string.IsNullOrEmpty(Ld) ? "" : Convert.ToDateTime(Ld).ToShortDateString();
 
                 // Edit link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
@@ -144,8 +146,16 @@ namespace EMS.WebApp.Equipment
         {
             int newPageSize = Convert.ToInt32(ddlPaging.SelectedValue);
             SaveNewPageSize(newPageSize);
-            LoadCharge(0);
+            LoadContainer(0);
             upLoc.Update();
+        }
+
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {
+            txtContainerNo.Text = string.Empty;
+            txtVessel.Text = string.Empty;
+            txtVoyage.Text = string.Empty;
+            LoadContainer(0);
         }
 
         #endregion
@@ -192,7 +202,7 @@ namespace EMS.WebApp.Equipment
             gvwContainerTran.PagerSettings.PageButtonCount = Convert.ToInt32(ConfigurationManager.AppSettings["PageButtonCount"]);
         }
 
-        private void LoadCharge(int MovementId)
+        private void LoadContainer(int MovementId)
         {
             if (!ReferenceEquals(Session[Constants.SESSION_SEARCH_CRITERIA], null))
             {
@@ -207,23 +217,24 @@ namespace EMS.WebApp.Equipment
                     gvwContainerTran.PageIndex = searchCriteria.PageIndex;
                     if (searchCriteria.PageSize > 0) gvwContainerTran.PageSize = searchCriteria.PageSize;
 
-                    gvwContainerTran.DataSource = oContainerTranBLL.GetContainerTransactionList(searchCriteria, MovementId);
+                    gvwContainerTran.DataSource = oContainerTranBLL.GetContainerTransactionList(searchCriteria, MovementId).Tables[0];
                     gvwContainerTran.DataBind();
                 }
             }
         }
 
-        private void DeleteLocation(int ChargeId)
+        private void DeleteTransaction(int TranId)
         {
-            ChargeBLL.DeleteCharge(ChargeId);
-            LoadCharge(0);
+            ContainerTranBLL oBll = new ContainerTranBLL();
+            oBll.DeleteTransaction(TranId);
+            LoadContainer(0);
             ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00006") + "');</script>", false);
         }
 
         private void RedirecToAddEditPage(int id)
         {
             string encryptedId = GeneralFunctions.EncryptQueryString(id.ToString());
-            Response.Redirect("~/container-movement-add-edit.aspx?id=" + encryptedId);
+            Response.Redirect("container-movement-entry.aspx?id=" + encryptedId);
         }
 
         private void BuildSearchCriteria(SearchCriteria criteria)

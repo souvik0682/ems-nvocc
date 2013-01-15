@@ -65,11 +65,13 @@ namespace EMS.WebApp.MasterModule
             if (ddlVendorType.SelectedItem.Text == "CFS")
             {
                 txtCfsCode.Enabled = true;
+                rfvCfdCode.Enabled = true;
                 ddlTerminalCode.Enabled = true;
             }
             else
             {
                 txtCfsCode.Enabled = false;
+                rfvCfdCode.Enabled = false;
                 ddlTerminalCode.Enabled = false;
             }
             ddlLocationID.SelectedIndex = Convert.ToInt32(ddlLocationID.Items.IndexOf(ddlLocationID.Items.FindByValue(oVendor.LocationName)));
@@ -158,11 +160,13 @@ namespace EMS.WebApp.MasterModule
             if (ddlVendorType.SelectedItem.Text == "CFS")
             {
                 txtCfsCode.Enabled = true;
+                rfvCfdCode.Enabled = true;
                 ddlTerminalCode.Enabled = true;
             }
             else
             {
                 txtCfsCode.Enabled = false;
+                rfvCfdCode.Enabled = false;
                 ddlTerminalCode.Enabled = false;
             }
 
@@ -188,7 +192,8 @@ namespace EMS.WebApp.MasterModule
         {
             ddlLocationID.SelectedIndex = 0;
             ddlSalutation.SelectedIndex = 0;
-            ddlTerminalCode.SelectedIndex = 0;
+            if (ddlTerminalCode.Items.Count > 0)
+                ddlTerminalCode.SelectedIndex = 0;
             ddlVendorType.SelectedIndex = 0;
             txtAddress.Text = string.Empty;
             txtCfsCode.Text = string.Empty;

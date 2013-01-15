@@ -10,14 +10,26 @@ namespace EMS.BLL
 {
     public class ContainerTranBLL
     {
-        public DataTable GetContainerTransactionList(SearchCriteria searchCriteria, int ID)
+        public DataSet GetContainerTransactionList(SearchCriteria searchCriteria, int ID)
         {
             return ContainerTranDAL.GetContainerTransactionList(searchCriteria, ID);
         }
 
-        public static DataTable GetContainerTransactionListFiltered(int Status, int LocationId)
+        public DataTable GetContainerTransactionListFiltered(int Status, int LocationId)
         {
-            return ContainerTranDAL.GetContainerTransactionListFiltered(Status,LocationId);
+            return ContainerTranDAL.GetContainerTransactionListFiltered(Status, LocationId);
+        }
+
+        public int AddEditContainerTransaction(out string TransactionCode, string OldTransactionCode, string Containers, int MovementOptID, int TotalTEU, int TotalFEU
+            , DateTime MovementDate, string Narration, int FromLocationID, int TransferLocationID, int AddressID, int CreatedBy, DateTime CreatedOn, int ModifiedBy, DateTime ModifiedOn)
+        {
+            return ContainerTranDAL.AddEditContainerTransaction(out TransactionCode, OldTransactionCode, Containers, MovementOptID, TotalTEU, TotalFEU
+            , MovementDate, Narration, FromLocationID, TransferLocationID, AddressID, CreatedBy, CreatedOn, ModifiedBy, ModifiedOn);
+        }
+
+        public int DeleteTransaction(int TransactionId)
+        {
+            return ContainerTranDAL.DeleteTransaction(TransactionId);
         }
     }
 }

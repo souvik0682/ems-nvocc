@@ -61,7 +61,7 @@ namespace EMS.WebApp.MasterModule
         {
             VendorEntity oVendor = (VendorEntity)VendorBLL.GetVendor(Convert.ToInt32(hdnVendorID.Value));
 
-            ddlVendorType.SelectedIndex = Convert.ToInt32(ddlVendorType.Items.IndexOf(ddlVendorType.Items.FindByValue(oVendor.VendorType)));
+            ddlVendorType.SelectedIndex =ddlVendorType.Items.IndexOf(ddlVendorType.Items.FindByValue(oVendor.VendorType));
             if (ddlVendorType.SelectedItem.Text == "CFS")
             {
                 txtCfsCode.Enabled = true;

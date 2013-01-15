@@ -167,6 +167,7 @@ namespace EMS.WebApp.MasterModule
             {
                 txtCfsCode.Enabled = false;
                 rfvCfdCode.Enabled = false;
+                txtCfsCode.Text = string.Empty;
                 ddlTerminalCode.Enabled = false;
             }
 

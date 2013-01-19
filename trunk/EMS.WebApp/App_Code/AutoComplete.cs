@@ -95,6 +95,6 @@ public class AutoComplete : System.Web.Services.WebService {
 
 public class AppCodeClass
 {
-    public string ConnectionString = "Data Source=WIN-SERVER;Initial Catalog=Liner;Integrated Security=True;Pooling=true;Connection Timeout=30;Max Pool Size=40;Min Pool Size=5";
+    public string ConnectionString = "Data Source=WIN-SERVER;Initial Catalog=Liner;User Id=sa;Password=P@ssw0rd;Pooling=true;Connection Timeout=30;Max Pool Size=40;Min Pool Size=5";
 }
 

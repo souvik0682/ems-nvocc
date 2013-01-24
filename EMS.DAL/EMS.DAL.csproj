@@ -44,11 +44,13 @@
     <Compile Include="CommonDAL.cs" />
     <Compile Include="ContainerTranDAL.cs" />
     <Compile Include="EDIDAL.cs" />
+    <Compile Include="EquipmentDAL.cs" />
     <Compile Include="ImportHaulageDAL.cs" />
     <Compile Include="ChargeDAL.cs" />
     <Compile Include="DBManager\DataConnection.cs" />
     <Compile Include="DBManager\DbManagerBase.cs" />
     <Compile Include="DBManager\DbQuery.cs" />
+    <Compile Include="OnHire.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportDAL.cs" />
     <Compile Include="UserDAL.cs" />
@@ -62,6 +64,10 @@
     <ProjectReference Include="..\EMS.Entity\EMS.Entity.csproj">
       <Project>{8F7034CA-9283-4E9F-AF15-44D0CE2422FD}</Project>
       <Name>EMS.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EMS.Utilities\EMS.Utilities.csproj">
+      <Project>{96CE34FB-822A-4470-8919-130E02839431}</Project>
+      <Name>EMS.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

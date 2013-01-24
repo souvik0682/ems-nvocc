@@ -75,6 +75,16 @@ namespace EMS.BLL
             return dquery.GetTables();
         }
 
+        public void DeleteGeneral(string formName, int pk_tableID)
+        {
+            string ProcName = "prcDeleteGeneral";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+            dquery.AddIntegerParam("@pk_tableID", pk_tableID);
+            dquery.AddVarcharParam("@formName", 20, formName);
+            dquery.RunActionQuery();
+
+        }
+
 
         #endregion
 
@@ -108,7 +118,7 @@ namespace EMS.BLL
             dquery.AddIntegerParam("@userID", userID);
             dquery.AddIntegerParam("@pk_CountryId", pk_CountryID);
             dquery.AddVarcharParam("@CountryName", 200, CountryName);
-            dquery.AddVarcharParam("@CountryAbbr", 5, CountryName);
+            dquery.AddVarcharParam("@CountryAbbr", 5, CountryAbbr);
             dquery.AddBooleanParam("@isEdit", isEdit);
 
             return dquery.RunActionQuery();
@@ -389,5 +399,7 @@ namespace EMS.BLL
         #endregion
 
 
+
+        
     }
 }

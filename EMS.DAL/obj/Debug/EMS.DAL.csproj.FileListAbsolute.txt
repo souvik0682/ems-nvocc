@@ -16,3 +16,16 @@ D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.DAL\bin\Debug\EMS.Entity.pdb
 D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.DAL\obj\Debug\ResolveAssemblyReference.cache
 D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.DAL\obj\Debug\EMS.DAL.dll
 D:\Visual Studio 2010\EMS\EMSSourceCode\EMS.DAL\obj\Debug\EMS.DAL.pdb
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.DAL\bin\Debug\EMS.DAL.dll
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.DAL\bin\Debug\EMS.DAL.pdb
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.DAL\bin\Debug\EMS.Common.dll
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.DAL\bin\Debug\EMS.Entity.dll
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.DAL\bin\Debug\EMS.Utilities.dll
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.DAL\bin\Debug\EMS.Common.pdb
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.DAL\bin\Debug\EMS.Entity.pdb
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.DAL\bin\Debug\EMS.Utilities.pdb
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.DAL\bin\Debug\en-GB\EMS.Utilities.resources.dll
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.DAL\bin\Debug\en-US\EMS.Utilities.resources.dll
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.DAL\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.DAL\obj\Debug\EMS.DAL.dll
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.DAL\obj\Debug\EMS.DAL.pdb

@@ -3,14 +3,14 @@
 .autocomplete_completionListElement 
 {  
 	margin : 0px!important;
-	background-color : ButtonShadow;
+	background-color : inherit;
 	color : windowtext;
 	border : buttonshadow;
 	border-width : 1px;
 	border-style : solid;
 	cursor : 'default';
 	overflow : auto;
-	height : 100px;
+	height : 200px;
 	font-family:Tahoma;
 	font-size:small;
     text-align : left; 
@@ -22,7 +22,7 @@
 
 .autocomplete_highlightedListItem
 {
-	background-color:GrayText;/* #ffff99; */
+	background-color: #ffff99;
 	color: black;
 	padding: 1px;
 }
@@ -31,7 +31,7 @@
 
 .autocomplete_listItem 
 {
-	background-color : ButtonShadow;
+	background-color : window;
 	color : windowtext;
 	padding : 1px;
 }

@@ -34,3 +34,22 @@ D:\Projects\Tapas Roy\Ben Line\ems-NVOCC\EMS.WebApp\obj\Debug\RdlCompile.cache
 D:\Projects\Tapas Roy\Ben Line\ems-NVOCC\EMS.WebApp\obj\Debug\RdlCompile.compiled
 D:\Projects\Tapas Roy\Ben Line\ems-NVOCC\EMS.WebApp\obj\Debug\EMS.WebApp.dll
 D:\Projects\Tapas Roy\Ben Line\ems-NVOCC\EMS.WebApp\obj\Debug\EMS.WebApp.pdb
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\bin\EMS.WebApp.dll
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\bin\EMS.WebApp.pdb
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\bin\EMS.BLL.dll
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\bin\EMS.Common.dll
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\bin\EMS.Entity.dll
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\bin\EMS.Utilities.dll
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\bin\EMS.DAL.dll
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\bin\EMS.BLL.pdb
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\bin\EMS.Common.pdb
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\bin\EMS.Entity.pdb
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\bin\EMS.Utilities.pdb
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\bin\EMS.DAL.pdb
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\bin\en-GB\EMS.Utilities.resources.dll
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\bin\en-US\EMS.Utilities.resources.dll
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\obj\Debug\RdlCompile.cache
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\obj\Debug\RdlCompile.compiled
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\obj\Debug\EMS.WebApp.dll
+C:\Users\Souvik\Desktop\Linear\Work Item\NVOCC\EMS.WebApp\obj\Debug\EMS.WebApp.pdb

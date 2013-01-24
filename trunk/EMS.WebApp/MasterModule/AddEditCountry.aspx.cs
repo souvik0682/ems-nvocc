@@ -75,6 +75,12 @@ namespace EMS.WebApp.MasterModule
         {
             BLL.DBInteraction dbinteract = new BLL.DBInteraction();
             bool isedit = countryId != "-1" ? true : false;
+            bool s = dbinteract.IsUnique("mstCountry", "CountryAbbr", txtAbbr.Text.Trim());
+            if (!dbinteract.IsUnique("mstCountry", "CountryAbbr", txtAbbr.Text.Trim()) && !isedit)
+            {
+                GeneralFunctions.RegisterAlertScript(this, "Country Abbr Must Be unique");
+                return;
+            }
             int result = dbinteract.AddEditCountry(_userId, Convert.ToInt32(countryId), txtCountryName.Text.Trim(), txtAbbr.Text.Trim(), isedit);
 
 

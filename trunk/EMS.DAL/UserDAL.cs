@@ -163,6 +163,16 @@ namespace EMS.DAL
             }
         }
 
+        public static DataSet GetAdminUsers()
+        {
+            DataSet ds = new DataSet();
+            using (DbQuery dq = new DbQuery("prcGetAdminUsers"))
+            {
+                ds = dq.GetTables();
+            }
+            return ds;
+        }
+
         #endregion
 
         #region Role

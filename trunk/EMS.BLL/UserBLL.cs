@@ -123,6 +123,11 @@ namespace EMS.BLL
             UserDAL.ResetPassword(user, modifiedBy);
         }
 
+        public static System.Data.DataSet GetAdminUsers()
+        {
+            return EMS.DAL.UserDAL.GetAdminUsers();
+        }
+
         #endregion
 
         #region Role

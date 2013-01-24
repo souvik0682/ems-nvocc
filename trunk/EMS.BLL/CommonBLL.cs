@@ -425,5 +425,14 @@ namespace EMS.BLL
         }
 
         #endregion
+
+        #region Container Type
+
+        public static IList<IContainerType> GetContainerType()
+        {
+            return CommonDAL.GetContainerType();
+        }
+
+        #endregion
     }
 }

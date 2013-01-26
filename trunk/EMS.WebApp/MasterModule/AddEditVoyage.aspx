@@ -194,21 +194,25 @@
                   <tr>
                     <td style="width:140px;">Last Port Called.</td>
                     <td  onkeyup="CheckAdditional()">
+                    <div style="width:230px">
                        <uc2:AutoCompletepPort ID="AutoCompletepPort1" runat="server" />
+                       </div>
                    </td>
                 </tr>
                   <tr>
                     <td style="width:140px;">Port Last but One</td>
                     <td >
+                     <div style="width:230px">
                         <uc2:AutoCompletepPort ID="AutoCompletepPort2" runat="server" />
+                        </div>
                    </td>
                 </tr>
                  <tr>
                     <td style="width:140px;">Port Last but Two</td>
                     <td  >  
-                       
+                        <div style="width:230px">
                         <uc2:AutoCompletepPort ID="AutoCompletepPort3" runat="server" />
-                       
+                       </div>
                       
                    </td>
                 </tr>

@@ -231,6 +231,7 @@ namespace EMS.WebApp.MasterModule
                         AddRates();
                         lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
                         ClearAll();
+                        EnableAllField();
                     }
                     else if (hdnChargeID.Value == "-1")
                     {

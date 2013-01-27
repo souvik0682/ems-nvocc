@@ -33,7 +33,7 @@
                                     Effective Date<span class="errormessage1">*</span> :
                                 </td>
                                 <td style="width: 375px;">
-                                    <asp:TextBox ID="txtEffectDate" runat="server" Width="150"></asp:TextBox>
+                                    <asp:TextBox ID="txtEffectDate" runat="server" Width="150" AutoCompleteType="None"></asp:TextBox>
                                     <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtEffectDate"
                                         PopupPosition="BottomLeft" TargetControlID="txtEffectDate" Format="dd/MM/yyyy"
                                         OnClientDateSelectionChanged="checkDate">

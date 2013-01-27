@@ -26,7 +26,7 @@ namespace EMS.WebApp.Equipment
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //CheckUserAccess();
+            CheckUserAccess();
             SetAttributes();
 
             if (!IsPostBack)
@@ -173,10 +173,10 @@ namespace EMS.WebApp.Equipment
                     Response.Redirect("~/Login.aspx");
                 }
 
-                ////if (user.UserRole.Id != (int)UserRole.Admin)
-                ////{
-                ////    Response.Redirect("~/Unauthorized.aspx");
-                ////}
+                if (user.UserRole.Id != (int)UserRole.Admin)
+                {
+                    Response.Redirect("~/Unauthorized.aspx");
+                }
             }
             else
             {

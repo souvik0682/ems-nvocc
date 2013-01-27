@@ -22,7 +22,7 @@ namespace EMS.WebApp.Equipment
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            CheckUserAccess();
             RetriveParameters();
             if (!Page.IsPostBack)
             {
@@ -55,6 +55,28 @@ namespace EMS.WebApp.Equipment
                     FillHeaderDetail(ds.Tables[0]);
                     FillContainers(ds.Tables[1]);
                 }
+            }
+        }
+
+        private void CheckUserAccess()
+        {
+            if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+            {
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+
+                if (ReferenceEquals(user, null) || user.Id == 0)
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
+
+                if (user.UserRole.Id != (int)UserRole.Admin)
+                {
+                    Response.Redirect("~/Unauthorized.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
             }
         }
 

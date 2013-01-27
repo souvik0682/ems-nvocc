@@ -199,7 +199,7 @@
                             <li id="liLD" runat="server">
                                 <a href="#">Data</a>
                                 <ul>
-                                    <li id="liLD_Container" runat="server"><a href="Equipment/container-movement.aspx">Container</a></li>
+                                    <li id="liLD_Container" runat="server"><a href="<%=Page.ResolveClientUrl("~/Equipment/container-movement.aspx") %>">Container</a></li>
                                     <li id="liLD_Repairing" runat="server"><a href="#">Repairing</a></li>
                                     <li id="liLD_Onhire" runat="server"><a href="#">On-Hire</a></li>
                                     <li id="liLD_Pickup" runat="server"><a href="#">Pick-up</a></li>

@@ -28,11 +28,12 @@
                     <ContentTemplate>
                         <table border="0" cellpadding="2" cellspacing="3" width="100%">
                             <tr>
+                            <td style="width: 150px;"></td>
                                 <td style="width: 150px;">
                                     Effective Date<span class="errormessage1">*</span> :
                                 </td>
                                 <td style="width: 375px;">
-                                    <asp:TextBox ID="txtEffectDate" runat="server" Width="250"></asp:TextBox>
+                                    <asp:TextBox ID="txtEffectDate" runat="server" Width="150"></asp:TextBox>
                                     <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtEffectDate"
                                         PopupPosition="BottomLeft" TargetControlID="txtEffectDate" Format="dd/MM/yyyy"
                                         OnClientDateSelectionChanged="checkDate">
@@ -60,12 +61,12 @@
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr><td></td>
                                 <td>
                                     Name of Charge<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtChargeName" runat="server" Width="250" Style="text-transform: uppercase;"></asp:TextBox>
+                                    <asp:TextBox ID="txtChargeName" runat="server" Width="150" Style="text-transform: uppercase;"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="rfvChargeTitle" runat="server" ErrorMessage="Please enter charge title"
                                         ControlToValidate="txtChargeName" Display="None" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender11" runat="server" TargetControlID="rfvChargeTitle">
@@ -86,12 +87,12 @@
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr><td></td>
                                 <td>
                                     Import / Export<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlImportExportGeneral" runat="server" Width="255">
+                                    <asp:DropDownList ID="ddlImportExportGeneral" runat="server" Width="155">
                                         <asp:ListItem Text="Import" Value="I"></asp:ListItem>
                                         <asp:ListItem Text="Export" Value="E"></asp:ListItem>
                                         <asp:ListItem Text="General" Value="G"></asp:ListItem>
@@ -116,12 +117,12 @@
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr><td></td>
                                 <td>
                                     Charge Type<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlChargeType" runat="server" Width="255" AutoPostBack="true"
+                                    <asp:DropDownList ID="ddlChargeType" runat="server" Width="155" AutoPostBack="true"
                                         OnSelectedIndexChanged="ddlChargeType_SelectedIndexChanged">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvChargeType" runat="server" ErrorMessage="Please select charge type"
@@ -144,12 +145,12 @@
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr><td></td>
                                 <td>
                                     Display Order :
                                 </td>
                                 <td>
-                                    <cc2:CustomTextBox ID="txtDisplayOrder" runat="server" Width="250" Type="Numeric"
+                                    <cc2:CustomTextBox ID="txtDisplayOrder" runat="server" Width="150" Type="Numeric"
                                         Style="text-align: right;"></cc2:CustomTextBox>
                                 </td>
                                 <td>
@@ -167,12 +168,12 @@
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr><td></td>
                                 <td>
                                     Line<span class="errormessage1"></span> :
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlLine" runat="server" Width="255">
+                                    <asp:DropDownList ID="ddlLine" runat="server" Width="155">
                                     </asp:DropDownList>
                                     <%-- <asp:RequiredFieldValidator ID="rfvLine" runat="server" ErrorMessage="Please select line"
                                 Display="None" ControlToValidate="ddlLine" InitialValue="0" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
@@ -194,12 +195,12 @@
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr><td></td>
                                 <td>
                                     Currency<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlCurrency" runat="server" Width="255">
+                                    <asp:DropDownList ID="ddlCurrency" runat="server" Width="155">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvCurrency" runat="server" ErrorMessage="Please select currency"
                                         ControlToValidate="ddlCurrency" Display="None" ValidationGroup="vgCharge" InitialValue="0"></asp:RequiredFieldValidator>
@@ -212,7 +213,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="4" style="padding-top: 30px; border: none;">
+                                <td colspan="5" style="padding-top: 30px; border: none;">
                                     <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                 <ContentTemplate>--%>
                                     <asp:GridView ID="dgChargeRates" runat="server" AutoGenerateColumns="false" ShowFooter="false"
@@ -430,7 +431,7 @@
                             </asp:UpdatePanel>--%>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr><td></td>
                                 <td>
                                 </td>
                                 <td>

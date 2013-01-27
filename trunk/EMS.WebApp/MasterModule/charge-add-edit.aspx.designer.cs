@@ -13,6 +13,15 @@ namespace EMS.WebApp.MasterModule {
     public partial class charge_add_edit {
         
         /// <summary>
+        /// UpdatePanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        
+        /// <summary>
         /// txtEffectDate control.
         /// </summary>
         /// <remarks>
@@ -58,31 +67,31 @@ namespace EMS.WebApp.MasterModule {
         protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender1;
         
         /// <summary>
-        /// ddlCurrency control.
+        /// rdbTerminalRequired control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCurrency;
+        protected global::System.Web.UI.WebControls.RadioButtonList rdbTerminalRequired;
         
         /// <summary>
-        /// rfvCurrency control.
+        /// rfvTerminalRequired control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCurrency;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTerminalRequired;
         
         /// <summary>
-        /// ValidatorCalloutExtender12 control.
+        /// ValidatorCalloutExtender18 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender12;
+        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender18;
         
         /// <summary>
         /// txtChargeName control.
@@ -301,13 +310,31 @@ namespace EMS.WebApp.MasterModule {
         protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender19;
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// ddlCurrency control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCurrency;
+        
+        /// <summary>
+        /// rfvCurrency control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCurrency;
+        
+        /// <summary>
+        /// ValidatorCalloutExtender12 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender12;
         
         /// <summary>
         /// dgChargeRates control.

@@ -27,6 +27,8 @@ namespace EMS.WebApp.MasterModule
             //string[] Names = new string[5] { "A", "A", "A", "A", "A" };
             //dgChargeRates.DataSource = Names;
 
+            CheckUserAccess();
+
             IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
             _userId = user == null ? 0 : user.Id;
 
@@ -41,9 +43,11 @@ namespace EMS.WebApp.MasterModule
                 {
                     FillChargeDetails(Convert.ToInt32(hdnChargeID.Value));
                     FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
+                    TerminalSelection(rdbTerminalRequired);
                     WashingSelection(rdbWashing);
                     SharingSelection(rdbPrincipleSharing);
                     ShowHideControlofFooter(ddlChargeType);
+                    DisableAllField();
                 }
                 else
                 {
@@ -55,6 +59,28 @@ namespace EMS.WebApp.MasterModule
                     dgChargeRates.DataBind();
                 }
 
+            }
+        }
+
+        private void CheckUserAccess()
+        {
+            if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+            {
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+
+                if (ReferenceEquals(user, null) || user.Id == 0)
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
+
+                if (user.UserRole.Id != (int)UserRole.Admin)
+                {
+                    Response.Redirect("~/Unauthorized.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
             }
         }
 
@@ -132,13 +158,17 @@ namespace EMS.WebApp.MasterModule
             CommonBLL.PopulateDropdown(Number, ddl, Filter);
         }
 
-
         protected void ddlLocationID_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DropDownList ddlFLocation = (DropDownList)sender;
-            GridViewRow item = (GridViewRow)((DropDownList)sender).NamingContainer;
-            DropDownList ddlFTerminal = (DropDownList)item.FindControl("ddlFTerminal");
-            PopulateDropDown((int)Enums.DropDownPopulationFor.TerminalCode, ddlFTerminal, Convert.ToInt32(ddlFLocation.SelectedValue));
+            if (rdbTerminalRequired.SelectedValue == "1")
+            {
+                DropDownList ddlFLocation = (DropDownList)sender;
+                GridViewRow item = (GridViewRow)((DropDownList)sender).NamingContainer;
+                DropDownList ddlFTerminal = (DropDownList)item.FindControl("ddlFTerminal");
+                PopulateDropDown((int)Enums.DropDownPopulationFor.TerminalCode, ddlFTerminal, Convert.ToInt32(ddlFLocation.SelectedValue));
+                if (ddlFLocation.SelectedValue == "0")
+                    ddlFTerminal.Items.Clear();
+            }
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -177,6 +207,7 @@ namespace EMS.WebApp.MasterModule
                 oChargeEntity.EffectDt = Convert.ToDateTime(txtEffectDate.Text.Trim());
                 oChargeEntity.IEC = Convert.ToChar(ddlImportExportGeneral.SelectedValue);
                 oChargeEntity.IsFreightComponent = Convert.ToBoolean(Convert.ToInt32(rdbFreightComponent.SelectedItem.Value));
+                oChargeEntity.IsTerminal = Convert.ToBoolean(Convert.ToInt32(rdbTerminalRequired.SelectedItem.Value));
                 oChargeEntity.IsWashing = Convert.ToBoolean(Convert.ToInt32(rdbWashing.SelectedItem.Value));
                 oChargeEntity.NVOCCID = Convert.ToInt32(ddlLine.SelectedValue);
                 oChargeEntity.PrincipleSharing = Convert.ToBoolean(Convert.ToInt32(rdbPrincipleSharing.SelectedItem.Value));
@@ -239,16 +270,16 @@ namespace EMS.WebApp.MasterModule
 
             //if (Rates.Count > 0)
             //{
-                oChargeBLL = new ChargeBLL();
-                //Deactivate all existing record
+            oChargeBLL = new ChargeBLL();
+            //Deactivate all existing record
 
-                oChargeBLL.DeactivateAllRatesAgainstChargeId(Convert.ToInt32(hdnChargeID.Value));
+            oChargeBLL.DeactivateAllRatesAgainstChargeId(Convert.ToInt32(hdnChargeID.Value));
 
-                foreach (IChargeRate Rate in Rates)
-                {
-                    Rate.ChargesID = Convert.ToInt32(hdnChargeID.Value);
-                    oChargeBLL.AddEditChargeRates(Rate);
-                }
+            foreach (IChargeRate Rate in Rates)
+            {
+                Rate.ChargesID = Convert.ToInt32(hdnChargeID.Value);
+                oChargeBLL.AddEditChargeRates(Rate);
+            }
             //}
         }
 
@@ -274,6 +305,7 @@ namespace EMS.WebApp.MasterModule
 
             rdbServiceTaxApplicable.Items.FindByValue(oChargeEntity.ServiceTax.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
             rdbFreightComponent.Items.FindByValue(oChargeEntity.IsFreightComponent.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
+            rdbTerminalRequired.Items.FindByValue(oChargeEntity.IsTerminal.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
             rdbWashing.Items.FindByValue(oChargeEntity.IsWashing.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
             //WashingSelection(rdbWashing);
             string ss = oChargeEntity.PrincipleSharing.ToString().ToLower() == "true" ? "1" : "0";
@@ -338,6 +370,20 @@ namespace EMS.WebApp.MasterModule
                 //}
 
             }
+            else if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                //Delete link
+                ImageButton btnRemove = (ImageButton)e.Row.FindControl("lnkDelete");
+                btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
+                //btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "pk_PortId"));
+
+
+                btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
+
+                //btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
+                //btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
+
+            }
         }
         protected void dgChargeRates_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -395,7 +441,7 @@ namespace EMS.WebApp.MasterModule
                 oEntity.SharingFEU = Convert.ToDecimal(txtSharingFEU.Text);
                 oEntity.SharingTEU = Convert.ToDecimal(txtSharingTEU.Text);
                 oEntity.WashingType = Convert.ToInt32(ddlFWashingType.SelectedValue);
-                if (ddlFTerminal.Items.Count > 0 && ddlFTerminal.SelectedIndex > 0)
+                if (ddlFTerminal.Items.Count > 0 && ddlFTerminal.SelectedIndex >= 0)
                     oEntity.TerminalId = Convert.ToInt32(ddlFTerminal.SelectedValue);
 
                 //Header change & CBM/TON selection to be implemented below
@@ -512,8 +558,12 @@ namespace EMS.WebApp.MasterModule
                 //Rates[Row.RowIndex].RateActive = false;
                 Rates.RemoveAt(Row.RowIndex);
                 ViewState["ChargeRates"] = Rates;
+                if (Rates.Count <= 0 && hdnChargeID.Value == "0")
+                {
+                    EnableAllField();
+                }
                 FillRates();
-
+                
             }
             #endregion
 
@@ -558,9 +608,11 @@ namespace EMS.WebApp.MasterModule
             }
             #endregion
 
+            TerminalSelection(rdbTerminalRequired);
             WashingSelection(rdbWashing);
             SharingSelection(rdbPrincipleSharing);
             ShowHideControlofFooter(ddlChargeType);
+            DisableAllField();
         }
 
         void FillRates()
@@ -591,6 +643,34 @@ namespace EMS.WebApp.MasterModule
         {
             RadioButtonList rdl = (RadioButtonList)sender;
             SharingSelection(rdl);
+        }
+
+        protected void rdbTerminalRequired_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RadioButtonList rdl = (RadioButtonList)sender;
+            TerminalSelection(rdl);
+        }
+        private void TerminalSelection(RadioButtonList rdl)
+        {
+            GridViewRow Row = dgChargeRates.HeaderRow;
+            DropDownList ddlFTerminal = (DropDownList)Row.FindControl("ddlFTerminal");
+            DropDownList ddlFLocation = (DropDownList)Row.FindControl("ddlFLocation");
+
+            if (rdl.SelectedItem.Value == "0")
+            {
+                if (ddlFTerminal.Items.Count > 0)
+                {
+                    //ddlFTerminal.SelectedIndex = 0;
+                    ddlFTerminal.Items.Clear();
+                }
+                ddlFTerminal.Enabled = false;
+            }
+            else
+            {
+                ddlFTerminal.Enabled = true;
+                if (Convert.ToInt32(ddlFLocation.SelectedValue) > 0)
+                    PopulateDropDown((int)Enums.DropDownPopulationFor.TerminalCode, ddlFTerminal, Convert.ToInt32(ddlFLocation.SelectedValue));
+            }
         }
 
         private void SharingSelection(RadioButtonList rdl)
@@ -697,6 +777,7 @@ namespace EMS.WebApp.MasterModule
             rdbRateChange.SelectedIndex = 1;
             rdbServiceTaxApplicable.SelectedIndex = 0;
             rdbWashing.SelectedIndex = 1;
+            rdbTerminalRequired.SelectedIndex = 1;
         }
 
         protected void ddlChargeType_SelectedIndexChanged(object sender, EventArgs e)
@@ -958,6 +1039,45 @@ namespace EMS.WebApp.MasterModule
 
                     break;
             }
+        }
+
+        void DisableAllField()
+        {
+            txtChargeName.Enabled = false;
+            txtDisplayOrder.Enabled = false;
+            txtEffectDate.Enabled = false;
+
+            ddlChargeType.Enabled = false;
+            ddlCurrency.Enabled = false;
+            ddlImportExportGeneral.Enabled = false;
+            ddlLine.Enabled = false;
+
+            rdbFreightComponent.Enabled = false;
+            rdbPrincipleSharing.Enabled = false;
+            rdbRateChange.Enabled = false;
+            rdbServiceTaxApplicable.Enabled = false;
+            rdbTerminalRequired.Enabled = false;
+            rdbWashing.Enabled = false;
+            
+        }
+        void EnableAllField()
+        {
+            txtChargeName.Enabled = true;
+            txtDisplayOrder.Enabled = true;
+            txtEffectDate.Enabled = true;
+
+            ddlChargeType.Enabled = true;
+            ddlCurrency.Enabled = true;
+            ddlImportExportGeneral.Enabled = true;
+            ddlLine.Enabled = true;
+
+            rdbFreightComponent.Enabled = true;
+            rdbPrincipleSharing.Enabled = true;
+            rdbRateChange.Enabled = true;
+            rdbServiceTaxApplicable.Enabled = true;
+            rdbTerminalRequired.Enabled = true;
+            rdbWashing.Enabled = true;
+
         }
     }
 }

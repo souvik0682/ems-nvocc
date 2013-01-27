@@ -146,6 +146,7 @@ namespace EMS.DAL
                 oDq.AddBooleanParam("@ChargeActive", Charge.ChargeActive);
                 oDq.AddBooleanParam("@IsFreightComponent", Charge.IsFreightComponent);
                 oDq.AddDateTimeParam("@EffectDt", Charge.EffectDt);
+                oDq.AddBooleanParam("@TerminalRequired", Charge.IsTerminal);
                 oDq.AddBooleanParam("@IsWashing", Charge.IsWashing);
                 oDq.AddBooleanParam("@PrincipleSharing", Charge.PrincipleSharing);
                 oDq.AddIntegerParam("@Currency", Charge.Currency);
@@ -275,7 +276,7 @@ namespace EMS.DAL
         }
 
         public static void DeactivateAllRatesAgainstChargeId(int ChargeId)
-        {            
+        {
             string strExecution = "[mst].[spChargeRateStatusUpdate]";
             //int Result = 0;
 

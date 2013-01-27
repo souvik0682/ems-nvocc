@@ -78,6 +78,12 @@ namespace EMS.Entity
             set;
         }
 
+        public bool IsTerminal
+        {
+            get;
+            set;
+        }
+
         public bool IsWashing
         {
             get;
@@ -152,6 +158,7 @@ namespace EMS.Entity
             this.Sequence = Convert.ToInt32(reader["DisplayOrder"]);
 
             this.IsFreightComponent = Convert.ToBoolean(reader["IsFreight"]);
+            this.IsTerminal = Convert.ToBoolean(reader["IsTerminal"]);            
             this.IsWashing = Convert.ToBoolean(reader["IsWashing"]);            
             this.PrincipleSharing = Convert.ToBoolean(reader["IsPrincipleShared"]);
             this.RateChangeable = Convert.ToBoolean(reader["RateChangable"]);            
@@ -174,5 +181,8 @@ namespace EMS.Entity
             serializer.Serialize(xmlWriter, Items);
             return stringWriter.ToString();
         }
+
+
+        
     }
 }

@@ -18,6 +18,7 @@ namespace EMS.Common
         bool ChargeActive { get; set; }
         bool IsFreightComponent { get; set; }
         DateTime EffectDt { get; set; }
+        bool IsTerminal { get; set; }
         bool IsWashing { get; set; }
         bool PrincipleSharing { get; set; }
         int Currency { get; set; }

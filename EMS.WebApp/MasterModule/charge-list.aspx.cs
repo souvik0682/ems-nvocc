@@ -26,7 +26,7 @@ namespace EMS.WebApp.MasterModule
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //CheckUserAccess();
+            CheckUserAccess();
             SetAttributes();
 
             if (!IsPostBack)
@@ -150,7 +150,9 @@ namespace EMS.WebApp.MasterModule
 
                 if (_hasEditAccess)
                 {
-                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00010") + "');";
+                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
+
+                   
                 }
                 else
                 {
@@ -158,6 +160,7 @@ namespace EMS.WebApp.MasterModule
                     btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00009") + "');return false;";
                 }
             }
+          
         }
 
         protected void ddlPaging_SelectedIndexChanged(object sender, EventArgs e)
@@ -183,10 +186,10 @@ namespace EMS.WebApp.MasterModule
                     Response.Redirect("~/Login.aspx");
                 }
 
-                ////if (user.UserRole.Id != (int)UserRole.Admin)
-                ////{
-                ////    Response.Redirect("~/Unauthorized.aspx");
-                ////}
+                if (user.UserRole.Id != (int)UserRole.Admin)
+                {
+                    Response.Redirect("~/Unauthorized.aspx");
+                }
             }
             else
             {

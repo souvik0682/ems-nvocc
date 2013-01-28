@@ -351,4 +351,7 @@
   <data name="ERR00077" xml:space="preserve">
     <value>Low value can not be greater than high value.</value>
   </data>
+  <data name="ERR00078" xml:space="preserve">
+    <value>Empty container list can not be saved.</value>
+  </data>
 </root>

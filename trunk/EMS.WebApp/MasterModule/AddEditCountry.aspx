@@ -25,7 +25,7 @@
                 
                 <tr>
                     <td>Country Code:<span class="errormessage1">*</span></td>
-                    <td><asp:TextBox ID="txtAbbr" runat="server" CssClass="textboxuppercase" MaxLength="3" Width="250"></asp:TextBox><br />
+                    <td><asp:TextBox ID="txtAbbr" runat="server" CssClass="textboxuppercase" MaxLength="2" Width="250"></asp:TextBox><br />
                     <asp:RequiredFieldValidator ID="rfvAbbr" runat="server" CssClass="errormessage" Text="This field is Required" ControlToValidate="txtAbbr" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator></td>
                 </tr>
               

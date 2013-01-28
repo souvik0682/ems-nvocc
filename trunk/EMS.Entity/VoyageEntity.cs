@@ -15,7 +15,7 @@ namespace EMS.Entity
         public string IGMNo { get; set; }
         public DateTime? IGMDate { get; set; }
         public DateTime? LandingDate { get; set; }
-        public Nullable<DateTime> AddLandingDate { get; set; }
+        public DateTime? AddLandingDate { get; set; }
         public string VoyageType { get; set; }
         public string LGNo { get; set; }
         public string AltLGNo { get; set; }
@@ -44,7 +44,7 @@ namespace EMS.Entity
         public DateTime? SailDate { get; set; }
         public DateTime? ETD { get; set; }
         public decimal ExpXchangeRate { get; set; }
-        public DateTime CutOffDate { get; set; }
+        public DateTime? CutOffDate { get; set; }
         public int EGMNo { get; set; }
         public DateTime? EGMDate { get; set; }
         public string BondNo { get; set; }

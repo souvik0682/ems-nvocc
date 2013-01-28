@@ -85,12 +85,12 @@ namespace EMS.WebApp.MasterModule
             bool isedit = portId != "-1" ? true : false;
             if (!isedit)
                 // if (dbinteract.GetPort(-1, txtPortCode.Text.Trim(), "").Tables[0].Rows.Count > 0)
-                if (!dbinteract.IsUnique("mstPort", "PortCode", txtPortCode.Text.Trim()))
+                if (!dbinteract.IsUnique("DSR.dbo.mstPort", "PortCode", txtPortCode.Text.Trim()))
                 {
                     GeneralFunctions.RegisterAlertScript(this, "Port Code must be unique. The given code has already been used for another port. Please try with another one.");
                     return;
                 }
-            int result = dbinteract.AddEditPort(_userId, Convert.ToInt32(portId), txtPortName.Text.Trim(), txtPortCode.Text, ddlICD.SelectedIndex == 0 ? false : true, txtPortAddressee.Text, txtAdd1.Text, txtAdd2.Text,txtExportPort.Text, isedit);
+            int result = dbinteract.AddEditPort(_userId, Convert.ToInt32(portId), txtPortName.Text.Trim().ToUpper(), txtPortCode.Text.Trim().ToUpper(), ddlICD.SelectedIndex == 0 ? false : true, txtPortAddressee.Text, txtAdd1.Text, txtAdd2.Text, txtExportPort.Text, isedit);
 
 
             if (result > 0)

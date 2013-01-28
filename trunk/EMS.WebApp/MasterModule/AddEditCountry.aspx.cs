@@ -81,7 +81,7 @@ namespace EMS.WebApp.MasterModule
                 GeneralFunctions.RegisterAlertScript(this, "Country Abbr Must Be unique");
                 return;
             }
-            int result = dbinteract.AddEditCountry(_userId, Convert.ToInt32(countryId), txtCountryName.Text.Trim(), txtAbbr.Text.Trim(), isedit);
+            int result = dbinteract.AddEditCountry(_userId, Convert.ToInt32(countryId), txtCountryName.Text.Trim(), txtAbbr.Text.Trim().ToUpper(), isedit);
 
 
             if (result > 0)

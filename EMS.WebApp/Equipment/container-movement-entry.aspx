@@ -206,7 +206,7 @@
                                     <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="vgContainer"
                                         OnClick="btnSave_Click" />&nbsp;&nbsp;<asp:Button ID="btnBack" runat="server" CssClass="button"
                                             Text="Back" ValidationGroup="vgUnknown" OnClick="btnBack_Click" OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
-                                    <asp:Label ID="lblMessage" runat="server"></asp:Label>
+                                    <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
                                 </td>
                             </tr>
                         </table>

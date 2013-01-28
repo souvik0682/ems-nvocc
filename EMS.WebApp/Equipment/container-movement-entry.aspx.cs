@@ -19,6 +19,7 @@ namespace EMS.WebApp.Equipment
     {
 
         private int _ContainerMovementId = 0;
+        DataTable dtFilteredContainer = new DataTable();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -240,11 +241,11 @@ namespace EMS.WebApp.Equipment
 
         void fillContainer(int EmptyYardId)
         {
-            DataTable dt = new DataTable();
+            
             ContainerTranBLL oContainerTranBLL = new ContainerTranBLL();
-            dt = oContainerTranBLL.GetContainerTransactionListFiltered(Convert.ToInt16(ddlFromStatus.SelectedValue), EmptyYardId);
+            dtFilteredContainer = oContainerTranBLL.GetContainerTransactionListFiltered(Convert.ToInt16(ddlFromStatus.SelectedValue), EmptyYardId);
 
-            gvContainer.DataSource = dt;
+            gvContainer.DataSource = dtFilteredContainer;
             gvContainer.DataBind();
         }
 
@@ -355,6 +356,13 @@ namespace EMS.WebApp.Equipment
             {
                 ContainerTranBLL oContainerTranBLL = new ContainerTranBLL();
                 string TranCode = string.Empty;
+
+                if (dtFilteredContainer.Rows.Count <= 0)
+                {
+                    lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00078");
+                    return; ;
+                }
+
                 int Result = oContainerTranBLL.AddEditContainerTransaction(out TranCode, lblTranCode.Text, GenerateContainerXMLString(),
                     Convert.ToInt32(ddlToStatus.SelectedValue), Convert.ToInt32(txtTeus.Text), Convert.ToInt32(txtFEUs.Text), Convert.ToDateTime(txtDate.Text),
                     Convert.ToString(txtNarration.Text), Convert.ToInt32(ddlFromLocation.SelectedValue), Convert.ToInt32(ddlTolocation.SelectedValue),
@@ -363,6 +371,9 @@ namespace EMS.WebApp.Equipment
 
                 switch (Result)
                 {
+                    case -1:
+                        lblMessage.Text = ResourceManager.GetStringWithoutName("ERR000078");
+                        break;
                     case 1:
                         lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
                         if (string.IsNullOrEmpty(lblTranCode.Text))

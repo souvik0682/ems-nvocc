@@ -85,8 +85,18 @@ inputh1 {text-transform:uppercase;}
 .hyperlink{text-decoration:underline;}
 
 .watermark{text-transform:uppercase;width: 221px;background: transparent url('../Images/bg.jpg') no-repeat;color: #747862;height: 20px;border: 0;padding: 4px 8px;margin-bottom: 0px;}
-.watermark1{text-transform:uppercase;width: 175px;background: transparent url('../Images/bg.jpg') no-repeat;color: #747862;height: 20px;border: 0;padding: 4px 8px;margin-bottom: 0px;}
-
+/*.watermark1{text-transform:uppercase;width: 175px;background: transparent url('../Images/bg.jpg') no-repeat;color: #747862;height: 20px;border: 0;padding: 4px 8px;margin-bottom: 0px;}  */
+.watermark1
+    {
+        text-transform: uppercase;
+       /* background: transparent url('../Images/bg.jpg') no-repeat; */
+        height: 20px;
+        border: 0;padding: 3px 3px ;
+        margin-bottom: 0px;
+        width:auto;
+        color: #747862;
+        !important;
+    }
 .table{border-collapse:collapse;}
 .table th{border:solid 1px #A1CDF2;font-size:12px; font-weight:bold;color:#36478B;text-align:left;}
 .table td{border:solid 1px #A1CDF2;font-size:12px; font-weight:normal;text-align:left;}

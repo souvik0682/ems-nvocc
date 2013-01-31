@@ -191,6 +191,18 @@ namespace EMS.DAL
             return lstEntity;
         }
 
+        public static DataSet GetRptCargoDesc(int vesselId, int voyageId)
+        {
+            DataSet ds = new DataSet();
+            using (DbQuery dq = new DbQuery("prcRptCargoDesc"))
+            {
+                dq.AddIntegerParam("@vesselId", vesselId);
+                dq.AddIntegerParam("@voyageId", voyageId);
+                ds = dq.GetTables();
+            }
+            return ds;
+        }
+
         #endregion
 
         #region Private Methods

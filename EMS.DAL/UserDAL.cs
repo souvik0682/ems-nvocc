@@ -163,12 +163,13 @@ namespace EMS.DAL
             }
         }
 
-        public static DataSet GetAdminUsers(int LoggedUserId)
+        public static DataSet GetAdminUsers(int LoggedUserId, int locationId)
         {
             DataSet ds = new DataSet();
             using (DbQuery dq = new DbQuery("prcGetAdminUsers"))
             {
                 dq.AddIntegerParam("@LoggedUserId", LoggedUserId);
+                dq.AddIntegerParam("@locationId", locationId);
                 ds = dq.GetTables();
             }
             return ds;

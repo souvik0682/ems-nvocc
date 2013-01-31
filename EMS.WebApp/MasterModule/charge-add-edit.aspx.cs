@@ -852,9 +852,9 @@ namespace EMS.WebApp.MasterModule
 
                     if (rdbPrincipleSharing.SelectedItem.Value == "0")
                     {
-                        txtSharingFEU.ReadOnly = true;
-                        txtSharingTEU.ReadOnly = true;
-                        txtSharingBL.ReadOnly = true;
+                        txtSharingFEU.Enabled = false;
+                        txtSharingTEU.Enabled = false;
+                        txtSharingBL.Enabled = false;
 
                         rfvSharingBL.Enabled = false;
                         rfvSharingFEU.Enabled = false;
@@ -863,9 +863,9 @@ namespace EMS.WebApp.MasterModule
                     }
                     else
                     {
-                        txtSharingFEU.ReadOnly = false;
-                        txtSharingTEU.ReadOnly = false;
-                        txtSharingBL.ReadOnly = true;
+                        txtSharingFEU.Enabled = true;
+                        txtSharingTEU.Enabled = true;
+                        txtSharingBL.Enabled = false;
 
                         rfvSharingBL.Enabled = false;
                         rfvSharingFEU.Enabled = true;
@@ -894,18 +894,18 @@ namespace EMS.WebApp.MasterModule
 
                     if (rdbPrincipleSharing.SelectedItem.Value == "0")
                     {
-                        txtSharingBL.ReadOnly = true;
-                        txtSharingFEU.ReadOnly = true;
-                        txtSharingTEU.ReadOnly = true;
+                        txtSharingBL.Enabled = false;
+                        txtSharingFEU.Enabled = false;
+                        txtSharingTEU.Enabled = false;
                         rfvSharingBL.Enabled = false;
                         rfvSharingFEU.Enabled = false;
                         rfvSharingTEU.Enabled = false;
                     }
                     else
                     {
-                        txtSharingBL.ReadOnly = false;
-                        txtSharingFEU.ReadOnly = true;
-                        txtSharingTEU.ReadOnly = true;
+                        txtSharingBL.Enabled = true;
+                        txtSharingFEU.Enabled = false;
+                        txtSharingTEU.Enabled = false;
 
                         rfvSharingBL.Enabled = true;
                         rfvSharingFEU.Enabled = false;
@@ -933,18 +933,18 @@ namespace EMS.WebApp.MasterModule
 
                     if (rdbPrincipleSharing.SelectedItem.Value == "0")
                     {
-                        txtSharingFEU.ReadOnly = true;
-                        txtSharingTEU.ReadOnly = true;
-                        txtSharingBL.ReadOnly = true;
+                        txtSharingFEU.Enabled = false;
+                        txtSharingTEU.Enabled = false;
+                        txtSharingBL.Enabled = false;
                         rfvSharingBL.Enabled = false;
                         rfvSharingFEU.Enabled = false;
                         rfvSharingTEU.Enabled = false;
                     }
                     else
                     {
-                        txtSharingFEU.ReadOnly = false;
-                        txtSharingTEU.ReadOnly = false;
-                        txtSharingBL.ReadOnly = true;
+                        txtSharingFEU.Enabled = true;
+                        txtSharingTEU.Enabled = true;
+                        txtSharingBL.Enabled = false;
 
                         rfvSharingBL.Enabled = false;
                         rfvSharingFEU.Enabled = true;
@@ -958,37 +958,37 @@ namespace EMS.WebApp.MasterModule
                     txtHigh.Enabled = true;
                     txtRatePerBL.Enabled = true;
 
-                    txtRatePerTEU.Enabled = false;
-                    txtRatePerTEU.Text = "0.00";
-                    txtRateperFEU.Enabled = false;
-                    txtRateperFEU.Text = "0.00";
+                    txtRatePerTEU.Enabled = true;
+                    //txtRatePerTEU.Text = "0.00";
+                    txtRateperFEU.Enabled = true;
+                    //txtRateperFEU.Text = "0.00";
 
 
                     rfvLow.Enabled = true;
                     rfvHigh.Enabled = true;
 
                     rfvRatePerBl.Enabled = true;
-                    rfvRatePerTEU.Enabled = false;
-                    rfvRatePerFEU.Enabled = false;
+                    rfvRatePerTEU.Enabled = true;
+                    rfvRatePerFEU.Enabled = true;
 
                     if (rdbPrincipleSharing.SelectedItem.Value == "0")
                     {
-                        txtSharingBL.ReadOnly = true;
-                        txtSharingFEU.ReadOnly = true;
-                        txtSharingTEU.ReadOnly = true;
+                        txtSharingBL.Enabled = false;
+                        txtSharingFEU.Enabled = false;
+                        txtSharingTEU.Enabled = false;
                         rfvSharingBL.Enabled = false;
                         rfvSharingFEU.Enabled = false;
                         rfvSharingTEU.Enabled = false;
                     }
                     else
                     {
-                        txtSharingBL.ReadOnly = false;
-                        txtSharingFEU.ReadOnly = true;
-                        txtSharingTEU.ReadOnly = true;
+                        txtSharingBL.Enabled = true;
+                        txtSharingFEU.Enabled = true;
+                        txtSharingTEU.Enabled = true;
 
                         rfvSharingBL.Enabled = true;
-                        rfvSharingFEU.Enabled = false;
-                        rfvSharingTEU.Enabled = false;
+                        rfvSharingFEU.Enabled = true;
+                        rfvSharingTEU.Enabled = true;
                     }
 
                     break;
@@ -1021,18 +1021,18 @@ namespace EMS.WebApp.MasterModule
 
                     if (rdbPrincipleSharing.SelectedItem.Value == "0")
                     {
-                        txtSharingFEU.ReadOnly = true;
-                        txtSharingTEU.ReadOnly = true;
-                        txtSharingBL.ReadOnly = true;
+                        txtSharingFEU.Enabled = false;
+                        txtSharingTEU.Enabled = false;
+                        txtSharingBL.Enabled = false;
                         rfvSharingBL.Enabled = false;
                         rfvSharingFEU.Enabled = false;
                         rfvSharingTEU.Enabled = false;
                     }
                     else
                     {
-                        txtSharingFEU.ReadOnly = false;
-                        txtSharingTEU.ReadOnly = false;
-                        txtSharingBL.ReadOnly = true;
+                        txtSharingFEU.Enabled = true;
+                        txtSharingTEU.Enabled = true;
+                        txtSharingBL.Enabled = false;
                         rfvSharingBL.Enabled = false;
                         rfvSharingFEU.Enabled = true;
                         rfvSharingTEU.Enabled = true;

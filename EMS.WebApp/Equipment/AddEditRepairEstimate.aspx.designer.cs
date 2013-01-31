@@ -13,6 +13,15 @@ namespace EMS.WebApp.Equipment {
     public partial class AddEditRepairEstimate {
         
         /// <summary>
+        /// lblError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblError;
+        
+        /// <summary>
         /// ddlLoc control.
         /// </summary>
         /// <remarks>
@@ -157,15 +166,6 @@ namespace EMS.WebApp.Equipment {
         protected global::EMS.WebApp.CustomControls.CustomTextBox txtLabourApp;
         
         /// <summary>
-        /// ddlUser control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlUser;
-        
-        /// <summary>
         /// chkpOnHold control.
         /// </summary>
         /// <remarks>
@@ -182,6 +182,15 @@ namespace EMS.WebApp.Equipment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkDamage;
+        
+        /// <summary>
+        /// ddlUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlUser;
         
         /// <summary>
         /// txtReleasedOn control.

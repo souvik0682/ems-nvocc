@@ -9,14 +9,19 @@
     <div id="headercaption">
         ADD / EDIT ESTIMATE</div>
     <center>
-        <fieldset style="width:400px; ">
+        <fieldset style="width:600px; ">
             <legend>Add / Edit Estimate</legend>
             <table border="0" cellpadding="2" cellspacing="3">
+            <tr>
+             <td colspan="2">
+               <asp:Label ID="lblError" runat="server" Text="" style="color:Red"></asp:Label>
+             </td>
+            </tr>
             <tr>
              
                     <td>Location:<span class="errormessage1">*</span></td>
                     <td>
-                      <asp:DropDownList ID="ddlLoc" runat="server" Width="100%" 
+                      <asp:DropDownList ID="ddlLoc" runat="server" Width="100%" AutoPostBack="True" onselectedindexchanged="ddlLoc_SelectedIndexChanged" 
                             ></asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage" 
                             ControlToValidate="ddlLoc" Display="Dynamic" InitialValue="0" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator>
@@ -92,6 +97,13 @@
                       <cc1:CustomTextBox ID="txtLabourApp" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc1:CustomTextBox>
                     </td>
                 </tr>
+                 <tr>
+                    <td></td>
+                    <td>
+                    OnHold:<asp:CheckBox ID="chkpOnHold" runat="server"></asp:CheckBox> &nbsp;
+                    Damage: <asp:CheckBox ID="chkDamage" runat="server"></asp:CheckBox>
+                    </td>
+                </tr>
               <tr>
                     <td>User Approved:</td>
                     <td>
@@ -100,13 +112,7 @@
                       </asp:DropDownList>
                     </td>
                 </tr>
-                  <tr>
-                    <td></td>
-                    <td>
-                    OnHold:<asp:CheckBox ID="chkpOnHold" runat="server"></asp:CheckBox> &nbsp;
-                    Damage: <asp:CheckBox ID="chkDamage" runat="server"></asp:CheckBox>
-                    </td>
-                </tr>
+                 
 		       <%--<tr>
                     <td></td>
                     <td>

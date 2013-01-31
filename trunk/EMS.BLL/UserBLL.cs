@@ -123,9 +123,9 @@ namespace EMS.BLL
             UserDAL.ResetPassword(user, modifiedBy);
         }
 
-        public static System.Data.DataSet GetAdminUsers(int LoggedUserId)
+        public static System.Data.DataSet GetAdminUsers(int LoggedUserId,int locationId)
         {
-            return EMS.DAL.UserDAL.GetAdminUsers(LoggedUserId);
+            return EMS.DAL.UserDAL.GetAdminUsers(LoggedUserId, locationId);
         }
 
         #endregion

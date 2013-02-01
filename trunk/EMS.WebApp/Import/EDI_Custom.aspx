@@ -6,9 +6,7 @@
 <%@ Register Src="../CustomControls/AutoCompletepPort.ascx" TagName="AutoCompletepPort"
     TagPrefix="uc2" %>
 <%--<%@ Register Src="../CustomControls/DatePicker.ascx" TagName="DatePicker" TagPrefix="uc3" %>--%>
-
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc2" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script src="../Scripts/Common.js" type="text/javascript"></script>
     <script type="text/javascript" language="javascript">
@@ -119,7 +117,9 @@
                  <tr>
                     <td>Customs House Code:</td>
                     <td >
+                    <div style="width:230px">
                         <uc2:AutoCompletepPort ID="AutoCompletepPort1" runat="server" />
+                        </div>
                         
                     </td>
                 </tr>

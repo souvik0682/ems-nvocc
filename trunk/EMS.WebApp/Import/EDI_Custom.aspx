@@ -118,10 +118,9 @@
                 </tr>
                  <tr>
                     <td>Customs House Code:</td>
-                    <td>
-                      <asp:DropDownList ID="ddlCustomHouse" runat="server" Width="90%" 
-                            AutoPostBack="True" onselectedindexchanged="ddlCustomHouse_SelectedIndexChanged" 
-                           ></asp:DropDownList>
+                    <td >
+                        <uc2:AutoCompletepPort ID="AutoCompletepPort1" runat="server" />
+                        
                     </td>
                 </tr>
 

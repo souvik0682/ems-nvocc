@@ -26,8 +26,12 @@ namespace EMS.WebApp.Import
             if (!IsPostBack)
             {
                 GeneralFunctions.PopulateDropDownList(ddlVessel, dbinteract.PopulateDDLDS("trnVessel", "pk_VesselID", "VesselName"));
-                GeneralFunctions.PopulateDropDownList(ddlCustomHouse, dbinteract.PopulateDDLDS("DSR.dbo.mstPort", "pk_PortID", "PortCode", true));
+                // GeneralFunctions.PopulateDropDownList(ddlCustomHouse, dbinteract.PopulateDDLDS("DSR.dbo.mstPort", "pk_PortID", "PortCode", true));
+                GeneralFunctions.PopulateDropDownList(ddlTerminalOperator, dbinteract.PopulateDDLDS("mstTerminal", "pk_TerminalID", "TerminalName"));
+                TextBox txtPort = ((TextBox)AutoCompletepPort1.FindControl("txtPort"));
+                txtPort.Attributes.Add("onblur", "document.getElementById('form1').submit();");
             }
+           
 
 
         }
@@ -99,10 +103,10 @@ namespace EMS.WebApp.Import
 
         }
 
-        protected void ddlCustomHouse_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            GeneralFunctions.PopulateDropDownList(ddlTerminalOperator, dbinteract.PopulateDDLDS("mstTerminal", "TerminalName", "pk_TerminalID", "where TerminalName like '" + ddlCustomHouse.SelectedItem.Text + "%'"));
-        }
+        //protected void ddlCustomHouse_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    GeneralFunctions.PopulateDropDownList(ddlTerminalOperator, dbinteract.PopulateDDLDS("mstTerminal", "TerminalName", "pk_TerminalID", "where TerminalName like '" + ddlCustomHouse.SelectedItem.Text + "%'"));
+        //}
 
         protected void btnDownLoad_Click(object sender, EventArgs e)
         {
@@ -137,7 +141,7 @@ namespace EMS.WebApp.Import
             string ArrTime = txtArriveTime.Text.Replace(":", ""); //Convert.ToDateTime(txtdtArrival.Text).ToString("hhmm");
             if (ArrTime.Length > 4) ArrTime = ArrTime.Substring(0,4);
             string ArrDate1 = Convert.ToDateTime(txtdtArrival.Text).ToString("ddMMyyyy hh:mm");
-            string custHouse = ddlCustomHouse.SelectedItem.Text.ToLower().Contains("select") ? "" : ddlCustomHouse.SelectedItem.Text;
+            string custHouse =  ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
             StreamWriter writer = new StreamWriter(FileName);
             //  ("myfile.txt")
             writer.WriteLine(("HREC" + ('' + ("ZZ" + (''
@@ -196,7 +200,7 @@ namespace EMS.WebApp.Import
                 Not2 = ((Dr["NotifyPartyInformation"].ToString().Substring(35, 35) == "") ? "." : Dr["NotifyPartyInformation"].ToString().Substring(35, 35));
                 Not3 = ((Dr["NotifyPartyInformation"].ToString().Substring(70, 35) == "") ? "." : Dr["NotifyPartyInformation"].ToString().Substring(70, 35));
                 Not4 = ((Dr["NotifyPartyInformation"].ToString().Substring(105, 35) == "") ? "." : Dr["NotifyPartyInformation"].ToString().Substring(105, 35));
-                Destport = ((Dr["DischargeIG"].ToString().Substring(0, 2) == "IN") ? ddlCustomHouse.SelectedItem.Text : Dr["DischargeIG"].ToString());
+                Destport = ((Dr["DischargeIG"].ToString().Substring(0, 2) == "IN") ?  ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text : Dr["DischargeIG"].ToString());
                BLno=Dr["BLNUMBER"].ToString().Replace("[^\\w\\ ]", "").TrimEnd().Replace(" ", "").Replace(" ", "20");
                 DischargePort= Dr["DischargeIG"].ToString().Split(',')[1].Trim();
 

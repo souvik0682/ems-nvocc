@@ -28,8 +28,8 @@ namespace EMS.WebApp.Import
                 GeneralFunctions.PopulateDropDownList(ddlVessel, dbinteract.PopulateDDLDS("trnVessel", "pk_VesselID", "VesselName"));
                 // GeneralFunctions.PopulateDropDownList(ddlCustomHouse, dbinteract.PopulateDDLDS("DSR.dbo.mstPort", "pk_PortID", "PortCode", true));
                 GeneralFunctions.PopulateDropDownList(ddlTerminalOperator, dbinteract.PopulateDDLDS("mstTerminal", "pk_TerminalID", "TerminalName"));
-                TextBox txtPort = ((TextBox)AutoCompletepPort1.FindControl("txtPort"));
-                txtPort.Attributes.Add("onblur", "document.getElementById('form1').submit();");
+                //TextBox txtPort = ((TextBox)AutoCompletepPort1.FindControl("txtPort"));
+                //txtPort.Attributes.Add("onblur", "document.getElementById('form1').submit();");
             }
            
 
@@ -137,10 +137,10 @@ namespace EMS.WebApp.Import
             //File.Create(Server.MapPath(@"~/Import/EDIFile/") + uniqueFileName + "_IMP_EDI.IGM");
             string FileName = Server.MapPath(@"~/Import/EDIFile/") + uniqueFileName + "_IMP_EDI.IGM";
             string ICEGateLogin = Convert.ToString(new DBInteraction().GetShipLine_Tax(_userId).Tables[0].Rows[0]["ICEGateLogin"]);
-            string ArrDate = Convert.ToDateTime(txtdtArrival.Text).ToString("yyyyMMdd");
+            string ArrDate = txtdtArrival.Text.Trim() == "" ? "" : Convert.ToDateTime(txtdtArrival.Text).ToString("yyyyMMdd");
             string ArrTime = txtArriveTime.Text.Replace(":", ""); //Convert.ToDateTime(txtdtArrival.Text).ToString("hhmm");
             if (ArrTime.Length > 4) ArrTime = ArrTime.Substring(0,4);
-            string ArrDate1 = Convert.ToDateTime(txtdtArrival.Text).ToString("ddMMyyyy hh:mm");
+            string ArrDate1 =(txtdtArrival.Text.Trim())==""? "" : Convert.ToDateTime(txtdtArrival.Text).ToString("ddMMyyyy hh:mm");
             string custHouse =  ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
             StreamWriter writer = new StreamWriter(FileName);
             //  ("myfile.txt")
@@ -161,7 +161,7 @@ namespace EMS.WebApp.Import
                             + (txtPAN.Text + (''
                             + (txtMaster.Text + (''
                             + (custHouse + (''
-                            + (txtLastPort.Text.Split(',')[1].Trim() + (''
+                            + (!txtLastPort.Text.Contains(',')?"": txtLastPort.Text.Split(',')[1].Trim() + (''
                             + (txtPortBefore1.Text + (''
                             + (txtPortBefore2.Text + (''
                             + (ddlVesselType.Text.Substring(0, 1) + (''

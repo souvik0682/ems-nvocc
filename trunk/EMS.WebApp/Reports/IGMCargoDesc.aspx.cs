@@ -53,7 +53,7 @@ namespace EMS.WebApp.Reports
                 rptViewer.Reset();
                 rptViewer.LocalReport.Dispose();
                 rptViewer.LocalReport.DataSources.Clear();
-                rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
+                rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) +"/" +ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
 
                 rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", ds.Tables[0]));
                 rptViewer.LocalReport.Refresh();

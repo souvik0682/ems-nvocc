@@ -16,7 +16,7 @@
                 ServicePath="AutoComplete.asmx" ServiceMethod="GetPortList" MinimumPrefixLength="2"
                 CompletionInterval="1000" EnableCaching="true" CompletionSetCount="20" CompletionListCssClass="autocomplete_completionListElement"
                 CompletionListItemCssClass="autocomplete_listItem" CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem"
-                DelimiterCharacters=";, :" ShowOnlyCurrentWordInCompletionListItem="true">
+                DelimiterCharacters=";,:" ShowOnlyCurrentWordInCompletionListItem="true">
                 <%-- <Animations>
                     <OnShow>
                         <Sequence>

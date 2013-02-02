@@ -173,7 +173,7 @@
                 <tr>
                     <td>Same Button Cargo:</td>
                     <td>
-                      <asp:DropDownList ID="ddlSameButton" runat="server" Width="90%">
+                      <asp:DropDownList ID="ddlSameButton" runat="server" Width="50%">
                           <asp:ListItem Value="1">Yes</asp:ListItem>
                           <asp:ListItem Value="0">No</asp:ListItem>
                       </asp:DropDownList>
@@ -182,7 +182,7 @@
         <tr>
                     <td>Ship Store Submitted:</td>
                     <td>
-                      <asp:DropDownList ID="ddlShipStoreSubmitted" runat="server" Width="90%">
+                      <asp:DropDownList ID="ddlShipStoreSubmitted" runat="server" Width="50%">
                           <asp:ListItem Value="1">Yes</asp:ListItem>
                           <asp:ListItem Value="0">No</asp:ListItem>
                       </asp:DropDownList>
@@ -191,7 +191,7 @@
         <tr>
                     <td>Crew List:</td>
                     <td>
-                      <asp:DropDownList ID="ddlCrewList" runat="server" Width="90%">
+                      <asp:DropDownList ID="ddlCrewList" runat="server" Width="50%">
                           <asp:ListItem Value="1">Yes</asp:ListItem>
                           <asp:ListItem Value="0">No</asp:ListItem>
                       </asp:DropDownList>
@@ -200,7 +200,7 @@
         <tr>
                     <td>Passenger List:</td>
                     <td>
-                      <asp:DropDownList ID="ddlPessengerList" runat="server" Width="90%">
+                      <asp:DropDownList ID="ddlPessengerList" runat="server" Width="50%">
                           <asp:ListItem Value="1">Yes</asp:ListItem>
                           <asp:ListItem Value="0">No</asp:ListItem>
                       </asp:DropDownList>
@@ -209,7 +209,7 @@
         <tr>
                     <td>Crew Effective List:</td>
                     <td>
-                      <asp:DropDownList ID="ddlCrewEffList" runat="server" Width="90%">
+                      <asp:DropDownList ID="ddlCrewEffList" runat="server" Width="50%">
                           <asp:ListItem Value="1">Yes</asp:ListItem>
                           <asp:ListItem Value="0">No</asp:ListItem>
                       </asp:DropDownList>
@@ -218,7 +218,7 @@
                 <tr>
                     <td>Maritime List:</td>
                     <td>
-                      <asp:DropDownList ID="ddlMaritime" runat="server" Width="90%">
+                      <asp:DropDownList ID="ddlMaritime" runat="server" Width="50%">
                           <asp:ListItem Value="1">Yes</asp:ListItem>
                           <asp:ListItem Value="0">No</asp:ListItem>
                       </asp:DropDownList>

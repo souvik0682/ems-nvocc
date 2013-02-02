@@ -166,7 +166,7 @@
                 </tr>
                   <tr>
                     <td style="width:140px;">Light house Due</td>
-                    <td><asp:TextBox ID="txtLightHouse" runat="server" CssClass="numerictextbox"  MaxLength="10" Width="250"  onkeyup="IsNumeric(this)"></asp:TextBox><br />
+                    <td><asp:TextBox ID="txtLightHouse" runat="server" CssClass="numerictextbox"  MaxLength="10" Width="160"  onkeyup="IsNumeric(this)"></asp:TextBox><br />
                    </td>
                 </tr>
                 

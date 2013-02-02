@@ -69,60 +69,68 @@ namespace EMS.Entity
             set;
         }
 
+        decimal _RatePerBL = 0.00M;
         [XmlAnyElement]
         public decimal RatePerBL
         {
-            get;
-            set;
+            get { return _RatePerBL; }
+            set { _RatePerBL = value; }
         }
 
+        decimal _RatePerTEU = 0.00M;
         [XmlAnyElement]
         public decimal RatePerTEU
         {
-            get;
-            set;
+            get { return _RatePerTEU; }
+            set { _RatePerTEU = value; }
         }
 
+        decimal _RatePerFEU = 0.00M;
         [XmlAnyElement]
         public decimal RatePerFEU
         {
-            get;
-            set;
+            get { return _RatePerFEU; }
+            set { _RatePerFEU = value; }
         }
 
+        decimal _RatePerTON = 0.00M;
         [XmlAnyElement]
         public decimal RatePerTON
         {
-            get;
-            set;
+            get { return _RatePerTON; }
+            set { _RatePerTON = value; }
         }
 
+        decimal _RatePerCBM = 0.00M;
         [XmlAnyElement]
         public decimal RatePerCBM
         {
-            get;
-            set;
+            get { return _RatePerCBM; }
+            set { _RatePerCBM = value; }
         }
 
+        decimal _SharingBL = 0.00M;
         [XmlAnyElement]
         public decimal SharingBL
         {
-            get;
-            set;
+            get { return _SharingBL; }
+            set { _SharingBL = value; }
         }
 
+        decimal _SharingTEU = 0.00M;
         [XmlAnyElement]
         public decimal SharingTEU
         {
-            get;
-            set;
+            get { return _SharingTEU; }
+            set { _SharingTEU = value; }
         }
 
+        decimal _SharingFEU = 0.00M;
         [XmlAnyElement]
         public decimal SharingFEU
         {
-            get;
-            set;
+            get { return _SharingFEU; }
+            set { _SharingFEU = value; }
         }
 
         [XmlAnyElement]

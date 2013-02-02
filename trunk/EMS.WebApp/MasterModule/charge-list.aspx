@@ -104,7 +104,7 @@
                                             <asp:LinkButton ID="lnkHType" runat="server" CommandName="Sort" CommandArgument="Name"
                                                 Text="Charge Title"></asp:LinkButton></HeaderTemplate>
                                         <ItemTemplate>
-                                            <asp:Label ID="lblChargeTitle" runat="server"></asp:Label>
+                                            <asp:Label ID="lblChargeTitle" runat="server" style="text-transform:uppercase;"></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>

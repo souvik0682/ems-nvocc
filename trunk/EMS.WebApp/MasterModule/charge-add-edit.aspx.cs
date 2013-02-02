@@ -54,6 +54,9 @@ namespace EMS.WebApp.MasterModule
                     oChargeRates.Add(Ent);
                     dgChargeRates.DataSource = oChargeRates;
                     dgChargeRates.DataBind();
+                    dgChargeRates.Rows[0].Visible = false;
+
+                    WashingSelection(rdbWashing);
                 }
 
             }
@@ -99,7 +102,7 @@ namespace EMS.WebApp.MasterModule
             #region ChargeType
             foreach (Enums.ChargeType r in Enum.GetValues(typeof(Enums.ChargeType)))
             {
-                Li = new ListItem("Select", "0");
+                Li = new ListItem("SELECT", "0");
                 ListItem item = new ListItem(Enum.GetName(typeof(Enums.ChargeType), r).Replace('_', ' '), ((int)r).ToString());
                 ddlChargeType.Items.Add(item);
             }
@@ -109,7 +112,7 @@ namespace EMS.WebApp.MasterModule
             #region Currency
             foreach (Enums.Currency r in Enum.GetValues(typeof(Enums.Currency)))
             {
-                //Li = new ListItem("Select", "0");
+                //Li = new ListItem("SELECT", "0");
                 ListItem item = new ListItem(Enum.GetName(typeof(Enums.Currency), r).Replace('_', ' '), ((int)r).ToString());
                 ddlCurrency.Items.Add(item);
             }
@@ -119,7 +122,7 @@ namespace EMS.WebApp.MasterModule
             #region ImportExportGeneral
             //foreach (Enums.ImportExportGeneral r in Enum.GetValues(typeof(Enums.ImportExportGeneral)))
             //{
-            //    Li = new ListItem("Select", "0");
+            //    Li = new ListItem("SELECT", "0");
             //    ListItem item = new ListItem(Enum.GetName(typeof(Enums.ImportExportGeneral), r).Replace('_', ' '), ((int)r).ToString());
             //    ddlImportExportGeneral.Items.Add(item);
             //}
@@ -134,13 +137,19 @@ namespace EMS.WebApp.MasterModule
             #endregion
 
             #region Master list of Location, Terminal, WashinfType
+
+            Li = new ListItem("ALL", "-1");
             PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlMLocation, 0);
+            ddlMLocation.Items.Insert(0, Li);
+
+            Li = new ListItem("ALL", "-1");
             PopulateDropDown((int)Enums.DropDownPopulationFor.TerminalCode, ddlMTerminal, 0);
+            ddlMTerminal.Items.Insert(0, Li);
             //PopulateDropDown((int)Enums.DropDownPopulationFor.Wa, ddlMWashingType, 0);
 
             foreach (Enums.WashingType r in Enum.GetValues(typeof(Enums.WashingType)))
             {
-                Li = new ListItem("Select", "0");
+                Li = new ListItem("SELECT", "0");
                 ListItem item = new ListItem(Enum.GetName(typeof(Enums.WashingType), r).Replace('_', ' '), ((int)r).ToString());
                 ddlMWashingType.Items.Add(item);
             }
@@ -164,7 +173,16 @@ namespace EMS.WebApp.MasterModule
                 DropDownList ddlFTerminal = (DropDownList)item.FindControl("ddlFTerminal");
                 PopulateDropDown((int)Enums.DropDownPopulationFor.TerminalCode, ddlFTerminal, Convert.ToInt32(ddlFLocation.SelectedValue));
                 if (ddlFLocation.SelectedValue == "0")
+                {
                     ddlFTerminal.Items.Clear();
+                }
+                else if(ddlFLocation.SelectedValue == "-1")
+                {
+                    ddlFTerminal.Items.Clear();
+                    ListItem Li = new ListItem("ALL", "-1");
+                    ddlFTerminal.Items.Insert(0, Li);
+                }
+
             }
         }
 
@@ -209,7 +227,8 @@ namespace EMS.WebApp.MasterModule
                 oChargeEntity.NVOCCID = Convert.ToInt32(ddlLine.SelectedValue);
                 oChargeEntity.PrincipleSharing = Convert.ToBoolean(Convert.ToInt32(rdbPrincipleSharing.SelectedItem.Value));
                 oChargeEntity.RateChangeable = Convert.ToBoolean(Convert.ToInt32(rdbRateChange.SelectedItem.Value));
-                oChargeEntity.Sequence = Convert.ToInt32(txtDisplayOrder.Text.Trim());
+                if (!String.IsNullOrEmpty(txtDisplayOrder.Text.Trim()))
+                    oChargeEntity.Sequence = Convert.ToInt32(txtDisplayOrder.Text.Trim());
                 oChargeEntity.ServiceTax = Convert.ToBoolean(Convert.ToInt32(rdbServiceTaxApplicable.SelectedItem.Value));
 
 
@@ -228,7 +247,9 @@ namespace EMS.WebApp.MasterModule
                         AddRates();
                         lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
                         ClearAll();
-                        EnableAllField();
+                        EnableAllField();                       
+                        ViewState["ChargeRates"] = null;
+                        WashingSelection(rdbWashing);
                     }
                     else if (hdnChargeID.Value == "-1")
                     {
@@ -344,25 +365,21 @@ namespace EMS.WebApp.MasterModule
             {
                 ListItem Li;
                 DropDownList ddlFLocation = (DropDownList)e.Row.FindControl("ddlFLocation");
-
                 DropDownList ddlFWashingType = (DropDownList)e.Row.FindControl("ddlFWashingType");
 
-                Li = new ListItem("Select", "0");
                 PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlFLocation, 0);
+                Li = new ListItem("SELECT", "0");
                 ddlFLocation.Items.Insert(0, Li);
+                Li = new ListItem("ALL", "-1");
+                ddlFLocation.Items.Insert(1, Li);
 
                 foreach (Enums.WashingType r in Enum.GetValues(typeof(Enums.WashingType)))
                 {
-                    Li = new ListItem("Select", "0");
+                    Li = new ListItem("SELECT", "0");
                     ListItem item = new ListItem(Enum.GetName(typeof(Enums.WashingType), r).Replace('_', ' '), ((int)r).ToString());
                     ddlFWashingType.Items.Add(item);
                 }
                 ddlFWashingType.Items.Insert(0, Li);
-
-                //if (rdbWashing.SelectedItem.Value == "0")
-                //{
-                //    ddlFWashingType.Enabled = false;
-                //}
 
             }
             else if (e.Row.RowType == DataControlRowType.DataRow)
@@ -506,10 +523,32 @@ namespace EMS.WebApp.MasterModule
                 }
                 else
                 {
-                    Rates.Add(oEntity);
+                    int Locn = 0;
+                    int Ter = 0;
+                    int Was = 0;
+                    
+                    Locn = Convert.ToInt32(ddlFLocation.SelectedValue);
+                    if (ddlFTerminal.Items.Count > 0)
+                        Ter = Convert.ToInt32(ddlFTerminal.SelectedValue);
+                    if (ddlFWashingType.Items.Count > 0)
+                        Was = Convert.ToInt32(ddlFWashingType.SelectedValue);
+
+                    IEnumerable<IChargeRate> cr = from rate in Rates
+                                                  where rate.LocationId == Locn && rate.TerminalId == Ter && rate.WashingType == Was
+                                                  select rate;
+
+                    if (cr.Count() <= 0)
+                    {
+                        Rates.Add(oEntity);
+                    }
+                    else
+                    {
+                        lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00076");
+                        return;
+                    }
                 }
 
-
+                
                 ViewState["ChargeRates"] = Rates;
                 FillRates();
 
@@ -658,6 +697,7 @@ namespace EMS.WebApp.MasterModule
 
                 dgChargeRates.DataSource = EmptyRates;
                 dgChargeRates.DataBind();
+                dgChargeRates.Rows[0].Visible = false;
             }
 
 
@@ -693,8 +733,15 @@ namespace EMS.WebApp.MasterModule
             else
             {
                 ddlFTerminal.Enabled = true;
+                ddlFTerminal.Items.Clear();
                 if (Convert.ToInt32(ddlFLocation.SelectedValue) > 0)
                     PopulateDropDown((int)Enums.DropDownPopulationFor.TerminalCode, ddlFTerminal, Convert.ToInt32(ddlFLocation.SelectedValue));
+
+                if (ddlFLocation.SelectedValue == "-1")
+                {
+                    ListItem Li = new ListItem("ALL", "-1");
+                    ddlFTerminal.Items.Insert(0, Li);
+                }
             }
         }
 
@@ -748,15 +795,18 @@ namespace EMS.WebApp.MasterModule
         {
             GridViewRow Row = dgChargeRates.HeaderRow;
             DropDownList ddlFWashingType = (DropDownList)Row.FindControl("ddlFWashingType");
+            RequiredFieldValidator rfvWashing = (RequiredFieldValidator)Row.FindControl("rfvWashing");
 
             if (rdl.SelectedItem.Value == "0")
             {
                 ddlFWashingType.SelectedIndex = 0;
                 ddlFWashingType.Enabled = false;
+                rfvWashing.Enabled = false;
             }
             else
             {
                 ddlFWashingType.Enabled = true;
+                rfvWashing.Enabled = true;
             }
         }
         protected void rdbServiceTaxApplicable_SelectedIndexChanged(object sender, EventArgs e)
@@ -792,7 +842,7 @@ namespace EMS.WebApp.MasterModule
             oChargeRates.Add(Ent);
             dgChargeRates.DataSource = oChargeRates;
             dgChargeRates.DataBind();
-
+            dgChargeRates.Rows[0].Visible = false;
         }
 
         void DefaultSelection()
@@ -803,6 +853,8 @@ namespace EMS.WebApp.MasterModule
             rdbServiceTaxApplicable.SelectedIndex = 0;
             rdbWashing.SelectedIndex = 1;
             rdbTerminalRequired.SelectedIndex = 1;
+
+           
         }
 
         protected void ddlChargeType_SelectedIndexChanged(object sender, EventArgs e)

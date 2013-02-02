@@ -24,9 +24,6 @@ namespace EMS.WebApp.MasterModule
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //string[] Names = new string[5] { "A", "A", "A", "A", "A" };
-            //dgChargeRates.DataSource = Names;
-
             CheckUserAccess();
 
             IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
@@ -268,11 +265,9 @@ namespace EMS.WebApp.MasterModule
         void AddRates()
         {
             Rates = (List<IChargeRate>)ViewState["ChargeRates"];
-
-            //if (Rates.Count > 0)
-            //{
+            if (Rates == null)
+                Rates = new List<IChargeRate>();
             oChargeBLL = new ChargeBLL();
-            //Deactivate all existing record
 
             oChargeBLL.DeactivateAllRatesAgainstChargeId(Convert.ToInt32(hdnChargeID.Value));
 
@@ -281,7 +276,6 @@ namespace EMS.WebApp.MasterModule
                 Rate.ChargesID = Convert.ToInt32(hdnChargeID.Value);
                 oChargeBLL.AddEditChargeRates(Rate);
             }
-            //}
         }
 
         void FillChargeDetails(int ChargesID)
@@ -409,38 +403,81 @@ namespace EMS.WebApp.MasterModule
                 TextBox txtHigh = (TextBox)Row.FindControl("txtHigh");
                 TextBox txtLow = (TextBox)Row.FindControl("txtLow");
 
-                if (Convert.ToDecimal(txtHigh.Text) < Convert.ToDecimal(txtLow.Text))
+                if ((!String.IsNullOrEmpty(txtHigh.Text) && !String.IsNullOrEmpty(txtLow.Text)))
                 {
-                    ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00077") + "');</script>", false);
-                    return;
+                    if (Convert.ToDecimal(txtHigh.Text) < Convert.ToDecimal(txtLow.Text))
+                    {
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00077") + "');</script>", false);
+                        return;
+                    }
                 }
-
 
                 DropDownList ddlFLocation = (DropDownList)Row.FindControl("ddlFLocation");
                 DropDownList ddlFTerminal = (DropDownList)Row.FindControl("ddlFTerminal");
                 DropDownList ddlFWashingType = (DropDownList)Row.FindControl("ddlFWashingType");
 
-                //TextBox txtHigh = (TextBox)Row.FindControl("txtHigh");
-                //TextBox txtLow = (TextBox)Row.FindControl("txtLow");
+
                 TextBox txtRatePerBL = (TextBox)Row.FindControl("txtRatePerBL");
                 TextBox txtRatePerTEU = (TextBox)Row.FindControl("txtRatePerTEU");
                 TextBox txtRateperFEU = (TextBox)Row.FindControl("txtRateperFEU");
                 TextBox txtSharingBL = (TextBox)Row.FindControl("txtSharingBL");
                 TextBox txtSharingTEU = (TextBox)Row.FindControl("txtSharingTEU");
                 TextBox txtSharingFEU = (TextBox)Row.FindControl("txtSharingFEU");
+
                 HiddenField hdnFId = (HiddenField)Row.FindControl("hdnFId");
                 HiddenField hdnId = (HiddenField)Row.FindControl("hdnId");
                 HiddenField hdnFSlno = (HiddenField)Row.FindControl("hdnFSlno");
 
+                if (rdbPrincipleSharing.SelectedValue == "1")
+                {
+                    if (String.IsNullOrEmpty(txtRatePerBL.Text))
+                        txtRatePerBL.Text = "0.00";
+                    if (String.IsNullOrEmpty(txtSharingBL.Text))
+                        txtSharingBL.Text = "0.00";
+                    if (String.IsNullOrEmpty(txtRateperFEU.Text))
+                        txtRateperFEU.Text = "0.00";
+                    if (String.IsNullOrEmpty(txtSharingFEU.Text))
+                        txtSharingFEU.Text = "0.00";
+                    if (String.IsNullOrEmpty(txtRatePerTEU.Text))
+                        txtRatePerTEU.Text = "0.00";
+                    if (String.IsNullOrEmpty(txtSharingTEU.Text))
+                        txtSharingTEU.Text = "0.00";
+
+
+                    if (Convert.ToDecimal(txtRatePerBL.Text) < Convert.ToDecimal(txtSharingBL.Text))
+                    {
+                        lblMessage.Text = "Sharing value can not be greater than original value";
+                        return;
+                    }
+
+                    if (Convert.ToDecimal(txtRateperFEU.Text) < Convert.ToDecimal(txtSharingFEU.Text))
+                    {
+                        lblMessage.Text = "Sharing value can not be greater than original value";
+                        return;
+                    }
+
+                    if (Convert.ToDecimal(txtRatePerTEU.Text) < Convert.ToDecimal(txtSharingTEU.Text))
+                    {
+                        lblMessage.Text = "Sharing value can not be greater than original value";
+                        return;
+                    }
+                }
+
                 oEntity = new ChargeRateEntity();
                 oEntity.ChargesID = Convert.ToInt32(hdnChargeID.Value);
-                oEntity.High = Convert.ToInt32(txtHigh.Text);
+                if (!String.IsNullOrEmpty(txtHigh.Text))
+                    oEntity.High = Convert.ToInt32(txtHigh.Text);
                 oEntity.LocationId = Convert.ToInt32(ddlFLocation.SelectedValue);
-                oEntity.Low = Convert.ToInt32(txtLow.Text);
-                oEntity.RatePerBL = Convert.ToDecimal(txtRatePerBL.Text);
-                oEntity.SharingBL = Convert.ToDecimal(txtSharingBL.Text);
-                oEntity.SharingFEU = Convert.ToDecimal(txtSharingFEU.Text);
-                oEntity.SharingTEU = Convert.ToDecimal(txtSharingTEU.Text);
+                if (!String.IsNullOrEmpty(txtLow.Text))
+                    oEntity.Low = Convert.ToInt32(txtLow.Text);
+                if (!String.IsNullOrEmpty(txtRatePerBL.Text))
+                    oEntity.RatePerBL = Convert.ToDecimal(txtRatePerBL.Text);
+                if (!String.IsNullOrEmpty(txtSharingBL.Text))
+                    oEntity.SharingBL = Convert.ToDecimal(txtSharingBL.Text);
+                if (!String.IsNullOrEmpty(txtSharingFEU.Text))
+                    oEntity.SharingFEU = Convert.ToDecimal(txtSharingFEU.Text);
+                if (!String.IsNullOrEmpty(txtSharingTEU.Text))
+                    oEntity.SharingTEU = Convert.ToDecimal(txtSharingTEU.Text);
                 oEntity.WashingType = Convert.ToInt32(ddlFWashingType.SelectedValue);
                 if (ddlFTerminal.Items.Count > 0 && ddlFTerminal.SelectedIndex >= 0)
                     oEntity.TerminalId = Convert.ToInt32(ddlFTerminal.SelectedValue);
@@ -449,13 +486,17 @@ namespace EMS.WebApp.MasterModule
                 oEntity.RateActive = true;
                 if (ddlChargeType.SelectedValue == "6") //If LCL selected, then data will go to CBM & TON
                 {
-                    oEntity.RatePerCBM = Convert.ToDecimal(txtRateperFEU.Text);
-                    oEntity.RatePerTON = Convert.ToDecimal(txtRatePerTEU.Text);
+                    if (!String.IsNullOrEmpty(txtRateperFEU.Text))
+                        oEntity.RatePerCBM = Convert.ToDecimal(txtRateperFEU.Text);
+                    if (!String.IsNullOrEmpty(txtRatePerTEU.Text))
+                        oEntity.RatePerTON = Convert.ToDecimal(txtRatePerTEU.Text);
                 }
                 else
                 {
-                    oEntity.RatePerFEU = Convert.ToDecimal(txtRateperFEU.Text);
-                    oEntity.RatePerTEU = Convert.ToDecimal(txtRatePerTEU.Text);
+                    if (!String.IsNullOrEmpty(txtRateperFEU.Text))
+                        oEntity.RatePerFEU = Convert.ToDecimal(txtRateperFEU.Text);
+                    if (!String.IsNullOrEmpty(txtRatePerTEU.Text))
+                        oEntity.RatePerTEU = Convert.ToDecimal(txtRatePerTEU.Text);
                 }
 
                 if (Convert.ToInt32(hdnFSlno.Value) >= 0)
@@ -471,23 +512,6 @@ namespace EMS.WebApp.MasterModule
 
                 ViewState["ChargeRates"] = Rates;
                 FillRates();
-
-                ////if (hdnFId.Value == "0") //Inser in local list
-                ////{
-                ////    oChargeBLL.AddEditChargeRates(oEntity);
-                ////}
-                ////else //Update local list
-                ////{
-                ////    oEntity.ChargesRateID = Convert.ToInt32(hdnFId.Value);
-                ////    oChargeBLL.AddEditChargeRates(oEntity);
-                ////}
-                ////FillChargeRate(Convert.ToInt32(hdnChargeID.Value));                   
-
-                //}
-                //else
-                //{
-                //    ClientScript.RegisterClientScriptBlock(typeof(Page), "myscript", "alert('Please enter the charge detail first')", true);
-                //}
 
             }
             #endregion
@@ -564,7 +588,7 @@ namespace EMS.WebApp.MasterModule
                     EnableAllField();
                 }
                 FillRates();
-                
+
             }
             #endregion
 
@@ -587,8 +611,8 @@ namespace EMS.WebApp.MasterModule
                 HiddenField hdnFId = (HiddenField)Row.FindControl("hdnFId");
                 HiddenField hdnFSlno = (HiddenField)Row.FindControl("hdnFSlno");
 
-                txtHigh.Text = "0";
-                txtLow.Text = "0";
+                txtHigh.Text = String.Empty;// "0";
+                txtLow.Text = String.Empty;// "0";
                 ddlFLocation.SelectedIndex = 0;
                 if (ddlFTerminal.Items.Count > 0)
                 {
@@ -597,12 +621,12 @@ namespace EMS.WebApp.MasterModule
                     //ddlFTerminal.Enabled = false;
                 }
                 ddlFWashingType.SelectedIndex = 0;
-                txtRatePerBL.Text = "0.00";
-                txtRatePerTEU.Text = "0.00";
-                txtRateperFEU.Text = "0.00";
-                txtSharingBL.Text = "0.00";
-                txtSharingTEU.Text = "0.00";
-                txtSharingFEU.Text = "0.00";
+                txtRatePerBL.Text = String.Empty;// "0.00";
+                txtRatePerTEU.Text = String.Empty;//"0.00";
+                txtRateperFEU.Text = String.Empty;//"0.00";
+                txtSharingBL.Text = String.Empty;//"0.00";
+                txtSharingTEU.Text = String.Empty;//"0.00";
+                txtSharingFEU.Text = String.Empty;//"0.00";
 
                 hdnFId.Value = "0";
                 hdnFSlno.Value = "0";
@@ -683,14 +707,14 @@ namespace EMS.WebApp.MasterModule
 
             if (rdl.SelectedItem.Value == "0")
             {
-                txtSharingBL.ReadOnly = true;
-                txtSharingBL.Text = "0.0";
+                txtSharingBL.Enabled = false;
+                txtSharingBL.Text = String.Empty;//"0.0";
 
-                txtSharingTEU.ReadOnly = true;
-                txtSharingTEU.Text = "0.0";
+                txtSharingTEU.Enabled = false;
+                txtSharingTEU.Text = String.Empty;//"0.0";
 
-                txtSharingFEU.ReadOnly = true;
-                txtSharingFEU.Text = "0.0";
+                txtSharingFEU.Enabled = false;
+                txtSharingFEU.Text = String.Empty;//"0.0";
             }
             else
             {
@@ -699,15 +723,15 @@ namespace EMS.WebApp.MasterModule
                     case "1":
                     case "3":
                     case "4":
-                        txtSharingBL.ReadOnly = true;
-                        txtSharingTEU.ReadOnly = false;
-                        txtSharingFEU.ReadOnly = false;
+                        txtSharingBL.Enabled = false;
+                        txtSharingTEU.Enabled = true;
+                        txtSharingFEU.Enabled = true;
                         break;
                     case "2":
                     case "5":
-                        txtSharingBL.ReadOnly = false;
-                        txtSharingTEU.ReadOnly = true;
-                        txtSharingFEU.ReadOnly = true;
+                        txtSharingBL.Enabled = true;
+                        txtSharingTEU.Enabled = false;
+                        txtSharingFEU.Enabled = false;
                         break;
                 }
 
@@ -838,11 +862,11 @@ namespace EMS.WebApp.MasterModule
                     txtRatePerTEU.Enabled = true;
                     txtRateperFEU.Enabled = true;
                     txtRatePerBL.Enabled = false;
-                    txtRatePerBL.Text = "0.00";
+                    txtRatePerBL.Text = String.Empty;//"0.00";
                     txtLow.Enabled = false;
-                    txtLow.Text = "0";
+                    txtLow.Text = String.Empty;//"0";
                     txtHigh.Enabled = false;
-                    txtHigh.Text = "0";
+                    txtHigh.Text = String.Empty;//"0";
 
                     rfvRatePerTEU.Enabled = true;
                     rfvRatePerFEU.Enabled = true;
@@ -878,13 +902,13 @@ namespace EMS.WebApp.MasterModule
                     txtRatePerBL.Enabled = true;
 
                     txtRatePerTEU.Enabled = false;
-                    txtRatePerTEU.Text = "0.00";
+                    txtRatePerTEU.Text = String.Empty;//"0.00";
                     txtRateperFEU.Enabled = false;
-                    txtRateperFEU.Text = "0.00";
+                    txtRateperFEU.Text = String.Empty;//"0.00";
                     txtLow.Enabled = false;
-                    txtLow.Text = "0";
+                    txtLow.Text = String.Empty;//"0";
                     txtHigh.Enabled = false;
-                    txtHigh.Text = "0";
+                    txtHigh.Text = String.Empty;//"0";
 
                     rfvRatePerBl.Enabled = true;
                     rfvLow.Enabled = false;
@@ -922,7 +946,7 @@ namespace EMS.WebApp.MasterModule
                     txtRateperFEU.Enabled = true;
 
                     txtRatePerBL.Enabled = false;
-                    txtRatePerBL.Text = "0.00";
+                    txtRatePerBL.Text = String.Empty;//"0.00";
 
                     rfvLow.Enabled = true;
                     rfvHigh.Enabled = true;
@@ -1007,11 +1031,11 @@ namespace EMS.WebApp.MasterModule
                     txtRatePerTEU.Enabled = true;
                     txtRateperFEU.Enabled = true;
                     txtRatePerBL.Enabled = false;
-                    txtRatePerBL.Text = "0.00";
+                    txtRatePerBL.Text = String.Empty;//"0.00";
                     txtLow.Enabled = false;
-                    txtLow.Text = "0";
+                    txtLow.Text = String.Empty;//"0";
                     txtHigh.Enabled = false;
-                    txtHigh.Text = "0";
+                    txtHigh.Text = String.Empty;//"0";
 
                     rfvRatePerTEU.Enabled = true;
                     rfvRatePerFEU.Enabled = true;
@@ -1059,7 +1083,7 @@ namespace EMS.WebApp.MasterModule
             rdbServiceTaxApplicable.Enabled = false;
             rdbTerminalRequired.Enabled = false;
             rdbWashing.Enabled = false;
-            
+
         }
         void EnableAllField()
         {

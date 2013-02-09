@@ -104,6 +104,7 @@ inputh1 {text-transform:uppercase;}
 .tableheader{font-size:10pt; color:#000000; font-weight:bold;padding-left:10px;text-align: center;}
 .gridviewheader {color:#000000;font-size:12px; font-weight:bold; border:1px solid #e8e8e8; padding:5px; background:-webkit-gradient(linear, left bottom, left top, from(#ccc), to(#fff));text-align:left;vertical-align:top;}
 .gridviewheader_num {color:#000000;font-size:12px; font-weight:bold; border:1px solid #e8e8e8; padding:5px; background:-webkit-gradient(linear, left bottom, left top, from(#ccc), to(#fff)); text-align:right;vertical-align:top;}
+.gridviewheader_center {color:#000000;font-size:12px; font-weight:bold; border:1px solid #e8e8e8; padding:5px; background:-webkit-gradient(linear, left bottom, left top, from(#ccc), to(#fff)); text-align:center;vertical-align:top;}
 .gridviewitem {border:1px solid #e8e8e8;font-size:12px; padding:1px; background-color:#FFFFFF;}
 
 .gridviewalternateitem {border:1px solid #e8e8e8;font-size:12px; padding:1px; background-color:#f8f8f8;}

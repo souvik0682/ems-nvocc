@@ -116,7 +116,7 @@
                    </td>
                 </tr>
                 <tr>
-                    <td>Same Button Cargo:</td>
+                    <td>Same Bottom Cargo:</td>
                     <td>
                       <asp:DropDownList ID="ddlSameButton" runat="server" Width="40%">
                           <asp:ListItem Value="1">Yes</asp:ListItem>

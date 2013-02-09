@@ -13,9 +13,9 @@ namespace EMS.Common
         string LocationTo { get; set; }
         string LTCode { get; set; }
         string ContainerSize { get; set; }
-        double WeightFrom { get; set; }
-        double WeightTo { get; set; }
-        double HaulageRate { get; set; }
+        decimal WeightFrom { get; set; }
+        decimal WeightTo { get; set; }
+        decimal HaulageRate { get; set; }
         bool HaulageStatus { get; set; }
     }
 }

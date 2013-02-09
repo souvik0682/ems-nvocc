@@ -105,7 +105,7 @@ namespace EMS.WebApp.MasterModule
             }
             else
             {
-                if (dbinteract.IsUnique("finInvoice", "InvoiceDate", txtStDate.Text) )
+                if (!dbinteract.IsUnique("finInvoice", "InvoiceDate", txtStDate.Text) )
                 {
                     GeneralFunctions.RegisterAlertScript(this, "This Date has been already used for Invoice. It can not be edited");
                     return;

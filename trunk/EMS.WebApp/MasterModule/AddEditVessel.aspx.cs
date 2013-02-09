@@ -115,17 +115,17 @@ namespace EMS.WebApp.MasterModule
 
             Entity.Vessel vessel = new Entity.Vessel();
             vessel.VesselID = Convert.ToInt32(VesselId);
-            vessel.AgentCode = txtAgentCode.Text;
+            vessel.AgentCode = txtAgentCode.Text.ToUpper();
             //vessel.CallSign = txtCallSign.Text;
-            vessel.IMONumber = txtIMO.Text;
+            vessel.IMONumber = txtIMO.Text.ToUpper();
             //string port = ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
             //port = port.Contains(',') && port.Split(',').Length >= 1 ? port.Split(',')[1].Trim() : "";
             //vessel.LastPortCalled = dbinteract.GetId("Port", port);
-            vessel.MasterName = txtMasterCode.Text;
-            vessel.PANNo = txtPan.Text;
-            vessel.ShippingLineCode = txtShipLineCode.Text;
+            vessel.MasterName = txtMasterCode.Text.ToUpper();
+            vessel.PANNo = txtPan.Text.ToUpper();
+            vessel.ShippingLineCode = txtShipLineCode.Text.ToUpper();
             vessel.VesselFlag = dbinteract.GetId("Country", ((TextBox)AutoCompleteCountry1.FindControl("txtCountry")).Text);
-            vessel.VesselName = txtVesselName.Text;
+            vessel.VesselName = txtVesselName.Text.ToUpper(); 
             vessel.VesselPrefix = Convert.ToInt32(ddlVesselPrefix.SelectedValue);
 
             //if (vessel.LastPortCalled == 0)

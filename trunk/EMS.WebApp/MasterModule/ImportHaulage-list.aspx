@@ -125,29 +125,29 @@
                                             <asp:Label ID="lblLocationTo" runat="server"></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Right" >
+                                        <HeaderStyle CssClass="gridviewheader_num" />
+                                        <ItemStyle CssClass="gridviewitem" Width="10%"  />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHContainerSize" runat="server" CommandName="Sort" CommandArgument="ContainerSize"
                                                 Text="Container Size"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <HeaderStyle CssClass="gridviewheader" />
+                                    <asp:TemplateField  ItemStyle-HorizontalAlign="Right" >
+                                        <HeaderStyle CssClass="gridviewheader_num" />
                                         <ItemStyle CssClass="gridviewitem" Width="10%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHWeightFrom" runat="server" CommandName="Sort" CommandArgument="WeightFrom"
                                                 Text="Weight From"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Address">
-                                        <HeaderStyle CssClass="gridviewheader" />
+                                    <asp:TemplateField HeaderText="Address"  ItemStyle-HorizontalAlign="Right" >
+                                        <HeaderStyle CssClass="gridviewheader_num" />
                                         <ItemStyle CssClass="gridviewitem" Width="10%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHWeightTo" runat="server" CommandName="Sort" CommandArgument="WeightTo"
                                                 Text="Weight To"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Address">
-                                        <HeaderStyle CssClass="gridviewheader" />
+                                    <asp:TemplateField HeaderText="Address"  ItemStyle-HorizontalAlign="Right" >
+                                        <HeaderStyle CssClass="gridviewheader_num" />
                                         <ItemStyle CssClass="gridviewitem" Width="10%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHRate" runat="server" CommandName="Sort" CommandArgument="HaulageRate"

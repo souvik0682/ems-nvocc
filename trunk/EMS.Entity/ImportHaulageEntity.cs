@@ -33,19 +33,19 @@ namespace EMS.Entity
             set;
         }
 
-        public double WeightFrom
+        public decimal WeightFrom
         {
             get;
             set;
         }
 
-        public double WeightTo
+        public decimal WeightTo
         {
             get;
             set;
         }
 
-        public double HaulageRate
+        public decimal HaulageRate
         {
             get;
             set;
@@ -105,12 +105,12 @@ namespace EMS.Entity
         {
             this.ContainerSize = Convert.ToString(reader["ContainerSize"]);
             this.HaulageChgID = Convert.ToInt32(reader["HaulageChgID"]);
-            this.HaulageRate = Convert.ToDouble(reader["HaulageRate"]);
+            this.HaulageRate = Convert.ToDecimal(reader["HaulageRate"]);
             this.HaulageStatus = Convert.ToBoolean(reader["HaulageStatus"]);
             this.LocationFrom = Convert.ToString(reader["LocationFrom"]);
             this.LocationTo = Convert.ToString(reader["LocationTo"]);
-            this.WeightFrom = Convert.ToDouble(reader["WeightFrom"]);
-            this.WeightTo = Convert.ToDouble(reader["WeightTo"]);
+            this.WeightFrom = Convert.ToDecimal(reader["WeightFrom"]);
+            this.WeightTo = Convert.ToDecimal(reader["WeightTo"]);
             this.LFCode = Convert.ToString(reader["LFCode"]);
             this.LTCode = Convert.ToString(reader["LTCode"]);
         }

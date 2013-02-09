@@ -118,11 +118,11 @@ namespace EMS.WebApp.MasterModule
                 //oUserEntity = (UserEntity)Session[Constants.SESSION_USER_INFO]; // This section has been commented temporarily
 
                 oImportHaulageEntity.ContainerSize = ddlContainerSize.SelectedItem.Text;
-                oImportHaulageEntity.HaulageRate = Convert.ToDouble(txtRate.Text);
+                oImportHaulageEntity.HaulageRate = Convert.ToDecimal(txtRate.Text);
                 oImportHaulageEntity.LocationFrom = hdnFromLocation.Value;
                 oImportHaulageEntity.LocationTo = hdnToLocation.Value;
-                oImportHaulageEntity.WeightFrom = Convert.ToDouble(txtWFrom.Text.Trim());
-                oImportHaulageEntity.WeightTo = Convert.ToDouble(txtWTo.Text.Trim());
+                oImportHaulageEntity.WeightFrom = Convert.ToDecimal(txtWFrom.Text.Trim());
+                oImportHaulageEntity.WeightTo = Convert.ToDecimal(txtWTo.Text.Trim());
                 oImportHaulageEntity.HaulageStatus = true;
 
                 if (hdnHaulageChrgID.Value == "0") // Insert

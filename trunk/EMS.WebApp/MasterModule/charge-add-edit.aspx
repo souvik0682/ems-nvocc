@@ -28,12 +28,12 @@
                     <ContentTemplate>
                         <table border="0" cellpadding="2" cellspacing="3" width="100%">
                             <tr>
-                                <td style="width: 150px;">
+                                <td style="width: 60px;">
                                 </td>
-                                <td style="width: 150px;">
+                                <td style="width: 140px;">
                                     Effective Date<span class="errormessage1">*</span> :
                                 </td>
-                                <td style="width: 375px;">
+                                <td style="width: 250px;">
                                     <asp:TextBox ID="txtEffectDate" runat="server" Width="150" AutoCompleteType="None"></asp:TextBox>
                                     <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtEffectDate"
                                         PopupPosition="BottomLeft" TargetControlID="txtEffectDate" Format="dd/MM/yyyy"
@@ -108,7 +108,7 @@
                             </cc1:ValidatorCalloutExtender>--%>
                                 </td>
                                 <td>
-                                    washing charge<span class="errormessage1">*</span> :
+                                    Washing Charge<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
                                     <asp:RadioButtonList ID="rdbWashing" AutoPostBack="true" runat="server" RepeatDirection="Horizontal"
@@ -232,14 +232,16 @@
                                         
                                             <asp:GridView ID="dgChargeRates" runat="server" AutoGenerateColumns="false" ShowFooter="false"
                                                 OnItemCommand="dgChargeRates_ItemCommand" OnItemDataBound="dgChargeRates_ItemDataBound"
-                                                OnRowCommand="dgChargeRates_RowCommand" OnRowDataBound="dgChargeRates_RowDataBound">
+                                                OnRowCommand="dgChargeRates_RowCommand" 
+                                                OnRowDataBound="dgChargeRates_RowDataBound" Font-Names="Calibri" 
+                                                Font-Size="11pt">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Location">
                                                         <ItemTemplate>
                                                             <asp:HiddenField ID="hdnLocationId" runat="server" Value='<%# Eval("LocationId")%>' />
                                                             <%# (Eval("LocationId").ToString() == "0" ? string.Empty : ddlMLocation.Items.FindByValue(Eval("LocationId").ToString()).Text)%></ItemTemplate>
                                                         <HeaderTemplate>
-                                                            <asp:DropDownList ID="ddlFLocation" runat="server" Width="120" AutoPostBack="true"
+                                                            <asp:DropDownList ID="ddlFLocation" runat="server" Width="60" AutoPostBack="true"
                                                                 OnSelectedIndexChanged="ddlLocationID_SelectedIndexChanged">
                                                             </asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="rfvLocation" runat="server" ErrorMessage="Please select location"
@@ -258,7 +260,7 @@
                                                             <%# (Eval("TerminalId").ToString() == "0" ? string.Empty : ddlMTerminal.Items.FindByValue(Eval("TerminalId").ToString()).Text)%>
                                                         </ItemTemplate>
                                                         <HeaderTemplate>
-                                                            <asp:DropDownList ID="ddlFTerminal" runat="server" Width="120" Enabled="false">
+                                                            <asp:DropDownList ID="ddlFTerminal" runat="server" Width="60" Enabled="false">
                                                             </asp:DropDownList>
                                                             <br />
                                                             <br />
@@ -271,7 +273,7 @@
                                                             <%# (Eval("WashingType").ToString() == "0" ? string.Empty : ddlMWashingType.Items.FindByValue(Eval("WashingType").ToString()).Text )%>
                                                         </ItemTemplate>
                                                         <HeaderTemplate>
-                                                            <asp:DropDownList ID="ddlFWashingType" runat="server" Width="120" Enabled="false">
+                                                            <asp:DropDownList ID="ddlFWashingType" runat="server" Width="90" Enabled="false">
                                                             </asp:DropDownList>
                                                              <asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select washing type"
                                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="ddlFWashingType"
@@ -289,7 +291,7 @@
                                                             <asp:Label ID="lblLow" runat="server" Text='<%# Eval("Low")%>'></asp:Label>
                                                         </ItemTemplate>
                                                         <HeaderTemplate>
-                                                            <cc2:CustomTextBox ID="txtLow" runat="server" Width="50" Type="Numeric" Style="text-align: right;"></cc2:CustomTextBox>
+                                                            <cc2:CustomTextBox ID="txtLow" runat="server" Width="40" Type="Numeric" Style="text-align: right;"></cc2:CustomTextBox>
                                                             <cc1:TextBoxWatermarkExtender ID="tw1" runat="server" TargetControlID="txtLow" WatermarkText="0">
                                                             </cc1:TextBoxWatermarkExtender>
                                                             <asp:RequiredFieldValidator ID="rfvLow" runat="server" ErrorMessage="Please enter low slab"
@@ -300,12 +302,14 @@
                                                             <br />
                                                             Low
                                                         </HeaderTemplate>
+                                                        <HeaderStyle HorizontalAlign="Right" />
+                                                        <ItemStyle HorizontalAlign="Right" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="High" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
                                                         <ItemTemplate>
                                                             <asp:Label ID="lblHigh" runat="server" Text='<%# Eval("High")%>'></asp:Label></ItemTemplate>
                                                         <HeaderTemplate>
-                                                            <cc2:CustomTextBox ID="txtHigh" runat="server" Width="50" Type="Numeric" Style="text-align: right;"></cc2:CustomTextBox>
+                                                            <cc2:CustomTextBox ID="txtHigh" runat="server" Width="40" Type="Numeric" Style="text-align: right;"></cc2:CustomTextBox>
                                                             <cc1:TextBoxWatermarkExtender ID="tw2" runat="server" TargetControlID="txtHigh" WatermarkText="0">
                                                             </cc1:TextBoxWatermarkExtender>
                                                             <asp:RequiredFieldValidator ID="rfvHigh" runat="server" ErrorMessage="Please enter high slab"
@@ -316,12 +320,15 @@
                                                             <br />
                                                             High
                                                         </HeaderTemplate>
+                                                        <HeaderStyle HorizontalAlign="Right" />
+                                                        <ItemStyle HorizontalAlign="Right" />
                                                     </asp:TemplateField>
+                                                   
                                                     <asp:TemplateField HeaderText="Rate/BL" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
                                                         <ItemTemplate>
                                                             <asp:Label ID="lblRatePerBl" runat="server" Text='<%# Eval("RatePerBL")%>'></asp:Label></ItemTemplate>
                                                         <HeaderTemplate>
-                                                            <cc2:CustomTextBox ID="txtRatePerBL" runat="server" Width="90" Type="Decimal" MaxLength="10"
+                                                            <cc2:CustomTextBox ID="txtRatePerBL" runat="server" Width="60" Type="Decimal" MaxLength="10"
                                                                 Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
                                                             <cc1:TextBoxWatermarkExtender ID="tw3" runat="server" TargetControlID="txtRatePerBL"
                                                                 WatermarkText="0.00">
@@ -334,13 +341,15 @@
                                                             <br />
                                                             Rate/BL
                                                         </HeaderTemplate>
+                                                        <HeaderStyle HorizontalAlign="Right" />
+                                                        <ItemStyle HorizontalAlign="Right" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Rate/TEU" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
                                                         <ItemTemplate>
                                                             <asp:Label ID="lblRatePerTEU" runat="server" Text='<%# ddlChargeType.SelectedValue == "6" ? Eval("RatePerCBM") : Eval("RatePerTEU") %>'></asp:Label>
                                                         </ItemTemplate>
                                                         <HeaderTemplate>
-                                                            <cc2:CustomTextBox ID="txtRatePerTEU" runat="server" Width="90" Type="Decimal" MaxLength="10"
+                                                            <cc2:CustomTextBox ID="txtRatePerTEU" runat="server" Width="60" Type="Decimal" MaxLength="10"
                                                                 Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
                                                             <cc1:TextBoxWatermarkExtender ID="tw4" runat="server" TargetControlID="txtRatePerTEU"
                                                                 WatermarkText="0.00">
@@ -353,13 +362,15 @@
                                                             <br />
                                                             <asp:Label ID="lblFRateTeu" runat="server" Text="Rate/TEU"></asp:Label>
                                                         </HeaderTemplate>
+                                                        <HeaderStyle HorizontalAlign="Right" />
+                                                        <ItemStyle HorizontalAlign="Right" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Rate/FEU" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
                                                         <ItemTemplate>
                                                             <asp:Label ID="lblRatePerFEU" runat="server" Text='<%#  ddlChargeType.SelectedValue == "6" ? Eval("RatePerTON") : Eval("RatePerFEU") %>'></asp:Label>
                                                         </ItemTemplate>
                                                         <HeaderTemplate>
-                                                            <cc2:CustomTextBox ID="txtRateperFEU" runat="server" Width="90" Type="Decimal" MaxLength="10"
+                                                            <cc2:CustomTextBox ID="txtRateperFEU" runat="server" Width="60" Type="Decimal" MaxLength="10"
                                                                 Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
                                                             <cc1:TextBoxWatermarkExtender ID="tw5" runat="server" TargetControlID="txtRateperFEU"
                                                                 WatermarkText="0.00">
@@ -372,13 +383,15 @@
                                                             <br />
                                                             <asp:Label ID="lblFRateFeu" runat="server" Text="Rate/FEU"></asp:Label>
                                                         </HeaderTemplate>
+                                                        <HeaderStyle HorizontalAlign="Right" />
+                                                        <ItemStyle HorizontalAlign="Right" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Share/BL" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
                                                         <ItemTemplate>
                                                             <asp:Label ID="lblSharingBL" runat="server" Text='<%# Eval("SharingBL")%>'></asp:Label>
                                                         </ItemTemplate>
                                                         <HeaderTemplate>
-                                                            <cc2:CustomTextBox ID="txtSharingBL" runat="server" Width="90" Type="Decimal" MaxLength="10"
+                                                            <cc2:CustomTextBox ID="txtSharingBL" runat="server" Width="60" Type="Decimal" MaxLength="10"
                                                                 Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
                                                             <cc1:TextBoxWatermarkExtender ID="tw6" runat="server" TargetControlID="txtSharingBL"
                                                                 WatermarkText="0.00">
@@ -391,13 +404,15 @@
                                                             <br />
                                                             Share/BL
                                                         </HeaderTemplate>
+                                                        <HeaderStyle HorizontalAlign="Right" />
+                                                        <ItemStyle HorizontalAlign="Right" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Share/TEU" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
                                                         <ItemTemplate>
                                                             <asp:Label ID="lblSharingTEU" runat="server" Text='<%# Eval("SharingTEU")%>'></asp:Label>
                                                         </ItemTemplate>
                                                         <HeaderTemplate>
-                                                            <cc2:CustomTextBox ID="txtSharingTEU" runat="server" Width="90" Type="Decimal" MaxLength="10"
+                                                            <cc2:CustomTextBox ID="txtSharingTEU" runat="server" Width="60" Type="Decimal" MaxLength="10"
                                                                 Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
                                                             <cc1:TextBoxWatermarkExtender ID="tw7" runat="server" TargetControlID="txtSharingTEU"
                                                                 WatermarkText="0.00">
@@ -410,13 +425,15 @@
                                                             <br />
                                                             <asp:Label ID="lblFShareTeu" runat="server" Text="Share/TEU"></asp:Label>
                                                         </HeaderTemplate>
+                                                        <HeaderStyle HorizontalAlign="Right" />
+                                                        <ItemStyle HorizontalAlign="Right" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Shar/FEU" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
                                                         <ItemTemplate>
                                                             <asp:Label ID="lblSharingFEU" runat="server" Text='<%# Eval("SharingFEU")%>'></asp:Label>
                                                         </ItemTemplate>
                                                         <HeaderTemplate>
-                                                            <cc2:CustomTextBox ID="txtSharingFEU" runat="server" Width="90" Type="Decimal" MaxLength="10"
+                                                            <cc2:CustomTextBox ID="txtSharingFEU" runat="server" Width="60" Type="Decimal" MaxLength="10"
                                                                 Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
                                                             <cc1:TextBoxWatermarkExtender ID="tw8" runat="server" TargetControlID="txtSharingFEU"
                                                                 WatermarkText="0.00">
@@ -429,7 +446,10 @@
                                                             <br />
                                                             <asp:Label ID="lblFShareFeu" runat="server" Text="Shar/FEU"></asp:Label>
                                                         </HeaderTemplate>
+                                                        <HeaderStyle HorizontalAlign="Right" />
+                                                        <ItemStyle HorizontalAlign="Right" />
                                                     </asp:TemplateField>
+
                                                     <asp:TemplateField HeaderText="Edit" ItemStyle-Font-Bold="true" ItemStyle-HorizontalAlign="Center"
                                                         FooterStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Top">
                                                         <ItemTemplate>
@@ -447,6 +467,9 @@
                                                             <br />
                                                             Edit
                                                         </HeaderTemplate>
+                                                        <FooterStyle HorizontalAlign="Center" />
+                                                        <HeaderStyle VerticalAlign="Top" />
+                                                        <ItemStyle Font-Bold="True" HorizontalAlign="Center" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Delete" ItemStyle-Font-Bold="true" ItemStyle-HorizontalAlign="Center"
                                                         FooterStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Top">
@@ -461,11 +484,14 @@
                                                             <br />
                                                             Delete
                                                         </HeaderTemplate>
+                                                        <FooterStyle HorizontalAlign="Center" />
+                                                        <HeaderStyle VerticalAlign="Top" />
+                                                        <ItemStyle Font-Bold="True" HorizontalAlign="Center" />
                                                     </asp:TemplateField>
                                                 </Columns>
-                                                <HeaderStyle Font-Bold="true" HorizontalAlign="Center" BackColor="GrayText" />
+                                                <HeaderStyle Font-Bold="true" HorizontalAlign="Center" BackColor="#F8F8F8" />
                                                 <RowStyle Wrap="true" />
-                                                <FooterStyle BackColor="GrayText" HorizontalAlign="Center" />
+                                                <FooterStyle BackColor="#F8F8F8" HorizontalAlign="Center" />
                                             </asp:GridView>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>

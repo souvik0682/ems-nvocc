@@ -51,12 +51,26 @@ namespace EMS.DAL
             string strExecution = "[mst].[spGetVendor]";
             List<IVendor> lstVnd = new List<IVendor>();
 
+            //using (DbQuery oDq = new DbQuery(strExecution))
+            //{
+            //    //=========================================================
+                
+            //    oDq.AddIntegerParam("@VendorId", ID);
+            //    oDq.AddVarcharParam("@SchName", 100, searchCriteria.LocAbbr);
+            //    oDq.AddVarcharParam("@SchLoc", 100, searchCriteria.LocName);
+            //    oDq.AddVarcharParam("@SortExpression", 4, searchCriteria.SortExpression);
+            //    oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
+            //    DataTable dtAdd = oDq.GetTable();
+            //}
+
+
+
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@VendorId", ID);
                 oDq.AddVarcharParam("@SchName", 100, searchCriteria.LocAbbr);
                 oDq.AddVarcharParam("@SchLoc", 100, searchCriteria.LocName);
-                oDq.AddVarcharParam("@SortExpression", 4, searchCriteria.SortExpression);
+                oDq.AddVarcharParam("@SortExpression", 10, searchCriteria.SortExpression);
                 oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
                 DataTableReader reader = oDq.GetTableReader();
 
@@ -65,7 +79,7 @@ namespace EMS.DAL
                     IVendor Vnd = new VendorEntity(reader);
                     lstVnd.Add(Vnd);
                 }
-                reader.Close();
+                reader.Close();  
             }
             return lstVnd;
         }

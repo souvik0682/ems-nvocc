@@ -58,7 +58,7 @@ namespace EMS.Entity
         public int fk_UserAdded { get; set; }
         public int fk_UserEdited { get; set; }
         public bool VoyageStatus { get; set; }
-        public int locid { get; set; }
+        public int? locid { get; set; }
 
     }
 }

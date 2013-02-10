@@ -97,7 +97,7 @@
                             <li id="liMst_Country" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManageCountry.aspx") %>">Country Master</a></li>
                             <li id="liMst_Port" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManagePort.aspx") %>">Port Master</a></li>
                             <li id="liMst_Haulage" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ImportHaulage-list.aspx") %>">Import Haulage</a></li>
-                            <li id="liMst_Vessel" runat="server"><a href="#">Vessel</a></li>
+                            <li id="liMst_Vessel" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageVessel.aspx") %>">Vessel</a></li>
                         </ul>
                     </li>
                     <li id="liImp" runat="server">
@@ -114,7 +114,7 @@
                                 <a href="#">Report</a>
                                 <ul>
                                     <li id="liIR_BL" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ImpBLChkLst.aspx") %>">Import B/L checklist</a></li>
-                                    <li id="liIR_EDI" runat="server"><a href="#">Import EDI for Custom - Export to text file</a></li>
+                                    <li id="liIR_EDI" runat="server"><a href="<%=Page.ResolveClientUrl("~/Import/EDI_Custom.aspx") %>">Import EDI for Custom - Export to text file</a></li>
                                     <li id="liIR_IGM" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/IGMForm2.aspx") %>">IGM - Form II</a></li>
                                     <li id="liIR_IGMC" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/IGMFormC.aspx") %>">IGM - Form C for Hazardous Cargo</a></li>
                                     <li id="liIR_Amend" runat="server"><a href="#">Amendment Letter</a></li>
@@ -200,7 +200,7 @@
                                 <a href="#">Data</a>
                                 <ul>
                                     <li id="liLD_Container" runat="server"><a href="<%=Page.ResolveClientUrl("~/Equipment/container-movement.aspx") %>">Container</a></li>
-                                    <li id="liLD_Repairing" runat="server"><a href="#">Repairing</a></li>
+                                    <li id="liLD_Repairing" runat="server"><a href="<%=Page.ResolveClientUrl("~/Equipment/RepairingEstimate.aspx") %>">Repairing</a></li>
                                     <li id="liLD_Onhire" runat="server"><a href="#">On-Hire</a></li>
                                     <li id="liLD_Pickup" runat="server"><a href="#">Pick-up</a></li>
                                 </ul>

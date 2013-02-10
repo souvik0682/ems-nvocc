@@ -107,7 +107,7 @@
                                 <a href="#">Data</a>
                                 <ul>
                                     <li id="liID_BL" runat="server"><a href="<%=Page.ResolveClientUrl("~/Transaction/ImportBL.aspx") %>">B/L Entry</a></li>
-                                    <li id="liID_Voyage" runat="server"><a href="#">Voyage</a></li>
+                                    <li id="liID_Voyage" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MangeVoyage.aspx") %>">Voyage</a></li>
                                 </ul>
                             </li>
                             <li id="liIR" runat="server">

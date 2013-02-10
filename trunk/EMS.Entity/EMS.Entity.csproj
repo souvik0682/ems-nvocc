@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="AddressEntity.cs" />
     <Compile Include="AreaEntity.cs" />
+    <Compile Include="BLFooterEntity.cs" />
+    <Compile Include="BLHeaderEntity.cs" />
     <Compile Include="ChargeEntity.cs" />
     <Compile Include="ChargeRateEntity.cs" />
     <Compile Include="ContactPersonEntity.cs" />
@@ -50,6 +52,7 @@
     <Compile Include="EqpOnHire.cs" />
     <Compile Include="EqpOnHireContainer.cs" />
     <Compile Include="EquipmentRepairEntity.cs" />
+    <Compile Include="LineEntity.cs" />
     <Compile Include="Report\CANEntity.cs" />
     <Compile Include="Report\ImpRegisterSummaryEntity.cs" />
     <Compile Include="Report\ImpRegisterEntity.cs" />

@@ -45,6 +45,7 @@
     <Compile Include="ContainerTranDAL.cs" />
     <Compile Include="EDIDAL.cs" />
     <Compile Include="EquipmentDAL.cs" />
+    <Compile Include="ImportBLDAL.cs" />
     <Compile Include="ImportHaulageDAL.cs" />
     <Compile Include="ChargeDAL.cs" />
     <Compile Include="DBManager\DataConnection.cs" />

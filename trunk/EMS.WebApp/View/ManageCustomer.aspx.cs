@@ -52,6 +52,10 @@ namespace EMS.WebApp.View
             txtCustName.Text = string.Empty;
             txtGrComp.Text = string.Empty;
             txtExec.Text = string.Empty;
+
+            SaveNewPageIndex(0);
+            LoadCustomer();
+            upCust.Update();
         }
 
         protected void gvwCust_PageIndexChanging(object sender, GridViewPageEventArgs e)

@@ -56,6 +56,10 @@ namespace EMS.WebApp.View
         {
             txtUserName.Text = string.Empty;
             txtFName.Text = string.Empty;
+
+            SaveNewPageIndex(0);
+            LoadUser();
+            upUser.Update();
         }
 
         protected void gvwUser_PageIndexChanging(object sender, GridViewPageEventArgs e)

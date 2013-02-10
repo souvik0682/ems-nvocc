@@ -40,12 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBLFooter.cs" />
+    <Compile Include="IBLHeader.cs" />
     <Compile Include="IChargeRate.cs" />
     <Compile Include="IContainerType.cs" />
     <Compile Include="IEqpContainerTransaction.cs" />
     <Compile Include="IEqpOnHire.cs" />
     <Compile Include="IEqpOnHireContainer.cs" />
     <Compile Include="IEqpRepairing.cs" />
+    <Compile Include="ILine.cs" />
     <Compile Include="IRoleMenu.cs" />
     <Compile Include="IMenu.cs" />
     <Compile Include="IExchangeRate.cs" />

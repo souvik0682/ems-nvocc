@@ -45,7 +45,8 @@ namespace EMS.WebApp.MasterModule
 
             if (VoyageId != "-1")
             {
-                int c = dbinteract.PopulateDDLDS("ImpBLHeader", "fk_ImpVesselID", "fk_ImpVoyageID", "where fk_ImpVesselID=" + ddlVessel.SelectedValue + " and fk_ImpVoyageID=" + txtVoyageNo.Text.Trim()).Tables[0].Rows.Count;
+                //int c = dbinteract.PopulateDDLDS("ImpBLHeader", "fk_ImpVesselID", "fk_ImpVoyageID", "where fk_ImpVesselID=" + ddlVessel.SelectedValue + " and fk_ImpVoyageID='" + txtVoyageNo.Text.Trim()+"'").Tables[0].Rows.Count;
+                int c = dbinteract.CountLandDate(Convert.ToInt32(ddlVessel.SelectedValue), txtVoyageNo.Text.Trim());
                 if (c > 0)
                 {
                     if (txtExcRate.Text.Trim() == "")
@@ -172,7 +173,7 @@ namespace EMS.WebApp.MasterModule
             voyage.IGMDate = string.IsNullOrEmpty(txtDtIGM.Text.Trim()) ? (Nullable<DateTime>)null : Convert.ToDateTime(txtDtIGM.Text);
             voyage.LandingDate = string.IsNullOrEmpty(txtdtLand.Text.Trim()) ? (Nullable<DateTime>)null : Convert.ToDateTime(txtdtLand.Text);
             voyage.PCCDate = string.IsNullOrEmpty(txtdtPCC.Text.Trim()) ? (Nullable<DateTime>)null : Convert.ToDateTime(txtdtPCC.Text);
-
+            voyage.locid = Convert.ToInt32(ddlLoc.SelectedValue);
             string port = ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
             port = port.Contains(',') && port.Split(',').Length >= 1 ? port.Split(',')[1].Trim() : "";
             voyage.fk_LPortID = dbinteract.GetId("Port", port);

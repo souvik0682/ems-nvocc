@@ -321,7 +321,7 @@ namespace EMS.BLL
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
             dquery.AddIntegerParam("@userID", userID);
             dquery.AddBooleanParam("@isEdit", isEdit);
-            dquery.AddIntegerParam("@loc", voyage.locid);
+            dquery.AddIntegerParam("@locid", voyage.locid);
             dquery.AddIntegerParam("@pk_VoyageID", voyage.pk_VoyageID);
             dquery.AddIntegerParam("@fk_VesselID", voyage.fk_VesselID);
             dquery.AddIntegerParam("@fl_TerminalID", voyage.fl_TerminalID);

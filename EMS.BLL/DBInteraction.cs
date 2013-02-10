@@ -91,6 +91,16 @@ namespace EMS.BLL
             dquery.AddDateTimeParam("@StaxDate", dt);
             return Convert.ToInt32(dquery.GetScalar());
         }
+
+        public int CountLandDate(int fk_ImpVesselID,string VoyageNo)
+        {
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery("prcCountLandDate");
+            dquery.AddIntegerParam("@fk_ImpVesselID", fk_ImpVesselID);
+            dquery.AddVarcharParam("@VoyageNo",100, VoyageNo);
+            return Convert.ToInt32(dquery.GetScalar());
+
+           
+        }
         #endregion
 
         #region country

@@ -38,7 +38,7 @@ namespace EMS.WebApp.MasterModule
                
                 if (VesselId != "-1")
                     LoadData(VesselId);
-
+                else
                 LoadShip_Tax(_userId, dbinteract);
             }
         }
@@ -80,8 +80,8 @@ namespace EMS.WebApp.MasterModule
                 txtAgentCode.Text = ds.Tables[0].Rows[0]["AgentCode"].ToString();
                 txtIMO.Text = ds.Tables[0].Rows[0]["IMONumber"].ToString();
                 txtMasterCode.Text = ds.Tables[0].Rows[0]["MasterName"].ToString();
-                //txtPan.Text = ds.Tables[0].Rows[0]["PAN"].ToString();
-                //txtShipLineCode.Text = ds.Tables[0].Rows[0]["ShippingLineCode"].ToString();
+                txtPan.Text = ds.Tables[0].Rows[0]["PAN"].ToString();
+                txtShipLineCode.Text = ds.Tables[0].Rows[0]["ShippingLineCode"].ToString();
                 ((TextBox)AutoCompleteCountry1.FindControl("txtCountry")).Text = ds.Tables[0].Rows[0]["flag"].ToString();
                 txtVesselName.Text = ds.Tables[0].Rows[0]["VesselName"].ToString();
                 ddlVesselPrefix.SelectedValue = ds.Tables[0].Rows[0]["fk_VesselPrefixID"].ToString();

@@ -52,6 +52,7 @@ namespace EMS.Utilities
         ImportHaulageChargeMaster = 40,
         VesselMaster = 41,
         RoleMaster = 113,
+        ImportBL = 3,
     };
 
     public enum UserRole

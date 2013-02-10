@@ -31,6 +31,15 @@ namespace EMS.Entity
         public char ChargeType { get; set; }
         public string LineName { get; set; }
 
+        public string IGMBLNo { get; set; }
+        public string LineBLNo { get; set; }
+        public DateTime? BLDate { get; set; }
+        public string ContainerNo { get; set; }
+        public string Vessel { get; set; }
+        public string Voyage { get; set; }
+        public string POL { get; set; }
+        public string POD { get; set; }
+
 
         public string LocAbbr
         {
@@ -146,6 +155,14 @@ namespace EMS.Entity
             this.CurrentPage = 0;
             this.PageIndex = 0;
             this.PageSize = 0;
+            this.BLDate = null;
+            this.ContainerNo = string.Empty;
+            this.IGMBLNo = string.Empty;
+            this.LineBLNo = string.Empty;
+            this.POD = string.Empty;
+            this.POL = string.Empty;
+            this.Vessel = string.Empty;
+            this.Voyage = string.Empty;
         }
 
         #endregion

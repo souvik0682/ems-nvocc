@@ -57,6 +57,10 @@ namespace EMS.WebApp.View
         protected void btnReset_Click(object sender, EventArgs e)
         {
             txtDate.Text = string.Empty;
+
+            SaveNewPageIndex(0);
+            LoadExchangeRate();
+            upExchange.Update();
         }
 
         protected void gvwExch_PageIndexChanging(object sender, GridViewPageEventArgs e)

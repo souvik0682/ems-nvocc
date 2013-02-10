@@ -56,6 +56,10 @@ namespace EMS.WebApp.View
         {
             txtAbbreviation.Text = string.Empty;
             txtLocationName.Text = string.Empty;
+
+            SaveNewPageIndex(0);
+            LoadLocation();
+            upLoc.Update();
         }
 
         protected void gvwLoc_PageIndexChanging(object sender, GridViewPageEventArgs e)

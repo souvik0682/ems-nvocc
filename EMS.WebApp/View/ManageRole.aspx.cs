@@ -48,6 +48,10 @@ namespace EMS.WebApp.View
         protected void btnReset_Click(object sender, EventArgs e)
         {
             txtRole.Text = string.Empty;
+
+            SaveNewPageIndex(0);
+            LoadRole();
+            upRole.Update();
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)

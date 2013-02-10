@@ -22,5 +22,6 @@ namespace EMS.Common
         string ISO20 { get; set; }
         string ISO40 { get; set; }        
         char IsActive { get; set; }
+        int DefaultLocation { get; set; }
     }
 }

@@ -61,5 +61,25 @@ namespace EMS.Utilities
             M_S = 4
         }
 
+        public enum ContainerMovement
+        {
+            ONBR = 1,
+            DCHF = 2,
+            CFSI = 3,
+            CFSD = 4,
+            SNTC = 5,
+            DCHE = 6,
+            ONH = 7,
+            TRFI = 8,
+            RCVE = 9,
+            URPR = 10,
+            SNTS = 11,
+            RCVF = 12,
+            LODF = 13,
+            LODE = 14,
+            RCEE = 15,
+            TRFE = 16,
+            OFFH = 17
+        }
     }
 }

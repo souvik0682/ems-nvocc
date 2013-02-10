@@ -101,6 +101,12 @@ namespace EMS.Entity
             set;
         }
 
+        public int DefaultLocation
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region ICommon Members
@@ -176,8 +182,29 @@ namespace EMS.Entity
             this.ISO20 = Convert.ToString(reader["ISO20"]).Trim();
             this.ISO40 = Convert.ToString(reader["ISO40"]).Trim();
             this.IsActive = Convert.ToChar(reader["Active"]);
+
+            if (ColumnExists(reader, "DefaultLocID"))
+            {
+                if (reader["DefaultLocID"] != DBNull.Value)
+                    this.DefaultLocation = Convert.ToInt32(reader["DefaultLocID"]);
+            }
         }
 
         #endregion
+
+        public bool ColumnExists(IDataReader reader, string columnName)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                if (reader.GetName(i) == columnName)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
+
+
 }

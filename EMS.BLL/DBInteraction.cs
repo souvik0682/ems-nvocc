@@ -85,7 +85,12 @@ namespace EMS.BLL
 
         }
 
-
+        public int InvoiceDateCheck(DateTime dt)
+        {
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery("prcInvoiceDateCheck");
+            dquery.AddDateTimeParam("@StaxDate", dt);
+            return Convert.ToInt32(dquery.GetScalar());
+        }
         #endregion
 
         #region country

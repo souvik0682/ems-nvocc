@@ -97,7 +97,7 @@
                             <li id="liMst_Country" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManageCountry.aspx") %>">Country Master</a></li>
                             <li id="liMst_Port" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManagePort.aspx") %>">Port Master</a></li>
                             <li id="liMst_Haulage" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ImportHaulage-list.aspx") %>">Import Haulage</a></li>
-                            <li id="liMst_Vessel" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageVessel.aspx") %>">Vessel</a></li>
+                            <li id="liMst_Vessel" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManageVessel.aspx") %>">Vessel</a></li>
                         </ul>
                     </li>
                     <li id="liImp" runat="server">

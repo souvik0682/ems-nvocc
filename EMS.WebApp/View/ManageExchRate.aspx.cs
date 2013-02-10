@@ -258,6 +258,8 @@ namespace EMS.WebApp.View
 
             if (!string.IsNullOrEmpty(txtDate.Text) && txtDate.Text != ResourceManager.GetStringWithoutName("ERR00068"))
                 criteria.Date = Convert.ToDateTime(txtDate.Text.Trim(), _culture);
+            else
+                criteria.Date = null;
 
             Session[Constants.SESSION_SEARCH_CRITERIA] = criteria;
         }

@@ -46,22 +46,21 @@ namespace EMS.WebApp.MasterModule
             if (VoyageId != "-1")
             {
                 //int c = dbinteract.PopulateDDLDS("ImpBLHeader", "fk_ImpVesselID", "fk_ImpVoyageID", "where fk_ImpVesselID=" + ddlVessel.SelectedValue + " and fk_ImpVoyageID='" + txtVoyageNo.Text.Trim()+"'").Tables[0].Rows.Count;
-                int c = dbinteract.CountLandDate(Convert.ToInt32(ddlVessel.SelectedValue), txtVoyageNo.Text.Trim());
-                if (c > 0)
+                //int c = dbinteract.CountLandDate(Convert.ToInt32(ddlVessel.SelectedValue), txtVoyageNo.Text.Trim());
+               
+                if (txtdtLand.Text.Trim()!="")
                 {
-                    if (txtExcRate.Text.Trim() == "")
-                    {
+                   
                         txtExcRate.Text = hdntxtExcRate.Value = dbinteract.GetExchnageRate(Convert.ToDateTime(txtdtLand.Text)).ToString();
-                    }
+                   
                     trLandDate.Style.Add("display", " ");
                 }
                 else
                 {
                     trLandDate.Style.Add("display", "none");
-                    if (txtExcRate.Text.Trim() == "")
-                    {
+                   
                         txtExcRate.Text = hdntxtExcRate.Value = dbinteract.GetExchnageRate(DateTime.Today).ToString();
-                    }
+                   
                 }
 
             }

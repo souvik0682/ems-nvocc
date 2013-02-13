@@ -681,5 +681,20 @@ namespace EMS.DAL
                 oDq.RunActionQuery();
             }
         }
+
+        public static DataSet GetBLQuery(string BLNo)
+        {
+            string strExecution = "[trn].[getBLQuery]";
+            DataSet ds = new DataSet();
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@BLNo", 60, BLNo);
+                ds = oDq.GetTables();
+            }
+
+            return ds;
+        }
     }
 }

@@ -13,6 +13,15 @@ namespace EMS.WebApp.Import {
     public partial class bl_query {
         
         /// <summary>
+        /// UpdatePanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        
+        /// <summary>
         /// txtBlNo control.
         /// </summary>
         /// <remarks>
@@ -22,13 +31,13 @@ namespace EMS.WebApp.Import {
         protected global::System.Web.UI.WebControls.TextBox txtBlNo;
         
         /// <summary>
-        /// ddlDeleveredToCha control.
+        /// txtCha control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDeleveredToCha;
+        protected global::System.Web.UI.WebControls.TextBox txtCha;
         
         /// <summary>
         /// txtHouseBlNo control.
@@ -40,31 +49,31 @@ namespace EMS.WebApp.Import {
         protected global::System.Web.UI.WebControls.TextBox txtHouseBlNo;
         
         /// <summary>
-        /// txtFreedays control.
+        /// txtDetentionFee control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFreedays;
+        protected global::System.Web.UI.WebControls.TextBox txtDetentionFee;
         
         /// <summary>
-        /// txtValidUpto control.
+        /// txtDoValidUpto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtValidUpto;
+        protected global::System.Web.UI.WebControls.TextBox txtDoValidUpto;
         
         /// <summary>
-        /// txtDetentionChargeUpto control.
+        /// txtLandingDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDetentionChargeUpto;
+        protected global::System.Web.UI.WebControls.TextBox txtLandingDate;
         
         /// <summary>
         /// txtVessel control.
@@ -551,5 +560,14 @@ namespace EMS.WebApp.Import {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkDetentionWaiver;
+        
+        /// <summary>
+        /// gvwVendor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvwVendor;
     }
 }

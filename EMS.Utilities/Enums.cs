@@ -16,7 +16,8 @@ namespace EMS.Utilities
             ContainerSize = 5,
             Line = 6,
             ContainerMovementStatus = 7,
-            VendorList = 8
+            VendorList = 8,
+
         }
 
 

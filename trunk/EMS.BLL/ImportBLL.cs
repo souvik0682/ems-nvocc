@@ -188,5 +188,10 @@ namespace EMS.BLL
         {
             ImportBLDAL.DeleteBLFooter(FooterId);
         }
+
+        public DataSet GetBLQuery(string ImpBLNo)
+        {
+            return ImportBLDAL.GetBLQuery(ImpBLNo);
+        }
     }
 }

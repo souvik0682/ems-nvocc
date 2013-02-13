@@ -12,16 +12,19 @@
         <center>
             <fieldset style="width: 90%;">
                 <legend>B/L Detail</legend>
-                <table border="0" cellpadding="2" cellspacing="3" width="100%">
-                    <tr>
-                        <td style="width: 50px;">
-                        </td>
-                        <td style="width: 150px;">
-                            B/L No<span class="errormessage1">*</span> :
-                        </td>
-                        <td style="width: 230px;">
-                            <asp:TextBox ID="txtBlNo" runat="server" Width="150" AutoCompleteType="None"></asp:TextBox>
-                            <%--<cc1:calendarextender id="CalendarExtender1" runat="server" popupbuttonid="txtEffectDate"
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <table border="0" cellpadding="2" cellspacing="3" width="100%">
+                            <tr>
+                                <td style="width: 50px;">
+                                </td>
+                                <td style="width: 150px;">
+                                    B/L No :
+                                </td>
+                                <td style="width: 230px;">
+                                    <asp:TextBox ID="txtBlNo" runat="server" Width="150" AutoCompleteType="None" 
+                                        AutoPostBack="True" ontextchanged="txtBlNo_TextChanged"></asp:TextBox>
+                                    <%--<cc1:calendarextender id="CalendarExtender1" runat="server" popupbuttonid="txtEffectDate"
                                         popupposition="BottomLeft" targetcontrolid="txtEffectDate" format="dd/MM/yyyy"
                                         onclientdateselectionchanged="checkDate">
                                     </cc1:calendarextender>
@@ -32,153 +35,156 @@
                                     <cc1:filteredtextboxextender id="FilteredTextBoxExtender1" runat="server" targetcontrolid="txtEffectDate"
                                         filtermode="ValidChars" filtertype="Numbers,Custom" validchars="/">
                                     </cc1:filteredtextboxextender>--%>
-                        </td>
-                        <td style="width: 150px;">
-                            Delivered To (CHA)<span class="errormessage1">*</span>
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="ddlDeleveredToCha" runat="server" Width="155">
-                            </asp:DropDownList>
-                            <%--<asp:RequiredFieldValidator ID="rfvTerminalRequired" runat="server" ErrorMessage="Please select your choice"
+                                </td>
+                                <td style="width: 150px;">
+                                    Delivered To (CHA)
+                                </td>
+                                <td>
+                                    <%--<asp:DropDownList ID="ddlDeleveredToCha" runat="server" Width="155">
+                            </asp:DropDownList>--%>
+                                    <asp:TextBox ID="txtCha" runat="server" Width="150"></asp:TextBox>
+                                    <%--<asp:RequiredFieldValidator ID="rfvTerminalRequired" runat="server" ErrorMessage="Please select your choice"
                                         Display="None" ControlToValidate="rdbPrincipleSharing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                                     <cc1:validatorcalloutextender id="ValidatorCalloutExtender18" runat="server" targetcontrolid="rfvTerminalRequired">
                                     </cc1:validatorcalloutextender>--%>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            House B/L No<span class="errormessage1">*</span> :
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtHouseBlNo" runat="server" Width="150" Style="text-transform: uppercase;"></asp:TextBox>
-                            <%--<asp:RequiredFieldValidator ID="rfvChargeTitle" runat="server" ErrorMessage="Please enter charge title"
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    House B/L No :
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtHouseBlNo" runat="server" Width="150" Style="text-transform: uppercase;"></asp:TextBox>
+                                    <%--<asp:RequiredFieldValidator ID="rfvChargeTitle" runat="server" ErrorMessage="Please enter charge title"
                                         ControlToValidate="txtChargeName" Display="None" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                                     <cc1:validatorcalloutextender id="ValidatorCalloutExtender11" runat="server" targetcontrolid="rfvChargeTitle">
                                     </cc1:validatorcalloutextender>--%>
-                        </td>
-                        <td>
-                            Detention Free Days<span class="errormessage1">*</span> :
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtFreedays" runat="server" Width="150" Style="text-transform: uppercase;"></asp:TextBox>
-                            <%-- <asp:RequiredFieldValidator ID="rfvPS" runat="server" ErrorMessage="Please select your choice"
+                                </td>
+                                <td>
+                                    Detention Fee :
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtDetentionFee" runat="server" Width="150" Style="text-transform: uppercase;"></asp:TextBox>
+                                    <%-- <asp:RequiredFieldValidator ID="rfvPS" runat="server" ErrorMessage="Please select your choice"
                                 Display="None" ControlToValidate="rdbPrincipleSharing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender13" runat="server" TargetControlID="rfvPS">
                             </cc1:ValidatorCalloutExtender>--%>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            DO validated up to<span class="errormessage1">*</span> :
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtValidUpto" runat="server" Width="150"></asp:TextBox>
-                            <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    DO validated up to :
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtDoValidUpto" runat="server" Width="150"></asp:TextBox>
+                                    <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvSalutation" WarningIconImageUrl="" >
                             </cc1:ValidatorCalloutExtender>--%>
-                        </td>
-                        <td>
-                            Landing Date<span class="errormessage1">*</span> :
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtDetentionChargeUpto" runat="server" Width="150"></asp:TextBox>
-                            <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
+                                </td>
+                                <td>
+                                    Landing Date :
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtLandingDate" runat="server" Width="150"></asp:TextBox>
+                                    <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
                             </cc1:ValidatorCalloutExtender>--%>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            Vessel<span class="errormessage1">*</span> :
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtVessel" runat="server" Width="150"></asp:TextBox>
-                            <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    Vessel :
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtVessel" runat="server" Width="150"></asp:TextBox>
+                                    <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvSalutation" WarningIconImageUrl="" >
                             </cc1:ValidatorCalloutExtender>--%>
-                        </td>
-                        <td>
-                            Voyage<span class="errormessage1">*</span> :
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtVoyage" runat="server" Width="150"></asp:TextBox>
-                            <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
+                                </td>
+                                <td>
+                                    Voyage :
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtVoyage" runat="server" Width="150"></asp:TextBox>
+                                    <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
                             </cc1:ValidatorCalloutExtender>--%>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            Detentiion Free Days<span class="errormessage1">*</span> :
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtDetentionFreeDays" runat="server" Width="150"></asp:TextBox>
-                            <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    Detention Free Days :
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtDetentionFreeDays" runat="server" Width="150"></asp:TextBox>
+                                    <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvSalutation" WarningIconImageUrl="" >
                             </cc1:ValidatorCalloutExtender>--%>
-                        </td>
-                        <td>
-                            Detention till<span class="errormessage1">*</span> :
-                        </td>
-                        <td>
-                            <asp:TextBox ID="tstDetentionTill" runat="server" Width="150"></asp:TextBox>
-                            <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
+                                </td>
+                                <td>
+                                    Detention till :
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="tstDetentionTill" runat="server" Width="150"></asp:TextBox>
+                                    <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
                             </cc1:ValidatorCalloutExtender>--%>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            PGR free days<span class="errormessage1">*</span> :
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtPGRFreedays" runat="server" Width="150"></asp:TextBox>
-                            <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    PGR free days :
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtPGRFreedays" runat="server" Width="150"></asp:TextBox>
+                                    <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvSalutation" WarningIconImageUrl="" >
                             </cc1:ValidatorCalloutExtender>--%>
-                        </td>
-                        <td>
-                            PGR till<span class="errormessage1">*</span> :
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtPGRTill" runat="server" Width="150"></asp:TextBox>
-                            <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
+                                </td>
+                                <td>
+                                    PGR till :
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtPGRTill" runat="server" Width="150"></asp:TextBox>
+                                    <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
                             </cc1:ValidatorCalloutExtender>--%>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td colspan="3" align="right">
-                            <asp:HiddenField ID="hdnBlQueryID" runat="server" Value="0" />
-                            <asp:Button ID="btnSave1" runat="server" Text="Save" ValidationGroup="vgCharge" />&nbsp;&nbsp;<asp:Button
-                                ID="btnBack1" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
-                                OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
-                            <asp:Label ID="lblMessageBLQuery" runat="server" ForeColor="Red"></asp:Label>
-                        </td>
-                    </tr>
-                </table>
+                                </td>
+                            </tr>
+                            <tr style="height: 50px; vertical-align: bottom; display: none;">
+                                <td>
+                                </td>
+                                <td colspan="2">
+                                </td>
+                                <td colspan="2" align="left">
+                                    <asp:HiddenField ID="hdnBlQueryID" runat="server" Value="0" />
+                                    <asp:Button ID="btnSave1" runat="server" Text="Save" ValidationGroup="vgCharge" />&nbsp;&nbsp;<asp:Button
+                                        ID="btnBack1" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
+                                        OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
+                                    <asp:Label ID="lblMessageBLQuery" runat="server" ForeColor="Red"></asp:Label>
+                                </td>
+                            </tr>
+                        </table>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </fieldset>
             <fieldset style="width: 90%;">
                 <legend>Service Requests</legend>
@@ -296,8 +302,10 @@
                             </cc1:CalendarExtender>
                         </td>
                     </tr>
-                    <tr style="height: 30px;">
-                        <td colspan="8" align="right">
+                    <tr style="height: 50px; vertical-align: bottom;">
+                        <td colspan="3">
+                        </td>
+                        <td colspan="5" align="left">
                             <asp:Button ID="btnSave2" runat="server" Text="Save" ValidationGroup="vgCharge" />&nbsp;&nbsp;<asp:Button
                                 ID="btnBack2" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
                                 OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
@@ -355,6 +363,99 @@
                         </td>
                         <td colspan="2">
                             <asp:CheckBox ID="chkDetentionWaiver" runat="server" Text="Detention Waiver" />
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+            <fieldset style="width: 90%;">
+                <legend>Invoice Status</legend>
+                <table style="width: 100%;">
+                    <tr>
+                        <td>
+                            <asp:GridView ID="gvwVendor" runat="server" AutoGenerateColumns="false" AllowPaging="true"
+                                BorderStyle="None" BorderWidth="0" Width="100%">
+                                <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
+                                <EmptyDataTemplate>
+                                    No Record(s) Found</EmptyDataTemplate>
+                                <Columns>
+                                    <asp:TemplateField HeaderText="Sl#">
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="2%" />
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <HeaderTemplate>
+                                            Invoice Type</HeaderTemplate>
+                                        <ItemTemplate>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Location">
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
+                                        <HeaderTemplate>
+                                            Document No.</HeaderTemplate>
+                                        <ItemTemplate>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Name">
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
+                                        <HeaderTemplate>
+                                            Ref. Inv. No.</HeaderTemplate>
+                                        <ItemTemplate>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Address">
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <HeaderTemplate>
+                                            Invoice Amount</HeaderTemplate>
+                                        <ItemTemplate>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <HeaderTemplate>
+                                            Payment Received</HeaderTemplate>
+                                        <ItemTemplate>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Location">
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <HeaderTemplate>
+                                            CRN Amount</HeaderTemplate>
+                                        <ItemTemplate>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Name">
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="5%" />
+                                        <HeaderTemplate>
+                                            Print</HeaderTemplate>
+                                        <ItemTemplate>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Address">
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
+                                        <HeaderTemplate>
+                                            Money Recpt.</HeaderTemplate>
+                                        <ItemTemplate>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Address">
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <HeaderTemplate>
+                                            Credit Note</HeaderTemplate>
+                                        <ItemTemplate>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
                         </td>
                     </tr>
                 </table>

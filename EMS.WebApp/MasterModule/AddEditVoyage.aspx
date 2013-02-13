@@ -273,7 +273,7 @@
        
          <tr>
                     <td style="width:140px;">Mother Daughter</td>
-                    <td><asp:TextBox ID="txtMotherDaughter" CssClass="textboxuppercase" TextMode="MultiLine" runat="server" CssClass="" MaxLength="14" Width="250"></asp:TextBox><br />
+                    <td><asp:TextBox ID="txtMotherDaughter" CssClass="textboxuppercase" TextMode="MultiLine" runat="server"  MaxLength="14" Width="250"></asp:TextBox><br />
                    </td>
                 </tr>
 

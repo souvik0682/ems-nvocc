@@ -42,7 +42,7 @@ function IsNumeric(ctrl) {
     }
 
     if (!result) {
-        alert('Please enter a valid numeric value');
+       // alert('Please enter a valid numeric value');
         document.getElementById(ctrl.id).value = "";
         ctrl.focus();
         return false;
@@ -201,7 +201,7 @@ function IsDecimal(ctrl) {
     }
 
     if (!result) {
-        alert('Please enter a valid decimal value');
+        //alert('Please enter a valid decimal value');
         document.getElementById(ctrl.id).value = "";
         ctrl.focus();
         return false;

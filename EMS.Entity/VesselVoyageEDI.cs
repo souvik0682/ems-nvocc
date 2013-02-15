@@ -17,7 +17,7 @@ namespace EMS.Entity
 
         public string IGMNo { get; set; }
 
-        public DateTime IGMDate { get; set; }
+        public DateTime? IGMDate { get; set; }
 
         public string ShippingLineCode { get; set; }
 
@@ -29,7 +29,7 @@ namespace EMS.Entity
 
         public string VesselFlag { get; set; }
 
-        public int LPortID { get; set; }
+        public int? LPortID { get; set; }
 
         public string LastPortCalled { get; set; }
 
@@ -39,9 +39,9 @@ namespace EMS.Entity
 
         public string CargoDesc { get; set; }
 
-        public DateTime ETADate { get; set; }
+        public DateTime? ETADate { get; set; }
 
-        public int LightHouseDue { get; set; }
+        public int? LightHouseDue { get; set; }
 
         public int SameButtonCargo { get; set; }
 
@@ -76,7 +76,8 @@ namespace EMS.Entity
             this.CargoDesc = Convert.ToString(reader["CargoDesc"]);
             this.CrewEffectList = Convert.ToInt32(reader["CrewEffectList"]);
             this.CrewList = Convert.ToInt32(reader["CrewList"]);
-            this.ETADate = Convert.ToDateTime(reader["ETADate"]);
+            //this.ETADate =reader["ETADate"]==null?(Nullable<DateTime>)null: Convert.ToDateTime(reader["ETADate"]);
+            this.ETADate =reader["ETADate"]==DBNull.Value?(Nullable<DateTime>)null: Convert.ToDateTime(reader["ETADate"]);
             this.CountryId = Convert.ToInt32(reader["fk_CountryId"]);
             this.IGMDate = Convert.ToDateTime(reader["IGMDate"]);
             this.IGMNo = Convert.ToString(reader["IGMNo"]);
@@ -96,11 +97,6 @@ namespace EMS.Entity
             this.VesselType = Convert.ToString(reader["VesselType"]);
             this.LandingDate = Convert.ToDateTime(reader["LandingDate"]);
         }
-
-
-
-
-
 
 
 

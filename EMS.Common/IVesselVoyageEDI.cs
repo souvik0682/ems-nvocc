@@ -12,19 +12,19 @@ namespace EMS.Common
 
         string CallSign { get; set; }
         string IGMNo { get; set; }
-        DateTime IGMDate { get; set; }
+        DateTime? IGMDate { get; set; }
         string ShippingLineCode { get; set; }
         string PANNo { get; set; }
         string MasterName { get; set; }
         int CountryId { get; set; }
         string VesselFlag { get; set; }
-        int LPortID { get; set; }
+        int? LPortID { get; set; }
         string LastPortCalled { get; set; }
         string IMONumber { get; set; }
         string TotalLines { get; set; }
         string CargoDesc { get; set; }
-        DateTime ETADate { get; set; }
-        int LightHouseDue { get; set; }
+        DateTime? ETADate { get; set; }
+        int? LightHouseDue { get; set; }
         int SameButtonCargo { get; set; }
         int ShipStoreSubmitted { get; set; }
         int CrewList { get; set; }

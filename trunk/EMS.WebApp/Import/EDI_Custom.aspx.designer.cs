@@ -130,31 +130,31 @@ namespace EMS.WebApp.Import {
         protected global::System.Web.UI.WebControls.TextBox txtVesselFlag;
         
         /// <summary>
-        /// txtLastPort control.
+        /// AutoCompletepPort2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLastPort;
+        protected global::EMS.WebApp.CustomControls.AutoCompletePort AutoCompletepPort2;
         
         /// <summary>
-        /// txtPortBefore1 control.
+        /// AutoCompletepPort3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPortBefore1;
+        protected global::EMS.WebApp.CustomControls.AutoCompletePort AutoCompletepPort3;
         
         /// <summary>
-        /// txtPortBefore2 control.
+        /// AutoCompletepPort4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPortBefore2;
+        protected global::EMS.WebApp.CustomControls.AutoCompletePort AutoCompletepPort4;
         
         /// <summary>
         /// AutoCompletepPort1 control.
@@ -191,6 +191,15 @@ namespace EMS.WebApp.Import {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTotLine;
+        
+        /// <summary>
+        /// RequiredFieldValidator3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
         
         /// <summary>
         /// txtCargoDesc control.
@@ -244,7 +253,7 @@ namespace EMS.WebApp.Import {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLightHouse;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtLightHouse;
         
         /// <summary>
         /// ddlSameButton control.

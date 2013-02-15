@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="EDI_Custom.aspx.cs" Inherits="EMS.WebApp.Import.EDI_Custom" %>
-
+    <%@ Register Assembly="EMS.WebApp" Namespace="EMS.WebApp.CustomControls" TagPrefix="cc1" %>
 <%@ Register Src="../CustomControls/AutoCompleteCountry.ascx" TagName="AutoCompleteCountry"
     TagPrefix="uc1" %>
 <%@ Register Src="../CustomControls/AutoCompletepPort.ascx" TagName="AutoCompletepPort"
@@ -19,10 +19,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
     <div id="headercaption">
-        IMPORT EDI FOR CUSTOM - EXPORT TO TEXT FILE</div>
+        EDI for ICEGATE</div>
     <center>
         <fieldset style="width:800px; ">
-            <legend>Import EDI for Custom - Export to text file</legend>
+            <legend>EDI for ICEGATE</legend>
             <table border="0" cellpadding="2" cellspacing="3">
              <tr>
               <td style="width:50%; vertical-align:top;" >
@@ -35,7 +35,7 @@
                         </asp:DropDownList>
                         <br />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" CssClass="errormessage" 
-                            ControlToValidate="ddlVessel" Display="Dynamic" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator></td>
+                            ControlToValidate="ddlVessel" Display="Dynamic" InitialValue="0" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator></td>
                 </tr>
 
                 <tr>
@@ -43,7 +43,7 @@
                     <td><asp:DropDownList ID="ddlVoyage" runat="server" Width="90%" AutoPostBack="True" 
                             onselectedindexchanged="ddlVoyage_SelectedIndexChanged">
                         </asp:DropDownList><br />
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage" 
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage" InitialValue="0" 
                             ControlToValidate="ddlVoyage" Display="Dynamic" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator></td>
                 </tr>
 
@@ -73,7 +73,7 @@
                     <td style="width:140px;">IGM Date:</td>
                     <td>
                         <%--<%@ Register Src="../CustomControls/DatePicker.ascx" TagName="DatePicker" TagPrefix="uc3" %>--%>
-                           <asp:TextBox ID="txtDtIGM" runat="server"></asp:TextBox>
+                           <asp:TextBox ID="txtDtIGM" runat="server" ReadOnly="true"></asp:TextBox>
                         <cc2:CalendarExtender ID="dtIGM_" TargetControlID="txtDtIGM" runat="server" />
                    </td>
                 </tr>
@@ -101,17 +101,33 @@
                 </tr>
                  <tr>
                     <td style="width:140px;">Last Port Called:</td>
-                    <td><asp:TextBox ID="txtLastPort" runat="server" CssClass="textboxuppercase" ReadOnly="true" MaxLength="20" Width="250"></asp:TextBox><br />
+                    <td>
+                    <%--<asp:TextBox ID="txtLastPort" runat="server" CssClass="textboxuppercase" ReadOnly="true" MaxLength="20" Width="250">
+                    </asp:TextBox>--%>
+                      <div style="width:230px">
+                       <uc2:AutoCompletepPort ID="AutoCompletepPort2"  runat="server" />
+                       </div>
+                  
                    </td>
                 </tr>
                   <tr>
                     <td style="width:140px;">Port Before:</td>
-                    <td><asp:TextBox ID="txtPortBefore1" runat="server" CssClass="textboxuppercase"  Width="250"></asp:TextBox><br />
+                    <td>
+                    <%--<asp:TextBox ID="txtPortBefore1" runat="server" CssClass="textboxuppercase"  Width="250"></asp:TextBox>--%>
+                      <div style="width:230px">
+                       <uc2:AutoCompletepPort ID="AutoCompletepPort3" runat="server" />
+                       </div>
+                   
                    </td>
                 </tr>
                   <tr>
                     <td style="width:140px;">Port Before:</td>
-                    <td><asp:TextBox ID="txtPortBefore2" runat="server" CssClass="textboxuppercase"  Width="250"></asp:TextBox><br />
+                    <td>
+                    <%--<asp:TextBox ID="txtPortBefore2" runat="server" CssClass="textboxuppercase"  Width="250"></asp:TextBox>--%>
+                      <div style="width:230px">
+                       <uc2:AutoCompletepPort ID="AutoCompletepPort4" runat="server" />
+                       </div>
+                    
                    </td>
                 </tr>
                  <tr>
@@ -146,8 +162,10 @@
                     </td>
                 </tr>
                  <tr>
-                    <td style="width:140px;">Total Lines</td>
+                    <td style="width:140px;">Total Lines: <span class="errormessage1">*</span></td>
                     <td><asp:TextBox ID="txtTotLine" runat="server" CssClass="textboxuppercase"  MaxLength="15" Width="250"></asp:TextBox><br />
+                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="errormessage" 
+                            ControlToValidate="txtTotLine" Display="Dynamic" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator>
                    </td>
                 </tr>
                   <tr>
@@ -166,12 +184,15 @@
                 </tr>
                   <tr>
                     <td style="width:140px;">Light house Due</td>
-                    <td><asp:TextBox ID="txtLightHouse" runat="server" CssClass="numerictextbox"  MaxLength="10" Width="160"  onkeyup="IsNumeric(this)"></asp:TextBox><br />
+                    <td>
+                    <%--<asp:TextBox ID="txtLightHouse" runat="server" CssClass="numerictextbox"  MaxLength="10" Width="160"  onkeyup="IsNumeric(this)"></asp:TextBox>--%>
+                    <cc1:CustomTextBox ID="txtLightHouse" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="13" Precision="10" Scale="2" Width="100"></cc1:CustomTextBox>
+                    <br />
                    </td>
                 </tr>
                 
                 <tr>
-                    <td>Same Button Cargo:</td>
+                    <td>Same Bottom Cargo:</td>
                     <td>
                       <asp:DropDownList ID="ddlSameButton" runat="server" Width="50%">
                           <asp:ListItem Value="1">Yes</asp:ListItem>
@@ -238,7 +259,7 @@
                   <tr>
                     <td colspan="2" style="text-align:center" >
                       <center>
-                        <asp:Button ID="btnDownLoad" runat="server" CssClass="button" onclick="btnDownLoad_Click" 
+                        <asp:Button ID="btnDownLoad" runat="server" CssClass="button" onclick="btnDownLoad_Click" ValidationGroup="Save"
                             Text="Download" />
                       </center>
                     </td>

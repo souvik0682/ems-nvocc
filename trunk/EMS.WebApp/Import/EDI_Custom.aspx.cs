@@ -31,15 +31,15 @@ namespace EMS.WebApp.Import
                 //TextBox txtPort = ((TextBox)AutoCompletepPort1.FindControl("txtPort"));
                 //txtPort.Attributes.Add("onblur", "document.getElementById('form1').submit();");
             }
-           
 
+            ((TextBox)AutoCompletepPort2.FindControl("txtPort")).ReadOnly = true;
 
         }
 
         protected void ddlVessel_SelectedIndexChanged(object sender, EventArgs e)
         {
             CLearAll();
-            GeneralFunctions.PopulateDropDownList(ddlVoyage, dbinteract.PopulateDDLDS("trnVoyage", "VoyageNo", "pk_VoyageID", "where fk_VesselID=" + ddlVessel.SelectedValue));
+            GeneralFunctions.PopulateDropDownList(ddlVoyage, dbinteract.PopulateDDLDS("trnVoyage", "pk_VoyageID", "VoyageNo", "where fk_VesselID=" + ddlVessel.SelectedValue));
         }
 
         protected void ddlVoyage_SelectedIndexChanged(object sender, EventArgs e)
@@ -62,7 +62,8 @@ namespace EMS.WebApp.Import
             txtCargoDesc.Text = vesselVoyageEDI.CargoDesc;
             txtIGMNo.Text = vesselVoyageEDI.IGMNo;
             txtIMONo.Text = vesselVoyageEDI.IMONumber;
-            txtLastPort.Text = vesselVoyageEDI.LastPortCalled;
+            string Lastport = ((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text = vesselVoyageEDI.LastPortCalled;
+            //txtLastPort.Text = vesselVoyageEDI.LastPortCalled;
             txtLightHouse.Text = vesselVoyageEDI.LightHouseDue.ToString();
             txtMaster.Text = vesselVoyageEDI.MasterName;
             txtPAN.Text = vesselVoyageEDI.PANNo;
@@ -70,7 +71,8 @@ namespace EMS.WebApp.Import
             txtTotLine.Text = vesselVoyageEDI.TotalLines;
             txtVesselFlag.Text = vesselVoyageEDI.VesselFlag;
             txtdtArrival.Text = vesselVoyageEDI.LandingDate.ToString();
-            txtDtIGM.Text = vesselVoyageEDI.IGMDate.ToShortDateString();
+            txtdtArrival.Text = txtdtArrival.Text.Contains(' ') ? txtdtArrival.Text.Split(' ')[0] : "";
+            txtDtIGM.Text = vesselVoyageEDI.IGMDate == null ? "" : Convert.ToDateTime(vesselVoyageEDI.IGMDate).ToShortDateString();
 
             ddlCrewEffList.SelectedValue = vesselVoyageEDI.CrewEffectList.ToString();
             ddlCrewList.SelectedValue = vesselVoyageEDI.CrewList.ToString();
@@ -89,7 +91,7 @@ namespace EMS.WebApp.Import
             txtCargoDesc.Text = "";
             txtIGMNo.Text = "";
             txtIMONo.Text = "";
-            txtLastPort.Text = "";
+            //txtLastPort.Text = "";
             txtLightHouse.Text = "";
             txtMaster.Text = "";
             txtPAN.Text = "";
@@ -133,6 +135,7 @@ namespace EMS.WebApp.Import
 
         public string EDI_TXT()
         {
+            
             string uniqueFileName = Guid.NewGuid().ToString();
             //File.Create(Server.MapPath(@"~/Import/EDIFile/") + uniqueFileName + "_IMP_EDI.IGM");
             string FileName = Server.MapPath(@"~/Import/EDIFile/") + uniqueFileName + "_IMP_EDI.IGM";
@@ -141,7 +144,8 @@ namespace EMS.WebApp.Import
             string ArrTime = txtArriveTime.Text.Replace(":", ""); //Convert.ToDateTime(txtdtArrival.Text).ToString("hhmm");
             if (ArrTime.Length > 4) ArrTime = ArrTime.Substring(0,4);
             string ArrDate1 =(txtdtArrival.Text.Trim())==""? "" : Convert.ToDateTime(txtdtArrival.Text).ToString("ddMMyyyy hh:mm");
-            string custHouse =  ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
+            //string custHouse =  ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
+            string custHouse = !((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text.Contains(',') ? "" : ((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text.Split(',')[1].Trim();
             StreamWriter writer = new StreamWriter(FileName);
             //  ("myfile.txt")
             writer.WriteLine(("HREC" + ('' + ("ZZ" + (''
@@ -161,24 +165,25 @@ namespace EMS.WebApp.Import
                             + (txtPAN.Text + (''
                             + (txtMaster.Text + (''
                             + (custHouse + (''
-                            + (!txtLastPort.Text.Contains(',')?"": txtLastPort.Text.Split(',')[1].Trim() + (''
-                            + (txtPortBefore1.Text + (''
-                            + (txtPortBefore2.Text + (''
+                            + (!((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text.Contains(',') ? "" : ((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text.Split(',')[1].Trim() + (''
+                            + (((TextBox)AutoCompletepPort3.FindControl("txtPort")).Text + (''
+                            + (((TextBox)AutoCompletepPort4.FindControl("txtPort")).Text + (''
                             + (ddlVesselType.Text.Substring(0, 1) + (''
                             + (txtTotLine.Text + (''
                             + (txtCargoDesc.Text + (''
                             + (ArrDate1 + (''
                             + (((double.Parse(txtLightHouse.Text) == 0) ? "" : double.Parse(txtLightHouse.Text).ToString()) + (''
-                            + (ddlSameButton.SelectedValue == "1" ? "Y" : "N" + (''
-                            + (ddlShipStoreSubmitted.SelectedValue == "1" ? "Y" : "N" + (''
-                            + (ddlCrewList.SelectedValue == "1" ? "Y" : "N" + (''
-                            + (ddlPessengerList.SelectedValue == "1" ? "Y" : "N" + (''
-                            + (ddlCrewEffList.SelectedValue == "1" ? "Y" : "N" + (''
-                            + (ddlMaritime.SelectedValue == "1" ? "Y" : "N" + ('' + ddlTerminalOperator.SelectedItem.Text)))))))))))))))))))))))))))))))))))))))))))))))))));
+                            + (ddlSameButton.SelectedValue == "1" ? "Y" : "N") + (''
+                            + (ddlShipStoreSubmitted.SelectedValue == "1" ? "Y" : "N") + (''
+                            + (ddlCrewList.SelectedValue == "1" ? "Y" : "N") + (''
+                            + (ddlPessengerList.SelectedValue == "1" ? "Y" : "N") + (''
+                            + (ddlCrewEffList.SelectedValue == "1" ? "Y" : "N") + (''
+                            + (ddlMaritime.SelectedValue == "1" ? "Y" : "N") + ('' + 
+                            ddlTerminalOperator.SelectedItem.Text.Trim()==""?"": ddlTerminalOperator.SelectedItem.Text)))))))))))))))))))))))))))))))))))))))))))));
 
             writer.WriteLine("<END-vesinfo>");
             writer.WriteLine("<cargo>");
-
+            string sss = writer.ToNewString();
             DataSet Ds = EDIBLL.GetEDICargoInfo(Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue));
             //             TextShippingCode.Text = Ds.Tables(0).Rows(0).Item("ShippingLineCode")
             DataTable Dt = Ds.Tables[0];
@@ -192,14 +197,56 @@ namespace EMS.WebApp.Import
             {
                 Srl = (Srl + 1);
                 BlDate = Convert.ToDateTime(Dr["INFDATE"]).ToString("ddMMyyyy");
-                Con1 = ((Dr["ConsigneeInformation"].ToString().Substring(0, 35) == "") ? "." : Dr["ConsigneeInformation"].ToString().Substring(0, 35));
-                Con2 = ((Dr["ConsigneeInformation"].ToString().Substring(35, 35) == "") ? "." : Dr["ConsigneeInformation"].ToString().Substring(35, 35));
-                Con3 = ((Dr["ConsigneeInformation"].ToString().Substring(70, 35) == "") ? "." : Dr["ConsigneeInformation"].ToString().Substring(70, 35));
-                Con4 = ((Dr["ConsigneeInformation"].ToString().Substring(105, 35) == "") ? "." : Dr["ConsigneeInformation"].ToString().Substring(105, 35));
-                Not1 = ((Dr["NotifyPartyInformation"].ToString().Substring(0, 35) == "") ? "." : Dr["NotifyPartyInformation"].ToString().Substring(0, 35));
-                Not2 = ((Dr["NotifyPartyInformation"].ToString().Substring(35, 35) == "") ? "." : Dr["NotifyPartyInformation"].ToString().Substring(35, 35));
-                Not3 = ((Dr["NotifyPartyInformation"].ToString().Substring(70, 35) == "") ? "." : Dr["NotifyPartyInformation"].ToString().Substring(70, 35));
-                Not4 = ((Dr["NotifyPartyInformation"].ToString().Substring(105, 35) == "") ? "." : Dr["NotifyPartyInformation"].ToString().Substring(105, 35));
+                int conLen=35,notLen=35;
+                if (Dr["ConsigneeInformation"].ToString().Length >= conLen)
+                    Con1 = ((Dr["ConsigneeInformation"].ToString().Substring(0, 35) == "") ? "." : Dr["ConsigneeInformation"].ToString().Substring(0, 35));
+                else
+                    Con1 = ".";
+
+                conLen+=36;
+                if (Dr["ConsigneeInformation"].ToString().Length >= conLen)
+                    Con2 = ((Dr["ConsigneeInformation"].ToString().Substring(35, 35) == "") ? "." : Dr["ConsigneeInformation"].ToString().Substring(35, 35));
+                else
+                    Con2 = ".";
+
+                conLen += 36;
+                if (Dr["ConsigneeInformation"].ToString().Length >= conLen)
+                    Con3 = ((Dr["ConsigneeInformation"].ToString().Substring(70, 35) == "") ? "." : Dr["ConsigneeInformation"].ToString().Substring(70, 35));
+                else
+                    Con3 = ".";
+
+                conLen += 36;
+                if (Dr["ConsigneeInformation"].ToString().Length >= conLen)
+                    Con4 = ((Dr["ConsigneeInformation"].ToString().Substring(105, 35) == "") ? "." : Dr["ConsigneeInformation"].ToString().Substring(105, 35));
+                else
+                    Con4 = ".";
+
+
+                if (Dr["NotifyPartyInformation"].ToString().Length >= notLen)
+                    Not1 = ((Dr["NotifyPartyInformation"].ToString().Substring(0, 35) == "") ? "." : Dr["NotifyPartyInformation"].ToString().Substring(0, 35));
+                else
+                    Not1 = ".";
+
+                notLen += 36;
+                if (Dr["NotifyPartyInformation"].ToString().Length >= notLen)
+                    Not2 = ((Dr["NotifyPartyInformation"].ToString().Substring(35, 35) == "") ? "." : Dr["NotifyPartyInformation"].ToString().Substring(35, 35));
+                else
+                    Not2 = ".";
+
+                notLen += 36;
+                if (Dr["NotifyPartyInformation"].ToString().Length >= notLen)
+                    Not3 = ((Dr["NotifyPartyInformation"].ToString().Substring(70, 35) == "") ? "." : Dr["NotifyPartyInformation"].ToString().Substring(70, 35));
+                else
+                    Not3 = ".";
+
+
+                notLen += 36;
+                if (Dr["NotifyPartyInformation"].ToString().Length >= notLen)
+                    Not4 = ((Dr["NotifyPartyInformation"].ToString().Substring(105, 35) == "") ? "." : Dr["NotifyPartyInformation"].ToString().Substring(105, 35));
+                else
+                    Not4 = ".";
+
+               
                 Destport = ((Dr["DischargeIG"].ToString().Substring(0, 2) == "IN") ?  ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text : Dr["DischargeIG"].ToString());
                BLno=Dr["BLNUMBER"].ToString().Replace("[^\\w\\ ]", "").TrimEnd().Replace(" ", "").Replace(" ", "20");
                 DischargePort= Dr["DischargeIG"].ToString().Split(',')[1].Trim();

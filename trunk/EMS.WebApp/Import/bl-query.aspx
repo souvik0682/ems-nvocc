@@ -22,8 +22,8 @@
                                     B/L No :
                                 </td>
                                 <td style="width: 230px;">
-                                    <asp:TextBox ID="txtBlNo" runat="server" Width="150" AutoCompleteType="None" 
-                                        AutoPostBack="True" ontextchanged="txtBlNo_TextChanged"></asp:TextBox>
+                                    <asp:TextBox ID="txtBlNo" runat="server" Width="150" AutoCompleteType="None" AutoPostBack="True"
+                                        OnTextChanged="txtBlNo_TextChanged"></asp:TextBox>
                                     <%--<cc1:calendarextender id="CalendarExtender1" runat="server" popupbuttonid="txtEffectDate"
                                         popupposition="BottomLeft" targetcontrolid="txtEffectDate" format="dd/MM/yyyy"
                                         onclientdateselectionchanged="checkDate">
@@ -188,131 +188,147 @@
             </fieldset>
             <fieldset style="width: 90%;">
                 <legend>Service Requests</legend>
-                <table width="100%" border="0" cellspacing="0">
-                    <tr style="height: 30px;">
-                        <td>
-                            <asp:CheckBox ID="chkDo" runat="server" />
-                            <asp:LinkButton ID="lnkDO" runat="server" Text="Delivery Order" ForeColor="Blue"></asp:LinkButton>
-                        </td>
-                        <td>
-                            De-stuffing
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="ddlDestuffing" runat="server" Width="55">
-                                <asp:ListItem Text="CFS" Value="1"></asp:ListItem>
-                                <asp:ListItem Text="Factory" Value="2"></asp:ListItem>
-                            </asp:DropDownList>
-                        </td>
-                        <td>
-                            Do-Valid Till
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtDoValidTill" runat="server" Width="75"></asp:TextBox>
-                            <cc1:CalendarExtender ID="CalendarExtender5" runat="server" PopupButtonID="txtDoValidTill"
+                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                    <ContentTemplate>
+                        <table width="100%" border="0" cellspacing="0">
+                            <tr style="height: 30px;">
+                                <td>
+                                    <asp:CheckBox ID="chkDo" runat="server" />
+                                    <asp:LinkButton ID="lnkDO" runat="server" Text="Delivery Order" ForeColor="Blue"></asp:LinkButton>
+                                    <cc1:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="pnlDo"
+                                        TargetControlID="lnkDO">
+                                    </cc1:ModalPopupExtender>
+                                    <asp:Panel ID="pnlDo" runat="server">
+                                        <table>
+                                            <tr>
+                                                <asp:ImageButton ID="imgBtnExaminationDo" runat="server" AlternateText="Print Examination Do" /></tr>
+                                        </table>
+                                    </asp:Panel>
+                                </td>
+                                <td>
+                                    De-stuffing
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="ddlDestuffing" runat="server" Width="55">
+                                        <asp:ListItem Text="CFS" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="Factory" Value="2"></asp:ListItem>
+                                    </asp:DropDownList>
+                                </td>
+                                <td>
+                                    Do-Valid Till
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtDoValidTill" runat="server" Width="75"></asp:TextBox>
+                                    <%-- <cc1:CalendarExtender ID="CalendarExtender5" runat="server" PopupButtonID="txtDoValidTill"
                                 TargetControlID="txtDoValidTill">
-                            </cc1:CalendarExtender>
-                        </td>
-                        <td>
-                            <asp:CheckBox ID="ckkFreightPaid" runat="server" />Freight Paid
-                        </td>
-                        <td>
-                            <asp:CheckBox ID="chkBankGuarantee" runat="server" />Bank Guarantee
-                        </td>
-                        <td align="right">
-                            <asp:LinkButton ID="lnkGenerateInvoiceDo" runat="server" Text="Generate Invoice"
-                                ForeColor="Blue"></asp:LinkButton>
-                        </td>
-                    </tr>
-                    <tr style="height: 30px;">
-                        <td>
-                            <asp:CheckBox ID="chkDoExtension" runat="server" />
-                            <asp:LinkButton ID="lnkDoExtension" runat="server" Text="Delivery Order Extension"
-                                ForeColor="Blue"></asp:LinkButton>
-                        </td>
-                        <td>
-                            Validity Date
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtVAlidityDate" runat="server" Width="75"></asp:TextBox>
-                            <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtVAlidityDate"
-                                TargetControlID="txtValidityDate">
-                            </cc1:CalendarExtender>
-                        </td>
-                        <%--<td colspan="4">
+                            </cc1:CalendarExtender>--%>
+                                </td>
+                                <td>
+                                    <asp:CheckBox ID="ckkFreightPaid" runat="server" />Freight Paid
+                                </td>
+                                <td>
+                                    <asp:CheckBox ID="chkBankGuarantee" runat="server" />Bank Guarantee
+                                </td>
+                                <td align="right">
+                                    <asp:LinkButton ID="lnkGenerateInvoiceDo" runat="server" Text="Generate Invoice"
+                                        ForeColor="Blue"></asp:LinkButton>
+                                </td>
+                            </tr>
+                            <tr style="height: 30px;">
+                                <td>
+                                    <asp:CheckBox ID="chkDoExtension" runat="server" />
+                                    <asp:LinkButton ID="lnkDoExtension" runat="server" Text="Delivery Order Extension"
+                                        ForeColor="Blue"></asp:LinkButton>
+                                </td>
+                                <td>
+                                    Validity Date
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtVAlidityDate" runat="server" Width="75"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtVAlidityDate"
+                                        TargetControlID="txtValidityDate">
+                                    </cc1:CalendarExtender>
+                                </td>
+                                <%--<td colspan="4">
                         </td>  --%>
-                        <td colspan="5" align="right">
-                            <asp:LinkButton ID="lnkGenerateInvoiceDOE" runat="server" Text="Generate Invoice"
-                                ForeColor="Blue"></asp:LinkButton>
-                        </td>
-                    </tr>
-                    <tr style="height: 30px;">
-                        <td>
-                            <asp:CheckBox ID="chkSlotExtension" runat="server" />
-                            <asp:LinkButton ID="lnkSlotExtension" runat="server" Text="Slot Extension" ForeColor="Blue"></asp:LinkButton>
-                        </td>
-                        <td>
-                            Extension For<br />
-                            Detention
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtExtensionForDetention" runat="server" Width="75"></asp:TextBox>
-                            <cc1:CalendarExtender ID="CalendarExtender2" runat="server" PopupButtonID="txtExtensionForDetention"
-                                TargetControlID="txtExtensionForDetention">
-                            </cc1:CalendarExtender>
-                        </td>
-                        <td>
-                            Extension For<br />
-                            PGR
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtExtensionForPGR" runat="server" Width="75"></asp:TextBox>
-                            <cc1:CalendarExtender ID="CalendarExtender3" runat="server" PopupButtonID="txtExtensionForPGR"
-                                TargetControlID="txtExtensionForPGR">
-                            </cc1:CalendarExtender>
-                        </td>
-                        <td colspan="3" align="right">
-                            <asp:LinkButton ID="LinkButton2" runat="server" Text="Generate Invoice" ForeColor="Blue"></asp:LinkButton>
-                        </td>
-                    </tr>
-                    <tr style="height: 30px;">
-                        <td>
-                            <asp:CheckBox ID="chkAmendment" runat="server" />
-                            <asp:LinkButton ID="lnkAmendment" runat="server" Text="Amendment" ForeColor="Blue"></asp:LinkButton>
-                        </td>
-                        <td>
-                            Amendment For
-                        </td>
-                        <td colspan="5">
-                            <asp:DropDownList ID="ddlAmendmentFor" runat="server" Width="55">
-                            </asp:DropDownList>
-                        </td>
-                    </tr>
-                    <tr style="height: 30px;">
-                        <td>
-                            <asp:CheckBox ID="chkBondCancel" runat="server" />
-                            <asp:LinkButton ID="lnkBondCancel" runat="server" Text="Bond Cancellation" ForeColor="Blue"></asp:LinkButton>
-                        </td>
-                        <td>
-                            Cancellation Date
-                        </td>
-                        <td colspan="5">
-                            <asp:TextBox ID="txtBondCancellation" runat="server" Width="75"></asp:TextBox>
-                            <cc1:CalendarExtender ID="CalendarExtender4" runat="server" PopupButtonID="txtBondCancellation"
-                                TargetControlID="txtBondCancellation">
-                            </cc1:CalendarExtender>
-                        </td>
-                    </tr>
-                    <tr style="height: 50px; vertical-align: bottom;">
-                        <td colspan="3">
-                        </td>
-                        <td colspan="5" align="left">
-                            <asp:Button ID="btnSave2" runat="server" Text="Save" ValidationGroup="vgCharge" />&nbsp;&nbsp;<asp:Button
-                                ID="btnBack2" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
-                                OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
-                            <asp:Label ID="lblMessageServiceReq" runat="server" ForeColor="Red"></asp:Label>
-                        </td>
-                    </tr>
-                </table>
+                                <td colspan="5" align="right">
+                                    <asp:LinkButton ID="lnkGenerateInvoiceDOE" runat="server" Text="Generate Invoice"
+                                        ForeColor="Blue"></asp:LinkButton>
+                                </td>
+                            </tr>
+                            <tr style="height: 30px;">
+                                <td>
+                                    <asp:CheckBox ID="chkSlotExtension" runat="server" />
+                                    <asp:LinkButton ID="lnkSlotExtension" runat="server" Text="Slot Extension" ForeColor="Blue"></asp:LinkButton>
+                                </td>
+                                <td>
+                                    Extension For<br />
+                                    Detention
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtExtensionForDetention" runat="server" Width="75"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="CalendarExtender2" runat="server" PopupButtonID="txtExtensionForDetention"
+                                        TargetControlID="txtExtensionForDetention">
+                                    </cc1:CalendarExtender>
+                                </td>
+                                <td>
+                                    Extension For<br />
+                                    PGR
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtExtensionForPGR" runat="server" Width="75"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="CalendarExtender3" runat="server" PopupButtonID="txtExtensionForPGR"
+                                        TargetControlID="txtExtensionForPGR">
+                                    </cc1:CalendarExtender>
+                                </td>
+                                <td colspan="3" align="right">
+                                    <asp:LinkButton ID="LinkButton2" runat="server" Text="Generate Invoice" ForeColor="Blue"></asp:LinkButton>
+                                </td>
+                            </tr>
+                            <tr style="height: 30px;">
+                                <td>
+                                    <asp:CheckBox ID="chkAmendment" runat="server" />
+                                    <asp:LinkButton ID="lnkAmendment" runat="server" Text="Amendment" ForeColor="Blue"></asp:LinkButton>
+                                </td>
+                                <td>
+                                    Amendment For
+                                </td>
+                                <td colspan="5">
+                                    <asp:DropDownList ID="ddlAmendmentFor" runat="server" Width="55">
+                                    </asp:DropDownList>
+                                </td>
+                            </tr>
+                            <tr style="height: 30px;">
+                                <td>
+                                    <asp:CheckBox ID="chkBondCancel" runat="server" />
+                                    <asp:LinkButton ID="lnkBondCancel" runat="server" Text="Bond Cancellation" ForeColor="Blue"></asp:LinkButton>
+                                </td>
+                                <td>
+                                    Cancellation Date
+                                </td>
+                                <td colspan="5">
+                                    <asp:TextBox ID="txtBondCancellation" runat="server" Width="75"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="CalendarExtender4" runat="server" PopupButtonID="txtBondCancellation"
+                                        TargetControlID="txtBondCancellation">
+                                    </cc1:CalendarExtender>
+                                </td>
+                            </tr>
+                            <tr style="height: 50px; vertical-align: bottom;">
+                                <td colspan="3">
+                                </td>
+                                <td colspan="5" align="left">
+                                    <asp:Button ID="btnSave2" runat="server" Text="Save" ValidationGroup="vgCharge" />&nbsp;&nbsp;<asp:Button
+                                        ID="btnBack2" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
+                                        OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
+                                    <asp:Label ID="lblMessageServiceReq" runat="server" ForeColor="Red"></asp:Label>
+                                </td>
+                            </tr>
+                        </table>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:PostBackTrigger ControlID="txtBlNo" />
+                    </Triggers>
+                </asp:UpdatePanel>
             </fieldset>
             <fieldset style="width: 90%;">
                 <legend>Documents submitted</legend>

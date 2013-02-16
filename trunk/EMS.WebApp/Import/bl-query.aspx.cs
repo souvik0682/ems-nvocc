@@ -11,7 +11,7 @@ namespace EMS.WebApp.Import
 {
     public partial class bl_query : System.Web.UI.Page
     {
-        DataSet BLDataSet=new DataSet();
+        DataSet BLDataSet = new DataSet();
         ImportBLL oImportBLL = new ImportBLL();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -24,7 +24,14 @@ namespace EMS.WebApp.Import
         protected void txtBlNo_TextChanged(object sender, EventArgs e)
         {
             BLDataSet = oImportBLL.GetBLQuery(txtBlNo.Text.Trim());
-            fillBLDetail(BLDataSet.Tables[0]);
+            txtBlNo.Text = string.Empty;
+            if (BLDataSet.Tables[0].Rows.Count > 0)
+            {
+                fillBLDetail(BLDataSet.Tables[0]);
+                fillServiceRequest();
+            }
+            
+
         }
 
         void fillBLDetail(DataTable dtDetail)
@@ -44,6 +51,11 @@ namespace EMS.WebApp.Import
                 txtPGRFreedays.Text = dtDetail.Rows[0]["PGRFREEDAYS"].ToString();
                 txtPGRTill.Text = dtDetail.Rows[0]["PGRTILL"].ToString();
             }
+        }
+
+        void fillServiceRequest()
+        {
+            txtDoValidTill.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtDetentionFreeDays.Text) - 1).ToShortDateString();
         }
     }
 }

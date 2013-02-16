@@ -357,7 +357,4 @@
   <data name="ERR00079" xml:space="preserve">
     <value>Duplicate low value.</value>
   </data>
-  <data name="ERR00080" xml:space="preserve">
-    <value>Improper high value.</value>
-  </data>
 </root>

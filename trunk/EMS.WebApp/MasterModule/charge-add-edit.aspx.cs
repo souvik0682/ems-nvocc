@@ -176,7 +176,7 @@ namespace EMS.WebApp.MasterModule
                 {
                     ddlFTerminal.Items.Clear();
                 }
-                else if(ddlFLocation.SelectedValue == "-1")
+                else if (ddlFLocation.SelectedValue == "-1")
                 {
                     ddlFTerminal.Items.Clear();
                     ListItem Li = new ListItem("ALL", "-1");
@@ -247,7 +247,7 @@ namespace EMS.WebApp.MasterModule
                         AddRates();
                         lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
                         ClearAll();
-                        EnableAllField();                       
+                        EnableAllField();
                         ViewState["ChargeRates"] = null;
                         WashingSelection(rdbWashing);
                     }
@@ -516,39 +516,80 @@ namespace EMS.WebApp.MasterModule
                         oEntity.RatePerTEU = Convert.ToDecimal(txtRatePerTEU.Text);
                 }
 
+
+                int Locn = 0;
+                int Ter = 0;
+                int Was = 0;
+
+                Locn = Convert.ToInt32(ddlFLocation.SelectedValue);
+                if (ddlFTerminal.Items.Count > 0)
+                    Ter = Convert.ToInt32(ddlFTerminal.SelectedValue);
+                if (ddlFWashingType.Items.Count > 0)
+                    Was = Convert.ToInt32(ddlFWashingType.SelectedValue);
+
                 if (Convert.ToInt32(hdnFSlno.Value) >= 0)
                 {
-                    Rates.RemoveAt(Convert.ToInt32(hdnFSlno.Value));
-                    Rates.Insert(Convert.ToInt32(hdnFSlno.Value), oEntity);
-                }
-                else
-                {
-                    int Locn = 0;
-                    int Ter = 0;
-                    int Was = 0;
-                    
-                    Locn = Convert.ToInt32(ddlFLocation.SelectedValue);
-                    if (ddlFTerminal.Items.Count > 0)
-                        Ter = Convert.ToInt32(ddlFTerminal.SelectedValue);
-                    if (ddlFWashingType.Items.Count > 0)
-                        Was = Convert.ToInt32(ddlFWashingType.SelectedValue);
-
-                    IEnumerable<IChargeRate> cr = from rate in Rates
-                                                  where rate.LocationId == Locn && rate.TerminalId == Ter && rate.WashingType == Was
-                                                  select rate;
-
+                    IEnumerable<IChargeRate> cr = RangeValidationCheck(txtHigh, txtLow, Locn, Ter, Was);
                     if (cr.Count() <= 0)
                     {
-                        Rates.Add(oEntity);
+                        Rates.RemoveAt(Convert.ToInt32(hdnFSlno.Value));
+                        Rates.Insert(Convert.ToInt32(hdnFSlno.Value), oEntity);
                     }
                     else
                     {
-                        lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00076");
+                        lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00079");
                         return;
                     }
                 }
+                else
+                {
+                    //int Locn = 0;
+                    //int Ter = 0;
+                    //int Was = 0;
 
-                
+                    //Locn = Convert.ToInt32(ddlFLocation.SelectedValue);
+                    //if (ddlFTerminal.Items.Count > 0)
+                    //    Ter = Convert.ToInt32(ddlFTerminal.SelectedValue);
+                    //if (ddlFWashingType.Items.Count > 0)
+                    //    Was = Convert.ToInt32(ddlFWashingType.SelectedValue);
+
+
+                    if (txtHigh.Enabled == false && txtLow.Enabled == false)
+                    {
+                        IEnumerable<IChargeRate> cr = from rate in Rates
+                                                      where rate.LocationId == Locn && rate.TerminalId == Ter && rate.WashingType == Was
+                                                      select rate;
+
+                        if (cr.Count() <= 0)
+                        {
+                            Rates.Add(oEntity);
+                            lblMessage.Text = string.Empty;
+                        }
+                        else
+                        {
+                            lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00076");
+                            return;
+                        }
+                    }
+
+                    else
+                    {
+                        IEnumerable<IChargeRate> cr = RangeValidationCheck(txtHigh, txtLow, Locn, Ter, Was);
+
+                        if (cr.Count() <= 0)
+                        {
+                            Rates.Add(oEntity);
+                            lblMessage.Text = string.Empty;
+                        }
+                        else
+                        {
+                            lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00079");
+                            return;
+                        }
+                    }
+                }
+
+
                 ViewState["ChargeRates"] = Rates;
                 FillRates();
 
@@ -677,6 +718,34 @@ namespace EMS.WebApp.MasterModule
             SharingSelection(rdbPrincipleSharing);
             ShowHideControlofFooter(ddlChargeType);
             DisableAllField();
+        }
+
+        private IEnumerable<IChargeRate> RangeValidationCheck(TextBox txtHigh, TextBox txtLow, int Locn, int Ter, int Was)
+        {
+            int Min = 0, Max = 0;
+            bool isValidRange = true;
+            if (Rates.Count > 0)
+            {
+                foreach (IChargeRate rt in Rates)
+                {
+                    Min = rt.Low;
+                    Max = rt.High;
+
+                    for (int i = Min; i <= Max; i++)
+                    {
+                        if (i >= Convert.ToInt32(txtLow.Text) && i <= Convert.ToInt32(txtHigh.Text))
+                        {
+                            isValidRange = false;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            IEnumerable<IChargeRate> cr = from rate in Rates
+                                          where rate.LocationId == Locn && rate.TerminalId == Ter && rate.WashingType == Was && isValidRange == false
+                                          select rate;
+            return cr;
         }
 
         void FillRates()
@@ -854,7 +923,7 @@ namespace EMS.WebApp.MasterModule
             rdbWashing.SelectedIndex = 1;
             rdbTerminalRequired.SelectedIndex = 1;
 
-           
+
         }
 
         protected void ddlChargeType_SelectedIndexChanged(object sender, EventArgs e)

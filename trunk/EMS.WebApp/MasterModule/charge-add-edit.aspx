@@ -28,12 +28,12 @@
                     <ContentTemplate>
                         <table border="0" cellpadding="2" cellspacing="3" width="100%">
                             <tr>
-                                <td style="width: 60px;">
+                                <td style="width:18%;">
                                 </td>
-                                <td style="width: 140px;">
+                                <td style="width: 15%;">
                                     Effective Date<span class="errormessage1">*</span> :
                                 </td>
-                                <td style="width: 250px;">
+                                <td style="width: 20%;">
                                     <asp:TextBox ID="txtEffectDate" runat="server" Width="150" AutoCompleteType="None"></asp:TextBox>
                                     <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtEffectDate"
                                         PopupPosition="BottomLeft" TargetControlID="txtEffectDate" Format="dd/MM/yyyy"
@@ -47,7 +47,7 @@
                                         FilterMode="ValidChars" FilterType="Numbers,Custom" ValidChars="/">
                                     </cc1:FilteredTextBoxExtender>
                                 </td>
-                                <td>
+                                <td style="width: 19%;">
                                     Terminal Required<span class="errormessage1">*</span>
                                 </td>
                                 <td>
@@ -226,10 +226,9 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="5" style="padding-top: 30px; border: none;">
+                                <td colspan="5" style="padding-top: 30px; border: none;" align="center">
                                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                                        <ContentTemplate>
-                                        
+                                        <ContentTemplate>                                        
                                             <asp:GridView ID="dgChargeRates" runat="server" AutoGenerateColumns="false" ShowFooter="false"
                                                 OnItemCommand="dgChargeRates_ItemCommand" OnItemDataBound="dgChargeRates_ItemDataBound"
                                                 OnRowCommand="dgChargeRates_RowCommand" 
@@ -502,7 +501,7 @@
                                 </td>
                                 <td>
                                 </td>
-                                <td>
+                                <td colspan="4">
                                     <asp:HiddenField ID="hdnChargeID" runat="server" Value="0" />
                                     <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="vgCharge" OnClick="btnSave_Click" />&nbsp;&nbsp;<asp:Button
                                         ID="btnBack" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"

@@ -91,16 +91,6 @@ namespace EMS.BLL
             dquery.AddDateTimeParam("@StaxDate", dt);
             return Convert.ToInt32(dquery.GetScalar());
         }
-
-        public int CountLandDate(int fk_ImpVesselID,string VoyageNo)
-        {
-            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery("prcCountLandDate");
-            dquery.AddIntegerParam("@fk_ImpVesselID", fk_ImpVesselID);
-            dquery.AddVarcharParam("@VoyageNo",100, VoyageNo);
-            return Convert.ToInt32(dquery.GetScalar());
-
-           
-        }
         #endregion
 
         #region country
@@ -331,7 +321,7 @@ namespace EMS.BLL
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
             dquery.AddIntegerParam("@userID", userID);
             dquery.AddBooleanParam("@isEdit", isEdit);
-            dquery.AddIntegerParam("@locid", voyage.locid);
+
             dquery.AddIntegerParam("@pk_VoyageID", voyage.pk_VoyageID);
             dquery.AddIntegerParam("@fk_VesselID", voyage.fk_VesselID);
             dquery.AddIntegerParam("@fl_TerminalID", voyage.fl_TerminalID);

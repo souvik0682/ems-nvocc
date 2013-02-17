@@ -709,7 +709,7 @@ namespace EMS.WebApp.MasterModule
                 txtSharingFEU.Text = String.Empty;//"0.00";
 
                 hdnFId.Value = "0";
-                hdnFSlno.Value = "0";
+                hdnFSlno.Value = "-1";
             }
             #endregion
 
@@ -733,7 +733,13 @@ namespace EMS.WebApp.MasterModule
 
                     for (int i = Min; i <= Max; i++)
                     {
-                        if (i >= Convert.ToInt32(txtLow.Text) && i <= Convert.ToInt32(txtHigh.Text))
+                        //if (i >= Convert.ToInt32(txtLow.Text) && i <= Convert.ToInt32(txtHigh.Text))
+                        //{
+                        //    isValidRange = false;
+                        //    break;
+                        //}
+
+                        if (i >= Convert.ToInt32(txtLow.Text) && i <= Convert.ToInt32(txtHigh.Text) && rt.LocationId == Locn && rt.TerminalId == Ter && rt.WashingType == Was)
                         {
                             isValidRange = false;
                             break;

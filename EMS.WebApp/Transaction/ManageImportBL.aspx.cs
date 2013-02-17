@@ -24,7 +24,7 @@ namespace EMS.WebApp.Transaction
         const string PACKAGEUNITID = "PACKAGEUNITID";
         const string WEIGHTUNITID = "WEIGHTUNITID";
         const string VOLUMEUNITID = "VOLUMEUNITID";
-        const string SURVEYORID = "SURVEYORID";
+        //const string SURVEYORID = "SURVEYORID";
         const string SHIPERADDRID = "SHIPERADDRID";
         const string CONSIGNEEEADDRID = "CONSIGNEEEADDRID";
         const string NPADDRID = "NPADDRID";
@@ -72,7 +72,7 @@ namespace EMS.WebApp.Transaction
             AC_Port2.TextChanged += new EventHandler(AC_Port2_TextChanged);
             AC_Port3.TextChanged += new EventHandler(AC_Port3_TextChanged);
             AC_Port4.TextChanged += new EventHandler(AC_Port4_TextChanged);
-            AC_Surveyor1.TextChanged += new EventHandler(AC_Surveyor1_TextChanged);
+            //AC_Surveyor1.TextChanged += new EventHandler(AC_Surveyor1_TextChanged);
             AC_VolumeUnit1.TextChanged += new EventHandler(AC_VolumeUnit1_TextChanged);
             AC_WeightUnit1.TextChanged += new EventHandler(AC_WeightUnit1_TextChanged);
             AC_Shipper1.TextChanged += new EventHandler(AC_Shipper1_TextChanged);
@@ -81,6 +81,8 @@ namespace EMS.WebApp.Transaction
             //AC_CANotice1.TextChanged += new EventHandler(AC_CANotice1_TextChanged);
             AC_CFSCode1.TextChanged += new EventHandler(AC_CFSCode1_TextChanged);
             AC_Port5.TextChanged += new EventHandler(AC_Port5_TextChanged);
+
+            LoadSurveyorDDL();
         }
 
         void AC_CFSCode1_TextChanged(object sender, EventArgs e)
@@ -214,20 +216,20 @@ namespace EMS.WebApp.Transaction
             }
         }
 
-        void AC_Surveyor1_TextChanged(object sender, EventArgs e)
-        {
-            string surveyor = ((TextBox)AC_Surveyor1.FindControl("txtSurveyor")).Text.Trim();
+        //void AC_Surveyor1_TextChanged(object sender, EventArgs e)
+        //{
+        //    string surveyor = ((TextBox)AC_Surveyor1.FindControl("txtSurveyor")).Text.Trim();
 
-            if (surveyor != string.Empty)
-            {
-                int surveyorId = new ImportBLL().GetDeliveryToId(surveyor);
-                ViewState[SURVEYORID] = surveyorId;
-            }
-            else
-            {
-                ViewState[SURVEYORID] = null;
-            }
-        }
+        //    if (surveyor != string.Empty)
+        //    {
+        //        int surveyorId = new ImportBLL().GetDeliveryToId(surveyor);
+        //        ViewState[SURVEYORID] = surveyorId;
+        //    }
+        //    else
+        //    {
+        //        ViewState[SURVEYORID] = null;
+        //    }
+        //}
 
         //Frieght Payable At
         void AC_Port5_TextChanged(object sender, EventArgs e)
@@ -293,6 +295,8 @@ namespace EMS.WebApp.Transaction
                     int portId = new ImportBLL().GetPortId(portCode);
                     ViewState[PORTOFDISCHARGEID] = portId;
 
+                    hdnPortDischarge.Value = dischargePort.Split('|')[0].Trim();
+
                     if (((TextBox)AC_Port4.FindControl("txtPort")).Text == string.Empty)
                     {
                         ((TextBox)AC_Port4.FindControl("txtPort")).Text = dischargePort;
@@ -323,6 +327,8 @@ namespace EMS.WebApp.Transaction
                     string portCode = loadingPort.Split('|')[1].Trim();
                     int portId = new ImportBLL().GetPortId(portCode);
                     ViewState[PORTOFLOADINGID] = portId;
+
+                    hdnPortLoading.Value = loadingPort.Split('|')[0].Trim();
                 }
                 else
                 {
@@ -352,6 +358,8 @@ namespace EMS.WebApp.Transaction
                     {
                         ((TextBox)AC_Port2.FindControl("txtPort")).Text = issuePort;
                         ViewState[PORTOFLOADINGID] = portId;
+
+                        hdnPortLoading.Value = issuePort.Split('|')[0].Trim();
                     }
                 }
                 else
@@ -390,8 +398,8 @@ namespace EMS.WebApp.Transaction
                 //{
                 //    string vesselName = vessel.Split('|')[0].Trim();
                 int VesselId = new ImportBLL().GetVesselId(vessel);
-                    ViewState[VESSELID] = VesselId;
-                    LoadVoyageDDL();
+                ViewState[VESSELID] = VesselId;
+                LoadVoyageDDL();
                 //}
                 //else
                 //{
@@ -415,6 +423,20 @@ namespace EMS.WebApp.Transaction
         {
             if (txtIgmBLNo.Text.Trim() == string.Empty)
                 txtIgmBLNo.Text = txtLineBL.Text;
+
+            if (txtIgmBLNo.Text.Trim().ToUpper() != txtLineBL.Text.Trim().ToUpper())
+                rfvLineBLVessel.Visible = true;
+            else
+                rfvLineBLVessel.Visible = false;
+
+        }
+
+        protected void txtIgmBLNo_TextChanged(object sender, EventArgs e)
+        {
+            if (txtIgmBLNo.Text.Trim().ToUpper() != txtLineBL.Text.Trim().ToUpper())
+                rfvLineBLVessel.Visible = true;
+            else
+                rfvLineBLVessel.Visible = false;
         }
 
         protected void txtLineBLDate_TextChanged(object sender, EventArgs e)
@@ -589,7 +611,7 @@ namespace EMS.WebApp.Transaction
                 txtVolume.Enabled = true;
                 ((TextBox)AC_WeightUnit1.FindControl("txtWeightUnit")).Enabled = true;
                 ((TextBox)AC_VolumeUnit1.FindControl("txtVolUnit")).Enabled = true;
-                rfvVolume.Visible = true;
+                //rfvVolume.Visible = true;
                 rfvGrossWeight.Visible = true;
 
                 rdoCargoType.Enabled = true;
@@ -623,7 +645,7 @@ namespace EMS.WebApp.Transaction
                 ((TextBox)AC_WeightUnit1.FindControl("txtWeightUnit")).Enabled = false;
                 ((TextBox)AC_VolumeUnit1.FindControl("txtVolUnit")).Enabled = true;
 
-                rfvVolume.Visible = true;
+                //rfvVolume.Visible = true;
                 rfvGrossWeight.Visible = false;
             }
             else
@@ -637,7 +659,7 @@ namespace EMS.WebApp.Transaction
                 ((TextBox)AC_WeightUnit1.FindControl("txtWeightUnit")).Enabled = true;
                 ((TextBox)AC_VolumeUnit1.FindControl("txtVolUnit")).Enabled = false;
 
-                rfvVolume.Visible = false;
+                //rfvVolume.Visible = false;
                 rfvGrossWeight.Visible = false;
             }
         }
@@ -720,6 +742,15 @@ namespace EMS.WebApp.Transaction
 
             if (txtFtrCargoWt.Text == string.Empty)
                 txtFtrCargoWt.Text = (Convert.ToDecimal(TareWeight) / 1000).ToString();
+        }
+
+        protected void ddlFtrContainerSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Int64 LocationId = Convert.ToInt64(ddlLocation.SelectedValue);
+            int ContainerSize = Convert.ToInt32(ddlFtrContainerSize.SelectedValue);
+            string IsoCode = new ImportBLL().GetISOCode(LocationId, ContainerSize);
+
+            txtFtrISOCode.Text = IsoCode;
         }
 
         protected void rdoFtrTemperatureUnit_SelectedIndexChanged(object sender, EventArgs e)
@@ -813,7 +844,7 @@ namespace EMS.WebApp.Transaction
             LoadNvoccDDL();
             LoadLocationDDL();
             LoadContainerTypeDDL();
-            ISOCodeDDL();
+            //ISOCodeDDL();
         }
 
         private void SetDefaultFreightPayableAt()
@@ -927,18 +958,31 @@ namespace EMS.WebApp.Transaction
             ddlFtrContainerType.DataBind();
         }
 
-        private void ISOCodeDDL()
+        private void LoadSurveyorDDL()
         {
-            DataTable dt = new ImportBLL().GetISOCode();
+            DataTable dt = new ImportBLL().GetSurveyor(Convert.ToInt64(ddlLocation.SelectedValue));
             DataRow dr = dt.NewRow();
-            dr["ISOAbbr"] = "0";
-            dr["ISOName"] = "--Select--";
+            dr["fk_AddressID"] = "0";
+            dr["AddrName"] = "--Select--";
             dt.Rows.InsertAt(dr, 0);
-            ddlFtrIsoCode.DataValueField = "ISOAbbr";
-            ddlFtrIsoCode.DataTextField = "ISOName";
-            ddlFtrIsoCode.DataSource = dt;
-            ddlFtrIsoCode.DataBind();
+            ddlSurveyor.DataValueField = "fk_AddressID";
+            ddlSurveyor.DataTextField = "AddrName";
+            ddlSurveyor.DataSource = dt;
+            ddlSurveyor.DataBind();
         }
+
+        //private void ISOCodeDDL()
+        //{
+        //    DataTable dt = new ImportBLL().GetISOCode();
+        //    DataRow dr = dt.NewRow();
+        //    dr["ISOAbbr"] = "0";
+        //    dr["ISOName"] = "--Select--";
+        //    dt.Rows.InsertAt(dr, 0);
+        //    ddlFtrIsoCode.DataValueField = "ISOAbbr";
+        //    ddlFtrIsoCode.DataTextField = "ISOName";
+        //    ddlFtrIsoCode.DataSource = dt;
+        //    ddlFtrIsoCode.DataBind();
+        //}
 
         private void SetCargoMovementCode()
         {
@@ -1050,7 +1094,7 @@ namespace EMS.WebApp.Transaction
                 header.Reefer = false;
 
             header.StockLocationID = Convert.ToInt32(ddlStockLocation.SelectedValue);
-            header.SurveyorAddressID = Convert.ToInt32(ViewState[SURVEYORID]);
+            header.SurveyorAddressID = Convert.ToInt32(ddlSurveyor.SelectedValue); //Convert.ToInt32(ViewState[SURVEYORID]);
 
             if (Convert.ToString(rdoTaxExempted.SelectedValue) == "Yes")
                 header.TaxExemption = true;
@@ -1155,7 +1199,8 @@ namespace EMS.WebApp.Transaction
                 footer.GrossWeight = Convert.ToDecimal(txtFtrGrossWeight.Text.Trim());
 
             footer.IMCO = Convert.ToString(txtFtrImcoNo.Text.Trim());
-            footer.ISOCode = Convert.ToString(ddlFtrIsoCode.SelectedValue);
+            //footer.ISOCode = Convert.ToString(ddlFtrIsoCode.SelectedValue);
+            footer.ISOCode = txtFtrISOCode.Text.Trim();
 
             if (txtFtrODHeight.Text.Trim() != string.Empty)
                 footer.ODHeight = Convert.ToDecimal(txtFtrODHeight.Text.Trim());
@@ -1205,7 +1250,7 @@ namespace EMS.WebApp.Transaction
             errDeliveryTo.Text = "";
             errUnitPackage.Text = "";
             errUnitVW.Text = "";
-            errSurveyor.Text = "";
+            //errSurveyor.Text = "";
             errShipper.Text = "";
             errConsignee.Text = "";
             errNP.Text = "";
@@ -1213,6 +1258,7 @@ namespace EMS.WebApp.Transaction
             errFreight.Text = "";
             errBL.Text = "";
             errContainer.Text = "";
+            lblErr.Text = "";
 
             if (Convert.ToString(ViewState[VESSELID]) == string.Empty || Convert.ToString(ViewState[VESSELID]) == "0")
             {
@@ -1276,14 +1322,14 @@ namespace EMS.WebApp.Transaction
                 }
             }
 
-            if (((TextBox)AC_Surveyor1.FindControl("txtSurveyor")).Text.Trim() != string.Empty)
-            {
-                if (Convert.ToString(ViewState[SURVEYORID]) == string.Empty)
-                {
-                    IsValid = false;
-                    errSurveyor.Text = "Please enter valid surveyor";
-                }
-            }
+            //if (((TextBox)AC_Surveyor1.FindControl("txtSurveyor")).Text.Trim() != string.Empty)
+            //{
+            //    if (Convert.ToString(ViewState[SURVEYORID]) == string.Empty)
+            //    {
+            //        IsValid = false;
+            //        errSurveyor.Text = "Please enter valid surveyor";
+            //    }
+            //}
 
             //if (Convert.ToString(ViewState[SHIPERADDRID]) == string.Empty || Convert.ToString(ViewState[SHIPERADDRID]) == "0")
             //{
@@ -1335,15 +1381,29 @@ namespace EMS.WebApp.Transaction
             //    errContainer.Text = "Please enter valid container no";
             //}
 
+            List<IBLFooter> footers = ViewState[FOOTERDETAILS] as List<IBLFooter>;
 
             if (rdoNatureCargo.SelectedValue == "C")
             {
-                List<IBLFooter> footers = ViewState[FOOTERDETAILS] as List<IBLFooter>;
-
                 if (footers == null || footers.Count == 0)
                 {
                     IsValid = false;
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('No record available for Footer!');</script>", false);
+                }
+            }
+
+            if (footers != null || footers.Count > 0)
+            {
+                int headerPackage = Convert.ToInt32(txtPackage.Text.Trim());
+                decimal headerGrossWeight = Convert.ToDecimal(txtGrossWeight.Text.Trim());
+
+                int footerPackage = footers.Sum(f => f.Package);
+                decimal footerGrossWeight = footers.Sum(f => f.GrossWeight);
+
+                if ((headerPackage != footerPackage) || (headerGrossWeight != footerGrossWeight))
+                {
+                    IsValid = false;
+                    lblErr.Text = "Total Packages & Gross Weight should be equal with B/L Header";
                 }
             }
 
@@ -1361,7 +1421,8 @@ namespace EMS.WebApp.Transaction
             txtFtrGrossWeight.Text = "";
             txtFtrPackage.Text = "";
             txtFtrCargoWt.Text = "";
-            ddlFtrIsoCode.SelectedValue = "0";
+            //ddlFtrIsoCode.SelectedValue = "0";
+            txtFtrISOCode.Text = "";
             txtFtrAgentCode.Text = "";
             txtFtrTareWt.Text = "";
             txtFtrTemperature.Text = "";
@@ -1407,7 +1468,8 @@ namespace EMS.WebApp.Transaction
             txtFtrGrossWeight.Text = Convert.ToString(footer.GrossWeight);
             txtFtrPackage.Text = Convert.ToString(footer.Package);
             txtFtrCargoWt.Text = Convert.ToString(footer.CargoWtTon);
-            ddlFtrIsoCode.SelectedValue = footer.ISOCode;
+            //ddlFtrIsoCode.SelectedValue = footer.ISOCode;
+            txtFtrISOCode.Text = footer.ISOCode;
             txtFtrAgentCode.Text = footer.CAgent;
             //txtFtrTareWt.Text = Convert.ToString(footer.TareWt);
             txtFtrTemperature.Text = Convert.ToString(footer.Temperature);
@@ -1499,7 +1561,8 @@ namespace EMS.WebApp.Transaction
             blFooter.DIMCode = Convert.ToString(txtFtrDimCode.Text.Trim());
             blFooter.GrossWeight = Convert.ToDecimal(txtFtrGrossWeight.Text.Trim());
             blFooter.IMCO = Convert.ToString(txtFtrImcoNo.Text.Trim());
-            blFooter.ISOCode = Convert.ToString(ddlFtrIsoCode.SelectedValue);
+            //blFooter.ISOCode = Convert.ToString(ddlFtrIsoCode.SelectedValue);
+            blFooter.ISOCode = txtFtrISOCode.Text.Trim();
             blFooter.ODHeight = Convert.ToDecimal(txtFtrODHeight.Text.Trim());
             blFooter.ODLength = Convert.ToDecimal(txtFtrODLength.Text.Trim());
             blFooter.ODWidth = Convert.ToDecimal(txtFtrODWidth.Text.Trim());
@@ -1597,7 +1660,8 @@ namespace EMS.WebApp.Transaction
                 rdoReefer.SelectedValue = "No";
 
             ddlStockLocation.SelectedValue = header.StockLocationID.ToString();
-            ViewState[SURVEYORID] = header.SurveyorAddressID;
+            //ViewState[SURVEYORID] = header.SurveyorAddressID;
+            ddlSurveyor.SelectedValue = Convert.ToString(header.SurveyorAddressID);
 
             if (header.TaxExemption == true)
                 rdoTaxExempted.SelectedValue = "Yes";
@@ -1702,8 +1766,10 @@ namespace EMS.WebApp.Transaction
                 ((TextBox)AC_VolumeUnit1.FindControl("txtVolUnit")).Text = new ImportBLL().GetUnitNameById(header.UnitPackage);
 
             //Surveyor
-            if (header.SurveyorAddressID != 0)
-                ((TextBox)AC_Surveyor1.FindControl("txtSurveyor")).Text = new ImportBLL().GetSurveyorNameById(header.SurveyorAddressID);
+            //if (header.SurveyorAddressID != 0)
+            //    ((TextBox)AC_Surveyor1.FindControl("txtSurveyor")).Text = new ImportBLL().GetSurveyorNameById(header.SurveyorAddressID);
+
+            ddlSurveyor.SelectedValue = Convert.ToString(header.SurveyorAddressID);
 
             //================= BL Footer =========================
             List<IBLFooter> footers = new ImportBLL().GetBLFooterInfo(BlId);

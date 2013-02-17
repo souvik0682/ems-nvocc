@@ -44,6 +44,20 @@ namespace EMS.WebApp.Transaction
             upBL.Update();
         }
 
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            txtIGMBLNo.Text = "";
+            txtLineBLNo.Text = ""; 
+            txtPOD.Text = "";
+            txtPOL.Text = "";
+            txtVessel.Text = "";
+            txtVoyageNo.Text = "";
+
+            SaveNewPageIndex(0);
+            LoadImportBL();
+            upBL.Update();
+        }
+
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             RedirecToAddEditPage(-1);

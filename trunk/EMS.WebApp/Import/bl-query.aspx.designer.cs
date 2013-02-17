@@ -211,6 +211,15 @@ namespace EMS.WebApp.Import {
         protected global::System.Web.UI.WebControls.Panel pnlDo;
         
         /// <summary>
+        /// imgClose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgClose;
+        
+        /// <summary>
         /// imgBtnExaminationDo control.
         /// </summary>
         /// <remarks>
@@ -218,6 +227,15 @@ namespace EMS.WebApp.Import {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgBtnExaminationDo;
+        
+        /// <summary>
+        /// imgBtnFinalDo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgBtnFinalDo;
         
         /// <summary>
         /// ddlDestuffing control.
@@ -238,13 +256,13 @@ namespace EMS.WebApp.Import {
         protected global::System.Web.UI.WebControls.TextBox txtDoValidTill;
         
         /// <summary>
-        /// ckkFreightPaid control.
+        /// chkFreightPaidstatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ckkFreightPaid;
+        protected global::System.Web.UI.WebControls.CheckBox chkFreightPaidstatus;
         
         /// <summary>
         /// chkBankGuarantee control.
@@ -364,13 +382,13 @@ namespace EMS.WebApp.Import {
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtender3;
         
         /// <summary>
-        /// LinkButton2 control.
+        /// lnkGenerateInvoiceSlotExtension control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
+        protected global::System.Web.UI.WebControls.LinkButton lnkGenerateInvoiceSlotExtension;
         
         /// <summary>
         /// chkAmendment control.

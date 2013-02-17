@@ -28,34 +28,123 @@ namespace EMS.WebApp.Import
             if (BLDataSet.Tables[0].Rows.Count > 0)
             {
                 fillBLDetail(BLDataSet.Tables[0]);
-                fillServiceRequest();
+                fillServiceRequest(BLDataSet.Tables[0]);
             }
-            
+
 
         }
 
         void fillBLDetail(DataTable dtDetail)
         {
-            if (dtDetail.Rows.Count > 0)
+
+            txtBlNo.Text = dtDetail.Rows[0]["BLNO"].ToString();
+            txtCha.Text = dtDetail.Rows[0]["CHA"].ToString();
+            txtHouseBlNo.Text = dtDetail.Rows[0]["HBLNO"].ToString();
+            txtDetentionFee.Text = dtDetail.Rows[0]["DTNFEE"].ToString();
+            txtDoValidTill.Text = dtDetail.Rows[0]["DOVALIDUPTO"].ToString();
+            txtLandingDate.Text = Convert.ToDateTime(dtDetail.Rows[0]["LANDINGDT"].ToString()).ToString("dd/MM/yyyy");
+            txtVessel.Text = dtDetail.Rows[0]["VESSEL"].ToString();
+            txtVoyage.Text = dtDetail.Rows[0]["VOYAGE"].ToString();
+            txtDetentionFreeDays.Text = dtDetail.Rows[0]["DTNFREEDAYS"].ToString();
+            txtDetentionFee.Text = dtDetail.Rows[0]["DTNFEE"].ToString();
+            txtPGRFreedays.Text = dtDetail.Rows[0]["PGRFREEDAYS"].ToString();
+            txtPGRTill.Text = dtDetail.Rows[0]["PGRTILL"].ToString();
+
+        }
+
+        void fillServiceRequest(DataTable dtDetail)
+        {
+            txtDoValidTill.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtDetentionFreeDays.Text) - 1).ToShortDateString();
+            
+            if (dtDetail.Rows[0]["FREIGHTTYPE"].ToString().ToLower() == "pp")
+                chkFreightPaidstatus.Checked = true;
+            else
+                chkFreightPaidstatus.Checked = false;
+        }
+
+        protected void chkDo_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (chkDo.Checked == true)
             {
-                txtBlNo.Text = dtDetail.Rows[0]["BLNO"].ToString();
-                txtCha.Text = dtDetail.Rows[0]["CHA"].ToString();
-                txtHouseBlNo.Text = dtDetail.Rows[0]["HBLNO"].ToString();
-                txtDetentionFee.Text = dtDetail.Rows[0]["DTNFEE"].ToString();
-                txtDoValidTill.Text = dtDetail.Rows[0]["DOVALIDUPTO"].ToString();
-                txtLandingDate.Text = Convert.ToDateTime(dtDetail.Rows[0]["LANDINGDT"].ToString()).ToString("dd/MM/yyyy");
-                txtVessel.Text = dtDetail.Rows[0]["VESSEL"].ToString();
-                txtVoyage.Text = dtDetail.Rows[0]["VOYAGE"].ToString();
-                txtDetentionFreeDays.Text = dtDetail.Rows[0]["DTNFREEDAYS"].ToString();
-                txtDetentionFee.Text = dtDetail.Rows[0]["DTNFEE"].ToString();
-                txtPGRFreedays.Text = dtDetail.Rows[0]["PGRFREEDAYS"].ToString();
-                txtPGRTill.Text = dtDetail.Rows[0]["PGRTILL"].ToString();
+                ddlDestuffing.Enabled = true;
+                txtDoValidTill.Enabled = true;
+                chkFreightPaidstatus.Enabled = true;
+                chkBankGuarantee.Enabled = true;
+                lnkGenerateInvoiceDo.Enabled = true;
+                lnkGenerateInvoiceDo.Enabled = true;
+            }
+            else
+            {
+                ddlDestuffing.Enabled = false;
+                txtDoValidTill.Enabled = false;
+                chkFreightPaidstatus.Enabled = false;
+                chkBankGuarantee.Enabled = false;
+                lnkGenerateInvoiceDo.Enabled = false;
+                lnkGenerateInvoiceDo.Enabled = false;
             }
         }
 
-        void fillServiceRequest()
+        protected void chkDoExtension_CheckedChanged(object sender, EventArgs e)
         {
-            txtDoValidTill.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtDetentionFreeDays.Text) - 1).ToShortDateString();
+            if (chkDoExtension.Checked == true)
+            {
+                txtVAlidityDate.Enabled = true;
+                lnkGenerateInvoiceDOE.Enabled = true;
+            }
+            else
+            {
+                txtVAlidityDate.Enabled = false;
+                lnkGenerateInvoiceDOE.Enabled = false;
+            }
         }
+
+        protected void chkSlotExtension_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSlotExtension.Checked == true)
+            {
+                txtExtensionForDetention.Enabled = true;
+                txtExtensionForPGR.Enabled = true;
+                lnkGenerateInvoiceSlotExtension.Enabled = true;
+
+            }
+            else
+            {
+                txtExtensionForDetention.Enabled = false;
+                txtExtensionForPGR.Enabled = false;
+                lnkGenerateInvoiceSlotExtension.Enabled = false;
+            }
+        }
+
+        protected void chkAmendment_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmendment.Checked == true)
+            {
+                ddlAmendmentFor.Enabled = true;
+            }
+            else
+            {
+                ddlAmendmentFor.Enabled = false;
+            }
+        }
+
+        protected void chkBondCancel_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBondCancel.Checked == true)
+            {
+                txtBondCancellation.Enabled = true;
+            }
+            else
+            {
+                txtBondCancellation.Enabled = false;
+            }
+        }
+
+        protected void imgBtnExaminationDo_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("/#?bl");
+        }
+
+
     }
 }

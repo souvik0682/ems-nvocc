@@ -198,5 +198,10 @@ namespace EMS.BLL
         {
             return ImportBLDAL.GetSurveyor(LocationId);
         }
+
+        public DataSet GetBLQuery(string ImpBLNo)
+        {
+            return ImportBLDAL.GetBLQuery(ImpBLNo);
+        }
     }
 }

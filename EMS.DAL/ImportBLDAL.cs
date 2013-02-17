@@ -234,18 +234,34 @@ namespace EMS.DAL
             return dt;
         }
 
-        public static DataTable GetISOCode()
+        //public static DataTable GetISOCode()
+        //{
+        //    string strExecution = "uspGetISOCode";
+        //    DataTable dt = new DataTable();
+
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        dt = oDq.GetTable();
+        //    }
+
+        //    return dt;
+        //}
+
+        public static string GetISOCode(long LocationID, int ContainerSize)
         {
             string strExecution = "uspGetISOCode";
-            DataTable dt = new DataTable();
-
+            string ISO = string.Empty;
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                dt = oDq.GetTable();
+                oDq.AddBigIntegerParam("@LocationID", LocationID);
+                oDq.AddIntegerParam("@ContainerSize", ContainerSize);
+
+                ISO = Convert.ToString(oDq.GetScalar());
             }
 
-            return dt;
+            return ISO;
         }
 
         public static DataTable GetTareWeight(int ContainerTypeID)
@@ -680,6 +696,22 @@ namespace EMS.DAL
                 oDq.AddBigIntegerParam("@FooterID", FooterId);
                 oDq.RunActionQuery();
             }
+        }
+
+        public static DataTable GetSurveyor(long LocationId)
+        {
+            string strExecution = "uspGetSurveyor";
+            DataTable dt = new DataTable();
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@LocationId", LocationId);
+
+                dt = oDq.GetTable();
+            }
+
+            return dt;
         }
 
         public static DataSet GetBLQuery(string BLNo)

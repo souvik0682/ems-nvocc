@@ -10,240 +10,312 @@
 namespace EMS.WebApp.Transaction {
     
     
-    public partial class ImportBL {
+    public partial class ManageInvoice {
         
         /// <summary>
-        /// txtIGMBLNo control.
+        /// ddlInvoiceType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIGMBLNo;
+        protected global::System.Web.UI.WebControls.DropDownList ddlInvoiceType;
         
         /// <summary>
-        /// FilteredTextBoxExtender4 control.
+        /// rfvInvoiceType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender4;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvInvoiceType;
         
         /// <summary>
-        /// TextBoxWatermarkExtender4 control.
+        /// ddlLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender4;
+        protected global::System.Web.UI.WebControls.DropDownList ddlLocation;
         
         /// <summary>
-        /// txtLineBLNo control.
+        /// rfvLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLineBLNo;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLocation;
         
         /// <summary>
-        /// FilteredTextBoxExtender5 control.
+        /// ddlLineNvocc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender5;
+        protected global::System.Web.UI.WebControls.DropDownList ddlLineNvocc;
         
         /// <summary>
-        /// TextBoxWatermarkExtender5 control.
+        /// rfvLineNvocc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender5;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLineNvocc;
         
         /// <summary>
-        /// txtVoyageNo control.
+        /// txtInvoiceNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtVoyageNo;
+        protected global::System.Web.UI.WebControls.TextBox txtInvoiceNo;
         
         /// <summary>
-        /// FilteredTextBoxExtender8 control.
+        /// rfvInvoiceNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender8;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvInvoiceNo;
         
         /// <summary>
-        /// TextBoxWatermarkExtender8 control.
+        /// txtInvoiceDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender8;
+        protected global::System.Web.UI.WebControls.TextBox txtInvoiceDate;
         
         /// <summary>
-        /// txtVessel control.
+        /// rfvInvoiceDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtVessel;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvInvoiceDate;
         
         /// <summary>
-        /// FilteredTextBoxExtender7 control.
+        /// ddlBLno control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender7;
+        protected global::System.Web.UI.WebControls.DropDownList ddlBLno;
         
         /// <summary>
-        /// TextBoxWatermarkExtender7 control.
+        /// rfvBLno control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender7;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBLno;
         
         /// <summary>
-        /// txtPOD control.
+        /// txtBLdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPOD;
+        protected global::System.Web.UI.WebControls.TextBox txtBLdate;
         
         /// <summary>
-        /// FilteredTextBoxExtender9 control.
+        /// rfvBLdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender9;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBLdate;
         
         /// <summary>
-        /// TextBoxWatermarkExtender9 control.
+        /// ddlCHAid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender9;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCHAid;
         
         /// <summary>
-        /// txtPOL control.
+        /// rfvCHAid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPOL;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCHAid;
         
         /// <summary>
-        /// FilteredTextBoxExtender10 control.
+        /// rdblAccountFor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender10;
+        protected global::System.Web.UI.WebControls.RadioButtonList rdblAccountFor;
         
         /// <summary>
-        /// TextBoxWatermarkExtender10 control.
+        /// txtExchangeRate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender10;
+        protected global::System.Web.UI.WebControls.TextBox txtExchangeRate;
         
         /// <summary>
-        /// btnSearch control.
+        /// rfvExchangeRate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvExchangeRate;
         
         /// <summary>
-        /// btnReset control.
+        /// txtTotalAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReset;
+        protected global::System.Web.UI.WebControls.TextBox txtTotalAmount;
         
         /// <summary>
-        /// uProgressLoc control.
+        /// rdblAllinFreight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress uProgressLoc;
+        protected global::System.Web.UI.WebControls.RadioButtonList rdblAllinFreight;
         
         /// <summary>
-        /// fsList control.
+        /// txtGrossWeightTON control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fsList;
+        protected global::System.Web.UI.WebControls.TextBox txtGrossWeightTON;
         
         /// <summary>
-        /// ddlPaging control.
+        /// txtVolume control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPaging;
+        protected global::System.Web.UI.WebControls.TextBox txtVolume;
         
         /// <summary>
-        /// btnAdd control.
+        /// txtTEU control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdd;
+        protected global::System.Web.UI.WebControls.TextBox txtTEU;
         
         /// <summary>
-        /// upBL control.
+        /// txtFFU control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upBL;
+        protected global::System.Web.UI.WebControls.TextBox txtFFU;
         
         /// <summary>
-        /// gvImportBL control.
+        /// UpdatePanelInvoice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvImportBL;
+        protected global::System.Web.UI.UpdatePanel UpdatePanelInvoice;
+        
+        /// <summary>
+        /// dgInvoiceChargeRates control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgInvoiceChargeRates;
+        
+        /// <summary>
+        /// hdnChargeID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnChargeID;
+        
+        /// <summary>
+        /// btnSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSave;
+        
+        /// <summary>
+        /// btnBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBack;
+        
+        /// <summary>
+        /// lblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessage;
+        
+        /// <summary>
+        /// ddlMLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlMLocation;
+        
+        /// <summary>
+        /// ddlMTerminal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlMTerminal;
+        
+        /// <summary>
+        /// ddlMWashingType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlMWashingType;
     }
 }

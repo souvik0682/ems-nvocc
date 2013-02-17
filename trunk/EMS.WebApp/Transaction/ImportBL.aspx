@@ -23,7 +23,7 @@
                     <tr>
                         <td>
                             <asp:TextBox ID="txtIGMBLNo" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
-                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters"
+                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
                                 FilterMode="ValidChars" ValidChars=" " TargetControlID="txtIGMBLNo">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender4" runat="server" TargetControlID="txtIGMBLNo"
@@ -32,7 +32,7 @@
                         </td>
                         <td>
                             <asp:TextBox ID="txtLineBLNo" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
-                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters"
+                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
                                 FilterMode="ValidChars" ValidChars=" " TargetControlID="txtLineBLNo">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender5" runat="server" TargetControlID="txtLineBLNo"
@@ -50,7 +50,7 @@
                         </td>--%>
                         <td>
                             <asp:TextBox ID="txtVoyageNo" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
-                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender8" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters"
+                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender8" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
                                 FilterMode="ValidChars" ValidChars=" " TargetControlID="txtVoyageNo">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender8" runat="server" TargetControlID="txtVoyageNo"
@@ -61,7 +61,7 @@
                     <tr>
                         <td>
                             <asp:TextBox ID="txtVessel" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
-                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender7" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters"
+                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender7" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
                                 FilterMode="ValidChars" ValidChars=" " TargetControlID="txtVessel">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender7" runat="server" TargetControlID="txtVessel"
@@ -70,7 +70,7 @@
                         </td>
                         <td>
                             <asp:TextBox ID="txtPOD" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
-                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender9" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters"
+                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender9" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
                                 FilterMode="ValidChars" ValidChars=" " TargetControlID="txtPOD">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender9" runat="server" TargetControlID="txtPOD"
@@ -79,7 +79,7 @@
                         </td>
                         <td>
                             <asp:TextBox ID="txtPOL" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
-                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender10" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters"
+                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender10" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
                                 FilterMode="ValidChars" ValidChars=" " TargetControlID="txtPOL">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender10" runat="server" TargetControlID="txtPOL"
@@ -91,6 +91,9 @@
                         <td>
                             <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" 
                                 Width="100px" onclick="btnSearch_Click"/>
+                            &nbsp;&nbsp;&nbsp;
+                            <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="button" 
+                                Width="100px" onclick="btnReset_Click"/>
                         </td>
                     </tr>
                     </table>

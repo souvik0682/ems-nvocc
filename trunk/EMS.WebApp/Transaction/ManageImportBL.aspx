@@ -64,6 +64,9 @@
                 }
                 else if (selected.value == 'L') {
                     document.getElementById('<%=txtFtrCargoType.ClientID %>').value = 'LCL';
+
+                    document.getElementById('<%=txtFtrGrossWeight.ClientID %>').value = document.getElementById('<%=txtGrossWeight.ClientID %>').value;
+                    document.getElementById('<%=txtFtrPackage.ClientID %>').value = document.getElementById('<%=txtPackage.ClientID %>').value;
                 }
                 else if (selected.value == 'E') {
                     document.getElementById('<%=txtFtrCargoType.ClientID %>').value = 'ETY';
@@ -73,6 +76,8 @@
                 }
             }
 
+            //Transhipment Info
+            document.getElementById('<%=txtTransinfo.ClientID %>').value = "CARGO LOADED FROM " + document.getElementById('<%=hdnPortLoading.ClientID %>').value + "\n\rTO BE DISCHARGED AT " + document.getElementById('<%=hdnPortDischarge.ClientID %>').value;
         } 
 </script>
 
@@ -175,7 +180,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtLineBLDate" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="250px" TabIndex="4" OnTextChanged="txtLineBLDate_TextChanged"></asp:TextBox>
+                                                                    Width="250px" TabIndex="4" OnTextChanged="txtLineBLDate_TextChanged" AutoPostBack="true"></asp:TextBox>
                                                                 <cc1:CalendarExtender ID="cbeLineBLDate" TargetControlID="txtLineBLDate" runat="server"
                                                                     Format="dd-MM-yyyy" Enabled="True" />
                                                                 <br />
@@ -198,14 +203,14 @@
                                                             <td>
                                                             </td>
                                                             <td>
-                                                                Line B/L Vessel Details:<span class="errormessage">*</span>
+                                                                Line B/L Vessel Details:
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtLineBLVessel" runat="server" CssClass="textboxuppercase" MaxLength="100"
                                                                     Width="250px" TabIndex="6"></asp:TextBox><br />
                                                                 <asp:RequiredFieldValidator ID="rfvLineBLVessel" runat="server" ControlToValidate="txtLineBLVessel"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
-                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                    Display="Dynamic" Visible="false"></asp:RequiredFieldValidator>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -241,7 +246,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtIgmBLNo" runat="server" CssClass="textboxuppercase" MaxLength="60"
-                                                                    Width="250px" TabIndex="9"></asp:TextBox>
+                                                                    Width="250px" TabIndex="9" OnTextChanged="txtIgmBLNo_TextChanged" AutoPostBack="true"></asp:TextBox>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvIgmBLNo" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtIgmBLNo" ValidationGroup="Save"
@@ -265,7 +270,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                Line/Item Prefix:<span class="errormessage">*</span>
+                                                                Line/Item Prefix:
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtLinePrefix" runat="server" CssClass="textboxuppercase" MaxLength="8"
@@ -285,7 +290,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                Bill of Entry No:<span class="errormessage">*</span>
+                                                                Bill of Entry No:
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtBillEntery" runat="server" CssClass="textboxuppercase" MaxLength="50"
@@ -366,6 +371,7 @@
                                                             <td>
                                                                 <uc7:AC_Port ID="AC_Port2" runat="server" />
                                                                 <asp:Label ID="errPortOfLoading" runat="server" CssClass="errormessage"></asp:Label>
+                                                                <asp:HiddenField ID="hdnPortLoading" runat="server" />
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -375,6 +381,7 @@
                                                             <td>
                                                                 <uc7:AC_Port ID="AC_Port3" runat="server" />
                                                                 <asp:Label ID="errPortOfDischarge" runat="server" CssClass="errormessage"></asp:Label>
+                                                                <asp:HiddenField ID="hdnPortDischarge" runat="server" />
                                                             </td>
                                                             <td>
                                                             </td>
@@ -494,14 +501,14 @@
                                                             <td>
                                                             </td>
                                                             <td>
-                                                                Carrier Agency Code:<span class="errormessage">*</span>
+                                                                Carrier Agency Code:
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtCACode" runat="server" CssClass="textboxuppercase" MaxLength="10"
                                                                     Width="250px" TabIndex="32"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="rfvCACode" runat="server" ControlToValidate="txtCACode"
+                                                                <%--<asp:RequiredFieldValidator ID="rfvCACode" runat="server" ControlToValidate="txtCACode"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
-                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -552,14 +559,14 @@
                                                         <tr>
                                                             <td>
                                                                 <asp:Label ID="Label1" runat="server" Text="Volume:"></asp:Label>
-                                                                <span class="errormessage">*</span>
+                                                                
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtVolume" runat="server" CssClass="numerictextbox" Type="Decimal"
                                                                     MaxLength="17" Precision="13" Scale="3" Width="250px"></cc2:CustomTextBox>
-                                                                <asp:RequiredFieldValidator ID="rfvVolume" runat="server" ControlToValidate="txtVolume"
+                                                                <%--<asp:RequiredFieldValidator ID="rfvVolume" runat="server" ControlToValidate="txtVolume"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
-                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                                             </td>
                                                             <td>
                                                             </td>
@@ -666,14 +673,14 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                MLO Code:<span class="errormessage">*</span>
+                                                                MLO Code:
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtMLOCode" runat="server" CssClass="textboxuppercase" MaxLength="16"
                                                                     Width="250px" TabIndex="45"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="rfvMLOCode" runat="server" ControlToValidate="txtMLOCode"
+                                                                <%--<asp:RequiredFieldValidator ID="rfvMLOCode" runat="server" ControlToValidate="txtMLOCode"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
-                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                                             </td>
                                                             <td>
                                                             </td>
@@ -798,8 +805,17 @@
                                                                 Surveyor:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
-                                                                <uc5:AC_Surveyor ID="AC_Surveyor1" runat="server" />
-                                                                <asp:Label ID="errSurveyor" runat="server" CssClass="errormessage"></asp:Label>
+                                                                <%--<uc5:AC_Surveyor ID="AC_Surveyor1" runat="server" />
+                                                                <asp:Label ID="errSurveyor" runat="server" CssClass="errormessage"></asp:Label>--%>
+
+                                                                <asp:DropDownList ID="ddlSurveyor" runat="server" CssClass="dropdownlist" TabIndex="56">
+                                                                    <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
+                                                                </asp:DropDownList>
+                                                                <br />
+                                                                <asp:RequiredFieldValidator ID="rfvSurveyor" runat="server" ControlToValidate="ddlSurveyor"
+                                                                    ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
+                                                                    ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -872,7 +888,7 @@
                                                                 Marks & Nos:<span class="errormessage">*</span>
                                                                 <br />
                                                                 <asp:TextBox ID="txtMarks" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="450" TabIndex="9" Text="N/A" TextMode="MultiLine" Rows="3"></asp:TextBox><br />
+                                                                    Width="450" TabIndex="9" Text="N/M" TextMode="MultiLine" Rows="3"></asp:TextBox><br />
                                                                 <asp:RequiredFieldValidator ID="rfvMarks" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtMarks" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
@@ -952,7 +968,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td style="width: 20%;">
-                                                                Container No:
+                                                                Container No:<span class="errormessage">*</span>
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtFtrContainerNo" runat="server" CssClass="textboxuppercase" MaxLength="11"
@@ -969,8 +985,8 @@
                                                                 Container Size:
                                                             </td>
                                                             <td style="width: 28%;">
-                                                                <asp:DropDownList ID="ddlFtrContainerSize" runat="server" CssClass="dropdownlist"
-                                                                    TabIndex="6">
+                                                                <asp:DropDownList ID="ddlFtrContainerSize" runat="server" CssClass="dropdownlist" AutoPostBack="true"
+                                                                    TabIndex="6" OnSelectedIndexChanged="ddlFtrContainerSize_SelectedIndexChanged">
                                                                     <%--<asp:ListItem Value="0" Text="--Select--"></asp:ListItem>--%>
                                                                     <asp:ListItem Value="20" Text="20'" Selected="True"></asp:ListItem>
                                                                     <asp:ListItem Value="40" Text="40'"></asp:ListItem>
@@ -983,7 +999,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td style="width: 20%;">
-                                                                Container Type:
+                                                                Container Type:<span class="errormessage">*</span>
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:DropDownList ID="ddlFtrContainerType" runat="server" CssClass="dropdownlist"
@@ -999,7 +1015,7 @@
                                                             <td style="width: 4%;">
                                                             </td>
                                                             <td style="width: 20%;">
-                                                                Seal No:
+                                                                Seal No:<span class="errormessage">*</span>
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtFtrSealNo" runat="server" CssClass="textboxuppercase" MaxLength="15"
@@ -1012,7 +1028,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                Commodity:
+                                                                Commodity:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
                                                                 <%--<cc2:CustomTextBox ID="txtFtrCommodity" runat="server" CssClass="numerictextbox"
@@ -1038,7 +1054,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                Gross Weight:
+                                                                Gross Weight:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtFtrGrossWeight" runat="server" CssClass="numerictextbox"
@@ -1051,7 +1067,7 @@
                                                             <td>
                                                             </td>
                                                             <td>
-                                                                Package:
+                                                                Package:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtFtrPackage" runat="server" CssClass="numerictextbox" MaxLength="13"
@@ -1064,7 +1080,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                Cargo Weight(Ton):
+                                                                Cargo Weight(Ton):<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtFtrCargoWt" runat="server" CssClass="numerictextbox" Type="Decimal"
@@ -1077,16 +1093,18 @@
                                                             <td>
                                                             </td>
                                                             <td>
-                                                                ISO Code:
+                                                                ISO Code:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
-                                                                <asp:DropDownList ID="ddlFtrIsoCode" runat="server" CssClass="dropdownlist" TabIndex="14">
+                                                                <%--<asp:DropDownList ID="ddlFtrIsoCode" runat="server" CssClass="dropdownlist" TabIndex="14">
                                                                     <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                                                 </asp:DropDownList>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvFtrIsoCode" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="ddlFtrIsoCode" InitialValue="0"
-                                                                    ValidationGroup="Add" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                    ValidationGroup="Add" Display="Dynamic"></asp:RequiredFieldValidator>--%>
+                                                                <asp:TextBox ID="txtFtrISOCode" runat="server"  TabIndex="14" Width="250" 
+                                                                    CssClass="textboxuppercase" MaxLength="15" Enabled="false"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1319,7 +1337,9 @@
                                     <td colspan="2" style="padding-top: 10px;">
                                         <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" TabIndex="1"
                                             OnClick="btnSave_Click" />&nbsp;&nbsp;
-                                        <asp:Button ID="btnCancel" runat="server" CssClass="button" Text="Cancel" TabIndex="2" />
+                                        <asp:Button ID="btnBack" runat="server" CssClass="button" PostBackUrl="~/Transaction/ImportBL.aspx" Text="Back" />
+                                        <br />
+                                        <asp:Label ID="lblErr" runat="server" CssClass="errormessage"></asp:Label>
                                     </td>
                                 </tr>
                             </table>

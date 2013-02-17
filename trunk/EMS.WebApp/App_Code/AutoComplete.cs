@@ -238,7 +238,7 @@ public class AutoComplete : System.Web.Services.WebService {
 
         string sql = @"SELECT PortName collate SQL_Latin1_General_CP1_CI_AS+' | '+portCode collate SQL_Latin1_General_CP1_CI_AS+' | '+
                       (SELECT countryname FROM dbo.mstCountry WHERE countryabbr = LEFT(portCode collate SQL_Latin1_General_CP1_CI_AS,2)) Name
-                      FROM DSR.dbo.mstPort where portCode LIKE @prefixText";
+                      FROM DSR.dbo.mstPort where PortName LIKE @prefixText";
 
         SqlDataAdapter da = new SqlDataAdapter(sql, ac.ConnectionString);
         da.SelectCommand.Parameters.Add("@prefixText", SqlDbType.VarChar, 50).Value = prefixText + "%";
@@ -346,7 +346,7 @@ public class AutoComplete : System.Web.Services.WebService {
         string sql = @"SELECT a.[AddrName] FROM [DBO].[mstAddress] a 
                         INNER JOIN [dbo].[mstAddressType] at 
                         ON CAST(a.AddrType as int) = at.pk_AddrTypeID 
-                        WHERE a.[AddrActive] = 1 AND at.[AddrType] = 'IN' AND [AddrName] LIKE @prefixText";
+                        WHERE a.[AddrActive] = 1 AND at.[AddrType] = 'IC' AND [AddrName] LIKE @prefixText";
 
         SqlDataAdapter da = new SqlDataAdapter(sql, ac.ConnectionString);
         da.SelectCommand.Parameters.Add("@prefixText", SqlDbType.VarChar, 50).Value = prefixText + "%";
@@ -393,6 +393,6 @@ public class AutoComplete : System.Web.Services.WebService {
 public class AppCodeClass
 {
     public string ConnectionString = "Data Source=WIN-SERVER;Initial Catalog=Liner;User Id=sa;Password=P@ssw0rd;Pooling=true;Connection Timeout=30;Max Pool Size=40;Min Pool Size=5";
-    //public string ConnectionString = @"Data Source=SOUVIK-PC\SQLEXPRESS;Initial Catalog=NVOCC_NEW;Integrated Security=SSPI;";
+    //public string ConnectionString = @"Data Source=SOUVIK-PC\SQLEXPRESS;Initial Catalog=NVOCC;Integrated Security=SSPI;";
 }
 

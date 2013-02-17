@@ -391,6 +391,15 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.Label errPortOfLoading;
         
         /// <summary>
+        /// hdnPortLoading control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnPortLoading;
+        
+        /// <summary>
         /// AC_Port3 control.
         /// </summary>
         /// <remarks>
@@ -407,6 +416,15 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errPortOfDischarge;
+        
+        /// <summary>
+        /// hdnPortDischarge control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnPortDischarge;
         
         /// <summary>
         /// AC_Port4 control.
@@ -562,15 +580,6 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.TextBox txtCACode;
         
         /// <summary>
-        /// rfvCACode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCACode;
-        
-        /// <summary>
         /// txtPackage control.
         /// </summary>
         /// <remarks>
@@ -677,15 +686,6 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::EMS.WebApp.CustomControls.CustomTextBox txtVolume;
-        
-        /// <summary>
-        /// rfvVolume control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvVolume;
         
         /// <summary>
         /// Label3 control.
@@ -832,15 +832,6 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.TextBox txtMLOCode;
         
         /// <summary>
-        /// rfvMLOCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMLOCode;
-        
-        /// <summary>
         /// rdoPartBL control.
         /// </summary>
         /// <remarks>
@@ -967,22 +958,22 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.RadioButtonList rdoWaiverType;
         
         /// <summary>
-        /// AC_Surveyor1 control.
+        /// ddlSurveyor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::EMS.WebApp.CustomControls.AC_Surveyor AC_Surveyor1;
+        protected global::System.Web.UI.WebControls.DropDownList ddlSurveyor;
         
         /// <summary>
-        /// errSurveyor control.
+        /// rfvSurveyor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label errSurveyor;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSurveyor;
         
         /// <summary>
         /// tpOther control.
@@ -1345,22 +1336,13 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFtrCargoWt;
         
         /// <summary>
-        /// ddlFtrIsoCode control.
+        /// txtFtrISOCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlFtrIsoCode;
-        
-        /// <summary>
-        /// rfvFtrIsoCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFtrIsoCode;
+        protected global::System.Web.UI.WebControls.TextBox txtFtrISOCode;
         
         /// <summary>
         /// txtFtrAgentCode control.
@@ -1534,13 +1516,22 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.Button btnSave;
         
         /// <summary>
-        /// btnCancel control.
+        /// btnBack control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.Button btnBack;
+        
+        /// <summary>
+        /// lblErr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErr;
         
         /// <summary>
         /// uProgressBL control.

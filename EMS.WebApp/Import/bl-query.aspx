@@ -16,13 +16,13 @@
                     <ContentTemplate>
                         <table border="0" cellpadding="2" cellspacing="3" width="100%">
                             <tr>
-                                <td style="width: 50px;">
-                                </td>
-                                <td style="width: 150px;">
+                               <%-- <td style="width: 50px;">
+                                </td>--%>
+                                <td style="width: 18%;">
                                     B/L No :
                                 </td>
-                                <td style="width: 230px;">
-                                    <asp:TextBox ID="txtBlNo" runat="server" Width="150" AutoCompleteType="None" AutoPostBack="True"
+                                <td style="width: 15%;">
+                                    <asp:TextBox ID="txtBlNo" runat="server" Width="100" AutoCompleteType="None" AutoPostBack="True"
                                         OnTextChanged="txtBlNo_TextChanged"></asp:TextBox>
                                     <%--<cc1:calendarextender id="CalendarExtender1" runat="server" popupbuttonid="txtEffectDate"
                                         popupposition="BottomLeft" targetcontrolid="txtEffectDate" format="dd/MM/yyyy"
@@ -36,13 +36,13 @@
                                         filtermode="ValidChars" filtertype="Numbers,Custom" validchars="/">
                                     </cc1:filteredtextboxextender>--%>
                                 </td>
-                                <td style="width: 150px;">
-                                    Delivered To (CHA)
+                                <td style="width: 17%;">
+                                    Delivered To (CHA) :
                                 </td>
-                                <td>
+                                <td style="width: 15%;">
                                     <%--<asp:DropDownList ID="ddlDeleveredToCha" runat="server" Width="155">
                             </asp:DropDownList>--%>
-                                    <asp:TextBox ID="txtCha" runat="server" Width="150"></asp:TextBox>
+                                    <asp:TextBox ID="txtCha" runat="server" Width="100"></asp:TextBox>
                                     <%--<asp:RequiredFieldValidator ID="rfvTerminalRequired" runat="server" ErrorMessage="Please select your choice"
                                         Display="None" ControlToValidate="rdbPrincipleSharing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                                     <cc1:validatorcalloutextender id="ValidatorCalloutExtender18" runat="server" targetcontrolid="rfvTerminalRequired">
@@ -50,13 +50,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                </td>
+                                <%--<td>
+                                </td>--%>
                                 <td>
                                     House B/L No :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtHouseBlNo" runat="server" Width="150" Style="text-transform: uppercase;"></asp:TextBox>
+                                    <asp:TextBox ID="txtHouseBlNo" runat="server" Width="100" Style="text-transform: uppercase;"></asp:TextBox>
                                     <%--<asp:RequiredFieldValidator ID="rfvChargeTitle" runat="server" ErrorMessage="Please enter charge title"
                                         ControlToValidate="txtChargeName" Display="None" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                                     <cc1:validatorcalloutextender id="ValidatorCalloutExtender11" runat="server" targetcontrolid="rfvChargeTitle">
@@ -66,7 +66,7 @@
                                     Detention Fee :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtDetentionFee" runat="server" Width="150" Style="text-transform: uppercase;"></asp:TextBox>
+                                    <asp:TextBox ID="txtDetentionFee" runat="server" Width="100" Style="text-transform: uppercase;"></asp:TextBox>
                                     <%-- <asp:RequiredFieldValidator ID="rfvPS" runat="server" ErrorMessage="Please select your choice"
                                 Display="None" ControlToValidate="rdbPrincipleSharing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender13" runat="server" TargetControlID="rfvPS">
@@ -74,13 +74,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                </td>
+                                <%--<td>
+                                </td>--%>
                                 <td>
                                     DO validated up to :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtDoValidUpto" runat="server" Width="150"></asp:TextBox>
+                                    <asp:TextBox ID="txtDoValidUpto" runat="server" Width="100"></asp:TextBox>
                                     <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvSalutation" WarningIconImageUrl="" >
@@ -90,7 +90,7 @@
                                     Landing Date :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtLandingDate" runat="server" Width="150"></asp:TextBox>
+                                    <asp:TextBox ID="txtLandingDate" runat="server" Width="100"></asp:TextBox>
                                     <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
@@ -98,13 +98,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                </td>
+                                <%--<td>
+                                </td>--%>
                                 <td>
                                     Vessel :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtVessel" runat="server" Width="150"></asp:TextBox>
+                                    <asp:TextBox ID="txtVessel" runat="server" Width="100"></asp:TextBox>
                                     <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvSalutation" WarningIconImageUrl="" >
@@ -114,7 +114,7 @@
                                     Voyage :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtVoyage" runat="server" Width="150"></asp:TextBox>
+                                    <asp:TextBox ID="txtVoyage" runat="server" Width="100"></asp:TextBox>
                                     <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
@@ -122,13 +122,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                </td>
+                                <%--<td>
+                                </td>--%>
                                 <td>
                                     Detention Free Days :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtDetentionFreeDays" runat="server" Width="150"></asp:TextBox>
+                                    <asp:TextBox ID="txtDetentionFreeDays" runat="server" Width="100"></asp:TextBox>
                                     <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvSalutation" WarningIconImageUrl="" >
@@ -138,7 +138,7 @@
                                     Detention till :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="tstDetentionTill" runat="server" Width="150"></asp:TextBox>
+                                    <asp:TextBox ID="tstDetentionTill" runat="server" Width="100"></asp:TextBox>
                                     <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
@@ -146,13 +146,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                </td>
+                               <%-- <td>
+                                </td>--%>
                                 <td>
                                     PGR free days :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtPGRFreedays" runat="server" Width="150"></asp:TextBox>
+                                    <asp:TextBox ID="txtPGRFreedays" runat="server" Width="100"></asp:TextBox>
                                     <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvSalutation" WarningIconImageUrl="" >
@@ -162,7 +162,7 @@
                                     PGR till :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtPGRTill" runat="server" Width="150"></asp:TextBox>
+                                    <asp:TextBox ID="txtPGRTill" runat="server" Width="100"></asp:TextBox>
                                     <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
@@ -193,15 +193,39 @@
                         <table width="100%" border="0" cellspacing="0">
                             <tr style="height: 30px;">
                                 <td>
-                                    <asp:CheckBox ID="chkDo" runat="server" />
+                                    <asp:CheckBox ID="chkDo" runat="server" OnCheckedChanged="chkDo_CheckedChanged" AutoPostBack="true" />
                                     <asp:LinkButton ID="lnkDO" runat="server" Text="Delivery Order" ForeColor="Blue"></asp:LinkButton>
                                     <cc1:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="pnlDo"
-                                        TargetControlID="lnkDO">
+                                        TargetControlID="lnkDO" BackgroundCssClass="ModalPopupBG" CancelControlID="imgClose">
                                     </cc1:ModalPopupExtender>
                                     <asp:Panel ID="pnlDo" runat="server">
-                                        <table>
+                                        <table style="width: 300px; height: 80px; background-color: White; text-align: center;"
+                                            border="0">
                                             <tr>
-                                                <asp:ImageButton ID="imgBtnExaminationDo" runat="server" AlternateText="Print Examination Do" /></tr>
+                                                <td colspan="2" align="right">
+                                                    <asp:ImageButton ID="imgClose" runat="server" ImageUrl="~/Images/close-icon.png" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="50%">
+                                                    <asp:ImageButton ID="imgBtnExaminationDo" runat="server" ImageUrl="~/Images/p1.jpeg"
+                                                        ToolTip="Print Examination Do" Height="45" Width="45" 
+                                                        AlternateText="Print Examination Do" onclick="imgBtnExaminationDo_Click" />
+                                                    <br />
+                                                    Print Examination Do
+                                                </td>
+                                                <td width="50%">
+                                                    <asp:ImageButton ID="imgBtnFinalDo" runat="server" ImageUrl="~/Images/p2.jpeg" ToolTip="Print Final Do"
+                                                        Height="45" Width="45" AlternateText="Print Final Do" Enabled="false" />
+                                                    <br />
+                                                    Print Final Do
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" height="30px">
+                                                    
+                                                </td>
+                                            </tr>
                                         </table>
                                     </asp:Panel>
                                 </td>
@@ -209,7 +233,7 @@
                                     De-stuffing
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlDestuffing" runat="server" Width="55">
+                                    <asp:DropDownList ID="ddlDestuffing" runat="server" Width="55" Enabled="false">
                                         <asp:ListItem Text="CFS" Value="1"></asp:ListItem>
                                         <asp:ListItem Text="Factory" Value="2"></asp:ListItem>
                                     </asp:DropDownList>
@@ -218,25 +242,27 @@
                                     Do-Valid Till
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtDoValidTill" runat="server" Width="75"></asp:TextBox>
+                                    <asp:TextBox ID="txtDoValidTill" runat="server" Width="75" Enabled="false"></asp:TextBox>
                                     <%-- <cc1:CalendarExtender ID="CalendarExtender5" runat="server" PopupButtonID="txtDoValidTill"
                                 TargetControlID="txtDoValidTill">
                             </cc1:CalendarExtender>--%>
                                 </td>
                                 <td>
-                                    <asp:CheckBox ID="ckkFreightPaid" runat="server" />Freight Paid
+                                    <asp:CheckBox ID="chkFreightPaidstatus" runat="server" Enabled="false" />Freight
+                                    Paid
                                 </td>
                                 <td>
-                                    <asp:CheckBox ID="chkBankGuarantee" runat="server" />Bank Guarantee
+                                    <asp:CheckBox ID="chkBankGuarantee" runat="server" Enabled="false" />Bank Guarantee
                                 </td>
                                 <td align="right">
                                     <asp:LinkButton ID="lnkGenerateInvoiceDo" runat="server" Text="Generate Invoice"
-                                        ForeColor="Blue"></asp:LinkButton>
+                                        ForeColor="Blue" Enabled="false"></asp:LinkButton>
                                 </td>
                             </tr>
                             <tr style="height: 30px;">
                                 <td>
-                                    <asp:CheckBox ID="chkDoExtension" runat="server" />
+                                    <asp:CheckBox ID="chkDoExtension" runat="server" OnCheckedChanged="chkDoExtension_CheckedChanged"
+                                        AutoPostBack="true" />
                                     <asp:LinkButton ID="lnkDoExtension" runat="server" Text="Delivery Order Extension"
                                         ForeColor="Blue"></asp:LinkButton>
                                 </td>
@@ -244,7 +270,7 @@
                                     Validity Date
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtVAlidityDate" runat="server" Width="75"></asp:TextBox>
+                                    <asp:TextBox ID="txtVAlidityDate" runat="server" Width="75" Enabled="false"></asp:TextBox>
                                     <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtVAlidityDate"
                                         TargetControlID="txtValidityDate">
                                     </cc1:CalendarExtender>
@@ -253,12 +279,13 @@
                         </td>  --%>
                                 <td colspan="5" align="right">
                                     <asp:LinkButton ID="lnkGenerateInvoiceDOE" runat="server" Text="Generate Invoice"
-                                        ForeColor="Blue"></asp:LinkButton>
+                                        ForeColor="Blue" Enabled="false"></asp:LinkButton>
                                 </td>
                             </tr>
                             <tr style="height: 30px;">
                                 <td>
-                                    <asp:CheckBox ID="chkSlotExtension" runat="server" />
+                                    <asp:CheckBox ID="chkSlotExtension" runat="server" OnCheckedChanged="chkSlotExtension_CheckedChanged"
+                                        AutoPostBack="true" />
                                     <asp:LinkButton ID="lnkSlotExtension" runat="server" Text="Slot Extension" ForeColor="Blue"></asp:LinkButton>
                                 </td>
                                 <td>
@@ -266,7 +293,7 @@
                                     Detention
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtExtensionForDetention" runat="server" Width="75"></asp:TextBox>
+                                    <asp:TextBox ID="txtExtensionForDetention" runat="server" Width="75" Enabled="false"></asp:TextBox>
                                     <cc1:CalendarExtender ID="CalendarExtender2" runat="server" PopupButtonID="txtExtensionForDetention"
                                         TargetControlID="txtExtensionForDetention">
                                     </cc1:CalendarExtender>
@@ -276,38 +303,39 @@
                                     PGR
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtExtensionForPGR" runat="server" Width="75"></asp:TextBox>
+                                    <asp:TextBox ID="txtExtensionForPGR" runat="server" Width="75" Enabled="false"></asp:TextBox>
                                     <cc1:CalendarExtender ID="CalendarExtender3" runat="server" PopupButtonID="txtExtensionForPGR"
                                         TargetControlID="txtExtensionForPGR">
                                     </cc1:CalendarExtender>
                                 </td>
                                 <td colspan="3" align="right">
-                                    <asp:LinkButton ID="LinkButton2" runat="server" Text="Generate Invoice" ForeColor="Blue"></asp:LinkButton>
+                                    <asp:LinkButton ID="lnkGenerateInvoiceSlotExtension" runat="server" Text="Generate Invoice"
+                                        ForeColor="Blue" Enabled="false"></asp:LinkButton>
                                 </td>
                             </tr>
                             <tr style="height: 30px;">
                                 <td>
-                                    <asp:CheckBox ID="chkAmendment" runat="server" />
+                                    <asp:CheckBox ID="chkAmendment" runat="server" AutoPostBack="true" OnCheckedChanged="chkAmendment_CheckedChanged" />
                                     <asp:LinkButton ID="lnkAmendment" runat="server" Text="Amendment" ForeColor="Blue"></asp:LinkButton>
                                 </td>
                                 <td>
                                     Amendment For
                                 </td>
                                 <td colspan="5">
-                                    <asp:DropDownList ID="ddlAmendmentFor" runat="server" Width="55">
+                                    <asp:DropDownList ID="ddlAmendmentFor" runat="server" Width="55" Enabled="false">
                                     </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr style="height: 30px;">
                                 <td>
-                                    <asp:CheckBox ID="chkBondCancel" runat="server" />
+                                    <asp:CheckBox ID="chkBondCancel" runat="server" AutoPostBack="true" OnCheckedChanged="chkBondCancel_CheckedChanged" />
                                     <asp:LinkButton ID="lnkBondCancel" runat="server" Text="Bond Cancellation" ForeColor="Blue"></asp:LinkButton>
                                 </td>
                                 <td>
                                     Cancellation Date
                                 </td>
                                 <td colspan="5">
-                                    <asp:TextBox ID="txtBondCancellation" runat="server" Width="75"></asp:TextBox>
+                                    <asp:TextBox ID="txtBondCancellation" runat="server" Width="75" Enabled="false"></asp:TextBox>
                                     <cc1:CalendarExtender ID="CalendarExtender4" runat="server" PopupButtonID="txtBondCancellation"
                                         TargetControlID="txtBondCancellation">
                                     </cc1:CalendarExtender>

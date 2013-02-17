@@ -76,9 +76,14 @@ namespace EMS.BLL
             return ImportBLDAL.GetContainerType();
         }
 
-        public DataTable GetISOCode()
+        //public DataTable GetISOCode()
+        //{
+        //    return ImportBLDAL.GetISOCode();
+        //}
+
+        public string GetISOCode(long LocationID, int ContainerSize)
         {
-            return ImportBLDAL.GetISOCode();
+            return ImportBLDAL.GetISOCode(LocationID, ContainerSize);
         }
 
         public DataTable GetTareWeight(int ContainerTypeID)
@@ -189,9 +194,9 @@ namespace EMS.BLL
             ImportBLDAL.DeleteBLFooter(FooterId);
         }
 
-        public DataSet GetBLQuery(string ImpBLNo)
+        public DataTable GetSurveyor(long LocationId)
         {
-            return ImportBLDAL.GetBLQuery(ImpBLNo);
+            return ImportBLDAL.GetSurveyor(LocationId);
         }
     }
 }

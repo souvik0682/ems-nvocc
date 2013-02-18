@@ -11,7 +11,7 @@ namespace EMS.WebApp.Reports
 {
 
 
-    public partial class DeliveryOrder
+    public partial class InvDO
     {
     }
 }

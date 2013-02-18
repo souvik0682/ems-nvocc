@@ -1413,7 +1413,7 @@ namespace EMS.WebApp.Transaction
         private void ClearFooterDetail()
         {
             txtFtrContainerNo.Text = "";
-            ddlFtrContainerSize.SelectedValue = "0";
+            ddlFtrContainerSize.SelectedValue = "20";
             ddlFtrContainerType.SelectedValue = "0";
             txtFtrSealNo.Text = "";
             txtFtrCommodity.Text = "";

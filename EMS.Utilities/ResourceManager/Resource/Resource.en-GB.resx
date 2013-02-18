@@ -357,4 +357,7 @@
   <data name="ERR00079" xml:space="preserve">
     <value>Overlapping value range not allowed.</value>
   </data>
+  <data name="ERR00080" xml:space="preserve">
+    <value>Please enter BL No.</value>
+  </data>
 </root>

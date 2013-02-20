@@ -355,7 +355,7 @@ namespace EMS.BLL
             dquery.AddBooleanParam("@PassengerList", voyage.PassengerList == "1" ? true : false);
             dquery.AddBooleanParam("@CrewEffectList", voyage.CrewEffectList == "1" ? true : false);
             dquery.AddBooleanParam("@MaritimeList", voyage.MaritimeList == "1" ? true : false);
-
+            dquery.AddIntegerParam("@LocId", voyage.locid);
             return dquery.RunActionQuery();
 
         }

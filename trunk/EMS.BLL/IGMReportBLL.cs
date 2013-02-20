@@ -11,6 +11,7 @@ namespace EMS.BLL
        public static DataSet GetRptCargoDesc(int vesselId, int voyageId)
        {
            return EMS.DAL.IGMReportDAL.GetRptCargoDesc(vesselId, voyageId);
+          
        }
     }
 }

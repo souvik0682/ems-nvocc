@@ -14,35 +14,9 @@
             if (sender._id == "AutoCompleteEx") {
                 var hdnFromLocation = $get('<%=hdnReturn.ClientID %>');
                 hdnFromLocation.value = e.get_value();
-                alert(hdnFromLocation.value);
+             //   alert(hdnFromLocation.value);
             }
         }
-
-        function InitialzeDP() {
-            $('#' + '<%= txtReferenceDate.ClientID%>').datepicker({
-                changeMonth: true, changeYear: true, dateFormat: 'dd/mm/yy'
-            });
-            $('.ui-datepicker-trigger').attr('style', 'margin-left:287px;margin-top:-21px;');
-            $('#' + '<%= txtReleaseDate.ClientID%>').datepicker({
-                changeMonth: true, changeYear: true, dateFormat: 'dd/mm/yy'
-            });
-            $('#' + '<%= txtValidTill.ClientID%>').datepicker({
-                changeMonth: true, changeYear: true, dateFormat: 'dd/mm/yy'
-            });
-
-            $('#' + '<%= txtOnHireDate.ClientID%>').datepicker({
-                changeMonth: true, changeYear: true, dateFormat: 'dd/mm/yy'               
-            });
-            $('#' + '<%= txtIGMDate.ClientID%>').datepicker({
-                changeMonth: true, changeYear: true, dateFormat: 'dd/mm/yy'
-               
-            });
-
-        }
-
-        $(function () {
-            InitialzeDP();
-        });     
     </script>
     <style type="text/css">
         .custtable
@@ -80,8 +54,6 @@
                                     ControlToValidate="ddlLocation" InitialValue="0" ValidationGroup="Save" Display="Dynamic"
                                     ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                             </td>
-                       <%-- </tr>
-                        <tr>--%>
                             <td>
                                 Line Code:<span class="errormessage">*</span>
                             </td>
@@ -123,7 +95,11 @@
                                 Reference Date:<span class="errormessage">*</span>
                             </td>
                               <td >
-                                <asp:TextBox ID="txtReferenceDate" runat="server" CssClass="" MaxLength="10" Width="150"></asp:TextBox><br />
+                                <asp:TextBox ID="txtReferenceDate" runat="server" CssClass="" MaxLength="10" Width="150"></asp:TextBox>
+                                <cc1:CalendarExtender Format="dd/MM/yyyy" ID="CalendarExtender1" runat="server" PopupButtonID="txtReferenceDate"
+                                TargetControlID="txtReferenceDate">
+                            </cc1:CalendarExtender>
+                                <br />
                                 <asp:RequiredFieldValidator ID="rfvReferenceDate" runat="server" CssClass="errormessage"
                                     ControlToValidate="txtReferenceDate" ValidationGroup="Save" Display="Dynamic"
                                     ErrorMessage="[Required]"></asp:RequiredFieldValidator>
@@ -137,6 +113,9 @@
                               <td >
                                 <asp:TextBox ID="txtValidTill" runat="server" CssClass="textboxuppercase" MaxLength="10"
                                     Width="150"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="CalendarExtender3" runat="server" PopupButtonID="txtValidTill"
+                                TargetControlID="txtValidTill" Format="dd/MM/yyyy">
+                            </cc1:CalendarExtender>
                                 <br />
                                 <asp:RequiredFieldValidator ID="rfvValidTill" runat="server" CssClass="errormessage"
                                     ControlToValidate="txtValidTill" ValidationGroup="Save" Display="Dynamic" ErrorMessage="[Required]"></asp:RequiredFieldValidator>
@@ -150,9 +129,6 @@
                                 Return At:<asp:Label ID="lblReturn" runat="server" CssClass="errormessage" Text="*"></asp:Label> 
                             </td>
                               <td>
-                                <%--  <asp:DropDownList ID="ddlReturnAt" runat="server" CssClass="dropdownlist">
-                                    <asp:ListItem Value="0" Text="---Select---"></asp:ListItem>
-                                </asp:DropDownList>--%>
                                 <asp:HiddenField ID="hdnReturn" runat="server" Value="0" />
                                 <asp:TextBox ID="txtReturn" runat="server" CssClass="textboxuppercase" MaxLength="50"
                                     Width="250"></asp:TextBox>
@@ -226,7 +202,10 @@
                              <td >
                                 <asp:TextBox ID="txtReleaseDate" runat="server" CssClass="textboxuppercase" MaxLength="10"
                                     Width="150"></asp:TextBox>
-                                <asp:RegularExpressionValidator ControlToValidate="txtReleaseDate" ID="RegularExpressionValidator2"
+                                    <cc1:CalendarExtender ID="CalendarExtender2" runat="server" PopupButtonID="txtReleaseDate" Format="dd/MM/yyyy"
+                                TargetControlID="txtReleaseDate">
+                            </cc1:CalendarExtender>
+                                <asp:RegularExpressionValidator ControlToValidate="txtReleaseDate" ID="RegularExpressionValidator2" 
                                     runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]"
                                     Display="Dynamic" ValidationExpression="^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$"></asp:RegularExpressionValidator>
                                 <br />
@@ -248,7 +227,7 @@
                                            SI#
                                         </th>
                                           <th style="width: 13%;" class="gridviewheader" scope="col">
-                                            <asp:TextBox ID="txtContainerNo" runat="server" CssClass="textboxuppercase" ForeColor="#747862"></asp:TextBox>
+                                            <asp:TextBox ID="txtContainerNo" MaxLength="11" runat="server" CssClass="textboxuppercase" ForeColor="#747862"></asp:TextBox>
                                             <br />
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" CssClass="errormessage"
                                                 ValidationGroup="AddToList" ErrorMessage="[Required]" ControlToValidate="txtContainerNo"
@@ -260,9 +239,9 @@
                                           <th style="width: 13%;" class="gridviewheader" scope="col">
                                             <asp:TextBox ID="txtIGMNo" runat="server" CssClass="numerictextbox" ForeColor="#747862"></asp:TextBox>
                                             <br />
-                                           <%--  <asp:RegularExpressionValidator ControlToValidate="txtIGMNo" ID="RegularExpressionValidator5"
+                                             <asp:RegularExpressionValidator ControlToValidate="txtIGMNo" ID="RegularExpressionValidator5"
                                                 runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]"
-                                                Display="Dynamic" ValidationExpression="^\d$"></asp:RegularExpressionValidator>--%>
+                                                Display="Dynamic" ValidationExpression="^\d$"></asp:RegularExpressionValidator>
                                        </th>
                                           <th style="width: 13%;" class="gridviewheader" scope="col" align="center">
                                             <asp:DropDownList ID="ddlSize" runat="server" CssClass="dropdownlist">
@@ -285,12 +264,18 @@
                                        </th>
                                           <th style="width: 13%;" class="gridviewheader" scope="col">
                                             <asp:TextBox ID="txtIGMDate" runat="server" CssClass="textboxuppercase" ForeColor="#747862"></asp:TextBox>
+                                            <cc1:CalendarExtender ID="CalendarExtender5" runat="server" PopupButtonID="txtIGMDate" Format="dd/MM/yyyy"
+                                TargetControlID="txtIGMDate">
+                            </cc1:CalendarExtender>
                                             <asp:RegularExpressionValidator ControlToValidate="txtIGMDate" ID="RegularExpressionValidator3"
                                                 runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]"
                                                 Display="Dynamic" ValidationExpression="^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$"></asp:RegularExpressionValidator>
                                        </th>
                                           <th style="width: 13%;" class="gridviewheader" scope="col">
                                             <asp:TextBox ID="txtOnHireDate" runat="server" CssClass="textboxuppercase" ForeColor="#747862"></asp:TextBox>
+                                            <cc1:CalendarExtender ID="CalendarExtender4" runat="server" PopupButtonID="txtOnHireDate" Format="dd/MM/yyyy"
+                                TargetControlID="txtOnHireDate">
+                            </cc1:CalendarExtender>
                                             <br />
                                             <asp:RegularExpressionValidator ControlToValidate="txtOnHireDate" ID="RegularExpressionValidator4"
                                                 runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]"
@@ -374,7 +359,7 @@
 
                     //prm.add_endRequest();
                     function pageLoad(sender, args) {
-                        InitialzeDP();
+                        //InitialzeDP();
                     }
                 </script>
             </ContentTemplate>

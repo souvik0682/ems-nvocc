@@ -151,6 +151,11 @@ namespace EMS.WebApp.Hire
                 ClearFieldUpper();
                 Filler.GridDataBind(lstEqpOnHireContainer, gvwHire);
             }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), DateTime.Now.Ticks.ToString(), string.Format("alert('{0} already exist in Table');", txtContainerNo.Text.Trim()), true);
+            return;
+            }
         }
         protected void gvwHire_RowEditing(object sender, GridViewEditEventArgs e)
         {
@@ -265,8 +270,16 @@ namespace EMS.WebApp.Hire
 
             if (Validate())
             {
-                var feu = CountFEU();
+                
                 var lst = GetEqpOnHireContainers;
+                //foreach (var t in lst)
+                //{
+                //if(new OnHireBLL().ValidateOnHire(t.ContainerNo, rdTransactionType.SelectedValue)){
+                //    ScriptManager.RegisterStartupScript(this,this.GetType(),DateTime.Now.Ticks.ToString(),string.Format("alert('{0} already exist in Table');",t.ContainerNo),true);
+                //return;
+                //}
+                //}
+                var feu = CountFEU();
                 IEqpOnHire onHire = new EqpOnHire
                 {
                     AddedOn = DateTime.Now,
@@ -303,12 +316,12 @@ namespace EMS.WebApp.Hire
                 if (retrunVal > 0)
                 {
                     Session.Remove("IEqpOnHireContainer");
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), Messenger.SendMessage("Saved successfully.", "1", "Add/Edit OnHire", "Hire.aspx"), true);
-                    //Response.Redirect("Hire.aspx");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Saved successfully.');", true);
+                    Response.Redirect("Hire.aspx");
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), Messenger.SendMessage("Error! Please try again.", "4", "Add/Edit OnHire", ""), true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),"alert('Error! Please try again.')", true);
                 }
             }
 

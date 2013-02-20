@@ -68,9 +68,16 @@ namespace EMS.WebApp.MasterModule
             {
                 trLandDate.Style.Add("display", "none");
                 txtExcRate.Text = hdntxtExcRate.Value = dbinteract.GetExchnageRate(DateTime.Today).ToString();
+                txtdtLand.ReadOnly = true;
+
             }
-
-
+            int cnt= EMS.BLL.VoyageBLL.IfExistInBL(ddlVessel.SelectedIndex > 0 ? Convert.ToInt32(ddlVessel.SelectedValue) : 0, Convert.ToInt32(VoyageId)).Rows.Count;
+            if (cnt<=0)
+            {
+                txtdtLand.ReadOnly = true;
+                txtdtLand.Enabled = false;
+                dtLand_.Enabled = false;
+            }
         }
 
 
@@ -216,9 +223,9 @@ namespace EMS.WebApp.MasterModule
             }
 
             int result = dbinteract.AddEditVoyage(_userId, isedit, voyage);
+            int result1 = EMS.BLL.VoyageBLL.VoyageLandingDateEntry(voyage.fk_VesselID,Convert.ToInt32(VoyageId), voyage.LandingDate, _userId);
 
-
-            if (result > 0)
+            if (result > 0 )
             {
                 Response.Redirect("~/MasterModule/MangeVoyage.aspx");
             }

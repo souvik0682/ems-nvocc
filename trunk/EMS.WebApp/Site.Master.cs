@@ -165,6 +165,10 @@ namespace EMS.WebApp
             {
                 menuId = (int)PageName.IGMFormC;
             }
+            else if (Request.Path.Contains("/Reports/CntrStockDetail.aspx"))
+            {
+                menuId = (int)PageName.IGMFormC;
+            }
             else if (Request.Path.Contains("/Reports/FileLandingGurantee.aspx"))
             {
                 menuId = (int)PageName.FileLandingGuranteeLetter;

@@ -202,14 +202,14 @@
                                 <ul>
                                     <li id="liLD_Container" runat="server"><a href="<%=Page.ResolveClientUrl("~/Equipment/container-movement.aspx") %>">Container</a></li>
                                     <li id="liLD_Repairing" runat="server"><a href="<%=Page.ResolveClientUrl("~/Equipment/RepairingEstimate.aspx") %>">Repairing</a></li>
-                                    <li id="liLD_Onhire" runat="server"><a href="#">On-Hire</a></li>
+                                    <li id="liLD_Onhire" runat="server"><a href="<%=Page.ResolveClientUrl("~/Hire/Hire.aspx") %>">On-Hire</a></li>
                                     <li id="liLD_Pickup" runat="server"><a href="#">Pick-up</a></li>
                                 </ul>
                             </li>
                             <li id="liLR" runat="server">
                                 <a href="#">Reports</a>
                                 <ul>
-                                    <li id="liLR_StkSumm" runat="server"><a href="#">Container Stock Summary</a></li>
+                                    <li id="liLR_StkSumm" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/CntrStockDetail.aspx") %>">Container Stock Summary</a></li>
                                     <li id="liLR_StkStmt" runat="server"><a href="#">Container Stock Statement</a></li>
                                     <li id="liLR_Pickup" runat="server"><a href="#">Pick-up Letter</a></li>
                                     <li id="liLR_Onhire" runat="server"><a href="#">On-hire Register</a></li>

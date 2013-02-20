@@ -178,8 +178,8 @@ namespace EMS.WebApp.Import
                             + (ddlCrewList.SelectedValue == "1" ? "Y" : "N") + (''
                             + (ddlPessengerList.SelectedValue == "1" ? "Y" : "N") + (''
                             + (ddlCrewEffList.SelectedValue == "1" ? "Y" : "N") + (''
-                            + (ddlMaritime.SelectedValue == "1" ? "Y" : "N") + ('' + 
-                            ddlTerminalOperator.SelectedItem.Text.Trim()==""?"": ddlTerminalOperator.SelectedItem.Text)))))))))))))))))))))))))))))))))))))))))))));
+                            + (ddlMaritime.SelectedValue == "1" ? "Y" : "N") + ('' +
+                            (ddlTerminalOperator.SelectedIndex==0 ? "" : ddlTerminalOperator.SelectedItem.Text))))))))))))))))))))))))))))))))))))))))))))));
 
             writer.WriteLine("<END-vesinfo>");
             writer.WriteLine("<cargo>");

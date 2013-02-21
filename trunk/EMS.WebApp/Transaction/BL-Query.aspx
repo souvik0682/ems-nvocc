@@ -256,7 +256,7 @@
                                 </td>
                                 <td align="right">
                                     <asp:LinkButton ID="lnkGenerateInvoiceDo" runat="server" Text="Generate Invoice"
-                                        ForeColor="Blue" Enabled="false"></asp:LinkButton>
+                                        ForeColor="Blue" Enabled="false" onclick="lnkGenerateInvoiceDo_Click"></asp:LinkButton>
                                 </td>
                             </tr>
                             <tr style="height: 30px;">
@@ -279,7 +279,7 @@
                         </td>  --%>
                                 <td colspan="5" align="right">
                                     <asp:LinkButton ID="lnkGenerateInvoiceDOE" runat="server" Text="Generate Invoice"
-                                        ForeColor="Blue" Enabled="false"></asp:LinkButton>
+                                        ForeColor="Blue" Enabled="false" onclick="lnkGenerateInvoiceDOE_Click"></asp:LinkButton>
                                 </td>
                             </tr>
                             <tr style="height: 30px;">
@@ -310,7 +310,8 @@
                                 </td>
                                 <td colspan="3" align="right">
                                     <asp:LinkButton ID="lnkGenerateInvoiceSlotExtension" runat="server" Text="Generate Invoice"
-                                        ForeColor="Blue" Enabled="false"></asp:LinkButton>
+                                        ForeColor="Blue" Enabled="false" 
+                                        onclick="lnkGenerateInvoiceSlotExtension_Click"></asp:LinkButton>
                                 </td>
                             </tr>
                             <tr style="height: 30px;">

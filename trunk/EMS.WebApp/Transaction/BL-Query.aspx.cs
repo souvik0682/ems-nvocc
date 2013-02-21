@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using EMS.BLL;
+using EMS.Utilities.ResourceManager;
 
 namespace EMS.WebApp.Transaction
 {
@@ -60,6 +61,13 @@ namespace EMS.WebApp.Transaction
                 chkFreightPaidstatus.Checked = true;
             else
                 chkFreightPaidstatus.Checked = false;
+
+
+
+            if (dtDetail.Rows[0]["DESTUFFING"].ToString() == "0")
+                ddlDestuffing.SelectedIndex = 0;
+            else
+                ddlDestuffing.SelectedIndex = 1;
         }
 
         protected void chkDo_CheckedChanged(object sender, EventArgs e)
@@ -143,6 +151,30 @@ namespace EMS.WebApp.Transaction
         protected void imgBtnExaminationDo_Click(object sender, ImageClickEventArgs e)
         {
             Response.Redirect("/#?bl");
+        }
+
+        protected void lnkGenerateInvoiceDo_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(txtBlNo.Text))
+                Response.Redirect("~/Reports/InvDO.aspx?BL=" + txtBlNo.Text.Trim());
+            else
+                lblMessageServiceReq.Text = ResourceManager.GetStringWithoutName("ERR00080");
+        }
+
+        protected void lnkGenerateInvoiceDOE_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(txtBlNo.Text))
+                Response.Redirect("~/Reports/InvDOExt.aspx?BL=" + txtBlNo.Text.Trim());
+            else
+                lblMessageServiceReq.Text = ResourceManager.GetStringWithoutName("ERR00080");
+        }
+
+        protected void lnkGenerateInvoiceSlotExtension_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(txtBlNo.Text))
+                Response.Redirect("~/Reports/InvSlotExt.aspx?BL=" + txtBlNo.Text.Trim());
+            else
+                lblMessageServiceReq.Text = ResourceManager.GetStringWithoutName("ERR00080");
         }
 
 

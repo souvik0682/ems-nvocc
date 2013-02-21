@@ -29,7 +29,8 @@ namespace EMS.WebApp.Equipment
             {
                 fillAllDropdown();
 
-                if (lblTranCode.Text == string.Empty && hdnContainerTransactionId.Value == "0")
+                //if (lblTranCode.Text == string.Empty && hdnContainerTransactionId.Value == "0")
+                if (hdnTranCode.Value == string.Empty && hdnContainerTransactionId.Value == "0")
                 {
                     DataTable Dt = CreateDataTable();
                     DataRow dr = Dt.NewRow();
@@ -48,15 +49,45 @@ namespace EMS.WebApp.Equipment
                     {
                         ds = oContainerTranBLL.GetContainerTransactionList(searchCriteria, Convert.ToInt32(hdnContainerTransactionId.Value));
                     }
-                    else if(!string.IsNullOrEmpty(lblTranCode.Text))
+                    //else if(!string.IsNullOrEmpty(lblTranCode.Text))
+                    else if (!string.IsNullOrEmpty(hdnTranCode.Value))
                     {
-                        searchCriteria.StringOption4 = lblTranCode.Text;
+                        searchCriteria.StringOption4 = hdnTranCode.Value;
                         ds = oContainerTranBLL.GetContainerTransactionList(searchCriteria, 0);
                     }
                     FillHeaderDetail(ds.Tables[0]);
+                    DisableHeaderSection();
                     FillContainers(ds.Tables[1]);
                 }
             }
+        }
+
+        void DisableHeaderSection()
+        {
+            ddlFromStatus.Enabled = false;
+            ddlFromLocation.Enabled = false;
+            ddlToStatus.Enabled = false;
+            ddlTolocation.Enabled = false;
+            ddlEmptyYard.Enabled = false;
+
+            txtTeus.Enabled = false;
+            txtNarration.Enabled = false;
+            txtDate.Enabled = false;
+            txtFEUs.Enabled = false;
+
+
+            rfvFromStatus.Enabled = false;
+            rfvFromLocation.Enabled = false;
+            rfvTeus.Enabled = false;
+            rfvDate.Enabled = false;
+            rfvToStatus.Enabled = false;
+            rfvToLocation.Enabled = false;
+            rfvFeus.Enabled = false;
+            rfvEmptyYard.Enabled = false;
+
+
+
+
         }
 
         private void CheckUserAccess()
@@ -91,7 +122,7 @@ namespace EMS.WebApp.Equipment
 
                 ddlToStatus.SelectedIndex = ddlToStatus.Items.IndexOf(ddlToStatus.Items.FindByValue(dt.Rows[0]["ToStatus"].ToString()));
                 ActionOnToStatusChange();
-                
+
                 ddlFromLocation.SelectedIndex = ddlFromLocation.Items.IndexOf(ddlFromLocation.Items.FindByValue(dt.Rows[0]["FromLocation"].ToString()));
                 ActionOnFromLocationChange();
 
@@ -102,13 +133,13 @@ namespace EMS.WebApp.Equipment
                 txtFEUs.Text = dt.Rows[0]["FEUs"].ToString();
                 txtNarration.Text = dt.Rows[0]["Narration"].ToString();
                 lblTranCode.Text = dt.Rows[0]["TransactionCode"].ToString();
+                hdnTranCode.Value = dt.Rows[0]["TransactionCode"].ToString();
             }
         }
 
         void FillContainers(DataTable dt)
         {
             DataTable oTable = CreateDataTable();
-            
 
             foreach (DataRow Row in dt.Rows)
             {
@@ -118,7 +149,7 @@ namespace EMS.WebApp.Equipment
                 Dr["NewTransactionId"] = Row["TranId"];
                 Dr["ContainerNo"] = Row["ContainerNo"];
                 Dr["FromStatus"] = ddlFromStatus.Items.FindByValue(Row["FromStatus"].ToString()).Text;
-                Dr["ToStatus"] = ddlFromStatus.Items.FindByValue(Row["ToStatus"].ToString()).Text; 
+                Dr["ToStatus"] = ddlFromStatus.Items.FindByValue(Row["ToStatus"].ToString()).Text;
                 Dr["LandingDate"] = Row["LandingDate"];
                 Dr["ChangeDate"] = Row["MovementDate"];
 
@@ -127,6 +158,7 @@ namespace EMS.WebApp.Equipment
             gvSelectedContainer.DataSource = oTable;
             gvSelectedContainer.DataBind();
 
+            ViewState["Container"] = oTable;
         }
 
         private void RetriveParameters()
@@ -141,6 +173,7 @@ namespace EMS.WebApp.Equipment
             else if (!ReferenceEquals(Request.QueryString["tcode"], null))
             {
                 lblTranCode.Text = GeneralFunctions.DecryptQueryString(Request.QueryString["tcode"].ToString());
+                hdnTranCode.Value = GeneralFunctions.DecryptQueryString(Request.QueryString["tcode"].ToString());
             }
         }
 
@@ -241,10 +274,10 @@ namespace EMS.WebApp.Equipment
 
         void fillContainer(int EmptyYardId)
         {
-            
+
             ContainerTranBLL oContainerTranBLL = new ContainerTranBLL();
             dtFilteredContainer = oContainerTranBLL.GetContainerTransactionListFiltered(Convert.ToInt16(ddlFromStatus.SelectedValue), EmptyYardId);
-
+            ViewState["Container"] = dtFilteredContainer;
             gvContainer.DataSource = dtFilteredContainer;
             gvContainer.DataBind();
         }
@@ -357,13 +390,24 @@ namespace EMS.WebApp.Equipment
                 ContainerTranBLL oContainerTranBLL = new ContainerTranBLL();
                 string TranCode = string.Empty;
 
+                if (ViewState["Container"] != null)
+                    dtFilteredContainer = (DataTable)ViewState["Container"];
+
                 if (dtFilteredContainer.Rows.Count <= 0)
                 {
                     lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00078");
+                    hdnTranCode.Value = string.Empty;
                     return; ;
                 }
 
-                int Result = oContainerTranBLL.AddEditContainerTransaction(out TranCode, lblTranCode.Text, GenerateContainerXMLString(),
+                if (String.IsNullOrEmpty(txtTeus.Text))
+                    txtTeus.Text = "0";
+
+                if (String.IsNullOrEmpty(txtFEUs.Text))
+                    txtFEUs.Text = "0";
+
+
+                int Result = oContainerTranBLL.AddEditContainerTransaction(out TranCode, hdnTranCode.Value, GenerateContainerXMLString(),
                     Convert.ToInt32(ddlToStatus.SelectedValue), Convert.ToInt32(txtTeus.Text), Convert.ToInt32(txtFEUs.Text), Convert.ToDateTime(txtDate.Text),
                     Convert.ToString(txtNarration.Text), Convert.ToInt32(ddlFromLocation.SelectedValue), Convert.ToInt32(ddlTolocation.SelectedValue),
                     Convert.ToInt32(ddlEmptyYard.SelectedValue), 1, DateTime.Now.Date, 1, DateTime.Now.Date);
@@ -376,7 +420,7 @@ namespace EMS.WebApp.Equipment
                         break;
                     case 1:
                         lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
-                        if (string.IsNullOrEmpty(lblTranCode.Text))
+                        if (string.IsNullOrEmpty(hdnTranCode.Value))
                         {
                             lblTranCode.Text = TranCode;
                             ClearAll();
@@ -438,7 +482,8 @@ namespace EMS.WebApp.Equipment
                 ddlTolocation.SelectedIndex = 0;
 
             //hdnChargeID.Value = string.Empty;
-            hdnContainerTransactionId.Value = string.Empty;
+            hdnContainerTransactionId.Value = "0";
+            hdnTranCode.Value = string.Empty;
             //lblTranCode.Text = string.Empty;
 
             DataTable Dt = CreateDataTable();

@@ -18,10 +18,11 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@MovementId", ID);
-                oDq.AddVarcharParam("@TransactionCode", 20, searchCriteria.StringOption4);
+                oDq.AddVarcharParam("@TransactionCode", 50, searchCriteria.StringOption4);
                 oDq.AddVarcharParam("@SchContainerNo", 100, searchCriteria.StringOption1);
                 oDq.AddVarcharParam("@SchVessel", 100, searchCriteria.StringOption2);
                 oDq.AddVarcharParam("@SchVoyage", 100, searchCriteria.StringOption3);
+                oDq.AddVarcharParam("@SchStatus", 100, searchCriteria.StringOption5);
                 oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
                 oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
                 myDataSet = oDq.GetTables();

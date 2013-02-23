@@ -155,6 +155,8 @@ namespace EMS.WebApp.Equipment
             txtContainerNo.Text = string.Empty;
             txtVessel.Text = string.Empty;
             txtVoyage.Text = string.Empty;
+            txtStatus.Text = string.Empty;
+            txtTranCode.Text = string.Empty;
             LoadContainer(0);
         }
 
@@ -249,8 +251,9 @@ namespace EMS.WebApp.Equipment
             }
             else
             {
-                sortExpression = "ContainerNo";
-                sortDirection = "ASC";
+                //sortExpression = "ContainerNo";
+                sortExpression = "Date";                
+                sortDirection = "DESC";
             }
 
             criteria.SortExpression = sortExpression;
@@ -258,6 +261,8 @@ namespace EMS.WebApp.Equipment
             criteria.StringOption1 = txtContainerNo.Text.Trim();
             criteria.StringOption2 = txtVessel.Text.Trim();
             criteria.StringOption3 = txtVoyage.Text.Trim();
+            criteria.StringOption4 = txtTranCode.Text.Trim();
+            criteria.StringOption5 = txtStatus.Text.Trim();
             Session[Constants.SESSION_SEARCH_CRITERIA] = criteria;
         }
 

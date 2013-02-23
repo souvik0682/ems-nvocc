@@ -11,16 +11,16 @@
         <div id="headercaption">
             ADD / EDIT CONTAINER MOVEMENT</div>
         <center>
-            <fieldset style="width: 70%;">
+            <fieldset style="width: 60%;">
                 <legend>Add / Edit Container Transaction</legend>
                 <table border="0" cellpadding="2" cellspacing="3" width="100%">
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                        <ContentTemplate>
+                   <%-- <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>--%>
                             <tr>
-                                <td style="width: 150px;">
+                                <td>
                                     Transaction CODE :
                                 </td>
-                                <td style="width: 375px;">
+                                <td >
                                     <asp:Label ID="lblTranCode" runat="server"></asp:Label>
                                     <asp:HiddenField ID="hdnTranCode" runat="server" />
                                     <asp:HiddenField ID="hdnContainerTransactionId" runat="server" Value="0" />
@@ -29,7 +29,7 @@
                                     Activity Date<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtDate" runat="server" Width="250"></asp:TextBox>
+                                    <asp:TextBox ID="txtDate" runat="server" Width="150"></asp:TextBox>
                                     <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtDate"
                                         Format="dd/MM/yyyy" TargetControlID="txtDate">
                                     </cc1:CalendarExtender>
@@ -44,7 +44,7 @@
                                     From Status<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlFromStatus" runat="server" Width="255" OnSelectedIndexChanged="ddlFromStatus_SelectedIndexChanged"
+                                    <asp:DropDownList ID="ddlFromStatus" runat="server" Width="155" OnSelectedIndexChanged="ddlFromStatus_SelectedIndexChanged"
                                         AutoPostBack="true">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvFromStatus" runat="server" ErrorMessage="Please enter from status"
@@ -57,7 +57,7 @@
                                     To Status<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlToStatus" runat="server" Width="255" AutoPostBack="True"
+                                    <asp:DropDownList ID="ddlToStatus" runat="server" Width="155" AutoPostBack="True"
                                         OnSelectedIndexChanged="ddlToStatus_SelectedIndexChanged">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvToStatus" runat="server" ErrorMessage="Please enter transfer location"
@@ -72,7 +72,7 @@
                                     From Location<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlFromLocation" runat="server" Width="255" OnSelectedIndexChanged="ddlFromLocation_SelectedIndexChanged"
+                                    <asp:DropDownList ID="ddlFromLocation" runat="server" Width="155" OnSelectedIndexChanged="ddlFromLocation_SelectedIndexChanged"
                                         AutoPostBack="true">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvFromLocation" runat="server" ErrorMessage="Please enter from location"
@@ -84,7 +84,7 @@
                                     To Location:
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlTolocation" runat="server" Width="255" Enabled="false">
+                                    <asp:DropDownList ID="ddlTolocation" runat="server" Width="155" Enabled="false">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvToLocation" runat="server" ErrorMessage="Please enter to location"
                                         ControlToValidate="ddlTolocation" Display="None" ValidationGroup="vgContainer"
@@ -99,7 +99,7 @@
                                     :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtTeus" runat="server" Width="250" Style="text-align: right;"></asp:TextBox>
+                                    <asp:TextBox ID="txtTeus" runat="server" Width="150" Style="text-align: right;"></asp:TextBox>
                                     <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="txtTeus"
                                         FilterMode="ValidChars" FilterType="Numbers">
                                     </cc1:FilteredTextBoxExtender>
@@ -113,7 +113,7 @@
                                     :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtFEUs" runat="server" Width="250" Style="text-align: right;"></asp:TextBox>
+                                    <asp:TextBox ID="txtFEUs" runat="server" Width="150" Style="text-align: right;"></asp:TextBox>
                                     <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" TargetControlID="txtFEUs"
                                         FilterMode="ValidChars" FilterType="Numbers">
                                     </cc1:FilteredTextBoxExtender>
@@ -128,13 +128,13 @@
                                     Narration :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtNarration" runat="server" Width="250" TextMode="MultiLine" Style="text-transform: uppercase;"></asp:TextBox>
+                                    <asp:TextBox ID="txtNarration" runat="server" Width="150" TextMode="MultiLine" Style="text-transform: uppercase;"></asp:TextBox>
                                 </td>
                                 <td valign="top">
                                     Empty Yard <span class="errormessage1">*</span>:
                                 </td>
                                 <td valign="top">
-                                    <asp:DropDownList ID="ddlEmptyYard" runat="server" Enabled="false" Width="255" OnSelectedIndexChanged="ddlEmptyYard_SelectedIndexChanged"
+                                    <asp:DropDownList ID="ddlEmptyYard" runat="server" Enabled="false" Width="155" OnSelectedIndexChanged="ddlEmptyYard_SelectedIndexChanged"
                                         AutoPostBack="true">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvEmptyYard" runat="server" ErrorMessage="Please select yard location"
@@ -144,14 +144,13 @@
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
                             </tr>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
+                        <%--</ContentTemplate>
+                    </asp:UpdatePanel>--%>
                     <tr>
-                        <td colspan="3">
-                        </td>
-                        <td>
-                            <asp:Button ID="btnShow" runat="server" Text="Show Container" OnClick="btnShow_Click"
-                                ValidationGroup="vgContainer" />
+                       
+                        <td colspan="4">
+                            <div style="margin-left:53%;"><asp:Button ID="btnShow" runat="server" Text="Show Container" OnClick="btnShow_Click"
+                                ValidationGroup="vgContainer" /></div>
                             <asp:Button ID="Button1" runat="server" Style="display: none;" />
                             <cc1:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="Button1"
                                 PopupControlID="pnlContainer" Drag="true" BackgroundCssClass="ModalPopupBG" CancelControlID="btnCancel">
@@ -203,26 +202,31 @@
                                             <asp:HiddenField ID="hdnOldTransactionId" runat="server" Value='<%# Eval("OldTransactionId") %>' />
                                             <asp:HiddenField ID="hdnCurrentTransactionId" runat="server" Value='<%# Eval("NewTransactionId") %>' />
                                             <%# Eval("ContainerNo")%></ItemTemplate>
+                                            <ItemStyle CssClass="gridviewitem" Width="12%" />
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Previous Status">
                                         <ItemTemplate>
                                             <%# Eval("FromStatus")%>
                                         </ItemTemplate>
+                                        <ItemStyle CssClass="gridviewitem" Width="13%" />
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Landing Date">
                                         <ItemTemplate>
                                             <%# Eval("LandingDate").ToString() == "" ? " " : Convert.ToDateTime(Eval("LandingDate")).ToShortDateString()%>
                                         </ItemTemplate>
+                                        <ItemStyle CssClass="gridviewitem" Width="12%" />
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Current Status">
                                         <ItemTemplate>
                                             <%# Eval("ToStatus")%>
                                         </ItemTemplate>
+                                        <ItemStyle CssClass="gridviewitem" Width="13%" />
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Date of Change">
                                         <ItemTemplate>
                                             <%# Eval("ChangeDate").ToString() == "" ? " " : Convert.ToDateTime(Eval("ChangeDate")).ToShortDateString()%>
                                         </ItemTemplate>
+                                        <ItemStyle CssClass="gridviewitem" Width="12%" />
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Select All" ItemStyle-HorizontalAlign="Center">
                                         <HeaderTemplate>
@@ -232,9 +236,10 @@
                                         <ItemTemplate>
                                             <asp:CheckBox ID="chkItem" runat="server" Checked="true" />
                                         </ItemTemplate>
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
                                     </asp:TemplateField>
-                                </Columns>
-                                <HeaderStyle Font-Bold="true" HorizontalAlign="Center" BackColor="GrayText" />
+                                </Columns>                                
+                                <HeaderStyle Font-Bold="true" HorizontalAlign="Center" BackColor="#F8F8F8" />
                                 <RowStyle Wrap="true" />
                                 <FooterStyle BackColor="GrayText" HorizontalAlign="Center" />
                             </asp:GridView>

@@ -78,11 +78,11 @@ namespace EMS.WebApp.Equipment
 
             rfvFromStatus.Enabled = false;
             rfvFromLocation.Enabled = false;
-            rfvTeus.Enabled = false;
+            //rfvTeus.Enabled = false;
             rfvDate.Enabled = false;
             rfvToStatus.Enabled = false;
             rfvToLocation.Enabled = false;
-            rfvFeus.Enabled = false;
+            //rfvFeus.Enabled = false;
             rfvEmptyYard.Enabled = false;
 
 
@@ -158,7 +158,7 @@ namespace EMS.WebApp.Equipment
             gvSelectedContainer.DataSource = oTable;
             gvSelectedContainer.DataBind();
 
-            ViewState["Container"] = oTable;
+            //ViewState["Container"] = oTable;
         }
 
         private void RetriveParameters()
@@ -314,6 +314,8 @@ namespace EMS.WebApp.Equipment
 
             gvSelectedContainer.DataSource = Dt;
             gvSelectedContainer.DataBind();
+
+            ViewState["Container"] = Dt;
 
         }
 

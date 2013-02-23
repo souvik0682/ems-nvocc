@@ -16,6 +16,7 @@ namespace EMS.Entity
         public string StringOption2 { get; set; }
         public string StringOption3 { get; set; }
         public string StringOption4 { get; set; }
+        public string StringOption5 { get; set; }
 
         public int IntegerOption1 { get; set; }
         public int IntegerOption2 { get; set; }

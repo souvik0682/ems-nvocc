@@ -48,10 +48,32 @@
                                 WatermarkText="Voyage">
                             </cc1:TextBoxWatermarkExtender>
                         </td>
+                        
+                    </tr>
+                    <tr>
                         <td>
-                            <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px"
+                            <asp:TextBox ID="txtStatus" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
+                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server" FilterMode="InvalidChars"
+                                InvalidChars="<>-" TargetControlID="txtStatus">
+                            </cc1:FilteredTextBoxExtender>
+                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender4" runat="server" TargetControlID="txtStatus"
+                                WatermarkText="Status">
+                            </cc1:TextBoxWatermarkExtender>
+                        </td>
+
+                        <td>
+                            <asp:TextBox ID="txtTranCode" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
+                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server" FilterMode="InvalidChars"
+                                InvalidChars="<>" TargetControlID="txtTranCode">
+                            </cc1:FilteredTextBoxExtender>
+                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender5" runat="server" TargetControlID="txtTranCode"
+                                WatermarkText="Transaction Code">
+                            </cc1:TextBoxWatermarkExtender>
+                        </td>
+                        <td>
+                            <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="80px"
                                 OnClick="btnSearch_Click" />
-                            <asp:Button ID="btnRefresh" runat="server" Text="Reset" CssClass="button" Width="100px"
+                            <asp:Button ID="btnRefresh" runat="server" Text="Reset" CssClass="button" Width="80px"
                                 OnClick="btnRefresh_Click" />
                         </td>
                     </tr>
@@ -78,7 +100,7 @@
                         <asp:ListItem Text="100" Value="100" />
                     </asp:DropDownList>
                     &nbsp;&nbsp;
-                    <asp:Button ID="btnAdd" runat="server" Text="Add New" Width="130px" OnClick="btnAdd_Click" />
+                    <asp:Button ID="btnAdd" runat="server" Text="Add New" Width="80px" OnClick="btnAdd_Click" />
                 </div>
                 <div style="height: 30px;">
                     &nbsp; <span class="errormessage" style="display: none;">* Indicates Inactive Location(s)</span>
@@ -117,7 +139,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="12%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="6%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHStatus" runat="server" CommandName="Sort" CommandArgument="Status"
                                                 Text="Status"></asp:LinkButton></HeaderTemplate>
@@ -127,7 +149,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHIDate" runat="server" CommandName="Sort" CommandArgument="Date"
                                                 Text="Date"></asp:LinkButton></HeaderTemplate>
@@ -137,7 +159,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="15%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHVessel" runat="server" CommandName="Sort" CommandArgument="Vessel"
                                                 Text="Vessel"></asp:LinkButton></HeaderTemplate>
@@ -146,7 +168,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHVoyage" runat="server" CommandName="Sort" CommandArgument="Voyage"
                                                 Text="Voyage"></asp:LinkButton></HeaderTemplate>
@@ -156,7 +178,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="13%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="9%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHLandingDate" runat="server" CommandName="Sort" CommandArgument="LandingDate"
                                                 Text="Landing Date"></asp:LinkButton></HeaderTemplate>

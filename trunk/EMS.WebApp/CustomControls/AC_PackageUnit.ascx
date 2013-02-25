@@ -16,7 +16,8 @@
 </style>
 
 <div>
-    <asp:TextBox runat="server" ID="txtPkgUnit" autocomplete="off" CssClass="textboxuppercase" MaxLength="50" Width="250px"
+    <asp:TextBox runat="server" ID="txtPkgUnit" autocomplete="off" CssClass="watermark1" ForeColor="#747862"
+        MaxLength="50" Width="250px"
         OnTextChanged="txtPkgUnit_TextChanged" AutoPostBack="true" />
     <cc1:textboxwatermarkextender id="txtWMEName1" runat="server" targetcontrolid="txtPkgUnit"
         watermarktext="TYPE PACKAGE UNIT" watermarkcssclass="watermark1"></cc1:textboxwatermarkextender>
@@ -25,7 +26,7 @@
         targetcontrolid="txtPkgUnit" servicepath="AutoComplete.asmx" servicemethod="GetPackageUnitList"
         minimumprefixlength="1" completioninterval="1000" enablecaching="true" completionsetcount="20"
         completionlistcssclass="autocomplete_completionListElement" completionlistitemcssclass="autocomplete_listItem"
-        completionlisthighlighteditemcssclass="autocomplete_highlightedListItem" delimitercharacters=";, :"
+        completionlisthighlighteditemcssclass="autocomplete_highlightedListItem" delimitercharacters=";,:"
         showonlycurrentwordincompletionlistitem="true">
     </cc1:autocompleteextender>
  

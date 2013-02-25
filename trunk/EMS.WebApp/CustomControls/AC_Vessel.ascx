@@ -19,7 +19,7 @@
    <%-- <asp:hiddenfield id="hdnValue" runat="server" />--%>
 
     <asp:TextBox runat="server" ID="txtVessel" autocomplete="off" 
-        CssClass="textboxuppercase" MaxLength="50" Width="250px" 
+        CssClass="watermark1" ForeColor="#747862" MaxLength="50" Width="250px" 
         AutoPostBack="true" OnTextChanged="txtVessel_TextChanged" />
     <cc1:textboxwatermarkextender id="txtWMEName1" runat="server" targetcontrolid="txtVessel"
         watermarktext="TYPE VESSEL" watermarkcssclass="watermark1"></cc1:textboxwatermarkextender>
@@ -28,7 +28,7 @@
         targetcontrolid="txtVessel" servicepath="AutoComplete.asmx" servicemethod="GetVesselList"
         minimumprefixlength="2" completioninterval="1000" enablecaching="true" completionsetcount="20"
         completionlistcssclass="autocomplete_completionListElement" completionlistitemcssclass="autocomplete_listItem"
-        completionlisthighlighteditemcssclass="autocomplete_highlightedListItem" delimitercharacters=";, :"
+        completionlisthighlighteditemcssclass="autocomplete_highlightedListItem" delimitercharacters=";,:"
         showonlycurrentwordincompletionlistitem="true" >
     </cc1:autocompleteextender>
  

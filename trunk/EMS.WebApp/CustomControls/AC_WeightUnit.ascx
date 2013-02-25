@@ -17,7 +17,8 @@
 </style>
 
 <div>
-    <asp:TextBox runat="server" ID="txtWeightUnit" autocomplete="off" CssClass="textboxuppercase" MaxLength="50" Width="250px"
+    <asp:TextBox runat="server" ID="txtWeightUnit" autocomplete="off" CssClass="watermark1" ForeColor="#747862"
+        MaxLength="50" Width="250px"
         OnTextChanged="txtWeightUnit_TextChanged" AutoPostBack="true" />
     <cc1:textboxwatermarkextender id="txtWMEName1" runat="server" targetcontrolid="txtWeightUnit"
         watermarktext="TYPE WEIGHT UNIT" watermarkcssclass="watermark1"></cc1:textboxwatermarkextender>
@@ -26,7 +27,7 @@
         targetcontrolid="txtWeightUnit" servicepath="AutoComplete.asmx" servicemethod="GetWeightUnitList"
         minimumprefixlength="2" completioninterval="1000" enablecaching="true" completionsetcount="20"
         completionlistcssclass="autocomplete_completionListElement" completionlistitemcssclass="autocomplete_listItem"
-        completionlisthighlighteditemcssclass="autocomplete_highlightedListItem" delimitercharacters=";, :"
+        completionlisthighlighteditemcssclass="autocomplete_highlightedListItem" delimitercharacters=";,:"
         showonlycurrentwordincompletionlistitem="true">
     </cc1:autocompleteextender>
  

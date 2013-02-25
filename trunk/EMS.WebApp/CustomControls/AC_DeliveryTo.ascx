@@ -17,7 +17,7 @@
 
 <div>
     <asp:TextBox runat="server" ID="txtDeliveryTo" autocomplete="off" 
-        CssClass="textboxuppercase" MaxLength="50" Width="250px" Enabled="false" 
+        CssClass="watermark1" ForeColor="#747862" MaxLength="50" Width="250px" Enabled="false" 
         ontextchanged="txtDeliveryTo_TextChanged" AutoPostBack="true" />
     <cc1:textboxwatermarkextender id="txtWMEName6" runat="server" targetcontrolid="txtDeliveryTo"
         watermarktext="TYPE DELIVERY TO" watermarkcssclass="watermark1"></cc1:textboxwatermarkextender>
@@ -26,7 +26,7 @@
         targetcontrolid="txtDeliveryTo" servicepath="AutoComplete.asmx" servicemethod="GetDeliveryToList"
         minimumprefixlength="1" completioninterval="1000" enablecaching="true" completionsetcount="20"
         completionlistcssclass="autocomplete_completionListElement" completionlistitemcssclass="autocomplete_listItem"
-        completionlisthighlighteditemcssclass="autocomplete_highlightedListItem" delimitercharacters=";, :"
+        completionlisthighlighteditemcssclass="autocomplete_highlightedListItem" delimitercharacters=";,:"
         showonlycurrentwordincompletionlistitem="true">
     </cc1:autocompleteextender>
  

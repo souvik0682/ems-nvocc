@@ -805,15 +805,6 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.TextBox txtTPBondNo;
         
         /// <summary>
-        /// rfvTPBondNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTPBondNo;
-        
-        /// <summary>
         /// rdoFreeOut control.
         /// </summary>
         /// <remarks>
@@ -1219,6 +1210,15 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.DropDownList ddlFtrContainerSize;
         
         /// <summary>
+        /// rfvFtrContainerSize control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFtrContainerSize;
+        
+        /// <summary>
         /// ddlFtrContainerType control.
         /// </summary>
         /// <remarks>
@@ -1343,6 +1343,15 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFtrISOCode;
+        
+        /// <summary>
+        /// rfvISO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvISO;
         
         /// <summary>
         /// txtFtrAgentCode control.

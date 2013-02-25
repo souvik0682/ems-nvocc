@@ -168,7 +168,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtLineBL" runat="server" CssClass="textboxuppercase" MaxLength="60"
-                                                                    Width="250px" TabIndex="3" OnTextChanged="txtLineBL_TextChanged" AutoPostBack="True"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="5" OnTextChanged="txtLineBL_TextChanged" AutoPostBack="True"></asp:TextBox><br />
                                                                 <asp:RequiredFieldValidator ID="rfvLineBL" runat="server" ControlToValidate="txtLineBL"
                                                                     Display="Dynamic" CssClass="errormessage" ValidationGroup="Save"></asp:RequiredFieldValidator>
                                                                 <asp:Label runat="server" ID="errBL" CssClass="errormessage"></asp:Label>
@@ -180,7 +180,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtLineBLDate" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="250px" TabIndex="4" OnTextChanged="txtLineBLDate_TextChanged" AutoPostBack="true"></asp:TextBox>
+                                                                    Width="250px" TabIndex="6" OnTextChanged="txtLineBLDate_TextChanged" AutoPostBack="true"></asp:TextBox>
                                                                 <cc1:CalendarExtender ID="cbeLineBLDate" TargetControlID="txtLineBLDate" runat="server"
                                                                     Format="dd-MM-yyyy" Enabled="True" />
                                                                 <br />
@@ -194,7 +194,7 @@
                                                                 Line B/L Type:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoLineBLType" runat="server" TabIndex="5" RepeatDirection="Horizontal">
+                                                                <asp:RadioButtonList ID="rdoLineBLType" runat="server" TabIndex="7" RepeatDirection="Horizontal">
                                                                     <asp:ListItem Selected="True" Text="OBL" Value="OB"></asp:ListItem>
                                                                     <asp:ListItem Text="Exp Release" Value="ER"></asp:ListItem>
                                                                     <asp:ListItem Text="Seaway" Value="SE"></asp:ListItem>
@@ -207,7 +207,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtLineBLVessel" runat="server" CssClass="textboxuppercase" MaxLength="100"
-                                                                    Width="250px" TabIndex="6"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="8"></asp:TextBox><br />
                                                                 <asp:RequiredFieldValidator ID="rfvLineBLVessel" runat="server" ControlToValidate="txtLineBLVessel"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
                                                                     Display="Dynamic" Visible="false"></asp:RequiredFieldValidator>
@@ -218,7 +218,7 @@
                                                                 Nature of Cargo:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoNatureCargo" runat="server" TabIndex="7" RepeatDirection="Horizontal"
+                                                                <asp:RadioButtonList ID="rdoNatureCargo" runat="server" TabIndex="9" RepeatDirection="Horizontal"
                                                                     AutoPostBack="True" OnSelectedIndexChanged="rdoNatureCargo_SelectedIndexChanged">
                                                                     <asp:ListItem Selected="True" Text="C" Value="C"></asp:ListItem>
                                                                     <asp:ListItem Text="DB" Value="DB"></asp:ListItem>
@@ -231,7 +231,7 @@
                                                                 Cargo Type:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoCargoType" runat="server" TabIndex="8" RepeatDirection="Horizontal"
+                                                                <asp:RadioButtonList ID="rdoCargoType" runat="server" TabIndex="10" RepeatDirection="Horizontal"
                                                                     OnSelectedIndexChanged="rdoCargoType_SelectedIndexChanged" AutoPostBack="True">
                                                                     <asp:ListItem Selected="True" Text="FCL" Value="F"></asp:ListItem>
                                                                     <asp:ListItem Text="LCL" Value="L"></asp:ListItem>
@@ -246,7 +246,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtIgmBLNo" runat="server" CssClass="textboxuppercase" MaxLength="60"
-                                                                    Width="250px" TabIndex="9" OnTextChanged="txtIgmBLNo_TextChanged" AutoPostBack="true"></asp:TextBox>
+                                                                    Width="250px" TabIndex="11" OnTextChanged="txtIgmBLNo_TextChanged" AutoPostBack="true"></asp:TextBox>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvIgmBLNo" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtIgmBLNo" ValidationGroup="Save"
@@ -259,7 +259,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtIgmBLDate" runat="server" CssClass="textboxuppercase" MaxLength="15"
-                                                                    Width="250px" TabIndex="10"></asp:TextBox>
+                                                                    Width="250px" TabIndex="12"></asp:TextBox>
                                                                 <cc1:CalendarExtender ID="ceIgmBLDate" TargetControlID="txtIgmBLDate" runat="server"
                                                                     Format="dd-MM-yyyy" Enabled="True" />
                                                                 <br />
@@ -274,7 +274,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtLinePrefix" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="11"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13"></asp:TextBox><br />
                                                             </td>
                                                             <td>
                                                             </td>
@@ -283,7 +283,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtLINo" runat="server" CssClass="numerictextbox" MaxLength="6"
-                                                                    Width="250px" TabIndex="12"></cc2:CustomTextBox>
+                                                                    Width="250px" TabIndex="14"></cc2:CustomTextBox>
                                                                 <asp:RequiredFieldValidator ID="rfvLINo" runat="server" CssClass="errormessage" ControlToValidate="txtLINo"
                                                                     ErrorMessage="This field is required" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </td>
@@ -294,7 +294,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtBillEntery" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="250px" TabIndex="13"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="15"></asp:TextBox><br />
                                                             </td>
                                                             <td>
                                                             </td>
@@ -303,7 +303,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtSublineNo" runat="server" CssClass="textboxuppercase" Width="250px" MaxLength="6"
-                                                                    Text="0" TabIndex="14" Enabled="False"></asp:TextBox>
+                                                                    Text="0" TabIndex="16" Enabled="False"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -311,7 +311,7 @@
                                                                 Fright Type:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList runat="server" ID="rdoFrightType" TabIndex="15" RepeatDirection="Horizontal"
+                                                                <asp:RadioButtonList runat="server" ID="rdoFrightType" TabIndex="16" RepeatDirection="Horizontal"
                                                                     OnSelectedIndexChanged="rdoFrightType_SelectedIndexChanged" AutoPostBack="True">
                                                                     <asp:ListItem Selected="True" Text="Pre Paid" Value="PP"></asp:ListItem>
                                                                     <asp:ListItem Text="To Collect" Value="TC"></asp:ListItem>
@@ -324,7 +324,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtFrightToCollect" runat="server" CssClass="numerictextbox"
-                                                                    Width="250px" TabIndex="16" Type="Decimal" Enabled="False"
+                                                                    Width="250px" TabIndex="18" Type="Decimal" Enabled="False"
                                                                     MaxLength="13" Precision="10" Scale="2" ></cc2:CustomTextBox>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvFrightToCollect" runat="server" ControlToValidate="txtFrightToCollect"
@@ -351,7 +351,7 @@
                                                                 Stock Location:
                                                             </td>
                                                             <td>
-                                                                <asp:DropDownList ID="ddlStockLocation" runat="server" CssClass="dropdownlist" TabIndex="18">
+                                                                <asp:DropDownList ID="ddlStockLocation" runat="server" CssClass="dropdownlist" TabIndex="20">
                                                                 </asp:DropDownList>
                                                             </td>
                                                         </tr>
@@ -399,7 +399,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtCommodity" runat="server" CssClass="textboxuppercase" MaxLength="20"
-                                                                    Width="250px" TabIndex="23"></asp:TextBox>
+                                                                    Width="250px" TabIndex="25"></asp:TextBox>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvCommodity" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtCommodity" ValidationGroup="Save"
@@ -411,7 +411,7 @@
                                                                 Hazardous Cargo:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoHazardousCargo" runat="server" TabIndex="24" RepeatDirection="Horizontal"
+                                                                <asp:RadioButtonList ID="rdoHazardousCargo" runat="server" TabIndex="26" RepeatDirection="Horizontal"
                                                                     AutoPostBack="True" OnSelectedIndexChanged="rdoHazardousCargo_SelectedIndexChanged">
                                                                     <asp:ListItem Selected="True" Text="No" Value="No"></asp:ListItem>
                                                                     <asp:ListItem Text="Yes" Value="Yes"></asp:ListItem>
@@ -424,7 +424,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtUNOCode" runat="server" CssClass="textboxuppercase" MaxLength="5"
-                                                                    Text="ZZZZZ" Enabled="False" Width="250px" TabIndex="25"></asp:TextBox>
+                                                                    Text="ZZZZZ" Enabled="False" Width="250px" TabIndex="27"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="rfvUNOCode" runat="server" ControlToValidate="txtUNOCode"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
@@ -436,7 +436,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtIMOCode" runat="server" CssClass="textboxuppercase" MaxLength="3"
-                                                                    Text="ZZZ" Enabled="False" Width="250px" TabIndex="26"></asp:TextBox>
+                                                                    Text="ZZZ" Enabled="False" Width="250px" TabIndex="28"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="rfvIMOCode" runat="server" ControlToValidate="txtIMOCode"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
@@ -447,7 +447,7 @@
                                                                 Direct Port Transfer:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoDPT" runat="server" TabIndex="27" RepeatDirection="Horizontal"
+                                                                <asp:RadioButtonList ID="rdoDPT" runat="server" TabIndex="29" RepeatDirection="Horizontal"
                                                                     AutoPostBack="True" OnSelectedIndexChanged="rdoDPT_SelectedIndexChanged">
                                                                     <asp:ListItem Selected="True" Text="No" Value="No"></asp:ListItem>
                                                                     <asp:ListItem Text="Yes" Value="Yes"></asp:ListItem>
@@ -484,7 +484,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtCFSName" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="250px" TabIndex="30" Enabled="False"></asp:TextBox>
+                                                                    Width="250px" TabIndex="32" Enabled="False"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -492,7 +492,7 @@
                                                                 CFS Nominated By:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoCfsNominated" runat="server" TabIndex="31" RepeatDirection="Horizontal">
+                                                                <asp:RadioButtonList ID="rdoCfsNominated" runat="server" TabIndex="33" RepeatDirection="Horizontal">
                                                                     <asp:ListItem Selected="True" Text="Line" Value="L"></asp:ListItem>
                                                                     <asp:ListItem Text="Consignee" Value="C"></asp:ListItem>
                                                                     <asp:ListItem Text="None" Value="N"></asp:ListItem>
@@ -505,7 +505,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtCACode" runat="server" CssClass="textboxuppercase" MaxLength="10"
-                                                                    Width="250px" TabIndex="32"></asp:TextBox>
+                                                                    Width="250px" TabIndex="34"></asp:TextBox>
                                                                 <%--<asp:RequiredFieldValidator ID="rfvCACode" runat="server" ControlToValidate="txtCACode"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>--%>
@@ -517,7 +517,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtPackage" runat="server" CssClass="numerictextbox" MaxLength="30"
-                                                                    Width="250px" TabIndex="33"></cc2:CustomTextBox>
+                                                                    Width="250px" TabIndex="35"></cc2:CustomTextBox>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvPackage" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtPackage" ValidationGroup="Save"
@@ -540,7 +540,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtGrossWeight" runat="server" CssClass="numerictextbox" Type="Decimal"
-                                                                    MaxLength="17" Precision="13" Scale="3" Width="250px"></cc2:CustomTextBox>
+                                                                    MaxLength="17" Precision="13" Scale="3" Width="250px" TabIndex="37"></cc2:CustomTextBox>
                                                                 <asp:RequiredFieldValidator ID="rfvGrossWeight" runat="server" ControlToValidate="txtGrossWeight"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
@@ -563,7 +563,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtVolume" runat="server" CssClass="numerictextbox" Type="Decimal"
-                                                                    MaxLength="17" Precision="13" Scale="3" Width="250px"></cc2:CustomTextBox>
+                                                                    MaxLength="17" Precision="13" Scale="3" Width="250px" TabIndex="39"></cc2:CustomTextBox>
                                                                 <%--<asp:RequiredFieldValidator ID="rfvVolume" runat="server" ControlToValidate="txtVolume"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>--%>
@@ -572,7 +572,6 @@
                                                             </td>
                                                             <td>
                                                                 <asp:Label ID="Label3" runat="server" Text="Unit of Volume:"></asp:Label>
-                                                                <span class="errormessage">*</span>
                                                             </td>
                                                             <td>
                                                                 <uc3:AC_VolumeUnit ID="AC_VolumeUnit1" runat="server" />
@@ -584,7 +583,7 @@
                                                                 Item type:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoItemType" runat="server" TabIndex="37" RepeatDirection="Horizontal">
+                                                                <asp:RadioButtonList ID="rdoItemType" runat="server" TabIndex="41" RepeatDirection="Horizontal">
                                                                     <asp:ListItem Selected="True" Text="OT" Value="OT"></asp:ListItem>
                                                                     <asp:ListItem Text="GC" Value="GC"></asp:ListItem>
                                                                 </asp:RadioButtonList>
@@ -596,7 +595,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtCMCode" runat="server" CssClass="textboxuppercase" MaxLength="2"
-                                                                    Width="250px" TabIndex="38"></asp:TextBox>
+                                                                    Width="250px" TabIndex="42"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="rfvCMCode" runat="server" ControlToValidate="txtCMCode"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
@@ -608,7 +607,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtDestFreeDays" runat="server" CssClass="numerictextbox"
-                                                                    MaxLength="13" Width="250px" TabIndex="39"></cc2:CustomTextBox>
+                                                                    MaxLength="13" Width="250px" TabIndex="43"></cc2:CustomTextBox>
                                                                 <asp:RequiredFieldValidator ID="rfvDestFreeDays" runat="server" ControlToValidate="txtDestFreeDays"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
@@ -619,7 +618,7 @@
                                                                 Detention Slab:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoDestSlab" runat="server" TabIndex="40" RepeatDirection="Horizontal">
+                                                                <asp:RadioButtonList ID="rdoDestSlab" runat="server" TabIndex="44" RepeatDirection="Horizontal">
                                                                     <asp:ListItem Selected="True" Text="Regular" Value="R"></asp:ListItem>
                                                                     <asp:ListItem Text="Overwrite" Value="O"></asp:ListItem>
                                                                 </asp:RadioButtonList>
@@ -631,7 +630,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtPGRFreeDays" runat="server" CssClass="numerictextbox" MaxLength="13"
-                                                                    Width="250px" TabIndex="41"></cc2:CustomTextBox>
+                                                                    Width="250px" TabIndex="45"></cc2:CustomTextBox>
                                                                 <asp:RequiredFieldValidator ID="rfvPGRFreeDays" runat="server" ControlToValidate="txtPGRFreeDays"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
@@ -642,7 +641,7 @@
                                                                 Reefer:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoReefer" runat="server" TabIndex="42" RepeatDirection="Horizontal">
+                                                                <asp:RadioButtonList ID="rdoReefer" runat="server" TabIndex="46" RepeatDirection="Horizontal">
                                                                     <asp:ListItem Selected="True" Text="No" Value="No"></asp:ListItem>
                                                                     <asp:ListItem Text="Yes" Value="Yes"></asp:ListItem>
                                                                 </asp:RadioButtonList>
@@ -650,14 +649,14 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                TP Bond No:<span class="errormessage">*</span>
+                                                                TP Bond No:
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtTPBondNo" runat="server" CssClass="textboxuppercase" MaxLength="10"
-                                                                    Width="250px" TabIndex="43"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="rfvTPBondNo" runat="server" ControlToValidate="txtTPBondNo"
+                                                                    Width="250px" TabIndex="47"></asp:TextBox>
+                                                                <%--<asp:RequiredFieldValidator ID="rfvTPBondNo" runat="server" ControlToValidate="txtTPBondNo"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
-                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                                             </td>
                                                             <td>
                                                             </td>
@@ -665,7 +664,7 @@
                                                                 FreeOut:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoFreeOut" runat="server" TabIndex="44" RepeatDirection="Horizontal">
+                                                                <asp:RadioButtonList ID="rdoFreeOut" runat="server" TabIndex="48" RepeatDirection="Horizontal">
                                                                     <asp:ListItem Selected="True" Text="No" Value="No"></asp:ListItem>
                                                                     <asp:ListItem Text="Yes" Value="Yes"></asp:ListItem>
                                                                 </asp:RadioButtonList>
@@ -677,7 +676,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtMLOCode" runat="server" CssClass="textboxuppercase" MaxLength="16"
-                                                                    Width="250px" TabIndex="45"></asp:TextBox>
+                                                                    Width="250px" TabIndex="49"></asp:TextBox>
                                                                 <%--<asp:RequiredFieldValidator ID="rfvMLOCode" runat="server" ControlToValidate="txtMLOCode"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>--%>
@@ -688,7 +687,7 @@
                                                                 Part B/L:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoPartBL" runat="server" TabIndex="46" RepeatDirection="Horizontal">
+                                                                <asp:RadioButtonList ID="rdoPartBL" runat="server" TabIndex="50" RepeatDirection="Horizontal">
                                                                     <asp:ListItem Selected="True" Text="No" Value="No"></asp:ListItem>
                                                                     <asp:ListItem Text="Yes" Value="Yes"></asp:ListItem>
                                                                 </asp:RadioButtonList>
@@ -699,7 +698,7 @@
                                                                 Transport Mode:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoTransportMode" runat="server" TabIndex="47" RepeatDirection="Horizontal">
+                                                                <asp:RadioButtonList ID="rdoTransportMode" runat="server" TabIndex="51" RepeatDirection="Horizontal">
                                                                     <asp:ListItem Text="Road" Value="R" Selected="True"></asp:ListItem>
                                                                     <asp:ListItem Text="Train" Value="T"></asp:ListItem>
                                                                     <asp:ListItem Text="Ship" Value="S"></asp:ListItem>
@@ -711,7 +710,7 @@
                                                                 Tax Exempted:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoTaxExempted" runat="server" TabIndex="48" RepeatDirection="Horizontal">
+                                                                <asp:RadioButtonList ID="rdoTaxExempted" runat="server" TabIndex="52" RepeatDirection="Horizontal">
                                                                     <asp:ListItem Selected="True" Text="No" Value="No"></asp:ListItem>
                                                                     <asp:ListItem Text="Yes" Value="Yes"></asp:ListItem>
                                                                 </asp:RadioButtonList>
@@ -722,7 +721,7 @@
                                                                 Lock DO:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoLockDO" runat="server" TabIndex="49" RepeatDirection="Horizontal"
+                                                                <asp:RadioButtonList ID="rdoLockDO" runat="server" TabIndex="53" RepeatDirection="Horizontal"
                                                                     OnSelectedIndexChanged="rdoLockDO_SelectedIndexChanged" AutoPostBack="True">
                                                                     <asp:ListItem Selected="True" Text="No" Value="No"></asp:ListItem>
                                                                     <asp:ListItem Text="Yes" Value="Yes"></asp:ListItem>
@@ -735,7 +734,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtLockDOComment" runat="server" CssClass="textboxuppercase" MaxLength="100"
-                                                                    Width="250px" TabIndex="50" Enabled="False"></asp:TextBox>
+                                                                    Width="250px" TabIndex="54" Enabled="False"></asp:TextBox>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvLockDOComment" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtLockDOComment" ValidationGroup="Save"
@@ -748,7 +747,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtTEU" runat="server" CssClass="numerictextbox" MaxLength="13"
-                                                                    Width="250px" TabIndex="51"></cc2:CustomTextBox>
+                                                                    Width="250px" TabIndex="55"></cc2:CustomTextBox>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvTEU" runat="server" CssClass="errormessage" ErrorMessage="This field is required"
                                                                     ControlToValidate="txtTEU" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -760,7 +759,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtFEU" runat="server" CssClass="numerictextbox" MaxLength="13"
-                                                                    Width="250px" TabIndex="52"></cc2:CustomTextBox>
+                                                                    Width="250px" TabIndex="56"></cc2:CustomTextBox>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvFEU" runat="server" CssClass="errormessage" ErrorMessage="This field is required"
                                                                     ControlToValidate="txtFEU" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -772,7 +771,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtWaiver" runat="server" CssClass="numerictextbox" Type="Decimal"
-                                                                    MaxLength="17" Precision="13" Scale="3" Width="250px" TabIndex="53" Text="00.00"
+                                                                    MaxLength="17" Precision="13" Scale="3" Width="250px" TabIndex="57" Text="00.00"
                                                                     OnTextChanged="txtWaiver_TextChanged" AutoPostBack="True"></cc2:CustomTextBox>
                                                             </td>
                                                             <td>
@@ -782,7 +781,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClientClick="javascript:popWin();"
-                                                                    Enabled="False" />
+                                                                    Enabled="False" TabIndex="58" />
                                                                 <asp:HiddenField ID="hdnFilePath" runat="server" />
                                                                 &nbsp;&nbsp; &nbsp;
                                                             </td>
@@ -792,7 +791,7 @@
                                                                 Waiver Type:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoWaiverType" runat="server" TabIndex="55" RepeatDirection="Horizontal"
+                                                                <asp:RadioButtonList ID="rdoWaiverType" runat="server" TabIndex="59" RepeatDirection="Horizontal"
                                                                     Enabled="False">
                                                                     <asp:ListItem Text="B/L Wise" Value="BW"></asp:ListItem>
                                                                     <asp:ListItem Text="Container Wise" Value="CW"></asp:ListItem>
@@ -808,7 +807,7 @@
                                                                 <%--<uc5:AC_Surveyor ID="AC_Surveyor1" runat="server" />
                                                                 <asp:Label ID="errSurveyor" runat="server" CssClass="errormessage"></asp:Label>--%>
 
-                                                                <asp:DropDownList ID="ddlSurveyor" runat="server" CssClass="dropdownlist" TabIndex="56">
+                                                                <asp:DropDownList ID="ddlSurveyor" runat="server" CssClass="dropdownlist" TabIndex="60">
                                                                     <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
                                                                 </asp:DropDownList>
                                                                 <br />
@@ -870,7 +869,7 @@
                                                                 Cargo Arrival Notice To:<span class="errormessage">*</span>
                                                                 <br />
                                                                 <asp:TextBox ID="txtCargoArrivalNotice" runat="server" CssClass="textboxuppercase"
-                                                                    MaxLength="50" Width="450" TabIndex="10" TextMode="MultiLine" Rows="3"></asp:TextBox><br />
+                                                                    MaxLength="50" Width="450" TabIndex="7" TextMode="MultiLine" Rows="3"></asp:TextBox><br />
                                                                 <asp:RequiredFieldValidator ID="rfvCANotice" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtCargoArrivalNotice" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
@@ -888,7 +887,7 @@
                                                                 Marks & Nos:<span class="errormessage">*</span>
                                                                 <br />
                                                                 <asp:TextBox ID="txtMarks" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="450" TabIndex="9" Text="N/M" TextMode="MultiLine" Rows="3"></asp:TextBox><br />
+                                                                    Width="450" TabIndex="8" Text="N/M" TextMode="MultiLine" Rows="3"></asp:TextBox><br />
                                                                 <asp:RequiredFieldValidator ID="rfvMarks" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtMarks" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
@@ -899,7 +898,7 @@
                                                                 Description of Goods:<span class="errormessage">*</span>
                                                                 <br />
                                                                 <asp:TextBox ID="txtDescGoods" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="450" TabIndex="10" TextMode="MultiLine" Rows="3"></asp:TextBox><br />
+                                                                    Width="450" TabIndex="9" TextMode="MultiLine" Rows="3"></asp:TextBox><br />
                                                                 <asp:RequiredFieldValidator ID="rfvDescGoods" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtDescGoods" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
@@ -918,7 +917,7 @@
                                                                 B/L Comment:
                                                                 <br />
                                                                 <asp:TextBox ID="txtBLComment" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="450" TabIndex="10" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                                                                    Width="450" TabIndex="11" TextMode="MultiLine" Rows="3"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -954,7 +953,7 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <cc2:CustomTextBox ID="txtFtrBLGrossWeight" runat="server" CssClass="numerictextbox" Type="Decimal"
-                                                                    MaxLength="17" Precision="13" Scale="3" Width="250px" Enabled="false"></cc2:CustomTextBox>
+                                                                    MaxLength="17" Precision="13" Scale="3" Width="250px" Enabled="false" TabIndex="3"></cc2:CustomTextBox>
                                                             </td>
                                                             <td style="width: 4%;">
                                                             </td>
@@ -987,14 +986,14 @@
                                                             <td style="width: 28%;">
                                                                 <asp:DropDownList ID="ddlFtrContainerSize" runat="server" CssClass="dropdownlist" AutoPostBack="true"
                                                                     TabIndex="6" OnSelectedIndexChanged="ddlFtrContainerSize_SelectedIndexChanged">
-                                                                    <%--<asp:ListItem Value="0" Text="--Select--"></asp:ListItem>--%>
-                                                                    <asp:ListItem Value="20" Text="20'" Selected="True"></asp:ListItem>
+                                                                    <asp:ListItem Value="0" Text="--Select--" Selected="True"></asp:ListItem>
+                                                                    <asp:ListItem Value="20" Text="20'"></asp:ListItem>
                                                                     <asp:ListItem Value="40" Text="40'"></asp:ListItem>
                                                                 </asp:DropDownList>
-                                                                <%--<br />
+                                                                <br />
                                                                 <asp:RequiredFieldValidator ID="rfvFtrContainerSize" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="ddlFtrContainerSize"
-                                                                    InitialValue="0" ValidationGroup="Add" Display="Dynamic"></asp:RequiredFieldValidator>--%>
+                                                                    InitialValue="0" ValidationGroup="Add" Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1104,7 +1103,11 @@
                                                                     ErrorMessage="This field is required" ControlToValidate="ddlFtrIsoCode" InitialValue="0"
                                                                     ValidationGroup="Add" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                                                 <asp:TextBox ID="txtFtrISOCode" runat="server"  TabIndex="14" Width="250" 
-                                                                    CssClass="textboxuppercase" MaxLength="15" Enabled="false"></asp:TextBox>
+                                                                    CssClass="textboxuppercase" MaxLength="15"></asp:TextBox>
+                                                                <br />
+                                                                <asp:RequiredFieldValidator ID="rfvISO" runat="server" CssClass="errormessage"
+                                                                    ErrorMessage="This field is required" ControlToValidate="txtFtrISOCode" ValidationGroup="Add"
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1121,8 +1124,8 @@
                                                                 Tare Weight:
                                                             </td>
                                                             <td>
-                                                                <cc2:CustomTextBox ID="txtFtrTareWt" runat="server" CssClass="numerictextbox" MaxLength="13"
-                                                                    Width="250px" TabIndex="16" Enabled="false"></cc2:CustomTextBox>
+                                                                <cc2:CustomTextBox ID="txtFtrTareWt" runat="server" CssClass="numerictextbox" MaxLength="8"
+                                                                    Width="250px" TabIndex="16" Type="Decimal" Precision="4" Scale="3"></cc2:CustomTextBox>
                                                                 <%--<br />
                                                                 <asp:RequiredFieldValidator ID="rfvFtrTareWt" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtFtrTareWt" ValidationGroup="Add"
@@ -1175,7 +1178,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtFtrTempMax" runat="server" CssClass="numerictextbox"
-                                                                    Width="250px" TabIndex="17" Type="Decimal"
+                                                                    Width="250px" TabIndex="21" Type="Decimal"
                                                                     MaxLength="7" Precision="4" Scale="2"></cc2:CustomTextBox>
                                                             </td>
                                                             <td>
@@ -1254,7 +1257,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtFtrStowage" runat="server" CssClass="textboxuppercase" MaxLength="6"
-                                                                    Width="250" TabIndex="28"></asp:TextBox>
+                                                                    Width="250" TabIndex="29"></asp:TextBox>
                                                             </td>
                                                             <td>
                                                             </td>
@@ -1263,14 +1266,14 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtFtrCallNo" runat="server" CssClass="textboxuppercase" MaxLength="1"
-                                                                    Width="250" TabIndex="29"></asp:TextBox>
+                                                                    Width="250" TabIndex="30"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                     </table>
                                                     <table border="0" cellpadding="1" cellspacing="0" width="100%" class="custtable">
                                                         <tr>
                                                             <td style="padding-top: 10px;">
-                                                                <asp:Button ID="btnAddRow" runat="server" Text="Add Row" TabIndex="30" OnClick="btnAddRow_Click"
+                                                                <asp:Button ID="btnAddRow" runat="server" Text="Add Row" TabIndex="31" OnClick="btnAddRow_Click"
                                                                     ValidationGroup="Add" />&nbsp;&nbsp;
                                                                 <%--<asp:Button ID="btnRefresh" runat="server" CssClass="button" Text="Refresh" TabIndex="31" />--%>
                                                             </td>
@@ -1335,9 +1338,10 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" style="padding-top: 10px;">
-                                        <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" TabIndex="1"
+                                        <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" TabIndex="70"
                                             OnClick="btnSave_Click" />&nbsp;&nbsp;
-                                        <asp:Button ID="btnBack" runat="server" CssClass="button" PostBackUrl="~/Transaction/ImportBL.aspx" Text="Back" />
+                                        <asp:Button ID="btnBack" runat="server" CssClass="button" TabIndex="71"
+                                            PostBackUrl="~/Transaction/ImportBL.aspx" Text="Back" />
                                         <br />
                                         <asp:Label ID="lblErr" runat="server" CssClass="errormessage"></asp:Label>
                                     </td>

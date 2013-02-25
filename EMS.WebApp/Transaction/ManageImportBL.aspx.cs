@@ -505,22 +505,27 @@ namespace EMS.WebApp.Transaction
                 btnAddRow.Enabled = false;
             }
 
-            if (IsValidContainerNo())
-            {
-                CheckContainerNumber();
+            //if (IsValidContainerNo())
+            //{
 
-                if (Convert.ToBoolean(ViewState["IsValidContainer"]))
-                {
-                    if (Convert.ToString(ViewState[EDITBLFOOTER]) == "")
-                        AddBLFooterDetails();
-                    else
-                        EditFooterDetails();
-                }
+            if (rdoFtrSoc.SelectedValue == "N")
+                IsValidContainerNo();
+
+
+            CheckContainerNumber();
+
+            if (Convert.ToBoolean(ViewState["IsValidContainer"]))
+            {
+                if (Convert.ToString(ViewState[EDITBLFOOTER]) == "")
+                    AddBLFooterDetails();
                 else
-                {
-                    errContainer.Text = "Please enter unique Container No";
-                }
+                    EditFooterDetails();
             }
+            else
+            {
+                errContainer.Text = "Please enter unique Container No";
+            }
+            //}
         }
 
         protected void rdoFrightType_SelectedIndexChanged(object sender, EventArgs e)
@@ -735,10 +740,13 @@ namespace EMS.WebApp.Transaction
         {
             string TareWeight = RetriveTareWeight().ToString();
 
-            txtFtrTareWt.Text = TareWeight;
+            if (rdoCargoType.SelectedValue == "E")
+            {
+                txtFtrTareWt.Text = TareWeight;
 
-            if (txtFtrGrossWeight.Text == string.Empty)
-                txtFtrGrossWeight.Text = TareWeight;
+                if (txtFtrGrossWeight.Text == string.Empty)
+                    txtFtrGrossWeight.Text = TareWeight;
+            }
 
             if (txtFtrCargoWt.Text == string.Empty)
                 txtFtrCargoWt.Text = (Convert.ToDecimal(TareWeight) / 1000).ToString();
@@ -914,7 +922,7 @@ namespace EMS.WebApp.Transaction
 
         private void LoadLocationDDL()
         {
-            List<ILocation> lstLocation = new ImportBLL().GetLocation(3);
+            List<ILocation> lstLocation = new ImportBLL().GetLocation(_userId);
             ddlLocation.DataValueField = "Id";
             ddlLocation.DataTextField = "Name";
             ddlLocation.DataSource = lstLocation;
@@ -1407,13 +1415,28 @@ namespace EMS.WebApp.Transaction
                 }
             }
 
+            int teu = 0;
+            int feu = 0;
+
+            if (txtTEU.Text != string.Empty)
+                teu = Convert.ToInt32(txtTEU.Text);
+
+            if (txtFEU.Text != string.Empty)
+                feu = Convert.ToInt32(txtFEU.Text);
+
+            if ((teu + feu) == 0)
+            {
+                IsValid = false;
+                lblErr.Text = "Total number of (TEU + FEU) should be greater than 0";
+            }
+
             return IsValid;
         }
 
         private void ClearFooterDetail()
         {
             txtFtrContainerNo.Text = "";
-            ddlFtrContainerSize.SelectedValue = "20";
+            ddlFtrContainerSize.SelectedValue = "0";
             ddlFtrContainerType.SelectedValue = "0";
             txtFtrSealNo.Text = "";
             txtFtrCommodity.Text = "";
@@ -1888,7 +1911,8 @@ namespace EMS.WebApp.Transaction
                     checkDigit = 0;
                 if (checkDigit != (int)containerNo[10] - 48) //check digit should equal the last character in the textbox.
                 {
-                    errContainer.Text = "Container Number NOT Valid";
+                    //errContainer.Text = "Container Number NOT Valid";
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "container", "<script>javascript:void alert('Container Number NOT Valid!');</script>", false);
                     IsValid = false;
                 }
                 else
@@ -1899,7 +1923,8 @@ namespace EMS.WebApp.Transaction
             }
             else
             {
-                errContainer.Text = "Container Number must be 11 characters in length";
+                //errContainer.Text = "Container Number must be 11 characters in length";
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "container", "<script>javascript:void alert('Container Number must be 11 characters in length!');</script>", false);
                 IsValid = false;
             }
             return IsValid;

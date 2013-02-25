@@ -237,11 +237,11 @@
                                             <asp:TextBox ID="txtLGNo" runat="server" CssClass="textboxuppercase" ForeColor="#747862"></asp:TextBox>
                                         </th>
                                           <th style="width: 13%;" class="gridviewheader" scope="col">
-                                            <asp:TextBox ID="txtIGMNo" runat="server" CssClass="numerictextbox" ForeColor="#747862"></asp:TextBox>
+                                            <asp:TextBox ID="txtIGMNo" runat="server" CssClass="textboxuppercase" ForeColor="#747862"></asp:TextBox>
                                             <br />
                                              <asp:RegularExpressionValidator ControlToValidate="txtIGMNo" ID="RegularExpressionValidator5"
                                                 runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]"
-                                                Display="Dynamic" ValidationExpression="^\d$"></asp:RegularExpressionValidator>
+                                                Display="Dynamic" ValidationExpression="^\d*"></asp:RegularExpressionValidator>
                                        </th>
                                           <th style="width: 13%;" class="gridviewheader" scope="col" align="center">
                                             <asp:DropDownList ID="ddlSize" runat="server" CssClass="dropdownlist">
@@ -302,9 +302,9 @@
                                             DataField="ContainerNo" HeaderText="Container No." />
                                         <asp:BoundField ItemStyle-CssClass="gridviewitem" HeaderStyle-Width="13%" HeaderStyle-CssClass="gridviewheader"
                                             DataField="LGNo" HeaderText="LG No." />
-                                        <asp:BoundField ItemStyle-CssClass="gridviewitem" HeaderStyle-Width="13%" ItemStyle-HorizontalAlign="Right"
+                                        <asp:BoundField ItemStyle-CssClass="gridviewitem" HeaderStyle-Width="13%" ItemStyle-HorizontalAlign="Left"
                                             HeaderStyle-CssClass="gridviewheader" DataField="IGMNo" HeaderText="IGM No." />
-                                        <asp:BoundField ItemStyle-CssClass="gridviewitem" HeaderStyle-Width="13%" ItemStyle-HorizontalAlign="Right"
+                                        <asp:BoundField ItemStyle-CssClass="gridviewitem" HeaderStyle-Width="13%" ItemStyle-HorizontalAlign="Left"
                                             HeaderStyle-CssClass="gridviewheader" DataField="CntrSize" HeaderText="Size" />
                                         <asp:TemplateField HeaderText="Type" HeaderStyle-Width="13%" ItemStyle-CssClass="gridviewitem"
                                             HeaderStyle-CssClass="gridviewheader">

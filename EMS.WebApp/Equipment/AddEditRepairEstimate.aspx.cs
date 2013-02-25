@@ -36,8 +36,9 @@ namespace EMS.WebApp.Equipment
                 btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('RepairingEstimate.aspx','" + EMS.Utilities.ResourceManager.ResourceManager.GetStringWithoutName("ERR00017") + "')";
                 if (EqEstId != "-1")
                 {
+                    GeneralFunctions.PopulateDropDownList(ddlUser, EMS.BLL.UserBLL.GetAdminUsers(_userId, Convert.ToInt32(ddlLoc.SelectedValue)));
                     LoadData(_userId, EqEstId);
-                    GeneralFunctions.PopulateDropDownList(ddlUser, EMS.BLL.UserBLL.GetAdminUsers(_userId,Convert.ToInt32(ddlLoc.SelectedValue)));
+                    
                 }
             }
             if (EqEstId == "-1")
@@ -114,7 +115,11 @@ namespace EMS.WebApp.Equipment
                 ClearControls();
             else
                 if (!checkContainerStatus(true)) return;
-
+            if (ddlUser.SelectedIndex == 0)
+            {
+                lblError.Text = "Please select an Approver.";
+                return;
+            }
             IEqpRepairing iequip = new EquipmentRepairEntity();
             iequip.pk_RepairID = Convert.ToInt32(EqEstId);
             iequip.locId = Convert.ToInt32(ddlLoc.SelectedValue);

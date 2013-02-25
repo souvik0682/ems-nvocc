@@ -13,9 +13,9 @@
         <center>
             <fieldset style="width: 60%;">
                 <legend>Add / Edit Container Transaction</legend>
-                <table border="0" cellpadding="2" cellspacing="3" width="100%">
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                        <ContentTemplate>
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate><table border="0" cellpadding="2" cellspacing="3" width="100%">
+                    
                             <tr>
                                 <td>
                                     Transaction CODE :
@@ -142,10 +142,13 @@
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
                             </tr>
-                        </ContentTemplate>
+                        
+
+                    </table></ContentTemplate>
                     </asp:UpdatePanel>
+                    <table border="0" cellpadding="2" cellspacing="3" width="100%">
                     <tr>
-                        <td colspan="4">
+                        <td>
                             <div style="margin-left: 53%;">
                                 <asp:Button ID="btnShow" runat="server" Text="Show Container" OnClick="btnShow_Click"
                                     ValidationGroup="vgContainer" /></div>
@@ -192,7 +195,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4">
+                        <td>
                             <asp:GridView ID="gvSelectedContainer" runat="server" AutoGenerateColumns="false"
                                 ShowFooter="false" Width="100%">
                                 <Columns>
@@ -219,7 +222,6 @@
                                         <ItemStyle CssClass="gridviewitem" Width="12%" />
                                         <HeaderStyle CssClass="gridviewheader" />
                                     </asp:TemplateField>
-                                    
                                     <asp:TemplateField HeaderText="To Status">
                                         <ItemTemplate>
                                             <%# Eval("ToStatus")%>
@@ -230,7 +232,6 @@
                                     <asp:TemplateField HeaderText="Status Date">
                                         <ItemTemplate>
                                             <%# Eval("ChangeDate").ToString() == "" ? " " : Convert.ToDateTime(Eval("ChangeDate")).ToShortDateString()%>
-                                            
                                         </ItemTemplate>
                                         <ItemStyle CssClass="gridviewitem" Width="12%" />
                                         <HeaderStyle CssClass="gridviewheader" />
@@ -254,17 +255,17 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                        </td>
-                        <td colspan="3">
+                        <%--<td>
+                        </td>--%>
+                        <td style="padding-left:23%;">
                             <%--<asp:HiddenField ID="hdnChargeID" runat="server" Value="0" />--%>
                             <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="vgContainer"
                                 OnClick="btnSave_Click" />&nbsp;&nbsp;<asp:Button ID="btnBack" runat="server" CssClass="button"
                                     Text="Back" ValidationGroup="vgUnknown" OnClick="btnBack_Click" OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
                             <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
                         </td>
-                    </tr>
-                </table>
+                    </tr></table>
+                
             </fieldset>
         </center>
     </div>

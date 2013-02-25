@@ -43,7 +43,7 @@ namespace EMS.WebApp.Hire
         {
             Filler.FillData<IContainerType>(ddlType, CommonBLL.GetContainerType(), "CotainerDesc", "ContainerTypeID", "---Type---");
             Filler.FillData<ILocation>(ddlLocation, new CommonBLL().GetActiveLocation(), "Name", "Id", "---Select---");
-            Filler.FillData(ddlLineCode, new DBInteraction().GetNVOCCLine(1, "").Tables[0], "NVOCCName", "pk_NVOCCID", "---Select---");
+            Filler.FillData(ddlLineCode, new DBInteraction().GetNVOCCLine(-1, "").Tables[0], "NVOCCName", "pk_NVOCCID", "---Select---");
             Filler.GridDataBind(new List<IEqpOnHireContainer>(), gvwHire);
             rdTransactionType_SelectedIndexChanged(null, null);
         }
@@ -88,11 +88,11 @@ namespace EMS.WebApp.Hire
 
         private void ClearFieldUpper()
         {
-            txtHireReference.Text = string.Empty;
+            //txtHireReference.Text = string.Empty;
             txtLGNo.Text = string.Empty;
             txtIGMNo.Text = string.Empty;
-            ddlLocation.SelectedValue = "0";
-            ddlLineCode.SelectedValue = "0";
+            //ddlLocation.SelectedValue = "0";
+            //ddlLineCode.SelectedValue = "0";
             txtIGMDate.Text = string.Empty;
             txtOnHireDate.Text = string.Empty;
         }
@@ -119,14 +119,14 @@ namespace EMS.WebApp.Hire
                 var temp = lstEqpOnHireContainer.FirstOrDefault(f => f.ContainerNo == txtContainerNo.Text.Trim().StringRequired());
                 if (temp != null)
                 {
-                    temp.ContainerNo = txtContainerNo.Text;
+                    temp.ContainerNo = txtContainerNo.Text.JToUpper();
                     temp.LGNo = txtLGNo.Text;
                     temp.IGMNo = txtIGMNo.Text.ToNullLong();
                     temp.CntrSize = (ddlSize.SelectedValue.Equals("0") ? "" : ddlSize.SelectedValue).StringRequired();
                     temp.ContainerTypeID = ddlType.SelectedValue.Trim().ToNullInt();
                     temp.IGMDate = txtIGMDate.Text.ToNullDateTime();
                     temp.ActualOnHireDate = txtOnHireDate.Text.ToNullDateTime();
-
+                    
                     ClearFieldUpper();
                     Filler.GridDataBind(lstEqpOnHireContainer, gvwHire);
                     return;
@@ -137,13 +137,14 @@ namespace EMS.WebApp.Hire
                 lstEqpOnHireContainer.Add(new EqpOnHireContainer
                  {
                      ContainerNo = txtContainerNo.Text.Trim(),
-                     LGNo = txtLGNo.Text,
+                     LGNo = txtLGNo.Text.JToUpper(),
                      IGMNo = txtIGMNo.Text.ToNullLong(),
                      CntrSize = (ddlSize.SelectedValue.Equals("0") ? "" : ddlSize.SelectedValue).StringRequired(),
                      ContainerTypeID = ddlType.SelectedValue.Trim().ToNullInt(),
                      IGMDate = txtIGMDate.Text.ToNullDateTime(),
                      ActualOnHireDate = txtOnHireDate.Text.ToNullDateTime(),
                      AddedOn = DateTime.Now,
+                     EditedOn = DateTime.Now,
                      MovementOptID = 9,
                      UserAdded = user.Id,
                      UserLastEdited = user.Id
@@ -286,16 +287,16 @@ namespace EMS.WebApp.Hire
                     CompanyID = 1,//                    user.CompanyId
                     EditedOn = DateTime.Now,
                     FEUs = feu,
-                    HireReference = txtHireReference.Text.Trim(),
+                    HireReference = txtHireReference.Text.Trim().JToUpper(),
                     HireReferenceDate = txtReferenceDate.Text.Trim().ToNullDateTime(),
                     LstEqpOnHireContainer = lst,
                     LocationID = ddlLocation.SelectedValue.ToInt(),
                     NVOCCID = ddlLineCode.SelectedValue.ToInt(),
-                    Narration = txtNarration.Text.Trim(),
+                    Narration = txtNarration.Text.Trim().JToUpper(),
                     OnOffHire = rdTransactionType.SelectedValue.ToCharArray()[0],
                     ReturnedPortID = hdnReturn.Value.ToInt(),
                     ReleaseRefDate = txtReleaseDate.Text.ToNullDateTime(),
-                    ReleaseRefNo = txtReleaseRefNo.Text.Trim(),
+                    ReleaseRefNo = txtReleaseRefNo.Text.Trim().JToUpper(),
                     TEUs = lst.Count - feu,
                     UserAdded = user.Id,
                     UserLastEdited = user.Id,

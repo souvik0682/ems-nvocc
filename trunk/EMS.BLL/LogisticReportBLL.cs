@@ -14,5 +14,10 @@ namespace EMS.BLL
       {
           return EMS.DAL.LogisticReportDAL.GetRptCargoDesc(Line, Loc, StockDate);
       }
+
+      public static DataSet GetRptCntrStockSummery(string Line, string Loc, string StockDate)
+      {
+          return EMS.DAL.LogisticReportDAL.GetRptCntrStockSummery(Line, Loc, StockDate);
+      }
     }
 }

@@ -434,5 +434,12 @@ namespace EMS.BLL
         }
 
         #endregion
+
+        #region BLHeader
+        public static DataTable GetBLHeaderByBLNo(long LocationId)
+        {
+            return CommonDAL.GetBLHeaderByBLNo(LocationId);
+        }
+        #endregion
     }
 }

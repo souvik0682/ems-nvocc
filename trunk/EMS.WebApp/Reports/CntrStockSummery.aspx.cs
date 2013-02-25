@@ -13,7 +13,7 @@ using Microsoft.Reporting.WebForms;
 
 namespace EMS.WebApp.Reports
 {
-    public partial class CntrStockDetail : System.Web.UI.Page
+    public partial class CntrStockSummery : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,7 +22,7 @@ namespace EMS.WebApp.Reports
             {
                 GeneralFunctions.PopulateDropDownList(ddlLine, EMS.BLL.EquipmentBLL.DDLGetLine());
                 GeneralFunctions.PopulateDropDownList(ddlLoc, dbinteract.PopulateDDLDS("DSR.dbo.mstLocation", "pk_LocID", "LocAbbr", true), true);
-               //GenerateReport();
+                //GenerateReport();
             }
         }
 
@@ -30,11 +30,11 @@ namespace EMS.WebApp.Reports
         {
             ReportBLL cls = new ReportBLL();
 
-            LocalReportManager reportManager = new LocalReportManager(rptViewer, "CntrStockDetail", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
-            string rptName = "CntrStockDetail.rdlc";
-         
+            LocalReportManager reportManager = new LocalReportManager(rptViewer, "CntrStockSummery", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
+            string rptName = "CntrStockSummery.rdlc";
 
-            DataSet ds = EMS.BLL.LogisticReportBLL.GetRptCntrStockDetails(ddlLine.SelectedValue,ddlLoc.SelectedValue,txtdtStock.Text.Trim());
+
+            DataSet ds = EMS.BLL.LogisticReportBLL.GetRptCntrStockSummery(ddlLine.SelectedValue, ddlLoc.SelectedValue, txtdtStock.Text.Trim());
             try
             {
                 rptViewer.Reset();
@@ -42,7 +42,7 @@ namespace EMS.WebApp.Reports
                 rptViewer.LocalReport.DataSources.Clear();
                 rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
                 rptViewer.LocalReport.SetParameters(new ReportParameter("CompanyName", Convert.ToString(ConfigurationManager.AppSettings["CompanyName"])));
-                rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds.Tables[0]));
+                rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds.Tables[0]));
                 rptViewer.LocalReport.Refresh();
             }
             catch
@@ -54,7 +54,7 @@ namespace EMS.WebApp.Reports
 
 
         }
-       
+
 
         protected void btnSave_Click(object sender, EventArgs e)
         {

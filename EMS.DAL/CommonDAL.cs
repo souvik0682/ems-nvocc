@@ -74,14 +74,16 @@ namespace EMS.DAL
         /// <returns>DataTable</returns>
         /// <createdby>Rajen Saha</createdby>
         /// <createddate>01/12/2012</createddate>
-        public static DataTable PopulateDropdown(int Number, int? Filter)
+        public static DataTable PopulateDropdown(int Number, int? Filter1, int? Filter2)
         {
             string strExecution = "[common].[spPopulateDropDownList]";
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@Number", Number);
-                oDq.AddIntegerParam("@Filter", Filter.Value);
+                oDq.AddIntegerParam("@Filter", Filter1.Value);
+                oDq.AddIntegerParam("@Type", Filter2.Value);
+                
                 
                 return oDq.GetTable();
             }

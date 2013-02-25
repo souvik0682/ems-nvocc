@@ -48,7 +48,6 @@
                                 WatermarkText="Voyage">
                             </cc1:TextBoxWatermarkExtender>
                         </td>
-                        
                     </tr>
                     <tr>
                         <td>
@@ -60,7 +59,6 @@
                                 WatermarkText="Status">
                             </cc1:TextBoxWatermarkExtender>
                         </td>
-
                         <td>
                             <asp:TextBox ID="txtTranCode" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server" FilterMode="InvalidChars"

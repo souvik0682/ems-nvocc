@@ -152,13 +152,15 @@ namespace EMS.WebApp.Equipment
                 Dr["ToStatus"] = ddlFromStatus.Items.FindByValue(Row["ToStatus"].ToString()).Text;
                 Dr["LandingDate"] = Row["LandingDate"];
                 Dr["ChangeDate"] = Row["MovementDate"];
+                Dr["LMDT"] = Row["LMDT"];
 
                 oTable.Rows.Add(Dr);
             }
             gvSelectedContainer.DataSource = oTable;
             gvSelectedContainer.DataBind();
 
-            //ViewState["Container"] = oTable;
+            if (ViewState["Container"] == null)
+                ViewState["Container"] = oTable;
         }
 
         private void RetriveParameters()
@@ -184,15 +186,16 @@ namespace EMS.WebApp.Equipment
             #region FromStatus
 
             Li = new ListItem("Select", "0");
-            PopulateDropDown((int)Enums.DropDownPopulationFor.ContainerMovementStatus, ddlFromStatus, 0);
+            PopulateDropDown((int)Enums.DropDownPopulationFor.ContainerMovementStatus, ddlFromStatus, 0, 0);
             ddlFromStatus.Items.Insert(0, Li);
             ddlFromStatus.Items.Remove(ddlFromStatus.Items.FindByText("ONBR"));
+            //ddlFromStatus.Items.Remove(ddlFromStatus.Items.FindByText());
             #endregion
 
             #region FromLocation
 
             Li = new ListItem("Select", "0");
-            PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlFromLocation, 0);
+            PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlFromLocation, 0, 0);
             ddlFromLocation.Items.Insert(0, Li);
 
             #endregion
@@ -200,15 +203,15 @@ namespace EMS.WebApp.Equipment
             #region ToLocation
 
             Li = new ListItem("Select", "0");
-            PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlTolocation, 0);
+            PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlTolocation, 0, 0);
             ddlTolocation.Items.Insert(0, Li);
 
             #endregion
         }
 
-        void PopulateDropDown(int Number, DropDownList ddl, int? Filter)
+        void PopulateDropDown(int Number, DropDownList ddl, int? Filter1, int? Filter2)
         {
-            CommonBLL.PopulateDropdown(Number, ddl, Filter);
+            CommonBLL.PopulateDropdown(Number, ddl, Filter1, Filter2);
         }
 
         protected void ddlFromStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -219,7 +222,7 @@ namespace EMS.WebApp.Equipment
         private void ActionOnFromStatusChange()
         {
             ListItem Li = new ListItem("Select", "0");
-            PopulateDropDown((int)Enums.DropDownPopulationFor.ContainerMovementStatus, ddlToStatus, Convert.ToInt32(ddlFromStatus.SelectedValue));
+            PopulateDropDown((int)Enums.DropDownPopulationFor.ContainerMovementStatus, ddlToStatus, Convert.ToInt32(ddlFromStatus.SelectedValue), 0);
             ddlToStatus.Items.Insert(0, Li);
 
 
@@ -230,6 +233,17 @@ namespace EMS.WebApp.Equipment
             else
             {
                 ddlEmptyYard.Enabled = false;
+            }
+
+            if (ddlFromStatus.SelectedItem.Text == "TRFE")
+            {
+                ddlToStatus.Enabled = false;
+                ddlTolocation.Enabled = true;
+            }
+            else
+            {
+                ddlToStatus.Enabled = true;
+                ddlTolocation.Enabled = false;
             }
         }
 
@@ -276,7 +290,7 @@ namespace EMS.WebApp.Equipment
         {
 
             ContainerTranBLL oContainerTranBLL = new ContainerTranBLL();
-            dtFilteredContainer = oContainerTranBLL.GetContainerTransactionListFiltered(Convert.ToInt16(ddlFromStatus.SelectedValue), EmptyYardId);
+            dtFilteredContainer = oContainerTranBLL.GetContainerTransactionListFiltered(Convert.ToInt16(ddlFromStatus.SelectedValue), EmptyYardId, Convert.ToDateTime(txtDate.Text));
             ViewState["Container"] = dtFilteredContainer;
             gvContainer.DataSource = dtFilteredContainer;
             gvContainer.DataBind();
@@ -297,6 +311,7 @@ namespace EMS.WebApp.Equipment
                     HiddenField hdnOldTransactionId = (HiddenField)Row.FindControl("hdnOldTransactionId");
                     HiddenField hdnStatus = (HiddenField)Row.FindControl("hdnStatus");
                     HiddenField hdnLandingDate = (HiddenField)Row.FindControl("hdnLandingDate");
+                    HiddenField hdnLMDT = (HiddenField)Row.FindControl("hdnLMDT");
                     Label lblContainerNo = (Label)Row.FindControl("lblContainerNo");
                     Label lblContainerSize = (Label)Row.FindControl("lblContainerSize");
 
@@ -307,6 +322,7 @@ namespace EMS.WebApp.Equipment
                     dr["LandingDate"] = hdnLandingDate.Value;
                     dr["ToStatus"] = ddlToStatus.SelectedItem.Text;
                     dr["ChangeDate"] = txtDate.Text;
+                    dr["LMDT"] = hdnLMDT.Value;
 
                     Dt.Rows.Add(dr);
                 }
@@ -344,6 +360,12 @@ namespace EMS.WebApp.Equipment
 
             dc = new DataColumn("ChangeDate");
             Dt.Columns.Add(dc);
+
+            dc = new DataColumn("LMDT");
+            Dt.Columns.Add(dc);
+
+
+
             return Dt;
         }
 
@@ -366,8 +388,10 @@ namespace EMS.WebApp.Equipment
         private void ActionOnFromLocationChange()
         {
             ListItem Li = new ListItem("Select", "0");
-            PopulateDropDown((int)Enums.DropDownPopulationFor.VendorList, ddlEmptyYard, Convert.ToInt32(ddlFromLocation.SelectedValue));
+            PopulateDropDown((int)Enums.DropDownPopulationFor.VendorList, ddlEmptyYard, Convert.ToInt32(ddlFromLocation.SelectedValue), 3);
             ddlEmptyYard.Items.Insert(0, Li);
+
+
         }
 
         protected void btnShow_Click(object sender, EventArgs e)
@@ -389,6 +413,19 @@ namespace EMS.WebApp.Equipment
         {
             if (Page.IsValid)
             {
+                foreach (GridViewRow gvRow in gvSelectedContainer.Rows)
+                {
+                    //HiddenField hdnLMDT = (HiddenField)gvRow.FindControl("hdnLMDT");
+                    HiddenField hdnCDT = (HiddenField)gvRow.Cells[0].FindControl("hdnCDT");
+                    DateTime dt = Convert.ToDateTime(hdnCDT.Value);
+                    if (dt > Convert.ToDateTime(txtDate.Text))
+                    {
+                        lblMessage.Text = "Activity date can not be greater than last movement date";
+                        return;
+                    }
+                }
+
+
                 ContainerTranBLL oContainerTranBLL = new ContainerTranBLL();
                 string TranCode = string.Empty;
 

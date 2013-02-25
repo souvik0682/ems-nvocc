@@ -15,9 +15,9 @@ namespace EMS.BLL
             return ContainerTranDAL.GetContainerTransactionList(searchCriteria, ID);
         }
 
-        public DataTable GetContainerTransactionListFiltered(int Status, int LocationId)
+        public DataTable GetContainerTransactionListFiltered(int Status, int LocationId, DateTime MovementDate)
         {
-            return ContainerTranDAL.GetContainerTransactionListFiltered(Status, LocationId);
+            return ContainerTranDAL.GetContainerTransactionListFiltered(Status, LocationId,MovementDate);
         }
 
         public int AddEditContainerTransaction(out string TransactionCode, string OldTransactionCode, string Containers, int MovementOptID, int TotalTEU, int TotalFEU

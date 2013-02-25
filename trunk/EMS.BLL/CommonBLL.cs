@@ -192,9 +192,9 @@ namespace EMS.BLL
         /// <returns>DataTable</returns>
         /// <createdby>Rajen Saha</createdby>
         /// <createddate>01/12/2012</createddate>
-        public static void PopulateDropdown(int Number, DropDownList ddl, int? Filter)
+        public static void PopulateDropdown(int Number, DropDownList ddl, int? Filter1, int? Filter2)
         {
-            ddl.DataSource = CommonDAL.PopulateDropdown(Number,Filter);
+            ddl.DataSource = CommonDAL.PopulateDropdown(Number,Filter1,Filter2);
             ddl.DataValueField="Value";
             ddl.DataTextField = "Text";
             ddl.DataBind();            

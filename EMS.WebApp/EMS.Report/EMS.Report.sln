@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "EMS.Report", "EMS.Report\EMS.Report.rptproj", "{C5674689-7EAB-4684-9474-C199E348F59C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5674689-7EAB-4684-9474-C199E348F59C}.Debug|Default.ActiveCfg = Debug
+		{C5674689-7EAB-4684-9474-C199E348F59C}.Debug|Default.Build.0 = DebugLocal
+		{C5674689-7EAB-4684-9474-C199E348F59C}.Debug|Default.Deploy.0 = DebugLocal
+		{C5674689-7EAB-4684-9474-C199E348F59C}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{C5674689-7EAB-4684-9474-C199E348F59C}.DebugLocal|Default.Build.0 = DebugLocal
+		{C5674689-7EAB-4684-9474-C199E348F59C}.Release|Default.ActiveCfg = Release
+		{C5674689-7EAB-4684-9474-C199E348F59C}.Release|Default.Build.0 = Release
+		{C5674689-7EAB-4684-9474-C199E348F59C}.Release|Default.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

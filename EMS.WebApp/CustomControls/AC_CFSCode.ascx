@@ -17,8 +17,8 @@
 </style>
 
 <div>
-    <asp:TextBox runat="server" ID="txtCFSCode" autocomplete="off" 
-        CssClass="textboxuppercase" MaxLength="50" Width="250px"
+    <asp:TextBox runat="server" ID="txtCFSCode" autocomplete="off" CssClass="watermark1" ForeColor="#747862"
+        MaxLength="50" Width="250px"
         AutoPostBack="true" OnTextChanged="txtCFSCode_TextChanged" />
     <cc1:textboxwatermarkextender id="txtWMEName6" runat="server" targetcontrolid="txtCFSCode"
         watermarktext="TYPE CFS CODE" watermarkcssclass="watermark1"></cc1:textboxwatermarkextender>
@@ -27,7 +27,7 @@
         targetcontrolid="txtCFSCode" servicepath="AutoComplete.asmx" servicemethod="GetCFSCode"
         minimumprefixlength="1" completioninterval="1000" enablecaching="true" completionsetcount="20"
         completionlistcssclass="autocomplete_completionListElement" completionlistitemcssclass="autocomplete_listItem"
-        completionlisthighlighteditemcssclass="autocomplete_highlightedListItem" delimitercharacters=";, :"
+        completionlisthighlighteditemcssclass="autocomplete_highlightedListItem" delimitercharacters=";,:"
         showonlycurrentwordincompletionlistitem="true">
     </cc1:autocompleteextender>
  

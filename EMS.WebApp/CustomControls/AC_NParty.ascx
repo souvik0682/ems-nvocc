@@ -18,7 +18,7 @@
 
 <div>
     <asp:TextBox runat="server" ID="txtNParty" autocomplete="off" 
-        CssClass="textboxuppercase" MaxLength="250" Width="450px" 
+        CssClass="watermark1" ForeColor="#747862" MaxLength="250" Width="450px" 
         AutoPostBack="true" ontextchanged="txtNParty_TextChanged" />
     <cc1:textboxwatermarkextender id="txtWMEName6" runat="server" targetcontrolid="txtNParty"
         watermarktext="TYPE NOTIFYING PARTY" watermarkcssclass="watermark1"></cc1:textboxwatermarkextender>
@@ -27,7 +27,7 @@
         targetcontrolid="txtNParty" servicepath="AutoComplete.asmx" servicemethod="GetNParty"
         minimumprefixlength="1" completioninterval="1000" enablecaching="true" completionsetcount="20"
         completionlistcssclass="autocomplete_completionListElement" completionlistitemcssclass="autocomplete_listItem"
-        completionlisthighlighteditemcssclass="autocomplete_highlightedListItem" delimitercharacters=";, :"
+        completionlisthighlighteditemcssclass="autocomplete_highlightedListItem" delimitercharacters=";,:"
         showonlycurrentwordincompletionlistitem="true">
     </cc1:autocompleteextender>
  

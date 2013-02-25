@@ -161,7 +161,7 @@ namespace EMS.WebApp.MasterModule
 
         void PopulateDropDown(int Number, DropDownList ddl, int? Filter)
         {
-            CommonBLL.PopulateDropdown(Number, ddl, Filter);
+            CommonBLL.PopulateDropdown(Number, ddl, Filter,0);
         }
 
         protected void ddlLocationID_SelectedIndexChanged(object sender, EventArgs e)

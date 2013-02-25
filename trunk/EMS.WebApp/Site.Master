@@ -209,8 +209,8 @@
                             <li id="liLR" runat="server">
                                 <a href="#">Reports</a>
                                 <ul>
-                                    <li id="liLR_StkSumm" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/CntrStockDetail.aspx") %>">Container Stock Summary</a></li>
-                                    <li id="liLR_StkStmt" runat="server"><a href="#">Container Stock Statement</a></li>
+                                    <li id="liLR_StkSumm" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/CntrStockSummery.aspx") %>">Container Stock Summary</a></li>
+                                    <li id="liLR_StkStmt" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/CntrStockDetail.aspx") %>">Container Stock Statement</a></li>
                                     <li id="liLR_Pickup" runat="server"><a href="#">Pick-up Letter</a></li>
                                     <li id="liLR_Onhire" runat="server"><a href="#">On-hire Register</a></li>
                                     <li id="liLR_Offhire" runat="server"><a href="#">Off-hire Register</a></li>

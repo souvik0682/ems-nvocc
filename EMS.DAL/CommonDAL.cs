@@ -622,5 +622,24 @@ namespace EMS.DAL
         }
 
         #endregion
+
+
+
+
+        #region BLHeader
+        public static DataTable GetBLHeaderByBLNo(long LocationId)
+        {
+            string strExecution = "[dbo].[uspGetBLHeaderByBLNo]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@LocationId", LocationId);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+        #endregion
     }
 }

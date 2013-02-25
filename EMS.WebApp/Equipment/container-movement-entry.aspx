@@ -14,13 +14,13 @@
             <fieldset style="width: 60%;">
                 <legend>Add / Edit Container Transaction</legend>
                 <table border="0" cellpadding="2" cellspacing="3" width="100%">
-                   <%-- <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                        <ContentTemplate>--%>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
                             <tr>
                                 <td>
                                     Transaction CODE :
                                 </td>
-                                <td >
+                                <td>
                                     <asp:Label ID="lblTranCode" runat="server"></asp:Label>
                                     <asp:HiddenField ID="hdnTranCode" runat="server" />
                                     <asp:HiddenField ID="hdnContainerTransactionId" runat="server" Value="0" />
@@ -93,10 +93,9 @@
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
                             </tr>
-                            <tr style="display:none;">
+                            <tr style="display: none;">
                                 <td>
-                                    No. Of TEUs<%--<span class="errormessage1">*</span>--%>
-                                    :
+                                    No. Of TEUs<%--<span class="errormessage1">*</span>--%>:
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtTeus" runat="server" Width="150" Style="text-align: right;"></asp:TextBox>
@@ -109,8 +108,7 @@
                             </cc1:ValidatorCalloutExtender>--%>
                                 </td>
                                 <td>
-                                    No. Of FEUs<%--<span class="errormessage1">*</span>--%>
-                                    :
+                                    No. Of FEUs<%--<span class="errormessage1">*</span>--%>:
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtFEUs" runat="server" Width="150" Style="text-align: right;"></asp:TextBox>
@@ -144,13 +142,13 @@
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
                             </tr>
-                        <%--</ContentTemplate>
-                    </asp:UpdatePanel>--%>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                     <tr>
-                       
                         <td colspan="4">
-                            <div style="margin-left:53%;"><asp:Button ID="btnShow" runat="server" Text="Show Container" OnClick="btnShow_Click"
-                                ValidationGroup="vgContainer" /></div>
+                            <div style="margin-left: 53%;">
+                                <asp:Button ID="btnShow" runat="server" Text="Show Container" OnClick="btnShow_Click"
+                                    ValidationGroup="vgContainer" /></div>
                             <asp:Button ID="Button1" runat="server" Style="display: none;" />
                             <cc1:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="Button1"
                                 PopupControlID="pnlContainer" Drag="true" BackgroundCssClass="ModalPopupBG" CancelControlID="btnCancel">
@@ -166,6 +164,7 @@
                                                             <asp:HiddenField ID="hdnOldTransactionId" runat="server" Value='<%# Eval("TransactionId") %>' />
                                                             <asp:HiddenField ID="hdnStatus" runat="server" Value='<%# Eval("Status") %>' />
                                                             <asp:HiddenField ID="hdnLandingDate" runat="server" Value='<%# Eval("LandingDate") %>' />
+                                                            <asp:HiddenField ID="hdnLMDT" runat="server" Value='<%# Eval("LMDT") %>' />
                                                             <asp:Label ID="lblContainerNo" runat="server" Text='<%# Eval("ContainerNo")%>'></asp:Label>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
@@ -202,31 +201,39 @@
                                             <asp:HiddenField ID="hdnOldTransactionId" runat="server" Value='<%# Eval("OldTransactionId") %>' />
                                             <asp:HiddenField ID="hdnCurrentTransactionId" runat="server" Value='<%# Eval("NewTransactionId") %>' />
                                             <%# Eval("ContainerNo")%></ItemTemplate>
-                                            <ItemStyle CssClass="gridviewitem" Width="12%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="12%" />
+                                        <HeaderStyle CssClass="gridviewheader" />
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Previous Status">
+                                    <asp:TemplateField HeaderText="From Status">
                                         <ItemTemplate>
                                             <%# Eval("FromStatus")%>
                                         </ItemTemplate>
                                         <ItemStyle CssClass="gridviewitem" Width="13%" />
+                                        <HeaderStyle CssClass="gridviewheader" />
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Landing Date">
+                                    <asp:TemplateField HeaderText="Status Date">
                                         <ItemTemplate>
-                                            <%# Eval("LandingDate").ToString() == "" ? " " : Convert.ToDateTime(Eval("LandingDate")).ToShortDateString()%>
+                                            <%# Eval("LMDT").ToString() == "" ? " " : Eval("LMDT")%>
+                                            <asp:HiddenField ID="hdnCDT" runat="server" Value='<%# Eval("LMDT").ToString() == "" ? " " : Convert.ToDateTime(Eval("LMDT")).ToShortDateString()%>' />
                                         </ItemTemplate>
                                         <ItemStyle CssClass="gridviewitem" Width="12%" />
+                                        <HeaderStyle CssClass="gridviewheader" />
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Current Status">
+                                    
+                                    <asp:TemplateField HeaderText="To Status">
                                         <ItemTemplate>
                                             <%# Eval("ToStatus")%>
                                         </ItemTemplate>
                                         <ItemStyle CssClass="gridviewitem" Width="13%" />
+                                        <HeaderStyle CssClass="gridviewheader" />
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Date of Change">
+                                    <asp:TemplateField HeaderText="Status Date">
                                         <ItemTemplate>
                                             <%# Eval("ChangeDate").ToString() == "" ? " " : Convert.ToDateTime(Eval("ChangeDate")).ToShortDateString()%>
+                                            
                                         </ItemTemplate>
                                         <ItemStyle CssClass="gridviewitem" Width="12%" />
+                                        <HeaderStyle CssClass="gridviewheader" />
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Select All" ItemStyle-HorizontalAlign="Center">
                                         <HeaderTemplate>
@@ -237,8 +244,9 @@
                                             <asp:CheckBox ID="chkItem" runat="server" Checked="true" />
                                         </ItemTemplate>
                                         <ItemStyle CssClass="gridviewitem" Width="8%" />
+                                        <HeaderStyle CssClass="gridviewheader_center" />
                                     </asp:TemplateField>
-                                </Columns>                                
+                                </Columns>
                                 <HeaderStyle Font-Bold="true" HorizontalAlign="Center" BackColor="#F8F8F8" />
                                 <RowStyle Wrap="true" />
                                 <FooterStyle BackColor="GrayText" HorizontalAlign="Center" />
@@ -248,7 +256,7 @@
                     <tr>
                         <td>
                         </td>
-                        <td>
+                        <td colspan="3">
                             <%--<asp:HiddenField ID="hdnChargeID" runat="server" Value="0" />--%>
                             <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="vgContainer"
                                 OnClick="btnSave_Click" />&nbsp;&nbsp;<asp:Button ID="btnBack" runat="server" CssClass="button"

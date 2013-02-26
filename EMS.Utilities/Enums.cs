@@ -37,7 +37,7 @@ namespace EMS.Utilities
         {
             INR = 1,
             DOLLAR = 2
-            
+
         }
 
         public enum ImportExportGeneral
@@ -81,6 +81,15 @@ namespace EMS.Utilities
             RCEE = 15,
             TRFE = 16,
             OFFH = 17
+        }
+
+        public enum BLQ_Doc
+        {
+            FreightPrepaid = 1,
+            CFS_Nomination = 2,
+            Detention_Waiver = 3,
+            BL_Surrender = 4,
+            BL_Extension = 5
         }
     }
 }

@@ -91,5 +91,14 @@ namespace EMS.Utilities
             BL_Surrender = 4,
             BL_Extension = 5
         }
+
+        public enum BLActivity
+        {
+            DO = 1,
+            DOE = 2,
+            SE = 3,
+            AMD = 4,
+            BC = 5
+        }
     }
 }

@@ -728,5 +728,21 @@ namespace EMS.DAL
 
             return ds;
         }
+
+        public static int SaveBLQActivity(string Activity, int BLID)
+        {
+            string strExecution = "[trn].[ImpBLActivityAddEdit]";
+            int Result = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@BLID", BLID);
+                oDq.AddNVarcharParam("@Activity", 4000, Activity);
+                oDq.AddIntegerParam("@Result", Result, QueryParameterDirection.Output);
+                oDq.RunActionQuery();
+                Result = Convert.ToInt32(oDq.GetParaValue("@Result"));
+            }
+            return Result;
+        }
     }
 }

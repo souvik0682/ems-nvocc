@@ -203,5 +203,10 @@ namespace EMS.BLL
         {
             return ImportBLDAL.GetBLQuery(ImpBLNo);
         }
+
+        public int SaveBLQActivity(string Activity, int BLID)
+        {
+            return ImportBLDAL.SaveBLQActivity(Activity, BLID);
+        }
     }
 }

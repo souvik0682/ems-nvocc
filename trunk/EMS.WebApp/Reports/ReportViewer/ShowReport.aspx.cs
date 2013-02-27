@@ -57,16 +57,23 @@ namespace EMS.WebApp.Reports.ReportViewer
               FillData();
               strReportName=  Request.QueryString["reportName"];
               ViewState["strReportName"] = strReportName;
+              SetDefault();
             }
             
         }
         private void FillData(){            
-            Filler.FillData<ILocation>(ddlLine, new CommonBLL().GetActiveLocation(), "Name", "Id", "---Select---");
+            Filler.FillData<ILocation>(ddlLine, new CommonBLL().GetActiveLocation(), "Name", "Id", "Location");
             if (user.UserRole.Id != 2)
             {
                 ddlLine.SelectedValue = user.UserLocation.Id.ToString();
             }            
             //Filler.FillData<IContainerType>(ddlEmptyYard, );
+        }
+        public void SetDefault() {
+            if (strReportName.ToLower() != "gang") {
+                trgang2.Visible = false; trgang2.Visible = false;
+            }
+        
         }
         
         private ReportParameter[] BindParameter(string reportType) {
@@ -146,7 +153,7 @@ namespace EMS.WebApp.Reports.ReportViewer
             var lng = ddlLine.SelectedValue.ToLong();
             if (lng> 0)
             {
-                Filler.FillData(ddlBlNo, CommonBLL.GetBLHeaderByBLNo(lng), "ImpLineBLNo", "ImpLineBLNo", "---Bl No.---");
+                Filler.FillData(ddlBlNo, CommonBLL.GetBLHeaderByBLNo(lng), "ImpLineBLNo", "ImpLineBLNo", "Bl. No.");
             }
         }
 

@@ -49,6 +49,15 @@ namespace EMS.WebApp.Reports.ReportViewer {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
+        /// trgang1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trgang1;
+        
+        /// <summary>
         /// txtGangDate control.
         /// </summary>
         /// <remarks>
@@ -101,6 +110,15 @@ namespace EMS.WebApp.Reports.ReportViewer {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+        
+        /// <summary>
+        /// trgang2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trgang2;
         
         /// <summary>
         /// ddlEmptyYard control.

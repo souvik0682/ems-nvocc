@@ -13,7 +13,8 @@
                 BL No.
             </td>
             <td style="width:20%">
-                <asp:DropDownList ID="ddlBlNo" runat="server">
+                <asp:DropDownList ID="ddlBlNo" runat="server" Width="120">
+                <asp:ListItem Text="Bl. No." Value="0"></asp:ListItem>                
                 </asp:DropDownList>
                 <asp:RequiredFieldValidator ID="rfvLocation" runat="server" CssClass="errormessage"
                     ControlToValidate="ddlBlNo" InitialValue="0" ValidationGroup="Save" Display="Dynamic"
@@ -24,14 +25,14 @@
             </td>
             <td  style="width:20%">
                 <asp:DropDownList ID="ddlLine" runat="server" AutoPostBack="true"
-                    onselectedindexchanged="ddlLine_SelectedIndexChanged">
+                    onselectedindexchanged="ddlLine_SelectedIndexChanged" Width="120">
                 </asp:DropDownList>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" CssClass="errormessage"
                     ControlToValidate="ddlLine" InitialValue="0" ValidationGroup="Save" Display="Dynamic"
                     ErrorMessage="[Required]"></asp:RequiredFieldValidator>
             </td>
         </tr>
-        <tr id="">
+        <tr id="trgang1" runat="server" >
             <td>
                 Gang Date
             </td>
@@ -51,7 +52,7 @@
                 Shift
             </td>
             <td>
-                <asp:DropDownList ID="ddlShift" runat="server">
+                <asp:DropDownList ID="ddlShift" runat="server" Width="120">
                 <asp:ListItem Text="Shift" Value="0"></asp:ListItem>
                 <asp:ListItem Text="Shift-1" Value="1"></asp:ListItem>
                 <asp:ListItem Text="Shift-2" Value="2"></asp:ListItem>
@@ -62,12 +63,12 @@
                     ErrorMessage="[Required]"></asp:RequiredFieldValidator>
             </td>
         </tr>
-        <tr>
+        <tr style="visibility:hidden" id="trgang2" runat="server">
             <td>
                 Empty Yard
             </td>
             <td colspan="2">
-                <asp:DropDownList ID="ddlEmptyYard" runat="server">
+                <asp:DropDownList ID="ddlEmptyYard" runat="server" Width="120">
                 <asp:ListItem Text="Empty Yard" Value="0"></asp:ListItem>
                 </asp:DropDownList>
             </td>
@@ -79,6 +80,6 @@
         </td>
         </tr>
     </table>
-    <rsweb:ReportViewer ID="rptViewer" runat="server" Width="900" Height="500">
+    <rsweb:ReportViewer ID="rptViewer" runat="server" Width="100%" Height="900" >
     </rsweb:ReportViewer>
 </asp:Content>

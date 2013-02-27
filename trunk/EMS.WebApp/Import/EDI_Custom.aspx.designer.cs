@@ -157,13 +157,13 @@ namespace EMS.WebApp.Import {
         protected global::EMS.WebApp.CustomControls.AutoCompletePort AutoCompletepPort4;
         
         /// <summary>
-        /// AutoCompletepPort1 control.
+        /// ddlCustomHouse control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::EMS.WebApp.CustomControls.AutoCompletePort AutoCompletepPort1;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCustomHouse;
         
         /// <summary>
         /// txtIMONo control.

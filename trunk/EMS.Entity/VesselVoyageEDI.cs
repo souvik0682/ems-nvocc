@@ -79,7 +79,7 @@ namespace EMS.Entity
             //this.ETADate =reader["ETADate"]==null?(Nullable<DateTime>)null: Convert.ToDateTime(reader["ETADate"]);
             this.ETADate =reader["ETADate"]==DBNull.Value?(Nullable<DateTime>)null: Convert.ToDateTime(reader["ETADate"]);
             this.CountryId = Convert.ToInt32(reader["fk_CountryId"]);
-            this.IGMDate = Convert.ToDateTime(reader["IGMDate"]);
+            this.IGMDate = reader["IGMDate"]==DBNull.Value?(Nullable<DateTime>)null: Convert.ToDateTime(reader["IGMDate"]); 
             this.IGMNo = Convert.ToString(reader["IGMNo"]);
             this.IMONumber = Convert.ToString(reader["IMONumber"]);
             this.LastPortCalled = Convert.ToString(reader["LastPortCalled"]);

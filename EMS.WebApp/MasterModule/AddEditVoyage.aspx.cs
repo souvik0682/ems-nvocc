@@ -71,13 +71,16 @@ namespace EMS.WebApp.MasterModule
                 txtdtLand.ReadOnly = true;
 
             }
-            int cnt= EMS.BLL.VoyageBLL.IfExistInBL(ddlVessel.SelectedIndex > 0 ? Convert.ToInt32(ddlVessel.SelectedValue) : 0, Convert.ToInt32(VoyageId)).Rows.Count;
-            if (cnt<=0)
+            if (VoyageId == "-1")
             {
-                txtdtLand.ReadOnly = true;
-                txtdtLand.Enabled = false;
-                dtLand_.Enabled = false;
-                txtdtLand.Style.Add("background-color", "#E6E6E6");
+                int cnt = EMS.BLL.VoyageBLL.IfExistInBL(ddlVessel.SelectedIndex > 0 ? Convert.ToInt32(ddlVessel.SelectedValue) : 0, Convert.ToInt32(VoyageId)).Rows.Count;
+                if (cnt <= 0)
+                {
+                    txtdtLand.ReadOnly = true;
+                    txtdtLand.Enabled = false;
+                    dtLand_.Enabled = false;
+                    txtdtLand.Style.Add("background-color", "#E6E6E6");
+                }
             }
         }
 

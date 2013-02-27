@@ -6,7 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using EMS.BLL;
+using EMS.Utilities;
 using EMS.Utilities.ResourceManager;
+using System.Text;
 
 namespace EMS.WebApp.Transaction
 {
@@ -37,7 +39,7 @@ namespace EMS.WebApp.Transaction
 
         void fillBLDetail(DataTable dtDetail)
         {
-
+            hdnBLId.Value = dtDetail.Rows[0]["BLID"].ToString();
             txtBlNo.Text = dtDetail.Rows[0]["BLNO"].ToString();
             txtCha.Text = dtDetail.Rows[0]["CHA"].ToString();
             txtHouseBlNo.Text = dtDetail.Rows[0]["HBLNO"].ToString();
@@ -63,11 +65,26 @@ namespace EMS.WebApp.Transaction
                 chkFreightPaidstatus.Checked = false;
 
 
-
             if (dtDetail.Rows[0]["DESTUFFING"].ToString() == "0")
                 ddlDestuffing.SelectedIndex = 0;
             else
                 ddlDestuffing.SelectedIndex = 1;
+
+            chkBankGuarantee.Checked = Convert.ToBoolean(dtDetail.Rows[0]["BANKGUARANTEE"].ToString());
+
+            if (dtDetail.Rows[0]["VALIDITYDATE"].ToString() != "")
+                txtVAlidityDate.Text = Convert.ToDateTime(dtDetail.Rows[0]["VALIDITYDATE"].ToString()).ToString("dd/MM/yyyy");
+
+
+            if (dtDetail.Rows[0]["SFD"].ToString() != "")
+                txtExtensionForDetention.Text = Convert.ToDateTime(dtDetail.Rows[0]["SFD"].ToString()).ToString("dd/MM/yyyy");
+
+            if (dtDetail.Rows[0]["SFPGR"].ToString() != "")
+                txtExtensionForPGR.Text = Convert.ToDateTime(dtDetail.Rows[0]["SFPGR"].ToString()).ToString("dd/MM/yyyy");
+
+
+            if (dtDetail.Rows[0]["BONDCANCEL"].ToString() != "")
+                txtBondCancellation.Text = Convert.ToDateTime(dtDetail.Rows[0]["BONDCANCEL"].ToString()).ToString("dd/MM/yyyy");
         }
 
         protected void chkDo_CheckedChanged(object sender, EventArgs e)
@@ -177,6 +194,112 @@ namespace EMS.WebApp.Transaction
                 lblMessageServiceReq.Text = ResourceManager.GetStringWithoutName("ERR00080");
         }
 
+        protected void btnSave2_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                oImportBLL.SaveBLQActivity(GenerateBLQActivityXMLString(), Convert.ToInt32(hdnBLId.Value));
+            }
+        }
+
+
+        string GenerateBLQActivityXMLString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<Activity>");
+
+            if (chkDo.Checked)
+            {
+                sb.Append("<Item>");
+
+                sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
+                sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.DO + "</AT>");
+                sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
+                sb.Append("<VD>" + Convert.ToDateTime(txtDoValidTill.Text).ToString("MM/dd/yyyy") + "</VD>");
+                sb.Append("<BG>" + (chkBankGuarantee.Checked ? "1" : "0") + "</BG>");
+                sb.Append("<IG>" + 0 + "</IG>");
+                sb.Append("<NOP>" + 0 + "</NOP>");
+
+                sb.Append("</Item>");
+            }
+
+            if (chkDoExtension.Checked)
+            {
+                sb.Append("<Item>");
+
+                sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
+                sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.DOE + "</AT>");
+                sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
+                sb.Append("<VD>" + Convert.ToDateTime(txtVAlidityDate.Text).ToString("MM/dd/yyyy") + "</VD>");
+                sb.Append("<BG>" + "0" + "</BG>");
+                sb.Append("<IG>" + 0 + "</IG>");
+                sb.Append("<NOP>" + 0 + "</NOP>");
+
+                sb.Append("</Item>");
+            }
+
+
+            if (chkSlotExtension.Checked)
+            {
+                sb.Append("<Item>");
+
+                sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
+                sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.SE + "</AT>");
+                if (!String.IsNullOrEmpty(txtExtensionForDetention.Text))
+                    sb.Append("<AD>" + Convert.ToDateTime(txtExtensionForDetention.Text).ToString("MM/dd/yyyy") + "</AD>");
+                else
+                    sb.Append("<AD></AD>");
+
+                if (!String.IsNullOrEmpty(txtExtensionForPGR.Text))
+                    sb.Append("<VD>" + Convert.ToDateTime(txtExtensionForPGR.Text).ToString("MM/dd/yyyy") + "</VD>");
+                else
+                    sb.Append("<VD></VD>");
+
+                sb.Append("<BG>" + "0" + "</BG>");
+                sb.Append("<IG>" + 0 + "</IG>");
+                sb.Append("<NOP>" + 0 + "</NOP>");
+
+                sb.Append("</Item>");
+            }
+
+            if (chkBondCancel.Checked)
+            {
+                sb.Append("<Item>");
+
+                sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
+                sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.BC + "</AT>");
+                sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
+                sb.Append("<VD>" + Convert.ToDateTime(txtBondCancellation.Text).ToString("MM/dd/yyyy") + "</VD>");
+                sb.Append("<BG>" + "0" + "</BG>");
+                sb.Append("<IG>" + 0 + "</IG>");
+                sb.Append("<NOP>" + 0 + "</NOP>");
+
+                sb.Append("</Item>");
+            }
+
+            sb.Append("</Activity>");
+
+            /*
+            foreach (GridViewRow gvRow in gvSelectedContainer.Rows)
+            {
+                HiddenField hdnOldTransactionId = (HiddenField)gvRow.FindControl("hdnOldTransactionId");
+                HiddenField hdnCurrentTransactionId = (HiddenField)gvRow.FindControl("hdnCurrentTransactionId");
+                CheckBox chkItem = (CheckBox)gvRow.FindControl("chkItem");
+
+                sb.Append("<Cont>");
+
+                sb.Append("<Oid>" + hdnOldTransactionId.Value + "</Oid>");
+                sb.Append("<Nid>" + hdnCurrentTransactionId.Value + "</Nid>");
+                sb.Append("<Stats>" + chkItem.Checked.ToString() + "</Stats>");
+
+                sb.Append("</Cont>");
+
+            }*/
+
+
+
+            return sb.ToString();
+        }
 
     }
 }

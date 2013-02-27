@@ -24,7 +24,19 @@ namespace EMS.BLL
            return EDIDAL.GetEDIContainerInfo(VesselID, VoyageID);
        }
 
-      
+
+
+       public static System.Data.DataSet GetCustomHouse()
+       {
+           return EDIDAL.GetCustomHouse();
+       }
+
+
+
+       public static System.Data.DataSet GetTerminalOperator(int VoyageID)
+       {
+           return EDIDAL.GetTerminalOperator(VoyageID);
+       }
     }
 
 }

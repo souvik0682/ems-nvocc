@@ -111,7 +111,7 @@
                    </td>
                 </tr>
                   <tr>
-                    <td style="width:140px;">Port Before:</td>
+                    <td style="width:140px;">Port Last But One:</td>
                     <td>
                     <%--<asp:TextBox ID="txtPortBefore1" runat="server" CssClass="textboxuppercase"  Width="250"></asp:TextBox>--%>
                       <div style="width:230px">
@@ -121,7 +121,7 @@
                    </td>
                 </tr>
                   <tr>
-                    <td style="width:140px;">Port Before:</td>
+                    <td style="width:140px;">Port Last But Two:</td>
                     <td>
                     <%--<asp:TextBox ID="txtPortBefore2" runat="server" CssClass="textboxuppercase"  Width="250"></asp:TextBox>--%>
                       <div style="width:230px">

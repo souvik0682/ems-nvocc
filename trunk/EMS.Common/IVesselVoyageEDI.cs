@@ -32,6 +32,6 @@ namespace EMS.Common
         int CrewEffectList { get; set; }
         int MaritimeList { get; set; }
         string VesselType { get; set; }
-        DateTime LandingDate { get; set; }
+        DateTime? LandingDate { get; set; }
     }
 }

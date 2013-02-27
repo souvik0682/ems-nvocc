@@ -641,31 +641,5 @@ namespace EMS.DAL
             return myDataTable;
         }
         #endregion
-=======
-
-        #region Container Type
-
-        public static IList<IContainerType> GetContainerType()
-        {
-            string strExecution = "[common].[uspGetContainerType]";
-            List<IContainerType> lstContainerType = new List<IContainerType>();
-
-            using (DbQuery oDq = new DbQuery(strExecution))
-            {               
-                DataTableReader reader = oDq.GetTableReader();
-
-                while (reader.Read())
-                {
-                    lstContainerType.Add(new ContainerType(reader));
-                }
-
-                reader.Close();
-            }
-
-            return lstContainerType;
-        }
-
-        #endregion
->>>>>>> .r416
     }
 }

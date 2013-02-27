@@ -379,7 +379,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Bill Of Landing No. and Date</Value>
+                              <Value>Bill Of Lading No. and Date</Value>
                               <Style>
                                 <FontSize>6pt</FontSize>
                               </Style>
@@ -692,7 +692,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>No of Packages on  which duty  collected  or warehou-sed</Value>
+                              <Value>No of Packages on  which duty  collected  or warehoused</Value>
                               <Style>
                                 <FontSize>6pt</FontSize>
                               </Style>
@@ -851,7 +851,6 @@
                       </Style>
                     </Textbox>
                     <ColSpan>7</ColSpan>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />

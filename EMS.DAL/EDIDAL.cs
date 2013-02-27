@@ -62,6 +62,26 @@ namespace EMS.DAL
 
         }
 
-        
+
+
+        public static DataSet GetCustomHouse()
+        {
+            string ProcName = "prcGetCustomHouse";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+
+            return dquery.GetTables();
+        }
+
+        public static DataSet GetTerminalOperator(int VoyageID)
+        {
+            string ProcName = "prcGetTerminalOperator";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            dquery.AddIntegerParam("@VoyageID", VoyageID);
+           
+
+            return dquery.GetTables();
+        }
     }
 }

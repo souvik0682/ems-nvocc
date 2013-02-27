@@ -77,6 +77,7 @@ namespace EMS.WebApp.MasterModule
                 txtdtLand.ReadOnly = true;
                 txtdtLand.Enabled = false;
                 dtLand_.Enabled = false;
+                txtdtLand.Style.Add("background-color", "#E6E6E6");
             }
         }
 

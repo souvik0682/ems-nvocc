@@ -21,6 +21,14 @@ input[type="text"],textarea
 	text-transform:uppercase;	
 }
 
+.textboxuppercaseRO
+{
+	border: 1px default #7f9db9;
+	background-color:#E6E6E6;
+	font-family:"Trebuchet MS", Helvetica, sans-serif;font-size:10pt;
+	text-transform:uppercase;	
+}
+
 input[type="submit"]
 {
 	background-color:#f3f6f8;color:Black;border:solid 1px #c8c8c8; cursor:pointer;font-family:"Trebuchet MS", Helvetica, sans-serif;font-size:10pt;height:28px;

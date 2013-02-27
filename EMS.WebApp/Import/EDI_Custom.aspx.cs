@@ -144,7 +144,7 @@ namespace EMS.WebApp.Import
             string ArrDate = txtdtArrival.Text.Trim() == "" ? "" : Convert.ToDateTime(txtdtArrival.Text).ToString("yyyyMMdd");
             string ArrTime = txtArriveTime.Text.Replace(":", ""); //Convert.ToDateTime(txtdtArrival.Text).ToString("hhmm");
             if (ArrTime.Length > 4) ArrTime = ArrTime.Substring(0,4);
-            string ArrDate1 =(txtdtArrival.Text.Trim())==""? "" : Convert.ToDateTime(txtdtArrival.Text).ToString("ddMMyyyy hh:mm");
+            string ArrDate1 =(txtdtArrival.Text.Trim())==""? "" : Convert.ToDateTime(txtdtArrival.Text).ToString("ddMMyyyy hh:mm").Replace(" ","");
             //string custHouse =  ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
            // string custHouse = !((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text.Contains(',') ? "" : ((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text.Split(',')[1].Trim();
             string custHouse = ddlCustomHouse.SelectedItem.Text.Trim();
@@ -159,7 +159,7 @@ namespace EMS.WebApp.Import
             writer.WriteLine(("F" + (''
                             + (custHouse + (''
                             + (txtIGMNo.Text + (''
-                            + (txtDtIGM.Text + (''
+                            + (txtDtIGM.Text.Replace(@"/","") + (''
                             + (txtIMONo.Text + (''
                             + (txtCallSign.Text + (''
                             + (ddlVoyage.SelectedItem.Text + (''
@@ -200,6 +200,9 @@ namespace EMS.WebApp.Import
                 Srl = (Srl + 1);
                 BlDate = Convert.ToDateTime(Dr["INFDATE"]).ToString("ddMMyyyy");
                 int conLen=35,notLen=35;
+                int conOriLen = Dr["ConsigneeInformation"].ToString().Length;
+                int notOriLen = Dr["NotifyPartyInformation"].ToString().Length;
+
                 if (Dr["ConsigneeInformation"].ToString().Length >= conLen)
                     Con1 = ((Dr["ConsigneeInformation"].ToString().Substring(0, 35) == "") ? "." : Dr["ConsigneeInformation"].ToString().Substring(0, 35));
                 else
@@ -259,7 +262,7 @@ namespace EMS.WebApp.Import
                                 + (txtCallSign.Text + (''
                                 + (ddlVoyage.SelectedItem.Text + (''
                                 + (txtIGMNo.Text + (''
-                                + (txtDtIGM.Text + (''
+                                + (txtDtIGM.Text.Replace(@"/","") + (''
                                 + (Dr["VgLineNo"].ToString() + ('' + ("0" + (''
                                 + (BLno.Length>=20? BLno.Substring(0, 20):BLno + (''
                                 + (BlDate + (''

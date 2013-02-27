@@ -87,7 +87,7 @@
             <rsweb:ReportViewer ID="rptViewer" runat="server" Width="100%" 
                 Font-Names="Verdana" Font-Size="8pt" InteractiveDeviceInfos="(Collection)" 
                 WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt" >
-                <LocalReport ReportPath="RDLC\IGMCargoDesc.rdlc">
+                <LocalReport ReportPath="RDLC\IGMForm2.rdlc">
                 </LocalReport>
             </rsweb:ReportViewer>        
         </div>    

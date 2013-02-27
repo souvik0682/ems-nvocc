@@ -156,7 +156,7 @@
                 <tr>
                     <td>Vessel Type:</td>
                     <td>
-                      <asp:DropDownList ID="ddlVesselType" runat="server" Width="90%">
+                      <asp:DropDownList ID="ddlVesselType" runat="server" Width="70%">
                           <asp:ListItem Value="C">Cargo</asp:ListItem>
                           <asp:ListItem Value="E">Empty</asp:ListItem>
                       </asp:DropDownList>

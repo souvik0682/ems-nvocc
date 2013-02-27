@@ -132,11 +132,11 @@ namespace EMS.WebApp.Hire
                     return;
                 }
             }
-            if (!CheckContainerInList(lstEqpOnHireContainer, txtContainerNo.Text.Trim().StringRequired()) && !new OnHireBLL().ValidateOnHire(txtContainerNo.Text.Trim(), rdTransactionType.SelectedValue))// Check using proc
+            if (!CheckContainerInList(lstEqpOnHireContainer, txtContainerNo.Text.Trim().JToUpper().StringRequired()) && !new OnHireBLL().ValidateOnHire(txtContainerNo.Text.Trim().JToUpper(), rdTransactionType.SelectedValue))// Check using proc
             {
                 lstEqpOnHireContainer.Add(new EqpOnHireContainer
                  {
-                     ContainerNo = txtContainerNo.Text.Trim(),
+                     ContainerNo = txtContainerNo.Text.Trim().JToUpper(),
                      LGNo = txtLGNo.Text.JToUpper(),
                      IGMNo = txtIGMNo.Text.ToNullLong(),
                      CntrSize = (ddlSize.SelectedValue.Equals("0") ? "" : ddlSize.SelectedValue).StringRequired(),
@@ -154,7 +154,7 @@ namespace EMS.WebApp.Hire
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), DateTime.Now.Ticks.ToString(), string.Format("alert('{0} already exist in Table');", txtContainerNo.Text.Trim()), true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), DateTime.Now.Ticks.ToString(), string.Format("alert('{0} already exist in Table');", txtContainerNo.Text.Trim().JToUpper()), true);
             return;
             }
         }

@@ -71,7 +71,7 @@ namespace EMS.WebApp.Reports.ReportViewer
         }
         public void SetDefault() {
             if (strReportName.ToLower() != "gang") {
-                trgang2.Visible = false; trgang2.Visible = false;
+                trgang1.Visible = false; trgang2.Visible = false;
             }
         
         }

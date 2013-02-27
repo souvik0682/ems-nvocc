@@ -49,7 +49,7 @@
 
                 <tr>
                     <td style="width:140px;">Call Sign</td>
-                    <td><asp:TextBox ID="txtCallSign" runat="server" ReadOnly="true" CssClass="textboxuppercase" MaxLength="60" Width="250"></asp:TextBox><br />
+                    <td><asp:TextBox ID="txtCallSign" runat="server" ReadOnly="true" CssClass="textboxuppercaseRO" MaxLength="60" Width="250"></asp:TextBox><br />
                    </td>
                 </tr>
 
@@ -65,7 +65,7 @@
 
                 <tr>
                     <td style="width:140px;">IGM No:</td>
-                    <td><asp:TextBox ID="txtIGMNo" runat="server" CssClass="textboxuppercase" ReadOnly="true" MaxLength="10" Width="250"></asp:TextBox><br />
+                    <td><asp:TextBox ID="txtIGMNo" runat="server" CssClass="textboxuppercaseRO" ReadOnly="true" MaxLength="10" Width="250"></asp:TextBox><br />
                    </td>
                 </tr>
                                
@@ -73,30 +73,30 @@
                     <td style="width:140px;">IGM Date:</td>
                     <td>
                         <%--<%@ Register Src="../CustomControls/DatePicker.ascx" TagName="DatePicker" TagPrefix="uc3" %>--%>
-                           <asp:TextBox ID="txtDtIGM" runat="server" ReadOnly="true"></asp:TextBox>
+                           <asp:TextBox ID="txtDtIGM" CssClass="textboxuppercaseRO"  runat="server" ReadOnly="true"></asp:TextBox>
                         <cc2:CalendarExtender ID="dtIGM_" TargetControlID="txtDtIGM" runat="server" />
                    </td>
                 </tr>
 
                 <tr>
                     <td style="width:140px;">Shipping Line Code:</td>
-                    <td><asp:TextBox ID="txtShipCode" runat="server" CssClass="textboxuppercase" ReadOnly="true" MaxLength="15" Width="250"></asp:TextBox><br />
+                    <td><asp:TextBox ID="txtShipCode" runat="server" CssClass="textboxuppercaseRO" ReadOnly="true" MaxLength="15" Width="250"></asp:TextBox><br />
                    </td>
                 </tr>
 
                 <tr>
                     <td style="width:140px;">Pan No:</td>
-                    <td><asp:TextBox ID="txtPAN" runat="server" CssClass="textboxuppercase" ReadOnly="true" MaxLength="13" Width="250"></asp:TextBox><br />
+                    <td><asp:TextBox ID="txtPAN" runat="server" CssClass="textboxuppercaseRO" ReadOnly="true" MaxLength="13" Width="250"></asp:TextBox><br />
                    </td>
                 </tr>
                   <tr>
                     <td style="width:140px;">Master Name:</td>
-                    <td><asp:TextBox ID="txtMaster" runat="server" CssClass="textboxuppercase" ReadOnly="true" MaxLength="20" Width="250"></asp:TextBox><br />
+                    <td><asp:TextBox ID="txtMaster" runat="server" CssClass="textboxuppercaseRO" ReadOnly="true" MaxLength="20" Width="250"></asp:TextBox><br />
                    </td>
                 </tr>
                 <tr>
                     <td style="width:140px;">Vessel Flag:</td>
-                    <td><asp:TextBox ID="txtVesselFlag" runat="server" CssClass="textboxuppercase" ReadOnly="true" MaxLength="20" Width="250"></asp:TextBox><br />
+                    <td><asp:TextBox ID="txtVesselFlag" runat="server" CssClass="textboxuppercaseRO" ReadOnly="true" MaxLength="20" Width="250"></asp:TextBox><br />
                    </td>
                 </tr>
                  <tr>
@@ -134,7 +134,8 @@
                     <td>Customs House Code:</td>
                     <td >
                     <div style="width:230px">
-                        <uc2:AutoCompletepPort ID="AutoCompletepPort1" runat="server" />
+                        <%--<uc2:AutoCompletepPort ID="AutoCompletepPort1" runat="server" />--%>
+                        <asp:DropDownList ID="ddlCustomHouse" Width="70%" runat="server"></asp:DropDownList>
                         </div>
                         
                     </td>

@@ -32,8 +32,8 @@ namespace EMS.Utilities
             PORT_GROUND_RENT = 4,
             SLAB = 5,
             LCL = 6,
-            Slab_Unit = 7,
-            Slab_Docs = 8
+            SLAB_UNIT = 7,
+            SLAB_DOCS = 8
         }
         public enum Currency
         {

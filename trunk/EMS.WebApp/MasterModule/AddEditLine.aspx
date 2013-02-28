@@ -44,7 +44,7 @@
                     <td><asp:TextBox ID="txtExportCommission" runat="server" CssClass="textboxuppercase" style="text-align:right" MaxLength="10" Width="250" onkeyup="IsDecimal(this)"></asp:TextBox><br /></td>
                 </tr>
                   <tr>
-                    <td>Export Booking:</td>
+                    <td>Export B/L:</td>
                     <td><asp:DropDownList ID="ddlExpBook" runat="server">
                     <asp:ListItem Value="y">Yes</asp:ListItem>
                     <asp:ListItem Value="n">No</asp:ListItem>

@@ -166,24 +166,6 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.RadioButtonList rdbWashing;
         
         /// <summary>
-        /// rfvWashing control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvWashing;
-        
-        /// <summary>
-        /// ValidatorCalloutExtender14 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender14;
-        
-        /// <summary>
         /// ddlChargeType control.
         /// </summary>
         /// <remarks>
@@ -335,6 +317,33 @@ namespace EMS.WebApp.MasterModule {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender12;
+        
+        /// <summary>
+        /// ddlHeaderLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlHeaderLocation;
+        
+        /// <summary>
+        /// rfvHeaderLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvHeaderLocation;
+        
+        /// <summary>
+        /// ValidatorCalloutExtender14 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender14;
         
         /// <summary>
         /// UpdatePanel2 control.

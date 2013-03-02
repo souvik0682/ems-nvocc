@@ -24,6 +24,7 @@ namespace EMS.WebApp.MasterModule
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             CheckUserAccess();
 
             IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
@@ -99,6 +100,15 @@ namespace EMS.WebApp.MasterModule
         {
             ListItem Li = null;
 
+            #region Location
+            //
+            PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlHeaderLocation, 0);
+            Li = new ListItem("SELECT", "0");
+            ddlHeaderLocation.Items.Insert(0, Li);
+            Li = new ListItem("ALL", "-1");
+            ddlHeaderLocation.Items.Insert(1, Li);
+            #endregion
+
             #region ChargeType
             foreach (Enums.ChargeType r in Enum.GetValues(typeof(Enums.ChargeType)))
             {
@@ -161,16 +171,23 @@ namespace EMS.WebApp.MasterModule
 
         void PopulateDropDown(int Number, DropDownList ddl, int? Filter)
         {
-            CommonBLL.PopulateDropdown(Number, ddl, Filter,0);
+            CommonBLL.PopulateDropdown(Number, ddl, Filter, 0);
         }
 
         protected void ddlLocationID_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ActionOnLocationChange(sender);
+        }
+
+        private void ActionOnLocationChange(object sender)
+        {
             if (rdbTerminalRequired.SelectedValue == "1")
             {
                 DropDownList ddlFLocation = (DropDownList)sender;
-                GridViewRow item = (GridViewRow)((DropDownList)sender).NamingContainer;
-                DropDownList ddlFTerminal = (DropDownList)item.FindControl("ddlFTerminal");
+                //GridViewRow item = (GridViewRow)((DropDownList)sender).NamingContainer;
+                GridViewRow item = dgChargeRates.HeaderRow;
+                DropDownList ddlFTerminal = (DropDownList)item.FindControl("ddlFTerminal");                
+
                 PopulateDropDown((int)Enums.DropDownPopulationFor.TerminalCode, ddlFTerminal, Convert.ToInt32(ddlFLocation.SelectedValue));
                 if (ddlFLocation.SelectedValue == "0")
                 {
@@ -794,7 +811,7 @@ namespace EMS.WebApp.MasterModule
         {
             GridViewRow Row = dgChargeRates.HeaderRow;
             DropDownList ddlFTerminal = (DropDownList)Row.FindControl("ddlFTerminal");
-            DropDownList ddlFLocation = (DropDownList)Row.FindControl("ddlFLocation");
+            //DropDownList ddlFLocation = (DropDownList)Row.FindControl("ddlFLocation");
 
             if (rdl.SelectedItem.Value == "0")
             {
@@ -809,10 +826,10 @@ namespace EMS.WebApp.MasterModule
             {
                 ddlFTerminal.Enabled = true;
                 ddlFTerminal.Items.Clear();
-                if (Convert.ToInt32(ddlFLocation.SelectedValue) > 0)
-                    PopulateDropDown((int)Enums.DropDownPopulationFor.TerminalCode, ddlFTerminal, Convert.ToInt32(ddlFLocation.SelectedValue));
+                if (Convert.ToInt32(ddlHeaderLocation.SelectedValue) > 0)
+                    PopulateDropDown((int)Enums.DropDownPopulationFor.TerminalCode, ddlFTerminal, Convert.ToInt32(ddlHeaderLocation.SelectedValue));
 
-                if (ddlFLocation.SelectedValue == "-1")
+                if (ddlHeaderLocation.SelectedValue == "-1")
                 {
                     ListItem Li = new ListItem("ALL", "-1");
                     ddlFTerminal.Items.Insert(0, Li);
@@ -899,6 +916,7 @@ namespace EMS.WebApp.MasterModule
             ddlMLocation.SelectedIndex = 0;
             ddlMTerminal.SelectedIndex = 0;
             ddlMWashingType.SelectedIndex = 0;
+            ddlHeaderLocation.SelectedIndex = 0;
 
             //rdbFreightComponent.SelectedIndex = 0;
             //rdbPrincipleSharing.SelectedIndex = 0;
@@ -986,6 +1004,7 @@ namespace EMS.WebApp.MasterModule
             switch (ddlChargeType.SelectedValue)
             {
                 case "1":
+                case "7":
                     txtRatePerTEU.Enabled = true;
                     txtRateperFEU.Enabled = true;
                     txtRatePerBL.Enabled = false;
@@ -1023,9 +1042,20 @@ namespace EMS.WebApp.MasterModule
                         rfvSharingTEU.Enabled = true;
                     }
 
+                    if (ddlChargeType.SelectedValue == "7")
+                    {
+                        txtLow.Enabled = true;
+                        txtHigh.Enabled = true;
+
+                        rfvLow.Enabled = true;
+                        rfvHigh.Enabled = true;
+                    }
+
+
                     break;
 
                 case "2":
+                case "8":
                     txtRatePerBL.Enabled = true;
 
                     txtRatePerTEU.Enabled = false;
@@ -1061,6 +1091,15 @@ namespace EMS.WebApp.MasterModule
                         rfvSharingBL.Enabled = true;
                         rfvSharingFEU.Enabled = false;
                         rfvSharingTEU.Enabled = false;
+                    }
+
+                    if (ddlChargeType.SelectedValue == "8")
+                    {
+                        txtLow.Enabled = true;
+                        txtHigh.Enabled = true;
+
+                        rfvLow.Enabled = true;
+                        rfvHigh.Enabled = true;
                     }
 
                     break;
@@ -1203,6 +1242,7 @@ namespace EMS.WebApp.MasterModule
             ddlCurrency.Enabled = false;
             ddlImportExportGeneral.Enabled = false;
             ddlLine.Enabled = false;
+            ddlHeaderLocation.Enabled = false;
 
             rdbFreightComponent.Enabled = false;
             rdbPrincipleSharing.Enabled = false;
@@ -1230,6 +1270,11 @@ namespace EMS.WebApp.MasterModule
             rdbTerminalRequired.Enabled = true;
             rdbWashing.Enabled = true;
 
+        }
+
+        protected void ddlHeaderLocation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ActionOnLocationChange(sender);
         }
     }
 }

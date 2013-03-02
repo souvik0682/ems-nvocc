@@ -28,7 +28,7 @@
                     <ContentTemplate>
                         <table border="0" cellpadding="2" cellspacing="3" width="100%">
                             <tr>
-                                <td style="width:18%;">
+                                <td style="width: 18%;">
                                 </td>
                                 <td style="width: 15%;">
                                     Effective Date<span class="errormessage1">*</span> :
@@ -111,22 +111,22 @@
                                     Washing Charge<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                    <asp:RadioButtonList ID="rdbWashing" AutoPostBack="true" runat="server" RepeatDirection="Horizontal"
-                                        RepeatLayout="Flow" OnSelectedIndexChanged="rdbWashing_SelectedIndexChanged">
+                                    <asp:RadioButtonList ID="rdbWashing" AutoPostBack="true" runat="server"
+                                        RepeatDirection="Horizontal" RepeatLayout="Flow" OnSelectedIndexChanged="rdbWashing_SelectedIndexChanged">
                                         <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
                                         <asp:ListItem Text="No" Value="0"></asp:ListItem>
                                     </asp:RadioButtonList>
-                                    <asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
+                                    <%-- <asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
                                         Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
-                                    </cc1:ValidatorCalloutExtender>
+                                    </cc1:ValidatorCalloutExtender>--%>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                 </td>
                                 <td>
-                                    Charge Type<span class="errormessage1">*</span> :
+                                    Charge Basis<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
                                     <asp:DropDownList ID="ddlChargeType" runat="server" Width="155" AutoPostBack="true"
@@ -226,16 +226,35 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    Location<span class="errormessage1">*</span> :
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="ddlHeaderLocation" runat="server" Width="155" 
+                                        onselectedindexchanged="ddlHeaderLocation_SelectedIndexChanged" AutoPostBack="true">
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="rfvHeaderLocation" runat="server" ErrorMessage="Please select location"
+                                        ControlToValidate="ddlHeaderLocation" Display="None" ValidationGroup="vgCharge" InitialValue="0"></asp:RequiredFieldValidator>
+                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvHeaderLocation">
+                                    </cc1:ValidatorCalloutExtender>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td colspan="5" style="padding-top: 30px; border: none;" align="center">
                                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                                        <ContentTemplate>                                        
+                                        <ContentTemplate>
                                             <asp:GridView ID="dgChargeRates" runat="server" AutoGenerateColumns="false" ShowFooter="false"
                                                 OnItemCommand="dgChargeRates_ItemCommand" OnItemDataBound="dgChargeRates_ItemDataBound"
-                                                OnRowCommand="dgChargeRates_RowCommand" 
-                                                OnRowDataBound="dgChargeRates_RowDataBound" Font-Names="Calibri" 
-                                                Font-Size="11pt">
+                                                OnRowCommand="dgChargeRates_RowCommand" OnRowDataBound="dgChargeRates_RowDataBound"
+                                                Font-Names="Calibri" Font-Size="11pt">
                                                 <Columns>
-                                                    <asp:TemplateField HeaderText="Location">
+                                                    <asp:TemplateField HeaderText="Location" Visible="false">
                                                         <ItemTemplate>
                                                             <asp:HiddenField ID="hdnLocationId" runat="server" Value='<%# Eval("LocationId")%>' />
                                                             <%# (Eval("LocationId").ToString() == "0" ? string.Empty : ddlMLocation.Items.FindByValue(Eval("LocationId").ToString()).Text)%></ItemTemplate>
@@ -266,7 +285,7 @@
                                                             Terminal
                                                         </HeaderTemplate>
                                                     </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Washing Type">
+                                                    <asp:TemplateField HeaderText="Washing Type" Visible="false">
                                                         <ItemTemplate>
                                                             <asp:HiddenField ID="hdnWashingTypeId" runat="server" Value='<%# Eval("WashingType")%>' />
                                                             <%# (Eval("WashingType").ToString() == "0" ? string.Empty : ddlMWashingType.Items.FindByValue(Eval("WashingType").ToString()).Text )%>
@@ -274,12 +293,11 @@
                                                         <HeaderTemplate>
                                                             <asp:DropDownList ID="ddlFWashingType" runat="server" Width="90" Enabled="false">
                                                             </asp:DropDownList>
-                                                             <asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select washing type"
+                                                            <asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select washing type"
                                                                 Display="None" ValidationGroup="vgGridFooter" ControlToValidate="ddlFWashingType"
                                                                 InitialValue="0"></asp:RequiredFieldValidator>
                                                             <cc1:ValidatorCalloutExtender ID="vceW" runat="server" TargetControlID="rfvWashing">
                                                             </cc1:ValidatorCalloutExtender>
-
                                                             <br />
                                                             <br />
                                                             Washing Type
@@ -322,7 +340,6 @@
                                                         <HeaderStyle HorizontalAlign="Right" />
                                                         <ItemStyle HorizontalAlign="Right" />
                                                     </asp:TemplateField>
-                                                   
                                                     <asp:TemplateField HeaderText="Rate/BL" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
                                                         <ItemTemplate>
                                                             <asp:Label ID="lblRatePerBl" runat="server" Text='<%# Eval("RatePerBL")%>'></asp:Label></ItemTemplate>
@@ -448,7 +465,6 @@
                                                         <HeaderStyle HorizontalAlign="Right" />
                                                         <ItemStyle HorizontalAlign="Right" />
                                                     </asp:TemplateField>
-
                                                     <asp:TemplateField HeaderText="Edit" ItemStyle-Font-Bold="true" ItemStyle-HorizontalAlign="Center"
                                                         FooterStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Top">
                                                         <ItemTemplate>
@@ -521,7 +537,6 @@
                             </tr>
                         </table>
                     </ContentTemplate>
-                    
                 </asp:UpdatePanel>
             </fieldset>
         </center>

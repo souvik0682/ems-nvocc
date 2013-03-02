@@ -24,7 +24,7 @@ namespace EMS.WebApp.MasterModule
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             CheckUserAccess();
 
             IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
@@ -186,7 +186,7 @@ namespace EMS.WebApp.MasterModule
                 DropDownList ddlFLocation = (DropDownList)sender;
                 //GridViewRow item = (GridViewRow)((DropDownList)sender).NamingContainer;
                 GridViewRow item = dgChargeRates.HeaderRow;
-                DropDownList ddlFTerminal = (DropDownList)item.FindControl("ddlFTerminal");                
+                DropDownList ddlFTerminal = (DropDownList)item.FindControl("ddlFTerminal");
 
                 PopulateDropDown((int)Enums.DropDownPopulationFor.TerminalCode, ddlFTerminal, Convert.ToInt32(ddlFLocation.SelectedValue));
                 if (ddlFLocation.SelectedValue == "0")
@@ -364,6 +364,11 @@ namespace EMS.WebApp.MasterModule
             else
             {
                 ViewState["ChargeRates"] = Rates;
+            }
+
+            if (Rates.Count > 0)
+            {
+                ddlHeaderLocation.SelectedValue = Convert.ToString(Rates[0].LocationId);
             }
 
             dgChargeRates.DataSource = Rates;

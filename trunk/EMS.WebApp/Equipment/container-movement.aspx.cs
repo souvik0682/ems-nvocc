@@ -19,13 +19,14 @@ namespace EMS.WebApp.Equipment
 
         private int _userId = 0;
         private bool _hasEditAccess = true;
-
+        private IUser oUser = null;
         #endregion
 
         #region Protected Event Handlers
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            oUser = (IUser)Session[Constants.SESSION_USER_INFO];
             CheckUserAccess();
             SetAttributes();
 
@@ -96,6 +97,8 @@ namespace EMS.WebApp.Equipment
             }
         }
 
+
+
         protected void gvwContainerTran_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -124,7 +127,11 @@ namespace EMS.WebApp.Equipment
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
                 //btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00008");
                 btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerTranID"));
-                btnEdit.Visible = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Editable"));
+
+                if (oUser.UserRole.Id != 6)
+                    btnEdit.Visible = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Editable"));
+                else
+                    btnEdit.Visible = true;
 
                 //Delete link
                 ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
@@ -177,7 +184,7 @@ namespace EMS.WebApp.Equipment
                     Response.Redirect("~/Login.aspx");
                 }
 
-                if (user.UserRole.Id != (int)UserRole.Admin)
+                if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.Manager)
                 {
                     Response.Redirect("~/Unauthorized.aspx");
                 }
@@ -254,7 +261,7 @@ namespace EMS.WebApp.Equipment
             else
             {
                 //sortExpression = "ContainerNo";
-                sortExpression = "Date";                
+                sortExpression = "Date";
                 sortDirection = "DESC";
             }
 

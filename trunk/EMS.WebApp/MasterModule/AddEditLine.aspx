@@ -24,7 +24,7 @@
                 </tr>
                 
                 <tr>
-                    <td>Contact Agent:</td>
+                    <td>Line Name:</td>
                     <td><asp:TextBox ID="txtContact" runat="server" CssClass="textboxuppercase" MaxLength="10" Width="250"></asp:TextBox><br />
                     </td>
                 </tr>

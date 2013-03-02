@@ -114,15 +114,15 @@ namespace EMS.Utilities
             grd.DataBind();
         }
     }
-    
+
     public static class JDatetimeConverter
     {
         public static string JToDtString(this DateTime value)
         {
-            if (value==null)
+            if (value == null)
                 return string.Empty;
             CultureInfo ci = CultureInfo.InvariantCulture;
-            return value.ToString("yyyy-MM-dd hh:mm:ss.FFF",ci);
+            return value.ToString("yyyy-MM-dd hh:mm:ss.FFF", ci);
         }
     }
 

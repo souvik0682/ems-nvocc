@@ -249,8 +249,8 @@
                             </tr>
                             <tr>
                                 <td colspan="5" style="padding-top: 30px; border: none;" align="center">
-                                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                                        <ContentTemplate>
+                                   <%-- <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                        <ContentTemplate>--%>
                                             <asp:GridView ID="dgChargeRates" runat="server" AutoGenerateColumns="false" ShowFooter="false"
                                                 OnItemCommand="dgChargeRates_ItemCommand" OnItemDataBound="dgChargeRates_ItemDataBound"
                                                 OnRowCommand="dgChargeRates_RowCommand" OnRowDataBound="dgChargeRates_RowDataBound"
@@ -492,7 +492,7 @@
                                                         FooterStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Top">
                                                         <ItemTemplate>
                                                             <asp:ImageButton ID="lnkDelete" runat="server" CommandArgument="Delete" ImageUrl="~/Images/remove.png"
-                                                                Height="16" Width="16" ToolTip="Delete" />
+                                                                Height="16" Width="16" ToolTip="Delete"  />
                                                         </ItemTemplate>
                                                         <HeaderTemplate>
                                                             <asp:Button ID="lnkCancel" runat="server" CommandArgument="Cancel" Text="Cancel"
@@ -510,8 +510,8 @@
                                                 <RowStyle Wrap="true" />
                                                 <FooterStyle BackColor="#F8F8F8" HorizontalAlign="Center" />
                                             </asp:GridView>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
+                                        <%--</ContentTemplate>
+                                    </asp:UpdatePanel>--%>
                                 </td>
                             </tr>
                             <tr>

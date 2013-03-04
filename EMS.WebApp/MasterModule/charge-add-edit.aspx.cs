@@ -22,6 +22,18 @@ namespace EMS.WebApp.MasterModule
         private int _userId = 0;
         List<IChargeRate> Rates = new List<IChargeRate>();
 
+        //protected void UpdatePanel1_Load(object sender, EventArgs e)
+        //{
+        //    if (ViewState["ChargeRates"] != null)
+        //    {
+        //        Rates = (List<IChargeRate>)ViewState["ChargeRates"];
+        //        if (Rates.Count <= 0 && hdnChargeID.Value == "0")
+        //        {
+        //            EnableAllField();
+        //        }
+        //    }
+        //}
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -247,7 +259,7 @@ namespace EMS.WebApp.MasterModule
                 if (!String.IsNullOrEmpty(txtDisplayOrder.Text.Trim()))
                     oChargeEntity.Sequence = Convert.ToInt32(txtDisplayOrder.Text.Trim());
                 oChargeEntity.ServiceTax = Convert.ToBoolean(Convert.ToInt32(rdbServiceTaxApplicable.SelectedItem.Value));
-
+                oChargeEntity.Location = Convert.ToInt32(ddlHeaderLocation.SelectedValue);
 
 
                 if (Convert.ToInt32(hdnChargeID.Value) <= 0) //insert
@@ -335,6 +347,9 @@ namespace EMS.WebApp.MasterModule
             ddlLine.SelectedIndex = ddlLine.Items.IndexOf(ddlLine.Items.FindByValue(oChargeEntity.NVOCCID.ToString()));
             txtDisplayOrder.Text = oChargeEntity.Sequence.ToString();
 
+            ddlHeaderLocation.SelectedIndex = ddlHeaderLocation.Items.IndexOf(ddlHeaderLocation.Items.FindByValue(oChargeEntity.Location.ToString()));
+            
+
 
             rdbServiceTaxApplicable.Items.FindByValue(oChargeEntity.ServiceTax.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
             rdbFreightComponent.Items.FindByValue(oChargeEntity.IsFreightComponent.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
@@ -366,10 +381,10 @@ namespace EMS.WebApp.MasterModule
                 ViewState["ChargeRates"] = Rates;
             }
 
-            if (Rates.Count > 0)
-            {
-                ddlHeaderLocation.SelectedValue = Convert.ToString(Rates[0].LocationId);
-            }
+            //if (Rates.Count > 0)
+            //{
+            //    ddlHeaderLocation.SelectedValue = Convert.ToString(Rates[0].LocationId);
+            //}
 
             dgChargeRates.DataSource = Rates;
             dgChargeRates.DataBind();
@@ -565,17 +580,7 @@ namespace EMS.WebApp.MasterModule
                 }
                 else
                 {
-                    //int Locn = 0;
-                    //int Ter = 0;
-                    //int Was = 0;
-
-                    //Locn = Convert.ToInt32(ddlFLocation.SelectedValue);
-                    //if (ddlFTerminal.Items.Count > 0)
-                    //    Ter = Convert.ToInt32(ddlFTerminal.SelectedValue);
-                    //if (ddlFWashingType.Items.Count > 0)
-                    //    Was = Convert.ToInt32(ddlFWashingType.SelectedValue);
-
-
+                    
                     if (txtHigh.Enabled == false && txtLow.Enabled == false)
                     {
                         IEnumerable<IChargeRate> cr = from rate in Rates
@@ -685,10 +690,11 @@ namespace EMS.WebApp.MasterModule
                 //Rates[Row.RowIndex].RateActive = false;
                 Rates.RemoveAt(Row.RowIndex);
                 ViewState["ChargeRates"] = Rates;
-                if (Rates.Count <= 0 && hdnChargeID.Value == "0")
-                {
-                    EnableAllField();
-                }
+                //if (Rates.Count <= 0 && hdnChargeID.Value == "0")
+                //{
+                //    EnableAllField();
+                //    UpdatePanel1.Update();
+                //}
                 FillRates();
 
             }
@@ -849,16 +855,24 @@ namespace EMS.WebApp.MasterModule
             TextBox txtSharingTEU = (TextBox)Row.FindControl("txtSharingTEU");
             TextBox txtSharingFEU = (TextBox)Row.FindControl("txtSharingFEU");
 
+            RequiredFieldValidator rfvSharingBL = (RequiredFieldValidator)Row.FindControl("rfvSharingBL");
+            RequiredFieldValidator rfvSharingTEU = (RequiredFieldValidator)Row.FindControl("rfvSharingTEU");
+            RequiredFieldValidator rfvSharingFEU = (RequiredFieldValidator)Row.FindControl("rfvSharingFEU");
+
             if (rdl.SelectedItem.Value == "0")
             {
                 txtSharingBL.Enabled = false;
                 txtSharingBL.Text = String.Empty;//"0.0";
+                rfvSharingBL.Enabled = false;
 
                 txtSharingTEU.Enabled = false;
                 txtSharingTEU.Text = String.Empty;//"0.0";
+                rfvSharingTEU.Enabled = false;
 
                 txtSharingFEU.Enabled = false;
                 txtSharingFEU.Text = String.Empty;//"0.0";
+                rfvSharingFEU.Enabled = false;
+
             }
             else
             {
@@ -868,14 +882,24 @@ namespace EMS.WebApp.MasterModule
                     case "3":
                     case "4":
                         txtSharingBL.Enabled = false;
+                        rfvSharingBL.Enabled = false;
+
                         txtSharingTEU.Enabled = true;
+                        rfvSharingTEU.Enabled = true;
+
                         txtSharingFEU.Enabled = true;
+                        rfvSharingFEU.Enabled = true;
                         break;
                     case "2":
                     case "5":
                         txtSharingBL.Enabled = true;
+                        rfvSharingBL.Enabled = true;
+
                         txtSharingTEU.Enabled = false;
+                        rfvSharingTEU.Enabled = false;
+
                         txtSharingFEU.Enabled = false;
+                        rfvSharingFEU.Enabled = false;
                         break;
                 }
 
@@ -1267,6 +1291,7 @@ namespace EMS.WebApp.MasterModule
             ddlCurrency.Enabled = true;
             ddlImportExportGeneral.Enabled = true;
             ddlLine.Enabled = true;
+            ddlHeaderLocation.Enabled = true;
 
             rdbFreightComponent.Enabled = true;
             rdbPrincipleSharing.Enabled = true;

@@ -25,7 +25,7 @@ namespace EMS.WebApp.MasterModule
         {
             _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
 
-            VoyageId =  GeneralFunctions.DecryptQueryString(Request.QueryString["id"]);
+            VoyageId = GeneralFunctions.DecryptQueryString(Request.QueryString["id"]);
 
             if (!IsPostBack)
             {
@@ -47,20 +47,20 @@ namespace EMS.WebApp.MasterModule
             {
                 //int c = dbinteract.PopulateDDLDS("ImpBLHeader", "fk_ImpVesselID", "fk_ImpVoyageID", "where fk_ImpVesselID=" + ddlVessel.SelectedValue + " and fk_ImpVoyageID='" + txtVoyageNo.Text.Trim()+"'").Tables[0].Rows.Count;
                 //int c = dbinteract.CountLandDate(Convert.ToInt32(ddlVessel.SelectedValue), txtVoyageNo.Text.Trim());
-               
-                if (txtdtLand.Text.Trim()!="")
+
+                if (txtdtLand.Text.Trim() != "")
                 {
-                   
-                        txtExcRate.Text = hdntxtExcRate.Value = dbinteract.GetExchnageRate(Convert.ToDateTime(txtdtLand.Text)).ToString();
-                   
+
+                    txtExcRate.Text = hdntxtExcRate.Value = dbinteract.GetExchnageRate(Convert.ToDateTime(txtdtLand.Text)).ToString();
+
                     trLandDate.Style.Add("display", " ");
                 }
                 else
                 {
                     trLandDate.Style.Add("display", "none");
-                   
-                        txtExcRate.Text = hdntxtExcRate.Value = dbinteract.GetExchnageRate(DateTime.Today).ToString();
-                   
+
+                    txtExcRate.Text = hdntxtExcRate.Value = dbinteract.GetExchnageRate(DateTime.Today).ToString();
+
                 }
 
             }
@@ -92,48 +92,49 @@ namespace EMS.WebApp.MasterModule
             if (VoyageId == "" || !Int32.TryParse(VoyageId, out intVoyageId))
                 return;
             BLL.DBInteraction dbinteract = new BLL.DBInteraction();
-            System.Data.DataSet ds = dbinteract.GetVoyage(Convert.ToInt32(VoyageId), "a", "", "","");
+            System.Data.DataSet ds = dbinteract.GetVoyage(Convert.ToInt32(VoyageId), "a", "", "", "");
 
             if (!ReferenceEquals(ds, null) && ds.Tables[0].Rows.Count > 0)
             {
                 ddlLoc.SelectedValue = ds.Tables[0].Rows[0]["pk_LocID"].ToString();
-                
+
                 GeneralFunctions.PopulateDropDownList(ddlTerminalID, dbinteract.PopulateDDLDS("mstTerminal", "pk_TerminalID", "TerminalName", "Where fk_LocationID=" + ddlLoc.SelectedValue));
                 ddlTerminalID.SelectedValue = ds.Tables[0].Rows[0]["fl_TerminalID"].ToString();
-                 txtAltLGNo.Text=ds.Tables[0].Rows[0]["AltLGNo"].ToString();
-                 txtCargoDesc.Text = ds.Tables[0].Rows[0]["CargoDesc"].ToString();
-                 txtExcRate.Text = ds.Tables[0].Rows[0]["ImpXChangeRate"].ToString();
-                 txtIGMNo.Text = ds.Tables[0].Rows[0]["IGMNo"].ToString();
-                 txtCallSign.Text = ds.Tables[0].Rows[0]["CallSign"].ToString();
-                 txtLGNo.Text = ds.Tables[0].Rows[0]["LGNo"].ToString();
-                 txtLightHouse.Text = ds.Tables[0].Rows[0]["LightHouseDue"].ToString();
-                 txtMotherDaughter.Text = ds.Tables[0].Rows[0]["MotherDaughterDtl"].ToString();
-                 txtPCCNo.Text = ds.Tables[0].Rows[0]["PCCNo"].ToString();
-                 txtTime.Text = ds.Tables[0].Rows[0]["ETATime"].ToString();
-                 txtTotLine.Text = ds.Tables[0].Rows[0]["TotalLines"].ToString();
-                  txtVCN.Text= ds.Tables[0].Rows[0]["VCN"].ToString();
-                  ddlVessel.SelectedValue = ds.Tables[0].Rows[0]["fk_VesselID"].ToString();
-                  txtVIA.Text = ds.Tables[0].Rows[0]["VIANo"].ToString();
-                  txtVoyageNo.Text = ds.Tables[0].Rows[0]["VoyageNo"].ToString();
-                  ddlCrewEffList.SelectedValue = ds.Tables[0].Rows[0]["CrewEffectList"].ToString();
-                  ddlCrewList.SelectedValue = ds.Tables[0].Rows[0]["CrewList"].ToString();
-                  ddlMaritime.SelectedValue = ds.Tables[0].Rows[0]["MaritimeList"].ToString();
-                  ddlPessengerList.SelectedValue = ds.Tables[0].Rows[0]["PassengerList"].ToString();
-                  ddlSameButton.SelectedValue = ds.Tables[0].Rows[0]["SameButtonCargo"].ToString();
-                  ddlShipStoreSubmitted.SelectedValue = ds.Tables[0].Rows[0]["ShipStoreSubmitted"].ToString();
-                  ddlTerminalID.SelectedValue = ds.Tables[0].Rows[0]["fl_TerminalID"].ToString();
+                txtAltLGNo.Text = ds.Tables[0].Rows[0]["AltLGNo"].ToString();
+                txtCargoDesc.Text = ds.Tables[0].Rows[0]["CargoDesc"].ToString();
+                txtExcRate.Text = ds.Tables[0].Rows[0]["ImpXChangeRate"].ToString();
+                txtIGMNo.Text = ds.Tables[0].Rows[0]["IGMNo"].ToString();
+                txtCallSign.Text = ds.Tables[0].Rows[0]["CallSign"].ToString();
+                txtLGNo.Text = ds.Tables[0].Rows[0]["LGNo"].ToString();
+                txtLightHouse.Text = ds.Tables[0].Rows[0]["LightHouseDue"].ToString();
+                txtMotherDaughter.Text = ds.Tables[0].Rows[0]["MotherDaughterDtl"].ToString();
+                txtPCCNo.Text = ds.Tables[0].Rows[0]["PCCNo"].ToString();
+                txtTime.Text = ds.Tables[0].Rows[0]["ETATime"].ToString();
+                txtTotLine.Text = ds.Tables[0].Rows[0]["TotalLines"].ToString();
+                txtVCN.Text = ds.Tables[0].Rows[0]["VCN"].ToString();
+                ddlVessel.SelectedValue = ds.Tables[0].Rows[0]["fk_VesselID"].ToString();
+                txtVIA.Text = ds.Tables[0].Rows[0]["VIANo"].ToString();
+                txtVoyageNo.Text = ds.Tables[0].Rows[0]["VoyageNo"].ToString();
+                ddlCrewEffList.SelectedValue = ds.Tables[0].Rows[0]["CrewEffectList"].ToString();
+                ddlCrewList.SelectedValue = ds.Tables[0].Rows[0]["CrewList"].ToString();
+                ddlMaritime.SelectedValue = ds.Tables[0].Rows[0]["MaritimeList"].ToString();
+                ddlPessengerList.SelectedValue = ds.Tables[0].Rows[0]["PassengerList"].ToString();
+                ddlSameButton.SelectedValue = ds.Tables[0].Rows[0]["SameButtonCargo"].ToString();
+                ddlShipStoreSubmitted.SelectedValue = ds.Tables[0].Rows[0]["ShipStoreSubmitted"].ToString();
+                ddlTerminalID.SelectedValue = ds.Tables[0].Rows[0]["fl_TerminalID"].ToString();
 
-                  
-                  txtdtETA.Text = ds.Tables[0].Rows[0]["ETADate"].ToString().Split(' ')[0];
-                  txtdtLand.Text = ds.Tables[0].Rows[0]["AddLandingDate"].ToString().Split(' ')[0];
-                  txtDtIGM.Text = ds.Tables[0].Rows[0]["IGMDate"].ToString().Split(' ')[0];
-                  txtdtLand.Text = ds.Tables[0].Rows[0]["LandingDate"].ToString().Split(' ')[0];
-                  txtdtPCC.Text = ds.Tables[0].Rows[0]["PCCDate"].ToString().Split(' ')[0];
-                  //txtdtAddLand.Text = ds.Tables[0].Rows[0]["__"].ToString();
-                  string port = ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text = ds.Tables[0].Rows[0]["lastport"].ToString();
-                         port = ((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text = ds.Tables[0].Rows[0]["lastport1"].ToString(); 
-                         port = ((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text = ds.Tables[0].Rows[0]["lastport2"].ToString();
-               
+
+                txtdtETA.Text = ds.Tables[0].Rows[0]["ETADate"].ToString().Split(' ')[0];
+                txtdtLand.Text = ds.Tables[0].Rows[0]["AddLandingDate"].ToString().Split(' ')[0];
+                txtDtIGM.Text = ds.Tables[0].Rows[0]["IGMDate"].ToString().Split(' ')[0];
+                txtdtLand.Text = ds.Tables[0].Rows[0]["LandingDate"].ToString().Split(' ')[0];
+                txtdtPCC.Text = ds.Tables[0].Rows[0]["PCCDate"].ToString().Split(' ')[0];
+                //txtdtAddLand.Text = ds.Tables[0].Rows[0]["__"].ToString();
+                ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text = ds.Tables[0].Rows[0]["lastport"].ToString();
+                ((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text = ds.Tables[0].Rows[0]["lastport1"].ToString();
+                ((TextBox)AutoCompletepPort3.FindControl("txtPort")).Text = ds.Tables[0].Rows[0]["lastport2"].ToString();
+                ((TextBox)AutoCompletepPort4.FindControl("txtPort")).Text = ds.Tables[0].Rows[0]["portDischarge"].ToString();
+
             }
         }
 
@@ -198,12 +199,16 @@ namespace EMS.WebApp.MasterModule
             port = port.Contains(',') && port.Split(',').Length >= 1 ? port.Split(',')[1].Trim() : "";
             voyage.fk_LPortID2 = dbinteract.GetId("Port", port);
 
+            port = ((TextBox)AutoCompletepPort4.FindControl("txtPort")).Text;
+            port = port.Contains(',') && port.Split(',').Length >= 1 ? port.Split(',')[1].Trim() : "";
+            voyage.fk_Pod = dbinteract.GetId("Port", port);
+
             return voyage;
         }
 
         protected void btnSave_Click1(object sender, EventArgs e)
         {
-            VoyageId =  GeneralFunctions.DecryptQueryString(Request.QueryString["id"]);
+            VoyageId = GeneralFunctions.DecryptQueryString(Request.QueryString["id"]);
             bool isedit = VoyageId != "-1" ? true : false;
             Entity.VoyageEntity voyage = AssignVoyageProp(VoyageId);
             if (ddlLoc.SelectedIndex == 0)
@@ -216,22 +221,38 @@ namespace EMS.WebApp.MasterModule
                 GeneralFunctions.RegisterAlertScript(this, "Please provide Last_Port_Called");
                 return;
             }
-            if (!isedit)
+
+            if (voyage.fk_Pod == 0)
             {
-                int c = dbinteract.PopulateDDLDS("trnVoyage", "fk_VesselID", "VoyageNo", "where fk_VesselID=" + ddlVessel.SelectedValue + " and VoyageNo='" + txtVoyageNo.Text.Trim() + "'").Tables[0].Rows.Count;
-                if (c > 0)
-                {
-                    GeneralFunctions.RegisterAlertScript(this, "Vessel + Voyage must be unique.");
-                    return;
-                }
+                GeneralFunctions.RegisterAlertScript(this, "Please provide PoD");
+                return;
             }
+         
+                string msg = EMS.BLL.VoyageBLL.CheckVoyageEntryAbilty(voyage.fk_VesselID, txtVoyageNo.Text.Trim(), voyage.fk_Pod, voyage.LandingDate, isedit);
+                //int c = dbinteract.PopulateDDLDS("trnVoyage", "fk_VesselID", "VoyageNo", "where fk_VesselID=" + ddlVessel.SelectedValue + " and VoyageNo='" + txtVoyageNo.Text.Trim() + "'").Tables[0].Rows.Count;
+                if (msg != "")
+                {
+                   
+                        GeneralFunctions.RegisterAlertScript(this, msg);
+                        return;
+                   
+
+                }
+            
 
             int result = dbinteract.AddEditVoyage(_userId, isedit, voyage);
-            int result1 = EMS.BLL.VoyageBLL.VoyageLandingDateEntry(voyage.fk_VesselID,Convert.ToInt32(VoyageId), voyage.LandingDate, _userId);
+            int result1 = EMS.BLL.VoyageBLL.VoyageLandingDateEntry(voyage.fk_VesselID, Convert.ToInt32(VoyageId), voyage.fk_Pod, voyage.LandingDate, _userId);
 
-            if (result > 0 )
+            if (result > 0)
             {
-                Response.Redirect("~/MasterModule/MangeVoyage.aspx");
+                if (!isedit)
+                    Response.Redirect("~/MasterModule/MangeVoyage.aspx");
+                else if (result1 > 0)
+                    Response.Redirect("~/MasterModule/MangeVoyage.aspx");
+                else
+                {
+                    GeneralFunctions.RegisterAlertScript(this, "Error Occured");
+                }
             }
             else
             {

@@ -40,13 +40,13 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
-        /// ddlTerminalID control.
+        /// AutoCompletepPort4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTerminalID;
+        protected global::EMS.WebApp.CustomControls.AutoCompletePort AutoCompletepPort4;
         
         /// <summary>
         /// txtIGMNo control.
@@ -254,6 +254,15 @@ namespace EMS.WebApp.MasterModule {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+        
+        /// <summary>
+        /// ddlTerminalID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTerminalID;
         
         /// <summary>
         /// txtDtIGM control.

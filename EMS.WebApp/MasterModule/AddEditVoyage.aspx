@@ -63,12 +63,14 @@
                             ControlToValidate="ddlVessel" InitialValue="0" Display="Dynamic" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator></td>
                 </tr>
                 <tr>
-                    <td>Terminal ID:</td>
-                    <td>
-                      <asp:DropDownList ID="ddlTerminalID" runat="server" Width="100%" 
-                           ></asp:DropDownList>
-                    </td>
+                    <td style="width:140px;">Port of Discharge:<span class="errormessage1">*</span></td>
+                    <td >
+                    <div style="width:230px">
+                       <uc2:AutoCompletepPort ID="AutoCompletepPort4" runat="server" />
+                       </div>
+                   </td>
                 </tr>
+
                 <tr>
                     <td style="width:140px;">IGM No:</td>
                     <td><asp:TextBox ID="txtIGMNo" runat="server" CssClass="textboxuppercase" MaxLength="10" Width="250"></asp:TextBox><br />
@@ -182,6 +184,13 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage" 
                             ControlToValidate="txtVoyageNo" Display="Dynamic" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator></td>
                 </tr>
+                 <tr>
+                    <td>Terminal ID:</td>
+                    <td>
+                      <asp:DropDownList ID="ddlTerminalID" runat="server" Width="100%" 
+                           ></asp:DropDownList>
+                    </td>
+                </tr>
               <tr>
                     <td style="width:140px;">IGM Date:</td>
                     <td>
@@ -192,7 +201,7 @@
                 </tr>
 
                   <tr>
-                    <td style="width:140px;">Last Port Called.</td>
+                    <td style="width:140px;">Last Port Called:<span class="errormessage1">*</span></td>
                     <td  onkeyup="CheckAdditional()">
                     <div style="width:230px">
                        <uc2:AutoCompletepPort ID="AutoCompletepPort1" runat="server" />

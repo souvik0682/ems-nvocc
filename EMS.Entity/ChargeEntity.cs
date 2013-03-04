@@ -163,7 +163,7 @@ namespace EMS.Entity
             this.PrincipleSharing = Convert.ToBoolean(reader["IsPrincipleShared"]);
             this.RateChangeable = Convert.ToBoolean(reader["RateChangable"]);            
             this.ServiceTax = Convert.ToBoolean(reader["ServiceTax"]);
-            
+            this.Location = Convert.ToInt32(reader["LocationId"]);
 
             //if (!string.IsNullOrEmpty(Convert.ToString(reader["ChargeRates"])))
             //{
@@ -181,8 +181,12 @@ namespace EMS.Entity
             serializer.Serialize(xmlWriter, Items);
             return stringWriter.ToString();
         }
-
-
         
+
+        public int Location
+        {
+            get;
+            set;
+        }
     }
 }

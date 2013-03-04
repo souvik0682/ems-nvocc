@@ -24,6 +24,7 @@ namespace EMS.Common
         int Currency { get; set; }
         bool ServiceTax { get; set; }
         List<IChargeRate> ChargeRates { get; set; }
+        int Location { get; set; }
 
         string ConvertListToXML(List<IChargeRate> Items);
     }

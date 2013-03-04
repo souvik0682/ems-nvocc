@@ -155,7 +155,7 @@
                                             <li id="liFDI_Export" runat="server"><a href="#">Export Invoice</a></li>
                                         </ul>
                                     </li>
-                                    <li id="liFD_MR" runat="server"><a href="#">Money Receipt</a></li>
+                                    <li id="liFD_MR" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/MoneyRcpt.aspx") %>">Money Receipt</a></li>
                                     <li id="liFD_CN" runat="server"><a href="#">Credit Note</a></li>
                                 </ul>
                             </li>

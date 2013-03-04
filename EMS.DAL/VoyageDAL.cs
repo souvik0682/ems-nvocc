@@ -40,7 +40,7 @@ namespace EMS.DAL
            return ds;
        }
 
-       public static  int VoyageLandingDateEntry(int vesselId ,int voyageId,DateTime? LandingDate, int UserId)
+       public static  int VoyageLandingDateEntry(int vesselId ,int voyageId,int Pod,DateTime? LandingDate, int UserId)
         {
            string ProcName = "prcVoyageLandingDateEntry";
            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
@@ -49,10 +49,29 @@ namespace EMS.DAL
            dquery.AddIntegerParam("@vesselId", vesselId);
            dquery.AddIntegerParam("@voyageId", voyageId);
            dquery.AddDateTimeParam("@LandingDate", LandingDate);
+           dquery.AddIntegerParam("@Pod", Pod);
            
            return dquery.RunActionQuery();
 
         }
-       
+
+
+       public static string CheckVoyageEntryAbilty(int vesselId, string VoyageNo, int Pod,DateTime? LandingDate, bool isEdit)
+       {
+           DataSet ds = new DataSet();
+           using (DbQuery dq = new DbQuery("prcCheckVoyageEntryAbilty"))
+           {
+               dq.AddIntegerParam("@vesselId", vesselId);
+               dq.AddVarcharParam("@VoyageNo",10, VoyageNo);
+               dq.AddIntegerParam("@Pod", Pod);
+               dq.AddDateTimeParam("@LandingDate", LandingDate);
+               dq.AddBooleanParam("@isEdit", isEdit);
+               ds = dq.GetTables();
+           }
+           if (Convert.ToString(ds.Tables[0].Rows[0][0]).ToLower() =="false")
+               return Convert.ToString(ds.Tables[0].Rows[0][1]);
+           else
+               return "True";
+       }
     }
 }

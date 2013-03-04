@@ -108,10 +108,20 @@
                             </cc1:ValidatorCalloutExtender>--%>
                                 </td>
                                 <td>
-                                    Washing Charge<span class="errormessage1">*</span> :
+                                    <%--Washing Charge<span class="errormessage1">*</span> :--%>
+                                    Is Freight Component ?<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                    <asp:RadioButtonList ID="rdbWashing" AutoPostBack="true" runat="server"
+                                    <asp:RadioButtonList ID="rdbFreightComponent" AutoPostBack="true" runat="server"
+                                        RepeatDirection="Horizontal" RepeatLayout="Flow">
+                                        <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="No" Value="0"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                    <asp:RequiredFieldValidator ID="rfvFreight" runat="server" ErrorMessage="Please select your choice"
+                                        Display="None" ControlToValidate="rdbFreightComponent" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
+                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender19" runat="server" TargetControlID="rfvFreight">
+                                    </cc1:ValidatorCalloutExtender>
+                                     <asp:RadioButtonList ID="rdbWashing" AutoPostBack="true" runat="server" style="display:none;"
                                         RepeatDirection="Horizontal" RepeatLayout="Flow" OnSelectedIndexChanged="rdbWashing_SelectedIndexChanged">
                                         <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
                                         <asp:ListItem Text="No" Value="0"></asp:ListItem>
@@ -192,18 +202,9 @@
                             </cc1:ValidatorCalloutExtender>--%>
                                 </td>
                                 <td>
-                                    Is Freight Component ?<span class="errormessage1">*</span> :
+                                    <%--Is Freight Component ?<span class="errormessage1">*</span> :--%>
                                 </td>
                                 <td>
-                                    <asp:RadioButtonList ID="rdbFreightComponent" AutoPostBack="true" runat="server"
-                                        RepeatDirection="Horizontal" RepeatLayout="Flow">
-                                        <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
-                                        <asp:ListItem Text="No" Value="0"></asp:ListItem>
-                                    </asp:RadioButtonList>
-                                    <asp:RequiredFieldValidator ID="rfvFreight" runat="server" ErrorMessage="Please select your choice"
-                                        Display="None" ControlToValidate="rdbFreightComponent" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
-                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender19" runat="server" TargetControlID="rfvFreight">
-                                    </cc1:ValidatorCalloutExtender>
                                 </td>
                             </tr>
                             <tr>
@@ -232,11 +233,12 @@
                                     Location<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlHeaderLocation" runat="server" Width="155" 
-                                        onselectedindexchanged="ddlHeaderLocation_SelectedIndexChanged" AutoPostBack="true">
+                                    <asp:DropDownList ID="ddlHeaderLocation" runat="server" Width="155" OnSelectedIndexChanged="ddlHeaderLocation_SelectedIndexChanged"
+                                        AutoPostBack="true">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvHeaderLocation" runat="server" ErrorMessage="Please select location"
-                                        ControlToValidate="ddlHeaderLocation" Display="None" ValidationGroup="vgCharge" InitialValue="0"></asp:RequiredFieldValidator>
+                                        ControlToValidate="ddlHeaderLocation" Display="None" ValidationGroup="vgCharge"
+                                        InitialValue="0"></asp:RequiredFieldValidator>
                                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvHeaderLocation">
                                     </cc1:ValidatorCalloutExtender>
                                 </td>

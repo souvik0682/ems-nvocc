@@ -157,6 +157,33 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.DropDownList ddlImportExportGeneral;
         
         /// <summary>
+        /// rdbFreightComponent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rdbFreightComponent;
+        
+        /// <summary>
+        /// rfvFreight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFreight;
+        
+        /// <summary>
+        /// ValidatorCalloutExtender19 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender19;
+        
+        /// <summary>
         /// rdbWashing control.
         /// </summary>
         /// <remarks>
@@ -263,33 +290,6 @@ namespace EMS.WebApp.MasterModule {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlLine;
-        
-        /// <summary>
-        /// rdbFreightComponent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdbFreightComponent;
-        
-        /// <summary>
-        /// rfvFreight control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFreight;
-        
-        /// <summary>
-        /// ValidatorCalloutExtender19 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender19;
         
         /// <summary>
         /// ddlCurrency control.

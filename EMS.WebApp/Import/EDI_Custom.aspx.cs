@@ -144,10 +144,14 @@ namespace EMS.WebApp.Import
             string ArrDate = txtdtArrival.Text.Trim() == "" ? "" : Convert.ToDateTime(txtdtArrival.Text).ToString("yyyyMMdd");
             string ArrTime = txtArriveTime.Text.Replace(":", ""); //Convert.ToDateTime(txtdtArrival.Text).ToString("hhmm");
             if (ArrTime.Length > 4) ArrTime = ArrTime.Substring(0,4);
+            ArrTime= string.IsNullOrEmpty(ArrTime.Trim())? "1200":ArrTime; 
             string ArrDate1 =(txtdtArrival.Text.Trim())==""? "" : Convert.ToDateTime(txtdtArrival.Text).ToString("ddMMyyyy hh:mm").Replace(" ","");
             //string custHouse =  ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
            // string custHouse = !((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text.Contains(',') ? "" : ((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text.Split(',')[1].Trim();
             string custHouse = ddlCustomHouse.SelectedItem.Text.Trim();
+            string port1=((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text;
+            string port2 = ((TextBox)AutoCompletepPort3.FindControl("txtPort")).Text;
+            string port3 = ((TextBox)AutoCompletepPort4.FindControl("txtPort")).Text;
             StreamWriter writer = new StreamWriter(FileName);
             //  ("myfile.txt")
             writer.WriteLine(("HREC" + ('' + ("ZZ" + (''
@@ -167,9 +171,9 @@ namespace EMS.WebApp.Import
                             + (txtPAN.Text + (''
                             + (txtMaster.Text + (''
                             + (custHouse + (''
-                            + (!((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text.Contains(',') ? "" : ((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text.Split(',')[1].Trim() + (''
-                            + (((TextBox)AutoCompletepPort3.FindControl("txtPort")).Text + (''
-                            + (((TextBox)AutoCompletepPort4.FindControl("txtPort")).Text + (''
+                            + (!port1.Contains(',') ? "" : port1.Split(',')[1].Trim() + (''
+                            + (!port2.Contains(',') ? "" : port2.Split(',')[1].Trim() + (''
+                            + (!port3.Contains(',') ? "" : port3.Split(',')[1].Trim() + (''
                             + (ddlVesselType.Text.Substring(0, 1) + (''
                             + (txtTotLine.Text + (''
                             + (txtCargoDesc.Text + (''
@@ -200,60 +204,59 @@ namespace EMS.WebApp.Import
                 Srl = (Srl + 1);
                 BlDate = Convert.ToDateTime(Dr["INFDATE"]).ToString("ddMMyyyy");
                 int conLen=35,notLen=35;
-                int conOriLen = Dr["ConsigneeInformation"].ToString().Length;
-                int notOriLen = Dr["NotifyPartyInformation"].ToString().Length;
+                string  conOri = Dr["ConsigneeInformation"].ToString();
+                string notOri = Dr["NotifyPartyInformation"].ToString();
 
-                if (Dr["ConsigneeInformation"].ToString().Length >= conLen)
-                    Con1 = ((Dr["ConsigneeInformation"].ToString().Substring(0, 35) == "") ? "." : Dr["ConsigneeInformation"].ToString().Substring(0, 35));
+                if(conOri.Length>0)
+                   Con1 = ((conOri.Length >= conLen) ? conOri.Substring(0, 35):conOri);
                 else
                     Con1 = ".";
 
-                conLen+=36;
-                if (Dr["ConsigneeInformation"].ToString().Length >= conLen)
-                    Con2 = ((Dr["ConsigneeInformation"].ToString().Substring(35, 35) == "") ? "." : Dr["ConsigneeInformation"].ToString().Substring(35, 35));
+                conOri = conOri.Replace(Con1,"");
+                if (conOri.Length > 0)
+                    Con2 = ((conOri.Length >= conLen) ?  conOri.Substring(0, 35):conOri);
                 else
                     Con2 = ".";
 
-                conLen += 36;
-                if (Dr["ConsigneeInformation"].ToString().Length >= conLen)
-                    Con3 = ((Dr["ConsigneeInformation"].ToString().Substring(70, 35) == "") ? "." : Dr["ConsigneeInformation"].ToString().Substring(70, 35));
+                conOri = conOri.Replace(Con2, "");
+                if (conOri.Length > 0)
+                    Con3 = ((conOri.Length >= conLen) ? conOri.Substring(0, 35) : conOri);
                 else
                     Con3 = ".";
 
-                conLen += 36;
-                if (Dr["ConsigneeInformation"].ToString().Length >= conLen)
-                    Con4 = ((Dr["ConsigneeInformation"].ToString().Substring(105, 35) == "") ? "." : Dr["ConsigneeInformation"].ToString().Substring(105, 35));
+                conOri = conOri.Replace(Con3, "");
+                if (conOri.Length > 0)
+                    Con4 = ((conOri.Length >= conLen) ? conOri.Substring(0, 35) : conOri);
                 else
                     Con4 = ".";
 
 
-                if (Dr["NotifyPartyInformation"].ToString().Length >= notLen)
-                    Not1 = ((Dr["NotifyPartyInformation"].ToString().Substring(0, 35) == "") ? "." : Dr["NotifyPartyInformation"].ToString().Substring(0, 35));
+                if (notOri.Length > 0)
+                    Not1 = ((notOri.Length >= notLen) ? notOri.Substring(0, 35) : notOri);
                 else
                     Not1 = ".";
 
-                notLen += 36;
-                if (Dr["NotifyPartyInformation"].ToString().Length >= notLen)
-                    Not2 = ((Dr["NotifyPartyInformation"].ToString().Substring(35, 35) == "") ? "." : Dr["NotifyPartyInformation"].ToString().Substring(35, 35));
+                notOri = notOri.Replace(Not1, "");
+                if (notOri.Length > 0)
+                    Not2 = ((notOri.Length >= notLen) ? notOri.Substring(0, 35) : notOri);
                 else
                     Not2 = ".";
 
-                notLen += 36;
-                if (Dr["NotifyPartyInformation"].ToString().Length >= notLen)
-                    Not3 = ((Dr["NotifyPartyInformation"].ToString().Substring(70, 35) == "") ? "." : Dr["NotifyPartyInformation"].ToString().Substring(70, 35));
+                notOri = notOri.Replace(Not2, "");
+                if (notOri.Length > 0)
+                    Not3 = ((notOri.Length >= notLen) ? notOri.Substring(0, 35) : notOri);
                 else
                     Not3 = ".";
 
-
-                notLen += 36;
-                if (Dr["NotifyPartyInformation"].ToString().Length >= notLen)
-                    Not4 = ((Dr["NotifyPartyInformation"].ToString().Substring(105, 35) == "") ? "." : Dr["NotifyPartyInformation"].ToString().Substring(105, 35));
+                notOri = notOri.Replace(Not3, "");
+                if (notOri.Length > 0)
+                    Not4 = ((notOri.Length >= notLen) ? notOri.Substring(0, 35) : notOri);
                 else
                     Not4 = ".";
 
                
-                Destport = ((Dr["DischargeIG"].ToString().Substring(0, 2) == "IN") ?  ddlCustomHouse.SelectedItem.Text : Dr["DischargeIG"].ToString());
-               BLno=Dr["BLNUMBER"].ToString().Replace("[^\\w\\ ]", "").TrimEnd().Replace(" ", "").Replace(" ", "20");
+               Destport = ((Dr["DischargeIG"].ToString().Substring(0, 2) == "IN") ?  ddlCustomHouse.SelectedItem.Text : Dr["DischargeIG"].ToString());
+               BLno=System.Text.RegularExpressions.Regex.Replace(Dr["BLNUMBER"].ToString(),"[^\\w\\ ]","").TrimEnd().Replace(" ", "").Replace(" ", "20");
                 DischargePort= Dr["DischargeIG"].ToString().Split(',')[1].Trim();
 
                 writer.WriteLine(("F" + (''

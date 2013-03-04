@@ -19,6 +19,7 @@ namespace EMS.Entity
         public string VoyageType { get; set; }
         public string LGNo { get; set; }
         public string AltLGNo { get; set; }
+        public int fk_Pod { get; set; }
         public int fk_LPortID { get; set; }
         public int fk_LPortID1 { get; set; }
         public int fk_LPortID2 { get; set; }

@@ -715,49 +715,31 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.CheckBox chkCHSSA;
         
         /// <summary>
-        /// chkFreightPaid control.
+        /// ddlUploadedDoc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkFreightPaid;
+        protected global::System.Web.UI.WebControls.DropDownList ddlUploadedDoc;
         
         /// <summary>
-        /// chkBLSurrender control.
+        /// FileUpload1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkBLSurrender;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
         
         /// <summary>
-        /// chkCFSNomination control.
+        /// btnUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkCFSNomination;
-        
-        /// <summary>
-        /// chkBLExtension control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkBLExtension;
-        
-        /// <summary>
-        /// chkDetentionWaiver control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkDetentionWaiver;
+        protected global::System.Web.UI.WebControls.Button btnUpload;
         
         /// <summary>
         /// gvwVendor control.

@@ -22,6 +22,23 @@ namespace EMS.WebApp.Transaction
             string[] Val = new string[] { "A", "A", "A", "A", "A" };
             gvwVendor.DataSource = Val;
             gvwVendor.DataBind();
+
+            if (!Page.IsPostBack)
+            {
+                FillDropDown();
+            }
+        }
+
+        void FillDropDown()
+        {
+            ListItem Li = null;
+            foreach (Enums.UploadedDoc r in Enum.GetValues(typeof(Enums.UploadedDoc)))
+            {
+                Li = new ListItem("SELECT", "0");
+                ListItem item = new ListItem(Enum.GetName(typeof(Enums.UploadedDoc), r).Replace('_', ' '), ((int)r).ToString());
+                ddlUploadedDoc.Items.Add(item);
+            }
+            ddlUploadedDoc.Items.Insert(0, Li);
         }
 
         protected void txtBlNo_TextChanged(object sender, EventArgs e)

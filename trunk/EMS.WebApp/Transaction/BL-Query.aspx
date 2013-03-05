@@ -475,31 +475,26 @@
                 </fieldset>
             </div>
             <div style="float: left; width: 37%;">
-                <fieldset>
+                <fieldset style="height: 94px;">
                     <legend>Documents uploaded</legend>
-                    <table width="100%" border="0">
+                    <table style="height: 500px; height: 25px; width: 90%; text-align: center;" cellpadding="0"
+                        cellspacing="0">
                         <tr>
                             <td>
-                                <asp:CheckBox ID="chkFreightPaid" runat="server" Text="Freight Prepaid" />
+                                <asp:DropDownList ID="ddlUploadedDoc" runat="server" >
+                                   
+                                </asp:DropDownList>
                             </td>
                             <td>
-                                <asp:CheckBox ID="chkBLSurrender" runat="server" Text="B/L Surrender" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:CheckBox ID="chkCFSNomination" runat="server" Text="CFS Nomination" />
+                                <asp:FileUpload ID="FileUpload1" runat="server" size="13%"  />
                             </td>
                             <td>
-                                <asp:CheckBox ID="chkBLExtension" runat="server" Text="B/L Extension" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <asp:CheckBox ID="chkDetentionWaiver" runat="server" Text="Detention Waiver" />
+                                <asp:Button ID="btnUpload" runat="server" Text="Upload" Style="height: 22px;" />
                             </td>
                         </tr>
                     </table>
+                    <div style="height: 45px; overflow: auto; vertical-align: top;">
+                    </div>
                 </fieldset>
             </div>
             <fieldset style="width: 95%;">

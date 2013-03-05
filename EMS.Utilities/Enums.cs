@@ -35,6 +35,7 @@ namespace EMS.Utilities
             SLAB_UNIT = 7,
             SLAB_DOCS = 8
         }
+
         public enum Currency
         {
             INR = 1,
@@ -101,6 +102,15 @@ namespace EMS.Utilities
             SE = 3,
             AMD = 4,
             BC = 5
+        }
+
+        public enum UploadedDoc
+        {
+            Freight_Prepaid = 1,
+            CFS_Nomination = 2,
+            Detention_Waiver = 3,
+            BL_Surrender = 4,
+            BL_Extension = 5
         }
     }
 }

@@ -110,12 +110,12 @@
 
                                  <asp:TemplateField HeaderText="Vessel Name" SortExpression="VesselName">
                                     <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="15%" />                                       
+                                    <ItemStyle CssClass="gridviewitem" Width="20%" />                                       
                                 </asp:TemplateField>
 
                                  <asp:TemplateField HeaderText="IGM No" SortExpression="IGMNo">
                                     <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="9%" />                                       
+                                    <ItemStyle CssClass="gridviewitem" Width="10%" />                                       
                                 </asp:TemplateField>
 
                                  <asp:TemplateField HeaderText="IGM Date" SortExpression="IGMDate">
@@ -130,19 +130,19 @@
 
                                 <asp:TemplateField HeaderText="Last Port">
                                     <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="25%" />                                       
+                                    <ItemStyle CssClass="gridviewitem" Width="12%" />                                       
                                 </asp:TemplateField>
 
                                 <asp:TemplateField>
                                     <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />                                    
+                                    <ItemStyle CssClass="gridviewitem" Width="7%" HorizontalAlign="Center" VerticalAlign="Middle" />                                    
                                     <ItemTemplate>
                                         <asp:ImageButton ID="btnEdit" runat="server" CommandName="Edit" ImageUrl="~/Images/edit.png" Height="16" Width="16" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderStyle CssClass="gridviewheader" />
-                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />                                    
+                                    <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Center" VerticalAlign="Middle" />                                    
                                     <ItemTemplate>
                                         <asp:ImageButton ID="btnRemove" runat="server" CommandName="Remove" ImageUrl="~/Images/remove.png" Height="16" Width="16" />
                                     </ItemTemplate>

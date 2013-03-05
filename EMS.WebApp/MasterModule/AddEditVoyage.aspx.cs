@@ -232,7 +232,7 @@ namespace EMS.WebApp.MasterModule
             {
                 string msg = EMS.BLL.VoyageBLL.CheckVoyageEntryAbilty(voyage.fk_VesselID, txtVoyageNo.Text.Trim(), voyage.fk_Pod, voyage.LandingDate, isedit);
                 //int c = dbinteract.PopulateDDLDS("trnVoyage", "fk_VesselID", "VoyageNo", "where fk_VesselID=" + ddlVessel.SelectedValue + " and VoyageNo='" + txtVoyageNo.Text.Trim() + "'").Tables[0].Rows.Count;
-                if (msg != "")
+                if (msg != "" && msg.ToLower()!="true")
                 {
 
                     GeneralFunctions.RegisterAlertScript(this, msg);

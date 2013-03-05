@@ -248,14 +248,14 @@ namespace EMS.WebApp.MasterModule
 
             if (result > 0)
             {
-                if (!isedit)
+                //if (!isedit)
                     Response.Redirect("~/MasterModule/MangeVoyage.aspx");
-                else if (result1 > 0)
-                    Response.Redirect("~/MasterModule/MangeVoyage.aspx");
-                else
-                {
-                    GeneralFunctions.RegisterAlertScript(this, "Error Occured");
-                }
+                //else if (result1 > 0)
+                //    Response.Redirect("~/MasterModule/MangeVoyage.aspx");
+                //else
+                //{
+                //    GeneralFunctions.RegisterAlertScript(this, "Error Occured");
+                //}
             }
             else
             {

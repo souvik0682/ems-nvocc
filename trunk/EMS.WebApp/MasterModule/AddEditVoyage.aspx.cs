@@ -227,17 +227,20 @@ namespace EMS.WebApp.MasterModule
                 GeneralFunctions.RegisterAlertScript(this, "Please provide PoD");
                 return;
             }
-         
+
+            if (txtdtLand.Text != "")
+            {
                 string msg = EMS.BLL.VoyageBLL.CheckVoyageEntryAbilty(voyage.fk_VesselID, txtVoyageNo.Text.Trim(), voyage.fk_Pod, voyage.LandingDate, isedit);
                 //int c = dbinteract.PopulateDDLDS("trnVoyage", "fk_VesselID", "VoyageNo", "where fk_VesselID=" + ddlVessel.SelectedValue + " and VoyageNo='" + txtVoyageNo.Text.Trim() + "'").Tables[0].Rows.Count;
                 if (msg != "")
                 {
-                   
-                        GeneralFunctions.RegisterAlertScript(this, msg);
-                        return;
-                   
+
+                    GeneralFunctions.RegisterAlertScript(this, msg);
+                    return;
+
 
                 }
+            }
             
 
             int result = dbinteract.AddEditVoyage(_userId, isedit, voyage);

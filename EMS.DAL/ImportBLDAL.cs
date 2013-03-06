@@ -757,7 +757,7 @@ namespace EMS.DAL
                 oDq.AddImageParam("@DocImg", DocImage);
                 oDq.AddDateTimeParam("@UplodedDate", UploadDate);
 
-                Res = Convert.ToInt32(oDq.GetScalar());
+                Res = oDq.RunActionQuery();
             }
             return Res;
         }

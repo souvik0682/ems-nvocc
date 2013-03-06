@@ -744,5 +744,36 @@ namespace EMS.DAL
             }
             return Result;
         }
+
+        public static int SaveUploadedDocument(Int64 BLId, int DocName, byte[] DocImage, DateTime UploadDate)
+        {
+            string strExecution = "[trn].[docUpload]";
+            int Res = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@fk_BLID", BLId);
+                oDq.AddBigIntegerParam("@DocName", DocName);
+                oDq.AddImageParam("@DocImg", DocImage);
+                oDq.AddDateTimeParam("@UplodedDate", UploadDate);
+
+                Res = Convert.ToInt32(oDq.GetScalar());
+            }
+            return Res;
+        }
+
+        public static int DeleteUploadedDocument(Int64 DocId)
+        {
+            string strExecution = "[trn].[DeleteUploadedDoc]";
+            int Res = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@DocID", DocId);
+
+                Res = Convert.ToInt32(oDq.GetScalar());
+            }
+            return Res;
+        }
     }
 }

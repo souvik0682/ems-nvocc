@@ -208,5 +208,15 @@ namespace EMS.BLL
         {
             return ImportBLDAL.SaveBLQActivity(Activity, BLID);
         }
+
+        public int SaveUploadedDocument(Int64 BLId, int DocName, byte[] DocImage, DateTime UploadDate)
+        {
+            return ImportBLDAL.SaveUploadedDocument(BLId, DocName, DocImage, UploadDate);
+        }
+
+        public static int DeleteUploadedDocument(Int64 DocId)
+        {
+            return ImportBLDAL.DeleteUploadedDocument(DocId);
+        }
     }
 }

@@ -214,7 +214,7 @@ namespace EMS.BLL
             return ImportBLDAL.SaveUploadedDocument(BLId, DocName, DocImage, UploadDate);
         }
 
-        public static int DeleteUploadedDocument(Int64 DocId)
+        public int DeleteUploadedDocument(Int64 DocId)
         {
             return ImportBLDAL.DeleteUploadedDocument(DocId);
         }

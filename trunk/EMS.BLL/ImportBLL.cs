@@ -199,9 +199,9 @@ namespace EMS.BLL
             return ImportBLDAL.GetSurveyor(LocationId);
         }
 
-        public DataSet GetBLQuery(string ImpBLNo)
+        public DataSet GetBLQuery(string ImpBLNo, int ActivityType)
         {
-            return ImportBLDAL.GetBLQuery(ImpBLNo);
+            return ImportBLDAL.GetBLQuery(ImpBLNo,ActivityType);
         }
 
         public int SaveBLQActivity(string Activity, int BLID)
@@ -209,14 +209,29 @@ namespace EMS.BLL
             return ImportBLDAL.SaveBLQActivity(Activity, BLID);
         }
 
-        public int SaveUploadedDocument(Int64 BLId, int DocName, byte[] DocImage, DateTime UploadDate)
+        public int SaveUploadedDocument(Int64 BLId, int DocName, string DocType, byte[] DocImage, DateTime UploadDate)
         {
-            return ImportBLDAL.SaveUploadedDocument(BLId, DocName, DocImage, UploadDate);
+            return ImportBLDAL.SaveUploadedDocument(BLId, DocName, DocType, DocImage, UploadDate);
         }
 
         public int DeleteUploadedDocument(Int64 DocId)
         {
             return ImportBLDAL.DeleteUploadedDocument(DocId);
+        }
+
+        public int SaveSubmittedDocument(Int64 BLId, string Param)
+        {
+            return ImportBLDAL.SaveSubmittedDocument(BLId, Param);
+        }
+
+        public DataTable GetUploadedDocByID(int DocID)
+        {
+            return ImportBLDAL.GetUploadedDocByID(DocID);
+        }
+
+        public DataTable GetAllInvoice(Int64 BLId)
+        {
+            return ImportBLDAL.GetAllInvoice(BLId);
         }
     }
 }

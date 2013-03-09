@@ -42,6 +42,14 @@ namespace EMS.WebApp.Transaction
                 ddlUploadedDoc.Items.Add(item);
             }
             ddlUploadedDoc.Items.Insert(0, Li);
+
+            foreach (Enums.AmendmentFor r in Enum.GetValues(typeof(Enums.AmendmentFor)))
+            {
+                Li = new ListItem("SELECT", "0");
+                ListItem item = new ListItem(Enum.GetName(typeof(Enums.AmendmentFor), r).Replace('_', ' ').Replace("and", "&"), ((int)r).ToString());
+                ddlAmendmentFor.Items.Add(item);
+            }
+            ddlAmendmentFor.Items.Insert(0, Li);
         }
 
         protected void txtBlNo_TextChanged(object sender, EventArgs e)

@@ -337,13 +337,13 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.ImageButton imgCloseDOE;
         
         /// <summary>
-        /// imgBtnDOE control.
+        /// dvDoExtension control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnDOE;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvDoExtension;
         
         /// <summary>
         /// txtVAlidityDate control.
@@ -517,13 +517,40 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.ImageButton imgCloseAmend;
         
         /// <summary>
-        /// imgBtnAmend control.
+        /// txtAmendShownAs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnAmend;
+        protected global::System.Web.UI.WebControls.TextBox txtAmendShownAs;
+        
+        /// <summary>
+        /// txtAmendShouldBe control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAmendShouldBe;
+        
+        /// <summary>
+        /// txtAmendComment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAmendComment;
+        
+        /// <summary>
+        /// imgPrintAmend control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgPrintAmend;
         
         /// <summary>
         /// ddlAmendmentFor control.
@@ -715,6 +742,15 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.CheckBox chkCHSSA;
         
         /// <summary>
+        /// btnDocSubmit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDocSubmit;
+        
+        /// <summary>
         /// ddlUploadedDoc control.
         /// </summary>
         /// <remarks>
@@ -740,6 +776,42 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUpload;
+        
+        /// <summary>
+        /// lblUploadMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUploadMsg;
+        
+        /// <summary>
+        /// hdnUploadedDocId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnUploadedDocId;
+        
+        /// <summary>
+        /// btnDeleteDoc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDeleteDoc;
+        
+        /// <summary>
+        /// dvDoc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvDoc;
         
         /// <summary>
         /// gvwVendor control.

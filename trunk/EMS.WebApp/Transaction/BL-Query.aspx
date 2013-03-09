@@ -424,7 +424,7 @@
                                     Amendment For
                                 </td>
                                 <td colspan="5">
-                                    <asp:DropDownList ID="ddlAmendmentFor" runat="server" Width="55" Enabled="false">
+                                    <asp:DropDownList ID="ddlAmendmentFor" runat="server" Width="79" Enabled="false">
                                     </asp:DropDownList>
                                 </td>
                             </tr>

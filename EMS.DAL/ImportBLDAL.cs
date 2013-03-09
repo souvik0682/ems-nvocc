@@ -714,7 +714,7 @@ namespace EMS.DAL
             return dt;
         }
 
-        public static DataSet GetBLQuery(string BLNo)
+        public static DataSet GetBLQuery(string BLNo, int ActivityType)
         {
             string strExecution = "[trn].[getBLQuery]";
             DataSet ds = new DataSet();
@@ -723,6 +723,7 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddVarcharParam("@BLNo", 60, BLNo);
+                oDq.AddIntegerParam("@ActivityType", ActivityType);
                 ds = oDq.GetTables();
             }
 
@@ -745,7 +746,7 @@ namespace EMS.DAL
             return Result;
         }
 
-        public static int SaveUploadedDocument(Int64 BLId, int DocName, byte[] DocImage, DateTime UploadDate)
+        public static int SaveUploadedDocument(Int64 BLId, int DocName,string DocType, byte[] DocImage, DateTime UploadDate)
         {
             string strExecution = "[trn].[docUpload]";
             int Res = 0;
@@ -754,6 +755,7 @@ namespace EMS.DAL
             {
                 oDq.AddBigIntegerParam("@fk_BLID", BLId);
                 oDq.AddBigIntegerParam("@DocName", DocName);
+                oDq.AddNVarcharParam("@DocType",100, DocType);                
                 oDq.AddImageParam("@DocImg", DocImage);
                 oDq.AddDateTimeParam("@UplodedDate", UploadDate);
 
@@ -774,6 +776,52 @@ namespace EMS.DAL
                 Res = Convert.ToInt32(oDq.GetScalar());
             }
             return Res;
+        }
+
+        public static int SaveSubmittedDocument(Int64 BLId, string Param)
+        {
+            string strExecution = "[trn].[AddEditBLQSubmittedDoc]";
+            int Res = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@BLId", BLId);
+                oDq.AddNVarcharParam("@Params", 2000, Param);
+
+                Res = oDq.RunActionQuery();
+            }
+            return Res;
+        }
+
+        public static DataTable GetUploadedDocByID(int DocID)
+        {
+            string strExecution = "[trn].[GetUploadedDocByID]";
+            DataTable dt = new DataTable();
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@DocId", DocID);
+
+                dt = oDq.GetTable();
+            }
+
+            return dt;
+        }
+
+        public static DataTable GetAllInvoice(Int64 BLId)
+        {
+            string strExecution = "[trn].[GetInvoiceStatus]";
+            DataTable dt = new DataTable();
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@BlId", BLId);
+                dt = oDq.GetTable();
+            }
+
+            return dt;
         }
     }
 }

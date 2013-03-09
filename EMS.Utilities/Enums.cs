@@ -112,5 +112,19 @@ namespace EMS.Utilities
             BL_Surrender = 4,
             BL_Extension = 5
         }
+
+        public enum AmendmentFor
+        {
+            Line_Number = 1,
+            BL_Number_and_Date = 2,
+            Marks_and_Numbers = 3,
+            Package = 4,
+            Weight = 5,
+            Consignee = 6,
+            Notify_Party = 7,
+            Goods_Description = 8,
+            Container_Details = 9
+
+        }
     }
 }

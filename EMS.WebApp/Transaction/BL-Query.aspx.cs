@@ -9,6 +9,9 @@ using EMS.BLL;
 using EMS.Utilities;
 using EMS.Utilities.ResourceManager;
 using System.Text;
+using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace EMS.WebApp.Transaction
 {
@@ -19,9 +22,9 @@ namespace EMS.WebApp.Transaction
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string[] Val = new string[] { "A", "A", "A", "A", "A" };
-            gvwVendor.DataSource = Val;
-            gvwVendor.DataBind();
+            //string[] Val = new string[] { "A", "A", "A", "A", "A" };
+            //gvwVendor.DataSource = Val;
+            //gvwVendor.DataBind();
 
             if (!Page.IsPostBack)
             {
@@ -43,15 +46,22 @@ namespace EMS.WebApp.Transaction
 
         protected void txtBlNo_TextChanged(object sender, EventArgs e)
         {
-            BLDataSet = oImportBLL.GetBLQuery(txtBlNo.Text.Trim());
+            PopulateAllData();
+        }
+
+        private void PopulateAllData()
+        {
+            BLDataSet = oImportBLL.GetBLQuery(txtBlNo.Text.Trim(), (int)EMS.Utilities.Enums.BLActivity.DOE);
             txtBlNo.Text = string.Empty;
             if (BLDataSet.Tables[0].Rows.Count > 0)
             {
                 fillBLDetail(BLDataSet.Tables[0]);
                 fillServiceRequest(BLDataSet.Tables[0]);
+                FillUploadedDocument(BLDataSet.Tables[1]);
+                FillSubmittedDocument(BLDataSet.Tables[2]);
+                FillInvoiceStatus(Convert.ToInt64(hdnBLId.Value));
+                FillDoExtension(BLDataSet.Tables[3]);
             }
-
-
         }
 
         void fillBLDetail(DataTable dtDetail)
@@ -102,6 +112,118 @@ namespace EMS.WebApp.Transaction
 
             if (dtDetail.Rows[0]["BONDCANCEL"].ToString() != "")
                 txtBondCancellation.Text = Convert.ToDateTime(dtDetail.Rows[0]["BONDCANCEL"].ToString()).ToString("dd/MM/yyyy");
+        }
+
+        void FillUploadedDocument(DataTable dtDoc)
+        {
+
+            StringBuilder sbr = new StringBuilder();
+            sbr.Append("<table style='width: 100%; border: none;' cellpadding='0' cellspacing='0'>");
+            sbr.Append("<tr style='background-color:#328DC4;color:White; font-weight:bold;'>");
+            sbr.Append("<td style='width: 170px;padding-left:2px;'>Name</td>");
+            sbr.Append("<td style='width: 80px;'>Uploaded On</td>");
+            sbr.Append("<td style='width: 50px;text-align:center;'>Delete</td>");
+            sbr.Append("</tr>");
+
+            for (int rowCount = 0; rowCount < dtDoc.Rows.Count; rowCount++)
+            {
+                string Id = dtDoc.Rows[rowCount]["ID"].ToString();
+                string Name = ddlUploadedDoc.Items.FindByValue(dtDoc.Rows[rowCount]["DOCNAME"].ToString()).Text.Replace(" ", "_");
+                string Date = Convert.ToDateTime(dtDoc.Rows[rowCount]["UPLOADDATE"].ToString()).ToString("dd/MM/yyyy");
+
+                if (rowCount % 2 == 0) //For ODD row
+                {
+                    sbr.Append("<tr><td padding-left:2px;><a href='DocDownload.ashx?Id=" + Id + "&n=" + Name + "'>" + Name + "</a></td>");
+                    sbr.Append("<td>" + Date + "</td>");
+                    sbr.Append("<td style='text-align:center;'>");
+                    sbr.Append("<input type='image' onclick='DeleteUploadedDoc(this)' id='" + Id + "' src='../Images/remove_icon.gif' />");
+                    sbr.Append("</td>");
+                    sbr.Append("</tr>");
+                }
+                else // For Even Row
+                {
+                    //sbr.Append("<tr style='background-color:#99CCFF;'>");
+                    sbr.Append("<tr style='background-color:#99CCFF;'><td padding-left:2px;><a href='DocDownload.ashx?Id=" + Id + "&n=" + Name + "'>" + Name + "</a></td>");
+                    sbr.Append("<td>" + Date + "</td>");
+                    sbr.Append("<td style='text-align:center;'>");
+                    sbr.Append("<input type='image' onclick='DeleteUploadedDoc(this)' id='" + Id + "' src='../Images/remove_icon.gif' />");
+                    sbr.Append("</td>");
+                    sbr.Append("</tr>");
+                }
+            }
+
+
+            sbr.Append("</table>");
+
+            dvDoc.InnerHtml = sbr.ToString();
+
+        }
+
+        void FillInvoiceStatus(Int64 BLId)
+        {
+            DataTable dtInvoices = oImportBLL.GetAllInvoice(BLId);
+
+            gvwVendor.DataSource = dtInvoices;
+            gvwVendor.DataBind();
+        }
+
+        void FillSubmittedDocument(DataTable dtDoc)
+        {
+            if (dtDoc.Rows.Count > 0)
+            {
+                chkOriginalBL.Checked = Convert.ToBoolean(dtDoc.Rows[0]["OrgininalBL"].ToString());
+                chkEndorseHBL.Checked = Convert.ToBoolean(dtDoc.Rows[0]["EndorseHBL"].ToString());
+                chkContainerBond.Checked = Convert.ToBoolean(dtDoc.Rows[0]["ContainerBond"].ToString());
+                chkInsuranceCopy.Checked = Convert.ToBoolean(dtDoc.Rows[0]["InsuranceCopy"].ToString());
+                chkCopyOfMasterBL.Checked = Convert.ToBoolean(dtDoc.Rows[0]["MasterBLCopy"].ToString());
+                chkSecurityCheque.Checked = Convert.ToBoolean(dtDoc.Rows[0]["SecurityCheque"].ToString());
+                chkCopyOfBill.Checked = Convert.ToBoolean(dtDoc.Rows[0]["CopyBillOfEntry"].ToString());
+                chkConsoldatorNOC.Checked = Convert.ToBoolean(dtDoc.Rows[0]["ConsolidatorsNOC"].ToString());
+                chkCHSSA.Checked = Convert.ToBoolean(dtDoc.Rows[0]["HighSeaSales"].ToString());
+            }
+        }
+
+        void FillDoExtension(DataTable dtDOE)
+        {
+            StringBuilder sbr = new StringBuilder();
+            if (dtDOE.Rows.Count > 0)
+            {
+                sbr.Append("<table style='width:80%;' cellspacing='0' align='center'>");
+                sbr.Append("<tr style='height:30px;background-color:#328DC4;color:White; font-weight:bold;'><td>Date</td><td>Print</td></tr>");
+
+                for (int rowCount = 0; rowCount < dtDOE.Rows.Count; rowCount++)
+                {
+                    string Date = Convert.ToDateTime(dtDOE.Rows[rowCount]["Date"].ToString()).ToString("dd/MM/yyyy");
+
+                    if (rowCount % 2 == 0) //For ODD row
+                    {
+                        sbr.Append("<tr><td>" + Date + "</td><td><a href='#'><img src='../Images/Print.png' /></a></td></tr>");
+                    }
+                    else
+                    {
+                        sbr.Append("<tr style='background-color:#99CCFF;'><td>" + Date + "</td><td><a href='#'><img src='../Images/Print.png' /></a></td></tr>");
+                    }
+                }
+
+                sbr.Append("</table>");
+                dvDoExtension.InnerHtml = sbr.ToString();
+            }
+            else
+            {
+                sbr.Append("<table style='width:80%;' cellspacing='0' align='center'>");
+                sbr.Append("<tr><td>No records found</td></tr>");
+                sbr.Append("</table>");
+                dvDoExtension.InnerHtml = sbr.ToString();
+            }
+        }
+
+        protected void DeleteUploadedDoc(object sender, EventArgs e)
+        {
+            //System.Web.UI.HtmlControls.HtmlImage a = (System.Web.UI.HtmlControls.HtmlImage)sender;
+            //Int64 docId = Convert.ToInt64(a.ID.Substring(a.ID.IndexOf('_') + 1));
+            Int64 docId = Convert.ToInt64(hdnUploadedDocId.Value);
+            oImportBLL.DeleteUploadedDocument(docId);
+            PopulateAllData();
         }
 
         protected void chkDo_CheckedChanged(object sender, EventArgs e)
@@ -215,7 +337,14 @@ namespace EMS.WebApp.Transaction
         {
             if (Page.IsValid)
             {
-                oImportBLL.SaveBLQActivity(GenerateBLQActivityXMLString(), Convert.ToInt32(hdnBLId.Value));
+                switch (oImportBLL.SaveBLQActivity(GenerateBLQActivityXMLString(), Convert.ToInt32(hdnBLId.Value)))
+                {
+                    case 1: PopulateAllData();
+                        lblMessageServiceReq.Text= ResourceManager.GetStringWithoutName("ERR00009");
+                        UpdatePanel2.Update();
+                        break;
+                }
+
             }
         }
 
@@ -318,5 +447,43 @@ namespace EMS.WebApp.Transaction
             return sb.ToString();
         }
 
+        protected void btnUpload_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToInt64(hdnBLId.Value) > 0)
+            {
+                byte[] DocImage = FileUpload1.FileBytes;
+                string Type = FileUpload1.PostedFile.ContentType;
+                switch (oImportBLL.SaveUploadedDocument(Convert.ToInt64(hdnBLId.Value), Convert.ToInt16(ddlUploadedDoc.SelectedValue), Type, DocImage, DateTime.Now.Date))
+                {
+                    case -1:
+                    case 1: lblUploadMsg.Text = "Upload succeeded";
+                        PopulateAllData();
+                        break;
+                    case 0: lblUploadMsg.Text = "Upload failed";
+                        break;
+                }
+            }
+            else
+            {
+                lblUploadMsg.Text = ResourceManager.GetStringWithoutName("ERR00080");
+            }
+        }
+
+        protected void btnDocSubmit_Click(object sender, EventArgs e)
+        {
+            StringBuilder sbr = new StringBuilder();
+
+            sbr.Append(chkOriginalBL.Checked == true ? "1," : "0,");
+            sbr.Append(chkEndorseHBL.Checked == true ? "1," : "0,");
+            sbr.Append(chkContainerBond.Checked == true ? "1," : "0,");
+            sbr.Append(chkInsuranceCopy.Checked == true ? "1," : "0,");
+            sbr.Append(chkCopyOfMasterBL.Checked == true ? "1," : "0,");
+            sbr.Append(chkSecurityCheque.Checked == true ? "1," : "0,");
+            sbr.Append(chkCopyOfBill.Checked == true ? "1," : "0,");
+            sbr.Append(chkConsoldatorNOC.Checked == true ? "1," : "0,");
+            sbr.Append(chkCHSSA.Checked == true ? "1" : "0");
+
+            oImportBLL.SaveSubmittedDocument(Convert.ToInt64(hdnBLId.Value), sbr.ToString());
+        }
     }
 }

@@ -19,10 +19,10 @@
    <%-- <asp:hiddenfield id="hdnValue" runat="server" />--%>
 
     <asp:TextBox runat="server" ID="txtVessel" autocomplete="off" 
-        CssClass="watermark1" ForeColor="#747862" MaxLength="50" Width="250px" 
+        ForeColor="#747862" MaxLength="50" Width="250px" CssClass="textboxuppercase"
         AutoPostBack="true" OnTextChanged="txtVessel_TextChanged" />
-    <cc1:textboxwatermarkextender id="txtWMEName1" runat="server" targetcontrolid="txtVessel"
-        watermarktext="TYPE VESSEL" watermarkcssclass="watermark1"></cc1:textboxwatermarkextender>
+    <%--<cc1:textboxwatermarkextender id="txtWMEName1" runat="server" targetcontrolid="txtVessel"
+        watermarktext="TYPE VESSEL" watermarkcssclass="watermark1"></cc1:textboxwatermarkextender>--%>
  
     <cc1:autocompleteextender runat="server"  ID="AutoPort"
         targetcontrolid="txtVessel" servicepath="AutoComplete.asmx" servicemethod="GetVesselList"

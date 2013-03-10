@@ -22,15 +22,6 @@ namespace EMS.WebApp.CustomControls {
         protected global::System.Web.UI.WebControls.TextBox txtShipper;
         
         /// <summary>
-        /// txtWMEName6 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender txtWMEName6;
-        
-        /// <summary>
         /// AutoPort control.
         /// </summary>
         /// <remarks>

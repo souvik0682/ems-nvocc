@@ -81,8 +81,6 @@ namespace EMS.WebApp.Transaction
             //AC_CANotice1.TextChanged += new EventHandler(AC_CANotice1_TextChanged);
             AC_CFSCode1.TextChanged += new EventHandler(AC_CFSCode1_TextChanged);
             AC_Port5.TextChanged += new EventHandler(AC_Port5_TextChanged);
-
-            LoadSurveyorDDL();
         }
 
         void AC_CFSCode1_TextChanged(object sender, EventArgs e)
@@ -610,7 +608,8 @@ namespace EMS.WebApp.Transaction
                 txtTEU.Enabled = true;
                 txtFEU.Enabled = true;
                 rfvTEU.Visible = true;
-                rfvFEU.Visible = true;
+                //rfvFEU.Visible = true;  -- As per Tapas Da -- 10-03-13
+                rfvFEU.Visible = false;
 
                 txtGrossWeight.Enabled = true;
                 txtVolume.Enabled = true;
@@ -734,6 +733,8 @@ namespace EMS.WebApp.Transaction
         {
             int PGRFreeDays = new ImportBLL().GetPGRFreeDays(Convert.ToInt32(ddlLocation.SelectedValue));
             txtPGRFreeDays.Text = PGRFreeDays.ToString();
+
+            LoadSurveyorDDL();
         }
 
         protected void ddlFtrContainerType_SelectedIndexChanged(object sender, EventArgs e)
@@ -853,6 +854,11 @@ namespace EMS.WebApp.Transaction
             LoadLocationDDL();
             LoadContainerTypeDDL();
             //ISOCodeDDL();
+            LoadSurveyorDDL();
+
+            string PAN = new ImportBLL().GetPanNoById(1);
+            txtMLOCode.Text = PAN;
+            txtFtrAgentCode.Text = PAN;
         }
 
         private void SetDefaultFreightPayableAt()
@@ -997,6 +1003,8 @@ namespace EMS.WebApp.Transaction
             if (((TextBox)AC_Port4.FindControl("txtPort")).Text == ((TextBox)AC_Port3.FindControl("txtPort")).Text)
             {
                 txtCMCode.Text = "LC";
+
+                txtTPBondNo.Enabled = false;
             }
             else
             {
@@ -1007,6 +1015,8 @@ namespace EMS.WebApp.Transaction
                     txtCMCode.Text = "TI";
                 else
                     txtCMCode.Text = "TC";
+
+                txtTPBondNo.Enabled = true;
             }
         }
 
@@ -1083,6 +1093,8 @@ namespace EMS.WebApp.Transaction
 
             if (txtTEU.Text.Trim() != string.Empty)
                 header.NoofTEU = Convert.ToInt32(txtTEU.Text);
+
+
             header.PackageDetail = Convert.ToString(txtPackage.Text.Trim());
 
             if (Convert.ToString(rdoPartBL.SelectedValue) == "Yes")
@@ -1782,11 +1794,11 @@ namespace EMS.WebApp.Transaction
 
             //Unit of Package/Weight/Volume
             if (header.UnitOfVolume != 0)
-                ((TextBox)AC_WeightUnit1.FindControl("txtWeightUnit")).Text = new ImportBLL().GetUnitNameById(header.UnitOfVolume);
+                ((TextBox)AC_WeightUnit1.FindControl("txtWeightUnit")).Text = new ImportBLL().GetUnitNameById(header.UnitOfWeight);
             if (header.UnitOfWeight != 0)
-                ((TextBox)AC_PackageUnit1.FindControl("txtPkgUnit")).Text = new ImportBLL().GetUnitNameById(header.UnitOfWeight);
+                ((TextBox)AC_PackageUnit1.FindControl("txtPkgUnit")).Text = new ImportBLL().GetUnitNameById(header.UnitPackage);
             if (header.UnitPackage != 0)
-                ((TextBox)AC_VolumeUnit1.FindControl("txtVolUnit")).Text = new ImportBLL().GetUnitNameById(header.UnitPackage);
+                ((TextBox)AC_VolumeUnit1.FindControl("txtVolUnit")).Text = new ImportBLL().GetUnitNameById(header.UnitOfVolume);
 
             //Surveyor
             //if (header.SurveyorAddressID != 0)

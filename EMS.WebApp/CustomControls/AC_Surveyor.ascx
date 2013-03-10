@@ -17,11 +17,11 @@
 </style>
 
 <div>
-    <asp:TextBox runat="server" ID="txtSurveyor" autocomplete="off" CssClass="watermark1" ForeColor="#747862"
-        MaxLength="50" Width="250px"
+    <asp:TextBox runat="server" ID="txtSurveyor" autocomplete="off" ForeColor="#747862"
+        MaxLength="50" Width="250px" CssClass="textboxuppercase"
         OnTextChanged="txtSurveyor_TextChanged" AutoPostBack="true" />
-    <cc1:textboxwatermarkextender id="txtWMEName5" runat="server" targetcontrolid="txtSurveyor"
-        watermarktext="TYPE SURVEYOR" watermarkcssclass="watermark1"></cc1:textboxwatermarkextender>
+    <%--<cc1:textboxwatermarkextender id="txtWMEName5" runat="server" targetcontrolid="txtSurveyor"
+        watermarktext="TYPE SURVEYOR" watermarkcssclass="watermark1"></cc1:textboxwatermarkextender>--%>
  
     <cc1:autocompleteextender runat="server"  ID="AutoPort"
         targetcontrolid="txtSurveyor" servicepath="AutoComplete.asmx" servicemethod="GetSurveyorList"

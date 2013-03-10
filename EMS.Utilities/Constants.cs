@@ -53,6 +53,7 @@ namespace EMS.Utilities
         VesselMaster = 41,
         RoleMaster = 113,
         ImportBL = 3,
+        Invoice = 53,
     };
 
     public enum UserRole

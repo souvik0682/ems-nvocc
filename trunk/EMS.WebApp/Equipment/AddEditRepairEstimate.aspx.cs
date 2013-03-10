@@ -25,12 +25,14 @@ namespace EMS.WebApp.Equipment
         protected void Page_Load(object sender, EventArgs e)
         {
             _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
+            
             EqEstId = GeneralFunctions.DecryptQueryString(Request.QueryString["id"]);
          
             if (!IsPostBack)
             {
                 GeneralFunctions.PopulateDropDownList(ddlLoc, dbinteract.PopulateDDLDS("DSR.dbo.mstLocation", "pk_LocID", "LocName", true), true);
                 GeneralFunctions.PopulateDropDownList(ddlLine, EMS.BLL.EquipmentBLL.DDLGetLine());
+                int dis=DisableControls();
                
                 
                 btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('RepairingEstimate.aspx','" + EMS.Utilities.ResourceManager.ResourceManager.GetStringWithoutName("ERR00017") + "')";
@@ -47,6 +49,22 @@ namespace EMS.WebApp.Equipment
                 txtStockRetDate.Enabled = false;
             }
          
+        }
+
+        private int DisableControls()
+        {
+            int[] adm_mgrRoles = { 1, 2, 3, 6 };
+            if (Array.IndexOf(adm_mgrRoles, EMS.BLL.UserBLL.GetLoggedInUserRoleId()) < 0)
+            {
+                ddlUser.Enabled = false;
+                txtMaterialApp.ReadOnly = true;
+                txtMaterialApp.Style.Add("background-color", "#E6E6E6");
+                txtLabourApp.ReadOnly = true;
+                txtLabourApp.Style.Add("background-color", "#E6E6E6");
+                return 0;
+            }
+            else return 1;
+           
         }
 
         private void LoadData(int _userId, string EqEstId)
@@ -115,7 +133,10 @@ namespace EMS.WebApp.Equipment
                 ClearControls();
             else
                 if (!checkContainerStatus(true)) return;
-            if (ddlUser.SelectedIndex == 0)
+
+           
+
+            if( DisableControls()==1 && ddlUser.SelectedIndex == 0)
             {
                 lblError.Text = "Please select an Approver.";
                 return;
@@ -138,7 +159,16 @@ namespace EMS.WebApp.Equipment
             iequip.ProspectID = Convert.ToInt32(ddlLine.SelectedValue);
             iequip.locId = Convert.ToInt32(ddlLoc.SelectedValue);
             iequip.NVOCCId = Convert.ToInt32(ddlLine.SelectedValue);
-            iequip.fk_UserApproved = Convert.ToInt32(ddlUser.SelectedValue);
+            try
+            {
+                iequip.fk_UserApproved = Convert.ToInt32(ddlUser.SelectedValue);
+            }
+            catch 
+            {
+
+                iequip.fk_UserApproved = 0;
+            }
+            
             iequip.onHold = chkpOnHold.Checked;
             iequip.Damaged = chkDamage.Checked;
 
@@ -187,15 +217,15 @@ namespace EMS.WebApp.Equipment
             }
             else
             {
-                if (abbr.ToUpper() != "RCVE")
+                if (abbr.ToUpper() != "RCVE" && abbr.ToUpper() != "OFFH")
                 {
-                    GeneralFunctions.RegisterAlertScript(this, "Container status is not RCVE and hence repair entry is not possible");
+                    GeneralFunctions.RegisterAlertScript(this, "Container status is not RCVE/OFFH and hence repair entry is not possible");
 
                 }
                 else
                 {
-                    if (!fromSaveButton)
-                        GeneralFunctions.RegisterAlertScript(this, "Container status is RCVE.");
+                    if (!fromSaveButton) 
+                        GeneralFunctions.RegisterAlertScript(this, "Container status is RCVE/OFFH.");
                     canEditable = true;
                 }
             }

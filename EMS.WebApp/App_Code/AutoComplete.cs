@@ -388,11 +388,33 @@ public class AutoComplete : System.Web.Services.WebService {
         }
         return items;
     }
+
+    [WebMethod]
+    public string[] GetInvoiceNo(string prefixText, int count)
+    {
+        count = 10;
+        AppCodeClass ac = new AppCodeClass();
+
+        string sql = "select InvoiceNo from finInvoice WHERE InvoiceNo LIKE @prefixText";
+
+        SqlDataAdapter da = new SqlDataAdapter(sql, ac.ConnectionString);
+        da.SelectCommand.Parameters.Add("@prefixText", SqlDbType.VarChar, 50).Value = prefixText + "%";
+        DataTable dt = new DataTable();
+        da.Fill(dt);
+        string[] items = new string[dt.Rows.Count];
+        int i = 0;
+        foreach (DataRow dr in dt.Rows)
+        {
+            items.SetValue(dr["InvoiceNo"].ToString(), i);
+            i++;
+        }
+        return items;
+    }
 }
 
 public class AppCodeClass
 {
     public string ConnectionString = "Data Source=WIN-SERVER;Initial Catalog=Liner;User Id=sa;Password=P@ssw0rd;Pooling=true;Connection Timeout=30;Max Pool Size=40;Min Pool Size=5";
-    //public string ConnectionString = @"Data Source=SOUVIK-PC\SQLEXPRESS;Initial Catalog=NVOCC;Integrated Security=SSPI;";
+    //public string ConnectionString = @"Data Source=DILP-PC;Initial Catalog=NVOCC;Integrated Security=true;Pooling=true;Connection Timeout=30;Max Pool Size=40;Min Pool Size=5";
 }
 

@@ -109,6 +109,7 @@
                                     <li id="liID_BL" runat="server"><a href="<%=Page.ResolveClientUrl("~/Transaction/ImportBL.aspx") %>">B/L Entry</a></li>
                                     <li id="liID_BLQuery" runat="server"><a href="<%=Page.ResolveClientUrl("~/Transaction/BL-Query.aspx") %>">B/L Query</a></li>
                                     <li id="liID_Voyage" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MangeVoyage.aspx") %>">Voyage</a></li>
+                                    <li id="liID_Invoice" runat="server"><a href="<%=Page.ResolveClientUrl("~/Transaction/Invoice.aspx") %>">Invoice</a></li>
                                 </ul>
                             </li>
                             <li id="liIR" runat="server">

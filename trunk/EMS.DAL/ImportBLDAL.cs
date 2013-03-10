@@ -823,5 +823,21 @@ namespace EMS.DAL
 
             return dt;
         }
+
+        public static string GetPanNoById(int CompanyId)
+        {
+            string strExecution = "uspGetPANNoByCompanyId";
+            string PANNo = string.Empty;
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@CompanyId", CompanyId);
+
+                PANNo = Convert.ToString(oDq.GetScalar());
+            }
+
+            return PANNo;
+        }
     }
 }

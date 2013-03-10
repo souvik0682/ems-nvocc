@@ -185,6 +185,10 @@ namespace EMS.WebApp
             {
                 menuId = (int)PageName.ImportBL;
             }
+            else if (Request.Path.Contains("/Transaction/Invoice.aspx") || Request.Path.Contains("/Transaction/ManageInvoice.aspx"))
+            {
+                menuId = (int)PageName.Invoice;
+            }
 
             //switch (Request.Path)
             //{

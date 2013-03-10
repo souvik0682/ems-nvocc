@@ -17,11 +17,11 @@
 </style>
 
 <div>
-    <asp:TextBox runat="server" ID="txtWeightUnit" autocomplete="off" CssClass="watermark1" ForeColor="#747862"
-        MaxLength="50" Width="250px"
+    <asp:TextBox runat="server" ID="txtWeightUnit" autocomplete="off" ForeColor="#747862"
+        MaxLength="50" Width="250px" CssClass="textboxuppercase"
         OnTextChanged="txtWeightUnit_TextChanged" AutoPostBack="true" />
-    <cc1:textboxwatermarkextender id="txtWMEName1" runat="server" targetcontrolid="txtWeightUnit"
-        watermarktext="TYPE WEIGHT UNIT" watermarkcssclass="watermark1"></cc1:textboxwatermarkextender>
+    <%--<cc1:textboxwatermarkextender id="txtWMEName1" runat="server" targetcontrolid="txtWeightUnit"
+        watermarktext="TYPE WEIGHT UNIT" watermarkcssclass="watermark1"></cc1:textboxwatermarkextender>--%>
  
     <cc1:autocompleteextender runat="server"  ID="AutoPort"
         targetcontrolid="txtWeightUnit" servicepath="AutoComplete.asmx" servicemethod="GetWeightUnitList"

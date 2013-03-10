@@ -274,15 +274,6 @@ namespace EMS.WebApp.Transaction {
         protected global::EMS.WebApp.CustomControls.CustomTextBox txtLINo;
         
         /// <summary>
-        /// rfvLINo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLINo;
-        
-        /// <summary>
         /// txtBillEntery control.
         /// </summary>
         /// <remarks>
@@ -724,22 +715,13 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.RadioButtonList rdoItemType;
         
         /// <summary>
-        /// txtCMCode control.
+        /// rdoTransportMode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCMCode;
-        
-        /// <summary>
-        /// rfvCMCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCMCode;
+        protected global::System.Web.UI.WebControls.RadioButtonList rdoTransportMode;
         
         /// <summary>
         /// txtDestFreeDays control.
@@ -832,13 +814,22 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.RadioButtonList rdoPartBL;
         
         /// <summary>
-        /// rdoTransportMode control.
+        /// txtCMCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdoTransportMode;
+        protected global::System.Web.UI.WebControls.TextBox txtCMCode;
+        
+        /// <summary>
+        /// rfvCMCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCMCode;
         
         /// <summary>
         /// rdoTaxExempted control.
@@ -1237,22 +1228,13 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFtrContainerType;
         
         /// <summary>
-        /// txtFtrSealNo control.
+        /// txtFtrAgentCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFtrSealNo;
-        
-        /// <summary>
-        /// rfvFtrSealNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFtrSealNo;
+        protected global::System.Web.UI.WebControls.TextBox txtFtrAgentCode;
         
         /// <summary>
         /// txtFtrCommodity control.
@@ -1300,22 +1282,13 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFtrGrossWeight;
         
         /// <summary>
-        /// txtFtrPackage control.
+        /// txtFtrCustSeal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::EMS.WebApp.CustomControls.CustomTextBox txtFtrPackage;
-        
-        /// <summary>
-        /// rfvFtrPackage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFtrPackage;
+        protected global::System.Web.UI.WebControls.TextBox txtFtrCustSeal;
         
         /// <summary>
         /// txtFtrCargoWt control.
@@ -1336,6 +1309,69 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFtrCargoWt;
         
         /// <summary>
+        /// txtFtrStowage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFtrStowage;
+        
+        /// <summary>
+        /// txtFtrSealNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFtrSealNo;
+        
+        /// <summary>
+        /// rfvFtrSealNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFtrSealNo;
+        
+        /// <summary>
+        /// txtFtrTareWt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtFtrTareWt;
+        
+        /// <summary>
+        /// txtFtrPackage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtFtrPackage;
+        
+        /// <summary>
+        /// rfvFtrPackage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFtrPackage;
+        
+        /// <summary>
+        /// txtFtrImcoNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFtrImcoNo;
+        
+        /// <summary>
         /// txtFtrISOCode control.
         /// </summary>
         /// <remarks>
@@ -1354,22 +1390,13 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvISO;
         
         /// <summary>
-        /// txtFtrAgentCode control.
+        /// txtFtrCallNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFtrAgentCode;
-        
-        /// <summary>
-        /// txtFtrTareWt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::EMS.WebApp.CustomControls.CustomTextBox txtFtrTareWt;
+        protected global::System.Web.UI.WebControls.TextBox txtFtrCallNo;
         
         /// <summary>
         /// txtFtrTemperature control.
@@ -1388,24 +1415,6 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rdoFtrTemperatureUnit;
-        
-        /// <summary>
-        /// txtFtrCustSeal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFtrCustSeal;
-        
-        /// <summary>
-        /// txtFtrImcoNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFtrImcoNo;
         
         /// <summary>
         /// txtFtrTempMax control.
@@ -1478,24 +1487,6 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFtrCargo;
-        
-        /// <summary>
-        /// txtFtrStowage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFtrStowage;
-        
-        /// <summary>
-        /// txtFtrCallNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFtrCallNo;
         
         /// <summary>
         /// btnAddRow control.

@@ -233,5 +233,10 @@ namespace EMS.BLL
         {
             return ImportBLDAL.GetAllInvoice(BLId);
         }
+
+        public string GetPanNoById(int CompanyId)
+        {
+            return ImportBLDAL.GetPanNoById(CompanyId);
+        }
     }
 }

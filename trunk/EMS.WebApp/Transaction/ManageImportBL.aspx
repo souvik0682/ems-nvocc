@@ -77,7 +77,7 @@
             }
 
             //Transhipment Info
-            document.getElementById('<%=txtTransinfo.ClientID %>').value = "CARGO LOADED FROM " + document.getElementById('<%=hdnPortLoading.ClientID %>').value + "\n\rTO BE DISCHARGED AT " + document.getElementById('<%=hdnPortDischarge.ClientID %>').value;
+            document.getElementById('<%=txtTransinfo.ClientID %>').value = "CARGO LOADED FROM " + document.getElementById('<%=hdnPortLoading.ClientID %>').value + "\nTO BE DISCHARGED AT " + document.getElementById('<%=hdnPortDischarge.ClientID %>').value;
         } 
 </script>
 
@@ -279,13 +279,13 @@
                                                             <td>
                                                             </td>
                                                             <td>
-                                                                Line/Item No:<span class="errormessage">*</span>
+                                                                Line/Item No:
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtLINo" runat="server" CssClass="numerictextbox" MaxLength="6"
                                                                     Width="250px" TabIndex="14"></cc2:CustomTextBox>
-                                                                <asp:RequiredFieldValidator ID="rfvLINo" runat="server" CssClass="errormessage" ControlToValidate="txtLINo"
-                                                                    ErrorMessage="This field is required" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                <%--<asp:RequiredFieldValidator ID="rfvLINo" runat="server" CssClass="errormessage" ControlToValidate="txtLINo"
+                                                                    ErrorMessage="This field is required" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -591,14 +591,14 @@
                                                             <td>
                                                             </td>
                                                             <td>
-                                                                Cargo Movement Code:<span class="errormessage">*</span>
+                                                                Transport Mode:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="txtCMCode" runat="server" CssClass="textboxuppercase" MaxLength="2"
-                                                                    Width="250px" TabIndex="42"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="rfvCMCode" runat="server" ControlToValidate="txtCMCode"
-                                                                    ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
-                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                <asp:RadioButtonList ID="rdoTransportMode" runat="server" TabIndex="42" RepeatDirection="Horizontal">
+                                                                    <asp:ListItem Text="Road" Value="R" Selected="True"></asp:ListItem>
+                                                                    <asp:ListItem Text="Train" Value="T"></asp:ListItem>
+                                                                    <asp:ListItem Text="Ship" Value="S"></asp:ListItem>
+                                                                </asp:RadioButtonList>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -676,7 +676,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtMLOCode" runat="server" CssClass="textboxuppercase" MaxLength="16"
-                                                                    Width="250px" TabIndex="49"></asp:TextBox>
+                                                                    Width="250px" TabIndex="49" Enabled="false"></asp:TextBox>
                                                                 <%--<asp:RequiredFieldValidator ID="rfvMLOCode" runat="server" ControlToValidate="txtMLOCode"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>--%>
@@ -694,15 +694,15 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>
-                                                                Transport Mode:
+                                                             <td>
+                                                                Cargo Movement Code:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoTransportMode" runat="server" TabIndex="51" RepeatDirection="Horizontal">
-                                                                    <asp:ListItem Text="Road" Value="R" Selected="True"></asp:ListItem>
-                                                                    <asp:ListItem Text="Train" Value="T"></asp:ListItem>
-                                                                    <asp:ListItem Text="Ship" Value="S"></asp:ListItem>
-                                                                </asp:RadioButtonList>
+                                                                <asp:TextBox ID="txtCMCode" runat="server" CssClass="textboxuppercase" MaxLength="2"
+                                                                    Width="250px" TabIndex="51"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="rfvCMCode" runat="server" ControlToValidate="txtCMCode"
+                                                                    ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </td>
                                                             <td>
                                                             </td>
@@ -747,7 +747,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtTEU" runat="server" CssClass="numerictextbox" MaxLength="13"
-                                                                    Width="250px" TabIndex="55"></cc2:CustomTextBox>
+                                                                    Width="250px" TabIndex="55" Text="0"></cc2:CustomTextBox>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvTEU" runat="server" CssClass="errormessage" ErrorMessage="This field is required"
                                                                     ControlToValidate="txtTEU" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -759,7 +759,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtFEU" runat="server" CssClass="numerictextbox" MaxLength="13"
-                                                                    Width="250px" TabIndex="56"></cc2:CustomTextBox>
+                                                                    Width="250px" TabIndex="56"  Text="0"></cc2:CustomTextBox>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvFEU" runat="server" CssClass="errormessage" ErrorMessage="This field is required"
                                                                     ControlToValidate="txtFEU" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -1013,16 +1013,13 @@
                                                             </td>
                                                             <td style="width: 4%;">
                                                             </td>
-                                                            <td style="width: 20%;">
-                                                                Seal No:<span class="errormessage">*</span>
+                                                            
+                                                            <td>
+                                                                Agent Code:
                                                             </td>
-                                                            <td style="width: 28%;">
-                                                                <asp:TextBox ID="txtFtrSealNo" runat="server" CssClass="textboxuppercase" MaxLength="15"
-                                                                    Width="250" TabIndex="8"></asp:TextBox>
-                                                                <br />
-                                                                <asp:RequiredFieldValidator ID="rfvFtrSealNo" runat="server" CssClass="errormessage"
-                                                                    ErrorMessage="This field is required" ControlToValidate="txtFtrSealNo" ValidationGroup="Add"
-                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                            <td>
+                                                                <asp:TextBox ID="txtFtrAgentCode" runat="server" CssClass="textboxuppercase" MaxLength="15"
+                                                                    Width="250" TabIndex="15" Enabled="false"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1065,16 +1062,13 @@
                                                             </td>
                                                             <td>
                                                             </td>
+                                                           
                                                             <td>
-                                                                Package:<span class="errormessage">*</span>
+                                                                Custom Seal:
                                                             </td>
                                                             <td>
-                                                                <cc2:CustomTextBox ID="txtFtrPackage" runat="server" CssClass="numerictextbox" MaxLength="13"
-                                                                    Width="250px" TabIndex="12"></cc2:CustomTextBox>
-                                                                <br />
-                                                                <asp:RequiredFieldValidator ID="rfvFtrPackage" runat="server" CssClass="errormessage"
-                                                                    ErrorMessage="This field is required" ControlToValidate="txtFtrPackage" ValidationGroup="Add"
-                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                <asp:TextBox ID="txtFtrCustSeal" runat="server" CssClass="textboxuppercase" MaxLength="15"
+                                                                    Width="250" TabIndex="19"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1091,6 +1085,64 @@
                                                             </td>
                                                             <td>
                                                             </td>
+                                                            
+                                                            <td>
+                                                                Stowage:
+                                                            </td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtFtrStowage" runat="server" CssClass="textboxuppercase" MaxLength="6"
+                                                                    Width="250" TabIndex="29"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 20%;">
+                                                                Seal No:<span class="errormessage">*</span>
+                                                            </td>
+                                                            <td style="width: 28%;">
+                                                                <asp:TextBox ID="txtFtrSealNo" runat="server" CssClass="textboxuppercase" MaxLength="15"
+                                                                    Width="250" TabIndex="8"></asp:TextBox>
+                                                                <br />
+                                                                <asp:RequiredFieldValidator ID="rfvFtrSealNo" runat="server" CssClass="errormessage"
+                                                                    ErrorMessage="This field is required" ControlToValidate="txtFtrSealNo" ValidationGroup="Add"
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                            <td>
+                                                                Tare Weight:
+                                                            </td>
+                                                            <td>
+                                                                <cc2:CustomTextBox ID="txtFtrTareWt" runat="server" CssClass="numerictextbox" MaxLength="8"
+                                                                    Width="250px" TabIndex="16" Type="Decimal" Precision="4" Scale="3"></cc2:CustomTextBox>
+                                                                <%--<br />
+                                                                <asp:RequiredFieldValidator ID="rfvFtrTareWt" runat="server" CssClass="errormessage"
+                                                                    ErrorMessage="This field is required" ControlToValidate="txtFtrTareWt" ValidationGroup="Add"
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>--%>
+                                                            </td>
+                                                        </tr>
+                                                         <tr>
+                                                             <td>
+                                                                Package:<span class="errormessage">*</span>
+                                                            </td>
+                                                            <td>
+                                                                <cc2:CustomTextBox ID="txtFtrPackage" runat="server" CssClass="numerictextbox" MaxLength="13"
+                                                                    Width="250px" TabIndex="12"></cc2:CustomTextBox>
+                                                                <br />
+                                                                <asp:RequiredFieldValidator ID="rfvFtrPackage" runat="server" CssClass="errormessage"
+                                                                    ErrorMessage="This field is required" ControlToValidate="txtFtrPackage" ValidationGroup="Add"
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                            <td>
+                                                                IMCO No:
+                                                            </td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtFtrImcoNo" runat="server" CssClass="textboxuppercase" MaxLength="4"
+                                                                    Width="250" TabIndex="20"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
                                                             <td>
                                                                 ISO Code:<span class="errormessage">*</span>
                                                             </td>
@@ -1109,27 +1161,14 @@
                                                                     ErrorMessage="This field is required" ControlToValidate="txtFtrISOCode" ValidationGroup="Add"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Agent Code:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="txtFtrAgentCode" runat="server" CssClass="textboxuppercase" MaxLength="15"
-                                                                    Width="250" TabIndex="15"></asp:TextBox>
-                                                            </td>
                                                             <td>
                                                             </td>
                                                             <td>
-                                                                Tare Weight:
+                                                                Call No:
                                                             </td>
                                                             <td>
-                                                                <cc2:CustomTextBox ID="txtFtrTareWt" runat="server" CssClass="numerictextbox" MaxLength="8"
-                                                                    Width="250px" TabIndex="16" Type="Decimal" Precision="4" Scale="3"></cc2:CustomTextBox>
-                                                                <%--<br />
-                                                                <asp:RequiredFieldValidator ID="rfvFtrTareWt" runat="server" CssClass="errormessage"
-                                                                    ErrorMessage="This field is required" ControlToValidate="txtFtrTareWt" ValidationGroup="Add"
-                                                                    Display="Dynamic"></asp:RequiredFieldValidator>--%>
+                                                                <asp:TextBox ID="txtFtrCallNo" runat="server" CssClass="textboxuppercase" MaxLength="1"
+                                                                    Width="250" TabIndex="30"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1154,24 +1193,7 @@
                                                                 </asp:RadioButtonList>
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Custom Seal:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="txtFtrCustSeal" runat="server" CssClass="textboxuppercase" MaxLength="15"
-                                                                    Width="250" TabIndex="19"></asp:TextBox>
-                                                            </td>
-                                                            <td>
-                                                            </td>
-                                                            <td>
-                                                                IMCO No:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="txtFtrImcoNo" runat="server" CssClass="textboxuppercase" MaxLength="4"
-                                                                    Width="250" TabIndex="20"></asp:TextBox>
-                                                            </td>
-                                                        </tr>
+                                                       
                                                         <tr>
                                                             <td>
                                                                 Temp. Max:
@@ -1251,24 +1273,7 @@
                                                                     Width="250" TabIndex="28"></asp:TextBox>
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Stowage:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="txtFtrStowage" runat="server" CssClass="textboxuppercase" MaxLength="6"
-                                                                    Width="250" TabIndex="29"></asp:TextBox>
-                                                            </td>
-                                                            <td>
-                                                            </td>
-                                                            <td>
-                                                                Call No:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="txtFtrCallNo" runat="server" CssClass="textboxuppercase" MaxLength="1"
-                                                                    Width="250" TabIndex="30"></asp:TextBox>
-                                                            </td>
-                                                        </tr>
+                                                        
                                                     </table>
                                                     <table border="0" cellpadding="1" cellspacing="0" width="100%" class="custtable">
                                                         <tr>

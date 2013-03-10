@@ -163,7 +163,10 @@ namespace EMS.Entity
             this.PrincipleSharing = Convert.ToBoolean(reader["IsPrincipleShared"]);
             this.RateChangeable = Convert.ToBoolean(reader["RateChangable"]);            
             this.ServiceTax = Convert.ToBoolean(reader["ServiceTax"]);
-            this.Location = Convert.ToInt32(reader["LocationId"]);
+
+            if (ColumnExists(reader, "LocationId"))
+                if (reader["LocationId"] != DBNull.Value)
+                    this.Location = Convert.ToInt32(reader["LocationId"]);
 
             //if (!string.IsNullOrEmpty(Convert.ToString(reader["ChargeRates"])))
             //{
@@ -182,11 +185,23 @@ namespace EMS.Entity
             return stringWriter.ToString();
         }
         
-
         public int Location
         {
             get;
             set;
+        }
+
+        public bool ColumnExists(IDataReader reader, string columnName)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                if (reader.GetName(i).ToUpper() == columnName.ToUpper())
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

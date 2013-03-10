@@ -13,6 +13,33 @@ namespace EMS.WebApp.Transaction {
     public partial class ManageInvoice {
         
         /// <summary>
+        /// UpdatePanelInvoice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanelInvoice;
+        
+        /// <summary>
+        /// txtInvoiceNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtInvoiceNo;
+        
+        /// <summary>
+        /// rdblAllinFreight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rdblAllinFreight;
+        
+        /// <summary>
         /// ddlInvoiceType control.
         /// </summary>
         /// <remarks>
@@ -29,6 +56,51 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvInvoiceType;
+        
+        /// <summary>
+        /// rdblAccountFor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rdblAccountFor;
+        
+        /// <summary>
+        /// txtInvoiceDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtInvoiceDate;
+        
+        /// <summary>
+        /// cbeInvoiceDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender cbeInvoiceDate;
+        
+        /// <summary>
+        /// rfvLineBLDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLineBLDate;
+        
+        /// <summary>
+        /// txtGrossWeightTON control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtGrossWeightTON;
         
         /// <summary>
         /// ddlLocation control.
@@ -49,58 +121,40 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLocation;
         
         /// <summary>
-        /// ddlLineNvocc control.
+        /// txtVolume control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlLineNvocc;
+        protected global::System.Web.UI.WebControls.TextBox txtVolume;
         
         /// <summary>
-        /// rfvLineNvocc control.
+        /// ddlNvocc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLineNvocc;
+        protected global::System.Web.UI.WebControls.DropDownList ddlNvocc;
         
         /// <summary>
-        /// txtInvoiceNo control.
+        /// rfvNvocc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInvoiceNo;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNvocc;
         
         /// <summary>
-        /// rfvInvoiceNo control.
+        /// txtTEU control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvInvoiceNo;
-        
-        /// <summary>
-        /// txtInvoiceDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInvoiceDate;
-        
-        /// <summary>
-        /// rfvInvoiceDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvInvoiceDate;
+        protected global::System.Web.UI.WebControls.TextBox txtTEU;
         
         /// <summary>
         /// ddlBLno control.
@@ -121,6 +175,15 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBLno;
         
         /// <summary>
+        /// txtFFU control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFFU;
+        
+        /// <summary>
         /// txtBLdate control.
         /// </summary>
         /// <remarks>
@@ -137,6 +200,15 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBLdate;
+        
+        /// <summary>
+        /// txtTotalAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTotalAmount;
         
         /// <summary>
         /// ddlCHAid control.
@@ -157,15 +229,6 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCHAid;
         
         /// <summary>
-        /// rdblAccountFor control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdblAccountFor;
-        
-        /// <summary>
         /// txtExchangeRate control.
         /// </summary>
         /// <remarks>
@@ -184,76 +247,139 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvExchangeRate;
         
         /// <summary>
-        /// txtTotalAmount control.
+        /// ddlFChargeName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTotalAmount;
+        protected global::System.Web.UI.WebControls.DropDownList ddlFChargeName;
         
         /// <summary>
-        /// rdblAllinFreight control.
+        /// rfvChargeName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdblAllinFreight;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvChargeName;
         
         /// <summary>
-        /// txtGrossWeightTON control.
+        /// ddlFTerminal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGrossWeightTON;
+        protected global::System.Web.UI.WebControls.DropDownList ddlFTerminal;
         
         /// <summary>
-        /// txtVolume control.
+        /// rfvTerminal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtVolume;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTerminal;
         
         /// <summary>
-        /// txtTEU control.
+        /// txtRatePerBL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTEU;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtRatePerBL;
         
         /// <summary>
-        /// txtFFU control.
+        /// txtRatePerTEU control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFFU;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtRatePerTEU;
         
         /// <summary>
-        /// UpdatePanelInvoice control.
+        /// txtRateperFEU control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanelInvoice;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtRateperFEU;
         
         /// <summary>
-        /// dgInvoiceChargeRates control.
+        /// txtRatePerCBM control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgInvoiceChargeRates;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtRatePerCBM;
+        
+        /// <summary>
+        /// txtRatePerTon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtRatePerTon;
+        
+        /// <summary>
+        /// txtUSD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtUSD;
+        
+        /// <summary>
+        /// txtGrossAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtGrossAmount;
+        
+        /// <summary>
+        /// txtServiceTax control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtServiceTax;
+        
+        /// <summary>
+        /// txtTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtTotal;
+        
+        /// <summary>
+        /// btnAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdd;
+        
+        /// <summary>
+        /// gvwInvoice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvwInvoice;
         
         /// <summary>
         /// hdnChargeID control.
@@ -290,32 +416,5 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMessage;
-        
-        /// <summary>
-        /// ddlMLocation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMLocation;
-        
-        /// <summary>
-        /// ddlMTerminal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMTerminal;
-        
-        /// <summary>
-        /// ddlMWashingType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMWashingType;
     }
 }

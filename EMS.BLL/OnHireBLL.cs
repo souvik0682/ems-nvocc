@@ -11,7 +11,15 @@ using EMS.Entity;
 namespace EMS.BLL
 {
     public class OnHireBLL
-    {      
+    {
+        public static DataTable GetContainerInfo(string ContainerId)
+        {
+            return EMS.DAL.OnHireDAL.GetContainerInfo(ContainerId);
+        }
+        public static bool ValidateContainerStatus(string ContainerId)
+        {
+            return EMS.DAL.OnHireDAL.ValidateContainerStatus(ContainerId);
+        }
         public bool ValidateOnHire(string  ContainerId,string OnOrOff)
         {
             return EMS.DAL.OnHireDAL.ValidateOnHire(ContainerId,OnOrOff);

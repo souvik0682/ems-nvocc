@@ -231,7 +231,7 @@
                                     </asp:DropDownList>
                                 </td>
                                 <td>
-                                    Do-Valid Till
+                                    DO-Valid Till
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtDoValidTill" runat="server" Width="75" Enabled="false"></asp:TextBox>

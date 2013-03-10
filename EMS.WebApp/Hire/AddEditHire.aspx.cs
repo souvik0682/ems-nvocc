@@ -10,6 +10,7 @@ using EMS.Entity;
 using System.Xml.Linq;
 using EMS.Utilities;
 using EMS.BLL;
+using EMS.WebApp.Transaction;
 
 namespace EMS.WebApp.Hire
 {
@@ -41,11 +42,18 @@ namespace EMS.WebApp.Hire
 
         private void SetDefault()
         {
-            Filler.FillData<IContainerType>(ddlType, CommonBLL.GetContainerType(), "CotainerDesc", "ContainerTypeID", "---Type---");
+            Filler.FillData<IContainerType>(ddlType, CommonBLL.GetContainerType(), "ContainerAbbr", "ContainerTypeID", "---Type---");
             Filler.FillData<ILocation>(ddlLocation, new CommonBLL().GetActiveLocation(), "Name", "Id", "---Select---");
             Filler.FillData(ddlLineCode, new DBInteraction().GetNVOCCLine(-1, "").Tables[0], "NVOCCName", "pk_NVOCCID", "---Select---");
             Filler.GridDataBind(new List<IEqpOnHireContainer>(), gvwHire);
             rdTransactionType_SelectedIndexChanged(null, null);
+
+            if (rdTransactionType.SelectedValue == "F" )
+                {
+                    txtContainerNo.TextChanged+=txtContainerNo_TextChanged;
+                ddlSize.Enabled=false;
+                ddlType.Enabled=false;
+                }
         }
         private void SetEditValue(DataTable dt)
         {
@@ -75,6 +83,21 @@ namespace EMS.WebApp.Hire
                 Filler.GridDataBind(lstEqpOnHireContainer, gvwHire);
             }
         }
+
+        public bool ReturnAt() {
+            if (rdTransactionType.SelectedValue == "F") { 
+            //chk valid ReturnAt            
+                var t=txtReturn.Text.Trim();
+                DataTable dt = ImportHaulageBLL.GetAllPort(t);
+                    if(dt.AsEnumerable().FirstOrDefault(e=>e.Field<String>("PortName") != t)!=null ) 
+                    {
+                        return true;
+                    }
+                   return false;
+                    
+            }
+            return true;
+        }
         private void ClearFieldLower()
         {
             txtContainerNo.Text = string.Empty;
@@ -102,10 +125,80 @@ namespace EMS.WebApp.Hire
             if (ddlType.SelectedIndex > 0) return ddlType.Items.FindByValue(val).Text;
             return "";
         }
+
+        protected bool IsValidContainerNo()
+        {
+            bool IsValid = true;
+            int total = 0;
+            int step = 10;
+            string containerNo = txtContainerNo.Text.ToUpper();
+
+            Dictionary<char, int> AlphabetCodes = new Dictionary<char, int>();
+            List<int> PowerOfMultipliers = new List<int>();
+            for (int i = 65; i < 91; i++)
+            {
+                char c = (char)i;
+                int pos = i - 65 + step;
+                if (c == 'A' || c == 'K' || c == 'U') //omit multiples of 11.
+                    step += 1;
+                AlphabetCodes.Add(c, pos); //add to dictionary
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                int result = (int)Math.Pow(2, i); //power of 2 calculation.
+                PowerOfMultipliers.Add(result); //add to list.
+            }
+            if (containerNo.Length == 11) //container numbers must be 11 characters long.
+            {
+                for (int i = 0; i < 10; i++) //loop through the first 10 characters (the 11th is the check digit!).
+                {
+                    if (AlphabetCodes.ContainsKey(containerNo[i])) //if the current character is in the dictionary.
+                        total += (AlphabetCodes[containerNo[i]] * PowerOfMultipliers[i]); //add it's value to the total.
+                    else
+                    {
+                        int serialNumber = (int)containerNo[i] - 48; //it must be a number, so get the number from the char ascii value.
+                        total += (serialNumber * PowerOfMultipliers[i]); //and add it to the total.
+                    }
+                }
+                int checkDigit = (int)total % 11; //this should give you the check digit
+                //The check digit shouldn't equal 10 according to ISO best practice - BUT there are containers out there that do, so we'll
+                //double check and set the check digit to 0...again according to ISO best practice.
+                if (checkDigit == 10)
+                    checkDigit = 0;
+                if (checkDigit != (int)containerNo[10] - 48) //check digit should equal the last character in the textbox.
+                {
+                    //errContainer.Text = "Container Number NOT Valid";
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "container", "<script>javascript:void alert('Container Number NOT Valid!');</script>", false);
+                    IsValid = false;
+                }
+                else
+                {
+                    //errContainer.Text = "Container Number Valid";
+                    IsValid = true;
+                }
+            }
+            else
+            {
+                //errContainer.Text = "Container Number must be 11 characters in length";
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "container", "<script>javascript:void alert('Container Number must be 11 characters in length!');</script>", false);
+                IsValid = false;
+            }
+            return IsValid;
+        }
         protected void btnAddToList_Click(object sender, EventArgs e)
         {
             counter = 1;
+
             var g = DateTime.Now;
+            if (!IsValidContainerNo())
+            {
+                return;
+            }
+            else {
+                if (rdTransactionType.SelectedValue == "F" &&  OnHireBLL.ValidateContainerStatus(txtContainerNo.Text)) {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), DateTime.Now.Ticks.ToString(), string.Format("alert('Please check the container {0}');", txtContainerNo.Text), true);
+                }
+            }
             IList<IEqpOnHireContainer> lstEqpOnHireContainer = GetEqpOnHireContainers;
 
             if (lstEqpOnHireContainer == null)
@@ -145,7 +238,7 @@ namespace EMS.WebApp.Hire
                      ActualOnHireDate = txtOnHireDate.Text.ToNullDateTime(),
                      AddedOn = DateTime.Now,
                      EditedOn = DateTime.Now,
-                     MovementOptID = 9,
+                     MovementOptID = rdTransactionType.SelectedValue=="N"?9:17,
                      UserAdded = user.Id,
                      UserLastEdited = user.Id
                  });
@@ -238,6 +331,9 @@ namespace EMS.WebApp.Hire
             {
                 //Mes="Please add one or more On Hire Containers"
                 return false;
+            }
+            if (!ReturnAt()) {
+                    ScriptManager.RegisterStartupScript(this,this.GetType(),DateTime.Now.Ticks.ToString(),string.Format("alert('ReturnAt is not valid');"),true);
             }
             return true;
         }
@@ -344,6 +440,8 @@ namespace EMS.WebApp.Hire
                     rfvLocation.Enabled = true;
                     lblValid.Visible = true;
                     lblStock.Visible = true;
+                    ddlSize.Enabled = true;
+                    ddlType.Enabled = true;
                 }
                 else
                 {
@@ -355,9 +453,33 @@ namespace EMS.WebApp.Hire
 
                     rfvReturn.Enabled = true;
                     lblReturn.Visible = true;
+                   // txtContainerNo.TextChanged+=txtContainerNo_TextChanged;
+                    ddlSize.Enabled=false;
+                    ddlType.Enabled=false;
                 }
             }
             catch { }
+        }
+
+        protected void txtContainerNo_TextChanged(object sender, EventArgs e)
+        {
+            if (!IsValidContainerNo())
+            {
+                return;
+            }
+            else
+            {
+                if (rdTransactionType.SelectedValue == "F" )
+                {
+                    var dt = OnHireBLL.GetContainerInfo(txtContainerNo.Text);
+                     foreach(DataRow dr in dt.Rows) {
+                        ddlType.SelectedValue= dr["fk_ContainerTypeID"].ToString();
+                        ddlSize.SelectedValue= dr["CntrSize"].ToString();
+                         break;
+                     }
+                }
+                 
+            }
         }
     }
 }

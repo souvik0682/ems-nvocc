@@ -40,15 +40,6 @@ namespace EMS.WebApp.Transaction {
         protected global::AjaxControlToolkit.TabPanel tpHeader;
         
         /// <summary>
-        /// imgLineLogo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgLineLogo;
-        
-        /// <summary>
         /// ddlNvocc control.
         /// </summary>
         /// <remarks>

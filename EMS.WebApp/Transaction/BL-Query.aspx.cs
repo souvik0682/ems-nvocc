@@ -88,6 +88,8 @@ namespace EMS.WebApp.Transaction
             txtPGRFreedays.Text = dtDetail.Rows[0]["PGRFREEDAYS"].ToString();
             txtPGRTill.Text = dtDetail.Rows[0]["PGRTILL"].ToString();
 
+
+
         }
 
         void fillServiceRequest(DataTable dtDetail)

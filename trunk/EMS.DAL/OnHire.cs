@@ -33,6 +33,25 @@ namespace EMS.DAL
             }
             return false;
         }
+        public static bool ValidateContainerStatus(string ContainerId)
+        {
+            string strExecution = "[admin].[uspCheckContainerStatus]";
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@ContainerNo", 11, ContainerId);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    if (Convert.ToInt32(reader["cnt"]) > 0)
+                        return true;
+                }
+
+                reader.Close();
+            }
+            return false;
+        }
         public static DataTable GetOnHire(ISearchCriteria searchCriteria)
         {
             string strExecution = "[admin].[prcGetAllOnHire]";
@@ -137,6 +156,19 @@ namespace EMS.DAL
             }
 
             return result;
+        }
+
+        public static DataTable GetContainerInfo(string ContainerId)
+        {
+            string strExecution = "[admin].[uspContainerInfo]";
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@ContainerNo", 11, ContainerId);
+                return oDq.GetTable();
+            }
+            // return (DataTable)null;
         }
     }
 }

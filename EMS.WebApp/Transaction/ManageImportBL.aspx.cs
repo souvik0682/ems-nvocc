@@ -723,7 +723,7 @@ namespace EMS.WebApp.Transaction
             List<ILine> lstLine = Session["NVOCC"] as List<ILine>;
             int nvoccId = Convert.ToInt32(ddlNvocc.SelectedValue);
 
-            imgLineLogo.ImageUrl = lstLine.Where(l => l.NVOCCID == nvoccId).FirstOrDefault().LogoPath;
+            //imgLineLogo.ImageUrl = lstLine.Where(l => l.NVOCCID == nvoccId).FirstOrDefault().LogoPath;
 
             int defaultFreeDays = new ImportBLL().GetDefaultFreeDays(nvoccId);
             txtDestFreeDays.Text = defaultFreeDays.ToString();
@@ -740,15 +740,13 @@ namespace EMS.WebApp.Transaction
         protected void ddlFtrContainerType_SelectedIndexChanged(object sender, EventArgs e)
         {
             string TareWeight = RetriveTareWeight().ToString();
+            txtFtrTareWt.Text = TareWeight;
 
             if (rdoCargoType.SelectedValue == "E")
             {
-                txtFtrTareWt.Text = TareWeight;
-
                 if (txtFtrGrossWeight.Text == string.Empty)
                     txtFtrGrossWeight.Text = TareWeight;
             }
-
             if (txtFtrCargoWt.Text == string.Empty)
                 txtFtrCargoWt.Text = (Convert.ToDecimal(TareWeight) / 1000).ToString();
         }
@@ -1940,6 +1938,15 @@ namespace EMS.WebApp.Transaction
                 IsValid = false;
             }
             return IsValid;
+        }
+
+        protected void txtGrossWeight_TextChanged(object sender, EventArgs e)
+        {
+            if (txtGrossWeight.Text != string.Empty)
+            {
+                if (txtFtrCargoWt.Text == string.Empty)
+                    txtFtrCargoWt.Text = (Convert.ToDecimal(txtGrossWeight.Text) / 1000).ToString();
+            }
         }
 
 

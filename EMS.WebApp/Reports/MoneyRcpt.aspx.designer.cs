@@ -31,13 +31,31 @@ namespace EMS.WebApp.Reports {
         protected global::System.Web.UI.UpdatePanel upLoc;
         
         /// <summary>
-        /// txtInvoiceNo control.
+        /// AutoCompletepInvoice1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInvoiceNo;
+        protected global::EMS.WebApp.CustomControls.AutoCompletePort AutoCompletepInvoice1;
+        
+        /// <summary>
+        /// btnGen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGen;
+        
+        /// <summary>
+        /// ddlMnyRcpt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlMnyRcpt;
         
         /// <summary>
         /// btnSave control.

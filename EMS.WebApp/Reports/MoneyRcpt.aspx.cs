@@ -26,8 +26,8 @@ namespace EMS.WebApp.Reports
             LocalReportManager reportManager = new LocalReportManager(rptViewer, "MoneyReciept", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
             string rptName = "MoneyReciept.rdlc";
 
-
-            DataSet ds = EMS.BLL.BLLReport.GetMoneyRcptDetails(txtInvoiceNo.Text.Trim());
+            string invoiceNo = ((TextBox)AutoCompletepInvoice1.FindControl("txtInvoice")).Text;
+            DataSet ds = EMS.BLL.BLLReport.GetMoneyRcptDetails(invoiceNo.Trim());
             try
             {
                 rptViewer.Reset();
@@ -52,6 +52,12 @@ namespace EMS.WebApp.Reports
         protected void btnSave_Click(object sender, EventArgs e)
         {
             GenerateReport();
+        }
+
+        protected void btnGen_Click(object sender, EventArgs e)
+        {
+            string invoiceNo = ((TextBox)AutoCompletepInvoice1.FindControl("txtInvoice")).Text;
+           EMS.Utilities.GeneralFunctions.PopulateDropDownList(ddlMnyRcpt,  BLLReport.FillDDLMoneyRcpt(invoiceNo));
         }
     }
 }

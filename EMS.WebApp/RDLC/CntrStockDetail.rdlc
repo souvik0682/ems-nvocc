@@ -131,7 +131,7 @@
               <Width>0.73078in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.84561in</Width>
+              <Width>0.90811in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.81155in</Width>
@@ -176,7 +176,7 @@
               <Width>0.75509in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.86967in</Width>
+              <Width>0.80718in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -721,6 +721,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -911,7 +912,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -945,7 +945,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -979,7 +978,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1013,7 +1011,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1047,7 +1044,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1081,7 +1077,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1115,7 +1110,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1149,7 +1143,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1183,7 +1176,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1217,7 +1209,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1251,7 +1242,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1285,7 +1275,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1319,7 +1308,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1390,7 +1378,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>12.46585in</Width>
+  <Width>12.52835in</Width>
   <Page>
     <PageHeader>
       <Height>2.05556cm</Height>
@@ -1404,7 +1392,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>S T O C K  S U M M E R Y</Value>
+                  <Value>S T O C K  S T A T E M E N T</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -1412,10 +1400,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
-          <Top>0.67056cm</Top>
-          <Left>12.65978cm</Left>
+          <Top>0.67036cm</Top>
+          <Left>12.36874cm</Left>
           <Height>0.57354cm</Height>
-          <Width>5.22521cm</Width>
+          <Width>4.90771cm</Width>
           <Style>
             <Border>
               <Style>None</Style>

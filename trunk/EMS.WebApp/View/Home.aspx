@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
     <center>
     <div style="margin: 2% 0% 0% 0%;width:400px;">
-        <img src="../Images/MUST_LOGO3.jpg" height="400" width="400" />
+        <img src="../Images/Edge_Screen.jpg" height="400" width="400" />
     </div>
     </center>
 </asp:Content>

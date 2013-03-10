@@ -64,6 +64,12 @@ namespace EMS.WebApp.Transaction
             if (BLDataSet.Tables[0].Rows.Count > 0)
             {
                 fillBLDetail(BLDataSet.Tables[0]);
+
+                if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["FSTINVGENERATED"]) == true)
+                {
+                    EnableDisableServiceRequestSection();
+                }
+
                 fillServiceRequest(BLDataSet.Tables[0]);
                 FillUploadedDocument(BLDataSet.Tables[1]);
                 FillSubmittedDocument(BLDataSet.Tables[2]);
@@ -72,19 +78,30 @@ namespace EMS.WebApp.Transaction
             }
         }
 
+
+        void EnableDisableServiceRequestSection()
+        {
+            chkDoExtension.Enabled = true;
+            chkSlotExtension.Enabled = true;
+            chkAmendment.Enabled = true;
+            chkBondCancel.Enabled = true;
+        }
+
+
+
         void fillBLDetail(DataTable dtDetail)
         {
             hdnBLId.Value = dtDetail.Rows[0]["BLID"].ToString();
             txtBlNo.Text = dtDetail.Rows[0]["BLNO"].ToString();
             txtCha.Text = dtDetail.Rows[0]["CHA"].ToString();
-            txtHouseBlNo.Text = dtDetail.Rows[0]["HBLNO"].ToString();
-            txtDetentionFee.Text = dtDetail.Rows[0]["DTNFEE"].ToString();
+            //txtHouseBlNo.Text = dtDetail.Rows[0]["HBLNO"].ToString();
+            //txtDetentionFee.Text = dtDetail.Rows[0]["DTNFEE"].ToString();
             txtDoValidTill.Text = dtDetail.Rows[0]["DOVALIDUPTO"].ToString();
             txtLandingDate.Text = Convert.ToDateTime(dtDetail.Rows[0]["LANDINGDT"].ToString()).ToString("dd/MM/yyyy");
             txtVessel.Text = dtDetail.Rows[0]["VESSEL"].ToString();
             txtVoyage.Text = dtDetail.Rows[0]["VOYAGE"].ToString();
             txtDetentionFreeDays.Text = dtDetail.Rows[0]["DTNFREEDAYS"].ToString();
-            txtDetentionFee.Text = dtDetail.Rows[0]["DTNFEE"].ToString();
+            //txtDetentionFee.Text = dtDetail.Rows[0]["DTNFEE"].ToString();
             txtPGRFreedays.Text = dtDetail.Rows[0]["PGRFREEDAYS"].ToString();
             txtPGRTill.Text = dtDetail.Rows[0]["PGRTILL"].ToString();
 
@@ -247,6 +264,7 @@ namespace EMS.WebApp.Transaction
                 chkBankGuarantee.Enabled = true;
                 lnkGenerateInvoiceDo.Enabled = true;
                 lnkGenerateInvoiceDo.Enabled = true;
+                lnkDO.Enabled = true;
             }
             else
             {
@@ -256,6 +274,7 @@ namespace EMS.WebApp.Transaction
                 chkBankGuarantee.Enabled = false;
                 lnkGenerateInvoiceDo.Enabled = false;
                 lnkGenerateInvoiceDo.Enabled = false;
+                lnkDO.Enabled = false;
             }
         }
 
@@ -265,11 +284,13 @@ namespace EMS.WebApp.Transaction
             {
                 txtVAlidityDate.Enabled = true;
                 lnkGenerateInvoiceDOE.Enabled = true;
+                lnkDoExtension.Enabled = true;
             }
             else
             {
                 txtVAlidityDate.Enabled = false;
                 lnkGenerateInvoiceDOE.Enabled = false;
+                lnkDoExtension.Enabled = false;
             }
         }
 
@@ -280,6 +301,7 @@ namespace EMS.WebApp.Transaction
                 txtExtensionForDetention.Enabled = true;
                 txtExtensionForPGR.Enabled = true;
                 lnkGenerateInvoiceSlotExtension.Enabled = true;
+                lnkSlotExtension.Enabled = true;
 
             }
             else
@@ -287,6 +309,7 @@ namespace EMS.WebApp.Transaction
                 txtExtensionForDetention.Enabled = false;
                 txtExtensionForPGR.Enabled = false;
                 lnkGenerateInvoiceSlotExtension.Enabled = false;
+                lnkSlotExtension.Enabled = false;
             }
         }
 
@@ -295,10 +318,14 @@ namespace EMS.WebApp.Transaction
             if (chkAmendment.Checked == true)
             {
                 ddlAmendmentFor.Enabled = true;
+                lnkPrintAmend.Enabled = true;
+                lnkAmendment.Enabled = true;
             }
             else
             {
                 ddlAmendmentFor.Enabled = false;
+                lnkPrintAmend.Enabled = false;
+                lnkAmendment.Enabled = false;
             }
         }
 
@@ -307,10 +334,14 @@ namespace EMS.WebApp.Transaction
             if (chkBondCancel.Checked == true)
             {
                 txtBondCancellation.Enabled = true;
+                btnBondSave.Enabled = true;
+                lnkBondCancel.Enabled = true;
             }
             else
             {
                 txtBondCancellation.Enabled = false;
+                btnBondSave.Enabled = false;
+                lnkBondCancel.Enabled = false;
             }
         }
 
@@ -322,7 +353,9 @@ namespace EMS.WebApp.Transaction
         protected void lnkGenerateInvoiceDo_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(txtBlNo.Text))
+            {
                 Response.Redirect("~/Reports/InvDO.aspx?BL=" + txtBlNo.Text.Trim());
+            }
             else
                 lblMessageServiceReq.Text = ResourceManager.GetStringWithoutName("ERR00080");
         }
@@ -345,114 +378,202 @@ namespace EMS.WebApp.Transaction
 
         protected void btnSave2_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid)
-            {
-                switch (oImportBLL.SaveBLQActivity(GenerateBLQActivityXMLString(), Convert.ToInt32(hdnBLId.Value)))
-                {
-                    case 1: PopulateAllData();
-                        lblMessageServiceReq.Text= ResourceManager.GetStringWithoutName("ERR00009");
-                        UpdatePanel2.Update();
-                        break;
-                }
+            //if (Page.IsValid)
+            //{
+            //    switch (oImportBLL.SaveBLQActivity(GenerateBLQActivityXMLString(), Convert.ToInt32(hdnBLId.Value)))
+            //    {
+            //        case 1: PopulateAllData();
+            //            lblMessageServiceReq.Text = ResourceManager.GetStringWithoutName("ERR00009");
+            //            UpdatePanel2.Update();
+            //            break;
+            //    }
 
-            }
+            //}
         }
 
 
-        string GenerateBLQActivityXMLString()
+        //string GenerateBLQActivityXMLString()
+        //{
+        //    StringBuilder sb = new StringBuilder();
+        //    sb.Append("<Activity>");
+
+        //    if (chkDo.Checked)
+        //    {
+        //        sb.Append("<Item>");
+
+        //        sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
+        //        sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.DO + "</AT>");
+        //        sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
+        //        sb.Append("<VD>" + Convert.ToDateTime(txtDoValidTill.Text).ToString("MM/dd/yyyy") + "</VD>");
+        //        sb.Append("<BG>" + (chkBankGuarantee.Checked ? "1" : "0") + "</BG>");
+        //        sb.Append("<IG>" + 0 + "</IG>");
+        //        sb.Append("<NOP>" + 0 + "</NOP>");
+
+        //        sb.Append("</Item>");
+        //    }
+
+        //    if (chkDoExtension.Checked)
+        //    {
+        //        sb.Append("<Item>");
+
+        //        sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
+        //        sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.DOE + "</AT>");
+        //        sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
+        //        sb.Append("<VD>" + Convert.ToDateTime(txtVAlidityDate.Text).ToString("MM/dd/yyyy") + "</VD>");
+        //        sb.Append("<BG>" + "0" + "</BG>");
+        //        sb.Append("<IG>" + 0 + "</IG>");
+        //        sb.Append("<NOP>" + 0 + "</NOP>");
+
+        //        sb.Append("</Item>");
+        //    }
+
+
+        //    if (chkSlotExtension.Checked)
+        //    {
+        //        sb.Append("<Item>");
+
+        //        sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
+        //        sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.SE + "</AT>");
+        //        if (!String.IsNullOrEmpty(txtExtensionForDetention.Text))
+        //            sb.Append("<AD>" + Convert.ToDateTime(txtExtensionForDetention.Text).ToString("MM/dd/yyyy") + "</AD>");
+        //        else
+        //            sb.Append("<AD></AD>");
+
+        //        if (!String.IsNullOrEmpty(txtExtensionForPGR.Text))
+        //            sb.Append("<VD>" + Convert.ToDateTime(txtExtensionForPGR.Text).ToString("MM/dd/yyyy") + "</VD>");
+        //        else
+        //            sb.Append("<VD></VD>");
+
+        //        sb.Append("<BG>" + "0" + "</BG>");
+        //        sb.Append("<IG>" + 0 + "</IG>");
+        //        sb.Append("<NOP>" + 0 + "</NOP>");
+
+        //        sb.Append("</Item>");
+        //    }
+
+        //    if (chkBondCancel.Checked)
+        //    {
+        //        sb.Append("<Item>");
+
+        //        sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
+        //        sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.BC + "</AT>");
+        //        sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
+        //        sb.Append("<VD>" + Convert.ToDateTime(txtBondCancellation.Text).ToString("MM/dd/yyyy") + "</VD>");
+        //        sb.Append("<BG>" + "0" + "</BG>");
+        //        sb.Append("<IG>" + 0 + "</IG>");
+        //        sb.Append("<NOP>" + 0 + "</NOP>");
+
+        //        sb.Append("</Item>");
+        //    }
+
+        //    sb.Append("</Activity>");
+
+        //    /*
+        //    foreach (GridViewRow gvRow in gvSelectedContainer.Rows)
+        //    {
+        //        HiddenField hdnOldTransactionId = (HiddenField)gvRow.FindControl("hdnOldTransactionId");
+        //        HiddenField hdnCurrentTransactionId = (HiddenField)gvRow.FindControl("hdnCurrentTransactionId");
+        //        CheckBox chkItem = (CheckBox)gvRow.FindControl("chkItem");
+
+        //        sb.Append("<Cont>");
+
+        //        sb.Append("<Oid>" + hdnOldTransactionId.Value + "</Oid>");
+        //        sb.Append("<Nid>" + hdnCurrentTransactionId.Value + "</Nid>");
+        //        sb.Append("<Stats>" + chkItem.Checked.ToString() + "</Stats>");
+
+        //        sb.Append("</Cont>");
+
+        //    }*/
+
+
+
+        //    return sb.ToString();
+        //}
+
+        string GenerateBLQActivityXMLString(int No)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("<Activity>");
 
-            if (chkDo.Checked)
+            switch (No)
             {
-                sb.Append("<Item>");
+                case 1:
+                    #region chkDo.Checked
+                    sb.Append("<Item>");
 
-                sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
-                sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.DO + "</AT>");
-                sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
-                sb.Append("<VD>" + Convert.ToDateTime(txtDoValidTill.Text).ToString("MM/dd/yyyy") + "</VD>");
-                sb.Append("<BG>" + (chkBankGuarantee.Checked ? "1" : "0") + "</BG>");
-                sb.Append("<IG>" + 0 + "</IG>");
-                sb.Append("<NOP>" + 0 + "</NOP>");
+                    sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
+                    sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.DO + "</AT>");
+                    sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
+                    sb.Append("<VD>" + Convert.ToDateTime(txtDoValidTill.Text).ToString("MM/dd/yyyy") + "</VD>");
+                    sb.Append("<BG>" + (chkBankGuarantee.Checked ? "1" : "0") + "</BG>");
+                    sb.Append("<IG>" + 0 + "</IG>");
+                    sb.Append("<NOP>" + 0 + "</NOP>");
 
-                sb.Append("</Item>");
-            }
+                    sb.Append("</Item>");
+                    #endregion
+                    break;
 
-            if (chkDoExtension.Checked)
-            {
-                sb.Append("<Item>");
+                case 2:
+                    #region chkDoExtension.Checked
+                    sb.Append("<Item>");
 
-                sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
-                sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.DOE + "</AT>");
-                sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
-                sb.Append("<VD>" + Convert.ToDateTime(txtVAlidityDate.Text).ToString("MM/dd/yyyy") + "</VD>");
-                sb.Append("<BG>" + "0" + "</BG>");
-                sb.Append("<IG>" + 0 + "</IG>");
-                sb.Append("<NOP>" + 0 + "</NOP>");
+                    sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
+                    sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.DOE + "</AT>");
+                    sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
+                    sb.Append("<VD>" + Convert.ToDateTime(txtVAlidityDate.Text).ToString("MM/dd/yyyy") + "</VD>");
+                    sb.Append("<BG>" + "0" + "</BG>");
+                    sb.Append("<IG>" + 0 + "</IG>");
+                    sb.Append("<NOP>" + 0 + "</NOP>");
 
-                sb.Append("</Item>");
-            }
+                    sb.Append("</Item>");
+                    #endregion
+                    break;
 
+                case 3:
+                    #region chkSlotExtension.Checked
+                    sb.Append("<Item>");
 
-            if (chkSlotExtension.Checked)
-            {
-                sb.Append("<Item>");
+                    sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
+                    sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.SE + "</AT>");
+                    if (!String.IsNullOrEmpty(txtExtensionForDetention.Text))
+                        sb.Append("<AD>" + Convert.ToDateTime(txtExtensionForDetention.Text).ToString("MM/dd/yyyy") + "</AD>");
+                    else
+                        sb.Append("<AD></AD>");
 
-                sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
-                sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.SE + "</AT>");
-                if (!String.IsNullOrEmpty(txtExtensionForDetention.Text))
-                    sb.Append("<AD>" + Convert.ToDateTime(txtExtensionForDetention.Text).ToString("MM/dd/yyyy") + "</AD>");
-                else
-                    sb.Append("<AD></AD>");
+                    if (!String.IsNullOrEmpty(txtExtensionForPGR.Text))
+                        sb.Append("<VD>" + Convert.ToDateTime(txtExtensionForPGR.Text).ToString("MM/dd/yyyy") + "</VD>");
+                    else
+                        sb.Append("<VD></VD>");
 
-                if (!String.IsNullOrEmpty(txtExtensionForPGR.Text))
-                    sb.Append("<VD>" + Convert.ToDateTime(txtExtensionForPGR.Text).ToString("MM/dd/yyyy") + "</VD>");
-                else
-                    sb.Append("<VD></VD>");
+                    sb.Append("<BG>" + "0" + "</BG>");
+                    sb.Append("<IG>" + 0 + "</IG>");
+                    sb.Append("<NOP>" + 0 + "</NOP>");
 
-                sb.Append("<BG>" + "0" + "</BG>");
-                sb.Append("<IG>" + 0 + "</IG>");
-                sb.Append("<NOP>" + 0 + "</NOP>");
+                    sb.Append("</Item>");
+                    #endregion
+                    break;
 
-                sb.Append("</Item>");
-            }
+                case 4:
+                    break;
 
-            if (chkBondCancel.Checked)
-            {
-                sb.Append("<Item>");
+                case 5:
+                    #region chkBondCancel.Checked
+                    sb.Append("<Item>");
 
-                sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
-                sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.BC + "</AT>");
-                sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
-                sb.Append("<VD>" + Convert.ToDateTime(txtBondCancellation.Text).ToString("MM/dd/yyyy") + "</VD>");
-                sb.Append("<BG>" + "0" + "</BG>");
-                sb.Append("<IG>" + 0 + "</IG>");
-                sb.Append("<NOP>" + 0 + "</NOP>");
+                    sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
+                    sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.BC + "</AT>");
+                    sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
+                    sb.Append("<VD>" + Convert.ToDateTime(txtBondCancellation.Text).ToString("MM/dd/yyyy") + "</VD>");
+                    sb.Append("<BG>" + "0" + "</BG>");
+                    sb.Append("<IG>" + 0 + "</IG>");
+                    sb.Append("<NOP>" + 0 + "</NOP>");
 
-                sb.Append("</Item>");
+                    sb.Append("</Item>");
+                    #endregion
+                    break;
             }
 
             sb.Append("</Activity>");
-
-            /*
-            foreach (GridViewRow gvRow in gvSelectedContainer.Rows)
-            {
-                HiddenField hdnOldTransactionId = (HiddenField)gvRow.FindControl("hdnOldTransactionId");
-                HiddenField hdnCurrentTransactionId = (HiddenField)gvRow.FindControl("hdnCurrentTransactionId");
-                CheckBox chkItem = (CheckBox)gvRow.FindControl("chkItem");
-
-                sb.Append("<Cont>");
-
-                sb.Append("<Oid>" + hdnOldTransactionId.Value + "</Oid>");
-                sb.Append("<Nid>" + hdnCurrentTransactionId.Value + "</Nid>");
-                sb.Append("<Stats>" + chkItem.Checked.ToString() + "</Stats>");
-
-                sb.Append("</Cont>");
-
-            }*/
-
-
 
             return sb.ToString();
         }
@@ -494,6 +615,31 @@ namespace EMS.WebApp.Transaction
             sbr.Append(chkCHSSA.Checked == true ? "1" : "0");
 
             oImportBLL.SaveSubmittedDocument(Convert.ToInt64(hdnBLId.Value), sbr.ToString());
+        }
+
+        protected void lnkDO_Click(object sender, EventArgs e)
+        {
+            mpeDo.Show();
+        }
+
+        protected void lnkDoExtension_Click(object sender, EventArgs e)
+        {
+            mpeDOE.Show();
+        }
+
+        protected void lnkSlotExtension_Click(object sender, EventArgs e)
+        {
+            mpeSE.Show();
+        }
+
+        protected void lnkAmendment_Click(object sender, EventArgs e)
+        {
+            mpeAmend.Show();
+        }
+
+        protected void lnkBondCancel_Click(object sender, EventArgs e)
+        {
+            mpeBond.Show();
         }
     }
 }

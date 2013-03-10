@@ -49,24 +49,6 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.TextBox txtCha;
         
         /// <summary>
-        /// txtHouseBlNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHouseBlNo;
-        
-        /// <summary>
-        /// txtDetentionFee control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDetentionFee;
-        
-        /// <summary>
         /// txtDoValidUpto control.
         /// </summary>
         /// <remarks>
@@ -184,6 +166,15 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
         
         /// <summary>
+        /// btnTemp1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTemp1;
+        
+        /// <summary>
         /// chkDo control.
         /// </summary>
         /// <remarks>
@@ -202,13 +193,13 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.LinkButton lnkDO;
         
         /// <summary>
-        /// ModalPopupExtender1 control.
+        /// mpeDo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender1;
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeDo;
         
         /// <summary>
         /// pnlDo control.
@@ -292,6 +283,15 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.LinkButton lnkGenerateInvoiceDo;
         
         /// <summary>
+        /// btnTemp2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTemp2;
+        
+        /// <summary>
         /// chkDoExtension control.
         /// </summary>
         /// <remarks>
@@ -310,13 +310,13 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.LinkButton lnkDoExtension;
         
         /// <summary>
-        /// ModalPopupExtender2 control.
+        /// mpeDOE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender2;
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeDOE;
         
         /// <summary>
         /// pnlDOE control.
@@ -373,6 +373,15 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.LinkButton lnkGenerateInvoiceDOE;
         
         /// <summary>
+        /// btnTemp3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTemp3;
+        
+        /// <summary>
         /// chkSlotExtension control.
         /// </summary>
         /// <remarks>
@@ -391,13 +400,13 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.LinkButton lnkSlotExtension;
         
         /// <summary>
-        /// ModalPopupExtender3 control.
+        /// mpeSE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender3;
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeSE;
         
         /// <summary>
         /// pnlSLE control.
@@ -427,6 +436,15 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.ImageButton imgBtnSLE;
         
         /// <summary>
+        /// rdbDetension control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rdbDetension;
+        
+        /// <summary>
         /// txtExtensionForDetention control.
         /// </summary>
         /// <remarks>
@@ -443,6 +461,15 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtender2;
+        
+        /// <summary>
+        /// rdbPGR control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rdbPGR;
         
         /// <summary>
         /// txtExtensionForPGR control.
@@ -472,6 +499,15 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.LinkButton lnkGenerateInvoiceSlotExtension;
         
         /// <summary>
+        /// btnTemp4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTemp4;
+        
+        /// <summary>
         /// chkAmendment control.
         /// </summary>
         /// <remarks>
@@ -490,13 +526,13 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.LinkButton lnkAmendment;
         
         /// <summary>
-        /// ModalPopupExtender4 control.
+        /// mpeAmend control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender4;
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeAmend;
         
         /// <summary>
         /// pnlAmendment control.
@@ -562,6 +598,24 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.DropDownList ddlAmendmentFor;
         
         /// <summary>
+        /// lnkPrintAmend control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkPrintAmend;
+        
+        /// <summary>
+        /// btnTemp5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTemp5;
+        
+        /// <summary>
         /// chkBondCancel control.
         /// </summary>
         /// <remarks>
@@ -580,13 +634,13 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.LinkButton lnkBondCancel;
         
         /// <summary>
-        /// ModalPopupExtender5 control.
+        /// mpeBond control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender5;
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeBond;
         
         /// <summary>
         /// pnlBondCancel control.
@@ -659,6 +713,15 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMessageServiceReq;
+        
+        /// <summary>
+        /// btnBondSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnBondSave;
         
         /// <summary>
         /// chkOriginalBL control.

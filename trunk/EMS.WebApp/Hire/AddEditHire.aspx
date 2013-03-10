@@ -227,7 +227,10 @@
                                            SI#
                                         </th>
                                           <th style="width: 13%;" class="gridviewheader" scope="col">
-                                            <asp:TextBox ID="txtContainerNo" MaxLength="11" runat="server" CssClass="textboxuppercase" ForeColor="#747862"></asp:TextBox>
+                                            <asp:TextBox ID="txtContainerNo" MaxLength="11" runat="server" AutoPostBack="true"
+                                            OnTextChanged="txtContainerNo_TextChanged"
+                                                  CssClass="textboxuppercase" ForeColor="#747862" 
+                                                  ></asp:TextBox>
                                             <br />
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" CssClass="errormessage"
                                                 ValidationGroup="AddToList" ErrorMessage="[Required]" ControlToValidate="txtContainerNo"
@@ -336,7 +339,7 @@
                                             <HeaderStyle CssClass="gridviewheader"  Width="4%" />
                                             <ItemStyle CssClass="gridviewitem" HorizontalAlign="Center" VerticalAlign="Middle" />
                                             <ItemTemplate>
-                                                <asp:ImageButton ID="btnRemove" runat="server" CommandArgument='<%#Eval("ContainerNo")%>'
+                                                <asp:ImageButton ID="btnRemove" runat="server" OnClientClick="return Confirm()" CommandArgument='<%#Eval("ContainerNo")%>'
                                                     CommandName="Remove" ImageUrl="~/Images/remove.png" Height="16" Width="16" />
                                             </ItemTemplate>
                                         </asp:TemplateField>

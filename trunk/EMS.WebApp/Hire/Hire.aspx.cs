@@ -122,5 +122,23 @@ namespace EMS.WebApp.Hire
 
 
         }
+
+        protected void gvwHire_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            
+            if(e.Row.RowType==DataControlRowType.DataRow ){
+            var t = ((System.Data.DataRowView)e.Row.DataItem).Row.ItemArray;
+            var m = t[3].ToString();
+            var m1 = t[29].ToString();
+            if (m == "On Hire" && m1 == "RCVE")
+            {
+                var btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
+                var btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                if (btnEdit != null) { btnEdit.Visible = false; }
+                if (btnRemove != null) { btnRemove.Visible = false; }
+            }
+
+            }
+        }
     }
 }

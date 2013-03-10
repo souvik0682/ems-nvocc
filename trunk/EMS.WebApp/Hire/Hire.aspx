@@ -22,7 +22,7 @@
                 <table>
                     <tr>
                         <td>
-                            <asp:TextBox ID="txtContainerNo" runat="server" CssClass="watermark1" ForeColor="#747862"></asp:TextBox>
+                            <asp:TextBox ID="txtContainerNo" runat="server"   CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterMode="InvalidChars"
                                 InvalidChars="<>-" TargetControlID="txtContainerNo">
                             </cc1:FilteredTextBoxExtender>
@@ -31,7 +31,7 @@
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
-                            <asp:TextBox ID="txtReferenceNo" runat="server" CssClass="watermark1" ForeColor="#747862"></asp:TextBox>
+                            <asp:TextBox ID="txtReferenceNo" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" FilterMode="InvalidChars"
                                 InvalidChars="<>-" TargetControlID="txtReferenceNo">
                             </cc1:FilteredTextBoxExtender>
@@ -40,7 +40,7 @@
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
-                            <asp:TextBox ID="txtRefDate" runat="server" CssClass="watermark1" ForeColor="#747862"></asp:TextBox>
+                            <asp:TextBox ID="txtRefDate" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
                                 FilterMode="ValidChars" ValidChars="/" TargetControlID="txtRefDate">
                             </cc1:FilteredTextBoxExtender>
@@ -92,7 +92,7 @@
                             <asp:GridView ID="gvwHire" runat="server" AutoGenerateColumns="false" AllowPaging="true"
                                 BorderStyle="None" BorderWidth="0" OnPageIndexChanging="gvwHire_PageIndexChanging"
                                  OnRowCommand="gvwHire_RowCommand"
-                                Width="100%">
+                                Width="100%" onrowdatabound="gvwHire_RowDataBound">
                                 <PagerSettings Mode="NumericFirstLast" Position="TopAndBottom" />
                                 <PagerStyle CssClass="gridviewpager" />
                                 <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
@@ -177,9 +177,11 @@
                                     <asp:TemplateField ItemStyle-Width="8%">
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" HorizontalAlign="Center" VerticalAlign="Middle" />
-                                        <ItemTemplate>
-                                            <asp:ImageButton ID="btnRemove" runat="server" CommandArgument='<%# EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("pk_HireID").ToString()) %>' CommandName="Remove" ImageUrl="~/Images/remove.png"
+                                        <ItemTemplate>                                     
+                                       
+                                            <asp:ImageButton ID="btnRemove"  runat="server" OnClientClick="return Confirm()" CommandArgument='<%# EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("pk_HireID").ToString()) %>' CommandName="Remove" ImageUrl="~/Images/remove.png"
                                                 Height="16" Width="16" />
+                                               
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>

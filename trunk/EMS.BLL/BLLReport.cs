@@ -12,5 +12,10 @@ namespace EMS.BLL
         {
             return EMS.DAL.DALReport.GetMoneyRcptDetails(invNo);
         }
+
+        public static System.Data.DataSet FillDDLMoneyRcpt(string invNo)
+        {
+            return EMS.DAL.DALReport.FillDDLMoneyRcpt(invNo);
+        }
     }
 }

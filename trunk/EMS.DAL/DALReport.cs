@@ -21,6 +21,19 @@ namespace EMS.DAL
             }
             return ds;
         }
+
+        public static DataSet FillDDLMoneyRcpt(string invNo)
+        {
+            DataSet ds = new DataSet();
+
+            using (DbQuery dq = new DbQuery("prcGetMoneyRcpts"))
+            {
+                dq.AddVarcharParam("@invoiceNO", 20, invNo);
+                ds = dq.GetTables();
+            }
+
+            return ds;
+        }
     }
 
 }

@@ -18,7 +18,7 @@
     <center>
 
  <div id="headercaption">
-         CONTAINER STOCK DETAILS </div>
+         CONTAINER STOCK SUMMERY </div>
     <center>
         <fieldset style="width:700px; ">
             <legend> Container Stock Details </legend>

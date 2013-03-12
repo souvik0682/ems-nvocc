@@ -29,7 +29,16 @@
                                     Activity Date<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtDate" runat="server" Width="150"></asp:TextBox>
+                                <script type="text/javascript">
+                                    function ChangeActivityDate(txt) {
+                                        var ID = txt.id;
+                                        //alert(ID);
+                                        //alert(txt.value);
+                                        document.getElementById("container_gvSelectedContainer_lblStatusDate_0").innerHTML = txt.value;
+                                    }
+                                </script>
+
+                                    <asp:TextBox ID="txtDate" runat="server" Width="150" ></asp:TextBox>
                                     <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtDate"
                                         Format="dd/MM/yyyy" TargetControlID="txtDate">
                                     </cc1:CalendarExtender>
@@ -231,7 +240,8 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Status Date">
                                         <ItemTemplate>
-                                            <%# Eval("ChangeDate").ToString() == "" ? " " : Convert.ToDateTime(Eval("ChangeDate")).ToShortDateString()%>
+                                        <asp:Label ID="lblStatusDate" runat="server" Text='<%# Eval("ChangeDate").ToString() == "" ? " " : Convert.ToDateTime(Eval("ChangeDate")).ToShortDateString()%>'></asp:Label>
+                                            
                                         </ItemTemplate>
                                         <ItemStyle CssClass="gridviewitem" Width="12%" />
                                         <HeaderStyle CssClass="gridviewheader" />
@@ -242,7 +252,7 @@
                                             <%--<asp:CheckBox ID="chkHeader" runat="server" />--%>
                                         </HeaderTemplate>
                                         <ItemTemplate>
-                                            <asp:CheckBox ID="chkItem" runat="server" Checked="true" />
+                                            <asp:CheckBox ID="chkItem" runat="server" Checked="true" Visible='<%# Convert.ToBoolean(Eval("Editable").ToString()) %>' />
                                         </ItemTemplate>
                                         <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderStyle CssClass="gridviewheader_center" />

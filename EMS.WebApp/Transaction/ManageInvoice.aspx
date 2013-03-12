@@ -6,53 +6,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="EMS.WebApp" Namespace="EMS.WebApp.CustomControls" TagPrefix="cc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style type="text/css">
-        .style1
-        {
-            width: 91px;
-        }
-        .style2
-        {
-            width: 239px;
-        }
-        .style3
-        {
-            height: 22px;
-        }
-        .style4
-        {
-            width: 239px;
-            height: 22px;
-        }
-        .style5
-        {
-            width: 123px;
-        }
-        .style6
-        {
-            width: 123px;
-            height: 22px;
-        }
-        .style7
-        {
-            width: 91px;
-            height: 26px;
-        }
-        .style8
-        {
-            width: 239px;
-            height: 26px;
-        }
-        .style9
-        {
-            width: 123px;
-            height: 26px;
-        }
-        .style10
-        {
-            height: 26px;
-        }
-    </style>
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
     <div>

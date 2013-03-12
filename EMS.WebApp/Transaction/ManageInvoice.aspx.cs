@@ -264,7 +264,7 @@ namespace EMS.WebApp.Transaction
 
         private void LoadExchangeRate()
         {
-            new InvoiceBLL().GetExchangeRate(Convert.ToInt64(ddlBLno.SelectedValue));
+            txtExchangeRate.Text =  new InvoiceBLL().GetExchangeRate(Convert.ToInt64(ddlBLno.SelectedValue)).ToString();
         }
 
         private void SetDefaultTerminal()

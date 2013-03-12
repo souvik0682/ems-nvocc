@@ -10,18 +10,32 @@
         <div id="headercaption">
             B/L QUERY</div>
         <center>
-            <fieldset style="width: 95%;">
+            <fieldset style="width: 98%;">
                 <legend>B/L Detail</legend>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <table border="0" cellpadding="2" cellspacing="3" width="100%">
                             <tr>
                                 <td style="width: 15%;">
+                                    Location :
+                                </td>
+                                <td style="width: 10%; font-weight: 700;">
+                                    <asp:DropDownList ID="ddlLocation" runat="server" Width="100">
+                                    </asp:DropDownList>
+                                </td>
+                                <td style="width: 8%;">
+                                    Line :
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="ddlLine" runat="server" Width="100">
+                                    </asp:DropDownList>
+                                </td>
+                                <td style="width: 15%;">
                                     B/L No :
                                 </td>
-                                <td style="width: 10%;" colspan="3">
+                                <td style="width: 10%;">
                                     <asp:HiddenField ID="hdnBLId" runat="server" Value="0" />
-                                    <asp:TextBox ID="txtBlNo" runat="server" Width="200" AutoCompleteType="None" AutoPostBack="True"
+                                    <asp:TextBox ID="txtBlNo" runat="server" Width="150" AutoCompleteType="None" AutoPostBack="True"
                                         OnTextChanged="txtBlNo_TextChanged"></asp:TextBox>
                                     <%--<cc1:calendarextender id="CalendarExtender1" runat="server" popupbuttonid="txtEffectDate"
                                         popupposition="BottomLeft" targetcontrolid="txtEffectDate" format="dd/MM/yyyy"
@@ -38,10 +52,10 @@
                                 <td style="width: 15%;">
                                     Delivered To (CHA) :
                                 </td>
-                                <td style="width: 10%;" colspan="3">
+                                <td style="width: 10%;">
                                     <%--<asp:DropDownList ID="ddlDeleveredToCha" runat="server" Width="155">
                             </asp:DropDownList>--%>
-                                    <asp:TextBox ID="txtCha" runat="server" Width="200"></asp:TextBox>
+                                    <asp:TextBox ID="txtCha" runat="server" Width="150"></asp:TextBox>
                                     <%--<asp:RequiredFieldValidator ID="rfvTerminalRequired" runat="server" ErrorMessage="Please select your choice"
                                         Display="None" ControlToValidate="rdbPrincipleSharing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                                     <cc1:validatorcalloutextender id="ValidatorCalloutExtender18" runat="server" targetcontrolid="rfvTerminalRequired">
@@ -49,21 +63,20 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 15%;">
-                                    DO validated up to :
+                                <td >
+                                    Landing Date :
                                 </td>
-                                <td style="width: 10%;">
-                                    <asp:TextBox ID="txtDoValidUpto" runat="server" Width="100"></asp:TextBox>
+                                <td>
                                     <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvSalutation" WarningIconImageUrl="" >
                             </cc1:ValidatorCalloutExtender>--%>
+                                    <asp:TextBox ID="txtLandingDate" runat="server" Width="100"></asp:TextBox>
                                 </td>
-                                <td style="width: 15%;">
-                                    Landing Date :
+                                <td>
+                                    &nbsp;
                                 </td>
                                 <td style="width: 10%;">
-                                    <asp:TextBox ID="txtLandingDate" runat="server" Width="100"></asp:TextBox>
                                     <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
@@ -323,7 +336,8 @@
                                         </table>
                                     </asp:Panel>
                                 </td>
-                                <td><asp:RadioButton ID="rdbDetension" runat="server" GroupName="Detn" />
+                                <td>
+                                    <asp:RadioButton ID="rdbDetension" runat="server" GroupName="Detn" />
                                     Detention
                                 </td>
                                 <td>
@@ -332,7 +346,8 @@
                                         TargetControlID="txtExtensionForDetention" Format="dd/MM/yyyy">
                                     </cc1:CalendarExtender>
                                 </td>
-                                <td><asp:RadioButton ID="rdbPGR" runat="server" GroupName="Detn" />
+                                <td>
+                                    <asp:RadioButton ID="rdbPGR" runat="server" GroupName="Detn" />
                                     PGR
                                 </td>
                                 <td>

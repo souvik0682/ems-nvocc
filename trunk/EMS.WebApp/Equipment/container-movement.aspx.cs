@@ -128,10 +128,10 @@ namespace EMS.WebApp.Equipment
                 //btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00008");
                 btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerTranID"));
 
-                if (oUser.UserRole.Id != 6)
-                    btnEdit.Visible = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Editable"));
-                else
+                if (oUser.UserRole.Id == 6 || oUser.UserRole.Id == 2)
                     btnEdit.Visible = true;
+                else
+                    btnEdit.Visible = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Editable"));
 
                 //Delete link
                 ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");

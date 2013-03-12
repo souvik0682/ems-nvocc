@@ -34,6 +34,7 @@ namespace EMS.WebApp.Equipment
                 {
                     DataTable Dt = CreateDataTable();
                     DataRow dr = Dt.NewRow();
+                    dr["Editable"] = true;
                     Dt.Rows.Add(dr);
                     gvSelectedContainer.DataSource = Dt;
                     gvSelectedContainer.DataBind();
@@ -41,6 +42,10 @@ namespace EMS.WebApp.Equipment
                 }
                 else
                 {
+                    btnShow.Visible = false;
+                    txtDate.Attributes.Add("onchange", "ChangeActivityDate(this);");
+                    
+
                     ContainerTranBLL oContainerTranBLL = new ContainerTranBLL();
                     SearchCriteria searchCriteria = new SearchCriteria();
                     DataSet ds = new DataSet();
@@ -72,7 +77,7 @@ namespace EMS.WebApp.Equipment
 
             txtTeus.Enabled = false;
             txtNarration.Enabled = false;
-            txtDate.Enabled = false;
+            //txtDate.Enabled = false;
             txtFEUs.Enabled = false;
 
 
@@ -140,7 +145,7 @@ namespace EMS.WebApp.Equipment
         void FillContainers(DataTable dt)
         {
             DataTable oTable = CreateDataTable();
-
+            
             foreach (DataRow Row in dt.Rows)
             {
                 DataRow Dr = oTable.NewRow();
@@ -153,6 +158,7 @@ namespace EMS.WebApp.Equipment
                 Dr["LandingDate"] = Row["LandingDate"];
                 Dr["ChangeDate"] = Row["MovementDate"];
                 Dr["LMDT"] = Row["LMDT"];
+                Dr["Editable"] = Row["Editable"];
 
                 oTable.Rows.Add(Dr);
             }
@@ -323,7 +329,7 @@ namespace EMS.WebApp.Equipment
                     dr["ToStatus"] = ddlToStatus.SelectedItem.Text;
                     dr["ChangeDate"] = txtDate.Text;
                     dr["LMDT"] = hdnLMDT.Value;
-
+                    dr["Editable"] = true;
                     Dt.Rows.Add(dr);
                 }
             }
@@ -364,7 +370,9 @@ namespace EMS.WebApp.Equipment
             dc = new DataColumn("LMDT");
             Dt.Columns.Add(dc);
 
-
+            dc = new DataColumn("Editable");
+            Dt.Columns.Add(dc);
+            
 
             return Dt;
         }
@@ -527,6 +535,7 @@ namespace EMS.WebApp.Equipment
 
             DataTable Dt = CreateDataTable();
             DataRow dr = Dt.NewRow();
+            dr["Editable"] = true;
             Dt.Rows.Add(dr);
             gvSelectedContainer.DataSource = Dt;
             gvSelectedContainer.DataBind();

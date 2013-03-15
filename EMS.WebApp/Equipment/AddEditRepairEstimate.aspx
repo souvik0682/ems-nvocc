@@ -9,9 +9,9 @@
     <div id="headercaption">
         ADD / EDIT ESTIMATE</div>
     <center>
-        <fieldset style="width:600px; ">
+        <fieldset style="width:550px; ">
             <legend>Add / Edit Estimate</legend>
-            <table border="0" cellpadding="2" cellspacing="3">
+            <table border="0" cellpadding="2" cellspacing="3" width="100%">
             <tr>
              <td colspan="2">
                <asp:Label ID="lblError" runat="server" Text="" style="color:Red"></asp:Label>
@@ -21,10 +21,19 @@
              
                     <td>Location:<span class="errormessage1">*</span></td>
                     <td>
-                      <asp:DropDownList ID="ddlLoc" runat="server" Width="100%" AutoPostBack="True" onselectedindexchanged="ddlLoc_SelectedIndexChanged" 
+                      <asp:DropDownList ID="ddlLoc" runat="server" Width="60%" AutoPostBack="True" onselectedindexchanged="ddlLoc_SelectedIndexChanged" 
                             ></asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage" 
                             ControlToValidate="ddlLoc" Display="Dynamic" InitialValue="0" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+
+                 <tr>
+                    <td>Line:</td>
+                    <td>
+                     <asp:DropDownList ID="ddlLine" runat="server" Width="60%">
+                         
+                      </asp:DropDownList>
                     </td>
                 </tr>
               <tr>
@@ -52,51 +61,50 @@
                     <td><asp:TextBox ID="txtEstimateRef" runat="server" CssClass="textboxuppercase" MaxLength="100" Width="250"></asp:TextBox>
                        </td>
                 </tr>
-              <tr>
-                    <td>Line:</td>
-                    <td>
-                     <asp:DropDownList ID="ddlLine" runat="server" Width="100%">
-                         
+             <tr>
+               <td colspan="2">
+               <table width="100%">
+                 <tr>
+                   <td style="width:70%">
+                    <table width="100%">
+                 <tr>
+                   <td style="width:33%"></td>
+                   <td style="width:33%">Material</td>
+                   <td style="width:33%">Labour</td>
+                  </tr>
+                  <tr>
+                   <td style="width:33%; text-align:right; padding-right:30px">&nbsp;&nbsp;Estimate</td>
+                   <td style="width:33%"><cc1:CustomTextBox ID="txtMaterialEst" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc1:CustomTextBox></td>
+                   <td style="width:33%"><cc1:CustomTextBox ID="txtLabourEst" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc1:CustomTextBox></td>
+                  </tr>
+                   <tr>
+                   <td style="width:33%; text-align:right; padding-right:30px">&nbsp;&nbsp;Approved</td>
+                   <td style="width:33%"><cc1:CustomTextBox ID="txtMaterialApp" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc1:CustomTextBox></td>
+                   <td style="width:33%"><cc1:CustomTextBox ID="txtLabourApp" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc1:CustomTextBox></td>
+                  </tr>
+                   <tr>
+                   <td style="width:33%; text-align:right; padding-right:30px">&nbsp;&nbsp;To Charge</td>
+                   <td style="width:33%"><cc1:CustomTextBox ID="txtMaterialBill" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc1:CustomTextBox></td>
+                   <td style="width:33%"><cc1:CustomTextBox ID="txtLabourBill" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc1:CustomTextBox></td>
+                  </tr>
+                 </table>
+                   </td>
+                   <td style="width:30%; height:100%">
+                   <asp:Panel ID="Panel1" runat="server" GroupingText="<span style='font-size:small;font-style:normal; color:Black;font-weight:lighter'>Approved By<span>" style="min-height:100%; ">
+                   <br />
+                    <asp:DropDownList ID="ddlUser" runat="server" Width="100%">                        
                       </asp:DropDownList>
-                    </td>
-                </tr>
-              <tr>
-                    <td>Material Estimate:</td>
-                    <td>
-                      <cc1:CustomTextBox ID="txtMaterialEst" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc1:CustomTextBox>
-                    </td>
-                </tr>
-              <tr>
-                    <td>Labour Estimate:</td>
-                    <td>
-                      <cc1:CustomTextBox ID="txtLabourEst" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc1:CustomTextBox>
-                    </td>
-                </tr>
-              <tr>
-                    <td>Material Billable:</td>
-                    <td>
-                      <cc1:CustomTextBox ID="txtMaterialBill" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc1:CustomTextBox>
-                    </td>
-                </tr>
-              <tr>
-                    <td>Labour Billable:</td>
-                    <td>
-                      <cc1:CustomTextBox ID="txtLabourBill" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc1:CustomTextBox>
-                    </td>
-                </tr>
+                      <br /><br /><br />
+                   </asp:Panel>
+                    
+                   </td>
+                 </tr>
+               </table>
+                 
+               </td>
+             </tr>
              
-               <tr>
-                    <td> Material Approved:</td>
-                    <td>
-                      <cc1:CustomTextBox ID="txtMaterialApp" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc1:CustomTextBox>
-                    </td>
-                </tr>
-          <tr>
-                    <td>Labour Approved:</td>
-                    <td>
-                      <cc1:CustomTextBox ID="txtLabourApp" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc1:CustomTextBox>
-                    </td>
-                </tr>
+            
                  <tr>
                     <td></td>
                     <td>
@@ -105,20 +113,7 @@
                     </td>
                 </tr>
               <tr>
-                    <td>User Approved:</td>
-                    <td>
-                     <asp:DropDownList ID="ddlUser" runat="server" Width="100%">
-                         
-                      </asp:DropDownList>
-                    </td>
-                </tr>
-                 
-		       <%--<tr>
-                    <td></td>
-                    <td>
-                   
-                    </td>
-                </tr>--%>
+                  
 			   <tr>
                     <td style="width:140px;">Released On:</td>
                     <td>

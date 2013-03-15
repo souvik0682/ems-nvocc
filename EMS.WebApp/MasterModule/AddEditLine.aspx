@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="AddEditLine.aspx.cs" Inherits="EMS.WebApp.MasterModule.AddEditLine" %>
+    <%@ Register Assembly="EMS.WebApp" Namespace="EMS.WebApp.CustomControls" TagPrefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script src="../Scripts/Common.js" type="text/javascript"></script>
@@ -51,7 +52,10 @@
                     </asp:DropDownList>
                     <br /></td>
                 </tr>
-
+                 <tr>
+                    <td>ROE Buffer:</td>
+                    <td><cc1:CustomTextBox ID="txtRBuffer" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="13" Precision="6" Scale="2" Width="100"></cc1:CustomTextBox></td>
+                </tr>
                   <tr>
                     <td>Logo:</td>
                     <td>

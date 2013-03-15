@@ -66,6 +66,7 @@ namespace EMS.WebApp.MasterModule
 
                 txtImpCommsn.Text = Convert.ToString(ds.Tables[0].Rows[0]["ImportCommission"]);
                 txtExportCommission.Text = Convert.ToString(ds.Tables[0].Rows[0]["ExportCommission"]);
+                txtRBuffer.Text = Convert.ToString(ds.Tables[0].Rows[0]["XChgRateBuffer"]);
                 string exp = Convert.ToString(ds.Tables[0].Rows[0]["ExportBooking"]);
                 ddlExpBook.SelectedValue = exp == "1" ? "y" : "n";
 
@@ -101,12 +102,13 @@ namespace EMS.WebApp.MasterModule
             }
             else
                 hdnLogo.Value = "";
-            decimal impComm = 0;
+            decimal impComm = 0; decimal rBuffer = 0;
             decimal.TryParse(txtImpCommsn.Text,out impComm);
+            decimal.TryParse(txtRBuffer.Text, out rBuffer);
             decimal expCommsn = 0;
             decimal.TryParse(txtExportCommission.Text,out expCommsn);
             char ExpBook =  ddlExpBook.SelectedValue=="y"?'1':'0';
-            int result = dbinteract.AddEditLine(_userId, Convert.ToInt32(NVOCCId), txtLineName.Text.Trim(), string.IsNullOrEmpty(txtFreeDays.Text) ? -1 :  Convert.ToInt32(txtFreeDays.Text), txtContact.Text,impComm,expCommsn,ExpBook, hdnLogo.Value, isedit);
+            int result = dbinteract.AddEditLine(_userId, Convert.ToInt32(NVOCCId), txtLineName.Text.Trim(), string.IsNullOrEmpty(txtFreeDays.Text) ? -1 :  Convert.ToInt32(txtFreeDays.Text), txtContact.Text,impComm,expCommsn,ExpBook,rBuffer, hdnLogo.Value, isedit);
 
 
             if (result > 0)

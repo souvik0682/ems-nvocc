@@ -76,6 +76,15 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.DropDownList ddlExpBook;
         
         /// <summary>
+        /// txtRBuffer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtRBuffer;
+        
+        /// <summary>
         /// fuLogo control.
         /// </summary>
         /// <remarks>

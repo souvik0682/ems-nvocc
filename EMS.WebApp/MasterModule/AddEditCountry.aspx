@@ -28,6 +28,22 @@
                     <td><asp:TextBox ID="txtAbbr" runat="server" CssClass="textboxuppercase" MaxLength="2" Width="250"></asp:TextBox><br />
                     <asp:RequiredFieldValidator ID="rfvAbbr" runat="server" CssClass="errormessage" Text="This field is Required" ControlToValidate="txtAbbr" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator></td>
                 </tr>
+
+                <tr>
+                    <td>GMT:</td>
+                    <td><asp:TextBox ID="txtGMT" runat="server" CssClass="textboxuppercase" MaxLength="10" Width="250"></asp:TextBox><br />
+                    </td>
+                </tr>
+                <tr>
+                    <td>ISD Code:</td>
+                    <td><asp:TextBox ID="txtISD" runat="server" CssClass="textboxuppercase" MaxLength="10" Width="250"></asp:TextBox><br />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sector:</td>
+                    <td><asp:TextBox ID="txtSector" runat="server" CssClass="textboxuppercase" MaxLength="50" Width="250"></asp:TextBox><br />
+                    </td>
+                </tr>
               
                 <tr>
                     <td colspan="2">

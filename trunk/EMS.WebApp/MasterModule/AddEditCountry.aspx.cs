@@ -64,6 +64,9 @@ namespace EMS.WebApp.MasterModule
             {
                 txtCountryName.Text = ds.Tables[0].Rows[0]["CountryName"].ToString();
                 txtAbbr.Text = ds.Tables[0].Rows[0]["CountryAbbr"].ToString();
+                txtGMT.Text = ds.Tables[0].Rows[0]["GMT"].ToString();
+                txtISD.Text = ds.Tables[0].Rows[0]["ISDCode"].ToString();
+                txtSector.Text = ds.Tables[0].Rows[0]["Sector"].ToString();
             }
         }
         private void ClearText()
@@ -81,7 +84,8 @@ namespace EMS.WebApp.MasterModule
                 GeneralFunctions.RegisterAlertScript(this, "Country Abbr Must Be unique");
                 return;
             }
-            int result = dbinteract.AddEditCountry(_userId, Convert.ToInt32(countryId), txtCountryName.Text.Trim().ToUpper(), txtAbbr.Text.Trim().ToUpper(), isedit);
+            int result = dbinteract.AddEditCountry(_userId, Convert.ToInt32(countryId), txtCountryName.Text.Trim().ToUpper(), txtAbbr.Text.Trim().ToUpper(),
+                                                    txtGMT.Text.ToUpper(),txtISD.Text.ToUpper(),txtSector.Text.ToUpper(),     isedit);
 
 
             if (result > 0)

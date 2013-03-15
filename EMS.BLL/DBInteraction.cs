@@ -116,7 +116,7 @@ namespace EMS.BLL
 
         }
 
-        public int AddEditCountry(int userID, int pk_CountryID, string CountryName, string CountryAbbr, bool isEdit)
+        public int AddEditCountry(int userID, int pk_CountryID, string CountryName, string CountryAbbr,string GMT,string ISD,string Sector, bool isEdit)
         {
             string ProcName = "admin.prcAddEditCountry";
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
@@ -124,6 +124,9 @@ namespace EMS.BLL
             dquery.AddIntegerParam("@pk_CountryId", pk_CountryID);
             dquery.AddVarcharParam("@CountryName", 200, CountryName);
             dquery.AddVarcharParam("@CountryAbbr", 5, CountryAbbr);
+            dquery.AddVarcharParam("@GMT", 10, GMT);
+            dquery.AddVarcharParam("@ISD", 10, ISD);
+            dquery.AddVarcharParam("@Sector", 50, Sector);
             dquery.AddBooleanParam("@isEdit", isEdit);
 
             return dquery.RunActionQuery();
@@ -190,7 +193,7 @@ namespace EMS.BLL
             return dquery.GetTables();
         }
 
-        public int AddEditLine(int userID, int pk_NVOCCId, string NVOCCName, int DefaultFreeDays, string ContAgentCode, decimal ImpCommsn, decimal ExpCommsn, char ExpBook, string logoPath, bool isEdit)
+        public int AddEditLine(int userID, int pk_NVOCCId, string NVOCCName, int DefaultFreeDays, string ContAgentCode, decimal ImpCommsn, decimal ExpCommsn, char ExpBook,decimal rBuffer, string logoPath, bool isEdit)
         {
             string ProcName = "admin.prcAddEditLine";
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
@@ -201,6 +204,7 @@ namespace EMS.BLL
             dquery.AddVarcharParam("@ContAgentCode", 10, ContAgentCode);
             dquery.AddDecimalParam("@ImportCommission", 6, 2, ImpCommsn);
             dquery.AddDecimalParam("@ExportCommission", 6, 2, ExpCommsn);
+            dquery.AddDecimalParam("@RBuffer", 6, 2, rBuffer);
             dquery.AddCharParam("@ExportBooking", 1, ExpBook);
             dquery.AddVarcharParam("@logoPath", 150, logoPath);
             dquery.AddBooleanParam("@isEdit", isEdit);

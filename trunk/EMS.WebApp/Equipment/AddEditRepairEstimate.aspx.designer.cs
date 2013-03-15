@@ -40,6 +40,15 @@ namespace EMS.WebApp.Equipment {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
+        /// ddlLine control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLine;
+        
+        /// <summary>
         /// txtContainerNo control.
         /// </summary>
         /// <remarks>
@@ -103,15 +112,6 @@ namespace EMS.WebApp.Equipment {
         protected global::System.Web.UI.WebControls.TextBox txtEstimateRef;
         
         /// <summary>
-        /// ddlLine control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlLine;
-        
-        /// <summary>
         /// txtMaterialEst control.
         /// </summary>
         /// <remarks>
@@ -128,24 +128,6 @@ namespace EMS.WebApp.Equipment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::EMS.WebApp.CustomControls.CustomTextBox txtLabourEst;
-        
-        /// <summary>
-        /// txtMaterialBill control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::EMS.WebApp.CustomControls.CustomTextBox txtMaterialBill;
-        
-        /// <summary>
-        /// txtLabourBill control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::EMS.WebApp.CustomControls.CustomTextBox txtLabourBill;
         
         /// <summary>
         /// txtMaterialApp control.
@@ -166,6 +148,42 @@ namespace EMS.WebApp.Equipment {
         protected global::EMS.WebApp.CustomControls.CustomTextBox txtLabourApp;
         
         /// <summary>
+        /// txtMaterialBill control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtMaterialBill;
+        
+        /// <summary>
+        /// txtLabourBill control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtLabourBill;
+        
+        /// <summary>
+        /// Panel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel1;
+        
+        /// <summary>
+        /// ddlUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlUser;
+        
+        /// <summary>
         /// chkpOnHold control.
         /// </summary>
         /// <remarks>
@@ -182,15 +200,6 @@ namespace EMS.WebApp.Equipment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkDamage;
-        
-        /// <summary>
-        /// ddlUser control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlUser;
         
         /// <summary>
         /// txtReleasedOn control.

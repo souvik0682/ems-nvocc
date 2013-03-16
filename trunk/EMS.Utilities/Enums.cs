@@ -97,11 +97,16 @@ namespace EMS.Utilities
 
         public enum BLActivity
         {
-            DO = 1,
-            DOE = 2,
-            SE = 3,
-            AMD = 4,
-            BC = 5
+            FTC = 1,
+            DO = 2,
+            DOE = 3,
+            DE = 4,
+            PGRE = 5,
+            SI = 6,
+            FI = 7,
+            OI = 8,
+            AM = 9,
+            BC = 10
         }
 
         public enum UploadedDoc

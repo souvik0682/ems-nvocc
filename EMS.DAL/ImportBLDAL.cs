@@ -839,5 +839,22 @@ namespace EMS.DAL
 
             return PANNo;
         }
+
+        public static DataTable GetBLNo(int LocId, int LineId, string Initial)
+        {
+            //GetBLNo
+            string strExecution = "[trn].[GetBLNo]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@InitialChar", 250, Initial);
+                oDq.AddIntegerParam("@LineId",  LineId);
+                oDq.AddIntegerParam("@LocationID",  LocId);
+
+                myDataTable = oDq.GetTable();
+            }
+            return myDataTable;
+        }
     }
 }

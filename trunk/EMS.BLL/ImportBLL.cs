@@ -238,5 +238,10 @@ namespace EMS.BLL
         {
             return ImportBLDAL.GetPanNoById(CompanyId);
         }
+
+        public DataTable GetBLNo(int LocId, int LineId, string Initial)
+        {
+            return ImportBLDAL.GetBLNo(LocId, LineId, Initial);
+        }
     }
 }

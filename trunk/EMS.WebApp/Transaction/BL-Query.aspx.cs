@@ -12,6 +12,7 @@ using System.Text;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Data.SqlTypes;
 
 namespace EMS.WebApp.Transaction
 {
@@ -22,13 +23,12 @@ namespace EMS.WebApp.Transaction
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //string[] Val = new string[] { "A", "A", "A", "A", "A" };
-            //gvwVendor.DataSource = Val;
-            //gvwVendor.DataBind();
-
             if (!Page.IsPostBack)
             {
+                autoComplete1.ContextKey = "0|0";
                 FillDropDown();
+                chkFreightToCollect.Enabled = true;
+                DisableAllServiceControls();
             }
         }
 
@@ -50,6 +50,20 @@ namespace EMS.WebApp.Transaction
                 ddlAmendmentFor.Items.Add(item);
             }
             ddlAmendmentFor.Items.Insert(0, Li);
+
+
+            Li = new ListItem("Select", "0");
+            PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlLocation, 0, 0);
+            ddlLocation.Items.Insert(0, Li);
+
+            Li = new ListItem("Select", "0");
+            PopulateDropDown((int)Enums.DropDownPopulationFor.Line, ddlLine, 0, 0);
+            ddlLine.Items.Insert(0, Li);
+        }
+
+        void PopulateDropDown(int Number, DropDownList ddl, int? Filter1, int? Filter2)
+        {
+            CommonBLL.PopulateDropdown(Number, ddl, Filter1, Filter2);
         }
 
         protected void txtBlNo_TextChanged(object sender, EventArgs e)
@@ -65,6 +79,12 @@ namespace EMS.WebApp.Transaction
             {
                 fillBLDetail(BLDataSet.Tables[0]);
 
+                //
+                if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["FREIGHTTOCOLLECT"]) == true)
+                {
+                    chkDo.Enabled=true;
+                }
+
                 if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["FSTINVGENERATED"]) == true)
                 {
                     EnableDisableServiceRequestSection();
@@ -78,16 +98,18 @@ namespace EMS.WebApp.Transaction
             }
         }
 
-
         void EnableDisableServiceRequestSection()
         {
+            //chkDo.Enabled = true;
             chkDoExtension.Enabled = true;
-            chkSlotExtension.Enabled = true;
+            chkDetensionExtension.Enabled = true;
+            chkPGRExtension.Enabled = true;
+            chkSecurityInv.Enabled = true;
+            chkFinalInvoice.Enabled = true;
+            chkOtherInv.Enabled = true;
             chkAmendment.Enabled = true;
             chkBondCancel.Enabled = true;
         }
-
-
 
         void fillBLDetail(DataTable dtDetail)
         {
@@ -96,7 +118,7 @@ namespace EMS.WebApp.Transaction
             txtCha.Text = dtDetail.Rows[0]["CHA"].ToString();
             //txtHouseBlNo.Text = dtDetail.Rows[0]["HBLNO"].ToString();
             //txtDetentionFee.Text = dtDetail.Rows[0]["DTNFEE"].ToString();
-            txtDoValidTill.Text = dtDetail.Rows[0]["DOVALIDUPTO"].ToString();
+            //txtDoValidTill.Text = dtDetail.Rows[0]["DOVALIDUPTO"].ToString();
             txtLandingDate.Text = Convert.ToDateTime(dtDetail.Rows[0]["LANDINGDT"].ToString()).ToString("dd/MM/yyyy");
             txtVessel.Text = dtDetail.Rows[0]["VESSEL"].ToString();
             txtVoyage.Text = dtDetail.Rows[0]["VOYAGE"].ToString();
@@ -105,18 +127,32 @@ namespace EMS.WebApp.Transaction
             txtPGRFreedays.Text = dtDetail.Rows[0]["PGRFREEDAYS"].ToString();
             txtPGRTill.Text = dtDetail.Rows[0]["PGRTILL"].ToString();
 
+            if (Convert.ToDateTime(dtDetail.Rows[0]["DOVALIDUPTO"].ToString()) > Convert.ToDateTime("01/01/1950"))
+                txtDoValidUpto.Text = dtDetail.Rows[0]["DOVALIDUPTO"].ToString();
+            else
+                txtDoValidUpto.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtDetentionFreeDays.Text) - 1).ToShortDateString();
 
+            //if (!string.IsNullOrEmpty(dtDetail.Rows[0]["DTNUPTO"].ToString()))
+            if (Convert.ToDateTime(dtDetail.Rows[0]["DTNUPTO"].ToString()) > Convert.ToDateTime("01/01/1950"))
+                tstDetentionTill.Text = dtDetail.Rows[0]["DTNUPTO"].ToString();
+            else
+                tstDetentionTill.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtDetentionFreeDays.Text) - 1).ToShortDateString();
 
+            //if (!string.IsNullOrEmpty(dtDetail.Rows[0]["PGRTILL"].ToString()))
+            if (Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()) > Convert.ToDateTime("01/01/1950"))
+                txtPGRTill.Text = dtDetail.Rows[0]["PGRTILL"].ToString();
+            else
+                txtPGRTill.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtPGRFreedays.Text) - 1).ToShortDateString();
         }
 
         void fillServiceRequest(DataTable dtDetail)
         {
-            txtDoValidTill.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtDetentionFreeDays.Text) - 1).ToShortDateString();
+            //txtDoValidTill.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtDetentionFreeDays.Text) - 1).ToShortDateString();
 
-            if (dtDetail.Rows[0]["FREIGHTTYPE"].ToString().ToLower() == "pp")
-                chkFreightPaidstatus.Checked = true;
-            else
-                chkFreightPaidstatus.Checked = false;
+            //if (dtDetail.Rows[0]["FREIGHTTYPE"].ToString().ToLower() == "pp")
+            //    chkFreightPaidstatus.Checked = true;
+            //else
+            //    chkFreightPaidstatus.Checked = false;
 
 
             if (dtDetail.Rows[0]["DESTUFFING"].ToString() == "0")
@@ -124,7 +160,7 @@ namespace EMS.WebApp.Transaction
             else
                 ddlDestuffing.SelectedIndex = 1;
 
-            chkBankGuarantee.Checked = Convert.ToBoolean(dtDetail.Rows[0]["BANKGUARANTEE"].ToString());
+            //chkBankGuarantee.Checked = Convert.ToBoolean(dtDetail.Rows[0]["BANKGUARANTEE"].ToString());
 
             if (dtDetail.Rows[0]["VALIDITYDATE"].ToString() != "")
                 txtVAlidityDate.Text = Convert.ToDateTime(dtDetail.Rows[0]["VALIDITYDATE"].ToString()).ToString("dd/MM/yyyy");
@@ -207,6 +243,7 @@ namespace EMS.WebApp.Transaction
                 chkCopyOfBill.Checked = Convert.ToBoolean(dtDoc.Rows[0]["CopyBillOfEntry"].ToString());
                 chkConsoldatorNOC.Checked = Convert.ToBoolean(dtDoc.Rows[0]["ConsolidatorsNOC"].ToString());
                 chkCHSSA.Checked = Convert.ToBoolean(dtDoc.Rows[0]["HighSeaSales"].ToString());
+                chkBankGuarantee.Checked = Convert.ToBoolean(dtDoc.Rows[0]["HighSeaSales"].ToString());
             }
         }
 
@@ -255,125 +292,59 @@ namespace EMS.WebApp.Transaction
 
         protected void chkDo_CheckedChanged(object sender, EventArgs e)
         {
+            DisableAllServiceControls();
 
-            if (chkDo.Checked == true)
-            {
-                ddlDestuffing.Enabled = true;
-                txtDoValidTill.Enabled = true;
-                chkFreightPaidstatus.Enabled = true;
-                chkBankGuarantee.Enabled = true;
-                lnkGenerateInvoiceDo.Enabled = true;
-                lnkGenerateInvoiceDo.Enabled = true;
-                lnkDO.Enabled = true;
-            }
-            else
-            {
-                ddlDestuffing.Enabled = false;
-                txtDoValidTill.Enabled = false;
-                chkFreightPaidstatus.Enabled = false;
-                chkBankGuarantee.Enabled = false;
-                lnkGenerateInvoiceDo.Enabled = false;
-                lnkGenerateInvoiceDo.Enabled = false;
-                lnkDO.Enabled = false;
-            }
+            ddlDestuffing.Enabled = true;
+            lnkGenerateInvoiceDo.Enabled = true;
+            lnkGenerateInvoiceDo.Enabled = true;
+            lnkDO.Enabled = true;
+
         }
 
         protected void chkDoExtension_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkDoExtension.Checked == true)
-            {
-                txtVAlidityDate.Enabled = true;
-                lnkGenerateInvoiceDOE.Enabled = true;
-                lnkDoExtension.Enabled = true;
-            }
-            else
-            {
-                txtVAlidityDate.Enabled = false;
-                lnkGenerateInvoiceDOE.Enabled = false;
-                lnkDoExtension.Enabled = false;
-            }
+            DisableAllServiceControls();
+
+            txtVAlidityDate.Enabled = true;
+            lnkGenerateInvoiceDOE.Enabled = true;
+            lnkDoExtension.Enabled = true;
+
         }
 
         protected void chkSlotExtension_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkSlotExtension.Checked == true)
-            {
-                txtExtensionForDetention.Enabled = true;
-                txtExtensionForPGR.Enabled = true;
-                lnkGenerateInvoiceSlotExtension.Enabled = true;
-                lnkSlotExtension.Enabled = true;
+            DisableAllServiceControls();
 
-            }
-            else
-            {
-                txtExtensionForDetention.Enabled = false;
-                txtExtensionForPGR.Enabled = false;
-                lnkGenerateInvoiceSlotExtension.Enabled = false;
-                lnkSlotExtension.Enabled = false;
-            }
+
+            txtExtensionForDetention.Enabled = true;
+            lnkGenerateInvoiceSlotExtension.Enabled = true;
+            lnkSlotExtension.Enabled = true;
+
+
         }
 
         protected void chkAmendment_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkAmendment.Checked == true)
-            {
-                ddlAmendmentFor.Enabled = true;
-                lnkPrintAmend.Enabled = true;
-                lnkAmendment.Enabled = true;
-            }
-            else
-            {
-                ddlAmendmentFor.Enabled = false;
-                lnkPrintAmend.Enabled = false;
-                lnkAmendment.Enabled = false;
-            }
+            DisableAllServiceControls();
+            ddlAmendmentFor.Enabled = true;
+            lnkPrintAmend.Enabled = true;
+            //lnkAmendment.Enabled = true;
+
         }
 
         protected void chkBondCancel_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkBondCancel.Checked == true)
-            {
-                txtBondCancellation.Enabled = true;
-                btnBondSave.Enabled = true;
-                lnkBondCancel.Enabled = true;
-            }
-            else
-            {
-                txtBondCancellation.Enabled = false;
-                btnBondSave.Enabled = false;
-                lnkBondCancel.Enabled = false;
-            }
+            DisableAllServiceControls();
+
+            txtBondCancellation.Enabled = true;
+            btnBondSave.Enabled = true;
+            lnkBondCancel.Enabled = true;
+
         }
 
         protected void imgBtnExaminationDo_Click(object sender, ImageClickEventArgs e)
         {
             Response.Redirect("/#?bl");
-        }
-
-        protected void lnkGenerateInvoiceDo_Click(object sender, EventArgs e)
-        {
-            if (!String.IsNullOrEmpty(txtBlNo.Text))
-            {
-                Response.Redirect("~/Reports/InvDO.aspx?BL=" + txtBlNo.Text.Trim());
-            }
-            else
-                lblMessageServiceReq.Text = ResourceManager.GetStringWithoutName("ERR00080");
-        }
-
-        protected void lnkGenerateInvoiceDOE_Click(object sender, EventArgs e)
-        {
-            if (!String.IsNullOrEmpty(txtBlNo.Text))
-                Response.Redirect("~/Reports/InvDOExt.aspx?BL=" + txtBlNo.Text.Trim());
-            else
-                lblMessageServiceReq.Text = ResourceManager.GetStringWithoutName("ERR00080");
-        }
-
-        protected void lnkGenerateInvoiceSlotExtension_Click(object sender, EventArgs e)
-        {
-            if (!String.IsNullOrEmpty(txtBlNo.Text))
-                Response.Redirect("~/Reports/InvSlotExt.aspx?BL=" + txtBlNo.Text.Trim());
-            else
-                lblMessageServiceReq.Text = ResourceManager.GetStringWithoutName("ERR00080");
         }
 
         protected void btnSave2_Click(object sender, EventArgs e)
@@ -504,8 +475,8 @@ namespace EMS.WebApp.Transaction
                     sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
                     sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.DO + "</AT>");
                     sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
-                    sb.Append("<VD>" + Convert.ToDateTime(txtDoValidTill.Text).ToString("MM/dd/yyyy") + "</VD>");
-                    sb.Append("<BG>" + (chkBankGuarantee.Checked ? "1" : "0") + "</BG>");
+                    //sb.Append("<VD>" + Convert.ToDateTime(txtDoValidTill.Text).ToString("MM/dd/yyyy") + "</VD>");
+                    //sb.Append("<BG>" + (chkBankGuarantee.Checked ? "1" : "0") + "</BG>");
                     sb.Append("<IG>" + 0 + "</IG>");
                     sb.Append("<NOP>" + 0 + "</NOP>");
 
@@ -612,7 +583,8 @@ namespace EMS.WebApp.Transaction
             sbr.Append(chkSecurityCheque.Checked == true ? "1," : "0,");
             sbr.Append(chkCopyOfBill.Checked == true ? "1," : "0,");
             sbr.Append(chkConsoldatorNOC.Checked == true ? "1," : "0,");
-            sbr.Append(chkCHSSA.Checked == true ? "1" : "0");
+            sbr.Append(chkCHSSA.Checked == true ? "1," : "0,");
+            sbr.Append(chkBankGuarantee.Checked == true ? "1" : "0");
 
             oImportBLL.SaveSubmittedDocument(Convert.ToInt64(hdnBLId.Value), sbr.ToString());
         }
@@ -640,6 +612,143 @@ namespace EMS.WebApp.Transaction
         protected void lnkBondCancel_Click(object sender, EventArgs e)
         {
             mpeBond.Show();
+        }
+
+        protected void LocationLine_Changed(object sender, EventArgs e)
+        {
+            autoComplete1.ContextKey = ddlLocation.SelectedValue + "|" + ddlLine.SelectedValue;
+        }
+
+
+        protected void chkFreightToCollect_CheckedChanged(object sender, EventArgs e)
+        {
+            DisableAllServiceControls();
+
+            lnkFreightToCollect.Enabled = true;
+            txtFreightToCollect.Enabled = true;
+            lnkGenInvFreightToCollect.Enabled = true;
+
+        }
+
+        protected void chkPGRExtension_CheckedChanged(object sender, EventArgs e)
+        {
+            DisableAllServiceControls();
+            lnkPGRExtension.Enabled = true;
+            txtExtensionForPGR.Enabled = true;
+            lnkGenInvPGR.Enabled = true;
+        }
+
+        protected void chkSecurityInv_CheckedChanged(object sender, EventArgs e)
+        {
+            DisableAllServiceControls();
+            lnkSecurityInv.Enabled = true;
+            lnkGenInvSecirity.Enabled = true;
+        }
+
+        protected void chkFinalInvoice_CheckedChanged(object sender, EventArgs e)
+        {
+            DisableAllServiceControls();
+            lnkFinalInvoice.Enabled = true;
+            lnkGenInvFinalDo.Enabled = true;
+        }
+
+        protected void chkOtherInv_CheckedChanged(object sender, EventArgs e)
+        {
+            DisableAllServiceControls();
+            lnkOtherInv.Enabled = true;
+            lnkGenInvOtherInvoice.Enabled = true;
+        }
+
+        void Redirect(string BLNo, string InvoiceName, string InvTypID, string Misc)
+        {
+            if (String.IsNullOrEmpty(BLNo))
+            {
+                Label lblMsg = new Label();
+                lblMessageBLQuery.Text = "<script type='text/javascript'>alert('Please enter BLNo');</script>";
+                Page.Controls.Add(lblMessageBLQuery);
+            }
+
+            string p1 = GeneralFunctions.EncryptQueryString(BLNo);
+            string p2 = GeneralFunctions.EncryptQueryString(InvoiceName);
+            string p3 = GeneralFunctions.EncryptQueryString(InvTypID);
+            string p4 = GeneralFunctions.EncryptQueryString(Misc);
+
+            Response.Redirect("~/Transaction/ManageInvoice.aspx?p1=" + p1 + "&p2=" + p2 + "&p3=" + p3 + "&p4=" + p4 + "");
+        }
+
+
+        protected void lnkGenInvFreightToCollect_Click(object sender, EventArgs e)
+        {
+            Redirect(txtBlNo.Text.Trim(), "Freight Invoice", "7", txtFreightToCollect.Text.Trim());
+        }
+
+        protected void lnkGenerateInvoiceDo_Click(object sender, EventArgs e)
+        {
+            Redirect(txtBlNo.Text.Trim(), "First Invoice", "1", ddlDestuffing.SelectedItem.Text);
+        }
+
+        protected void lnkGenerateInvoiceDOE_Click(object sender, EventArgs e)
+        {
+            Redirect(txtBlNo.Text.Trim(), "DO Extension", "22", txtVAlidityDate.Text.Trim());
+        }
+
+        protected void lnkGenerateInvoiceSlotExtension_Click(object sender, EventArgs e)
+        {
+            Redirect(txtBlNo.Text.Trim(), "Proforma Invoice", "8", txtExtensionForDetention.Text.Trim());
+        }
+
+        protected void lnkGenInvPGR_Click(object sender, EventArgs e)
+        {
+            Redirect(txtBlNo.Text.Trim(), "Proforma Invoice", "21", txtExtensionForPGR.Text.Trim());
+        }
+
+        protected void lnkGenInvSecirity_Click(object sender, EventArgs e)
+        {
+            Redirect(txtBlNo.Text.Trim(), "Securty Deposit", "2", string.Empty);
+        }
+
+        protected void lnkGenInvFinalDo_Click(object sender, EventArgs e)
+        {
+            Redirect(txtBlNo.Text.Trim(), "Final Invoice", "3", string.Empty);
+        }
+
+        protected void lnkGenInvOtherInvoice_Click(object sender, EventArgs e)
+        {
+            Redirect(txtBlNo.Text.Trim(), "MISC. INVOICE", "0", string.Empty);
+        }
+
+        void DisableAllServiceControls()
+        {
+            lnkFreightToCollect.Enabled = false;
+            lnkDO.Enabled = false;
+            lnkDoExtension.Enabled = false;
+            lnkSlotExtension.Enabled = false;
+            lnkPGRExtension.Enabled = false;
+            lnkSecurityInv.Enabled = false;
+            lnkFinalInvoice.Enabled = false;
+            lnkOtherInv.Enabled = false;
+            lnkBondCancel.Enabled = false;
+
+            txtFreightToCollect.Enabled = false;
+            ddlDestuffing.Enabled = false;
+            txtVAlidityDate.Enabled = false;
+            txtExtensionForDetention.Enabled = false;
+            txtExtensionForPGR.Enabled = false;
+            ddlAmendmentFor.Enabled = false;
+            txtBondCancellation.Enabled = false;
+
+            lnkGenInvFreightToCollect.Enabled = false;
+            lnkGenerateInvoiceDo.Enabled = false;
+            lnkGenerateInvoiceDOE.Enabled = false;
+            lnkGenerateInvoiceSlotExtension.Enabled = false;
+            lnkGenInvPGR.Enabled = false;
+            lnkGenInvSecirity.Enabled = false;
+            lnkGenInvFinalDo.Enabled = false;
+            lnkGenInvOtherInvoice.Enabled = false;
+            lnkPrintAmend.Enabled = false;
+            btnBondSave.Enabled = false;
+
+
         }
     }
 }

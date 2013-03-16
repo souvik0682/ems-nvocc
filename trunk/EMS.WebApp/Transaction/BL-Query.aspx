@@ -4,52 +4,93 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="EMS.WebApp" Namespace="EMS.WebApp.CustomControls" TagPrefix="cc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript">
+        function AutoCompleteItemSelected(sender, e) {
+
+            if (sender._id == "AutoCompleteEx") {
+                var hdnBLId = $get('<%=hdnBLId.ClientID %>');
+                hdnBLId.value = e.get_value();
+            }
+
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
     <div>
         <div id="headercaption">
             B/L QUERY</div>
         <center>
-            <fieldset style="width: 98%;">
+            <fieldset style="width: 98%; display: block;">
                 <legend>B/L Detail</legend>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <table border="0" cellpadding="2" cellspacing="3" width="100%">
                             <tr>
-                                <td style="width: 15%;">
+                                <td style="width: 9%;">
                                     Location :
                                 </td>
-                                <td style="width: 10%; font-weight: 700;">
-                                    <asp:DropDownList ID="ddlLocation" runat="server" Width="100">
+                                <td width="6%">
+                                    <asp:DropDownList ID="ddlLocation" runat="server" Width="70" AutoPostBack="True"
+                                        OnSelectedIndexChanged="LocationLine_Changed">
                                     </asp:DropDownList>
                                 </td>
-                                <td style="width: 8%;">
+                                <td style="width: 5%;">
                                     Line :
                                 </td>
-                                <td>
-                                    <asp:DropDownList ID="ddlLine" runat="server" Width="100">
+                                <td style="width: 5%;">
+                                    <asp:DropDownList ID="ddlLine" runat="server" Width="100" AutoPostBack="True" OnSelectedIndexChanged="LocationLine_Changed">
                                     </asp:DropDownList>
                                 </td>
-                                <td style="width: 15%;">
+                                <td style="width: 9%;">
                                     B/L No :
                                 </td>
-                                <td style="width: 10%;">
+                                <td style="width: 5%;">
                                     <asp:HiddenField ID="hdnBLId" runat="server" Value="0" />
-                                    <asp:TextBox ID="txtBlNo" runat="server" Width="150" AutoCompleteType="None" AutoPostBack="True"
-                                        OnTextChanged="txtBlNo_TextChanged"></asp:TextBox>
-                                    <%--<cc1:calendarextender id="CalendarExtender1" runat="server" popupbuttonid="txtEffectDate"
-                                        popupposition="BottomLeft" targetcontrolid="txtEffectDate" format="dd/MM/yyyy"
-                                        onclientdateselectionchanged="checkDate">
-                                    </cc1:calendarextender>
-                                    <asp:RequiredFieldValidator ID="rfvDate" runat="server" ErrorMessage="Please select date"
-                                        ControlToValidate="txtEffectDate" Display="None" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
-                                    <cc1:validatorcalloutextender id="ValidatorCalloutExtender10" runat="server" targetcontrolid="rfvDate">
-                                    </cc1:validatorcalloutextender>
-                                    <cc1:filteredtextboxextender id="FilteredTextBoxExtender1" runat="server" targetcontrolid="txtEffectDate"
-                                        filtermode="ValidChars" filtertype="Numbers,Custom" validchars="/">
-                                    </cc1:filteredtextboxextender>--%>
+                                    <asp:TextBox ID="txtBlNo" runat="server" Width="150" AutoPostBack="True" OnTextChanged="txtBlNo_TextChanged"
+                                        onkeyup="SetContextKey();"></asp:TextBox>
+                                    <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx" ID="autoComplete1"
+                                        TargetControlID="txtBlNo" ServicePath="~/GetLocation.asmx" ServiceMethod="GetBLNoList"
+                                        MinimumPrefixLength="1" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
+                                        CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
+                                        CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
+                                        ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected"
+                                        UseContextKey="true">
+                                        <Animations>
+                                        <OnShow>
+                                            <Sequence>
+                                                <%-- Make the completion list transparent and then show it --%>
+                                                <OpacityAction Opacity="0" />
+                                                <HideAction Visible="true" />
+                            
+                                                <%--Cache the original size of the completion list the first time
+                                                    the animation is played and then set it to zero --%>
+                                                <ScriptAction Script="
+                                                    // Cache the size and setup the initial size
+                                                    var behavior = $find('AutoCompleteEx');
+                                                    if (!behavior._height) {
+                                                        var target = behavior.get_completionList();
+                                                        behavior._height = target.offsetHeight - 2;
+                                                        target.style.height = '0px';
+                                                    }" />
+                            
+                                                <%-- Expand from 0px to the appropriate size while fading in --%>
+                                                <Parallel Duration=".4">
+                                                    <FadeIn />
+                                                    <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteEx')._height" />
+                                                </Parallel>
+                                            </Sequence>
+                                        </OnShow>
+                                        <OnHide>
+                                            <%-- Collapse down to 0px and fade out --%>
+                                            <Parallel Duration=".4">
+                                                <FadeOut />
+                                                <Length PropertyKey="height" StartValueScript="$find('AutoCompleteEx')._height" EndValue="0" />
+                                            </Parallel>
+                                        </OnHide>
+                                        </Animations>
+                                    </cc1:AutoCompleteExtender>
                                 </td>
-                                <td style="width: 15%;">
+                                <td style="width: 10%;">
                                     Delivered To (CHA) :
                                 </td>
                                 <td style="width: 10%;">
@@ -63,7 +104,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td >
+                                <td>
                                     Landing Date :
                                 </td>
                                 <td>
@@ -71,70 +112,71 @@
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvSalutation" WarningIconImageUrl="" >
                             </cc1:ValidatorCalloutExtender>--%>
-                                    <asp:TextBox ID="txtLandingDate" runat="server" Width="100"></asp:TextBox>
+                                    <asp:TextBox ID="txtLandingDate" runat="server" Width="71"></asp:TextBox>
                                 </td>
                                 <td>
-                                    &nbsp;
+                                    Vessel :
                                 </td>
-                                <td style="width: 10%;">
+                                <td>
                                     <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
                             </cc1:ValidatorCalloutExtender>--%>
-                                </td>
-                                <td style="width: 11%;">
-                                    Vessel :
-                                </td>
-                                <td style="width: 10%;">
                                     <asp:TextBox ID="txtVessel" runat="server" Width="100"></asp:TextBox>
+                                </td>
+                                <td>
+                                    Detention Free Days :
+                                </td>
+                                <td>
                                     <%--<asp:ImageButton ID='btnRemove' runat='server' CommandName='Remove' ImageUrl='~/Images/remove.png' Height='16' Width='16' />--%>
                                     <%--<input type="image" onserverclick="DeleteUploadedDoc" id="imgDelDoc" runat="server" src="~/Images/remove.png" style="height:20px; width:20px;" />--%>
                                     <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvSalutation" WarningIconImageUrl="" >
                             </cc1:ValidatorCalloutExtender>--%>
+                                    <asp:TextBox ID="txtDetentionFreeDays" runat="server" Width="100"></asp:TextBox>
                                 </td>
                                 <td style="width: 11%;">
-                                    Voyage :
+                                    PGR free days :
                                 </td>
                                 <td style="width: 10%;">
-                                    <asp:TextBox ID="txtVoyage" runat="server" Width="100"></asp:TextBox>
                                     <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
                             </cc1:ValidatorCalloutExtender>--%>
+                                    <asp:TextBox ID="txtPGRFreedays" runat="server" Width="100"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    Detention Free Days :
+                                    DO Valid Upto :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtDetentionFreeDays" runat="server" Width="100"></asp:TextBox>
                                     <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvSalutation" WarningIconImageUrl="" >
                             </cc1:ValidatorCalloutExtender>--%>
+                                    <asp:TextBox ID="txtDoValidUpto" runat="server" Width="71"></asp:TextBox>
+                                </td>
+                                <td>
+                                    Voyage :
+                                </td>
+                                <td>
+                                    <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
+                                Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
+                            <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
+                            </cc1:ValidatorCalloutExtender>--%>
+                                    <asp:TextBox ID="txtVoyage" runat="server" Width="100"></asp:TextBox>
                                 </td>
                                 <td>
                                     Detention till :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="tstDetentionTill" runat="server" Width="100"></asp:TextBox>
-                                    <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
-                                Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
-                            <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
-                            </cc1:ValidatorCalloutExtender>--%>
-                                </td>
-                                <td>
-                                    PGR free days :
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="txtPGRFreedays" runat="server" Width="100"></asp:TextBox>
                                     <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvSalutation" WarningIconImageUrl="" >
                             </cc1:ValidatorCalloutExtender>--%>
+                                    <asp:TextBox ID="tstDetentionTill" runat="server" Width="100"></asp:TextBox>
                                 </td>
                                 <td>
                                     PGR till :
@@ -164,21 +206,57 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </fieldset>
-            <fieldset style="width: 95%;">
+            <fieldset style="width: 98%; display: block;">
                 <legend>Service Requests</legend>
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Always">
                     <ContentTemplate>
                         <table width="100%" border="0" cellspacing="0">
                             <tr style="height: 30px;">
                                 <td>
+                                    <%--<asp:CheckBox ID="" runat="server" AutoPostBack="true" />--%>
+                                    <asp:RadioButton ID="chkFreightToCollect" runat="server" GroupName="Service" AutoPostBack="true"
+                                        OnCheckedChanged="chkFreightToCollect_CheckedChanged" />
+                                    <asp:LinkButton ID="lnkFreightToCollect" Enabled="false" runat="server" Text="Freight To Collect"
+                                        ForeColor="Blue"></asp:LinkButton>
+                                </td>
+                                <td>
+                                    Freight Amt in $
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtFreightToCollect" runat="server" Width="75" Enabled="false"></asp:TextBox>
+                                </td>
+                                <td align="right" style="border-right: Solid 1px Black;">
+                                    <asp:LinkButton ID="lnkGenInvFreightToCollect" runat="server" Text="Generate Invoice"
+                                        ForeColor="Blue" Enabled="false" OnClick="lnkGenInvFreightToCollect_Click"></asp:LinkButton>
+                                </td>
+                                <td>
+                                    <%--<asp:CheckBox ID="" runat="server" AutoPostBack="true" />--%>
+                                    <asp:RadioButton ID="chkSecurityInv" runat="server" GroupName="Service" AutoPostBack="true"
+                                        OnCheckedChanged="chkSecurityInv_CheckedChanged" Enabled="false" />
+                                    <asp:LinkButton ID="lnkSecurityInv" Enabled="false" runat="server" Text="Security Invoice"
+                                        ForeColor="Blue"></asp:LinkButton>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td align="right">
+                                    <asp:LinkButton ID="lnkGenInvSecirity" runat="server" Text="Generate Invoice" ForeColor="Blue"
+                                        Enabled="false" OnClick="lnkGenInvSecirity_Click"></asp:LinkButton>
+                                </td>
+                            </tr>
+                            <tr style="height: 30px;">
+                                <td>
                                     <asp:Button ID="btnTemp1" runat="server" Style="display: none;" />
-                                    <asp:CheckBox ID="chkDo" runat="server" OnCheckedChanged="chkDo_CheckedChanged" AutoPostBack="true" />
+                                    <%--<asp:CheckBox ID="" runat="server" OnCheckedChanged="chkDo_CheckedChanged" AutoPostBack="true" />--%>
+                                    <asp:RadioButton ID="chkDo" runat="server" GroupName="Service" AutoPostBack="true"
+                                        OnCheckedChanged="chkDo_CheckedChanged" Enabled="false" />
                                     <asp:LinkButton ID="lnkDO" Enabled="false" runat="server" Text="Delivery Order" ForeColor="Blue"
                                         OnClick="lnkDO_Click"></asp:LinkButton>
                                     <cc1:ModalPopupExtender ID="mpeDo" runat="server" PopupControlID="pnlDo" TargetControlID="btnTemp1"
                                         BackgroundCssClass="ModalPopupBG" CancelControlID="imgClose">
                                     </cc1:ModalPopupExtender>
-                                    <asp:Panel ID="pnlDo" runat="server">
+                                    <asp:Panel ID="pnlDo" runat="server" Style="display: none;">
                                         <table style="width: 300px; height: 80px; background-color: White; text-align: center;"
                                             border="0" cellspacing="0">
                                             <%-- <tr>
@@ -220,43 +298,44 @@
                                     De-stuffing
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlDestuffing" runat="server" Width="79" Enabled="false">
+                                    <asp:DropDownList ID="ddlDestuffing" runat="server" Enabled="false" Width="79">
                                         <asp:ListItem Text="CFS" Value="1"></asp:ListItem>
                                         <asp:ListItem Text="Factory" Value="2"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
-                                <td>
-                                    DO-Valid Till
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="txtDoValidTill" runat="server" Width="75" Enabled="false"></asp:TextBox>
-                                    <%-- <cc1:CalendarExtender ID="CalendarExtender5" runat="server" PopupButtonID="txtDoValidTill"
-                                TargetControlID="txtDoValidTill">
-                            </cc1:CalendarExtender>--%>
-                                </td>
-                                <td>
-                                    <asp:CheckBox ID="chkFreightPaidstatus" runat="server" Enabled="false" />Freight
-                                    Paid
-                                </td>
-                                <td>
-                                    <asp:CheckBox ID="chkBankGuarantee" runat="server" Enabled="false" />Bank Guarantee
-                                </td>
-                                <td align="right">
+                                <td align="right" style="border-right: Solid 1px Black;">
                                     <asp:LinkButton ID="lnkGenerateInvoiceDo" runat="server" Text="Generate Invoice"
                                         ForeColor="Blue" Enabled="false" OnClick="lnkGenerateInvoiceDo_Click"></asp:LinkButton>
+                                </td>
+                                <td>
+                                    <%--<asp:CheckBox ID="" runat="server" AutoPostBack="true" />--%>
+                                    <asp:RadioButton ID="chkFinalInvoice" runat="server" GroupName="Service" AutoPostBack="true"
+                                        OnCheckedChanged="chkFinalInvoice_CheckedChanged" Enabled="false" />
+                                    <asp:LinkButton ID="lnkFinalInvoice" Enabled="false" runat="server" Text="Final Invoice"
+                                        ForeColor="Blue"></asp:LinkButton>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td align="right">
+                                    <asp:LinkButton ID="lnkGenInvFinalDo" runat="server" Text="Generate Invoice" ForeColor="Blue"
+                                        Enabled="false" OnClick="lnkGenInvFinalDo_Click"></asp:LinkButton>
                                 </td>
                             </tr>
                             <tr style="height: 30px;">
                                 <td>
                                     <asp:Button ID="btnTemp2" runat="server" Style="display: none;" />
-                                    <asp:CheckBox ID="chkDoExtension" Enabled="false" runat="server" OnCheckedChanged="chkDoExtension_CheckedChanged"
-                                        AutoPostBack="true" />
+                                    <%--<asp:CheckBox ID="" Enabled="false" runat="server" OnCheckedChanged="chkDoExtension_CheckedChanged"
+                                        AutoPostBack="true" />--%>
+                                    <asp:RadioButton ID="chkDoExtension" runat="server" GroupName="Service" AutoPostBack="true"
+                                        OnCheckedChanged="chkDoExtension_CheckedChanged" Enabled="false" />
                                     <asp:LinkButton ID="lnkDoExtension" Enabled="false" runat="server" Text="Delivery Order Extension"
                                         ForeColor="Blue" OnClick="lnkDoExtension_Click"></asp:LinkButton>
                                     <cc1:ModalPopupExtender ID="mpeDOE" runat="server" PopupControlID="pnlDOE" TargetControlID="btnTemp2"
                                         BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseDOE">
                                     </cc1:ModalPopupExtender>
-                                    <asp:Panel ID="pnlDOE" runat="server">
+                                    <asp:Panel ID="pnlDOE" runat="server" Style="display: none;">
                                         <div style="height: 300; width: 350px;">
                                             <div style="background-color: #328DC4; padding-top: 5px;">
                                                 <div style="width: 85%; text-align: left; font-weight: bold; color: White; font-size: 12pt;
@@ -293,24 +372,39 @@
                                         TargetControlID="txtValidityDate" Format="dd/MM/yyyy">
                                     </cc1:CalendarExtender>
                                 </td>
-                                <%--<td colspan="4">
-                        </td>  --%>
-                                <td colspan="5" align="right">
+                                <td align="right" style="border-right: Solid 1px Black;">
                                     <asp:LinkButton ID="lnkGenerateInvoiceDOE" runat="server" Text="Generate Invoice"
                                         ForeColor="Blue" Enabled="false" OnClick="lnkGenerateInvoiceDOE_Click"></asp:LinkButton>
+                                </td>
+                                <td>
+                                    <%-- <asp:CheckBox ID="" runat="server" AutoPostBack="true" />--%>
+                                    <asp:RadioButton ID="chkOtherInv" runat="server" GroupName="Service" AutoPostBack="true"
+                                        OnCheckedChanged="chkOtherInv_CheckedChanged" Enabled="false" />
+                                    <asp:LinkButton ID="lnkOtherInv" Enabled="false" runat="server" Text="Other Invoice"
+                                        ForeColor="Blue"></asp:LinkButton>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td align="right">
+                                    <asp:LinkButton ID="lnkGenInvOtherInvoice" runat="server" Text="Generate Invoice"
+                                        ForeColor="Blue" Enabled="false" OnClick="lnkGenInvOtherInvoice_Click"></asp:LinkButton>
                                 </td>
                             </tr>
                             <tr style="height: 30px;">
                                 <td>
                                     <asp:Button ID="btnTemp3" runat="server" Style="display: none;" />
-                                    <asp:CheckBox ID="chkSlotExtension" Enabled="false" runat="server" OnCheckedChanged="chkSlotExtension_CheckedChanged"
-                                        AutoPostBack="true" />
-                                    <asp:LinkButton ID="lnkSlotExtension" Enabled="false" runat="server" Text="Slot Extension"
+                                    <%--<asp:CheckBox ID="" Enabled="false" runat="server" OnCheckedChanged="chkSlotExtension_CheckedChanged"
+                                        AutoPostBack="true" />--%>
+                                    <asp:RadioButton ID="chkDetensionExtension" runat="server" GroupName="Service" AutoPostBack="true"
+                                        OnCheckedChanged="chkSlotExtension_CheckedChanged" Enabled="false" />
+                                    <asp:LinkButton ID="lnkSlotExtension" Enabled="false" runat="server" Text="Extension for Detention"
                                         ForeColor="Blue" OnClick="lnkSlotExtension_Click"></asp:LinkButton>
                                     <cc1:ModalPopupExtender ID="mpeSE" runat="server" PopupControlID="pnlSLE" TargetControlID="btnTemp3"
                                         BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseSLE">
                                     </cc1:ModalPopupExtender>
-                                    <asp:Panel ID="pnlSLE" runat="server">
+                                    <asp:Panel ID="pnlSLE" runat="server" Style="display: none;">
                                         <table style="width: 300px; height: 80px; background-color: White; text-align: center;"
                                             border="0" cellspacing="0">
                                             <tr style="background-color: #328DC4; height: 28px;">
@@ -337,8 +431,6 @@
                                     </asp:Panel>
                                 </td>
                                 <td>
-                                    <asp:RadioButton ID="rdbDetension" runat="server" GroupName="Detn" />
-                                    Detention
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtExtensionForDetention" runat="server" Width="75" Enabled="false"></asp:TextBox>
@@ -346,32 +438,23 @@
                                         TargetControlID="txtExtensionForDetention" Format="dd/MM/yyyy">
                                     </cc1:CalendarExtender>
                                 </td>
-                                <td>
-                                    <asp:RadioButton ID="rdbPGR" runat="server" GroupName="Detn" />
-                                    PGR
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="txtExtensionForPGR" runat="server" Width="75" Enabled="false"></asp:TextBox>
-                                    <cc1:CalendarExtender ID="CalendarExtender3" runat="server" PopupButtonID="txtExtensionForPGR"
-                                        TargetControlID="txtExtensionForPGR" Format="dd/MM/yyyy">
-                                    </cc1:CalendarExtender>
-                                </td>
-                                <td colspan="3" align="right">
+                                <td align="right" style="border-right: Solid 1px Black;">
                                     <asp:LinkButton ID="lnkGenerateInvoiceSlotExtension" runat="server" Text="Generate Invoice"
                                         ForeColor="Blue" Enabled="false" OnClick="lnkGenerateInvoiceSlotExtension_Click"></asp:LinkButton>
                                 </td>
-                            </tr>
-                            <tr style="height: 30px;">
                                 <td>
                                     <asp:Button ID="btnTemp4" runat="server" Style="display: none;" />
-                                    <asp:CheckBox ID="chkAmendment" Enabled="false" runat="server" AutoPostBack="true"
-                                        OnCheckedChanged="chkAmendment_CheckedChanged" />
-                                    <asp:LinkButton ID="lnkAmendment" Enabled="false" runat="server" Text="Amendment"
-                                        ForeColor="Blue" OnClick="lnkAmendment_Click"></asp:LinkButton>
+                                    <%-- <asp:CheckBox ID="" Enabled="false" runat="server" AutoPostBack="true"
+                                        OnCheckedChanged="chkAmendment_CheckedChanged" />--%>
+                                    <asp:RadioButton ID="chkAmendment" runat="server" GroupName="Service" AutoPostBack="true"
+                                        OnCheckedChanged="chkAmendment_CheckedChanged" Enabled="false" />
+                                    Amendment
+                                    <%--  <asp:LinkButton ID="lnkAmendment" Enabled="false" runat="server" Text="Amendment"
+                                        ForeColor="Blue" OnClick="lnkAmendment_Click"></asp:LinkButton>--%>
                                     <cc1:ModalPopupExtender ID="mpeAmend" runat="server" PopupControlID="pnlAmendment"
                                         TargetControlID="btnTemp4" BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseAmend">
                                     </cc1:ModalPopupExtender>
-                                    <asp:Panel ID="pnlAmendment" runat="server">
+                                    <asp:Panel ID="pnlAmendment" runat="server" Style="display: none;">
                                         <table style="width: 350px; height: 200px; background-color: White; text-align: center;"
                                             border="0" cellspacing="0">
                                             <tr style="background-color: #328DC4; height: 28px;">
@@ -424,7 +507,7 @@
                                 <td>
                                     Amendment For
                                 </td>
-                                <td colspan="5">
+                                <td>
                                     <asp:DropDownList ID="ddlAmendmentFor" runat="server" Width="79" Enabled="false">
                                     </asp:DropDownList>
                                 </td>
@@ -434,16 +517,37 @@
                                 </td>
                             </tr>
                             <tr style="height: 30px;">
+                                <td align="left">
+                                    <%--<asp:CheckBox ID="" Enabled="false" runat="server" AutoPostBack="true" />--%>
+                                    <asp:RadioButton ID="chkPGRExtension" runat="server" GroupName="Service" AutoPostBack="true"
+                                        OnCheckedChanged="chkPGRExtension_CheckedChanged" Enabled="false" />
+                                    <asp:LinkButton ID="lnkPGRExtension" Enabled="false" runat="server" Text="Extension for PGR"
+                                        ForeColor="Blue" OnClick="lnkSlotExtension_Click"></asp:LinkButton>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtExtensionForPGR" runat="server" Width="75" Enabled="false"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="CalendarExtender3" runat="server" PopupButtonID="txtExtensionForPGR"
+                                        TargetControlID="txtExtensionForPGR" Format="dd/MM/yyyy">
+                                    </cc1:CalendarExtender>
+                                </td>
+                                <td align="right" style="border-right: Solid 1px Black;">
+                                    <asp:LinkButton ID="lnkGenInvPGR" runat="server" Text="Generate Invoice" ForeColor="Blue"
+                                        Enabled="false" OnClick="lnkGenInvPGR_Click"></asp:LinkButton>
+                                </td>
                                 <td>
                                     <asp:Button ID="btnTemp5" runat="server" Style="display: none;" />
-                                    <asp:CheckBox ID="chkBondCancel" Enabled="false" runat="server" AutoPostBack="true"
-                                        OnCheckedChanged="chkBondCancel_CheckedChanged" />
+                                    <%-- <asp:CheckBox ID="" Enabled="false" runat="server" AutoPostBack="true"
+                                        OnCheckedChanged="chkBondCancel_CheckedChanged" />--%>
+                                    <asp:RadioButton ID="chkBondCancel" runat="server" GroupName="Service" AutoPostBack="true"
+                                        OnCheckedChanged="chkBondCancel_CheckedChanged" Enabled="false" />
                                     <asp:LinkButton ID="lnkBondCancel" Enabled="false" runat="server" Text="Bond Cancellation"
                                         ForeColor="Blue" OnClick="lnkBondCancel_Click"></asp:LinkButton>
                                     <cc1:ModalPopupExtender ID="mpeBond" runat="server" PopupControlID="pnlBondCancel"
                                         TargetControlID="btnTemp5" BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseBC">
                                     </cc1:ModalPopupExtender>
-                                    <asp:Panel ID="pnlBondCancel" runat="server">
+                                    <asp:Panel ID="pnlBondCancel" runat="server" Style="display: none;">
                                         <table style="width: 300px; height: 80px; background-color: White; text-align: center;"
                                             border="0" cellspacing="0">
                                             <tr style="background-color: #328DC4; height: 28px;">
@@ -479,12 +583,6 @@
                                         TargetControlID="txtBondCancellation" Format="dd/MM/yyyy">
                                     </cc1:CalendarExtender>
                                 </td>
-                                <td colspan="4" align="left">
-                                    <asp:Button ID="btnSave2" runat="server" Text="Save" ValidationGroup="vgCharge" OnClick="btnSave2_Click"
-                                        Style="display: none;" />&nbsp;&nbsp;<asp:Button ID="btnBack2" runat="server" CssClass="button"
-                                            Text="Back" Style="display: none;" ValidationGroup="vgUnknown" OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
-                                    <asp:Label ID="lblMessageServiceReq" runat="server" ForeColor="Red"></asp:Label>
-                                </td>
                                 <td style="text-align: right;">
                                     <asp:LinkButton ID="btnBondSave" ForeColor="Blue" runat="server" Enabled="false"
                                         Text="Save Bond Cancellation"></asp:LinkButton>
@@ -497,7 +595,7 @@
                     </Triggers>
                 </asp:UpdatePanel>
             </fieldset>
-            <div style="float: left; width: 60%; padding-left: 1.5%;">
+            <div style="float: left; width: 60%;">
                 <fieldset>
                     <legend>Documents submitted</legend>
                     <table width="100%" border="0">
@@ -532,6 +630,15 @@
                             </td>
                             <td>
                                 <asp:CheckBox ID="chkCHSSA" runat="server" Text="Copy of High Seas Sales Agreement" />&nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:CheckBox ID="chkBankGuarantee" runat="server" Text="Bank Guarantee" />
+                            </td>
+                            <td>
+                            </td>
+                            <td>
                                 <div style="float: right; z-index: 100;">
                                     <asp:Button ID="btnDocSubmit" runat="server" Text="Save" OnClick="btnDocSubmit_Click" />
                                     <%-- <asp:Button ID="btnDocback" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
@@ -542,8 +649,8 @@
                     </table>
                 </fieldset>
             </div>
-            <div style="float: left; width: 37%;">
-                <fieldset style="height: 102px;">
+            <div style="float: left; width: 40%;">
+                <fieldset style="height: 125px;">
                     <legend>Documents uploaded</legend>
                     <table style="font-size: smaller; height: 25px; width: 100%; text-align: center;"
                         cellpadding="0" cellspacing="0" border="0">
@@ -573,11 +680,11 @@
                     <asp:HiddenField ID="hdnUploadedDocId" runat="server" Value="0" />
                     <asp:Button ID="btnDeleteDoc" runat="server" OnClick="DeleteUploadedDoc" Style="display: none;" />
                     <%--<input type="image" onserverclick="DeleteUploadedDoc" id="imgDelDoc" runat="server" src="~/Images/remove.png" style="height:20px; width:20px;" />--%>
-                    <div id="dvDoc" runat="server" style="height: 58px; overflow: auto; vertical-align: top;">
+                    <div id="dvDoc" runat="server" style="height: 78px; overflow: auto; vertical-align: top;">
                     </div>
                 </fieldset>
             </div>
-            <fieldset style="width: 95%;">
+            <fieldset style="width: 98%;">
                 <legend>Invoice Status</legend>
                 <table style="width: 100%;">
                     <tr>
@@ -661,20 +768,20 @@
                                         <HeaderStyle CssClass="gridviewheader_center" />
                                         <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" />
                                         <HeaderTemplate>
-                                            Money Recpt.</HeaderTemplate>
+                                            Add Money Recpt.</HeaderTemplate>
                                         <ItemTemplate>
                                             <a href="#">
-                                                <img alt="Add" tooltip="add" src="../Images/add.jpeg" height="16" width="16" /></a>
+                                                <img alt="Add" src="../Images/ADD.JPG" /></a>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Address">
                                         <HeaderStyle CssClass="gridviewheader_center" />
                                         <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Center" />
                                         <HeaderTemplate>
-                                            Credit Note</HeaderTemplate>
+                                            Add Credit Note</HeaderTemplate>
                                         <ItemTemplate>
                                             <a href="#">
-                                                <img alt="Add" src="../Images/add.jpeg" height="16" width="16" /></a>
+                                                <img alt="Add" src="../Images/ADD.JPG" /></a>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>

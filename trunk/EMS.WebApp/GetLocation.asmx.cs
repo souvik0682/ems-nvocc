@@ -16,7 +16,9 @@ namespace EMS.WebApp
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
+    
     [System.Web.Script.Services.ScriptService]
+    
     public class GetLocation : System.Web.Services.WebService
     {
         public GetLocation()
@@ -70,5 +72,28 @@ namespace EMS.WebApp
 
             return vesselNames;
         }
+
+
+        [WebMethod]
+        [System.Web.Script.Services.ScriptMethod]
+        //public string[] GetBLNoList(string prefixText, int count,int Location, int Line)
+        public string[] GetBLNoList(string prefixText, int count, string contextKey)
+        {
+            int Location = Convert.ToInt32(contextKey.Split('|')[0].ToString());
+            int Line = Convert.ToInt32(contextKey.Split('|')[1].ToString());
+            
+            ImportBLL oImportBLL = new ImportBLL();
+            DataTable dt = oImportBLL.GetBLNo(Location, Line, prefixText);
+            string[] BlNos = new string[dt.Rows.Count];
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                BlNos[i] = AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(Convert.ToString(dt.Rows[i]["BLNo"]), Convert.ToString(dt.Rows[i]["BLID"]));
+            }
+
+            return BlNos;
+        }
+
+
     }
 }

@@ -74,7 +74,7 @@
                     <td>
                         <%--<%@ Register Src="../CustomControls/DatePicker.ascx" TagName="DatePicker" TagPrefix="uc3" %>--%>
                            <asp:TextBox ID="txtDtIGM" CssClass="textboxuppercaseRO"  runat="server" ReadOnly="true"></asp:TextBox>
-                        <cc2:CalendarExtender ID="dtIGM_" TargetControlID="txtDtIGM" runat="server" />
+                        <cc2:CalendarExtender ID="dtIGM_" Format="dd/MM/yyyy" TargetControlID="txtDtIGM" runat="server" />
                    </td>
                 </tr>
 
@@ -178,7 +178,7 @@
                     <td style="width:140px;">Arrival Date </td>
                     <td> <%--<uc3:DatePicker ID="dtIGM" runat="server" />--%>
                          <asp:TextBox ID="txtdtArrival" runat="server"  CssClass="textboxuppercase" Width="100"></asp:TextBox>
-                        <cc2:CalendarExtender ID="dtArrival_" TargetControlID="txtdtArrival" runat="server"  />
+                        <cc2:CalendarExtender ID="dtArrival_" TargetControlID="txtdtArrival" Format="dd/MM/yyyy" runat="server"  />
                         Time <asp:TextBox ID="txtArriveTime" runat="server" width="100"></asp:TextBox>
                          <cc2:TextBoxWatermarkExtender ID="txtWMEAbbr" runat="server" TargetControlID="txtArriveTime" WatermarkText="hh:mm"></cc2:TextBoxWatermarkExtender>
                    </td>

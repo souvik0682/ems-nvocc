@@ -21,7 +21,7 @@
              
                     <td>Location:<span class="errormessage1">*</span></td>
                     <td>
-                      <asp:DropDownList ID="ddlLoc" runat="server" Width="60%" AutoPostBack="True" onselectedindexchanged="ddlLoc_SelectedIndexChanged" 
+                      <asp:DropDownList ID="ddlLoc" runat="server" Width="60%" AutoPostBack="false" onselectedindexchanged="ddlLoc_SelectedIndexChanged" 
                             ></asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage" 
                             ControlToValidate="ddlLoc" Display="Dynamic" InitialValue="0" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator>
@@ -92,9 +92,9 @@
                    <td style="width:30%; height:100%">
                    <asp:Panel ID="Panel1" runat="server" GroupingText="<span style='font-size:small;font-style:normal; color:Black;font-weight:lighter'>Approved By<span>" style="min-height:100%; ">
                    <br />
-                    <asp:DropDownList ID="ddlUser" runat="server" Width="100%">                        
-                      </asp:DropDownList>
-                      <%--<asp:TextBox ID="txtAppUser" CssClass="textboxuppercase" MaxLength="11" Width="120" runat="server"></asp:TextBox>--%>
+                    <%--<asp:DropDownList ID="ddlUser" runat="server" Width="100%">                        
+                      </asp:DropDownList>--%>
+                      <asp:TextBox ID="txtAppUser" CssClass="textboxuppercase" MaxLength="11" Width="120" runat="server"></asp:TextBox>
                       <br /><br /><br />
                    </asp:Panel>
                     

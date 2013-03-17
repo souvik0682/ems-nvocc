@@ -32,16 +32,22 @@ namespace EMS.WebApp.Equipment
             {
                 GeneralFunctions.PopulateDropDownList(ddlLoc, dbinteract.PopulateDDLDS("DSR.dbo.mstLocation", "pk_LocID", "LocName", true), true);
                 GeneralFunctions.PopulateDropDownList(ddlLine, EMS.BLL.EquipmentBLL.DDLGetLine());
-                int dis=DisableControls();
+               
                
                 
                 btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('RepairingEstimate.aspx','" + EMS.Utilities.ResourceManager.ResourceManager.GetStringWithoutName("ERR00017") + "')";
                 if (EqEstId != "-1")
                 {
-                    GeneralFunctions.PopulateDropDownList(ddlUser, EMS.BLL.UserBLL.GetAdminUsers(_userId, Convert.ToInt32(ddlLoc.SelectedValue)));
+                   // GeneralFunctions.PopulateDropDownList(ddlUser, EMS.BLL.UserBLL.GetAdminUsers(_userId, Convert.ToInt32(ddlLoc.SelectedValue)));
+                   
                     LoadData(_userId, EqEstId);
+                    System.Data.DataSet ds = UserBLL.GetUserById(_userId);
+                    if (ds.Tables[0].Rows.Count > 0)
+                        txtAppUser.Text = ds.Tables[0].Rows[0]["Name"].ToString();
                     
                 }
+
+                int dis = DisableControls();
             }
             if (EqEstId == "-1")
             {
@@ -56,11 +62,15 @@ namespace EMS.WebApp.Equipment
             int[] adm_mgrRoles = { 1, 2, 3, 6 };
             if (Array.IndexOf(adm_mgrRoles, EMS.BLL.UserBLL.GetLoggedInUserRoleId()) < 0)
             {
-                ddlUser.Enabled = false;
+                //ddlUser.Enabled = false;
+                txtAppUser.ReadOnly = true;
+                txtAppUser.Style.Add("background-color", "#E6E6E6");
                 txtMaterialApp.ReadOnly = true;
                 txtMaterialApp.Style.Add("background-color", "#E6E6E6");
                 txtLabourApp.ReadOnly = true;
                 txtLabourApp.Style.Add("background-color", "#E6E6E6");
+                if (txtAppUser.Text.Trim() != "")
+                    btnSave.Enabled = false;
                 return 0;
             }
             else return 1;
@@ -96,7 +106,8 @@ namespace EMS.WebApp.Equipment
                 txtTransactionDate.Text = dt.Rows[0]["TransactionDate"].ToString().Split(' ')[0];
                 ddlLine.SelectedValue = dt.Rows[0]["pk_prospectID"].ToString();
                 ddlLoc.SelectedValue = dt.Rows[0]["pk_locId"].ToString();
-                ddlUser.SelectedValue = dt.Rows[0]["fk_UserApproved"].ToString();
+                //ddlUser.SelectedValue = dt.Rows[0]["fk_UserApproved"].ToString();
+                txtAppUser.Text = dt.Rows[0]["fk_UserApproved"].ToString();
                 chkpOnHold.Checked = Convert.ToBoolean(dt.Rows[0]["onHold"]);
                 chkDamage.Checked = Convert.ToBoolean(dt.Rows[0]["Damaged"]);
             }
@@ -117,7 +128,8 @@ namespace EMS.WebApp.Equipment
             // txtTransactionDate.Text = "";
             ddlLine.SelectedIndex = 0;
             // ddlLoc.SelectedIndex = 0;
-            ddlUser.SelectedIndex = 0;
+            //ddlUser.SelectedIndex = 0;
+            //txtAppUser.Text = "";
             lblError.Text = "";
         }
 
@@ -136,9 +148,9 @@ namespace EMS.WebApp.Equipment
 
            
 
-            if( DisableControls()==1 && ddlUser.SelectedIndex == 0)
+            if( DisableControls()==1 && txtAppUser.Text.Trim()=="")//ddlUser.SelectedIndex == 0)
             {
-                lblError.Text = "Please select an Approver.";
+                lblError.Text = "Approver name cannot be blank";
                 return;
             }
             IEqpRepairing iequip = new EquipmentRepairEntity();
@@ -161,7 +173,7 @@ namespace EMS.WebApp.Equipment
             iequip.NVOCCId = Convert.ToInt32(ddlLine.SelectedValue);
             try
             {
-                iequip.fk_UserApproved = Convert.ToInt32(ddlUser.SelectedValue);
+                iequip.fk_UserApproved = Convert.ToInt32(txtAppUser.Text);// Convert.ToInt32(ddlUser.SelectedValue);
             }
             catch 
             {
@@ -241,7 +253,7 @@ namespace EMS.WebApp.Equipment
 
         protected void ddlLoc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GeneralFunctions.PopulateDropDownList(ddlUser, EMS.BLL.UserBLL.GetAdminUsers(_userId, Convert.ToInt32(ddlLoc.SelectedValue)));
+           // GeneralFunctions.PopulateDropDownList(ddlUser, EMS.BLL.UserBLL.GetAdminUsers(_userId, Convert.ToInt32(ddlLoc.SelectedValue)));
         }
     }
 }

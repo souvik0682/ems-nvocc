@@ -25,26 +25,26 @@ namespace EMS.WebApp.Equipment
         protected void Page_Load(object sender, EventArgs e)
         {
             _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
-            
+
             EqEstId = GeneralFunctions.DecryptQueryString(Request.QueryString["id"]);
-         
+
             if (!IsPostBack)
             {
                 GeneralFunctions.PopulateDropDownList(ddlLoc, dbinteract.PopulateDDLDS("DSR.dbo.mstLocation", "pk_LocID", "LocName", true), true);
                 GeneralFunctions.PopulateDropDownList(ddlLine, EMS.BLL.EquipmentBLL.DDLGetLine());
-               
-               
-                
+
+
+
                 btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('RepairingEstimate.aspx','" + EMS.Utilities.ResourceManager.ResourceManager.GetStringWithoutName("ERR00017") + "')";
                 if (EqEstId != "-1")
                 {
-                   // GeneralFunctions.PopulateDropDownList(ddlUser, EMS.BLL.UserBLL.GetAdminUsers(_userId, Convert.ToInt32(ddlLoc.SelectedValue)));
-                   
+                    // GeneralFunctions.PopulateDropDownList(ddlUser, EMS.BLL.UserBLL.GetAdminUsers(_userId, Convert.ToInt32(ddlLoc.SelectedValue)));
+
                     LoadData(_userId, EqEstId);
                     System.Data.DataSet ds = UserBLL.GetUserById(_userId);
                     if (ds.Tables[0].Rows.Count > 0)
                         txtAppUser.Text = ds.Tables[0].Rows[0]["Name"].ToString();
-                    
+
                 }
 
                 int dis = DisableControls();
@@ -54,7 +54,7 @@ namespace EMS.WebApp.Equipment
                 txtReleasedOn.Enabled = false;
                 txtStockRetDate.Enabled = false;
             }
-         
+
         }
 
         private int DisableControls()
@@ -74,7 +74,7 @@ namespace EMS.WebApp.Equipment
                 return 0;
             }
             else return 1;
-           
+
         }
 
         private void LoadData(int _userId, string EqEstId)
@@ -115,7 +115,7 @@ namespace EMS.WebApp.Equipment
 
         private void ClearControls()
         {
-           // txtContainerNo.Text = "";
+            // txtContainerNo.Text = "";
             txtEstimateRef.Text = "";
             txtLabourBill.Text = "";
             txtLabourEst.Text = "";
@@ -146,9 +146,9 @@ namespace EMS.WebApp.Equipment
             else
                 if (!checkContainerStatus(true)) return;
 
-           
 
-            if( DisableControls()==1 && txtAppUser.Text.Trim()=="")//ddlUser.SelectedIndex == 0)
+
+            if (DisableControls() == 1 && txtAppUser.Text.Trim() == "")//ddlUser.SelectedIndex == 0)
             {
                 lblError.Text = "Approver name cannot be blank";
                 return;
@@ -158,12 +158,12 @@ namespace EMS.WebApp.Equipment
             iequip.locId = Convert.ToInt32(ddlLoc.SelectedValue);
             iequip.ContainerNo = txtContainerNo.Text;
             iequip.EstimateReference = txtEstimateRef.Text;
-            iequip.RepLabourBilled = txtLabourBill.Text.Trim()==""?0: Convert.ToDecimal(txtLabourBill.Text);
-            iequip.RepLabourEst = txtLabourEst.Text.Trim()==""?0: Convert.ToDecimal(txtLabourEst.Text);
-            iequip.RepLabourAppr = txtLabourApp.Text.Trim()==""?0: Convert.ToDecimal(txtLabourApp.Text);
-            iequip.RepMaterialAppr = txtMaterialApp.Text.Trim()==""?0: Convert.ToDecimal(txtMaterialApp.Text);
-            iequip.RepMaterialBilled = txtMaterialBill.Text.Trim()==""?0: Convert.ToDecimal(txtMaterialBill.Text);
-            iequip.RepMaterialEst = txtMaterialEst.Text.Trim()==""?0: Convert.ToDecimal(txtMaterialEst.Text);
+            iequip.RepLabourBilled = txtLabourBill.Text.Trim() == "" ? 0 : Convert.ToDecimal(txtLabourBill.Text);
+            iequip.RepLabourEst = txtLabourEst.Text.Trim() == "" ? 0 : Convert.ToDecimal(txtLabourEst.Text);
+            iequip.RepLabourAppr = txtLabourApp.Text.Trim() == "" ? 0 : Convert.ToDecimal(txtLabourApp.Text);
+            iequip.RepMaterialAppr = txtMaterialApp.Text.Trim() == "" ? 0 : Convert.ToDecimal(txtMaterialApp.Text);
+            iequip.RepMaterialBilled = txtMaterialBill.Text.Trim() == "" ? 0 : Convert.ToDecimal(txtMaterialBill.Text);
+            iequip.RepMaterialEst = txtMaterialEst.Text.Trim() == "" ? 0 : Convert.ToDecimal(txtMaterialEst.Text);
             iequip.Reason = txtReason.Text;
             iequip.RealeasedOn = txtReleasedOn.Text.Trim() == "" ? (Nullable<DateTime>)null : Convert.ToDateTime(txtReleasedOn.Text);
             iequip.StockReturnDate = txtStockRetDate.Text.Trim() == "" ? (Nullable<DateTime>)null : Convert.ToDateTime(txtStockRetDate.Text);
@@ -175,19 +175,19 @@ namespace EMS.WebApp.Equipment
             {
                 iequip.fk_UserApproved = Convert.ToInt32(txtAppUser.Text);// Convert.ToInt32(ddlUser.SelectedValue);
             }
-            catch 
+            catch
             {
 
                 iequip.fk_UserApproved = 0;
             }
-            
+
             iequip.onHold = chkpOnHold.Checked;
             iequip.Damaged = chkDamage.Checked;
 
 
             if (iequip.RepLabourBilled <= iequip.RepLabourAppr || iequip.RepMaterialBilled <= iequip.RepMaterialAppr)
             {
-               // GeneralFunctions.RegisterAlertScript(this, "Approved amount cannot be greater then Billable amount");
+                // GeneralFunctions.RegisterAlertScript(this, "Approved amount cannot be greater then Billable amount");
                 lblError.Text = "Approved amount cannot be greater then Billable amount";
                 return;
             }
@@ -217,15 +217,24 @@ namespace EMS.WebApp.Equipment
             lblError.Text = "";
             System.Data.DataSet ds = EquipmentBLL.CheckContainerStatus(txtContainerNo.Text.Trim());
             string abbr = string.Empty;
-            if (ds.Tables.Count > 0)
-                abbr = Convert.ToString(ds.Tables[0].Rows[0]["MoveAbbr"]);
+            try
+            {
+                if (ds.Tables.Count > 0)
+                    abbr = Convert.ToString(ds.Tables[0].Rows[0]["MoveAbbr"]);
+            }
+            catch
+            {
+
+
+            }
+
 
 
             bool canEditable = false;
             if (abbr == string.Empty)
             {
                 GeneralFunctions.RegisterAlertScript(this, "This container-number doesn't exists");
-                lblError.Text = "This container-number doesn't exists";
+                lblError.Text = "This container-number doesn't exists or its movement id is null";
             }
             else
             {
@@ -236,7 +245,7 @@ namespace EMS.WebApp.Equipment
                 }
                 else
                 {
-                    if (!fromSaveButton) 
+                    if (!fromSaveButton)
                         GeneralFunctions.RegisterAlertScript(this, "Container status is RCVE/OFFH.");
                     canEditable = true;
                 }
@@ -253,7 +262,7 @@ namespace EMS.WebApp.Equipment
 
         protected void ddlLoc_SelectedIndexChanged(object sender, EventArgs e)
         {
-           // GeneralFunctions.PopulateDropDownList(ddlUser, EMS.BLL.UserBLL.GetAdminUsers(_userId, Convert.ToInt32(ddlLoc.SelectedValue)));
+            // GeneralFunctions.PopulateDropDownList(ddlUser, EMS.BLL.UserBLL.GetAdminUsers(_userId, Convert.ToInt32(ddlLoc.SelectedValue)));
         }
     }
 }

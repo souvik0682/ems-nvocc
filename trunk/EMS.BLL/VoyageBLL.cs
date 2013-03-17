@@ -31,5 +31,10 @@ namespace EMS.BLL
        {
            return EMS.DAL.VoyageDAL.CheckVoyageEntryAbilty(vesselId, voyageNo,fk_pod, LandingDate, isedit);
        }
+
+       public static int AddEditMLVoyage(string voyageId, string vesselId, string MLvoyageNo, string dtActivity, int fk_PortID, int _userId,bool isEdit)
+       {
+           return EMS.DAL.VoyageDAL.AddEditMLVoyage(voyageId,vesselId, MLvoyageNo, dtActivity, fk_PortID, _userId, isEdit);
+       }
     }
 }

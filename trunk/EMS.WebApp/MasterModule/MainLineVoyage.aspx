@@ -98,7 +98,7 @@
 
                                
 
-                                <asp:TemplateField HeaderText="ML Voyage No" SortExpression="VoyageNo">
+                                <asp:TemplateField HeaderText="ML Voyage No" SortExpression="MLVoyageNo">
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="20%" />      
                                 </asp:TemplateField>
@@ -110,7 +110,7 @@
 
                               
 
-                                <asp:TemplateField HeaderText="Port" SortExpression="LocName">
+                                <asp:TemplateField HeaderText="Port" SortExpression="LastPort">
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="20%" />                                       
                                 </asp:TemplateField>

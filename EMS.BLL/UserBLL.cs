@@ -89,6 +89,11 @@ namespace EMS.BLL
             return UserDAL.GetUser(userId, false, searchCriteria);
         }
 
+        public static System.Data.DataSet GetUserById(int userId)
+        {
+           return UserDAL.GetUserById(userId);
+        }
+
         public string SaveUser(IUser user, int modifiedBy)
         {
             int result = 0;

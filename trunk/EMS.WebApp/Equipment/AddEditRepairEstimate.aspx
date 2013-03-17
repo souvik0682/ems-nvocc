@@ -94,6 +94,7 @@
                    <br />
                     <asp:DropDownList ID="ddlUser" runat="server" Width="100%">                        
                       </asp:DropDownList>
+                      <%--<asp:TextBox ID="txtAppUser" CssClass="textboxuppercase" MaxLength="11" Width="120" runat="server"></asp:TextBox>--%>
                       <br /><br /><br />
                    </asp:Panel>
                     
@@ -112,7 +113,7 @@
                     Damage: <asp:CheckBox ID="chkDamage" runat="server"></asp:CheckBox>
                     </td>
                 </tr>
-              <tr>
+            
                   
 			   <tr>
                     <td style="width:140px;">Released On:</td>

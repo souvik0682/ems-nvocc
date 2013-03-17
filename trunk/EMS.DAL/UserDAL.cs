@@ -175,6 +175,22 @@ namespace EMS.DAL
             return ds;
         }
 
+        public static DataSet GetUserById(int userId)
+        {
+            string strExecution = "prcgetUserById";
+             DataSet reader = null;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@UserId", userId);
+                reader = oDq.GetTables();
+
+                
+            }
+
+            return reader;
+        }
+
         #endregion
 
         #region Role

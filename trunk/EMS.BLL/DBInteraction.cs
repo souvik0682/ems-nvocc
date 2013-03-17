@@ -403,13 +403,35 @@ namespace EMS.BLL
             return dquery.GetTables();
         }
 
-       
-        
+
+
 
         #endregion
 
 
 
-        
+
+
+        public DataSet GetMLVoyage(int VoyageId, string voyageType, string VesselName, string voyageNo)
+        {
+            string ProcName = "prcGetMLVoyage";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            dquery.AddIntegerParam("@pk_VoyageID", VoyageId);
+            dquery.AddCharParam("@VoyageType", 1, voyageType.ToCharArray()[0]);
+            dquery.AddVarcharParam("@vesselName", 70, VesselName);
+            dquery.AddVarcharParam("@VoyageNo", 10, voyageNo);
+          
+
+            return dquery.GetTables();
+        }
+
+        public void DeleteMLVoyage(int VoyageId)
+        {
+            string ProcName = "prcDeleteMLVoyage";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+            dquery.AddIntegerParam("@pk_mainLineVoyageID", VoyageId);
+            dquery.RunActionQuery();
+        }
     }
 }

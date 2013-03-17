@@ -32,7 +32,7 @@ namespace EMS.BLL
         public DataSet PopulateDDLDS(string tableName, string textField, string valuefield)
         {
 
-            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery("Select [" + textField + "] ListItemValue, [" + valuefield + "] ListItemText from dbo." + tableName, true);
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery("Select [" + textField + "] ListItemValue, [" + valuefield + "] ListItemText from dbo." + tableName+" order by ListItemText", true);
 
             return dquery.GetTables();
 

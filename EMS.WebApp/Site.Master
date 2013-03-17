@@ -124,6 +124,8 @@
                                         B/L Query</a></li>
                                     <li id="liID_Voyage" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MangeVoyage.aspx") %>">
                                         Voyage</a></li>
+                                    <li id="li1" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MainLineVoyage.aspx") %>">
+                                        Main Line Voyage</a></li>
                                     <li id="liID_Invoice" runat="server"><a href="<%=Page.ResolveClientUrl("~/Transaction/Invoice.aspx") %>">
                                         Invoice</a></li>
                                 </ul>

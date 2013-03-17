@@ -1,7 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="IGMForm2.aspx.cs" Inherits="EMS.WebApp.Reports.IGMForm2" Title=":: Liner :: IGM Form II" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="IGMForm2.aspx.cs"
+    Inherits="EMS.WebApp.Reports.IGMForm2" Title=":: Liner :: IGM Form II" %>
+
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">    
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
     <asp:UpdateProgress ID="uProgressLoc" runat="server" AssociatedUpdatePanelID="upLoc">
@@ -34,6 +36,14 @@
               <td style="width:40%" >
               <table width="100%">
                     <tr>
+                      <td style="text-align:right">Location:<%--<span class="errormessage1">*</span>--%></td>
+                    <td>
+                      <asp:DropDownList ID="ddlLoc" runat="server" Width="100%" onselectedindexchanged="ddlLoc_SelectedIndexChanged" 
+                            ></asp:DropDownList>
+                           <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage" 
+                            ControlToValidate="ddlLoc" Display="Dynamic" InitialValue="0" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
+                    </td>
+
                     <td style="text-align:right">Line:</td>
                     <td>
                      <asp:DropDownList ID="ddlLine" runat="server" Width="100%">
@@ -41,13 +51,7 @@
                       </asp:DropDownList>
                     </td>
            
-                    <td style="text-align:right">Location:<%--<span class="errormessage1">*</span>--%></td>
-                    <td>
-                      <asp:DropDownList ID="ddlLoc" runat="server" Width="100%" onselectedindexchanged="ddlLoc_SelectedIndexChanged" 
-                            ></asp:DropDownList>
-                           <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage" 
-                            ControlToValidate="ddlLoc" Display="Dynamic" InitialValue="0" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
-                    </td>
+                  
               
               </table>
               </td>

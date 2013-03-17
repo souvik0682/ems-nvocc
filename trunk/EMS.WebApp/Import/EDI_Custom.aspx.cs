@@ -146,6 +146,7 @@ namespace EMS.WebApp.Import
             if (ArrTime.Length > 4) ArrTime = ArrTime.Substring(0,4);
             ArrTime= string.IsNullOrEmpty(ArrTime.Trim())? "1200":ArrTime; 
             string ArrDate1 =(txtdtArrival.Text.Trim())==""? "" : Convert.ToDateTime(txtdtArrival.Text).ToString("ddMMyyyy hh:mm");//.Replace(" ","");
+            string lighthsdue = txtLightHouse.Text;
             //string custHouse =  ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
            // string custHouse = !((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text.Contains(',') ? "" : ((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text.Split(',')[1].Trim();
             string custHouse = ddlCustomHouse.SelectedItem.Text.Trim();
@@ -171,21 +172,22 @@ namespace EMS.WebApp.Import
                             + (txtPAN.Text + (''
                             + (txtMaster.Text + (''
                             + (custHouse + (''
-                            + (!port1.Contains(',') ? "" : port1.Split(',')[1].Trim() + (''
-                            + (!port2.Contains(',') ? "" : port2.Split(',')[1].Trim() + (''
-                            + (!port3.Contains(',') ? "" : port3.Split(',')[1].Trim() + (''
+                            + ((!port1.Contains(',') ? string.Empty : port1.Split(',')[1].Trim()) + (''
+                            + ((!port2.Contains(',') ? string.Empty : port2.Split(',')[1].Trim()) + (''
+                            + ((!port3.Contains(',') ? string.Empty : port3.Split(',')[1].Trim()) + (''
                             + (ddlVesselType.Text.Substring(0, 1) + (''
                             + (txtTotLine.Text + (''
                             + (txtCargoDesc.Text + (''
                             + (ArrDate1 + (''
-                            + (((double.Parse(txtLightHouse.Text) == 0) ? "" : double.Parse(txtLightHouse.Text).ToString()) + (''
+                            //+ (((double.Parse(txtLightHouse.Text) == 0) ? "" : double.Parse(txtLightHouse.Text).ToString()) + (''
+                            + (txtLightHouse.Text + (''
                             + (ddlSameButton.SelectedValue == "1" ? "Y" : "N") + (''
                             + (ddlShipStoreSubmitted.SelectedValue == "1" ? "Y" : "N") + (''
                             + (ddlCrewList.SelectedValue == "1" ? "Y" : "N") + (''
                             + (ddlPessengerList.SelectedValue == "1" ? "Y" : "N") + (''
                             + (ddlCrewEffList.SelectedValue == "1" ? "Y" : "N") + (''
-                            + (ddlMaritime.SelectedValue == "1" ? "Y" : "N") + ('' +
-                            (ddlTerminalOperator.SelectedIndex==0 ? "" : ddlTerminalOperator.SelectedItem.Text))))))))))))))))))))))))))))))))))))))))))))));
+                            + (ddlMaritime.SelectedValue == "1" ? "Y" : "N") + ('' 
+                            + (ddlTerminalOperator.SelectedIndex==0 ? "" : ddlTerminalOperator.SelectedItem.Text))))))))))))))))))))))))))))))))))))))))))))));
 
             writer.WriteLine("<END-vesinfo>");
             writer.WriteLine("<cargo>");
@@ -282,19 +284,18 @@ namespace EMS.WebApp.Import
                                 + (Dr["CARGONATURE"].ToString() + (''
                                 + (Dr["ITEMTYPE"].ToString() + (''
                                 + (Dr["CargoMovementCode"].ToString() + (''
-                                + ((( (DischargePort.Length>=6 ? DischargePort.Substring(0, 6):DischargePort) == "INHAL1") ? DischargePort : "") + (''
+                                + ((( (DischargePort.Length>=6 ? DischargePort.Substring(0, 6):DischargePort) == "INHAL1") ? DischargePort : string.Empty) + (''
                                 + (Dr["NumberPackage"].ToString() + (''
                                 + (Dr["PackingUnit"].ToString() + (''
-                                + (((Convert.ToInt32(Dr["GrossWeight"]) > 0) ? (Dr["GrossWeight"].ToString() + (''
-                                + (Dr["WTUnit"].ToString() + ''))) : ("" + ""))
-                                + (((Convert.ToInt32(Dr["Volume"]) > 0) ? (Dr["Volume"].ToString() + (" " + Dr["VolUnit"].ToString())) : (" " + " "))
-                                + (Dr["MarksNumbers"].ToString().Length > 300 ? Dr["MarksNumbers"].ToString().Substring(0, 300) : Dr["MarksNumbers"].ToString() + (''
-                                + (Dr["GoodDescription"].ToString().Length > 250 ? Dr["GoodDescription"].ToString().Substring(0, 250) : Dr["GoodDescription"].ToString() + (''
+                                + (((Convert.ToInt32(Dr["GrossWeight"]) > 0) ? (Dr["GrossWeight"].ToString() + ('' + (Dr["WTUnit"].ToString() + ''))) : (string.Empty+'' + string.Empty))
+                                + (((Convert.ToInt32(Dr["Volume"]) > 0) ? (Dr["Volume"].ToString() + ('' + Dr["VolUnit"].ToString())) : (string.Empty+'' + string.Empty))+(''
+                                + ((Dr["MarksNumbers"].ToString().Length > 300 ? Dr["MarksNumbers"].ToString().Substring(0, 300) : Dr["MarksNumbers"].ToString()) + (''
+                                + ((Dr["GoodDescription"].ToString().Length > 250 ? Dr["GoodDescription"].ToString().Substring(0, 250) : Dr["GoodDescription"].ToString()) + (''
                                 + (Dr["UNOCode"].ToString() + (''
                                 + (Dr["IMO_IMDGCode"].ToString() + (''
                                 + (Dr["TPBondNo"].ToString() + (''
                                 + (Dr["CACode"].ToString() + (''
-                                + (Dr["TransportMode"].ToString() + ('' + Dr["MLOCode"].ToString())))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));
+                                + (Dr["TransportMode"].ToString() + ('' + Dr["MLOCode"].ToString()))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));
                                 //
             }
             writer.WriteLine("<END-cargo>");

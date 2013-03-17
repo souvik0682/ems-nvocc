@@ -146,7 +146,7 @@ namespace EMS.WebApp.Import
             if (ArrTime.Length > 4) ArrTime = ArrTime.Substring(0,4);
             ArrTime= string.IsNullOrEmpty(ArrTime.Trim())? "1200":ArrTime; 
             string ArrDate1 =(txtdtArrival.Text.Trim())==""? "" : Convert.ToDateTime(txtdtArrival.Text).ToString("ddMMyyyy hh:mm");//.Replace(" ","");
-            string lighthsdue = txtLightHouse.Text;
+            string lighthsdue = txtLightHouse.Text;// (txtLightHouse.Text.Trim() == "" || txtLightHouse.Text == "0") ? "+(''+" : txtLightHouse.Text;
             //string custHouse =  ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
            // string custHouse = !((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text.Contains(',') ? "" : ((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text.Split(',')[1].Trim();
             string custHouse = ddlCustomHouse.SelectedItem.Text.Trim();
@@ -180,7 +180,7 @@ namespace EMS.WebApp.Import
                             + (txtCargoDesc.Text + (''
                             + (ArrDate1 + (''
                             //+ (((double.Parse(txtLightHouse.Text) == 0) ? "" : double.Parse(txtLightHouse.Text).ToString()) + (''
-                            + (txtLightHouse.Text + (''
+                            + ((txtLightHouse.Text == "0" || txtLightHouse.Text.Trim() == "" ? (string.Empty + '' + string.Empty) : txtLightHouse.Text) + (''
                             + (ddlSameButton.SelectedValue == "1" ? "Y" : "N") + (''
                             + (ddlShipStoreSubmitted.SelectedValue == "1" ? "Y" : "N") + (''
                             + (ddlCrewList.SelectedValue == "1" ? "Y" : "N") + (''

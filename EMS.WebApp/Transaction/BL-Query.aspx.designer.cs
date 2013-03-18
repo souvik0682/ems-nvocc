@@ -148,15 +148,6 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.TextBox txtPGRTill;
         
         /// <summary>
-        /// hdnBlQueryID control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnBlQueryID;
-        
-        /// <summary>
         /// btnSave1 control.
         /// </summary>
         /// <remarks>
@@ -193,6 +184,15 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
         
         /// <summary>
+        /// btnTemp9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTemp9;
+        
+        /// <summary>
         /// chkFreightToCollect control.
         /// </summary>
         /// <remarks>
@@ -209,6 +209,42 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkFreightToCollect;
+        
+        /// <summary>
+        /// mpeFreight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeFreight;
+        
+        /// <summary>
+        /// pnlFreight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlFreight;
+        
+        /// <summary>
+        /// imgCloseFreight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgCloseFreight;
+        
+        /// <summary>
+        /// ImageButton2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButton2;
         
         /// <summary>
         /// txtFreightToCollect control.
@@ -229,6 +265,15 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.LinkButton lnkGenInvFreightToCollect;
         
         /// <summary>
+        /// btnTemp7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTemp7;
+        
+        /// <summary>
         /// chkSecurityInv control.
         /// </summary>
         /// <remarks>
@@ -245,6 +290,42 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkSecurityInv;
+        
+        /// <summary>
+        /// mpeSecurity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeSecurity;
+        
+        /// <summary>
+        /// pnlSecurity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlSecurity;
+        
+        /// <summary>
+        /// imgCloseSecurity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgCloseSecurity;
+        
+        /// <summary>
+        /// dvSecurity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvSecurity;
         
         /// <summary>
         /// lnkGenInvSecirity control.
@@ -346,6 +427,15 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.LinkButton lnkGenerateInvoiceDo;
         
         /// <summary>
+        /// btnTemp10 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTemp10;
+        
+        /// <summary>
         /// chkFinalInvoice control.
         /// </summary>
         /// <remarks>
@@ -362,6 +452,42 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkFinalInvoice;
+        
+        /// <summary>
+        /// mpeFinalInv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeFinalInv;
+        
+        /// <summary>
+        /// pnlFinalInv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlFinalInv;
+        
+        /// <summary>
+        /// imgCloseFinalInv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgCloseFinalInv;
+        
+        /// <summary>
+        /// ImageButton3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButton3;
         
         /// <summary>
         /// lnkGenInvFinalDo control.
@@ -463,6 +589,15 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.LinkButton lnkGenerateInvoiceDOE;
         
         /// <summary>
+        /// btnTemp8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTemp8;
+        
+        /// <summary>
         /// chkOtherInv control.
         /// </summary>
         /// <remarks>
@@ -479,6 +614,42 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkOtherInv;
+        
+        /// <summary>
+        /// mpeOi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeOi;
+        
+        /// <summary>
+        /// pnlOI control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlOI;
+        
+        /// <summary>
+        /// imgCloseOI control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgCloseOI;
+        
+        /// <summary>
+        /// dvOtherInvoice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvOtherInvoice;
         
         /// <summary>
         /// lnkGenInvOtherInvoice control.
@@ -544,13 +715,13 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.ImageButton imgCloseSLE;
         
         /// <summary>
-        /// imgBtnSLE control.
+        /// dvEFD control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnSLE;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvEFD;
         
         /// <summary>
         /// txtExtensionForDetention control.
@@ -679,6 +850,15 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.LinkButton lnkPrintAmend;
         
         /// <summary>
+        /// btnTemp6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTemp6;
+        
+        /// <summary>
         /// chkPGRExtension control.
         /// </summary>
         /// <remarks>
@@ -695,6 +875,42 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkPGRExtension;
+        
+        /// <summary>
+        /// mpePGR control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender mpePGR;
+        
+        /// <summary>
+        /// pnlPGR control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPGR;
+        
+        /// <summary>
+        /// imgClosePGR control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgClosePGR;
+        
+        /// <summary>
+        /// dvPGR control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvPGR;
         
         /// <summary>
         /// txtExtensionForPGR control.
@@ -976,12 +1192,57 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvDoc;
         
         /// <summary>
-        /// gvwVendor control.
+        /// btnTemp11 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvwVendor;
+        protected global::System.Web.UI.WebControls.Button btnTemp11;
+        
+        /// <summary>
+        /// mpeMoneyReceivedDetail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeMoneyReceivedDetail;
+        
+        /// <summary>
+        /// pnlMoneyReceived control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlMoneyReceived;
+        
+        /// <summary>
+        /// imgCloseMoneyReceived control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgCloseMoneyReceived;
+        
+        /// <summary>
+        /// dvMoneyReceived control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvMoneyReceived;
+        
+        /// <summary>
+        /// gvwInvoice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvwInvoice;
     }
 }

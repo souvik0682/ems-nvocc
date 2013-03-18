@@ -71,7 +71,7 @@ namespace EMS.WebApp.Transaction
         {
             if (!ReferenceEquals(Request.QueryString["blno"], null))
             {
-                txtBlNo.Text = Request.QueryString["blno"].ToString();
+                txtBlNo.Text = GeneralFunctions.DecryptQueryString(Request.QueryString["blno"].ToString());
                 PopulateAllData();
             }
         }

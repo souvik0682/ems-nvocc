@@ -45,6 +45,7 @@
                     </asp:DropDownList>&nbsp;&nbsp;
                 <asp:Button ID="btnAdd" runat="server" Text="Add New Role" Width="130px" OnClick="btnAdd_Click" />
             </div>
+            <br /><br />
             <div>
                 <asp:UpdatePanel ID="upRole" runat="server" UpdateMode="Conditional">
                     <Triggers>

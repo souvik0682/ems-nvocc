@@ -71,7 +71,8 @@
                 <img alt="" src="<%=Page.ResolveClientUrl("~/Images/App Logo.png") %>" height="55" />
             </div>
             <div class="productname" style="margin-top: 10px;">
-                <center><span style="color:Red;font-weight:bold;font-size:16pt;">LINER APPLICATION</span></center>
+                <center>
+                    <span style="color: Red; font-weight: bold; font-size: 16pt;">LINER APPLICATION</span></center>
             </div>
             <div class="search">
                 <div style="text-align: right;">
@@ -98,12 +99,8 @@
                                 Line / MLO</a></li>
                             <li id="liMst_Vendor" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/vendor-list.aspx") %>">
                                 Vendor / Address</a></li>
-                            <li id="liMst_ServiceTax" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManageServTax.aspx") %>">
-                                Service Tax</a></li>
                             <li id="liMst_Charge" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/charge-list.aspx") %>">
                                 Charge Master</a></li>
-                            <li id="liMst_ExRate" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageExchRate.aspx") %>">
-                                Exchange Rate</a></li>
                             <li id="liMst_Country" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManageCountry.aspx") %>">
                                 Country Master</a></li>
                             <li id="liMst_Port" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManagePort.aspx") %>">
@@ -171,7 +168,15 @@
                     </li>
                     <li id="liFin" runat="server"><a href="#">Finance</a>
                         <ul>
-                            <li id="liFD" runat="server"><a href="#">Data</a>
+                            <li id="liFD" runat="server"><a href="#">Master</a>
+                                <ul>
+                                    <li id="liMst_ServiceTax" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManageServTax.aspx") %>">
+                                        Service Tax</a></li>
+                                    <li id="liMst_ExRate" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageExchRate.aspx") %>">
+                                        Exchange Rate</a></li>
+                                </ul>
+                            </li>
+                            <%-- <li id="liFD" runat="server"><a href="#">Data</a>
                                 <ul>
                                     <li id="liFDI" runat="server"><a href="#">Invoice</a>
                                         <ul>
@@ -187,7 +192,7 @@
                                         Money Receipt</a></li>
                                     <li id="liFD_CN" runat="server"><a href="#">Credit Note</a></li>
                                 </ul>
-                            </li>
+                            </li>--%>
                             <li id="liFR" runat="server"><a href="#">Reports</a>
                                 <ul>
                                     <li id="liFRI" runat="server"><a href="#">Invoice</a>

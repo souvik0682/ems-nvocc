@@ -856,5 +856,19 @@ namespace EMS.DAL
             }
             return myDataTable;
         }
+
+       
+        public static DataTable GetReceivedAmtBreakup(Int64 InvoiceId)
+        {
+            string strExecution = "[trn].[GetReceivedAmountBreakeup]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@InvoiceId", InvoiceId);
+                myDataTable = oDq.GetTable();
+            }
+            return myDataTable;
+        }
     }
 }

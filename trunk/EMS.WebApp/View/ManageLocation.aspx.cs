@@ -259,7 +259,7 @@ namespace EMS.WebApp.View
         private void RedirecToAddEditPage(int id)
         {
             string encryptedId = GeneralFunctions.EncryptQueryString(id.ToString());
-            Response.Redirect("~/View/AddEditLocation.aspx?id=" + encryptedId);
+            Response.Redirect("~/View/EditLocation.aspx?id=" + encryptedId);
         }
 
         private void BuildSearchCriteria(SearchCriteria criteria)

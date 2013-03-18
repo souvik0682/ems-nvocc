@@ -243,5 +243,10 @@ namespace EMS.BLL
         {
             return ImportBLDAL.GetBLNo(LocId, LineId, Initial);
         }
+
+        public DataTable GetReceivedAmtBreakup(Int64 InvoiceId)
+        {
+            return ImportBLDAL.GetReceivedAmtBreakup(InvoiceId);
+        }
     }
 }

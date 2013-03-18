@@ -61,9 +61,9 @@ namespace EMS.WebApp.Transaction
                     int docTypeId = 0;
                     string misc = string.Empty;
 
-                    blNo = Request.QueryString["p1"].ToString();
-                    Int32.TryParse(Request.QueryString["p3"].ToString(), out docTypeId);
-                    misc = Request.QueryString["p4"].ToString();
+                    blNo = GeneralFunctions.DecryptQueryString(Request.QueryString["p1"].ToString());
+                    Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["p3"].ToString()), out docTypeId);
+                    misc = GeneralFunctions.DecryptQueryString(Request.QueryString["p4"].ToString());
 
                     LoadForBLQuery(blNo, docTypeId, misc);
                 }
@@ -731,7 +731,7 @@ namespace EMS.WebApp.Transaction
 
             ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Record saved successfully! Invoice Number: " + invoiceNo + "');</script>", false);
 
-            Response.Redirect("~/BL-Query.aspx?BlNo=" + ddlBLno.SelectedItem.Text);
+            Response.Redirect("~/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(ddlBLno.SelectedItem.Text));
 
             //ViewState["CHARGERATE"] = null;
             //gvwInvoice.DataSource = null;
@@ -740,7 +740,7 @@ namespace EMS.WebApp.Transaction
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/BL-Query.aspx?BlNo=" + ddlBLno.SelectedItem.Text);
+            Response.Redirect("~/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(ddlBLno.SelectedItem.Text));
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
@@ -990,10 +990,10 @@ namespace EMS.WebApp.Transaction
             ddlLocation.SelectedValue = location.ToString();
             ddlNvocc.SelectedValue = line.ToString();
 
-            GrossWeight(Request.QueryString["p1"].ToString());
-            TEU(Request.QueryString["p1"].ToString());
-            FEU(Request.QueryString["p1"].ToString());
-            Volume(Request.QueryString["p1"].ToString());
+            GrossWeight(GeneralFunctions.DecryptQueryString(Request.QueryString["p1"].ToString()));
+            TEU(GeneralFunctions.DecryptQueryString(Request.QueryString["p1"].ToString()));
+            FEU(GeneralFunctions.DecryptQueryString(Request.QueryString["p1"].ToString()));
+            Volume(GeneralFunctions.DecryptQueryString(Request.QueryString["p1"].ToString()));
             
             /*
             BLdate(Request.QueryString["BLNo"].ToString());

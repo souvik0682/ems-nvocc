@@ -227,6 +227,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "ServiceTaxACess"))
                 if (reader["ServiceTaxACess"] != DBNull.Value)
                     this.ServiceTaxACess = Convert.ToInt32(reader["ServiceTaxACess"]);
+
+            if (ColumnExists(reader, "TotalAmount"))
+                if (reader["TotalAmount"] != DBNull.Value)
+                    this.TotalAmount = Convert.ToInt32(reader["TotalAmount"]);
             //this.ServiceTax = Convert.ToDecimal(reader["ServiceTax"]);
         }
 

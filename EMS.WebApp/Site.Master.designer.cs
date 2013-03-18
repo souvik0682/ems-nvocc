@@ -121,15 +121,6 @@ namespace EMS.WebApp {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMst_Vendor;
         
         /// <summary>
-        /// liMst_ServiceTax control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMst_ServiceTax;
-        
-        /// <summary>
         /// liMst_Charge control.
         /// </summary>
         /// <remarks>
@@ -137,15 +128,6 @@ namespace EMS.WebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMst_Charge;
-        
-        /// <summary>
-        /// liMst_ExRate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMst_ExRate;
         
         /// <summary>
         /// liMst_Country control.
@@ -454,85 +436,22 @@ namespace EMS.WebApp {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFD;
         
         /// <summary>
-        /// liFDI control.
+        /// liMst_ServiceTax control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFDI;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMst_ServiceTax;
         
         /// <summary>
-        /// liFDI_1st control.
+        /// liMst_ExRate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFDI_1st;
-        
-        /// <summary>
-        /// liFDI_Freight control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFDI_Freight;
-        
-        /// <summary>
-        /// liFDI_SDI control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFDI_SDI;
-        
-        /// <summary>
-        /// liFDI_Proforma control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFDI_Proforma;
-        
-        /// <summary>
-        /// liFDI_Final control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFDI_Final;
-        
-        /// <summary>
-        /// liFDI_Export control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFDI_Export;
-        
-        /// <summary>
-        /// liFD_MR control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFD_MR;
-        
-        /// <summary>
-        /// liFD_CN control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFD_CN;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMst_ExRate;
         
         /// <summary>
         /// liFR control.

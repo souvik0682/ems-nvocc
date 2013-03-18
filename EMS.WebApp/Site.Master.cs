@@ -105,7 +105,7 @@ namespace EMS.WebApp
             {
                 menuId = (int)PageName.RoleMaster;
             }
-            else if (Request.Path.Contains("/View/ManageLocation.aspx") || Request.Path.Contains("/View/AddEditLocation.aspx"))
+            else if (Request.Path.Contains("/View/ManageLocation.aspx") || Request.Path.Contains("/View/EditLocation.aspx"))
             {
                 menuId = (int)PageName.LocationMaster;
             }
@@ -202,7 +202,7 @@ namespace EMS.WebApp
             //        menuId = (int)PageName.RoleMaster;
             //        break;
             //    case "/View/ManageLocation.aspx":
-            //    case "/View/AddEditLocation.aspx":
+            //    case "/View/EditLocation.aspx":
             //        menuId = (int)PageName.LocationMaster;
             //        break;
             //    case "/View/ManageCustomer.aspx":

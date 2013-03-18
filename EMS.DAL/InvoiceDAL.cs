@@ -313,7 +313,7 @@ namespace EMS.DAL
                 oDq.AddDecimalParam("@RateUSD", 12, 2, cRate.Usd);
                 oDq.AddDecimalParam("@GrossAmount", 12, 2, cRate.GrossAmount);
                 oDq.AddDecimalParam("@ServiceTaxAmount", 12, 2, cRate.STax);
-
+                oDq.AddBigIntegerParam("@TerminalId", cRate.TerminalId);
                 oDq.AddDecimalParam("@SharingBL", 12, 2, cRate.SharingBL);
                 oDq.AddDecimalParam("@SharingTEU", 12, 2, cRate.SharingTEU);
                 oDq.AddDecimalParam("@SharingFEU", 12, 2, cRate.SharingFEU);
@@ -443,6 +443,48 @@ namespace EMS.DAL
             }
 
             return lstInvoice;
+        }
+
+        public static DataTable GetLineLocation(string BLNo)
+        {
+            string strExecution = "usp_Invoice_GetLineLocation";
+            DataTable dt = new DataTable();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@BLNo", 60,BLNo);
+                dt = oDq.GetTable();
+            }
+            return dt;
+        }
+
+        public static List<IChargeRate> GetInvoiceCharges_New(long BlId, int ChargesID, int TerminalID, decimal ExchangeRate, int DocTypeId, string Param3, DateTime InvoiceDate)
+        {
+            string strExecution = "usp_Invoice_CalculateCharge";
+            List<IChargeRate> lstRates = new List<IChargeRate>();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@BLID", BlId);
+                oDq.AddIntegerParam("@ChargeID", ChargesID);
+                oDq.AddIntegerParam("@TerminalID", TerminalID);
+                oDq.AddDecimalParam("@ExRate", 12, 2, ExchangeRate);
+                oDq.AddIntegerParam("@DoctypeID", DocTypeId);
+                oDq.AddVarcharParam("@Param3", 500, Param3);
+                oDq.AddDateTimeParam("@InvoiceDate", InvoiceDate); 
+                
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    IChargeRate chargeRate = new ChargeRateEntity(reader);
+                    lstRates.Add(chargeRate);
+                }
+
+                reader.Close();
+            }
+
+            return lstRates;
         }
     }
 }

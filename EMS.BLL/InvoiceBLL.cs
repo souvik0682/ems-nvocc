@@ -155,5 +155,15 @@ namespace EMS.BLL
         {
             return InvoiceDAL.GetInvoice(searchCriteria);
         }
+
+        public DataTable GetLineLocation(string BLNo)
+        {
+            return InvoiceDAL.GetLineLocation(BLNo);
+        }
+
+        public List<IChargeRate> GetInvoiceCharges_New(long BlId, int ChargesID, int TerminalID, decimal ExchangeRate, int DocTypeId, string Param3, DateTime InvoiceDate)
+        {
+            return InvoiceDAL.GetInvoiceCharges_New(BlId, ChargesID, TerminalID, ExchangeRate, DocTypeId, Param3, InvoiceDate);
+        }
     }
 }

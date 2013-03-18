@@ -26,7 +26,7 @@ namespace EMS.Common
         bool RateActive { get; set; }
         decimal ServiceTax { get; set; }
 
-	string ChangeName { get; set; }
+	    string ChangeName { get; set; }
         string TerminalName { get; set; }
         string WashingTypeName { get; set; }
         decimal Usd { get; set; }

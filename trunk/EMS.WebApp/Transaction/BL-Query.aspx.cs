@@ -13,6 +13,7 @@ using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Data.SqlTypes;
+using EMS.Common;
 
 namespace EMS.WebApp.Transaction
 {
@@ -21,14 +22,57 @@ namespace EMS.WebApp.Transaction
         DataSet BLDataSet = new DataSet();
         ImportBLL oImportBLL = new ImportBLL();
 
+        #region Private Member Variables
+
+        private int _userId = 0;
+        private int _locId = 0;
+
+        #endregion
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            CheckUserAccess();
+            IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+            _userId = user == null ? 0 : user.Id;
+
             if (!Page.IsPostBack)
             {
                 autoComplete1.ContextKey = "0|0";
                 FillDropDown();
-                chkFreightToCollect.Enabled = true;
+                //chkFreightToCollect.Enabled = true;
                 DisableAllServiceControls();
+            }
+            RetriveParameters();
+        }
+
+        private void CheckUserAccess()
+        {
+            if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+            {
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+
+                if (ReferenceEquals(user, null) || user.Id == 0)
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
+
+                if (user.UserRole.Id != (int)UserRole.Admin)
+                {
+                    Response.Redirect("~/Unauthorized.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+        }
+
+        private void RetriveParameters()
+        {
+            if (!ReferenceEquals(Request.QueryString["blno"], null))
+            {
+                txtBlNo.Text = Request.QueryString["blno"].ToString();
+                PopulateAllData();
             }
         }
 
@@ -73,16 +117,32 @@ namespace EMS.WebApp.Transaction
 
         private void PopulateAllData()
         {
+            ClearAll();
             BLDataSet = oImportBLL.GetBLQuery(txtBlNo.Text.Trim(), (int)EMS.Utilities.Enums.BLActivity.DOE);
             txtBlNo.Text = string.Empty;
             if (BLDataSet.Tables[0].Rows.Count > 0)
             {
                 fillBLDetail(BLDataSet.Tables[0]);
 
-                //
+                //FREIGHTTYPE
+                if (BLDataSet.Tables[0].Rows[0]["FREIGHTTOCOLLECT"].ToString() == "PP")
+                {
+                    chkFreightToCollect.Enabled = false;
+                    chkDo.Enabled = true;
+                }
+                else
+                {
+                    if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["RECPTCHECK"].ToString()) == true)
+                        chkFreightToCollect.Enabled = true;
+                    else
+                        chkFreightToCollect.Enabled = true;
+
+                    txtFreightToCollect.Text = BLDataSet.Tables[0].Rows[0]["FREIGHTTOCOLLECT"].ToString();
+                }
+
                 if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["FREIGHTTOCOLLECT"]) == true)
                 {
-                    chkDo.Enabled=true;
+                    chkDo.Enabled = true;
                 }
 
                 if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["FSTINVGENERATED"]) == true)
@@ -226,8 +286,8 @@ namespace EMS.WebApp.Transaction
         {
             DataTable dtInvoices = oImportBLL.GetAllInvoice(BLId);
 
-            gvwVendor.DataSource = dtInvoices;
-            gvwVendor.DataBind();
+            gvwInvoice.DataSource = dtInvoices;
+            gvwInvoice.DataBind();
         }
 
         void FillSubmittedDocument(DataTable dtDoc)
@@ -247,38 +307,183 @@ namespace EMS.WebApp.Transaction
             }
         }
 
+        //void FillDoExtension(DataTable dtDOE)
+        //{
+        //    StringBuilder sbr = new StringBuilder();
+        //    if (dtDOE.Rows.Count > 0)
+        //    {
+        //        sbr.Append("<table style='width:80%;' cellspacing='0' align='center'>");
+        //        sbr.Append("<tr style='height:30px;background-color:#328DC4;color:White; font-weight:bold;'><td>Date</td><td>Print</td></tr>");
+
+        //        for (int rowCount = 0; rowCount < dtDOE.Rows.Count; rowCount++)
+        //        {
+        //            string Date = Convert.ToDateTime(dtDOE.Rows[rowCount]["Date"].ToString()).ToString("dd/MM/yyyy");
+
+        //            if (rowCount % 2 == 0) //For ODD row
+        //            {
+        //                sbr.Append("<tr><td>" + Date + "</td><td><a href='#'><img src='../Images/Print.png' /></a></td></tr>");
+        //            }
+        //            else
+        //            {
+        //                sbr.Append("<tr style='background-color:#99CCFF;'><td>" + Date + "</td><td><a href='#'><img src='../Images/Print.png' /></a></td></tr>");
+        //            }
+        //        }
+
+        //        sbr.Append("</table>");
+        //        dvDoExtension.InnerHtml = sbr.ToString();
+        //    }
+        //    else
+        //    {
+        //        sbr.Append("<table style='width:80%;' cellspacing='0' align='center'>");
+        //        sbr.Append("<tr><td>No records found</td></tr>");
+        //        sbr.Append("</table>");
+        //        dvDoExtension.InnerHtml = sbr.ToString();
+        //    }
+        //}
+
         void FillDoExtension(DataTable dtDOE)
         {
-            StringBuilder sbr = new StringBuilder();
+            StringBuilder sbr = null;
             if (dtDOE.Rows.Count > 0)
             {
+                #region DO Extension Section
+
+                sbr = new StringBuilder();
                 sbr.Append("<table style='width:80%;' cellspacing='0' align='center'>");
                 sbr.Append("<tr style='height:30px;background-color:#328DC4;color:White; font-weight:bold;'><td>Date</td><td>Print</td></tr>");
 
                 for (int rowCount = 0; rowCount < dtDOE.Rows.Count; rowCount++)
                 {
-                    string Date = Convert.ToDateTime(dtDOE.Rows[rowCount]["Date"].ToString()).ToString("dd/MM/yyyy");
+                    if (Convert.ToInt32(dtDOE.Rows[rowCount]["Type"].ToString()) == (int)EMS.Utilities.Enums.BLActivity.DOE)
+                    {
+                        string Date = Convert.ToDateTime(dtDOE.Rows[rowCount]["Date"].ToString()).ToString("dd/MM/yyyy");
 
-                    if (rowCount % 2 == 0) //For ODD row
-                    {
-                        sbr.Append("<tr><td>" + Date + "</td><td><a href='#'><img src='../Images/Print.png' /></a></td></tr>");
-                    }
-                    else
-                    {
-                        sbr.Append("<tr style='background-color:#99CCFF;'><td>" + Date + "</td><td><a href='#'><img src='../Images/Print.png' /></a></td></tr>");
+                        if (rowCount % 2 == 0) //For ODD row
+                        {
+                            sbr.Append("<tr><td>" + Date + "</td><td><a href='#'><img src='../Images/Print.png' /></a></td></tr>");
+                        }
+                        else
+                        {
+                            sbr.Append("<tr style='background-color:#99CCFF;'><td>" + Date + "</td><td><a href='#'><img src='../Images/Print.png' /></a></td></tr>");
+                        }
                     }
                 }
 
                 sbr.Append("</table>");
                 dvDoExtension.InnerHtml = sbr.ToString();
-            }
-            else
-            {
+                #endregion
+
+                #region Detention Extention Section
+                sbr = new StringBuilder();
                 sbr.Append("<table style='width:80%;' cellspacing='0' align='center'>");
-                sbr.Append("<tr><td>No records found</td></tr>");
+                sbr.Append("<tr style='height:30px;background-color:#328DC4;color:White; font-weight:bold;'><td>Date</td><td>Print</td></tr>");
+
+                for (int rowCount = 0; rowCount < dtDOE.Rows.Count; rowCount++)
+                {
+                    if (Convert.ToInt32(dtDOE.Rows[rowCount]["Type"].ToString()) == (int)EMS.Utilities.Enums.BLActivity.DE)
+                    {
+                        string Date = Convert.ToDateTime(dtDOE.Rows[rowCount]["Date"].ToString()).ToString("dd/MM/yyyy");
+
+                        if (rowCount % 2 == 0) //For ODD row
+                        {
+                            sbr.Append("<tr><td>" + Date + "</td><td><a href='#'><img src='../Images/Print.png' /></a></td></tr>");
+                        }
+                        else
+                        {
+                            sbr.Append("<tr style='background-color:#99CCFF;'><td>" + Date + "</td><td><a href='#'><img src='../Images/Print.png' /></a></td></tr>");
+                        }
+                    }
+                }
+
                 sbr.Append("</table>");
-                dvDoExtension.InnerHtml = sbr.ToString();
+                dvEFD.InnerHtml = sbr.ToString();
+                #endregion
+
+                #region PGR Extention Section
+                sbr = new StringBuilder();
+                sbr.Append("<table style='width:80%;' cellspacing='0' align='center'>");
+                sbr.Append("<tr style='height:30px;background-color:#328DC4;color:White; font-weight:bold;'><td>Date</td><td>Print</td></tr>");
+
+                for (int rowCount = 0; rowCount < dtDOE.Rows.Count; rowCount++)
+                {
+                    if (Convert.ToInt32(dtDOE.Rows[rowCount]["Type"].ToString()) == (int)EMS.Utilities.Enums.BLActivity.PGRE)
+                    {
+                        string Date = Convert.ToDateTime(dtDOE.Rows[rowCount]["Date"].ToString()).ToString("dd/MM/yyyy");
+
+                        if (rowCount % 2 == 0) //For ODD row
+                        {
+                            sbr.Append("<tr><td>" + Date + "</td><td><a href='#'><img src='../Images/Print.png' /></a></td></tr>");
+                        }
+                        else
+                        {
+                            sbr.Append("<tr style='background-color:#99CCFF;'><td>" + Date + "</td><td><a href='#'><img src='../Images/Print.png' /></a></td></tr>");
+                        }
+                    }
+                }
+
+                sbr.Append("</table>");
+                dvPGR.InnerHtml = sbr.ToString();
+                #endregion
+
+                #region Security Invoice Section
+                sbr = new StringBuilder();
+                sbr.Append("<table style='width:80%;' cellspacing='0' align='center'>");
+                sbr.Append("<tr style='height:30px;background-color:#328DC4;color:White; font-weight:bold;'><td>Date</td><td>Print</td></tr>");
+
+                for (int rowCount = 0; rowCount < dtDOE.Rows.Count; rowCount++)
+                {
+                    if (Convert.ToInt32(dtDOE.Rows[rowCount]["Type"].ToString()) == (int)EMS.Utilities.Enums.BLActivity.SI)
+                    {
+                        string Date = Convert.ToDateTime(dtDOE.Rows[rowCount]["Date"].ToString()).ToString("dd/MM/yyyy");
+
+                        if (rowCount % 2 == 0) //For ODD row
+                        {
+                            sbr.Append("<tr><td>" + Date + "</td><td><a href='#'><img src='../Images/Print.png' /></a></td></tr>");
+                        }
+                        else
+                        {
+                            sbr.Append("<tr style='background-color:#99CCFF;'><td>" + Date + "</td><td><a href='#'><img src='../Images/Print.png' /></a></td></tr>");
+                        }
+                    }
+                }
+
+                sbr.Append("</table>");
+                dvSecurity.InnerHtml = sbr.ToString();
+                #endregion
+
+                #region Other Invoice Section
+                sbr = new StringBuilder();
+                sbr.Append("<table style='width:80%;' cellspacing='0' align='center'>");
+                sbr.Append("<tr style='height:30px;background-color:#328DC4;color:White; font-weight:bold;'><td>Date</td><td>Print</td></tr>");
+
+                for (int rowCount = 0; rowCount < dtDOE.Rows.Count; rowCount++)
+                {
+                    if (Convert.ToInt32(dtDOE.Rows[rowCount]["Type"].ToString()) == (int)EMS.Utilities.Enums.BLActivity.OI)
+                    {
+                        string Date = Convert.ToDateTime(dtDOE.Rows[rowCount]["Date"].ToString()).ToString("dd/MM/yyyy");
+
+                        if (rowCount % 2 == 0) //For ODD row
+                        {
+                            sbr.Append("<tr><td>" + Date + "</td><td><a href='#'><img src='../Images/Print.png' /></a></td></tr>");
+                        }
+                        else
+                        {
+                            sbr.Append("<tr style='background-color:#99CCFF;'><td>" + Date + "</td><td><a href='#'><img src='../Images/Print.png' /></a></td></tr>");
+                        }
+                    }
+                }
+
+                sbr.Append("</table>");
+                dvOtherInvoice.InnerHtml = sbr.ToString();
+                #endregion
             }
+            //else
+            //{
+            //    sbr.Append("<table style='width:80%;' cellspacing='0' align='center'>");
+            //    sbr.Append("<tr><td>No records found</td></tr>");
+            //    sbr.Append("</table>");
+            //    dvDoExtension.InnerHtml = sbr.ToString();
+            //}
         }
 
         protected void DeleteUploadedDoc(object sender, EventArgs e)
@@ -461,93 +666,93 @@ namespace EMS.WebApp.Transaction
         //    return sb.ToString();
         //}
 
-        string GenerateBLQActivityXMLString(int No)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("<Activity>");
+        //string GenerateBLQActivityXMLString(int No)
+        //{
+        //    StringBuilder sb = new StringBuilder();
+        //    sb.Append("<Activity>");
 
-            switch (No)
-            {
-                case 1:
-                    #region chkDo.Checked
-                    sb.Append("<Item>");
+        //    switch (No)
+        //    {
+        //        case 1:
+        //            #region chkDo.Checked
+        //            sb.Append("<Item>");
 
-                    sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
-                    sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.DO + "</AT>");
-                    sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
-                    //sb.Append("<VD>" + Convert.ToDateTime(txtDoValidTill.Text).ToString("MM/dd/yyyy") + "</VD>");
-                    //sb.Append("<BG>" + (chkBankGuarantee.Checked ? "1" : "0") + "</BG>");
-                    sb.Append("<IG>" + 0 + "</IG>");
-                    sb.Append("<NOP>" + 0 + "</NOP>");
+        //            sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
+        //            sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.DO + "</AT>");
+        //            sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
+        //            //sb.Append("<VD>" + Convert.ToDateTime(txtDoValidTill.Text).ToString("MM/dd/yyyy") + "</VD>");
+        //            //sb.Append("<BG>" + (chkBankGuarantee.Checked ? "1" : "0") + "</BG>");
+        //            sb.Append("<IG>" + 0 + "</IG>");
+        //            sb.Append("<NOP>" + 0 + "</NOP>");
 
-                    sb.Append("</Item>");
-                    #endregion
-                    break;
+        //            sb.Append("</Item>");
+        //            #endregion
+        //            break;
 
-                case 2:
-                    #region chkDoExtension.Checked
-                    sb.Append("<Item>");
+        //        case 2:
+        //            #region chkDoExtension.Checked
+        //            sb.Append("<Item>");
 
-                    sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
-                    sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.DOE + "</AT>");
-                    sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
-                    sb.Append("<VD>" + Convert.ToDateTime(txtVAlidityDate.Text).ToString("MM/dd/yyyy") + "</VD>");
-                    sb.Append("<BG>" + "0" + "</BG>");
-                    sb.Append("<IG>" + 0 + "</IG>");
-                    sb.Append("<NOP>" + 0 + "</NOP>");
+        //            sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
+        //            sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.DOE + "</AT>");
+        //            sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
+        //            sb.Append("<VD>" + Convert.ToDateTime(txtVAlidityDate.Text).ToString("MM/dd/yyyy") + "</VD>");
+        //            sb.Append("<BG>" + "0" + "</BG>");
+        //            sb.Append("<IG>" + 0 + "</IG>");
+        //            sb.Append("<NOP>" + 0 + "</NOP>");
 
-                    sb.Append("</Item>");
-                    #endregion
-                    break;
+        //            sb.Append("</Item>");
+        //            #endregion
+        //            break;
 
-                case 3:
-                    #region chkSlotExtension.Checked
-                    sb.Append("<Item>");
+        //        case 3:
+        //            #region chkSlotExtension.Checked
+        //            sb.Append("<Item>");
 
-                    sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
-                    sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.SE + "</AT>");
-                    if (!String.IsNullOrEmpty(txtExtensionForDetention.Text))
-                        sb.Append("<AD>" + Convert.ToDateTime(txtExtensionForDetention.Text).ToString("MM/dd/yyyy") + "</AD>");
-                    else
-                        sb.Append("<AD></AD>");
+        //            sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
+        //            sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.SE + "</AT>");
+        //            if (!String.IsNullOrEmpty(txtExtensionForDetention.Text))
+        //                sb.Append("<AD>" + Convert.ToDateTime(txtExtensionForDetention.Text).ToString("MM/dd/yyyy") + "</AD>");
+        //            else
+        //                sb.Append("<AD></AD>");
 
-                    if (!String.IsNullOrEmpty(txtExtensionForPGR.Text))
-                        sb.Append("<VD>" + Convert.ToDateTime(txtExtensionForPGR.Text).ToString("MM/dd/yyyy") + "</VD>");
-                    else
-                        sb.Append("<VD></VD>");
+        //            if (!String.IsNullOrEmpty(txtExtensionForPGR.Text))
+        //                sb.Append("<VD>" + Convert.ToDateTime(txtExtensionForPGR.Text).ToString("MM/dd/yyyy") + "</VD>");
+        //            else
+        //                sb.Append("<VD></VD>");
 
-                    sb.Append("<BG>" + "0" + "</BG>");
-                    sb.Append("<IG>" + 0 + "</IG>");
-                    sb.Append("<NOP>" + 0 + "</NOP>");
+        //            sb.Append("<BG>" + "0" + "</BG>");
+        //            sb.Append("<IG>" + 0 + "</IG>");
+        //            sb.Append("<NOP>" + 0 + "</NOP>");
 
-                    sb.Append("</Item>");
-                    #endregion
-                    break;
+        //            sb.Append("</Item>");
+        //            #endregion
+        //            break;
 
-                case 4:
-                    break;
+        //        case 4:
+        //            break;
 
-                case 5:
-                    #region chkBondCancel.Checked
-                    sb.Append("<Item>");
+        //        case 5:
+        //            #region chkBondCancel.Checked
+        //            sb.Append("<Item>");
 
-                    sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
-                    sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.BC + "</AT>");
-                    sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
-                    sb.Append("<VD>" + Convert.ToDateTime(txtBondCancellation.Text).ToString("MM/dd/yyyy") + "</VD>");
-                    sb.Append("<BG>" + "0" + "</BG>");
-                    sb.Append("<IG>" + 0 + "</IG>");
-                    sb.Append("<NOP>" + 0 + "</NOP>");
+        //            sb.Append("<BLID>" + hdnBLId.Value + "</BLID>");
+        //            sb.Append("<AT>" + (int)EMS.Utilities.Enums.BLActivity.BC + "</AT>");
+        //            sb.Append("<AD>" + DateTime.Today.Date.ToString("MM/dd/yyyy") + "</AD>");
+        //            sb.Append("<VD>" + Convert.ToDateTime(txtBondCancellation.Text).ToString("MM/dd/yyyy") + "</VD>");
+        //            sb.Append("<BG>" + "0" + "</BG>");
+        //            sb.Append("<IG>" + 0 + "</IG>");
+        //            sb.Append("<NOP>" + 0 + "</NOP>");
 
-                    sb.Append("</Item>");
-                    #endregion
-                    break;
-            }
+        //            sb.Append("</Item>");
+        //            #endregion
+        //            break;
+        //    }
 
-            sb.Append("</Activity>");
+        //    sb.Append("</Activity>");
 
-            return sb.ToString();
-        }
+        //    return sb.ToString();
+        //}
 
         protected void btnUpload_Click(object sender, EventArgs e)
         {
@@ -617,6 +822,22 @@ namespace EMS.WebApp.Transaction
         protected void LocationLine_Changed(object sender, EventArgs e)
         {
             autoComplete1.ContextKey = ddlLocation.SelectedValue + "|" + ddlLine.SelectedValue;
+            if (ddlLocation.SelectedIndex > 0)
+                ddlLine.Enabled = true;
+            else
+            {
+                ddlLine.Enabled = false;
+                ddlLine.SelectedIndex = 0;
+            }
+
+            if (ddlLine.SelectedIndex > 0)
+                txtBlNo.Enabled = true;
+            else
+            {
+                txtBlNo.Enabled = false;
+                txtBlNo.Text = string.Empty;
+                ClearAll();
+            }
         }
 
 
@@ -675,7 +896,6 @@ namespace EMS.WebApp.Transaction
 
             Response.Redirect("~/Transaction/ManageInvoice.aspx?p1=" + p1 + "&p2=" + p2 + "&p3=" + p3 + "&p4=" + p4 + "");
         }
-
 
         protected void lnkGenInvFreightToCollect_Click(object sender, EventArgs e)
         {
@@ -750,5 +970,152 @@ namespace EMS.WebApp.Transaction
 
 
         }
+
+        protected void lnkSecurityInv_Click(object sender, EventArgs e)
+        {
+            mpeSecurity.Show();
+        }
+
+        protected void lnkPGRExtension_Click(object sender, EventArgs e)
+        {
+            mpePGR.Show();
+        }
+
+        protected void lnkOtherInv_Click(object sender, EventArgs e)
+        {
+            mpeOi.Show();
+        }
+
+        void ClearAll()
+        {
+            txtCha.Text = string.Empty;
+            txtLandingDate.Text = string.Empty;
+            txtDoValidUpto.Text = string.Empty;
+            txtVessel.Text = string.Empty;
+            txtVoyage.Text = string.Empty;
+            txtDetentionFreeDays.Text = string.Empty;
+            tstDetentionTill.Text = string.Empty;
+            txtPGRFreedays.Text = string.Empty;
+            txtPGRTill.Text = string.Empty;
+
+            txtFreightToCollect.Text = string.Empty;
+            ddlDestuffing.SelectedIndex = 0;
+            txtVAlidityDate.Text = string.Empty;
+            txtExtensionForDetention.Text = string.Empty;
+            txtExtensionForPGR.Text = string.Empty;
+            ddlAmendmentFor.SelectedIndex = 0;
+            txtBondCancellation.Text = string.Empty;
+
+            gvwInvoice.DataSource = null;
+            gvwInvoice.DataBind();
+
+            chkOriginalBL.Checked = false;
+            chkEndorseHBL.Checked = false;
+            chkContainerBond.Checked = false;
+            chkBankGuarantee.Checked = false;
+            chkInsuranceCopy.Checked = false;
+            chkCopyOfMasterBL.Checked = false;
+            chkSecurityCheque.Checked = false;
+            chkCopyOfBill.Checked = false;
+            chkConsoldatorNOC.Checked = false;
+            chkCHSSA.Checked = false;
+
+            dvDoc.InnerHtml = string.Empty;
+            //gvwVendor
+            /*
+             * InvoiceType
+             * InvoiceNo
+             * Ammount
+             * ReceivedAmt
+             * 
+             * BlId
+             * */
+
+        }
+
+        protected void lnkFreightToCollect_Click(object sender, EventArgs e)
+        {
+            mpeFreight.Show();
+        }
+
+        protected void lnkFinalInvoice_Click(object sender, EventArgs e)
+        {
+            mpeFinalInv.Show();
+
+        }
+
+        protected void gvwVendor_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                //System.Web.UI.HtmlControls.HtmlAnchor aInvoice = (System.Web.UI.HtmlControls.HtmlAnchor)e.Row.FindControl("aInvoice");
+                //aInvoice.HRef = "ManageInvoice.aspx?invid=" + e.da;
+                //href='<% "ManageInvoice.aspx?invid=" + GeneralFunctions.EncryptQueryString(Eval("InvoiceID")ToString()) %>'
+            }
+        }
+
+        protected void ShowReceivedAmt(object sender, EventArgs e)
+        {
+            System.Web.UI.HtmlControls.HtmlAnchor a = (System.Web.UI.HtmlControls.HtmlAnchor)sender;
+
+            GridViewRow Row = (GridViewRow)a.NamingContainer;
+            HiddenField hdnInvID = (HiddenField)Row.FindControl("hdnInvID");
+
+            DataTable dtDoc = oImportBLL.GetReceivedAmtBreakup(Convert.ToInt64(hdnInvID.Value));
+
+            StringBuilder sbr = new StringBuilder();
+            sbr.Append("<table style='width: 100%; border: none;' cellpadding='0' cellspacing='0'>");
+            sbr.Append("<tr style='background-color:#328DC4;color:White; font-weight:bold;'>");
+            sbr.Append("<td style='width: 50px;padding-left:2px;'>MRNo.</td>");
+            sbr.Append("<td style='width: 80px;'>Date</td>");
+            sbr.Append("<td style='width: 80px;'>Cash</td>");
+            sbr.Append("<td style='width: 80px;'>Cheque</td>");
+            sbr.Append("<td style='width: 80px;'>TDS</td>");
+            sbr.Append("<td style='width: 50px;text-align:center;'>Edit</td>");
+            sbr.Append("</tr>");
+
+            for (int rowCount = 0; rowCount < dtDoc.Rows.Count; rowCount++)
+            {
+                string MRID = dtDoc.Rows[rowCount]["MRID"].ToString();
+                string CASH = dtDoc.Rows[rowCount]["CASH"].ToString();
+                string CHEQUE = dtDoc.Rows[rowCount]["CHEQUE"].ToString();
+                string DATE = Convert.ToDateTime(dtDoc.Rows[rowCount]["DATE"].ToString()).ToString("dd/MM/yyyy");
+                string MRNO = dtDoc.Rows[rowCount]["MRNO"].ToString();
+                string TDS = dtDoc.Rows[rowCount]["TDS"].ToString();
+
+
+                if (rowCount % 2 == 0) //For ODD row
+                {
+                    sbr.Append("<tr>");
+                    sbr.Append("<td>" + MRNO + "</td>");
+                    sbr.Append("<td>" + DATE + "</td>");
+                    sbr.Append("<td>" + CASH + "</td>");
+                    sbr.Append("<td>" + CHEQUE + "</td>");
+                    sbr.Append("<td>" + TDS + "</td>");
+                    sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
+                    sbr.Append("</tr>");
+                }
+                else // For Even Row
+                {
+                    sbr.Append("<tr style='background-color:#99CCFF;'>");
+                    sbr.Append("<td>" + MRNO + "</td>");
+                    sbr.Append("<td>" + DATE + "</td>");
+                    sbr.Append("<td>" + CASH + "</td>");
+                    sbr.Append("<td>" + CHEQUE + "</td>");
+                    sbr.Append("<td>" + TDS + "</td>");
+                    sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
+
+                    sbr.Append("</tr>");
+                }
+            }
+
+            sbr.Append("</table>");
+
+            dvMoneyReceived.InnerHtml = sbr.ToString();
+
+            mpeMoneyReceivedDetail.Show();
+
+        }
+
     }
 }

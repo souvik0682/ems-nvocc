@@ -731,14 +731,16 @@ namespace EMS.WebApp.Transaction
 
             ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Record saved successfully! Invoice Number: " + invoiceNo + "');</script>", false);
 
-            ViewState["CHARGERATE"] = null;
-            gvwInvoice.DataSource = null;
-            gvwInvoice.DataBind();
+            Response.Redirect("~/BL-Query.aspx?BlNo=" + ddlBLno.SelectedItem.Text);
+
+            //ViewState["CHARGERATE"] = null;
+            //gvwInvoice.DataSource = null;
+            //gvwInvoice.DataBind();
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("~/BL-Query.aspx?BlNo=" + ddlBLno.SelectedItem.Text);
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)

@@ -242,7 +242,7 @@ namespace DSR.WebApp.Security
         private void RedirecToAddEditPage(int id)
         {
             string encryptedId = GeneralFunctions.EncryptQueryString(id.ToString());
-            Response.Redirect("~/Security/AddEditLocation.aspx?id=" + encryptedId);
+            Response.Redirect("~/Security/EditLocation.aspx?id=" + encryptedId);
         }
 
         private void BuildSearchCriteria(SearchCriteria criteria)

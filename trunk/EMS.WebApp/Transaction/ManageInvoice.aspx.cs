@@ -731,7 +731,7 @@ namespace EMS.WebApp.Transaction
 
             ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Record saved successfully! Invoice Number: " + invoiceNo + "');</script>", false);
 
-            Response.Redirect("~/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(ddlBLno.SelectedItem.Text));
+            Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(ddlBLno.SelectedItem.Text));
 
             //ViewState["CHARGERATE"] = null;
             //gvwInvoice.DataSource = null;
@@ -740,7 +740,7 @@ namespace EMS.WebApp.Transaction
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(ddlBLno.SelectedItem.Text));
+            Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(ddlBLno.SelectedItem.Text));
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)

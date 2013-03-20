@@ -133,17 +133,18 @@ namespace EMS.WebApp.Transaction
                 else
                 {
                     if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["RECPTCHECK"].ToString()) == true)
-                        chkFreightToCollect.Enabled = true;
+                        chkDo.Enabled = true;
                     else
-                        chkFreightToCollect.Enabled = true;
+                        chkDo.Enabled = false;
 
+                    chkFreightToCollect.Enabled = true;
                     txtFreightToCollect.Text = BLDataSet.Tables[0].Rows[0]["FREIGHTTOCOLLECT"].ToString();
                 }
 
-                if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["FREIGHTTOCOLLECT"]) == true)
-                {
-                    chkDo.Enabled = true;
-                }
+                //if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["FREIGHTTOCOLLECT"]) == true)
+                //{
+                //    chkDo.Enabled = true;
+                //}
 
                 if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["FSTINVGENERATED"]) == true)
                 {

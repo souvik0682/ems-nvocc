@@ -71,7 +71,19 @@ namespace EMS.Entity.Report
             set;
         }
 
+        public string PackUnit
+        {
+            get;
+            set;
+        }
+
         public decimal? Volume
+        {
+            get;
+            set;
+        }
+
+        public string VolUnit
         {
             get;
             set;
@@ -161,6 +173,12 @@ namespace EMS.Entity.Report
             set;
         }
 
+        public string WtUnit
+        {
+            get;
+            set;
+        }
+
         public decimal? FreigthToCollect
         {
             get;
@@ -197,12 +215,22 @@ namespace EMS.Entity.Report
             set;
         }
 
+        public string ConsigneeName
+        {
+            get;
+            set;
+        }
         public string NotifyPartyInformation
         {
             get;
             set;
         }
 
+        public string NotifyPartyName
+        {
+            get;
+            set;
+        }
         public string MarksNumbers
         {
             get;
@@ -309,7 +337,7 @@ namespace EMS.Entity.Report
         {
             get;
             set;
-        }        
+        }
 
         public Int64 BLId
         {
@@ -370,8 +398,14 @@ namespace EMS.Entity.Report
             if (HasColumn(reader, "PackageDetail") && reader["PackageDetail"] != DBNull.Value)
                 this.PackageDetail = Convert.ToString(reader["PackageDetail"]);
 
+            if (HasColumn(reader, "PackUnit") && reader["PackUnit"] != DBNull.Value)
+                this.PackUnit = Convert.ToString(reader["PackUnit"]);
+
             if (HasColumn(reader, "Volume") && reader["Volume"] != DBNull.Value)
                 this.Volume = Convert.ToDecimal(reader["Volume"]);
+
+            if (HasColumn(reader, "VolUnit") && reader["VolUnit"] != DBNull.Value)
+                this.VolUnit = Convert.ToString(reader["VolUnit"]);
 
             if (HasColumn(reader, "FreightType") && reader["FreightType"] != DBNull.Value)
                 this.FreightType = Convert.ToString(reader["FreightType"]);
@@ -388,8 +422,11 @@ namespace EMS.Entity.Report
             if (HasColumn(reader, "CACode") && reader["CACode"] != DBNull.Value)
                 this.CACode = Convert.ToString(reader["CACode"]);
 
+            //if (HasColumn(reader, "IGMBLDate") && reader["IGMBLDate"] != DBNull.Value)
+            //    this.IGMBLDate = Convert.ToString(reader["IGMBLDate"]);
             if (HasColumn(reader, "IGMBLDate") && reader["IGMBLDate"] != DBNull.Value)
-                this.IGMBLDate = Convert.ToString(reader["IGMBLDate"]);
+                this.IGMBLDate = Convert.ToDateTime(reader["IGMBLDate"]).ToString("dd/MM/yyyy");
+
 
             if (HasColumn(reader, "LineBLType") && reader["LineBLType"] != DBNull.Value)
                 this.LineBLType = Convert.ToString(reader["LineBLType"]);
@@ -415,6 +452,9 @@ namespace EMS.Entity.Report
             if (HasColumn(reader, "GrossWeight") && reader["GrossWeight"] != DBNull.Value)
                 this.GrossWeight = Convert.ToDecimal(reader["GrossWeight"]);
 
+            if (HasColumn(reader, "WtUnit") && reader["WtUnit"] != DBNull.Value)
+                this.WtUnit = Convert.ToString(reader["WtUnit"]);
+
             if (HasColumn(reader, "FreigthToCollect") && reader["FreigthToCollect"] != DBNull.Value)
                 this.FreigthToCollect = Convert.ToDecimal(reader["FreigthToCollect"]);
 
@@ -433,8 +473,14 @@ namespace EMS.Entity.Report
             if (HasColumn(reader, "ConsigneeInformation") && reader["ConsigneeInformation"] != DBNull.Value)
                 this.ConsigneeInformation = Convert.ToString(reader["ConsigneeInformation"]);
 
+            if (HasColumn(reader, "ConsigneeName") && reader["ConsigneeName"] != DBNull.Value)
+                this.ConsigneeName = Convert.ToString(reader["ConsigneeName"]);
+
             if (HasColumn(reader, "NotifyPartyInformation") && reader["NotifyPartyInformation"] != DBNull.Value)
                 this.NotifyPartyInformation = Convert.ToString(reader["NotifyPartyInformation"]);
+
+            if (HasColumn(reader, "NotifyPartyName") && reader["NotifyPartyNme"] != DBNull.Value)
+                this.NotifyPartyName = Convert.ToString(reader["NotifyPartyName"]);
 
             if (HasColumn(reader, "MarksNumbers") && reader["MarksNumbers"] != DBNull.Value)
                 this.MarksNumbers = Convert.ToString(reader["MarksNumbers"]);

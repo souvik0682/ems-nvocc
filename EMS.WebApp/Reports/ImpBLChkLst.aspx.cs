@@ -204,7 +204,7 @@ namespace EMS.WebApp.Reports
             //rptViewer.LocalReport.ReportPath = Server.MapPath("/" + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName);
             rptViewer.LocalReport.DataSources.Add(new ReportDataSource("RptDataSet", lstEntity));
             rptViewer.LocalReport.SetParameters(new ReportParameter("CompanyName", Convert.ToString(ConfigurationManager.AppSettings["CompanyName"])));
-            rptViewer.LocalReport.SetParameters(new ReportParameter("ReportDate", System.DateTime.Now.ToString("MMMM dd, yyyy") + " at " + System.DateTime.Now.ToString("HH:MM tt")));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("ReportDate", System.DateTime.Now.ToString("MMMM dd, yyyy")));
             rptViewer.LocalReport.Refresh();
         }
 

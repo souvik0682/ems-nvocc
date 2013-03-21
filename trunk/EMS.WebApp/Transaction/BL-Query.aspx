@@ -913,7 +913,7 @@
                                         <HeaderTemplate>
                                             Add Money Recpt.</HeaderTemplate>
                                         <ItemTemplate>
-                                            <a runat="server" href='<%# "ManageMoneyReceipt.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'>
+                                            <a runat="server" href='<%# "AddEditMoneyReceipts.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'>
                                                 <img alt="Add" src="../Images/ADD.JPG" /></a>
                                         </ItemTemplate>
                                     </asp:TemplateField>

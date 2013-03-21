@@ -125,7 +125,7 @@ namespace EMS.WebApp.Transaction
                 fillBLDetail(BLDataSet.Tables[0]);
 
                 //FREIGHTTYPE
-                if (BLDataSet.Tables[0].Rows[0]["FREIGHTTOCOLLECT"].ToString() == "PP")
+                if (BLDataSet.Tables[0].Rows[0]["FREIGHTTYPE"].ToString().ToLower() == "pp")
                 {
                     chkFreightToCollect.Enabled = false;
                     chkDo.Enabled = true;

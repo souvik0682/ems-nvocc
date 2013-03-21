@@ -10,6 +10,7 @@ using EMS.Common;
 using EMS.Entity;
 using EMS.Utilities;
 using EMS.Utilities.ResourceManager;
+using System.Data;
 
 namespace EMS.WebApp.Transaction
 {
@@ -24,6 +25,7 @@ namespace EMS.WebApp.Transaction
         private bool _canDelete = false;
         private bool _canView = false;
         MoneyReceiptEntity mrSession = null;
+        private int _InvoiceId = 0;
         #endregion
 
         #region Protected Event Handlers
@@ -37,11 +39,8 @@ namespace EMS.WebApp.Transaction
             if (!IsPostBack)
             {
                 //this.getMoneyReceiptObjectInstance(null);
-                PopulateInvoiceTypes();
-                PopulateLocation();
+
                 LoadData();
-
-
 
             }
 
@@ -110,9 +109,9 @@ namespace EMS.WebApp.Transaction
             //Get user permission.
             MoneyReceiptsBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
 
-            if (!ReferenceEquals(Request.QueryString["id"], null))
+            if (!ReferenceEquals(Request.QueryString["invid"], null))
             {
-                Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["id"].ToString()), out _uId);
+                Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["invid"].ToString()), out _InvoiceId);
             }
         }
 
@@ -171,24 +170,24 @@ namespace EMS.WebApp.Transaction
 
         private void CheckUserAccess()
         {
-            //if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
-            //{
-            //    IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+            if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+            {
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
 
-            //    if (ReferenceEquals(user, null) || user.Id == 0)
-            //    {
-            //        Response.Redirect("~/Login.aspx");
-            //    }
+                if (ReferenceEquals(user, null) || user.Id == 0)
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
 
-            //    if (user.UserRole.Id != (int)UserRole.Admin)
-            //    {
-            //        Response.Redirect("~/Unauthorized.aspx");
-            //    }
-            //}
-            //else
-            //{
-            //    Response.Redirect("~/Login.aspx");
-            //}
+                if (user.UserRole.Id != (int)UserRole.Admin)
+                {
+                    Response.Redirect("~/Unauthorized.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
+            }
 
             //if (_uId == 0)
             //    Response.Redirect("~/Transaction/AddEditMoneyReceipts.aspx");
@@ -228,9 +227,9 @@ namespace EMS.WebApp.Transaction
 
         private void PopulateInvoiceTypes()
         {
-            MoneyReceiptsBLL mrBll = new MoneyReceiptsBLL();
-            List<InvoiceTypeEntity> lstInvoiceTypes = mrBll.GetInvoiceTypes();
-            GeneralFunctions.PopulateDropDownList(this.drpDwnInvoiceType, lstInvoiceTypes, "InvoiceTypeId", "InvoiceTypeName", true);
+            //MoneyReceiptsBLL mrBll = new MoneyReceiptsBLL();
+            //List<InvoiceTypeEntity> lstInvoiceTypes = mrBll.GetInvoiceTypes();
+            //GeneralFunctions.PopulateDropDownList(this.drpDwnInvoiceType, lstInvoiceTypes, "InvoiceTypeId", "InvoiceTypeName", true);
         }
 
         private void PopulateLocation()
@@ -242,57 +241,22 @@ namespace EMS.WebApp.Transaction
 
         private void LoadData()
         {
-            mrSession = this.getMoneyReceiptObjectInstance(null);
-            if (mrSession.MRNo != null)
-            {
-                this.txtMRNo.Text = mrSession.MRNo;
-                this.dtPckrMRDate.DBDate = mrSession.MRDate.ToString();
-                this.txtBLNo.Text = mrSession.BLNo;
-                this.txtBLNo_TextChanged(this.txtBLNo, null);
-                this.drpDwnInvoiceType.Items.FindByValue(mrSession.InvoiceTypeId.ToString()).Selected = true;
-                this.drpDwnInvoiceType_SelectedIndexChanged(this.drpDwnInvoiceType, null);
-                this.drpDwnInvoiceNo.Items.FindByText(mrSession.InvoiceNo.ToString()).Selected = true;
-                this.populateInvoiceData(mrSession.InvoiceTypeId, mrSession.InvoiceId);
+            MoneyReceiptsBLL mrBll = new MoneyReceiptsBLL();
+            DataTable dt = mrBll.GetInvoiceDetailForMoneyReceipt(_InvoiceId);
+
+            txtBLNo.Text = dt.Rows[0]["BLNO"].ToString();
+            txtNvocc.Text = dt.Rows[0]["LINE"].ToString();
+            txtLocation.Text = dt.Rows[0]["LOCATION"].ToString();
+            ddlExportImport.SelectedValue = dt.Rows[0]["EXPIMP"].ToString();
+
+            txtInvoiceNo.Text = dt.Rows[0]["INVNO"].ToString();
+            txtInvoiceType.Text = dt.Rows[0]["DOCTYPE"].ToString();
+            txtInvoiceDate.Text = Convert.ToDateTime(dt.Rows[0]["INVDT"].ToString()).ToString("dd/MM/yyyy");
+            txtInvoiceAmount.Text = dt.Rows[0]["INVAMT"].ToString();
 
 
 
 
-                mrSession.ChargeDetails.ForEach(cd =>
-                    {
-                        MoneyReceiptsBLL mrBll = new MoneyReceiptsBLL();
-                        cd.InvoiceTypeName = mrBll.GetInvoiceTypes().FirstOrDefault(inv => inv.InvoiceTypeId == cd.InvoiceTypeId).InvoiceTypeName;
-                    });
-
-                this.bindGridData(mrSession.ChargeDetails);
-            }
-            else
-            {
-                Session["ISADDED"] = true;
-            }
-            //IUser user = new UserBLL().GetUser(_uId);
-
-            //if (!ReferenceEquals(user, null))
-            //{
-            //    txtUserName.Text = user.Name;
-            //    txtFName.Text = user.FirstName;
-            //    txtLName.Text = user.LastName;
-            //    txtEmail.Text = user.EmailId;
-            //    ddlRole.SelectedValue = Convert.ToString(user.UserRole.Id);
-            //    ddlLoc.SelectedValue = Convert.ToString(user.UserLocation.Id);
-
-            //    if (user.AllowMutipleLocation)
-            //        ddlMultiLoc.SelectedValue = "1";
-            //    else
-            //        ddlMultiLoc.SelectedValue = "0";
-
-            //    if (user.IsActive)
-            //        chkActive.Checked = true;
-            //    else
-            //        chkActive.Checked = false;
-
-            //    if (_uId == 1)
-            //        chkActive.Enabled = false;
-            //}
         }
 
         private bool ValidateControls(IUser user)
@@ -389,7 +353,7 @@ namespace EMS.WebApp.Transaction
             if (moneyReceipt.ChargeDetails == null)
             {
                 moneyReceipt.MRNo = this.txtMRNo.Text;
-                moneyReceipt.MRDate = this.dtPckrMRDate.dt;
+                //moneyReceipt.MRDate = this.dtPckrMRDate.dt;
                 moneyReceipt.UserAddedId = _userId;
                 moneyReceipt.UserEditedId = _userId;
                 lstMoneyReceipts.Add(moneyReceipt);
@@ -401,7 +365,7 @@ namespace EMS.WebApp.Transaction
                 {
                     MoneyReceiptEntity mrAdd = new MoneyReceiptEntity();
                     mrAdd.MRNo = this.txtMRNo.Text;
-                    mrAdd.MRDate = this.dtPckrMRDate.dt;
+                    //mrAdd.MRDate = this.dtPckrMRDate.dt;
                     mrAdd.UserAddedId = _userId;
                     mrAdd.UserEditedId = _userId;
                     mrAdd.InvoiceId = cd.InvoiceId;
@@ -450,31 +414,31 @@ namespace EMS.WebApp.Transaction
 
         protected void drpDwnInvoiceType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((sender as DropDownList) != null)
-            {
-                int invoiceTypeId = Convert.ToInt32((sender as DropDownList).SelectedValue);
-                MoneyReceiptsBLL mrBll = new MoneyReceiptsBLL();
-                List<InvoiceDetailsEntity> lstInvoiceDetails = mrBll.GetInvoiceDetails(invoiceTypeId);
-                GeneralFunctions.PopulateDropDownList(this.drpDwnInvoiceNo, lstInvoiceDetails, "InvoiceId", "InvoiceNo", true);
-                if (Session["CHARGEDETAILS"] != null)
-                {
-                    this.bindGridData(Session["CHARGEDETAILS"] as List<ChargeDetails>);
-                 
-                }
-                //this.populateChargeDetailsGrid(true);
-            }
+            //if ((sender as DropDownList) != null)
+            //{
+            //    int invoiceTypeId = Convert.ToInt32((sender as DropDownList).SelectedValue);
+            //    MoneyReceiptsBLL mrBll = new MoneyReceiptsBLL();
+            //    List<InvoiceDetailsEntity> lstInvoiceDetails = mrBll.GetInvoiceDetails(invoiceTypeId);
+            //    GeneralFunctions.PopulateDropDownList(this.drpDwnInvoiceNo, lstInvoiceDetails, "InvoiceId", "InvoiceNo", true);
+            //    if (Session["CHARGEDETAILS"] != null)
+            //    {
+            //        this.bindGridData(Session["CHARGEDETAILS"] as List<ChargeDetails>);
+
+            //    }
+            //    //this.populateChargeDetailsGrid(true);
+            //}
         }
 
         protected void drpDwnInvoiceNo_SelectedIndexChanged(object sender, EventArgs e)
         {
             if ((sender as DropDownList) != null)
             {
-                int invoiceTypeId = Convert.ToInt32(this.drpDwnInvoiceType.SelectedValue);
+                //int invoiceTypeId = Convert.ToInt32(this.drpDwnInvoiceType.SelectedValue);
                 long invoiceId = long.Parse((sender as DropDownList).SelectedValue);
-                this.populateInvoiceData(invoiceTypeId, invoiceId);
+                //this.populateInvoiceData(invoiceTypeId, invoiceId);
                 if (Session["CHARGEDETAILS"] != null)
                 {
-                    this.bindGridData(Session["CHARGEDETAILS"] as List<ChargeDetails>);
+                    //this.bindGridData(Session["CHARGEDETAILS"] as List<ChargeDetails>);
 
                 }
                 //this.populateChargeDetailsGrid(true);
@@ -491,166 +455,17 @@ namespace EMS.WebApp.Transaction
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            this.populateChargeDetailsGrid(false);
-            this.clearChargeDetails();
-        }
-
-        private void populateChargeDetailsGrid(bool selectionChanged)
-        {
-            mrSession = this.getMoneyReceiptObjectInstance(null);
-            if (mrSession.ChargeDetails == null)
-            {
-                if (selectionChanged) return;
-                mrSession.ChargeDetails = new List<ChargeDetails>();
-            }
-
-            int id = 0;
-            foreach (GridViewRow row in this.gvwAddEditMoneyReceipts.Rows)
-            {
-                if (!string.IsNullOrEmpty(row.Cells[0].Text))
-                {
-                    if (Convert.ToInt32(row.Cells[0].Text) > id)
-                    {
-                        id = Convert.ToInt32(row.Cells[0].Text);
-                    }
-                }
-            }
-
-            ChargeDetails chargeDetails = new ChargeDetails();
-            chargeDetails.ID = id; //((gvwAddEditMoneyReceipts.PageSize * gvwAddEditMoneyReceipts.PageIndex) + e.Row.RowIndex + 1).ToString();
-            chargeDetails.InvoiceId = long.Parse(this.drpDwnInvoiceNo.SelectedValue);
-            chargeDetails.InvoiceNo = this.drpDwnInvoiceNo.SelectedItem.Text;
-            chargeDetails.InvoiceTypeId = Convert.ToInt32(this.drpDwnInvoiceType.SelectedValue);
-            chargeDetails.InvoiceTypeName = this.drpDwnInvoiceType.SelectedItem.Text;
-            if(!string.IsNullOrEmpty(this.txtInvoiceDate.Text))
-            chargeDetails.InvoiceDate = Convert.ToDateTime(this.txtInvoiceDate.Text.Trim());
-            chargeDetails.InvoiceAmount = Convert.ToDecimal(string.IsNullOrEmpty(this.txtInvoiceAmount.Text.Trim()) ? "0" : this.txtInvoiceAmount.Text.Trim());
-            chargeDetails.ReceivedAmount = Convert.ToDecimal(string.IsNullOrEmpty(this.txtReceivedAmount.Text.Trim()) ? "0" : this.txtReceivedAmount.Text.Trim());
-            chargeDetails.TDS = Convert.ToDecimal(this.txtTDS.Text);
-            chargeDetails.CashAmount = Convert.ToDecimal(string.IsNullOrEmpty(this.txtCashAmount.Text.Trim()) ? "0" : this.txtCashAmount.Text.Trim());
-            chargeDetails.ChequeAmount = Convert.ToDecimal(string.IsNullOrEmpty(this.txtChequeAmount.Text.Trim()) ? "0" : this.txtChequeAmount.Text.Trim());
-            chargeDetails.CurrentReceivedAmount = chargeDetails.TDS + chargeDetails.CashAmount + chargeDetails.CurrentReceivedAmount;
-            chargeDetails.ChequeDetails = this.txtChequeDetails.Text;
-            mrSession.ChargeDetails.Add(chargeDetails);
-
-            this.bindGridData(mrSession.ChargeDetails);
-           
-
-           
-        }
-
-        private void bindGridData(List<ChargeDetails> lstChargeDetails)
-        {
-            this.gvwAddEditMoneyReceipts.DataSource = null;
-            this.gvwAddEditMoneyReceipts.DataSource = lstChargeDetails;
-            this.gvwAddEditMoneyReceipts.DataBind();
-            Session["CHARGEDETAILS"] = lstChargeDetails;
-
+            //this.populateChargeDetailsGrid(false);
+            //this.clearChargeDetails();
         }
 
 
         private void clearChargeDetails()
-        {
-            this.drpDwnInvoiceNo.SelectedIndex = 0;
-            this.drpDwnInvoiceType.SelectedIndex = 0;
+        {             //this.drpDwnInvoiceType.SelectedIndex = 0;
             this.txtInvoiceDate.Text = string.Empty;
             this.txtInvoiceAmount.Text = "0";
-            this.populateCurrentAndReceivedAmount(null);
             this.txtTDS.Text = "0";
-            this.txtCashAmount.Text = "0";
-            this.txtChequeAmount.Text = "0";
             this.txtCurrentAmount.Text = "0";
-            this.txtChequeDetails.Text = string.Empty;
-        }
-
-        protected void gvwAddEditMoneyReceipts_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 8);
-
-                ScriptManager sManager = ScriptManager.GetCurrent(this);
-                string slNo = ((gvwAddEditMoneyReceipts.PageSize * gvwAddEditMoneyReceipts.PageIndex) + e.Row.RowIndex + 1).ToString();
-                e.Row.Cells[0].Text = slNo;//Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ID")); ;
-                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceTypeName"));
-                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceNo"));
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceDate"));
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceAmount"));
-                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ReceivedAmount"));
-                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ReceivedAmount"));
-                e.Row.Cells[7].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "TDS"));
-                e.Row.Cells[8].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CashAmount"));
-                e.Row.Cells[9].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChequeAmount"));
-                e.Row.Cells[10].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChequeDetails"));
-                (e.Row.DataItem as ChargeDetails).ID = Convert.ToInt32(slNo);
-
-                ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
-                btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00013");
-                btnEdit.CommandArgument = slNo;// Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ID"));
-
-                //Delete link
-                ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
-                btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
-                btnRemove.CommandArgument = slNo;// Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ID")); 
-
-            }
-        }
-
-        protected void gvwAddEditMoneyReceipts_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "Edit")
-            {
-                // ChargeDetails chargeDetail = null;
-                foreach (GridViewRow row in (sender as GridView).Rows)
-                {
-                    if (row.Cells[0].Text == e.CommandArgument.ToString())
-                    {
-                        this.drpDwnInvoiceType.Items.FindByText(row.Cells[1].Text).Selected = true; //chargeDetail.InvoiceTypeId.ToString();
-                        this.drpDwnInvoiceType_SelectedIndexChanged(this.drpDwnInvoiceType, null);
-                        if(this.drpDwnInvoiceNo.Items.FindByText(row.Cells[2].Text) != null)
-                        this.drpDwnInvoiceNo.Items.FindByText(row.Cells[2].Text).Selected = true;
-                        this.txtInvoiceDate.Text = row.Cells[3].Text;
-                        this.txtInvoiceAmount.Text = row.Cells[4].Text;
-                        this.txtReceivedAmount.Text = row.Cells[5].Text;
-                        this.txtCurrentAmount.Text = row.Cells[6].Text;
-                        this.txtTDS.Text = row.Cells[7].Text;
-                        this.txtCashAmount.Text = row.Cells[8].Text;
-                        this.txtChequeAmount.Text = row.Cells[9].Text;
-                        this.txtChequeDetails.Text = row.Cells[7].Text;
-                        if (Session["CHARGEDETAILS"] != null)
-                        {
-                            this.bindGridData(Session["CHARGEDETAILS"] as List<ChargeDetails>);
-
-                        }
-                        //chargeDetail = row.DataItem as ChargeDetails;
-                    }
-
-                }
-                // ChargeDetails chargeDetail = (sender as GridView).Rows.Cells[0] as ChargeDetails;
-
-
-            }
-            else if (e.CommandName == "Remove")
-            {
-                if (Session["CHARGEDETAILS"] != null)
-                {
-                    List<ChargeDetails> lstChargeDetails = Session["CHARGEDETAILS"] as List<ChargeDetails>;
-                    lstChargeDetails.Remove(lstChargeDetails.FirstOrDefault(cd=>cd.ID==Convert.ToInt32(e.CommandArgument)));
-                    this.bindGridData(lstChargeDetails);
-                    ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00010") + "');</script>", false);
-
-                }
-                //GridViewRow rowDeleted = null;
-                //foreach (GridViewRow row in (sender as GridView).Rows)
-                //{
-                //    if (row.Cells[0].Text == e.CommandArgument.ToString())
-                //    {
-                //        rowDeleted = row;
-                //    }
-                //}
-
-                //(sender as GridView).DeleteRow(rowDeleted.RowIndex);
-            }
         }
 
         protected void txtBLNo_TextChanged(object sender, EventArgs e)
@@ -675,19 +490,19 @@ namespace EMS.WebApp.Transaction
         protected void txtCashAmount_TextChanged(object sender, EventArgs e)
         {
             // Update Current Amount.
-            this.populateCurrentAndReceivedAmount(sender);
+            //this.populateCurrentAndReceivedAmount(sender);
         }
 
         protected void txtTDS_TextChanged(object sender, EventArgs e)
         {
             //  Update Current Amount.
-            this.populateCurrentAndReceivedAmount(sender);
+            //this.populateCurrentAndReceivedAmount(sender);
         }
 
         protected void txtChequeAmount_TextChanged(object sender, EventArgs e)
         {
             // Update Current Amount.
-            this.populateCurrentAndReceivedAmount(sender);
+            //this.populateCurrentAndReceivedAmount(sender);
         }
 
         protected void txtCurrentAmount_TextChanged(object sender, EventArgs e)
@@ -695,21 +510,21 @@ namespace EMS.WebApp.Transaction
             // Update  received amount.
         }
 
-        private void populateCurrentAndReceivedAmount(object sender)
-        {
-            if (sender != null)
-                this.txtCurrentAmount.Text = (Convert.ToDecimal(this.txtCurrentAmount.Text) + Convert.ToDecimal((sender as TextBox).Text)).ToString();
 
-            mrSession = this.getMoneyReceiptObjectInstance(null);
-            if (mrSession.ChargeDetails != null)
-                this.txtReceivedAmount.Text = (mrSession.ChargeDetails.Sum(cd => cd.CurrentReceivedAmount) + (Convert.ToDecimal(this.txtCurrentAmount.Text))).ToString();
-            else
-                this.txtReceivedAmount.Text = (Convert.ToDecimal(this.txtCurrentAmount.Text)).ToString();
-        }
 
         protected void gvwAddEditMoneyReceipts_RowEditing(object sender, GridViewEditEventArgs e)
         {
             // do nothing.
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            //Response.Redirect("");
+        }
+
+        protected void txtReceivedAmount_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

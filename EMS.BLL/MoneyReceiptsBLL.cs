@@ -9,6 +9,7 @@ using EMS.Utilities;
 using System.Web;
 using EMS.Utilities.ResourceManager;
 using EMS.Utilities.Cryptography;
+using System.Data;
 
 namespace EMS.BLL
 {
@@ -221,5 +222,11 @@ namespace EMS.BLL
         }
 
         #endregion
+
+
+        public DataTable GetInvoiceDetailForMoneyReceipt(Int64 InvoiceId)
+        {
+            return MoneyReceiptDAL.GetInvoiceDetailForMoneyReceipt(InvoiceId);
+        }
     }
 }

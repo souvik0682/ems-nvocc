@@ -203,7 +203,22 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@MRNo", 40, mrNo);
                 oDq.RunActionQuery();
             }
+        }        
+
+        public static DataTable GetInvoiceDetailForMoneyReceipt(Int64 InvoiceId)
+        {
+            string strExecution = "[trn].[GetInvDetailForMoneyReceipt]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@InvoiceId", InvoiceId);
+                myDataTable = oDq.GetTable();
+            }
+            return myDataTable;
         }
+
+
 
         #endregion
 

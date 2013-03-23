@@ -34,6 +34,35 @@ namespace EMS.DAL
 
             return ds;
         }
+
+        public static DataSet GetImpBill(string BLRefNo, string dt)
+        {
+            DataSet ds = new DataSet();
+            dt = dt.Trim() == "" ? System.DateTime.Now.ToShortDateString() : dt;
+            DateTime dt_ = Convert.ToDateTime(dt);
+            int BLid = BLRefNo.Trim() == "" ? 0 : Convert.ToInt32(BLRefNo);
+            using (DbQuery dq = new DbQuery("prcRptimportbillingstatement"))
+            {
+                dq.AddIntegerParam("@BLRefNo", BLid);
+                dq.AddDateTimeParam("@billDate", dt_);
+                ds = dq.GetTables();
+            }
+
+            return ds;
+        }
+
+        public static string GetAddByCompName(string compname)
+        {
+            string data = string.Empty;
+            using (DbQuery dq = new DbQuery("prcGetAddByCompName"))
+            {
+                dq.AddVarcharParam("@compname", 100, compname);
+
+                data = Convert.ToString(dq.GetScalar());
+            }
+
+            return data;
+        }
     }
 
 }

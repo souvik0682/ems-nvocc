@@ -1067,12 +1067,12 @@ namespace EMS.WebApp.Transaction
             StringBuilder sbr = new StringBuilder();
             sbr.Append("<table style='width: 100%; border: none;' cellpadding='0' cellspacing='0'>");
             sbr.Append("<tr style='background-color:#328DC4;color:White; font-weight:bold;'>");
-            sbr.Append("<td style='width: 50px;padding-left:2px;'>MRNo.</td>");
+            sbr.Append("<td style='width: 70px;padding-left:2px;'>MRNo.</td>");
             sbr.Append("<td style='width: 80px;'>Date</td>");
-            sbr.Append("<td style='width: 80px;'>Cash</td>");
-            sbr.Append("<td style='width: 80px;'>Cheque</td>");
-            sbr.Append("<td style='width: 80px;'>TDS</td>");
-            sbr.Append("<td style='width: 50px;text-align:center;'>Edit</td>");
+            sbr.Append("<td style='width: 80px;text-align:right;'>Cash</td>");
+            sbr.Append("<td style='width: 80px;text-align:right;'>Cheque</td>");
+            sbr.Append("<td style='width: 80px;text-align:right;'>TDS</td>");
+            sbr.Append("<td style='width: 50px;text-align:center;'>Print</td>");
             sbr.Append("</tr>");
 
             for (int rowCount = 0; rowCount < dtDoc.Rows.Count; rowCount++)
@@ -1090,10 +1090,12 @@ namespace EMS.WebApp.Transaction
                     sbr.Append("<tr>");
                     sbr.Append("<td>" + MRNO + "</td>");
                     sbr.Append("<td>" + DATE + "</td>");
-                    sbr.Append("<td>" + CASH + "</td>");
-                    sbr.Append("<td>" + CHEQUE + "</td>");
-                    sbr.Append("<td>" + TDS + "</td>");
-                    sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
+                    sbr.Append("<td style='text-align:right;'>" + CASH + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + CHEQUE + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + TDS + "</td>");
+                    //sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
+                    sbr.Append("<td><a href='#'><img src='../Images/Print.png' /></a></td>");
+                    
                     sbr.Append("</tr>");
                 }
                 else // For Even Row
@@ -1101,10 +1103,11 @@ namespace EMS.WebApp.Transaction
                     sbr.Append("<tr style='background-color:#99CCFF;'>");
                     sbr.Append("<td>" + MRNO + "</td>");
                     sbr.Append("<td>" + DATE + "</td>");
-                    sbr.Append("<td>" + CASH + "</td>");
-                    sbr.Append("<td>" + CHEQUE + "</td>");
-                    sbr.Append("<td>" + TDS + "</td>");
-                    sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
+                    sbr.Append("<td style='text-align:right;'>" + CASH + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + CHEQUE + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + TDS + "</td>");
+                    //sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
+                    sbr.Append("<td><a href='#'><img src='../Images/Print.png' /></a></td>");
 
                     sbr.Append("</tr>");
                 }

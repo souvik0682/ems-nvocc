@@ -76,9 +76,11 @@ namespace EMS.WebApp.Transaction
             return moneyReceiptInstance;
 
         }
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            SaveMoneyReceipts();
+            if (Page.IsValid)
+                SaveMoneyReceipts();
         }
 
         protected void ddlRole_SelectedIndexChanged(object sender, EventArgs e)
@@ -252,7 +254,9 @@ namespace EMS.WebApp.Transaction
             txtInvoiceNo.Text = dt.Rows[0]["INVNO"].ToString();
             txtInvoiceType.Text = dt.Rows[0]["DOCTYPE"].ToString();
             txtInvoiceDate.Text = Convert.ToDateTime(dt.Rows[0]["INVDT"].ToString()).ToString("dd/MM/yyyy");
+            hdnInvDt.Value = Convert.ToDateTime(dt.Rows[0]["INVDT"].ToString()).ToString("MM/dd/yyyy");
             txtInvoiceAmount.Text = dt.Rows[0]["INVAMT"].ToString();
+            txtPendingAmt.Text = dt.Rows[0]["PENDING"].ToString();
 
 
 
@@ -323,92 +327,43 @@ namespace EMS.WebApp.Transaction
             MoneyReceiptsBLL mrBll = new MoneyReceiptsBLL();
             MoneyReceiptEntity moneyReceipt = this.getMoneyReceiptObjectInstance(null);
             int returnVal = 0;
-            List<MoneyReceiptEntity> moneyReceipts = BuildMoneyReceipts(moneyReceipt);
-            if ((bool)Session["ISADDED"] == true)
-            {
-                moneyReceipts.ForEach(mr => mr.IsAdded = 1);
-            }
-            //if (ValidateControls(user))
-            //{
-            returnVal = mrBll.SaveMoneyReceipts(moneyReceipts);
 
-            if (returnVal == 1)
-            {
-                //if (_uId == 0)
-                //    SendEmail(user);
+            moneyReceipt.InvoiceId = Convert.ToInt64(_InvoiceId);
+            moneyReceipt.LocationId = Convert.ToInt32(hdnLocationID.Value);
+            moneyReceipt.NvoccId = Convert.ToInt32(hdnNvoccId.Value);
+            moneyReceipt.ExportImport = Convert.ToChar(ddlExportImport.SelectedValue);
+            moneyReceipt.MRDate = Convert.ToDateTime(txtDate.Text);
+            moneyReceipt.ChequeNo = txtChqNo.Text;
+            moneyReceipt.ChequeBank = txtBankName.Text;
+            moneyReceipt.ChequeDate = Convert.ToDateTime(txtChqDate.Text);
 
-                Response.Redirect("~/Transaction/ManageMoneyReceipt.aspx");
-            }
-            else
+            if (!string.IsNullOrEmpty(txtCashAmt.Text))
+                moneyReceipt.CashPayment = Convert.ToDecimal(txtCashAmt.Text);
+
+            if (!string.IsNullOrEmpty(txtChequeAmt.Text))
+                moneyReceipt.ChequePayment = Convert.ToDecimal(txtChequeAmt.Text);
+
+            if (!string.IsNullOrEmpty(txtTDS.Text))
+                moneyReceipt.TdsDeducted = Convert.ToDecimal(txtTDS.Text);
+
+            moneyReceipt.UserAddedId = _userId;
+            moneyReceipt.UserEditedId = _userId;
+            moneyReceipt.UserAddedOn = DateTime.Now.Date;
+            moneyReceipt.UserEditedOn = DateTime.Now.Date;
+            moneyReceipt.Status = true;
+
+            switch (mrBll.SaveMoneyReceipt(moneyReceipt))
             {
-                GeneralFunctions.RegisterAlertScript(this, "Failed to save money receipt details.");
+                case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
+                    break;
+                case 1:
+                    Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(txtBLNo.Text));
+                    break;
             }
-            //}
+
         }
 
-        private List<MoneyReceiptEntity> BuildMoneyReceipts(MoneyReceiptEntity moneyReceipt)
-        {
-            List<MoneyReceiptEntity> lstMoneyReceipts = new List<MoneyReceiptEntity>();
 
-            if (moneyReceipt.ChargeDetails == null)
-            {
-                moneyReceipt.MRNo = this.txtMRNo.Text;
-                //moneyReceipt.MRDate = this.dtPckrMRDate.dt;
-                moneyReceipt.UserAddedId = _userId;
-                moneyReceipt.UserEditedId = _userId;
-                lstMoneyReceipts.Add(moneyReceipt);
-
-            }
-            else
-            {
-                foreach (ChargeDetails cd in moneyReceipt.ChargeDetails)
-                {
-                    MoneyReceiptEntity mrAdd = new MoneyReceiptEntity();
-                    mrAdd.MRNo = this.txtMRNo.Text;
-                    //mrAdd.MRDate = this.dtPckrMRDate.dt;
-                    mrAdd.UserAddedId = _userId;
-                    mrAdd.UserEditedId = _userId;
-                    mrAdd.InvoiceId = cd.InvoiceId;
-                    mrAdd.CashPayment = cd.CashAmount;
-                    mrAdd.ChequePayment = cd.ChequeAmount;
-                    mrAdd.TdsDeducted = cd.TDS;
-                    mrAdd.ChequeDetails = cd.ChequeDetails;
-                    lstMoneyReceipts.Add(mrAdd);
-                }
-            }
-
-            return lstMoneyReceipts;
-            //user.Id = _uId;
-            //user.Name = txtUserName.Text.Trim().ToUpper();
-            //user.Password = UserBLL.GetDefaultPassword();
-            //user.FirstName = txtFName.Text.Trim().ToUpper();
-            //user.LastName = txtLName.Text.Trim().ToUpper();
-            //user.EmailId = txtEmail.Text.Trim().ToUpper();
-            //user.UserRole.Id = Convert.ToInt32(ddlRole.SelectedValue);
-            //user.UserLocation.Id = Convert.ToInt32(ddlLoc.SelectedValue);
-
-            //IRole role = new UserBLL().GetRole(Convert.ToInt32(ddlRole.SelectedValue));
-
-            //user.UserRole.LocationSpecific = false;
-
-            //if (!ReferenceEquals(role, null))
-            //{
-            //    if (role.LocationSpecific.HasValue && role.LocationSpecific.Value)
-            //    {
-            //        user.UserRole.LocationSpecific = true;
-            //    }
-            //}
-
-            //if (ddlMultiLoc.SelectedValue == "1")
-            //    user.AllowMutipleLocation = true;
-            //else
-            //    user.AllowMutipleLocation = false;
-
-            //if (chkActive.Checked)
-            //    user.IsActive = true;
-            //else
-            //    user.IsActive = false;
-        }
 
         #endregion
 
@@ -525,6 +480,29 @@ namespace EMS.WebApp.Transaction
         protected void txtReceivedAmount_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void txtChequeAmt_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(txtChequeAmt.Text))
+            {
+                if (Convert.ToDecimal(txtChequeAmt.Text) > 0)
+                {
+                    txtChqNo.Enabled = true;
+                    txtBankName.Enabled = true;
+                    txtChqDate.Enabled = true;
+                }
+                else
+                {
+                    txtChqNo.Enabled = false;
+                    txtBankName.Enabled = false;
+                    txtChqDate.Enabled = false;
+
+                    txtChqNo.Text = string.Empty;
+                    txtBankName.Text = string.Empty;
+                    txtChqDate.Text = string.Empty;
+                }
+            }
         }
     }
 }

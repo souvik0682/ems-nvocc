@@ -826,7 +826,7 @@
                                 TargetControlID="btnTemp11" BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseMoneyReceived">
                             </cc1:ModalPopupExtender>
                             <asp:Panel ID="pnlMoneyReceived" runat="server" Style="display: none;">
-                                <div style="height: 300; width: 450px;">
+                                <div style="height: 300; width: 600px;overflow:auto;">
                                     <div style="background-color: #328DC4; padding-top: 5px;">
                                         <div style="width: 89%; text-align: left; font-weight: bold; color: White; font-size: 12pt;
                                             padding-left: 15px; float: left;">
@@ -837,7 +837,7 @@
                                         <div style="clear: both;">
                                         </div>
                                     </div>
-                                    <div id="dvMoneyReceived" runat="server" style="width: 100%; height: 200px; overflow: auto;
+                                    <div id="dvMoneyReceived" runat="server" style="width: 100%; height: 300px; overflow: auto;
                                         background-color: White; padding-top: 15px; text-align: center;">
                                         Please enter B/L No.
                                     </div>
@@ -888,7 +888,7 @@
                                                 <%# Eval("ReceivedAmt")%></a>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Location">
+                                    <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader_num" />
                                         <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Right" />
                                         <HeaderTemplate>
@@ -897,7 +897,7 @@
                                             <a href="#">N/A</a>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Name">
+                                    <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader_center" />
                                         <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" />
                                         <HeaderTemplate>
@@ -907,17 +907,18 @@
                                                 <img src="../Images/Print.png" /></a>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Address">
+                                    <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader_center" />
                                         <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" />
                                         <HeaderTemplate>
                                             Add Money Recpt.</HeaderTemplate>
                                         <ItemTemplate>
-                                            <a runat="server" href='<%# "AddEditMoneyReceipts.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'>
-                                                <img alt="Add" src="../Images/ADD.JPG" /></a>
+                                           <a id="aMoneyRecpt" runat="server" href='<%# "AddEditMoneyReceipts.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'
+                                            style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Ammount")) ? "display:block;" : "display:none;" %>'>
+                                            <img alt="Add" src="../Images/ADD.JPG" /></a>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Address">
+                                    <asp:TemplateField >
                                         <HeaderStyle CssClass="gridviewheader_center" />
                                         <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Center" />
                                         <HeaderTemplate>

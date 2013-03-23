@@ -43,19 +43,32 @@ namespace EMS.Entity
         private int isEdited;
         private int isDeleted;
         private string chequeDetails;
+        private char exportImport;
+        private bool status;
 
         public string ChequeDetails
         {
             get { return chequeDetails; }
             set { chequeDetails = value; }
         }
+        public char ExportImport
+        {
+            get { return exportImport; }
+            set { exportImport = value; }
+        }
+
+        public bool Status
+        {
+            get { return status; }
+            set { status = value; }
+        }
         #endregion
 
         #region Constructor
 
         public MoneyReceiptEntity()
-        { 
-            
+        {
+
         }
 
         public MoneyReceiptEntity(DataTableReader reader)
@@ -81,8 +94,8 @@ namespace EMS.Entity
             this.chequePayment = Convert.ToDecimal(reader["ChequePayment"]);
             this.tdsDeducted = Convert.ToDecimal(reader["TDSDeducted"]);
             this.chequeBank = reader["ChequeBank"].ToString();
-            if(!reader.IsDBNull(reader.GetOrdinal("ChequeDate")))
-            this.chequeDate = Convert.ToDateTime(reader["ChequeDate"]);
+            if (!reader.IsDBNull(reader.GetOrdinal("ChequeDate")))
+                this.chequeDate = Convert.ToDateTime(reader["ChequeDate"]);
             this.chequeNo = reader["ChequeNo"].ToString();
             this.MRAmount = Convert.ToDecimal(reader["MRAmount"]);
             this.userAddedId = Convert.ToInt32(reader["UserAdded"]);
@@ -149,6 +162,7 @@ namespace EMS.Entity
         public int LocationId
         {
             get { return locationId; }
+            set { locationId = value; }
         }
 
         public string LocationName
@@ -159,6 +173,7 @@ namespace EMS.Entity
         public int NvoccId
         {
             get { return nvoccId; }
+            set { nvoccId = value; }
         }
 
         public string NvoccName
@@ -235,11 +250,13 @@ namespace EMS.Entity
         public DateTime? UserAddedOn
         {
             get { return userAddedOn; }
+            set { userAddedOn = value; }
         }
 
         public DateTime? UserEditedOn
         {
             get { return userEditedOn; }
+            set { userEditedOn = value; }
         }
 
         public int IsAdded
@@ -282,7 +299,7 @@ namespace EMS.Entity
         public string MRNo { get; set; }
         public string BLNo { get; set; }
         public long InvoiceId { get; set; }
-        public int InvoiceTypeId{ get; set; }
+        public int InvoiceTypeId { get; set; }
         public string InvoiceTypeName { get; set; }
         public string InvoiceNo { get; set; }
         public DateTime? InvoiceDate { get; set; }
@@ -311,7 +328,7 @@ namespace EMS.Entity
         public string InvoiceNo { get; set; }
         public DateTime? InvoiceDate { get; set; }
         public decimal InvoiceAmount { get; set; }
-    
+
     }
 
     public class BLInformations
@@ -325,7 +342,7 @@ namespace EMS.Entity
         public int ExportImport { get; set; }
 
         public BLInformations(DataTableReader reader)
-        { 
+        {
             this.BLId = long.Parse(reader["BLId"].ToString());
             this.BLNo = reader["BLNumber"].ToString();
             this.LocationId = Convert.ToInt32(reader["LocationId"]);
@@ -334,6 +351,6 @@ namespace EMS.Entity
             this.NVOCCName = reader["NVOCCName"].ToString();
             this.ExportImport = Convert.ToInt32(reader["ExportImport"]);
         }
-    
+
     }
 }

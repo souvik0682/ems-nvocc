@@ -690,31 +690,38 @@ Cash /Deposit W.R No</Value>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.25in</Height>
+              <Height>0.1875in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TranShipment">
+                    <Textbox Name="TranShipment1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=First(Fields!TranShipment.Value, "DataSet1")</Value>
+                              <Value>=Fields!TranShipment.Value</Value>
                               <Style>
-                                <FontSize>7pt</FontSize>
+                                <FontFamily>Lucida Console</FontFamily>
+                                <FontSize>6pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>TranShipment</rd:DefaultName>
+                      <rd:DefaultName>TranShipment1</rd:DefaultName>
                       <Style>
                         <Border>
-                          <Style>None</Style>
+                          <Style>Solid</Style>
                         </Border>
+                        <LeftBorder>
+                          <Style>None</Style>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Style>None</Style>
+                        </RightBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -731,28 +738,34 @@ Cash /Deposit W.R No</Value>
                 <TablixCell />
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="col4">
+                    <Textbox Name="col41">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=First(Fields!col4.Value, "DataSet1")</Value>
+                              <Value>=Fields!col4.Value</Value>
                               <Style>
-                                <FontSize>7pt</FontSize>
+                                <FontFamily>Lucida Console</FontFamily>
+                                <FontSize>6pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>col4</rd:DefaultName>
-                      <ZIndex>15</ZIndex>
+                      <rd:DefaultName>col41</rd:DefaultName>
                       <Style>
                         <Border>
-                          <Style>None</Style>
+                          <Style>Solid</Style>
                         </Border>
+                        <LeftBorder>
+                          <Style>None</Style>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Style>None</Style>
+                        </RightBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1213,16 +1226,17 @@ Cash /Deposit W.R No</Value>
               <KeepWithGroup>After</KeepWithGroup>
             </TablixMember>
             <TablixMember>
-              <KeepWithGroup>After</KeepWithGroup>
-            </TablixMember>
-            <TablixMember>
               <Group Name="Details" />
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
         <Left>0.08588in</Left>
-        <Height>1.21875in</Height>
+        <Height>1.15625in</Height>
         <Width>10.65198in</Width>
         <Style>
           <Border>
@@ -1251,7 +1265,7 @@ Cash /Deposit W.R No</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.37153in</Top>
+        <Top>1.22153in</Top>
         <Left>0.11899in</Left>
         <Height>0.15625in</Height>
         <Width>1.28634in</Width>
@@ -1298,7 +1312,7 @@ Cash /Deposit W.R No</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.37153in</Top>
+        <Top>1.22153in</Top>
         <Left>2.79328in</Left>
         <Height>0.15625in</Height>
         <Width>0.68704in</Width>
@@ -1334,7 +1348,7 @@ Cash /Deposit W.R No</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.37153in</Top>
+        <Top>1.22153in</Top>
         <Left>1.98379in</Left>
         <Height>0.15625in</Height>
         <Width>0.23532in</Width>
@@ -1366,7 +1380,7 @@ Cash /Deposit W.R No</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>itemNo1</rd:DefaultName>
-        <Top>1.37153in</Top>
+        <Top>1.22153in</Top>
         <Left>1.43865in</Left>
         <Height>0.15625in</Height>
         <Width>0.54514in</Width>
@@ -1398,7 +1412,7 @@ Cash /Deposit W.R No</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>itemNo1</rd:DefaultName>
-        <Top>1.37153in</Top>
+        <Top>1.22153in</Top>
         <Left>2.21911in</Left>
         <Height>0.15625in</Height>
         <Width>0.57417in</Width>
@@ -1430,7 +1444,7 @@ Cash /Deposit W.R No</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>col3</rd:DefaultName>
-        <Top>1.38125in</Top>
+        <Top>1.23125in</Top>
         <Left>3.48032in</Left>
         <Height>0.15625in</Height>
         <Width>0.61727in</Width>
@@ -1477,7 +1491,7 @@ Cash /Deposit W.R No</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.38125in</Top>
+        <Top>1.23125in</Top>
         <Left>4.09759in</Left>
         <Height>0.15625in</Height>
         <Width>4.11538in</Width>
@@ -1539,7 +1553,7 @@ Cash /Deposit W.R No</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.5375in</Top>
+        <Top>1.3875in</Top>
         <Left>0.11899in</Left>
         <Height>0.15521in</Height>
         <Width>8.09398in</Width>
@@ -1571,7 +1585,7 @@ Cash /Deposit W.R No</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.32188in</Top>
+        <Top>1.24688in</Top>
         <Left>8.29003in</Left>
         <Height>0.25in</Height>
         <Width>0.30717in</Width>
@@ -1603,7 +1617,7 @@ Cash /Deposit W.R No</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>company</rd:DefaultName>
-        <Top>1.32188in</Top>
+        <Top>1.24688in</Top>
         <Left>8.5972in</Left>
         <Height>0.25in</Height>
         <Width>2.03125in</Width>
@@ -1639,7 +1653,7 @@ Cash /Deposit W.R No</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.58576in</Top>
+        <Top>1.51076in</Top>
         <Left>8.29003in</Left>
         <Height>0.25in</Height>
         <Width>2.33842in</Width>
@@ -1671,7 +1685,7 @@ Cash /Deposit W.R No</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>1.69826in</Top>
+        <Top>1.54826in</Top>
         <Left>0.13287in</Left>
         <Height>0.13542in</Height>
         <Width>0.46806in</Width>
@@ -1705,7 +1719,7 @@ Cash /Deposit W.R No</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox28</rd:DefaultName>
-        <Top>1.65938in</Top>
+        <Top>1.50938in</Top>
         <Left>0.60093in</Left>
         <Height>0.16388in</Height>
         <Width>4.15994in</Width>

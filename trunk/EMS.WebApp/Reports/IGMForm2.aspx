@@ -19,7 +19,7 @@
     <center>
 
  <div id="headercaption">
-         C A R G O    D E C L A R A T I O N </div>
+         C A R G O &nbsp;   D E C L A R A T I O N </div>
     <center>
         <fieldset style="width:800px; ">
             <legend> Form-II Cargo Declaration </legend>

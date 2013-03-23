@@ -91,10 +91,16 @@ namespace EMS.BLL
             return MoneyReceiptDAL.GetInvoiceDetails(invoiceTypeId);
         }
 
-        public int SaveMoneyReceipts(List<MoneyReceiptEntity> moneyReceipts)
-        {
-            return MoneyReceiptDAL.SaveMoneyReceipts(moneyReceipts);
+        //public int SaveMoneyReceipts(List<MoneyReceiptEntity> moneyReceipts)
+        //{
+        //    return MoneyReceiptDAL.SaveMoneyReceipts(moneyReceipts);
         
+        //}
+
+        public int SaveMoneyReceipt(MoneyReceiptEntity moneyReceipt)
+        {
+            return MoneyReceiptDAL.SaveMoneyReceipt(moneyReceipt);
+
         }
 
         public void DeleteMoneyReceipts(string MRNo)

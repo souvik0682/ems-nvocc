@@ -147,48 +147,38 @@ namespace EMS.DAL
 
         public static int SaveMoneyReceipt(MoneyReceiptEntity moneyReceipt)
         {
-            string strExecution = "[dbo].[prcAddEditMoneyReceipt]";
+            string strExecution = "[trn].[AddMoneyReceipt]";
             int result = 0;
+            string MrNo = string.Empty;
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 if (moneyReceipt.IsAdded == 1)
                 {
-                    oDq.AddBigIntegerParam("@InvoiceID", moneyReceipt.InvoiceId);
-                    oDq.AddBigIntegerParam("@MoneyRcptID", 0); //Just to avoid exception. Not actually in use.
-                    oDq.AddVarcharParam("@MRNo", 30, moneyReceipt.MRNo);
-                    oDq.AddDateTimeParam("@MRDate", moneyReceipt.MRDate);
-                    oDq.AddDecimalParam("@CashPayment", 14, 2, moneyReceipt.CashPayment);
-                    oDq.AddDecimalParam("@ChequePayment", 14, 2, moneyReceipt.ChequePayment);
-                    oDq.AddVarcharParam("@ChequeDetails", 50, moneyReceipt.ChequeBank);
-                    oDq.AddDecimalParam("@TDSDeducted", 14, 2, moneyReceipt.TdsDeducted);
-                    oDq.AddIntegerParam("@UserAdded", moneyReceipt.UserAddedId);
-                    oDq.AddIntegerParam("@UserLastEdited", moneyReceipt.UserEditedId);
-                    oDq.AddIntegerParam("@IsAdded", moneyReceipt.IsAdded);
-                    oDq.AddDateTimeParam("@AddedOn", DateTime.Now);
-                    oDq.AddIntegerParam("@Result", result, QueryParameterDirection.Output);
-                    oDq.RunActionQuery();
-                    result = Convert.ToInt32(oDq.GetParaValue("@Result"));
-                }
-                else
-                {
-                    oDq.AddBigIntegerParam("@InvoiceID", moneyReceipt.InvoiceId);
                     oDq.AddBigIntegerParam("@MoneyRcptID", moneyReceipt.MoneyReceiptId);
-                    oDq.AddVarcharParam("@MRNo", 30, moneyReceipt.MRNo);
-                    oDq.AddDateTimeParam("@MRDate", moneyReceipt.MRDate);
-                    oDq.AddDecimalParam("@CashPayment", 14, 2, moneyReceipt.CashPayment);
-                    oDq.AddDecimalParam("@ChequePayment", 14, 2, moneyReceipt.ChequePayment);
-                    oDq.AddVarcharParam("@ChequeDetails", 50, moneyReceipt.ChequeBank);
-                    oDq.AddDecimalParam("@TDSDeducted", 14, 2, moneyReceipt.TdsDeducted);
+                    oDq.AddBigIntegerParam("@InvoiceID", moneyReceipt.InvoiceId); //Just to avoid exception. Not actually in use.
+                    oDq.AddIntegerParam("@LocationID", moneyReceipt.LocationId);
+                    oDq.AddIntegerParam("@NVOCCID", moneyReceipt.NvoccId);
+                    oDq.AddCharParam("@ExportImport",2, moneyReceipt.ExportImport);
+                    oDq.AddDateTimeParam("@MRDate",moneyReceipt.MRDate);                    
+                    oDq.AddNVarcharParam("@ChequeNo", moneyReceipt.ChequeNo);
+                    oDq.AddDateTimeParam("@ChequeDate", moneyReceipt.ChequeDate);
+                    oDq.AddNVarcharParam("@ChequeBank", moneyReceipt.ChequeBank);
+                    oDq.AddDecimalParam("@CashPayment", 12, 2, moneyReceipt.CashPayment);
+                    oDq.AddDecimalParam("@ChequePayment", 12, 2, moneyReceipt.ChequePayment);
+                    oDq.AddDecimalParam("@TDSDeducted", 12, 2, moneyReceipt.TdsDeducted);
                     oDq.AddIntegerParam("@UserAdded", moneyReceipt.UserAddedId);
                     oDq.AddIntegerParam("@UserLastEdited", moneyReceipt.UserEditedId);
-                    oDq.AddIntegerParam("@IsAdded", moneyReceipt.IsAdded);
-                    oDq.AddDateTimeParam("@AddedOn", DateTime.Now);
+                    oDq.AddDateTimeParam("@AddedOn", moneyReceipt.UserAddedOn);
+                    oDq.AddDateTimeParam("@EditedOn", moneyReceipt.UserEditedOn);
+                    oDq.AddBooleanParam("@MRStatus", moneyReceipt.Status);
                     oDq.AddIntegerParam("@Result", result, QueryParameterDirection.Output);
+                    oDq.AddNVarcharParam("@MRNo",40, MrNo, QueryParameterDirection.Output);
                     oDq.RunActionQuery();
                     result = Convert.ToInt32(oDq.GetParaValue("@Result"));
-
+                    MrNo = Convert.ToString(oDq.GetParaValue("@MRNo"));
                 }
+
             }
 
             return result;
@@ -203,7 +193,7 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@MRNo", 40, mrNo);
                 oDq.RunActionQuery();
             }
-        }        
+        }
 
         public static DataTable GetInvoiceDetailForMoneyReceipt(Int64 InvoiceId)
         {
@@ -217,6 +207,7 @@ namespace EMS.DAL
             }
             return myDataTable;
         }
+
 
 
 

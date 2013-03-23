@@ -148,7 +148,7 @@ namespace EMS.WebApp.Equipment
 
 
 
-            if (DisableControls() == 1 && txtAppUser.Text.Trim() == "")//ddlUser.SelectedIndex == 0)
+            if (DisableControls() == 1 && txtAppUser.Text.Trim() == "" && (txtLabourApp.Text!="" || txtMaterialApp.Text!="") )//ddlUser.SelectedIndex == 0)
             {
                 lblError.Text = "Approver name cannot be blank";
                 return;
@@ -185,7 +185,7 @@ namespace EMS.WebApp.Equipment
             iequip.Damaged = chkDamage.Checked;
 
 
-            if (iequip.RepLabourBilled <= iequip.RepLabourAppr || iequip.RepMaterialBilled <= iequip.RepMaterialAppr)
+            if (iequip.RepLabourBilled < iequip.RepLabourAppr || iequip.RepMaterialBilled < iequip.RepMaterialAppr)
             {
                 // GeneralFunctions.RegisterAlertScript(this, "Approved amount cannot be greater then Billable amount");
                 lblError.Text = "Approved amount cannot be greater then Billable amount";

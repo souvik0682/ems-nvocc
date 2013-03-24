@@ -10,13 +10,14 @@ namespace EMS.DAL
    public class DALReport
     {
 
-        public static System.Data.DataSet GetMoneyRcptDetails(string invNo)
+        public static System.Data.DataSet GetMoneyRcptDetails(Int64 moneyRecptNo)
         {
             DataSet ds = new DataSet();
 
             using (DbQuery dq = new DbQuery("prcRptMoneyRcpt"))
             {
-                dq.AddVarcharParam("@invNo", 20, invNo);
+                //dq.AddVarcharParam("@invNo", 20, invNo);
+                dq.AddBigIntegerParam("@MrId", moneyRecptNo);
                 ds = dq.GetTables();
             }
             return ds;

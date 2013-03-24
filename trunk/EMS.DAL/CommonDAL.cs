@@ -707,7 +707,19 @@ namespace EMS.DAL
 
             return myDataTable;
         }
-       
+        public static DataTable GetInvoiceByBLNo(string BLNo)
+        {
+            string strExecution = "rptPrcGetInvoice";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@LineBLNo", 60, BLNo);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
         #endregion
     }
 }

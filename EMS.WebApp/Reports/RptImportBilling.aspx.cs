@@ -35,6 +35,7 @@ namespace EMS.WebApp.Reports
               
             }
 
+
         }
 
         private void CheckUserAccess()
@@ -81,6 +82,7 @@ namespace EMS.WebApp.Reports
 
         private void GenerateReport()
         {
+            lblMsg.Text = "";
             ReportBLL cls = new ReportBLL();
 
             LocalReportManager reportManager = new LocalReportManager(rptViewer, "ImpBilling", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
@@ -116,9 +118,9 @@ namespace EMS.WebApp.Reports
                 rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", ds.Tables[0]));
                 rptViewer.LocalReport.Refresh();
             }
-            catch
+            catch(Exception ex)
             {
-
+                lblMsg.Text = ex.Message;
 
             }
 

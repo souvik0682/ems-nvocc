@@ -120,7 +120,8 @@
 
                            <td style="text-align:right; width:12%; vertical-align:middle">
                     <asp:Button ID="btnSave" runat="server" onclick="btnSave_Click" Text="Show"   ValidationGroup="Save" />
-                    &nbsp;&nbsp;
+                               
+&nbsp;
                 </td>
                        
                     </tr>
@@ -129,9 +130,9 @@
             </asp:UpdatePanel>
         </fieldset>
     </center>
+    &nbsp;<asp:Label ID="lblMsg" runat="server" Text=""></asp:Label>
     <div style="padding-top: 10px;">
-        <div style="padding-left: 5px; width: 98%;">
-        <asp:Label ID="lblMsg" runat="server" Text=""></asp:Label>
+        <div style="padding-left: 5px; width: 98%;visibility:visible">
             <rsweb:ReportViewer ID="rptViewer" runat="server" Width="100%" Font-Names="Verdana"
                 Font-Size="8pt" InteractiveDeviceInfos="(Collection)" WaitMessageFont-Names="Verdana"
                 WaitMessageFont-Size="14pt">

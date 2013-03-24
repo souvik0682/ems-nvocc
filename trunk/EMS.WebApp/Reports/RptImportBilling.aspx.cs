@@ -91,8 +91,10 @@ namespace EMS.WebApp.Reports
 
             string BlRefNo = ((TextBox)autoComplete1.FindControl("txtBlNo")).Text;
             DataSet ds = EMS.BLL.BLLReport.GetImpBill(hdnBLId.Value,txtdtBill.Text);
-            decimal gamt1 = Convert.ToDecimal(ds.Tables[0].Compute("Sum(col1)", ""));
-            decimal MRamt = Convert.ToDecimal(ds.Tables[0].Compute("Sum(col2)", ""));
+            decimal gamt1 = 0;
+            decimal.TryParse(Convert.ToString(ds.Tables[0].Compute("Sum(col1)", "")),out gamt1);
+            decimal MRamt = 0;
+            decimal.TryParse(Convert.ToString(ds.Tables[0].Compute("Sum(col2)", "")),out gamt1);
             decimal famt = gamt1 - MRamt;
             string finalAmt = string.Empty;
             if (famt > 0)
@@ -117,12 +119,15 @@ namespace EMS.WebApp.Reports
                 rptViewer.LocalReport.SetParameters(new ReportParameter("NumToWords", numToWords));
                 rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", ds.Tables[0]));
                 rptViewer.LocalReport.Refresh();
+               
             }
             catch(Exception ex)
             {
                 lblMsg.Text = ex.Message;
 
             }
+
+            lblMsg.Text = rptViewer.LocalReport.ReportPath+"dgfdfgdf";
 
         }
 

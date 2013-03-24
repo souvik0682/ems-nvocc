@@ -16,6 +16,11 @@ namespace EMS.BLL
 {
     public class CommonBLL
     {
+        public static void SavePrintCount(string blNo)
+        {
+            CommonDAL.SavePrintCount(blNo);
+        }
+
         #region Common
 
         public static DataTable GetVoyageList(string prefixText)
@@ -440,6 +445,28 @@ namespace EMS.BLL
         {
             return CommonDAL.GetBLHeaderByBLNo(LocationId);
         }
+        #endregion
+
+        #region Report
+        public static DataTable GetLine(string Location)
+        {
+           
+            return CommonDAL.GetLine(Location);
+        }
+        public static DataTable GetVessels(string Line)
+        {
+            return CommonDAL.GetVessels(Line);
+        }
+
+        public static DataTable GetVoyages(string Vessel)
+        {
+            return CommonDAL.GetVoyages(Vessel);
+        }
+        public static DataTable GetBLNo(string line, string Vessel, string Voyage)
+        {
+            return CommonDAL.GetBLNo(line, Vessel, Voyage);
+        }
+
         #endregion
     }
 }

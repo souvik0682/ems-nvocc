@@ -38,18 +38,9 @@ namespace EMS.WebApp.Transaction
 
             if (!IsPostBack)
             {
-                //this.getMoneyReceiptObjectInstance(null);
-
                 LoadData();
-
             }
 
-
-            //if (Session["CHARGEDETAILS"] != null)
-            //{
-            //    this.gvwAddEditMoneyReceipts.DataSource = Session["CHARGEDETAILS"] as List<ChargeDetails>;
-            //    this.gvwAddEditMoneyReceipts.DataBind();
-            //}
         }
 
         private MoneyReceiptEntity getMoneyReceiptObjectInstance(MoneyReceiptEntity moneyReceipt)
@@ -79,8 +70,11 @@ namespace EMS.WebApp.Transaction
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid)
+            //if (Page.IsValid)
+            //if (!string.IsNullOrEmpty(txtCurrentAmount.Text))
                 SaveMoneyReceipts();
+            //else
+            //    rfvNetAmt.Enabled = true;
         }
 
         protected void ddlRole_SelectedIndexChanged(object sender, EventArgs e)
@@ -258,6 +252,8 @@ namespace EMS.WebApp.Transaction
             txtInvoiceAmount.Text = dt.Rows[0]["INVAMT"].ToString();
             txtPendingAmt.Text = dt.Rows[0]["PENDING"].ToString();
 
+            hdnLocationID.Value = dt.Rows[0]["LOCID"].ToString();
+            hdnNvoccId.Value = dt.Rows[0]["LINEID"].ToString();
 
 
 
@@ -335,7 +331,8 @@ namespace EMS.WebApp.Transaction
             moneyReceipt.MRDate = Convert.ToDateTime(txtDate.Text);
             moneyReceipt.ChequeNo = txtChqNo.Text;
             moneyReceipt.ChequeBank = txtBankName.Text;
-            moneyReceipt.ChequeDate = Convert.ToDateTime(txtChqDate.Text);
+            if (!string.IsNullOrEmpty(txtChqDate.Text))
+                moneyReceipt.ChequeDate = Convert.ToDateTime(txtChqDate.Text);
 
             if (!string.IsNullOrEmpty(txtCashAmt.Text))
                 moneyReceipt.CashPayment = Convert.ToDecimal(txtCashAmt.Text);
@@ -474,7 +471,7 @@ namespace EMS.WebApp.Transaction
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            //Response.Redirect("");
+            Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(txtBLNo.Text));
         }
 
         protected void txtReceivedAmount_TextChanged(object sender, EventArgs e)

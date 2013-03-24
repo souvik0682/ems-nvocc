@@ -26,26 +26,22 @@
                     <ContentTemplate>--%>
                 <table border="0" cellpadding="2" cellspacing="3" width="100%">
                     <tr>
-                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                            <ContentTemplate>
-                                <td style="width: 9%;">
-                                    Location :
-                                </td>
-                                <td width="6%">
-                                    <asp:DropDownList ID="ddlLocation" runat="server" Width="70" AutoPostBack="True"
-                                        OnSelectedIndexChanged="LocationLine_Changed">
-                                    </asp:DropDownList>
-                                </td>
-                                <td style="width: 5%;">
-                                    Line :
-                                </td>
-                                <td style="width: 5%;">
-                                    <asp:DropDownList ID="ddlLine" runat="server" Width="100" AutoPostBack="True" OnSelectedIndexChanged="LocationLine_Changed"
-                                        Enabled="false">
-                                    </asp:DropDownList>
-                                </td>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
+                        <td style="width: 9%;">
+                            Location :
+                        </td>
+                        <td width="6%">
+                            <asp:DropDownList ID="ddlLocation" runat="server" Width="70" AutoPostBack="True"
+                                OnSelectedIndexChanged="LocationLine_Changed">
+                            </asp:DropDownList>
+                        </td>
+                        <td style="width: 5%;">
+                            Line :
+                        </td>
+                        <td style="width: 5%;">
+                            <asp:DropDownList ID="ddlLine" runat="server" Width="100" AutoPostBack="True" OnSelectedIndexChanged="LocationLine_Changed"
+                                Enabled="false">
+                            </asp:DropDownList>
+                        </td>
                         <td style="width: 9%;">
                             B/L No :
                         </td>
@@ -233,8 +229,8 @@
                                             </tr>
                                             <tr>
                                                 <td width="50%" style="padding-top: 10px;" colspan="2">
-                                                    <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/Images/p1.jpeg" ToolTip="Print Examination Do"
-                                                        Height="45" Width="45" AlternateText="Print Freight to collect" OnClick="imgBtnExaminationDo_Click" />
+                                                    <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/Images/p1.jpeg" ToolTip="Print Freight to collect"
+                                                        Height="45" Width="45" AlternateText="Print Freight to collect" />
                                                     <br />
                                                     Print Freight to collect
                                                 </td>
@@ -258,7 +254,7 @@
                                 <td>
                                     <asp:TextBox ID="txtFreightToCollect" runat="server" Width="75" Enabled="false"></asp:TextBox>
                                 </td>
-                                <td align="right" style="border-right: Solid 1px Black;">
+                                <td align="right" style="border-right: Solid 1px Black; padding-right: 5px;">
                                     <asp:LinkButton ID="lnkGenInvFreightToCollect" runat="server" Text="Generate Invoice"
                                         ForeColor="Blue" Enabled="false" OnClick="lnkGenInvFreightToCollect_Click"></asp:LinkButton>
                                 </td>
@@ -367,7 +363,7 @@
                                         <asp:ListItem Text="Factory" Value="2"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
-                                <td align="right" style="border-right: Solid 1px Black;">
+                                <td align="right" style="border-right: Solid 1px Black; padding-right: 5px;">
                                     <asp:LinkButton ID="lnkGenerateInvoiceDo" runat="server" Text="Generate Invoice"
                                         ForeColor="Blue" Enabled="false" OnClick="lnkGenerateInvoiceDo_Click"></asp:LinkButton>
                                 </td>
@@ -467,7 +463,7 @@
                                         TargetControlID="txtValidityDate" Format="dd/MM/yyyy">
                                     </cc1:CalendarExtender>
                                 </td>
-                                <td align="right" style="border-right: Solid 1px Black;">
+                                <td align="right" style="border-right: Solid 1px Black; padding-right: 5px;">
                                     <asp:LinkButton ID="lnkGenerateInvoiceDOE" runat="server" Text="Generate Invoice"
                                         ForeColor="Blue" Enabled="false" OnClick="lnkGenerateInvoiceDOE_Click"></asp:LinkButton>
                                 </td>
@@ -548,7 +544,7 @@
                                         TargetControlID="txtExtensionForDetention" Format="dd/MM/yyyy">
                                     </cc1:CalendarExtender>
                                 </td>
-                                <td align="right" style="border-right: Solid 1px Black;">
+                                <td align="right" style="border-right: Solid 1px Black; padding-right: 5px;">
                                     <asp:LinkButton ID="lnkGenerateInvoiceSlotExtension" runat="server" Text="Generate Invoice"
                                         ForeColor="Blue" Enabled="false" OnClick="lnkGenerateInvoiceSlotExtension_Click"></asp:LinkButton>
                                 </td>
@@ -664,7 +660,7 @@
                                         TargetControlID="txtExtensionForPGR" Format="dd/MM/yyyy">
                                     </cc1:CalendarExtender>
                                 </td>
-                                <td align="right" style="border-right: Solid 1px Black;">
+                                <td align="right" style="border-right: Solid 1px Black; padding-right: 5px;">
                                     <asp:LinkButton ID="lnkGenInvPGR" runat="server" Text="Generate Invoice" ForeColor="Blue"
                                         Enabled="false" OnClick="lnkGenInvPGR_Click"></asp:LinkButton>
                                 </td>
@@ -826,7 +822,7 @@
                                 TargetControlID="btnTemp11" BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseMoneyReceived">
                             </cc1:ModalPopupExtender>
                             <asp:Panel ID="pnlMoneyReceived" runat="server" Style="display: none;">
-                                <div style="height: 300; width: 600px;overflow:auto;">
+                                <div style="height: 300; width: 600px; overflow: auto;">
                                     <div style="background-color: #328DC4; padding-top: 5px;">
                                         <div style="width: 89%; text-align: left; font-weight: bold; color: White; font-size: 12pt;
                                             padding-left: 15px; float: left;">
@@ -913,12 +909,12 @@
                                         <HeaderTemplate>
                                             Add Money Recpt.</HeaderTemplate>
                                         <ItemTemplate>
-                                           <a id="aMoneyRecpt" runat="server" href='<%# "AddEditMoneyReceipts.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'
-                                            style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Ammount")) ? "display:block;" : "display:none;" %>'>
-                                            <img alt="Add" src="../Images/ADD.JPG" /></a>
+                                            <a id="aMoneyRecpt" runat="server" href='<%# "AddEditMoneyReceipts.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'
+                                                style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Ammount")) ? "display:block;": "display:none;" %>'>
+                                                <img alt="Add" src="../Images/ADD.JPG" /></a>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField >
+                                    <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader_center" />
                                         <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Center" />
                                         <HeaderTemplate>

@@ -52,17 +52,28 @@ namespace EMS.WebApp.Reports.ReportViewer
         {
             base.OnInit(e);
             strReportName = Request.QueryString["reportName"];
-            ViewState["strReportName"] = strReportName;
+            if (string.IsNullOrEmpty(strReportName)) {
+                throw new Exception("EmptyParameters");
+            }
+            ViewState["strReportName"] = strReportName; 
+            trInvoice.Visible = false;
             switch (strReportName.ToLower())
             {
+
                 case "cargoarrivalnotice":
                     ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1;                   
                     break;
                 default:
                     lblLine.Text = "BL No.";
-                    ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged;
+                    ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged;                   
                     trCar.Visible = false;
                     trCar1.Visible = false;
+                    trInvoice.Visible = false;
+                    if (strReportName.ToLower() == "invoicedeveloper")
+                    {
+                        trInvoice.Visible = true;
+                        ddlLocation.SelectedIndexChanged += ddlLocation_SelectedIndexChanged_Invoice;    
+                    }
                     break;
             }
 
@@ -105,24 +116,24 @@ namespace EMS.WebApp.Reports.ReportViewer
             switch (reportType.ToLower()) {
                 case "custom":
                     rptParameters = new ReportParameter[2];
-                    rptParameters[0] = new ReportParameter("LineBLNo", ddlBlNo.SelectedValue);
+                    rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedValue);
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
                     break;
                 case "gang":
                     rptParameters = new ReportParameter[4];
-                   rptParameters[0] = new ReportParameter("LineBLNo", ddlBlNo.SelectedValue);
+                    rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedValue);
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
                     rptParameters[2] = new ReportParameter("Shift", ddlShift.SelectedValue);
                     rptParameters[3] = new ReportParameter("GangDate", txtGangDate.Text);
                     break;
                 case "edeliveryorder":
                     rptParameters = new ReportParameter[2];
-                    rptParameters[0] = new ReportParameter("invBLHeader", ddlBlNo.SelectedValue);
+                    rptParameters[0] = new ReportParameter("invBLHeader", ddlLocation.SelectedValue);
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
                     break;
                 case "deliveryorder":
                     rptParameters = new ReportParameter[2];
-                    rptParameters[0] = new ReportParameter("invBLHeader", ddlBlNo.SelectedValue);
+                    rptParameters[0] = new ReportParameter("invBLHeader", ddlLocation.SelectedValue);
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
                     break;
                 case "cargoarrivalnotice":
@@ -135,10 +146,11 @@ namespace EMS.WebApp.Reports.ReportViewer
                     rptParameters[5] = new ReportParameter("ETA", txtETA.Text.Trim());
                     break;
                 case "invoicedeveloper":
-                    rptParameters = new ReportParameter[3];
-                    rptParameters[0] = new ReportParameter("LineBLNo", ddlBlNo.SelectedValue);
+                    rptParameters = new ReportParameter[4];
+                    rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedItem.Text);
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
-                    rptParameters[2] = new ReportParameter("LoginUserName", ddlLine.SelectedValue);
+                    rptParameters[2] = new ReportParameter("LoginUserName", txtPrintedBy.Text);
+                    rptParameters[3] = new ReportParameter("InvoiceId", ddlInvoice.SelectedValue);
                     break;
                 default: strReportName = string.Empty; break;
             }
@@ -205,7 +217,14 @@ namespace EMS.WebApp.Reports.ReportViewer
                 LoadReport();
             }
         }
-
+        //Get invoice
+        protected void ddlLocation_SelectedIndexChanged_Invoice(object sender, EventArgs e)
+        {
+            if (ddlLocation.SelectedIndex > 0)
+            {
+                Filler.FillData(ddlInvoice, CommonBLL.GetInvoiceByBLNo(ddlLocation.SelectedValue), "InvoiceNo", "InvoiceID", "Invoice");
+            }
+        }
         protected void ddlLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlLocation.SelectedIndex > 0)

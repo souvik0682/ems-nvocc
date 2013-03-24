@@ -466,6 +466,10 @@ namespace EMS.BLL
         {
             return CommonDAL.GetBLNo(line, Vessel, Voyage);
         }
+        public static DataTable GetInvoiceByBLNo(string BLNo)
+        {
+            return CommonDAL.GetInvoiceByBLNo(BLNo);
+        }
 
         #endregion
     }

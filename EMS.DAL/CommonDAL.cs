@@ -6,7 +6,7 @@ using System.Text;
 using EMS.Common;
 using EMS.DAL.DbManager;
 using EMS.Entity;
-
+using EMS.Utilities;
 namespace EMS.DAL
 {
     public sealed class CommonDAL
@@ -624,7 +624,16 @@ namespace EMS.DAL
         #endregion
 
 
+        public static void SavePrintCount(string blNo) {
+            string strExecution = "prcSaveInvoicePrintCount";
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+               
+                oDq.AddVarcharParam("@BlNo", 60,blNo);
+                oDq.RunActionQuery();
+            }
 
+        }
 
         #region BLHeader
         public static DataTable GetBLHeaderByBLNo(long LocationId)
@@ -640,6 +649,65 @@ namespace EMS.DAL
 
             return myDataTable;
         }
+        #endregion
+
+        #region Report
+        public static DataTable GetLine(string Location)
+        {
+            string strExecution = "rptUspGetLineByLoc";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@Location", Location.ToInt());
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+        public static DataTable GetVessels(string Line)
+        {
+            string strExecution = "rptUspGetVesselByNVOCCID";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@line", Line.ToInt());
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+
+        public static DataTable GetVoyages(string Vessel)
+        {
+            string strExecution = "rptUspGetVoyageByVesselID";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@Vessel", Vessel.ToInt());
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+        public static DataTable GetBLNo(string line, string Vessel, string Voyage)
+        {
+            string strExecution = "rptUspGetLineBLNo";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@line", line.ToInt());
+                oDq.AddIntegerParam("@Vessel", Vessel.ToInt());
+                oDq.AddIntegerParam("@voyage", Voyage.ToInt());
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+       
         #endregion
     }
 }

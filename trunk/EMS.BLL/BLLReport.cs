@@ -8,9 +8,10 @@ namespace EMS.BLL
    public class BLLReport
     {
 
-        public static System.Data.DataSet GetMoneyRcptDetails(string invNo)
+        //public static System.Data.DataSet GetMoneyRcptDetails(string invNo)
+       public static System.Data.DataSet GetMoneyRcptDetails(Int64 moneyRecptNo)
         {
-            return EMS.DAL.DALReport.GetMoneyRcptDetails(invNo);
+            return EMS.DAL.DALReport.GetMoneyRcptDetails(moneyRecptNo);
         }
 
         public static System.Data.DataSet FillDDLMoneyRcpt(string invNo)

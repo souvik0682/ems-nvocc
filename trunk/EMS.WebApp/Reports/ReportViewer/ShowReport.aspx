@@ -11,21 +11,10 @@
 <fieldset style="padding:5px;width:55%">
     <table style="width: 100%" cellpadding="1" cellspacing="0">
         <tr id="main">
-            <td style="width:10%">
-                BL No.:<span class="errormessage">*</span>
-            </td>
-            <td style="width:20%"  align="left" >
-                <asp:DropDownList ID="ddlBlNo" runat="server" Width="120">
-                <asp:ListItem Text="Select" Value="0"></asp:ListItem>                
-                </asp:DropDownList>
-                <asp:RequiredFieldValidator ID="rfvLocation" runat="server" CssClass="errormessage"
-                    ControlToValidate="ddlBlNo" InitialValue="0" ValidationGroup="Report" Display="Dynamic"
-                    ErrorMessage="[Required]"></asp:RequiredFieldValidator>
-            </td>
-            <td  style="width:10%"   >
+         <td   align="left" style="width: 15%">
                 Location:<span class="errormessage">*</span>
             </td>
-            <td  style="width:20%"  align="left" >
+            <td   align="left" style="width: 35%">
                 <asp:DropDownList ID="ddlLine" runat="server" AutoPostBack="true"
                      Width="120">
                 </asp:DropDownList>
@@ -33,6 +22,18 @@
                     ControlToValidate="ddlLine" InitialValue="0" ValidationGroup="Report"  Display="Dynamic"
                     ErrorMessage="[Required]"></asp:RequiredFieldValidator>
             </td>
+              <td>
+                  <asp:Label ID="lblLine" runat="server" Text="Line"></asp:Label>:<span class="errormessage" style="width: 15%">*</span></td>
+        <td  align="left" style="width: 35%">
+            <asp:DropDownList ID="ddlLocation" runat="server"  AutoPostBack="true"
+                onselectedindexchanged="ddlLocation_SelectedIndexChanged">
+            <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+            </asp:DropDownList>            
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="errormessage"
+                    ControlToValidate="ddlLocation" InitialValue="0" ValidationGroup="Report"  Display="Dynamic"
+                    ErrorMessage="[Required]"></asp:RequiredFieldValidator>
+        </td>
+           
         </tr>
         <tr id="trgang1" runat="server" >
             <td   >
@@ -75,16 +76,7 @@
             </td>
         </tr>
         <tr runat="server" id="trCar">
-        <td>Line:<span class="errormessage">*</span></td>
-        <td  align="left" >
-            <asp:DropDownList ID="ddlLocation" runat="server"  AutoPostBack="true"
-                onselectedindexchanged="ddlLocation_SelectedIndexChanged">
-            <asp:ListItem Text="Select" Value="0"></asp:ListItem>
-            </asp:DropDownList>            
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="errormessage"
-                    ControlToValidate="ddlLocation" InitialValue="0" ValidationGroup="Report"  Display="Dynamic"
-                    ErrorMessage="[Required]"></asp:RequiredFieldValidator>
-        </td>
+      
         <td>Vessel:<span class="errormessage">*</span></td>
         <td  align="left" > <asp:DropDownList ID="ddlVessel" runat="server" AutoPostBack="true"
                 onselectedindexchanged="ddlVessel_SelectedIndexChanged">
@@ -94,8 +86,6 @@
                     ControlToValidate="ddlVessel" InitialValue="0" ValidationGroup="Report"  Display="Dynamic"
                     ErrorMessage="[Required]"></asp:RequiredFieldValidator>
             </td>
-            </tr>
-             <tr runat="server" id="trCar1">
              <td>Voyage:<span class="errormessage">*</span></td> <td  align="left" > <asp:DropDownList ID="ddlVoyage" runat="server" AutoPostBack="true"
                      onselectedindexchanged="ddlVoyage_SelectedIndexChanged">
             <asp:ListItem Text="Select" Value="0"></asp:ListItem>
@@ -103,6 +93,19 @@
             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" CssClass="errormessage"
                     ControlToValidate="ddlVoyage" InitialValue="0" ValidationGroup="Report"  Display="Dynamic"
                     ErrorMessage="[Required]"></asp:RequiredFieldValidator></td>
+            </tr>
+             <tr runat="server" id="trCar1">
+              <td >
+                BL No.:<span class="errormessage">*</span>
+            </td>
+            <td   align="left" >
+                <asp:DropDownList ID="ddlBlNo" runat="server" Width="120">
+                <asp:ListItem Text="Select" Value="0"></asp:ListItem>                
+                </asp:DropDownList>
+                <asp:RequiredFieldValidator ID="rfvLocation" runat="server" CssClass="errormessage"
+                    ControlToValidate="ddlBlNo" InitialValue="0" ValidationGroup="Report" Display="Dynamic"
+                    ErrorMessage="[Required]"></asp:RequiredFieldValidator>
+            </td>
              <td>ETA:<span class="errormessage">*</span></td> <td align="left">
                  <asp:TextBox ID="txtETA" runat="server" Width="113"></asp:TextBox>
                  <cc1:CalendarExtender Format="dd/MM/yyyy" ID="CalendarExtender2" runat="server" PopupButtonID="txtETADt"
@@ -116,6 +119,8 @@
                     runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]" ValidationGroup="Report" 
                     Display="Dynamic" ValidationExpression="^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$"></asp:RegularExpressionValidator>
                  </td>
+                 
+          
         </tr>
         <tr>
        

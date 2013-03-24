@@ -1407,7 +1407,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>=Parameters!Address.Value</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
@@ -1416,7 +1418,7 @@
           <rd:DefaultName>Textbox2</rd:DefaultName>
           <Top>0.635cm</Top>
           <Left>10.50325cm</Left>
-          <Height>0.86289cm</Height>
+          <Height>0.6865cm</Height>
           <Width>11.76042cm</Width>
           <ZIndex>3</ZIndex>
           <Style>
@@ -1439,6 +1441,7 @@
                   <Value>Import Billing Statement as on</Value>
                   <Style>
                     <FontStyle>Normal</FontStyle>
+                    <FontSize>11pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                     <TextDecoration>None</TextDecoration>
                     <Color>#000000</Color>
@@ -1550,7 +1553,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>=Parameters!tillDate.Value</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>11pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />

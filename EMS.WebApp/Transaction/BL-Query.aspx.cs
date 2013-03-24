@@ -177,16 +177,15 @@ namespace EMS.WebApp.Transaction
             hdnBLId.Value = dtDetail.Rows[0]["BLID"].ToString();
             txtBlNo.Text = dtDetail.Rows[0]["BLNO"].ToString();
             txtCha.Text = dtDetail.Rows[0]["CHA"].ToString();
-            //txtHouseBlNo.Text = dtDetail.Rows[0]["HBLNO"].ToString();
-            //txtDetentionFee.Text = dtDetail.Rows[0]["DTNFEE"].ToString();
-            //txtDoValidTill.Text = dtDetail.Rows[0]["DOVALIDUPTO"].ToString();
             txtLandingDate.Text = Convert.ToDateTime(dtDetail.Rows[0]["LANDINGDT"].ToString()).ToString("dd/MM/yyyy");
             txtVessel.Text = dtDetail.Rows[0]["VESSEL"].ToString();
             txtVoyage.Text = dtDetail.Rows[0]["VOYAGE"].ToString();
             txtDetentionFreeDays.Text = dtDetail.Rows[0]["DTNFREEDAYS"].ToString();
-            //txtDetentionFee.Text = dtDetail.Rows[0]["DTNFEE"].ToString();
             txtPGRFreedays.Text = dtDetail.Rows[0]["PGRFREEDAYS"].ToString();
             txtPGRTill.Text = dtDetail.Rows[0]["PGRTILL"].ToString();
+
+            ddlLine.SelectedValue = dtDetail.Rows[0]["LINE"].ToString();
+            ddlLocation.SelectedValue = dtDetail.Rows[0]["LOCATION"].ToString();
 
             if (Convert.ToDateTime(dtDetail.Rows[0]["DOVALIDUPTO"].ToString()) > Convert.ToDateTime("01/01/1950"))
                 txtDoValidUpto.Text = dtDetail.Rows[0]["DOVALIDUPTO"].ToString();
@@ -286,6 +285,19 @@ namespace EMS.WebApp.Transaction
         void FillInvoiceStatus(Int64 BLId)
         {
             DataTable dtInvoices = oImportBLL.GetAllInvoice(BLId);
+
+            foreach (DataRow dRow in dtInvoices.Rows)
+            {
+                switch (Convert.ToInt64(dRow["InvoiceTypeID"].ToString()))
+                {
+                    case 1: lnkGenerateInvoiceDo.Visible = false;
+                        break;
+                    case 3: lnkGenInvFinalDo.Visible = false;
+                        break;
+                    case 7: lnkGenInvFreightToCollect.Visible = false;
+                        break;
+                }
+            }
 
             gvwInvoice.DataSource = dtInvoices;
             gvwInvoice.DataBind();
@@ -550,7 +562,7 @@ namespace EMS.WebApp.Transaction
 
         protected void imgBtnExaminationDo_Click(object sender, ImageClickEventArgs e)
         {
-            Response.Redirect("/#?bl");
+            Response.Redirect("../Reports/InvDO.aspx");
         }
 
         protected void btnSave2_Click(object sender, EventArgs e)
@@ -1094,8 +1106,8 @@ namespace EMS.WebApp.Transaction
                     sbr.Append("<td style='text-align:right;'>" + CHEQUE + "</td>");
                     sbr.Append("<td style='text-align:right;'>" + TDS + "</td>");
                     //sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
-                    sbr.Append("<td><a href='#'><img src='../Images/Print.png' /></a></td>");
-                    
+                    sbr.Append("<td><a href='../Reports/MoneyRcpt.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/Print.png' /></a></td>");
+
                     sbr.Append("</tr>");
                 }
                 else // For Even Row
@@ -1107,7 +1119,7 @@ namespace EMS.WebApp.Transaction
                     sbr.Append("<td style='text-align:right;'>" + CHEQUE + "</td>");
                     sbr.Append("<td style='text-align:right;'>" + TDS + "</td>");
                     //sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
-                    sbr.Append("<td><a href='#'><img src='../Images/Print.png' /></a></td>");
+                    sbr.Append("<td><a href='../Reports/MoneyRcpt.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/Print.png' /></a></td>");
 
                     sbr.Append("</tr>");
                 }

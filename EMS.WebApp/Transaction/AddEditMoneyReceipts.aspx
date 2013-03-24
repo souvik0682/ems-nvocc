@@ -9,6 +9,22 @@
     <script type="text/javascript">
         function CheckTotal() {
 
+            var ch = document.getElementById('<%= txtChequeAmt.ClientID %>').value;
+            if (ch == "" || ch <= 0) {
+                document.getElementById('<%= txtChqNo.ClientID %>').disabled = true;
+                document.getElementById('<%= txtBankName.ClientID %>').disabled = true;
+                document.getElementById('<%= txtChqDate.ClientID %>').disabled = true;
+
+                document.getElementById('<%= txtChqNo.ClientID %>').value = "";
+                document.getElementById('<%= txtBankName.ClientID %>').value = "";
+                document.getElementById('<%= txtChqDate.ClientID %>').value = "";
+            }
+            else {
+                document.getElementById('<%= txtChqNo.ClientID %>').disabled = false;
+                document.getElementById('<%= txtBankName.ClientID %>').disabled = false;
+                document.getElementById('<%= txtChqDate.ClientID %>').disabled = false;
+            }
+
             var v1 = document.getElementById('<%= txtCashAmt.ClientID %>').value;
             var v2 = document.getElementById('<%= txtChequeAmt.ClientID %>').value;
             var v3 = document.getElementById('<%= txtTDS.ClientID %>').value;
@@ -29,14 +45,16 @@
 
             document.getElementById('<%= txtCurrentAmount.ClientID %>').value = v1 + v2 + v3;
 
-            if (parseFloat(document.getElementById('<%= txtPendingAmt.ClientID %>').value, 10) < v1 + v2 + v3) {
+        }
+
+        function ValidateTotal() {
+            debugger;
+            if (parseFloat(document.getElementById('<%= txtPendingAmt.ClientID %>').value, 10) < parseFloat(document.getElementById('<%= txtCurrentAmount.ClientID %>').value, 10)) {
                 alert("Pay amount can not be greater than penfing amount");
                 return false;
             }
             else
                 return true;
-
-
         }
 
 
@@ -195,7 +213,7 @@
                         Cheque No.
                     </td>
                     <td>
-                        <asp:TextBox ID="txtChqNo" runat="server" Width="150"></asp:TextBox>
+                        <asp:TextBox ID="txtChqNo" runat="server" Width="150" Enabled="false"></asp:TextBox>
                     </td>
                     <td>
                         Pay Amount in Cheque
@@ -204,7 +222,7 @@
                         <%-- <cc2:CustomTextBox ID="txtChequeAmt" runat="server" Width="150" Type="Decimal" MaxLength="13"
                             Precision="10" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>--%>
                         <asp:TextBox ID="txtChequeAmt" runat="server" Width="150" MaxLength="13" Style="text-align: right;"
-                            onblur="CheckTotal();" AutoPostBack="true" OnTextChanged="txtChequeAmt_TextChanged"></asp:TextBox>
+                            onblur="CheckTotal();" AutoPostBack="false" OnTextChanged="txtChequeAmt_TextChanged"></asp:TextBox>
                         <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" TargetControlID="txtChequeAmt"
                             FilterMode="ValidChars" FilterType="Numbers,Custom" ValidChars=".">
                         </cc1:FilteredTextBoxExtender>
@@ -215,7 +233,7 @@
                         Bank Name
                     </td>
                     <td>
-                        <asp:TextBox ID="txtBankName" Width="150" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtBankName" Width="150" runat="server" Enabled="false"></asp:TextBox>
                     </td>
                     <td>
                         TDS:
@@ -235,7 +253,7 @@
                         Cheque Date
                     </td>
                     <td>
-                        <asp:TextBox ID="txtChqDate" Width="150" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtChqDate" Width="150" runat="server" Enabled="false"></asp:TextBox>
                         <cc1:CalendarExtender ID="CalendarExtender2" runat="server" PopupButtonID="txtChqDate"
                             TargetControlID="txtChqDate" Format="dd/MM/yyyy">
                         </cc1:CalendarExtender>
@@ -245,7 +263,7 @@
                     </td>
                     <td>
                         <cc2:CustomTextBox ID="txtCurrentAmount" runat="server" Width="150" Type="Decimal"
-                            MaxLength="13" Precision="10" Scale="2" Style="text-align: right;" Enabled="false"></cc2:CustomTextBox>
+                            MaxLength="13" Precision="10" Scale="2" Style="text-align: right;" ReadOnly="true"></cc2:CustomTextBox>
                         <asp:RequiredFieldValidator ID="rfvNetAmt" runat="server" ErrorMessage="Net Amount can not be blank"
                             ControlToValidate="txtCurrentAmount" ValidationGroup="vgMoneyRecpt" Display="None"></asp:RequiredFieldValidator>
                         <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender2" runat="server" TargetControlID="rfvNetAmt">
@@ -255,8 +273,9 @@
             </table>
         </fieldset>
         <div>
-            <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" ValidationGroup="vgMoneyRecpt" />&nbsp;&nbsp;<asp:Button
-                ID="btnBack" runat="server" CssClass="button" Text="Back" OnClick="btnBack_Click" />
+            <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" ValidationGroup="vgMoneyRecpt"
+                OnClientClick="return ValidateTotal();" />&nbsp;&nbsp;<asp:Button ID="btnBack" runat="server"
+                    CssClass="button" Text="Back" OnClick="btnBack_Click" />
             &nbsp;
             <asp:Label ID="lblMessage" runat="server"></asp:Label>
         </div>

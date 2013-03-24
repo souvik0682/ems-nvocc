@@ -8,6 +8,20 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
 <center>
+<script language="javascript" type="text/javascript">
+function Print(){ 
+var val= document.getElementById('<%=ddlLocation.ClientID %>').value;
+alert(val);
+//GetLocation
+//EMS.WebApp.GetLocation.SavePrintSequence(val, function () { alert('s'); }, function () { alert('f'); });
+var ws = new EMS.WebApp.GetLocation();
+ws.SavePrintSequence(val, function () { alert('s'); }, function () { alert('f'); })
+return false;
+    }
+</script>
+    <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server">
+    <Services ><asp:ServiceReference Path="~/GetLocation.asmx" InlineScript="true"/></Services>
+    </asp:ScriptManagerProxy>
 <fieldset style="padding:5px;width:55%">
     <table style="width: 100%" cellpadding="1" cellspacing="0">
         <tr id="main">
@@ -34,6 +48,19 @@
                     ErrorMessage="[Required]"></asp:RequiredFieldValidator>
         </td>
            
+        </tr><tr id="trInvoice" runat="server" ><td>Invoice No.:<span class="errormessage">*</span></td><td>
+         <asp:DropDownList ID="ddlInvoice" runat="server"  AutoPostBack="true"
+                onselectedindexchanged="ddlLocation_SelectedIndexChanged">
+            <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+            </asp:DropDownList>            
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" CssClass="errormessage"
+                    ControlToValidate="ddlInvoice" InitialValue="0" ValidationGroup="Report"  Display="Dynamic"
+                    ErrorMessage="[Required]"></asp:RequiredFieldValidator>
+        </td>
+        <td>Printed By:<span class="errormessage">*</span></td><td>
+            <asp:TextBox ID="txtPrintedBy" runat="server"></asp:TextBox><asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" CssClass="errormessage"
+                    ControlToValidate="txtPrintedBy"  ValidationGroup="Report"  Display="Dynamic"
+                    ErrorMessage="[Required]"></asp:RequiredFieldValidator></td>
         </tr>
         <tr id="trgang1" runat="server" >
             <td   >
@@ -127,6 +154,8 @@
         <td colspan="4" align="left" style="padding:5px 5px 5px 0">
         <asp:Button ID="btnReport" runat="server" Text="View Report" ValidationGroup="Report" 
                 onclick="btnReport_Click" />
+      <asp:Button ID="Button1" runat="server" Text="Print" ValidationGroup="Report" 
+                OnClientClick="return Print()" />
         </td>
         </tr>
     </table>

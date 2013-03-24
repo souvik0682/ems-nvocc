@@ -29,6 +29,12 @@ namespace EMS.WebApp
         }
 
         [WebMethod]
+        public void SavePrintSequence(string prefixText)
+        {
+            CommonBLL.SavePrintCount(prefixText);
+        }
+
+        [WebMethod]
         public string[] GetCompletionList(string prefixText, int count)
         {
             DataTable dt = ImportHaulageBLL.GetAllPort(prefixText);

@@ -59,6 +59,7 @@ namespace EMS.WebApp.Reports.ReportViewer
                     ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1;                   
                     break;
                 default:
+                    lblLine.Text = "BL No.";
                     ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged;
                     trCar.Visible = false;
                     trCar1.Visible = false;
@@ -191,7 +192,7 @@ namespace EMS.WebApp.Reports.ReportViewer
             var lng = ddlLine.SelectedValue.ToLong();
             if (lng> 0)
             {
-                Filler.FillData(ddlBlNo, CommonBLL.GetBLHeaderByBLNo(lng), "ImpLineBLNo", "ImpLineBLNo", "Bl. No.");
+                Filler.FillData(ddlLocation, CommonBLL.GetBLHeaderByBLNo(lng), "ImpLineBLNo", "ImpLineBLNo", "Bl. No.");
             }
         }
 

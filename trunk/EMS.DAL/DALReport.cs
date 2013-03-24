@@ -64,6 +64,19 @@ namespace EMS.DAL
 
             return data;
         }
+
+        public static string GetNumToWords(long num)
+        {
+            string data = string.Empty;
+            using (DbQuery dq = new DbQuery("prcGetWordsFromNum"))
+            {
+                dq.AddBigIntegerParam("@num", num);
+
+                data = Convert.ToString(dq.GetScalar());
+            }
+
+            return data;
+        }
     }
 
 }

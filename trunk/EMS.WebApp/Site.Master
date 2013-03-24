@@ -198,7 +198,7 @@
                                     <li id="liFRI" runat="server"><a href="#">Invoice</a>
                                         <ul>
                                             <li id="liFRI_Regular" runat="server"><a href="#">Invoice (Regular / Exp. Detention</a></li>
-                                            <li id="liFRI_IBS" runat="server"><a href="#">Import Billing Statement</a></li>
+                                            <li id="liFRI_IBS" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/RptImportBilling.aspx") %>">Import Billing Statement</a></li>
                                             <li id="liFRI_IIR" runat="server"><a href="#">Import Invoice Register</a></li>
                                             <li id="liFRI_EIR" runat="server"><a href="#">Export Invoice Register</a></li>
                                         </ul>

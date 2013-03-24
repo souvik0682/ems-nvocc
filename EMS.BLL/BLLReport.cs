@@ -29,6 +29,12 @@ namespace EMS.BLL
         {
             return EMS.DAL.DALReport.GetAddByCompName(compname);
         }
-       
+
+        public static string GetNumToWords(long num)
+        {
+            return EMS.DAL.DALReport.GetNumToWords(num);
+        }
+
+
     }
 }

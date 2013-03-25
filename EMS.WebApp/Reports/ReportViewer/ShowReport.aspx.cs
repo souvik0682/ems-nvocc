@@ -102,7 +102,7 @@ namespace EMS.WebApp.Reports.ReportViewer
 
         private void Load(Microsoft.Reporting.WebForms.ReportViewer rptViewer, string reportType, ReportParameter[] reportParma)
         {
-            if (string.IsNullOrEmpty(reportType)) return;
+            if (string.IsNullOrEmpty(reportType)) throw new Exception("Null ReportParameter Or Null Report Name");
             rptViewer.ProcessingMode = ProcessingMode.Remote;
             rptViewer.ServerReport.ReportServerUrl = new Uri(ConfigurationManager.AppSettings["ReportURL"]);
             rptViewer.ServerReport.ReportPath = "/EMS.Report/" + reportType;

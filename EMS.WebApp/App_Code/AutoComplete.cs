@@ -410,11 +410,38 @@ public class AutoComplete : System.Web.Services.WebService {
         }
         return items;
     }
+
+    [WebMethod]
+    public string[] GetChaList(string prefixText, int count)
+    {
+        count = 10;
+        AppCodeClass ac = new AppCodeClass();
+        
+        string sql = @"SELECT a.[AddrName] FROM [DBO].[mstAddress] a 
+                        INNER JOIN [dbo].[mstAddressType] at 
+                        ON CAST(a.AddrType as int) = at.pk_AddrTypeID 
+                        WHERE a.[AddrActive] = 1 AND at.[AddrType] = 'CH' AND [AddrName] LIKE @prefixText";
+
+        SqlDataAdapter da = new SqlDataAdapter(sql, ac.ConnectionString);
+        da.SelectCommand.Parameters.Add("@prefixText", SqlDbType.VarChar, 50).Value = prefixText + "%";
+        DataTable dt = new DataTable();
+        da.Fill(dt);
+        string[] items = new string[dt.Rows.Count];
+        int i = 0;
+        foreach (DataRow dr in dt.Rows)
+        {
+            items.SetValue(dr["AddrName"].ToString(), i);
+            i++;
+        }
+        return items;
+    }
 }
 
 public class AppCodeClass
 {
     public string ConnectionString = "Data Source=WIN-SERVER;Initial Catalog=Liner;User Id=sa;Password=P@ssw0rd;Pooling=true;Connection Timeout=30;Max Pool Size=40;Min Pool Size=5";
     //public string ConnectionString = @"Data Source=DILP-PC;Initial Catalog=NVOCC;Integrated Security=true;Pooling=true;Connection Timeout=30;Max Pool Size=40;Min Pool Size=5";
+
+    //public string ConnectionString = @"Data Source=SOUVIK-PC\SQLEXPRESS;Initial Catalog=NVOCC;Integrated Security=SSPI;";
 }
 

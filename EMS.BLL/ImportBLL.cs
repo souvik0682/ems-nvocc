@@ -249,5 +249,16 @@ namespace EMS.BLL
             return ImportBLDAL.GetReceivedAmtBreakup(InvoiceId);
         }
 
+
+        public string GetCHAId(string CHAName)
+        {
+            return ImportBLDAL.GetCHAId(CHAName);
+        }
+
+        public string GetCHAName(long CHAId)
+        {
+            return ImportBLDAL.GetCHAName(CHAId);
+        }
+
     }
 }

@@ -76,7 +76,8 @@ namespace EMS.WebApp.Reports.ReportViewer
                 {
                     if (v.ToLower() != "reportname")
                     {
-                        rptParameters[i++] = new ReportParameter(v, GeneralFunctions.DecryptQueryString(reportParma[v]));
+                        //rptParameters[i++] = new ReportParameter(v, GeneralFunctions.DecryptQueryString(reportParma[v]));
+                        rptParameters[i++] = new ReportParameter(v,reportParma[v]);
                     }
                 }
             }
@@ -113,6 +114,7 @@ namespace EMS.WebApp.Reports.ReportViewer
             rptViewer.ShowParameterPrompts = false;
             rptViewer.ShowPromptAreaButton = false;
             rptViewer.ShowToolBar = true;
+            rptViewer.ShowPrintButton = true;
             rptViewer.ShowReportBody = true;
             rptViewer.ServerReport.Refresh();
         }

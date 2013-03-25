@@ -153,8 +153,8 @@ namespace EMS.DAL
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                if (moneyReceipt.IsAdded == 1)
-                {
+                //if (moneyReceipt.IsAdded == 1)
+                //{
                     oDq.AddBigIntegerParam("@MoneyRcptID", moneyReceipt.MoneyReceiptId);
                     oDq.AddBigIntegerParam("@InvoiceID", moneyReceipt.InvoiceId); //Just to avoid exception. Not actually in use.
                     oDq.AddIntegerParam("@LocationID", moneyReceipt.LocationId);
@@ -177,7 +177,7 @@ namespace EMS.DAL
                     oDq.RunActionQuery();
                     result = Convert.ToInt32(oDq.GetParaValue("@Result"));
                     MrNo = Convert.ToString(oDq.GetParaValue("@MRNo"));
-                }
+                //}
 
             }
 

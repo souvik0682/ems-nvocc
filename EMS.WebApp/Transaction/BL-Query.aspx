@@ -5,6 +5,19 @@
 <%@ Register Assembly="EMS.WebApp" Namespace="EMS.WebApp.CustomControls" TagPrefix="cc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
+        function ReportPrint(a, b, c) {
+            window.open('../Popup/Report.aspx?' + a + b + c, 'mywindow', 'status=1,toolbar=1,location=no');
+            return false;
+        }
+
+
+        function ReportPrint1(a, b, c, d, e) {
+            window.open('../Popup/Report.aspx?' + a + b + c + d + e, 'mywindow', 'status=1,toolbar=1,location=no');
+            return false;
+        }
+
+    </script>
+    <script type="text/javascript">
         function AutoCompleteItemSelected(sender, e) {
 
             if (sender._id == "AutoCompleteEx") {
@@ -335,8 +348,7 @@
                                             <tr>
                                                 <td width="50%" style="padding-top: 10px;">
                                                     <asp:ImageButton ID="imgBtnExaminationDo" runat="server" ImageUrl="~/Images/p1.jpeg"
-                                                        ToolTip="Print Examination Do" Height="45" Width="45" AlternateText="Print Examination Do"
-                                                        OnClick="imgBtnExaminationDo_Click" />
+                                                        ToolTip="Print Examination Do" Height="45" Width="45" AlternateText="Print Examination Do" />
                                                     <br />
                                                     Print Examination Do
                                                 </td>
@@ -840,7 +852,7 @@
                                 </div>
                             </asp:Panel>
                             <asp:GridView ID="gvwInvoice" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                                BorderStyle="None" BorderWidth="0" Width="100%">
+                                BorderStyle="None" BorderWidth="0" Width="100%" OnRowDataBound="gvwInvoice_RowDataBound">
                                 <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
                                 <EmptyDataTemplate>
                                     No Record(s) Found</EmptyDataTemplate>
@@ -899,7 +911,7 @@
                                         <HeaderTemplate>
                                             Print</HeaderTemplate>
                                         <ItemTemplate>
-                                            <a href="#?<%# Eval("BlId") %>">
+                                            <a id="aPrint" runat="server">
                                                 <img src="../Images/Print.png" /></a>
                                         </ItemTemplate>
                                     </asp:TemplateField>

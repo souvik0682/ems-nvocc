@@ -54,7 +54,14 @@
                 return false;
             }
             else
-                return true;
+                if (document.getElementById('<%= txtDate.ClientID %>').value == "") {
+                    return false;
+                    document.getElementById('<%= rfvDate.ClientID %>').enabled = true;
+                }
+                else {
+                    return true;
+                }
+                
         }
 
 
@@ -117,7 +124,7 @@
                     </td>
                     <td>
                         <asp:TextBox ID="txtBLNo" runat="server" CssClass="textboxuppercase" MaxLength="30"
-                            Width="150px" AutoPostBack="True" OnTextChanged="txtBLNo_TextChanged" Enabled="false"></asp:TextBox>
+                            Width="150px" AutoPostBack="True" Enabled="false"></asp:TextBox>
                         <%--<asp:RequiredFieldValidator ID="rfvEmail" runat="server" CssClass="errormessage" ControlToValidate="txtEmail" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
                     </td>
                     <td>
@@ -222,7 +229,7 @@
                         <%-- <cc2:CustomTextBox ID="txtChequeAmt" runat="server" Width="150" Type="Decimal" MaxLength="13"
                             Precision="10" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>--%>
                         <asp:TextBox ID="txtChequeAmt" runat="server" Width="150" MaxLength="13" Style="text-align: right;"
-                            onblur="CheckTotal();" AutoPostBack="false" OnTextChanged="txtChequeAmt_TextChanged"></asp:TextBox>
+                            onblur="CheckTotal();" AutoPostBack="false"></asp:TextBox>
                         <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" TargetControlID="txtChequeAmt"
                             FilterMode="ValidChars" FilterType="Numbers,Custom" ValidChars=".">
                         </cc1:FilteredTextBoxExtender>

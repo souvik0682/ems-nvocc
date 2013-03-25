@@ -561,6 +561,8 @@ namespace EMS.Entity
         public string PortOfLoading { get; set; }
         public string PortOfDischarge { get; set; }
 
+        public Int64 CHAId { get; set; }
+
         public BLHeaderEntity()
         {
             this.BLFooter = new List<IBLFooter>();
@@ -669,6 +671,10 @@ namespace EMS.Entity
 
             if (ColumnExists(reader, "VesselName"))
                 this.VesselName = Convert.ToString(reader["VesselName"]);
+
+            if (ColumnExists(reader, "CHAId"))
+                if (reader["CHAId"] != DBNull.Value)
+                    this.CHAId = Convert.ToInt64(reader["CHAId"]);
         }
 
         public bool ColumnExists(IDataReader reader, string columnName)

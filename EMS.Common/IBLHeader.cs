@@ -101,6 +101,8 @@ namespace EMS.Common
         string VoyageNo { get; set; }
         string PortOfLoading { get; set; }
         string PortOfDischarge { get; set; }
+
+        Int64 CHAId { get; set; }
         
         List<IBLFooter> BLFooter { get; set; }
     }

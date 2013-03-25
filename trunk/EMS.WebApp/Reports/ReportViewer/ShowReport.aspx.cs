@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,6 +13,8 @@ using EMS.Utilities;
 using EMS.BLL;
 using EMS.Common;
 using EMS.Entity;
+using System.Collections.Specialized;
+using EMS.Utilities.Cryptography;
 
 namespace EMS.WebApp.Reports.ReportViewer
 {
@@ -45,6 +48,81 @@ namespace EMS.WebApp.Reports.ReportViewer
         public ICredentials NetworkCredentials { get; set; }
     }
 
+
+    public class ReportUtil {
+        private ReportParameter[] BindParameter(Dictionary<string,string> reportParma)
+        {  ReportParameter[] rptParameters = null;
+            if(reportParma!=null && reportParma.Count>1){
+                int i = 0;
+           rptParameters = new ReportParameter[reportParma.Count-1];
+           foreach (string v in reportParma.Keys)
+           {
+                if (v.ToLower() != "reportname")
+                {
+                    rptParameters[i++] = new ReportParameter(v, reportParma[v]);
+                }
+            }
+            }            
+            return rptParameters;
+        }
+        private ReportParameter[] BindParameter(NameValueCollection reportParma)
+        {
+            ReportParameter[] rptParameters = null;
+            if (reportParma != null && reportParma.Count >1)
+            {
+                rptParameters = new ReportParameter[reportParma.Count-1];
+                int i = 0;
+                foreach (string v in reportParma)
+                {
+                    if (v.ToLower() != "reportname")
+                    {
+                        rptParameters[i++] = new ReportParameter(v, reportParma[v]);
+                    }
+                }
+            }
+            return rptParameters;
+        }
+        public Dictionary<string,string> GetQueryString(NameValueCollection nameValue) { 
+             Dictionary<string,string> dic=null;
+            if(nameValue.Count<2) throw new Exception("insufficent Params");
+            dic=new Dictionary<string,string>();
+            foreach(string str in nameValue.AllKeys){
+                if (str.ToLower() != "reportname")
+                {
+                    // dic[str]= GeneralFunctions.DecryptQueryString(nameValue[str]);               
+                    dic[str] = nameValue[str];
+                }
+            }
+        return dic;
+        }
+        public  void LoadReport(Microsoft.Reporting.WebForms.ReportViewer rptViewer,NameValueCollection  reportParma){
+            string ReportName = reportParma["ReportName"];
+            Load(rptViewer,ReportName,BindParameter(reportParma)); 
+        }
+
+        private void Load(Microsoft.Reporting.WebForms.ReportViewer rptViewer, string reportType, ReportParameter[] reportParma)
+        {
+            if (string.IsNullOrEmpty(reportType)) return;
+            rptViewer.ProcessingMode = ProcessingMode.Remote;
+            rptViewer.ServerReport.ReportServerUrl = new Uri(ConfigurationManager.AppSettings["ReportURL"]);
+            rptViewer.ServerReport.ReportPath = "/EMS.Report/" + reportType;
+            rptViewer.ServerReport.SetParameters(reportParma);
+            rptViewer.ServerReport.DisplayName = reportType + "_" + DateTime.Now.Ticks.ToString();
+            rptViewer.ShowCredentialPrompts = false;
+            rptViewer.ShowPrintButton = true;
+            rptViewer.ShowParameterPrompts = false;
+            rptViewer.ShowPromptAreaButton = false;
+            rptViewer.ShowToolBar = true;
+            rptViewer.ShowReportBody = true;
+            rptViewer.ServerReport.Refresh();
+        }
+       public  void LoadReport(Microsoft.Reporting.WebForms.ReportViewer rptViewer,string reportType,Dictionary<string,string> reportParma)
+        {
+             string ReportName = reportParma["ReportName"];
+           Load(rptViewer,reportType,BindParameter(reportParma));                    
+
+        }
+    }
 
     public partial class ShowReport : System.Web.UI.Page
     {
@@ -110,6 +188,7 @@ namespace EMS.WebApp.Reports.ReportViewer
             }
         
         }
+
         
         private ReportParameter[] BindParameter(string reportType) {
             ReportParameter[] rptParameters = null;

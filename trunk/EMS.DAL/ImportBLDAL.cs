@@ -374,11 +374,11 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@ShipperInformation", 500, blHeader.ShipperInformation.ToUpper());
                 oDq.AddVarcharParam("@ShipperName", 60, blHeader.ShipperName.ToUpper()); //NOT FOUND
                 oDq.AddVarcharParam("@MarksNumbers", 500, blHeader.MarksNumbers.ToUpper());
-                oDq.AddVarcharParam("@GoodDescription", 60, blHeader.GoodDescription.ToUpper());
+                oDq.AddVarcharParam("@GoodDescription", 500, blHeader.GoodDescription.ToUpper());
                 oDq.AddVarcharParam("@ConsigneeInformation", 500, blHeader.ConsigneeInformation.ToUpper());
-                oDq.AddVarcharParam("@ConsigneeName", 60, blHeader.ConsigneeName.ToUpper()); //NOT FOUND
-                oDq.AddVarcharParam("@BLComment", 60, blHeader.BLComment.ToUpper());
-                oDq.AddVarcharParam("@NotifyName", 60, blHeader.NotifyName.ToUpper()); //NOT FOUND
+                oDq.AddVarcharParam("@ConsigneeName", 100, blHeader.ConsigneeName.ToUpper()); //NOT FOUND
+                oDq.AddVarcharParam("@BLComment", 300, blHeader.BLComment.ToUpper());
+                oDq.AddVarcharParam("@NotifyName", 100, blHeader.NotifyName.ToUpper()); //NOT FOUND
                 oDq.AddVarcharParam("@NotifyPartyInformation", 500, blHeader.NotifyPartyInformation.ToUpper());
                 oDq.AddDateTimeParam("@dtAdded", blHeader.dtAdded);
                 oDq.AddDateTimeParam("@dtEdited", blHeader.dtEdited);
@@ -390,7 +390,7 @@ namespace EMS.DAL
                 oDq.AddDateTimeParam("@WaiverDate", blHeader.WaiverDate); //NOT FOUND
                 oDq.AddVarcharParam("@Commodity", 20, blHeader.Commodity.ToUpper());
                 oDq.AddVarcharParam("@LineBLVesselDetail", 100, blHeader.LineBLVesselDetail.ToUpper());
-                oDq.AddVarcharParam("@CANTo", 60, blHeader.CANTo.ToUpper());
+                oDq.AddVarcharParam("@CANTo", 500, blHeader.CANTo.ToUpper());
                 oDq.AddIntegerParam("@WaiverFk_UserID", blHeader.WaiverFk_UserID); //NOT FOUND
                 oDq.AddBigIntegerParam("@UserAdded", blHeader.UserAdded);
                 oDq.AddBigIntegerParam("@UserEdited", blHeader.UserEdited);
@@ -400,6 +400,7 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@AddressCFSId", blHeader.AddressCFSId);
                 oDq.AddBigIntegerParam("@PortFrtPayableID", blHeader.PortFrtPayableID);
                 oDq.AddIntegerParam("@DPTId", blHeader.DPTId);
+                oDq.AddBigIntegerParam("@CHAId", blHeader.CHAId);
 
                 blId = Convert.ToInt32(oDq.GetScalar());
             }
@@ -857,7 +858,6 @@ namespace EMS.DAL
             return myDataTable;
         }
 
-       
         public static DataTable GetReceivedAmtBreakup(Int64 InvoiceId)
         {
             string strExecution = "[trn].[GetReceivedAmountBreakeup]";
@@ -870,6 +870,31 @@ namespace EMS.DAL
             }
             return myDataTable;
         }
-                
+
+        public static string GetCHAId(string CHAName)
+        {
+            string strExecution = "uspGetCHAIdForBL";
+            string chaId = string.Empty;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@CHAName", 50, CHAName);
+                chaId = Convert.ToString(oDq.GetScalar());
+            }
+            return chaId;
+        }
+
+        public static string GetCHAName(long CHAId)
+        {
+            string strExecution = "uspGetCHAName";
+            string chaName = string.Empty;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@CHAId", CHAId);
+                chaName = Convert.ToString(oDq.GetScalar());
+            }
+            return chaName;
+        }
     }
 }

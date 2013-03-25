@@ -156,6 +156,8 @@ namespace EMS.WebApp.Transaction
                 FillSubmittedDocument(BLDataSet.Tables[2]);
                 FillInvoiceStatus(Convert.ToInt64(hdnBLId.Value));
                 FillDoExtension(BLDataSet.Tables[3]);
+
+
             }
         }
 
@@ -562,7 +564,9 @@ namespace EMS.WebApp.Transaction
 
         protected void imgBtnExaminationDo_Click(object sender, ImageClickEventArgs e)
         {
-            Response.Redirect("../Reports/InvDO.aspx");
+            //Response.Redirect("../Reports/InvDO.aspx");
+            //href='<%# "Popup/Report.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString())%>'     
+
         }
 
         protected void btnSave2_Click(object sender, EventArgs e)
@@ -809,6 +813,7 @@ namespace EMS.WebApp.Transaction
 
         protected void lnkDO_Click(object sender, EventArgs e)
         {
+            PopulateInvoiceButtons();
             mpeDo.Show();
         }
 
@@ -1132,6 +1137,40 @@ namespace EMS.WebApp.Transaction
             mpeMoneyReceivedDetail.Show();
 
         }
+
+
+        void PopulateInvoiceButtons()
+        {
+            imgBtnExaminationDo.Attributes.Add("onclick", string.Format("return ReportPrint('{0}','{1}','{2}');", "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("eDeliveryOrder"),
+                "&invBLHeader=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue)));
+            //window.open ('Popup/Report.aspx?reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("eDeliveryOrder") + "&invBLHeader=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text) + "&Location=" + ddlLocation.SelectedValue + "', 'mywindow','status=1,toolbar=1');");
+
+
+
+            imgBtnFinalDo.Attributes.Add("onclick", string.Format("return ReportPrint('{0}','{1}','{2}');", "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("DeliveryOrder"),
+                "&invBLHeader=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue)));
+        }
+
+        protected void gvwInvoice_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+                HiddenField hdnInvID = (HiddenField)e.Row.FindControl("hdnInvID");
+                System.Web.UI.HtmlControls.HtmlAnchor aPrint = (System.Web.UI.HtmlControls.HtmlAnchor)e.Row.FindControl("aPrint");
+
+                aPrint.Attributes.Add("onclick", string.Format("return ReportPrint1('{0}','{1}','{2}','{3}','{4}');", 
+                    "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("InvoiceDeveloper"),
+                    "&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), 
+                    "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue),
+                    "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(user.FirstName + " " + user.LastName),
+                    "&InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(hdnInvID.Value)));               
+
+            }
+
+        }
+
+
 
     }
 }

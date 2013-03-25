@@ -81,6 +81,26 @@ namespace EMS.WebApp.Transaction
             //AC_CANotice1.TextChanged += new EventHandler(AC_CANotice1_TextChanged);
             AC_CFSCode1.TextChanged += new EventHandler(AC_CFSCode1_TextChanged);
             AC_Port5.TextChanged += new EventHandler(AC_Port5_TextChanged);
+            AC_CHA1.TextChanged += new EventHandler(AC_CHA1_TextChanged);
+        }
+
+        void AC_CHA1_TextChanged(object sender, EventArgs e)
+        {
+            string chaName = ((TextBox)AC_CHA1.FindControl("txtCha")).Text.Trim();
+
+            if (chaName != string.Empty)
+            {
+                string chaId = new ImportBLL().GetCHAId(chaName);
+
+                if (!ReferenceEquals(chaId, null))
+                    ViewState["CHAID"] = chaId;
+                else
+                    ViewState["CHAID"] = null;
+            }
+            else
+            {
+                ViewState["CHAID"] = null;
+            }
         }
 
         void AC_CFSCode1_TextChanged(object sender, EventArgs e)
@@ -783,6 +803,8 @@ namespace EMS.WebApp.Transaction
                 int blId = new ImportBLL().SaveImportBL(blHeader);
 
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Record saved successfully!');</script>", false);
+
+                Response.Redirect("~/Transaction/ImportBL.aspx");
             }
         }
 
@@ -853,6 +875,7 @@ namespace EMS.WebApp.Transaction
             LoadContainerTypeDDL();
             //ISOCodeDDL();
             LoadSurveyorDDL();
+            //LoadCHADDL();
 
             string PAN = new ImportBLL().GetPanNoById(1);
             txtMLOCode.Text = PAN;
@@ -983,6 +1006,32 @@ namespace EMS.WebApp.Transaction
             ddlSurveyor.DataBind();
         }
 
+        /*
+        private void LoadCHADDL()
+        {
+            try
+            {
+                DataTable dt = new ImportBLL().GetCHAId();
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataRow dr = dt.NewRow();
+                    dr["fk_AddressID"] = "0";
+                    dr["AddrName"] = "--Select--";
+                    dt.Rows.InsertAt(dr, 0);
+                    ddlCHAid.DataValueField = "fk_AddressID";
+                    ddlCHAid.DataTextField = "AddrName";
+                    ddlCHAid.DataSource = dt;
+                    ddlCHAid.DataBind();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        */
+
         //private void ISOCodeDDL()
         //{
         //    DataTable dt = new ImportBLL().GetISOCode();
@@ -1028,7 +1077,7 @@ namespace EMS.WebApp.Transaction
 
             header.BillOfEntryNo = Convert.ToString(txtBillEntery.Text.Trim());
             header.BLIssuePortID = Convert.ToInt32(ViewState[ISSUEPORTID]);
-            header.CACode = Convert.ToString(txtCACode.Text.Trim());
+            //header.CACode = Convert.ToString(txtCACode.Text.Trim());
             header.CargoMovement = Convert.ToString(txtCMCode.Text.Trim());
             header.CargoNature = Convert.ToString(rdoNatureCargo.SelectedValue);
             header.CargoType = Convert.ToString(rdoCargoType.SelectedValue);
@@ -1159,6 +1208,8 @@ namespace EMS.WebApp.Transaction
             header.WaiverFk_UserID = _userId;
             header.UserAdded = _userId;
             header.UserEdited = _userId;
+
+            header.CHAId = Convert.ToInt64(ViewState["CHAID"]);
 
             if (hdnFilePath.Value != string.Empty)
                 header.WaiverLetterUpload = @"~\Transaction\WaiverFile\" + hdnFilePath.Value;
@@ -1355,6 +1406,7 @@ namespace EMS.WebApp.Transaction
             //    errShipper.Text = "This field is required";
             //}
 
+            /*  -- Blocking on Client Request
             if (Convert.ToString(ViewState[CONSIGNEEEADDRID]) == string.Empty || Convert.ToString(ViewState[CONSIGNEEEADDRID]) == "0")
             {
                 IsValid = false;
@@ -1366,6 +1418,7 @@ namespace EMS.WebApp.Transaction
                 IsValid = false;
                 errNP.Text = "This field is required";
             }
+            */
 
             //if (Convert.ToString(ViewState[CANADDRID]) == string.Empty)
             //{
@@ -1624,7 +1677,7 @@ namespace EMS.WebApp.Transaction
 
             txtBillEntery.Text = header.BillOfEntryNo;
             ViewState[ISSUEPORTID] = header.BLIssuePortID;
-            txtCACode.Text = header.CACode;
+            //txtCACode.Text = header.CACode;  -- Replaced on demand
             txtCMCode.Text = header.CargoMovement;
             rdoNatureCargo.SelectedValue = header.CargoNature;
             rdoCargoType.SelectedValue = header.CargoType;
@@ -1686,6 +1739,11 @@ namespace EMS.WebApp.Transaction
             txtPGRFreeDays.Text = header.PGR_FreeDays.ToString();
             ViewState[PORTOFDISCHARGEID] = header.PortDischarge;
             ViewState[PORTOFLOADINGID] = header.PortLoading;
+
+            //ddlCHAid.SelectedValue = header.CHAId.ToString();
+
+            ViewState["CHAID"] = header.CHAId;
+            ((TextBox)AC_CHA1.FindControl("txtCha")).Text = new ImportBLL().GetCHAName(header.CHAId);
 
             if (header.Reefer == true)
                 rdoReefer.SelectedValue = "Yes";

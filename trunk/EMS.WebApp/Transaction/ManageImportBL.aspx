@@ -16,6 +16,7 @@
 <%@ Register Src="~/CustomControls/AC_NParty.ascx" TagName="AC_NParty" TagPrefix="uc10" %>
 <%@ Register Src="~/CustomControls/AC_Shipper.ascx" TagName="AC_Shipper" TagPrefix="uc11" %>
 <%@ Register Src="~/CustomControls/AC_CFSCode.ascx" TagName="AC_CFSCode" TagPrefix="uc12" %>
+<%@ Register src="~/CustomControls/AC_CHA.ascx" tagname="AC_CHA" tagprefix="uc13" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
@@ -485,12 +486,21 @@
                                                             </td>
                                                             <td>
                                                             </td>
-                                                            <td>
+                                                            <%--<td>
                                                                 Carrier Agency Code:
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtCACode" runat="server" CssClass="textboxuppercase" MaxLength="10"
                                                                     Width="250px" TabIndex="34"></asp:TextBox>
+                                                            </td>--%>
+                                                            <td>
+                                                                CHA:
+                                                            </td>
+                                                            <td>
+                                                                <%--<asp:DropDownList ID="ddlCHAid" runat="server" CssClass="dropdownlist">
+                                                                    <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
+                                                                </asp:DropDownList>--%>
+                                                                <uc13:AC_CHA ID="AC_CHA1" runat="server" />
                                                             </td>
                                                         </tr>
                                                         <tr>

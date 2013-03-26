@@ -646,7 +646,7 @@ namespace EMS.WebApp.Transaction
                 txtRatePerTon.Text = chargeRates[0].RatePerTON.ToString();
                 txtUSD.Text = chargeRates[0].Usd.ToString();
                 txtGrossAmount.Text = chargeRates[0].GrossAmount.ToString();
-                txtServiceTax.Text = chargeRates[0].STax.ToString();
+                txtServiceTax.Text = (chargeRates[0].STax + chargeRates[0].ServiceTaxCessAmount + chargeRates[0].ServiceTaxACess).ToString();
                 txtTotal.Text = chargeRates[0].TotalAmount.ToString();
 
                 ViewState["RATEPERPTEU"] = chargeRates[0].SharingTEU;
@@ -654,6 +654,7 @@ namespace EMS.WebApp.Transaction
                 ViewState["RATEPERPBL"] = chargeRates[0].SharingBL;
                 ViewState["CESSAMOUNT"] = chargeRates[0].ServiceTaxCessAmount;
                 ViewState["ADDCESS"] = chargeRates[0].ServiceTaxACess;
+                ViewState["STAX"] = chargeRates[0].STax;
             }
         }
 
@@ -703,7 +704,7 @@ namespace EMS.WebApp.Transaction
                 e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "RatePerTON"));
                 e.Row.Cells[7].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Usd"));
                 e.Row.Cells[8].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "GrossAmount"));
-                e.Row.Cells[9].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "STax"));
+                e.Row.Cells[9].Text = Convert.ToString(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "STax")) + Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ServiceTaxCessAmount")) + Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ServiceTaxACess")));
                 e.Row.Cells[10].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "TotalAmount"));
 
                 //Delete link
@@ -838,7 +839,9 @@ namespace EMS.WebApp.Transaction
             charge.RatePerFEU = Convert.ToDecimal(txtRateperFEU.Text);
             charge.RatePerTEU = Convert.ToDecimal(txtRatePerTEU.Text);
             charge.RatePerTON = Convert.ToDecimal(txtRatePerTon.Text);
-            charge.STax = Convert.ToDecimal(txtServiceTax.Text);
+
+            if (ViewState["STAX"] != null)
+                charge.STax = Convert.ToDecimal(ViewState["STAX"]);  //Convert.ToDecimal(txtServiceTax.Text);
 
             if (ViewState["RATEPERPBL"] != null)
                 charge.SharingBL = Convert.ToDecimal(ViewState["RATEPERPBL"]);
@@ -852,7 +855,7 @@ namespace EMS.WebApp.Transaction
             if (ViewState["ADDCESS"] != null)
                 charge.ServiceTaxACess = Convert.ToDecimal(ViewState["ADDCESS"]);
 
-            charge.STax = Convert.ToDecimal(txtServiceTax.Text);
+            //charge.STax = Convert.ToDecimal(txtServiceTax.Text);
 
             if (Convert.ToInt32(ddlFTerminal.SelectedValue) != 0)
             {
@@ -944,7 +947,7 @@ namespace EMS.WebApp.Transaction
             ddlInvoiceType.SelectedValue = invoice.InvoiceTypeID.ToString();
             ddlLocation.SelectedValue = invoice.LocationID.ToString();
             ddlNvocc.SelectedValue = invoice.NVOCCID.ToString();
-            txtServiceTax.Text = invoice.ServiceTax.ToString();
+            //txtServiceTax.Text = invoice.ServiceTax.ToString();
             txtExchangeRate.Text = invoice.XchangeRate.ToString();
 
             long nvoccId = Convert.ToInt64(ddlNvocc.SelectedValue);
@@ -994,7 +997,7 @@ namespace EMS.WebApp.Transaction
             TEU(GeneralFunctions.DecryptQueryString(Request.QueryString["p1"].ToString()));
             FEU(GeneralFunctions.DecryptQueryString(Request.QueryString["p1"].ToString()));
             Volume(GeneralFunctions.DecryptQueryString(Request.QueryString["p1"].ToString()));
-            
+
             /*
             BLdate(Request.QueryString["BLNo"].ToString());
             */

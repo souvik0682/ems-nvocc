@@ -114,7 +114,7 @@ namespace EMS.WebApp.Reports.ReportViewer
             rptViewer.ShowParameterPrompts = false;
             rptViewer.ShowPromptAreaButton = false;
             rptViewer.ShowToolBar = true;
-            rptViewer.ShowPrintButton = true;
+            rptViewer.ShowPrintButton = true;            
             rptViewer.ShowReportBody = true;
             rptViewer.ServerReport.Refresh();
         }

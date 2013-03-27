@@ -118,27 +118,34 @@ namespace EMS.WebApp.Transaction
         private void PopulateAllData()
         {
             ClearAll();
+            DisableAllServiceControls();
             BLDataSet = oImportBLL.GetBLQuery(txtBlNo.Text.Trim(), (int)EMS.Utilities.Enums.BLActivity.DOE);
             txtBlNo.Text = string.Empty;
             if (BLDataSet.Tables[0].Rows.Count > 0)
             {
                 fillBLDetail(BLDataSet.Tables[0]);
 
-                //FREIGHTTYPE
-                if (BLDataSet.Tables[0].Rows[0]["FREIGHTTYPE"].ToString().ToLower() == "pp")
+                if (Convert.ToDateTime(BLDataSet.Tables[0].Rows[0]["LANDINGDT"].ToString()) > Convert.ToDateTime("01/01/1950"))//
                 {
-                    chkFreightToCollect.Enabled = false;
-                    chkDo.Enabled = true;
+                    if (BLDataSet.Tables[0].Rows[0]["FREIGHTTYPE"].ToString().ToLower() == "pp")
+                    {
+                        chkFreightToCollect.Enabled = false;
+                        chkDo.Enabled = true;
+                    }
+                    else
+                    {
+                        if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["RECPTCHECK"].ToString()) == true)
+                            chkDo.Enabled = true;
+                        else
+                            chkDo.Enabled = false;
+
+                        chkFreightToCollect.Enabled = true;
+                        txtFreightToCollect.Text = BLDataSet.Tables[0].Rows[0]["FREIGHTTOCOLLECT"].ToString();
+                    }
                 }
                 else
                 {
-                    if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["RECPTCHECK"].ToString()) == true)
-                        chkDo.Enabled = true;
-                    else
-                        chkDo.Enabled = false;
-
-                    chkFreightToCollect.Enabled = true;
-                    txtFreightToCollect.Text = BLDataSet.Tables[0].Rows[0]["FREIGHTTOCOLLECT"].ToString();
+                    chkDo.Enabled = true;
                 }
 
                 //if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["FREIGHTTOCOLLECT"]) == true)
@@ -149,6 +156,7 @@ namespace EMS.WebApp.Transaction
                 if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["FSTINVGENERATED"]) == true)
                 {
                     EnableDisableServiceRequestSection();
+                    //imgBtnFinalDo.Enabled = true;
                 }
 
                 fillServiceRequest(BLDataSet.Tables[0]);
@@ -179,12 +187,15 @@ namespace EMS.WebApp.Transaction
             hdnBLId.Value = dtDetail.Rows[0]["BLID"].ToString();
             txtBlNo.Text = dtDetail.Rows[0]["BLNO"].ToString();
             txtCha.Text = dtDetail.Rows[0]["CHA"].ToString();
-            txtLandingDate.Text = Convert.ToDateTime(dtDetail.Rows[0]["LANDINGDT"].ToString()).ToString("dd/MM/yyyy");
+            if (Convert.ToDateTime(dtDetail.Rows[0]["LANDINGDT"].ToString()) > Convert.ToDateTime("01/01/1950"))//
+                txtLandingDate.Text = Convert.ToDateTime(dtDetail.Rows[0]["LANDINGDT"].ToString()).ToString("dd/MM/yyyy");
             txtVessel.Text = dtDetail.Rows[0]["VESSEL"].ToString();
             txtVoyage.Text = dtDetail.Rows[0]["VOYAGE"].ToString();
             txtDetentionFreeDays.Text = dtDetail.Rows[0]["DTNFREEDAYS"].ToString();
             txtPGRFreedays.Text = dtDetail.Rows[0]["PGRFREEDAYS"].ToString();
-            txtPGRTill.Text = dtDetail.Rows[0]["PGRTILL"].ToString();
+
+            if (Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()) > Convert.ToDateTime("01/01/1950"))
+                txtPGRTill.Text = dtDetail.Rows[0]["PGRTILL"].ToString();
 
             ddlLine.SelectedValue = dtDetail.Rows[0]["LINE"].ToString();
             ddlLocation.SelectedValue = dtDetail.Rows[0]["LOCATION"].ToString();
@@ -192,29 +203,43 @@ namespace EMS.WebApp.Transaction
             if (Convert.ToDateTime(dtDetail.Rows[0]["DOVALIDUPTO"].ToString()) > Convert.ToDateTime("01/01/1950"))
                 txtDoValidUpto.Text = dtDetail.Rows[0]["DOVALIDUPTO"].ToString();
             else
-                txtDoValidUpto.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtDetentionFreeDays.Text) - 1).ToShortDateString();
+            {
+                if (!String.IsNullOrEmpty(txtLandingDate.Text))
+                    txtDoValidUpto.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtDetentionFreeDays.Text) - 1).ToShortDateString();
+            }
 
             //if (!string.IsNullOrEmpty(dtDetail.Rows[0]["DTNUPTO"].ToString()))
             if (Convert.ToDateTime(dtDetail.Rows[0]["DTNUPTO"].ToString()) > Convert.ToDateTime("01/01/1950"))
                 tstDetentionTill.Text = dtDetail.Rows[0]["DTNUPTO"].ToString();
             else
-                tstDetentionTill.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtDetentionFreeDays.Text) - 1).ToShortDateString();
+            {
+                if (!String.IsNullOrEmpty(txtLandingDate.Text))
+                    tstDetentionTill.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtDetentionFreeDays.Text) - 1).ToShortDateString();
+            }
 
             //if (!string.IsNullOrEmpty(dtDetail.Rows[0]["PGRTILL"].ToString()))
             if (Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()) > Convert.ToDateTime("01/01/1950"))
                 txtPGRTill.Text = dtDetail.Rows[0]["PGRTILL"].ToString();
             else
-                txtPGRTill.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtPGRFreedays.Text) - 1).ToShortDateString();
+            {
+                if (!String.IsNullOrEmpty(txtLandingDate.Text))
+                    txtPGRTill.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtPGRFreedays.Text) - 1).ToShortDateString();
+            }
         }
 
         void fillServiceRequest(DataTable dtDetail)
         {
-            //txtDoValidTill.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtDetentionFreeDays.Text) - 1).ToShortDateString();
 
-            //if (dtDetail.Rows[0]["FREIGHTTYPE"].ToString().ToLower() == "pp")
-            //    chkFreightPaidstatus.Checked = true;
-            //else
-            //    chkFreightPaidstatus.Checked = false;
+            if (Convert.ToDateTime(dtDetail.Rows[0]["LANDINGDT"].ToString()) < Convert.ToDateTime("01/01/1950"))
+            {
+                tdFinalDo.Visible = false;
+                tdExmDo.Attributes.Add("colspan", "2");
+            }
+            else
+            {
+                tdFinalDo.Visible = true;
+                tdExmDo.Attributes.Add("colspan", "1");
+            }
 
 
             if (dtDetail.Rows[0]["DESTUFFING"].ToString() == "0")
@@ -1027,6 +1052,8 @@ namespace EMS.WebApp.Transaction
             gvwInvoice.DataSource = null;
             gvwInvoice.DataBind();
 
+            chkFreightToCollect.Checked = false;
+            chkDo.Checked = false;
             chkOriginalBL.Checked = false;
             chkEndorseHBL.Checked = false;
             chkContainerBond.Checked = false;
@@ -1159,15 +1186,37 @@ namespace EMS.WebApp.Transaction
                 HiddenField hdnInvID = (HiddenField)e.Row.FindControl("hdnInvID");
                 System.Web.UI.HtmlControls.HtmlAnchor aPrint = (System.Web.UI.HtmlControls.HtmlAnchor)e.Row.FindControl("aPrint");
 
-                aPrint.Attributes.Add("onclick", string.Format("return ReportPrint1('{0}','{1}','{2}','{3}','{4}');", 
+                aPrint.Attributes.Add("onclick", string.Format("return ReportPrint1('{0}','{1}','{2}','{3}','{4}');",
                     "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("InvoiceDeveloper"),
-                    "&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), 
+                    "&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text),
                     "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue),
                     "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(user.FirstName + " " + user.LastName),
-                    "&InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(hdnInvID.Value)));               
+                    "&InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(hdnInvID.Value)));
 
             }
 
+        }
+
+        void DisableAllCheckBoxes()
+        {
+            chkFreightToCollect.Enabled = false;
+            chkDo.Enabled = false;
+            chkDoExtension.Enabled = false;
+            chkDetensionExtension.Enabled = false;
+            chkPGRExtension.Enabled = false;
+            chkSecurityInv.Enabled = false;
+            chkFinalInvoice.Enabled = false;
+            chkOtherInv.Enabled = false;
+            chkAmendment.Enabled = false;
+            chkBondCancel.Enabled = false;
+        }
+
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            ClearAll();
+            DisableAllServiceControls();
+            DisableAllCheckBoxes();
+            UpdatePanel2.Update();
         }
 
 

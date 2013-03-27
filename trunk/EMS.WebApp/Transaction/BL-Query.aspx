@@ -27,32 +27,64 @@
 
         }
     </script>
+    <script type="text/javascript">
+        function EnableDisable(ddlNo) {
+
+            var ddlLocation = document.getElementById('<%= ddlLocation.ClientID %>');
+            var ddlLine = document.getElementById('<%= ddlLine.ClientID %>');
+            var txtBlNo = document.getElementById('<%= txtBlNo.ClientID %>');
+            var btnReset = document.getElementById('<%= btnReset.ClientID %>');
+            switch (ddlNo) {
+                case 1:
+                    if (ddlLocation.options[ddlLocation.selectedIndex].value == "0") {
+                        ddlLine.disabled = true;
+                        txtBlNo.disabled = true;
+                        txtBlNo.value = "";
+                        btnReset.click();
+                    }
+                    else {
+                        ddlLine.disabled = false;
+                    }
+
+                    break;
+                case 2:
+                    if (ddlLine.options[ddlLine.selectedIndex].value == "0") {
+                        txtBlNo.disabled = true;
+                        txtBlNo.value = "";
+                        btnReset.click();
+                    }
+                    else {
+                        txtBlNo.disabled = false;
+                    }
+                    break;
+            }
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
+    <asp:Button ID="btnReset" runat="server" Style="display: none;" Text="Reset" OnClick="btnReset_Click" />
     <div>
         <div id="headercaption">
             B/L QUERY</div>
         <center>
             <fieldset style="width: 98%; display: block;">
                 <legend>B/L Detail</legend>
-                <%-- <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                    <ContentTemplate>--%>
                 <table border="0" cellpadding="2" cellspacing="3" width="100%">
                     <tr>
                         <td style="width: 9%;">
                             Location :
                         </td>
                         <td width="6%">
-                            <asp:DropDownList ID="ddlLocation" runat="server" Width="70" AutoPostBack="True"
-                                OnSelectedIndexChanged="LocationLine_Changed">
+                            <asp:DropDownList ID="ddlLocation" runat="server" Width="70" AutoPostBack="false"
+                                onchange="EnableDisable(1);" OnSelectedIndexChanged="LocationLine_Changed">
                             </asp:DropDownList>
                         </td>
                         <td style="width: 5%;">
                             Line :
                         </td>
                         <td style="width: 5%;">
-                            <asp:DropDownList ID="ddlLine" runat="server" Width="100" AutoPostBack="True" OnSelectedIndexChanged="LocationLine_Changed"
-                                Enabled="false">
+                            <asp:DropDownList ID="ddlLine" runat="server" Width="100" AutoPostBack="false" OnSelectedIndexChanged="LocationLine_Changed"
+                                Enabled="false" onchange="EnableDisable(2);">
                             </asp:DropDownList>
                         </td>
                         <td style="width: 9%;">
@@ -61,7 +93,7 @@
                         <td style="width: 5%;">
                             <asp:HiddenField ID="hdnBLId" runat="server" Value="0" />
                             <asp:TextBox ID="txtBlNo" runat="server" Width="150" AutoPostBack="True" OnTextChanged="txtBlNo_TextChanged"
-                                onkeyup="SetContextKey();" Enabled="false"></asp:TextBox>
+                                onkeyup="SetContextKey();" Enabled="false" Style="text-transform: uppercase;"></asp:TextBox>
                             <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx" ID="autoComplete1"
                                 TargetControlID="txtBlNo" ServicePath="~/GetLocation.asmx" ServiceMethod="GetBLNoList"
                                 MinimumPrefixLength="1" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
@@ -208,10 +240,12 @@
                     </tr>
                 </table>
             </fieldset>
-            <fieldset style="width: 98%; display: block;">
-                <legend>Service Requests</legend>
-                <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Always">
-                    <ContentTemplate>
+            <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <fieldset style="width: 98%; display: block;">
+                        <legend>Service Requests</legend>
+                        <%--<asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>--%>
                         <table width="100%" border="0" cellspacing="0">
                             <tr style="height: 30px;">
                                 <td>
@@ -219,8 +253,9 @@
                                     <asp:Button ID="btnTemp9" runat="server" Style="display: none;" />
                                     <asp:RadioButton ID="chkFreightToCollect" runat="server" GroupName="Service" AutoPostBack="true"
                                         OnCheckedChanged="chkFreightToCollect_CheckedChanged" Enabled="false" />
+                                    Freight To Collect
                                     <asp:LinkButton ID="lnkFreightToCollect" Enabled="false" runat="server" Text="Freight To Collect"
-                                        ForeColor="Blue" OnClick="lnkFreightToCollect_Click"></asp:LinkButton>
+                                        ForeColor="Blue" OnClick="lnkFreightToCollect_Click" Style="display: none;"></asp:LinkButton>
                                     <cc1:ModalPopupExtender ID="mpeFreight" runat="server" PopupControlID="pnlFreight"
                                         TargetControlID="btnTemp9" BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseFreight">
                                     </cc1:ModalPopupExtender>
@@ -276,8 +311,9 @@
                                     <asp:Button ID="btnTemp7" runat="server" Style="display: none;" />
                                     <asp:RadioButton ID="chkSecurityInv" runat="server" GroupName="Service" AutoPostBack="true"
                                         OnCheckedChanged="chkSecurityInv_CheckedChanged" Enabled="false" />
+                                    Security Invoice
                                     <asp:LinkButton ID="lnkSecurityInv" Enabled="false" runat="server" Text="Security Invoice"
-                                        ForeColor="Blue" OnClick="lnkSecurityInv_Click"></asp:LinkButton>
+                                        ForeColor="Blue" OnClick="lnkSecurityInv_Click" Style="display: none;"></asp:LinkButton>
                                     <cc1:ModalPopupExtender ID="mpeSecurity" runat="server" PopupControlID="pnlSecurity"
                                         TargetControlID="btnTemp7" BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseSecurity">
                                     </cc1:ModalPopupExtender>
@@ -295,7 +331,7 @@
                                             </div>
                                             <div id="dvSecurity" runat="server" style="width: 100%; height: 200px; overflow: auto;
                                                 background-color: White; padding-top: 15px; text-align: center;">
-                                                Please enter B/L No.
+                                                No records found.
                                                 <%--<table style="width:80%;" cellspacing="0" align="center">
                                                 <tr style="height:30px;background-color:#328DC4;color:White; font-weight:bold;"><td>Date</td><td>Print</td></tr>
                                                 <tr><td>01/01/2012</td><td><a href="#"><img src="../Images/Print.png" /></a></td></tr>
@@ -346,17 +382,17 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td width="50%" style="padding-top: 10px;">
+                                                <td id="tdExmDo" runat="server" width="50%" style="padding-top: 10px;">
                                                     <asp:ImageButton ID="imgBtnExaminationDo" runat="server" ImageUrl="~/Images/p1.jpeg"
                                                         ToolTip="Print Examination Do" Height="45" Width="45" AlternateText="Print Examination Do" />
                                                     <br />
                                                     Print Examination Do
                                                 </td>
-                                                <td width="50%" style="padding-top: 10px;">
+                                                <td id="tdFinalDo" runat="server" width="50%" style="padding-top: 10px;">
                                                     <asp:ImageButton ID="imgBtnFinalDo" runat="server" ImageUrl="~/Images/p2.jpeg" ToolTip="Print Final Do"
                                                         Height="45" Width="45" AlternateText="Print Final Do" Enabled="false" />
                                                     <br />
-                                                    Print Final Do
+                                                    Final Do
                                                 </td>
                                             </tr>
                                             <tr>
@@ -384,8 +420,9 @@
                                     <asp:Button ID="btnTemp10" runat="server" Style="display: none;" />
                                     <asp:RadioButton ID="chkFinalInvoice" runat="server" GroupName="Service" AutoPostBack="true"
                                         OnCheckedChanged="chkFinalInvoice_CheckedChanged" Enabled="false" />
+                                    Final Invoice
                                     <asp:LinkButton ID="lnkFinalInvoice" Enabled="false" runat="server" Text="Final Invoice"
-                                        ForeColor="Blue" OnClick="lnkFinalInvoice_Click"></asp:LinkButton>
+                                        ForeColor="Blue" OnClick="lnkFinalInvoice_Click" Style="display: none;"></asp:LinkButton>
                                     <cc1:ModalPopupExtender ID="mpeFinalInv" runat="server" PopupControlID="pnlFinalInv"
                                         TargetControlID="btnTemp10" BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseFinalInv">
                                     </cc1:ModalPopupExtender>
@@ -461,7 +498,7 @@
                                             </div>
                                             <div id="dvDoExtension" runat="server" style="width: 100%; height: 200px; overflow: auto;
                                                 background-color: White; padding-top: 15px; text-align: center;">
-                                                Please enter B/L No.
+                                                No records found.
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -484,8 +521,9 @@
                                     <asp:Button ID="btnTemp8" runat="server" Style="display: none;" />
                                     <asp:RadioButton ID="chkOtherInv" runat="server" GroupName="Service" AutoPostBack="true"
                                         OnCheckedChanged="chkOtherInv_CheckedChanged" Enabled="false" />
+                                    Other Invoice
                                     <asp:LinkButton ID="lnkOtherInv" Enabled="false" runat="server" Text="Other Invoice"
-                                        ForeColor="Blue" OnClick="lnkOtherInv_Click"></asp:LinkButton>
+                                        ForeColor="Blue" OnClick="lnkOtherInv_Click" Style="display: none;"></asp:LinkButton>
                                     <cc1:ModalPopupExtender ID="mpeOi" runat="server" PopupControlID="pnlOI" TargetControlID="btnTemp8"
                                         BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseOI">
                                     </cc1:ModalPopupExtender>
@@ -503,7 +541,7 @@
                                             </div>
                                             <div id="dvOtherInvoice" runat="server" style="width: 100%; height: 200px; overflow: auto;
                                                 background-color: White; padding-top: 15px; text-align: center;">
-                                                Please enter B/L No.
+                                                No records found.
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -543,7 +581,7 @@
                                             </div>
                                             <div id="dvEFD" runat="server" style="width: 100%; height: 200px; overflow: auto;
                                                 background-color: White; padding-top: 15px; text-align: center;">
-                                                Please enter B/L No.
+                                                No records found.
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -659,7 +697,7 @@
                                             </div>
                                             <div id="dvPGR" runat="server" style="width: 100%; height: 200px; overflow: auto;
                                                 background-color: White; padding-top: 15px; text-align: center;">
-                                                Please enter B/L No.
+                                                No records found.
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -682,8 +720,9 @@
                                         OnCheckedChanged="chkBondCancel_CheckedChanged" />--%>
                                     <asp:RadioButton ID="chkBondCancel" runat="server" GroupName="Service" AutoPostBack="true"
                                         OnCheckedChanged="chkBondCancel_CheckedChanged" Enabled="false" />
+                                    Bond Cancellation
                                     <asp:LinkButton ID="lnkBondCancel" Enabled="false" runat="server" Text="Bond Cancellation"
-                                        ForeColor="Blue" OnClick="lnkBondCancel_Click"></asp:LinkButton>
+                                        ForeColor="Blue" OnClick="lnkBondCancel_Click" Style="display: none;"></asp:LinkButton>
                                     <cc1:ModalPopupExtender ID="mpeBond" runat="server" PopupControlID="pnlBondCancel"
                                         TargetControlID="btnTemp5" BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseBC">
                                     </cc1:ModalPopupExtender>
@@ -729,219 +768,226 @@
                                 </td>
                             </tr>
                         </table>
-                    </ContentTemplate>
+                        <%-- </ContentTemplate>
                     <Triggers>
-                        <asp:PostBackTrigger ControlID="txtBlNo" />
+                        <asp:AsyncPostBackTrigger ControlID="btnReset" EventName="Click" />
+                        <asp:AsyncPostBackTrigger ControlID="txtBlNo" EventName="TextChanged" />
                     </Triggers>
-                </asp:UpdatePanel>
-            </fieldset>
-            <div style="float: left; width: 60%;">
-                <fieldset>
-                    <legend>Documents submitted</legend>
-                    <table width="100%" border="0">
-                        <tr>
-                            <td>
-                                <asp:CheckBox ID="chkOriginalBL" runat="server" Text="Original B/Ls" />
-                            </td>
-                            <td>
-                                <asp:CheckBox ID="chkInsuranceCopy" runat="server" Text="Insurance Copy" />
-                            </td>
-                            <td>
-                                <asp:CheckBox ID="chkCopyOfBill" runat="server" Text="Copy of Bill of entry / TR6" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:CheckBox ID="chkEndorseHBL" runat="server" Text="Endorse HBL" />
-                            </td>
-                            <td>
-                                <asp:CheckBox ID="chkCopyOfMasterBL" runat="server" Text="Copy of Master B/L" />
-                            </td>
-                            <td>
-                                <asp:CheckBox ID="chkConsoldatorNOC" runat="server" Text="Consoldator's NOC" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:CheckBox ID="chkContainerBond" runat="server" Text="Container Bond" />
-                            </td>
-                            <td>
-                                <asp:CheckBox ID="chkSecurityCheque" runat="server" Text="Security Cheque" />
-                            </td>
-                            <td>
-                                <asp:CheckBox ID="chkCHSSA" runat="server" Text="Copy of High Seas Sales Agreement" />&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:CheckBox ID="chkBankGuarantee" runat="server" Text="Bank Guarantee" />
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                <div style="float: right; z-index: 100;">
-                                    <asp:Button ID="btnDocSubmit" runat="server" Text="Save" OnClick="btnDocSubmit_Click" />
-                                    <%-- <asp:Button ID="btnDocback" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
+                </asp:UpdatePanel>--%>
+                    </fieldset>
+                    <div style="float: left; width: 60%;">
+                        <fieldset>
+                            <legend>Documents submitted</legend>
+                            <table width="100%" border="0">
+                                <tr>
+                                    <td>
+                                        <asp:CheckBox ID="chkOriginalBL" runat="server" Text="Original B/Ls" />
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox ID="chkInsuranceCopy" runat="server" Text="Insurance Copy" />
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox ID="chkCopyOfBill" runat="server" Text="Copy of Bill of entry / TR6" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:CheckBox ID="chkEndorseHBL" runat="server" Text="Endorse HBL" />
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox ID="chkCopyOfMasterBL" runat="server" Text="Copy of Master B/L" />
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox ID="chkConsoldatorNOC" runat="server" Text="Consoldator's NOC" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:CheckBox ID="chkContainerBond" runat="server" Text="Container Bond" />
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox ID="chkSecurityCheque" runat="server" Text="Security Cheque" />
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox ID="chkCHSSA" runat="server" Text="Copy of High Seas Sales Agreement" />&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:CheckBox ID="chkBankGuarantee" runat="server" Text="Bank Guarantee" />
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <div style="float: right; z-index: 100;">
+                                            <asp:Button ID="btnDocSubmit" runat="server" Text="Save" OnClick="btnDocSubmit_Click" />
+                                            <%-- <asp:Button ID="btnDocback" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
                                         OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />--%>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </fieldset>
-            </div>
-            <div style="float: left; width: 40%;">
-                <fieldset style="height: 125px;">
-                    <legend>Documents uploaded</legend>
-                    <table style="font-size: smaller; height: 25px; width: 100%; text-align: center;"
-                        cellpadding="0" cellspacing="0" border="0">
-                        <tr>
-                            <td style="width: 10%">
-                                <asp:DropDownList ID="ddlUploadedDoc" runat="server" Width="70">
-                                </asp:DropDownList>
-                            </td>
-                            <td style="width: 5%; text-align: left;">
-                                <asp:FileUpload ID="FileUpload1" runat="server" size="5%" />
-                            </td>
-                            <td style="width: 5%; text-align: left;">
-                                <asp:Button ID="btnUpload" runat="server" Text="Upload" Style="height: 22px;" OnClick="btnUpload_Click" />
-                            </td>
-                            <td style="width: 80%;">
-                                <asp:Label ID="lblUploadMsg" runat="server" Style="color: #FF0000"></asp:Label>
-                            </td>
-                        </tr>
-                    </table>
-                    <script language="javascript" type="text/javascript">
-                        function DeleteUploadedDoc(sndr) {
-                            var Id = sndr.id;
-                            document.getElementById('<%= hdnUploadedDocId.ClientID %>').value = Id;
-                            document.getElementById('<%= btnDeleteDoc.ClientID %>').click();
-                        }
-                    </script>
-                    <asp:HiddenField ID="hdnUploadedDocId" runat="server" Value="0" />
-                    <asp:Button ID="btnDeleteDoc" runat="server" OnClick="DeleteUploadedDoc" Style="display: none;" />
-                    <%--<input type="image" onserverclick="DeleteUploadedDoc" id="imgDelDoc" runat="server" src="~/Images/remove.png" style="height:20px; width:20px;" />--%>
-                    <div id="dvDoc" runat="server" style="height: 78px; overflow: auto; vertical-align: top;">
-                    </div>
-                </fieldset>
-            </div>
-            <fieldset style="width: 98%;">
-                <legend>Invoice Status</legend>
-                <table style="width: 100%;">
-                    <tr>
-                        <td>
-                            <asp:Button ID="btnTemp11" runat="server" Style="display: none;" />
-                            <cc1:ModalPopupExtender ID="mpeMoneyReceivedDetail" runat="server" PopupControlID="pnlMoneyReceived"
-                                TargetControlID="btnTemp11" BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseMoneyReceived">
-                            </cc1:ModalPopupExtender>
-                            <asp:Panel ID="pnlMoneyReceived" runat="server" Style="display: none;">
-                                <div style="height: 300; width: 600px; overflow: auto;">
-                                    <div style="background-color: #328DC4; padding-top: 5px;">
-                                        <div style="width: 89%; text-align: left; font-weight: bold; color: White; font-size: 12pt;
-                                            padding-left: 15px; float: left;">
-                                            Received Amount</div>
-                                        <div style="float: left;">
-                                            <asp:ImageButton ID="imgCloseMoneyReceived" runat="server" ImageUrl="~/Images/close-icon.png"
-                                                Style="display: block;" /></div>
-                                        <div style="clear: both;">
                                         </div>
-                                    </div>
-                                    <div id="dvMoneyReceived" runat="server" style="width: 100%; height: 300px; overflow: auto;
-                                        background-color: White; padding-top: 15px; text-align: center;">
-                                        Please enter B/L No.
-                                    </div>
-                                </div>
-                            </asp:Panel>
-                            <asp:GridView ID="gvwInvoice" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                                BorderStyle="None" BorderWidth="0" Width="100%" OnRowDataBound="gvwInvoice_RowDataBound">
-                                <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
-                                <EmptyDataTemplate>
-                                    No Record(s) Found</EmptyDataTemplate>
-                                <Columns>
-                                    <asp:TemplateField>
-                                        <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
-                                        <HeaderTemplate>
-                                            Invoice Type</HeaderTemplate>
-                                        <ItemTemplate>
-                                            <%# Eval("InvoiceType")%>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Location">
-                                        <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
-                                        <HeaderTemplate>
-                                            Invoice No.</HeaderTemplate>
-                                        <ItemTemplate>
-                                            <a id="aInvoice" runat="server" href='<%# "ManageInvoice.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'>
-                                                <%# Eval("InvoiceNo")%></a>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Address">
-                                        <HeaderStyle CssClass="gridviewheader_num" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Right" />
-                                        <HeaderTemplate>
-                                            Invoice Amount</HeaderTemplate>
-                                        <ItemTemplate>
-                                            <%# Eval("Ammount")%>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <HeaderStyle CssClass="gridviewheader_num" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Right" />
-                                        <HeaderTemplate>
-                                            Received Amount</HeaderTemplate>
-                                        <ItemTemplate>
-                                            <asp:HiddenField ID="hdnInvID" runat="server" Value='<%# Eval("InvoiceID")%>' />
-                                            <a href="#" runat="server" onserverclick="ShowReceivedAmt">
-                                                <%# Eval("ReceivedAmt")%></a>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <HeaderStyle CssClass="gridviewheader_num" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Right" />
-                                        <HeaderTemplate>
-                                            CRN Amount</HeaderTemplate>
-                                        <ItemTemplate>
-                                            <a href="#">N/A</a>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <HeaderStyle CssClass="gridviewheader_center" />
-                                        <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" />
-                                        <HeaderTemplate>
-                                            Print</HeaderTemplate>
-                                        <ItemTemplate>
-                                            <a id="aPrint" runat="server">
-                                                <img src="../Images/Print.png" /></a>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <HeaderStyle CssClass="gridviewheader_center" />
-                                        <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" />
-                                        <HeaderTemplate>
-                                            Add Money Recpt.</HeaderTemplate>
-                                        <ItemTemplate>
-                                            <a id="aMoneyRecpt" runat="server" href='<%# "AddEditMoneyReceipts.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'
-                                                style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Ammount")) ? "display:block;": "display:none;" %>'>
-                                                <img alt="Add" src="../Images/ADD.JPG" /></a>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <HeaderStyle CssClass="gridviewheader_center" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Center" />
-                                        <HeaderTemplate>
-                                            Add Credit Note</HeaderTemplate>
-                                        <ItemTemplate>
-                                            <a href="#">
-                                                <img alt="Add" src="../Images/ADD.JPG" /></a>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                </Columns>
-                            </asp:GridView>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                    </div>
+                    <div style="float: left; width: 40%;">
+                        <fieldset style="height: 125px;">
+                            <legend>Documents uploaded</legend>
+                            <table style="font-size: smaller; height: 25px; width: 100%; text-align: center;"
+                                cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td style="width: 10%">
+                                        <asp:DropDownList ID="ddlUploadedDoc" runat="server" Width="70">
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td style="width: 5%; text-align: left;">
+                                        <asp:FileUpload ID="FileUpload1" runat="server" size="5%" />
+                                    </td>
+                                    <td style="width: 5%; text-align: left;">
+                                        <asp:Button ID="btnUpload" runat="server" Text="Upload" Style="height: 22px;" OnClick="btnUpload_Click" />
+                                    </td>
+                                    <td style="width: 80%;">
+                                        <asp:Label ID="lblUploadMsg" runat="server" Style="color: #FF0000"></asp:Label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <script language="javascript" type="text/javascript">
+                                function DeleteUploadedDoc(sndr) {
+                                    var Id = sndr.id;
+                                    document.getElementById('<%= hdnUploadedDocId.ClientID %>').value = Id;
+                                    document.getElementById('<%= btnDeleteDoc.ClientID %>').click();
+                                }
+                            </script>
+                            <asp:HiddenField ID="hdnUploadedDocId" runat="server" Value="0" />
+                            <asp:Button ID="btnDeleteDoc" runat="server" OnClick="DeleteUploadedDoc" Style="display: none;" />
+                            <%--<input type="image" onserverclick="DeleteUploadedDoc" id="imgDelDoc" runat="server" src="~/Images/remove.png" style="height:20px; width:20px;" />--%>
+                            <div id="dvDoc" runat="server" style="height: 78px; overflow: auto; vertical-align: top;">
+                            </div>
+                        </fieldset>
+                    </div>
+                    <fieldset style="width: 98%;">
+                        <legend>Invoice Status</legend>
+                        <table style="width: 100%;">
+                            <tr>
+                                <td>
+                                    <asp:Button ID="btnTemp11" runat="server" Style="display: none;" />
+                                    <cc1:ModalPopupExtender ID="mpeMoneyReceivedDetail" runat="server" PopupControlID="pnlMoneyReceived"
+                                        TargetControlID="btnTemp11" BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseMoneyReceived">
+                                    </cc1:ModalPopupExtender>
+                                    <asp:Panel ID="pnlMoneyReceived" runat="server" Style="display: none;">
+                                        <div style="height: 300; width: 600px; overflow: auto;">
+                                            <div style="background-color: #328DC4; padding-top: 5px;">
+                                                <div style="width: 89%; text-align: left; font-weight: bold; color: White; font-size: 12pt;
+                                                    padding-left: 15px; float: left;">
+                                                    Received Amount</div>
+                                                <div style="float: left;">
+                                                    <asp:ImageButton ID="imgCloseMoneyReceived" runat="server" ImageUrl="~/Images/close-icon.png"
+                                                        Style="display: block;" /></div>
+                                                <div style="clear: both;">
+                                                </div>
+                                            </div>
+                                            <div id="dvMoneyReceived" runat="server" style="width: 100%; height: 300px; overflow: auto;
+                                                background-color: White; padding-top: 15px; text-align: center;">
+                                                No records found.
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
+                                    <asp:GridView ID="gvwInvoice" runat="server" AutoGenerateColumns="false" AllowPaging="true"
+                                        BorderStyle="None" BorderWidth="0" Width="100%" OnRowDataBound="gvwInvoice_RowDataBound">
+                                        <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
+                                        <EmptyDataTemplate>
+                                            No Record(s) Found</EmptyDataTemplate>
+                                        <Columns>
+                                            <asp:TemplateField>
+                                                <HeaderStyle CssClass="gridviewheader" />
+                                                <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                <HeaderTemplate>
+                                                    Invoice Type</HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <%# Eval("InvoiceType")%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Location">
+                                                <HeaderStyle CssClass="gridviewheader" />
+                                                <ItemStyle CssClass="gridviewitem" Width="8%" />
+                                                <HeaderTemplate>
+                                                    Invoice No.</HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <a id="aInvoice" runat="server" href='<%# "ManageInvoice.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'>
+                                                        <%# Eval("InvoiceNo")%></a>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Address">
+                                                <HeaderStyle CssClass="gridviewheader_num" />
+                                                <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Right" />
+                                                <HeaderTemplate>
+                                                    Invoice Amount</HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <%# Eval("Ammount")%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField>
+                                                <HeaderStyle CssClass="gridviewheader_num" />
+                                                <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Right" />
+                                                <HeaderTemplate>
+                                                    Received Amount</HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <asp:HiddenField ID="hdnInvID" runat="server" Value='<%# Eval("InvoiceID")%>' />
+                                                    <a href="#" runat="server" onserverclick="ShowReceivedAmt">
+                                                        <%# Eval("ReceivedAmt")%></a>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField>
+                                                <HeaderStyle CssClass="gridviewheader_num" />
+                                                <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Right" />
+                                                <HeaderTemplate>
+                                                    CRN Amount</HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <a href="#">N/A</a>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField>
+                                                <HeaderStyle CssClass="gridviewheader_center" />
+                                                <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" />
+                                                <HeaderTemplate>
+                                                    Print</HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <a id="aPrint" runat="server" style="cursor: pointer;">
+                                                        <img src="../Images/Print.png" /></a>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField>
+                                                <HeaderStyle CssClass="gridviewheader_center" />
+                                                <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" />
+                                                <HeaderTemplate>
+                                                    Add Money Recpt.</HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <a id="aMoneyRecpt" runat="server" href='<%# "AddEditMoneyReceipts.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'
+                                                        style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Ammount")) ? "display:block;": "display:none;" %>'>
+                                                        <img alt="Add" src="../Images/ADD.JPG" /></a>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField>
+                                                <HeaderStyle CssClass="gridviewheader_center" />
+                                                <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Center" />
+                                                <HeaderTemplate>
+                                                    Add Credit Note</HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <a href="#">
+                                                        <img alt="Add" src="../Images/ADD.JPG" /></a>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="btnReset" EventName="Click" />
+                    <asp:AsyncPostBackTrigger ControlID="txtBlNo" EventName="TextChanged" />
+                </Triggers>
+            </asp:UpdatePanel>
         </center>
     </div>
 </asp:Content>

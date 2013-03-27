@@ -13,6 +13,15 @@ namespace EMS.WebApp.Transaction {
     public partial class BL_Query {
         
         /// <summary>
+        /// btnReset control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReset;
+        
+        /// <summary>
         /// ddlLocation control.
         /// </summary>
         /// <remarks>
@@ -382,6 +391,15 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.ImageButton imgClose;
         
         /// <summary>
+        /// tdExmDo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell tdExmDo;
+        
+        /// <summary>
         /// imgBtnExaminationDo control.
         /// </summary>
         /// <remarks>
@@ -389,6 +407,15 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgBtnExaminationDo;
+        
+        /// <summary>
+        /// tdFinalDo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell tdFinalDo;
         
         /// <summary>
         /// imgBtnFinalDo control.

@@ -34,7 +34,7 @@ namespace EMS.WebApp.Transaction
         {
             RetriveParameters();
             CheckUserAccess();
-            
+
 
             if (!IsPostBack)
             {
@@ -70,8 +70,26 @@ namespace EMS.WebApp.Transaction
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            decimal Cash = 0, Chq=0, Tds=0;
+
+            if (!String.IsNullOrEmpty(txtCashAmt.Text))
+                Cash = Convert.ToDecimal(txtCashAmt.Text);
+
+            if (!String.IsNullOrEmpty(txtChequeAmt.Text))
+                Chq = Convert.ToDecimal(txtChequeAmt.Text);
+
+            if (!String.IsNullOrEmpty(txtTDS.Text))
+                Tds = Convert.ToDecimal(txtTDS.Text);
+
+            if (Convert.ToDecimal(txtPendingAmt.Text) >= (Cash + Chq + Tds))
                 SaveMoneyReceipts();
-        }       
+            else
+            {                
+                Label lbl = new Label();
+                lbl.Text = "<script type='text/javascript'>alert('Pay amount can not be greater than penfing amount');</script>";
+                Page.Controls.Add(lbl);
+            }
+        }
 
         #endregion
 
@@ -88,7 +106,7 @@ namespace EMS.WebApp.Transaction
             {
                 Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["invid"].ToString()), out _InvoiceId);
             }
-        }       
+        }
 
         private void CheckUserAccess()
         {
@@ -119,7 +137,7 @@ namespace EMS.WebApp.Transaction
             //    Response.Redirect("~/Unauthorized.aspx");
             //}
         }
-            
+
         private void LoadData()
         {
             MoneyReceiptsBLL mrBll = new MoneyReceiptsBLL();
@@ -139,7 +157,7 @@ namespace EMS.WebApp.Transaction
 
             hdnLocationID.Value = dt.Rows[0]["LOCID"].ToString();
             hdnNvoccId.Value = dt.Rows[0]["LINEID"].ToString();
-        }       
+        }
 
         private void SaveMoneyReceipts()
         {
@@ -153,7 +171,7 @@ namespace EMS.WebApp.Transaction
             moneyReceipt.ExportImport = Convert.ToChar(ddlExportImport.SelectedValue);
             moneyReceipt.MRDate = Convert.ToDateTime(txtDate.Text);
             moneyReceipt.ChequeNo = txtChqNo.Text;
-            moneyReceipt.ChequeBank = txtBankName.Text;
+            moneyReceipt.ChequeBank = txtBankName.Text.ToUpper();
             if (!string.IsNullOrEmpty(txtChqDate.Text))
                 moneyReceipt.ChequeDate = Convert.ToDateTime(txtChqDate.Text);
 
@@ -186,13 +204,13 @@ namespace EMS.WebApp.Transaction
 
 
         #endregion
-            
+
 
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(txtBLNo.Text));
-        }       
-       
+        }
+
     }
 }

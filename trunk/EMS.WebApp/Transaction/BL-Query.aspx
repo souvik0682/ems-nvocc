@@ -60,6 +60,14 @@
             }
         }
     </script>
+    <script type="text/javascript">
+        function cont() {
+            
+            document.getElementById('<%= btnFinalContinue.ClientID %>').click();
+        }
+            
+        
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
     <asp:Button ID="btnReset" runat="server" Style="display: none;" Text="Reset" OnClick="btnReset_Click" />
@@ -332,15 +340,6 @@
                                             <div id="dvSecurity" runat="server" style="width: 100%; height: 200px; overflow: auto;
                                                 background-color: White; padding-top: 15px; text-align: center;">
                                                 No records found.
-                                                <%--<table style="width:80%;" cellspacing="0" align="center">
-                                                <tr style="height:30px;background-color:#328DC4;color:White; font-weight:bold;"><td>Date</td><td>Print</td></tr>
-                                                <tr><td>01/01/2012</td><td><a href="#"><img src="../Images/Print.png" /></a></td></tr>
-                                                <tr style="background-color:#99CCFF;"><td>01/01/2012</td><td><a href="#"><img src="../Images/Print.png" /></a></td></tr>
-                                                <tr><td>01/01/2012</td><td><a href="#"><img src="../Images/Print.png" /></a></td></tr>
-                                                <tr style="background-color:#99CCFF;"><td>01/01/2012</td><td><a href="#"><img src="../Images/Print.png" /></a></td></tr>
-                                                <tr><td>01/01/2012</td><td><a href="#"><img src="../Images/Print.png" /></a></td></tr>
-                                                <tr style="background-color:#99CCFF;"><td>01/01/2012</td><td><a href="#"><img src="../Images/Print.png" /></a></td></tr>
-                                                </table>--%>
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -468,6 +467,7 @@
                                 <td>
                                 </td>
                                 <td align="right">
+                                    <asp:Button ID="btnFinalContinue" runat="server" Style="display: none;" OnClick="btnFinalContinue_Click" />
                                     <asp:LinkButton ID="lnkGenInvFinalDo" runat="server" Text="Generate Invoice" ForeColor="Blue"
                                         Enabled="false" OnClick="lnkGenInvFinalDo_Click"></asp:LinkButton>
                                 </td>
@@ -876,9 +876,9 @@
                                     <asp:Panel ID="pnlMoneyReceived" runat="server" Style="display: none;">
                                         <div style="height: 300; width: 600px; overflow: auto;">
                                             <div style="background-color: #328DC4; padding-top: 5px;">
-                                                <div style="width: 89%; text-align: left; font-weight: bold; color: White; font-size: 12pt;
+                                                <div id="headerTest" runat="server" style="width: 89%; text-align: left; font-weight: bold; color: White; font-size: 12pt;
                                                     padding-left: 15px; float: left;">
-                                                    Received Amount</div>
+                                                    </div>
                                                 <div style="float: left;">
                                                     <asp:ImageButton ID="imgCloseMoneyReceived" runat="server" ImageUrl="~/Images/close-icon.png"
                                                         Style="display: block;" /></div>

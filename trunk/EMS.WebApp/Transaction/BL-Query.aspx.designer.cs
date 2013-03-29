@@ -508,6 +508,15 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.ImageButton ImageButton3;
         
         /// <summary>
+        /// btnFinalContinue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFinalContinue;
+        
+        /// <summary>
         /// lnkGenInvFinalDo control.
         /// </summary>
         /// <remarks>
@@ -1235,6 +1244,15 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlMoneyReceived;
+        
+        /// <summary>
+        /// headerTest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl headerTest;
         
         /// <summary>
         /// imgCloseMoneyReceived control.

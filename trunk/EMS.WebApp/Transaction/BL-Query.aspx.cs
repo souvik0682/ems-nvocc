@@ -14,6 +14,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Data.SqlTypes;
 using EMS.Common;
+using EMS.Entity;
 
 namespace EMS.WebApp.Transaction
 {
@@ -972,8 +973,101 @@ namespace EMS.WebApp.Transaction
 
         protected void lnkGenInvFinalDo_Click(object sender, EventArgs e)
         {
-            Redirect(txtBlNo.Text.Trim(), "Final Invoice", "3", string.Empty);
+            //Redirect(txtBlNo.Text.Trim(), "Final Invoice", "3", string.Empty);
+            DataTable dtContainers = oImportBLL.GetContainerBLWise(Convert.ToInt64(hdnBLId.Value));
+            bool isQualified = true;
+
+            StringBuilder sbr = new StringBuilder();
+            sbr.Append("<table style='width: 100%; border: none;' cellpadding='0' cellspacing='0'>");
+            sbr.Append("<tr style='background-color:#328DC4;color:White; font-weight:bold;'>");
+
+            sbr.Append("<td style='width: 100px;padding-left:2px;'>Container No.</td>");
+            sbr.Append("<td style='width: 40px;'>Size</td>");
+            sbr.Append("<td style='width: 40px;text-align:right;'>Movement</td>");
+
+            sbr.Append("<td style='width: 90px;text-align:right;'>Material</td>");
+            sbr.Append("<td style='width: 90px;text-align:right;'>Labour</td>");
+
+            sbr.Append("<td style='width: 60px;text-align:center;'>Status</td>");
+            sbr.Append("</tr>");
+
+            for (int rowCount = 0; rowCount < dtContainers.Rows.Count; rowCount++)
+            {
+                string CNTNo = dtContainers.Rows[rowCount]["CntrNo"].ToString();
+                string SIZE = dtContainers.Rows[rowCount]["Size"].ToString();
+                string MOVEMENT = dtContainers.Rows[rowCount]["MoveAbbr"].ToString();
+                string MATERIAL = dtContainers.Rows[rowCount]["Material"].ToString();
+                string LABOUR = dtContainers.Rows[rowCount]["Labour"].ToString();
+                string STATUSIMG = string.Empty;
+
+                if (Convert.ToInt32(dtContainers.Rows[rowCount]["MovSeq"].ToString()) < 50)
+                {
+                    STATUSIMG = "RedFlag.JPG";
+                    isQualified = false;
+                }
+                else
+                {
+                    if(Convert.ToInt32(dtContainers.Rows[rowCount]["RepairID"].ToString()) <= 0)
+                    {
+                        STATUSIMG = "GreenFlag.JPG";
+                    }
+                    else
+                    {
+                        if ((Convert.ToDecimal(MATERIAL) + Convert.ToDecimal(LABOUR)) > 0)
+                        {
+                            STATUSIMG = "GreenFlag.JPG";
+                        }
+                        else
+                        {
+                            STATUSIMG = "YellowFlag.JPG";
+                        }
+                    }
+
+                    
+                }
+
+
+                if (rowCount % 2 == 0) //For ODD row
+                {
+                    sbr.Append("<tr>");
+                    sbr.Append("<td>" + CNTNo + "</td>");
+                    sbr.Append("<td>" + SIZE + "</td>");
+                    sbr.Append("<td>" + MOVEMENT + "</td>");
+
+                    sbr.Append("<td style='text-align:right;'>" + MATERIAL + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + LABOUR + "</td>");
+                    sbr.Append("<td><img src='../Images/" + STATUSIMG + "' /></td>");
+                    sbr.Append("</tr>");
+                }
+                else // For Even Row
+                {
+                    sbr.Append("<tr style='background-color:#99CCFF;'>");
+                    sbr.Append("<td>" + CNTNo + "</td>");
+                    sbr.Append("<td>" + SIZE + "</td>");
+                    sbr.Append("<td>" + MOVEMENT + "</td>");
+
+                    sbr.Append("<td style='text-align:right;'>" + MATERIAL + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + LABOUR + "</td>");
+                    sbr.Append("<td><img src='../Images/" + STATUSIMG + "' /></td>");
+                    sbr.Append("</tr>");
+                }
+            }
+
+            if (isQualified)
+                sbr.Append("<tr><td colspan='6' style='text-align:center;'><input id='btnCon' type='button' value='continue' onclick='cont();' /></td></tr>");
+
+            sbr.Append("</table>");
+
+            headerTest.InnerText = "Container List";
+            dvMoneyReceived.InnerHtml = sbr.ToString();
+
+            mpeMoneyReceivedDetail.Show();
         }
+
+        //void Continue(object sender, EventArgs e)
+        //{
+        //    Redirect(txtBlNo.Text.Trim(), "Final Invoice", "3", string.Empty);
+        //}
 
         protected void lnkGenInvOtherInvoice_Click(object sender, EventArgs e)
         {
@@ -1102,6 +1196,7 @@ namespace EMS.WebApp.Transaction
         protected void ShowReceivedAmt(object sender, EventArgs e)
         {
             System.Web.UI.HtmlControls.HtmlAnchor a = (System.Web.UI.HtmlControls.HtmlAnchor)sender;
+            headerTest.InnerText = "Received Amount";
 
             GridViewRow Row = (GridViewRow)a.NamingContainer;
             HiddenField hdnInvID = (HiddenField)Row.FindControl("hdnInvID");
@@ -1217,6 +1312,11 @@ namespace EMS.WebApp.Transaction
             DisableAllServiceControls();
             DisableAllCheckBoxes();
             UpdatePanel2.Update();
+        }
+
+        protected void btnFinalContinue_Click(object sender, EventArgs e)
+        {
+            Redirect(txtBlNo.Text.Trim(), "Final Invoice", "3", string.Empty);
         }
 
 

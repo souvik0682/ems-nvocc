@@ -747,7 +747,7 @@ namespace EMS.DAL
             return Result;
         }
 
-        public static int SaveUploadedDocument(Int64 BLId, int DocName,string DocType, byte[] DocImage, DateTime UploadDate)
+        public static int SaveUploadedDocument(Int64 BLId, int DocName, string DocType, byte[] DocImage, DateTime UploadDate)
         {
             string strExecution = "[trn].[docUpload]";
             int Res = 0;
@@ -756,7 +756,7 @@ namespace EMS.DAL
             {
                 oDq.AddBigIntegerParam("@fk_BLID", BLId);
                 oDq.AddBigIntegerParam("@DocName", DocName);
-                oDq.AddNVarcharParam("@DocType",100, DocType);                
+                oDq.AddNVarcharParam("@DocType", 100, DocType);
                 oDq.AddImageParam("@DocImg", DocImage);
                 oDq.AddDateTimeParam("@UplodedDate", UploadDate);
 
@@ -850,8 +850,8 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddVarcharParam("@InitialChar", 250, Initial);
-                oDq.AddIntegerParam("@LineId",  LineId);
-                oDq.AddIntegerParam("@LocationID",  LocId);
+                oDq.AddIntegerParam("@LineId", LineId);
+                oDq.AddIntegerParam("@LocationID", LocId);
 
                 myDataTable = oDq.GetTable();
             }
@@ -895,6 +895,19 @@ namespace EMS.DAL
                 chaName = Convert.ToString(oDq.GetScalar());
             }
             return chaName;
+        }
+
+        public static DataTable GetContainerBLWise(Int64 BlId)
+        {
+            string strExecution = "[trn].[GetContainerMovementListOFSingleBL]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@BLID", BlId);
+                myDataTable = oDq.GetTable();
+            }
+            return myDataTable;
         }
     }
 }

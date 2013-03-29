@@ -304,6 +304,8 @@ namespace EMS.WebApp.Equipment
 
         protected void btnProceed_Click(object sender, EventArgs e)
         {
+            lblMessage.Text=string.Empty;
+
             DataTable Dt = CreateDataTable();
 
             foreach (GridViewRow Row in gvContainer.Rows)
@@ -545,6 +547,11 @@ namespace EMS.WebApp.Equipment
         protected void btnBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("container-movement.aspx");
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            lblMessage.Text = string.Empty;
         }
 
     }

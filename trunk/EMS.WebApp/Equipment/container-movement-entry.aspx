@@ -53,7 +53,12 @@
                                     From Status<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlFromStatus" runat="server" Width="155" OnSelectedIndexChanged="ddlFromStatus_SelectedIndexChanged"
+                                <script type="text/javascript">
+                                    function clear() {
+                                        document.getElementById('<%= lblMessage.ClientID %>').innerHTML = "";
+                                    }
+                                </script>                                
+                                    <asp:DropDownList ID="ddlFromStatus" runat="server" Width="155" onchange="clear();" OnSelectedIndexChanged="ddlFromStatus_SelectedIndexChanged"
                                         AutoPostBack="true">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvFromStatus" runat="server" ErrorMessage="Please enter from status"
@@ -197,7 +202,8 @@
                                         </div>
                                         <br />
                                         <asp:Button ID="btnProceed" runat="server" Text="Proceed" OnClick="btnProceed_Click" />
-                                        <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
+                                        <asp:Button ID="btnCancel" runat="server" Text="Cancel" 
+                                            onclick="btnCancel_Click" />
                                     </fieldset>
                                 </center>
                             </asp:Panel>

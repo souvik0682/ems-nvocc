@@ -201,7 +201,7 @@ namespace EMS.BLL
 
         public DataSet GetBLQuery(string ImpBLNo, int ActivityType)
         {
-            return ImportBLDAL.GetBLQuery(ImpBLNo,ActivityType);
+            return ImportBLDAL.GetBLQuery(ImpBLNo, ActivityType);
         }
 
         public int SaveBLQActivity(string Activity, int BLID)
@@ -258,6 +258,11 @@ namespace EMS.BLL
         public string GetCHAName(long CHAId)
         {
             return ImportBLDAL.GetCHAName(CHAId);
+        }
+
+        public DataTable GetContainerBLWise(Int64 BlId)
+        {
+            return ImportBLDAL.GetContainerBLWise(BlId);
         }
 
     }

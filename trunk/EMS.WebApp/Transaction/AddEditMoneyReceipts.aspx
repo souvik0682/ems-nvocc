@@ -43,7 +43,13 @@
             v2 = parseFloat(v2, 10);
             v3 = parseFloat(v3, 10);
 
-            document.getElementById('<%= txtCurrentAmount.ClientID %>').value = v1 + v2 + v3;
+            if ((v1 + v2 + v3) > 0) {
+                document.getElementById('<%= txtCurrentAmount.ClientID %>').value = v1 + v2 + v3;
+            }
+            else
+                document.getElementById('<%= txtCurrentAmount.ClientID %>').value = "";
+
+            
 
         }
 
@@ -55,13 +61,13 @@
             }
             else
                 if (document.getElementById('<%= txtDate.ClientID %>').value == "") {
+                    document.getElementById('<%= rfvDate.ClientID %>').style.display = "block";
                     return false;
-                    document.getElementById('<%= rfvDate.ClientID %>').enabled = true;
                 }
                 else {
                     return true;
                 }
-                
+
         }
 
 
@@ -240,7 +246,7 @@
                         Bank Name
                     </td>
                     <td>
-                        <asp:TextBox ID="txtBankName" Width="150" runat="server" Enabled="false"></asp:TextBox>
+                        <asp:TextBox ID="txtBankName" Width="150" runat="server" Enabled="false" style="text-transform:uppercase;"></asp:TextBox>
                     </td>
                     <td>
                         TDS:
@@ -280,9 +286,8 @@
             </table>
         </fieldset>
         <div>
-            <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" ValidationGroup="vgMoneyRecpt"
-                OnClientClick="return ValidateTotal();" />&nbsp;&nbsp;<asp:Button ID="btnBack" runat="server"
-                    CssClass="button" Text="Back" OnClick="btnBack_Click" />
+            <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" ValidationGroup="vgMoneyRecpt" />&nbsp;&nbsp;<asp:Button
+                ID="btnBack" runat="server" CssClass="button" Text="Back" OnClick="btnBack_Click" />
             &nbsp;
             <asp:Label ID="lblMessage" runat="server"></asp:Label>
         </div>

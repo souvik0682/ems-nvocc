@@ -11,6 +11,7 @@ using System.Configuration;
 using EMS.Utilities.ResourceManager;
 using EMS.Entity;
 using EMS.Common;
+using System.Globalization;
 
 namespace EMS.WebApp.Transaction
 {
@@ -280,7 +281,7 @@ namespace EMS.WebApp.Transaction
 
         private void LoadExchangeRate()
         {
-            txtExchangeRate.Text = new InvoiceBLL().GetExchangeRate(Convert.ToInt64(ddlBLno.SelectedValue)).ToString();
+            txtExchangeRate.Text = new InvoiceBLL().GetExchangeRate(Convert.ToInt64(ddlBLno.SelectedValue)).ToString("0.00", CultureInfo.InvariantCulture);
         }
 
         private void SetDefaultTerminal()
@@ -966,7 +967,7 @@ namespace EMS.WebApp.Transaction
             LoadExchangeRate();
             SetDefaultTerminal();
 
-            txtContainers.Text = ViewState["NOOFTEU"].ToString() + " * 20' & " + ViewState["NOOFFEU"] + " * 40'";
+            txtContainers.Text = ViewState["NOOFTEU"].ToString() + " x 20' & " + ViewState["NOOFFEU"] + " x 40'";
 
             //For Charge Rates
             List<IChargeRate> chargeRates = new InvoiceBLL().GetInvoiceChargesById(InvoiceId);
@@ -1002,7 +1003,7 @@ namespace EMS.WebApp.Transaction
             BLdate(Request.QueryString["BLNo"].ToString());
             */
 
-            txtContainers.Text = ViewState["NOOFTEU"].ToString() + " * 20' & " + ViewState["NOOFFEU"] + " * 40'";
+            txtContainers.Text = ViewState["NOOFTEU"].ToString() + " x 20' & " + ViewState["NOOFFEU"] + " x 40'";
 
             LoadBLNoDDL(line, location);
             ddlBLno.SelectedValue = blId.ToString();

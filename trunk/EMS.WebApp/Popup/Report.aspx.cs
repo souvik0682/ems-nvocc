@@ -20,7 +20,7 @@ namespace EMS.WebApp.Popup
                 }
                 catch
                 {
-
+                    Response.Clear();
                 }
             }
 

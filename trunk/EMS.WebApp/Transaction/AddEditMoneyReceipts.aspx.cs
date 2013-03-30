@@ -86,7 +86,7 @@ namespace EMS.WebApp.Transaction
             else
             {                
                 Label lbl = new Label();
-                lbl.Text = "<script type='text/javascript'>alert('Pay amount can not be greater than penfing amount');</script>";
+                lbl.Text = "<script type='text/javascript'>alert('Receipt Amount can not be more than O/s Amount');</script>";
                 Page.Controls.Add(lbl);
             }
         }

@@ -1,4 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="charge-list.aspx.cs" MasterPageFile="~/Site.Master" Inherits="EMS.WebApp.MasterModule.charge_list" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="charge-list.aspx.cs" MasterPageFile="~/Site.Master"
+    Inherits="EMS.WebApp.MasterModule.charge_list" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -14,24 +16,30 @@
     <div id="headercaption">
         MANAGE CHARGES</div>
     <center>
-        <div style="width: 850px;">
+        <div style="width: 80%;">
             <fieldset style="width: 100%;">
                 <legend>Search Charge</legend>
-                <table>
+                <table border="0">
                     <tr>
                         <td>
                             <asp:TextBox ID="txtChargeName" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
-                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" 
-                                FilterMode="InvalidChars" InvalidChars="<>-" TargetControlID="txtChargeName">
+                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterMode="InvalidChars"
+                                InvalidChars="<>-" TargetControlID="txtChargeName">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtChargeName"
                                 WatermarkText="Charge Title">
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlChargeType" runat="server">
+                            <asp:DropDownList ID="ddlChargeType" runat="server" Width="200">
                             </asp:DropDownList>
                         </td>
+                        <td>
+                            <asp:DropDownList ID="ddlLocation" runat="server" Width="200">
+                            </asp:DropDownList>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>
                             <asp:TextBox ID="txtLine" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters"
@@ -40,6 +48,10 @@
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender3" runat="server" TargetControlID="txtLine"
                                 WatermarkText="LINE">
                             </cc1:TextBoxWatermarkExtender>
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlLine" runat="server" Width="200">
+                            </asp:DropDownList>
                         </td>
                         <td>
                             <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px"
@@ -99,41 +111,52 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="32%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="30%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHType" runat="server" CommandName="Sort" CommandArgument="Name"
                                                 Text="Charge Title"></asp:LinkButton></HeaderTemplate>
                                         <ItemTemplate>
-                                            <asp:Label ID="lblChargeTitle" runat="server" style="text-transform:uppercase;"></asp:Label>
+                                            <asp:Label ID="lblChargeTitle" runat="server" Style="text-transform: uppercase;"></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="12%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHIEc" runat="server" CommandName="Sort" CommandArgument="IEC"
                                                 Text="Import / Export"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="13%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHType" runat="server" CommandName="Sort" CommandArgument="Type"
                                                 Text="Charge Type"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lnkHLocation" runat="server" CommandName="Sort" CommandArgument="Location"
+                                                Text="Location"></asp:LinkButton></HeaderTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHLine" runat="server" CommandName="Sort" CommandArgument="Line"
                                                 Text="Line"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lnkHDate" runat="server" CommandName="Sort" CommandArgument="Date"
+                                                Text="Date"></asp:LinkButton></HeaderTemplate>
+                                    </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Order">
                                         <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Center" />
-                                        <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center"  />
-                                         <%--<HeaderTemplate>
-                                           <asp:LinkButton style="text-align:right;" ID="lnkHDisplayOrder" runat="server" CommandName="Sort" CommandArgument="DisplayOrder"
-                                                Text="Display Order"></asp:LinkButton></HeaderTemplate>--%>
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" />
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
@@ -158,9 +181,9 @@
                 </div>
                 <div style="display: none;">
                     <asp:DropDownList ID="ddlIEC" runat="server" Width="255">
-                        <asp:ListItem Text="Import" Value="I"></asp:ListItem>
-                        <asp:ListItem Text="Export" Value="E"></asp:ListItem>
-                        <asp:ListItem Text="General" Value="G"></asp:ListItem>
+                        <asp:ListItem Text="IMPORT" Value="I"></asp:ListItem>
+                        <asp:ListItem Text="EXPORT" Value="E"></asp:ListItem>
+                        <asp:ListItem Text="GENERAL" Value="G"></asp:ListItem>
                     </asp:DropDownList>
                 </div>
             </fieldset>

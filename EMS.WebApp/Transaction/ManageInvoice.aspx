@@ -148,10 +148,10 @@
                                                     BL
                                                 </td>
                                                 <td style="text-align: right;font-weight:bold">
-                                                    Teu
+                                                    TEU
                                                 </td>
                                                 <td style="text-align: right;font-weight:bold">
-                                                    Feu
+                                                    FEU
                                                 </td>
                                                 <td style="text-align: right;font-weight:bold">
                                                     CBM
@@ -283,11 +283,11 @@
                                                             <HeaderStyle CssClass="gridviewheader_num" />
                                                             <ItemStyle CssClass="gridviewitem" Width="6%" HorizontalAlign="Right" />
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Teu">
+                                                        <asp:TemplateField HeaderText="TEU">
                                                             <HeaderStyle CssClass="gridviewheader_num" />
                                                             <ItemStyle CssClass="gridviewitem" Width="6%" HorizontalAlign="Right" />
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Feu">
+                                                        <asp:TemplateField HeaderText="FEU">
                                                             <HeaderStyle CssClass="gridviewheader_num" />
                                                             <ItemStyle CssClass="gridviewitem" Width="6%" HorizontalAlign="Right" />
                                                         </asp:TemplateField>

@@ -60,6 +60,7 @@ namespace EMS.WebApp.Reports.ReportViewer
                 if (v.ToLower() != "reportname")
                 {
                     rptParameters[i++] = new ReportParameter(v,GeneralFunctions.DecryptQueryString( reportParma[v]));
+                    
                 }
             }
             }            
@@ -90,7 +91,8 @@ namespace EMS.WebApp.Reports.ReportViewer
             foreach(string str in nameValue.AllKeys){
                 if (str.ToLower() != "reportname")
                 {
-                     dic[str]= GeneralFunctions.DecryptQueryString(nameValue[str]);               
+                    dic[str]= GeneralFunctions.DecryptQueryString(nameValue[str]);               
+                    
                    // dic[str] = nameValue[str];
                 }
             }

@@ -62,7 +62,7 @@
     </script>
     <script type="text/javascript">
         function cont() {
-            
+
             document.getElementById('<%= btnFinalContinue.ClientID %>').click();
         }
             
@@ -75,41 +75,43 @@
         <div id="headercaption">
             B/L QUERY</div>
         <center>
-            <fieldset style="width: 98%; display: block;">
-                <legend>B/L Detail</legend>
-                <table border="0" cellpadding="2" cellspacing="3" width="100%">
-                    <tr>
-                        <td style="width: 9%;">
-                            Location :
-                        </td>
-                        <td width="6%">
-                            <asp:DropDownList ID="ddlLocation" runat="server" Width="70" AutoPostBack="false"
-                                onchange="EnableDisable(1);" OnSelectedIndexChanged="LocationLine_Changed">
-                            </asp:DropDownList>
-                        </td>
-                        <td style="width: 5%;">
-                            Line :
-                        </td>
-                        <td style="width: 5%;">
-                            <asp:DropDownList ID="ddlLine" runat="server" Width="100" AutoPostBack="false" OnSelectedIndexChanged="LocationLine_Changed"
-                                Enabled="false" onchange="EnableDisable(2);">
-                            </asp:DropDownList>
-                        </td>
-                        <td style="width: 9%;">
-                            B/L No :
-                        </td>
-                        <td style="width: 5%;">
-                            <asp:HiddenField ID="hdnBLId" runat="server" Value="0" />
-                            <asp:TextBox ID="txtBlNo" runat="server" Width="150" AutoPostBack="True" OnTextChanged="txtBlNo_TextChanged"
-                                onkeyup="SetContextKey();" Enabled="false" Style="text-transform: uppercase;"></asp:TextBox>
-                            <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx" ID="autoComplete1"
-                                TargetControlID="txtBlNo" ServicePath="~/GetLocation.asmx" ServiceMethod="GetBLNoList"
-                                MinimumPrefixLength="1" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
-                                CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
-                                CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
-                                ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected"
-                                UseContextKey="true">
-                                <Animations>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <fieldset style="width: 98%; display: block;">
+                        <legend>B/L Detail</legend>
+                        <table border="0" cellpadding="0" cellspacing="2" width="100%">
+                            <tr>
+                                <td style="width: 6%;">
+                                    Location :
+                                </td>
+                                <td width="6%">
+                                    <asp:DropDownList ID="ddlLocation" runat="server" Width="70" AutoPostBack="false"
+                                        onchange="EnableDisable(1);" OnSelectedIndexChanged="LocationLine_Changed">
+                                    </asp:DropDownList>
+                                </td>
+                                <td style="width: 5%;">
+                                    Line :
+                                </td>
+                                <td style="width: 5%;">
+                                    <asp:DropDownList ID="ddlLine" runat="server" Width="155" AutoPostBack="false" OnSelectedIndexChanged="LocationLine_Changed"
+                                        Enabled="false" onchange="EnableDisable(2);">
+                                    </asp:DropDownList>
+                                </td>
+                                <td style="width: 9%;">
+                                    B/L No :
+                                </td>
+                                <td style="width: 5%;">
+                                    <asp:HiddenField ID="hdnBLId" runat="server" Value="0" />
+                                    <asp:TextBox ID="txtBlNo" runat="server" Width="150" AutoPostBack="True" OnTextChanged="txtBlNo_TextChanged"
+                                        onkeyup="SetContextKey();" Enabled="false" Style="text-transform: uppercase;"></asp:TextBox>
+                                    <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx" ID="autoComplete1"
+                                        TargetControlID="txtBlNo" ServicePath="~/GetLocation.asmx" ServiceMethod="GetBLNoList"
+                                        MinimumPrefixLength="1" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
+                                        CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
+                                        CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
+                                        ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected"
+                                        UseContextKey="true">
+                                        <Animations>
                                         <OnShow>
                                             <Sequence>
                                                 <%-- Make the completion list transparent and then show it --%>
@@ -141,113 +143,115 @@
                                                 <Length PropertyKey="height" StartValueScript="$find('AutoCompleteEx')._height" EndValue="0" />
                                             </Parallel>
                                         </OnHide>
-                                </Animations>
-                            </cc1:AutoCompleteExtender>
-                        </td>
-                        <td style="width: 10%;">
-                            Delivered To (CHA) :
-                        </td>
-                        <td style="width: 10%;">
-                            <asp:TextBox ID="txtCha" runat="server" Width="150"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Landing Date :
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtLandingDate" runat="server" Width="71"></asp:TextBox>
-                        </td>
-                        <td>
-                            Vessel :
-                        </td>
-                        <td>
-                            <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
+                                        </Animations>
+                                    </cc1:AutoCompleteExtender>
+                                </td>
+                                <td style="width: 3%;">
+                                    Delivered To    (CHA) :
+                                </td>
+                                <td style="width: 15%;">
+                                    <asp:TextBox ID="txtCha" runat="server" Width="220" Enabled="false"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Landing Date :
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtLandingDate" runat="server" Width="71" Enabled="false"></asp:TextBox>
+                                </td>
+                                <td>
+                                    Vessel :
+                                </td>
+                                <td>
+                                    <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
                             </cc1:ValidatorCalloutExtender>--%>
-                            <asp:TextBox ID="txtVessel" runat="server" Width="100"></asp:TextBox>
-                        </td>
-                        <td>
-                            Detention Free Days :
-                        </td>
-                        <td>
-                            <%--<asp:ImageButton ID='btnRemove' runat='server' CommandName='Remove' ImageUrl='~/Images/remove.png' Height='16' Width='16' />--%>
-                            <%--<input type="image" onserverclick="DeleteUploadedDoc" id="imgDelDoc" runat="server" src="~/Images/remove.png" style="height:20px; width:20px;" />--%>
-                            <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
+                                    <asp:TextBox ID="txtVessel" runat="server" Width="150" Enabled="false"></asp:TextBox>
+                                </td>
+                                <td>
+                                    Detention Free Days :
+                                </td>
+                                <td>
+                                    <%--<asp:ImageButton ID='btnRemove' runat='server' CommandName='Remove' ImageUrl='~/Images/remove.png' Height='16' Width='16' />--%>
+                                    <%--<input type="image" onserverclick="DeleteUploadedDoc" id="imgDelDoc" runat="server" src="~/Images/remove.png" style="height:20px; width:20px;" />--%>
+                                    <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvSalutation" WarningIconImageUrl="" >
                             </cc1:ValidatorCalloutExtender>--%>
-                            <asp:TextBox ID="txtDetentionFreeDays" runat="server" Width="100"></asp:TextBox>
-                        </td>
-                        <td style="width: 11%;">
-                            PGR free days :
-                        </td>
-                        <td style="width: 10%;">
-                            <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
+                                    <asp:TextBox ID="txtDetentionFreeDays" runat="server" Width="100" Enabled="false"></asp:TextBox>
+                                </td>
+                                <td style="width: 11%;">
+                                    PGR free days :
+                                </td>
+                                <td style="width: 10%;">
+                                    <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
                             </cc1:ValidatorCalloutExtender>--%>
-                            <asp:TextBox ID="txtPGRFreedays" runat="server" Width="100"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            DO Valid Upto :
-                        </td>
-                        <td>
-                            <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
+                                    <asp:TextBox ID="txtPGRFreedays" runat="server" Width="100" Enabled="false"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    DO Valid Upto :
+                                </td>
+                                <td>
+                                    <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvSalutation" WarningIconImageUrl="" >
                             </cc1:ValidatorCalloutExtender>--%>
-                            <asp:TextBox ID="txtDoValidUpto" runat="server" Width="71"></asp:TextBox>
-                        </td>
-                        <td>
-                            Voyage :
-                        </td>
-                        <td>
-                            <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
+                                    <asp:TextBox ID="txtDoValidUpto" runat="server" Width="71" Enabled="false"></asp:TextBox>
+                                </td>
+                                <td>
+                                    Voyage :
+                                </td>
+                                <td>
+                                    <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
                             </cc1:ValidatorCalloutExtender>--%>
-                            <asp:TextBox ID="txtVoyage" runat="server" Width="100"></asp:TextBox>
-                        </td>
-                        <td>
-                            Detention till :
-                        </td>
-                        <td>
-                            <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
+                                    <asp:TextBox ID="txtVoyage" runat="server" Width="150" Enabled="false"></asp:TextBox>
+                                </td>
+                                <td>
+                                    Detention till :
+                                </td>
+                                <td>
+                                    <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
                                 Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvSalutation" WarningIconImageUrl="" >
                             </cc1:ValidatorCalloutExtender>--%>
-                            <asp:TextBox ID="tstDetentionTill" runat="server" Width="100"></asp:TextBox>
-                        </td>
-                        <td>
-                            PGR till :
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtPGRTill" runat="server" Width="100"></asp:TextBox>
-                            <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
+                                    <asp:TextBox ID="tstDetentionTill" runat="server" Width="100" Enabled="false"></asp:TextBox>
+                                </td>
+                                <td>
+                                    PGR till :
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtPGRTill" runat="server" Width="100" Enabled="false"></asp:TextBox>
+                                    <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
                             </cc1:ValidatorCalloutExtender>--%>
-                        </td>
-                    </tr>
-                    <tr style="height: 50px; vertical-align: bottom; display: none;">
-                        <td>
-                        </td>
-                        <td colspan="2">
-                        </td>
-                        <td colspan="2" align="left">
-                            <%-- <asp:HiddenField ID="hdnBlQueryID" runat="server" Value="0" />--%>
-                            <asp:Button ID="btnSave1" runat="server" Text="Save" ValidationGroup="vgCharge" />&nbsp;&nbsp;<asp:Button
-                                ID="btnBack1" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
-                                OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
-                            <asp:Label ID="lblMessageBLQuery" runat="server" ForeColor="Red"></asp:Label>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
+                                </td>
+                            </tr>
+                            <tr style="height: 50px; vertical-align: bottom; display: none;">
+                                <td>
+                                </td>
+                                <td colspan="2">
+                                </td>
+                                <td colspan="2" align="left">
+                                    <%-- <asp:HiddenField ID="hdnBlQueryID" runat="server" Value="0" />--%>
+                                    <asp:Button ID="btnSave1" runat="server" Text="Save" ValidationGroup="vgCharge" />&nbsp;&nbsp;<asp:Button
+                                        ID="btnBack1" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
+                                        OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
+                                    <asp:Label ID="lblMessageBLQuery" runat="server" ForeColor="Red"></asp:Label>
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </ContentTemplate>
+            </asp:UpdatePanel>
             <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <fieldset style="width: 98%; display: block;">
@@ -876,9 +880,9 @@
                                     <asp:Panel ID="pnlMoneyReceived" runat="server" Style="display: none;">
                                         <div style="height: 300; width: 600px; overflow: auto;">
                                             <div style="background-color: #328DC4; padding-top: 5px;">
-                                                <div id="headerTest" runat="server" style="width: 89%; text-align: left; font-weight: bold; color: White; font-size: 12pt;
-                                                    padding-left: 15px; float: left;">
-                                                    </div>
+                                                <div id="headerTest" runat="server" style="width: 89%; text-align: left; font-weight: bold;
+                                                    color: White; font-size: 12pt; padding-left: 15px; float: left;">
+                                                </div>
                                                 <div style="float: left;">
                                                     <asp:ImageButton ID="imgCloseMoneyReceived" runat="server" ImageUrl="~/Images/close-icon.png"
                                                         Style="display: block;" /></div>

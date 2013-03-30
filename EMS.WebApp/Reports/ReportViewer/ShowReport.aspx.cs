@@ -77,8 +77,8 @@ namespace EMS.WebApp.Reports.ReportViewer
                 {
                     if (v.ToLower() != "reportname")
                     {
-                        //rptParameters[i++] = new ReportParameter(v, GeneralFunctions.DecryptQueryString(reportParma[v]));
-                        rptParameters[i++] = new ReportParameter(v,reportParma[v]);
+                        rptParameters[i++] = new ReportParameter(v, GeneralFunctions.DecryptQueryString(reportParma[v]));
+                        //rptParameters[i++] = new ReportParameter(v,reportParma[v]);
                     }
                 }
             }
@@ -100,7 +100,7 @@ namespace EMS.WebApp.Reports.ReportViewer
         }
         public  void LoadReport(Microsoft.Reporting.WebForms.ReportViewer rptViewer,NameValueCollection  reportParma){
             string ReportName = reportParma["ReportName"];
-            Load(rptViewer,ReportName,BindParameter(reportParma)); 
+            Load(rptViewer, GeneralFunctions.DecryptQueryString(ReportName),BindParameter(reportParma)); 
         }
 
         private void Load(Microsoft.Reporting.WebForms.ReportViewer rptViewer, string reportType, ReportParameter[] reportParma)

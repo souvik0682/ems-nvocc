@@ -69,6 +69,7 @@ namespace EMS.Utilities
             string encryptedString = string.Empty;
 
             encryptedString = Encryption.Encrypt(value);
+            
 
             if (encryptedString.Contains("+"))
             {

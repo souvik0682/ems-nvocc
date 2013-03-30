@@ -393,7 +393,7 @@
                                                 </td>
                                                 <td id="tdFinalDo" runat="server" width="50%" style="padding-top: 10px;">
                                                     <asp:ImageButton ID="imgBtnFinalDo" runat="server" ImageUrl="~/Images/p2.jpeg" ToolTip="Print Final Do"
-                                                        Height="45" Width="45" AlternateText="Print Final Do" Enabled="false" />
+                                                        Height="45" Width="45" AlternateText="Print Final Do" />
                                                     <br />
                                                     Final Do
                                                 </td>

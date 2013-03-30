@@ -52,6 +52,8 @@ namespace EMS.WebApp.Transaction
             txtPOL.Text = "";
             txtVessel.Text = "";
             txtVoyageNo.Text = "";
+            txtSLine.Text = "";
+            txtSLocation.Text = "";
 
             SaveNewPageIndex(0);
             LoadImportBL();

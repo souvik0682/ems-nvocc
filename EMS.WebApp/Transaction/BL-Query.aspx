@@ -85,7 +85,7 @@
                                     Location :
                                 </td>
                                 <td width="6%">
-                                    <asp:DropDownList ID="ddlLocation" runat="server" Width="70" AutoPostBack="false"
+                                    <asp:DropDownList ID="ddlLocation" runat="server" Width="70" AutoPostBack="true"
                                         onchange="EnableDisable(1);" OnSelectedIndexChanged="LocationLine_Changed">
                                     </asp:DropDownList>
                                 </td>
@@ -93,7 +93,7 @@
                                     Line :
                                 </td>
                                 <td style="width: 5%;">
-                                    <asp:DropDownList ID="ddlLine" runat="server" Width="155" AutoPostBack="false" OnSelectedIndexChanged="LocationLine_Changed"
+                                    <asp:DropDownList ID="ddlLine" runat="server" Width="155" AutoPostBack="true" OnSelectedIndexChanged="LocationLine_Changed"
                                         Enabled="false" onchange="EnableDisable(2);">
                                     </asp:DropDownList>
                                 </td>

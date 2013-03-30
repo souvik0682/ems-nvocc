@@ -44,7 +44,13 @@
                     }
                     else {
                         ddlLine.disabled = false;
+                        txtBlNo.disabled = true;
+                        txtBlNo.value = "";
+                        ddlLine.selectedIndex = 0;
+                        btnReset.click();
                     }
+
+
 
                     break;
                 case 2:
@@ -55,6 +61,8 @@
                     }
                     else {
                         txtBlNo.disabled = false;
+                        txtBlNo.value = "";
+                        btnReset.click();
                     }
                     break;
             }
@@ -147,7 +155,7 @@
                                     </cc1:AutoCompleteExtender>
                                 </td>
                                 <td style="width: 3%;">
-                                    Delivered To    (CHA) :
+                                    Delivered To (CHA) :
                                 </td>
                                 <td style="width: 15%;">
                                     <asp:TextBox ID="txtCha" runat="server" Width="220" Enabled="false"></asp:TextBox>

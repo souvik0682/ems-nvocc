@@ -215,7 +215,7 @@
                                     <asp:TextBox ID="txtVoyage" runat="server" Width="150" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
-                                    Detention till :
+                                    Detention free till :
                                 </td>
                                 <td>
                                     <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
@@ -225,7 +225,7 @@
                                     <asp:TextBox ID="tstDetentionTill" runat="server" Width="100" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
-                                    PGR till :
+                                    PGR free till :
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtPGRTill" runat="server" Width="100" Enabled="false"></asp:TextBox>

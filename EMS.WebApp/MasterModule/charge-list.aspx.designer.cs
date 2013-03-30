@@ -49,6 +49,15 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.DropDownList ddlChargeType;
         
         /// <summary>
+        /// ddlLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLocation;
+        
+        /// <summary>
         /// txtLine control.
         /// </summary>
         /// <remarks>
@@ -74,6 +83,15 @@ namespace EMS.WebApp.MasterModule {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender3;
+        
+        /// <summary>
+        /// ddlLine control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLine;
         
         /// <summary>
         /// btnSearch control.

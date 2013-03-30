@@ -39,13 +39,37 @@ namespace EMS.WebApp.MasterModule
 
         protected void PopulateDropDown()
         {
-            ListItem Li = new ListItem("All", " ");
+            ListItem Li = new ListItem("ALL", " ");
             foreach (Enums.ChargeType r in Enum.GetValues(typeof(Enums.ChargeType)))
             {
                 ListItem item = new ListItem(Enum.GetName(typeof(Enums.ChargeType), r).Replace('_', ' '), ((int)r).ToString());
                 ddlChargeType.Items.Add(item);
             }
             ddlChargeType.Items.Insert(0, Li);
+
+
+            #region Location
+            //
+            PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlLocation, 0);
+            Li = new ListItem("SELECT LOCATION", "0");
+            ddlLocation.Items.Insert(0, Li);
+            Li = new ListItem("ALL", "-1");
+            ddlLocation.Items.Insert(1, Li);
+            #endregion
+
+
+            #region Line
+
+            PopulateDropDown((int)Enums.DropDownPopulationFor.Line, ddlLine, 0);
+            Li = new ListItem("SELECT LINE", "0");
+            ddlLine.Items.Insert(0, Li);
+            #endregion
+
+        }
+
+        void PopulateDropDown(int Number, DropDownList ddl, int? Filter)
+        {
+            CommonBLL.PopulateDropdown(Number, ddl, Filter, 0);
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
@@ -134,9 +158,18 @@ namespace EMS.WebApp.MasterModule
                 if (!string.IsNullOrEmpty(Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChargeType"))))
                     e.Row.Cells[3].Text = ((Enums.ChargeType)Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "ChargeType"))).ToString().Replace("_", " ");
 
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Line"));
+                string Loc = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Location"));
+                if (Loc != "0")
+                    e.Row.Cells[4].Text = ddlLocation.Items.FindByValue(Loc).Text;
 
-                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "DisplayOrder"));
+                string Lin = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Line"));
+                if (Lin != "0")
+                    e.Row.Cells[5].Text = ddlLine.Items.FindByValue(Lin).Text;
+
+
+                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EffectDate"));
+
+                e.Row.Cells[7].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "DisplayOrder"));
 
                 // Edit link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
@@ -152,7 +185,7 @@ namespace EMS.WebApp.MasterModule
                 {
                     btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
 
-                   
+
                 }
                 else
                 {
@@ -160,7 +193,7 @@ namespace EMS.WebApp.MasterModule
                     btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00009") + "');return false;";
                 }
             }
-          
+
         }
 
         protected void ddlPaging_SelectedIndexChanged(object sender, EventArgs e)
@@ -174,6 +207,8 @@ namespace EMS.WebApp.MasterModule
         #endregion
 
         #region Private Methods
+
+
 
         private void CheckUserAccess()
         {

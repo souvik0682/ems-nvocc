@@ -25,7 +25,7 @@
                         <td>
                             <asp:TextBox ID="txtIGMBLNo" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
-                                FilterMode="ValidChars" ValidChars=" " TargetControlID="txtIGMBLNo">
+                                FilterMode="InvalidChars" ValidChars=" " TargetControlID="txtIGMBLNo">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender4" runat="server" TargetControlID="txtIGMBLNo"
                                 WatermarkText="IGM BL No">
@@ -34,7 +34,7 @@
                         <td>
                             <asp:TextBox ID="txtLineBLNo" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
-                                FilterMode="ValidChars" ValidChars=" " TargetControlID="txtLineBLNo">
+                                FilterMode="InvalidChars" ValidChars=" " TargetControlID="txtLineBLNo">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender5" runat="server" TargetControlID="txtLineBLNo"
                                 WatermarkText="Line BL No">
@@ -63,7 +63,7 @@
                         <td>
                             <asp:TextBox ID="txtVessel" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender7" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
-                                FilterMode="ValidChars" ValidChars=" " TargetControlID="txtVessel">
+                                FilterMode="InvalidChars" ValidChars=" " TargetControlID="txtVessel">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender7" runat="server" TargetControlID="txtVessel"
                                 WatermarkText="Vessel Name">
@@ -72,7 +72,7 @@
                         <td>
                             <asp:TextBox ID="txtPOD" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender9" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
-                                FilterMode="ValidChars" ValidChars=" " TargetControlID="txtPOD">
+                                FilterMode="InvalidChars" ValidChars=" " TargetControlID="txtPOD">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender9" runat="server" TargetControlID="txtPOD"
                                 WatermarkText="Port of Discharge">
@@ -81,13 +81,38 @@
                         <td>
                             <asp:TextBox ID="txtPOL" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender10" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
-                                FilterMode="ValidChars" ValidChars=" " TargetControlID="txtPOL">
+                                FilterMode="InvalidChars" ValidChars=" " TargetControlID="txtPOL">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender10" runat="server" TargetControlID="txtPOL"
                                 WatermarkText="Port of Loading">
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                     </tr>
+                    <!-- New Addition Line & Location-->
+                    <tr>
+                        <td>
+                            <asp:TextBox ID="txtSLocation" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
+                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
+                                FilterMode="InvalidChars" ValidChars=" " TargetControlID="txtSLocation">
+                            </cc1:FilteredTextBoxExtender>
+                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtSLocation"
+                                WatermarkText="Location">
+                            </cc1:TextBoxWatermarkExtender>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtSLine" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
+                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
+                                FilterMode="InvalidChars" ValidChars=" " TargetControlID="txtSLine">
+                            </cc1:FilteredTextBoxExtender>
+                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="txtSLine"
+                                WatermarkText="Line">
+                            </cc1:TextBoxWatermarkExtender>
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                    </tr>
+
                     <tr>
                         <td>
                             <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" 
@@ -155,7 +180,7 @@
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="15%" />
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkBLDate" runat="server" CommandName="Sort" CommandArgument="ImpLineBLDate" Text="BL Date"></asp:LinkButton>
+                                            <asp:LinkButton ID="lnkLineBLNo" runat="server" CommandName="Sort" CommandArgument="ImpLineBLNo" Text="Line BL No"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>

@@ -40,8 +40,9 @@ namespace EMS.Entity
         public string Voyage { get; set; }
         public string POL { get; set; }
         public string POD { get; set; }
+        public string Location { get; set; }
 	
-	public string InvoiceNo { get; set; }
+	    public string InvoiceNo { get; set; }
         public string BLNo { get; set; }
         public string BookingNo { get; set; }
         public string ImportExport { get; set; }

@@ -319,7 +319,7 @@ namespace EMS.DAL
             {
                 oDq.AddBigIntegerParam("@BLID", blHeader.BLID);
                 oDq.AddBigIntegerParam("@BLIssuePortID", blHeader.BLIssuePortID);
-                oDq.AddVarcharParam("@CACode", 10, blHeader.CACode.ToUpper());
+                //oDq.AddVarcharParam("@CACode", 10, blHeader.CACode.ToUpper());
                 oDq.AddVarcharParam("@BillOfEntryNo", 50, blHeader.BillOfEntryNo.ToUpper());
                 oDq.AddVarcharParam("@CargoMovement", 2, blHeader.CargoMovement.ToUpper());
                 oDq.AddVarcharParam("@CargoNature", 2, blHeader.CargoNature.ToUpper());

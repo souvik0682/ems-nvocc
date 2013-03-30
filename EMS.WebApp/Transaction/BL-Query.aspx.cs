@@ -841,15 +841,19 @@ namespace EMS.WebApp.Transaction
         {
             PopulateInvoiceButtons();
             mpeDo.Show();
+            //UpdatePanel2.Update();
         }
 
         protected void lnkDoExtension_Click(object sender, EventArgs e)
         {
+            //UpdatePanel2.Update();
             mpeDOE.Show();
+            
         }
 
         protected void lnkSlotExtension_Click(object sender, EventArgs e)
         {
+            //UpdatePanel2.Update();
             mpeSE.Show();
         }
 
@@ -1115,6 +1119,7 @@ namespace EMS.WebApp.Transaction
 
         protected void lnkPGRExtension_Click(object sender, EventArgs e)
         {
+            //UpdatePanel2.Update();
             mpePGR.Show();
         }
 
@@ -1265,9 +1270,7 @@ namespace EMS.WebApp.Transaction
         {
             imgBtnExaminationDo.Attributes.Add("onclick", string.Format("return ReportPrint('{0}','{1}','{2}');", "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("eDeliveryOrder"),
                 "&invBLHeader=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue)));
-            //window.open ('Popup/Report.aspx?reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("eDeliveryOrder") + "&invBLHeader=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text) + "&Location=" + ddlLocation.SelectedValue + "', 'mywindow','status=1,toolbar=1');");
-
-
+            
 
             imgBtnFinalDo.Attributes.Add("onclick", string.Format("return ReportPrint('{0}','{1}','{2}');", "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("DeliveryOrder"),
                 "&invBLHeader=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue)));
@@ -1311,7 +1314,7 @@ namespace EMS.WebApp.Transaction
             ClearAll();
             DisableAllServiceControls();
             DisableAllCheckBoxes();
-            UpdatePanel2.Update();
+            //UpdatePanel2.Update();
         }
 
         protected void btnFinalContinue_Click(object sender, EventArgs e)

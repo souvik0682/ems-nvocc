@@ -606,6 +606,8 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@POL", 100, searchCriteria.POL);
                 oDq.AddVarcharParam("@Voyage", 100, searchCriteria.Voyage);
                 oDq.AddVarcharParam("@Vessel", 100, searchCriteria.Vessel);
+                oDq.AddVarcharParam("@Line", 100, searchCriteria.LineName);
+                oDq.AddVarcharParam("@Location", 100, searchCriteria.Location);
                 oDq.AddVarcharParam("@SortExpression", 100, searchCriteria.SortExpression);
                 oDq.AddVarcharParam("@SortDirection", 100, searchCriteria.SortDirection);
 

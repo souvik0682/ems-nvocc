@@ -118,7 +118,7 @@ namespace EMS.WebApp.Transaction
                 //e.Row.Cells[0].Text = ((gvImportBL.PageSize * gvImportBL.PageIndex) + e.Row.RowIndex + 1).ToString();
 
                 e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ImpLineBLNo"));
-                e.Row.Cells[1].Text = Convert.ToDateTime(DataBinder.Eval(e.Row.DataItem, "ImpLineBLDate")).ToShortDateString();
+                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ImpLineBLNo"));
                 e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "VesselName"));
                 e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "VoyageNo"));
                 e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PortOfLoading"));
@@ -271,6 +271,8 @@ namespace EMS.WebApp.Transaction
             criteria.POL = (txtPOL.Text == "") ? string.Empty : txtPOL.Text.Trim();
             criteria.Vessel = (txtVessel.Text == "") ? string.Empty : txtVessel.Text.Trim();
             criteria.Voyage = (txtVoyageNo.Text == "") ? string.Empty : txtVoyageNo.Text.Trim();
+            criteria.LineName = (txtSLine.Text == "") ? string.Empty : txtSLine.Text.Trim();
+            criteria.Location = (txtSLocation.Text == "") ? string.Empty : txtSLocation.Text.Trim();
 
             Session[Constants.SESSION_SEARCH_CRITERIA] = criteria;
         }
@@ -299,6 +301,8 @@ namespace EMS.WebApp.Transaction
                         txtPOL.Text = criteria.POL;
                         txtVessel.Text = criteria.Vessel;
                         txtVoyageNo.Text = criteria.Voyage;
+                        txtSLocation.Text = criteria.Location;
+                        txtSLine.Text = criteria.LineName;
 
                         gvImportBL.PageIndex = criteria.PageIndex;
                         gvImportBL.PageSize = criteria.PageSize;

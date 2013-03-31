@@ -40,14 +40,24 @@ namespace EMS.WebApp.Reports
 
         private void GenerateReport()
         {
+            string pod = ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
+            pod = pod.Contains(',') ? pod.Split(',')[1] : "";
+            if (pod.Trim() == "")
+            {
+                lblError.Attributes.Add("Style", "display:block");
+                return;
+            }
+            else
+                lblError.Attributes.Add("Style", "display:none");
+
             ReportBLL cls = new ReportBLL();
 
             LocalReportManager reportManager = new LocalReportManager(rptViewer, "IGMCargoDesc", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
             string rptName = "IGMCargoDesc.rdlc";
             int vesselId = Convert.ToInt32(ddlVessel.SelectedValue);
             int voyageId = ddlVoyage.SelectedIndex > 0 ? Convert.ToInt32(ddlVoyage.SelectedValue) : 0;
-
-            DataSet ds = EMS.BLL.IGMReportBLL.GetRptCargoDesc(vesselId, voyageId);
+            DBInteraction dbinteract = new DBInteraction();
+            DataSet ds = EMS.BLL.IGMReportBLL.GetRptCargoDesc(vesselId, voyageId, dbinteract.GetId("Port", pod));
             try
             {
                 rptViewer.Reset();

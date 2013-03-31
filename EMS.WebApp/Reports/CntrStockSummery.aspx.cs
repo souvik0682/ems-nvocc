@@ -42,6 +42,9 @@ namespace EMS.WebApp.Reports
                 rptViewer.LocalReport.DataSources.Clear();
                 rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
                 rptViewer.LocalReport.SetParameters(new ReportParameter("CompanyName", Convert.ToString(ConfigurationManager.AppSettings["CompanyName"])));
+                rptViewer.LocalReport.SetParameters(new ReportParameter("StockDate", txtdtStock.Text));
+                rptViewer.LocalReport.SetParameters(new ReportParameter("loc", ddlLoc.SelectedItem.Text));
+                rptViewer.LocalReport.SetParameters(new ReportParameter("line", ddlLine.SelectedItem.Text));
                 rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds.Tables[0]));
                 rptViewer.LocalReport.Refresh();
             }

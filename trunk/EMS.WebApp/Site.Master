@@ -88,11 +88,11 @@
                     <li id="liMst" runat="server"><a href="#">Master</a>
                         <ul>
                             <li id="liMst_User" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageUser.aspx") %>">
-                                User Master</a></li>
+                                User</a></li>
                             <li id="liMst_Role" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageRole.aspx") %>">
-                                Role Master</a></li>
+                                Role</a></li>
                             <li id="liMst_Loc" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageLocation.aspx") %>">
-                                Location Master</a></li>
+                                Location</a></li>
                             <li id="liMst_Cust" runat="server"><a href="<%=Page.ResolveClientUrl("~/View/ManageCustomer.aspx") %>">
                                 Customer Display</a></li>
                             <li id="liMst_Line" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManageLine.aspx") %>">
@@ -102,13 +102,15 @@
                             <li id="liMst_Charge" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/charge-list.aspx") %>">
                                 Charge Master</a></li>
                             <li id="liMst_Country" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManageCountry.aspx") %>">
-                                Country Master</a></li>
+                                Country</a></li>
                             <li id="liMst_Port" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManagePort.aspx") %>">
-                                Port Master</a></li>
+                                Port</a></li>
                             <li id="liMst_Haulage" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ImportHaulage-list.aspx") %>">
                                 Import Haulage</a></li>
                             <li id="liMst_Vessel" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManageVessel.aspx") %>">
                                 Vessel</a></li>
+                            <li id="li1" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MangeVoyage.aspx") %>">
+                                Voyage</a></li>
                         </ul>
                     </li>
                     <li id="liImp" runat="server"><a href="#">Import</a>
@@ -119,26 +121,26 @@
                                         B/L Entry</a></li>
                                     <li id="liID_BLQuery" runat="server"><a href="<%=Page.ResolveClientUrl("~/Transaction/BL-Query.aspx") %>">
                                         B/L Query</a></li>
-                                    <li id="liID_Voyage" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MangeVoyage.aspx") %>">
+                       <%--             <li id="liID_Voyage" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MangeVoyage.aspx") %>">
                                         Voyage</a></li>
                                     <li id="li1" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MainLineVoyage.aspx") %>">
                                         Main Line Voyage</a></li>
                                     <li id="liID_Invoice" runat="server"><a href="<%=Page.ResolveClientUrl("~/Transaction/Invoice.aspx") %>">
-                                        Invoice</a></li>
+                                        Invoice</a></li>--%>
                                 </ul>
                             </li>
                             <li id="liIR" runat="server"><a href="#">Report</a>
                                 <ul>
                                     <li id="liIR_BL" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ImpBLChkLst.aspx") %>">
-                                        Import B/L checklist</a></li>
+                                        B/L checklist</a></li>
                                     <li id="liIR_EDI" runat="server"><a href="<%=Page.ResolveClientUrl("~/Import/EDI_Custom.aspx") %>">
-                                        Import EDI for Custom - Export to text file</a></li>
+                                        EDI for Customs</a></li>
                                     <li id="liIR_IGM" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/IGMForm2.aspx") %>">
                                         IGM - Form II</a></li>
-                                    <li id="liIR_IGMC" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/IGMFormC.aspx") %>">
-                                        IGM - Form C for Hazardous Cargo</a></li>
+                                  <%--  <li id="liIR_IGMC" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/IGMFormC.aspx") %>">
+                                        IGM - Form C for Hazardous Cargo</a></li>--%>
                                     <li id="liIR_Amend" runat="server"><a href="#">Amendment Letter</a></li>
-                                    <li id="liIR_Land" runat="server"><a href="#">Letter to File Landing Gurantee</a></li>
+                                    <li id="liIR_Land" runat="server"><a href="#">Bond Filing Letter</a></li>
                                     <li id="liIR_Stat" runat="server"><a href="#">Statistical report</a></li>
                                     <li id="liIR_IR" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ImportRegister.aspx") %>">
                                         Import Register</a></li>
@@ -151,12 +153,12 @@
                                         }
                                     </script>
                                     <li id="liIR_PDO" runat="server"><a href="#">Pending DO</a></li>
-                                    <li id="liIR_DOExamin" runat="server"><a href="#">Delivery Order (Examin / Final)</a></li>
-                                    <li id="liIR_DOFactory" runat="server"><a href="#">Delivery Order (Factory / CFS) Distuffing</a></li>
-                                    <li id="liIR_Slot" runat="server"><a href="#">Slot/Plot/Empty Letter</a></li>
-                                    <li id="liIR_Carting" runat="server"><a href="#">Carting Order / Gang Letter</a></li>
-                                    <li id="liIR_FileLanding" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/FileLandingGurantee.aspx") %>">
-                                        LIST TO FILE LANDING G'TE</a></li>
+                                 <%--   <li id="liIR_DOExamin" runat="server"><a href="#">Delivery Order (Examin / Final)</a></li>--%>
+                                 <%--   <li id="liIR_DOFactory" runat="server"><a href="#">Delivery Order (Factory / CFS) Distuffing</a></li>--%>
+                                    <li id="liIR_Slot" runat="server"><a href="#">Empty Letter</a></li>
+                                    <li id="liIR_Carting" runat="server"><a href="#">Gang Letter</a></li>
+<%--                                    <li id="liIR_FileLanding" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/FileLandingGurantee.aspx") %>">
+                                        LIST TO FILE LANDING G'TE</a></li>--%>
                                     <li id="liIR_SMTP" runat="server"><a href="#">SMTP EXTRACT</a></li>
                                     <li id="liIR_Coprar" runat="server"><a href="#">COPRAR</a></li>
                                     <li id="liIR_ACL" runat="server"><a href="#">Advance Container List</a></li>
@@ -195,31 +197,31 @@
                             </li>--%>
                             <li id="liFR" runat="server"><a href="#">Reports</a>
                                 <ul>
-                                    <li id="liFRI" runat="server"><a href="#">Invoice</a>
-                                        <ul>
+                                    <li id="liFRI" runat="server"><a href="#">Dashboard View & Print</a>
+                           <%--             <ul>
                                             <li id="liFRI_Regular" runat="server"><a href="#">Invoice (Regular / Exp. Detention</a></li>
                                             <li id="liFRI_IBS" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/RptImportBilling.aspx") %>">Import Billing Statement</a></li>
                                             <li id="liFRI_IIR" runat="server"><a href="#">Import Invoice Register</a></li>
                                             <li id="liFRI_EIR" runat="server"><a href="#">Export Invoice Register</a></li>
-                                        </ul>
+                                        </ul>--%>
                                     </li>
-                                    <li id="liFR_CN" runat="server"><a href="#">Credit Note</a></li>
-                                    <li id="liFRO" runat="server"><a href="#">Other Report</a>
-                                        <ul>
+                                    <li id="liFR_CN" runat="server"><a href="#">Invoice Statement</a></li>
+                                    <li id="liFRO" runat="server"><a href="#">Collection Statement</a>
+                                  <%--      <ul>    
                                             <li id="liFRO_Collection" runat="server"><a href="#">Collection Register</a></li>
                                             <li id="liFRO_Repairing" runat="server"><a href="#">Repairing Bill</a></li>
                                             <li id="liFRO_Freight" runat="server"><a href="#">Freight Certificate</a></li>
                                             <li id="liFRO_ServiceTax" runat="server"><a href="#">Service Tax Register</a></li>
-                                        </ul>
+                                        </ul>--%>
                                     </li>
-                                    <li id="liFRMR" runat="server"><a href="#">Money Receipt</a>
-                                        <ul>
+                                    <li id="liFRMR" runat="server"><a href="#">Service Tax Statement</a>
+                           <%--             <ul>
                                             <li id="liFRMR_MR" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/MoneyRcpt.aspx") %>">
                                                 Money Receipt</a></li>
                                             <li id="liFRMR_PA" runat="server"><a href="#">Payment Advice</a></li>
                                             <li id="liFRMR_DCS" runat="server"><a href="#">Detention Collection Statement</a></li>
                                             <li id="liFRMR_ERM" runat="server"><a href="#">Exchange Rate mismatch</a></li>
-                                        </ul>
+                                        </ul>--%>
                                     </li>
                                 </ul>
                             </li>
@@ -241,23 +243,23 @@
                             <li id="liLR" runat="server"><a href="#">Reports</a>
                                 <ul>
                                     <li id="liLR_StkSumm" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/CntrStockSummery.aspx") %>">
-                                        Container Stock Summary</a></li>
+                                        Stock Summary</a></li>
                                     <li id="liLR_StkStmt" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/CntrStockDetail.aspx") %>">
-                                        Container Stock Statement</a></li>
-                                    <li id="liLR_Pickup" runat="server"><a href="#">Pick-up Letter</a></li>
-                                    <li id="liLR_Onhire" runat="server"><a href="#">On-hire Register</a></li>
-                                    <li id="liLR_Offhire" runat="server"><a href="#">Off-hire Register</a></li>
-                                    <li id="liLR_Damage" runat="server"><a href="#">Damage Register</a></li>
-                                    <li id="liLR_NotMoved" runat="server"><a href="#">Container Not moved</a></li>
-                                    <li id="liLR_AgeAnalysis" runat="server"><a href="#">Container Age Analysis</a></li>
-                                    <li id="liLR_IDTR" runat="server"><a href="#">Generation of IDTR/Bond Cancellation</a></li>
-                                    <li id="liLR_LiftOnOff" runat="server"><a href="#">Monthly Lift on / lift off statement</a></li>
-                                    <li id="liLR_Empty" runat="server"><a href="#">Periodic Empty yard rent statement</a></li>
-                                    <li id="liLR_Sanction" runat="server"><a href="#">Repairing Sanction List</a></li>
+                                        Stock Statement</a></li>
+                                    <li id="liLR_Pickup" runat="server"><a href="#">Drop-Off Letter</a></li>
+                                    <li id="liLR_Onhire" runat="server"><a href="#">On/Off hire Register</a></li>
+                                   <%-- <li id="liLR_Offhire" runat="server"><a href="#">Off-hire Register</a></li>--%>
+                                    <li id="liLR_Damage" runat="server"><a href="#">Damage/Hold Register</a></li>
+                                    <li id="liLR_NotMoved" runat="server"><a href="#">Long Idle Container</a></li>
+                                    <li id="liLR_AgeAnalysis" runat="server"><a href="#">Age Analysis</a></li>
+                                    <li id="liLR_IDTR" runat="server"><a href="#">Bond Cancellation</a></li>
+                                    <li id="liLR_LiftOnOff" runat="server"><a href="#">LOLO statement</a></li>
+                                    <li id="liLR_Empty" runat="server"><a href="#">Empty yard rent</a></li>
+                                    <li id="liLR_Sanction" runat="server"><a href="#">Sanction List</a></li>
                                     <li id="liLR_TurnAround" runat="server"><a href="#">Turn Around Report</a></li>
                                     <li id="liLR_Transfer" runat="server"><a href="#">Container Transfer List</a></li>
-                                    <li id="liLR_Principal" runat="server"><a href="#">Principal Reports - 4 nos</a></li>
-                                    <li id="liLR_CWV" runat="server"><a href="#">Container wise View actual date / User</a></li>
+                                   <%-- <li id="liLR_Principal" runat="server"><a href="#">Principal Reports - 4 nos</a></li>--%>
+                                    <li id="liLR_CWV" runat="server"><a href="#">Container Analysis</a></li>
                                 </ul>
                             </li>
                         </ul>

@@ -22,6 +22,15 @@ namespace EMS.WebApp.Reports {
         protected global::System.Web.UI.UpdateProgress uProgressLoc;
         
         /// <summary>
+        /// lblError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblError;
+        
+        /// <summary>
         /// upLoc control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace EMS.WebApp.Reports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlVoyage;
+        
+        /// <summary>
+        /// AutoCompletepPort1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.AutoCompletePort AutoCompletepPort1;
         
         /// <summary>
         /// btnSave control.

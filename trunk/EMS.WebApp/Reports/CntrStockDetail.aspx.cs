@@ -33,7 +33,7 @@ namespace EMS.WebApp.Reports
             LocalReportManager reportManager = new LocalReportManager(rptViewer, "CntrStockDetail", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
             string rptName = "CntrStockDetail.rdlc";
          
-
+           
             DataSet ds = EMS.BLL.LogisticReportBLL.GetRptCntrStockDetails(ddlLine.SelectedValue,ddlLoc.SelectedValue,txtdtStock.Text.Trim());
             try
             {
@@ -42,6 +42,9 @@ namespace EMS.WebApp.Reports
                 rptViewer.LocalReport.DataSources.Clear();
                 rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
                 rptViewer.LocalReport.SetParameters(new ReportParameter("CompanyName", Convert.ToString(ConfigurationManager.AppSettings["CompanyName"])));
+                rptViewer.LocalReport.SetParameters(new ReportParameter("StockDate", txtdtStock.Text ));
+                rptViewer.LocalReport.SetParameters(new ReportParameter("loc", ddlLoc.SelectedItem.Text));
+                rptViewer.LocalReport.SetParameters(new ReportParameter("line", ddlLine.SelectedItem.Text));
                 rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds.Tables[0]));
                 rptViewer.LocalReport.Refresh();
             }
@@ -59,6 +62,7 @@ namespace EMS.WebApp.Reports
         protected void btnSave_Click(object sender, EventArgs e)
         {
             GenerateReport();
+            
         }
     }
 }

@@ -33,5 +33,7 @@ namespace EMS.Common
         int MaritimeList { get; set; }
         string VesselType { get; set; }
         DateTime? LandingDate { get; set; }
+        int? podid { get; set; }
+        string pod { get; set; }
     }
 }

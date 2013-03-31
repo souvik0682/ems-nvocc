@@ -8,9 +8,9 @@ namespace EMS.BLL
 {
    public class IGMReportBLL
     {
-       public static DataSet GetRptCargoDesc(int vesselId, int voyageId)
+       public static DataSet GetRptCargoDesc(int vesselId, int voyageId,int pod)
        {
-           return EMS.DAL.IGMReportDAL.GetRptCargoDesc(vesselId, voyageId);
+           return EMS.DAL.IGMReportDAL.GetRptCargoDesc(vesselId, voyageId,pod);
           
        }
     }

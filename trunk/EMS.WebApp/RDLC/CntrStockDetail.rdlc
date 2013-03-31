@@ -140,10 +140,10 @@
               <Width>0.73611in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.58815in</Width>
+              <Width>0.60898in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.67014in</Width>
+              <Width>0.61806in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.6213in</Width>
@@ -152,7 +152,7 @@
               <Width>0.61967in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.62474in</Width>
+              <Width>0.61432in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.60926in</Width>
@@ -167,16 +167,16 @@
               <Width>0.60925in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.69098in</Width>
+              <Width>0.59723in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.65092in</Width>
+              <Width>0.63009in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.75509in</Width>
+              <Width>0.58842in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.80718in</Width>
+              <Width>0.6301in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -193,7 +193,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>LOC</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -223,7 +226,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>LINE</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -253,7 +259,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>CONTAINER</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -283,7 +292,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>SZ TY</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -313,7 +325,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>STATUS</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -343,7 +358,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>DCHF</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -373,7 +391,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>DCHE</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -403,7 +424,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>CFSI</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -433,7 +457,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>SNTC</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -463,7 +490,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>ONH</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -493,7 +523,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>TRFE</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -523,7 +556,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>TRFI</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -553,7 +589,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>RCVE</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -582,8 +621,11 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>REPAIR</Value>
-                              <Style />
+                              <Value>URPR</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -613,7 +655,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>SNTS</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -643,7 +688,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>RCVF</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -673,7 +721,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>LODF</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -703,7 +754,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>LODE</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -721,7 +775,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -739,7 +792,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!LOC.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -769,7 +825,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!LINE.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -799,7 +858,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!Container.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -829,7 +891,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!SZ_TY.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -859,7 +924,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!PRESENT_STATUS.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -890,6 +958,7 @@
                             <TextRun>
                               <Value>=Fields!DCHF.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                                 <Format>dd-MM-yy</Format>
                               </Style>
@@ -925,6 +994,7 @@
                             <TextRun>
                               <Value>=Fields!DCHE.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                                 <Format>dd-MM-yy</Format>
                               </Style>
@@ -958,6 +1028,7 @@
                             <TextRun>
                               <Value>=Fields!CFSI.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                                 <Format>dd-MM-yyyy</Format>
                               </Style>
@@ -991,6 +1062,7 @@
                             <TextRun>
                               <Value>=Fields!SNTC.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                                 <Format>dd-MM-yyyy</Format>
                               </Style>
@@ -1024,6 +1096,7 @@
                             <TextRun>
                               <Value>=Fields!ONH.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                                 <Format>dd-MM-yyyy</Format>
                               </Style>
@@ -1057,6 +1130,7 @@
                             <TextRun>
                               <Value>=Fields!TRFE.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                                 <Format>dd-MM-yyyy</Format>
                               </Style>
@@ -1090,6 +1164,7 @@
                             <TextRun>
                               <Value>=Fields!TRFI.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                                 <Format>dd-MM-yyyy</Format>
                               </Style>
@@ -1123,6 +1198,7 @@
                             <TextRun>
                               <Value>=Fields!RCVE.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                                 <Format>dd-MM-yyyy</Format>
                               </Style>
@@ -1156,6 +1232,7 @@
                             <TextRun>
                               <Value>=Fields!REPAIR.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                                 <Format>dd-MM-yyyy</Format>
                               </Style>
@@ -1189,6 +1266,7 @@
                             <TextRun>
                               <Value>=Fields!SNTS.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                                 <Format>dd-MM-yyyy</Format>
                               </Style>
@@ -1222,6 +1300,7 @@
                             <TextRun>
                               <Value>=Fields!RCVF.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                                 <Format>dd-MM-yyyy</Format>
                               </Style>
@@ -1255,6 +1334,7 @@
                             <TextRun>
                               <Value>=Fields!LODF.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                                 <Format>dd-MM-yyyy</Format>
                               </Style>
@@ -1288,6 +1368,7 @@
                             <TextRun>
                               <Value>=Fields!LODE.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                                 <Format>dd-MM-yyyy</Format>
                               </Style>
@@ -1350,7 +1431,7 @@
         <Top>0.03528cm</Top>
         <Left>0.15875cm</Left>
         <Height>1.2cm</Height>
-        <Width>31.50452cm</Width>
+        <Width>30.23453cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1360,7 +1441,7 @@
       <Line Name="Line1">
         <Left>0.04445cm</Left>
         <Height>0cm</Height>
-        <Width>31.61882cm</Width>
+        <Width>30.34883cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -1369,7 +1450,7 @@
         </Style>
       </Line>
     </ReportItems>
-    <Height>2.25705in</Height>
+    <Height>1.6633in</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -1377,11 +1458,27 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="StockDate">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="loc">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="line">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
-  <Width>12.52835in</Width>
+  <Width>11.98668in</Width>
   <Page>
     <PageHeader>
-      <Height>2.05556cm</Height>
+      <Height>0.80928in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1428,85 +1525,22 @@
                   </Style>
                 </TextRun>
               </TextRuns>
-              <Style />
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox3</rd:DefaultName>
           <Top>1.42028cm</Top>
-          <Left>0.15875cm</Left>
+          <Left>0.254cm</Left>
           <Height>0.6cm</Height>
-          <Width>6.01896cm</Width>
+          <Width>5.87785cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
             <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="PageNumber1">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=Globals!PageNumber</Value>
-                  <Style>
-                    <FontSize>7pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>PageNumber1</rd:DefaultName>
-          <Top>0.47594in</Top>
-          <Left>10.19248in</Left>
-          <Height>0.25in</Height>
-          <Width>0.26043in</Width>
-          <ZIndex>2</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox69">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>Page</Value>
-                  <Style>
-                    <FontSize>7pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox69</rd:DefaultName>
-          <Top>0.48983in</Top>
-          <Left>9.86956in</Left>
-          <Height>0.22222in</Height>
-          <Width>0.32292in</Width>
-          <ZIndex>3</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
             <PaddingTop>2pt</PaddingTop>
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
@@ -1535,7 +1569,7 @@
           <Left>2.79142in</Left>
           <Height>0.25in</Height>
           <Width>6in</Width>
-          <ZIndex>4</ZIndex>
+          <ZIndex>2</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1554,23 +1588,47 @@
           <Left>10.19248in</Left>
           <Height>0.36042in</Height>
           <Width>0.89932in</Width>
-          <ZIndex>5</ZIndex>
+          <ZIndex>3</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
           </Style>
         </Image>
-        <Textbox Name="col1">
+        <Textbox Name="StockDate">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=First(Fields!col1.Value, "DataSet2")</Value>
+                  <Value>=Parameters!StockDate.Value</Value>
                   <Style>
-                    <Format>dd-MM-yyyy</Format>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value> FOR </Value>
+                  <Style>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>=Parameters!line.Value</Value>
+                  <Style>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value> OF </Value>
+                  <Style>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>=Parameters!loc.Value</Value>
+                  <Style>
+                    <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
               </TextRuns>
@@ -1579,17 +1637,16 @@
               </Style>
             </Paragraph>
           </Paragraphs>
-          <rd:DefaultName>col1</rd:DefaultName>
-          <Top>1.42029cm</Top>
-          <Left>6.08952cm</Left>
+          <rd:DefaultName>StockDate</rd:DefaultName>
+          <Top>1.42028cm</Top>
+          <Left>6.13185cm</Left>
           <Height>0.6cm</Height>
-          <Width>6.39819cm</Width>
-          <ZIndex>6</ZIndex>
+          <Width>11.97208cm</Width>
+          <ZIndex>4</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
-            <PaddingLeft>2pt</PaddingLeft>
             <PaddingRight>2pt</PaddingRight>
             <PaddingTop>2pt</PaddingTop>
             <PaddingBottom>2pt</PaddingBottom>
@@ -1602,13 +1659,92 @@
         </Border>
       </Style>
     </PageHeader>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
-    <LeftMargin>2cm</LeftMargin>
-    <RightMargin>2cm</RightMargin>
-    <TopMargin>2cm</TopMargin>
-    <BottomMargin>2cm</BottomMargin>
-    <ColumnSpacing>0.13cm</ColumnSpacing>
+    <PageFooter>
+      <Height>0.25in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox69">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Page </Value>
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox69</rd:DefaultName>
+          <Top>0.02084in</Top>
+          <Left>10.90359in</Left>
+          <Height>0.22222in</Height>
+          <Width>0.32292in</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="PageNumber1">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Globals!PageNumber</Value>
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Left</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>PageNumber1</rd:DefaultName>
+          <Top>0.02084in</Top>
+          <Left>11.22651in</Left>
+          <Height>0.22222in</Height>
+          <Width>0.57293in</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageFooter>
+    <PageHeight>8.27in</PageHeight>
+    <PageWidth>11.69in</PageWidth>
+    <LeftMargin>0.5in</LeftMargin>
+    <RightMargin>0.7874in</RightMargin>
+    <TopMargin>0.7874in</TopMargin>
+    <BottomMargin>0.7874in</BottomMargin>
+    <ColumnSpacing>0.05118in</ColumnSpacing>
     <Style />
   </Page>
   <EmbeddedImages>
@@ -1624,5 +1760,5 @@ iqmAGbqHaIt5Zv8Ae9pyG3JnScbWzYm2TQ8i24TkTRLKvYTRi2qU4kzl9NAGzc9xb3Bb9hWB64R7PcN7
     </EmbeddedImage>
   </EmbeddedImages>
   <rd:ReportID>6a7aa684-5f1a-4f68-b537-feef7ea88f6f</rd:ReportID>
-  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
 </Report>

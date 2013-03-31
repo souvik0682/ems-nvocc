@@ -9,14 +9,14 @@ namespace EMS.BLL
 {
   public  class EDIBLL
     {
-       public static List<IVesselVoyageEDI> VesselVoyageEDI(int VesselID,int VoyageID)
+       public static List<IVesselVoyageEDI> VesselVoyageEDI(int VesselID,int VoyageID,int pod)
         {
-            return EDIDAL.GetVesselVoyageFrEDI(VesselID,VoyageID);
+            return EDIDAL.GetVesselVoyageFrEDI(VesselID,VoyageID,pod);
         }
 
-       public static System.Data.DataSet  GetEDICargoInfo(int VesselID, int VoyageID)
+       public static System.Data.DataSet  GetEDICargoInfo(int VesselID, int VoyageID,int pod)
        {
-           return EDIDAL.GetEDICargoInfo(VesselID, VoyageID);
+           return EDIDAL.GetEDICargoInfo(VesselID, VoyageID,pod);
        }
 
        public static System.Data.DataSet GetEDIContainerInfo(int VesselID, int VoyageID)
@@ -37,6 +37,8 @@ namespace EMS.BLL
        {
            return EDIDAL.GetTerminalOperator(VoyageID);
        }
+
+     
     }
 
 }

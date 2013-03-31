@@ -41,10 +41,7 @@ namespace EMS.WebApp.Equipment
                     // GeneralFunctions.PopulateDropDownList(ddlUser, EMS.BLL.UserBLL.GetAdminUsers(_userId, Convert.ToInt32(ddlLoc.SelectedValue)));
 
                     LoadData(_userId, EqEstId);
-                    System.Data.DataSet ds = UserBLL.GetUserById(_userId);
-                    if (ds.Tables[0].Rows.Count > 0)
-                        txtAppUser.Text = ds.Tables[0].Rows[0]["Name"].ToString();
-
+                    
                 }
 
                 int dis = DisableControls();
@@ -59,7 +56,40 @@ namespace EMS.WebApp.Equipment
 
         private int DisableControls()
         {
-            int[] adm_mgrRoles = { 1, 2, 3, 6 };
+            if (EqEstId != "-1")
+            {
+                ddlLoc.Enabled = false;
+                ddlLine.Enabled = false;
+                txtContainerNo.ReadOnly = true;
+                txtContainerNo.Style.Add("background-color", "#E6E6E6");
+                txtTransactionDate.ReadOnly = true;
+                txtTransactionDate.Style.Add("background-color", "#E6E6E6");
+                dtTransDate.Enabled = false;
+                txtEstimateRef.ReadOnly = true;
+                txtEstimateRef.Style.Add("background-color", "#E6E6E6");
+                //if(txtAppUser.Text!=
+
+            }
+            else
+            {
+                txtTransactionDate.Text = DateTime.Now.ToShortDateString();
+                txtTransactionDate.ReadOnly = true;
+                txtTransactionDate.Style.Add("background-color", "#E6E6E6");
+                dtTransDate.Enabled = false;
+                chkDamage.Checked = true;
+                chkDamage.Enabled = false;
+                txtReleasedOn.ReadOnly = true;
+                txtReleasedOn.Style.Add("background-color", "#E6E6E6");
+                txtStockRetDate.ReadOnly = true;
+                txtStockRetDate.Style.Add("background-color", "#E6E6E6");
+                txtReason.ReadOnly = true;
+                txtReason.Style.Add("background-color", "#E6E6E6");
+            }
+            int[] adm_mgrRoles = { 1, 2, 5};
+            if (EMS.BLL.UserBLL.GetLoggedInUserRoleId() == 6)
+            {
+                trTocharge.Visible = false;
+            }
             if (Array.IndexOf(adm_mgrRoles, EMS.BLL.UserBLL.GetLoggedInUserRoleId()) < 0)
             {
                 //ddlUser.Enabled = false;
@@ -107,7 +137,27 @@ namespace EMS.WebApp.Equipment
                 ddlLine.SelectedValue = dt.Rows[0]["pk_prospectID"].ToString();
                 ddlLoc.SelectedValue = dt.Rows[0]["pk_locId"].ToString();
                 //ddlUser.SelectedValue = dt.Rows[0]["fk_UserApproved"].ToString();
-                txtAppUser.Text = dt.Rows[0]["fk_UserApproved"].ToString();
+                int[] adm_mgrRoles = { 1, 2, 5};
+                int uid = -2;
+                int.TryParse(Convert.ToString(dt.Rows[0]["fk_UserApproved"]),out uid);
+                System.Data.DataSet ds = UserBLL.GetUserById(uid);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    txtAppUser.Text = ds.Tables[0].Rows[0]["Name"].ToString();
+                    txtLabourEst.ReadOnly = true;
+                    txtLabourEst.Style.Add("background-color", "#E6E6E6");
+                    txtMaterialEst.ReadOnly = true;
+                    txtMaterialEst.Style.Add("background-color", "#E6E6E6");
+                }
+                else if (Array.IndexOf(adm_mgrRoles, EMS.BLL.UserBLL.GetLoggedInUserRoleId()) > 0)
+                {
+                    ds = UserBLL.GetUserById(_userId);
+                    if (ds.Tables[0].Rows.Count > 0)
+                        txtAppUser.Text = ds.Tables[0].Rows[0]["Name"].ToString();
+                }
+                else
+                    txtAppUser.Text = "";
+
                 chkpOnHold.Checked = Convert.ToBoolean(dt.Rows[0]["onHold"]);
                 chkDamage.Checked = Convert.ToBoolean(dt.Rows[0]["Damaged"]);
             }
@@ -142,7 +192,8 @@ namespace EMS.WebApp.Equipment
         private void SaveData(string EqEstId)
         {
             if (chkDamage.Checked || chkpOnHold.Checked)
-                ClearControls();
+            { // ClearControls();
+            }
             else
                 if (!checkContainerStatus(true)) return;
 
@@ -173,12 +224,12 @@ namespace EMS.WebApp.Equipment
             iequip.NVOCCId = Convert.ToInt32(ddlLine.SelectedValue);
             try
             {
-                iequip.fk_UserApproved = Convert.ToInt32(txtAppUser.Text);// Convert.ToInt32(ddlUser.SelectedValue);
+                iequip.fk_UserApproved = _userId;// Convert.ToInt32(txtAppUser.Text);// Convert.ToInt32(ddlUser.SelectedValue);
             }
             catch
             {
 
-                iequip.fk_UserApproved = 0;
+                iequip.fk_UserApproved = null;
             }
 
             iequip.onHold = chkpOnHold.Checked;

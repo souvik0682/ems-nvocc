@@ -11,7 +11,7 @@ namespace EMS.DAL
 {
     public class EDIDAL
     {
-        public static List<IVesselVoyageEDI> GetVesselVoyageFrEDI(int VesselID,int VoyageID)
+        public static List<IVesselVoyageEDI> GetVesselVoyageFrEDI(int VesselID,int VoyageID,int pod)
         {
             string ProcName = "prcGetVesselVoyageFrEDI";
             List<IVesselVoyageEDI> lstVesselVoyageEDI = new List<IVesselVoyageEDI>();
@@ -20,6 +20,7 @@ namespace EMS.DAL
             {
                 oDq.AddIntegerParam("@VesselID", VesselID);
                 oDq.AddIntegerParam("@VoyageID", VoyageID);
+                oDq.AddIntegerParam("@pod", pod);
                 DataTableReader reader = oDq.GetTableReader();
 
                 while (reader.Read())
@@ -36,7 +37,7 @@ namespace EMS.DAL
             return lstVesselVoyageEDI;
         }
 
-        public static DataSet GetEDICargoInfo(int VesselID, int VoyageId)
+        public static DataSet GetEDICargoInfo(int VesselID, int VoyageId,int pod)
         {
           
             string ProcName = "GetEDICargoInfo";
@@ -44,6 +45,7 @@ namespace EMS.DAL
 
             dquery.AddIntegerParam("@VoyageID", VoyageId);
             dquery.AddIntegerParam("@VesselID", VesselID);
+            dquery.AddIntegerParam("@pod", pod);
 
             return dquery.GetTables();
 

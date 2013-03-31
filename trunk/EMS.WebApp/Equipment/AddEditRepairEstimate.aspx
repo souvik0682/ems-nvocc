@@ -82,7 +82,7 @@
                    <td style="width:33%"><cc1:CustomTextBox ID="txtMaterialApp" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc1:CustomTextBox></td>
                    <td style="width:33%"><cc1:CustomTextBox ID="txtLabourApp" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc1:CustomTextBox></td>
                   </tr>
-                   <tr>
+                   <tr id="trTocharge" runat="server">
                    <td style="width:33%; text-align:right; padding-right:30px">&nbsp;&nbsp;To Charge</td>
                    <td style="width:33%"><cc1:CustomTextBox ID="txtMaterialBill" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc1:CustomTextBox></td>
                    <td style="width:33%"><cc1:CustomTextBox ID="txtLabourBill" runat="server" CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc1:CustomTextBox></td>

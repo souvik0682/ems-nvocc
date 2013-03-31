@@ -67,6 +67,17 @@ namespace EMS.Entity
             set;
         }
 
+        public int? podid
+        {
+            get;
+            set;
+        }
+
+        public string pod
+        {
+            get;
+            set;
+        }
         #endregion
 
         public VesselVoyageEDI() { }
@@ -95,10 +106,14 @@ namespace EMS.Entity
             this.TotalLines = Convert.ToString(reader["TotalLines"]);
             this.VesselFlag = Convert.ToString(reader["VesselFlag"]);
             this.VesselType = Convert.ToString(reader["VesselType"]);
-            this.LandingDate = reader["LandingDate"] == DBNull.Value ? (Nullable<DateTime>)null : Convert.ToDateTime(reader["LandingDate"]); 
+            this.LandingDate = reader["LandingDate"] == DBNull.Value ? (Nullable<DateTime>)null : Convert.ToDateTime(reader["LandingDate"]);
+            this.pod = Convert.ToString(reader["pod"]);
         }
 
 
 
+
+
+     
     }
 }

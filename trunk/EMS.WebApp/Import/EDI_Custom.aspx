@@ -23,6 +23,7 @@
     <center>
         <fieldset style="width:800px; ">
             <legend>EDI for ICEGATE</legend>
+            
             <table border="0" cellpadding="2" cellspacing="3">
              <tr>
               <td style="width:50%; vertical-align:top;" >
@@ -148,6 +149,15 @@
            
               <td style="width:50%; vertical-align:top;" >
                  <table width="100%">
+                  <tr>
+                    <td style="width:140px;">Port of Discharge:<span class="errormessage1">*</span></td>
+                    <td >
+                    <div style="width:230px">
+                       <uc2:AutoCompletepPort ID="AutoCompletepPort1" runat="server" />
+                       </div>
+                   </td>
+                </tr>
+
                  <tr>
                     <td style="width:140px;">IMO Number:</td>
                     <td><asp:TextBox ID="txtIMONo" runat="server" CssClass="textboxuppercase" MaxLength="5" Width="250"></asp:TextBox><br />

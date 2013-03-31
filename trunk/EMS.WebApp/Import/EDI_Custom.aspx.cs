@@ -45,14 +45,21 @@ namespace EMS.WebApp.Import
 
         protected void ddlVoyage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //dbinteract=new BLL.DBInteraction();
-            //DataSet ds = dbinteract.GetImportEDIforCustom( Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(ddlVessel.SelectedValue));
+            string pod= ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
+            if (pod.Trim() == "")
+            {
+                GeneralFunctions.RegisterAlertScript(this, "Port of Discharge cannot be left blank");
+                ddlVoyage.SelectedIndex = 0;
+                return;
+            }
             LoadData();
         }
 
         private void LoadData()
         {
-            List<IVesselVoyageEDI> lstVesselVoyageEDI = EDIBLL.VesselVoyageEDI(Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue));
+             string pod = ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
+             pod = pod.Contains(',') ? pod.Split(',')[1] : "";
+            List<IVesselVoyageEDI> lstVesselVoyageEDI = EDIBLL.VesselVoyageEDI(Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue),dbinteract.GetId("Port",pod));
             if (lstVesselVoyageEDI.Count == 0)
             {
                 CLearAll();
@@ -64,6 +71,7 @@ namespace EMS.WebApp.Import
             txtIGMNo.Text = vesselVoyageEDI.IGMNo;
             txtIMONo.Text = vesselVoyageEDI.IMONumber;
             string Lastport = ((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text = vesselVoyageEDI.LastPortCalled;
+             pod = ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text = vesselVoyageEDI.pod;
             //txtLastPort.Text = vesselVoyageEDI.LastPortCalled;
             txtLightHouse.Text = vesselVoyageEDI.LightHouseDue.ToString();
             txtMaster.Text = vesselVoyageEDI.MasterName;
@@ -113,6 +121,12 @@ namespace EMS.WebApp.Import
 
         protected void btnDownLoad_Click(object sender, EventArgs e)
         {
+            string pod= ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
+            if (pod.Trim() == "")
+            {
+                GeneralFunctions.RegisterAlertScript(this, "Port of Discharge cannot be left blank");
+                return;
+            }
            string FileName= EDI_TXT();
            DownLoadFile(FileName);
            File.Delete(FileName);
@@ -153,6 +167,8 @@ namespace EMS.WebApp.Import
             string port1=((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text;
             string port2 = ((TextBox)AutoCompletepPort3.FindControl("txtPort")).Text;
             string port3 = ((TextBox)AutoCompletepPort4.FindControl("txtPort")).Text;
+            string pod = ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
+            pod = pod.Contains(',') ? pod.Split(',')[1] : "";
             StreamWriter writer = new StreamWriter(FileName);
             //  ("myfile.txt")
             writer.WriteLine(("HREC" + ('' + ("ZZ" + (''
@@ -192,7 +208,8 @@ namespace EMS.WebApp.Import
             writer.WriteLine("<END-vesinfo>");
             writer.WriteLine("<cargo>");
             string sss = writer.ToNewString();
-            DataSet Ds = EDIBLL.GetEDICargoInfo(Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue));
+
+            DataSet Ds = EDIBLL.GetEDICargoInfo(Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue), dbinteract.GetId("Port", pod));
             //             TextShippingCode.Text = Ds.Tables(0).Rows(0).Item("ShippingLineCode")
             DataTable Dt = Ds.Tables[0];
             int Srl = 0;

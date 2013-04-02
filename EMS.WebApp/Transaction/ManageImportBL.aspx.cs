@@ -754,6 +754,10 @@ namespace EMS.WebApp.Transaction
             int PGRFreeDays = new ImportBLL().GetPGRFreeDays(Convert.ToInt32(ddlLocation.SelectedValue));
             txtPGRFreeDays.Text = PGRFreeDays.ToString();
 
+            ((AjaxControlToolkit.AutoCompleteExtender)AC_Consignee1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
+            ((AjaxControlToolkit.AutoCompleteExtender)AC_NParty1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
+            ((AjaxControlToolkit.AutoCompleteExtender)AC_CHA1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
+
             LoadSurveyorDDL();
         }
 
@@ -949,21 +953,26 @@ namespace EMS.WebApp.Transaction
 
         private void LoadLocationDDL()
         {
-            List<ILocation> lstLocation = new ImportBLL().GetLocation(_userId);
+            List<ILocation> lstLocation = new ImportBLL().GetLocation(_userId, false);
             ddlLocation.DataValueField = "Id";
             ddlLocation.DataTextField = "Name";
             ddlLocation.DataSource = lstLocation;
             ddlLocation.DataBind();
             ddlLocation.SelectedValue = lstLocation[0].DefaultLocation.ToString();
 
+            ((AjaxControlToolkit.AutoCompleteExtender)AC_Consignee1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
+            ((AjaxControlToolkit.AutoCompleteExtender)AC_NParty1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
+            ((AjaxControlToolkit.AutoCompleteExtender)AC_CHA1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
+
             int PGRFreeDays = new ImportBLL().GetPGRFreeDays(Convert.ToInt32(ddlLocation.SelectedValue));
             txtPGRFreeDays.Text = PGRFreeDays.ToString();
 
+            List<ILocation> lstStockLocation = new ImportBLL().GetLocation(_userId, true);
             ddlStockLocation.DataValueField = "Id";
             ddlStockLocation.DataTextField = "Name";
-            ddlStockLocation.DataSource = lstLocation;
+            ddlStockLocation.DataSource = lstStockLocation;
             ddlStockLocation.DataBind();
-            ddlStockLocation.SelectedValue = lstLocation[0].DefaultLocation.ToString();
+            ddlStockLocation.SelectedValue = lstStockLocation[0].DefaultLocation.ToString();
         }
 
         private void LoadVoyageDDL()
@@ -1752,7 +1761,7 @@ namespace EMS.WebApp.Transaction
 
             ddlStockLocation.SelectedValue = header.StockLocationID.ToString();
             //ViewState[SURVEYORID] = header.SurveyorAddressID;
-            ddlSurveyor.SelectedValue = Convert.ToString(header.SurveyorAddressID);
+            //ddlSurveyor.SelectedValue = Convert.ToString(header.SurveyorAddressID);
 
             if (header.TaxExemption == true)
                 rdoTaxExempted.SelectedValue = "Yes";

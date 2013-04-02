@@ -47,7 +47,7 @@ namespace EMS.WebApp.Transaction
         protected void btnReset_Click(object sender, EventArgs e)
         {
             txtIGMBLNo.Text = "";
-            txtLineBLNo.Text = ""; 
+            txtLineBLNo.Text = "";
             txtPOD.Text = "";
             txtPOL.Text = "";
             txtVessel.Text = "";
@@ -120,7 +120,7 @@ namespace EMS.WebApp.Transaction
                 //e.Row.Cells[0].Text = ((gvImportBL.PageSize * gvImportBL.PageIndex) + e.Row.RowIndex + 1).ToString();
 
                 e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ImpLineBLNo"));
-                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ImpLineBLNo"));
+                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "IGMBLNumber"));
                 e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "VesselName"));
                 e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "VoyageNo"));
                 e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PortOfLoading"));
@@ -207,25 +207,34 @@ namespace EMS.WebApp.Transaction
 
         private void LoadImportBL()
         {
-            if (!ReferenceEquals(Session[Constants.SESSION_SEARCH_CRITERIA], null))
+            if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
             {
-                SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
 
-                if (!ReferenceEquals(searchCriteria, null))
+                if (!ReferenceEquals(Session[Constants.SESSION_SEARCH_CRITERIA], null))
                 {
-                    BuildSearchCriteria(searchCriteria);
-                    
-                    gvImportBL.PageIndex = searchCriteria.PageIndex;
+                    SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
 
-                    if (searchCriteria.PageSize > 0) gvImportBL.PageSize = searchCriteria.PageSize;
+                    if (!ReferenceEquals(searchCriteria, null))
+                    {
+                        BuildSearchCriteria(searchCriteria);
 
-                    //if (_roleId == (int)UserRole.Management)
-                    //    gvImportBL.DataSource = commonBll.GetActiveCustomer(searchCriteria);
-                    //else
-                    //    gvImportBL.DataSource = commonBll.GetAllCustomer(searchCriteria);
+                        gvImportBL.PageIndex = searchCriteria.PageIndex;
 
-                    gvImportBL.DataSource = new ImportBLL().GetImportBL(searchCriteria);
-                    gvImportBL.DataBind();
+                        if (searchCriteria.PageSize > 0) gvImportBL.PageSize = searchCriteria.PageSize;
+
+                        //if (_roleId == (int)UserRole.Management)
+                        //    gvImportBL.DataSource = commonBll.GetActiveCustomer(searchCriteria);
+                        //else
+                        //    gvImportBL.DataSource = commonBll.GetAllCustomer(searchCriteria);
+
+                        if (user.UserRole.Id == 4)
+                            gvImportBL.DataSource = new ImportBLL().GetImportBL(searchCriteria, user.UserLocation.Id);
+                        else
+                            gvImportBL.DataSource = new ImportBLL().GetImportBL(searchCriteria, 0);
+
+                        gvImportBL.DataBind();
+                    }
                 }
             }
         }
@@ -362,6 +371,6 @@ namespace EMS.WebApp.Transaction
 
         #endregion
 
-        
+
     }
 }

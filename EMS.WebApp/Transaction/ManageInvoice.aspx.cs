@@ -172,7 +172,7 @@ namespace EMS.WebApp.Transaction
 
         private void LoadLocationDDL()
         {
-            List<ILocation> lstLocation = new ImportBLL().GetLocation(3);  //Replace with UserId
+            List<ILocation> lstLocation = new ImportBLL().GetLocation(_userId, true);  //Replace with UserId
             ddlLocation.DataValueField = "Id";
             ddlLocation.DataTextField = "Name";
             ddlLocation.DataSource = lstLocation;

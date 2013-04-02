@@ -33,7 +33,7 @@ namespace EMS.DAL
             return lstLine;
         }
 
-        public static List<ILocation> GetLocation(int UserId)
+        public static List<ILocation> GetLocation(int UserId, bool IsStock)
         {
             string strExecution = "uspGetLocationForImportBL";
             List<ILocation> lstLoc = new List<ILocation>();
@@ -41,6 +41,7 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@UserId", UserId);
+                oDq.AddBooleanParam("@IsStock", IsStock);
 
                 DataTableReader reader = oDq.GetTableReader();
 
@@ -592,7 +593,7 @@ namespace EMS.DAL
             return surveyorName;
         }
 
-        public static List<IBLHeader> GetImportBL(SearchCriteria searchCriteria)
+        public static List<IBLHeader> GetImportBL(SearchCriteria searchCriteria, int locationId)
         {
             string strExecution = "[uspGetImportBLList]";
             List<IBLHeader> lstBL = new List<IBLHeader>();
@@ -608,6 +609,10 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@Vessel", 100, searchCriteria.Vessel);
                 oDq.AddVarcharParam("@Line", 100, searchCriteria.LineName);
                 oDq.AddVarcharParam("@Location", 100, searchCriteria.Location);
+
+                if (locationId > 0)
+                    oDq.AddIntegerParam("@LocationId", locationId);
+
                 oDq.AddVarcharParam("@SortExpression", 100, searchCriteria.SortExpression);
                 oDq.AddVarcharParam("@SortDirection", 100, searchCriteria.SortDirection);
 

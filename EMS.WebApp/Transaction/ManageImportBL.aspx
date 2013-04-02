@@ -161,7 +161,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                Line B/L Number:<span class="errormessage">*</span>
+                                                                IGM B/L Number:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtLineBL" runat="server" CssClass="textboxuppercase" MaxLength="60"
@@ -173,7 +173,7 @@
                                                             <td style="width: 4%;">
                                                             </td>
                                                             <td>
-                                                                Line B/L Date:<span class="errormessage">*</span>
+                                                                IGM B/L Date:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtLineBLDate" runat="server" CssClass="textboxuppercase" MaxLength="50"
@@ -240,7 +240,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                IGM B/L No:<span class="errormessage">*</span>
+                                                                Line B/L No:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtIgmBLNo" runat="server" CssClass="textboxuppercase" MaxLength="60"
@@ -254,7 +254,7 @@
                                                             <td>
                                                             </td>
                                                             <td>
-                                                                IGM B/L Date:<span class="errormessage">*</span>
+                                                                Line B/L Date:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtIgmBLDate" runat="server" CssClass="textboxuppercase" MaxLength="15"

@@ -16,9 +16,9 @@ namespace EMS.BLL
             return ImportBLDAL.GetAllLine();
         }
 
-        public List<ILocation> GetLocation(int UserId)
+        public List<ILocation> GetLocation(int UserId, bool IsStock)
         {
-            return ImportBLDAL.GetLocation(UserId);
+            return ImportBLDAL.GetLocation(UserId, IsStock);
         }
 
         public DataTable GetVoyages(int VesselId)
@@ -164,9 +164,9 @@ namespace EMS.BLL
             return ImportBLDAL.GetSurveyorNameById(SurveyorId);
         }
 
-        public List<IBLHeader> GetImportBL(SearchCriteria searchCriteria)
+        public List<IBLHeader> GetImportBL(SearchCriteria searchCriteria, int locationId)
         {
-            return ImportBLDAL.GetImportBL(searchCriteria);
+            return ImportBLDAL.GetImportBL(searchCriteria, locationId);
         }
 
         public bool IsDuplicateBL(string LineBLNo, Int64 VesselId, Int64 VoyageId, Int64 BLId)

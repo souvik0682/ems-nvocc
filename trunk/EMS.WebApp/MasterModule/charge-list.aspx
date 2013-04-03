@@ -50,9 +50,16 @@
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlLine" runat="server" Width="200">
-                            </asp:DropDownList>
-                        </td>
+                          <%--  <asp:DropDownList ID="ddlLine" runat="server" Width="200">
+                            </asp:DropDownList>--%>
+                            
+                            <asp:TextBox ID="txtEfectDate" runat="server" CssClass="watermark" ForeColor="#747862" onkeyup="return false;"></asp:TextBox>
+                            <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtEfectDate" TargetControlID="txtEfectDate" Format="dd/MM/yyyy">
+                            </cc1:CalendarExtender>
+                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="txtEfectDate"
+                                WatermarkText="Effective Date">
+                            </cc1:TextBoxWatermarkExtender>
+                            </td>
                         <td>
                             <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px"
                                 OnClick="btnSearch_Click" />
@@ -113,7 +120,7 @@
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="30%" />
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkHType" runat="server" CommandName="Sort" CommandArgument="Name"
+                                            <asp:LinkButton ID="lnkHName" runat="server" CommandName="Sort" CommandArgument="Name"
                                                 Text="Charge Title"></asp:LinkButton></HeaderTemplate>
                                         <ItemTemplate>
                                             <asp:Label ID="lblChargeTitle" runat="server" Style="text-transform: uppercase;"></asp:Label>

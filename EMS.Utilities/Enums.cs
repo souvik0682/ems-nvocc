@@ -30,10 +30,11 @@ namespace EMS.Utilities
             PER_DOCUMENT = 2,
             DETENTION = 3,
             PORT_GROUND_RENT = 4,
-            SLAB = 5,
+            INLAND_HAULAGE = 5,
             LCL = 6,
             SLAB_UNIT = 7,
-            SLAB_DOCS = 8
+            SLAB_DOCS = 8,
+            REPAIRING = 9
         }
 
         public enum Currency

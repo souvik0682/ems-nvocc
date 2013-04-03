@@ -21,9 +21,12 @@ namespace EMS.Entity
             set { invoiceTypeName = value; }
         }
         private long bLId;
+        private decimal totReceipt;
         private string bLNo;
         private int locationId;
         private string locationName;
+        private string locationAddress;
+        private string rstoWord;
         private int nvoccId;
         private string nvoccName;
         private string mrNo;
@@ -43,9 +46,12 @@ namespace EMS.Entity
         private int isEdited;
         private int isDeleted;
         private string chequeDetails;
+        private string voyageNo;
+        private string vesselName;
+        private string rcvdFrom;
         private char exportImport;
         private bool status;
-
+     
         public string ChequeDetails
         {
             get { return chequeDetails; }
@@ -77,7 +83,7 @@ namespace EMS.Entity
             this.userAddedOn = Convert.ToDateTime(reader["AddedOn"]);
             this.userEditedOn = Convert.ToDateTime(reader["EditedOn"]);
             this.moneyReceiptId = long.Parse(reader["MRId"].ToString());
-            this.invoiceId = long.Parse(reader["InvoiceId"].ToString());
+            this.invoiceId = long.Parse(reader["InvoiceId"].ToString());    
             this.invoiceNo = reader["InvoiceNo"].ToString();
             this.invoiceTypeId = Convert.ToInt32(reader["InvoiceType"]);
             this.invoiceDate = Convert.ToDateTime(reader["InvoiceDate"]);
@@ -86,6 +92,9 @@ namespace EMS.Entity
             this.bLNo = reader["BLNumber"].ToString();
             this.locationId = Convert.ToInt32(reader["LocationId"]);
             this.locationName = reader["MRLocation"].ToString();
+            this.locationAddress = reader["LocationAddress"].ToString();
+            this.totReceipt = Convert.ToDecimal(reader["TotReceipt"]);
+            this.rstoWord = reader["RsInWord"].ToString();
             this.nvoccId = Convert.ToInt32(reader["NVOCCId"]);
             this.nvoccName = reader["NVOCCName"].ToString();
             this.mrNo = reader["MRNo"].ToString();
@@ -102,6 +111,11 @@ namespace EMS.Entity
             this.userEditedId = Convert.ToInt32(reader["UserLastEdited"]);
             this.userAddedOn = Convert.ToDateTime(reader["AddedOn"]);
             this.userEditedOn = Convert.ToDateTime(reader["EditedOn"]);
+            this.voyageNo = reader["VoyageNo"].ToString();
+            this.vesselName = reader["VesselName"].ToString();
+            this.rcvdFrom = reader["RcvdFrom"].ToString();
+            //this.totReceipt = Convert.ToDecimal(reader["TotReceipt"]);
+           
         }
 
         #endregion
@@ -170,6 +184,21 @@ namespace EMS.Entity
             get { return locationName; }
         }
 
+        public string LocationAddress
+        {
+            get { return locationAddress; }
+        }
+
+        public decimal TotReceipt
+        {
+            get { return totReceipt; }
+        }
+
+        public string RsToWord
+        {
+            get { return rstoWord; }
+        }
+
         public int NvoccId
         {
             get { return nvoccId; }
@@ -233,6 +262,24 @@ namespace EMS.Entity
         {
             get { return mrAmount; }
             set { mrAmount = value; }
+        }
+
+        public string VoyageNo
+        {
+            get { return voyageNo; }
+            set { voyageNo = value; }
+        }
+
+        public string VesselName
+        {
+            get { return vesselName; }
+            set { vesselName = value; }
+        }
+
+        public string RcvdFrom
+        {
+            get { return rcvdFrom; }
+            set { rcvdFrom = value; }
         }
 
         public int UserAddedId
@@ -309,6 +356,8 @@ namespace EMS.Entity
         public decimal TDS { get; set; }
         public decimal CashAmount { get; set; }
         public decimal ChequeAmount { get; set; }
+        public decimal TotReceipt { get; set; }
+        public string RsToWord { get; set; }
         public string ChequeDetails { get; set; }
     }
 
@@ -337,6 +386,8 @@ namespace EMS.Entity
         public string BLNo { get; set; }
         public int LocationId { get; set; }
         public string LocationName { get; set; }
+        public string LocationAddress { get; set; }
+
         public int NVOCCId { get; set; }
         public string NVOCCName { get; set; }
         public int ExportImport { get; set; }
@@ -347,6 +398,7 @@ namespace EMS.Entity
             this.BLNo = reader["BLNumber"].ToString();
             this.LocationId = Convert.ToInt32(reader["LocationId"]);
             this.LocationName = reader["MRLocation"].ToString();
+            this.LocationAddress = reader["LocationAddress"].ToString();
             this.NVOCCId = Convert.ToInt32(reader["NVOCCId"]);
             this.NVOCCName = reader["NVOCCName"].ToString();
             this.ExportImport = Convert.ToInt32(reader["ExportImport"]);

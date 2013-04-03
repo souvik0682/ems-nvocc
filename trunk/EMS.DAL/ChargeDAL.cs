@@ -112,6 +112,8 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@SchName", 200, searchCriteria.ChargeName);
                 oDq.AddCharParam("@SchType", 1, searchCriteria.ChargeType);
                 oDq.AddVarcharParam("@SchLine", 200, searchCriteria.LineName);
+                oDq.AddIntegerParam("@Location", Convert.ToInt32(searchCriteria.Location));
+                oDq.AddDateTimeParam("@EDate", searchCriteria.Date);
                 oDq.AddVarcharParam("@SortExpression", 20, searchCriteria.SortExpression);
                 oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
 

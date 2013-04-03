@@ -348,7 +348,7 @@ namespace EMS.WebApp.MasterModule
             txtDisplayOrder.Text = oChargeEntity.Sequence.ToString();
 
             ddlHeaderLocation.SelectedIndex = ddlHeaderLocation.Items.IndexOf(ddlHeaderLocation.Items.FindByValue(oChargeEntity.Location.ToString()));
-            
+
 
 
             rdbServiceTaxApplicable.Items.FindByValue(oChargeEntity.ServiceTax.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
@@ -580,7 +580,7 @@ namespace EMS.WebApp.MasterModule
                 }
                 else
                 {
-                    
+
                     if (txtHigh.Enabled == false && txtLow.Enabled == false)
                     {
                         IEnumerable<IChargeRate> cr = from rate in Rates
@@ -619,8 +619,9 @@ namespace EMS.WebApp.MasterModule
 
                 ViewState["ChargeRates"] = Rates;
                 FillRates();
-
+                DisableAllField();
             }
+
             #endregion
 
             #region Edit
@@ -745,7 +746,7 @@ namespace EMS.WebApp.MasterModule
             WashingSelection(rdbWashing);
             SharingSelection(rdbPrincipleSharing);
             ShowHideControlofFooter(ddlChargeType);
-            DisableAllField();
+            //DisableAllField();
         }
 
         private IEnumerable<IChargeRate> RangeValidationCheck(TextBox txtHigh, TextBox txtLow, int Locn, int Ter, int Was)
@@ -992,6 +993,11 @@ namespace EMS.WebApp.MasterModule
             GridViewRow FootetRow = dgChargeRates.HeaderRow;
             GridViewRow HeaderRow = dgChargeRates.HeaderRow;
 
+            DropDownList ddlFTerminal = (DropDownList)FootetRow.FindControl("ddlFTerminal");
+            Button lnkAdd = (Button)FootetRow.FindControl("lnkAdd");
+            Button lnkCancel = (Button)FootetRow.FindControl("lnkCancel");
+
+
             TextBox txtLow = (TextBox)FootetRow.FindControl("txtLow");
             TextBox txtHigh = (TextBox)FootetRow.FindControl("txtHigh");
             TextBox txtRatePerBL = (TextBox)FootetRow.FindControl("txtRatePerBL");
@@ -1080,7 +1086,8 @@ namespace EMS.WebApp.MasterModule
                         rfvHigh.Enabled = true;
                     }
 
-
+                    lnkAdd.Enabled = true;
+                    lnkCancel.Enabled = true;
                     break;
 
                 case "2":
@@ -1131,6 +1138,8 @@ namespace EMS.WebApp.MasterModule
                         rfvHigh.Enabled = true;
                     }
 
+                    lnkAdd.Enabled = true;
+                    lnkCancel.Enabled = true;
                     break;
 
                 case "3":
@@ -1171,6 +1180,8 @@ namespace EMS.WebApp.MasterModule
 
                     }
 
+                    lnkAdd.Enabled = true;
+                    lnkCancel.Enabled = true;
                     break;
                 case "5":
                     txtLow.Enabled = true;
@@ -1210,6 +1221,8 @@ namespace EMS.WebApp.MasterModule
                         rfvSharingTEU.Enabled = true;
                     }
 
+                    lnkAdd.Enabled = true;
+                    lnkCancel.Enabled = true;
                     break;
 
                 case "6":
@@ -1257,6 +1270,33 @@ namespace EMS.WebApp.MasterModule
                         rfvSharingTEU.Enabled = true;
                     }
 
+                    lnkAdd.Enabled = true;
+                    lnkCancel.Enabled = true;
+
+                    break;
+                case "9":
+                    lnkAdd.Enabled = false;
+                    lnkCancel.Enabled = false;
+
+                    txtLow.Enabled = false;
+                    txtHigh.Enabled = false;
+                    txtRatePerBL.Enabled = false;
+                    txtRatePerTEU.Enabled = false;
+                    txtRateperFEU.Enabled = false;
+                    txtSharingBL.Enabled = false;
+                    txtSharingTEU.Enabled = false;
+                    txtSharingFEU.Enabled = false;
+                    ddlFTerminal.Enabled = false;
+
+                    rfvLow.Enabled = false;
+                    rfvHigh.Enabled = false;
+                    rfvRatePerBl.Enabled = false;
+                    rfvRatePerTEU.Enabled = false;
+                    rfvRatePerFEU.Enabled = false;
+                    rfvSharingBL.Enabled = false;
+                    rfvSharingFEU.Enabled = false;
+                    rfvSharingTEU.Enabled = false;
+
                     break;
             }
         }
@@ -1299,6 +1339,8 @@ namespace EMS.WebApp.MasterModule
             rdbServiceTaxApplicable.Enabled = true;
             rdbTerminalRequired.Enabled = true;
             rdbWashing.Enabled = true;
+
+
 
         }
 

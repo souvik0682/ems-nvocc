@@ -113,7 +113,15 @@ namespace EMS.WebApp.Transaction
 
         protected void txtBlNo_TextChanged(object sender, EventArgs e)
         {
-            PopulateAllData();
+            if (txtBlNo.Text != string.Empty)
+            {
+                PopulateAllData();
+                UpdatePanel2.Update();
+            }
+            else
+            {
+                ClearForm();
+            }
         }
 
         private void PopulateAllData()
@@ -554,7 +562,7 @@ namespace EMS.WebApp.Transaction
             txtVAlidityDate.Enabled = true;
             lnkGenerateInvoiceDOE.Enabled = true;
             lnkDoExtension.Enabled = true;
-
+            rfvDOE.Enabled = true;
         }
 
         protected void chkSlotExtension_CheckedChanged(object sender, EventArgs e)
@@ -565,7 +573,7 @@ namespace EMS.WebApp.Transaction
             txtExtensionForDetention.Enabled = true;
             lnkGenerateInvoiceSlotExtension.Enabled = true;
             lnkSlotExtension.Enabled = true;
-
+            rfvEFD.Enabled = true;
 
         }
 
@@ -905,6 +913,7 @@ namespace EMS.WebApp.Transaction
             lnkPGRExtension.Enabled = true;
             txtExtensionForPGR.Enabled = true;
             lnkGenInvPGR.Enabled = true;
+            rfvEFP.Enabled = true;
         }
 
         protected void chkSecurityInv_CheckedChanged(object sender, EventArgs e)
@@ -1311,10 +1320,14 @@ namespace EMS.WebApp.Transaction
 
         protected void btnReset_Click(object sender, EventArgs e)
         {
+            ClearForm();
+        }
+
+        void ClearForm()
+        {
             ClearAll();
             DisableAllServiceControls();
             DisableAllCheckBoxes();
-            //UpdatePanel2.Update();
         }
 
         protected void btnFinalContinue_Click(object sender, EventArgs e)

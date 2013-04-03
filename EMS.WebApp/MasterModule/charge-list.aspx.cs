@@ -60,9 +60,9 @@ namespace EMS.WebApp.MasterModule
 
             #region Line
 
-            PopulateDropDown((int)Enums.DropDownPopulationFor.Line, ddlLine, 0);
-            Li = new ListItem("SELECT LINE", "0");
-            ddlLine.Items.Insert(0, Li);
+            //PopulateDropDown((int)Enums.DropDownPopulationFor.Line, ddlLine, 0);
+            //Li = new ListItem("SELECT LINE", "0");
+            //ddlLine.Items.Insert(0, Li);
             #endregion
 
         }
@@ -84,7 +84,7 @@ namespace EMS.WebApp.MasterModule
             {
                 SaveNewPageIndex(0);
                 LoadCharge();
-                upLoc.Update();
+                //upLoc.Update();
             }
         }
 
@@ -93,6 +93,8 @@ namespace EMS.WebApp.MasterModule
             txtChargeName.Text = string.Empty;
             txtLine.Text = string.Empty;
             ddlChargeType.SelectedIndex = 0;
+            ddlLocation.SelectedIndex = 0;
+            txtEfectDate.Text = string.Empty;
             LoadCharge();
         }
 
@@ -162,10 +164,10 @@ namespace EMS.WebApp.MasterModule
                 if (Loc != "0")
                     e.Row.Cells[4].Text = ddlLocation.Items.FindByValue(Loc).Text;
 
-                string Lin = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Line"));
-                if (Lin != "0")
-                    e.Row.Cells[5].Text = ddlLine.Items.FindByValue(Lin).Text;
-
+                //string Lin = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Line"));
+                //if (Lin != "0")
+                //    e.Row.Cells[5].Text = ddlLine.Items.FindByValue(Lin).Text;
+                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Line"));
 
                 e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EffectDate"));
 
@@ -201,7 +203,7 @@ namespace EMS.WebApp.MasterModule
             int newPageSize = Convert.ToInt32(ddlPaging.SelectedValue);
             SaveNewPageSize(newPageSize);
             LoadCharge();
-            upLoc.Update();
+            //upLoc.Update();
         }
 
         #endregion
@@ -304,6 +306,12 @@ namespace EMS.WebApp.MasterModule
             criteria.ChargeName = txtChargeName.Text.Trim();
             criteria.ChargeType = Convert.ToChar(ddlChargeType.SelectedValue);
             criteria.LineName = txtLine.Text.Trim();
+            criteria.Location = ddlLocation.SelectedValue;
+            if (!String.IsNullOrEmpty(txtEfectDate.Text))
+                criteria.Date = Convert.ToDateTime(txtEfectDate.Text);
+            else
+                criteria.Date = null;
+
             Session[Constants.SESSION_SEARCH_CRITERIA] = criteria;
         }
 
@@ -327,6 +335,12 @@ namespace EMS.WebApp.MasterModule
                         txtChargeName.Text = criteria.ChargeName;
                         txtLine.Text = criteria.LineName;
                         ddlChargeType.SelectedIndex = ddlChargeType.Items.IndexOf(ddlChargeType.Items.FindByValue(criteria.ChargeType.ToString()));
+
+                        if (criteria.Date.HasValue)
+                            txtEfectDate.Text = criteria.Date.Value.ToString("dd/MM/yyyy");
+                        ddlLocation.SelectedValue = criteria.Location;
+
+
                         gvwCharge.PageIndex = criteria.PageIndex;
                         gvwCharge.PageSize = criteria.PageSize;
                         ddlPaging.SelectedValue = criteria.PageSize.ToString();

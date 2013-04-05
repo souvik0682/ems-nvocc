@@ -17,7 +17,7 @@ namespace EMS.WebApp.MasterModule
         ImportHaulageEntity oImportHaulageEntity;
         ImportHaulageBLL oImportHaulageBll;
         UserEntity oUserEntity;
-        
+
 
         #region Private Member Variables
 
@@ -95,11 +95,13 @@ namespace EMS.WebApp.MasterModule
             txtWTo.Text = Convert.ToString(oImportHaulage.WeightTo);
             txtRate.Text = Convert.ToString(oImportHaulage.HaulageRate);
 
+            if (oImportHaulage.EffectDate >= Convert.ToDateTime("01/01/1950"))
+                txtEffectDate.Text = oImportHaulage.EffectDate.ToString("dd/MM/yyyy");
         }
 
         void PopulateDropDown(int Number, DropDownList ddl, int? Filter)
         {
-            CommonBLL.PopulateDropdown(Number, ddl, Filter,0);
+            CommonBLL.PopulateDropdown(Number, ddl, Filter, 0);
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -124,6 +126,7 @@ namespace EMS.WebApp.MasterModule
                 oImportHaulageEntity.WeightFrom = Convert.ToDecimal(txtWFrom.Text.Trim());
                 oImportHaulageEntity.WeightTo = Convert.ToDecimal(txtWTo.Text.Trim());
                 oImportHaulageEntity.HaulageStatus = true;
+                oImportHaulageEntity.EffectDate = Convert.ToDateTime(txtEffectDate.Text);
 
                 if (hdnHaulageChrgID.Value == "0") // Insert
                 {
@@ -154,12 +157,12 @@ namespace EMS.WebApp.MasterModule
                     {
                         case -1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00076");
                             break;
-                        case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");                            
+                        case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
                             break;
-                        case 1: Response.Redirect("~/MasterModule/ImportHaulage-list.aspx"); 
+                        case 1: Response.Redirect("~/MasterModule/ImportHaulage-list.aspx");
                             break;
                     }
-                }               
+                }
 
 
             }
@@ -190,6 +193,7 @@ namespace EMS.WebApp.MasterModule
             txtRate.Text = string.Empty;
             txtWFrom.Text = string.Empty;
             txtWTo.Text = string.Empty;
+            txtEffectDate.Text = string.Empty;
         }
     }
 }

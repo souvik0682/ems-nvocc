@@ -30,6 +30,7 @@ namespace EMS.DAL
                 oDq.AddDecimalParam("@WeightTo", 12, 2, Convert.ToDecimal(ImportHaulage.WeightTo));
                 oDq.AddDecimalParam("@HaulageRate", 12, 2, Convert.ToDecimal(ImportHaulage.HaulageRate));
                 oDq.AddBooleanParam("@HaulageStatus", ImportHaulage.HaulageStatus);
+                oDq.AddDateTimeParam("@EffDate",ImportHaulage.EffectDate);
                 if (ImportHaulage.HaulageChgID <= 0)
                 {
                     oDq.AddIntegerParam("@CreatedBy", ImportHaulage.CreatedBy);

@@ -10,5 +10,6 @@
 <li><a href="ShowReport.aspx?reportName=Custom">Custom</a></li>
 <li><a href="ShowReport.aspx?reportName=Gang">Gang</a></li>
 <li><a href="ShowReport.aspx?reportName=InvoiceDeveloper">Invoice</a></li>
+<li><a href="ShowReport.aspx?reportName=OnOffHire">On/Off-Hire</a></li>
 </ul>
 </asp:Content>

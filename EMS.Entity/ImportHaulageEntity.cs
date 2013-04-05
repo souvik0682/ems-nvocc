@@ -93,6 +93,11 @@ namespace EMS.Entity
             set;
         }
 
+        public DateTime EffectDate
+        {
+            get;
+            set;
+        }
 
 
         public ImportHaulageEntity()
@@ -113,11 +118,9 @@ namespace EMS.Entity
             this.WeightTo = Convert.ToDecimal(reader["WeightTo"]);
             this.LFCode = Convert.ToString(reader["LFCode"]);
             this.LTCode = Convert.ToString(reader["LTCode"]);
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["EDate"])))
+                this.EffectDate = Convert.ToDateTime(reader["EDate"]);
         }
-
-
-
-
 
 
     }

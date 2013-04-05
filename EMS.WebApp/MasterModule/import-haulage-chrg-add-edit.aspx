@@ -17,6 +17,18 @@
             }
         }
     </script>
+    <script language="javascript" type="text/javascript">
+        function checkDate(sender, args) {
+            if (sender._selectedDate < new Date()) {
+                alert("Please select advance date only!");
+                sender._selectedDate = new Date();
+                // set the date back to the current date
+                //sender._textbox.set_Value(sender._selectedDate.format(sender._format))
+                sender._textbox.set_Value("")
+            }
+        }
+
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
     <div>
@@ -26,6 +38,26 @@
             <fieldset style="width: 400px;">
                 <legend>Add / Edit Import Haulage</legend>
                 <table border="0" cellpadding="2" cellspacing="3">
+                    <tr>
+                        <td>
+                            Effective Date<span class="errormessage1">*</span> :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtEffectDate" runat="server" Width="250"></asp:TextBox>
+                            <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtEffectDate"
+                                PopupPosition="BottomLeft" TargetControlID="txtEffectDate" Format="dd/MM/yyyy"
+                                OnClientDateSelectionChanged="checkDate">
+                            </cc1:CalendarExtender>
+                            <asp:RequiredFieldValidator ID="rfvDate" runat="server" ErrorMessage="Please enter effective date"
+                                Display="None" ControlToValidate="txtEffectDate" ValidationGroup="vgHaulage"></asp:RequiredFieldValidator>
+                            <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender7" runat="server" TargetControlID="rfvDate"
+                                WarningIconImageUrl="">
+                            </cc1:ValidatorCalloutExtender>
+                            <%--  <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="txtWFrom"
+                                FilterMode="ValidChars" FilterType="Custom,Numbers" ValidChars=".">
+                            </cc1:FilteredTextBoxExtender>--%>
+                        </td>
+                    </tr>
                     <tr>
                         <td style="width: 140px;">
                             Location From<span class="errormessage1">*</span> :
@@ -86,7 +118,7 @@
                         </td>
                         <td>
                             <asp:HiddenField ID="hdnToLocation" runat="server" />
-                            <asp:TextBox runat="server" ID="txtToLocation" Width="250" autocomplete="off" Style="text-transform:uppercase;" />
+                            <asp:TextBox runat="server" ID="txtToLocation" Width="250" autocomplete="off" Style="text-transform: uppercase;" />
                             <asp:RequiredFieldValidator ID="rfvTLocation" runat="server" ErrorMessage="Please select location"
                                 Display="None" ControlToValidate="txtToLocation" ValidationGroup="vgHaulage"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender2" runat="server" TargetControlID="rfvTLocation"
@@ -155,13 +187,13 @@
                         </td>
                         <td>
                             <cc2:CustomTextBox ID="txtWFrom" runat="server" Width="250" Type="Decimal" MaxLength="13"
-                                Precision="10" Scale="3" style="text-align: right;"></cc2:CustomTextBox>
+                                Precision="10" Scale="3" Style="text-align: right;"></cc2:CustomTextBox>
                             <asp:RequiredFieldValidator ID="rfvWFrom" runat="server" ErrorMessage="Please enter minimum weight"
                                 Display="None" ControlToValidate="txtWFrom" ValidationGroup="vgHaulage"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender4" runat="server" TargetControlID="rfvWFrom"
                                 WarningIconImageUrl="">
                             </cc1:ValidatorCalloutExtender>
-                          <%--  <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="txtWFrom"
+                            <%--  <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="txtWFrom"
                                 FilterMode="ValidChars" FilterType="Custom,Numbers" ValidChars=".">
                             </cc1:FilteredTextBoxExtender>--%>
                         </td>
@@ -172,13 +204,13 @@
                         </td>
                         <td>
                             <cc2:CustomTextBox ID="txtWTo" runat="server" Width="250" Type="Decimal" MaxLength="13"
-                                Precision="10" Scale="3" style="text-align: right;"></cc2:CustomTextBox>
+                                Precision="10" Scale="3" Style="text-align: right;"></cc2:CustomTextBox>
                             <asp:RequiredFieldValidator ID="rfvWTo" runat="server" ErrorMessage="Please enter maximum weight"
                                 Display="None" ControlToValidate="txtWTo" ValidationGroup="vgHaulage"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender5" runat="server" TargetControlID="rfvWTo"
                                 WarningIconImageUrl="">
                             </cc1:ValidatorCalloutExtender>
-                          <%--  <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" TargetControlID="txtWTo"
+                            <%--  <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" TargetControlID="txtWTo"
                                 FilterMode="ValidChars" FilterType="Custom,Numbers" ValidChars=".">
                             </cc1:FilteredTextBoxExtender>--%>
                         </td>
@@ -189,7 +221,7 @@
                         </td>
                         <td>
                             <cc2:CustomTextBox ID="txtRate" runat="server" Width="250" Type="Decimal" MaxLength="13"
-                                Precision="10" Scale="2" style="text-align: right;"></cc2:CustomTextBox>
+                                Precision="10" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
                             <asp:RequiredFieldValidator ID="rfvRate" runat="server" ErrorMessage="Please enter rate"
                                 Display="None" ControlToValidate="txtRate" ValidationGroup="vgHaulage"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender6" runat="server" TargetControlID="rfvRate"
@@ -208,7 +240,7 @@
                             <asp:HiddenField ID="hdnHaulageChrgID" runat="server" Value="0" />
                             <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" ValidationGroup="vgHaulage" />&nbsp;&nbsp;<asp:Button
                                 ID="btnBack" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
-                                OnClick="btnBack_Click"  OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
+                                OnClick="btnBack_Click" OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
                         </td>
                     </tr>
                 </table>

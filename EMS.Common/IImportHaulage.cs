@@ -17,5 +17,6 @@ namespace EMS.Common
         decimal WeightTo { get; set; }
         decimal HaulageRate { get; set; }
         bool HaulageStatus { get; set; }
+        DateTime EffectDate { get; set; }
     }
 }

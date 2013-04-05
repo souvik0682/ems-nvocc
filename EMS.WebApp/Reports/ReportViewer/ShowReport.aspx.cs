@@ -135,25 +135,36 @@ namespace EMS.WebApp.Reports.ReportViewer
             if (string.IsNullOrEmpty(strReportName)) {
                 throw new Exception("EmptyParameters");
             }
-            ViewState["strReportName"] = strReportName; 
+            ViewState["strReportName"] = strReportName;
+
+            lblLine.Text = "BL No.";
+            ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged;
+            trCar.Visible = false;
+            trCar1.Visible = false;
             trInvoice.Visible = false;
+
+            trInvoice.Visible = false;
+            TrHire.Visible = false;
+            TrHire1.Visible = false;
+            btnPrint.Visible = false;
             switch (strReportName.ToLower())
             {
 
                 case "cargoarrivalnotice":
                     ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1;                   
                     break;
-                default:
-                    lblLine.Text = "BL No.";
-                    ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged;                   
-                    trCar.Visible = false;
-                    trCar1.Visible = false;
-                    trInvoice.Visible = false;
-                    if (strReportName.ToLower() == "invoicedeveloper")
-                    {
-                        trInvoice.Visible = true;
-                        ddlLocation.SelectedIndexChanged += ddlLocation_SelectedIndexChanged_Invoice;    
-                    }
+                case "invoicedeveloper":
+                   trInvoice.Visible = true;
+                   btnPrint.Visible = true;
+                   ddlLocation.SelectedIndexChanged += ddlLocation_SelectedIndexChanged_Invoice;   
+                    break;
+                case "onoffhire":
+                    TrHire.Visible = true;
+                    TrHire1.Visible = true;
+                    lblLine.Text = "Line";
+                    ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1; 
+                    break;
+                default:                   
                     break;
             }
 
@@ -233,6 +244,14 @@ namespace EMS.WebApp.Reports.ReportViewer
                     rptParameters[2] = new ReportParameter("LoginUserName", txtPrintedBy.Text);
                     rptParameters[3] = new ReportParameter("InvoiceId", ddlInvoice.SelectedValue);
                     break;
+                case "onoffhire":
+                    rptParameters = new ReportParameter[5];
+                    rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
+                    rptParameters[0] = new ReportParameter("line", ddlLocation.SelectedValue);
+                    rptParameters[2] = new ReportParameter("refDateS", txtSDate.Text);
+                    rptParameters[3] = new ReportParameter("refDateE", txtEDate.Text);
+                    rptParameters[4] = new ReportParameter("onOffhire", ddlHire.SelectedValue);
+                    break;
                 default: strReportName = string.Empty; break;
             }
             return rptParameters;
@@ -276,7 +295,13 @@ namespace EMS.WebApp.Reports.ReportViewer
         {            
             if (ddlLine.SelectedIndex>0)
             {
-                Filler.FillData(ddlLocation, CommonBLL.GetLine(ddlLine.SelectedValue), "ProspectName", "ProspectID", "Line");
+                if (ViewState["strReportName"].ToString().ToLower() == "onoffhire") {
+                    Filler.FillData(ddlLocation, CommonBLL.GetLineForHire(ddlLine.SelectedValue), "ProspectName", "ProspectID", "Line");
+                }
+                else
+                {
+                    Filler.FillData(ddlLocation, CommonBLL.GetLine(ddlLine.SelectedValue), "ProspectName", "ProspectID", "Line");
+                }
             }
         }
 
@@ -318,7 +343,7 @@ namespace EMS.WebApp.Reports.ReportViewer
         {
             if (ddlVessel.SelectedIndex > 0)
             {
-                Filler.FillData(ddlVoyage, CommonBLL.GetVoyages(ddlVessel.SelectedValue), "VoyageNo", "VoyageID", "Voyage");
+                Filler.FillData(ddlVoyage, CommonBLL.GetVoyages(ddlVessel.SelectedValue, ddlLocation.SelectedValue), "VoyageNo", "VoyageID", "Voyage");
             }
         }
 

@@ -665,6 +665,19 @@ namespace EMS.DAL
 
             return myDataTable;
         }
+        public static DataTable GetLineForHire(string Location)
+        {
+            string strExecution = "rptUspGetLineByLocForHireContainer";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@Location", Location.ToInt());
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
         public static DataTable GetVessels(string Line)
         {
             string strExecution = "rptUspGetVesselByNVOCCID";
@@ -679,14 +692,14 @@ namespace EMS.DAL
             return myDataTable;
         }
 
-        public static DataTable GetVoyages(string Vessel)
+        public static DataTable GetVoyages(string Vessel, string Line)
         {
             string strExecution = "rptUspGetVoyageByVesselID";
             DataTable myDataTable;
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                oDq.AddIntegerParam("@Vessel", Vessel.ToInt());
+                oDq.AddIntegerParam("@Vessel", Vessel.ToInt()); oDq.AddIntegerParam("@line", Line.ToInt()); 
                 myDataTable = oDq.GetTable();
             }
 

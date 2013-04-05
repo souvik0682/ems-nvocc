@@ -448,6 +448,10 @@ namespace EMS.BLL
         #endregion
 
         #region Report
+        public static DataTable GetLineForHire(string Location)
+        {
+            return CommonDAL.GetLineForHire(Location);
+        }
         public static DataTable GetLine(string Location)
         {
            
@@ -458,9 +462,9 @@ namespace EMS.BLL
             return CommonDAL.GetVessels(Line);
         }
 
-        public static DataTable GetVoyages(string Vessel)
+        public static DataTable GetVoyages(string Vessel, string Line)
         {
-            return CommonDAL.GetVoyages(Vessel);
+            return CommonDAL.GetVoyages(Vessel,  Line);
         }
         public static DataTable GetBLNo(string line, string Vessel, string Voyage)
         {

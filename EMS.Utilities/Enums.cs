@@ -132,5 +132,13 @@ namespace EMS.Utilities
             Container_Details = 9
 
         }
+
+        // "__" will be replace with "-" & "_" will be replace with space
+        public enum DeliveryMode
+        {
+            None = 0,
+            Factory_de__stuffing =1,
+            CFS_de__stuffing = 2
+        }
     }
 }

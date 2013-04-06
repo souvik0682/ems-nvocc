@@ -163,6 +163,8 @@ namespace EMS.Entity
             this.PrincipleSharing = Convert.ToBoolean(reader["IsPrincipleShared"]);
             this.RateChangeable = Convert.ToBoolean(reader["RateChangable"]);            
             this.ServiceTax = Convert.ToBoolean(reader["ServiceTax"]);
+            this.IsSpecialRate = Convert.ToBoolean(reader["IsSpecialRate"]);
+            this.DeliveryMode = Convert.ToChar(reader["DeliveryMode"]);
 
             if (ColumnExists(reader, "LocationId"))
                 if (reader["LocationId"] != DBNull.Value)
@@ -202,6 +204,19 @@ namespace EMS.Entity
             }
 
             return false;
+        }
+
+
+        public bool IsSpecialRate
+        {
+            get;
+            set;
+        }
+
+        public char DeliveryMode
+        {
+            get;
+            set;
         }
     }
 }

@@ -200,8 +200,9 @@
                                 </td>
                                 <td>
                                     <%--Is Freight Component ?<span class="errormessage1">*</span> :--%>
-                                </td>
+                                   Special Rate</td>
                                 <td>
+                                    <asp:CheckBox ID="chkSpecialRate" runat="server" />
                                 </td>
                             </tr>
                             <tr>
@@ -214,9 +215,11 @@
                                     <cc2:CustomTextBox ID="txtDisplayOrder" runat="server" Width="150" Type="Numeric"
                                         Style="text-align: right;"></cc2:CustomTextBox>
                                 </td>
-                                <td>
+                                <td>Delivery Mode
                                 </td>
                                 <td>
+                                    <asp:DropDownList ID="ddlDeliveryMode" runat="server">
+                                    </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>

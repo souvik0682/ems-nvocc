@@ -179,6 +179,14 @@ namespace EMS.WebApp.MasterModule
             #endregion
 
 
+            #region Delivery Mode
+            foreach (Enums.DeliveryMode r in Enum.GetValues(typeof(Enums.DeliveryMode)))
+            {
+                ListItem item = new ListItem(Enum.GetName(typeof(Enums.DeliveryMode), r).Replace("__", "-").Replace('_', ' '), ((int)r).ToString());
+                ddlDeliveryMode.Items.Add(item);
+            }
+            #endregion
+
         }
 
         void PopulateDropDown(int Number, DropDownList ddl, int? Filter)
@@ -260,7 +268,8 @@ namespace EMS.WebApp.MasterModule
                     oChargeEntity.Sequence = Convert.ToInt32(txtDisplayOrder.Text.Trim());
                 oChargeEntity.ServiceTax = Convert.ToBoolean(Convert.ToInt32(rdbServiceTaxApplicable.SelectedItem.Value));
                 oChargeEntity.Location = Convert.ToInt32(ddlHeaderLocation.SelectedValue);
-
+                oChargeEntity.IsSpecialRate = chkSpecialRate.Checked;
+                oChargeEntity.DeliveryMode = Convert.ToChar(ddlDeliveryMode.SelectedValue);
 
                 if (Convert.ToInt32(hdnChargeID.Value) <= 0) //insert
                 {
@@ -360,6 +369,9 @@ namespace EMS.WebApp.MasterModule
             rdbPrincipleSharing.Items.FindByValue(oChargeEntity.PrincipleSharing.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
             //SharingSelection(rdbPrincipleSharing);
             rdbRateChange.Items.FindByValue(oChargeEntity.RateChangeable.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
+
+            chkSpecialRate.Checked = oChargeEntity.IsSpecialRate;
+            ddlDeliveryMode.SelectedValue = oChargeEntity.DeliveryMode.ToString();
 
             hdnChargeID.Value = oChargeEntity.ChargesID.ToString();
 
@@ -966,6 +978,9 @@ namespace EMS.WebApp.MasterModule
             dgChargeRates.DataSource = oChargeRates;
             dgChargeRates.DataBind();
             dgChargeRates.Rows[0].Visible = false;
+
+            chkSpecialRate.Checked = false;
+            ddlDeliveryMode.SelectedIndex = 0;
         }
 
         void DefaultSelection()
@@ -1320,6 +1335,9 @@ namespace EMS.WebApp.MasterModule
             rdbTerminalRequired.Enabled = false;
             rdbWashing.Enabled = false;
 
+            chkSpecialRate.Enabled = false;
+            ddlDeliveryMode.Enabled = false;
+
         }
         void EnableAllField()
         {
@@ -1340,7 +1358,8 @@ namespace EMS.WebApp.MasterModule
             rdbTerminalRequired.Enabled = true;
             rdbWashing.Enabled = true;
 
-
+            chkSpecialRate.Enabled = true;
+            ddlDeliveryMode.Enabled = true;
 
         }
 

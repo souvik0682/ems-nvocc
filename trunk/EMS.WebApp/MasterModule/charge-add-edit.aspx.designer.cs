@@ -310,6 +310,15 @@ namespace EMS.WebApp.MasterModule {
         protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender15;
         
         /// <summary>
+        /// chkSpecialRate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkSpecialRate;
+        
+        /// <summary>
         /// txtDisplayOrder control.
         /// </summary>
         /// <remarks>
@@ -317,6 +326,15 @@ namespace EMS.WebApp.MasterModule {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::EMS.WebApp.CustomControls.CustomTextBox txtDisplayOrder;
+        
+        /// <summary>
+        /// ddlDeliveryMode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlDeliveryMode;
         
         /// <summary>
         /// ddlCurrency control.

@@ -79,6 +79,27 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
+     <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+            <ProgressTemplate>
+                <div class="progress">
+                    <div id="image">
+                        <img src="<%=Page.ResolveClientUrl("~/Images/PleaseWait.gif") %>" alt="" /></div>
+                    <div id="text">
+                        Please Wait...</div>
+                </div>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
+
+        <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
+            <ProgressTemplate>
+                <div class="progress">
+                    <div id="image">
+                        <img src="<%=Page.ResolveClientUrl("~/Images/PleaseWait.gif") %>" alt="" /></div>
+                    <div id="text">
+                        Please Wait...</div>
+                </div>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
     <asp:Button ID="btnReset" runat="server" Style="display: none;" Text="Reset" OnClick="btnReset_Click" />
     <div>
         <div id="headercaption">
@@ -524,8 +545,8 @@
                                     <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtVAlidityDate"
                                         TargetControlID="txtValidityDate" Format="dd/MM/yyyy">
                                     </cc1:CalendarExtender>
-                                    <asp:RequiredFieldValidator ControlToValidate="txtVAlidityDate" Enabled="false" ID="rfvDOE" runat="server" ErrorMessage="Please enter date"
-                                        Display="None" ValidationGroup="vgInv"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ControlToValidate="txtVAlidityDate" Enabled="false" ID="rfvDOE"
+                                        runat="server" ErrorMessage="Please enter date" Display="None" ValidationGroup="vgInv"></asp:RequiredFieldValidator>
                                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server" TargetControlID="rfvDOE">
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
@@ -610,8 +631,8 @@
                                     <cc1:CalendarExtender ID="CalendarExtender2" runat="server" PopupButtonID="txtExtensionForDetention"
                                         TargetControlID="txtExtensionForDetention" Format="dd/MM/yyyy">
                                     </cc1:CalendarExtender>
-                                    <asp:RequiredFieldValidator ControlToValidate="txtExtensionForDetention" Enabled="false" ID="rfvEFD" runat="server" ErrorMessage="Please enter date"
-                                        Display="None" ValidationGroup="vgInv"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ControlToValidate="txtExtensionForDetention" Enabled="false"
+                                        ID="rfvEFD" runat="server" ErrorMessage="Please enter date" Display="None" ValidationGroup="vgInv"></asp:RequiredFieldValidator>
                                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender2" runat="server" TargetControlID="rfvEFD">
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
@@ -731,8 +752,8 @@
                                     <cc1:CalendarExtender ID="CalendarExtender3" runat="server" PopupButtonID="txtExtensionForPGR"
                                         TargetControlID="txtExtensionForPGR" Format="dd/MM/yyyy">
                                     </cc1:CalendarExtender>
-                                    <asp:RequiredFieldValidator ControlToValidate="txtExtensionForPGR" Enabled="false" ID="rfvEFP" runat="server" ErrorMessage="Please enter date"
-                                        Display="None" ValidationGroup="vgInv"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ControlToValidate="txtExtensionForPGR" Enabled="false"
+                                        ID="rfvEFP" runat="server" ErrorMessage="Please enter date" Display="None" ValidationGroup="vgInv"></asp:RequiredFieldValidator>
                                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvEFP">
                                     </cc1:ValidatorCalloutExtender>
                                 </td>

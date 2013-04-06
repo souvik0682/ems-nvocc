@@ -42,8 +42,9 @@ namespace EMS.WebApp.Transaction
                 FillDropDown();
                 //chkFreightToCollect.Enabled = true;
                 DisableAllServiceControls();
+                RetriveParameters();
             }
-            RetriveParameters();
+            
         }
 
         private void CheckUserAccess()
@@ -166,6 +167,13 @@ namespace EMS.WebApp.Transaction
                 {
                     EnableDisableServiceRequestSection();
                     //imgBtnFinalDo.Enabled = true;
+                    tdFinalDo.Visible = true;
+                    tdExmDo.Attributes.Add("colspan", "1");
+                }
+                else
+                {
+                    tdFinalDo.Visible = false;
+                    tdExmDo.Attributes.Add("colspan", "2");
                 }
 
                 fillServiceRequest(BLDataSet.Tables[0]);
@@ -241,13 +249,13 @@ namespace EMS.WebApp.Transaction
 
             if (Convert.ToDateTime(dtDetail.Rows[0]["LANDINGDT"].ToString()) < Convert.ToDateTime("01/01/1950"))
             {
-                tdFinalDo.Visible = false;
-                tdExmDo.Attributes.Add("colspan", "2");
+                //tdFinalDo.Visible = false;
+                //tdExmDo.Attributes.Add("colspan", "2");
             }
             else
             {
-                tdFinalDo.Visible = true;
-                tdExmDo.Attributes.Add("colspan", "1");
+                //tdFinalDo.Visible = true;
+                //tdExmDo.Attributes.Add("colspan", "1");
             }
 
 

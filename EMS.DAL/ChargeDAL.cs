@@ -154,6 +154,10 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@Currency", Charge.Currency);
                 oDq.AddBooleanParam("@ServiceTax", Charge.ServiceTax);
                 oDq.AddIntegerParam("@LocationId", Charge.Location);
+                oDq.AddBooleanParam("@IsSpecialRate", Charge.IsSpecialRate);
+                oDq.AddCharParam("@DeliveryMode", 1, Charge.DeliveryMode);
+     
+
                 //oDq.AddNVarcharParam("@ChargeRate",8000,Charge.ConvertListToXML((List<IChargeRate>)Charge.ChargeRates));
 
 

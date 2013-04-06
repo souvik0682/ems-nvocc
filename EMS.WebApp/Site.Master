@@ -250,7 +250,8 @@
                                     <li id="liLR_StkStmt" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/CntrStockDetail.aspx") %>">
                                         Stock Statement</a></li>
                                     <li id="liLR_Pickup" runat="server"><a href="#">Drop-Off Letter</a></li>
-                                    <li id="liLR_Onhire" runat="server"><a href="#">On/Off hire Register</a></li>
+
+                                    <li id="liLR_Onhire" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ReportViewer/ShowReport.aspx?reportName=OnOffHire") %>">On/Off hire Register</a></li>
                                    <%-- <li id="liLR_Offhire" runat="server"><a href="#">Off-hire Register</a></li>--%>
                                     <li id="liLR_Damage" runat="server"><a href="#">Damage/Hold Register</a></li>
                                     <li id="liLR_NotMoved" runat="server"><a href="#">Long Idle Container</a></li>

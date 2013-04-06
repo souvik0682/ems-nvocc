@@ -271,7 +271,7 @@
                                                     <%# (Eval("TerminalId").ToString() == "0" ? string.Empty : ddlMTerminal.Items.FindByValue(Eval("TerminalId").ToString()).Text)%>
                                                 </ItemTemplate>
                                                 <HeaderTemplate>
-                                                    <asp:DropDownList ID="ddlFTerminal" runat="server" Width="60" Enabled="false">
+                                                    <asp:DropDownList ID="ddlFTerminal" runat="server" Width="100" Enabled="false">
                                                     </asp:DropDownList>
                                                     <br />
                                                     <br />

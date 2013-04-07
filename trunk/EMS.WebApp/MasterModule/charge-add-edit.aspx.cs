@@ -62,6 +62,7 @@ namespace EMS.WebApp.MasterModule
                 else
                 {
                     DefaultSelection();
+                    FillDocType();
                     oChargeRates = new List<ChargeRateEntity>();
                     ChargeRateEntity Ent = new ChargeRateEntity();
                     oChargeRates.Add(Ent);
@@ -178,7 +179,6 @@ namespace EMS.WebApp.MasterModule
             ddlMWashingType.Items.Insert(0, Li);
             #endregion
 
-
             #region Delivery Mode
             foreach (Enums.DeliveryMode r in Enum.GetValues(typeof(Enums.DeliveryMode)))
             {
@@ -186,6 +186,7 @@ namespace EMS.WebApp.MasterModule
                 ddlDeliveryMode.Items.Add(item);
             }
             #endregion
+
 
         }
 
@@ -271,6 +272,9 @@ namespace EMS.WebApp.MasterModule
                 oChargeEntity.IsSpecialRate = chkSpecialRate.Checked;
                 oChargeEntity.DeliveryMode = Convert.ToChar(ddlDeliveryMode.SelectedValue);
 
+                if (ddlInvLink.Items != null)
+                    oChargeEntity.DocumentType = Convert.ToInt32(ddlInvLink.SelectedValue);
+
                 if (Convert.ToInt32(hdnChargeID.Value) <= 0) //insert
                 {
                     oChargeEntity.CreatedBy = _userId;// oUserEntity.Id;
@@ -353,6 +357,9 @@ namespace EMS.WebApp.MasterModule
             ddlCurrency.SelectedIndex = ddlCurrency.Items.IndexOf(ddlCurrency.Items.FindByValue(oChargeEntity.Currency.ToString()));
             txtEffectDate.Text = oChargeEntity.EffectDt.ToShortDateString();
             ddlImportExportGeneral.SelectedIndex = ddlImportExportGeneral.Items.IndexOf(ddlImportExportGeneral.Items.FindByValue(oChargeEntity.IEC.ToString()));
+            FillDocType();
+            ddlInvLink.SelectedIndex = ddlInvLink.Items.IndexOf(ddlInvLink.Items.FindByValue(oChargeEntity.DocumentType.ToString()));
+
             ddlLine.SelectedIndex = ddlLine.Items.IndexOf(ddlLine.Items.FindByValue(oChargeEntity.NVOCCID.ToString()));
             txtDisplayOrder.Text = oChargeEntity.Sequence.ToString();
 
@@ -1338,6 +1345,8 @@ namespace EMS.WebApp.MasterModule
             chkSpecialRate.Enabled = false;
             ddlDeliveryMode.Enabled = false;
 
+            ddlInvLink.Enabled = false;
+
         }
         void EnableAllField()
         {
@@ -1360,12 +1369,35 @@ namespace EMS.WebApp.MasterModule
 
             chkSpecialRate.Enabled = true;
             ddlDeliveryMode.Enabled = true;
+            ddlInvLink.Enabled = true;
 
         }
 
         protected void ddlHeaderLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
             ActionOnLocationChange(sender);
+        }
+        
+        private void FillDocType()
+        {
+            switch (ddlImportExportGeneral.SelectedValue)
+            {
+                case "I": PopulateDropDown((int)Enums.DropDownPopulationFor.InvoiceLink, ddlInvLink, 1);
+                    break;
+                case "E": PopulateDropDown((int)Enums.DropDownPopulationFor.InvoiceLink, ddlInvLink, 2);
+                    break;
+                case "G": PopulateDropDown((int)Enums.DropDownPopulationFor.InvoiceLink, ddlInvLink, 3);
+                    break;
+            }
+
+            ListItem Li = new ListItem("None","0");
+            ddlInvLink.Items.Insert(0, Li);
+            
+        }
+
+        protected void ddlImportExportGeneral_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillDocType();
         }
     }
 }

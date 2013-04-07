@@ -162,7 +162,8 @@
                                     Import / Export<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlImportExportGeneral" runat="server" Width="155">
+                                    <asp:DropDownList ID="ddlImportExportGeneral" runat="server" Width="155" 
+                                        onselectedindexchanged="ddlImportExportGeneral_SelectedIndexChanged" AutoPostBack="true" >
                                         <asp:ListItem Text="IMPORT" Value="I"></asp:ListItem>
                                         <asp:ListItem Text="EXPORT" Value="E"></asp:ListItem>
                                         <asp:ListItem Text="GENERAL" Value="G"></asp:ListItem>
@@ -200,7 +201,8 @@
                                 </td>
                                 <td>
                                     <%--Is Freight Component ?<span class="errormessage1">*</span> :--%>
-                                   Special Rate</td>
+                                    Special Rate
+                                </td>
                                 <td>
                                     <asp:CheckBox ID="chkSpecialRate" runat="server" />
                                 </td>
@@ -215,10 +217,11 @@
                                     <cc2:CustomTextBox ID="txtDisplayOrder" runat="server" Width="150" Type="Numeric"
                                         Style="text-align: right;"></cc2:CustomTextBox>
                                 </td>
-                                <td>Delivery Mode
+                                <td>
+                                    Delivery Mode
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlDeliveryMode" runat="server">
+                                    <asp:DropDownList ID="ddlDeliveryMode" runat="server" Width="155">
                                     </asp:DropDownList>
                                 </td>
                             </tr>
@@ -237,8 +240,11 @@
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
                                 <td>
+                                    Invoice Link
                                 </td>
                                 <td>
+                                    <asp:DropDownList ID="ddlInvLink" runat="server" Width="155" >
+                                    </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>

@@ -27,6 +27,7 @@ namespace EMS.Common
         int Location { get; set; }
         bool IsSpecialRate { get; set; }
         char DeliveryMode { get; set; }
+        int DocumentType { get; set; }
 
         string ConvertListToXML(List<IChargeRate> Items);
     }

@@ -806,9 +806,12 @@ namespace EMS.WebApp.Transaction
                 //Add-Update
                 int blId = new ImportBLL().SaveImportBL(blHeader);
 
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Record saved successfully!');</script>", false);
+                //ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Record saved successfully!');</script>", false);
+                //Response.Redirect("~/Transaction/ImportBL.aspx");
 
-                Response.Redirect("~/Transaction/ImportBL.aspx");
+                //ScriptManager.RegisterStartupScript(this, typeof(Page), "save", "<script> alert('Save successfully');  window.location.href ='~/Transaction/ImportBL.aspx'<script>", false);
+
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('Record saved successfully!'); window.location='" + Request.ApplicationPath + "Transaction/ImportBL.aspx';", true);
             }
         }
 

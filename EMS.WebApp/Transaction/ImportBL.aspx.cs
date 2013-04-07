@@ -267,8 +267,8 @@ namespace EMS.WebApp.Transaction
             }
             else
             {
-                sortExpression = "LineBLNo";
-                sortDirection = "ASC";
+                sortExpression = "BLID";
+                sortDirection = "DESC";
             }
 
             //criteria.PageIndex = gvwCust.PageIndex;

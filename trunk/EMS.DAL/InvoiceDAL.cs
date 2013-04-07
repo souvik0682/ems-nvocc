@@ -486,5 +486,21 @@ namespace EMS.DAL
 
             return lstRates;
         }
+
+        public static DataTable ChargeEditable(int ChargeId)
+        {
+            string strExecution = "usp_Invoice_IsChargeEditable";
+            DataTable charge = null;
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@ChargeId", ChargeId);
+
+                charge = oDq.GetTable();
+            }
+
+            return charge;
+        }
     }
 }

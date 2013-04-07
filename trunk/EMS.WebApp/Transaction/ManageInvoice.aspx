@@ -208,27 +208,32 @@
                                             </td>--%>
                                                 <td>
                                                     <cc2:CustomTextBox ID="txtRatePerBL" runat="server" Width="75" Type="Decimal" MaxLength="10"
-                                                        Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox><br />
+                                                        Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
+                                                        OnTextChanged="txtRatePerBL_TextChanged" AutoPostBack="true" ></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <td>
                                                     <cc2:CustomTextBox ID="txtRatePerTEU" runat="server" Width="75" Type="Decimal" MaxLength="10"
-                                                        Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox><br />
+                                                        Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
+                                                        OnTextChanged="txtRatePerTEU_TextChanged" AutoPostBack="true"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <td>
                                                     <cc2:CustomTextBox ID="txtRateperFEU" runat="server" Width="75" Type="Decimal" MaxLength="10"
-                                                        Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox><br />
+                                                        Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
+                                                        OnTextChanged="txtRateperFEU_TextChanged" AutoPostBack="true"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <td>
                                                     <cc2:CustomTextBox ID="txtRatePerCBM" runat="server" Width="75" Type="Decimal" MaxLength="10"
-                                                        Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox><br />
+                                                        Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
+                                                        OnTextChanged="txtRatePerCBM_TextChanged" AutoPostBack="true"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <td>
                                                     <cc2:CustomTextBox ID="txtRatePerTon" runat="server" Width="75" Type="Decimal" MaxLength="10"
-                                                        Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox><br />
+                                                        Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
+                                                        OnTextChanged="txtRatePerTon_TextChanged" AutoPostBack="true"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <td>

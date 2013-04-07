@@ -1869,6 +1869,7 @@ namespace EMS.WebApp.Transaction
             //if (header.SurveyorAddressID != 0)
             //    ((TextBox)AC_Surveyor1.FindControl("txtSurveyor")).Text = new ImportBLL().GetSurveyorNameById(header.SurveyorAddressID);
 
+            LoadSurveyorDDL();
             ddlSurveyor.SelectedValue = Convert.ToString(header.SurveyorAddressID);
 
             //================= BL Footer =========================

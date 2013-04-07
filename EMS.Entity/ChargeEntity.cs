@@ -165,6 +165,7 @@ namespace EMS.Entity
             this.ServiceTax = Convert.ToBoolean(reader["ServiceTax"]);
             this.IsSpecialRate = Convert.ToBoolean(reader["IsSpecialRate"]);
             this.DeliveryMode = Convert.ToChar(reader["DeliveryMode"]);
+            this.DocumentType = Convert.ToInt32(reader["DocType"]);
 
             if (ColumnExists(reader, "LocationId"))
                 if (reader["LocationId"] != DBNull.Value)
@@ -214,6 +215,13 @@ namespace EMS.Entity
         }
 
         public char DeliveryMode
+        {
+            get;
+            set;
+        }
+
+
+        public int DocumentType
         {
             get;
             set;

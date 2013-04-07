@@ -785,7 +785,20 @@ namespace EMS.WebApp.Transaction
                         txtRatePerTon.Enabled = false;
                     }
                 }
-                
+
+                if (Convert.ToBoolean(Charge.Rows[0]["TerminalReq"].ToString()))
+                {
+                    SetDefaultTerminal();
+                    //ddlFTerminal.Enabled = true;
+                    rfvTerminal.Visible = true;
+                }
+                else
+                {
+                    //ddlFTerminal.SelectedValue = "0";
+                    SetDefaultTerminal();
+                    //ddlFTerminal.Enabled = false;
+                    rfvTerminal.Visible = false;
+                }
             }
         }
 

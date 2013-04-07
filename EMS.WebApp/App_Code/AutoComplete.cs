@@ -367,17 +367,24 @@ public class AutoComplete : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public string[] GetCFSCode(string prefixText, int count)
+    public string[] GetCFSCode(string prefixText, int count, string contextKey)
     {
         count = 10;
         AppCodeClass ac = new AppCodeClass();
 
         //string sql = "SELECT [CFSCode] FROM [DBO].[mstAddress] WHERE [AddrActive] = 1 AND [AddrType] = 'CF' AND [CFSCode] LIKE @prefixText";
 
-        string sql = @"SELECT a.[CFSCode] FROM [DBO].[mstAddress] a 
+//        string sql = @"SELECT a.[CFSCode] FROM [DBO].[mstAddress] a 
+//                        INNER JOIN [dbo].[mstAddressType] at 
+//                        ON CAST(a.AddrType as int) = at.pk_AddrTypeID 
+//                        WHERE a.[AddrActive] = 1 AND at.[AddrType] = 'CF' AND [CFSCode] LIKE @prefixText";
+
+        string sql = @"SELECT a.[AddrName] FROM [DBO].[mstAddress] a 
                         INNER JOIN [dbo].[mstAddressType] at 
                         ON CAST(a.AddrType as int) = at.pk_AddrTypeID 
-                        WHERE a.[AddrActive] = 1 AND at.[AddrType] = 'CF' AND [CFSCode] LIKE @prefixText";
+                        WHERE a.[AddrActive] = 1 AND at.[AddrType] = 'CF' 
+                        AND a.[fk_LocationID] = " + contextKey +
+                        " AND [AddrName] LIKE @prefixText";
 
         SqlDataAdapter da = new SqlDataAdapter(sql, ac.ConnectionString);
         da.SelectCommand.Parameters.Add("@prefixText", SqlDbType.VarChar, 50).Value = prefixText + "%";
@@ -387,7 +394,7 @@ public class AutoComplete : System.Web.Services.WebService {
         int i = 0;
         foreach (DataRow dr in dt.Rows)
         {
-            items.SetValue(dr["CFSCode"].ToString(), i);
+            items.SetValue(dr["AddrName"].ToString(), i);
             i++;
         }
         return items;

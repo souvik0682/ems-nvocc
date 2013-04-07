@@ -51,6 +51,11 @@ namespace EMS.BLL
             return ImportBLDAL.GetCFSName(CFSCode);
         }
 
+        public DataTable GetCFSCode(string CFSName)
+        {
+            return ImportBLDAL.GetCFSCode(CFSName);
+        }
+
         public int GetDefaultFreeDays(int NvoccId)
         {
             return ImportBLDAL.GetDefaultFreeDays(NvoccId);

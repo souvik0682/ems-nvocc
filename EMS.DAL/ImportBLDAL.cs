@@ -153,6 +153,22 @@ namespace EMS.DAL
             return CFS;
         }
 
+        public static DataTable GetCFSCode(string CFSName)
+        {
+            string strExecution = "uspGetCFSCodeByName";
+            DataTable CFS = new DataTable();
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@CFSName", 10, CFSName);
+
+                CFS = oDq.GetTable();
+            }
+
+            return CFS;
+        }
+
         public static int GetDefaultFreeDays(int NvoccId)
         {
             string strExecution = "uspGetDefaultFreeDays";

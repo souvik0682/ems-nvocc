@@ -28,7 +28,7 @@
         minimumprefixlength="1" completioninterval="1000" enablecaching="true" completionsetcount="20"
         completionlistcssclass="autocomplete_completionListElement" completionlistitemcssclass="autocomplete_listItem"
         completionlisthighlighteditemcssclass="autocomplete_highlightedListItem" delimitercharacters=";,:"
-        showonlycurrentwordincompletionlistitem="true">
+        showonlycurrentwordincompletionlistitem="true" UseContextKey="true">
     </cc1:autocompleteextender>
  
 </div>

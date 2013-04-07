@@ -161,7 +161,7 @@ namespace EMS.DAL
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                oDq.AddVarcharParam("@CFSName", 10, CFSName);
+                oDq.AddVarcharParam("@CFSName", 100, CFSName);
 
                 CFS = oDq.GetTable();
             }

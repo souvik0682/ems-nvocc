@@ -156,6 +156,7 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@LocationId", Charge.Location);
                 oDq.AddBooleanParam("@IsSpecialRate", Charge.IsSpecialRate);
                 oDq.AddCharParam("@DeliveryMode", 1, Charge.DeliveryMode);
+                oDq.AddIntegerParam("@DocType", Charge.DocumentType);
      
 
                 //oDq.AddNVarcharParam("@ChargeRate",8000,Charge.ConvertListToXML((List<IChargeRate>)Charge.ChargeRates));

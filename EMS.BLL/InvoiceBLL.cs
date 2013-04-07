@@ -165,5 +165,10 @@ namespace EMS.BLL
         {
             return InvoiceDAL.GetInvoiceCharges_New(BlId, ChargesID, TerminalID, ExchangeRate, DocTypeId, Param3, InvoiceDate);
         }
+
+        public DataTable ChargeEditable(int ChargeId)
+        {
+            return InvoiceDAL.ChargeEditable(ChargeId);
+        }
     }
 }

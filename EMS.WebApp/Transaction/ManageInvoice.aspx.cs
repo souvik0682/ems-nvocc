@@ -398,6 +398,81 @@ namespace EMS.WebApp.Transaction
             }
         }
 
+
+        private void CalculateCharge()
+        {
+            decimal grossAmount = 0;
+            decimal totalAmount = 0;
+            decimal serviceTax = 0;
+            decimal cessAmount = 0;
+            decimal addCess = 0;
+
+            decimal Teu = Convert.ToDecimal(txtRatePerTEU.Text);
+            decimal Feu = Convert.ToDecimal(txtRateperFEU.Text);
+            decimal BL = Convert.ToDecimal(txtRatePerBL.Text);
+            decimal CBM = Convert.ToDecimal(txtRatePerCBM.Text);
+            decimal Ton = Convert.ToDecimal(txtRatePerTon.Text);
+
+            decimal TaxPer = 0;
+            decimal TaxCess = 0;
+            decimal TaxAddCess = 0;
+
+            grossAmount = (Teu + Feu + BL + CBM + Ton);
+
+            DataTable dtSTax = new InvoiceBLL().GetServiceTax(Convert.ToDateTime(txtInvoiceDate.Text));
+
+            if (dtSTax != null && dtSTax.Rows.Count > 0)
+            {
+                TaxPer = Convert.ToDecimal(dtSTax.Rows[0]["TaxPer"].ToString());
+                TaxCess = Convert.ToDecimal(dtSTax.Rows[0]["TaxCess"].ToString());
+                TaxAddCess = Convert.ToDecimal(dtSTax.Rows[0]["TaxAddCess"].ToString());
+            }
+
+            DataTable Charge = new InvoiceBLL().ChargeEditable(Convert.ToInt32(ddlFChargeName.SelectedValue));
+
+            if (Convert.ToBoolean(Charge.Rows[0]["ServiceTax"].ToString()))
+            {
+                serviceTax = (grossAmount * TaxPer) / 100;
+                cessAmount = (serviceTax * TaxCess) / 100;
+                addCess = (serviceTax * TaxAddCess) / 100;
+            }
+
+            totalAmount = (grossAmount + serviceTax + cessAmount + addCess);
+
+            txtGrossAmount.Text = grossAmount.ToString();
+            txtServiceTax.Text = (serviceTax + cessAmount + addCess).ToString();
+            txtTotal.Text = totalAmount.ToString();
+
+            ViewState["CESSAMOUNT"] = cessAmount;
+            ViewState["ADDCESS"] = addCess;
+            ViewState["STAX"] = serviceTax;
+        }
+
+        protected void txtRatePerTEU_TextChanged(object sender, EventArgs e)
+        {
+            CalculateCharge();
+        }
+
+        protected void txtRateperFEU_TextChanged(object sender, EventArgs e)
+        {
+            CalculateCharge();
+        }
+
+        protected void txtRatePerBL_TextChanged(object sender, EventArgs e)
+        {
+            CalculateCharge();
+        }
+
+        protected void txtRatePerCBM_TextChanged(object sender, EventArgs e)
+        {
+            CalculateCharge();
+        }
+
+        protected void txtRatePerTon_TextChanged(object sender, EventArgs e)
+        {
+            CalculateCharge();
+        }
+
         /*
         protected void ddlChargeName_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -638,6 +713,8 @@ namespace EMS.WebApp.Transaction
         {
             List<IChargeRate> chargeRates = new InvoiceBLL().GetInvoiceCharges_New(Convert.ToInt64(ddlBLno.SelectedValue), Convert.ToInt32(ddlFChargeName.SelectedValue), Convert.ToInt32(ddlFTerminal.SelectedValue), Convert.ToDecimal(txtExchangeRate.Text), 0, "", Convert.ToDateTime(txtInvoiceDate.Text));
 
+            DataTable Charge = new InvoiceBLL().ChargeEditable(Convert.ToInt32(ddlFChargeName.SelectedValue));
+
             if (chargeRates != null && chargeRates.Count > 0)
             {
                 txtRatePerTEU.Text = chargeRates[0].RatePerTEU.ToString();
@@ -656,6 +733,59 @@ namespace EMS.WebApp.Transaction
                 ViewState["CESSAMOUNT"] = chargeRates[0].ServiceTaxCessAmount;
                 ViewState["ADDCESS"] = chargeRates[0].ServiceTaxACess;
                 ViewState["STAX"] = chargeRates[0].STax;
+
+                if (Charge != null && Charge.Rows.Count > 0)
+                {
+                    if (Convert.ToBoolean(Charge.Rows[0]["RateChangeable"].ToString()))
+                    {
+                        int ChargeType = Convert.ToInt32(Charge.Rows[0]["ChargeType"].ToString());
+
+                        if (ChargeType == (int)Enums.ChargeType.PER_UNIT)
+                        {
+                            txtRatePerTEU.Enabled = true;
+                            txtRateperFEU.Enabled = true;
+
+                            txtRatePerBL.Enabled = false;
+                            txtRatePerCBM.Enabled = false;
+                            txtRatePerTon.Enabled = false;
+                        }
+                        else if (ChargeType == (int)Enums.ChargeType.PER_DOCUMENT)
+                        {
+                            txtRatePerBL.Enabled = true;
+
+                            txtRatePerTEU.Enabled = false;
+                            txtRateperFEU.Enabled = false;
+                            txtRatePerCBM.Enabled = false;
+                            txtRatePerTon.Enabled = false;
+                        }
+                        else if (ChargeType == (int)Enums.ChargeType.LCL)
+                        {
+                            txtRatePerCBM.Enabled = true;
+                            txtRatePerTon.Enabled = true;
+
+                            txtRatePerTEU.Enabled = false;
+                            txtRateperFEU.Enabled = false;
+                            txtRatePerBL.Enabled = false;
+                        }
+                        else if (ChargeType == (int)Enums.ChargeType.SLAB)
+                        {
+                            txtRatePerBL.Enabled = true;
+
+                            txtRatePerTEU.Enabled = false;
+                            txtRateperFEU.Enabled = false;
+                            txtRatePerCBM.Enabled = false;
+                        }
+                    }
+                    else
+                    {
+                        txtRatePerTEU.Enabled = false;
+                        txtRateperFEU.Enabled = false;
+                        txtRatePerBL.Enabled = false;
+                        txtRatePerCBM.Enabled = false;
+                        txtRatePerTon.Enabled = false;
+                    }
+                }
+                
             }
         }
 

@@ -457,7 +457,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                CFS Code:
+                                                                CFS Name:
                                                             </td>
                                                             <td>
                                                                 <uc12:AC_CFSCode ID="AC_CFSCode1" runat="server" />
@@ -466,7 +466,7 @@
                                                             <td>
                                                             </td>
                                                             <td>
-                                                                CFS Name:
+                                                                CFS Code:
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtCFSName" runat="server" CssClass="textboxuppercase" MaxLength="50"

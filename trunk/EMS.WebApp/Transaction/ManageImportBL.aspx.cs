@@ -105,15 +105,15 @@ namespace EMS.WebApp.Transaction
 
         void AC_CFSCode1_TextChanged(object sender, EventArgs e)
         {
-            string cfsCode = ((TextBox)AC_CFSCode1.FindControl("txtCFSCode")).Text.Trim();
+            string cfsName = ((TextBox)AC_CFSCode1.FindControl("txtCFSCode")).Text.Trim();
 
-            if (cfsCode != string.Empty)
+            if (cfsName != string.Empty)
             {
-                DataTable dt = new ImportBLL().GetCFSName(cfsCode);
+                DataTable dt = new ImportBLL().GetCFSCode(cfsName);
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    txtCFSName.Text = Convert.ToString(dt.Rows[0]["AddrName"]);
+                    txtCFSName.Text = Convert.ToString(dt.Rows[0]["CFSCode"]);
                     ViewState[CFSADDRID] = Convert.ToString(dt.Rows[0]["fk_AddressID"]);
                 }
                 else
@@ -757,7 +757,7 @@ namespace EMS.WebApp.Transaction
             ((AjaxControlToolkit.AutoCompleteExtender)AC_Consignee1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
             ((AjaxControlToolkit.AutoCompleteExtender)AC_NParty1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
             ((AjaxControlToolkit.AutoCompleteExtender)AC_CHA1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
-
+            ((AjaxControlToolkit.AutoCompleteExtender)AC_CFSCode1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
             LoadSurveyorDDL();
         }
 
@@ -966,6 +966,7 @@ namespace EMS.WebApp.Transaction
             ((AjaxControlToolkit.AutoCompleteExtender)AC_Consignee1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
             ((AjaxControlToolkit.AutoCompleteExtender)AC_NParty1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
             ((AjaxControlToolkit.AutoCompleteExtender)AC_CHA1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
+            ((AjaxControlToolkit.AutoCompleteExtender)AC_CFSCode1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
 
             int PGRFreeDays = new ImportBLL().GetPGRFreeDays(Convert.ToInt32(ddlLocation.SelectedValue));
             txtPGRFreeDays.Text = PGRFreeDays.ToString();
@@ -1850,11 +1851,12 @@ namespace EMS.WebApp.Transaction
 
             //CFS Code
             string cfsCode = new ImportBLL().GetCFSCodeById(header.AddressCFSId);
-            ((TextBox)AC_CFSCode1.FindControl("txtCFSCode")).Text = cfsCode;
             DataTable dt = new ImportBLL().GetCFSName(cfsCode);
 
+            txtCFSName.Text = cfsCode;
+
             if (dt != null && dt.Rows.Count > 0)
-                txtCFSName.Text = Convert.ToString(dt.Rows[0]["AddrName"]);
+                ((TextBox)AC_CFSCode1.FindControl("txtCFSCode")).Text = Convert.ToString(dt.Rows[0]["AddrName"]);
 
             //Delivery To
             string deliveryTo = new ImportBLL().GetDeliveryToById(header.DPTId);

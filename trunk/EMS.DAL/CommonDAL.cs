@@ -83,11 +83,11 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@Number", Number);
                 oDq.AddIntegerParam("@Filter", Filter1.Value);
                 oDq.AddIntegerParam("@Type", Filter2.Value);
-                
-                
+
+
                 return oDq.GetTable();
             }
-        } 
+        }
 
         #endregion
 
@@ -607,7 +607,7 @@ namespace EMS.DAL
             List<IContainerType> lstContainerType = new List<IContainerType>();
 
             using (DbQuery oDq = new DbQuery(strExecution))
-            {               
+            {
                 DataTableReader reader = oDq.GetTableReader();
 
                 while (reader.Read())
@@ -624,12 +624,13 @@ namespace EMS.DAL
         #endregion
 
 
-        public static void SavePrintCount(string blNo) {
+        public static void SavePrintCount(string blNo)
+        {
             string strExecution = "prcSaveInvoicePrintCount";
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-               
-                oDq.AddVarcharParam("@BlNo", 60,blNo);
+
+                oDq.AddVarcharParam("@BlNo", 60, blNo);
                 oDq.RunActionQuery();
             }
 
@@ -652,6 +653,29 @@ namespace EMS.DAL
         #endregion
 
         #region Report
+        public static bool GenerateExcel(string filename, string Location, string Vessel, string PortOfDischarge, string Line, string Voyage, string VIANo)
+        {
+            string strExecution = "GenerateExcel";
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+
+                oDq.AddVarcharParam("@filename", 1000, filename);
+                oDq.AddVarcharParam("@Location", 60, Location);
+                oDq.AddVarcharParam("@Vessel", 60, Vessel);
+                oDq.AddVarcharParam("@PortOfDischarge", 60, PortOfDischarge);
+                oDq.AddVarcharParam("@Line", 60, Line);
+                oDq.AddVarcharParam("@Voyage", 60, Voyage);
+                oDq.AddVarcharParam("@VIANo", 200, VIANo);
+                oDq.AddIntegerParam("@return", 0, QueryParameterDirection.Output);
+                oDq.RunActionQuery();
+                var result = Convert.ToInt32(oDq.GetParaValue("@return"));
+                if (result == 1) return true;
+            }
+            return false;
+        }
+
         public static DataTable GetLine(string Location)
         {
             string strExecution = "rptUspGetLineByLoc";
@@ -699,7 +723,7 @@ namespace EMS.DAL
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                oDq.AddIntegerParam("@Vessel", Vessel.ToInt()); oDq.AddIntegerParam("@line", Line.ToInt()); 
+                oDq.AddIntegerParam("@Vessel", Vessel.ToInt()); oDq.AddIntegerParam("@line", Line.ToInt());
                 myDataTable = oDq.GetTable();
             }
 

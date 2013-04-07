@@ -811,7 +811,7 @@ namespace EMS.WebApp.Transaction
 
                 //ScriptManager.RegisterStartupScript(this, typeof(Page), "save", "<script> alert('Save successfully');  window.location.href ='~/Transaction/ImportBL.aspx'<script>", false);
 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('Record saved successfully!'); window.location='" + Request.ApplicationPath + "Transaction/ImportBL.aspx';", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('Record saved successfully!'); window.location='" + Request.ApplicationPath + "/Transaction/ImportBL.aspx';", true);
             }
         }
 

@@ -28,7 +28,7 @@
                                 FilterMode="InvalidChars" ValidChars=" " TargetControlID="txtIGMBLNo">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender4" runat="server" TargetControlID="txtIGMBLNo"
-                                WatermarkText="IGM BL No">
+                                WatermarkText="Line BL No">
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
@@ -37,7 +37,7 @@
                                 FilterMode="InvalidChars" ValidChars=" " TargetControlID="txtLineBLNo">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender5" runat="server" TargetControlID="txtLineBLNo"
-                                WatermarkText="Line BL No">
+                                WatermarkText="IGM BL No">
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <%--<td>
@@ -173,14 +173,14 @@
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="5%" />
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkBLNo" runat="server" CommandName="Sort" CommandArgument="ImpLineBLNo" Text="IGM BL Number"></asp:LinkButton>
+                                            <asp:LinkButton ID="lnkBLNo" runat="server" CommandName="Sort" CommandArgument="ImpLineBLNo" Text="Line BL Number"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="15%" />
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkLineBLNo" runat="server" CommandName="Sort" CommandArgument="IGMBLNumber" Text="Line BL No"></asp:LinkButton>
+                                            <asp:LinkButton ID="lnkLineBLNo" runat="server" CommandName="Sort" CommandArgument="IGMBLNumber" Text="IGM BL No"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>

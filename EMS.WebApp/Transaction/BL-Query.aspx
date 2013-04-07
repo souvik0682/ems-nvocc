@@ -103,7 +103,7 @@
     <asp:Button ID="btnReset" runat="server" Style="display: none;" Text="Reset" OnClick="btnReset_Click" />
     <div>
         <div id="headercaption">
-            B/L QUERY</div>
+            DISCHARGE DASHBOARD</div>
         <center>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>

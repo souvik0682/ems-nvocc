@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="EMS.WebApp.Site" %>
+ <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="EMS.WebApp.Site" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -164,7 +164,7 @@
                                         LIST TO FILE LANDING G'TE</a></li>--%>
                                     <li id="liIR_SMTP" runat="server"><a href="#">SMTP EXTRACT</a></li>
                                     <li id="liIR_Coprar" runat="server"><a href="#">COPRAR</a></li>
-                                    <li id="liIR_ACL" runat="server"><a href="#">Advance Container List</a></li>
+                                   <li id="liIR_ACL" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/AdvanceContainerList.aspx") %>">Advance Container List</a></li>s
                                     <li id="liIR_EDIIAL" runat="server"><a href="#">EDI IAL</a></li>
                                     <li id="liIR_Survey" runat="server"><a href="#">Survey Letter</a></li>
                                 </ul>

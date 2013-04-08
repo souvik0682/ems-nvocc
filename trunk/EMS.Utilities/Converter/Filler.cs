@@ -11,8 +11,33 @@ using System.Runtime.Serialization;
 using System.Xml;
 using System.Collections;
 using System.Globalization;
+using System.Web;
 namespace EMS.Utilities
 {
+
+    public class FileUtil {               
+        public string Src { get; set; }
+        public string Dst { get; set; }
+
+        public FileUtil(){}
+        public FileUtil(string src, string dst)
+        {
+            if(!string.IsNullOrEmpty(src)){
+            Src=Path.GetFullPath(src);
+            Dst = Path.GetFullPath(dst);
+            File.Copy(Src, Dst);
+            }
+        }
+        public void Download(HttpResponse Response)
+        {
+            var fileInfo = new System.IO.FileInfo(Dst);
+            Response.ContentType = "application/octet-stream";
+            Response.AddHeader("Content-Disposition", String.Format("attachment;filename=\"{0}\"", fileInfo.Name));
+            Response.AddHeader("Content-Length", fileInfo.Length.ToString());
+            Response.WriteFile(Dst);
+            Response.End();
+        }
+    }
     public  class Messenger {
         public static string SendMessage(string msgs, string state, string title, string isredirect)
         {
@@ -350,7 +375,8 @@ namespace EMS.Utilities
             if(obj!=null){
                 if(typeof(T).Equals(typeof(DateTime))){
                     try{
-                        if (obj.ToDateTime() == Convert.ToDateTime("01/01/1900"))
+                        var t = obj.ToDateTime();
+                        if (t.GetHashCode()==0 || t == Convert.ToDateTime("01/01/1900"))
                             return string.Empty;
                             return obj.ToDateTime().ToShortDateString();
                     }catch{}

@@ -24,6 +24,10 @@
           <DataField>MotherVessel</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="LocName">
+          <DataField>LocName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="ItemLineNo">
           <DataField>ItemLineNo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -172,6 +176,22 @@
           <DataField>CargoArrivNotice</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="MainLineVessel">
+          <DataField>MainLineVessel</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MLVoyageNo">
+          <DataField>MLVoyageNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="VesselName">
+          <DataField>VesselName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="VoyageNo">
+          <DataField>VoyageNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="DetentionFree">
           <DataField>DetentionFree</DataField>
           <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
@@ -260,7 +280,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>9.7479in</Width>
+              <Width>9.75in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -275,45 +295,45 @@
                           <TablixBody>
                             <TablixColumns>
                               <TablixColumn>
-                                <Width>0.52187in</Width>
+                                <Width>0.52205in</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>0.96145in</Width>
+                                <Width>0.96162in</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>0.47395in</Width>
+                                <Width>0.47413in</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>0.71145in</Width>
+                                <Width>0.71162in</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>1.0177in</Width>
+                                <Width>1.01788in</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>0.79688in</Width>
+                                <Width>0.79706in</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>1.12187in</Width>
+                                <Width>1.12205in</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>0.5177in</Width>
+                                <Width>0.51788in</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>0.72188in</Width>
+                                <Width>0.72206in</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>0.62187in</Width>
+                                <Width>0.62204in</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>0.77396in</Width>
+                                <Width>0.77414in</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>1.50732in</Width>
+                                <Width>1.50749in</Width>
                               </TablixColumn>
                             </TablixColumns>
                             <TablixRows>
                               <TablixRow>
-                                <Height>0.25in</Height>
+                                <Height>0.21354in</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -762,7 +782,7 @@
                                 </TablixCells>
                               </TablixRow>
                               <TablixRow>
-                                <Height>0.25in</Height>
+                                <Height>0.21354in</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -1207,9 +1227,9 @@
                             </TablixMembers>
                           </TablixRowHierarchy>
                           <DataSetName>RptDataSet</DataSetName>
-                          <Top>4.43209in</Top>
-                          <Height>0.5in</Height>
-                          <Width>9.7479in</Width>
+                          <Top>4.49459in</Top>
+                          <Height>0.42708in</Height>
+                          <Width>9.75in</Width>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -2069,7 +2089,7 @@
                                           <Paragraph>
                                             <TextRuns>
                                               <TextRun>
-                                                <Value>Line B/L Vessel Detl:</Value>
+                                                <Value>Main Line Vessel</Value>
                                                 <Style>
                                                   <FontStyle>Normal</FontStyle>
                                                   <FontSize>9pt</FontSize>
@@ -2104,7 +2124,7 @@
                                           <Paragraph>
                                             <TextRuns>
                                               <TextRun>
-                                                <Value>=Fields!MotherVessel.Value</Value>
+                                                <Value>=Fields!MainLineVessel.Value + "/" + Fields!MLVoyageNo.Value</Value>
                                                 <Style>
                                                   <FontSize>9pt</FontSize>
                                                   <FontWeight>Normal</FontWeight>
@@ -3285,14 +3305,14 @@
                                   </TablixCell>
                                   <TablixCell>
                                     <CellContents>
-                                      <Textbox Name="Textbox86">
+                                      <Textbox Name="LocName">
                                         <CanGrow>true</CanGrow>
                                         <KeepTogether>true</KeepTogether>
                                         <Paragraphs>
                                           <Paragraph>
                                             <TextRuns>
                                               <TextRun>
-                                                <Value />
+                                                <Value>=Fields!LocName.Value</Value>
                                                 <Style>
                                                   <FontSize>9pt</FontSize>
                                                   <FontWeight>Normal</FontWeight>
@@ -3302,7 +3322,7 @@
                                             <Style />
                                           </Paragraph>
                                         </Paragraphs>
-                                        <rd:DefaultName>Textbox86</rd:DefaultName>
+                                        <rd:DefaultName>LocName</rd:DefaultName>
                                         <Style>
                                           <Border>
                                             <Style>None</Style>
@@ -3414,7 +3434,6 @@
                                           <PaddingBottom>2pt</PaddingBottom>
                                         </Style>
                                       </Textbox>
-                                      <rd:Selected>true</rd:Selected>
                                     </CellContents>
                                   </TablixCell>
                                 </TablixCells>
@@ -3525,104 +3544,6 @@
                                   </TablixCell>
                                   <TablixCell>
                                     <CellContents>
-                                      <Textbox Name="Textbox94">
-                                        <CanGrow>true</CanGrow>
-                                        <KeepTogether>true</KeepTogether>
-                                        <Paragraphs>
-                                          <Paragraph>
-                                            <TextRuns>
-                                              <TextRun>
-                                                <Value>Nature of Cargo:</Value>
-                                                <Style>
-                                                  <FontStyle>Normal</FontStyle>
-                                                  <FontSize>9pt</FontSize>
-                                                  <FontWeight>Bold</FontWeight>
-                                                  <TextDecoration>None</TextDecoration>
-                                                </Style>
-                                              </TextRun>
-                                            </TextRuns>
-                                            <Style />
-                                          </Paragraph>
-                                        </Paragraphs>
-                                        <rd:DefaultName>Textbox94</rd:DefaultName>
-                                        <Style>
-                                          <Border>
-                                            <Style>None</Style>
-                                          </Border>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
-                                        </Style>
-                                      </Textbox>
-                                    </CellContents>
-                                  </TablixCell>
-                                  <TablixCell>
-                                    <CellContents>
-                                      <Textbox Name="CargoNature3">
-                                        <CanGrow>true</CanGrow>
-                                        <KeepTogether>true</KeepTogether>
-                                        <Paragraphs>
-                                          <Paragraph>
-                                            <TextRuns>
-                                              <TextRun>
-                                                <Value>=Fields!CargoNature.Value</Value>
-                                                <Style>
-                                                  <FontSize>9pt</FontSize>
-                                                  <FontWeight>Normal</FontWeight>
-                                                </Style>
-                                              </TextRun>
-                                            </TextRuns>
-                                            <Style />
-                                          </Paragraph>
-                                        </Paragraphs>
-                                        <rd:DefaultName>CargoNature3</rd:DefaultName>
-                                        <Style>
-                                          <Border>
-                                            <Style>None</Style>
-                                          </Border>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
-                                        </Style>
-                                      </Textbox>
-                                    </CellContents>
-                                  </TablixCell>
-                                  <TablixCell>
-                                    <CellContents>
-                                      <Textbox Name="Textbox15">
-                                        <CanGrow>true</CanGrow>
-                                        <KeepTogether>true</KeepTogether>
-                                        <Paragraphs>
-                                          <Paragraph>
-                                            <TextRuns>
-                                              <TextRun>
-                                                <Value />
-                                                <Style>
-                                                  <FontSize>9pt</FontSize>
-                                                  <FontWeight>Normal</FontWeight>
-                                                </Style>
-                                              </TextRun>
-                                            </TextRuns>
-                                            <Style />
-                                          </Paragraph>
-                                        </Paragraphs>
-                                        <rd:DefaultName>Textbox15</rd:DefaultName>
-                                        <Style>
-                                          <Border>
-                                            <Style>None</Style>
-                                          </Border>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
-                                        </Style>
-                                      </Textbox>
-                                    </CellContents>
-                                  </TablixCell>
-                                  <TablixCell>
-                                    <CellContents>
                                       <Textbox Name="Textbox29">
                                         <CanGrow>true</CanGrow>
                                         <KeepTogether>true</KeepTogether>
@@ -3675,6 +3596,104 @@
                                           </Paragraph>
                                         </Paragraphs>
                                         <rd:DefaultName>DirectPortTransfer</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>None</Style>
+                                          </Border>
+                                          <PaddingLeft>2pt</PaddingLeft>
+                                          <PaddingRight>2pt</PaddingRight>
+                                          <PaddingTop>2pt</PaddingTop>
+                                          <PaddingBottom>2pt</PaddingBottom>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Textbox15">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value />
+                                                <Style>
+                                                  <FontSize>9pt</FontSize>
+                                                  <FontWeight>Normal</FontWeight>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style />
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox15</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>None</Style>
+                                          </Border>
+                                          <PaddingLeft>2pt</PaddingLeft>
+                                          <PaddingRight>2pt</PaddingRight>
+                                          <PaddingTop>2pt</PaddingTop>
+                                          <PaddingBottom>2pt</PaddingBottom>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Textbox1">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value />
+                                                <Style>
+                                                  <FontStyle>Normal</FontStyle>
+                                                  <FontSize>9pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <TextDecoration>None</TextDecoration>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style />
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox1</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>None</Style>
+                                          </Border>
+                                          <PaddingLeft>2pt</PaddingLeft>
+                                          <PaddingRight>2pt</PaddingRight>
+                                          <PaddingTop>2pt</PaddingTop>
+                                          <PaddingBottom>2pt</PaddingBottom>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Textbox19">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value />
+                                                <Style>
+                                                  <FontSize>9pt</FontSize>
+                                                  <FontWeight>Normal</FontWeight>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style />
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox19</rd:DefaultName>
                                         <Style>
                                           <Border>
                                             <Style>None</Style>
@@ -4239,18 +4258,6 @@
                                           <Border>
                                             <Style>None</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Style>Dashed</Style>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Style>None</Style>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Style>None</Style>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Style>None</Style>
-                                          </RightBorder>
                                           <PaddingLeft>2pt</PaddingLeft>
                                           <PaddingRight>2pt</PaddingRight>
                                           <PaddingTop>2pt</PaddingTop>
@@ -4283,18 +4290,6 @@
                                           <Border>
                                             <Style>None</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Style>Dashed</Style>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Style>None</Style>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Style>None</Style>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Style>None</Style>
-                                          </RightBorder>
                                           <PaddingLeft>2pt</PaddingLeft>
                                           <PaddingRight>2pt</PaddingRight>
                                           <PaddingTop>2pt</PaddingTop>
@@ -4339,18 +4334,6 @@
                                           <Border>
                                             <Style>None</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Style>Dashed</Style>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Style>None</Style>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Style>None</Style>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Style>None</Style>
-                                          </RightBorder>
                                           <PaddingLeft>2pt</PaddingLeft>
                                           <PaddingRight>2pt</PaddingRight>
                                           <PaddingTop>2pt</PaddingTop>
@@ -4384,18 +4367,6 @@
                                           <Border>
                                             <Style>None</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Style>Dashed</Style>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Style>None</Style>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Style>None</Style>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Style>None</Style>
-                                          </RightBorder>
                                           <PaddingLeft>2pt</PaddingLeft>
                                           <PaddingRight>2pt</PaddingRight>
                                           <PaddingTop>2pt</PaddingTop>
@@ -4440,18 +4411,6 @@
                                           <Border>
                                             <Style>None</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Style>Dashed</Style>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Style>None</Style>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Style>None</Style>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Style>None</Style>
-                                          </RightBorder>
                                           <PaddingLeft>2pt</PaddingLeft>
                                           <PaddingRight>2pt</PaddingRight>
                                           <PaddingTop>2pt</PaddingTop>
@@ -4481,18 +4440,6 @@
                                           <Border>
                                             <Style>None</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Style>Dashed</Style>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Style>None</Style>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Style>None</Style>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Style>None</Style>
-                                          </RightBorder>
                                           <PaddingLeft>2pt</PaddingLeft>
                                           <PaddingRight>2pt</PaddingRight>
                                           <PaddingTop>2pt</PaddingTop>
@@ -4537,18 +4484,6 @@
                                           <Border>
                                             <Style>None</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Style>Dashed</Style>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Style>None</Style>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Style>None</Style>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Style>None</Style>
-                                          </RightBorder>
                                           <PaddingLeft>2pt</PaddingLeft>
                                           <PaddingRight>2pt</PaddingRight>
                                           <PaddingTop>2pt</PaddingTop>
@@ -4578,18 +4513,6 @@
                                           <Border>
                                             <Style>None</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Style>Dashed</Style>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Style>None</Style>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Style>None</Style>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Style>None</Style>
-                                          </RightBorder>
                                           <PaddingLeft>2pt</PaddingLeft>
                                           <PaddingRight>2pt</PaddingRight>
                                           <PaddingTop>2pt</PaddingTop>
@@ -4634,18 +4557,6 @@
                                           <Border>
                                             <Style>None</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Style>Dashed</Style>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Style>None</Style>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Style>None</Style>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Style>None</Style>
-                                          </RightBorder>
                                           <PaddingLeft>2pt</PaddingLeft>
                                           <PaddingRight>2pt</PaddingRight>
                                           <PaddingTop>2pt</PaddingTop>
@@ -4675,18 +4586,6 @@
                                           <Border>
                                             <Style>None</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Style>Dashed</Style>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Style>None</Style>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Style>None</Style>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Style>None</Style>
-                                          </RightBorder>
                                           <PaddingLeft>2pt</PaddingLeft>
                                           <PaddingRight>2pt</PaddingRight>
                                           <PaddingTop>2pt</PaddingTop>
@@ -4731,9 +4630,6 @@
                                           <Border>
                                             <Style>None</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Style>Dashed</Style>
-                                          </TopBorder>
                                           <BottomBorder>
                                             <Style>Solid</Style>
                                           </BottomBorder>
@@ -4766,9 +4662,6 @@
                                           <Border>
                                             <Style>None</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Style>Dashed</Style>
-                                          </TopBorder>
                                           <BottomBorder>
                                             <Style>Solid</Style>
                                           </BottomBorder>
@@ -4843,7 +4736,7 @@
                           </TablixRowHierarchy>
                           <DataSetName>RptDataSet</DataSetName>
                           <Height>4.36888in</Height>
-                          <Width>9.7479in</Width>
+                          <Width>9.74789in</Width>
                           <ZIndex>1</ZIndex>
                           <Style>
                             <Border>
@@ -4859,6 +4752,7 @@
                         </Border>
                       </Style>
                     </Rectangle>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -4887,7 +4781,7 @@
         <DataSetName>RptDataSet</DataSetName>
         <Top>0.06944in</Top>
         <Height>7.03973in</Height>
-        <Width>9.7479in</Width>
+        <Width>9.75in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4913,7 +4807,7 @@
   <Width>9.91457in</Width>
   <Page>
     <PageHeader>
-      <Height>0.7in</Height>
+      <Height>0.99667in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -4972,7 +4866,7 @@
           <rd:DefaultName>Textbox17</rd:DefaultName>
           <Top>0.26389in</Top>
           <Left>1.72917in</Left>
-          <Height>0.25in</Height>
+          <Height>0.30833in</Height>
           <Width>6in</Width>
           <ZIndex>1</ZIndex>
           <Style>
@@ -4999,6 +4893,66 @@
             </Border>
           </Style>
         </Image>
+        <Textbox Name="VesselName">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=First(Fields!VesselName.Value, "RptDataSet")</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>VesselName</rd:DefaultName>
+          <Top>0.64167in</Top>
+          <Left>2.94458in</Left>
+          <Height>0.25in</Height>
+          <Width>2.36458in</Width>
+          <ZIndex>3</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="VoyageNo">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=First(Fields!VoyageNo.Value, "RptDataSet")</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>VoyageNo</rd:DefaultName>
+          <Top>0.67375in</Top>
+          <Left>5.50295in</Left>
+          <Height>0.25in</Height>
+          <Width>1in</Width>
+          <ZIndex>4</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
       </ReportItems>
       <Style>
         <Border>

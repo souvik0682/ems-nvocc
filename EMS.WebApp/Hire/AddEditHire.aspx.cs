@@ -238,7 +238,7 @@ namespace EMS.WebApp.Hire
                      ActualOnHireDate = txtOnHireDate.Text.ToNullDateTime(),
                      AddedOn = DateTime.Now,
                      EditedOn = DateTime.Now,
-                     MovementOptID = rdTransactionType.SelectedValue=="N"?9:17,
+                     MovementOptID = rdTransactionType.SelectedValue=="N"?7:17,
                      UserAdded = user.Id,
                      UserLastEdited = user.Id
                  });

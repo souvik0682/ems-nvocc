@@ -767,7 +767,7 @@ namespace EMS.WebApp.Transaction
                             txtRateperFEU.Enabled = false;
                             txtRatePerBL.Enabled = false;
                         }
-                        else if (ChargeType == (int)Enums.ChargeType.SLAB)
+                        else if (ChargeType == (int)Enums.ChargeType.INLAND_HAULAGE)
                         {
                             txtRatePerBL.Enabled = true;
 

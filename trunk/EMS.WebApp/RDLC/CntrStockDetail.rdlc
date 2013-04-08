@@ -1475,7 +1475,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>11.98668in</Width>
+  <Width>12.38484in</Width>
   <Page>
     <PageHeader>
       <Height>0.80928in</Height>
@@ -1524,9 +1524,44 @@
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
+                <TextRun>
+                  <Value>=Parameters!StockDate.Value</Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value> FOR </Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>=Parameters!line.Value</Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value> OF </Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>=Parameters!loc.Value</Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
               </TextRuns>
               <Style>
-                <TextAlign>Right</TextAlign>
+                <TextAlign>Left</TextAlign>
               </Style>
             </Paragraph>
           </Paragraphs>
@@ -1534,7 +1569,7 @@
           <Top>1.42028cm</Top>
           <Left>0.254cm</Left>
           <Height>0.6cm</Height>
-          <Width>5.87785cm</Width>
+          <Width>15.32347cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -1638,11 +1673,14 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>StockDate</rd:DefaultName>
-          <Top>1.42028cm</Top>
-          <Left>6.13185cm</Left>
+          <Top>1.27918cm</Top>
+          <Left>17.9985cm</Left>
           <Height>0.6cm</Height>
           <Width>11.97208cm</Width>
           <ZIndex>4</ZIndex>
+          <Visibility>
+            <Hidden>true</Hidden>
+          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>

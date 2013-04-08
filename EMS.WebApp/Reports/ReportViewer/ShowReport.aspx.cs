@@ -151,7 +151,10 @@ namespace EMS.WebApp.Reports.ReportViewer
             {
 
                 case "cargoarrivalnotice":
-                    ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1;                   
+                    ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1;
+                    trCar.Visible = true;
+                    trCar1.Visible = true;
+                    lblLine.Text = "Line";
                     break;
                 case "invoicedeveloper":
                    trInvoice.Visible = true;

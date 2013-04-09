@@ -172,6 +172,7 @@ namespace EMS.WebApp.Reports.ReportViewer
             }
 
             trgang2.Visible = false;
+
         }
        
         IUser user = null;
@@ -234,11 +235,11 @@ namespace EMS.WebApp.Reports.ReportViewer
                 case "cargoarrivalnotice":
                     rptParameters = new ReportParameter[6];
                     rptParameters[0] = new ReportParameter("blno", ddlBlNo.SelectedValue);
-                    rptParameters[1] = new ReportParameter("line", ddlLine.SelectedValue);
-                    rptParameters[2] = new ReportParameter("Location", ddlLocation.SelectedValue);
+                    rptParameters[1] = new ReportParameter("line", ddlLocation.SelectedValue);
+                    rptParameters[2] = new ReportParameter("Location", ddlLine.SelectedValue);
                     rptParameters[3] = new ReportParameter("Vessel", ddlVessel.SelectedValue);
                     rptParameters[4] = new ReportParameter("voyage", ddlVoyage.SelectedValue);
-                    rptParameters[5] = new ReportParameter("ETA", txtETA.Text.Trim());
+                    rptParameters[5] = new ReportParameter("ETA", txtETA.Text );
                     break;
                 case "invoicedeveloper":
                     rptParameters = new ReportParameter[4];
@@ -283,6 +284,7 @@ namespace EMS.WebApp.Reports.ReportViewer
             rptViewer.ShowPromptAreaButton = false;
             rptViewer.ShowToolBar = true;
             rptViewer.ShowReportBody = true;
+            rptViewer.Visible = true;
             rptViewer.ServerReport.Refresh();
 
         }

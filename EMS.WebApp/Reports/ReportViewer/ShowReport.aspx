@@ -157,7 +157,7 @@ return false;
             </td>
                <td   align="left" style="width: 35%">
                 <asp:TextBox ID="txtSDate" runat="server" Width="113"></asp:TextBox>
-                 <cc1:CalendarExtender Format="dd/MM/yyyy" ID="CalendarExtender3" runat="server" PopupButtonID="txtSDate"
+                 <cc1:CalendarExtender Format="dd-MM-yyyy" ID="CalendarExtender3" runat="server" PopupButtonID="txtSDate"
                                 TargetControlID="txtSDate">
                             </cc1:CalendarExtender>
                             

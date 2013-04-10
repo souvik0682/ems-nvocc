@@ -208,6 +208,7 @@ namespace EMS.WebApp.Import
             writer.WriteLine("<END-vesinfo>");
             writer.WriteLine("<cargo>");
             string sss = writer.ToNewString();
+            int PortCode = dbinteract.GetId("Port", pod);
 
             DataSet Ds = EDIBLL.GetEDICargoInfo(Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue), dbinteract.GetId("Port", pod));
             //             TextShippingCode.Text = Ds.Tables(0).Rows(0).Item("ShippingLineCode")
@@ -276,7 +277,7 @@ namespace EMS.WebApp.Import
                
                Destport = ((Dr["DischargeIG"].ToString().Substring(0, 2) == "IN") ?  ddlCustomHouse.SelectedItem.Text : Dr["DischargeIG"].ToString());
                BLno=System.Text.RegularExpressions.Regex.Replace(Dr["BLNUMBER"].ToString(),"[^\\w\\ ]","").TrimEnd().Replace(" ", "").Replace(" ", "20");
-                DischargePort= Dr["DischargeIG"].ToString().Split(',')[1].Trim();
+               DischargePort= Dr["DischargeIG"].ToString().Split(',')[1].Trim();
 
                 writer.WriteLine(("F" + (''
                                 + (custHouse + (''
@@ -301,7 +302,8 @@ namespace EMS.WebApp.Import
                                 + (Dr["CARGONATURE"].ToString() + (''
                                 + (Dr["ITEMTYPE"].ToString() + (''
                                 + (Dr["CargoMovementCode"].ToString() + (''
-                                + ((( (DischargePort.Length>=6 ? DischargePort.Substring(0, 6):DischargePort) == "INHAL1") ? DischargePort : string.Empty) + (''
+                                //+ ((( (DischargePort.Length>=6 ? DischargePort.Substring(0, 6):DischargePort) == "INHAL1") ? DischargePort : string.Empty) + (''
+                                + (Dr["CFSCode"].ToString() + (''
                                 + (Dr["NumberPackage"].ToString() + (''
                                 + (Dr["PackingUnit"].ToString() + (''
                                 + (((Convert.ToInt32(Dr["GrossWeight"]) > 0) ? (Dr["GrossWeight"].ToString() + ('' + (Dr["WTUnit"].ToString() + ''))) : (string.Empty+'' + string.Empty))

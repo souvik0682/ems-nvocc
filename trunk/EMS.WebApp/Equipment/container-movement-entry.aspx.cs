@@ -17,13 +17,14 @@ namespace EMS.WebApp.Equipment
 {
     public partial class container_movement_entry : System.Web.UI.Page
     {
-
+        private int _userId = 0;
         private int _ContainerMovementId = 0;
         DataTable dtFilteredContainer = new DataTable();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             CheckUserAccess();
+            _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
             RetriveParameters();
             if (!Page.IsPostBack)
             {
@@ -44,7 +45,7 @@ namespace EMS.WebApp.Equipment
                 {
                     btnShow.Visible = false;
                     txtDate.Attributes.Add("onchange", "ChangeActivityDate(this);");
-                    
+
 
                     ContainerTranBLL oContainerTranBLL = new ContainerTranBLL();
                     SearchCriteria searchCriteria = new SearchCriteria();
@@ -145,7 +146,7 @@ namespace EMS.WebApp.Equipment
         void FillContainers(DataTable dt)
         {
             DataTable oTable = CreateDataTable();
-            
+
             foreach (DataRow Row in dt.Rows)
             {
                 DataRow Dr = oTable.NewRow();
@@ -304,7 +305,7 @@ namespace EMS.WebApp.Equipment
 
         protected void btnProceed_Click(object sender, EventArgs e)
         {
-            lblMessage.Text=string.Empty;
+            lblMessage.Text = string.Empty;
 
             DataTable Dt = CreateDataTable();
 
@@ -374,7 +375,7 @@ namespace EMS.WebApp.Equipment
 
             dc = new DataColumn("Editable");
             Dt.Columns.Add(dc);
-            
+
 
             return Dt;
         }
@@ -456,10 +457,14 @@ namespace EMS.WebApp.Equipment
                     txtFEUs.Text = "0";
 
 
+                int FLocation = Convert.ToInt32(ddlFromLocation.SelectedValue);
+                int TLocation = Convert.ToInt32(ddlTolocation.SelectedValue);
+                int EYard = Convert.ToInt32(ddlEmptyYard.SelectedValue);
+
                 int Result = oContainerTranBLL.AddEditContainerTransaction(out TranCode, hdnTranCode.Value, GenerateContainerXMLString(),
                     Convert.ToInt32(ddlToStatus.SelectedValue), Convert.ToInt32(txtTeus.Text), Convert.ToInt32(txtFEUs.Text), Convert.ToDateTime(txtDate.Text),
-                    Convert.ToString(txtNarration.Text), Convert.ToInt32(ddlFromLocation.SelectedValue), Convert.ToInt32(ddlTolocation.SelectedValue),
-                    Convert.ToInt32(ddlEmptyYard.SelectedValue), 1, DateTime.Now.Date, 1, DateTime.Now.Date);
+                    Convert.ToString(txtNarration.Text), FLocation, TLocation,
+                    EYard, _userId, DateTime.Now.Date, _userId, DateTime.Now.Date);
 
 
                 switch (Result)

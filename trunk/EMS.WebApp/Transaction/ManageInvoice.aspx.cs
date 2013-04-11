@@ -1159,6 +1159,11 @@ namespace EMS.WebApp.Transaction
 
             ViewState["CHARGERATE"] = chargeRates;
 
+            if (chargeRates.Min(c => c.InvoiceChargeId) < 0)
+                ViewState["INVOICECHARGEID"] = chargeRates.Min(c => c.InvoiceChargeId);
+            else
+                ViewState["INVOICECHARGEID"] = null;
+
             gvwInvoice.DataSource = chargeRates;
             gvwInvoice.DataBind();
         }

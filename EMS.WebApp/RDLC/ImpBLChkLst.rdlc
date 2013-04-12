@@ -140,6 +140,10 @@
           <DataField>DirectPortTransfer</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="BLContainers">
+          <DataField>BLContainers</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="TranShipment">
           <DataField>TranShipment</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -2704,7 +2708,7 @@
                                           <Paragraph>
                                             <TextRuns>
                                               <TextRun>
-                                                <Value />
+                                                <Value>Containers</Value>
                                                 <Style>
                                                   <FontStyle>Normal</FontStyle>
                                                   <FontSize>9pt</FontSize>
@@ -2731,24 +2735,26 @@
                                   </TablixCell>
                                   <TablixCell>
                                     <CellContents>
-                                      <Textbox Name="Textbox19">
+                                      <Textbox Name="BLContainers">
                                         <CanGrow>true</CanGrow>
                                         <KeepTogether>true</KeepTogether>
                                         <Paragraphs>
                                           <Paragraph>
                                             <TextRuns>
                                               <TextRun>
-                                                <Value />
+                                                <Value>=LTrim(Fields!BLContainers.Value)</Value>
                                                 <Style>
                                                   <FontSize>9pt</FontSize>
                                                   <FontWeight>Normal</FontWeight>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
-                                            <Style />
+                                            <Style>
+                                              <TextAlign>Left</TextAlign>
+                                            </Style>
                                           </Paragraph>
                                         </Paragraphs>
-                                        <rd:DefaultName>Textbox19</rd:DefaultName>
+                                        <rd:DefaultName>BLContainers</rd:DefaultName>
                                         <Style>
                                           <Border>
                                             <Style>None</Style>
@@ -2759,6 +2765,7 @@
                                           <PaddingBottom>2pt</PaddingBottom>
                                         </Style>
                                       </Textbox>
+                                      <rd:Selected>true</rd:Selected>
                                     </CellContents>
                                   </TablixCell>
                                 </TablixCells>
@@ -4786,7 +4793,6 @@
                         </Border>
                       </Style>
                     </Rectangle>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>

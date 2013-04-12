@@ -29,6 +29,12 @@ namespace EMS.Entity.Report
             set;
         }
 
+        public string LocName
+        {
+            get;
+            set;
+        }
+
         public string ItemLineNo
         {
             get;
@@ -196,6 +202,11 @@ namespace EMS.Entity.Report
             get;
             set;
         }
+        public string BLContainers
+        {
+            get;
+            set;
+        }
 
         public string TranShipment
         {
@@ -249,6 +260,30 @@ namespace EMS.Entity.Report
             set;
         }
 
+        public string MainLineVessel
+        {
+            get;
+            set;
+        }
+
+        public string MLVoyageNo
+        {
+            get;
+            set;
+        }
+
+        public string VesselName
+        {
+            get;
+            set;
+        }
+
+        public string VoyageNo
+        {
+            get;
+            set;
+        }
+        
         public int? DetentionFree
         {
             get;
@@ -314,6 +349,7 @@ namespace EMS.Entity.Report
             get;
             set;
         }
+
 
         public decimal? Height
         {
@@ -464,6 +500,9 @@ namespace EMS.Entity.Report
             if (HasColumn(reader, "DirectPortTransfer") && reader["DirectPortTransfer"] != DBNull.Value)
                 this.DirectPortTransfer = Convert.ToString(reader["DirectPortTransfer"]);
 
+            if (HasColumn(reader, "BLContainers") && reader["BLContainers"] != DBNull.Value)
+                this.BLContainers = Convert.ToString(reader["BLContainers"]);
+
             if (HasColumn(reader, "TranShipment") && reader["TranShipment"] != DBNull.Value)
                 this.TranShipment = Convert.ToString(reader["TranShipment"]);
 
@@ -535,6 +574,23 @@ namespace EMS.Entity.Report
 
             if (HasColumn(reader, "Comodity") && reader["Comodity"] != DBNull.Value)
                 this.Comodity = Convert.ToString(reader["Comodity"]);
+
+            if (HasColumn(reader, "MainLineVessel") && reader["MainLineVessel"] != DBNull.Value)
+                this.MainLineVessel = Convert.ToString(reader["MainLineVessel"]);
+
+            if (HasColumn(reader, "MLVoyageNo") && reader["MLVoyageNo"] != DBNull.Value)
+                this.MLVoyageNo = Convert.ToString(reader["MLVoyageNo"]);
+
+            if (HasColumn(reader, "LocName") && reader["LocName"] != DBNull.Value)
+                this.LocName = Convert.ToString(reader["LocName"]);
+
+            if (HasColumn(reader, "VesselName") && reader["VesselName"] != DBNull.Value)
+                this.VesselName = Convert.ToString(reader["VesselName"]);
+
+            if (HasColumn(reader, "VoyageNo") && reader["VoyageNo"] != DBNull.Value)
+                this.VoyageNo = Convert.ToString(reader["VoyageNo"]);
+
+            
         }
 
         #endregion

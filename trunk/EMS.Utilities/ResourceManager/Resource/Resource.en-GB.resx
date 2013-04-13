@@ -360,4 +360,7 @@
   <data name="ERR00080" xml:space="preserve">
     <value>Please enter BL No.</value>
   </data>
+  <data name="ERR00081" xml:space="preserve">
+    <value>Record added successfully.</value>
+  </data>
 </root>

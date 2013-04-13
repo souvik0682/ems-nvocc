@@ -830,6 +830,10 @@ namespace EMS.WebApp.Transaction
             {
                 RemoveChargeRate(Convert.ToInt32(e.CommandArgument));
             }
+            else if (e.CommandName == "Edit")
+            {
+                EditChargeRate(Convert.ToInt32(e.CommandArgument));
+            }
         }
 
         protected void gvwInvoice_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -856,6 +860,10 @@ namespace EMS.WebApp.Transaction
                 btnRemove.ToolTip = "Remove";
                 btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceChargeId"));
 
+                //Edit link
+                ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
+                btnEdit.ToolTip = "Edit";
+                btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceChargeId"));
 
                 btnRemove.OnClientClick = "javascript:return confirm('Are you sure about delete?');";
             }
@@ -967,14 +975,28 @@ namespace EMS.WebApp.Transaction
 
         private void BuildChargesRate(IChargeRate charge)
         {
-            if (ViewState["INVOICECHARGEID"] == null)
-                charge.InvoiceChargeId = -1;
+            if (ViewState["EDITINVOICECHARGEID"] == null)
+            {
+                if (ViewState["INVOICECHARGEID"] == null)
+                    charge.InvoiceChargeId = -1;
+                else
+                    charge.InvoiceChargeId = Convert.ToInt32(ViewState["INVOICECHARGEID"]) - 1;
+
+                ViewState["INVOICECHARGEID"] = charge.InvoiceChargeId;
+            }
             else
-                charge.InvoiceChargeId = Convert.ToInt32(ViewState["INVOICECHARGEID"]) - 1;
+            {
+                if (ViewState["CHARGERATE"] != null)
+                    ChargeRates = ViewState["CHARGERATE"] as List<IChargeRate>;
 
-            ViewState["INVOICECHARGEID"] = charge.InvoiceChargeId;
+                charge.InvoiceChargeId = Convert.ToInt32(ViewState["EDITINVOICECHARGEID"]);
 
-
+                IChargeRate cRate = ChargeRates.Single(c => c.InvoiceChargeId == Convert.ToInt32(ViewState["EDITINVOICECHARGEID"]));
+                ChargeRates.Remove(cRate);
+                ViewState["CHARGERATE"] = ChargeRates;
+                ViewState["EDITINVOICECHARGEID"] = null;
+            }
+            
             charge.ChangeName = ddlFChargeName.SelectedItem.Text;
             charge.ChargesID = Convert.ToInt32(ddlFChargeName.SelectedValue);
             charge.GrossAmount = Convert.ToDecimal(txtGrossAmount.Text);
@@ -1166,6 +1188,100 @@ namespace EMS.WebApp.Transaction
 
             gvwInvoice.DataSource = chargeRates;
             gvwInvoice.DataBind();
+        }
+
+        private void EditChargeRate(int InvoiceChargeId)
+        {
+            List<IChargeRate> chargeRates = null;
+
+            if (ViewState["CHARGERATE"] != null)
+                chargeRates = ViewState["CHARGERATE"] as List<IChargeRate>;
+
+            IChargeRate chargeRate = chargeRates.Single(c => c.InvoiceChargeId == InvoiceChargeId);
+
+            ddlFChargeName.SelectedValue = chargeRate.ChargesID.ToString();
+            txtGrossAmount.Text = chargeRate.GrossAmount.ToString();
+            txtRatePerBL.Text = chargeRate.RatePerBL.ToString();
+            txtRatePerCBM.Text = chargeRate.RatePerCBM.ToString();
+            txtRateperFEU.Text = chargeRate.RatePerFEU.ToString();
+            txtRatePerTEU.Text = chargeRate.RatePerTEU.ToString();
+            txtRatePerTon.Text = chargeRate.RatePerTON.ToString();
+            txtServiceTax.Text = (chargeRate.STax + chargeRate.ServiceTaxCessAmount + chargeRate.ServiceTaxACess).ToString();
+
+            ViewState["STAX"] = chargeRate.STax;
+            ViewState["CESSAMOUNT"] = chargeRate.ServiceTaxCessAmount;
+            ViewState["ADDCESS"] = chargeRate.ServiceTaxACess;
+
+            ddlFTerminal.SelectedValue = chargeRate.TerminalId.ToString();
+            txtTotal.Text = chargeRate.TotalAmount.ToString();
+            txtUSD.Text = chargeRate.Usd.ToString();
+
+            DataTable Charge = new InvoiceBLL().ChargeEditable(Convert.ToInt32(ddlFChargeName.SelectedValue));
+            if (Charge != null && Charge.Rows.Count > 0)
+            {
+                if (Convert.ToBoolean(Charge.Rows[0]["RateChangeable"].ToString()))
+                {
+                    int ChargeType = Convert.ToInt32(Charge.Rows[0]["ChargeType"].ToString());
+
+                    if (ChargeType == (int)Enums.ChargeType.PER_UNIT)
+                    {
+                        txtRatePerTEU.Enabled = true;
+                        txtRateperFEU.Enabled = true;
+
+                        txtRatePerBL.Enabled = false;
+                        txtRatePerCBM.Enabled = false;
+                        txtRatePerTon.Enabled = false;
+                    }
+                    else if (ChargeType == (int)Enums.ChargeType.PER_DOCUMENT)
+                    {
+                        txtRatePerBL.Enabled = true;
+
+                        txtRatePerTEU.Enabled = false;
+                        txtRateperFEU.Enabled = false;
+                        txtRatePerCBM.Enabled = false;
+                        txtRatePerTon.Enabled = false;
+                    }
+                    else if (ChargeType == (int)Enums.ChargeType.LCL)
+                    {
+                        txtRatePerCBM.Enabled = true;
+                        txtRatePerTon.Enabled = true;
+
+                        txtRatePerTEU.Enabled = false;
+                        txtRateperFEU.Enabled = false;
+                        txtRatePerBL.Enabled = false;
+                    }
+                    else if (ChargeType == (int)Enums.ChargeType.INLAND_HAULAGE)
+                    {
+                        txtRatePerBL.Enabled = true;
+
+                        txtRatePerTEU.Enabled = false;
+                        txtRateperFEU.Enabled = false;
+                        txtRatePerCBM.Enabled = false;
+                    }
+                }
+                else
+                {
+                    txtRatePerTEU.Enabled = false;
+                    txtRateperFEU.Enabled = false;
+                    txtRatePerBL.Enabled = false;
+                    txtRatePerCBM.Enabled = false;
+                    txtRatePerTon.Enabled = false;
+                }
+            }
+
+            if (Convert.ToBoolean(Charge.Rows[0]["TerminalReq"].ToString()))
+            {
+                SetDefaultTerminal();
+                //ddlFTerminal.Enabled = true;
+                rfvTerminal.Visible = true;
+            }
+            else
+            {
+                //ddlFTerminal.SelectedValue = "0";
+                SetDefaultTerminal();
+                //ddlFTerminal.Enabled = false;
+                rfvTerminal.Visible = false;
+            }
         }
     }
 }

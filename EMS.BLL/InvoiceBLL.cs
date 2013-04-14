@@ -104,12 +104,12 @@ namespace EMS.BLL
             return InvoiceDAL.GetDetentionAmount(BlId);
         }
 
-        public long SaveInvoice(IInvoice invoice)
+        public long SaveInvoice(IInvoice invoice, string misc)
         {
             long invoiceId = 0;
             int invoiceChargeId = 0;
 
-            invoiceId = InvoiceDAL.SaveInvoice(invoice);
+            invoiceId = InvoiceDAL.SaveInvoice(invoice, misc);
 
             if (invoiceId > 0)
             {

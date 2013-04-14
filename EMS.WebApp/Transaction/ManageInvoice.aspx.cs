@@ -44,7 +44,7 @@ namespace EMS.WebApp.Transaction
                  */
 
                 //Charge
-                LoadChargeDDL();
+                LoadChargeDDL(0);
 
 
                 if (!ReferenceEquals(Request.QueryString["invid"], null))
@@ -106,9 +106,9 @@ namespace EMS.WebApp.Transaction
             }
         }
 
-        private void LoadChargeDDL()
+        private void LoadChargeDDL(int docTypeId)
         {
-            List<ICharge> lstCharge = new InvoiceBLL().GetAllCharges();
+            List<ICharge> lstCharge = new InvoiceBLL().GetAllCharges(docTypeId);
             Session["CHARGES"] = lstCharge;
             ddlFChargeName.DataValueField = "ChargesID";
             ddlFChargeName.DataTextField = "ChargeDescr";
@@ -1181,10 +1181,30 @@ namespace EMS.WebApp.Transaction
 
             ViewState["CHARGERATE"] = chargeRates;
 
-            if (chargeRates.Min(c => c.InvoiceChargeId) < 0)
-                ViewState["INVOICECHARGEID"] = chargeRates.Min(c => c.InvoiceChargeId);
+            if (chargeRates != null && chargeRates.Count > 0)
+            {
+                if (chargeRates.Min(c => c.InvoiceChargeId) < 0)
+                    ViewState["INVOICECHARGEID"] = chargeRates.Min(c => c.InvoiceChargeId);
+                else
+                    ViewState["INVOICECHARGEID"] = null;
+            }
             else
+            {
                 ViewState["INVOICECHARGEID"] = null;
+            }
+
+
+            LoadChargeDDL(DocType);
+
+            if (DocType == -1)
+            {
+
+                ddlFChargeName.Enabled = true;
+            }
+            else
+            {
+                ddlFChargeName.Enabled = false;
+            }
 
             gvwInvoice.DataSource = chargeRates;
             gvwInvoice.DataBind();
@@ -1192,13 +1212,14 @@ namespace EMS.WebApp.Transaction
 
         private void EditChargeRate(int InvoiceChargeId)
         {
+            ddlFChargeName.Enabled = false;
+
             List<IChargeRate> chargeRates = null;
 
             if (ViewState["CHARGERATE"] != null)
                 chargeRates = ViewState["CHARGERATE"] as List<IChargeRate>;
 
             IChargeRate chargeRate = chargeRates.Single(c => c.InvoiceChargeId == InvoiceChargeId);
-
 
             DataTable Charge = new InvoiceBLL().ChargeEditable(chargeRate.ChargesID);
             if (Charge != null && Charge.Rows.Count > 0)
@@ -1266,8 +1287,6 @@ namespace EMS.WebApp.Transaction
                 //ddlFTerminal.Enabled = false;
                 rfvTerminal.Visible = false;
             }
-
-
 
             ddlFChargeName.SelectedValue = chargeRate.ChargesID.ToString();
             txtGrossAmount.Text = chargeRate.GrossAmount.ToString();

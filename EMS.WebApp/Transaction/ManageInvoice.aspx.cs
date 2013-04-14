@@ -830,7 +830,7 @@ namespace EMS.WebApp.Transaction
             {
                 RemoveChargeRate(Convert.ToInt32(e.CommandArgument));
             }
-            else if (e.CommandName == "Edit")
+            else if (e.CommandName == "EditRow")
             {
                 EditChargeRate(Convert.ToInt32(e.CommandArgument));
             }
@@ -1199,24 +1199,8 @@ namespace EMS.WebApp.Transaction
 
             IChargeRate chargeRate = chargeRates.Single(c => c.InvoiceChargeId == InvoiceChargeId);
 
-            ddlFChargeName.SelectedValue = chargeRate.ChargesID.ToString();
-            txtGrossAmount.Text = chargeRate.GrossAmount.ToString();
-            txtRatePerBL.Text = chargeRate.RatePerBL.ToString();
-            txtRatePerCBM.Text = chargeRate.RatePerCBM.ToString();
-            txtRateperFEU.Text = chargeRate.RatePerFEU.ToString();
-            txtRatePerTEU.Text = chargeRate.RatePerTEU.ToString();
-            txtRatePerTon.Text = chargeRate.RatePerTON.ToString();
-            txtServiceTax.Text = (chargeRate.STax + chargeRate.ServiceTaxCessAmount + chargeRate.ServiceTaxACess).ToString();
 
-            ViewState["STAX"] = chargeRate.STax;
-            ViewState["CESSAMOUNT"] = chargeRate.ServiceTaxCessAmount;
-            ViewState["ADDCESS"] = chargeRate.ServiceTaxACess;
-
-            ddlFTerminal.SelectedValue = chargeRate.TerminalId.ToString();
-            txtTotal.Text = chargeRate.TotalAmount.ToString();
-            txtUSD.Text = chargeRate.Usd.ToString();
-
-            DataTable Charge = new InvoiceBLL().ChargeEditable(Convert.ToInt32(ddlFChargeName.SelectedValue));
+            DataTable Charge = new InvoiceBLL().ChargeEditable(chargeRate.ChargesID);
             if (Charge != null && Charge.Rows.Count > 0)
             {
                 if (Convert.ToBoolean(Charge.Rows[0]["RateChangeable"].ToString()))
@@ -1282,6 +1266,27 @@ namespace EMS.WebApp.Transaction
                 //ddlFTerminal.Enabled = false;
                 rfvTerminal.Visible = false;
             }
+
+
+
+            ddlFChargeName.SelectedValue = chargeRate.ChargesID.ToString();
+            txtGrossAmount.Text = chargeRate.GrossAmount.ToString();
+            txtRatePerBL.Text = chargeRate.RatePerBL.ToString();
+            txtRatePerCBM.Text = chargeRate.RatePerCBM.ToString();
+            txtRateperFEU.Text = chargeRate.RatePerFEU.ToString();
+            txtRatePerTEU.Text = chargeRate.RatePerTEU.ToString();
+            txtRatePerTon.Text = chargeRate.RatePerTON.ToString();
+            txtServiceTax.Text = (chargeRate.STax + chargeRate.ServiceTaxCessAmount + chargeRate.ServiceTaxACess).ToString();
+
+            ViewState["STAX"] = chargeRate.STax;
+            ViewState["CESSAMOUNT"] = chargeRate.ServiceTaxCessAmount;
+            ViewState["ADDCESS"] = chargeRate.ServiceTaxACess;
+
+            ddlFTerminal.SelectedValue = chargeRate.TerminalId.ToString();
+            txtTotal.Text = chargeRate.TotalAmount.ToString();
+            txtUSD.Text = chargeRate.Usd.ToString();
+
+            ViewState["EDITINVOICECHARGEID"] = chargeRate.InvoiceChargeId;
         }
     }
 }

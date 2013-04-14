@@ -15,7 +15,7 @@
         <center>
             <fieldset style="width: 85%;">
                 <legend>Add / Edit Invoice</legend>
-                <asp:UpdatePanel ID="UpdatePanelInvoice" runat="server">
+                <asp:UpdatePanel ID="upInvoice" runat="server" UpdateMode="Always">
                     <ContentTemplate>
                         <table style="width: 100%;">
                             <tr>
@@ -324,7 +324,7 @@
                                                                 <HeaderStyle CssClass="gridviewheader" />
                                                                 <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                                                 <ItemTemplate>
-                                                                    <asp:ImageButton ID="btnEdit" runat="server" CommandName="Edit" ImageUrl="~/Images/edit.png"
+                                                                    <asp:ImageButton ID="btnEdit" runat="server" CommandName="EditRow" ImageUrl="~/Images/edit.png"
                                                                         Height="16" Width="16" />
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
@@ -359,6 +359,16 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </fieldset>
+            <asp:UpdateProgress ID="uProgressInvoice" runat="server" AssociatedUpdatePanelID="upInvoice">
+                <ProgressTemplate>
+                    <div class="progress">
+                        <div id="image">
+                            <img src="../Images/PleaseWait.gif" alt="" /></div>
+                        <div id="text">
+                            Please Wait...</div>
+                    </div>
+                </ProgressTemplate>
+            </asp:UpdateProgress>
         </center>
     </div>
 </asp:Content>

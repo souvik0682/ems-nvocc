@@ -13,13 +13,13 @@ namespace EMS.WebApp.Transaction {
     public partial class ManageInvoice {
         
         /// <summary>
-        /// UpdatePanelInvoice control.
+        /// upInvoice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanelInvoice;
+        protected global::System.Web.UI.UpdatePanel upInvoice;
         
         /// <summary>
         /// txtInvoiceNo control.
@@ -299,5 +299,14 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMessage;
+        
+        /// <summary>
+        /// uProgressInvoice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress uProgressInvoice;
     }
 }

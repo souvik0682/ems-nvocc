@@ -141,11 +141,15 @@ namespace EMS.WebApp.Transaction
                     {
                         chkFreightToCollect.Enabled = false;
                         chkDo.Enabled = true;
+                        EnableDisableServiceRequestSection();
                     }
                     else
                     {
                         if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["RECPTCHECK"].ToString()) == true)
+                        {
                             chkDo.Enabled = true;
+                            EnableDisableServiceRequestSection();
+                        }
                         else
                             chkDo.Enabled = false;
 
@@ -156,6 +160,7 @@ namespace EMS.WebApp.Transaction
                 else
                 {
                     chkDo.Enabled = true;
+                    EnableDisableServiceRequestSection();
                 }
 
                 //if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["FREIGHTTOCOLLECT"]) == true)
@@ -165,7 +170,7 @@ namespace EMS.WebApp.Transaction
 
                 if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["FSTINVGENERATED"]) == true)
                 {
-                    EnableDisableServiceRequestSection();
+                    //EnableDisableServiceRequestSection();
                     //imgBtnFinalDo.Enabled = true;
                     tdFinalDo.Visible = true;
                     tdExmDo.Attributes.Add("colspan", "1");
@@ -212,13 +217,14 @@ namespace EMS.WebApp.Transaction
             txtPGRFreedays.Text = dtDetail.Rows[0]["PGRFREEDAYS"].ToString();
 
             if (Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()) > Convert.ToDateTime("01/01/1950"))
-                txtPGRTill.Text = dtDetail.Rows[0]["PGRTILL"].ToString();
+                txtPGRTill.Text = Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()).ToString("dd/MM/yyyy");
+            
 
             ddlLine.SelectedValue = dtDetail.Rows[0]["LINE"].ToString();
             ddlLocation.SelectedValue = dtDetail.Rows[0]["LOCATION"].ToString();
 
             if (Convert.ToDateTime(dtDetail.Rows[0]["DOVALIDUPTO"].ToString()) > Convert.ToDateTime("01/01/1950"))
-                txtDoValidUpto.Text = dtDetail.Rows[0]["DOVALIDUPTO"].ToString();
+                txtDoValidUpto.Text = Convert.ToDateTime(dtDetail.Rows[0]["DOVALIDUPTO"].ToString()).ToString("dd/MM/yyyy");
             else
             {
                 if (!String.IsNullOrEmpty(txtLandingDate.Text))
@@ -227,7 +233,7 @@ namespace EMS.WebApp.Transaction
 
             //if (!string.IsNullOrEmpty(dtDetail.Rows[0]["DTNUPTO"].ToString()))
             if (Convert.ToDateTime(dtDetail.Rows[0]["DTNUPTO"].ToString()) > Convert.ToDateTime("01/01/1950"))
-                tstDetentionTill.Text = dtDetail.Rows[0]["DTNUPTO"].ToString();
+                tstDetentionTill.Text = Convert.ToDateTime(dtDetail.Rows[0]["DTNUPTO"].ToString()).ToString("dd/MM/yyyy"); 
             else
             {
                 if (!String.IsNullOrEmpty(txtLandingDate.Text))
@@ -236,7 +242,7 @@ namespace EMS.WebApp.Transaction
 
             //if (!string.IsNullOrEmpty(dtDetail.Rows[0]["PGRTILL"].ToString()))
             if (Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()) > Convert.ToDateTime("01/01/1950"))
-                txtPGRTill.Text = dtDetail.Rows[0]["PGRTILL"].ToString();
+                txtPGRTill.Text = Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()).ToString("dd/MM/yyyy"); 
             else
             {
                 if (!String.IsNullOrEmpty(txtLandingDate.Text))

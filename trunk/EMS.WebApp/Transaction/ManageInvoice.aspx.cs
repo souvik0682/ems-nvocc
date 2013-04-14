@@ -715,6 +715,72 @@ namespace EMS.WebApp.Transaction
 
             DataTable Charge = new InvoiceBLL().ChargeEditable(Convert.ToInt32(ddlFChargeName.SelectedValue));
 
+            if (Charge != null && Charge.Rows.Count > 0)
+            {
+                if (Convert.ToBoolean(Charge.Rows[0]["RateChangeable"].ToString()))
+                {
+                    int ChargeType = Convert.ToInt32(Charge.Rows[0]["ChargeType"].ToString());
+
+                    if (ChargeType == (int)Enums.ChargeType.PER_UNIT)
+                    {
+                        txtRatePerTEU.Enabled = true;
+                        txtRateperFEU.Enabled = true;
+
+                        txtRatePerBL.Enabled = false;
+                        txtRatePerCBM.Enabled = false;
+                        txtRatePerTon.Enabled = false;
+                    }
+                    else if (ChargeType == (int)Enums.ChargeType.PER_DOCUMENT)
+                    {
+                        txtRatePerBL.Enabled = true;
+
+                        txtRatePerTEU.Enabled = false;
+                        txtRateperFEU.Enabled = false;
+                        txtRatePerCBM.Enabled = false;
+                        txtRatePerTon.Enabled = false;
+                    }
+                    else if (ChargeType == (int)Enums.ChargeType.LCL)
+                    {
+                        txtRatePerCBM.Enabled = true;
+                        txtRatePerTon.Enabled = true;
+
+                        txtRatePerTEU.Enabled = false;
+                        txtRateperFEU.Enabled = false;
+                        txtRatePerBL.Enabled = false;
+                    }
+                    else if (ChargeType == (int)Enums.ChargeType.INLAND_HAULAGE)
+                    {
+                        txtRatePerBL.Enabled = true;
+
+                        txtRatePerTEU.Enabled = false;
+                        txtRateperFEU.Enabled = false;
+                        txtRatePerCBM.Enabled = false;
+                    }
+                }
+                else
+                {
+                    txtRatePerTEU.Enabled = false;
+                    txtRateperFEU.Enabled = false;
+                    txtRatePerBL.Enabled = false;
+                    txtRatePerCBM.Enabled = false;
+                    txtRatePerTon.Enabled = false;
+                }
+            }
+
+            if (Convert.ToBoolean(Charge.Rows[0]["TerminalReq"].ToString()))
+            {
+                SetDefaultTerminal();
+                //ddlFTerminal.Enabled = true;
+                rfvTerminal.Visible = true;
+            }
+            else
+            {
+                //ddlFTerminal.SelectedValue = "0";
+                SetDefaultTerminal();
+                //ddlFTerminal.Enabled = false;
+                rfvTerminal.Visible = false;
+            }
+
             if (chargeRates != null && chargeRates.Count > 0)
             {
                 txtRatePerTEU.Text = chargeRates[0].RatePerTEU.ToString();
@@ -733,72 +799,25 @@ namespace EMS.WebApp.Transaction
                 ViewState["CESSAMOUNT"] = chargeRates[0].ServiceTaxCessAmount;
                 ViewState["ADDCESS"] = chargeRates[0].ServiceTaxACess;
                 ViewState["STAX"] = chargeRates[0].STax;
+            }
+            else
+            {
+                txtRatePerTEU.Text = "0.00";
+                txtRateperFEU.Text = "0.00";
+                txtRatePerBL.Text = "0.00";
+                txtRatePerCBM.Text = "0.00";
+                txtRatePerTon.Text = "0.00";
+                txtUSD.Text = "0.00";
+                txtGrossAmount.Text = "0.00";
+                txtServiceTax.Text = "0.00";
+                txtTotal.Text = "0.00";
 
-                if (Charge != null && Charge.Rows.Count > 0)
-                {
-                    if (Convert.ToBoolean(Charge.Rows[0]["RateChangeable"].ToString()))
-                    {
-                        int ChargeType = Convert.ToInt32(Charge.Rows[0]["ChargeType"].ToString());
-
-                        if (ChargeType == (int)Enums.ChargeType.PER_UNIT)
-                        {
-                            txtRatePerTEU.Enabled = true;
-                            txtRateperFEU.Enabled = true;
-
-                            txtRatePerBL.Enabled = false;
-                            txtRatePerCBM.Enabled = false;
-                            txtRatePerTon.Enabled = false;
-                        }
-                        else if (ChargeType == (int)Enums.ChargeType.PER_DOCUMENT)
-                        {
-                            txtRatePerBL.Enabled = true;
-
-                            txtRatePerTEU.Enabled = false;
-                            txtRateperFEU.Enabled = false;
-                            txtRatePerCBM.Enabled = false;
-                            txtRatePerTon.Enabled = false;
-                        }
-                        else if (ChargeType == (int)Enums.ChargeType.LCL)
-                        {
-                            txtRatePerCBM.Enabled = true;
-                            txtRatePerTon.Enabled = true;
-
-                            txtRatePerTEU.Enabled = false;
-                            txtRateperFEU.Enabled = false;
-                            txtRatePerBL.Enabled = false;
-                        }
-                        else if (ChargeType == (int)Enums.ChargeType.INLAND_HAULAGE)
-                        {
-                            txtRatePerBL.Enabled = true;
-
-                            txtRatePerTEU.Enabled = false;
-                            txtRateperFEU.Enabled = false;
-                            txtRatePerCBM.Enabled = false;
-                        }
-                    }
-                    else
-                    {
-                        txtRatePerTEU.Enabled = false;
-                        txtRateperFEU.Enabled = false;
-                        txtRatePerBL.Enabled = false;
-                        txtRatePerCBM.Enabled = false;
-                        txtRatePerTon.Enabled = false;
-                    }
-                }
-
-                if (Convert.ToBoolean(Charge.Rows[0]["TerminalReq"].ToString()))
-                {
-                    SetDefaultTerminal();
-                    //ddlFTerminal.Enabled = true;
-                    rfvTerminal.Visible = true;
-                }
-                else
-                {
-                    //ddlFTerminal.SelectedValue = "0";
-                    SetDefaultTerminal();
-                    //ddlFTerminal.Enabled = false;
-                    rfvTerminal.Visible = false;
-                }
+                ViewState["RATEPERPTEU"] = null;
+                ViewState["RATEPERPFEU"] = null;
+                ViewState["RATEPERPBL"] = null;
+                ViewState["CESSAMOUNT"] = null;
+                ViewState["ADDCESS"] = null;
+                ViewState["STAX"] = null;
             }
         }
 

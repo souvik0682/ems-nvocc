@@ -890,14 +890,16 @@ namespace EMS.WebApp.Transaction
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            string misc = string.Empty;
             IInvoice invoice = new InvoiceEntity();
             BuildInvoiceEntity(invoice);
 
             List<IChargeRate> chargeRate = ViewState["CHARGERATE"] as List<IChargeRate>;
             invoice.ChargeRates = chargeRate;
 
+            misc = GeneralFunctions.DecryptQueryString(Request.QueryString["p4"].ToString());
             //Add-Update
-            long invoiceID = new InvoiceBLL().SaveInvoice(invoice);
+            long invoiceID = new InvoiceBLL().SaveInvoice(invoice, misc);
 
             string invoiceNo = new InvoiceBLL().GetInvoiceNoById(invoiceID);
 

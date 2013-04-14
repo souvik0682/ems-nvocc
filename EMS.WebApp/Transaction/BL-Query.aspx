@@ -79,7 +79,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
-    <%-- <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+     <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
             <ProgressTemplate>
                 <div class="progress">
                     <div id="image">
@@ -99,7 +99,7 @@
                         Please Wait...</div>
                 </div>
             </ProgressTemplate>
-        </asp:UpdateProgress>--%>
+        </asp:UpdateProgress>
     <asp:Button ID="btnReset" runat="server" Style="display: none;" Text="Reset" OnClick="btnReset_Click" />
     <div>
         <div id="headercaption">

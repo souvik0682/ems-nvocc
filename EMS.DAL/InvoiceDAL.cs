@@ -251,7 +251,7 @@ namespace EMS.DAL
             return detentionAmount;
         }
 
-        public static long SaveInvoice(IInvoice invoice)
+        public static long SaveInvoice(IInvoice invoice, string misc)
         {
             string strExecution = "usp_Invoice_Save";
             long invoiceId = 0;
@@ -261,6 +261,7 @@ namespace EMS.DAL
                 if (invoice.InvoiceID != 0)
                     oDq.AddBigIntegerParam("@InvoiceID", invoice.InvoiceID);
 
+                oDq.AddVarcharParam("@Misc", 20, misc);
                 oDq.AddIntegerParam("@CompanyID", invoice.CompanyID);
                 oDq.AddIntegerParam("@LocationID", invoice.LocationID);
                 oDq.AddIntegerParam("@NVOCCID", invoice.NVOCCID);

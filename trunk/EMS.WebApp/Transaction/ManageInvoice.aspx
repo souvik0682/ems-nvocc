@@ -177,7 +177,7 @@
                                             <tr>
                                                 <td>
                                                     <asp:DropDownList ID="ddlFChargeName" runat="server" Width="120" AutoPostBack="true"
-                                                        OnSelectedIndexChanged="ddlChargeName_SelectedIndexChanged">
+                                                        OnSelectedIndexChanged="ddlChargeName_SelectedIndexChanged" Enabled="false">
                                                         <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                                     </asp:DropDownList>
                                                     <br />

@@ -74,9 +74,9 @@ namespace EMS.BLL
             return InvoiceDAL.GetExchangeRate(BlId);
         }
 
-        public List<ICharge> GetAllCharges()
+        public List<ICharge> GetAllCharges(int docTypeId)
         {
-            return InvoiceDAL.GetAllCharges();
+            return InvoiceDAL.GetAllCharges(docTypeId);
         }
 
         public DataTable GetTerminals(long LocationId)

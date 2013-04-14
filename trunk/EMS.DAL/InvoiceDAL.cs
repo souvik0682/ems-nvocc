@@ -148,7 +148,7 @@ namespace EMS.DAL
             return ExchangeRate;
         }
 
-        public static List<ICharge> GetAllCharges()
+        public static List<ICharge> GetAllCharges(int docTypeId)
         {
             string strExecution = "usp_Invoice_GetAllCharges";
 
@@ -156,6 +156,7 @@ namespace EMS.DAL
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
+                oDq.AddBigIntegerParam("@DocTypeId", docTypeId);
                 DataTableReader reader = oDq.GetTableReader();
 
                 while (reader.Read())

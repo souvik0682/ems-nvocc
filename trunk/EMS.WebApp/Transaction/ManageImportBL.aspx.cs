@@ -873,8 +873,8 @@ namespace EMS.WebApp.Transaction
 
         private void InitialActivities()
         {
-            txtLineBLDate.Text = Convert.ToString(DateTime.Now.ToString("dd-MM-yyyy"));
-            txtIgmBLDate.Text = Convert.ToString(DateTime.Now.ToString("dd-MM-yyyy"));
+            //txtLineBLDate.Text = Convert.ToString(DateTime.Now.ToString("dd-MM-yyyy"));
+            //txtIgmBLDate.Text = Convert.ToString(DateTime.Now.ToString("dd-MM-yyyy"));
             ((TextBox)AC_Port5.FindControl("txtPort")).Enabled = false;
 
             LoadNvoccDDL();
@@ -1505,6 +1505,20 @@ namespace EMS.WebApp.Transaction
                 IsValid = false;
                 lblErr.Text = "Total number of (TEU + FEU) should be greater than 0";
             }
+
+            //Container in Header & Footer should be same
+            if (footers != null || footers.Count > 0)
+            {
+                int footerTeu = (footers.Where(f => f.CntrSize == "20").Sum(f => Convert.ToInt32(f.CntrSize)) / 20);
+                int footerFeu = (footers.Where(f => f.CntrSize == "40").Sum(f => Convert.ToInt32(f.CntrSize)) / 40);
+
+                if ((teu != footerTeu) || (feu != footerFeu))
+                {
+                    IsValid = false;
+                    lblErr.Text = "Total TEU & FEU in header should be equal to B/L Footer";
+                }
+            }
+
 
             return IsValid;
         }

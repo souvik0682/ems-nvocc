@@ -2031,12 +2031,12 @@ namespace EMS.WebApp.Transaction
             return IsValid;
         }
 
-        protected void txtGrossWeight_TextChanged(object sender, EventArgs e)
+        protected void txtFtrGrossWeight_TextChanged(object sender, EventArgs e)
         {
-            if (txtGrossWeight.Text != string.Empty)
+            if (txtFtrGrossWeight.Text != string.Empty)
             {
-                if (txtFtrCargoWt.Text == string.Empty)
-                    txtFtrCargoWt.Text = (Convert.ToDecimal(txtGrossWeight.Text) / 1000).ToString();
+                //if (txtFtrCargoWt.Text == string.Empty)
+                txtFtrCargoWt.Text = (Convert.ToDecimal(txtGrossWeight.Text) / 1000).ToString();
             }
         }
 

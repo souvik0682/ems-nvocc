@@ -2036,7 +2036,7 @@ namespace EMS.WebApp.Transaction
             if (txtFtrGrossWeight.Text != string.Empty)
             {
                 //if (txtFtrCargoWt.Text == string.Empty)
-                txtFtrCargoWt.Text = (Convert.ToDecimal(txtGrossWeight.Text) / 1000).ToString();
+                txtFtrCargoWt.Text = (Convert.ToDecimal(txtFtrGrossWeight.Text) / 1000).ToString();
             }
         }
 

@@ -459,7 +459,7 @@ namespace EMS.WebApp.Transaction
 
         protected void txtLineBLDate_TextChanged(object sender, EventArgs e)
         {
-            if (txtIgmBLDate.Text.Trim() != string.Empty)
+            if (txtIgmBLDate.Text.Trim() == string.Empty)
                 txtIgmBLDate.Text = txtLineBLDate.Text;
         }
 

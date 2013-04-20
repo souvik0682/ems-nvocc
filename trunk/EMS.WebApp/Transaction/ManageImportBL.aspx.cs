@@ -62,7 +62,7 @@ namespace EMS.WebApp.Transaction
                         LoadForEdit(blHeaderId);
                 }
 
-                SetDefaultFreightPayableAt();
+                //SetDefaultFreightPayableAt();
                 SetDefaultUnit();
             }
             AC_Vessel1.TextChanged += new EventHandler(AC_Vessel1_TextChanged);
@@ -553,6 +553,8 @@ namespace EMS.WebApp.Transaction
                 txtFrightToCollect.Enabled = false;
                 //txtFreightPayable.Enabled = false;
                 ((TextBox)AC_Port5.FindControl("txtPort")).Enabled = false;
+                ((TextBox)AC_Port5.FindControl("txtPort")).Text = "";
+                ViewState[FRTPAYBLEATID] = null;
                 rfvFrightToCollect.Visible = false;
                 //rfvFreightPayable.Visible = false;
             }
@@ -563,6 +565,8 @@ namespace EMS.WebApp.Transaction
                 ((TextBox)AC_Port5.FindControl("txtPort")).Enabled = true;
                 rfvFrightToCollect.Visible = true;
                 //rfvFreightPayable.Visible = true;
+
+                SetDefaultFreightPayableAt();
             }
         }
 

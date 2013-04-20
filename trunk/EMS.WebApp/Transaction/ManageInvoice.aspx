@@ -133,11 +133,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="4" style="padding-top: 30px; border: none;">
+                                <td colspan="4" style="padding-top: 10; border: none;">
                                     <fieldset style="width: 95%;">
                                         <legend>Add Charges</legend>
                                         <table>
-                                            <tr>
+                                            <%--<tr>
                                                 <td style="font-weight:bold">
                                                     Charge Name
                                                 </td>
@@ -173,10 +173,10 @@
                                                 </td>
                                                 <td>
                                                 </td>
-                                            </tr>
+                                            </tr>--%>
                                             <tr>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlFChargeName" runat="server" Width="120" AutoPostBack="true"
+                                                    <asp:DropDownList ID="ddlFChargeName" runat="server" Width="210" AutoPostBack="true"
                                                         OnSelectedIndexChanged="ddlChargeName_SelectedIndexChanged" Enabled="false">
                                                         <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                                     </asp:DropDownList>
@@ -186,7 +186,7 @@
                                                         InitialValue="0"></asp:RequiredFieldValidator>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlFTerminal" runat="server" Width="75" Enabled="false">
+                                                    <asp:DropDownList ID="ddlFTerminal" runat="server" Width="150" Enabled="false">
                                                         <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
                                                     </asp:DropDownList>
                                                     <br />
@@ -207,47 +207,47 @@
                                                     ControlToValidate="ddlFWashingType" InitialValue="0"></asp:RequiredFieldValidator>
                                             </td>--%>
                                                 <td>
-                                                    <cc2:CustomTextBox ID="txtRatePerBL" runat="server" Width="75" Type="Decimal" MaxLength="10"
+                                                    <cc2:CustomTextBox ID="txtRatePerBL" runat="server" Width="50" Type="Decimal" MaxLength="10"
                                                         Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
                                                         OnTextChanged="txtRatePerBL_TextChanged" AutoPostBack="true" ></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <td>
-                                                    <cc2:CustomTextBox ID="txtRatePerTEU" runat="server" Width="75" Type="Decimal" MaxLength="10"
+                                                    <cc2:CustomTextBox ID="txtRatePerTEU" runat="server" Width="60" Type="Decimal" MaxLength="10"
                                                         Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
                                                         OnTextChanged="txtRatePerTEU_TextChanged" AutoPostBack="true"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <td>
-                                                    <cc2:CustomTextBox ID="txtRateperFEU" runat="server" Width="75" Type="Decimal" MaxLength="10"
+                                                    <cc2:CustomTextBox ID="txtRateperFEU" runat="server" Width="55" Type="Decimal" MaxLength="10"
                                                         Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
                                                         OnTextChanged="txtRateperFEU_TextChanged" AutoPostBack="true"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <td>
-                                                    <cc2:CustomTextBox ID="txtRatePerCBM" runat="server" Width="75" Type="Decimal" MaxLength="10"
+                                                    <cc2:CustomTextBox ID="txtRatePerCBM" runat="server" Width="55" Type="Decimal" MaxLength="10"
                                                         Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
                                                         OnTextChanged="txtRatePerCBM_TextChanged" AutoPostBack="true"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <td>
-                                                    <cc2:CustomTextBox ID="txtRatePerTon" runat="server" Width="75" Type="Decimal" MaxLength="10"
+                                                    <cc2:CustomTextBox ID="txtRatePerTon" runat="server" Width="55" Type="Decimal" MaxLength="10"
                                                         Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
                                                         OnTextChanged="txtRatePerTon_TextChanged" AutoPostBack="true"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <td>
-                                                    <cc2:CustomTextBox ID="txtUSD" runat="server" Width="75" Type="Decimal" MaxLength="10"
+                                                    <cc2:CustomTextBox ID="txtUSD" runat="server" Width="38" Type="Decimal" MaxLength="10"
                                                         Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <td>
-                                                    <cc2:CustomTextBox ID="txtGrossAmount" runat="server" Width="75" Type="Decimal" MaxLength="10"
+                                                    <cc2:CustomTextBox ID="txtGrossAmount" runat="server" Width="80" Type="Decimal" MaxLength="10"
                                                         Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <td>
-                                                    <cc2:CustomTextBox ID="txtServiceTax" runat="server" Width="75" Type="Decimal" MaxLength="10"
+                                                    <cc2:CustomTextBox ID="txtServiceTax" runat="server" Width="80" Type="Decimal" MaxLength="10"
                                                         Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>

@@ -532,8 +532,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtGrossWeight" runat="server" CssClass="numerictextbox" Type="Decimal"
-                                                                    MaxLength="17" Precision="13" Scale="3" Width="250px" TabIndex="37" 
-                                                                    ontextchanged="txtGrossWeight_TextChanged"></cc2:CustomTextBox>
+                                                                    MaxLength="17" Precision="13" Scale="3" Width="250px" TabIndex="37" ></cc2:CustomTextBox>
                                                                 <asp:RequiredFieldValidator ID="rfvGrossWeight" runat="server" ControlToValidate="txtGrossWeight"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
@@ -1036,7 +1035,8 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtFtrGrossWeight" runat="server" CssClass="numerictextbox"
-                                                                    Type="Decimal" MaxLength="11" Precision="7" Scale="3" Width="250px" TabIndex="11"></cc2:CustomTextBox>
+                                                                    Type="Decimal" MaxLength="11" Precision="7" Scale="3" Width="250px" TabIndex="11"
+                                                                    ontextchanged="txtFtrGrossWeight_TextChanged" AutoPostBack="true" ></cc2:CustomTextBox>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvFtrGrossWeight" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtFtrGrossWeight" ValidationGroup="Add"
@@ -1059,7 +1059,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtFtrCargoWt" runat="server" CssClass="numerictextbox" Type="Decimal"
-                                                                    MaxLength="5" Precision="2" Scale="2" Width="250px" TabIndex="13"></cc2:CustomTextBox>
+                                                                    MaxLength="5" Precision="2" Scale="2" Width="250px" TabIndex="13" Enabled="false"></cc2:CustomTextBox>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvFtrCargoWt" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtFtrCargoWt" ValidationGroup="Add"

@@ -120,7 +120,7 @@
                                     <li id="liID_BL" runat="server"><a href="<%=Page.ResolveClientUrl("~/Transaction/ImportBL.aspx") %>">
                                         B/L Entry</a></li>
                                     <li id="liID_BLQuery" runat="server"><a href="<%=Page.ResolveClientUrl("~/Transaction/BL-Query.aspx") %>">
-                                        B/L Query</a></li>
+                                        Discharge Dashboard</a></li>
                        <%--             <li id="liID_Voyage" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MangeVoyage.aspx") %>">
                                         Voyage</a></li>
                                     <li id="li1" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MainLineVoyage.aspx") %>">
@@ -164,7 +164,7 @@
                                         LIST TO FILE LANDING G'TE</a></li>--%>
                                     <li id="liIR_SMTP" runat="server"><a href="#">SMTP EXTRACT</a></li>
                                     <li id="liIR_Coprar" runat="server"><a href="#">COPRAR</a></li>
-                                   <li id="liIR_ACL" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/AdvanceContainerList.aspx") %>">Advance Container List</a></li>s
+                                   <li id="liIR_ACL" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/AdvanceContainerList.aspx") %>">Advance Container List</a></li>
                                     <li id="liIR_EDIIAL" runat="server"><a href="#">EDI IAL</a></li>
                                     <li id="liIR_Survey" runat="server"><a href="#">Survey Letter</a></li>
                                 </ul>

@@ -123,7 +123,7 @@
                                     Invoice amount
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtTotalAmount" runat="server" Width="250px" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtTotalAmount" runat="server" Width="250px" Enabled="false" Style="text-align: right;"></asp:TextBox>
                                 </td>
                                 <td>
                                     Containers

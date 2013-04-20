@@ -775,8 +775,8 @@ namespace EMS.WebApp.Transaction
                 if (txtFtrGrossWeight.Text == string.Empty)
                     txtFtrGrossWeight.Text = TareWeight;
             }
-            if (txtFtrCargoWt.Text == string.Empty)
-                txtFtrCargoWt.Text = (Convert.ToDecimal(TareWeight) / 1000).ToString();
+            //if (txtFtrCargoWt.Text == string.Empty)
+            //    txtFtrCargoWt.Text = (Convert.ToDecimal(TareWeight) / 1000).ToString();
         }
 
         protected void ddlFtrContainerSize_SelectedIndexChanged(object sender, EventArgs e)

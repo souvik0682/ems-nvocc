@@ -54,6 +54,8 @@ namespace EMS.WebApp.Transaction
 
                     if (invoiveId > 0)
                         LoadForEdit(invoiveId);
+
+                    btnSave.Enabled = false;
                 }
 
                 if (!ReferenceEquals(Request.QueryString["p1"], null))
@@ -67,6 +69,8 @@ namespace EMS.WebApp.Transaction
                     misc = GeneralFunctions.DecryptQueryString(Request.QueryString["p4"].ToString());
 
                     LoadForBLQuery(blNo, docTypeId, misc);
+
+                    btnSave.Enabled = true;
                 }
             }
         }
@@ -874,17 +878,31 @@ namespace EMS.WebApp.Transaction
                 e.Row.Cells[9].Text = Convert.ToString(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "STax")) + Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ServiceTaxCessAmount")) + Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ServiceTaxACess")));
                 e.Row.Cells[10].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "TotalAmount"));
 
-                //Delete link
-                ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
-                btnRemove.ToolTip = "Remove";
-                btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceChargeId"));
+                if (!ReferenceEquals(Request.QueryString["invid"], null))
+                {
+                    ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                    ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
 
-                //Edit link
-                ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
-                btnEdit.ToolTip = "Edit";
-                btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceChargeId"));
+                    btnRemove.Visible = false;
+                    btnEdit.Visible = false;
+                }
+                else
+                {
+                    //Delete link
+                    ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                    btnRemove.Visible = true;
+                    btnRemove.ToolTip = "Remove";
+                    btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceChargeId"));
+                    
+                    
+                    //Edit link
+                    ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
+                    btnEdit.Visible = true;
+                    btnEdit.ToolTip = "Edit";
+                    btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceChargeId"));
 
-                btnRemove.OnClientClick = "javascript:return confirm('Are you sure about delete?');";
+                    btnRemove.OnClientClick = "javascript:return confirm('Are you sure about delete?');";
+                }
             }
         }
 
@@ -1092,6 +1110,9 @@ namespace EMS.WebApp.Transaction
 
             ViewState["CHARGERATE"] = ChargeRates;
             RefreshGridView();
+
+            //Update Invoice Amount
+            txtTotalAmount.Text = ChargeRates.Sum(cr => cr.TotalAmount).ToString();
         }
 
         private void RefreshGridView()
@@ -1229,6 +1250,10 @@ namespace EMS.WebApp.Transaction
 
             gvwInvoice.DataSource = chargeRates;
             gvwInvoice.DataBind();
+
+
+            //Update Invoice Amount
+            txtTotalAmount.Text = chargeRates.Sum(cr => cr.TotalAmount).ToString();
         }
 
         private void EditChargeRate(int InvoiceChargeId)

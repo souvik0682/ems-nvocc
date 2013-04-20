@@ -1873,6 +1873,11 @@ namespace EMS.WebApp.Transaction
             //Frieght Payable At
             ((TextBox)AC_Port5.FindControl("txtPort")).Text = new ImportBLL().GetPortNameById(header.PortFrtPayableID);
 
+            if (header.FreightType == "TC")
+            {
+                ((TextBox)AC_Port5.FindControl("txtPort")).Enabled = true;
+            }
+
             //CFS Code
             string cfsCode = new ImportBLL().GetCFSCodeById(header.AddressCFSId);
             DataTable dt = new ImportBLL().GetCFSName(cfsCode);

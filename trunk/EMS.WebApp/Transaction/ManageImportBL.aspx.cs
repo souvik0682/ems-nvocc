@@ -815,7 +815,7 @@ namespace EMS.WebApp.Transaction
 
                 //ScriptManager.RegisterStartupScript(this, typeof(Page), "save", "<script> alert('Save successfully');  window.location.href ='~/Transaction/ImportBL.aspx'<script>", false);
 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('Record saved successfully!'); window.location='" + Request.ApplicationPath + "/Transaction/ImportBL.aspx';", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('Record saved successfully!'); window.location='" + string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.ServerVariables["HTTP_HOST"], (HttpContext.Current.Request.ApplicationPath.Equals("/")) ? string.Empty : HttpContext.Current.Request.ApplicationPath) + "/Transaction/ImportBL.aspx';", true);
             }
         }
 
@@ -1451,10 +1451,13 @@ namespace EMS.WebApp.Transaction
                 }
             }
 
-            if (Convert.ToString(ViewState[FRTPAYBLEATID]) == string.Empty || Convert.ToString(ViewState[FRTPAYBLEATID]) == "0")
+            if (rdoFrightType.SelectedValue == "TC")
             {
-                IsValid = false;
-                errFreight.Text = "This field is required";
+                if (Convert.ToString(ViewState[FRTPAYBLEATID]) == string.Empty || Convert.ToString(ViewState[FRTPAYBLEATID]) == "0")
+                {
+                    IsValid = false;
+                    errFreight.Text = "This field is required";
+                }
             }
 
             if (new ImportBLL().IsDuplicateBL(txtLineBL.Text.Trim(), Convert.ToInt64(ViewState[VESSELID]), Convert.ToInt64(ddlVoyage.SelectedValue), Convert.ToInt64(ViewState[BLHEADERID])))
@@ -1866,6 +1869,9 @@ namespace EMS.WebApp.Transaction
 
             //Issue Port
             ((TextBox)AC_Port1.FindControl("txtPort")).Text = new ImportBLL().GetPortNameById(header.BLIssuePortID);
+
+            //Frieght Payable At
+            ((TextBox)AC_Port5.FindControl("txtPort")).Text = new ImportBLL().GetPortNameById(header.PortFrtPayableID);
 
             //CFS Code
             string cfsCode = new ImportBLL().GetCFSCodeById(header.AddressCFSId);

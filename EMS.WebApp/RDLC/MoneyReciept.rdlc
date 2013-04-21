@@ -254,18 +254,6 @@
           </Border>
         </Style>
       </Line>
-      <Line Name="Line5">
-        <Top>10.72443cm</Top>
-        <Left>7.52866cm</Left>
-        <Height>0cm</Height>
-        <Width>7.64488cm</Width>
-        <ZIndex>4</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-          </Border>
-        </Style>
-      </Line>
       <Textbox Name="Textbox10">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -277,7 +265,7 @@
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>11pt</FontSize>
+                  <FontSize>9pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -292,7 +280,7 @@
         <Left>11.90625cm</Left>
         <Height>0.6cm</Height>
         <Width>3.26729cm</Width>
-        <ZIndex>5</ZIndex>
+        <ZIndex>4</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -335,7 +323,7 @@
                 </Style>
               </TextRun>
               <TextRun>
-                <Value> (</Value>
+                <Value> (Rupees </Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                 </Style>
@@ -422,7 +410,7 @@
         <Left>0.01354cm</Left>
         <Height>2.39888cm</Height>
         <Width>15.24cm</Width>
-        <ZIndex>6</ZIndex>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -461,7 +449,7 @@
         <Left>0.10583cm</Left>
         <Height>0.6cm</Height>
         <Width>5.88131cm</Width>
-        <ZIndex>7</ZIndex>
+        <ZIndex>6</ZIndex>
         <Visibility>
           <Hidden>=Sum(Fields!TDSDeducted.Value, "DataSet3")=0</Hidden>
         </Visibility>
@@ -496,7 +484,7 @@
         <Left>0.10583cm</Left>
         <Height>0.6cm</Height>
         <Width>14.40032cm</Width>
-        <ZIndex>8</ZIndex>
+        <ZIndex>7</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -514,7 +502,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>       Cash Amount         Cheque Amount        Cheque No.              Date                         Branch</Value>
+                <Value>       Cash Amount         Cheque Amount        Cheque No.              Date                         Bank Name</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                 </Style>
@@ -528,7 +516,7 @@
         <Left>0.10583cm</Left>
         <Height>0.6cm</Height>
         <Width>15.14771cm</Width>
-        <ZIndex>9</ZIndex>
+        <ZIndex>8</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -562,7 +550,7 @@
         <Left>0.10583cm</Left>
         <Height>0.6cm</Height>
         <Width>2.5cm</Width>
-        <ZIndex>10</ZIndex>
+        <ZIndex>9</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -596,7 +584,7 @@
         <Left>2.99389cm</Left>
         <Height>0.6cm</Height>
         <Width>2.5cm</Width>
-        <ZIndex>11</ZIndex>
+        <ZIndex>10</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -628,7 +616,7 @@
         <Left>5.98778cm</Left>
         <Height>0.6cm</Height>
         <Width>2.5cm</Width>
-        <ZIndex>12</ZIndex>
+        <ZIndex>11</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -660,7 +648,7 @@
         <Left>8.84218cm</Left>
         <Height>0.6cm</Height>
         <Width>2.5cm</Width>
-        <ZIndex>13</ZIndex>
+        <ZIndex>12</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -692,7 +680,7 @@
         <Left>11.51857cm</Left>
         <Height>0.6cm</Height>
         <Width>3.73497cm</Width>
-        <ZIndex>14</ZIndex>
+        <ZIndex>13</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -713,14 +701,14 @@
                 <Value>For </Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>11pt</FontSize>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
               <TextRun>
                 <Value>=Parameters!CompanyName.Value</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>11pt</FontSize>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -734,7 +722,7 @@
         <Left>2.35739in</Left>
         <Height>0.25in</Height>
         <Width>3.64794in</Width>
-        <ZIndex>15</ZIndex>
+        <ZIndex>14</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>

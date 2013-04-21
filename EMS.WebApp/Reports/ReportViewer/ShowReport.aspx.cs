@@ -50,6 +50,26 @@ namespace EMS.WebApp.Reports.ReportViewer
 
 
     public class ReportUtil {
+        public string GetUrl(string reportName,NameValueCollection reportParma)
+        {
+           
+            string str = string.Empty;
+            if (reportParma != null && reportParma.Count > 1)
+            {                
+                foreach (string v in reportParma)
+                {
+                    if (v.ToLower() != "reportname")
+                    {
+                        str += string.Format("&{0}={1}", v,GeneralFunctions.DecryptQueryString(reportParma[v]));
+                       // str += string.Format("&{0}={1}", v, reportParma[v]);
+                    }
+                }
+            }
+            if (!string.IsNullOrEmpty(str)) {
+                str =ConfigurationManager.AppSettings["ReportURL"]+ string.Format("?%2fEMS.Report%2f{0}&rs:Command=Render{1}&rs:Format=PDF", reportName, str);
+            }
+            return str;
+        }
         private ReportParameter[] BindParameter(Dictionary<string,string> reportParma)
         {  ReportParameter[] rptParameters = null;
             if(reportParma!=null && reportParma.Count>1){
@@ -97,8 +117,18 @@ namespace EMS.WebApp.Reports.ReportViewer
         return dic;
         }
         public  void LoadReport(Microsoft.Reporting.WebForms.ReportViewer rptViewer,NameValueCollection  reportParma){
-            string ReportName = reportParma["ReportName"];
-            Load(rptViewer, GeneralFunctions.DecryptQueryString(ReportName),BindParameter(reportParma)); 
+            string ReportName = GeneralFunctions.DecryptQueryString(reportParma["ReportName"]);
+           // string ReportName = reportParma["ReportName"];//;
+            if (!string.IsNullOrEmpty(ReportName))
+            {
+                if (ReportName.ToLower().Equals("invoicedeveloper")) {
+                   HttpContext.Current.Response.Redirect(GetUrl(ReportName, reportParma));
+                }
+                else
+                {
+                    Load(rptViewer, ReportName, BindParameter(reportParma));
+                }
+            }
         }
 
         private void Load(Microsoft.Reporting.WebForms.ReportViewer rptViewer, string reportType, ReportParameter[] reportParma)
@@ -118,7 +148,7 @@ namespace EMS.WebApp.Reports.ReportViewer
             rptViewer.ShowReportBody = true;
             rptViewer.ServerReport.Refresh();
         }
-       public  void LoadReport(Microsoft.Reporting.WebForms.ReportViewer rptViewer,string reportType,Dictionary<string,string> reportParma)
+        public  void LoadReport(Microsoft.Reporting.WebForms.ReportViewer rptViewer,string reportType,Dictionary<string,string> reportParma)
         {
              string ReportName = reportParma["ReportName"];
            Load(rptViewer,reportType,BindParameter(reportParma));                    
@@ -195,6 +225,24 @@ namespace EMS.WebApp.Reports.ReportViewer
             if (user.UserRole.Id != 2)
             {
                 ddlLine.SelectedValue = user.UserLocation.Id.ToString();
+                ddlLine.Enabled = false;
+                strReportName=ViewState["strReportName"].ToString();
+                switch (strReportName.ToLower())
+                {
+
+                    case "cargoarrivalnotice":
+                        ddlLine_SelectedIndexChanged1(null, null);
+                        break;
+                    case "invoicedeveloper":
+                        ddlLocation_SelectedIndexChanged_Invoice(null, null);
+                        break;
+                    case "onoffhire":
+                        ddlLine_SelectedIndexChanged1(null, null);
+                        break;
+                    default:
+                        ddlLine_SelectedIndexChanged(null, null);
+                        break;
+                }
             }            
             //Filler.FillData<IContainerType>(ddlEmptyYard, );
             
@@ -233,13 +281,20 @@ namespace EMS.WebApp.Reports.ReportViewer
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
                     break;
                 case "cargoarrivalnotice":
+                    //rptParameters = new ReportParameter[6];
+                    //rptParameters[0] = new ReportParameter("blno", ddlBlNo.SelectedValue);
+                    //rptParameters[1] = new ReportParameter("line", ddlLocation.SelectedValue);
+                    //rptParameters[2] = new ReportParameter("Location", ddlLine.SelectedValue);
+                    //rptParameters[3] = new ReportParameter("Vessel", ddlVessel.SelectedValue);
+                    //rptParameters[4] = new ReportParameter("voyage", ddlVoyage.SelectedValue);
+                    //rptParameters[5] = new ReportParameter("ETA", txtETA.Text );
                     rptParameters = new ReportParameter[6];
                     rptParameters[0] = new ReportParameter("blno", ddlBlNo.SelectedValue);
                     rptParameters[1] = new ReportParameter("line", ddlLocation.SelectedValue);
-                    rptParameters[2] = new ReportParameter("Location", ddlLine.SelectedValue);
+                    rptParameters[2] = new ReportParameter("location", ddlLine.SelectedValue);
                     rptParameters[3] = new ReportParameter("Vessel", ddlVessel.SelectedValue);
                     rptParameters[4] = new ReportParameter("voyage", ddlVoyage.SelectedValue);
-                    rptParameters[5] = new ReportParameter("ETA", txtETA.Text );
+                    rptParameters[5] = new ReportParameter("eta", txtETA.Text );
                     break;
                 case "invoicedeveloper":
                     rptParameters = new ReportParameter[4];
@@ -274,7 +329,14 @@ namespace EMS.WebApp.Reports.ReportViewer
             }
             else
             {
-                rptViewer.ServerReport.ReportPath = "/EMS.Report/" + strReportName;
+                if (ViewState["strReportName"].ToString().ToLower() == "cargoarrivalnotice")
+                {
+                    rptViewer.ServerReport.ReportPath = "/EMS.Report/MCAN";
+                }
+                else
+                {
+                    rptViewer.ServerReport.ReportPath = "/EMS.Report/" + strReportName;
+                }
             }
             rptViewer.ServerReport.SetParameters(reportParameter);           
             rptViewer.ServerReport.DisplayName = this.strFileName + "_" + DateTime.Now.Ticks.ToString();
@@ -283,6 +345,11 @@ namespace EMS.WebApp.Reports.ReportViewer
             rptViewer.ShowParameterPrompts = false;
             rptViewer.ShowPromptAreaButton = false;
             rptViewer.ShowToolBar = true;
+            rptViewer.ZoomPercent = 300;
+            if (ViewState["strReportName"].ToString().ToLower() == "cargoarrivalnotice")
+            {
+                
+            }
             rptViewer.ShowReportBody = true;
             rptViewer.Visible = true;
             rptViewer.ServerReport.Refresh();
@@ -357,6 +424,10 @@ namespace EMS.WebApp.Reports.ReportViewer
             if (ddlVoyage.SelectedIndex > 0)
             {
                 Filler.FillData(ddlBlNo, CommonBLL.GetBLNo(ddlLocation.SelectedValue, ddlVessel.SelectedValue, ddlVoyage.SelectedValue), "LineBLNo", "LineBLNo", "Bl. No.");
+                if (ViewState["strReportName"].ToString().ToLower() == "cargoarrivalnotice")
+                {
+                    ddlBlNo.Items.Insert(1, new ListItem("All", "All"));
+                }
             }
         }
     }

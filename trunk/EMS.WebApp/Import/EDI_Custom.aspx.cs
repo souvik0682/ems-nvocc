@@ -203,7 +203,7 @@ namespace EMS.WebApp.Import
                             + (ddlPessengerList.SelectedValue == "1" ? "Y" : "N") + (''
                             + (ddlCrewEffList.SelectedValue == "1" ? "Y" : "N") + (''
                             + (ddlMaritime.SelectedValue == "1" ? "Y" : "N") + ('' 
-                            + (ddlTerminalOperator.SelectedIndex==0 ? "" : ddlTerminalOperator.SelectedItem.Text))))))))))))))))))))))))))))))))))))))))))))));
+                            + (ddlTerminalOperator.SelectedIndex==0 ? "" : ddlTerminalOperator.SelectedItem.Text.Split('(')[0].Trim()))))))))))))))))))))))))))))))))))))))))))))));
 
             writer.WriteLine("<END-vesinfo>");
             writer.WriteLine("<cargo>");

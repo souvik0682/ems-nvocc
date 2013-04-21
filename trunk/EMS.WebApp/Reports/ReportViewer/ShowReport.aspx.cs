@@ -60,8 +60,8 @@ namespace EMS.WebApp.Reports.ReportViewer
                 {
                     if (v.ToLower() != "reportname")
                     {
-                        str += string.Format("&{0}={1}", v,GeneralFunctions.DecryptQueryString(reportParma[v]));
-                       // str += string.Format("&{0}={1}", v, reportParma[v]);
+                       // str += string.Format("&{0}={1}", v,GeneralFunctions.DecryptQueryString(reportParma[v]));
+                        str += string.Format("&{0}={1}", v, reportParma[v]);
                     }
                 }
             }
@@ -116,13 +116,40 @@ namespace EMS.WebApp.Reports.ReportViewer
             }
         return dic;
         }
+        string path = string.Empty;
+        void myWebClient_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
+        {
+            if(!string.IsNullOrEmpty(path)){
+            FileUtil ft = new FileUtil();
+            ft.Dst = path;
+            ft.Download(HttpContext.Current.Response);
+            }
+        }
         public  void LoadReport(Microsoft.Reporting.WebForms.ReportViewer rptViewer,NameValueCollection  reportParma){
-            string ReportName = GeneralFunctions.DecryptQueryString(reportParma["ReportName"]);
-           // string ReportName = reportParma["ReportName"];//;
+           // string ReportName = GeneralFunctions.DecryptQueryString(reportParma["ReportName"]);
+            string ReportName = reportParma["ReportName"];//;
             if (!string.IsNullOrEmpty(ReportName))
             {
                 if (ReportName.ToLower().Equals("invoicedeveloper")) {
-                   HttpContext.Current.Response.Redirect(GetUrl(ReportName, reportParma));
+                   //HttpContext.Current.Response.Redirect(GetUrl(ReportName, reportParma));
+                    using (WebClient myWebClient = new WebClient())
+                    {
+                        // Download the Web resource and save it into the current filesystem folder.
+                        myWebClient.DownloadDataCompleted += new DownloadDataCompletedEventHandler(myWebClient_DownloadDataCompleted);
+                        myWebClient.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["UserName"], ConfigurationManager.AppSettings["Password"]);
+                        path = HttpContext.Current.Server.MapPath("~/Download/" + "Invoice_" + DateTime.Now.Ticks.ToString()+".pdf");
+                        myWebClient.DownloadFile(GetUrl(ReportName, reportParma).Replace(ConfigurationManager.AppSettings["ReplaceString"], "http://localhost"), path);
+                        if (!string.IsNullOrEmpty(path))
+                        {
+                            var fileInfo = new System.IO.FileInfo(path);
+                            HttpContext.Current.Response.ContentType = "Application/pdf";
+                            HttpContext.Current.Response.AddHeader("Content-Disposition", String.Format("attachment;filename=\"{0}\"", fileInfo.Name));
+                            HttpContext.Current.Response.AddHeader("Content-Length", fileInfo.Length.ToString());
+                            HttpContext.Current.Response.WriteFile(path);
+                            HttpContext.Current.Response.Flush();
+                            HttpContext.Current.Response.End();
+                        }
+                    }
                 }
                 else
                 {

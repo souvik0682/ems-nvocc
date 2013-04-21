@@ -40,13 +40,13 @@ namespace EMS.WebApp.Equipment {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
-        /// ddlLine control.
+        /// hdnContId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlLine;
+        protected global::System.Web.UI.WebControls.HiddenField hdnContId;
         
         /// <summary>
         /// txtContainerNo control.
@@ -58,15 +58,6 @@ namespace EMS.WebApp.Equipment {
         protected global::System.Web.UI.WebControls.TextBox txtContainerNo;
         
         /// <summary>
-        /// lnkStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkStatus;
-        
-        /// <summary>
         /// rfvName control.
         /// </summary>
         /// <remarks>
@@ -74,6 +65,24 @@ namespace EMS.WebApp.Equipment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvName;
+        
+        /// <summary>
+        /// autoComplete1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender autoComplete1;
+        
+        /// <summary>
+        /// ddlLine control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLine;
         
         /// <summary>
         /// txtTransactionDate control.

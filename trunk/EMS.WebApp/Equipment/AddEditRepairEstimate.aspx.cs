@@ -314,6 +314,12 @@ namespace EMS.WebApp.Equipment
         protected void ddlLoc_SelectedIndexChanged(object sender, EventArgs e)
         {
             // GeneralFunctions.PopulateDropDownList(ddlUser, EMS.BLL.UserBLL.GetAdminUsers(_userId, Convert.ToInt32(ddlLoc.SelectedValue)));
+            autoComplete1.ContextKey = ddlLoc.SelectedValue;
+        }
+
+        protected void txtContainerNo_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

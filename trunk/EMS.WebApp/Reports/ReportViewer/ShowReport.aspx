@@ -142,7 +142,7 @@ return false;
                             </cc1:CalendarExtender>
                             
             <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" CssClass="errormessage"
-                    ControlToValidate="txtETA" InitialValue="0" ValidationGroup="Report"  Display="Dynamic"
+                    ControlToValidate="txtETA" ValidationGroup="Report"  Display="Dynamic"
                     ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                              <asp:RegularExpressionValidator ControlToValidate="txtETA" ID="RegularExpressionValidator1"
                     runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]" ValidationGroup="Report" 

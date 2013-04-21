@@ -35,6 +35,12 @@ namespace EMS.Entity.Report
             set;
         }
 
+        public string itemLinePrefix
+        {
+            get;
+            set;
+        }
+
         public string ItemLineNo
         {
             get;
@@ -413,6 +419,9 @@ namespace EMS.Entity.Report
             if (HasColumn(reader, "MotherVessel") && reader["MotherVessel"] != DBNull.Value)
                 this.MotherVessel = Convert.ToString(reader["MotherVessel"]);
 
+            if (HasColumn(reader, "ItemLinePrefix") && reader["ItemLinePrefix"] != DBNull.Value)
+                this.itemLinePrefix = Convert.ToString(reader["ItemLinePrefix"]);
+
             if (HasColumn(reader, "ItemLineNo") && reader["ItemLineNo"] != DBNull.Value)
                 this.ItemLineNo = Convert.ToString(reader["ItemLineNo"]);
 
@@ -518,8 +527,8 @@ namespace EMS.Entity.Report
             if (HasColumn(reader, "NotifyPartyInformation") && reader["NotifyPartyInformation"] != DBNull.Value)
                 this.NotifyPartyInformation = Convert.ToString(reader["NotifyPartyInformation"]);
 
-            if (HasColumn(reader, "NotifyPartyName") && reader["NotifyPartyNme"] != DBNull.Value)
-                this.NotifyPartyName = Convert.ToString(reader["NotifyPartyName"]);
+            if (HasColumn(reader, "NotifyName") && reader["NotifyName"] != DBNull.Value)
+                this.NotifyPartyName = Convert.ToString(reader["NotifyName"]);
 
             if (HasColumn(reader, "MarksNumbers") && reader["MarksNumbers"] != DBNull.Value)
                 this.MarksNumbers = Convert.ToString(reader["MarksNumbers"]);

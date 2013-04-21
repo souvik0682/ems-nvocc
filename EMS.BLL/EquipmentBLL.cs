@@ -29,5 +29,10 @@ namespace EMS.BLL
        {
            return EquipmentDAL.CheckContainerStatus(CntrNo);
        }
+
+       public DataTable GetContainerList(int LocId, string Initial)
+       {
+           return EquipmentDAL.GetContainerList(LocId, Initial);
+       }
     }
 }

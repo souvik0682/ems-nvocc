@@ -50,6 +50,42 @@ namespace EMS.WebApp.Reports.ReportViewer
 
 
     public class ReportUtil {
+        //private void CreatePDF(string fileName)
+        //{
+        //    // Setup DataSet
+        //    MyDataSetTableAdapters.YourTableAdapterHere ds = new MyDataSetTableAdapters.YourTableAdapterHere();
+
+
+        //    // Create Report DataSource
+        //    ReportDataSource rds = new ReportDataSource("MyDataSourceName", ds.GetData());
+
+
+        //    // Variables
+        //    Warning[] warnings;
+        //    string[] streamIds;
+        //    string mimeType = string.Empty;
+        //    string encoding = string.Empty;
+        //    string extension = string.Empty;
+
+
+        //    // Setup the report viewer object and get the array of bytes
+        //    ReportViewer viewer = new ReportViewer();
+        //    viewer.ProcessingMode = ProcessingMode.Local;
+        //    viewer.LocalReport.ReportPath = "YourReportHere.rdlc";
+        //    viewer.LocalReport.DataSources.Add(rds); // Add datasource here
+
+
+        //    byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+
+        //    // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+        //    Response.Buffer = true;
+        //    Response.Clear();
+        //    Response.ContentType = mimeType;
+        //    Response.AddHeader("content-disposition", "attachment; filename=" + fileName + "." + extension);
+        //    Response.BinaryWrite(bytes); // create the file
+        //    Response.Flush(); // send it to the client to download
+        //}
         public string GetUrl(string reportName,NameValueCollection reportParma)
         {
            
@@ -60,8 +96,8 @@ namespace EMS.WebApp.Reports.ReportViewer
                 {
                     if (v.ToLower() != "reportname")
                     {
-                       // str += string.Format("&{0}={1}", v,GeneralFunctions.DecryptQueryString(reportParma[v]));
-                        str += string.Format("&{0}={1}", v, reportParma[v]);
+                        str += string.Format("&{0}={1}", v,GeneralFunctions.DecryptQueryString(reportParma[v]));
+                       // str += string.Format("&{0}={1}", v, reportParma[v]);
                     }
                 }
             }
@@ -126,8 +162,8 @@ namespace EMS.WebApp.Reports.ReportViewer
             }
         }
         public  void LoadReport(Microsoft.Reporting.WebForms.ReportViewer rptViewer,NameValueCollection  reportParma){
-           // string ReportName = GeneralFunctions.DecryptQueryString(reportParma["ReportName"]);
-            string ReportName = reportParma["ReportName"];//;
+            string ReportName = GeneralFunctions.DecryptQueryString(reportParma["ReportName"]);
+           // string ReportName = reportParma["ReportName"];//;
             if (!string.IsNullOrEmpty(ReportName))
             {
                 if (ReportName.ToLower().Equals("invoicedeveloper")) {

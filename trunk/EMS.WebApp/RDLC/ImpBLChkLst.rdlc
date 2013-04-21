@@ -4040,7 +4040,6 @@
                                           <PaddingBottom>2pt</PaddingBottom>
                                         </Style>
                                       </Textbox>
-                                      <rd:Selected>true</rd:Selected>
                                     </CellContents>
                                   </TablixCell>
                                   <TablixCell>
@@ -4547,16 +4546,8 @@
                   </Style>
                 </TextRun>
                 <TextRun>
-                  <Value>[Vessel]</Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontWeight>Bold</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#000000</Color>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value> Voyage No.:</Value>
+                  <Label>VslName</Label>
+                  <Value>=First(Fields!VesselName.Value, "RptDataSet")</Value>
                   <Style>
                     <FontStyle>Normal</FontStyle>
                     <FontWeight>Normal</FontWeight>
@@ -4565,10 +4556,20 @@
                   </Style>
                 </TextRun>
                 <TextRun>
-                  <Value>[Voyage]</Value>
+                  <Value> Voyage No.: </Value>
                   <Style>
                     <FontStyle>Normal</FontStyle>
-                    <FontWeight>Bold</FontWeight>
+                    <FontWeight>Normal</FontWeight>
+                    <TextDecoration>None</TextDecoration>
+                    <Color>#000000</Color>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Label>Voy</Label>
+                  <Value>=First(Fields!VoyageNo.Value, "RptDataSet")</Value>
+                  <Style>
+                    <FontStyle>Normal</FontStyle>
+                    <FontWeight>Normal</FontWeight>
                     <TextDecoration>None</TextDecoration>
                     <Color>#000000</Color>
                   </Style>

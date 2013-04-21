@@ -236,14 +236,14 @@ namespace EMS.WebApp.Equipment
             iequip.Damaged = chkDamage.Checked;
 
 
-            if (iequip.RepLabourBilled < iequip.RepLabourAppr || iequip.RepMaterialBilled < iequip.RepMaterialAppr)
-            {
-                // GeneralFunctions.RegisterAlertScript(this, "Approved amount cannot be greater then Billable amount");
-                lblError.Text = "Approved amount cannot be greater then Billable amount";
-                return;
-            }
+            //if (iequip.RepLabourBilled < iequip.RepLabourAppr || iequip.RepMaterialBilled < iequip.RepMaterialAppr)
+            //{
+            //    // GeneralFunctions.RegisterAlertScript(this, "Approved amount cannot be greater then Billable amount");
+            //    lblError.Text = "Approved amount cannot be greater then Billable amount";
+            //    return;
+            //}
 
-            if (iequip.RepLabourEst <= iequip.RepLabourAppr || iequip.RepMaterialEst <= iequip.RepMaterialAppr)
+            if (iequip.RepLabourEst < iequip.RepLabourAppr || iequip.RepMaterialEst < iequip.RepMaterialAppr)
             {
                 // GeneralFunctions.RegisterAlertScript(this, "Approved amount cannot be greater then Billable amount");
                 lblError.Text = "Approved amount cannot be greater then Estimate amount";

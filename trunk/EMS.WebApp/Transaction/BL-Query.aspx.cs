@@ -1261,7 +1261,7 @@ namespace EMS.WebApp.Transaction
                     sbr.Append("<td style='text-align:right;'>" + CHEQUE + "</td>");
                     sbr.Append("<td style='text-align:right;'>" + TDS + "</td>");
                     //sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
-                    sbr.Append("<td><a href='../Reports/MoneyRcpt.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/Print.png' /></a></td>");
+                    sbr.Append("<td><a target='_blank' href='../Reports/MoneyRcpt.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/Print.png' /></a></td>");
 
                     sbr.Append("</tr>");
                 }
@@ -1274,7 +1274,7 @@ namespace EMS.WebApp.Transaction
                     sbr.Append("<td style='text-align:right;'>" + CHEQUE + "</td>");
                     sbr.Append("<td style='text-align:right;'>" + TDS + "</td>");
                     //sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
-                    sbr.Append("<td><a href='../Reports/MoneyRcpt.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/Print.png' /></a></td>");
+                    sbr.Append("<td><a target='_blank' href='../Reports/MoneyRcpt.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/Print.png' /></a></td>");
 
                     sbr.Append("</tr>");
                 }

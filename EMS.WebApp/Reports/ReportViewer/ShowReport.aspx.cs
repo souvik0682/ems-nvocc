@@ -326,6 +326,11 @@ namespace EMS.WebApp.Reports.ReportViewer
                     rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedValue);
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
                     break;
+                case "dropoff":
+                    rptParameters = new ReportParameter[2];
+                    rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedValue);
+                    rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
+                    break;
                 case "gang":
                     rptParameters = new ReportParameter[4];
                     rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedValue);

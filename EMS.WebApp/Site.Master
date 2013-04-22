@@ -155,7 +155,8 @@
                                     <li id="liIR_PDO" runat="server"><a href="#">Pending DO</a></li>
                                  <%--   <li id="liIR_DOExamin" runat="server"><a href="#">Delivery Order (Examin / Final)</a></li>--%>
                                  <%--   <li id="liIR_DOFactory" runat="server"><a href="#">Delivery Order (Factory / CFS) Distuffing</a></li>--%>
-                                    <li id="liIR_Slot" runat="server"><a href="#">Empty Letter</a></li>
+                                    <li id="liIR_Slot" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ReportViewer/ShowReport.aspx?reportName=DropOff") %>">Empty Letter</a></li>
+                                    <%--<a href="#">Empty Letter</a></li>--%>
                                     <li id="li2" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ReportViewer/ShowReport.aspx?reportName=Gang") %>">Gang Letter</a></li>
                                     <li id="li3" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ReportViewer/ShowReport.aspx?reportName=Custom") %>">Custom</a></li>
 <%--

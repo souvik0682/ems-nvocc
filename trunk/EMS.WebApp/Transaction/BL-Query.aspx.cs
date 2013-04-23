@@ -985,7 +985,7 @@ namespace EMS.WebApp.Transaction
 
         protected void lnkGenerateInvoiceSlotExtension_Click(object sender, EventArgs e)
         {
-            Redirect(txtBlNo.Text.Trim(), "Proforma Invoice", "8", txtExtensionForDetention.Text.Trim());
+            Redirect(txtBlNo.Text.Trim(), "Proforma Invoice", "24", txtExtensionForDetention.Text.Trim());
         }
 
         protected void lnkGenInvPGR_Click(object sender, EventArgs e)

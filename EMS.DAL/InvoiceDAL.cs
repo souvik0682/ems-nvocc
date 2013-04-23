@@ -315,6 +315,8 @@ namespace EMS.DAL
                 oDq.AddDecimalParam("@RateUSD", 12, 2, cRate.Usd);
                 oDq.AddDecimalParam("@GrossAmount", 12, 2, cRate.GrossAmount);
                 oDq.AddDecimalParam("@ServiceTaxAmount", 12, 2, cRate.STax);
+                oDq.AddDecimalParam("@ServiceTaxCessAmount", 12, 2, cRate.ServiceTaxCessAmount);
+                oDq.AddDecimalParam("@ServiceTaxACess", 12, 2, cRate.ServiceTaxACess);
                 oDq.AddBigIntegerParam("@TerminalId", cRate.TerminalId);
                 oDq.AddDecimalParam("@SharingBL", 12, 2, cRate.SharingBL);
                 oDq.AddDecimalParam("@SharingTEU", 12, 2, cRate.SharingTEU);

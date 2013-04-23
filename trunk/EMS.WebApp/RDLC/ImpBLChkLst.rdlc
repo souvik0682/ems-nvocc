@@ -3092,7 +3092,7 @@
                                               <TextRun>
                                                 <Value>=Fields!TranShipment.Value</Value>
                                                 <Style>
-                                                  <FontSize>9pt</FontSize>
+                                                  <FontSize>8pt</FontSize>
                                                   <FontWeight>Normal</FontWeight>
                                                 </Style>
                                               </TextRun>
@@ -3190,7 +3190,9 @@
                                             <TextRuns>
                                               <TextRun>
                                                 <Value>=Fields!MarksNumbers.Value</Value>
-                                                <Style />
+                                                <Style>
+                                                  <FontSize>8pt</FontSize>
+                                                </Style>
                                               </TextRun>
                                             </TextRuns>
                                             <Style />
@@ -3259,7 +3261,7 @@
                                               <TextRun>
                                                 <Value>=Fields!ConsigneeName.Value + " " + Fields!ConsigneeInformation.Value</Value>
                                                 <Style>
-                                                  <FontSize>9pt</FontSize>
+                                                  <FontSize>8pt</FontSize>
                                                   <FontWeight>Normal</FontWeight>
                                                 </Style>
                                               </TextRun>
@@ -3358,7 +3360,9 @@
                                             <TextRuns>
                                               <TextRun>
                                                 <Value>=Fields!NotifyPartyName.Value + " " + Fields!NotifyPartyInformation.Value</Value>
-                                                <Style />
+                                                <Style>
+                                                  <FontSize>8pt</FontSize>
+                                                </Style>
                                               </TextRun>
                                             </TextRuns>
                                             <Style />
@@ -3426,7 +3430,9 @@
                                             <TextRuns>
                                               <TextRun>
                                                 <Value>=Fields!GoodDescription.Value</Value>
-                                                <Style />
+                                                <Style>
+                                                  <FontSize>8pt</FontSize>
+                                                </Style>
                                               </TextRun>
                                             </TextRuns>
                                             <Style />
@@ -3519,7 +3525,9 @@
                                             <TextRuns>
                                               <TextRun>
                                                 <Value>=Fields!CargoArrivNotice.Value</Value>
-                                                <Style />
+                                                <Style>
+                                                  <FontSize>8pt</FontSize>
+                                                </Style>
                                               </TextRun>
                                             </TextRuns>
                                             <Style />

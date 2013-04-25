@@ -1,4 +1,4 @@
- <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="EMS.WebApp.Site" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="EMS.WebApp.Site" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -121,7 +121,7 @@
                                         B/L Entry</a></li>
                                     <li id="liID_BLQuery" runat="server"><a href="<%=Page.ResolveClientUrl("~/Transaction/BL-Query.aspx") %>">
                                         Discharge Dashboard</a></li>
-                       <%--             <li id="liID_Voyage" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MangeVoyage.aspx") %>">
+                                    <%--             <li id="liID_Voyage" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MangeVoyage.aspx") %>">
                                         Voyage</a></li>
                                     <li id="li1" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MainLineVoyage.aspx") %>">
                                         Main Line Voyage</a></li>
@@ -137,7 +137,7 @@
                                         EDI for Customs</a></li>
                                     <li id="liIR_IGM" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/IGMForm2.aspx") %>">
                                         IGM - Form II</a></li>
-                                  <%--  <li id="liIR_IGMC" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/IGMFormC.aspx") %>">
+                                    <%--  <li id="liIR_IGMC" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/IGMFormC.aspx") %>">
                                         IGM - Form C for Hazardous Cargo</a></li>--%>
                                     <li id="liIR_Amend" runat="server"><a href="#">Amendment Letter</a></li>
                                     <li id="liIR_Land" runat="server"><a href="#">Bond Filing Letter</a></li>
@@ -153,21 +153,25 @@
                                         }
                                     </script>
                                     <li id="liIR_PDO" runat="server"><a href="#">Pending DO</a></li>
-                                 <%--   <li id="liIR_DOExamin" runat="server"><a href="#">Delivery Order (Examin / Final)</a></li>--%>
-                                 <%--   <li id="liIR_DOFactory" runat="server"><a href="#">Delivery Order (Factory / CFS) Distuffing</a></li>--%>
-                                    <li id="liIR_Slot" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ReportViewer/ShowReport.aspx?reportName=DropOff") %>">Empty Letter</a></li>
+                                    <%--   <li id="liIR_DOExamin" runat="server"><a href="#">Delivery Order (Examin / Final)</a></li>--%>
+                                    <%--   <li id="liIR_DOFactory" runat="server"><a href="#">Delivery Order (Factory / CFS) Distuffing</a></li>--%>
+                                    <li id="liIR_Slot" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ReportViewer/ShowReport.aspx?reportName=DropOff") %>">
+                                        Empty Letter</a></li>
                                     <%--<a href="#">Empty Letter</a></li>--%>
-                                    <li id="li2" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ReportViewer/ShowReport.aspx?reportName=Gang") %>">Gang Letter</a></li>
-                                    <li id="li3" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ReportViewer/ShowReport.aspx?reportName=Custom") %>">Custom</a></li>
-<%--
+                                    <li id="li2" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ReportViewer/ShowReport.aspx?reportName=Gang") %>">
+                                        Gang Letter</a></li>
+                                    <li id="li3" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ReportViewer/ShowReport.aspx?reportName=Custom") %>">
+                                        Custom</a></li>
+                                    <%--
                                     <li id="liIR_Carting" runat="server"><a href="#">Gang Letter</a></li>
 --%><%--                                    <li id="liIR_FileLanding" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/FileLandingGurantee.aspx") %>">
                                         LIST TO FILE LANDING G'TE</a></li>--%>
                                     <li id="liIR_SMTP" runat="server"><a href="#">SMTP EXTRACT</a></li>
                                     <li id="liIR_Coprar" runat="server"><a href="#">COPRAR</a></li>
-                                   <li id="liIR_ACL" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/AdvanceContainerList.aspx") %>">Advance Container List</a></li>
+                                    <li id="liIR_ACL" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/AdvanceContainerList.aspx") %>">
+                                        Advance Container List</a></li>
                                     <li id="liIR_EDIIAL" runat="server"><a href="#">EDI IAL</a></li>
-                                    <li id="liIR_Survey" runat="server"><a href="#">Survey Letter</a></li>
+                                    <li id="liIR_Survey" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ReportViewer/ShowReport.aspx?reportName=Surveyor") %>">Survey Letter</a></li>                                   
                                 </ul>
                             </li>
                         </ul>
@@ -202,7 +206,7 @@
                             <li id="liFR" runat="server"><a href="#">Reports</a>
                                 <ul>
                                     <li id="liFRI" runat="server"><a href="#">Dashboard View & Print</a>
-                           <%--             <ul>
+                                        <%--             <ul>
                                             <li id="liFRI_Regular" runat="server"><a href="#">Invoice (Regular / Exp. Detention</a></li>
                                             <li id="liFRI_IBS" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/RptImportBilling.aspx") %>">Import Billing Statement</a></li>
                                             <li id="liFRI_IIR" runat="server"><a href="#">Import Invoice Register</a></li>
@@ -211,7 +215,7 @@
                                     </li>
                                     <li id="liFR_CN" runat="server"><a href="#">Invoice Statement</a></li>
                                     <li id="liFRO" runat="server"><a href="#">Collection Statement</a>
-                                  <%--      <ul>    
+                                        <%--      <ul>    
                                             <li id="liFRO_Collection" runat="server"><a href="#">Collection Register</a></li>
                                             <li id="liFRO_Repairing" runat="server"><a href="#">Repairing Bill</a></li>
                                             <li id="liFRO_Freight" runat="server"><a href="#">Freight Certificate</a></li>
@@ -219,7 +223,7 @@
                                         </ul>--%>
                                     </li>
                                     <li id="liFRMR" runat="server"><a href="#">Service Tax Statement</a>
-                           <%--             <ul>
+                                        <%--             <ul>
                                             <li id="liFRMR_MR" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/MoneyRcpt.aspx") %>">
                                                 Money Receipt</a></li>
                                             <li id="liFRMR_PA" runat="server"><a href="#">Payment Advice</a></li>
@@ -251,9 +255,9 @@
                                     <li id="liLR_StkStmt" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/CntrStockDetail.aspx") %>">
                                         Stock Statement</a></li>
                                     <li id="liLR_Pickup" runat="server"><a href="#">Drop-Off Letter</a></li>
-
-                                    <li id="liLR_Onhire" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ReportViewer/ShowReport.aspx?reportName=OnOffHire") %>">On/Off hire Register</a></li>
-                                   <%-- <li id="liLR_Offhire" runat="server"><a href="#">Off-hire Register</a></li>--%>
+                                    <li id="liLR_Onhire" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/ReportViewer/ShowReport.aspx?reportName=OnOffHire") %>">
+                                        On/Off hire Register</a></li>
+                                    <%-- <li id="liLR_Offhire" runat="server"><a href="#">Off-hire Register</a></li>--%>
                                     <li id="liLR_Damage" runat="server"><a href="#">Damage/Hold Register</a></li>
                                     <li id="liLR_NotMoved" runat="server"><a href="#">Long Idle Container</a></li>
                                     <li id="liLR_AgeAnalysis" runat="server"><a href="#">Age Analysis</a></li>
@@ -263,7 +267,7 @@
                                     <li id="liLR_Sanction" runat="server"><a href="#">Sanction List</a></li>
                                     <li id="liLR_TurnAround" runat="server"><a href="#">Turn Around Report</a></li>
                                     <li id="liLR_Transfer" runat="server"><a href="#">Container Transfer List</a></li>
-                                   <%-- <li id="liLR_Principal" runat="server"><a href="#">Principal Reports - 4 nos</a></li>--%>
+                                    <%-- <li id="liLR_Principal" runat="server"><a href="#">Principal Reports - 4 nos</a></li>--%>
                                     <li id="liLR_CWV" runat="server"><a href="#">Container Analysis</a></li>
                                 </ul>
                             </li>

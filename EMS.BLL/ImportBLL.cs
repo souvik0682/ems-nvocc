@@ -199,9 +199,9 @@ namespace EMS.BLL
             ImportBLDAL.DeleteBLFooter(FooterId);
         }
 
-        public DataTable GetSurveyor(long LocationId)
+        public DataTable GetEmptyYard(long LocationId)
         {
-            return ImportBLDAL.GetSurveyor(LocationId);
+            return ImportBLDAL.GetEmptyYard(LocationId);
         }
 
         public DataSet GetBLQuery(string ImpBLNo, int ActivityType)

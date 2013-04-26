@@ -98,7 +98,7 @@ namespace EMS.WebApp.MasterModule
             {
                 ddlLoc.SelectedValue = ds.Tables[0].Rows[0]["pk_LocID"].ToString();
 
-                GeneralFunctions.PopulateDropDownList(ddlTerminalID, dbinteract.PopulateDDLDS("mstTerminal", "pk_TerminalID", "TerminalName", "Where fk_LocationID=" + ddlLoc.SelectedValue));
+                GeneralFunctions.PopulateDropDownList(ddlTerminalID, dbinteract.PopulateDDLDS("mstTerminal", "pk_TerminalID", "TerminalName] + '-' + [terminal", "Where fk_LocationID=" + ddlLoc.SelectedValue));
                 ddlTerminalID.SelectedValue = ds.Tables[0].Rows[0]["fl_TerminalID"].ToString();
                 txtAltLGNo.Text = ds.Tables[0].Rows[0]["AltLGNo"].ToString();
                 txtCargoDesc.Text = ds.Tables[0].Rows[0]["CargoDesc"].ToString();
@@ -141,7 +141,7 @@ namespace EMS.WebApp.MasterModule
         protected void ddlLoc_SelectedIndexChanged(object sender, EventArgs e)
         {
             string loc = ddlLoc.SelectedValue;
-            GeneralFunctions.PopulateDropDownList(ddlTerminalID, dbinteract.PopulateDDLDS("mstTerminal", "pk_TerminalID", "TerminalName", "Where fk_LocationID=" + loc));
+            GeneralFunctions.PopulateDropDownList(ddlTerminalID, dbinteract.PopulateDDLDS("mstTerminal", "pk_TerminalID", "TerminalName] + '-' + [terminal", "Where fk_LocationID=" + loc));
             //GeneralFunctions.PopulateDropDownList(ddlLoc, dbinteract.PopulateDDLDS("DSR.dbo.mstLocation", "pk_LocID", "LocName", true),false);
             //ddlLoc.SelectedValue = loc;
         }

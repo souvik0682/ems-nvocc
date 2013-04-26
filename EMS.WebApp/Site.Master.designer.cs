@@ -166,6 +166,15 @@ namespace EMS.WebApp {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMst_Vessel;
         
         /// <summary>
+        /// li1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl li1;
+        
+        /// <summary>
         /// liImp control.
         /// </summary>
         /// <remarks>
@@ -202,33 +211,6 @@ namespace EMS.WebApp {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liID_BLQuery;
         
         /// <summary>
-        /// liID_Voyage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liID_Voyage;
-        
-        /// <summary>
-        /// li1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl li1;
-        
-        /// <summary>
-        /// liID_Invoice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liID_Invoice;
-        
-        /// <summary>
         /// liIR control.
         /// </summary>
         /// <remarks>
@@ -263,15 +245,6 @@ namespace EMS.WebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liIR_IGM;
-        
-        /// <summary>
-        /// liIR_IGMC control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liIR_IGMC;
         
         /// <summary>
         /// liIR_Amend control.
@@ -328,24 +301,6 @@ namespace EMS.WebApp {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liIR_PDO;
         
         /// <summary>
-        /// liIR_DOExamin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liIR_DOExamin;
-        
-        /// <summary>
-        /// liIR_DOFactory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liIR_DOFactory;
-        
-        /// <summary>
         /// liIR_Slot control.
         /// </summary>
         /// <remarks>
@@ -355,22 +310,22 @@ namespace EMS.WebApp {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liIR_Slot;
         
         /// <summary>
-        /// liIR_Carting control.
+        /// li2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liIR_Carting;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl li2;
         
         /// <summary>
-        /// liIR_FileLanding control.
+        /// li3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liIR_FileLanding;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl li3;
         
         /// <summary>
         /// liIR_SMTP control.
@@ -472,42 +427,6 @@ namespace EMS.WebApp {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFRI;
         
         /// <summary>
-        /// liFRI_Regular control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFRI_Regular;
-        
-        /// <summary>
-        /// liFRI_IBS control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFRI_IBS;
-        
-        /// <summary>
-        /// liFRI_IIR control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFRI_IIR;
-        
-        /// <summary>
-        /// liFRI_EIR control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFRI_EIR;
-        
-        /// <summary>
         /// liFR_CN control.
         /// </summary>
         /// <remarks>
@@ -526,42 +445,6 @@ namespace EMS.WebApp {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFRO;
         
         /// <summary>
-        /// liFRO_Collection control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFRO_Collection;
-        
-        /// <summary>
-        /// liFRO_Repairing control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFRO_Repairing;
-        
-        /// <summary>
-        /// liFRO_Freight control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFRO_Freight;
-        
-        /// <summary>
-        /// liFRO_ServiceTax control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFRO_ServiceTax;
-        
-        /// <summary>
         /// liFRMR control.
         /// </summary>
         /// <remarks>
@@ -569,42 +452,6 @@ namespace EMS.WebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFRMR;
-        
-        /// <summary>
-        /// liFRMR_MR control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFRMR_MR;
-        
-        /// <summary>
-        /// liFRMR_PA control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFRMR_PA;
-        
-        /// <summary>
-        /// liFRMR_DCS control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFRMR_DCS;
-        
-        /// <summary>
-        /// liFRMR_ERM control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liFRMR_ERM;
         
         /// <summary>
         /// liLogistics control.
@@ -706,15 +553,6 @@ namespace EMS.WebApp {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liLR_Onhire;
         
         /// <summary>
-        /// liLR_Offhire control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liLR_Offhire;
-        
-        /// <summary>
         /// liLR_Damage control.
         /// </summary>
         /// <remarks>
@@ -794,15 +632,6 @@ namespace EMS.WebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liLR_Transfer;
-        
-        /// <summary>
-        /// liLR_Principal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liLR_Principal;
         
         /// <summary>
         /// liLR_CWV control.

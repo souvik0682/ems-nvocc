@@ -762,7 +762,7 @@ namespace EMS.WebApp.Transaction
             ((AjaxControlToolkit.AutoCompleteExtender)AC_NParty1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
             ((AjaxControlToolkit.AutoCompleteExtender)AC_CHA1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
             ((AjaxControlToolkit.AutoCompleteExtender)AC_CFSCode1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
-            LoadSurveyorDDL();
+            LoadEmptyYardDDL();
         }
 
         protected void ddlFtrContainerType_SelectedIndexChanged(object sender, EventArgs e)
@@ -885,7 +885,7 @@ namespace EMS.WebApp.Transaction
             LoadLocationDDL();
             LoadContainerTypeDDL();
             //ISOCodeDDL();
-            LoadSurveyorDDL();
+            LoadEmptyYardDDL();
             //LoadCHADDL();
 
             string PAN = new ImportBLL().GetPanNoById(1);
@@ -1010,9 +1010,9 @@ namespace EMS.WebApp.Transaction
             ddlFtrContainerType.DataBind();
         }
 
-        private void LoadSurveyorDDL()
+        private void LoadEmptyYardDDL()
         {
-            DataTable dt = new ImportBLL().GetSurveyor(Convert.ToInt64(ddlLocation.SelectedValue));
+            DataTable dt = new ImportBLL().GetEmptyYard(Convert.ToInt64(ddlLocation.SelectedValue));
             DataRow dr = dt.NewRow();
             dr["fk_AddressID"] = "0";
             dr["AddrName"] = "--Select--";
@@ -1903,7 +1903,7 @@ namespace EMS.WebApp.Transaction
             //if (header.SurveyorAddressID != 0)
             //    ((TextBox)AC_Surveyor1.FindControl("txtSurveyor")).Text = new ImportBLL().GetSurveyorNameById(header.SurveyorAddressID);
 
-            LoadSurveyorDDL();
+            LoadEmptyYardDDL();
             ddlSurveyor.SelectedValue = Convert.ToString(header.SurveyorAddressID);
 
             //================= BL Footer =========================

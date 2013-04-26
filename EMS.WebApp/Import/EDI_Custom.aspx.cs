@@ -127,6 +127,11 @@ namespace EMS.WebApp.Import
                 GeneralFunctions.RegisterAlertScript(this, "Port of Discharge cannot be left blank");
                 return;
             }
+            if (ddlTerminalOperator.SelectedIndex == 0)
+            {
+                GeneralFunctions.RegisterAlertScript(this, "Terminal Operator cannot be left blank");
+                return;
+            }
            string FileName= EDI_TXT();
            DownLoadFile(FileName);
            File.Delete(FileName);

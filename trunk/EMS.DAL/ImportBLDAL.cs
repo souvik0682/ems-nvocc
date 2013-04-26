@@ -738,6 +738,22 @@ namespace EMS.DAL
             return dt;
         }
 
+        public static DataTable GetEmptyYard(long LocationId)
+        {
+            string strExecution = "uspGetEmptyYard";
+            DataTable dt = new DataTable();
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@LocationId", LocationId);
+
+                dt = oDq.GetTable();
+            }
+
+            return dt;
+        }
+
         public static DataSet GetBLQuery(string BLNo, int ActivityType)
         {
             string strExecution = "[trn].[getBLQuery]";

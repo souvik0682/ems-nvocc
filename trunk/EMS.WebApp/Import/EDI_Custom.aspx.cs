@@ -58,6 +58,7 @@ namespace EMS.WebApp.Import
         private void LoadData()
         {
              string pod = ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
+             Int32 podid = 0;
              pod = pod.Contains(',') ? pod.Split(',')[1] : "";
             List<IVesselVoyageEDI> lstVesselVoyageEDI = EDIBLL.VesselVoyageEDI(Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue),dbinteract.GetId("Port",pod));
             if (lstVesselVoyageEDI.Count == 0)
@@ -90,8 +91,14 @@ namespace EMS.WebApp.Import
             ddlSameButton.SelectedValue = vesselVoyageEDI.SameButtonCargo.ToString();
             ddlShipStoreSubmitted.SelectedValue = vesselVoyageEDI.ShipStoreSubmitted.ToString();
             ddlVesselType.SelectedValue = vesselVoyageEDI.VesselType;
-            GeneralFunctions.PopulateDropDownList(ddlTerminalOperator, EDIBLL.GetTerminalOperator(Convert.ToInt32(ddlVoyage.SelectedValue)));
+            podid = Convert.ToInt32(vesselVoyageEDI.podid);
+            GeneralFunctions.PopulateDropDownList(ddlTerminalOperator, EDIBLL.GetTerminalOperator(Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(ddlVessel.SelectedValue), podid));
             // txtArriveTime.Text = DateTime.Now.ToString("hh:mm");
+            if (ddlTerminalOperator.Items.Count>1)
+            {
+                ddlTerminalOperator.SelectedIndex = 1;
+            }
+
         }
 
         private void CLearAll()

@@ -753,7 +753,6 @@ namespace EMS.DAL
 
             return dt;
         }
-
         public static DataSet GetBLQuery(string BLNo, int ActivityType)
         {
             string strExecution = "[trn].[getBLQuery]";

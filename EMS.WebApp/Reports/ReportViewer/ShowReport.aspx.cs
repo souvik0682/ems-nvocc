@@ -360,7 +360,7 @@ namespace EMS.WebApp.Reports.ReportViewer
                     rptParameters[3] = new ReportParameter("GangDate", txtGangDate.Text);
                     break;
                 case "surveyor":
-                    rptParameters = new ReportParameter[4];
+                    rptParameters = new ReportParameter[2];
                     rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedValue);
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
                     //rptParameters[2] = new ReportParameter("Shift", ddlShift.SelectedValue);

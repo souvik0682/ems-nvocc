@@ -685,12 +685,12 @@ namespace EMS.DAL
             {
 
                 oDq.AddNVarcharParam("@filename", 1000, filename);
-                oDq.AddIntegerParam("@Location",  Location);
-                oDq.AddIntegerParam("@Vessel", Vessel);
-                oDq.AddIntegerParam("@PortOfDischarge",  PortOfDischarge);
+                oDq.AddIntegerParam("@Loc", Location);
+                oDq.AddIntegerParam("@Vsl", Vessel);
+                oDq.AddIntegerParam("@Pod", PortOfDischarge);
                 oDq.AddIntegerParam("@Line", Line);
-                oDq.AddIntegerParam("@Voyage", Voyage);
-                oDq.AddIntegerParam("@VIANo",VIANo);
+                oDq.AddIntegerParam("@Vog", Voyage);
+                oDq.AddIntegerParam("@VIA", VIANo);
                 oDq.AddBooleanParam("@Result", false,QueryParameterDirection.Output);
                 oDq.RunActionQuery();
                 return Convert.ToBoolean(oDq.GetParaValue("@Result"));

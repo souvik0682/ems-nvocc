@@ -199,10 +199,10 @@ namespace EMS.BLL
         /// <createddate>01/12/2012</createddate>
         public static void PopulateDropdown(int Number, DropDownList ddl, int? Filter1, int? Filter2)
         {
-            ddl.DataSource = CommonDAL.PopulateDropdown(Number,Filter1,Filter2);
-            ddl.DataValueField="Value";
+            ddl.DataSource = CommonDAL.PopulateDropdown(Number, Filter1, Filter2);
+            ddl.DataValueField = "Value";
             ddl.DataTextField = "Text";
-            ddl.DataBind();            
+            ddl.DataBind();
         }
 
         #endregion
@@ -448,15 +448,22 @@ namespace EMS.BLL
         #endregion
 
         #region Report
+        public static string GetTerminalType(int VoyageID)
+        { return CommonDAL.GetTerminalType(VoyageID); }
+
         public static bool GenerateExcel(string filename, string Location, string Vessel, string PortOfDischarge, string Line, string Voyage, string VIANo)
         { return CommonDAL.GenerateExcel(filename, Location, Vessel, PortOfDischarge, Line, Voyage, VIANo); }
+       
+        public static bool GenerateText(string filename, int Location, int Vessel, int PortOfDischarge, int Line, int Voyage, int VIANo)
+        { return CommonDAL.GenerateTxt(filename, Location, Vessel, PortOfDischarge, Line, Voyage, VIANo); }
+
         public static DataTable GetLineForHire(string Location)
         {
             return CommonDAL.GetLineForHire(Location);
         }
         public static DataTable GetLine(string Location)
         {
-           
+
             return CommonDAL.GetLine(Location);
         }
         public static DataTable GetVessels(string Line)
@@ -466,7 +473,7 @@ namespace EMS.BLL
 
         public static DataTable GetVoyages(string Vessel, string Line)
         {
-            return CommonDAL.GetVoyages(Vessel,  Line);
+            return CommonDAL.GetVoyages(Vessel, Line);
         }
         public static DataTable GetBLNo(string line, string Vessel, string Voyage)
         {

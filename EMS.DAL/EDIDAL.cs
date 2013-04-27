@@ -75,12 +75,14 @@ namespace EMS.DAL
             return dquery.GetTables();
         }
 
-        public static DataSet GetTerminalOperator(int VoyageID)
+        public static DataSet GetTerminalOperator(int VoyageID, int VesselID, int POD)
         {
             string ProcName = "prcGetTerminalOperator";
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
 
             dquery.AddIntegerParam("@VoyageID", VoyageID);
+            dquery.AddIntegerParam("@VesselID", VesselID);
+            dquery.AddIntegerParam("@POD", POD);
            
 
             return dquery.GetTables();

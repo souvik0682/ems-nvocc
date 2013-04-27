@@ -79,7 +79,7 @@
                     </tr>
                     <tr>
                         <td>
-                            CFS Code <span class="errormessage1">*</span> :
+                            Customs Code <span class="errormessage1">*</span> :
                         </td>
                         <td>
                             <asp:TextBox ID="txtCfsCode" runat="server" Width="250" Enabled="false" Style="text-transform: uppercase;"></asp:TextBox>

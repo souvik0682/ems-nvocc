@@ -676,6 +676,43 @@ namespace EMS.DAL
             return false;
         }
 
+        public static bool GenerateTxt(string filename, int Location, int Vessel, int PortOfDischarge, int Line, int Voyage, int VIANo)
+        {
+            string strExecution = "[trn].[GenAdvanceContList]";
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+
+                oDq.AddNVarcharParam("@filename", 1000, filename);
+                oDq.AddIntegerParam("@Location",  Location);
+                oDq.AddIntegerParam("@Vessel", Vessel);
+                oDq.AddIntegerParam("@PortOfDischarge",  PortOfDischarge);
+                oDq.AddIntegerParam("@Line", Line);
+                oDq.AddIntegerParam("@Voyage", Voyage);
+                oDq.AddIntegerParam("@VIANo",VIANo);
+                oDq.AddBooleanParam("@Result", false,QueryParameterDirection.Output);
+                oDq.RunActionQuery();
+                return Convert.ToBoolean(oDq.GetParaValue("@Result"));
+            }
+            
+        }
+
+
+        public static string GetTerminalType(int VoyageID)
+        {
+            //
+            string strExecution = "[trn].[GetTerminalType]";
+            string TerminalType = string.Empty;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@VoyageID",VoyageID);
+                TerminalType = Convert.ToString(oDq.GetScalar());
+            }
+            return TerminalType;
+        }
+
         public static DataTable GetLine(string Location)
         {
             string strExecution = "rptUspGetLineByLoc";

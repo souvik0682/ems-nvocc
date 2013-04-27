@@ -10,33 +10,54 @@ using EMS.BLL;
 
 namespace EMS.WebApp.Reports
 {
-	public partial class AdvanceContainerList : System.Web.UI.Page
-	{
-		protected void Page_Load(object sender, EventArgs e)
-		{
-            if (!IsPostBack) {
+    public partial class AdvanceContainerList : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
                 Filler.FillData<ILocation>(ddlLine, new CommonBLL().GetActiveLocation(), "Name", "Id", "Location");
             }
-		}
+        }
         protected void ddlLine_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlLine.SelectedIndex > 0)
             {
-                
-                    Filler.FillData(ddlLocation, CommonBLL.GetLine(ddlLine.SelectedValue), "ProspectName", "ProspectID", "Line");
-                
+                Filler.FillData(ddlLocation, CommonBLL.GetLine(ddlLine.SelectedValue), "ProspectName", "ProspectID", "Line");
             }
         }
 
 
         protected void btnReport_Click(object sender, EventArgs e)
-        {  
-            var fileName=Server.MapPath("~/Download/" + DateTime.Now.Ticks.ToString() + ".xlsx");
-            var t = new FileUtil(Server.MapPath("~/FileTemplate/Template.xlsx"),fileName );
-            if (CommonBLL.GenerateExcel(fileName, ddlLine.SelectedValue, ddlVessel.SelectedValue, hdnReturn.Value, ddlLocation.SelectedValue, ddlVoyage.SelectedValue, txtVIANo.Text))
+        {
+            string fileName = string.Empty;
+            FileUtil t = null;
+
+            switch (CommonBLL.GetTerminalType(Convert.ToInt32(ddlVoyage.SelectedValue)))
             {
-                t.Download(Response);
+                case "NSICT":
+                    fileName = Server.MapPath("~/Download/" + DateTime.Now.Ticks.ToString() + ".xlsx");
+                    t = new FileUtil(Server.MapPath("~/FileTemplate/Template.xlsx"), fileName);
+                    if (CommonBLL.GenerateExcel(fileName, ddlLine.SelectedValue, ddlVessel.SelectedValue, hdnReturn.Value, ddlLocation.SelectedValue, ddlVoyage.SelectedValue, txtVIANo.Text))
+                    {
+                        t.Download(Response);
+                    }
+                    break;
+
+                case "JNPT":
+                case "GTI":
+                    fileName = Server.MapPath(@"d:\Containers.txt");
+                    //t = new FileUtil(Server.MapPath("~/FileTemplate/Template.xlsx"), fileName);
+                    t = new FileUtil();
+                    if (CommonBLL.GenerateText(fileName, Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(hdnReturn.Value), Convert.ToInt32(ddlLocation.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(txtVIANo.Text)))
+                    {
+                        t.Download(Response);
+                    }
+                    break;
             }
+
+
+
         }
         protected void ddlLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -54,5 +75,5 @@ namespace EMS.WebApp.Reports
             }
         }
 
-	}
+    }
 }

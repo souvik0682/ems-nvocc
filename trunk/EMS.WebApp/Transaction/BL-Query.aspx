@@ -955,7 +955,7 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Location">
                                                 <HeaderStyle CssClass="gridviewheader" />
-                                                <ItemStyle CssClass="gridviewitem" Width="8%" />
+                                                <ItemStyle CssClass="gridviewitem" Width="15%" />
                                                 <HeaderTemplate>
                                                     Invoice No.</HeaderTemplate>
                                                 <ItemTemplate>
@@ -963,9 +963,20 @@
                                                         <%# Eval("InvoiceNo")%></a>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
+
+                                            <asp:TemplateField HeaderText="Location">
+                                                <HeaderStyle CssClass="gridviewheader" />
+                                                <ItemStyle CssClass="gridviewitem" Width="6%" />
+                                                <HeaderTemplate>
+                                                    Invoice Date</HeaderTemplate>
+                                                <ItemTemplate>
+                                                     <%# Eval("InvoiceDate")%></a>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+
                                             <asp:TemplateField HeaderText="Address">
                                                 <HeaderStyle CssClass="gridviewheader_num" />
-                                                <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Right" />
+                                                <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right" />
                                                 <HeaderTemplate>
                                                     Invoice Amount</HeaderTemplate>
                                                 <ItemTemplate>
@@ -974,7 +985,7 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField>
                                                 <HeaderStyle CssClass="gridviewheader_num" />
-                                                <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Right" />
+                                                <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right" />
                                                 <HeaderTemplate>
                                                     Received Amount</HeaderTemplate>
                                                 <ItemTemplate>
@@ -985,7 +996,7 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField>
                                                 <HeaderStyle CssClass="gridviewheader_num" />
-                                                <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Right" />
+                                                <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right" />
                                                 <HeaderTemplate>
                                                     CRN Amount</HeaderTemplate>
                                                 <ItemTemplate>
@@ -1004,7 +1015,7 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField>
                                                 <HeaderStyle CssClass="gridviewheader_center" />
-                                                <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" />
+                                                <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" />
                                                 <HeaderTemplate>
                                                     Add Money Recpt.</HeaderTemplate>
                                                 <ItemTemplate>
@@ -1015,7 +1026,7 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField>
                                                 <HeaderStyle CssClass="gridviewheader_center" />
-                                                <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Center" />
+                                                <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" />
                                                 <HeaderTemplate>
                                                     Add Credit Note</HeaderTemplate>
                                                 <ItemTemplate>

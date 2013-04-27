@@ -32,7 +32,7 @@ namespace EMS.WebApp.Reports
         {
             string fileName = string.Empty;
             FileUtil t = null;
-
+            
             switch (CommonBLL.GetTerminalType(Convert.ToInt32(ddlVoyage.SelectedValue)))
             {
                 case "NSICT":
@@ -46,9 +46,10 @@ namespace EMS.WebApp.Reports
 
                 case "JNPT":
                 case "GTI":
-                    fileName = Server.MapPath(@"d:\Containers.txt");
-                    //t = new FileUtil(Server.MapPath("~/FileTemplate/Template.xlsx"), fileName);
-                    t = new FileUtil();
+                    fileName = @"d:\Containers.txt";
+                    string dfileName = @"d:\ContainerList.txt";
+                    t = new FileUtil(fileName, dfileName);
+                    //t = new FileUtil();
                     if (CommonBLL.GenerateText(fileName, Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(hdnReturn.Value), Convert.ToInt32(ddlLocation.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(txtVIANo.Text)))
                     {
                         t.Download(Response);

@@ -35,8 +35,11 @@ namespace EMS.WebApp.MasterModule
                 btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('MangeVoyage.aspx','" + ResourceManager.GetStringWithoutName("ERR00017") + "')";
                 if (VoyageId != "-1")
                     LoadData(VoyageId);
+                else
+                    LandingDateCheck(dbinteract, VoyageId);
             }
-            LandingDateCheck(dbinteract, VoyageId);
+            else
+                LandingDateCheck(dbinteract, VoyageId);
             //
         }
 

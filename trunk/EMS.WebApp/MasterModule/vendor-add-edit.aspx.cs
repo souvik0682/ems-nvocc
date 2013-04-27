@@ -85,7 +85,7 @@ namespace EMS.WebApp.MasterModule
             VendorEntity oVendor = (VendorEntity)VendorBLL.GetVendor(Convert.ToInt32(hdnVendorID.Value));
 
             ddlVendorType.SelectedIndex =ddlVendorType.Items.IndexOf(ddlVendorType.Items.FindByValue(oVendor.VendorType));
-            if (ddlVendorType.SelectedItem.Text == "CFS")
+            if (ddlVendorType.SelectedItem.Text == "CFS" || ddlVendorType.SelectedItem.Text =="ICD")
             {
                 txtCfsCode.Enabled = true;
                 rfvCfdCode.Enabled = true;
@@ -180,7 +180,7 @@ namespace EMS.WebApp.MasterModule
 
         protected void ddlVendorType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlVendorType.SelectedItem.Text == "CFS")
+            if (ddlVendorType.SelectedItem.Text == "CFS" || ddlVendorType.SelectedItem.Text =="ICD")
             {
                 txtCfsCode.Enabled = true;
                 rfvCfdCode.Enabled = true;

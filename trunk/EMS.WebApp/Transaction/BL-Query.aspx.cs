@@ -980,7 +980,7 @@ namespace EMS.WebApp.Transaction
 
         protected void lnkGenerateInvoiceDOE_Click(object sender, EventArgs e)
         {
-            Redirect(txtBlNo.Text.Trim(), "DO Extension", "22", txtVAlidityDate.Text.Trim());
+            Redirect(txtBlNo.Text.Trim(), "DO Extension", "10", txtVAlidityDate.Text.Trim());
         }
 
         protected void lnkGenerateInvoiceSlotExtension_Click(object sender, EventArgs e)

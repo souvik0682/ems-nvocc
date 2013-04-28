@@ -90,7 +90,7 @@
                         Port of Discharge:<span class="errormessage">*</span>
                     </td>
                     <td align="left">
-                        <asp:TextBox ID="txtReturn" runat="server" Width="145"></asp:TextBox>
+                        <asp:TextBox ID="txtReturn" runat="server" Width="180"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvLocation" runat="server" CssClass="errormessage"
                             ControlToValidate="txtReturn" InitialValue="0" ValidationGroup="Report" Display="Dynamic"
                             ErrorMessage="[Required]"></asp:RequiredFieldValidator>

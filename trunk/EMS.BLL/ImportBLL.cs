@@ -270,5 +270,10 @@ namespace EMS.BLL
             return ImportBLDAL.GetContainerBLWise(BlId);
         }
 
+        public void GenerateDONo(int Loc, int Line, Int64 BlID)
+        {
+            ImportBLDAL.GenerateDONo(Loc,Line,BlID);
+        }
+
     }
 }

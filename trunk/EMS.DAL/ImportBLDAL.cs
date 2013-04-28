@@ -947,5 +947,18 @@ namespace EMS.DAL
             }
             return myDataTable;
         }
+
+        public static void GenerateDONo(int Loc,int Line, Int64 BlID)
+        {
+            string strExecution = "[trn].[GenDoNo]";           
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@LocId", Loc);
+                oDq.AddIntegerParam("@LineId", Line);
+                oDq.AddBigIntegerParam("@BLId", BlID);
+                oDq.RunActionQuery();                
+            }
+        }
     }
 }

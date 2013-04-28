@@ -364,6 +364,24 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.LinkButton lnkGenInvSecirity;
         
         /// <summary>
+        /// hdnDoNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnDoNo;
+        
+        /// <summary>
+        /// hdnIsDoLock control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnIsDoLock;
+        
+        /// <summary>
         /// btnTemp1 control.
         /// </summary>
         /// <remarks>
@@ -445,6 +463,15 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.HtmlControls.HtmlTableCell tdFinalDo;
         
         /// <summary>
+        /// btnGenDoNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGenDoNo;
+        
+        /// <summary>
         /// imgBtnFinalDo control.
         /// </summary>
         /// <remarks>
@@ -452,6 +479,15 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgBtnFinalDo;
+        
+        /// <summary>
+        /// spnPrintFinalDo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnPrintFinalDo;
         
         /// <summary>
         /// ddlDestuffing control.

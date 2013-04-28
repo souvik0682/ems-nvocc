@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using EMS.Utilities;
 using EMS.Common;
 using EMS.BLL;
+using System.IO;
 
 namespace EMS.WebApp.Reports
 {
@@ -32,28 +33,31 @@ namespace EMS.WebApp.Reports
         {
             string fileName = string.Empty;
             FileUtil t = null;
-            
+
             switch (CommonBLL.GetTerminalType(Convert.ToInt32(ddlVoyage.SelectedValue)))
             {
                 case "NSICT":
-                    fileName = Server.MapPath("~/Download/" + DateTime.Now.Ticks.ToString() + ".xlsx");
-                    t = new FileUtil(Server.MapPath("~/FileTemplate/Template.xlsx"), fileName);
-                    if (CommonBLL.GenerateExcel(fileName, ddlLine.SelectedValue, ddlVessel.SelectedValue, hdnReturn.Value, ddlLocation.SelectedValue, ddlVoyage.SelectedValue, txtVIANo.Text))
-                    {
-                        t.Download(Response);
-                    }
-                    break;
+                fileName = Server.MapPath("~/Download/" + DateTime.Now.Ticks.ToString() + ".xlsx");
+                t = new FileUtil(Server.MapPath("~/FileTemplate/Template.xlsx"), fileName);
+                if (CommonBLL.GenerateExcel(fileName, ddlLine.SelectedValue, ddlVessel.SelectedValue, hdnReturn.Value, ddlLocation.SelectedValue, ddlVoyage.SelectedValue, txtVIANo.Text))
+                {
+                    t.Download(Response);
+                }
+                break;
 
                 case "JNPT":
                 case "GTI":
-                    fileName = @"d:\Containers.txt";
-                    string dfileName = @"d:\ContainerList.txt";
-                    t = new FileUtil(fileName, dfileName);
-                    //t = new FileUtil();
+                    fileName = Server.MapPath("~/Download/ContainerList.txt");
+
+                    if (File.Exists(fileName))
+                        File.Delete(fileName);
+
+                    t = new FileUtil(Server.MapPath("~/FileTemplate/ContainerList.txt"), fileName);
                     if (CommonBLL.GenerateText(fileName, Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(hdnReturn.Value), Convert.ToInt32(ddlLocation.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(txtVIANo.Text)))
-                    {
+                    {                        
                         t.Download(Response);
                     }
+
                     break;
             }
 

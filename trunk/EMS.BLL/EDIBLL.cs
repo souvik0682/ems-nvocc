@@ -33,9 +33,9 @@ namespace EMS.BLL
 
 
 
-       public static System.Data.DataSet GetTerminalOperator(int VoyageID)
+       public static System.Data.DataSet GetTerminalOperator(int VoyageID, int VesselID, int POD)
        {
-           return EDIDAL.GetTerminalOperator(VoyageID);
+           return EDIDAL.GetTerminalOperator(VoyageID, VesselID, POD);
        }
 
      

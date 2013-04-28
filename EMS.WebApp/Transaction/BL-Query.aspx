@@ -5,7 +5,10 @@
 <%@ Register Assembly="EMS.WebApp" Namespace="EMS.WebApp.CustomControls" TagPrefix="cc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
-        function ReportPrint(a, b, c) {
+        function ReportPrint(a, b, c, d) {
+            if (d == "f") {
+                document.getElementById('<%= btnGenDoNo.ClientID %>').click();
+            }
             window.open('../Popup/Report.aspx?' + a + b + c, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
 
             return false;
@@ -13,6 +16,7 @@
 
 
         function ReportPrint1(a, b, c, d, e) {
+
             window.open('../Popup/Report.aspx?' + a + b + c + d + e, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
             return false;
         }
@@ -79,27 +83,26 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
-     <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
-            <ProgressTemplate>
-                <div class="progress">
-                    <div id="image">
-                        <img src="<%=Page.ResolveClientUrl("~/Images/PleaseWait.gif") %>" alt="" /></div>
-                    <div id="text">
-                        Please Wait...</div>
-                </div>
-            </ProgressTemplate>
-        </asp:UpdateProgress>
-
-        <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
-            <ProgressTemplate>
-                <div class="progress">
-                    <div id="image">
-                        <img src="<%=Page.ResolveClientUrl("~/Images/PleaseWait.gif") %>" alt="" /></div>
-                    <div id="text">
-                        Please Wait...</div>
-                </div>
-            </ProgressTemplate>
-        </asp:UpdateProgress>
+    <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+        <ProgressTemplate>
+            <div class="progress">
+                <div id="image">
+                    <img src="<%=Page.ResolveClientUrl("~/Images/PleaseWait.gif") %>" alt="" /></div>
+                <div id="text">
+                    Please Wait...</div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+    <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
+        <ProgressTemplate>
+            <div class="progress">
+                <div id="image">
+                    <img src="<%=Page.ResolveClientUrl("~/Images/PleaseWait.gif") %>" alt="" /></div>
+                <div id="text">
+                    Please Wait...</div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
     <asp:Button ID="btnReset" runat="server" Style="display: none;" Text="Reset" OnClick="btnReset_Click" />
     <div>
         <div id="headercaption">
@@ -389,6 +392,8 @@
                             </tr>
                             <tr style="height: 30px;">
                                 <td>
+                                    <asp:HiddenField ID="hdnDoNo" runat="server" />
+                                    <asp:HiddenField ID="hdnIsDoLock" runat="server" />
                                     <asp:Button ID="btnTemp1" runat="server" Style="display: none;" />
                                     <%--<asp:CheckBox ID="" runat="server" OnCheckedChanged="chkDo_CheckedChanged" AutoPostBack="true" />--%>
                                     <asp:RadioButton ID="chkDo" runat="server" GroupName="Service" AutoPostBack="true"
@@ -422,10 +427,11 @@
                                                     Print Examination Do
                                                 </td>
                                                 <td id="tdFinalDo" runat="server" width="50%" style="padding-top: 10px;">
+                                                    <asp:Button ID="btnGenDoNo" runat="server" OnClick="GenDo" Style="display: none;" />
                                                     <asp:ImageButton ID="imgBtnFinalDo" runat="server" ImageUrl="~/Images/p2.jpeg" ToolTip="Print Final Do"
                                                         Height="45" Width="45" AlternateText="Print Final Do" />
                                                     <br />
-                                                    Final Do
+                                                    <span id="spnPrintFinalDo" runat="server"></span>
                                                 </td>
                                             </tr>
                                             <tr>

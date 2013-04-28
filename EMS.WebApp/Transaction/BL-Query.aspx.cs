@@ -179,7 +179,9 @@ namespace EMS.WebApp.Transaction
                 {
                     tdFinalDo.Visible = false;
                     tdExmDo.Attributes.Add("colspan", "2");
-                }
+                }               
+
+
 
                 fillServiceRequest(BLDataSet.Tables[0]);
                 FillUploadedDocument(BLDataSet.Tables[1]);
@@ -264,6 +266,10 @@ namespace EMS.WebApp.Transaction
                 //tdExmDo.Attributes.Add("colspan", "1");
             }
 
+            hdnDoNo.Value=dtDetail.Rows[0]["DONO"].ToString();
+            hdnIsDoLock.Value = Convert.ToBoolean(dtDetail.Rows[0]["ISDOLOCK"].ToString()).ToString();
+            imgBtnFinalDo.Enabled = Convert.ToBoolean(hdnIsDoLock.Value);
+            spnPrintFinalDo.InnerText = (imgBtnFinalDo.Enabled) ? "Print Final Do" : "DO is locked";
 
             if (dtDetail.Rows[0]["DESTUFFING"].ToString() == "0")
                 ddlDestuffing.SelectedIndex = 0;
@@ -1291,12 +1297,18 @@ namespace EMS.WebApp.Transaction
 
         void PopulateInvoiceButtons()
         {
-            imgBtnExaminationDo.Attributes.Add("onclick", string.Format("return ReportPrint('{0}','{1}','{2}');", "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("eDeliveryOrder"),
-                "&invBLHeader=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue)));
-            
+            imgBtnExaminationDo.Attributes.Add("onclick", string.Format("return ReportPrint('{0}','{1}','{2}','{3}');", "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("eDeliveryOrder"),
+                "&invBLHeader=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue),'e'));
 
-            imgBtnFinalDo.Attributes.Add("onclick", string.Format("return ReportPrint('{0}','{1}','{2}');", "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("DeliveryOrder"),
-                "&invBLHeader=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue)));
+
+            imgBtnFinalDo.Attributes.Add("onclick", string.Format("return ReportPrint('{0}','{1}','{2}','{3}');", "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("DeliveryOrder"),
+                "&invBLHeader=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue),'f'));
+        }
+
+        protected void GenDo(object sender, EventArgs e)
+        {
+            oImportBLL.GenerateDONo(Convert.ToInt32(ddlLocation.SelectedValue),Convert.ToInt32(ddlLine.SelectedValue),Convert.ToInt64(hdnBLId.Value));
+            mpeDo.Show();
         }
 
         protected void gvwInvoice_RowDataBound(object sender, GridViewRowEventArgs e)

@@ -268,7 +268,16 @@ namespace EMS.WebApp.Transaction
 
             hdnDoNo.Value=dtDetail.Rows[0]["DONO"].ToString();
             hdnIsDoLock.Value = Convert.ToBoolean(dtDetail.Rows[0]["ISDOLOCK"].ToString()).ToString();
-            imgBtnFinalDo.Enabled = Convert.ToBoolean(hdnIsDoLock.Value);
+            if (Convert.ToBoolean(hdnIsDoLock.Value) == true)
+            {
+                imgBtnFinalDo.Enabled = false;
+            }
+            else
+            {
+                imgBtnFinalDo.Enabled = true;
+            }
+
+            //imgBtnFinalDo.Enabled = Convert.ToBoolean(hdnIsDoLock.Value);
             spnPrintFinalDo.InnerText = (imgBtnFinalDo.Enabled) ? "Print Final Do" : "DO is locked";
 
             if (dtDetail.Rows[0]["DESTUFFING"].ToString() == "0")
@@ -1307,7 +1316,7 @@ namespace EMS.WebApp.Transaction
 
         protected void GenDo(object sender, EventArgs e)
         {
-            oImportBLL.GenerateDONo(Convert.ToInt32(ddlLocation.SelectedValue),Convert.ToInt32(ddlLine.SelectedValue),Convert.ToInt64(hdnBLId.Value));
+            //oImportBLL.GenerateDONo(Convert.ToInt32(ddlLocation.SelectedValue),Convert.ToInt32(ddlLine.SelectedValue),Convert.ToInt64(hdnBLId.Value));
             mpeDo.Show();
         }
 

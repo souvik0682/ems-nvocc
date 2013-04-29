@@ -52,6 +52,8 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
+  <div id="headercaption">
+        B/L CHECKLIST</div>
 <center>
     <div style="padding-top: 10px;">
         <asp:HiddenField ID="hdnVessel" runat="server" />

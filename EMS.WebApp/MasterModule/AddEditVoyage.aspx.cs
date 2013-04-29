@@ -45,16 +45,17 @@ namespace EMS.WebApp.MasterModule
 
         private void LandingDateCheck(BLL.DBInteraction dbinteract, string VoyageId)
         {
+            Decimal ERate;
 
             if (VoyageId != "-1")
             {
-                //int c = dbinteract.PopulateDDLDS("ImpBLHeader", "fk_ImpVesselID", "fk_ImpVoyageID", "where fk_ImpVesselID=" + ddlVessel.SelectedValue + " and fk_ImpVoyageID='" + txtVoyageNo.Text.Trim()+"'").Tables[0].Rows.Count;
-                //int c = dbinteract.CountLandDate(Convert.ToInt32(ddlVessel.SelectedValue), txtVoyageNo.Text.Trim());
+
 
                 if (txtdtLand.Text.Trim() != "")
                 {
+                    ERate =dbinteract.GetExchnageRate(Convert.ToDateTime(txtdtLand.Text));
 
-                    txtExcRate.Text = hdntxtExcRate.Value = dbinteract.GetExchnageRate(Convert.ToDateTime(txtdtLand.Text)).ToString();
+                    //txtExcRate.Text = hdntxtExcRate.Value = dbinteract.GetExchnageRate(Convert.ToDateTime(txtdtLand.Text)).ToString();
 
                     trLandDate.Style.Add("display", " ");
                 }
@@ -62,10 +63,19 @@ namespace EMS.WebApp.MasterModule
                 {
                     trLandDate.Style.Add("display", "none");
 
-                    txtExcRate.Text = hdntxtExcRate.Value = dbinteract.GetExchnageRate(DateTime.Today).ToString();
+                    ERate = dbinteract.GetExchnageRate(DateTime.Today);
 
                 }
-
+                
+                if (decimal.Parse(txtExcRate.Text) < ERate)
+                {
+                    string msg;
+                    msg = "Rate should be Greater than Today's EXchange Rate ";
+                        {
+                            GeneralFunctions.RegisterAlertScript(this, msg);
+                            return;
+                        }
+                }
             }
             else
             {
@@ -74,6 +84,7 @@ namespace EMS.WebApp.MasterModule
                 txtdtLand.ReadOnly = true;
 
             }
+
             if (VoyageId == "-1")
             {
                 int cnt = EMS.BLL.VoyageBLL.IfExistInBL(ddlVessel.SelectedIndex > 0 ? Convert.ToInt32(ddlVessel.SelectedValue) : 0, Convert.ToInt32(VoyageId)).Rows.Count;

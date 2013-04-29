@@ -7,6 +7,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
+    <div id="headercaption">
+        GANG LETTER</div>
     <center>
         <script language="javascript" type="text/javascript">
             function Print() {

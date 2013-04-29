@@ -315,7 +315,7 @@ namespace EMS.WebApp.Import
                                 + (Dr["ITEMTYPE"].ToString() + (''
                                 + (Dr["CargoMovementCode"].ToString() + (''
                                 //+ ((( (DischargePort.Length>=6 ? DischargePort.Substring(0, 6):DischargePort) == "INHAL1") ? DischargePort : string.Empty) + (''
-                                + (Dr["CFSCode"].ToString() + (''
+                                + ((Dr["CargoMovementCode"].ToString()=="LC" ? Dr["CFSCode"].ToString() : "") + (''
                                 + (Dr["NumberPackage"].ToString() + (''
                                 + (Dr["PackingUnit"].ToString() + (''
                                 + (((Convert.ToInt32(Dr["GrossWeight"]) > 0) ? (Dr["GrossWeight"].ToString() + ('' + (Dr["WTUnit"].ToString() + ''))) : (string.Empty+'' + string.Empty))
@@ -326,7 +326,7 @@ namespace EMS.WebApp.Import
                                 + (Dr["IMO_IMDGCode"].ToString() + (''
                                 + (Dr["TPBondNo"].ToString() + (''
                                 + (Dr["CACode"].ToString() + (''
-                                + (Dr["TransportMode"].ToString() + ('' + Dr["MLOCode"].ToString()))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));
+                                + ((Dr["CargoMovementCode"].ToString()=="LC" ? "" : Dr["TransportMode"].ToString()) + ('' + Dr["MLOCode"].ToString()))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));
                                 //
             }
             writer.WriteLine("<END-cargo>");

@@ -61,20 +61,21 @@ namespace EMS.DAL
                     entity.Line = Convert.ToString(reader["Line"]);
                     entity.ItemLineNo = Convert.ToString(reader["ItemLineNo"]);
                     entity.BLNo = Convert.ToString(reader["ImpLineBLNo"]);
+                    entity.BLDate = Convert.ToDateTime(reader["ImpLineBLDate"]);
 
-                    if (reader["ImpLineBLDate"] != DBNull.Value) entity.BLDate = Convert.ToDateTime(reader["ImpLineBLDate"]);
+                    //if (reader["ImpLineBLDate"] != DBNull.Value) entity.BLDate = Convert.ToDateTime(reader["ImpLineBLDate"]);
                     if (reader["NoofTEU"] != DBNull.Value) entity.TEU = Convert.ToInt32(reader["NoofTEU"]);
                     if (reader["NoofFEU"] != DBNull.Value) entity.FEU = Convert.ToInt32(reader["NoofFEU"]);
                     entity.PortLoading = Convert.ToString(reader["PortLoading"]);
                     entity.PortDischarge = Convert.ToString(reader["PortDischarge"]);
                     entity.FinalDestination = Convert.ToString(reader["FinalDestination"]);
                     //entity.DischargeDate = Convert.ToString(reader["DischargeDate"]);
-                    entity.IGMBLNo = Convert.ToString(reader["IGMBLNumber"]);
+                    entity.IGMNo = Convert.ToString(reader["IGMNo"]);
                     if (reader["GrossWeight"] != DBNull.Value) entity.GrossWeight = Convert.ToDecimal(reader["GrossWeight"]);
                     entity.GoodsDescription = Convert.ToString(reader["GoodDescription"]);
                     if (reader["NumberPackage"] != DBNull.Value) entity.NumberPackage = Convert.ToInt64(reader["NumberPackage"]);
                     entity.PackageUnit = Convert.ToString(reader["PackageUnit"]);
-                    if (reader["RsStatus"] != DBNull.Value) entity.RsStatus = Convert.ToBoolean(reader["RsStatus"]);
+                    if (reader["Stat"] != DBNull.Value) entity.Stat = Convert.ToString(reader["Stat"]);
                     if (reader["PGR_FreeDays"] != DBNull.Value) entity.PGRFreeDays = Convert.ToInt32(reader["PGR_FreeDays"]);
                     entity.AddressCFS = Convert.ToString(reader["AddressCFS"]);
                     //entity.ICD = Convert.ToString(reader["ICD"]);
@@ -122,7 +123,7 @@ namespace EMS.DAL
                     if (reader["PayLoad"] != DBNull.Value) entity.PayLoad = Convert.ToDecimal(reader["PayLoad"]);
                     if (reader["NumberPackage"] != DBNull.Value) entity.NumberPackage = Convert.ToInt64(reader["NumberPackage"]);
                     entity.PackageUnit = Convert.ToString(reader["PackageUnit"]);
-                    if (reader["RsStatus"] != DBNull.Value) entity.RsStatus = Convert.ToBoolean(reader["RsStatus"]);
+                    if (reader["Stat"] != DBNull.Value) entity.Stat = Convert.ToString(reader["Stat"]);
                     entity.GoodsDescription = Convert.ToString(reader["GoodDescription"]);
                     entity.PortLoading = Convert.ToString(reader["PortLoading"]);
                     entity.PortDischarge = Convert.ToString(reader["PortDischarge"]);

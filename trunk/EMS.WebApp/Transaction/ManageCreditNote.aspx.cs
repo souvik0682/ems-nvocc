@@ -111,7 +111,7 @@ namespace EMS.WebApp.Transaction
 
             ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Record saved successfully!');</script>", false);
 
-            //Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(ddlBLno.SelectedItem.Text));
+            Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(txtBLRef.Text));
         }
 
         protected void gvwCreditNote_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -169,7 +169,7 @@ namespace EMS.WebApp.Transaction
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            //Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(ddlBLno.SelectedItem.Text));
+            Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(txtBLRef.Text));
         }
 
         protected void txtCNAmount_TextChanged(object sender, EventArgs e)

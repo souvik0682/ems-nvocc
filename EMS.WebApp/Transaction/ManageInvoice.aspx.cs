@@ -436,9 +436,9 @@ namespace EMS.WebApp.Transaction
 
             if (Convert.ToBoolean(Charge.Rows[0]["ServiceTax"].ToString()))
             {
-                serviceTax = (grossAmount * TaxPer) / 100;
-                cessAmount = (serviceTax * TaxCess) / 100;
-                addCess = (serviceTax * TaxAddCess) / 100;
+                serviceTax = Math.Round((grossAmount * TaxPer) / 100,0);
+                cessAmount = Math.Round((serviceTax * TaxCess) / 100,0);
+                addCess = Math.Round((serviceTax * TaxAddCess) / 100,0);
             }
 
             totalAmount = (grossAmount + serviceTax + cessAmount + addCess);

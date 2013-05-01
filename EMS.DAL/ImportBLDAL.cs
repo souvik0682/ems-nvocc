@@ -909,6 +909,20 @@ namespace EMS.DAL
             return myDataTable;
         }
 
+        //[trn].[GetCreditNoteAmountBreakeup]
+        public static DataTable GetCNAmtBreakup(Int64 InvoiceId)
+        {
+            string strExecution = "[trn].[GetCreditNoteAmountBreakeup]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@InvoiceId", InvoiceId);
+                myDataTable = oDq.GetTable();
+            }
+            return myDataTable;
+        }
+
         public static string GetCHAId(string CHAName)
         {
             string strExecution = "uspGetCHAIdForBL";

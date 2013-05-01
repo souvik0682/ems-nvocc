@@ -275,9 +275,9 @@ namespace EMS.WebApp.Transaction
 
             if (Convert.ToDecimal(txtChargeServiceTax.Text) > 0)
             {
-                serviceTax = (grossAmount * TaxPer) / 100;
-                cessAmount = (serviceTax * TaxCess) / 100;
-                addCess = (serviceTax * TaxAddCess) / 100;
+                serviceTax = Math.Round((grossAmount * TaxPer) / 100, 0);
+                cessAmount = Math.Round((serviceTax * TaxCess) / 100, 0);
+                addCess = Math.Round((serviceTax * TaxAddCess) / 100, 0);
             }
 
             txtCNServiceTax.Text = (serviceTax + cessAmount + addCess).ToString();

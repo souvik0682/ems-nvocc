@@ -254,6 +254,11 @@ namespace EMS.BLL
             return ImportBLDAL.GetReceivedAmtBreakup(InvoiceId);
         }
 
+        public DataTable GetCNAmtBreakup(Int64 InvoiceId)
+        {
+            return ImportBLDAL.GetCNAmtBreakup(InvoiceId);
+        }
+
 
         public string GetCHAId(string CHAName)
         {

@@ -1113,7 +1113,7 @@ namespace EMS.WebApp.Transaction
 
         protected void lnkGenInvOtherInvoice_Click(object sender, EventArgs e)
         {
-            Redirect(txtBlNo.Text.Trim(), "MISC. INVOICE", "0", string.Empty);
+            Redirect(txtBlNo.Text.Trim(), "MISC. INVOICE", "-1", string.Empty);
         }
 
         void DisableAllServiceControls()

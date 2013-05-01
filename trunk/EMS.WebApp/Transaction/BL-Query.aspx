@@ -969,17 +969,15 @@
                                                         <%# Eval("InvoiceNo")%></a>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-
                                             <asp:TemplateField HeaderText="Location">
                                                 <HeaderStyle CssClass="gridviewheader" />
                                                 <ItemStyle CssClass="gridviewitem" Width="6%" />
                                                 <HeaderTemplate>
                                                     Invoice Date</HeaderTemplate>
                                                 <ItemTemplate>
-                                                     <%# Eval("InvoiceDate")%></a>
+                                                    <%# Eval("InvoiceDate")%></a>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-
                                             <asp:TemplateField HeaderText="Address">
                                                 <HeaderStyle CssClass="gridviewheader_num" />
                                                 <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right" />
@@ -1006,7 +1004,7 @@
                                                 <HeaderTemplate>
                                                     CRN Amount</HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <a href="#">N/A</a>
+                                                    <a id="A1" href="#" runat="server" onserverclick="ShowCreditNoteAmt"><%# Eval("CNAmt")%></a>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField>
@@ -1036,7 +1034,10 @@
                                                 <HeaderTemplate>
                                                     Add Credit Note</HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <a href="#">
+                                                    <%-- <a href="#">
+                                                        <img alt="Add" src="../Images/ADD.JPG" /></a>--%>
+                                                    <a id="aAddCrdtNote" runat="server" href='<%# "ManageCreditNote.aspx?InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) + "&LocationId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue) + "&LineId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLine.SelectedValue) %>'
+                                                        style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Ammount")) ? "display:block;": "display:none;" %>'>
                                                         <img alt="Add" src="../Images/ADD.JPG" /></a>
                                                 </ItemTemplate>
                                             </asp:TemplateField>

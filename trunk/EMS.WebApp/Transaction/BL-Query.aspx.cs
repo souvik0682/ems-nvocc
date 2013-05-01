@@ -1239,7 +1239,7 @@ namespace EMS.WebApp.Transaction
         protected void ShowReceivedAmt(object sender, EventArgs e)
         {
             System.Web.UI.HtmlControls.HtmlAnchor a = (System.Web.UI.HtmlControls.HtmlAnchor)sender;
-            headerTest.InnerText = "Received Amount";
+            headerTest.InnerText = "Received Amount Details";
 
             GridViewRow Row = (GridViewRow)a.NamingContainer;
             HiddenField hdnInvID = (HiddenField)Row.FindControl("hdnInvID");
@@ -1290,6 +1290,80 @@ namespace EMS.WebApp.Transaction
                     sbr.Append("<td style='text-align:right;'>" + TDS + "</td>");
                     //sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
                     sbr.Append("<td><a target='_blank' href='../Reports/MoneyRcpt.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/Print.png' /></a></td>");
+
+                    sbr.Append("</tr>");
+                }
+            }
+
+            sbr.Append("</table>");
+
+            dvMoneyReceived.InnerHtml = sbr.ToString();
+
+            mpeMoneyReceivedDetail.Show();
+
+        }
+
+        protected void ShowCreditNoteAmt(object sender, EventArgs e)
+        {
+            System.Web.UI.HtmlControls.HtmlAnchor a = (System.Web.UI.HtmlControls.HtmlAnchor)sender;
+            headerTest.InnerText = "Credit Note Amount Details";
+
+            GridViewRow Row = (GridViewRow)a.NamingContainer;
+            HiddenField hdnInvID = (HiddenField)Row.FindControl("hdnInvID");
+
+            DataTable dtDoc = oImportBLL.GetCNAmtBreakup(Convert.ToInt64(hdnInvID.Value));
+
+            StringBuilder sbr = new StringBuilder();
+            sbr.Append("<table style='width: 100%; border: none;' cellpadding='0' cellspacing='0'>");
+            sbr.Append("<tr style='background-color:#328DC4;color:White; font-weight:bold;'>");
+            sbr.Append("<td style='width: 170px;padding-left:2px;'>CRNNo.</td>");
+            sbr.Append("<td style='width: 60px;'>Date</td>");
+            sbr.Append("<td style='width: 70px;text-align:right;'>Gross</td>");
+            sbr.Append("<td style='width: 70px;text-align:right;'>STax</td>");
+            sbr.Append("<td style='width: 70px;text-align:right;'>Cess</td>");
+            sbr.Append("<td style='width: 70px;text-align:right;'>ACess</td>");
+            sbr.Append("<td style='width: 50px;text-align:center;'>Print</td>");
+            sbr.Append("</tr>");
+
+            for (int rowCount = 0; rowCount < dtDoc.Rows.Count; rowCount++)
+            {
+                string CRNID = dtDoc.Rows[rowCount]["CRNID"].ToString();
+                string GROSS = dtDoc.Rows[rowCount]["GROSS"].ToString();
+                string STAX = dtDoc.Rows[rowCount]["STAX"].ToString();
+                string DATE = Convert.ToDateTime(dtDoc.Rows[rowCount]["DATE"].ToString()).ToString("dd/MM/yyyy");
+                string CRNNO = dtDoc.Rows[rowCount]["CRNNO"].ToString();
+                string CESS = dtDoc.Rows[rowCount]["CESS"].ToString();
+                string ACESS = dtDoc.Rows[rowCount]["ACESS"].ToString();
+               
+
+
+                if (rowCount % 2 == 0) //For ODD row
+                {
+                    sbr.Append("<tr>");
+                    sbr.Append("<td>" + CRNNO + "</td>");
+                    sbr.Append("<td>" + DATE + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + GROSS + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + STAX + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + CESS + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + ACESS + "</td>");
+                    //sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
+                    //sbr.Append("<td><a target='_blank' href='../Reports/MoneyRcpt.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/Print.png' /></a></td>");
+                    sbr.Append("<td><a target='_blank' href='#'><img src='../Images/Print.png' /></a></td>");
+
+                    sbr.Append("</tr>");
+                }
+                else // For Even Row
+                {
+                    sbr.Append("<tr style='background-color:#99CCFF;'>");
+                    sbr.Append("<td>" + CRNNO + "</td>");
+                    sbr.Append("<td>" + DATE + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + GROSS + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + STAX + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + CESS + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + ACESS + "</td>");
+                    //sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
+                    //sbr.Append("<td><a target='_blank' href='../Reports/MoneyRcpt.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/Print.png' /></a></td>");
+                    sbr.Append("<td><a target='_blank' href='#'><img src='../Images/Print.png' /></a></td>");
 
                     sbr.Append("</tr>");
                 }

@@ -22,7 +22,7 @@ namespace EMS.Entity.Report
 
         public string ItemLineNo { get; set; }
 
-        public string IGMBLNo { get; set; }
+        public string IGMNo { get; set; }
 
         public string PortLoading { get; set; }
 
@@ -70,7 +70,7 @@ namespace EMS.Entity.Report
 
         public int? TotalTEU { get; set; }
 
-        public bool? RsStatus { get; set; }
+        public string Stat { get; set; }
 
         //For footer
         public string ContainerNo { get; set; }

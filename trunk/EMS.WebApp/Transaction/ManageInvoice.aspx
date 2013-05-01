@@ -137,7 +137,7 @@
                                     <fieldset style="width: 95%;">
                                         <legend>Add Charges</legend>
                                         <table>
-                                            <%--<tr>
+                                            <tr>
                                                 <td style="font-weight:bold">
                                                     Charge Name
                                                 </td>
@@ -173,7 +173,7 @@
                                                 </td>
                                                 <td>
                                                 </td>
-                                            </tr>--%>
+                                            </tr>
                                             <tr>
                                                 <td>
                                                     <asp:DropDownList ID="ddlFChargeName" runat="server" Width="210" AutoPostBack="true"

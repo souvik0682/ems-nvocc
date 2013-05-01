@@ -89,6 +89,23 @@
                                         <legend>Add Charges</legend>
                                         <table>
                                             <tr>
+                                                <td style="font-weight:bold">
+                                                    Charge Name
+                                                </td>
+                                                <td style="text-align: right;font-weight:bold">
+                                                    Charged In Invoice
+                                                </td>
+                                                <td style="text-align: right;font-weight:bold">
+                                                    S/Tax
+                                                </td>
+                                                <td style="text-align: right;font-weight:bold">
+                                                    CRN Amount
+                                                </td>
+                                                <td style="text-align: right;font-weight:bold">
+                                                    S/Tax
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td>
                                                     <asp:DropDownList ID="ddlFChargeName" runat="server" Width="320" AutoPostBack="true"
                                                         OnSelectedIndexChanged="ddlChargeName_SelectedIndexChanged">

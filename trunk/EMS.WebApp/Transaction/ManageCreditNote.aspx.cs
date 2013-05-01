@@ -62,6 +62,11 @@ namespace EMS.WebApp.Transaction
                     btnSave.Enabled = true;
                     btnAdd.Enabled = true;
                 }
+
+                //List<ICreditNoteCharge> cnCharges = new List<ICreditNoteCharge>();
+
+                //gvwCreditNote.DataSource = cnCharges;
+                //gvwCreditNote.DataBind();
             }
         }
 

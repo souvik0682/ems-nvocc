@@ -35,8 +35,8 @@ namespace EMS.Utilities
             LCL = 6,
             SLAB_UNIT = 7,
             SLAB_DOCS = 8,
-            REPAIRING_MATERIAL = 9,
-            REPAIRING_LABOUR =10
+            //REPAIRING_MATERIAL = 9,
+            REPAIRING =10
 
         }
 

@@ -216,10 +216,12 @@ namespace EMS.WebApp.Transaction
             txtVessel.Text = dtDetail.Rows[0]["VESSEL"].ToString();
             txtVoyage.Text = dtDetail.Rows[0]["VOYAGE"].ToString();
             txtDetentionFreeDays.Text = dtDetail.Rows[0]["DTNFREEDAYS"].ToString();
-            txtPGRFreedays.Text = dtDetail.Rows[0]["PGRFREEDAYS"].ToString();
+            txtPGRFreedays.Text = dtDetail.Rows[0]["IGMNO"].ToString();
+            txtPGRTill.Text = dtDetail.Rows[0]["ITEMLINENO"].ToString();
+            // txtPGRFreedays.Text = dtDetail.Rows[0]["PGRFREEDAYS"].ToString();
 
-            if (Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()) > Convert.ToDateTime("01/01/1950"))
-                txtPGRTill.Text = Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()).ToString("dd/MM/yyyy");
+            //if (Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()) > Convert.ToDateTime("01/01/1950"))
+            //    txtPGRTill.Text = Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()).ToString("dd/MM/yyyy");
             
 
             ddlLine.SelectedValue = dtDetail.Rows[0]["LINE"].ToString();
@@ -243,13 +245,13 @@ namespace EMS.WebApp.Transaction
             }
 
             //if (!string.IsNullOrEmpty(dtDetail.Rows[0]["PGRTILL"].ToString()))
-            if (Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()) > Convert.ToDateTime("01/01/1950"))
-                txtPGRTill.Text = Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()).ToString("dd/MM/yyyy"); 
-            else
-            {
-                if (!String.IsNullOrEmpty(txtLandingDate.Text))
-                    txtPGRTill.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtPGRFreedays.Text) - 1).ToShortDateString();
-            }
+            //if (Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()) > Convert.ToDateTime("01/01/1950"))
+            //    txtPGRTill.Text = Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()).ToString("dd/MM/yyyy"); 
+            //else
+            //{
+            //    if (!String.IsNullOrEmpty(txtLandingDate.Text))
+            //        txtPGRTill.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtPGRFreedays.Text) - 1).ToShortDateString();
+            //}
         }
 
         void fillServiceRequest(DataTable dtDetail)

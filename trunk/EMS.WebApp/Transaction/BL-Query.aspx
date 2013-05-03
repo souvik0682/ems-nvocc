@@ -106,7 +106,7 @@
     <asp:Button ID="btnReset" runat="server" Style="display: none;" Text="Reset" OnClick="btnReset_Click" />
     <div>
         <div id="headercaption">
-            DISCHARGE DASHBOARD</div>
+            IMPORT DASHBOARD</div>
         <center>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
@@ -216,7 +216,7 @@
                                     <asp:TextBox ID="txtDetentionFreeDays" runat="server" Width="100" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td style="width: 11%;">
-                                    PGR free days :
+                                    IGM No :
                                 </td>
                                 <td style="width: 10%;">
                                     <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
@@ -258,7 +258,7 @@
                                     <asp:TextBox ID="tstDetentionTill" runat="server" Width="100" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
-                                    PGR till :
+                                    Line No. :
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtPGRTill" runat="server" Width="100" Enabled="false"></asp:TextBox>

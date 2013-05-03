@@ -120,7 +120,7 @@
                                     <li id="liID_BL" runat="server"><a href="<%=Page.ResolveClientUrl("~/Transaction/ImportBL.aspx") %>">
                                         B/L Entry</a></li>
                                     <li id="liID_BLQuery" runat="server"><a href="<%=Page.ResolveClientUrl("~/Transaction/BL-Query.aspx") %>">
-                                        Discharge Dashboard</a></li>
+                                        Import Dashboard</a></li>
                                     <%--             <li id="liID_Voyage" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MangeVoyage.aspx") %>">
                                         Voyage</a></li>
                                     <li id="li1" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MainLineVoyage.aspx") %>">
@@ -214,7 +214,8 @@
                                             <li id="liFRI_EIR" runat="server"><a href="#">Export Invoice Register</a></li>
                                         </ul>--%>
                                     </li>
-                                    <li id="liFR_CN" runat="server"><a href="#">Invoice Statement</a></li>
+                                    <li id="liFR_CN" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/RptImportBilling.aspx") %>">Invoice Statement</a></li>
+
                                     <li id="liFRO" runat="server"><a href="#">Collection Statement</a>
                                         <%--      <ul>    
                                             <li id="liFRO_Collection" runat="server"><a href="#">Collection Register</a></li>

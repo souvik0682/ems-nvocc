@@ -5,6 +5,7 @@
 <style type="text/css">
     
 </style>
+
 <table width="100%" cellpadding="0" cellspacing="0" style="vertical-align: bottom">
     <tr>
         <td style="vertical-align: bottom">
@@ -12,11 +13,11 @@
             <cc2:TextBoxWatermarkExtender ID="txtWMEName1" runat="server" TargetControlID="txtPort"
                 WatermarkText="TYPE PORT" WatermarkCssClass="watermark">
             </cc2:TextBoxWatermarkExtender>
-            <cc2:AutoCompleteExtender runat="server" ID="AutoPort" TargetControlID="txtPort"
+            <cc2:AutoCompleteExtender runat="server" ID="AutoPort" TargetControlID="txtPort" 
                 ServicePath="AutoComplete.asmx" ServiceMethod="GetPortList" MinimumPrefixLength="2"
                 CompletionInterval="1000" EnableCaching="true" CompletionSetCount="20" CompletionListCssClass="autocomplete_completionListElement"
                 CompletionListItemCssClass="autocomplete_listItem" CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem"
-                DelimiterCharacters=";,:" ShowOnlyCurrentWordInCompletionListItem="true">
+                DelimiterCharacters=";,:" ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected">
                 <%-- <Animations>
                     <OnShow>
                         <Sequence>

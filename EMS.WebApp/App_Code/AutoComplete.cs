@@ -71,18 +71,21 @@ public class AutoComplete : System.Web.Services.WebService {
     {
         count = 10;
         AppCodeClass ac = new AppCodeClass();
-        
-        string sql = "select PortName+','+PortCode port from DSR.dbo.mstPort where PortName like @prefixText";
+
+        string sql = "select PortName+','+PortCode port,pk_PortID ID from DSR.dbo.mstPort where PortName like @prefixText";
         SqlDataAdapter da = new SqlDataAdapter(sql, ac.ConnectionString);
         da.SelectCommand.Parameters.Add("@prefixText", SqlDbType.VarChar, 50).Value = prefixText + "%";
         DataTable dt = new DataTable();
         da.Fill(dt);
         string[] items = new string[dt.Rows.Count];
         int i = 0;
-        foreach (DataRow dr in dt.Rows)
+        //foreach (DataRow dr in dt.Rows)
+        for (int cnt = 0; cnt < dt.Rows.Count; cnt++)
         {
-            items.SetValue(dr["port"].ToString(), i);
-            i++;
+            //items.SetValue(dr["port"].ToString(), i);
+            //items.SetValue(dr["port"].ToString(), dr["ID"].ToString());
+            items[cnt] = AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(Convert.ToString(dt.Rows[cnt]["port"]), Convert.ToString(dt.Rows[cnt]["ID"]));
+            //i++;
         }
         return items;
 
@@ -452,7 +455,9 @@ public class AutoComplete : System.Web.Services.WebService {
 
 public class AppCodeClass
 {
-    public string ConnectionString = "Data Source=WIN-SERVER;Initial Catalog=Liner;User Id=sa;Password=P@ssw0rd;Pooling=true;Connection Timeout=30;Max Pool Size=40;Min Pool Size=5";
+    //public string ConnectionString = "Data Source=WIN-SERVER;Initial Catalog=Liner;User Id=sa;Password=P@ssw0rd;Pooling=true;Connection Timeout=30;Max Pool Size=40;Min Pool Size=5";
+    public string ConnectionString = @"Data Source=JOYASREE\SQLEXPRESS;Initial Catalog=Nvocc;User Id=sa;Password=pass;Pooling=true;Connection Timeout=30;Max Pool Size=40;Min Pool Size=5";
+    
     //public string ConnectionString = @"Data Source=DILP-PC;Initial Catalog=NVOCC;Integrated Security=true;Pooling=true;Connection Timeout=30;Max Pool Size=40;Min Pool Size=5";
 
     //public string ConnectionString = @"Data Source=SOUVIK-PC\SQLEXPRESS;Initial Catalog=NVOCC;Integrated Security=SSPI;";

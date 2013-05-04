@@ -87,5 +87,35 @@ namespace EMS.DAL
 
             return dquery.GetTables();
         }
+
+        
+        public static DataTable GetItemNoForEDI(int VoyageID, int VesselID, int POD)
+        {
+            string ProcName = "[dbo].[prcGetItemNoFrEDI]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            dquery.AddIntegerParam("@VoyageID", VoyageID);
+            dquery.AddIntegerParam("@VesselID", VesselID);
+            dquery.AddIntegerParam("@POD", POD);
+
+
+            return dquery.GetTable();
+        }
+
+        public static void SaveEDINo(int VoyageID, int VesselID, int POD, int NvoccID, int StartNo)
+        {
+            //[dbo].[prcSaveItemNoFrEDI] 
+
+            string ProcName = "[dbo].[prcSaveItemNoFrEDI]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            dquery.AddIntegerParam("@VoyageID", VoyageID);
+            dquery.AddIntegerParam("@VesselID", VesselID);
+            dquery.AddIntegerParam("@POD", POD);
+            dquery.AddIntegerParam("@Nvoccid", NvoccID);
+            dquery.AddIntegerParam("@StartNo", StartNo);
+
+            dquery.RunActionQuery();
+        }
     }
 }

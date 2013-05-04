@@ -58,7 +58,7 @@
                                     <cc1:CalendarExtender ID="CalendarExtender1" TargetControlID="txtCNDate" runat="server"
                                         Format="dd-MM-yyyy" Enabled="True" />
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtCNDate"
-                                        ValidationGroup="vgSave" ErrorMessage="This field is required*" CssClass="errormessage"
+                                        ValidationGroup="VGCrnSave" ErrorMessage="This field is required*" CssClass="errormessage"
                                         Display="Dynamic"></asp:RequiredFieldValidator>
                                 </td>
                             </tr>
@@ -204,7 +204,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="vgSave" OnClick="btnSave_Click" />
+                                    <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="VGCrnSave" OnClick="btnSave_Click" />
                                     &nbsp;&nbsp;
                                     <asp:Button ID="btnBack" runat="server" CssClass="button" Text="Back" OnClick="btnBack_Click"
                                         OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />

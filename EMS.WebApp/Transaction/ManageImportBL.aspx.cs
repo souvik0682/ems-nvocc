@@ -1862,10 +1862,14 @@ namespace EMS.WebApp.Transaction
             ((TextBox)AC_Port4.FindControl("txtPort")).Text = new ImportBLL().GetPortNameById(header.FinalDestination);
 
             //Port of Discharge
-            ((TextBox)AC_Port3.FindControl("txtPort")).Text = new ImportBLL().GetPortNameById(header.PortDischarge);
+            string dischargePort = new ImportBLL().GetPortNameById(header.PortDischarge);
+            hdnPortLoading.Value = dischargePort.Split('|')[0].Trim();
+            ((TextBox)AC_Port3.FindControl("txtPort")).Text = dischargePort;
 
             //Port of Loading
-            ((TextBox)AC_Port2.FindControl("txtPort")).Text = new ImportBLL().GetPortNameById(header.PortLoading);
+            string loadingPort = new ImportBLL().GetPortNameById(header.PortLoading);
+            hdnPortDischarge.Value = loadingPort.Split('|')[0].Trim();
+            ((TextBox)AC_Port2.FindControl("txtPort")).Text = loadingPort;
 
             //Issue Port
             ((TextBox)AC_Port1.FindControl("txtPort")).Text = new ImportBLL().GetPortNameById(header.BLIssuePortID);

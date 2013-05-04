@@ -1,6 +1,4 @@
-﻿<%--<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageInvoice.aspx.cs" Inherits="EMS.WebApp.Transaction.ManageInvoice" %>--%>
-
-<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="ManageInvoice.aspx.cs" Inherits="EMS.WebApp.Transaction.ManageInvoice" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
@@ -24,8 +22,6 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtInvoiceNo" runat="server" Width="250px" Enabled="false"></asp:TextBox>
-                                    <%-- <asp:RequiredFieldValidator ID="rfvInvoiceNo" ControlToValidate="txtInvoiceNo" runat="server"
-                                        ErrorMessage="This field is required" Font-Bold="true" ForeColor="Red"></asp:RequiredFieldValidator>--%>
                                 </td>
                                 <td>
                                     Location
@@ -35,10 +31,6 @@
                                         AutoPostBack="true" Enabled="false">
                                         <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                     </asp:DropDownList>
-                                    <%--<br />
-                                    <asp:RequiredFieldValidator ID="rfvLocation" ControlToValidate="ddlLocation" runat="server"
-                                        ValidationGroup="vgSave" ErrorMessage="This field is required" InitialValue="0"
-                                        CssClass="errormessage"></asp:RequiredFieldValidator>--%>
                                 </td>
                             </tr>
                             <tr>
@@ -62,10 +54,6 @@
                                         OnSelectedIndexChanged="ddlNvocc_SelectedIndexChanged" Enabled="false">
                                         <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                     </asp:DropDownList>
-                                    <%--<br />
-                                    <asp:RequiredFieldValidator ID="rfvNvocc" runat="server" CssClass="errormessage"
-                                        ErrorMessage="This field is required" ControlToValidate="ddlNvocc" InitialValue="0"
-                                        ValidationGroup="vgSave" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                 </td>
                             </tr>
                             <tr>
@@ -86,10 +74,6 @@
                                     <asp:DropDownList ID="ddlInvoiceType" runat="server" Enabled="false">
                                         <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                     </asp:DropDownList>
-                                    <%--<br />
-                                    <asp:RequiredFieldValidator ID="rfvInvoiceType" ControlToValidate="ddlInvoiceType"
-                                        ValidationGroup="vgSave" runat="server" ErrorMessage="This field is required"
-                                        CssClass="errormessage" InitialValue="0"></asp:RequiredFieldValidator>--%>
                                 </td>
                             </tr>
                             <tr>
@@ -100,9 +84,6 @@
                                     <cc2:CustomTextBox ID="txtExchangeRate" runat="server" Width="250px" Type="Decimal"
                                         MaxLength="10" Precision="8" Scale="2" Style="text-align: right;" Text="0.00" Enabled="false"
                                         ></cc2:CustomTextBox>
-                                    <%-- OnTextChanged="txtExchangeRate_OnTextChanged" AutoPostBack="true" --%>
-                                    <%--<asp:RequiredFieldValidator ID="rfvExchangeRate" runat="server" ControlToValidate="txtExchangeRate"
-                                        ValidationGroup="vgSave" ErrorMessage="This field is required" CssClass="errormessage"></asp:RequiredFieldValidator>--%>
                                 </td>
                                 <td>
                                     B/L No
@@ -112,10 +93,6 @@
                                         AutoPostBack="true" Enabled="false">
                                         <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                     </asp:DropDownList>
-                                    <%--<br />
-                                    <asp:RequiredFieldValidator ID="rfvBLno" runat="server" ControlToValidate="ddlBLno"
-                                        InitialValue="0" ValidationGroup="vgSave" ErrorMessage="This field is required"
-                                        CssClass="errormessage"></asp:RequiredFieldValidator>--%>
                                 </td>
                             </tr>
                             <tr>
@@ -171,8 +148,6 @@
                                                 <td style="text-align: right;font-weight:bold">
                                                     Total Amt
                                                 </td>
-                                                <td>
-                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -195,17 +170,6 @@
                                                         InitialValue="0"></asp:RequiredFieldValidator>
                                                     &nbsp;
                                                 </td>
-                                                <%-- <td>
-                                                <asp:DropDownList ID="ddlFWashingType" runat="server" Width="75" Enabled="false">
-                                                    <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
-                                                    <asp:ListItem Text="General" Value="1"></asp:ListItem>
-                                                    <asp:ListItem Text="Heavy" Value="2"></asp:ListItem>
-                                                    <asp:ListItem Text="Chemical" Value="3"></asp:ListItem>
-                                                </asp:DropDownList>
-                                                <br />
-                                                <asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Required"
-                                                    ControlToValidate="ddlFWashingType" InitialValue="0"></asp:RequiredFieldValidator>
-                                            </td>--%>
                                                 <td>
                                                     <cc2:CustomTextBox ID="txtRatePerBL" runat="server" Width="50" Type="Decimal" MaxLength="10"
                                                         Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
@@ -280,10 +244,6 @@
                                                             <HeaderStyle CssClass="gridviewheader" />
                                                             <ItemStyle CssClass="gridviewitem" Width="15%" />
                                                         </asp:TemplateField>
-                                                        <%--<asp:TemplateField HeaderText="Washing Type">
-                                                        <HeaderStyle CssClass="gridviewheader" />
-                                                        <ItemStyle CssClass="gridviewitem" Width="20%" HorizontalAlign="Right" />
-                                                    </asp:TemplateField>--%>
                                                         <asp:TemplateField HeaderText="BL">
                                                             <HeaderStyle CssClass="gridviewheader_num" />
                                                             <ItemStyle CssClass="gridviewitem" Width="6%" HorizontalAlign="Right" />
@@ -344,8 +304,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                </td>
                                 <td>
                                     <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="vgSave" OnClick="btnSave_Click" />
                                     &nbsp;&nbsp;

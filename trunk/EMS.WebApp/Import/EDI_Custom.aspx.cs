@@ -70,10 +70,10 @@ namespace EMS.WebApp.Import
                 string ss = dt.Rows[0]["NOALLOTED"].ToString();
                 if (Convert.ToBoolean(ss))
                 {
-                    lnkLines.Visible = true;
+                    lnkLines.Visible = false;
                 }
                 else
-                    lnkLines.Visible = false;
+                    lnkLines.Visible = true;
             }
            
         }

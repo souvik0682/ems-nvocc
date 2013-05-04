@@ -31,6 +31,15 @@ namespace EMS.WebApp.Import {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
+        /// hdnPortId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnPortId;
+        
+        /// <summary>
         /// ddlVoyage control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,78 @@ namespace EMS.WebApp.Import {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlVoyage;
+        
+        /// <summary>
+        /// lnkLines control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkLines;
+        
+        /// <summary>
+        /// hdnButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton hdnButton;
+        
+        /// <summary>
+        /// mpeLine control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeLine;
+        
+        /// <summary>
+        /// pnlLine control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlLine;
+        
+        /// <summary>
+        /// imgCloseMoneyReceived control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgCloseMoneyReceived;
+        
+        /// <summary>
+        /// dvMoneyReceived control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvMoneyReceived;
+        
+        /// <summary>
+        /// rpEDI control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rpEDI;
+        
+        /// <summary>
+        /// btnSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSave;
         
         /// <summary>
         /// RequiredFieldValidator2 control.
@@ -173,6 +254,15 @@ namespace EMS.WebApp.Import {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::EMS.WebApp.CustomControls.AutoCompletePort AutoCompletepPort1;
+        
+        /// <summary>
+        /// btnFillEdi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFillEdi;
         
         /// <summary>
         /// txtIMONo control.

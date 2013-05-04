@@ -10,6 +10,7 @@ using System.Data;
 using EMS.Common;
 using EMS.Entity;
 using EMS.BLL;
+using System.Text;
 
 namespace EMS.WebApp.Import
 {
@@ -27,7 +28,7 @@ namespace EMS.WebApp.Import
             {
                 GeneralFunctions.PopulateDropDownList(ddlVessel, dbinteract.PopulateDDLDS("trnVessel", "pk_VesselID", "VesselName"," order by VesselName"));
                 GeneralFunctions.PopulateDropDownList(ddlCustomHouse, EDIBLL.GetCustomHouse());
-               
+                                
                 //GeneralFunctions.PopulateDropDownList(ddlTerminalOperator, dbinteract.PopulateDDLDS("mstTerminal", "pk_TerminalID", "TerminalName"));
                 //TextBox txtPort = ((TextBox)AutoCompletepPort1.FindControl("txtPort"));
                 //txtPort.Attributes.Add("onblur", "document.getElementById('form1').submit();");
@@ -53,7 +54,31 @@ namespace EMS.WebApp.Import
                 return;
             }
             LoadData();
+            LoadEDIList();
         }
+
+
+        void LoadEDIList()
+        {
+            DataTable dt = EDIBLL.GetItemNoForEDI(Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(hdnPortId.Value));
+           
+            if (dt.Rows.Count > 0)
+            {
+                rpEDI.DataSource = dt;
+                rpEDI.DataBind();
+
+                string ss = dt.Rows[0]["NOALLOTED"].ToString();
+                if (Convert.ToBoolean(ss))
+                {
+                    lnkLines.Visible = true;
+                }
+                else
+                    lnkLines.Visible = false;
+            }
+           
+        }
+       
+
 
         private void LoadData()
         {
@@ -377,6 +402,32 @@ namespace EMS.WebApp.Import
             return FileName;
         }
 
+        protected void lnkLines_Click(object sender, EventArgs e)
+        {
+            mpeLine.Show();
+        }
+
+      
+        protected void btnFillEdi_Click(object sender, EventArgs e)
+        {
+            LoadEDIList();
+        }
+
+        protected void SaveEDI(object sender, EventArgs e)
+        {
+            foreach (RepeaterItem Itm in rpEDI.Items)
+            {
+                if (Itm.ItemType == ListItemType.Item || Itm.ItemType == ListItemType.AlternatingItem)
+                {
+                    //EDIBLL.SaveEDINo();
+
+                    HiddenField hdnLineId = (HiddenField)Itm.FindControl("hdnLineId");
+                    TextBox txtTotalLine = (TextBox)Itm.FindControl("txtTotalLine");
+
+                    EDIBLL.SaveEDINo(Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(hdnPortId.Value), Convert.ToInt32(hdnLineId.Value), Convert.ToInt32(txtTotalLine.Text));
+                }
+            }
+        }
         
     }
 }

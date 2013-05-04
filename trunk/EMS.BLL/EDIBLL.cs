@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using EMS.Common;
 using EMS.DAL;
+using System.Data;
 
 namespace EMS.BLL
 {
@@ -23,22 +24,26 @@ namespace EMS.BLL
        {
            return EDIDAL.GetEDIContainerInfo(VesselID, VoyageID);
        }
-
-
-
+      
        public static System.Data.DataSet GetCustomHouse()
        {
            return EDIDAL.GetCustomHouse();
        }
-
-
-
+      
        public static System.Data.DataSet GetTerminalOperator(int VoyageID, int VesselID, int POD)
        {
            return EDIDAL.GetTerminalOperator(VoyageID, VesselID, POD);
        }
 
-     
+       public static DataTable GetItemNoForEDI(int VoyageID, int VesselID, int POD)
+       {
+           return EDIDAL.GetItemNoForEDI(VoyageID,VesselID,POD);
+       }
+
+       public static void SaveEDINo(int VoyageID, int VesselID, int POD, int NvoccID, int StartNo)
+       {
+           EDIDAL.SaveEDINo(VoyageID, VesselID, POD, NvoccID, StartNo);
+       }
     }
 
 }

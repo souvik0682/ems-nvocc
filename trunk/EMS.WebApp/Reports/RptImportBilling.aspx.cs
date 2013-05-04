@@ -94,7 +94,7 @@ namespace EMS.WebApp.Reports
             decimal gamt1 = 0;
             decimal.TryParse(Convert.ToString(ds.Tables[0].Compute("Sum(col1)", "")),out gamt1);
             decimal MRamt = 0;
-            decimal.TryParse(Convert.ToString(ds.Tables[0].Compute("Sum(col2)", "")),out gamt1);
+            decimal.TryParse(Convert.ToString(ds.Tables[0].Compute("Sum(col2)", "")),out MRamt);
             decimal famt = gamt1 - MRamt;
             string finalAmt = string.Empty;
             if (famt > 0)
@@ -102,6 +102,7 @@ namespace EMS.WebApp.Reports
             else if (famt < 0)
                 finalAmt = "Amount to Refund   Rs.   " + famt*(-1);
             else finalAmt = "Amount to Refund      NIL";
+            famt = Math.Abs(famt);
             string numToWords = EMS.BLL.BLLReport.GetNumToWords(Convert.ToInt64(famt));
 
             try

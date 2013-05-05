@@ -86,8 +86,17 @@ namespace EMS.WebApp.Reports
             ReportBLL cls = new ReportBLL();
 
             LocalReportManager reportManager = new LocalReportManager(rptViewer, "ImpBilling", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
-            string rptName = "RptimpBill.rdlc";
-          
+            //string rptName = "RptimpBill.rdlc";
+            //string rptName = "RptImpBillAnnex.rdlc";
+            string rptName = string.Empty;
+
+            if (rbRpt.SelectedValue == "1")
+                rptName = "RptimpBill.rdlc";
+            else if (rbRpt.SelectedValue == "2")
+                rptName = "RptImpBillAnnex.rdlc";
+            else
+                return;
+
 
             string BlRefNo = ((TextBox)autoComplete1.FindControl("txtBlNo")).Text;
             DataSet ds = EMS.BLL.BLLReport.GetImpBill(hdnBLId.Value,txtdtBill.Text);

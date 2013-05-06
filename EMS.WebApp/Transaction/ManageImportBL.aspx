@@ -48,37 +48,41 @@
 
 
         function SetSelectedCargoType() {
-            var list = document.getElementById('<%= rdoCargoType.ClientID %>'); //Client ID of the radiolist
-            var inputs = list.getElementsByTagName("input");
-            var selected;
- 
-            for (var i = 0; i < inputs.length; i++) {
-                if (inputs[i].checked) {
-                    selected = inputs[i];
-                    break;
-                }
-            }
-            if (selected) {
-                //alert(selected.value);
-                if (selected.value == 'F') {
-                    document.getElementById('<%=txtFtrCargoType.ClientID %>').value = 'FCL';
-                }
-                else if (selected.value == 'L') {
-                    document.getElementById('<%=txtFtrCargoType.ClientID %>').value = 'LCL';
+            alert(document.getElementById('<%=txtTransinfo.ClientID %>').value);
+            if (document.getElementById('<%=txtTransinfo.ClientID %>').value == '') {
+                alert('Test');
+                var list = document.getElementById('<%= rdoCargoType.ClientID %>'); //Client ID of the radiolist
+                var inputs = list.getElementsByTagName("input");
+                var selected;
 
-                    document.getElementById('<%=txtFtrGrossWeight.ClientID %>').value = document.getElementById('<%=txtGrossWeight.ClientID %>').value;
-                    document.getElementById('<%=txtFtrPackage.ClientID %>').value = document.getElementById('<%=txtPackage.ClientID %>').value;
+                for (var i = 0; i < inputs.length; i++) {
+                    if (inputs[i].checked) {
+                        selected = inputs[i];
+                        break;
+                    }
                 }
-                else if (selected.value == 'E') {
-                    document.getElementById('<%=txtFtrCargoType.ClientID %>').value = 'ETY';
-                }
-                else if (selected.value == 'N') {
-                    document.getElementById('<%=txtFtrCargoType.ClientID %>').value = 'None';
-                }
-            }
+                if (selected) {
+                    //alert(selected.value);
+                    if (selected.value == 'F') {
+                        document.getElementById('<%=txtFtrCargoType.ClientID %>').value = 'FCL';
+                    }
+                    else if (selected.value == 'L') {
+                        document.getElementById('<%=txtFtrCargoType.ClientID %>').value = 'LCL';
 
-            //Transhipment Info
-            document.getElementById('<%=txtTransinfo.ClientID %>').value = "CARGO LOADED FROM " + document.getElementById('<%=hdnPortLoading.ClientID %>').value + "  TO BE DISCHARGED AT " + document.getElementById('<%=hdnPortDischarge.ClientID %>').value;
+                        document.getElementById('<%=txtFtrGrossWeight.ClientID %>').value = document.getElementById('<%=txtGrossWeight.ClientID %>').value;
+                        document.getElementById('<%=txtFtrPackage.ClientID %>').value = document.getElementById('<%=txtPackage.ClientID %>').value;
+                    }
+                    else if (selected.value == 'E') {
+                        document.getElementById('<%=txtFtrCargoType.ClientID %>').value = 'ETY';
+                    }
+                    else if (selected.value == 'N') {
+                        document.getElementById('<%=txtFtrCargoType.ClientID %>').value = 'None';
+                    }
+                }
+
+                //Transhipment Info
+                document.getElementById('<%=txtTransinfo.ClientID %>').value = "CARGO LOADED FROM " + document.getElementById('<%=hdnPortLoading.ClientID %>').value + "  TO BE DISCHARGED AT " + document.getElementById('<%=hdnPortDischarge.ClientID %>').value;
+            }
         } 
 </script>
 

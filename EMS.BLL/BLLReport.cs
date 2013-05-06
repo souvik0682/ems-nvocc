@@ -24,6 +24,12 @@ namespace EMS.BLL
             return EMS.DAL.DALReport.GetImpBill(BLRefNo, dt);
         }
 
+        public static System.Data.DataSet GetImpBillAnne(string BLRefNo, string dt)
+        {
+            return EMS.DAL.DALReport.GetImpBillAnne(BLRefNo, dt);
+        }
+
+
 
         public static string GetAddByCompName(string compname)
         {

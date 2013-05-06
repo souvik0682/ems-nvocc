@@ -1863,12 +1863,12 @@ namespace EMS.WebApp.Transaction
 
             //Port of Discharge
             string dischargePort = new ImportBLL().GetPortNameById(header.PortDischarge);
-            hdnPortLoading.Value = dischargePort.Split('|')[0].Trim();
+            hdnPortDischarge.Value = dischargePort.Split('|')[0].Trim();
             ((TextBox)AC_Port3.FindControl("txtPort")).Text = dischargePort;
 
             //Port of Loading
             string loadingPort = new ImportBLL().GetPortNameById(header.PortLoading);
-            hdnPortDischarge.Value = loadingPort.Split('|')[0].Trim();
+            hdnPortLoading.Value = loadingPort.Split('|')[0].Trim();
             ((TextBox)AC_Port2.FindControl("txtPort")).Text = loadingPort;
 
             //Issue Port

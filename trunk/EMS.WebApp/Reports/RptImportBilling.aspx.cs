@@ -91,53 +91,78 @@ namespace EMS.WebApp.Reports
             string rptName = string.Empty;
 
             if (rbRpt.SelectedValue == "1")
+            {
                 rptName = "RptimpBill.rdlc";
+                string BlRefNo = ((TextBox)autoComplete1.FindControl("txtBlNo")).Text;
+                DataSet ds = EMS.BLL.BLLReport.GetImpBill(hdnBLId.Value, txtdtBill.Text);
+                decimal gamt1 = 0;
+                decimal.TryParse(Convert.ToString(ds.Tables[0].Compute("Sum(col1)", "")), out gamt1);
+                decimal MRamt = 0;
+                decimal.TryParse(Convert.ToString(ds.Tables[0].Compute("Sum(col2)", "")), out MRamt);
+                decimal famt = gamt1 - MRamt;
+                string finalAmt = string.Empty;
+                if (famt > 0)
+                    finalAmt = "Amount to Collect   Rs.   " + famt;
+                else if (famt < 0)
+                    finalAmt = "Amount to Refund   Rs.   " + famt * (-1);
+                else finalAmt = "Amount to Refund      NIL";
+                famt = Math.Abs(famt);
+                string numToWords = EMS.BLL.BLLReport.GetNumToWords(Convert.ToInt64(famt));
+
+                try
+                {
+                    string compname = Convert.ToString(ConfigurationManager.AppSettings["CompanyName"]);
+                    rptViewer.Reset();
+                    rptViewer.LocalReport.Dispose();
+                    rptViewer.LocalReport.DataSources.Clear();
+                    rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
+                    rptViewer.LocalReport.SetParameters(new ReportParameter("CompanyName", compname));
+                    rptViewer.LocalReport.SetParameters(new ReportParameter("Address", EMS.BLL.BLLReport.GetAddByCompName(compname)));
+                    rptViewer.LocalReport.SetParameters(new ReportParameter("tillDate", txtdtBill.Text));
+                    rptViewer.LocalReport.SetParameters(new ReportParameter("BL_Ref", txtBlNo.Text));
+                    rptViewer.LocalReport.SetParameters(new ReportParameter("finalAmt", finalAmt));
+                    rptViewer.LocalReport.SetParameters(new ReportParameter("NumToWords", numToWords));
+                    rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", ds.Tables[0]));
+                    rptViewer.LocalReport.Refresh();
+
+                }
+                catch (Exception ex)
+                {
+                    lblMsg.Text = ex.Message;
+
+                }
+
+                lblMsg.Text = rptViewer.LocalReport.ReportPath + "dgfdfgdf";
+            }
+
             else if (rbRpt.SelectedValue == "2")
+            {
                 rptName = "RptImpBillAnnex.rdlc";
+                string BlRefNo = ((TextBox)autoComplete1.FindControl("txtBlNo")).Text;
+                DataSet ds = EMS.BLL.BLLReport.GetImpBillAnne(hdnBLId.Value, txtdtBill.Text);
+                try
+                {
+                    string compname = Convert.ToString(ConfigurationManager.AppSettings["CompanyName"]);
+                    rptViewer.Reset();
+                    rptViewer.LocalReport.Dispose();
+                    rptViewer.LocalReport.DataSources.Clear();
+                    rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
+                    rptViewer.LocalReport.SetParameters(new ReportParameter("CompanyName", compname));
+                    rptViewer.LocalReport.SetParameters(new ReportParameter("Address", EMS.BLL.BLLReport.GetAddByCompName(compname)));
+                    rptViewer.LocalReport.SetParameters(new ReportParameter("tillDate", txtdtBill.Text));
+                    rptViewer.LocalReport.SetParameters(new ReportParameter("BL_Ref", txtBlNo.Text));
+                    rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", ds.Tables[0]));
+                    rptViewer.LocalReport.Refresh();
+
+                }
+                catch (Exception ex)
+                {
+                    lblMsg.Text = ex.Message;
+
+                }
+            }
             else
                 return;
-
-
-            string BlRefNo = ((TextBox)autoComplete1.FindControl("txtBlNo")).Text;
-            DataSet ds = EMS.BLL.BLLReport.GetImpBill(hdnBLId.Value,txtdtBill.Text);
-            decimal gamt1 = 0;
-            decimal.TryParse(Convert.ToString(ds.Tables[0].Compute("Sum(col1)", "")),out gamt1);
-            decimal MRamt = 0;
-            decimal.TryParse(Convert.ToString(ds.Tables[0].Compute("Sum(col2)", "")),out MRamt);
-            decimal famt = gamt1 - MRamt;
-            string finalAmt = string.Empty;
-            if (famt > 0)
-                finalAmt = "Amount to Collect   Rs.   " + famt;
-            else if (famt < 0)
-                finalAmt = "Amount to Refund   Rs.   " + famt*(-1);
-            else finalAmt = "Amount to Refund      NIL";
-            famt = Math.Abs(famt);
-            string numToWords = EMS.BLL.BLLReport.GetNumToWords(Convert.ToInt64(famt));
-
-            try
-            {
-                string compname = Convert.ToString(ConfigurationManager.AppSettings["CompanyName"]);
-                rptViewer.Reset();
-                rptViewer.LocalReport.Dispose();
-                rptViewer.LocalReport.DataSources.Clear();
-                rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
-                rptViewer.LocalReport.SetParameters(new ReportParameter("CompanyName", compname));
-                rptViewer.LocalReport.SetParameters(new ReportParameter("Address", EMS.BLL.BLLReport.GetAddByCompName(compname)));
-                rptViewer.LocalReport.SetParameters(new ReportParameter("tillDate", txtdtBill.Text));
-                rptViewer.LocalReport.SetParameters(new ReportParameter("BL_Ref", txtBlNo.Text));
-                rptViewer.LocalReport.SetParameters(new ReportParameter("finalAmt", finalAmt));
-                rptViewer.LocalReport.SetParameters(new ReportParameter("NumToWords", numToWords));
-                rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", ds.Tables[0]));
-                rptViewer.LocalReport.Refresh();
-               
-            }
-            catch(Exception ex)
-            {
-                lblMsg.Text = ex.Message;
-
-            }
-
-            lblMsg.Text = rptViewer.LocalReport.ReportPath+"dgfdfgdf";
 
         }
 

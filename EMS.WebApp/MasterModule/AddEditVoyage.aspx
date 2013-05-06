@@ -10,6 +10,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script src="../Scripts/Common.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function AutoCompleteItemSelected(sender, e) {
+          
+        }
+    </script>
     <script type="text/javascript" language="javascript">
         function SetMaxLength(obj, maxLen) {
             return (obj.value.length < maxLen);

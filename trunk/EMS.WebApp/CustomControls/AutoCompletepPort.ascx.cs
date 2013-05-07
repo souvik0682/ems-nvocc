@@ -12,9 +12,9 @@ namespace EMS.WebApp.CustomControls
     [System.Web.Script.Services.ScriptService]
     public partial class AutoCompletePort : System.Web.UI.UserControl
     {
+        private bool? _Enable = true;
+        public string RandNo = Guid.NewGuid().ToString();
 
-        public string RandNo=Guid.NewGuid().ToString();
-       
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -65,13 +65,14 @@ namespace EMS.WebApp.CustomControls
 
         }
 
-     
+        public bool Enabled
+        {
+            set
+            {
+                _Enable = value;
+                txtPort.Enabled = _Enable.Value;
+            }
 
-
-
-
-
-
-
+        }
     }
 }

@@ -18,13 +18,14 @@ namespace EMS.WebApp.MasterModule
         private int _userId = 0;
         private bool _hasEditAccess = true;
         private string VoyageId = "";
+        private string _PrevPage = string.Empty;
         #endregion
 
         BLL.DBInteraction dbinteract = new BLL.DBInteraction();
         protected void Page_Load(object sender, EventArgs e)
         {
             _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
-
+            RetriveParameters();
             VoyageId = GeneralFunctions.DecryptQueryString(Request.QueryString["id"]);
 
             if (!IsPostBack)
@@ -32,15 +33,22 @@ namespace EMS.WebApp.MasterModule
 
                 GeneralFunctions.PopulateDropDownList(ddlLoc, dbinteract.PopulateDDLDS("DSR.dbo.mstLocation", "pk_LocID", "LocName", true), true);
                 GeneralFunctions.PopulateDropDownList(ddlVessel, dbinteract.PopulateDDLDS("trnVessel", "pk_VesselID", "VesselName"));
-                btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('MangeVoyage.aspx','" + ResourceManager.GetStringWithoutName("ERR00017") + "')";
+                btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('MangeVoyage.aspx?p=" + Request.QueryString["p"] + "','" + ResourceManager.GetStringWithoutName("ERR00017") + "')";
                 if (VoyageId != "-1")
+                {
                     LoadData(VoyageId);
+
+                    if (_PrevPage == "import")
+                    {
+                        DisableFields();
+                    }
+
+                }
                 else
                     LandingDateCheck(dbinteract, VoyageId);
             }
             else
                 LandingDateCheck(dbinteract, VoyageId);
-            //
         }
 
         private void LandingDateCheck(BLL.DBInteraction dbinteract, string VoyageId)
@@ -53,7 +61,7 @@ namespace EMS.WebApp.MasterModule
 
                 if (txtdtLand.Text.Trim() != "")
                 {
-                    ERate =dbinteract.GetExchnageRate(Convert.ToDateTime(txtdtLand.Text));
+                    ERate = dbinteract.GetExchnageRate(Convert.ToDateTime(txtdtLand.Text));
 
                     //txtExcRate.Text = hdntxtExcRate.Value = dbinteract.GetExchnageRate(Convert.ToDateTime(txtdtLand.Text)).ToString();
 
@@ -66,15 +74,15 @@ namespace EMS.WebApp.MasterModule
                     ERate = dbinteract.GetExchnageRate(DateTime.Today);
 
                 }
-                
+
                 if (decimal.Parse(txtExcRate.Text) < ERate)
                 {
                     string msg;
                     msg = "Rate should be Greater than Today's EXchange Rate ";
-                        {
-                            GeneralFunctions.RegisterAlertScript(this, msg);
-                            return;
-                        }
+                    {
+                        GeneralFunctions.RegisterAlertScript(this, msg);
+                        return;
+                    }
                 }
             }
             else
@@ -98,7 +106,40 @@ namespace EMS.WebApp.MasterModule
             }
         }
 
+        void DisableFields()
+        {
 
+            ddlLoc.Enabled = false;
+            ddlVessel.Enabled = false;
+            AutoCompletepPort4.Enabled = false;
+            ddlVesselType.Enabled = false;
+            txtTotLine.Enabled = false;
+            txtCallSign.Enabled = false;
+            txtdtETA.Enabled = false;
+            txtTime.Enabled = false;
+            ddlSameButton.Enabled = false;
+            ddlCrewList.Enabled = false;
+            ddlCrewEffList.Enabled = false;
+            txtPCCNo.Enabled = false;
+            txtVIA.Enabled = false;
+            txtCargoDesc.Enabled = false;
+            txtLGNo.Enabled = false;
+            txtExcRate.Enabled = false;
+            txtVoyageNo.Enabled = false;
+            ddlTerminalID.Enabled = false;
+            AutoCompletepPort1.Enabled = false;
+            AutoCompletepPort2.Enabled = false;
+            AutoCompletepPort3.Enabled = false;
+            txtLightHouse.Enabled = false;
+            ddlShipStoreSubmitted.Enabled = false;
+            ddlPessengerList.Enabled = false;
+            ddlMaritime.Enabled = false;
+            txtdtPCC.Enabled = false;
+            txtVCN.Enabled = false;
+            txtMotherDaughter.Enabled = false;
+            txtdtAddLand.Enabled = false;
+            txtAltLGNo.Enabled = false;
+        }
 
         private void LoadData(string VoyageId)
         {
@@ -246,7 +287,7 @@ namespace EMS.WebApp.MasterModule
             {
                 string msg = EMS.BLL.VoyageBLL.CheckVoyageEntryAbilty(voyage.fk_VesselID, txtVoyageNo.Text.Trim(), voyage.fk_Pod, voyage.LandingDate, isedit);
                 //int c = dbinteract.PopulateDDLDS("trnVoyage", "fk_VesselID", "VoyageNo", "where fk_VesselID=" + ddlVessel.SelectedValue + " and VoyageNo='" + txtVoyageNo.Text.Trim() + "'").Tables[0].Rows.Count;
-                if (msg != "" && msg.ToLower()!="true")
+                if (msg != "" && msg.ToLower() != "true")
                 {
 
                     GeneralFunctions.RegisterAlertScript(this, msg);
@@ -255,7 +296,7 @@ namespace EMS.WebApp.MasterModule
 
                 }
             }
-            
+
 
             int result = dbinteract.AddEditVoyage(_userId, isedit, voyage);
             int result1 = EMS.BLL.VoyageBLL.VoyageLandingDateEntry(voyage.fk_VesselID, Convert.ToInt32(VoyageId), voyage.fk_Pod, voyage.LandingDate, _userId);
@@ -263,7 +304,8 @@ namespace EMS.WebApp.MasterModule
             if (result > 0)
             {
                 //if (!isedit)
-                    Response.Redirect("~/MasterModule/MangeVoyage.aspx");
+                Response.Redirect("~/MasterModule/MangeVoyage.aspx?p=" + Request.QueryString["p"]);
+
                 //else if (result1 > 0)
                 //    Response.Redirect("~/MasterModule/MangeVoyage.aspx");
                 //else
@@ -277,6 +319,17 @@ namespace EMS.WebApp.MasterModule
             }
         }
 
+        private void RetriveParameters()
+        {
+            if (ReferenceEquals(Request.QueryString["p"], null))
+            {
+                Response.Redirect("~/View/Home.aspx");
+            }
+            else
+            {
+                _PrevPage = GeneralFunctions.DecryptQueryString(Request.QueryString["p"]);
+            }
+        }
 
     }
 }

@@ -211,6 +211,15 @@ namespace EMS.WebApp {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liID_BLQuery;
         
         /// <summary>
+        /// liVoyageEdit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liVoyageEdit;
+        
+        /// <summary>
         /// liIR control.
         /// </summary>
         /// <remarks>

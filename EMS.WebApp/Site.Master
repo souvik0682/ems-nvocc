@@ -109,7 +109,7 @@
                                 Import Haulage</a></li>
                             <li id="liMst_Vessel" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/ManageVessel.aspx") %>">
                                 Vessel</a></li>
-                            <li id="li1" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MangeVoyage.aspx") %>">
+                            <li id="li1" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MangeVoyage.aspx?p=") + EMS.Utilities.GeneralFunctions.EncryptQueryString("master") %>">
                                 Voyage</a></li>
                         </ul>
                     </li>
@@ -121,7 +121,9 @@
                                         B/L Entry</a></li>
                                     <li id="liID_BLQuery" runat="server"><a href="<%=Page.ResolveClientUrl("~/Transaction/BL-Query.aspx") %>">
                                         Import Dashboard</a></li>
-                                    <%--             <li id="liID_Voyage" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MangeVoyage.aspx") %>">
+                                    <li id="liVoyageEdit" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MangeVoyage.aspx?p=") + EMS.Utilities.GeneralFunctions.EncryptQueryString("import") %>">
+                                        Voyage Edit</a></li>
+                                    <%--<li id="liID_Voyage" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MangeVoyage.aspx") %>">
                                         Voyage</a></li>
                                     <li id="li1" runat="server"><a href="<%=Page.ResolveClientUrl("~/MasterModule/MainLineVoyage.aspx") %>">
                                         Main Line Voyage</a></li>
@@ -214,8 +216,8 @@
                                             <li id="liFRI_EIR" runat="server"><a href="#">Export Invoice Register</a></li>
                                         </ul>--%>
                                     </li>
-                                    <li id="liFR_CN" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/RptImportBilling.aspx") %>">Invoice Statement</a></li>
-
+                                    <li id="liFR_CN" runat="server"><a href="<%=Page.ResolveClientUrl("~/Reports/RptImportBilling.aspx") %>">
+                                        Invoice Statement</a></li>
                                     <li id="liFRO" runat="server"><a href="#">Collection Statement</a>
                                         <%--      <ul>    
                                             <li id="liFRO_Collection" runat="server"><a href="#">Collection Register</a></li>

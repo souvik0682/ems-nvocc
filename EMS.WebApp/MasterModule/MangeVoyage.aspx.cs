@@ -17,6 +17,7 @@ namespace EMS.WebApp.MasterModule
 
         private int _userId = 0;
         private bool _hasEditAccess = true;
+        private string _PrevPage = string.Empty;
 
         #endregion
 
@@ -24,7 +25,7 @@ namespace EMS.WebApp.MasterModule
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            RetriveParameters();
             SetAttributes();
 
             if (!IsPostBack)
@@ -33,6 +34,16 @@ namespace EMS.WebApp.MasterModule
                 SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
                 LoadData(searchCriteria.SortExpression, searchCriteria.SortDirection);
 
+                if (_PrevPage == "master")
+                {
+                    gvwLoc.Columns[10].Visible = true;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    gvwLoc.Columns[10].Visible = false;
+                    btnAdd.Visible = false;
+                }
             }
         }
 
@@ -122,6 +133,7 @@ namespace EMS.WebApp.MasterModule
                 ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
                 btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
                 btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "pk_VoyageID"));
+                               
 
                 if (_hasEditAccess)
                 {
@@ -209,8 +221,8 @@ namespace EMS.WebApp.MasterModule
         {
             string encryptedId = GeneralFunctions.EncryptQueryString(id.ToString());
 
-            Response.Redirect("~/MasterModule/AddEditVoyage.aspx?id=" + encryptedId);
-        }
+            Response.Redirect("~/MasterModule/AddEditVoyage.aspx?p=" + Request.QueryString["p"] + "&id=" + encryptedId);
+        } 
 
         private void BuildSearchCriteria(SearchCriteria criteria)
         {
@@ -324,5 +336,18 @@ namespace EMS.WebApp.MasterModule
         {
             Response.Redirect("~/MasterModule/MangeVoyage.aspx");
         }
+
+        private void RetriveParameters()
+        {
+            if (ReferenceEquals(Request.QueryString["p"], null))
+            {
+                Response.Redirect("~/View/Home.aspx");
+            }
+            else
+            {
+                _PrevPage = GeneralFunctions.DecryptQueryString(Request.QueryString["p"]);
+            }
+        }
+         
     }
 }

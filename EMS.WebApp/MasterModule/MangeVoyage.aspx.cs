@@ -334,7 +334,7 @@ namespace EMS.WebApp.MasterModule
 
         protected void btnRefresh_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/MasterModule/MangeVoyage.aspx");
+            Response.Redirect("~/MasterModule/MangeVoyage.aspx?p="+Request.QueryString["p"]);
         }
 
         private void RetriveParameters()

@@ -6,6 +6,11 @@
     <%@ Register Src="../CustomControls/AutoCompletepPort.ascx" TagName="AutoCompletepPort"
     TagPrefix="uc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+  <script type="text/javascript">
+      function AutoCompleteItemSelected(sender, e) {
+
+      }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
     <asp:UpdateProgress ID="uProgressLoc" runat="server" AssociatedUpdatePanelID="upLoc">

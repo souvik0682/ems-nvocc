@@ -859,20 +859,44 @@ namespace EMS.WebApp.Transaction
                     Response.Redirect("~/Login.aspx");
                 }
 
-                if (user.UserRole.Id != (int)UserRole.Admin)
+                //if (_canView==false)
+                //{
+                //    Response.Redirect("~/Unauthorized.aspx");
+                //}
+
+                if (!ReferenceEquals(Request.QueryString["BLId"], null))
                 {
-                    Response.Redirect("~/Unauthorized.aspx");
+                    long blHeaderId = 0;
+                    Int64.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["BLId"].ToString()), out blHeaderId);
+
+                    if (blHeaderId > 0)
+                        if (!_canEdit)
+                        {
+                            if (!_canView)
+                            {
+                                Response.Redirect("~/Unauthorized.aspx");
+                            }
+                        }
+                    if (blHeaderId == -1)
+                        if (!_canAdd)
+                        {
+                            Response.Redirect("~/Unauthorized.aspx");
+                        }
+                   
                 }
+
+
+                //if (user.UserRole.Id != (int)UserRole.Admin)
+                //{
+                //    Response.Redirect("~/Unauthorized.aspx");
+                //}
             }
             else
             {
                 Response.Redirect("~/Login.aspx");
             }
 
-            if (!_canView)
-            {
-                Response.Redirect("~/Unauthorized.aspx");
-            }
+        
         }
 
         private void InitialActivities()
@@ -1927,6 +1951,13 @@ namespace EMS.WebApp.Transaction
             else if (rdoCargoType.SelectedValue == "L" || rdoCargoType.SelectedValue == "N")
             {
                 btnAddRow.Enabled = false;
+            }
+
+            if (_canEdit == false && _canView==true)
+            {
+                btnAddRow.Visible = false;
+                btnSave.Visible = false;
+
             }
         }
 

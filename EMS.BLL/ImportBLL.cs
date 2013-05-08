@@ -275,9 +275,9 @@ namespace EMS.BLL
             return ImportBLDAL.GetContainerBLWise(BlId);
         }
 
-        public void GenerateDONo(int Loc, int Line, Int64 BlID)
+        public void SaveDestuffing(int Dest, Int64 BlID)
         {
-            ImportBLDAL.GenerateDONo(Loc,Line,BlID);
+            ImportBLDAL.SaveDestuffing(Dest, BlID);
         }
 
     }

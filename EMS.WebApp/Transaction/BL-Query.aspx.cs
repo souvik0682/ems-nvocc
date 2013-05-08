@@ -1392,7 +1392,7 @@ namespace EMS.WebApp.Transaction
 
         protected void GenDo(object sender, EventArgs e)
         {
-            //oImportBLL.GenerateDONo(Convert.ToInt32(ddlLocation.SelectedValue),Convert.ToInt32(ddlLine.SelectedValue),Convert.ToInt64(hdnBLId.Value));
+            oImportBLL.SaveDestuffing(Convert.ToInt32(ddlDestuffing.SelectedIndex), Convert.ToInt64(hdnBLId.Value));
             mpeDo.Show();
         }
 

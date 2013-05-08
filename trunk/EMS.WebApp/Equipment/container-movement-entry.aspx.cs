@@ -244,7 +244,7 @@ namespace EMS.WebApp.Equipment
 
             if (ddlFromStatus.SelectedItem.Text == "TRFE")
             {
-                ddlToStatus.Enabled = false;
+                //ddlToStatus.Enabled = false;
                 ddlTolocation.Enabled = true;
             }
             else
@@ -275,7 +275,7 @@ namespace EMS.WebApp.Equipment
                     ddlEmptyYard.SelectedIndex = 0;
             }
 
-            if (ddlToStatus.SelectedItem.Text == "TRFE")
+            if (ddlToStatus.SelectedItem.Text == "TRFE" || ddlToStatus.SelectedItem.Text == "TRFI")
             {
                 //txtToLocation.Enabled = true;
                 ddlTolocation.Enabled = true;

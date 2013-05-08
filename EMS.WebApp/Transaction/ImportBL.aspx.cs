@@ -19,6 +19,10 @@ namespace EMS.WebApp.Transaction
 
         private int _userId = 0;
         private int _roleId = 0;
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
         //private int _locId = 0;
         //private bool _hasEditAccess = true;
 
@@ -132,9 +136,19 @@ namespace EMS.WebApp.Transaction
                 btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLID"));
 
                 //Delete link
-                ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
-                btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00007");
-                btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLID"));
+                if (_canDelete == true)
+                {
+                    ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                    btnRemove.Visible = true;
+                    btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00007");
+                    btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLID"));
+
+                }
+                else
+                {
+                    ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                    btnRemove.Visible = false;
+                }
             }
         }
 
@@ -160,6 +174,20 @@ namespace EMS.WebApp.Transaction
                     Response.Redirect("~/Login.aspx");
                 }
 
+                if (user.UserRole.Id != (int)UserRole.Admin)
+                {
+
+                    if (_canView == false)
+                    {
+                        Response.Redirect("~/Unauthorized.aspx");
+                    }
+
+                    if (_canAdd == false)
+                    {
+                        btnAdd.Visible = false;
+                    }
+                }
+
                 //if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.Manager && user.UserRole.Id != (int)UserRole.SalesExecutive)
                 //{
                 //    Response.Redirect("~/Unauthorized.aspx");
@@ -182,6 +210,7 @@ namespace EMS.WebApp.Transaction
                 if (!ReferenceEquals(user.UserRole, null))
                 {
                     _roleId = user.UserRole.Id;
+                    UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
                 }
 
                 //if (!ReferenceEquals(user.UserLocation, null))

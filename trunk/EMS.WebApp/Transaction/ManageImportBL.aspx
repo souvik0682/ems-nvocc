@@ -48,9 +48,9 @@
 
 
         function SetSelectedCargoType() {
-            alert(document.getElementById('<%=txtTransinfo.ClientID %>').value);
+            //alert(document.getElementById('<%=txtTransinfo.ClientID %>').value);
             if (document.getElementById('<%=txtTransinfo.ClientID %>').value == '') {
-                alert('Test');
+                //alert('Test');
                 var list = document.getElementById('<%= rdoCargoType.ClientID %>'); //Client ID of the radiolist
                 var inputs = list.getElementsByTagName("input");
                 var selected;
@@ -461,7 +461,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                CFS Name:
+                                                                CFS / ICD Name:
                                                             </td>
                                                             <td>
                                                                 <uc12:AC_CFSCode ID="AC_CFSCode1" runat="server" />
@@ -470,7 +470,7 @@
                                                             <td>
                                                             </td>
                                                             <td>
-                                                                CFS Code:
+                                                                CFS / ICD Code:
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtCFSName" runat="server" CssClass="textboxuppercase" MaxLength="50"

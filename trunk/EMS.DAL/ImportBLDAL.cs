@@ -962,14 +962,13 @@ namespace EMS.DAL
             return myDataTable;
         }
 
-        public static void GenerateDONo(int Loc,int Line, Int64 BlID)
+        public static void SaveDestuffing(int Dest, Int64 BlID)
         {
-            string strExecution = "[trn].[GenDoNo]";           
+            string strExecution = "[trn].[prcSaveDestuffing]";           
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                oDq.AddIntegerParam("@LocId", Loc);
-                oDq.AddIntegerParam("@LineId", Line);
+                oDq.AddIntegerParam("@DestuffingID", Dest);
                 oDq.AddBigIntegerParam("@BLId", BlID);
                 oDq.RunActionQuery();                
             }

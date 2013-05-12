@@ -14,8 +14,8 @@
             <fieldset style="width: 60%;">
                 <legend>Add / Edit Container Transaction</legend>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                        <ContentTemplate><table border="0" cellpadding="2" cellspacing="3" width="100%">
-                    
+                    <ContentTemplate>
+                        <table border="0" cellpadding="2" cellspacing="3" width="100%">
                             <tr>
                                 <td>
                                     Transaction CODE :
@@ -29,16 +29,15 @@
                                     Activity Date<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                <script type="text/javascript">
-                                    function ChangeActivityDate(txt) {
-                                        var ID = txt.id;
-                                        //alert(ID);
-                                        //alert(txt.value);
-                                        document.getElementById("container_gvSelectedContainer_lblStatusDate_0").innerHTML = txt.value;
-                                    }
-                                </script>
-
-                                    <asp:TextBox ID="txtDate" runat="server" Width="150" ></asp:TextBox>
+                                    <script type="text/javascript">
+                                        function ChangeActivityDate(txt) {
+                                            var ID = txt.id;
+                                            //alert(ID);
+                                            //alert(txt.value);
+                                            document.getElementById("container_gvSelectedContainer_lblStatusDate_0").innerHTML = txt.value;
+                                        }
+                                    </script>
+                                    <asp:TextBox ID="txtDate" runat="server" Width="150"></asp:TextBox>
                                     <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtDate"
                                         Format="dd/MM/yyyy" TargetControlID="txtDate">
                                     </cc1:CalendarExtender>
@@ -53,13 +52,13 @@
                                     From Status<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                <script type="text/javascript">
-                                    function clear() {
-                                        document.getElementById('<%= lblMessage.ClientID %>').innerHTML = "";
-                                    }
-                                </script>                                
-                                    <asp:DropDownList ID="ddlFromStatus" runat="server" Width="155" onchange="clear();" OnSelectedIndexChanged="ddlFromStatus_SelectedIndexChanged"
-                                        AutoPostBack="true">
+                                    <script type="text/javascript">
+                                        function clear() {
+                                            document.getElementById('<%= lblMessage.ClientID %>').innerHTML = "";
+                                        }
+                                    </script>
+                                    <asp:DropDownList ID="ddlFromStatus" runat="server" Width="155" onchange="clear();"
+                                        OnSelectedIndexChanged="ddlFromStatus_SelectedIndexChanged" AutoPostBack="true">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvFromStatus" runat="server" ErrorMessage="Please enter from status"
                                         ControlToValidate="ddlFromStatus" Display="None" ValidationGroup="vgContainer"
@@ -137,10 +136,19 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Narration :
+                                    Line <span class="errormessage1">*</span>:
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtNarration" runat="server" Width="150" TextMode="MultiLine" Style="text-transform: uppercase;"></asp:TextBox>
+                                    
+
+                                    <asp:DropDownList ID="ddlLine" runat="server" Width="155" AutoPostBack="true">
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="rfvLine" runat="server" ErrorMessage="Please select line"
+                                        Display="None" ControlToValidate="ddlLine" InitialValue="0" ValidationGroup="vgContainer"
+                                        ></asp:RequiredFieldValidator>
+                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server" TargetControlID="rfvLine">
+                                    </cc1:ValidatorCalloutExtender>
+
                                 </td>
                                 <td valign="top">
                                     Empty Yard <span class="errormessage1">*</span>:
@@ -156,11 +164,23 @@
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
                             </tr>
-                        
-
-                    </table></ContentTemplate>
-                    </asp:UpdatePanel>
-                    <table border="0" cellpadding="2" cellspacing="3" width="100%">
+                            <tr>
+                                
+                                <td valign="top">                                    
+                                    Narration :
+                                </td>
+                                <td valign="top">
+                                    <asp:TextBox ID="txtNarration" runat="server" Width="150" TextMode="MultiLine" Style="text-transform: uppercase;"></asp:TextBox>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                        </table>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <table border="0" cellpadding="2" cellspacing="3" width="100%">
                     <tr>
                         <td>
                             <div style="margin-left: 53%;">
@@ -202,8 +222,7 @@
                                         </div>
                                         <br />
                                         <asp:Button ID="btnProceed" runat="server" Text="Proceed" OnClick="btnProceed_Click" />
-                                        <asp:Button ID="btnCancel" runat="server" Text="Cancel" 
-                                            onclick="btnCancel_Click" />
+                                        <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                                     </fieldset>
                                 </center>
                             </asp:Panel>
@@ -246,8 +265,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Status Date">
                                         <ItemTemplate>
-                                        <asp:Label ID="lblStatusDate" runat="server" Text='<%# Eval("ChangeDate").ToString() == "" ? " " : Convert.ToDateTime(Eval("ChangeDate")).ToShortDateString()%>'></asp:Label>
-                                            
+                                            <asp:Label ID="lblStatusDate" runat="server" Text='<%# Eval("ChangeDate").ToString() == "" ? " " : Convert.ToDateTime(Eval("ChangeDate")).ToShortDateString()%>'></asp:Label>
                                         </ItemTemplate>
                                         <ItemStyle CssClass="gridviewitem" Width="12%" />
                                         <HeaderStyle CssClass="gridviewheader" />
@@ -273,15 +291,15 @@
                     <tr>
                         <%--<td>
                         </td>--%>
-                        <td style="padding-left:23%;">
+                        <td style="padding-left: 23%;">
                             <%--<asp:HiddenField ID="hdnChargeID" runat="server" Value="0" />--%>
                             <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="vgContainer"
                                 OnClick="btnSave_Click" />&nbsp;&nbsp;<asp:Button ID="btnBack" runat="server" CssClass="button"
                                     Text="Back" ValidationGroup="vgUnknown" OnClick="btnBack_Click" OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
                             <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
                         </td>
-                    </tr></table>
-                
+                    </tr>
+                </table>
             </fieldset>
         </center>
     </div>

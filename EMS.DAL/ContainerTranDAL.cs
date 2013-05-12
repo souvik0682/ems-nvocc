@@ -30,7 +30,7 @@ namespace EMS.DAL
             return myDataSet;
         }
 
-        public static DataTable GetContainerTransactionListFiltered(int Status, int LocationId, DateTime MovementDate)
+        public static DataTable GetContainerTransactionListFiltered(int Status, int LocationId, DateTime MovementDate,int LineID)
         {
             string strExecution = "[trn].[getContainerFiltered]";
             DataTable myDataTable;
@@ -39,6 +39,7 @@ namespace EMS.DAL
             {
                 oDq.AddIntegerParam("@Status", Status);
                 oDq.AddIntegerParam("@LocationId", LocationId);
+                oDq.AddIntegerParam("@LineId", LineID);
                 oDq.AddDateTimeParam("@MovementDate", MovementDate);
                 
 

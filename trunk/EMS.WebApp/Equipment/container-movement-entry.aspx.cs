@@ -214,6 +214,12 @@ namespace EMS.WebApp.Equipment
             ddlTolocation.Items.Insert(0, Li);
 
             #endregion
+
+            #region Line/Nvocc
+            Li = new ListItem("Select", "0");
+            PopulateDropDown((int)Enums.DropDownPopulationFor.Line, ddlLine, 0, 0);
+            ddlLine.Items.Insert(0, Li);
+            #endregion
         }
 
         void PopulateDropDown(int Number, DropDownList ddl, int? Filter1, int? Filter2)
@@ -275,7 +281,7 @@ namespace EMS.WebApp.Equipment
                     ddlEmptyYard.SelectedIndex = 0;
             }
 
-            if (ddlToStatus.SelectedItem.Text == "TRFE" || ddlToStatus.SelectedItem.Text == "TRFI")
+            if (ddlToStatus.SelectedItem.Text == "TRFE") // || ddlToStatus.SelectedItem.Text == "TRFI")
             {
                 //txtToLocation.Enabled = true;
                 ddlTolocation.Enabled = true;
@@ -297,7 +303,7 @@ namespace EMS.WebApp.Equipment
         {
 
             ContainerTranBLL oContainerTranBLL = new ContainerTranBLL();
-            dtFilteredContainer = oContainerTranBLL.GetContainerTransactionListFiltered(Convert.ToInt16(ddlFromStatus.SelectedValue), EmptyYardId, Convert.ToDateTime(txtDate.Text));
+            dtFilteredContainer = oContainerTranBLL.GetContainerTransactionListFiltered(Convert.ToInt16(ddlFromStatus.SelectedValue), EmptyYardId, Convert.ToDateTime(txtDate.Text), Convert.ToInt16(ddlLine.SelectedValue));
             ViewState["Container"] = dtFilteredContainer;
             gvContainer.DataSource = dtFilteredContainer;
             gvContainer.DataBind();

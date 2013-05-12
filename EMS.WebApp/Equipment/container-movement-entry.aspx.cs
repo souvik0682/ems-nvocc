@@ -541,6 +541,9 @@ namespace EMS.WebApp.Equipment
             if (ddlTolocation.Items.Count > 0)
                 ddlTolocation.SelectedIndex = 0;
 
+            if (ddlLine.Items.Count > 0)
+                ddlLine.SelectedIndex = 0;
+
             //hdnChargeID.Value = string.Empty;
             hdnContainerTransactionId.Value = "0";
             hdnTranCode.Value = string.Empty;

@@ -413,7 +413,7 @@ namespace EMS.WebApp.Equipment
             }
             else
             {
-                fillContainer(0);
+                fillContainer(Convert.ToInt32(ddlFromLocation.SelectedValue));
             }
 
             ModalPopupExtender1.Show();

@@ -697,6 +697,8 @@ namespace EMS.WebApp.Transaction
             if (rdoCargoType.SelectedValue == "L")
             {
                 txtSublineNo.Enabled = true;
+                txtFtrCargoType.Text = "LCL";
+                rfvFtrSealNo.Visible = true;
 
                 if (Convert.ToInt64(ViewState[BLHEADERID]) > 0)
                 {
@@ -707,8 +709,24 @@ namespace EMS.WebApp.Transaction
                     btnAddRow.Enabled = true;
                 }
             }
-            else if (rdoCargoType.SelectedValue == "F" || rdoCargoType.SelectedValue == "E")
+            else if (rdoCargoType.SelectedValue == "F")
             {
+                txtSublineNo.Enabled = false;
+                btnAddRow.Enabled = true;
+                txtFtrCargoType.Text = "FCL";
+                rfvFtrSealNo.Visible = true;
+            }
+            else if (rdoCargoType.SelectedValue == "E")
+            {
+                txtFtrCargoWt.Text = "0";
+                txtFtrCommodity.Text = "EMPTY CONTAINER";
+                txtFtrSealNo.Text = "";
+                txtFtrPackage.Text = "0";
+                txtPackage.Text = "0";
+                txtGrossWeight.Text = "0";
+                txtFtrCargoType.Text = "ETY";
+                rfvFtrSealNo.Visible = false;
+               
                 txtSublineNo.Enabled = false;
                 btnAddRow.Enabled = true;
             }

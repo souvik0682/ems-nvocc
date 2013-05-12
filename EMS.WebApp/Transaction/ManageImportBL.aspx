@@ -49,7 +49,7 @@
 
         function SetSelectedCargoType() {
             //alert(document.getElementById('<%=txtTransinfo.ClientID %>').value);
-            if (document.getElementById('<%=txtTransinfo.ClientID %>').value == '') {
+//            if (document.getElementById('<%=txtTransinfo.ClientID %>').value == '') {
                 //alert('Test');
                 var list = document.getElementById('<%= rdoCargoType.ClientID %>'); //Client ID of the radiolist
                 var inputs = list.getElementsByTagName("input");
@@ -82,7 +82,7 @@
 
                 //Transhipment Info
                 document.getElementById('<%=txtTransinfo.ClientID %>').value = "CARGO LOADED FROM " + document.getElementById('<%=hdnPortLoading.ClientID %>').value + "  TO BE DISCHARGED AT " + document.getElementById('<%=hdnPortDischarge.ClientID %>').value;
-            }
+//            }
         } 
 </script>
 

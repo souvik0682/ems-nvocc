@@ -1027,7 +1027,7 @@ namespace EMS.WebApp.Transaction
 
         private void LoadVoyageDDL()
         {
-            DataTable dt = new ImportBLL().GetVoyages(Convert.ToInt32(ViewState[VESSELID]));
+            DataTable dt = new ImportBLL().GetVoyages(Convert.ToInt32(ViewState[VESSELID]), Convert.ToInt32(ddlLocation.SelectedValue));
             DataRow dr = dt.NewRow();
             dr["pk_VoyageID"] = "0";
             dr["VoyageNo"] = "--Select--";

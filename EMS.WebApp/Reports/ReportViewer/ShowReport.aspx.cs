@@ -356,7 +356,6 @@ namespace EMS.WebApp.Reports.ReportViewer
 
         }
 
-
         private ReportParameter[] BindParameter(string reportType)
         {
             ReportParameter[] rptParameters = null;

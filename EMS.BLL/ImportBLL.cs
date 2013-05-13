@@ -21,9 +21,9 @@ namespace EMS.BLL
             return ImportBLDAL.GetLocation(UserId, IsStock);
         }
 
-        public DataTable GetVoyages(int VesselId)
+        public DataTable GetVoyages(int VesselId, int LocationID)
         {
-            return ImportBLDAL.GetVoyages(VesselId);
+            return ImportBLDAL.GetVoyages(VesselId, LocationID);
         }
 
         public int GetVesselId(string VesseleName)

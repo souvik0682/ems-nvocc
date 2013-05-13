@@ -57,7 +57,7 @@ namespace EMS.DAL
             return lstLoc;
         }
 
-        public static DataTable GetVoyages(int VesseleId)
+        public static DataTable GetVoyages(int VesseleId, int LocationId)
         {
             string strExecution = "uspGetVoyage";
             DataTable dt = new DataTable();
@@ -66,7 +66,7 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@fk_VesselID", VesseleId);
-
+                oDq.AddIntegerParam("@fk_LocationID", LocationId);
                 dt = oDq.GetTable();
             }
 

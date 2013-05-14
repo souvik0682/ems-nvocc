@@ -776,10 +776,25 @@ namespace EMS.WebApp.Transaction
             int PGRFreeDays = new ImportBLL().GetPGRFreeDays(Convert.ToInt32(ddlLocation.SelectedValue));
             txtPGRFreeDays.Text = PGRFreeDays.ToString();
 
-            ((AjaxControlToolkit.AutoCompleteExtender)AC_Consignee1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
-            ((AjaxControlToolkit.AutoCompleteExtender)AC_NParty1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
-            ((AjaxControlToolkit.AutoCompleteExtender)AC_CHA1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
-            ((AjaxControlToolkit.AutoCompleteExtender)AC_CFSCode1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
+            //((AjaxControlToolkit.AutoCompleteExtender)AC_Consignee1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
+            //((AjaxControlToolkit.AutoCompleteExtender)AC_NParty1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
+            //((AjaxControlToolkit.AutoCompleteExtender)AC_CHA1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
+            //((AjaxControlToolkit.AutoCompleteExtender)AC_CFSCode1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
+            //LoadSurveyorDDL();
+        }
+
+        protected void ddlStockLocation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtCFSName.Text = "";
+            ((TextBox)AC_CHA1.FindControl("txtCha")).Text = "";
+            ((TextBox)AC_CFSCode1.FindControl("txtCFSCode")).Text = "";
+            
+            
+            
+            ((AjaxControlToolkit.AutoCompleteExtender)AC_Consignee1.FindControl("AutoPort")).ContextKey = ddlStockLocation.SelectedValue;
+            ((AjaxControlToolkit.AutoCompleteExtender)AC_NParty1.FindControl("AutoPort")).ContextKey = ddlStockLocation.SelectedValue;
+            ((AjaxControlToolkit.AutoCompleteExtender)AC_CHA1.FindControl("AutoPort")).ContextKey = ddlStockLocation.SelectedValue;
+            ((AjaxControlToolkit.AutoCompleteExtender)AC_CFSCode1.FindControl("AutoPort")).ContextKey = ddlStockLocation.SelectedValue;
             LoadSurveyorDDL();
         }
 
@@ -1012,7 +1027,7 @@ namespace EMS.WebApp.Transaction
             ((AjaxControlToolkit.AutoCompleteExtender)AC_Consignee1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
             ((AjaxControlToolkit.AutoCompleteExtender)AC_NParty1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
             ((AjaxControlToolkit.AutoCompleteExtender)AC_CHA1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
-            ((AjaxControlToolkit.AutoCompleteExtender)AC_CFSCode1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
+            
 
             int PGRFreeDays = new ImportBLL().GetPGRFreeDays(Convert.ToInt32(ddlLocation.SelectedValue));
             txtPGRFreeDays.Text = PGRFreeDays.ToString();
@@ -1023,6 +1038,7 @@ namespace EMS.WebApp.Transaction
             ddlStockLocation.DataSource = lstStockLocation;
             ddlStockLocation.DataBind();
             ddlStockLocation.SelectedValue = lstStockLocation[0].DefaultLocation.ToString();
+            ((AjaxControlToolkit.AutoCompleteExtender)AC_CFSCode1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
         }
 
         private void LoadVoyageDDL()
@@ -1054,7 +1070,7 @@ namespace EMS.WebApp.Transaction
 
         private void LoadSurveyorDDL()
         {
-            DataTable dt = new ImportBLL().GetEmptyYard(Convert.ToInt64(ddlLocation.SelectedValue));
+            DataTable dt = new ImportBLL().GetEmptyYard(Convert.ToInt64(ddlStockLocation.SelectedValue));
             DataRow dr = dt.NewRow();
             dr["fk_AddressID"] = "0";
             dr["AddrName"] = "--Select--";

@@ -110,7 +110,7 @@ namespace EMS.WebApp.Transaction
             }
             else if (e.CommandName == "Remove")
             {
-                DeleteImportBL(Convert.ToInt32(e.CommandArgument));
+                DeleteImportBL(Convert.ToInt64(e.CommandArgument));
             }
         }
 
@@ -268,12 +268,11 @@ namespace EMS.WebApp.Transaction
             }
         }
 
-        private void DeleteImportBL(int blId)
+        private void DeleteImportBL(long blId)
         {
-            //CommonBLL commonBll = new CommonBLL();
-            //commonBll.DeleteCustomer(custId, _userId);
+            new ImportBLL().DeleteBL(blId);
             LoadImportBL();
-            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00006") + "');</script>", false);
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('BL has been deleted successfully!');</script>", false);
         }
 
         private void RedirecToAddEditPage(int id)

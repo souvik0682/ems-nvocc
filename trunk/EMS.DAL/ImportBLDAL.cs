@@ -722,6 +722,17 @@ namespace EMS.DAL
             }
         }
 
+        public static void DeleteBL(long BLId)
+        {
+            string strExecution = "uspDeleteBL";
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@BLId", BLId);
+                oDq.RunActionQuery();
+            }
+        }
+
         public static DataTable GetSurveyor(long LocationId)
         {
             string strExecution = "uspGetSurveyor";

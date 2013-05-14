@@ -280,5 +280,9 @@ namespace EMS.BLL
             ImportBLDAL.SaveDestuffing(Dest, BlID);
         }
 
+        public void DeleteBL(long BLId)
+        {
+            ImportBLDAL.DeleteBL(BLId);
+        }
     }
 }

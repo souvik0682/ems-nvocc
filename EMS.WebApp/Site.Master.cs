@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using EMS.Utilities;
 using EMS.Common;
 using EMS.BLL;
+using System.Data;
+using System.Text;
 
 namespace EMS.WebApp
 {
@@ -58,6 +60,8 @@ namespace EMS.WebApp
             Page.Header.DataBind();
             this.Page.ClientScript.RegisterClientScriptInclude(this.GetType(), "Common", this.ResolveClientUrl("~/Scripts/Common.js"));
             this.Page.ClientScript.RegisterClientScriptInclude(this.GetType(), "CustomTextBox", this.ResolveClientUrl("~/Scripts/CustomTextBox.js"));
+
+            GenerateUserSpecificMenu(UserBLL.GetLoggedInUserId());
         }
 
         protected void lnkLogout_Click(object sender, EventArgs e)
@@ -248,5 +252,73 @@ namespace EMS.WebApp
 
             return menuId;
         }
+
+        private void GenerateUserSpecificMenu(int UserId)
+        {
+            DataTable MenuTable = UserBLL.GetUserSpecificMenuList(UserId);
+
+            StringBuilder StringMenu = new StringBuilder();
+
+            //Filter for 1st level menu
+            DataRow[] PRows = MenuTable.Select("PID = 0");
+            StringMenu.Append("<ul>");
+            GenerateList(MenuTable, StringMenu, PRows);
+            StringMenu.Append("</ul>");
+
+            navbar.InnerHtml = StringMenu.ToString();
+        }
+
+        private string GenerateList(DataTable MenuTable, StringBuilder StringMenu, DataRow[] PRows)
+        {
+            foreach (DataRow pRow in PRows)
+            {
+                //Checking whether child exist or not
+                DataRow[] FLCRows = MenuTable.Select("PID = " + pRow["MenuID"].ToString());
+
+                if (pRow["Name"].ToString() == "Home" || pRow["Name"].ToString() == "Change Password" || pRow["IsParent"].ToString() == "0")
+                {
+                    if (pRow["CanView"].ToString() == "1")
+                    {
+                        StringMenu.Append("<li>");
+                        switch (pRow["Name"].ToString())
+                        {
+                            case "Voyage":
+                                StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString() + "?p=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("master")) + "'>" + pRow["Name"].ToString() + "</a>");
+                                break;
+
+                            case "Voyage Edit":
+                                StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString() + "?p=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("import")) + "'>" + pRow["Name"].ToString() + "</a>");
+                                break;
+
+                            default:
+                                StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString()) + "'>" + pRow["Name"].ToString() + "</a>");
+                                break;
+                        }
+                        StringMenu.Append("</li>");
+                    }
+                }
+                else
+                {
+                    //StringMenu.Append("<li>");
+                    //StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString()) + "'>" + pRow["Name"].ToString() + "</a>");
+
+                    if (FLCRows.Length > 0)
+                    {
+                        StringMenu.Append("<li>");
+                        StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString()) + "'>" + pRow["Name"].ToString() + "</a>");
+
+                        StringMenu.Append("<ul>");
+                        GenerateList(MenuTable, StringMenu, FLCRows);
+                        StringMenu.Append("</ul>");
+
+                        StringMenu.Append("</li>");
+                    }
+                    //StringMenu.Append("</li>");
+                }
+            }
+
+            return StringMenu.ToString();
+        }
+
     }
 }

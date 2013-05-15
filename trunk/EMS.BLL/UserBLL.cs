@@ -9,6 +9,7 @@ using EMS.Utilities;
 using System.Web;
 using EMS.Utilities.ResourceManager;
 using EMS.Utilities.Cryptography;
+using System.Data;
 
 namespace EMS.BLL
 {
@@ -250,6 +251,11 @@ namespace EMS.BLL
                     canView = userPermission.CanView;
                 }
             }
+        }
+
+        public static DataTable GetUserSpecificMenuList(int UserID)
+        {
+            return UserDAL.GetUserSpecificMenuList(UserID);
         }
 
         #endregion

@@ -134,9 +134,9 @@ namespace EMS.Entity
             this.CompanyID = Convert.ToInt32(reader["CompanyID"]);
             this.Id = Convert.ToInt32(reader["RoleID"]);
             this.MenuID = Convert.ToInt32(reader["MenuID"]);
-            this.MainID = Convert.ToInt32(reader["MainID"]);
-            this.SubID = Convert.ToInt32(reader["SubID"]);
-            this.SubSubID = Convert.ToInt32(reader["SubSubID"]);
+            //this.MainID = Convert.ToInt32(reader["MainID"]);
+            //this.SubID = Convert.ToInt32(reader["SubID"]);
+            //this.SubSubID = Convert.ToInt32(reader["SubSubID"]);
             this.CanAdd = Convert.ToBoolean(reader["CanAdd"]);
             this.CanEdit = Convert.ToBoolean(reader["CanEdit"]);
             this.CanDelete = Convert.ToBoolean(reader["CanDelete"]);

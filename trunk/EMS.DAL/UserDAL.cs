@@ -334,6 +334,20 @@ namespace EMS.DAL
             return roleMenu;
         }
 
+
+        public static DataTable GetUserSpecificMenuList(int UserID)
+        {
+            string strExecution = "[dbo].[GetMenuList]";
+            DataTable dt = new DataTable();
+            
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@UserId", UserID);
+                dt = oDq.GetTable();
+            }
+            return dt;
+        }
+
         #endregion
     }
 }

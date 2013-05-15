@@ -25,11 +25,13 @@ namespace EMS.WebApp.View
 
         private enum MainMenuItem
         {
-            Master = 1,
-            Import = 2,
-            Finance = 3,
-            Logistic = 4,
-            Export = 5
+            Home = 1,
+            Master = 2,
+            Import = 17,
+            Finance = 40,
+            Logistic = 66,
+            Export = 92,
+            Change_Password = 110
         };
 
         #endregion

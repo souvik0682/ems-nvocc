@@ -91,9 +91,22 @@ namespace EMS.WebApp
             int userId = 0;
 
             userId = UserBLL.GetLoggedInUserId();
-            menuId = GetMenuIdByPath();
+            //menuId = GetMenuIdByPath();
+
+            if (Request.QueryString["mid"] != null)
+            {
+                menuId = Convert.ToInt32(EMS.Utilities.GeneralFunctions.DecryptQueryString(Request.QueryString["mid"]));
+            }
+
 
             IUserPermission userPermission = UserBLL.GetMenuAccessByUser(userId, menuId);
+            if (menuId == 0)
+            {
+                userPermission.CanAdd = true;
+                userPermission.CanDelete = true;
+                userPermission.CanEdit = true;
+                userPermission.CanView = true;
+            }
             Session[Constants.SESSION_USER_PERMISSION] = userPermission;
         }
 
@@ -283,15 +296,15 @@ namespace EMS.WebApp
                         switch (pRow["Name"].ToString())
                         {
                             case "Voyage":
-                                StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString() + "?p=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("master")) + "'>" + pRow["Name"].ToString() + "</a>");
+                                StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString() + "?p=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("master")) + "&mid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(pRow["MenuID"].ToString()) +"'>" + pRow["Name"].ToString() + "</a>");
                                 break;
 
                             case "Voyage Edit":
-                                StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString() + "?p=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("import")) + "'>" + pRow["Name"].ToString() + "</a>");
+                                StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString() + "?p=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("import")) + "&mid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(pRow["MenuID"].ToString()) + "'>" + pRow["Name"].ToString() + "</a>");
                                 break;
 
                             default:
-                                StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString()) + "'>" + pRow["Name"].ToString() + "</a>");
+                                StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString()) + "?mid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(pRow["MenuID"].ToString()) + "'>" + pRow["Name"].ToString() + "</a>");
                                 break;
                         }
                         StringMenu.Append("</li>");

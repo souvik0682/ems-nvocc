@@ -34,7 +34,7 @@ namespace EMS.WebApp.Reports
         protected void Page_Load(object sender, EventArgs e)
         {
             RetriveParameters();
-            CheckUserAccess();
+            //CheckUserAccess();
 
             if (!IsPostBack)
             {

@@ -20,6 +20,15 @@ namespace EMS.BLL
            return EquipmentDAL.DDLGetLine();
        }
 
+       public static DataSet DDLGetStatus()
+       {
+           return EquipmentDAL.DDLGetStatus();
+       }
+
+       public static DataSet DDLGetContainerType()
+       {
+           return EquipmentDAL.DDLGetContainerType();
+       }
        public static int AddEditEquipEstimate(int userId,bool isEdit,IEqpRepairing ieqp)
        {
            return EquipmentDAL.AddEditEquipEstimate(userId, isEdit, ieqp);

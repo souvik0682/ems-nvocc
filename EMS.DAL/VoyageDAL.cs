@@ -52,7 +52,6 @@ namespace EMS.DAL
             dquery.AddIntegerParam("@Pod", Pod);
 
             return dquery.RunActionQuery();
-
         }
 
 

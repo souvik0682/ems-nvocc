@@ -45,6 +45,26 @@ namespace EMS.DAL
           return ds;
       }
 
+      public static DataSet DDLGetStatus()
+      {
+          DataSet ds = new DataSet();
+          using (DbQuery dq = new DbQuery("Select pk_movementid ListItemValue, MoveAbbr ListItemText from mstContainerMovement where movestatus=1", true))
+          {
+              ds = dq.GetTables();
+          }
+          return ds;
+      }
+
+      public static DataSet DDLGetContainerType()
+      {
+          DataSet ds = new DataSet();
+          using (DbQuery dq = new DbQuery("Select pk_ContainerTypeid ListItemValue, ContainerAbbr ListItemText from mstContainerType", true))
+          {
+              ds = dq.GetTables();
+          }
+          return ds;
+      }
+
       public static int AddEditEquipEstimate(int userID,bool isEdit, IEqpRepairing ieqp)
       {
           int result = 0;

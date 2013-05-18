@@ -20,7 +20,7 @@
  <div id="headercaption">
          CONTAINER STOCK STATEMENT </div>
     <center>
-        <fieldset style="width:700px; ">
+        <fieldset style="width:1000px; ">
             <legend> Container Stock Details </legend>
              <asp:UpdatePanel ID="upLoc" runat="server" UpdateMode="Conditional">
                     <Triggers>
@@ -32,7 +32,7 @@
             <table border="0" cellpadding="2" cellspacing="3" width="100%">
             
             <tr>
-              <td style="width:40%" >
+              <td style="width:60%" >
               <table width="100%">
                     <tr>
                     <td style="text-align:right">Line:</td>
@@ -49,10 +49,24 @@
                            <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage" 
                             ControlToValidate="ddlLoc" Display="Dynamic" InitialValue="0" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
                     </td>
-              
+                    <td style="text-align:right">Status:<%--<span class="errormessage1">*</span>--%></td>
+                    <td>
+                      <asp:DropDownList ID="ddlStatus" runat="server" Width="100%" 
+                            ></asp:DropDownList>
+                           <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage" 
+                            ControlToValidate="ddlLoc" Display="Dynamic" InitialValue="0" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
+                    </td>
+                    
+                    <td style="text-align:right">Type:<%--<span class="errormessage1">*</span>--%></td>
+                    <td>
+                      <asp:DropDownList ID="ddlContainerType" runat="server" Width="100%" 
+                            ></asp:DropDownList>
+                           <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage" 
+                            ControlToValidate="ddlLoc" Display="Dynamic" InitialValue="0" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
+                    </td>                   
               </table>
               </td>
-              <td style="width:40%" colspan="2" align="right"><table width="100%">
+              <td style="width:30%" colspan="2" align="right"><table width="100%">
                 <tr>
                     <td style="text-align:right" >Stock Date:</td>
                     <td>

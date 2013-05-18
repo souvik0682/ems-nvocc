@@ -69,13 +69,14 @@ namespace EMS.DAL
                     entity.PortLoading = Convert.ToString(reader["PortLoading"]);
                     entity.PortDischarge = Convert.ToString(reader["PortDischarge"]);
                     entity.FinalDestination = Convert.ToString(reader["FinalDestination"]);
+                    entity.DischargeDate = Convert.ToDateTime(reader["DischargeDate"]);
                     //entity.DischargeDate = Convert.ToString(reader["DischargeDate"]);
                     entity.IGMNo = Convert.ToString(reader["IGMNo"]);
                     if (reader["GrossWeight"] != DBNull.Value) entity.GrossWeight = Convert.ToDecimal(reader["GrossWeight"]);
                     entity.GoodsDescription = Convert.ToString(reader["GoodDescription"]);
                     if (reader["NumberPackage"] != DBNull.Value) entity.NumberPackage = Convert.ToInt64(reader["NumberPackage"]);
                     entity.PackageUnit = Convert.ToString(reader["PackageUnit"]);
-                    if (reader["Stat"] != DBNull.Value) entity.Stat = Convert.ToString(reader["Stat"]);
+                    if (reader["RsStatus"] != DBNull.Value) entity.Stat = Convert.ToString(reader["RsStatus"]);
                     if (reader["PGR_FreeDays"] != DBNull.Value) entity.PGRFreeDays = Convert.ToInt32(reader["PGR_FreeDays"]);
                     entity.AddressCFS = Convert.ToString(reader["AddressCFS"]);
                     //entity.ICD = Convert.ToString(reader["ICD"]);

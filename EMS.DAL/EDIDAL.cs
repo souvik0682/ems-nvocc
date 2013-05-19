@@ -102,7 +102,7 @@ namespace EMS.DAL
             return dquery.GetTable();
         }
 
-        public static void SaveEDINo(int VoyageID, int VesselID, int POD, int NvoccID, int StartNo)
+        public static void SaveEDINo(int VoyageID, int VesselID, int POD, int NvoccID, int StartNo,int SurveyorID)
         {
             //[dbo].[prcSaveItemNoFrEDI] 
 
@@ -114,6 +114,8 @@ namespace EMS.DAL
             dquery.AddIntegerParam("@POD", POD);
             dquery.AddIntegerParam("@Nvoccid", NvoccID);
             dquery.AddIntegerParam("@StartNo", StartNo);
+            dquery.AddIntegerParam("@SurveyorID", SurveyorID);
+            
 
             dquery.RunActionQuery();
         }

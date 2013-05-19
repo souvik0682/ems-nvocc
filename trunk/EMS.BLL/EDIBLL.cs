@@ -40,9 +40,9 @@ namespace EMS.BLL
            return EDIDAL.GetItemNoForEDI(VoyageID,VesselID,POD);
        }
 
-       public static void SaveEDINo(int VoyageID, int VesselID, int POD, int NvoccID, int StartNo)
+       public static void SaveEDINo(int VoyageID, int VesselID, int POD, int NvoccID, int StartNo,int SurveyorID)
        {
-           EDIDAL.SaveEDINo(VoyageID, VesselID, POD, NvoccID, StartNo);
+           EDIDAL.SaveEDINo(VoyageID, VesselID, POD, NvoccID, StartNo,SurveyorID);
        }
     }
 

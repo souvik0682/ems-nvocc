@@ -29,7 +29,7 @@ namespace EMS.WebApp.Transaction
         protected void Page_Load(object sender, EventArgs e)
         {
             RetriveParameters();
-            CheckUserAccess();
+            //CheckUserAccess();
 
             if (!Page.IsPostBack)
             {
@@ -919,10 +919,16 @@ namespace EMS.WebApp.Transaction
             //Add-Update
             long invoiceID = new InvoiceBLL().SaveInvoice(invoice, misc);
 
-            string invoiceNo = new InvoiceBLL().GetInvoiceNoById(invoiceID);
+            if (invoiceID == 0)
+            {
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('No landing date. Invoice aborted');</script>", false);
+            }
+            else
+            {
+                string invoiceNo = new InvoiceBLL().GetInvoiceNoById(invoiceID);
 
-            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Record saved successfully! Invoice Number: " + invoiceNo + "');</script>", false);
-
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Record saved successfully! Invoice Number: " + invoiceNo + "');</script>", false);
+            }
             Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(ddlBLno.SelectedItem.Text));
 
             //ViewState["CHARGERATE"] = null;

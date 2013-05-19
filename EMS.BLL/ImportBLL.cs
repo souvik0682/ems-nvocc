@@ -284,5 +284,10 @@ namespace EMS.BLL
         {
             ImportBLDAL.DeleteBL(BLId);
         }
+
+        public  DataTable GetSurveyor(long LocationId)
+        {
+           return ImportBLDAL.GetSurveyor(LocationId);
+        }
     }
 }

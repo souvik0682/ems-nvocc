@@ -57,16 +57,16 @@
                                     <asp:HiddenField ID="hdnPortId" runat="server" Value="0" />
                                     <asp:DropDownList ID="ddlVoyage" runat="server" Width="67%" AutoPostBack="True" OnSelectedIndexChanged="ddlVoyage_SelectedIndexChanged">
                                     </asp:DropDownList>
-                                    <asp:LinkButton ID="lnkLines" runat="server" OnClick="lnkLines_Click" Visible="false">Check Line</asp:LinkButton>
+                                    <asp:LinkButton ID="lnkLines" runat="server" OnClick="lnkLines_Click" >Check Line</asp:LinkButton>
                                     <!-- -->
                                     <asp:LinkButton ID="hdnButton" runat="server"></asp:LinkButton>
                                     <cc2:ModalPopupExtender ID="mpeLine" runat="server" PopupControlID="pnlLine" TargetControlID="hdnButton"
                                         BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseMoneyReceived">
                                     </cc2:ModalPopupExtender>
                                     <asp:Panel ID="pnlLine" runat="server" Style="display: none;">
-                                        <div style="height: 280; width: 300px; overflow: auto;background-color:White;">
+                                        <div style="height: 280; width: 600px; overflow: auto;background-color:White;">
                                             <div style="background-color: #328DC4; padding-top: 5px;">
-                                                <div style="width: 83%; text-align: left; font-weight: bold; color: White; font-size: 12pt;
+                                                <div style="width: 90%; text-align: left; font-weight: bold; color: White; font-size: 12pt;
                                                     padding-left: 15px; float: left;">
                                                     No of Items for EDI
                                                 </div>
@@ -83,14 +83,17 @@
                                                         <td style='width: 130px; padding-left: 2px; text-align:left;'>
                                                             NVOCC
                                                         </td>
-                                                        <td style='width: 80px;'>
+                                                        <td style='width: 90px;'>
                                                             TOTAL NOS
                                                         </td>
                                                         <td style='width: 50px; text-align: center;'>
                                                             STARTING
                                                         </td>
+                                                        <td>
+                                                            SURVEYOR
+                                                        </td>
                                                     </tr>
-                                                    <asp:Repeater ID="rpEDI" runat="server">
+                                                    <asp:Repeater ID="rpEDI" runat="server" OnItemDataBound="rpEDI_ItemDataBound">
                                                         <ItemTemplate>
                                                             <tr>
                                                                 <td style="text-align:left;">
@@ -99,8 +102,11 @@
                                                                 </td>
                                                                 <td><%# Eval("TOTALBL")%>
                                                                 </td>
-                                                                <td><asp:TextBox ID="txtTotalLine" runat="server" Width="50px"></asp:TextBox>
+                                                                <td><asp:TextBox ID="txtTotalLine" runat="server" Width="50px" Text='<%# Eval("STARTNO") %>'></asp:TextBox>
                                                                 </td>
+                                                                <td>
+                                                                <asp:HiddenField ID="hdnSurveyor" runat="server" Value='<%# Eval("LOCATION") %>' />
+                                                                <asp:DropDownList ID="ddlSurveyor" runat="server"></asp:DropDownList></td>
                                                             </tr>
                                                         </ItemTemplate>
                                                         <AlternatingItemTemplate>
@@ -112,8 +118,11 @@
                                                                 </td>
                                                                 <td><%# Eval("TOTALBL")%>
                                                                 </td>
-                                                                <td><asp:TextBox ID="txtTotalLine" runat="server" Width="50px"></asp:TextBox>
+                                                                <td><asp:TextBox ID="txtTotalLine" runat="server" Width="50px" Text='<%# Eval("STARTNO") %>' ></asp:TextBox>
                                                                 </td>
+                                                                <td>
+                                                                <asp:HiddenField ID="hdnSurveyor" runat="server" Value='<%# Eval("LOCATION") %>' />
+                                                                <asp:DropDownList ID="ddlSurveyor" runat="server"></asp:DropDownList></td>
                                                             </tr>
                                                         </AlternatingItemTemplate>
                                                     </asp:Repeater>

@@ -7,8 +7,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
-    <div id="headercaption">
-        GANG LETTER</div>
+    <div id="headercaption" >
+        <asp:Literal ID="litHeader" runat="server"></asp:Literal>      </div>
     <center>
         <script language="javascript" type="text/javascript">
             function Print() {
@@ -211,6 +211,17 @@
                             ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
+                  <tr id="trPendingDO" runat="server">
+                    <td align="left" style="width: 15%">
+                         DO / Final Bill:<span class="errormessage">*</span>
+                    </td>
+                    <td align="left" colspan="2">
+                    <asp:TextBox ID="txtDoFinal" runat="server" Width="113"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" CssClass="errormessage"
+                            ControlToValidate="txtDoFinal"  ValidationGroup="Report" Display="Dynamic"
+                            ErrorMessage="[Required]"></asp:RequiredFieldValidator>
+                    </td>
+                    </tr>
                 <tr>
                     <td colspan="4" align="left" style="padding: 5px 5px 5px 0">
                         <asp:Button ID="btnReport" runat="server" Text="View Report" ValidationGroup="Report"

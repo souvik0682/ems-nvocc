@@ -251,6 +251,7 @@ namespace EMS.WebApp.Reports.ReportViewer
 
     public partial class ShowReport : System.Web.UI.Page
     {
+      
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
@@ -270,9 +271,12 @@ namespace EMS.WebApp.Reports.ReportViewer
             trInvoice.Visible = false;
             TrHire.Visible = false;
             TrHire1.Visible = false;
+            trPendingDO.Visible = false;
             btnPrint.Visible = false;
+            //PendingDelivaryOrder
             switch (strReportName.ToLower())
             {
+                    
 
                 case "cargoarrivalnotice":
                     ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1;
@@ -290,6 +294,11 @@ namespace EMS.WebApp.Reports.ReportViewer
                     TrHire1.Visible = true;
                     lblLine.Text = "Line";
                     ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1;
+                    break;
+                case "pendingdelivaryorder":
+                    trPendingDO.Visible = true;
+                    ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1;
+                    lblLine.Text = "Line";
                     break;
                 default:
                     break;
@@ -362,16 +371,19 @@ namespace EMS.WebApp.Reports.ReportViewer
             switch (reportType.ToLower())
             {
                 case "custom":
+                    litHeader.Text = "Custom Leter";
                     rptParameters = new ReportParameter[2];
                     rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedValue);
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
                     break;
                 case "dropoff":
+                    litHeader.Text = " EMPTY DROP-OFF LETTER";
                     rptParameters = new ReportParameter[2];
                     rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedValue);
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
                     break;
                 case "gang":
+                    litHeader.Text = "GANG LETTER";
                     rptParameters = new ReportParameter[4];
                     rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedValue);
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
@@ -379,6 +391,7 @@ namespace EMS.WebApp.Reports.ReportViewer
                     rptParameters[3] = new ReportParameter("GangDate", txtGangDate.Text);
                     break;
                 case "surveyor":
+                    litHeader.Text = "Surveyor";
                     rptParameters = new ReportParameter[2];
                     rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedValue);
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
@@ -386,16 +399,19 @@ namespace EMS.WebApp.Reports.ReportViewer
                     //rptParameters[3] = new ReportParameter("GangDate", txtGangDate.Text);
                     break;
                 case "edeliveryorder":
+                    litHeader.Text = "EXAMINATION DELIVERY ORDER";
                     rptParameters = new ReportParameter[2];
                     rptParameters[0] = new ReportParameter("invBLHeader", ddlLocation.SelectedValue);
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
                     break;
                 case "deliveryorder":
+                    litHeader.Text = "DELIVERY ORDER";
                     rptParameters = new ReportParameter[2];
                     rptParameters[0] = new ReportParameter("invBLHeader", ddlLocation.SelectedValue);
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
                     break;
                 case "cargoarrivalnotice":
+                    litHeader.Text = "CARGO ARRIVAL NOTICE";
                     //rptParameters = new ReportParameter[6];
                     //rptParameters[0] = new ReportParameter("blno", ddlBlNo.SelectedValue);
                     //rptParameters[1] = new ReportParameter("line", ddlLocation.SelectedValue);
@@ -412,6 +428,7 @@ namespace EMS.WebApp.Reports.ReportViewer
                     rptParameters[5] = new ReportParameter("eta", txtETA.Text);
                     break;
                 case "invoicedeveloper":
+                    litHeader.Text = "INVOICE DEVELOPER";
                     rptParameters = new ReportParameter[4];
                     rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedItem.Text);
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
@@ -419,6 +436,7 @@ namespace EMS.WebApp.Reports.ReportViewer
                     rptParameters[3] = new ReportParameter("InvoiceId", ddlInvoice.SelectedValue);
                     break;
                 case "onoffhire":
+                    litHeader.Text = "ON/OFF REGISTER FROM";
                     rptParameters = new ReportParameter[5];
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
                     rptParameters[0] = new ReportParameter("line", ddlLocation.SelectedValue);
@@ -426,6 +444,14 @@ namespace EMS.WebApp.Reports.ReportViewer
                     rptParameters[3] = new ReportParameter("refDateE", txtEDate.Text);
                     rptParameters[4] = new ReportParameter("onOffhire", ddlHire.SelectedValue);
                     break;
+                case "pendingdelivaryorder":
+                    litHeader.Text = "PENDING DELIVARY ORDER";
+                    rptParameters = new ReportParameter[3];
+                    rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
+                    rptParameters[0] = new ReportParameter("line", ddlLocation.SelectedValue);
+                    rptParameters[2] = new ReportParameter("DOFinalBill", txtDoFinal.Text);
+                    break;
+                //PendingDelivaryOrder
                 default: strReportName = string.Empty; break;
             }
             return rptParameters;

@@ -296,15 +296,24 @@ namespace EMS.WebApp
                         switch (pRow["Name"].ToString())
                         {
                             case "Voyage":
-                                StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString() + "?p=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("master")) + "&mid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(pRow["MenuID"].ToString()) +"'>" + pRow["Name"].ToString() + "</a>");
+                                if (pRow["Navigation"].ToString().IndexOf('?') >= 0)
+                                    StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString() + "&p=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("master")) + "&mid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(pRow["MenuID"].ToString()) + "'>" + pRow["Name"].ToString() + "</a>");
+                                else
+                                    StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString() + "?p=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("master")) + "&mid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(pRow["MenuID"].ToString()) + "'>" + pRow["Name"].ToString() + "</a>");
                                 break;
 
                             case "Voyage Edit":
-                                StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString() + "?p=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("import")) + "&mid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(pRow["MenuID"].ToString()) + "'>" + pRow["Name"].ToString() + "</a>");
+                                if (pRow["Navigation"].ToString().IndexOf('?') >= 0)
+                                    StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString() + "&p=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("import")) + "&mid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(pRow["MenuID"].ToString()) + "'>" + pRow["Name"].ToString() + "</a>");
+                                else
+                                    StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString() + "?p=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("import")) + "&mid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(pRow["MenuID"].ToString()) + "'>" + pRow["Name"].ToString() + "</a>");
                                 break;
 
                             default:
-                                StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString()) + "?mid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(pRow["MenuID"].ToString()) + "'>" + pRow["Name"].ToString() + "</a>");
+                                if (pRow["Navigation"].ToString().IndexOf('?') >= 0)
+                                StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString()) + "&mid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(pRow["MenuID"].ToString()) + "'>" + pRow["Name"].ToString() + "</a>");
+                                else
+                                    StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString()) + "?mid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(pRow["MenuID"].ToString()) + "'>" + pRow["Name"].ToString() + "</a>");
                                 break;
                         }
                         StringMenu.Append("</li>");

@@ -43,19 +43,26 @@
   <ItemGroup>
     <Compile Include="CommonDAL.cs" />
     <Compile Include="ContainerTranDAL.cs" />
+    <Compile Include="CreditNoteDAL.cs" />
+    <Compile Include="DALReport.cs" />
     <Compile Include="EDIDAL.cs" />
     <Compile Include="EquipmentDAL.cs" />
+    <Compile Include="IGMReportDAL.cs" />
     <Compile Include="ImportBLDAL.cs" />
     <Compile Include="ImportHaulageDAL.cs" />
     <Compile Include="ChargeDAL.cs" />
     <Compile Include="DBManager\DataConnection.cs" />
     <Compile Include="DBManager\DbManagerBase.cs" />
     <Compile Include="DBManager\DbQuery.cs" />
+    <Compile Include="InvoiceDAL.cs" />
+    <Compile Include="LogisticReportDAL.cs" />
+    <Compile Include="MoneyReceiptsDAL.cs" />
     <Compile Include="OnHire.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportDAL.cs" />
     <Compile Include="UserDAL.cs" />
     <Compile Include="VendorDAL.cs" />
+    <Compile Include="VoyageDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EMS.Common\EMS.Common.csproj">

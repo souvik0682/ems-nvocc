@@ -44,10 +44,14 @@
     <Compile Include="IBLHeader.cs" />
     <Compile Include="IChargeRate.cs" />
     <Compile Include="IContainerType.cs" />
+    <Compile Include="ICreditNote.cs" />
+    <Compile Include="ICreditNoteCharge.cs" />
     <Compile Include="IEqpContainerTransaction.cs" />
     <Compile Include="IEqpOnHire.cs" />
     <Compile Include="IEqpOnHireContainer.cs" />
     <Compile Include="IEqpRepairing.cs" />
+    <Compile Include="IIGMReport.cs" />
+    <Compile Include="IInvoice.cs" />
     <Compile Include="ILine.cs" />
     <Compile Include="IRoleMenu.cs" />
     <Compile Include="IMenu.cs" />

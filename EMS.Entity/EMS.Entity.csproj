@@ -49,11 +49,16 @@
     <Compile Include="ChargeRateEntity.cs" />
     <Compile Include="ContactPersonEntity.cs" />
     <Compile Include="ContainerType.cs" />
+    <Compile Include="CreditNoteChargeEntity.cs" />
+    <Compile Include="CreditNoteEntity.cs" />
     <Compile Include="EqpOnHire.cs" />
     <Compile Include="EqpOnHireContainer.cs" />
     <Compile Include="EquipmentRepairEntity.cs" />
+    <Compile Include="InvoiceEntity.cs" />
     <Compile Include="LineEntity.cs" />
+    <Compile Include="MoneyReceiptEntity.cs" />
     <Compile Include="Report\CANEntity.cs" />
+    <Compile Include="Report\ImpInvRegisterEntity.cs" />
     <Compile Include="Report\ImpRegisterSummaryEntity.cs" />
     <Compile Include="Report\ImpRegisterEntity.cs" />
     <Compile Include="Report\ImpBLChkLstEntity.cs" />

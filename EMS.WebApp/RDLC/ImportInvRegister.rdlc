@@ -72,6 +72,14 @@
           <DataField>VesselDetail</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="GLD">
+          <DataField>GLD</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Balance">
+          <DataField>Balance</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>EMSBLL</DataSourceName>
@@ -413,46 +421,46 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.7in</Width>
+              <Width>1.6in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.8in</Width>
+              <Width>0.62814in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>0.88542in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>0.7677in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.8in</Width>
+              <Width>0.60937in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.9in</Width>
+              <Width>0.70937in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.9in</Width>
+              <Width>1.20521in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.9in</Width>
+              <Width>1.26667in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.8in</Width>
+              <Width>0.67188in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.5in</Width>
+              <Width>0.44792in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.5in</Width>
+              <Width>0.49271in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.5in</Width>
+              <Width>0.47394in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.6in</Width>
+              <Width>0.33958in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.6in</Width>
+              <Width>0.40208in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -638,7 +646,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Outstanding</Value>
+                              <Value>Pending</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -951,6 +959,7 @@
                             <TextRun>
                               <Value>=Fields!InvoiceNo.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
@@ -983,8 +992,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!InvoiceDate.Value</Value>
+                              <Value>=Format(Fields!InvoiceDate.Value, "dd/MM/yyyy")</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
@@ -1019,6 +1029,7 @@
                             <TextRun>
                               <Value>=Fields!NetAmt.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
@@ -1053,6 +1064,7 @@
                             <TextRun>
                               <Value>=Fields!Mrtotal.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
@@ -1087,6 +1099,7 @@
                             <TextRun>
                               <Value>=Fields!Crntotal.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
@@ -1112,15 +1125,16 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox19">
+                    <Textbox Name="NetAmount">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!Balance.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
@@ -1131,7 +1145,6 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox19</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1155,6 +1168,7 @@
                             <TextRun>
                               <Value>=Fields!IGMBLNumber.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
@@ -1189,6 +1203,7 @@
                             <TextRun>
                               <Value>=Fields!ImpLineBLNo.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
@@ -1214,15 +1229,16 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox27">
+                    <Textbox Name="GLD">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Format(Fields!GLD.Value,"dd/MM/yyyy")</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
@@ -1233,7 +1249,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox27</rd:DefaultName>
+                      <rd:DefaultName>GLD</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1257,6 +1273,7 @@
                             <TextRun>
                               <Value>=Fields!POL.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
@@ -1291,6 +1308,7 @@
                             <TextRun>
                               <Value>=Fields!POD.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
@@ -1325,6 +1343,7 @@
                             <TextRun>
                               <Value>=Fields!FPOD.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
@@ -1359,6 +1378,7 @@
                             <TextRun>
                               <Value>=Fields!NoofTEU.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
@@ -1393,6 +1413,7 @@
                             <TextRun>
                               <Value>=Fields!NoofFEU.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
@@ -1419,7 +1440,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.25in</Height>
+              <Height>0.23958in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1556,39 +1577,7 @@
                 <TablixCell />
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox47">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>Normal</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox47</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox48">
+                    <Textbox Name="Textbox49">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -1620,24 +1609,23 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="AddrName">
+                    <Textbox Name="CHA">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!AddrName.Value</Value>
+                              <Value>=First(Fields!AddrName.Value, "RptDataSet")</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
-                                <FontWeight>Normal</FontWeight>
+                                <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>AddrName</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1648,60 +1636,9 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <ColSpan>5</ColSpan>
+                    <ColSpan>6</ColSpan>
                   </CellContents>
                 </TablixCell>
-                <TablixCell />
-                <TablixCell />
-                <TablixCell />
-                <TablixCell />
-              </TablixCells>
-            </TablixRow>
-            <TablixRow>
-              <Height>0.25in</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox54">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox54</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>None</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                    <ColSpan>14</ColSpan>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell />
-                <TablixCell />
-                <TablixCell />
-                <TablixCell />
-                <TablixCell />
-                <TablixCell />
-                <TablixCell />
-                <TablixCell />
                 <TablixCell />
                 <TablixCell />
                 <TablixCell />
@@ -1739,15 +1676,14 @@
               <TablixMembers>
                 <TablixMember />
                 <TablixMember />
-                <TablixMember />
               </TablixMembers>
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>RptDataSet</DataSetName>
         <Top>0.81958in</Top>
-        <Height>1in</Height>
-        <Width>10.5in</Width>
+        <Height>0.73958in</Height>
+        <Width>10.49999in</Width>
         <ZIndex>10</ZIndex>
         <Style>
           <Border>

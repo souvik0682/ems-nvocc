@@ -168,7 +168,7 @@ namespace EMS.WebApp.Reports
             ReportBLL cls = new ReportBLL();
             DateTime dtFrom = Convert.ToDateTime(txtFromDt.Text, _culture);
             DateTime dtTo = Convert.ToDateTime(txtToDt.Text, _culture);
-            List<ImpInvRegisterEntity> lstReg = ReportBLL.GetImportInvoiceRegister(Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue), ddlType.SelectedValue, dtFrom, dtTo);
+            List<ImpInvRegisterEntity> lstReg = ReportBLL.GetImportInvoiceRegister(Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue), Convert.ToInt32(ddlType.SelectedValue), dtFrom, dtTo);
 
             LocalReportManager reportManager = new LocalReportManager(rptViewer, "ImportInvRegister", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
             string rptName = "ImportInvRegister.rdlc";

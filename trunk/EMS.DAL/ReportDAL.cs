@@ -205,7 +205,7 @@ namespace EMS.DAL
             return ds;
         }
 
-        public static List<ImpInvRegisterEntity> GetImportInvoiceRegister(int lineId, int locId, string billType, DateTime dtFrom, DateTime dtTo)
+        public static List<ImpInvRegisterEntity> GetImportInvoiceRegister(int lineId, int locId, int billType, DateTime dtFrom, DateTime dtTo)
         {
             string strExecution = "[report].[uspGetImportInvoiceRegister]";
             List<ImpInvRegisterEntity> lstEntity = new List<ImpInvRegisterEntity>();
@@ -215,7 +215,7 @@ namespace EMS.DAL
             {
                 oDq.AddIntegerParam("@LocationID", locId);
                 oDq.AddIntegerParam("@LineID", lineId);
-                oDq.AddTextParam("@BillType", billType);
+                oDq.AddIntegerParam("@BillType", billType);
                 oDq.AddDateTimeParam("@StartDate", dtFrom);
                 oDq.AddDateTimeParam("@EndDate", dtTo);
 

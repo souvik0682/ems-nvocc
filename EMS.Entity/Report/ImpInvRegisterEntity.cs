@@ -25,6 +25,8 @@ namespace EMS.Entity.Report
         public string ConsigneeName { get; set; }
         public string AddrName { get; set; }
         public string VesselDetail { get; set; }
+        public DateTime GLD { get; set; }
+        public Decimal Balance { get; set; }
 
         #endregion
 
@@ -52,6 +54,8 @@ namespace EMS.Entity.Report
             this.ConsigneeName = Convert.ToString(reader["ConsigneeName"]);
             this.AddrName = Convert.ToString(reader["AddrName"]);
             this.VesselDetail = Convert.ToString(reader["VesselDetail"]);
+            if (reader["LandingDate"] != DBNull.Value) this.GLD = Convert.ToDateTime(reader["LandingDate"]);
+            if (reader["balance"] != DBNull.Value) this.Balance = Convert.ToDecimal(reader["balance"]);
         }
 
         #endregion

@@ -74,7 +74,7 @@
                     </td>
                 </tr>
                 <tr id="trgang1" runat="server">
-                    <td>
+                    <%--<td>
                         Gang Date:<span class="errormessage">*</span>
                     </td>
                     <td align="left">
@@ -87,7 +87,7 @@
                         <asp:RegularExpressionValidator ControlToValidate="txtGangDate" ID="revReferenceDate"
                             runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]"
                             ValidationGroup="Report" Display="Dynamic" ValidationExpression="^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$"></asp:RegularExpressionValidator>
-                    </td>
+                    </td>--%>
                     <td>
                         Shift:<span class="errormessage">*</span>
                     </td>
@@ -212,7 +212,7 @@
                     </td>
                 </tr>
                   <tr id="trPendingDO" runat="server">
-                    <td align="left" style="width: 15%">
+                   <%-- <td align="left" style="width: 15%">
                          DO / Final Bill:<span class="errormessage">*</span>
                     </td>
                     <td align="left" colspan="2">
@@ -220,7 +220,7 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" CssClass="errormessage"
                             ControlToValidate="txtDoFinal"  ValidationGroup="Report" Display="Dynamic"
                             ErrorMessage="[Required]"></asp:RequiredFieldValidator>
-                    </td>
+                    </td>--%>
                     </tr>
                 <tr>
                     <td colspan="4" align="left" style="padding: 5px 5px 5px 0">

@@ -708,6 +708,32 @@ namespace EMS.WebApp.Transaction
                 {
                     btnAddRow.Enabled = true;
                 }
+                //New logic for empty bl
+                ((TextBox)AC_CFSCode1.FindControl("txtCFSCode")).Enabled = true;
+
+                txtGrossWeight.Text = string.Empty;
+                txtGrossWeight.Enabled = true;
+                rfvGrossWeight.Visible = true;
+
+                txtFtrGrossWeight.Text = string.Empty;
+                txtFtrGrossWeight.Enabled = true;
+                rfvFtrGrossWeight.Visible = true;
+
+                txtPackage.Text = string.Empty;
+                txtPackage.Enabled = true;
+                rfvPackage.Visible = true;
+
+                txtFtrPackages.Text = string.Empty;
+                txtFtrPackages.Enabled = true;
+
+                txtFtrSealNo.Text = string.Empty;
+                txtFtrSealNo.Enabled = true;
+                rfvFtrSealNo.Visible = true;
+
+                ((TextBox)AC_Consignee1.FindControl("txtConsignee")).Text = string.Empty;
+                ((TextBox)AC_NParty1.FindControl("txtNParty")).Text = string.Empty;
+                txtCargoArrivalNotice.Text = string.Empty;
+
             }
             else if (rdoCargoType.SelectedValue == "F")
             {
@@ -715,6 +741,32 @@ namespace EMS.WebApp.Transaction
                 btnAddRow.Enabled = true;
                 txtFtrCargoType.Text = "FCL";
                 rfvFtrSealNo.Visible = true;
+
+                //New logic for empty bl
+                ((TextBox)AC_CFSCode1.FindControl("txtCFSCode")).Enabled = true;
+
+                txtGrossWeight.Text = string.Empty;
+                txtGrossWeight.Enabled = true;
+                rfvGrossWeight.Visible = true;
+
+                txtFtrGrossWeight.Text = string.Empty;
+                txtFtrGrossWeight.Enabled = true;
+                rfvFtrGrossWeight.Visible = true;
+
+                txtPackage.Text = string.Empty;
+                txtPackage.Enabled = true;
+                rfvPackage.Visible = true;
+
+                txtFtrPackages.Text = string.Empty;
+                txtFtrPackages.Enabled = true;
+
+                txtFtrSealNo.Text = string.Empty;
+                txtFtrSealNo.Enabled = true;
+                rfvFtrSealNo.Visible = true;
+
+                ((TextBox)AC_Consignee1.FindControl("txtConsignee")).Text = string.Empty;
+                ((TextBox)AC_NParty1.FindControl("txtNParty")).Text = string.Empty;
+                txtCargoArrivalNotice.Text = string.Empty;
             }
             else if (rdoCargoType.SelectedValue == "E")
             {
@@ -726,14 +778,70 @@ namespace EMS.WebApp.Transaction
                 txtGrossWeight.Text = "0";
                 txtFtrCargoType.Text = "ETY";
                 rfvFtrSealNo.Visible = false;
-               
+
                 txtSublineNo.Enabled = false;
                 btnAddRow.Enabled = true;
+
+                //New logic for empty bl
+                ((TextBox)AC_CFSCode1.FindControl("txtCFSCode")).Text = string.Empty;
+                txtCFSName.Text = string.Empty;
+                ViewState[CFSADDRID] = null;
+
+                ((TextBox)AC_CFSCode1.FindControl("txtCFSCode")).Enabled = false;
+
+                txtGrossWeight.Text = string.Empty;
+                txtGrossWeight.Enabled = false;
+                rfvGrossWeight.Visible = false;
+
+                txtFtrGrossWeight.Text = string.Empty;
+                txtFtrGrossWeight.Enabled = false;
+                rfvFtrGrossWeight.Visible = false;
+
+                txtPackage.Text = string.Empty;
+                txtPackage.Enabled = false;
+                rfvPackage.Visible = false;
+
+                txtFtrPackages.Text = string.Empty;
+                txtFtrPackages.Enabled = false;
+
+                txtFtrSealNo.Text = string.Empty;
+                txtFtrSealNo.Enabled = false;
+                rfvFtrSealNo.Visible = false;
+
+                ((TextBox)AC_Consignee1.FindControl("txtConsignee")).Text = "Ben Line Agencies (India) Pvt. Ltd.";
+                ((TextBox)AC_NParty1.FindControl("txtNParty")).Text = "Ben Line Agencies (India) Pvt. Ltd.";
+                txtCargoArrivalNotice.Text = "Ben Line Agencies (India) Pvt. Ltd.";
             }
             else
             {
                 txtSublineNo.Enabled = false;
                 btnAddRow.Enabled = false;
+
+                //New logic for empty bl
+                ((TextBox)AC_CFSCode1.FindControl("txtCFSCode")).Enabled = true;
+
+                txtGrossWeight.Text = string.Empty;
+                txtGrossWeight.Enabled = true;
+                rfvGrossWeight.Visible = true;
+
+                txtFtrGrossWeight.Text = string.Empty;
+                txtFtrGrossWeight.Enabled = true;
+                rfvFtrGrossWeight.Visible = true;
+
+                txtPackage.Text = string.Empty;
+                txtPackage.Enabled = true;
+                rfvPackage.Visible = true;
+
+                txtFtrPackages.Text = string.Empty;
+                txtFtrPackages.Enabled = true;
+
+                txtFtrSealNo.Text = string.Empty;
+                txtFtrSealNo.Enabled = true;
+                rfvFtrSealNo.Visible = true;
+
+                ((TextBox)AC_Consignee1.FindControl("txtConsignee")).Text = string.Empty;
+                ((TextBox)AC_NParty1.FindControl("txtNParty")).Text = string.Empty;
+                txtCargoArrivalNotice.Text = string.Empty;
             }
         }
 
@@ -788,9 +896,9 @@ namespace EMS.WebApp.Transaction
             txtCFSName.Text = "";
             ((TextBox)AC_CHA1.FindControl("txtCha")).Text = "";
             ((TextBox)AC_CFSCode1.FindControl("txtCFSCode")).Text = "";
-            
-            
-            
+
+
+
             ((AjaxControlToolkit.AutoCompleteExtender)AC_Consignee1.FindControl("AutoPort")).ContextKey = ddlStockLocation.SelectedValue;
             ((AjaxControlToolkit.AutoCompleteExtender)AC_NParty1.FindControl("AutoPort")).ContextKey = ddlStockLocation.SelectedValue;
             ((AjaxControlToolkit.AutoCompleteExtender)AC_CHA1.FindControl("AutoPort")).ContextKey = ddlStockLocation.SelectedValue;
@@ -915,7 +1023,7 @@ namespace EMS.WebApp.Transaction
                         {
                             Response.Redirect("~/Unauthorized.aspx");
                         }
-                   
+
                 }
 
 
@@ -929,7 +1037,7 @@ namespace EMS.WebApp.Transaction
                 Response.Redirect("~/Login.aspx");
             }
 
-        
+
         }
 
         private void InitialActivities()
@@ -1027,7 +1135,7 @@ namespace EMS.WebApp.Transaction
             ((AjaxControlToolkit.AutoCompleteExtender)AC_Consignee1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
             ((AjaxControlToolkit.AutoCompleteExtender)AC_NParty1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
             ((AjaxControlToolkit.AutoCompleteExtender)AC_CHA1.FindControl("AutoPort")).ContextKey = ddlLocation.SelectedValue;
-            
+
 
             int PGRFreeDays = new ImportBLL().GetPGRFreeDays(Convert.ToInt32(ddlLocation.SelectedValue));
             txtPGRFreeDays.Text = PGRFreeDays.ToString();
@@ -1504,8 +1612,11 @@ namespace EMS.WebApp.Transaction
             {
                 if (Convert.ToString(ViewState[CFSADDRID]) == string.Empty || Convert.ToString(ViewState[CFSADDRID]) == "0")
                 {
-                    IsValid = false;
-                    errCFS.Text = "This field is required";
+                    if (rdoCargoType.SelectedValue != "E")
+                    {
+                        IsValid = false;
+                        errCFS.Text = "This field is required";
+                    }
                 }
             }
 
@@ -1987,7 +2098,7 @@ namespace EMS.WebApp.Transaction
                 btnAddRow.Enabled = false;
             }
 
-            if (_canEdit == false && _canView==true)
+            if (_canEdit == false && _canView == true)
             {
                 btnAddRow.Visible = false;
                 btnSave.Visible = false;

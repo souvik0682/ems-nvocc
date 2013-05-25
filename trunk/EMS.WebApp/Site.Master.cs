@@ -102,6 +102,15 @@ namespace EMS.WebApp
             {
                 menuId = Convert.ToInt32(EMS.Utilities.GeneralFunctions.DecryptQueryString(Request.QueryString["mid"]));
             }
+            else
+            {
+                if (Request.UrlReferrer != null)
+                {
+                    //Page.Request.UrlReferrer.ToString
+                    if (HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["mid"] != null)
+                        menuId = Convert.ToInt32(EMS.Utilities.GeneralFunctions.DecryptQueryString(HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["mid"]));
+                }
+            }
 
 
             IUserPermission userPermission = UserBLL.GetMenuAccessByUser(userId, menuId);
@@ -316,7 +325,7 @@ namespace EMS.WebApp
 
                             default:
                                 if (pRow["Navigation"].ToString().IndexOf('?') >= 0)
-                                StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString()) + "&mid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(pRow["MenuID"].ToString()) + "'>" + pRow["Name"].ToString() + "</a>");
+                                    StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString()) + "&mid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(pRow["MenuID"].ToString()) + "'>" + pRow["Name"].ToString() + "</a>");
                                 else
                                     StringMenu.Append("<a href='" + Page.ResolveClientUrl(pRow["Navigation"].ToString()) + "?mid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(pRow["MenuID"].ToString()) + "'>" + pRow["Name"].ToString() + "</a>");
                                 break;

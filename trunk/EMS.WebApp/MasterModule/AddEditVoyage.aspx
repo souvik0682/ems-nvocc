@@ -39,6 +39,18 @@
 
         }
     </script>
+    <script language="javascript" type="text/javascript">
+        function CheckForDeletion() {
+
+            if (document.getElementById('<%= hdnLandingDT.ClientID %>').value != document.getElementById('<%= txtdtLand.ClientID %>').value && document.getElementById('<%= txtdtLand.ClientID %>').value != "") {
+                return confirm('All Containers of the voyage will be deleted. Confirm with Yes');
+            }
+            else {
+                return true;
+            }
+        }
+    
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
     <div id="headercaption">
@@ -97,6 +109,7 @@
                                 </td>
                                 <td>
                                     <%--<uc3:DatePicker ID="dtLand" runat="server" />--%>
+                                    <asp:HiddenField ID="hdnLandingDT" runat="server" />
                                     <asp:TextBox ID="txtdtLand" runat="server" CssClass="textboxuppercase" Width="250"></asp:TextBox>
                                     <cc2:CalendarExtender ID="dtLand_" Format="dd/MM/yyyy" TargetControlID="txtdtLand"
                                         runat="server" />

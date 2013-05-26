@@ -19,6 +19,7 @@ namespace EMS.WebApp.MasterModule
         private bool _hasEditAccess = true;
         private string VoyageId = "";
         private string _PrevPage = string.Empty;
+        private string OldLandingDate;
         #endregion
 
         BLL.DBInteraction dbinteract = new BLL.DBInteraction();
@@ -36,6 +37,8 @@ namespace EMS.WebApp.MasterModule
                 btnBack.OnClientClick = "javascript:return RedirectAfterCancelClick('MangeVoyage.aspx?p=" + Request.QueryString["p"] + "','" + ResourceManager.GetStringWithoutName("ERR00017") + "')";
                 if (VoyageId != "-1")
                 {
+                    //btnSave.OnClientClick = "javascript:return confirm('All Containers of the voyage will be deleted. Confirm with Yes');";
+                    btnSave.OnClientClick = "javascript:return CheckForDeletion();";
                     LoadData(VoyageId);
 
                     if (_PrevPage == "import")
@@ -178,11 +181,12 @@ namespace EMS.WebApp.MasterModule
                 ddlShipStoreSubmitted.SelectedValue = ds.Tables[0].Rows[0]["ShipStoreSubmitted"].ToString();
                 ddlTerminalID.SelectedValue = ds.Tables[0].Rows[0]["fl_TerminalID"].ToString();
 
-
                 txtdtETA.Text = ds.Tables[0].Rows[0]["ETADate"].ToString().Split(' ')[0];
                 txtdtLand.Text = ds.Tables[0].Rows[0]["AddLandingDate"].ToString().Split(' ')[0];
                 txtDtIGM.Text = ds.Tables[0].Rows[0]["IGMDate"].ToString().Split(' ')[0];
                 txtdtLand.Text = ds.Tables[0].Rows[0]["LandingDate"].ToString().Split(' ')[0];
+                hdnLandingDT.Value = ds.Tables[0].Rows[0]["LandingDate"].ToString().Split(' ')[0]; //Rajen
+                OldLandingDate = txtdtLand.Text;
                 txtdtPCC.Text = ds.Tables[0].Rows[0]["PCCDate"].ToString().Split(' ')[0];
                 //txtdtAddLand.Text = ds.Tables[0].Rows[0]["__"].ToString();
                 ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text = ds.Tables[0].Rows[0]["lastport"].ToString();
@@ -281,6 +285,19 @@ namespace EMS.WebApp.MasterModule
             {
                 GeneralFunctions.RegisterAlertScript(this, "Please provide PoD");
                 return;
+            }
+
+            if (isedit && OldLandingDate!=txtdtLand.Text && OldLandingDate != System.Convert.DBNull)
+            {
+                
+                //GeneralFunctions.RegisterAlertScript(this, "All Container transaction will be deleted");
+
+                //  "javascript:return confirm('All Containers of the voyage will be deleted. Confirm with Yes');";
+                
+                //if (retval!="yes") return;
+
+           
+                
             }
 
             if (txtdtLand.Text != "")

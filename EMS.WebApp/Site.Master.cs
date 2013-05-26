@@ -17,7 +17,7 @@ namespace EMS.WebApp
     {
         protected void Page_Init(object sender, EventArgs e)
         {
-            //InitialMethod();
+            InitialMethod();
         }
 
         private void InitialMethod()
@@ -63,7 +63,7 @@ namespace EMS.WebApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            InitialMethod();
+            
             Page.Header.DataBind();
             this.Page.ClientScript.RegisterClientScriptInclude(this.GetType(), "Common", this.ResolveClientUrl("~/Scripts/Common.js"));
             this.Page.ClientScript.RegisterClientScriptInclude(this.GetType(), "CustomTextBox", this.ResolveClientUrl("~/Scripts/CustomTextBox.js"));
@@ -94,68 +94,17 @@ namespace EMS.WebApp
 
         private void SetUserAccess()
         {
-            int menuId = 0;
-            int userId = 0;
-
-            userId = UserBLL.GetLoggedInUserId();
-            //menuId = GetMenuIdByPath();
-
             if (Request.QueryString["mid"] != null)
             {
+                int menuId = 0;
+                int userId = 0;
+
+                userId = UserBLL.GetLoggedInUserId();
                 menuId = Convert.ToInt32(EMS.Utilities.GeneralFunctions.DecryptQueryString(Request.QueryString["mid"]));
-            }
-            else
-            {
-                if (Request.UrlReferrer != null)
-                {
-                    //Page.Request.UrlReferrer.ToString
-                    if (HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["mid"] != null)
-                    {
-                        menuId = Convert.ToInt32(EMS.Utilities.GeneralFunctions.DecryptQueryString(HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["mid"]));
-
-                       
-                        String currurl = HttpContext.Current.Request.Url.AbsolutePath;
-
-                        string qs = string.Empty;
-                        string[] Keys = Request.QueryString.AllKeys;
-                        if (Keys.Length > 0)
-                        {
-                            foreach (string s in Keys)
-                            {
-                                if (qs == string.Empty)
-                                    qs = s + "=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(EMS.Utilities.GeneralFunctions.DecryptQueryString(Request.QueryString[s]));
-                                else
-                                    qs = qs + "&" + s + "=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(EMS.Utilities.GeneralFunctions.DecryptQueryString(Request.QueryString[s]));
-
-                            }
-
-                            if (!string.IsNullOrEmpty(qs))
-                            {
-                                qs = "?" + qs + "&mid=" + HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["mid"];
-                            }
-                        }
-                        else
-                        {
-                            qs = "?mid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(menuId.ToString());
-                        }
-
-                       
-                        currurl = currurl + qs;
-                        Response.Redirect(currurl);
-                    }
-                }
-            }
-
-
-            IUserPermission userPermission = UserBLL.GetMenuAccessByUser(userId, menuId);
-            if (menuId == 0)
-            {
-                userPermission.CanAdd = true;
-                userPermission.CanDelete = true;
-                userPermission.CanEdit = true;
-                userPermission.CanView = true;
-            }
-            Session[Constants.SESSION_USER_PERMISSION] = userPermission;
+                IUserPermission userPermission = UserBLL.GetMenuAccessByUser(userId, menuId);
+                Session[Constants.SESSION_USER_PERMISSION] = userPermission;
+            }           
+            
         }
 
         private int GetMenuIdByPath()

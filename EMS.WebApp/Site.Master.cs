@@ -9,6 +9,7 @@ using EMS.Common;
 using EMS.BLL;
 using System.Data;
 using System.Text;
+using System.Collections.Specialized;
 
 namespace EMS.WebApp
 {
@@ -16,7 +17,7 @@ namespace EMS.WebApp
     {
         protected void Page_Init(object sender, EventArgs e)
         {
-            InitialMethod();
+            //InitialMethod();
         }
 
         private void InitialMethod()
@@ -62,6 +63,7 @@ namespace EMS.WebApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            InitialMethod();
             Page.Header.DataBind();
             this.Page.ClientScript.RegisterClientScriptInclude(this.GetType(), "Common", this.ResolveClientUrl("~/Scripts/Common.js"));
             this.Page.ClientScript.RegisterClientScriptInclude(this.GetType(), "CustomTextBox", this.ResolveClientUrl("~/Scripts/CustomTextBox.js"));
@@ -108,7 +110,39 @@ namespace EMS.WebApp
                 {
                     //Page.Request.UrlReferrer.ToString
                     if (HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["mid"] != null)
+                    {
                         menuId = Convert.ToInt32(EMS.Utilities.GeneralFunctions.DecryptQueryString(HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["mid"]));
+
+                       
+                        String currurl = HttpContext.Current.Request.Url.AbsolutePath;
+
+                        string qs = string.Empty;
+                        string[] Keys = Request.QueryString.AllKeys;
+                        if (Keys.Length > 0)
+                        {
+                            foreach (string s in Keys)
+                            {
+                                if (qs == string.Empty)
+                                    qs = s + "=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(EMS.Utilities.GeneralFunctions.DecryptQueryString(Request.QueryString[s]));
+                                else
+                                    qs = qs + "&" + s + "=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(EMS.Utilities.GeneralFunctions.DecryptQueryString(Request.QueryString[s]));
+
+                            }
+
+                            if (!string.IsNullOrEmpty(qs))
+                            {
+                                qs = "?" + qs + "&mid=" + HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["mid"];
+                            }
+                        }
+                        else
+                        {
+                            qs = "?mid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(menuId.ToString());
+                        }
+
+                       
+                        currurl = currurl + qs;
+                        Response.Redirect(currurl);
+                    }
                 }
             }
 

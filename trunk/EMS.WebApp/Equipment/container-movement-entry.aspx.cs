@@ -20,12 +20,20 @@ namespace EMS.WebApp.Equipment
         private int _userId = 0;
         private int _ContainerMovementId = 0;
         DataTable dtFilteredContainer = new DataTable();
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            CheckUserAccess();
-            _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
-            RetriveParameters();
+            _userId = UserBLL.GetLoggedInUserId();
+
+            //Get user permission.
+            UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+
+
+            //_userId = EMS.BLL.UserBLL.GetLoggedInUserId();
             if (!Page.IsPostBack)
             {
                 fillAllDropdown();
@@ -66,6 +74,7 @@ namespace EMS.WebApp.Equipment
                     FillContainers(ds.Tables[1]);
                 }
             }
+            CheckUserAccess(hdnContainerTransactionId.Value);
         }
 
         void DisableHeaderSection()
@@ -96,7 +105,7 @@ namespace EMS.WebApp.Equipment
 
         }
 
-        private void CheckUserAccess()
+        private void CheckUserAccess(string xID)
         {
             if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
             {
@@ -107,16 +116,53 @@ namespace EMS.WebApp.Equipment
                     Response.Redirect("~/Login.aspx");
                 }
 
-                if (user.UserRole.Id != (int)UserRole.Admin)
+                btnSave.Visible = true;
+
+                if (!_canAdd && !_canEdit)
+                    btnSave.Visible = false;
+                else
                 {
-                    Response.Redirect("~/Unauthorized.aspx");
+
+                    if (!_canEdit && xID != "0")
+                    {
+                        btnSave.Visible = false;
+                    }
+                    else if (!_canAdd && xID == "0")
+                    {
+                        btnSave.Visible = false;
+                    }
                 }
+
             }
             else
             {
                 Response.Redirect("~/Login.aspx");
             }
         }
+
+
+
+        //private void CheckUserAccess()
+        //{
+        //    if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+        //    {
+        //        IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+
+        //        if (ReferenceEquals(user, null) || user.Id == 0)
+        //        {
+        //            Response.Redirect("~/Login.aspx");
+        //        }
+
+        //        if (user.UserRole.Id != (int)UserRole.Admin)
+        //        {
+        //            Response.Redirect("~/Unauthorized.aspx");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Response.Redirect("~/Login.aspx");
+        //    }
+        //}
 
         void FillHeaderDetail(DataTable dt)
         {

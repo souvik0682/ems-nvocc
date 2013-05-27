@@ -8,6 +8,7 @@ using EMS.Utilities;
 using EMS.Utilities.ResourceManager;
 using EMS.Entity;
 using EMS.BLL;
+using EMS.Common;
 
 namespace EMS.WebApp.MasterModule
 {
@@ -17,6 +18,10 @@ namespace EMS.WebApp.MasterModule
 
         private int _userId = 0;
         private bool _hasEditAccess = true;
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
 
         #endregion
 
@@ -26,6 +31,9 @@ namespace EMS.WebApp.MasterModule
         {
 
             SetAttributes();
+            RetriveParameters();
+            CheckUserAccess();
+
 
             if (!IsPostBack)
             {
@@ -115,7 +123,19 @@ namespace EMS.WebApp.MasterModule
                 e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "TaxAddCess"));
                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "[Status]"));
 
+               //if (_canDelete == true)
+               //{
+               //    //ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+               //    btn .Visible = true;
+               //    btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00007");
+               //    //btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLID"));
 
+               //}
+               //else
+               //{
+               //    //ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+               //    btnRemove.Visible = false;
+               //}
 
                 // Edit link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
@@ -139,6 +159,50 @@ namespace EMS.WebApp.MasterModule
         #endregion
 
         #region Private Methods
+
+        private void RetriveParameters()
+        {
+            _userId = UserBLL.GetLoggedInUserId();
+
+            //Get user permission.
+            UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+        }
+
+        private void CheckUserAccess()
+        {
+            if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+            {
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+
+                if (ReferenceEquals(user, null) || user.Id == 0)
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
+
+                if (user.UserRole.Id != (int)UserRole.Admin)
+                {
+                    if (_canView == false)
+                    {
+                        Response.Redirect("~/Unauthorized.aspx");
+                    }
+
+                    if (_canAdd == false)
+                    {
+                        btnAdd.Visible = false;
+                    }
+                    //Response.Redirect("~/Unauthorized.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+
+            if (!_canView)
+            {
+                Response.Redirect("~/Unauthorized.aspx");
+            }
+        }
 
         private void loadDDL(DateTime? dateTime)
         {

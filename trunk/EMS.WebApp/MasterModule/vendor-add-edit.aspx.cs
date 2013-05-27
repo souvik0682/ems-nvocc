@@ -22,14 +22,18 @@ namespace EMS.WebApp.MasterModule
 
         private int _userId = 0;
         private int _locId = 0;
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
 
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            CheckUserAccess();
-            IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
-            _userId = user == null ? 0 : user.Id;
+            //CheckUserAccess();
+            //IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+            //_userId = user == null ? 0 : user.Id;
 
             RetriveParameters();
             if (!Page.IsPostBack)
@@ -56,36 +60,37 @@ namespace EMS.WebApp.MasterModule
                 if (hdnVendorID.Value != "0")
                     LoadData();
             }
+            CheckUserAccess(hdnVendorID.Value);
         }
 
-        private void CheckUserAccess()
-        {
-            if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
-            {
-                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+        //private void CheckUserAccess()
+        //{
+        //    if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+        //    {
+        //        IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
 
-                if (ReferenceEquals(user, null) || user.Id == 0)
-                {
-                    Response.Redirect("~/Login.aspx");
-                }
+        //        if (ReferenceEquals(user, null) || user.Id == 0)
+        //        {
+        //            Response.Redirect("~/Login.aspx");
+        //        }
 
-                if (user.UserRole.Id != (int)UserRole.Admin)
-                {
-                    Response.Redirect("~/Unauthorized.aspx");
-                }
-            }
-            else
-            {
-                Response.Redirect("~/Login.aspx");
-            }
-        }
+        //        if (user.UserRole.Id != (int)UserRole.Admin)
+        //        {
+        //            Response.Redirect("~/Unauthorized.aspx");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Response.Redirect("~/Login.aspx");
+        //    }
+        //}
 
         private void LoadData()
         {
             VendorEntity oVendor = (VendorEntity)VendorBLL.GetVendor(Convert.ToInt32(hdnVendorID.Value));
 
             ddlVendorType.SelectedIndex =ddlVendorType.Items.IndexOf(ddlVendorType.Items.FindByValue(oVendor.VendorType));
-            if (ddlVendorType.SelectedItem.Text == "CFS" || ddlVendorType.SelectedItem.Text =="ICD")
+            if (ddlVendorType.SelectedItem.Text == "CFS/ICD" || ddlVendorType.SelectedItem.Text =="ICD")
             {
                 txtCfsCode.Enabled = true;
                 rfvCfdCode.Enabled = true;
@@ -109,7 +114,18 @@ namespace EMS.WebApp.MasterModule
             txtName.Text = oVendor.VendorName;
             txtAddress.Text = oVendor.VendorAddress;
             txtCfsCode.Text = oVendor.CFSCode;
-
+            TxtTAN.Text = oVendor.TANo;
+            TxtPAN.Text = oVendor.PAN;
+            TxtACNo.Text = oVendor.AcNo;
+            TxtAcType.Text = oVendor.AcType;
+            TxtBankName.Text = oVendor.BankName;
+            TxtIEC.Text = oVendor.IEC;
+            TxtEmail.Text = oVendor.EmailID;
+            TxtBIN.Text = oVendor.BIN;
+            TxtMob.Text = oVendor.Mobile;
+            TxtCP.Text = oVendor.CP;
+           
+            
         }
 
         void PopulateDropDown(int Number, DropDownList ddl, int? Filter)
@@ -132,6 +148,16 @@ namespace EMS.WebApp.MasterModule
                 oVendorEntity.VendorAddress = txtAddress.Text.Trim();
                 oVendorEntity.CompanyID = 1;//Need to populate from data base. This will be the company ID of the currently loggedin user.
                 oVendorEntity.VendorActive = true;
+                oVendorEntity.AcNo = TxtACNo.Text;
+                oVendorEntity.AcType = TxtAcType.Text;
+                oVendorEntity.BankName = TxtBankName.Text;
+                oVendorEntity.BIN = TxtBIN.Text;
+                oVendorEntity.EmailID = TxtEmail.Text;
+                oVendorEntity.IEC = TxtIEC.Text;
+                oVendorEntity.Mobile = TxtMob.Text;
+                oVendorEntity.TANo = TxtTAN.Text;
+                oVendorEntity.PAN = TxtPAN.Text;
+                oVendorEntity.CP = TxtCP.Text;
 
 
                 oVendorEntity.CFSCode = txtCfsCode.Text.Trim();
@@ -180,7 +206,7 @@ namespace EMS.WebApp.MasterModule
 
         protected void ddlVendorType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlVendorType.SelectedItem.Text == "CFS" || ddlVendorType.SelectedItem.Text =="ICD")
+            if (ddlVendorType.SelectedItem.Text == "CFS/ICD" || ddlVendorType.SelectedItem.Text == "ICD")
             {
                 txtCfsCode.Enabled = true;
                 rfvCfdCode.Enabled = true;
@@ -205,6 +231,44 @@ namespace EMS.WebApp.MasterModule
                 Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["id"].ToString()), out _locId);
                 hdnVendorID.Value = _locId.ToString();
             }
+            _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
+
+            EMS.BLL.UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+        }
+
+        private void CheckUserAccess(string xID)
+        {
+            if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+            {
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+
+                if (ReferenceEquals(user, null) || user.Id == 0)
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
+
+                btnSave.Visible = true;
+
+                if (!_canAdd && !_canEdit)
+                    btnSave.Visible = false;
+                else
+                {
+
+                    if (!_canEdit && xID != "0")
+                    {
+                        btnSave.Visible = false;
+                    }
+                    else if (!_canAdd && xID == "0")
+                    {
+                        btnSave.Visible = false;
+                    }
+                }
+
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
+            }
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
@@ -223,6 +287,17 @@ namespace EMS.WebApp.MasterModule
             txtCfsCode.Text = string.Empty;
             txtName.Text = string.Empty;
             hdnVendorID.Value = "0";
+            TxtBankName.Text = string.Empty;
+            TxtBIN.Text = string.Empty;
+            TxtEmail.Text = string.Empty;
+            TxtMob.Text = string.Empty;
+            TxtPAN.Text = string.Empty;
+            TxtTAN.Text = string.Empty;
+            TxtACNo.Text = string.Empty;
+            TxtAcType.Text = string.Empty;
+            TxtIEC.Text = string.Empty;
+            TxtCP.Text = string.Empty;
+
         }
     }
 }

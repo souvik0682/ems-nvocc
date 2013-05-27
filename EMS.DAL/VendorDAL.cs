@@ -31,6 +31,17 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@VendorType", 5, Vendor.VendorType);
                 oDq.AddVarcharParam("@CFSCode", 10, Vendor.CFSCode);
                 oDq.AddIntegerParam("@Terminalid", Vendor.Terminalid);
+                oDq.AddVarcharParam("@Acno", 20, Vendor.AcNo);
+                oDq.AddVarcharParam("@AcType", 20, Vendor.AcType);
+                oDq.AddVarcharParam("@PAN", 20, Vendor.PAN);
+                oDq.AddVarcharParam("@TANo", 20, Vendor.TANo);
+                oDq.AddVarcharParam("@BIN", 20, Vendor.BIN);
+                oDq.AddVarcharParam("@Mobile", 20, Vendor.Mobile);
+                oDq.AddVarcharParam("@EmailID", 50, Vendor.EmailID);
+                oDq.AddVarcharParam("@BankName", 50, Vendor.BankName);
+                oDq.AddVarcharParam("@IEC", 20, Vendor.IEC);
+                oDq.AddVarcharParam("@CP", 50, Vendor.CP);
+
                 oDq.AddBooleanParam("@VendorActive", Vendor.VendorActive);
                 if (Vendor.VendorId <= 0)
                 {

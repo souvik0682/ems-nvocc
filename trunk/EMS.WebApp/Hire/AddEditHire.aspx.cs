@@ -19,24 +19,80 @@ namespace EMS.WebApp.Hire
 
         IUser user = null;
         public int counter = 1;
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
+        private int _userId = 0;
+        private long Hid;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            RetriveParameters();
             user = (IUser)Session[Constants.SESSION_USER_INFO];
             if (!IsPostBack)
             {
                 SetDefault();
                 try
                 {
+
                     if (!String.IsNullOrEmpty(Request.QueryString["id"]))
                     {
                         ViewState["HireId"] = GeneralFunctions.DecryptQueryString(Request.QueryString["id"]).LongRequired();
                         ViewState["Edit"] = "Edit";
                         SetEditValue(new BLL.OnHireBLL().GetOnHire(new SearchCriteria { StringOption4 = ViewState["HireId"].ToString() }));
                         rdTransactionType.Enabled = false;
+                        Hid = GeneralFunctions.DecryptQueryString(Request.QueryString["id"]).LongRequired();
+                    }
+                    else
+                    {
+                        Hid = 0;
                     }
                 }
                 catch { }
+            }
+            CheckUserAccess(Hid);
+        }
+
+        private void RetriveParameters()
+
+        {
+            _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
+            EMS.BLL.UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+        }
+
+        private void CheckUserAccess(long xID)
+        {
+            if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+            {
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+
+                if (ReferenceEquals(user, null) || user.Id == 0)
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
+
+                btnSave.Visible = true;
+
+                if (!_canAdd && !_canEdit)
+                    btnSave.Visible = false;
+                else
+                {
+
+                    if (!_canEdit && xID != 0)
+                    {
+                        btnSave.Visible = false;
+                    }
+                    else if (!_canAdd && xID == 0)
+                    {
+                        btnSave.Visible = false;
+                    }
+                }
+
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
             }
         }
 
@@ -55,6 +111,7 @@ namespace EMS.WebApp.Hire
                 ddlType.Enabled=false;
                 }
         }
+
         private void SetEditValue(DataTable dt)
         {
             if (dt != null)
@@ -98,6 +155,7 @@ namespace EMS.WebApp.Hire
             }
             return true;
         }
+
         private void ClearFieldLower()
         {
             txtContainerNo.Text = string.Empty;

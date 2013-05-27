@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using EMS.Utilities;
 using EMS.Entity;
 using EMS.Common;
+using EMS.BLL;
 
 namespace EMS.WebApp.Hire
 {
@@ -22,13 +23,20 @@ namespace EMS.WebApp.Hire
             set { ViewState["SearchCriteria"] = value; }
         }
         private bool _hasEditAccess = true;
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
+        private int _userId = 0;
 
         #endregion
         public int counter = 1;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {               
+            {
+                RetriveParameters();
+                CheckUserAccess();
                 SetDeafaultSetting();
                 FillData(); 
             }
@@ -47,6 +55,51 @@ namespace EMS.WebApp.Hire
             ViewState["SearchCriteria"] = searchCriteria;
 
         }
+
+        private void RetriveParameters()
+        {
+            _userId = UserBLL.GetLoggedInUserId();
+
+            //Get user permission.
+            UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+        }
+
+        private void CheckUserAccess()
+        {
+            if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+            {
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+
+                if (ReferenceEquals(user, null) || user.Id == 0)
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
+
+                if (user.UserRole.Id != (int)UserRole.Admin)
+                {
+                    if (_canView == false)
+                    {
+                        Response.Redirect("~/Unauthorized.aspx");
+                    }
+
+                    if (_canAdd == false)
+                    {
+                        btnAdd.Visible = false;
+                    }
+                    //Response.Redirect("~/Unauthorized.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+
+            if (!_canView)
+            {
+                Response.Redirect("~/Unauthorized.aspx");
+            }
+        }
+
         private void FillData()
         {
             counter = 1;
@@ -126,17 +179,32 @@ namespace EMS.WebApp.Hire
         protected void gvwHire_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             
-            if(e.Row.RowType==DataControlRowType.DataRow ){
-            var t = ((System.Data.DataRowView)e.Row.DataItem).Row.ItemArray;
-            var m = t[3].ToString();
-            var m1 = t[29].ToString();
-            if (m == "On Hire" && m1 == "RCVE")
+            if(e.Row.RowType==DataControlRowType.DataRow )
             {
-                var btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
-                var btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
-                if (btnEdit != null) { btnEdit.Visible = false; }
-                if (btnRemove != null) { btnRemove.Visible = false; }
-            }
+                var t = ((System.Data.DataRowView)e.Row.DataItem).Row.ItemArray;
+                var m = t[3].ToString();
+                var m1 = t[29].ToString();
+                if (m == "On Hire" && m1 == "RCVE")
+                {
+                    var btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
+                    var btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                    if (btnEdit != null) { btnEdit.Visible = false; }
+                    if (btnRemove != null) { btnRemove.Visible = false; }
+                }
+                 if (_canDelete == true)
+                {
+                    ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                    
+                    btnRemove.Visible = true;
+                    //btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00007");
+                    //btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLID"));
+
+                }
+                else
+                {
+                    ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                    btnRemove.Visible = false;
+                }
 
             }
         }

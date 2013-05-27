@@ -19,6 +19,11 @@ namespace EMS.WebApp.MasterModule
         private int _userId = 0;
         private bool _hasEditAccess = true;
         private string VesselId = "";
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
+
         #endregion
 
 
@@ -26,7 +31,8 @@ namespace EMS.WebApp.MasterModule
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
+            //_userId = EMS.BLL.UserBLL.GetLoggedInUserId();
+           
 
             if (!IsPostBack)
             {
@@ -39,8 +45,10 @@ namespace EMS.WebApp.MasterModule
                 if (VesselId != "-1")
                     LoadData(VesselId);
                 else
-                LoadShip_Tax(_userId, dbinteract);
+                    LoadShip_Tax(_userId, dbinteract);
             }
+            RetriveParameters();
+            CheckUserAccess(VesselId);
         }
 
         private void LoadShip_Tax(int _userId, BLL.DBInteraction dbinteract)
@@ -64,6 +72,51 @@ namespace EMS.WebApp.MasterModule
         #endregion
 
         #region Private Methods
+
+        private void RetriveParameters()
+        {
+            _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
+
+            //Get user permission.
+            EMS.BLL.UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+        }
+
+        private void CheckUserAccess(string xID)
+        {
+            if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+            {
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+
+                if (ReferenceEquals(user, null) || user.Id == 0)
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
+
+                btnSave.Visible=true;
+
+                if (!_canAdd && !_canEdit)
+                    btnSave.Visible = false;
+                else
+                {
+
+                    if (!_canEdit && xID != "-1")
+                    {
+                        btnSave.Visible = false;
+                    }
+                    else if (!_canAdd && xID == "-1")
+                    {
+                        btnSave.Visible = false;
+                    }
+                }
+
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+
+
+        }
 
         private void LoadData(string VesselId)
         {

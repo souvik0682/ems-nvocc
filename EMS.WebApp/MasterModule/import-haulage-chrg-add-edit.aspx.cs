@@ -23,16 +23,16 @@ namespace EMS.WebApp.MasterModule
 
         private int _userId = 0;
         private int _locId = 0;
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
 
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            CheckUserAccess();
-
-            IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
-            _userId = user == null ? 0 : user.Id;
-
+ 
             RetriveParameters();
             if (!Page.IsPostBack)
             {
@@ -52,9 +52,32 @@ namespace EMS.WebApp.MasterModule
                 if (hdnHaulageChrgID.Value != "0")
                     LoadData();
             }
+            CheckUserAccess(hdnHaulageChrgID.Value);
         }
 
-        private void CheckUserAccess()
+        //private void CheckUserAccess()
+        //{
+        //    if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+        //    {
+        //        IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+
+        //        if (ReferenceEquals(user, null) || user.Id == 0)
+        //        {
+        //            Response.Redirect("~/Login.aspx");
+        //        }
+
+        //        if (user.UserRole.Id != (int)UserRole.Admin)
+        //        {
+        //            Response.Redirect("~/Unauthorized.aspx");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Response.Redirect("~/Login.aspx");
+        //    }
+        //}
+
+        private void CheckUserAccess(string xID)
         {
             if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
             {
@@ -65,16 +88,30 @@ namespace EMS.WebApp.MasterModule
                     Response.Redirect("~/Login.aspx");
                 }
 
-                if (user.UserRole.Id != (int)UserRole.Admin)
+                btnSave.Visible = true;
+
+                if (!_canAdd && !_canEdit)
+                    btnSave.Visible = false;
+                else
                 {
-                    Response.Redirect("~/Unauthorized.aspx");
+
+                    if (!_canEdit && xID != "0")
+                    {
+                        btnSave.Visible = false;
+                    }
+                    else if (!_canAdd && xID == "0")
+                    {
+                        btnSave.Visible = false;
+                    }
                 }
+
             }
             else
             {
                 Response.Redirect("~/Login.aspx");
             }
         }
+
 
         private void LoadData()
         {
@@ -177,6 +214,9 @@ namespace EMS.WebApp.MasterModule
                 Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["id"].ToString()), out _locId);
                 hdnHaulageChrgID.Value = _locId.ToString();
             }
+            _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
+
+            EMS.BLL.UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
         }
 
         protected void btnBack_Click(object sender, EventArgs e)

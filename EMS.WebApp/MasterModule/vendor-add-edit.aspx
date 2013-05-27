@@ -98,6 +98,96 @@
                             </asp:DropDownList>
                         </td>
                     </tr>
+
+                     <tr>
+                        <td>
+                            Contact Person :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TxtCP" runat="server" Width="250" Style="text-transform: uppercase;"></asp:TextBox>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Mobile No :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TxtMob" runat="server" Width="250" Style="text-transform: uppercase;"></asp:TextBox>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            e-Mail ID :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TxtEmail" runat="server" Width="250" Style="text-transform: uppercase;"></asp:TextBox>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            PAN :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TxtPAN" runat="server" Width="250" Style="text-transform: uppercase;"></asp:TextBox>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            TAN :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TxtTAN" runat="server" Width="250" Style="text-transform: uppercase;"></asp:TextBox>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            IEC :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TxtIEC" runat="server" Width="250" Style="text-transform: uppercase;"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            BIN :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TxtBIN" runat="server" Width="250" Style="text-transform: uppercase;"></asp:TextBox>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Bank Name :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TxtBankName" runat="server" Width="250" Style="text-transform: uppercase;"></asp:TextBox>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Account No :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TxtACNo" runat="server" Width="250" Style="text-transform: uppercase;"></asp:TextBox>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            A/c Type :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TxtAcType" runat="server" Width="250" Style="text-transform: uppercase;"></asp:TextBox>
+                        </td>
+                    </tr>
+
                     <tr>
                         <td>
                         </td>

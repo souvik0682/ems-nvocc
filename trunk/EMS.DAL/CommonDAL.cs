@@ -699,7 +699,7 @@ namespace EMS.DAL
         }
 
 
-        public static string GetTerminalType(int VoyageID)
+        public static string GetTerminalType(int VoyageID, int VesselID, int PortOfDischarge)
         {
             //
             string strExecution = "[trn].[GetTerminalType]";
@@ -708,6 +708,8 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@VoyageID",VoyageID);
+                oDq.AddIntegerParam("@VesselID", VesselID);
+                oDq.AddIntegerParam("@PortOfDischarge", PortOfDischarge);
                 TerminalType = Convert.ToString(oDq.GetScalar());
             }
             return TerminalType;

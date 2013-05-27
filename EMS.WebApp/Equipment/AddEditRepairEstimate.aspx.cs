@@ -19,12 +19,18 @@ namespace EMS.WebApp.Equipment
         private int _userId = 0;
         private bool _hasEditAccess = true;
         private string EqEstId = "";
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
+
         #endregion
 
         BLL.DBInteraction dbinteract = new BLL.DBInteraction();
         protected void Page_Load(object sender, EventArgs e)
         {
-            _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
+            RetriveParameters();
+            //_userId = EMS.BLL.UserBLL.GetLoggedInUserId();
 
             EqEstId = GeneralFunctions.DecryptQueryString(Request.QueryString["id"]);
 
@@ -51,9 +57,51 @@ namespace EMS.WebApp.Equipment
                 txtReleasedOn.Enabled = false;
                 txtStockRetDate.Enabled = false;
             }
+            CheckUserAccess(EqEstId);
 
         }
 
+        private void RetriveParameters()
+        {
+            _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
+
+            EMS.BLL.UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+        }
+
+        private void CheckUserAccess(string xID)
+        {
+            if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+            {
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+
+                if (ReferenceEquals(user, null) || user.Id == 0)
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
+
+                btnSave.Visible = true;
+
+                if (!_canAdd && !_canEdit)
+                    btnSave.Visible = false;
+                else
+                {
+
+                    if (!_canEdit && xID != "-1")
+                    {
+                        btnSave.Visible = false;
+                    }
+                    else if (!_canAdd && xID == "-1")
+                    {
+                        btnSave.Visible = false;
+                    }
+                }
+
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+        }
         private int DisableControls()
         {
             if (EqEstId != "-1")

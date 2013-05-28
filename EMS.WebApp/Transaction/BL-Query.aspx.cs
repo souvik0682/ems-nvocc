@@ -32,7 +32,7 @@ namespace EMS.WebApp.Transaction
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            CheckUserAccess();
+            //CheckUserAccess();
             IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
             _userId = user == null ? 0 : user.Id;
 

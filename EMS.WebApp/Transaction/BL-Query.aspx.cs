@@ -44,7 +44,7 @@ namespace EMS.WebApp.Transaction
                 DisableAllServiceControls();
                 RetriveParameters();
             }
-            
+
         }
 
         private void CheckUserAccess()
@@ -179,7 +179,7 @@ namespace EMS.WebApp.Transaction
                 {
                     tdFinalDo.Visible = false;
                     tdExmDo.Attributes.Add("colspan", "2");
-                }               
+                }
 
 
 
@@ -222,7 +222,7 @@ namespace EMS.WebApp.Transaction
 
             //if (Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()) > Convert.ToDateTime("01/01/1950"))
             //    txtPGRTill.Text = Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()).ToString("dd/MM/yyyy");
-            
+
 
             ddlLine.SelectedValue = dtDetail.Rows[0]["LINE"].ToString();
             ddlLocation.SelectedValue = dtDetail.Rows[0]["LOCATION"].ToString();
@@ -237,7 +237,7 @@ namespace EMS.WebApp.Transaction
 
             //if (!string.IsNullOrEmpty(dtDetail.Rows[0]["DTNUPTO"].ToString()))
             if (Convert.ToDateTime(dtDetail.Rows[0]["DTNUPTO"].ToString()) > Convert.ToDateTime("01/01/1950"))
-                tstDetentionTill.Text = Convert.ToDateTime(dtDetail.Rows[0]["DTNUPTO"].ToString()).ToString("dd/MM/yyyy"); 
+                tstDetentionTill.Text = Convert.ToDateTime(dtDetail.Rows[0]["DTNUPTO"].ToString()).ToString("dd/MM/yyyy");
             else
             {
                 if (!String.IsNullOrEmpty(txtLandingDate.Text))
@@ -268,7 +268,7 @@ namespace EMS.WebApp.Transaction
                 //tdExmDo.Attributes.Add("colspan", "1");
             }
 
-            hdnDoNo.Value=dtDetail.Rows[0]["DONO"].ToString();
+            hdnDoNo.Value = dtDetail.Rows[0]["DONO"].ToString();
             hdnIsDoLock.Value = Convert.ToBoolean(dtDetail.Rows[0]["ISDOLOCK"].ToString()).ToString();
             if (Convert.ToBoolean(hdnIsDoLock.Value) == true)
             {
@@ -887,7 +887,7 @@ namespace EMS.WebApp.Transaction
         {
             //UpdatePanel2.Update();
             mpeDOE.Show();
-            
+
         }
 
         protected void lnkSlotExtension_Click(object sender, EventArgs e)
@@ -1051,7 +1051,7 @@ namespace EMS.WebApp.Transaction
                 }
                 else
                 {
-                    if(Convert.ToInt32(dtContainers.Rows[rowCount]["RepairID"].ToString()) <= 0)
+                    if (Convert.ToInt32(dtContainers.Rows[rowCount]["RepairID"].ToString()) <= 0)
                     {
                         STATUSIMG = "GreenFlag.JPG";
                     }
@@ -1067,7 +1067,7 @@ namespace EMS.WebApp.Transaction
                         }
                     }
 
-                    
+
                 }
 
 
@@ -1336,8 +1336,15 @@ namespace EMS.WebApp.Transaction
                 string CRNNO = dtDoc.Rows[rowCount]["CRNNO"].ToString();
                 string CESS = dtDoc.Rows[rowCount]["CESS"].ToString();
                 string ACESS = dtDoc.Rows[rowCount]["ACESS"].ToString();
-               
+                
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
 
+                string ss = string.Format("ReportPrint1('{0}','{1}','{2}','{3}','{4}');",
+                "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("CreditNote"),
+                "&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text),
+                "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue),
+                "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(user.FirstName + " " + user.LastName),
+                "&CNId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(CRNID));
 
                 if (rowCount % 2 == 0) //For ODD row
                 {
@@ -1350,7 +1357,7 @@ namespace EMS.WebApp.Transaction
                     sbr.Append("<td style='text-align:right;'>" + ACESS + "</td>");
                     //sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
                     //sbr.Append("<td><a target='_blank' href='../Reports/MoneyRcpt.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/Print.png' /></a></td>");
-                    sbr.Append("<td><a target='_blank' href='#'><img src='../Images/Print.png' /></a></td>");
+                    sbr.Append("<td><a target='_blank' onclick=" + ss + "><img src='../Images/Print.png' /></a></td>");
 
                     sbr.Append("</tr>");
                 }
@@ -1365,7 +1372,7 @@ namespace EMS.WebApp.Transaction
                     sbr.Append("<td style='text-align:right;'>" + ACESS + "</td>");
                     //sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
                     //sbr.Append("<td><a target='_blank' href='../Reports/MoneyRcpt.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/Print.png' /></a></td>");
-                    sbr.Append("<td><a target='_blank' href='#'><img src='../Images/Print.png' /></a></td>");
+                    sbr.Append("<td><a target='_blank' onclick=" + ss + "><img src='../Images/Print.png' /></a></td>");
 
                     sbr.Append("</tr>");
                 }
@@ -1383,11 +1390,11 @@ namespace EMS.WebApp.Transaction
         void PopulateInvoiceButtons()
         {
             imgBtnExaminationDo.Attributes.Add("onclick", string.Format("return ReportPrint('{0}','{1}','{2}','{3}');", "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("eDeliveryOrder"),
-                "&invBLHeader=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue),'e'));
+                "&invBLHeader=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue), 'e'));
 
 
             imgBtnFinalDo.Attributes.Add("onclick", string.Format("return ReportPrint('{0}','{1}','{2}','{3}');", "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("DeliveryOrder"),
-                "&invBLHeader=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue),'f'));
+                "&invBLHeader=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue), 'f'));
         }
 
         protected void GenDo(object sender, EventArgs e)

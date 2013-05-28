@@ -16,7 +16,6 @@
 
 
         function ReportPrint1(a, b, c, d, e) {
-
             window.open('../Popup/Report.aspx?' + a + b + c + d + e, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
             return false;
         }

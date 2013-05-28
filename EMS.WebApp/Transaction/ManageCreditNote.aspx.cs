@@ -26,10 +26,15 @@ namespace EMS.WebApp.Transaction
         protected void Page_Load(object sender, EventArgs e)
         {
             RetriveParameters();
-            CheckUserAccess();
+            //CheckUserAccess();
 
             if (!Page.IsPostBack)
             {
+                //List<ICreditNoteCharge> cnCharges = null;
+
+                //gvwCreditNote.DataSource = cnCharges;
+                //gvwCreditNote.DataBind();
+
                 if (!ReferenceEquals(Request.QueryString["CrnId"], null))
                 {
                     long CrnId = 0;
@@ -40,6 +45,8 @@ namespace EMS.WebApp.Transaction
 
                     btnSave.Enabled = false;
                     btnAdd.Enabled = false;
+
+          
                 }
 
                 if (!ReferenceEquals(Request.QueryString["InvoiceId"], null))
@@ -89,7 +96,7 @@ namespace EMS.WebApp.Transaction
 
             if (cnAmount > 0)
             {
-                if (chargeAmount > cnAmount)
+                if (chargeAmount >= cnAmount)
                 {
                     AddCreditNoteCharge();
                 }

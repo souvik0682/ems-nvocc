@@ -18,5 +18,16 @@ namespace EMS.Common
         int Terminalid { get; set; }
         int CompanyID { get; set; }
         bool VendorActive { get; set; }
+        string AcNo { get; set; }
+        string AcType { get; set; }
+        string PAN { get; set; }
+        string TANo { get; set; }
+        string BIN { get; set; }
+        string Mobile { get; set; }
+        string EmailID { get; set; }
+        string BankName { get; set; }
+        string IEC { get; set; }
+        string CP { get; set; }
+
     }
 }

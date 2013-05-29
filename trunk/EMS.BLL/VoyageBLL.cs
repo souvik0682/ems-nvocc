@@ -20,9 +20,9 @@ namespace EMS.BLL
 
        }
 
-       public static int VoyageLandingDateEntry(int vesselId, int voyageId,int Pod, DateTime? LandingDate, int UserId)
+       public static int VoyageLandingDateEntry(int vesselId, int voyageId,int Pod, DateTime? LandingDate, DateTime? OldLandingDate, int UserId)
        {
-           return EMS.DAL.VoyageDAL.VoyageLandingDateEntry(vesselId, voyageId,Pod, LandingDate, UserId);
+           return EMS.DAL.VoyageDAL.VoyageLandingDateEntry(vesselId, voyageId,Pod, LandingDate, OldLandingDate, UserId);
        }
 
 

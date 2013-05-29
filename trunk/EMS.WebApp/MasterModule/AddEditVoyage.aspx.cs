@@ -19,7 +19,7 @@ namespace EMS.WebApp.MasterModule
         private bool _hasEditAccess = true;
         private string VoyageId = "";
         private string _PrevPage = string.Empty;
-        private string OldLandingDate;
+        private DateTime OldLandingDate;
         private bool _canAdd = false;
         private bool _canEdit = false;
         private bool _canDelete = false;
@@ -191,7 +191,7 @@ namespace EMS.WebApp.MasterModule
                 txtDtIGM.Text = ds.Tables[0].Rows[0]["IGMDate"].ToString().Split(' ')[0];
                 txtdtLand.Text = ds.Tables[0].Rows[0]["LandingDate"].ToString().Split(' ')[0];
                 hdnLandingDT.Value = ds.Tables[0].Rows[0]["LandingDate"].ToString().Split(' ')[0]; //Rajen
-                OldLandingDate = txtdtLand.Text;
+                hdnOldLandingDT.Value=ds.Tables[0].Rows[0]["LandingDate"].ToString().Split(' ')[0];
                 txtdtPCC.Text = ds.Tables[0].Rows[0]["PCCDate"].ToString().Split(' ')[0];
                 //txtdtAddLand.Text = ds.Tables[0].Rows[0]["__"].ToString();
                 ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text = ds.Tables[0].Rows[0]["lastport"].ToString();
@@ -246,6 +246,8 @@ namespace EMS.WebApp.MasterModule
             voyage.AddLandingDate = string.IsNullOrEmpty(txtdtAddLand.Text.Trim()) ? (Nullable<DateTime>)null : Convert.ToDateTime(txtdtAddLand.Text);
             voyage.ETADate = string.IsNullOrEmpty(txtdtETA.Text.Trim()) ? (Nullable<DateTime>)null : Convert.ToDateTime(txtdtETA.Text);
             voyage.IGMDate = string.IsNullOrEmpty(txtDtIGM.Text.Trim()) ? (Nullable<DateTime>)null : Convert.ToDateTime(txtDtIGM.Text);
+            //voyage.OLandingDate = Convert.ToDateTime(hdnOldLandingDT.Value);
+            voyage.OLandingDate = string.IsNullOrEmpty(hdnOldLandingDT.Value.Trim()) ? (Nullable<DateTime>)null : Convert.ToDateTime(hdnOldLandingDT.Value);
             voyage.LandingDate = string.IsNullOrEmpty(txtdtLand.Text.Trim()) ? (Nullable<DateTime>)null : Convert.ToDateTime(txtdtLand.Text);
             voyage.PCCDate = string.IsNullOrEmpty(txtdtPCC.Text.Trim()) ? (Nullable<DateTime>)null : Convert.ToDateTime(txtdtPCC.Text);
             voyage.locid = Convert.ToInt32(ddlLoc.SelectedValue);
@@ -292,18 +294,18 @@ namespace EMS.WebApp.MasterModule
                 return;
             }
 
-            if (isedit && OldLandingDate!=txtdtLand.Text && OldLandingDate != System.Convert.DBNull)
-            {
+            //if (isedit && OldLandingDate!=txtdtLand.Text && OldLandingDate != System.Convert.DBNull)
+            //{
                 
-                //GeneralFunctions.RegisterAlertScript(this, "All Container transaction will be deleted");
+            //    //GeneralFunctions.RegisterAlertScript(this, "All Container transaction will be deleted");
 
-                //  "javascript:return confirm('All Containers of the voyage will be deleted. Confirm with Yes');";
+            //    //  "javascript:return confirm('All Containers of the voyage will be deleted. Confirm with Yes');";
                 
-                //if (retval!="yes") return;
+            //    //if (retval!="yes") return;
 
            
                 
-            }
+            //}
 
             if (txtdtLand.Text != "")
             {
@@ -321,7 +323,7 @@ namespace EMS.WebApp.MasterModule
 
 
             int result = dbinteract.AddEditVoyage(_userId, isedit, voyage);
-            int result1 = EMS.BLL.VoyageBLL.VoyageLandingDateEntry(voyage.fk_VesselID, Convert.ToInt32(VoyageId), voyage.fk_Pod, voyage.LandingDate, _userId);
+            int result1 = EMS.BLL.VoyageBLL.VoyageLandingDateEntry(voyage.fk_VesselID, Convert.ToInt32(VoyageId), voyage.fk_Pod, voyage.LandingDate, voyage.OLandingDate, _userId);
 
             if (result > 0)
             {

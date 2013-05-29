@@ -40,7 +40,7 @@ namespace EMS.DAL
             return ds;
         }
 
-        public static int VoyageLandingDateEntry(int vesselId, int voyageId, int Pod, DateTime? LandingDate, int UserId)
+        public static int VoyageLandingDateEntry(int vesselId, int voyageId, int Pod, DateTime? LandingDate, DateTime? OldLandingDate, int UserId)
         {
             string ProcName = "prcVoyageLandingDateEntry";
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
@@ -49,6 +49,7 @@ namespace EMS.DAL
             dquery.AddIntegerParam("@vesselId", vesselId);
             dquery.AddIntegerParam("@voyageId", voyageId);
             dquery.AddDateTimeParam("@LandingDate", LandingDate);
+            dquery.AddDateTimeParam("@OldLandingDate", OldLandingDate);
             dquery.AddIntegerParam("@Pod", Pod);
 
             return dquery.RunActionQuery();

@@ -110,6 +110,7 @@
                                 <td>
                                     <%--<uc3:DatePicker ID="dtLand" runat="server" />--%>
                                     <asp:HiddenField ID="hdnLandingDT" runat="server" />
+                                    <asp:HiddenField ID="hdnOldLandingDT" runat="server" />
                                     <asp:TextBox ID="txtdtLand" runat="server" CssClass="textboxuppercase" Width="250"></asp:TextBox>
                                     <cc2:CalendarExtender ID="dtLand_" Format="dd/MM/yyyy" TargetControlID="txtdtLand"
                                         runat="server" />

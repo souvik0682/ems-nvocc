@@ -75,6 +75,67 @@ namespace EMS.Entity
             get;
             set;
         }
+
+        public string BankName
+        {
+            get;
+            set;
+        }
+
+        public string BIN
+        {
+            get;
+            set;
+        }
+
+        public string EmailID
+        {
+            get;
+            set;
+        }
+
+        public string Mobile
+        {
+            get;
+            set;
+        }
+
+        public string PAN
+        {
+            get;
+            set;
+        }
+
+        public string TANo
+        {
+            get;
+            set;
+        }
+
+        public string AcNo
+        {
+            get;
+            set;
+        }
+
+        public string AcType
+        {
+            get;
+            set;
+        }
+
+        public string IEC
+        {
+            get;
+            set;
+        }
+
+        public string CP
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region ICommon Members
@@ -101,6 +162,8 @@ namespace EMS.Entity
             get;
             set;
         }
+
+      
         #endregion
 
         #region Constructors
@@ -123,6 +186,16 @@ namespace EMS.Entity
             this.VendorName = Convert.ToString(reader["Name"]);
             this.VendorSalutation = Convert.ToInt32(reader["Salutation"]);
             this.VendorType = Convert.ToString(reader["Type"]);
+            this.PAN = Convert.ToString(reader["PAN"]);
+            this.TANo = Convert.ToString(reader["TANo"]);
+            this.IEC = Convert.ToString(reader["IEC"]);
+            this.BankName = Convert.ToString(reader["BankName"]);
+            this.BIN = Convert.ToString(reader["BIN"]);
+            this.AcNo = Convert.ToString(reader["AcNo"]);
+            this.AcType = Convert.ToString(reader["AcType"]);
+            this.Mobile = Convert.ToString(reader["Mobile"]);
+            this.CP = Convert.ToString(reader["CP"]);
+            this.EmailID = Convert.ToString(reader["EmailID"]);
         }
 
         #endregion

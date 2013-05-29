@@ -34,7 +34,7 @@ namespace EMS.WebApp.Reports
             string fileName = string.Empty;
             FileUtil t = null;
 
-            switch (CommonBLL.GetTerminalType(Convert.ToInt32(ddlVoyage.SelectedValue)))
+            switch (CommonBLL.GetTerminalType(Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(hdnReturn.Value)))
             {
                 case "NSICT":
                 fileName = Server.MapPath("~/Download/" + DateTime.Now.Ticks.ToString() + ".xlsx");

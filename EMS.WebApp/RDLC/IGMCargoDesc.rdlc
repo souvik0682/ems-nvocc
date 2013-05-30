@@ -114,16 +114,16 @@
               <Width>1.16569in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.90565in</Width>
+              <Width>0.83829in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.8125in</Width>
+              <Width>0.71607in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>0.79063in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.39662in</Width>
+              <Width>1.30992in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.5in</Width>
@@ -138,10 +138,10 @@
               <Width>0.70833in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.73958in</Width>
+              <Width>0.85934in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>0.77083in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1237,7 +1237,7 @@ Cash /Deposit W.R No</Value>
         <DataSetName>DataSet1</DataSetName>
         <Left>0.08588in</Left>
         <Height>1.15625in</Height>
-        <Width>10.65198in</Width>
+        <Width>10.08271in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1494,7 +1494,7 @@ Cash /Deposit W.R No</Value>
         <Top>1.23125in</Top>
         <Left>4.09759in</Left>
         <Height>0.15625in</Height>
-        <Width>4.11538in</Width>
+        <Width>3.7325in</Width>
         <ZIndex>7</ZIndex>
         <Style>
           <Border>
@@ -1556,7 +1556,7 @@ Cash /Deposit W.R No</Value>
         <Top>1.3875in</Top>
         <Left>0.11899in</Left>
         <Height>0.15521in</Height>
-        <Width>8.09398in</Width>
+        <Width>7.7111in</Width>
         <ZIndex>8</ZIndex>
         <Style>
           <Border>
@@ -1585,9 +1585,9 @@ Cash /Deposit W.R No</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.24688in</Top>
-        <Left>8.29003in</Left>
-        <Height>0.25in</Height>
+        <Top>1.23298in</Top>
+        <Left>7.88565in</Left>
+        <Height>0.26563in</Height>
         <Width>0.30717in</Width>
         <ZIndex>9</ZIndex>
         <Style>
@@ -1617,10 +1617,10 @@ Cash /Deposit W.R No</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>company</rd:DefaultName>
-        <Top>1.24688in</Top>
-        <Left>8.5972in</Left>
+        <Top>1.23298in</Top>
+        <Left>8.2067in</Left>
         <Height>0.25in</Height>
-        <Width>2.03125in</Width>
+        <Width>1.96189in</Width>
         <ZIndex>10</ZIndex>
         <Style>
           <Border>
@@ -1654,9 +1654,9 @@ Cash /Deposit W.R No</Value>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>1.51076in</Top>
-        <Left>8.29003in</Left>
+        <Left>7.88565in</Left>
         <Height>0.25in</Height>
-        <Width>2.33842in</Width>
+        <Width>2.28294in</Width>
         <ZIndex>11</ZIndex>
         <Style>
           <Border>
@@ -1734,7 +1734,7 @@ Cash /Deposit W.R No</Value>
         <Top>0.25in</Top>
         <Left>0.08588in</Left>
         <Height>0in</Height>
-        <Width>10.65199in</Width>
+        <Width>10.08271in</Width>
         <ZIndex>14</ZIndex>
         <Style>
           <Border>
@@ -1746,7 +1746,7 @@ Cash /Deposit W.R No</Value>
     <Height>2.47917in</Height>
     <Style />
   </Body>
-  <Width>10.73787in</Width>
+  <Width>10.27954in</Width>
   <Page>
     <PageHeader>
       <Height>1.25364in</Height>
@@ -2186,8 +2186,8 @@ Cash /Deposit W.R No</Value>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>PageNumber1</rd:DefaultName>
-          <Top>0.97586in</Top>
-          <Left>9.69002in</Left>
+          <Top>1.00364in</Top>
+          <Left>9.20391in</Left>
           <Height>0.20833in</Height>
           <Width>1in</Width>
           <ZIndex>13</ZIndex>
@@ -2218,8 +2218,8 @@ Cash /Deposit W.R No</Value>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox69</rd:DefaultName>
-          <Top>0.97586in</Top>
-          <Left>9.22821in</Left>
+          <Top>0.98974in</Top>
+          <Left>8.72821in</Left>
           <Height>0.22222in</Height>
           <Width>0.44792in</Width>
           <ZIndex>14</ZIndex>
@@ -2242,8 +2242,8 @@ Cash /Deposit W.R No</Value>
     </PageHeader>
     <PageHeight>8.27in</PageHeight>
     <PageWidth>11.69in</PageWidth>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
+    <LeftMargin>0.5in</LeftMargin>
+    <RightMargin>0.5in</RightMargin>
     <TopMargin>0.75in</TopMargin>
     <BottomMargin>0.75in</BottomMargin>
     <ColumnSpacing>0.05118in</ColumnSpacing>

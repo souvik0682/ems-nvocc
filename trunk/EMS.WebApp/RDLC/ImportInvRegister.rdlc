@@ -89,7 +89,7 @@
         <rd:DataSetName>EMS.BLL</rd:DataSetName>
         <rd:TableName>ReportBLL</rd:TableName>
         <rd:ObjectDataSourceSelectMethod>GetImportInvoiceRegister</rd:ObjectDataSourceSelectMethod>
-        <rd:ObjectDataSourceSelectMethodSignature>System.Collections.Generic.List`1[EMS.Entity.Report.ImpInvRegisterEntity] GetImportInvoiceRegister(Int32, Int32, System.String, System.DateTime, System.DateTime)</rd:ObjectDataSourceSelectMethodSignature>
+        <rd:ObjectDataSourceSelectMethodSignature>System.Collections.Generic.List`1[EMS.Entity.Report.ImpInvRegisterEntity] GetImportInvoiceRegister(Int32, Int32, Int32, System.DateTime, System.DateTime)</rd:ObjectDataSourceSelectMethodSignature>
         <rd:ObjectDataSourceType>EMS.BLL.ReportBLL, EMS.BLL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
@@ -1485,6 +1485,7 @@
                             <TextRun>
                               <Value>=Fields!VesselDetail.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
@@ -1552,6 +1553,7 @@
                             <TextRun>
                               <Value>=Fields!ConsigneeName.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
@@ -1616,10 +1618,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=First(Fields!AddrName.Value, "RptDataSet")</Value>
+                              <Value>=Fields!AddrName.Value</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>

@@ -1344,7 +1344,7 @@ namespace EMS.WebApp.Transaction
                 "&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text),
                 "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue),
                 "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(user.FirstName + " " + user.LastName),
-                "&CNId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(CRNNO));
+                "&CNId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(CRNID));
 
                 if (rowCount % 2 == 0) //For ODD row
                 {

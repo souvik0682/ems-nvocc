@@ -217,6 +217,26 @@ namespace EMS.WebApp.Reports.ReportViewer
                         }
                     }
                 }
+                else if (ReportName.ToLower().Equals("creditnote"))
+                {
+                    using (WebClient myWebClient = new WebClient())
+                    {
+                        myWebClient.DownloadDataCompleted += new DownloadDataCompletedEventHandler(myWebClient_DownloadDataCompleted);
+                        myWebClient.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["UserName"], ConfigurationManager.AppSettings["Password"]);
+                        path = HttpContext.Current.Server.MapPath("~/Download/" + "creditnote" + DateTime.Now.Ticks.ToString() + ".pdf");
+                        myWebClient.DownloadFile(GetUrl(ReportName, reportParma).Replace(ConfigurationManager.AppSettings["ReplaceString"], "http://localhost"), path);
+                        if (!string.IsNullOrEmpty(path))
+                        {
+                            var fileInfo = new System.IO.FileInfo(path);
+                            HttpContext.Current.Response.ContentType = "Application/pdf";
+                            HttpContext.Current.Response.AddHeader("Content-Disposition", String.Format("attachment;filename=\"{0}\"", fileInfo.Name));
+                            HttpContext.Current.Response.AddHeader("Content-Length", fileInfo.Length.ToString());
+                            HttpContext.Current.Response.WriteFile(path);
+                            HttpContext.Current.Response.Flush();
+                            HttpContext.Current.Response.End();
+                        }
+                    }
+                }
                 else
                 {
                     Load(rptViewer, ReportName, BindParameter(reportParma));
@@ -353,7 +373,10 @@ namespace EMS.WebApp.Reports.ReportViewer
                     litHeader.Text = "CARGO ARRIVAL NOTICE";
                     break;
                 case "invoicedeveloper":
-                    litHeader.Text = "INVOICE DEVELOPER";
+                    litHeader.Text = "INVOICE";
+                    break;
+                case "creditnote":
+                    litHeader.Text = "CREDIT NOTE";
                     break;
                 case "onoffhire":
                     litHeader.Text = "ON/OFF REGISTER FROM";
@@ -471,6 +494,14 @@ namespace EMS.WebApp.Reports.ReportViewer
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
                     rptParameters[2] = new ReportParameter("LoginUserName", txtPrintedBy.Text);
                     rptParameters[3] = new ReportParameter("InvoiceId", ddlInvoice.SelectedValue);
+                    break;
+                case "creditnote":
+                    //litHeader.Text = "INVOICE DEVELOPER";
+                    rptParameters = new ReportParameter[4];
+                    rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedItem.Text);
+                    rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
+                    rptParameters[2] = new ReportParameter("LoginUserName", txtPrintedBy.Text);
+                    rptParameters[3] = new ReportParameter("CrnId", ddlInvoice.SelectedValue);
                     break;
                 case "onoffhire":
                     //litHeader.Text = "ON/OFF REGISTER FROM";

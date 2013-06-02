@@ -121,5 +121,27 @@ namespace EMS.WebApp
         }
 
 
+
+        [WebMethod]
+        [System.Web.Script.Services.ScriptMethod]
+        //public string[] GetBLNoList(string prefixText, int count,int Location, int Line)
+        public string[] GetContainerListByLocLine(string prefixText, int count, string contextKey)
+        {
+            
+            string[] Items = contextKey.Split('|');
+
+            EquipmentBLL oEquipmentBLL = new EquipmentBLL();
+            DataTable dt = oEquipmentBLL.GetContainerList(Convert.ToInt32(Items[0]), Convert.ToInt32(Items[1]), prefixText);
+            string[] ContNos = new string[dt.Rows.Count];
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                ContNos[i] = AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(Convert.ToString(dt.Rows[i]["CntrNo"]), Convert.ToString(dt.Rows[i]["LineID"]));
+            }
+
+            return ContNos;
+        }
+
+
     }
 }

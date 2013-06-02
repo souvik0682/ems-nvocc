@@ -1339,7 +1339,7 @@ namespace EMS.WebApp.Transaction
                 
                 IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
 
-                string ss = string.Format("ReportPrint1('{0}','{1}','{2}','{3}','{4}','{5}');",
+                string ss = string.Format("ReportPrint2('{0}','{1}','{2}','{3}','{4}','{5}');",
                 "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("CreditNote"),
                 "&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text),
                 "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue),

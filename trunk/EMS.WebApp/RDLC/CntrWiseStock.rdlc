@@ -48,6 +48,10 @@
           <DataField>GroupID</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="HireRef">
+          <DataField>HireRef</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>EMSBLL</DataSourceName>
@@ -523,14 +527,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="GroupID">
+                    <Textbox Name="HireRef">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!GroupID.Value</Value>
+                              <Value>=Fields!HireRef.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -540,7 +544,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>GroupID</rd:DefaultName>
+                      <rd:DefaultName>HireRef</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>

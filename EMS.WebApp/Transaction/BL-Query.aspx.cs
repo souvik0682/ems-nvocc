@@ -1339,11 +1339,12 @@ namespace EMS.WebApp.Transaction
                 
                 IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
 
-                string ss = string.Format("ReportPrint1('{0}','{1}','{2}','{3}','{4}');",
+                string ss = string.Format("ReportPrint1('{0}','{1}','{2}','{3}','{4}','{5}');",
                 "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("CreditNote"),
                 "&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text),
                 "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue),
                 "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(user.FirstName + " " + user.LastName),
+                "&InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(hdnInvID.Value),
                 "&CNId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(CRNID));
 
                 if (rowCount % 2 == 0) //For ODD row

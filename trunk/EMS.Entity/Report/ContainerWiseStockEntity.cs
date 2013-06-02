@@ -62,6 +62,13 @@ namespace EMS.Entity.Report
             set;
         }
 
+        public string HireRef
+        {
+            get;
+            set;
+        }
+
+
 
     }
 }

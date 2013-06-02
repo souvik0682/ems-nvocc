@@ -1345,7 +1345,7 @@ namespace EMS.WebApp.Transaction
                 "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue),
                 "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(user.FirstName + " " + user.LastName),
                 "&InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(hdnInvID.Value),
-                "&CNId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(CRNID));
+                "&CreditNoteNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(CRNID));
 
                 if (rowCount % 2 == 0) //For ODD row
                 {

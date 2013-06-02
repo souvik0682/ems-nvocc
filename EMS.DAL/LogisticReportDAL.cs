@@ -79,6 +79,7 @@ namespace EMS.DAL
                     entity.NVOCC = Convert.ToString(reader["NVOCC"]);                   
                     entity.Size = Convert.ToString(reader["Size"]);
                     entity.vesselvoyage = Convert.ToString(reader["vesselvoyage"]);
+                    entity.HireRef = Convert.ToString(reader["hireref"]);
 
                     lstEntity.Add(entity);
                 }

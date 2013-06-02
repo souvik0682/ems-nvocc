@@ -37,7 +37,7 @@
     </asp:UpdateProgress>
     <center>
         <div id="headercaption">
-            CONTAINER WISE STOCK SUMMERY
+            CONTAINER WISE STOCK
         </div>
         <center>
             <fieldset style="width: 700px;">

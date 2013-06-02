@@ -55,8 +55,8 @@ namespace EMS.WebApp.Reports
         {
             ReportBLL cls = new ReportBLL();
 
-            LocalReportManager reportManager = new LocalReportManager(rptViewer, "Test", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
-            string rptName = "Test.rdlc";
+            LocalReportManager reportManager = new LocalReportManager(rptViewer, "CntrWiseStock", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
+            string rptName = "CntrWiseStock.rdlc";
 
 
             //DataSet ds = EMS.BLL.LogisticReportBLL.GetRptCntrStockDetails(ddlLine.SelectedValue, ddlLoc.SelectedValue, ddlStatus.SelectedValue, ddlContainerType.SelectedValue, txtdtStock.Text.Trim());

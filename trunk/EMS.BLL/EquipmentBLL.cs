@@ -41,7 +41,13 @@ namespace EMS.BLL
 
        public DataTable GetContainerList(int LocId, string Initial)
        {
-           return EquipmentDAL.GetContainerList(LocId, Initial);
+           return EquipmentDAL.GetContainerList(LocId,0, Initial);
+       }
+
+
+       public DataTable GetContainerList(int LocId, int LineId, string Initial)
+       {
+           return EquipmentDAL.GetContainerList(LocId, LineId, Initial);
        }
     }
 }

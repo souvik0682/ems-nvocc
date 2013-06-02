@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using EMS.DAL.DbManager;
+using EMS.Entity.Report;
 
 namespace EMS.DAL
 {
@@ -39,5 +40,60 @@ namespace EMS.DAL
             }
             return ds;
         }
+
+        public static IList<ContainerWiseStockEntity> GetRptContainerwiseStockSummery(string ContainerNo, int LineID, int LocationID)
+        {
+           /*
+            DataTable dt = new DataTable();
+            using (DbQuery dq = new DbQuery("prcRptContainerWiseStatus"))
+            {
+                dq.AddIntegerParam("@Location", LocationID);
+                dq.AddIntegerParam("@Line", LineID);
+                dq.AddNVarcharParam("@CntrNo", 15,ContainerNo);
+                //dt = dq.GetTable();
+                
+            }
+            return dt;
+            * */
+
+            ContainerWiseStockEntity entity;
+            List<ContainerWiseStockEntity> lstEntity = new List<ContainerWiseStockEntity>();
+            using (DbQuery oDq = new DbQuery("prcRptContainerWiseStatus"))
+            {
+                oDq.AddIntegerParam("@Location", LocationID);
+                oDq.AddIntegerParam("@Line", LineID);
+                oDq.AddNVarcharParam("@CntrNo", 15, ContainerNo);
+
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    entity = new ContainerWiseStockEntity();
+
+                    entity.cfs = Convert.ToString(reader["cfs"]);
+                    entity.ety = Convert.ToString(reader["ety"]);
+                    entity.GroupID = Convert.ToString(reader["GroupID"]);
+                    entity.Locabbr = Convert.ToString(reader["Locabbr"]);
+                    entity.MoveAbbr = Convert.ToString(reader["MoveAbbr"]);
+                    entity.MovementDate = Convert.ToDateTime(reader["MovementDate"]);
+                    entity.NVOCC = Convert.ToString(reader["NVOCC"]);                   
+                    entity.Size = Convert.ToString(reader["Size"]);
+                    entity.vesselvoyage = Convert.ToString(reader["vesselvoyage"]);
+
+                    lstEntity.Add(entity);
+                }
+            }
+
+
+            return lstEntity;
+        }
+
+        /*
+         * 
+         * 
+         * 
+         * */
+
+
     }
 }

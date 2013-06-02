@@ -131,5 +131,22 @@ namespace EMS.DAL
       }
 
 
+      public static DataTable GetContainerList(int LocId,int LineId, string Initial)
+      {
+          //GetBLNo
+          string strExecution = "[trn].[GetContainerList]";
+          DataTable myDataTable;
+
+          using (DbQuery oDq = new DbQuery(strExecution))
+          {
+              oDq.AddVarcharParam("@InitialChar", 250, Initial);
+              oDq.AddIntegerParam("@LocationID", LocId);
+              oDq.AddIntegerParam("@LineId", LineId);              
+
+              myDataTable = oDq.GetTable();
+          }
+          return myDataTable;
+      }
+
     }
 }

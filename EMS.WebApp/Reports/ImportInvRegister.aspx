@@ -3,6 +3,11 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">    
     <script type="text/javascript" language="javascript">
+        function ReportPrint2(a, b, c, d, e, f) {
+            window.open('../Popup/Report.aspx?' + a + b + c + d + e + f, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
+            return false;
+        }
+
         function validateData() {
             var ddlLoc = document.getElementById('<%=ddlLoc.ClientID %>');
             var ddlLine = document.getElementById('<%=ddlLine.ClientID %>');
@@ -49,7 +54,8 @@
                         Location:<span class="errormessage">*</span>
                     </td>
                     <td style="padding-right:20px;vertical-align:top;">
-                        <asp:DropDownList ID="ddlLoc" runat="server">
+                        <asp:DropDownList ID="ddlLoc" runat="server" AutoPostBack="True" 
+                            onselectedindexchanged="ddlLoc_SelectedIndexChanged">
                             <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                         </asp:DropDownList>
                     </td>
@@ -57,7 +63,8 @@
                         Line / NVOCC:<span class="errormessage">*</span>
                     </td>
                     <td style="padding-right:20px;vertical-align:top;">
-                        <asp:DropDownList ID="ddlLine" runat="server">
+                        <asp:DropDownList ID="ddlLine" runat="server" AutoPostBack="True" 
+                            onselectedindexchanged="ddlLine_SelectedIndexChanged">
                             <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                         </asp:DropDownList>
                     </td>
@@ -65,7 +72,8 @@
                         Bill Type:<span class="errormessage">*</span>
                     </td>
                     <td style="padding-right:20px;vertical-align:top;">
-                        <asp:DropDownList ID="ddlType" runat="server">
+                        <asp:DropDownList ID="ddlType" runat="server" AutoPostBack="True" 
+                            onselectedindexchanged="ddlType_SelectedIndexChanged">
                             <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                         </asp:DropDownList>
                     </td>        
@@ -76,17 +84,22 @@
                         From Date:<span class="errormessage">*</span>
                     </td>
                     <td style="padding-right:20px;vertical-align:top;">
-                        <asp:TextBox ID="txtFromDt" runat="server" CssClass="textbox" Width="80"></asp:TextBox>
+                        <asp:TextBox ID="txtFromDt" runat="server" CssClass="textbox" Width="80" 
+                            AutoPostBack="True" ontextchanged="txtFromDt_TextChanged"></asp:TextBox>
                         <cc1:CalendarExtender ID="cbeFromDt" runat="server" TargetControlID="txtFromDt" />
                     </td>
                     <td class="label" style="padding-right:5px;vertical-align:top;">
                         To Date:<span class="errormessage">*</span>
                     </td>
                     <td style="padding-right:20px;vertical-align:top;">
-                        <asp:TextBox ID="txtToDt" runat="server" CssClass="textbox" Width="80"></asp:TextBox>
+                        <asp:TextBox ID="txtToDt" runat="server" CssClass="textbox" Width="80" 
+                            AutoPostBack="True" ontextchanged="txtToDt_TextChanged"></asp:TextBox>
                         <cc1:CalendarExtender ID="cbeToDt" runat="server" TargetControlID="txtToDt" />
                     </td>
-                    <td style="vertical-align:top;"><asp:Button ID="btnShow" runat="server" Text="Show" CssClass="button" OnClientClick="javascript:return validateData();" OnClick="btnShow_Click" /></td>
+                    <td style="vertical-align:top;"><asp:Button ID="btnShow" runat="server" Text="Show Register" CssClass="button" OnClientClick="javascript:return validateData();" OnClick="btnShow_Click" /></td>
+                    <td style="vertical-align:top;">
+                    
+                    <asp:Button ID="btnInvoice" runat="server" Text="Print Invoice" CssClass="button" /></td>
                 </tr>
             </table>
         </fieldset>

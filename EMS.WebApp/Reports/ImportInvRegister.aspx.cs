@@ -65,6 +65,26 @@ namespace EMS.WebApp.Reports
             }
         }
 
+        protected void btnInvoice_Click(object sender, EventArgs e)
+        {
+            //try
+            //{
+            //    string message = string.Empty;
+
+            //    if (ValidateData(out message))
+            //    {
+            //        PrintInvoice();
+            //    }
+            //    else
+            //    {
+            //        GeneralFunctions.RegisterAlertScript(this, message);
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    GeneralFunctions.RegisterErrorAlertScript(this, ex.Message);
+            //}
+        }
         #endregion
 
         #region Private Methods
@@ -188,6 +208,49 @@ namespace EMS.WebApp.Reports
             rptViewer.LocalReport.Refresh();
         }
 
+        private void GenerateNavigationLink()
+        {
+            
+            string ss = string.Format("ReportPrint2('{0}','{1}','{2}','{3}','{4}','{5}', '{6}');",
+              "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("MID"),
+              "&Line=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLine.SelectedValue),
+              "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLoc.SelectedValue),
+              "&InvoiceTypeID=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlType.SelectedValue),
+              "&ToDate=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtToDt.Text),
+              "&FromDate=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtFromDt.Text),
+              "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(" "));
+
+           
+
+               btnInvoice.Attributes.Add("onclick", ss);
+
+        }
+
         #endregion
+
+        protected void ddlLoc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GenerateNavigationLink();
+        }
+
+        protected void ddlLine_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GenerateNavigationLink();
+        }
+
+        protected void ddlType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GenerateNavigationLink();
+        }
+
+        protected void txtFromDt_TextChanged(object sender, EventArgs e)
+        {
+            GenerateNavigationLink();
+        }
+
+        protected void txtToDt_TextChanged(object sender, EventArgs e)
+        {
+            GenerateNavigationLink();
+        }
     }
 }

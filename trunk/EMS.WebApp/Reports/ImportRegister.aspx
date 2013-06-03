@@ -52,6 +52,8 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
+  <div id="headercaption">
+        IMPORT B/L REGISTER</div>
 <center>
     <div style="padding-top: 10px;">
         <asp:HiddenField ID="hdnVessel" runat="server" />

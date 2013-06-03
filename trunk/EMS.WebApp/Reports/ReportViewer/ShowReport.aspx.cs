@@ -223,7 +223,7 @@ namespace EMS.WebApp.Reports.ReportViewer
                     {
                         myWebClient.DownloadDataCompleted += new DownloadDataCompletedEventHandler(myWebClient_DownloadDataCompleted);
                         myWebClient.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["UserName"], ConfigurationManager.AppSettings["Password"]);
-                        path = HttpContext.Current.Server.MapPath("~/Download/" + "creditnote" + DateTime.Now.Ticks.ToString() + ".pdf");
+                        path = HttpContext.Current.Server.MapPath("~/Download/" + "creditnote_" + DateTime.Now.Ticks.ToString() + ".pdf");
                         myWebClient.DownloadFile(GetUrl(ReportName, reportParma).Replace(ConfigurationManager.AppSettings["ReplaceString"], "http://localhost"), path);
                         if (!string.IsNullOrEmpty(path))
                         {
@@ -320,6 +320,11 @@ namespace EMS.WebApp.Reports.ReportViewer
                     ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1;
                     lblLine.Text = "Line";
                     break;
+                case "creditnote":
+                    trInvoice.Visible = true;
+                    btnPrint.Visible = true;
+                    ddlLocation.SelectedIndexChanged += ddlLocation_SelectedIndexChanged_Invoice;
+                    break;
                 default:
                     break;
             }
@@ -404,6 +409,10 @@ namespace EMS.WebApp.Reports.ReportViewer
                     case "onoffhire":
                         ddlLine_SelectedIndexChanged1(null, null);
                         break;
+                    case "creditnote":
+                        ddlLocation_SelectedIndexChanged_Invoice(null, null);
+                        break;
+
                     default:
                         ddlLine_SelectedIndexChanged(null, null);
                         break;
@@ -497,11 +506,12 @@ namespace EMS.WebApp.Reports.ReportViewer
                     break;
                 case "creditnote":
                     //litHeader.Text = "INVOICE DEVELOPER";
-                    rptParameters = new ReportParameter[4];
+                    rptParameters = new ReportParameter[5];
                     rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedItem.Text);
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
                     rptParameters[2] = new ReportParameter("LoginUserName", txtPrintedBy.Text);
-                    rptParameters[3] = new ReportParameter("CrnId", ddlInvoice.SelectedValue);
+                    rptParameters[3] = new ReportParameter("InvoiceId", ddlInvoice.SelectedValue);
+                    rptParameters[4] = new ReportParameter("CrnId", ddlInvoice.SelectedValue);
                     break;
                 case "onoffhire":
                     //litHeader.Text = "ON/OFF REGISTER FROM";

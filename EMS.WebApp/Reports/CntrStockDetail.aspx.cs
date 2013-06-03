@@ -15,8 +15,15 @@ namespace EMS.WebApp.Reports
 {
     public partial class CntrStockDetail : System.Web.UI.Page
     {
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
+        private int _userId = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            RetriveParameters();
+            CheckUserAccess();
             BLL.DBInteraction dbinteract = new BLL.DBInteraction();
             if (!IsPostBack)
             {
@@ -25,6 +32,22 @@ namespace EMS.WebApp.Reports
                 GeneralFunctions.PopulateDropDownList(ddlStatus, EMS.BLL.EquipmentBLL.DDLGetStatus());
                 GeneralFunctions.PopulateDropDownList(ddlContainerType, EMS.BLL.EquipmentBLL.DDLGetContainerType());
                //GenerateReport();
+            }
+        }
+
+        private void RetriveParameters()
+        {
+            _userId = UserBLL.GetLoggedInUserId();
+
+            //Get user permission.
+            UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+        }
+
+        private void CheckUserAccess()
+        {
+            if (!_canView)
+            {
+                Response.Redirect("~/Unauthorized.aspx");
             }
         }
 

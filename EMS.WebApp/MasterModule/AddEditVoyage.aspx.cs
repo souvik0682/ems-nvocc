@@ -131,8 +131,8 @@ namespace EMS.WebApp.MasterModule
             txtPCCNo.Enabled = false;
             txtVIA.Enabled = false;
             txtCargoDesc.Enabled = false;
-            txtLGNo.Enabled = false;
-            txtExcRate.Enabled = false;
+            //txtLGNo.Enabled = false;
+            //txtExcRate.Enabled = false;
             txtVoyageNo.Enabled = false;
             ddlTerminalID.Enabled = false;
             AutoCompletepPort1.Enabled = false;

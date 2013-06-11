@@ -19,7 +19,7 @@ namespace EMS.WebApp.Reports
         private Int64 _MoneyRecptNo = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            CheckUserAccess();
+            //CheckUserAccess();
             if (!Page.IsPostBack)
             {
                 RetriveParameters();
@@ -27,27 +27,27 @@ namespace EMS.WebApp.Reports
             }
         }
 
-        private void CheckUserAccess()
-        {
-            if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
-            {
-                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+        //private void CheckUserAccess()
+        //{
+        //    if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+        //    {
+        //        IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
 
-                if (ReferenceEquals(user, null) || user.Id == 0)
-                {
-                    Response.Redirect("~/Login.aspx");
-                }
+        //        if (ReferenceEquals(user, null) || user.Id == 0)
+        //        {
+        //            Response.Redirect("~/Login.aspx");
+        //        }
 
-                if (user.UserRole.Id != (int)UserRole.Admin)
-                {
-                    Response.Redirect("~/Unauthorized.aspx");
-                }
-            }
-            else
-            {
-                Response.Redirect("~/Login.aspx");
-            }
-        }
+        //        if (user.UserRole.Id != (int)UserRole.Admin)
+        //        {
+        //            Response.Redirect("~/Unauthorized.aspx");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Response.Redirect("~/Login.aspx");
+        //    }
+        //}
 
         private void RetriveParameters()
         {
@@ -70,6 +70,7 @@ namespace EMS.WebApp.Reports
             {
                 rptViewer.Reset();
                 rptViewer.LocalReport.Dispose();
+                rptViewer.ZoomPercent = 150;
                 rptViewer.LocalReport.DataSources.Clear();
                 rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
                 rptViewer.LocalReport.SetParameters(new ReportParameter("CompanyName", Convert.ToString(ConfigurationManager.AppSettings["CompanyName"])));

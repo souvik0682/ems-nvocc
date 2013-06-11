@@ -221,7 +221,7 @@ namespace EMS.BLL
         }
 
 
-        //Added by Souvik - 11-06-2013
+        //New Function Added By Souvik - 11-06-2013
         public List<ILocation> GetActiveLocation_New(int UserId)  
         {
             SearchCriteria searchCriteria = new SearchCriteria();

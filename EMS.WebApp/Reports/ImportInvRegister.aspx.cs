@@ -213,12 +213,12 @@ namespace EMS.WebApp.Reports
             
             string ss = string.Format("ReportPrint2('{0}','{1}','{2}','{3}','{4}','{5}', '{6}');",
               "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("MID"),
-              "&Line=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLine.SelectedValue),
+              "&line=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLine.SelectedValue),
               "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLoc.SelectedValue),
               "&InvoiceTypeID=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlType.SelectedValue),
               "&ToDate=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtToDt.Text),
               "&FromDate=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtFromDt.Text),
-              "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(" "));
+              "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("Tapas"));
 
            
 

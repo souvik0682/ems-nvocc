@@ -220,6 +220,15 @@ namespace EMS.BLL
             return CommonDAL.GetLocation('N', searchCriteria);
         }
 
+
+        //Added by Souvik - 11-06-2013
+        public List<ILocation> GetActiveLocation_New(int UserId)  
+        {
+            SearchCriteria searchCriteria = new SearchCriteria();
+            SetDefaultSearchCriteriaForLocation(searchCriteria);
+            return CommonDAL.GetLocation_New('Y', UserId, searchCriteria);
+        }
+
         public List<ILocation> GetActiveLocation()
         {
             SearchCriteria searchCriteria = new SearchCriteria();

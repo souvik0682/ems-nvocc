@@ -93,6 +93,34 @@ namespace EMS.DAL
 
         #region Location
 
+        //New Function Added By Souvik - 11-06-2013
+        public static List<ILocation> GetLocation_New(char isActiveOnly, int UserId, SearchCriteria searchCriteria)
+        {
+            string strExecution = "[common].[uspGetLocation_New]"; //Create a new SP with this Name (Previous one was : uspGetLocation)
+            List<ILocation> lstLoc = new List<ILocation>();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddCharParam("@IsActiveOnly", 1, isActiveOnly);
+                oDq.AddIntegerParam("@UserId", UserId);
+                oDq.AddVarcharParam("@SchAbbr", 3, searchCriteria.LocAbbr);
+                oDq.AddVarcharParam("@SchLocName", 50, searchCriteria.LocName);
+                oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
+                oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    ILocation loc = new LocationEntity(reader);
+                    lstLoc.Add(loc);
+                }
+
+                reader.Close();
+            }
+
+            return lstLoc;
+        }
+
         public static List<ILocation> GetLocation(char isActiveOnly, SearchCriteria searchCriteria)
         {
             string strExecution = "[common].[uspGetLocation]";

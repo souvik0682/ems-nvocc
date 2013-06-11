@@ -91,7 +91,7 @@ namespace EMS.WebApp.Reports
 
         private void PopulateLocation()
         {
-            List<ILocation> lstLoc = new CommonBLL().GetActiveLocation();
+            List<ILocation> lstLoc = new CommonBLL().GetActiveLocation_New(_userId);
 
             ddlLoc.DataValueField = "Id";
             ddlLoc.DataTextField = "Name";

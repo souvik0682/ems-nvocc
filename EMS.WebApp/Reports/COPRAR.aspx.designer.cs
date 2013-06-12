@@ -13,15 +13,6 @@ namespace EMS.WebApp.Reports {
     public partial class COPRAR {
         
         /// <summary>
-        /// uProgressLoc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress uProgressLoc;
-        
-        /// <summary>
         /// lblError control.
         /// </summary>
         /// <remarks>
@@ -29,15 +20,6 @@ namespace EMS.WebApp.Reports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
-        
-        /// <summary>
-        /// upLoc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upLoc;
         
         /// <summary>
         /// ddlLoc control.

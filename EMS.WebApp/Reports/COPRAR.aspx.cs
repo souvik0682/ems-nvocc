@@ -68,31 +68,6 @@ namespace EMS.WebApp.Reports
             else
                 lblError.Attributes.Add("Style", "display:none");
 
-            //ReportBLL cls = new ReportBLL();
-
-            //LocalReportManager reportManager = new LocalReportManager(rptViewer, "IGMCargoDesc", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
-            //string rptName = "IGMCargoDesc.rdlc";
-            //int vesselId = Convert.ToInt32(ddlVessel.SelectedValue);
-            //int voyageId = ddlVoyage.SelectedIndex > 0 ? Convert.ToInt32(ddlVoyage.SelectedValue) : 0;
-            //DBInteraction dbinteract = new DBInteraction();
-            //DataSet ds = EMS.BLL.IGMReportBLL.GetRptCargoDesc(vesselId, voyageId, dbinteract.GetId("Port", pod));
-            //try
-            //{
-            //    rptViewer.Reset();
-            //    rptViewer.LocalReport.Dispose();
-            //    rptViewer.LocalReport.DataSources.Clear();
-            //    rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
-
-            //    rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", ds.Tables[0]));
-
-            //    rptViewer.LocalReport.Refresh();
-            //}
-            //catch
-            //{
-
-
-            //}
-
             string FileName = COPRAR_TXT();
             DownLoadFile(FileName);
             File.Delete(FileName);
@@ -138,30 +113,20 @@ namespace EMS.WebApp.Reports
             string Containers;
 
             string uniqueFileName = Guid.NewGuid().ToString();
+
+
             //File.Create(Server.MapPath(@"~/Import/COPRARFILE/") + uniqueFileName + "_IMP_EDI.IGM");
             string FileName = Server.MapPath(@"~/Import/EDIFile/") + uniqueFileName + "_COPRAR.TXT";
             string PCSLogin = Convert.ToString(new DBInteraction().GetPCSLogin(LocationId).Tables[0].Rows[0]["PCSLoginID"]);
-            string CurDate = DateTime.Now.ToString("yyyyMMdd")+"00000001";
- 
-            //string ArrDate = txtdtArrival.Text.Trim() == "" ? "" : Convert.ToDateTime(txtdtArrival.Text).ToString("yyyyMMdd");
-            //string ArrTime = txtArriveTime.Text.Replace(":", ""); //Convert.ToDateTime(txtdtArrival.Text).ToString("hhmm");
-            //if (ArrTime.Length > 4) ArrTime = ArrTime.Substring(0, 4);
-            //ArrTime = string.IsNullOrEmpty(ArrTime.Trim()) ? "1200" : ArrTime;
-            //string ArrDate1 = (txtdtArrival.Text.Trim()) == "" ? "" : Convert.ToDateTime(txtdtArrival.Text).ToString("ddMMyyyy hh:mm");//.Replace(" ","");
-            //string lighthsdue = txtLightHouse.Text;// (txtLightHouse.Text.Trim() == "" || txtLightHouse.Text == "0") ? "+(''+" : txtLightHouse.Text;
-            //string custHouse =  ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
-            // string custHouse = !((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text.Contains(',') ? "" : ((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text.Split(',')[1].Trim();
-            //string custHouse = ddlCustomHouse.SelectedItem.Text.Trim();
-            //string port1 = ((TextBox)AutoCompletepPort2.FindControl("txtPort")).Text;
-            //string port2 = ((TextBox)AutoCompletepPort3.FindControl("txtPort")).Text;
-            //string port3 = ((TextBox)AutoCompletepPort4.FindControl("txtPort")).Text;
+            string CurDate = DateTime.Now.ToString("yyyyMMdd") + "00000001";
+
             string pod = ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
             pod = pod.Contains(',') ? pod.Split(',')[1] : "";
 
-            if(pod=="INCCU1")
-                rpd="kopt001";
+            if (pod == "INCCU1")
+                rpd = "kopt001";
             else
-                rpd="haldia001";
+                rpd = "haldia001";
 
             int PortCode = dbinteract.GetId("Port", pod);
 
@@ -173,20 +138,20 @@ namespace EMS.WebApp.Reports
                             + (CurDate + ('' + ("9" + ('' + (PCSLogin))))))))))))));
 
             writer.WriteLine(("RPD" + ('' + (rpd))));
-             
+
             //System.Data.DataTable dt = EquipmentBLL.GetOMHinformation(LocationId, LineID, VesselID, VoyageID, PortCode);
 
             System.Data.DataSet ds = EquipmentBLL.GetOMHinformation(LocationId, LineID, VesselID, VoyageID, PortCode);
 
             //if (ds.Tables[0].Rows.Count > 0)
             //{
-                VCN = ds.Tables[0].Rows[0]["VCN"].ToString();
-                CallSign = ds.Tables[0].Rows[0]["CallSign"].ToString();
-                IMONo = ds.Tables[0].Rows[0]["IMONumber"].ToString();
-                VoyageNo = ds.Tables[0].Rows[0]["VoyageNo"].ToString();
-                Port = ds.Tables[0].Rows[0]["PortCode"].ToString();
-                Country = ds.Tables[0].Rows[0]["CountryAbbr"].ToString();
-                Containers = ds.Tables[0].Rows[0]["TotContainers"].ToString();
+            VCN = ds.Tables[0].Rows[0]["VCN"].ToString();
+            CallSign = ds.Tables[0].Rows[0]["CallSign"].ToString();
+            IMONo = ds.Tables[0].Rows[0]["IMONumber"].ToString();
+            VoyageNo = ds.Tables[0].Rows[0]["VoyageNo"].ToString();
+            Port = ds.Tables[0].Rows[0]["PortCode"].ToString();
+            Country = ds.Tables[0].Rows[0]["CountryAbbr"].ToString();
+            Containers = ds.Tables[0].Rows[0]["TotContainers"].ToString();
             //}
 
 
@@ -197,11 +162,11 @@ namespace EMS.WebApp.Reports
                             + (VoyageNo + (''
                             + (Port + (''
                             + (Country + (''
-                            + ("BLA" + ('' + ('' + ('' + (''  + ('' 
+                            + ("BLA" + ('' + ('' + ('' + ('' + (''
                             + (Containers))))))))))))))))))))));
 
             DataSet DsContain = EquipmentBLL.GetCOPRARContainerInfo(VesselID, VoyageID, PortCode);
-                //.GetCOPRARContainerInfo(Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue));
+            //.GetCOPRARContainerInfo(Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue));
             //             TextShippingCode.Text = Ds.Tables(0).Rows(0).Item("ShippingLineCode")
             DataTable DtContain = DsContain.Tables[0];
             int Srl1 = 0;
@@ -216,12 +181,12 @@ namespace EMS.WebApp.Reports
                             + (Dr["cstatus"].ToString() + (''
                             + (Dr["ISOCode"].ToString() + (''
                             + (Dr["TareWeight"].ToString().Trim() + (''
-                            + (Dr["CargoWtTon"].ToString() + ('' + ('' 
+                            + (Dr["CargoWtTon"].ToString() + ('' + (''
                             + (Dr["issueport"].ToString() + (''
                             + (Dr["loadport"].ToString() + (''
-                            + (Dr["discport"].ToString() + ('' + ('' + ('' + ('' + ('' 
+                            + (Dr["discport"].ToString() + ('' + ('' + ('' + ('' + (''
                             + ("12" + (''
-                            + ("BLA" + ('' + ('' + ('' 
+                            + ("BLA" + ('' + ('' + (''
                             + (Dr["discport"].ToString() + (''
                             + (Dr["finalDestination"].ToString() + (''
                             + (Dr["TMODE"].ToString() + (''

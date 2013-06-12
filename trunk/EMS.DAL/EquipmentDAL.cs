@@ -91,10 +91,7 @@ namespace EMS.DAL
               dq.AddIntegerParam("@userId", userID);
               dq.AddBooleanParam("@isEdit", isEdit);
               result= dq.RunActionQuery();
-
-
-             
-            
+           
           }
 
           return result; 
@@ -146,6 +143,40 @@ namespace EMS.DAL
               myDataTable = oDq.GetTable();
           }
           return myDataTable;
+      }
+
+      public static DataSet GetOMHinformation(int LocId, int LineId, int VesselID, int VoyageID, int POD)
+      {
+          //GetBLNo
+          string strExecution = "[prcGetOMH]";
+          DataSet ds = null;
+          //DataTable myDataTable;
+
+          using (DbQuery oDq = new DbQuery(strExecution))
+          {
+              oDq.AddIntegerParam("@VesselID", VesselID);
+              oDq.AddIntegerParam("@LocationID", LocId);
+              oDq.AddIntegerParam("@VoyageID", VoyageID);
+              oDq.AddIntegerParam("@LineID", LineId);
+              oDq.AddIntegerParam("@POD", POD);
+              ds = oDq.GetTables();
+          }
+          return ds;
+
+      }
+
+      public static DataSet GetCOPRARContainerInfo(int VesselID, int VoyageId, int POD)
+      {
+
+          string ProcName = "prcGetContainerCOPRAR";
+          DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+          dquery.AddIntegerParam("@VoyageID", VoyageId);
+          dquery.AddIntegerParam("@VesselID", VesselID);
+          dquery.AddIntegerParam("@pod", POD);
+
+          return dquery.GetTables();
+
       }
 
     }

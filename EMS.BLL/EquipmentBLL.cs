@@ -49,5 +49,15 @@ namespace EMS.BLL
        {
            return EquipmentDAL.GetContainerList(LocId, LineId, Initial);
        }
+
+       public static DataSet GetOMHinformation(int LocId, int LineId, int VesselID, int VoyageID, int POD )
+       {
+           return EquipmentDAL.GetOMHinformation(LocId, LineId, VesselID, VoyageID, POD);
+       }
+
+       public static DataSet GetCOPRARContainerInfo(int VesselID, int VoyageID, int POD)
+       {
+           return EquipmentDAL.GetCOPRARContainerInfo(VesselID, VoyageID, POD);
+       }
     }
 }

@@ -75,6 +75,13 @@ namespace EMS.BLL
             return dquery.GetTables();
         }
 
+        public DataSet GetPCSLogin(int Locationid)
+        {
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery("prcGetPCSLogin");
+            dquery.AddIntegerParam("@Locationid", Locationid);
+            return dquery.GetTables();
+        }
+
         public void DeleteGeneral(string formName, int pk_tableID)
         {
             string ProcName = "prcDeleteGeneral";

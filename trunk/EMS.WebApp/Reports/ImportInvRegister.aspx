@@ -4,6 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">    
     <script type="text/javascript" language="javascript">
         function ReportPrint2(a, b, c, d, e, f) {
+            
             window.open('../Popup/Report.aspx?' + a + b + c + d + e + f, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
             return false;
         }

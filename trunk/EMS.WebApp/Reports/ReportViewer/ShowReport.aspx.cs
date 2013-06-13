@@ -237,6 +237,26 @@ namespace EMS.WebApp.Reports.ReportViewer
                         }
                     }
                 }
+                else if (ReportName.ToLower().Equals("mid"))
+                {
+                    using (WebClient myWebClient = new WebClient())
+                    {
+                        myWebClient.DownloadDataCompleted += new DownloadDataCompletedEventHandler(myWebClient_DownloadDataCompleted);
+                        myWebClient.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["UserName"], ConfigurationManager.AppSettings["Password"]);
+                        path = HttpContext.Current.Server.MapPath("~/Download/" + "mid" + DateTime.Now.Ticks.ToString() + ".pdf");
+                        myWebClient.DownloadFile(GetUrl(ReportName, reportParma).Replace(ConfigurationManager.AppSettings["ReplaceString"], "http://localhost"), path);
+                        if (!string.IsNullOrEmpty(path))
+                        {
+                            var fileInfo = new System.IO.FileInfo(path);
+                            HttpContext.Current.Response.ContentType = "Application/pdf";
+                            HttpContext.Current.Response.AddHeader("Content-Disposition", String.Format("attachment;filename=\"{0}\"", fileInfo.Name));
+                            HttpContext.Current.Response.AddHeader("Content-Length", fileInfo.Length.ToString());
+                            HttpContext.Current.Response.WriteFile(path);
+                            HttpContext.Current.Response.Flush();
+                            HttpContext.Current.Response.End();
+                        }
+                    }
+                }
                 else
                 {
                     Load(rptViewer, ReportName, BindParameter(reportParma));

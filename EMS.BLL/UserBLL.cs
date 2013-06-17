@@ -45,6 +45,40 @@ namespace EMS.BLL
             return userId;
         }
 
+        public static bool GetUserLocationSpecific()
+        {
+            bool UserLocSpecific=false;
+
+            if (!ReferenceEquals(System.Web.HttpContext.Current.Session[Constants.SESSION_USER_INFO], null))
+            {
+                IUser user = (IUser)System.Web.HttpContext.Current.Session[Constants.SESSION_USER_INFO];
+
+                if (!ReferenceEquals(user, null))
+                {
+                    UserLocSpecific = user.UserlocationSpecific;
+                }
+            }
+
+            return UserLocSpecific;
+        }
+
+        public static int GetUserLocation()
+        {
+            int uloc = 0;
+
+            if (!ReferenceEquals(System.Web.HttpContext.Current.Session[Constants.SESSION_USER_INFO], null))
+            {
+                IUser user = (IUser)System.Web.HttpContext.Current.Session[Constants.SESSION_USER_INFO];
+
+                if (!ReferenceEquals(user, null))
+                {
+                    uloc = user.UserLocation.Id;
+                }
+            }
+
+            return uloc;
+        }
+
         public static int GetLoggedInUserRoleId()
         {
             int roleId = 0;

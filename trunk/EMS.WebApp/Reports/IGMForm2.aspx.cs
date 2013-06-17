@@ -15,17 +15,54 @@ namespace EMS.WebApp.Reports
 {
     public partial class IGMForm2 : System.Web.UI.Page
     {
+        #region Private Member Variables
+
+        private int _userId = 0;
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
+        private bool _LocationSpecific = true;
+        private int _userLocation = 0;
+
+        #endregion
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            RetriveParameters();
             BLL.DBInteraction dbinteract = new BLL.DBInteraction();
             if (!IsPostBack)
             {
                 GeneralFunctions.PopulateDropDownList(ddlLine, EMS.BLL.EquipmentBLL.DDLGetLine());
                 GeneralFunctions.PopulateDropDownList(ddlVessel, dbinteract.PopulateDDLDS("trnVessel", "pk_VesselID", "VesselName"), true);
                 GeneralFunctions.PopulateDropDownList(ddlLoc, dbinteract.PopulateDDLDS("DSR.dbo.mstLocation", "pk_LocID", "LocName", true), true);
+                if (_LocationSpecific)
+                {
+                    ddlLoc.SelectedValue = Convert.ToString(_userLocation);
+                    ddlLoc.Enabled = false;
+                }
                // GenerateReport();
             }
 
+        }
+
+        private void RetriveParameters()
+        {
+            _userId = UserBLL.GetLoggedInUserId();
+
+            //Get user permission.
+            UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+            _LocationSpecific = UserBLL.GetUserLocationSpecific();
+            _userLocation = UserBLL.GetUserLocation();
+
+        }
+
+        private void CheckUserAccess()
+        {
+            if (!_canView)
+            {
+                Response.Redirect("~/Unauthorized.aspx");
+            }
         }
 
         protected void ddlVoyage_SelectedIndexChanged(object sender, EventArgs e)

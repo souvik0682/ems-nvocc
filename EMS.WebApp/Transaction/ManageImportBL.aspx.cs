@@ -776,6 +776,7 @@ namespace EMS.WebApp.Transaction
                 txtFtrPackage.Text = "0";
                 txtPackage.Text = "0";
                 txtGrossWeight.Text = "0";
+                
                 txtFtrCargoType.Text = "ETY";
                 rfvFtrSealNo.Visible = false;
 
@@ -789,7 +790,7 @@ namespace EMS.WebApp.Transaction
 
                 ((TextBox)AC_CFSCode1.FindControl("txtCFSCode")).Enabled = false;
 
-                txtGrossWeight.Text = string.Empty;
+                //txtGrossWeight.Text = string.Empty;
                 txtGrossWeight.Enabled = false;
                 rfvGrossWeight.Visible = false;
 
@@ -797,7 +798,7 @@ namespace EMS.WebApp.Transaction
                 txtFtrGrossWeight.Enabled = false;
                 rfvFtrGrossWeight.Visible = false;
 
-                txtPackage.Text = string.Empty;
+                //txtPackage.Text = string.Empty;
                 txtPackage.Enabled = false;
                 rfvPackage.Visible = false;
 
@@ -914,7 +915,11 @@ namespace EMS.WebApp.Transaction
             if (rdoCargoType.SelectedValue == "E")
             {
                 if (txtFtrGrossWeight.Text == string.Empty)
+                {
                     txtFtrGrossWeight.Text = TareWeight;
+
+                    txtFtrCargoWt.Text = (Convert.ToDecimal(txtFtrGrossWeight.Text) / 1000).ToString();
+                }
             }
             //if (txtFtrCargoWt.Text == string.Empty)
             //    txtFtrCargoWt.Text = (Convert.ToDecimal(TareWeight) / 1000).ToString();
@@ -1652,18 +1657,21 @@ namespace EMS.WebApp.Transaction
                 }
             }
 
-            if (footers != null || footers.Count > 0)
+            if (rdoCargoType.SelectedValue != "E")
             {
-                int headerPackage = Convert.ToInt32(txtPackage.Text.Trim());
-                decimal headerGrossWeight = Convert.ToDecimal(txtGrossWeight.Text.Trim());
-
-                int footerPackage = footers.Sum(f => f.Package);
-                decimal footerGrossWeight = footers.Sum(f => f.GrossWeight);
-
-                if ((headerPackage != footerPackage) || (headerGrossWeight != footerGrossWeight))
+                if (footers != null || footers.Count > 0)
                 {
-                    IsValid = false;
-                    lblErr.Text = "Total Packages & Gross Weight should be equal with B/L Header";
+                    int headerPackage = Convert.ToInt32(txtPackage.Text.Trim());
+                    decimal headerGrossWeight = Convert.ToDecimal(txtGrossWeight.Text.Trim());
+
+                    int footerPackage = footers.Sum(f => f.Package);
+                    decimal footerGrossWeight = footers.Sum(f => f.GrossWeight);
+
+                    if ((headerPackage != footerPackage) || (headerGrossWeight != footerGrossWeight))
+                    {
+                        IsValid = false;
+                        lblErr.Text = "Total Packages & Gross Weight should be equal with B/L Header";
+                    }
                 }
             }
 

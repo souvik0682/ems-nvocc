@@ -99,6 +99,7 @@ namespace EMS.Utilities
         public const string SESSION_USER_INFO = "UserInfo";
         public const string SESSION_ERROR = "ErrorInfo";
         public const string SESSION_USER_PERMISSION = "UserPermission";
+        public const string SESSION_ROLE_LOCATIONSPECIFIC = "UserLocationInfo";
 
         #endregion
 

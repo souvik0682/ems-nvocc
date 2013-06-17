@@ -62,6 +62,12 @@ namespace EMS.Entity
             set;
         }
 
+        public bool UserlocationSpecific
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region IRole Members
@@ -149,6 +155,7 @@ namespace EMS.Entity
             this.UserLocation = new LocationEntity();
             this.UserLocation.Id = Convert.ToInt32(reader["LocId"]);
             this.UserLocation.Name = Convert.ToString(reader["LocName"]);
+            this.UserlocationSpecific = Convert.ToBoolean(reader["locationSpecific"]);
 
             if (reader["EmailId"] != DBNull.Value)
                 this.EmailId = Convert.ToString(reader["EmailId"]);

@@ -26,6 +26,8 @@ namespace EMS.WebApp.Reports
         private bool _canEdit = false;
         private bool _canDelete = false;
         private bool _canView = false;
+        private bool _LocationSpecific = true;
+        private int _userLocation = 0;
 
         #endregion
 
@@ -73,6 +75,8 @@ namespace EMS.WebApp.Reports
 
             //Get user permission.
             UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+            _LocationSpecific = UserBLL.GetUserLocationSpecific();
+            _userLocation = UserBLL.GetUserLocation();
         }
 
         private void CheckUserAccess()
@@ -86,6 +90,11 @@ namespace EMS.WebApp.Reports
         private void PopulateControls()
         {
             PopulateLocation();
+            if (_LocationSpecific)
+            {
+                ddlLoc.SelectedValue = Convert.ToString(_userLocation);
+                ddlLoc.Enabled = false;
+            }
             PopulateLine();
         }
 

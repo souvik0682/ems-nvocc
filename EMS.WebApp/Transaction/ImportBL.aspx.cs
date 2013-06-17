@@ -23,6 +23,7 @@ namespace EMS.WebApp.Transaction
         private bool _canEdit = false;
         private bool _canDelete = false;
         private bool _canView = false;
+        private bool _LocationSpecific = true;
         //private int _locId = 0;
         //private bool _hasEditAccess = true;
 
@@ -202,6 +203,7 @@ namespace EMS.WebApp.Transaction
         private void RetriveParameters()
         {
             _userId = UserBLL.GetLoggedInUserId();
+            _LocationSpecific = UserBLL.GetUserLocationSpecific();
 
             IUser user = new UserBLL().GetUser(_userId);
 
@@ -256,8 +258,8 @@ namespace EMS.WebApp.Transaction
                         //    gvImportBL.DataSource = commonBll.GetActiveCustomer(searchCriteria);
                         //else
                         //    gvImportBL.DataSource = commonBll.GetAllCustomer(searchCriteria);
-
-                        if (user.UserRole.Id == 4)
+                        if (_LocationSpecific)
+                        //if (user.UserRole.Id == 4)
                             gvImportBL.DataSource = new ImportBLL().GetImportBL(searchCriteria, user.UserLocation.Id);
                         else
                             gvImportBL.DataSource = new ImportBLL().GetImportBL(searchCriteria, 0);

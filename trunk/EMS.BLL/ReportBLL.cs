@@ -35,5 +35,11 @@ namespace EMS.BLL
         {
             return ReportDAL.GetImportInvoiceRegister(lineId, locId, billType, dtFrom, dtTo);
         }
+
+        public static List<ImportInvoiceEntity> GetImportInvoicePrint(int lineId, int locId, int billType, DateTime dtFrom, DateTime dtTo)
+        {
+            return ReportDAL.GetImportInvoicePrint(lineId, locId, billType, dtFrom, dtTo);
+        }
+
     }
 }

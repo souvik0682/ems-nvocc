@@ -40,6 +40,7 @@ namespace EMS.WebApp
                     if (valid)
                     {
                         Session[Constants.SESSION_USER_INFO] = user;
+                        //Session[Constants.SESSION_ROLE_LOCATIONSPECIFIC] = user;
                         Response.Redirect("~/View/Home.aspx");
                     }
                     else

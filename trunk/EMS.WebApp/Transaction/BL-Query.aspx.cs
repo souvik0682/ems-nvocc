@@ -27,6 +27,9 @@ namespace EMS.WebApp.Transaction
 
         private int _userId = 0;
         private int _locId = 0;
+        private bool _canView = false;
+        private bool _LocationSpecific = true;
+        private int _userLocation = 0;
 
         #endregion
 
@@ -35,11 +38,20 @@ namespace EMS.WebApp.Transaction
             //CheckUserAccess();
             IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
             _userId = user == null ? 0 : user.Id;
-
+            //_userId = UserBLL.GetLoggedInUserId();
+            _LocationSpecific = UserBLL.GetUserLocationSpecific();
+            _userLocation = UserBLL.GetUserLocation();
+            
             if (!Page.IsPostBack)
             {
                 autoComplete1.ContextKey = "0|0";
                 FillDropDown();
+                if (_LocationSpecific)
+                {
+                    ddlLocation.SelectedValue = Convert.ToString(_userLocation);
+                    ddlLocation.Enabled = false;
+                    ddlLine.Enabled = true;
+                }
                 //chkFreightToCollect.Enabled = true;
                 DisableAllServiceControls();
                 RetriveParameters();

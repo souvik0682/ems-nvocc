@@ -1194,6 +1194,19 @@ namespace EMS.WebApp.Transaction
             ddlSurveyor.DataBind();
         }
 
+        private void LoadCarrier()
+        {
+            DataTable dt = new ImportBLL().GetCarrier(txtCMCode.Text);
+            DataRow dr = dt.NewRow();
+            dr["fk_AddressID"] = "0";
+            dr["AddrName"] = "--Select--";
+            dt.Rows.InsertAt(dr, 0);
+            ddlCarrier.DataValueField = "fk_AddressID";
+            ddlCarrier.DataTextField = "AddrName";
+            ddlCarrier.DataSource = dt;
+            ddlCarrier.DataBind();
+        }
+
         /*
         private void LoadCHADDL()
         {
@@ -1238,8 +1251,9 @@ namespace EMS.WebApp.Transaction
             if (((TextBox)AC_Port4.FindControl("txtPort")).Text == ((TextBox)AC_Port3.FindControl("txtPort")).Text)
             {
                 txtCMCode.Text = "LC";
-
-                txtTPBondNo.Enabled = false;
+                ddlCarrier.SelectedIndex = -1;
+                ddlCarrier.Enabled = false;
+                //txtTPBondNo.Enabled = false;
             }
             else
             {
@@ -1250,8 +1264,9 @@ namespace EMS.WebApp.Transaction
                     txtCMCode.Text = "TI";
                 else
                     txtCMCode.Text = "TC";
-
-                txtTPBondNo.Enabled = true;
+                ddlCarrier.Enabled = true;
+                LoadCarrier();
+                //txtTPBondNo.Enabled = true;
             }
         }
 
@@ -1350,13 +1365,15 @@ namespace EMS.WebApp.Transaction
 
             header.StockLocationID = Convert.ToInt32(ddlStockLocation.SelectedValue);
             header.SurveyorAddressID = Convert.ToInt32(ddlSurveyor.SelectedValue); //Convert.ToInt32(ViewState[SURVEYORID]);
+            header.CarrierID = Convert.ToInt32(ddlCarrier.SelectedValue);
 
             if (Convert.ToString(rdoTaxExempted.SelectedValue) == "Yes")
                 header.TaxExemption = true;
             else
                 header.TaxExemption = false;
 
-            header.TPBondNo = Convert.ToString(txtTPBondNo.Text.Trim());
+            //header.TPBondNo = Convert.ToString(txtTPBondNo.Text.Trim());
+            
             header.TransportMode = Convert.ToString(rdoTransportMode.SelectedValue);
             header.UnitOfVolume = Convert.ToInt32(ViewState[VOLUMEUNITID]);
             header.UnitOfWeight = Convert.ToInt32(ViewState[WEIGHTUNITID]);
@@ -1970,7 +1987,8 @@ namespace EMS.WebApp.Transaction
             else
                 rdoTaxExempted.SelectedValue = "No";
 
-            txtTPBondNo.Text = header.TPBondNo;
+            ddlCarrier.SelectedValue = header.CarrierID.ToString();
+            //txtTPBondNo.Text = header.TPBondNo;
             rdoTransportMode.SelectedValue = header.TransportMode;
             ViewState[VOLUMEUNITID] = header.UnitOfVolume;
             ViewState[WEIGHTUNITID] = header.UnitOfWeight;
@@ -2086,6 +2104,17 @@ namespace EMS.WebApp.Transaction
 
             LoadSurveyorDDL();
             ddlSurveyor.SelectedValue = Convert.ToString(header.SurveyorAddressID);
+
+            if (header.CargoMovement == "LC")
+            {
+                ddlCarrier.Enabled = false;
+            }
+            else
+            {
+
+                LoadCarrier();
+                ddlCarrier.SelectedValue = Convert.ToString(header.CarrierID);
+            }
 
             //================= BL Footer =========================
             List<IBLFooter> footers = new ImportBLL().GetBLFooterInfo(BlId);

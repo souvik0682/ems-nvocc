@@ -280,6 +280,12 @@ namespace EMS.Entity
             set;
         }
 
+        public int CarrierID
+        {
+            get;
+            set;
+        }
+
         public string CACode
         {
             get;
@@ -640,7 +646,7 @@ namespace EMS.Entity
             this.StockLocationID = Convert.ToInt32(reader["StockLocationID"]);
             this.SurveyorAddressID = Convert.ToInt32(reader["SurveyorAddressID"]);
             this.TaxExemption = Convert.ToBoolean(reader["TaxExemption"]);
-            this.TPBondNo = Convert.ToString(reader["TPBondNo"]);
+            //this.TPBondNo = Convert.ToString(reader["TPBondNo"]);
             this.TranShipment = Convert.ToString(reader["TranShipment"]);
             this.TransportMode = Convert.ToString(reader["TransportMode"]);
             this.UnitOfVolume = Convert.ToInt32(reader["UnitOfVolume"]);
@@ -659,6 +665,10 @@ namespace EMS.Entity
             this.LineBLVesselDetail = Convert.ToString(reader["LineBLVesselDetail"]);
             this.CANTo = Convert.ToString(reader["CANTo"]);
             this.DPTId = Convert.ToInt32(reader["DPTId"]);
+
+            if (ColumnExists(reader, "CarrierID"))
+                if (reader["CarrierID"] != DBNull.Value)
+                    this.CarrierID = Convert.ToInt32(reader["CarrierID"]);
 
             if (ColumnExists(reader, "PortOfLoading"))
                 this.PortOfLoading = Convert.ToString(reader["PortOfLoading"]);

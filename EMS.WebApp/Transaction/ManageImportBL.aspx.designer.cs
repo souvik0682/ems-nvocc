@@ -769,13 +769,22 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.RadioButtonList rdoReefer;
         
         /// <summary>
-        /// txtTPBondNo control.
+        /// txtCMCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTPBondNo;
+        protected global::System.Web.UI.WebControls.TextBox txtCMCode;
+        
+        /// <summary>
+        /// rfvCMCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCMCode;
         
         /// <summary>
         /// rdoFreeOut control.
@@ -805,22 +814,22 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.RadioButtonList rdoPartBL;
         
         /// <summary>
-        /// txtCMCode control.
+        /// ddlCarrier control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCMCode;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCarrier;
         
         /// <summary>
-        /// rfvCMCode control.
+        /// rfvCarrier control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCMCode;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCarrier;
         
         /// <summary>
         /// rdoTaxExempted control.

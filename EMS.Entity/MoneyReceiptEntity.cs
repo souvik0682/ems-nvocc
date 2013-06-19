@@ -51,6 +51,7 @@ namespace EMS.Entity
         private string rcvdFrom;
         private char exportImport;
         private bool status;
+        private string cha;
      
         public string ChequeDetails
         {
@@ -114,6 +115,7 @@ namespace EMS.Entity
             this.voyageNo = reader["VoyageNo"].ToString();
             this.vesselName = reader["VesselName"].ToString();
             this.rcvdFrom = reader["RcvdFrom"].ToString();
+            this.cha = reader["cha"].ToString();
             //this.totReceipt = Convert.ToDecimal(reader["TotReceipt"]);
            
         }
@@ -270,6 +272,12 @@ namespace EMS.Entity
             set { voyageNo = value; }
         }
 
+        public string CHA
+        {
+            get { return cha; }
+            set { cha = value; }
+        }
+
         public string VesselName
         {
             get { return vesselName; }
@@ -359,6 +367,7 @@ namespace EMS.Entity
         public decimal TotReceipt { get; set; }
         public string RsToWord { get; set; }
         public string ChequeDetails { get; set; }
+        //public string CHA { get; set; }
     }
 
     public class InvoiceTypeEntity

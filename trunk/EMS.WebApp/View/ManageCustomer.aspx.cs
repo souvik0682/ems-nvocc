@@ -19,6 +19,10 @@ namespace EMS.WebApp.View
 
         private int _userId = 0;
         private int _roleId = 0;
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
         //private int _locId = 0;
         //private bool _hasEditAccess = true;
 
@@ -218,16 +222,51 @@ namespace EMS.WebApp.View
                     Response.Redirect("~/Login.aspx");
                 }
 
-                //if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.Manager && user.UserRole.Id != (int)UserRole.SalesExecutive)
-                //{
-                //    Response.Redirect("~/Unauthorized.aspx");
-                //}
+                if (user.UserRole.Id != (int)UserRole.Admin)
+                {
+                    if (_canView == false)
+                    {
+                        Response.Redirect("~/Unauthorized.aspx");
+                    }
+
+                    //if (_canAdd == false)
+                    //{
+                    //    btnAdd.Visible = false;
+                    //}
+                    //Response.Redirect("~/Unauthorized.aspx");
+                }
             }
             else
             {
                 Response.Redirect("~/Login.aspx");
             }
+
+            if (!_canView)
+            {
+                Response.Redirect("~/Unauthorized.aspx");
+            }
         }
+        //private void CheckUserAccess()   old code
+        //{
+        //    if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+        //    {
+        //        IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+
+        //        if (ReferenceEquals(user, null) || user.Id == 0)
+        //        {
+        //            Response.Redirect("~/Login.aspx");
+        //        }
+
+        //        //if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.Manager && user.UserRole.Id != (int)UserRole.SalesExecutive)
+        //        //{
+        //        //    Response.Redirect("~/Unauthorized.aspx");
+        //        //}
+        //    }
+        //    else
+        //    {
+        //        Response.Redirect("~/Login.aspx");
+        //    }
+        //}
 
         private void RetriveParameters()
         {

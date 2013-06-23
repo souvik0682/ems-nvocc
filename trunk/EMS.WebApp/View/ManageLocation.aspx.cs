@@ -206,7 +206,12 @@ namespace EMS.WebApp.View
 
                 if (user.UserRole.Id != (int)UserRole.Admin)
                 {
-                    Response.Redirect("~/Unauthorized.aspx");
+                    if (_canView == false)
+                    {
+                        Response.Redirect("~/Unauthorized.aspx");
+                    }
+
+                    //Response.Redirect("~/Unauthorized.aspx");
                 }
             }
             else

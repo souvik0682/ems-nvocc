@@ -95,8 +95,13 @@ namespace EMS.WebApp.View
                 }
 
                 if (user.UserRole.Id != (int)UserRole.Admin)
+                    if (_canEdit == false && _canView == true)
+                    {
+                        btnSave.Visible = false;
+
+                    }
                 {
-                    Response.Redirect("~/Unauthorized.aspx");
+                    //Response.Redirect("~/Unauthorized.aspx");
                 }
             }
             else

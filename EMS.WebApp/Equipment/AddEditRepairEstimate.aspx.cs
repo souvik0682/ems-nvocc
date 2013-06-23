@@ -133,11 +133,11 @@ namespace EMS.WebApp.Equipment
                 txtReason.ReadOnly = true;
                 txtReason.Style.Add("background-color", "#E6E6E6");
             }
-            int[] adm_mgrRoles = { 1, 2, 5};
-            if (EMS.BLL.UserBLL.GetLoggedInUserRoleId() == 6)
-            {
-                trTocharge.Visible = false;
-            }
+            int[] adm_mgrRoles = { 1, 2, 6, 12, 14};
+            //if (EMS.BLL.UserBLL.GetLoggedInUserRoleId() == 6)
+            //{
+            //    trTocharge.Visible = false;
+            //}
             if (Array.IndexOf(adm_mgrRoles, EMS.BLL.UserBLL.GetLoggedInUserRoleId()) < 0)
             {
                 //ddlUser.Enabled = false;

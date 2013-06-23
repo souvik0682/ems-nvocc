@@ -33,7 +33,7 @@ namespace EMS.WebApp.View
         protected void Page_Load(object sender, EventArgs e)
         {
             RetriveParameters();
-            CheckUserAccess();
+            CheckUserAccess(_exchRateId);
             SetAttributes();
 
             if (!IsPostBack)
@@ -84,7 +84,37 @@ namespace EMS.WebApp.View
             }
         }
 
-        private void CheckUserAccess()
+        //private void CheckUserAccess()
+        //{
+        //    if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+        //    {
+        //        IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+
+        //        if (ReferenceEquals(user, null) || user.Id == 0)
+        //        {
+        //            Response.Redirect("~/Login.aspx");
+        //        }
+
+        //        //if (user.UserRole.Id != (int)UserRole.Admin)
+        //        //{
+        //        //    Response.Redirect("~/Unauthorized.aspx");
+        //        //}
+        //    }
+        //    else
+        //    {
+        //        Response.Redirect("~/Login.aspx");
+        //    }
+
+        //    if (!_canView)
+        //    {
+        //        Response.Redirect("~/Unauthorized.aspx");
+        //    }
+
+        //    if (_exchRateId == 0)
+        //        Response.Redirect("~/View/ManageExchRate.aspx");
+        //}
+
+        private void CheckUserAccess(int xID)
         {
             if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
             {
@@ -95,23 +125,28 @@ namespace EMS.WebApp.View
                     Response.Redirect("~/Login.aspx");
                 }
 
-                //if (user.UserRole.Id != (int)UserRole.Admin)
-                //{
-                //    Response.Redirect("~/Unauthorized.aspx");
-                //}
+                btnSave.Visible = true;
+
+                if (!_canAdd && !_canEdit)
+                    btnSave.Visible = false;
+                else
+                {
+
+                    if (!_canEdit && xID != -1)
+                    {
+                        btnSave.Visible = false;
+                    }
+                    else if (!_canAdd && xID == -1)
+                    {
+                        btnSave.Visible = false;
+                    }
+                }
+
             }
             else
             {
                 Response.Redirect("~/Login.aspx");
             }
-
-            if (!_canView)
-            {
-                Response.Redirect("~/Unauthorized.aspx");
-            }
-
-            if (_exchRateId == 0)
-                Response.Redirect("~/View/ManageExchRate.aspx");
         }
 
         private void LoadData()

@@ -132,6 +132,10 @@
           <DataField>col4</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="cha">
+          <DataField>cha</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>NVOCCDataSet</DataSourceName>
@@ -310,7 +314,20 @@
                 </Style>
               </TextRun>
               <TextRun>
-                <Value> an amount of Rs. </Value>
+                <Value> (CHA:  </Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Label>CHAName</Label>
+                <Value>=First(Fields!cha.Value, "DataSet3")</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>) an amount of Rs. </Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                 </Style>

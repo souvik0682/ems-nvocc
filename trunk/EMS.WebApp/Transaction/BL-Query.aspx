@@ -1057,6 +1057,7 @@
                     <asp:AsyncPostBackTrigger ControlID="btnReset" EventName="Click" />
                     <asp:AsyncPostBackTrigger ControlID="txtBlNo" EventName="TextChanged" />
                     <asp:AsyncPostBackTrigger ControlID="lnkDO" EventName="Click" />
+                    <asp:PostBackTrigger ControlID="btnUpload" />
                     <%--  <asp:AsyncPostBackTrigger ControlID="lnkDoExtension" EventName="Click" />
                     <asp:AsyncPostBackTrigger ControlID="lnkSlotExtension" EventName="Click" />
                     <asp:AsyncPostBackTrigger ControlID="lnkPGRExtension" EventName="Click" />--%>

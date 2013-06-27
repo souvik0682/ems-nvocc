@@ -248,7 +248,6 @@
       </Textbox>
       <Line Name="Line4">
         <Top>8.54548cm</Top>
-        <Left>0cm</Left>
         <Height>0cm</Height>
         <Width>15.25354cm</Width>
         <ZIndex>3</ZIndex>
@@ -651,7 +650,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!ChequeDate.Value, "DataSet3")</Value>
+                <Value>=IIf(First(Fields!ChequeNo.Value, "DataSet3")&lt;&gt;"",Format(First(Fields!ChequeDate.Value, "DataSet3"), "dd-MM-yyyy"),"")</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                 </Style>

@@ -204,6 +204,11 @@ namespace EMS.BLL
             return ImportBLDAL.GetEmptyYard(LocationId);
         }
 
+        public DataTable GetCarrier(string CarrierType)
+        {
+            return ImportBLDAL.GetCarrier(CarrierType);
+        }
+
         public DataSet GetBLQuery(string ImpBLNo, int ActivityType)
         {
             return ImportBLDAL.GetBLQuery(ImpBLNo, ActivityType);

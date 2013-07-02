@@ -365,7 +365,7 @@ namespace EMS.WebApp.Import
     
                                 //+ ((( (DischargePort.Length>=6 ? DischargePort.Substring(0, 6):DischargePort) == "INHAL1") ? DischargePort : string.Empty) + (''
                                 //+ ((Dr["CargoMovementCode"].ToString()=="LC" ? Dr["CFSCode"].ToString() : "") + (''
-                                + ((Dr["CargoMovementCode"].ToString()!="TC" ? Dr["CFSCode"].ToString() : "") + (''
+                                + ((Dr["CargoMovementCode"].ToString()=="LC" ? Dr["CFSCode"].ToString() : "") + (''
 //=======
 //                    //+ ((( (DischargePort.Length>=6 ? DischargePort.Substring(0, 6):DischargePort) == "INHAL1") ? DischargePort : string.Empty) + (''
 //                                + ((Dr["CargoMovementCode"].ToString() == "LC" ? Dr["CFSCode"].ToString() : "") + (''

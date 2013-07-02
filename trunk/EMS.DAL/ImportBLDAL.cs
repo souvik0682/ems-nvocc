@@ -378,7 +378,7 @@ namespace EMS.DAL
                 oDq.AddBigIntegerParam("@StockLocationID", blHeader.StockLocationID);
                 oDq.AddIntegerParam("@SurveyorAddressID", blHeader.SurveyorAddressID); //NOT FOUND
                 oDq.AddBooleanParam("@TaxExemption", blHeader.TaxExemption);
-                oDq.AddVarcharParam("@TPBondNo", 10, blHeader.TPBondNo.ToUpper());
+                //oDq.AddVarcharParam("@TPBondNo", 10, blHeader.TPBondNo.ToUpper());
                 oDq.AddVarcharParam("@TransportMode", 1, blHeader.TransportMode.ToUpper());
                 oDq.AddIntegerParam("@UnitOfVolume", blHeader.UnitOfVolume);
                 oDq.AddIntegerParam("@UnitOfWeight", blHeader.UnitOfWeight);
@@ -418,6 +418,7 @@ namespace EMS.DAL
                 oDq.AddBigIntegerParam("@PortFrtPayableID", blHeader.PortFrtPayableID);
                 oDq.AddIntegerParam("@DPTId", blHeader.DPTId);
                 oDq.AddBigIntegerParam("@CHAId", blHeader.CHAId);
+                oDq.AddBigIntegerParam("@CarrierID", blHeader.CarrierID);
 
                 blId = Convert.ToInt32(oDq.GetScalar());
             }
@@ -758,6 +759,23 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddBigIntegerParam("@LocationId", LocationId);
+
+                dt = oDq.GetTable();
+            }
+
+            return dt;
+        }
+         
+        public static DataTable GetCarrier(string CarrierType)
+        {
+            string strExecution = "uspGetCarrier";
+            DataTable dt = new DataTable();
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                //oDq.AddBigIntegerParam("@CarrierId", CarrierID);
+                oDq.AddVarcharParam("@Type", 2, CarrierType);
 
                 dt = oDq.GetTable();
             }

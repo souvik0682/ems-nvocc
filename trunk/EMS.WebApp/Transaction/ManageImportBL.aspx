@@ -637,7 +637,8 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtCMCode" runat="server" CssClass="textboxuppercase" MaxLength="2"
-                                                                    Width="250px" TabIndex="51"></asp:TextBox>
+                                                                    Width="250px" ontextchanged="txtCMCode_TextChanged" TabIndex="51" 
+                                                                    AutoPostBack="True"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="rfvCMCode" runat="server" ControlToValidate="txtCMCode"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
@@ -680,14 +681,9 @@
                                                                 Carrier:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
-
                                                                 <asp:DropDownList ID="ddlCarrier" runat="server" CssClass="dropdownlist" TabIndex="60">
                                                                     <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
                                                                 </asp:DropDownList>
-                                                                <br />
-                                                                <asp:RequiredFieldValidator ID="rfvCarrier" runat="server" ControlToValidate="ddlCarrier"
-                                                                    ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
-                                                                    ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </td>
                                                             <td>
                                                             </td>
@@ -1330,7 +1326,7 @@
                                         <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" TabIndex="70"
                                             OnClick="btnSave_Click" />&nbsp;&nbsp;
                                         <asp:Button ID="btnBack" runat="server" CssClass="button" TabIndex="71"
-                                            PostBackUrl="~/Transaction/ImportBL.aspx" Text="Back" />
+                                            OnClick="btnBack_Click" OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" Text="Back" />
                                         <br />
                                         <asp:Label ID="lblErr" runat="server" CssClass="errormessage"></asp:Label>
                                     </td>

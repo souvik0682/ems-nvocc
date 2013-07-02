@@ -939,6 +939,11 @@ namespace EMS.WebApp.Transaction
             rdoFtrTempUnit.SelectedValue = rdoFtrTemperatureUnit.SelectedValue;
         }
 
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Transaction/ImportBL.aspx");
+        }
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
             IBLHeader blHeader = new BLHeaderEntity();
@@ -1253,12 +1258,15 @@ namespace EMS.WebApp.Transaction
                 txtCMCode.Text = "LC";
                 ddlCarrier.SelectedIndex = -1;
                 ddlCarrier.Enabled = false;
+                txtCMCode.Enabled = false;
+
                 //txtTPBondNo.Enabled = false;
             }
             else
             {
                 string code = (((TextBox)AC_Port4.FindControl("txtPort")).Text.Split('|')[1]).Trim();
                 code = code.Substring(code.Length - 1, 1);
+                txtCMCode.Enabled = true;
 
                 if (code == "6")
                     txtCMCode.Text = "TI";
@@ -1266,6 +1274,9 @@ namespace EMS.WebApp.Transaction
                     txtCMCode.Text = "TC";
                 ddlCarrier.Enabled = true;
                 LoadCarrier();
+                if (ddlCarrier.Items.Count>0) 
+                    ddlCarrier.SelectedIndex = 0;
+                
                 //txtTPBondNo.Enabled = true;
             }
         }
@@ -1596,6 +1607,19 @@ namespace EMS.WebApp.Transaction
                 }
             }
 
+            if (txtCMCode.Text.ToUpper()!="LC" && txtCMCode.Text.ToUpper()!="TC" && txtCMCode.Text.ToUpper()!="TI")
+            {
+                IsValid = false;
+                lblErr.Text = "Cargo Movement valid codes are LC / TC / TI ";
+            }
+
+            if (txtCMCode.Text != "LC")
+            {
+                if (ddlCarrier.SelectedIndex==-1)
+                    IsValid = false;
+                //err
+                //    lblErr.Text = "Cargo Movement valid codes are LC / TC / TI ";
+            }
             //if (((TextBox)AC_Surveyor1.FindControl("txtSurveyor")).Text.Trim() != string.Empty)
             //{
             //    if (Convert.ToString(ViewState[SURVEYORID]) == string.Empty)
@@ -1987,7 +2011,8 @@ namespace EMS.WebApp.Transaction
             else
                 rdoTaxExempted.SelectedValue = "No";
 
-            ddlCarrier.SelectedValue = header.CarrierID.ToString();
+     
+
             //txtTPBondNo.Text = header.TPBondNo;
             rdoTransportMode.SelectedValue = header.TransportMode;
             ViewState[VOLUMEUNITID] = header.UnitOfVolume;
@@ -2108,13 +2133,17 @@ namespace EMS.WebApp.Transaction
             if (header.CargoMovement == "LC")
             {
                 ddlCarrier.Enabled = false;
+                ddlCarrier.SelectedIndex = -1;
             }
             else
             {
 
                 LoadCarrier();
                 ddlCarrier.SelectedValue = Convert.ToString(header.CarrierID);
+                ddlCarrier.Enabled = true;
             }
+
+
 
             //================= BL Footer =========================
             List<IBLFooter> footers = new ImportBLL().GetBLFooterInfo(BlId);
@@ -2265,6 +2294,25 @@ namespace EMS.WebApp.Transaction
             {
                 //if (txtFtrCargoWt.Text == string.Empty)
                 txtFtrCargoWt.Text = (Convert.ToDecimal(txtFtrGrossWeight.Text) / 1000).ToString();
+            }
+        }
+
+        protected void txtCMCode_TextChanged(object sender, EventArgs e)
+        {
+            string CMcode = txtCMCode.Text.ToUpper();
+            if (CMcode == "LC" || CMcode == "TC" || CMcode == "TI")
+            {
+                if (CMcode != "TI" && CMcode != "TC")
+                {
+                    txtCMCode.Text="";
+                }
+                else
+                {
+                    LoadCarrier();
+                    ddlCarrier.Enabled=true;
+                    if (ddlCarrier.Items.Count>0)
+                        ddlCarrier.SelectedIndex=0;
+                }
             }
         }
 

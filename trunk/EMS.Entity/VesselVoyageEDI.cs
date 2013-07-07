@@ -108,6 +108,7 @@ namespace EMS.Entity
             this.VesselType = Convert.ToString(reader["VesselType"]);
             this.LandingDate = reader["LandingDate"] == DBNull.Value ? (Nullable<DateTime>)null : Convert.ToDateTime(reader["LandingDate"]);
             this.pod = Convert.ToString(reader["pod"]);
+            this.podid = Convert.ToInt32(reader["fk_pod"]);
         }
 
 

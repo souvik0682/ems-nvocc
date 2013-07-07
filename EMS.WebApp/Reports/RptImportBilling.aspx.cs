@@ -21,13 +21,21 @@ namespace EMS.WebApp.Reports
         private int _userId = 0;
         private int _locId = 0;
 
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
+        private bool _LocationSpecific = true;
+        private int _userLocation = 0;
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            RetriveParameters();
             //CheckUserAccess();
-            IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
-            _userId = user == null ? 0 : user.Id;
+            //IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+            //_userId = user == null ? 0 : user.Id;
             if (!IsPostBack)
             {
                 autoComplete1.ContextKey = "0|0";
@@ -35,30 +43,47 @@ namespace EMS.WebApp.Reports
               
             }
 
+        }
 
+        private void RetriveParameters()
+        {
+            _userId = UserBLL.GetLoggedInUserId();
+
+            //Get user permission.
+            UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+            _LocationSpecific = UserBLL.GetUserLocationSpecific();
+            _userLocation = UserBLL.GetUserLocation();
         }
 
         private void CheckUserAccess()
         {
-            if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+            if (!_canView)
             {
-                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
-
-                if (ReferenceEquals(user, null) || user.Id == 0)
-                {
-                    Response.Redirect("~/Login.aspx");
-                }
-
-                if (user.UserRole.Id != (int)UserRole.Admin)
-                {
-                    Response.Redirect("~/Unauthorized.aspx");
-                }
-            }
-            else
-            {
-                Response.Redirect("~/Login.aspx");
+                Response.Redirect("~/Unauthorized.aspx");
             }
         }
+
+        //private void CheckUserAccess()
+        //{
+        //    if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+        //    {
+        //        IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+
+        //        if (ReferenceEquals(user, null) || user.Id == 0)
+        //        {
+        //            Response.Redirect("~/Login.aspx");
+        //        }
+
+        //        if (user.UserRole.Id != (int)UserRole.Admin)
+        //        {
+        //            Response.Redirect("~/Unauthorized.aspx");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Response.Redirect("~/Login.aspx");
+        //    }
+        //}
         protected void LocationLine_Changed(object sender, EventArgs e)
         {
             autoComplete1.ContextKey = ddlLocation.SelectedValue + "|" + ddlLine.SelectedValue;
@@ -189,6 +214,13 @@ namespace EMS.WebApp.Reports
             Li = new ListItem("Select", "0");
             PopulateDropDown((int)Enums.DropDownPopulationFor.Line, ddlLine, 0, 0);
             ddlLine.Items.Insert(0, Li);
+
+            if (_LocationSpecific)
+            {
+                ddlLocation.SelectedValue = Convert.ToString(_userLocation);
+                ddlLocation.Enabled = false;
+                ddlLine.Enabled = true;
+            }
         }
 
         void PopulateDropDown(int Number, DropDownList ddl, int? Filter1, int? Filter2)

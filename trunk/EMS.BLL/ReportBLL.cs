@@ -41,5 +41,14 @@ namespace EMS.BLL
             return ReportDAL.GetImportInvoicePrint(lineId, locId, billType, dtFrom, dtTo);
         }
 
+        public DataTable GetTypeWiseStockSummary(string LineId, string LocationId, DateTime StockDate)
+        {
+            return ReportDAL.GetTypeWiseStockSummary(LineId, LocationId, StockDate);
+        }
+
+        public DataTable GetDetentionReport(string vord, DateTime StartDate, DateTime EndDate, string VoyageID, string VesselID, string LineId, string LocationId)
+        {
+            return ReportDAL.GetDetentionReport(vord, StartDate, EndDate, VoyageID, VesselID, LineId, LocationId);
+        }
     }
 }

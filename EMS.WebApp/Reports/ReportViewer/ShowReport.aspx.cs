@@ -335,6 +335,18 @@ namespace EMS.WebApp.Reports.ReportViewer
                     lblLine.Text = "Line";
                     ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1;
                     break;
+                case "collectionregister":
+                    TrHire.Visible = true;
+                    TrHire1.Visible = false;
+                    lblLine.Text = "Line";
+                    ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1;
+                    break;
+                case "crnregister":
+                    TrHire.Visible = true;
+                    TrHire1.Visible = false;
+                    lblLine.Text = "Line";
+                    ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1;
+                    break;
                 case "pendingdelivaryorder":
                     trPendingDO.Visible = true;
                     ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1;
@@ -409,6 +421,12 @@ namespace EMS.WebApp.Reports.ReportViewer
                 case "pendingdelivaryorder":
                     litHeader.Text = "PENDING DELIVERY ORDER";
                     break;
+                case "collectionregister":
+                    litHeader.Text = "COLLECTION REGISTER";
+                    break;
+                case "crnregister":
+                    litHeader.Text = "CREDIT NOTE REGISTER";
+                    break;
                 //PendingDelivaryOrder
                 default: strReportName = string.Empty; break;
             }
@@ -429,10 +447,15 @@ namespace EMS.WebApp.Reports.ReportViewer
                     case "onoffhire":
                         ddlLine_SelectedIndexChanged1(null, null);
                         break;
+                    case "collectionregister":
+                        ddlLine_SelectedIndexChanged1(null, null);
+                        break;
                     case "creditnote":
                         ddlLocation_SelectedIndexChanged_Invoice(null, null);
                         break;
-
+                    case "crnregister":
+                        ddlLine_SelectedIndexChanged1(null, null);
+                        break;
                     default:
                         ddlLine_SelectedIndexChanged(null, null);
                         break;
@@ -508,13 +531,13 @@ namespace EMS.WebApp.Reports.ReportViewer
                     //rptParameters[3] = new ReportParameter("Vessel", ddlVessel.SelectedValue);
                     //rptParameters[4] = new ReportParameter("voyage", ddlVoyage.SelectedValue);
                     //rptParameters[5] = new ReportParameter("ETA", txtETA.Text );
-                    rptParameters = new ReportParameter[6];
+                    rptParameters = new ReportParameter[5];
                     rptParameters[0] = new ReportParameter("blno", ddlBlNo.SelectedValue);
                     rptParameters[1] = new ReportParameter("line", ddlLocation.SelectedValue);
                     rptParameters[2] = new ReportParameter("location", ddlLine.SelectedValue);
                     rptParameters[3] = new ReportParameter("Vessel", ddlVessel.SelectedValue);
                     rptParameters[4] = new ReportParameter("voyage", ddlVoyage.SelectedValue);
-                    rptParameters[5] = new ReportParameter("eta", txtETA.Text);
+                    //rptParameters[5] = new ReportParameter("eta", txtETA.Text);
                     break;
                 case "invoicedeveloper":
                     //litHeader.Text = "INVOICE DEVELOPER";
@@ -548,6 +571,22 @@ namespace EMS.WebApp.Reports.ReportViewer
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
                     rptParameters[0] = new ReportParameter("line", ddlLocation.SelectedValue);
                     //rptParameters[2] = new ReportParameter("DOFinalBill", txtDoFinal.Text);
+                    break;
+                case "collectionregister":
+                    //litHeader.Text = "ON/OFF REGISTER FROM";
+                    rptParameters = new ReportParameter[4];
+                    rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
+                    rptParameters[0] = new ReportParameter("line", ddlLocation.SelectedValue);
+                    rptParameters[2] = new ReportParameter("refDateS", txtSDate.Text);
+                    rptParameters[3] = new ReportParameter("refDateE", txtEDate.Text);
+                    break;
+                case "crnregister":
+                    //litHeader.Text = "ON/OFF REGISTER FROM";
+                    rptParameters = new ReportParameter[4];
+                    rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
+                    rptParameters[0] = new ReportParameter("line", ddlLocation.SelectedValue);
+                    rptParameters[2] = new ReportParameter("refDateS", txtSDate.Text);
+                    rptParameters[3] = new ReportParameter("refDateE", txtEDate.Text);
                     break;
                 //PendingDelivaryOrder
                 default: strReportName = string.Empty; break;

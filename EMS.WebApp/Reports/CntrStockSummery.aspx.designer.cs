@@ -13,24 +13,6 @@ namespace EMS.WebApp.Reports {
     public partial class CntrStockSummery {
         
         /// <summary>
-        /// uProgressLoc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress uProgressLoc;
-        
-        /// <summary>
-        /// upLoc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upLoc;
-        
-        /// <summary>
         /// ddlLine control.
         /// </summary>
         /// <remarks>
@@ -74,6 +56,15 @@ namespace EMS.WebApp.Reports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
+        
+        /// <summary>
+        /// btnPrint control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPrint;
         
         /// <summary>
         /// rptViewer control.

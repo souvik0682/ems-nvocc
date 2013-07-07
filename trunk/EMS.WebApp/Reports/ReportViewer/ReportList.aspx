@@ -10,6 +10,7 @@
 <li><a href="ShowReport.aspx?reportName=Custom">Custom</a></li>
 <li><a href="ShowReport.aspx?reportName=Gang">Gang</a></li>
 <li><a href="ShowReport.aspx?reportName=InvoiceDeveloper">Invoice1</a></li>
+<li><a href="ShowReport.aspx?reportName=creditnote">creditnote</a></li>
 <li><a href="../../Popup/Report.aspx?ReportName=InvoiceDeveloper&LineBLNo=UAFLMJN/NHV01&Location=1&LoginUserName=1&InvoiceId=1">Invoice</a></li>
 <li><a href="ShowReport.aspx?reportName=OnOffHire">On/Off-Hire</a></li>
 <li><a href="ShowReport.aspx?reportName=PendingDelivaryOrder">PendingDelivaryOrder</a></li>

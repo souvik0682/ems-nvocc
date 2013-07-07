@@ -232,6 +232,71 @@ namespace EMS.DAL
             return lstEntity;
         }
 
+        public static List<ImportInvoiceEntity> GetImportInvoicePrint(int lineId, int locId, int billType, DateTime dtFrom, DateTime dtTo)
+        {
+            string strExecution = "[report].[uspRptInvoiceDateRange]";
+            List<ImportInvoiceEntity> lstEntity = new List<ImportInvoiceEntity>();
+            ImportInvoiceEntity entity = null;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@LocationID", locId);
+                oDq.AddIntegerParam("@LineID", lineId);
+                oDq.AddIntegerParam("@BillType", billType);
+                oDq.AddDateTimeParam("@StartDate", dtFrom);
+                oDq.AddDateTimeParam("@EndDate", dtTo);
+
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    entity = new ImportInvoiceEntity(reader);
+                    lstEntity.Add(entity);
+                }
+            }
+
+
+            return lstEntity;
+        }
+
+        public static DataTable GetTypeWiseStockSummary(string LineId, string LocationId, DateTime StockDate)
+        {
+            string strExecution = "prcRptTypeWiseStockSummary";
+            DataTable dt = new DataTable();
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@Line", 100, LineId);
+                oDq.AddVarcharParam("@Loc", 100, LocationId);
+                oDq.AddDateTimeParam("@StockDate", StockDate);
+                dt = oDq.GetTable();
+            }
+
+            return dt;
+        }
+
+        public static DataTable GetDetentionReport(string vord, DateTime StartDate, DateTime EndDate, string VoyageID, string VesselID, string LineId, string LocationId)
+        {
+            string strExecution = "uspRptDetention";
+            DataTable dt = new DataTable();
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@VoyageOrDate", 1, vord);
+                oDq.AddDateTimeParam("@StartDate", StartDate);
+                oDq.AddDateTimeParam("@EndDate", EndDate);
+                oDq.AddVarcharParam("@fk_VoyageID", 60, VoyageID);
+                oDq.AddVarcharParam("@fk_VesselID", 60, VesselID);
+                oDq.AddVarcharParam("@fk_LineID", 60, LineId);
+                oDq.AddVarcharParam("@fk_LocationID", 60, LocationId);
+                dt = oDq.GetTable();
+            }
+
+            return dt;
+        }
+
         #endregion
 
         #region Private Methods

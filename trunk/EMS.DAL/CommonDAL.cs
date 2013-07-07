@@ -681,27 +681,30 @@ namespace EMS.DAL
         #endregion
 
         #region Report
-        public static bool GenerateExcel(string filename, string Location, string Vessel, string PortOfDischarge, string Line, string Voyage, string VIANo)
+
+        public static DataTable GenerateExcel(string Location, string Vessel, string PortOfDischarge, string Line, string Voyage, string VIANo)
         {
             string strExecution = "GenerateExcel";
-
+            DataTable dt = new DataTable();
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
 
-                oDq.AddVarcharParam("@filename", 1000, filename);
+                //oDq.AddVarcharParam("@filename", 1000, filename);
                 oDq.AddVarcharParam("@Location", 60, Location);
                 oDq.AddVarcharParam("@Vessel", 60, Vessel);
                 oDq.AddVarcharParam("@PortOfDischarge", 60, PortOfDischarge);
                 oDq.AddVarcharParam("@Line", 60, Line);
                 oDq.AddVarcharParam("@Voyage", 60, Voyage);
                 oDq.AddVarcharParam("@VIANo", 200, VIANo);
-                oDq.AddIntegerParam("@return", 0, QueryParameterDirection.Output);
-                oDq.RunActionQuery();
-                var result = Convert.ToInt32(oDq.GetParaValue("@return"));
-                if (result == 1) return true;
+                dt = oDq.GetTable();
+                //oDq.AddIntegerParam("@return", 0, QueryParameterDirection.Output);
+                //oDq.RunActionQuery();
+                //var result = Convert.ToInt32(oDq.GetParaValue("@return"));
+                //if (result == 1) return true;
             }
-            return false;
+            return dt;
+            //return false;
         }
 
         public static bool GenerateTxt(string filename, int Location, int Vessel, int PortOfDischarge, int Line, int Voyage, int VIANo)

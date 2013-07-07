@@ -316,7 +316,7 @@ namespace EMS.BLL
             dquery.AddIntegerParam("@VesselFlag", vessel.VesselFlag);
             dquery.AddVarcharParam("@VesselName", 60, vessel.VesselName);
             dquery.AddIntegerParam("@VesselPrefix", vessel.VesselPrefix);
-
+            dquery.AddVarcharParam("@CallSign", 14, vessel.CallSign);
 
             return dquery.RunActionQuery();
 
@@ -339,7 +339,7 @@ namespace EMS.BLL
             dquery.AddVarcharParam("@VoyageNo", 10, voyage.VoyageNo);
             dquery.AddDecimalParam("@ImpXChangeRate", 6, 2, voyage.ImpXChangeRate);
             dquery.AddVarcharParam("@IGMNo", 10, voyage.IGMNo);
-            dquery.AddVarcharParam("@CallSign", 14, voyage.CallSign);
+            //dquery.AddVarcharParam("@CallSign", 14, voyage.CallSign);
             dquery.AddDateTimeParam("@IGMDate", voyage.IGMDate);
             dquery.AddDateTimeParam("@LandingDate", voyage.LandingDate);
             dquery.AddDateTimeParam("@ETADate", voyage.ETADate);
@@ -394,7 +394,6 @@ namespace EMS.BLL
             return dquery.GetTables();
         }
 
-
         #endregion
 
         #region Import_ExportText
@@ -410,14 +409,7 @@ namespace EMS.BLL
             return dquery.GetTables();
         }
 
-
-
-
         #endregion
-
-
-
-
 
         public DataSet GetMLVoyage(int VoyageId, string voyageType, string VesselName, string voyageNo)
         {
@@ -429,7 +421,6 @@ namespace EMS.BLL
             dquery.AddVarcharParam("@vesselName", 70, VesselName);
             dquery.AddVarcharParam("@VoyageNo", 10, voyageNo);
           
-
             return dquery.GetTables();
         }
 

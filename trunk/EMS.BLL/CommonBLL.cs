@@ -460,8 +460,8 @@ namespace EMS.BLL
         public static string GetTerminalType(int VoyageID, int VesselID, int PortOfDischarge)
         { return CommonDAL.GetTerminalType(VoyageID, VesselID, PortOfDischarge); }
 
-        public static bool GenerateExcel(string filename, string Location, string Vessel, string PortOfDischarge, string Line, string Voyage, string VIANo)
-        { return CommonDAL.GenerateExcel(filename, Location, Vessel, PortOfDischarge, Line, Voyage, VIANo); }
+        public DataTable GenerateExcel(string Location, string Vessel, string PortOfDischarge, string Line, string Voyage, string VIANo)
+        { return CommonDAL.GenerateExcel(Location, Vessel, PortOfDischarge, Line, Voyage, VIANo); }
        
         public static bool GenerateText(string filename, int Location, int Vessel, int PortOfDischarge, int Line, int Voyage, int VIANo)
         { return CommonDAL.GenerateTxt(filename, Location, Vessel, PortOfDischarge, Line, Voyage, VIANo); }

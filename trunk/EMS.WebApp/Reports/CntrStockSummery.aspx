@@ -7,7 +7,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
-    <asp:UpdateProgress ID="uProgressLoc" runat="server" AssociatedUpdatePanelID="upLoc">
+<%--    <asp:UpdateProgress ID="uProgressLoc" runat="server" AssociatedUpdatePanelID="upLoc">
         <ProgressTemplate>
             <div class="progress">
                 <div id="image">
@@ -16,15 +16,15 @@
                     Please Wait...</div>
             </div>
         </ProgressTemplate>
-    </asp:UpdateProgress>
+    </asp:UpdateProgress>--%>
     <center>
         <div id="headercaption">
-            CONTAINER STOCK SUMMERY
+            CONTAINER STOCK SUMMARY
         </div>
         <center>
             <fieldset style="width: 700px;">
-                <legend>Container Stock Details </legend>
-                <asp:UpdatePanel ID="upLoc" runat="server" UpdateMode="Conditional">
+                <%--<legend>Container Stock Details </legend>--%>
+<%--                <asp:UpdatePanel ID="upLoc" runat="server" UpdateMode="Conditional">--%>
                     <Triggers>
                         <%-- <asp:AsyncPostBackTrigger ControlID="ddlVoyage" EventName="SelectedIndexChanged" />
                         <asp:AsyncPostBackTrigger ControlID="ddlVessel" EventName="SelectedIndexChanged" />
@@ -34,7 +34,7 @@
                         <table border="0" cellpadding="2" cellspacing="3" width="100%">
                             <tr>
                                 <td style="width: 40%">
-                                    <table width="100%">
+                                    <table style="width: 109%">
                                         <tr>
                                             <td style="text-align: right">
                                                 Line:
@@ -44,8 +44,7 @@
                                                 </asp:DropDownList>
                                             </td>
                                             <td style="text-align: right">
-                                                Location:<%--<span class="errormessage1">*</span>--%>
-                                            </td>
+                                                Location:<%--<span class="errormessage1">*</span>--%></td>
                                             <td>
                                                 <asp:DropDownList ID="ddlLoc" runat="server" Width="100%">
                                                 </asp:DropDownList>
@@ -55,10 +54,10 @@
                                     </table>
                                 </td>
                                 <td style="width: 40%" colspan="2" align="right">
-                                    <table width="100%">
+                                    <table style="width: 94%">
                                         <tr>
                                             <td style="text-align: right">
-                                                Stock Date:
+                                                &nbsp;Date:
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtdtStock" runat="server" CssClass="textboxuppercase" Width="150"></asp:TextBox>
@@ -69,13 +68,17 @@
                                     </table>
                                 </td>
                                 <td colspan="2" style="text-align: right; width: 10%">
-                                    <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Show" ValidationGroup="Save" />
+                                    <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Summary" ValidationGroup="Save" />
+                                    &nbsp;&nbsp;
+                                </td>
+                                <td colspan="2" style="text-align: right; width: 10%">
+                                    <asp:Button ID="btnPrint" runat="server" OnClick="btnPrint_Click" Text="Type Wise Summary" ValidationGroup="Print" />
                                     &nbsp;&nbsp;
                                 </td>
                             </tr>
                         </table>
                     </ContentTemplate>
-                </asp:UpdatePanel>
+<%--                </asp:UpdatePanel>--%>
             </fieldset>
         </center>
         <div style="padding-top: 10px;">

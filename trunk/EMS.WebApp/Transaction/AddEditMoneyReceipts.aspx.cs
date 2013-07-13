@@ -33,7 +33,7 @@ namespace EMS.WebApp.Transaction
         protected void Page_Load(object sender, EventArgs e)
         {
             RetriveParameters();
-            CheckUserAccess();
+            //CheckUserAccess();
 
 
             if (!IsPostBack)

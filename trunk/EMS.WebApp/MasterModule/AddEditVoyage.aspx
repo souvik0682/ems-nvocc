@@ -136,7 +136,7 @@
                                         Width="250"></asp:TextBox><br />
                                 </td>
                             </tr>
-                            <tr>
+        <%--                    <tr>
                                 <td style="width: 140px;">
                                     Call Sign
                                 </td>
@@ -144,7 +144,7 @@
                                     <asp:TextBox ID="txtCallSign" runat="server" CssClass="textboxuppercase" MaxLength="60"
                                         Width="250"></asp:TextBox><br />
                                 </td>
-                            </tr>
+                            </tr>--%>
                             <tr>
                                 <td style="width: 140px;">
                                     ETA Date

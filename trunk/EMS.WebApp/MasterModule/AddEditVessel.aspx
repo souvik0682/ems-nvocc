@@ -83,6 +83,12 @@
                    </td>
                 </tr>
 
+                <tr>
+                    <td>Call Sign:</td>
+                    <td><asp:TextBox ID="TxtCallSign" runat="server" CssClass="textboxuppercase" 
+                            MaxLength="10" Width="250" TextMode="SingleLine"></asp:TextBox><br />
+                   </td>
+                </tr>
                  <%--<tr>
                     <td>Last Port:<span class="errormessage1">*</span></td>
                     <td>

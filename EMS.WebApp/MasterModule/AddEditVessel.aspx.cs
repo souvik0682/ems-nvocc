@@ -137,6 +137,7 @@ namespace EMS.WebApp.MasterModule
                 txtShipLineCode.Text = ds.Tables[0].Rows[0]["ShippingLineCode"].ToString();
                 ((TextBox)AutoCompleteCountry1.FindControl("txtCountry")).Text = ds.Tables[0].Rows[0]["flag"].ToString();
                 txtVesselName.Text = ds.Tables[0].Rows[0]["VesselName"].ToString();
+                TxtCallSign.Text = ds.Tables[0].Rows[0]["CallSign"].ToString();
                 ddlVesselPrefix.SelectedValue = ds.Tables[0].Rows[0]["fk_VesselPrefixID"].ToString();
             }
         }
@@ -180,6 +181,7 @@ namespace EMS.WebApp.MasterModule
             vessel.VesselFlag = dbinteract.GetId("Country", ((TextBox)AutoCompleteCountry1.FindControl("txtCountry")).Text);
             vessel.VesselName = txtVesselName.Text.ToUpper(); 
             vessel.VesselPrefix = Convert.ToInt32(ddlVesselPrefix.SelectedValue);
+            vessel.CallSign = TxtCallSign.Text.ToUpper();
 
             //if (vessel.LastPortCalled == 0)
             //{

@@ -122,7 +122,7 @@ namespace EMS.WebApp.MasterModule
             AutoCompletepPort4.Enabled = false;
             ddlVesselType.Enabled = false;
             txtTotLine.Enabled = false;
-            txtCallSign.Enabled = false;
+            //txtCallSign.Enabled = false;
             txtdtETA.Enabled = false;
             txtTime.Enabled = false;
             ddlSameButton.Enabled = false;
@@ -155,7 +155,7 @@ namespace EMS.WebApp.MasterModule
             if (VoyageId == "" || !Int32.TryParse(VoyageId, out intVoyageId))
                 return;
             BLL.DBInteraction dbinteract = new BLL.DBInteraction();
-            System.Data.DataSet ds = dbinteract.GetVoyage(Convert.ToInt32(VoyageId), "a", "", "", "");
+            System.Data.DataSet ds = dbinteract.GetVoyage(Convert.ToInt32(VoyageId), "a", "", "", "", 0);
 
             if (!ReferenceEquals(ds, null) && ds.Tables[0].Rows.Count > 0)
             {
@@ -167,7 +167,7 @@ namespace EMS.WebApp.MasterModule
                 txtCargoDesc.Text = ds.Tables[0].Rows[0]["CargoDesc"].ToString();
                 txtExcRate.Text = ds.Tables[0].Rows[0]["ImpXChangeRate"].ToString();
                 txtIGMNo.Text = ds.Tables[0].Rows[0]["IGMNo"].ToString();
-                txtCallSign.Text = ds.Tables[0].Rows[0]["CallSign"].ToString();
+                //txtCallSign.Text = ds.Tables[0].Rows[0]["CallSign"].ToString();
                 txtLGNo.Text = ds.Tables[0].Rows[0]["LGNo"].ToString();
                 txtLightHouse.Text = ds.Tables[0].Rows[0]["LightHouseDue"].ToString();
                 txtMotherDaughter.Text = ds.Tables[0].Rows[0]["MotherDaughterDtl"].ToString();
@@ -224,7 +224,7 @@ namespace EMS.WebApp.MasterModule
             voyage.CargoDesc = txtCargoDesc.Text.ToUpper();
             voyage.ImpXChangeRate = txtExcRate.Text.Trim() == "" ? 0 : Convert.ToDecimal(txtExcRate.Text.Trim());
             voyage.IGMNo = txtIGMNo.Text.ToUpper();
-            voyage.CallSign = txtCallSign.Text.ToUpper();
+            //voyage.CallSign = txtCallSign.Text.ToUpper();
             voyage.LGNo = txtLGNo.Text.ToUpper();
             voyage.LightHouseDue = txtLightHouse.Text.Trim() == "" ? 0 : Convert.ToInt32(txtLightHouse.Text.Trim());
             voyage.MotherDaughterDtl = txtMotherDaughter.Text.ToUpper();
@@ -303,8 +303,6 @@ namespace EMS.WebApp.MasterModule
                 
             //    //if (retval!="yes") return;
 
-           
-                
             //}
 
             if (txtdtLand.Text != "")
@@ -313,14 +311,10 @@ namespace EMS.WebApp.MasterModule
                 //int c = dbinteract.PopulateDDLDS("trnVoyage", "fk_VesselID", "VoyageNo", "where fk_VesselID=" + ddlVessel.SelectedValue + " and VoyageNo='" + txtVoyageNo.Text.Trim() + "'").Tables[0].Rows.Count;
                 if (msg != "" && msg.ToLower() != "true")
                 {
-
                     GeneralFunctions.RegisterAlertScript(this, msg);
                     return;
-
-
                 }
             }
-
 
             int result = dbinteract.AddEditVoyage(_userId, isedit, voyage);
             int result1 = EMS.BLL.VoyageBLL.VoyageLandingDateEntry(voyage.fk_VesselID, Convert.ToInt32(VoyageId), voyage.fk_Pod, voyage.LandingDate, voyage.OLandingDate, _userId);

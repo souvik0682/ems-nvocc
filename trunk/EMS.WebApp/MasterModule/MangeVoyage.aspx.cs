@@ -23,6 +23,7 @@ namespace EMS.WebApp.MasterModule
         private bool _canEdit = false;
         private bool _canDelete = false;
         private bool _canView = false;
+        private int _userLocation = 0;
 
         #endregion
 
@@ -211,7 +212,7 @@ namespace EMS.WebApp.MasterModule
                     if (searchCriteria.PageSize > 0) gvwLoc.PageSize = searchCriteria.PageSize;
                     try
                     {
-                        System.Data.DataSet ds = dbinteract.GetVoyage(-1, voyageType, VesselName, voyageNo, igmNo);
+                        System.Data.DataSet ds = dbinteract.GetVoyage(-1, voyageType, VesselName, voyageNo, igmNo, _userLocation);
                         System.Data.DataView dv = new System.Data.DataView(ds.Tables[0]);
                         if (!string.IsNullOrEmpty(SortExp) && !string.IsNullOrEmpty(direction) && SortExp != "Location")
                             dv.Sort = SortExp + " " + direction;
@@ -361,6 +362,7 @@ namespace EMS.WebApp.MasterModule
 
         private void RetriveParameters()
         {
+            IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
             if (ReferenceEquals(Request.QueryString["p"], null))
             {
                 Response.Redirect("~/View/Home.aspx");
@@ -374,6 +376,14 @@ namespace EMS.WebApp.MasterModule
             //Get user ID & permission.
 
             _userId = UserBLL.GetLoggedInUserId();
+            if (user.UserRole.Id != (int)UserRole.Admin)
+            {
+                _userLocation = UserBLL.GetUserLocation();
+            }
+            else
+            {
+                _userLocation = 0;
+            }
             UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
         }
 

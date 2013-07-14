@@ -750,7 +750,8 @@ namespace EMS.DAL
         {
             string strExecution = "rptUspGetLineByLoc";
             DataTable myDataTable;
-
+            if (Location == "All")
+                Location = "0";
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@Location", Location.ToInt());

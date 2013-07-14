@@ -149,20 +149,20 @@
                             ControlToValidate="ddlBlNo" InitialValue="0" ValidationGroup="Report" Display="Dynamic"
                             ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                     </td>
-                   <%-- <td>
+      <%--              <td>
                         ETA:<span class="errormessage">*</span>
-                    </td>
+                    </td>--%>
                     <td align="left">
                         <asp:TextBox ID="txtETA" runat="server" Width="113"></asp:TextBox>
                         <cc1:CalendarExtender Format="dd/MM/yyyy" ID="CalendarExtender2" runat="server" PopupButtonID="txtETADt"
                             TargetControlID="txtETA">
                         </cc1:CalendarExtender>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" CssClass="errormessage"
+                      <%--  <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" CssClass="errormessage"
                             ControlToValidate="txtETA" ValidationGroup="Report" Display="Dynamic" ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ControlToValidate="txtETA" ID="RegularExpressionValidator1"
                             runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]"
-                            ValidationGroup="Report" Display="Dynamic" ValidationExpression="^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$"></asp:RegularExpressionValidator>
-                    </td>--%>
+                            ValidationGroup="Report" Display="Dynamic" ValidationExpression="^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$"></asp:RegularExpressionValidator>--%>
+                    </td>
                 </tr>
                 <tr id="TrHire" runat="server">
                     <td align="left" style="width: 15%">

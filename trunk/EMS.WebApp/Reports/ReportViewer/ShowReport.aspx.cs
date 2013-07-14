@@ -307,6 +307,8 @@ namespace EMS.WebApp.Reports.ReportViewer
             trCar.Visible = false;
             trCar1.Visible = false;
             trInvoice.Visible = false;
+            txtETA.Visible = false;
+            txtETA.Text = DateTime.Today.ToString();
 
             trInvoice.Visible = false;
             TrHire.Visible = false;
@@ -385,6 +387,10 @@ namespace EMS.WebApp.Reports.ReportViewer
                 Filler.FillData<ILocation>(ddlLine, new CommonBLL().GetActiveLocation(), "Name", "Id", "Location");
             }
 
+            if (ViewState["strReportName"].ToString().ToLower() == "collectionregister")
+            {
+                ddlLine.Items.Insert(1, new ListItem("All", "All"));
+            }
 
             switch (strReportName.ToLower())
             {
@@ -531,13 +537,13 @@ namespace EMS.WebApp.Reports.ReportViewer
                     //rptParameters[3] = new ReportParameter("Vessel", ddlVessel.SelectedValue);
                     //rptParameters[4] = new ReportParameter("voyage", ddlVoyage.SelectedValue);
                     //rptParameters[5] = new ReportParameter("ETA", txtETA.Text );
-                    rptParameters = new ReportParameter[5];
+                    rptParameters = new ReportParameter[6];
                     rptParameters[0] = new ReportParameter("blno", ddlBlNo.SelectedValue);
                     rptParameters[1] = new ReportParameter("line", ddlLocation.SelectedValue);
                     rptParameters[2] = new ReportParameter("location", ddlLine.SelectedValue);
                     rptParameters[3] = new ReportParameter("Vessel", ddlVessel.SelectedValue);
                     rptParameters[4] = new ReportParameter("voyage", ddlVoyage.SelectedValue);
-                    //rptParameters[5] = new ReportParameter("eta", txtETA.Text);
+                    rptParameters[5] = new ReportParameter("eta", txtETA.Text);
                     break;
                 case "invoicedeveloper":
                     //litHeader.Text = "INVOICE DEVELOPER";
@@ -575,8 +581,23 @@ namespace EMS.WebApp.Reports.ReportViewer
                 case "collectionregister":
                     //litHeader.Text = "ON/OFF REGISTER FROM";
                     rptParameters = new ReportParameter[4];
-                    rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
-                    rptParameters[0] = new ReportParameter("line", ddlLocation.SelectedValue);
+                    if (ddlLine.SelectedValue == "All")
+                    {
+                        rptParameters[1] = new ReportParameter("Location", "0");
+                    }
+                    else
+                    {
+                        rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
+                    }
+
+                    if (ddlLocation.SelectedValue == "All")
+                    {
+                        rptParameters[0] = new ReportParameter("line", "0");
+                    }
+                    else
+                    {
+                        rptParameters[0] = new ReportParameter("line", ddlLocation.SelectedValue);
+                    }
                     rptParameters[2] = new ReportParameter("refDateS", txtSDate.Text);
                     rptParameters[3] = new ReportParameter("refDateE", txtEDate.Text);
                     break;
@@ -652,6 +673,10 @@ namespace EMS.WebApp.Reports.ReportViewer
                 else
                 {
                     Filler.FillData(ddlLocation, CommonBLL.GetLine(ddlLine.SelectedValue), "ProspectName", "ProspectID", "Line");
+                    if (ViewState["strReportName"].ToString().ToLower() == "collectionregister")
+                    {
+                        ddlLocation.Items.Insert(1, new ListItem("All", "All"));
+                    }
                 }
             }
         }

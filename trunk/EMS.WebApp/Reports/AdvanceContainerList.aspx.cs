@@ -90,6 +90,23 @@ namespace EMS.WebApp.Reports
                     }
 
                     break;
+                default:
+                    {
+                        CommonBLL cls = new CommonBLL();
+
+                        try
+                        {
+                            //DateTime dt = Convert.ToDateTime(txtdtStock.Text.Trim());
+                            DataTable dtExcel = new DataTable();
+
+                            dtExcel = cls.GenerateExcel(ddlLine.SelectedValue, ddlVessel.SelectedValue, hdnReturn.Value, ddlLocation.SelectedValue, ddlVoyage.SelectedValue, txtVIANo.Text);
+                            ExporttoExcel(dtExcel);
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+                    }
+                    break;
             }
         }
         protected void ddlLocation_SelectedIndexChanged(object sender, EventArgs e)

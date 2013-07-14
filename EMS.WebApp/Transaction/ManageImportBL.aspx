@@ -1282,16 +1282,20 @@
                                                                 <HeaderStyle CssClass="gridviewheader" />
                                                                 <ItemStyle CssClass="gridviewitem" Width="20%" />
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Size">
-                                                                <HeaderStyle CssClass="gridviewheader"/>
+                                                            <asp:TemplateField HeaderText="SealNo">
+                                                                <HeaderStyle CssClass="gridviewheader" />
+                                                                <ItemStyle CssClass="gridviewitem" Width="20%" />
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Size" >
+                                                                <HeaderStyle CssClass="gridviewheader_num" />
                                                                 <ItemStyle CssClass="gridviewitem" Width="20%" HorizontalAlign="Right" />
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Gross Weight">
-                                                                <HeaderStyle CssClass="gridviewheader" />
+                                                                <HeaderStyle CssClass="gridviewheader_num" />
                                                                 <ItemStyle CssClass="gridviewitem" Width="20%"  HorizontalAlign="Right"/>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Package">
-                                                                <HeaderStyle CssClass="gridviewheader"/>
+                                                                <HeaderStyle CssClass="gridviewheader_num"/>
                                                                 <ItemStyle CssClass="gridviewitem" Width="20%"  HorizontalAlign="Right"/>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Waiver">

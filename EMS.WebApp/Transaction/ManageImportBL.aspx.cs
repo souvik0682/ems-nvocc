@@ -484,9 +484,10 @@ namespace EMS.WebApp.Transaction
 
                 e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CntrNo"));
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerType"));
-                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CntrSize"));
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "GrossWeight"));
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Package"));
+                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "SealNo"));
+                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CntrSize"));
+                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "GrossWeight"));
+                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Package"));
                 //e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Waiver"));
 
                 // Edit link
@@ -527,21 +528,69 @@ namespace EMS.WebApp.Transaction
             //{
 
             if (rdoFtrSoc.SelectedValue == "N")
-                IsValidContainerNo();
-
-
-            CheckContainerNumber();
-
-            if (Convert.ToBoolean(ViewState["IsValidContainer"]))
             {
-                if (Convert.ToString(ViewState[EDITBLFOOTER]) == "")
-                    AddBLFooterDetails();
-                else
-                    EditFooterDetails();
+                if (IsValidContainerNo())
+                {
+                    IBLFooter blFooter = null;
+
+                    if (ViewState[FOOTERDETAILS] != null)
+                    {
+                        footerDetails = ViewState[FOOTERDETAILS] as List<IBLFooter>;
+                        blFooter = footerDetails.SingleOrDefault(c => c.CntrNo == txtFtrContainerNo.Text);
+                    }
+
+                    if (!ReferenceEquals(blFooter, null))
+                    {
+                        errContainer.Text = "Please enter unique Container No";
+                    }
+                    else
+                    {
+                        CheckContainerNumber();
+
+                        if (Convert.ToBoolean(ViewState["IsValidContainer"]))
+                        {
+                            if (Convert.ToString(ViewState[EDITBLFOOTER]) == "")
+                                AddBLFooterDetails();
+                            else
+                                EditFooterDetails();
+                        }
+                        else
+                        {
+                            errContainer.Text = "Please enter unique Container No";
+                        }
+                    }
+                }
             }
             else
             {
-                errContainer.Text = "Please enter unique Container No";
+                IBLFooter blFooter = null;
+
+                if (ViewState[FOOTERDETAILS] != null)
+                {
+                    footerDetails = ViewState[FOOTERDETAILS] as List<IBLFooter>;
+                    blFooter = footerDetails.SingleOrDefault(c => c.CntrNo == txtFtrContainerNo.Text);
+                }
+
+                if (!ReferenceEquals(blFooter, null))
+                {
+                    errContainer.Text = "Please enter unique Container No";
+                }
+                else
+                {
+                    CheckContainerNumber();
+
+                    if (Convert.ToBoolean(ViewState["IsValidContainer"]))
+                    {
+                        if (Convert.ToString(ViewState[EDITBLFOOTER]) == "")
+                            AddBLFooterDetails();
+                        else
+                            EditFooterDetails();
+                    }
+                    else
+                    {
+                        errContainer.Text = "Please enter unique Container No";
+                    }
+                }
             }
             //}
         }

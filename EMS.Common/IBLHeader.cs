@@ -92,6 +92,7 @@ namespace EMS.Common
         int WaiverFk_UserID { get; set; }
         DateTime WaiverDate { get; set; }
         int SurveyorAddressID { get; set; }
+        int CarrierID { get; set; }
         string Commodity { get; set; }
         string LineBLVesselDetail { get; set; }
         string CANTo { get; set; }

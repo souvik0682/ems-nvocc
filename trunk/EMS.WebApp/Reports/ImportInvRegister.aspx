@@ -3,9 +3,19 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">    
     <script type="text/javascript" language="javascript">
-        function ReportPrint2(a, b, c, d, e, f) {
-            
-            window.open('../Popup/Report.aspx?' + a + b + c + d + e + f, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
+//<<<<<<< .mine
+//        function ReportPrint2(a) {
+//            window.open('../Popup/Report.aspx?' + a, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
+//=======
+//        function ReportPrint2(a, b, c, d, e, f) {
+//            
+//            window.open('../Popup/Report.aspx?' + a + b + c + d + e + f, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
+//>>>>>>> .r1011
+//            return false;
+//        }
+
+        function ReportPrint2(a) {
+            window.open('../Popup/Report.aspx?' + a, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
             return false;
         }
 
@@ -97,10 +107,12 @@
                             AutoPostBack="True" ontextchanged="txtToDt_TextChanged"></asp:TextBox>
                         <cc1:CalendarExtender ID="cbeToDt" runat="server" TargetControlID="txtToDt" />
                     </td>
-                    <td style="vertical-align:top;"><asp:Button ID="btnShow" runat="server" Text="Show Register" CssClass="button" OnClientClick="javascript:return validateData();" OnClick="btnShow_Click" /></td>
+                    <td style="vertical-align:top;"><asp:Button ID="btnShow" runat="server" Text="Show Register" CssClass="button" OnClientClick="javascript:return sure
+                    ();" OnClick="btnShow_Click" /></td>
                     <td style="vertical-align:top;">
                     
-                    <asp:Button ID="btnInvoice" runat="server" Text="Print Invoice" CssClass="button" /></td>
+                    <asp:Button ID="btnInvoice" runat="server" Text="Print Invoice" CssClass="button" 
+                            onclick="btnInvoice_Click" /></td>
                 </tr>
             </table>
         </fieldset>

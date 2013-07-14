@@ -380,7 +380,7 @@ namespace EMS.BLL
 
         }
 
-        public DataSet GetVoyage(int VoyageId, string voyageType, string VesselName, string voyageNo, string igmNo)
+        public DataSet GetVoyage(int VoyageId, string voyageType, string VesselName, string voyageNo, string igmNo, int UserLocation)
         {
             string ProcName = "prcGetVoyage";
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
@@ -390,6 +390,7 @@ namespace EMS.BLL
             dquery.AddVarcharParam("@vesselName", 70, VesselName);
             dquery.AddVarcharParam("@VoyageNo", 10, voyageNo);
             dquery.AddVarcharParam("@IGMNo", 10, igmNo);
+            dquery.AddIntegerParam("@LocationID", UserLocation);
 
             return dquery.GetTables();
         }

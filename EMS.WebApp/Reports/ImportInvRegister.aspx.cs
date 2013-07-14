@@ -27,6 +27,8 @@ namespace EMS.WebApp.Reports
         private bool _canEdit = false;
         private bool _canDelete = false;
         private bool _canView = false;
+        private bool _LocationSpecific = true;
+        private int _userLocation = 0;
 
         #endregion
 
@@ -104,6 +106,8 @@ namespace EMS.WebApp.Reports
 
             //Get user permission.
             UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+            _LocationSpecific = UserBLL.GetUserLocationSpecific();
+            _userLocation = UserBLL.GetUserLocation();
         }
 
         private void CheckUserAccess()
@@ -117,6 +121,11 @@ namespace EMS.WebApp.Reports
         private void PopulateControls()
         {
             PopulateLocation();
+            if (_LocationSpecific)
+            {
+                ddlLoc.SelectedValue = Convert.ToString(_userLocation);
+                ddlLoc.Enabled = false;
+            }
             PopulateLine();
             PopulateBillType();
         }
@@ -210,19 +219,30 @@ namespace EMS.WebApp.Reports
 
         private void GenerateNavigationLink()
         {
-            
-            string ss = string.Format("ReportPrint2('{0}','{1}','{2}','{3}','{4}','{5}', '{6}');",
-              "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("MID"),
-              "&line=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLine.SelectedValue),
-              "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLoc.SelectedValue),
-              "&InvoiceTypeID=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlType.SelectedValue),
-              "&ToDate=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtToDt.Text),
-              "&FromDate=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtFromDt.Text),
-              "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("Tapas"));
+            if (string.IsNullOrEmpty(txtFromDt.Text))
+                txtFromDt.Text = "1900-01-01";
 
-           
+            if (string.IsNullOrEmpty(txtToDt.Text))
+                txtToDt.Text = "1900-01-01";
 
-               btnInvoice.Attributes.Add("onclick", ss);
+            //if (!string.IsNullOrEmpty(txtFromDt.Text) && !string.IsNullOrEmpty(txtToDt.Text))
+            //{
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+                string username = user.Name;
+
+                string ss = string.Format("ReportPrint2('{0}')",
+                  "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("MID")+
+                  "&line=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLine.SelectedValue)+
+                  "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLoc.SelectedValue)+
+                  "&InvoiceTypeID=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlType.SelectedValue)+
+                  "&ToDate=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Convert.ToDateTime(txtToDt.Text).ToString("yyyy-MM-dd"))+
+                  "&FromDate=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Convert.ToDateTime(txtFromDt.Text).ToString("yyyy-MM-dd")) +
+                  "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(username));
+
+
+
+                btnInvoice.Attributes.Add("onclick", ss);
+            //}
 
         }
 

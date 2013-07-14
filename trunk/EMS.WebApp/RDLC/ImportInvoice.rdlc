@@ -1,0 +1,1565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
+  <DataSources>
+    <DataSource Name="EMSBLL">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>93aa4337-dd01-4674-9016-d70c1b0a2df1</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="RptDataSet">
+      <Fields>
+        <Field Name="InvoiceNo">
+          <DataField>InvoiceNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvoiceDate">
+          <DataField>InvoiceDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Billto">
+          <DataField>Billto</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BilltoDetail">
+          <DataField>BilltoDetail</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DocHeading">
+          <DataField>DocHeading</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BLNo">
+          <DataField>BLNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LoadPort">
+          <DataField>LoadPort</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="GrossWeight">
+          <DataField>GrossWeight</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="UnitCode">
+          <DataField>UnitCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MainLineVessel">
+          <DataField>MainLineVessel</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Berth">
+          <DataField>Berth</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ExVessel">
+          <DataField>ExVessel</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ExchRate">
+          <DataField>ExchRate</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ImportRotationNo">
+          <DataField>ImportRotationNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="VoyageNo">
+          <DataField>VoyageNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Total20">
+          <DataField>Total20</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Total40">
+          <DataField>Total40</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IGMDate">
+          <DataField>IGMDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="GeneralLandingDate">
+          <DataField>GeneralLandingDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="LineNos">
+          <DataField>LineNos</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DetetionFree">
+          <DataField>DetetionFree</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="PGRFree">
+          <DataField>PGRFree</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CompName">
+          <DataField>CompName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompAddress">
+          <DataField>CompAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompCity">
+          <DataField>CompCity</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompPIN">
+          <DataField>CompPIN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Datee">
+          <DataField>Datee</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="DebitNoteNo">
+          <DataField>DebitNoteNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Cha">
+          <DataField>Cha</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BankDetail">
+          <DataField>BankDetail</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BankDetail1">
+          <DataField>BankDetail1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BankDetail2">
+          <DataField>BankDetail2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BankDetail3">
+          <DataField>BankDetail3</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BankDetail4">
+          <DataField>BankDetail4</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BankDetail5">
+          <DataField>BankDetail5</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BankDetail6">
+          <DataField>BankDetail6</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BankDetail7">
+          <DataField>BankDetail7</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="taxper">
+          <DataField>taxper</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="TaxCessper">
+          <DataField>TaxCessper</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="TaxAddCessper">
+          <DataField>TaxAddCessper</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="gross">
+          <DataField>gross</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="stax">
+          <DataField>stax</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="staxcess">
+          <DataField>staxcess</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="staxacess">
+          <DataField>staxacess</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="fk_LocationID">
+          <DataField>fk_LocationID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Slno">
+          <DataField>Slno</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ChargeDescr">
+          <DataField>ChargeDescr</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="GrossAmount">
+          <DataField>GrossAmount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="RtUSD">
+          <DataField>RtUSD</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>EMSBLL</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <rd:DataSetInfo>
+        <rd:DataSetName>EMS.BLL</rd:DataSetName>
+        <rd:TableName>ReportBLL</rd:TableName>
+        <rd:ObjectDataSourceSelectMethod>GetImportInvoicePrint</rd:ObjectDataSourceSelectMethod>
+        <rd:ObjectDataSourceSelectMethodSignature>System.Collections.Generic.List`1[EMS.Entity.Report.ImportInvoiceEntity] GetImportInvoicePrint(Int32, Int32, Int32, System.DateTime, System.DateTime)</rd:ObjectDataSourceSelectMethodSignature>
+        <rd:ObjectDataSourceType>EMS.BLL.ReportBLL, EMS.BLL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <Body>
+    <ReportItems>
+      <Rectangle Name="Rectangle1">
+        <ReportItems>
+          <Line Name="Line1">
+            <Left>3.49626in</Left>
+            <Height>1.45805in</Height>
+            <Width>0in</Width>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Ex-Vessel</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>           : </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>ExVessel</Label>
+                    <Value>=First(Fields!ExVessel.Value, "RptDataSet")</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>0.47222in</Top>
+            <Left>0.00001in</Left>
+            <Height>0.20833in</Height>
+            <Width>3.4268in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>IGM No.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>              : </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>IGMNo</Label>
+                    <Value>=First(Fields!ImportRotationNo.Value, "RptDataSet")</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>0.70832in</Top>
+            <Left>0.00001in</Left>
+            <Height>0.20833in</Height>
+            <Width>3.4268in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox11">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Landing Date</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>    : </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>LandingDate</Label>
+                    <Value>=First(Fields!GeneralLandingDate.Value, "RptDataSet")</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>0.93054in</Top>
+            <Left>0.00001in</Left>
+            <Height>0.20833in</Height>
+            <Width>3.4268in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>M/Line Vessel  </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>: </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>MainLineVessel</Label>
+                    <Value>=First(Fields!MainLineVessel.Value, "RptDataSet")</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>0.25in</Top>
+            <Left>0.00001in</Left>
+            <Height>0.20833in</Height>
+            <Width>3.4268in</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox12">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Detention </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>         : </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Detentionfreedays</Label>
+                    <Value>=Sum(Fields!DetetionFree.Value, "RptDataSet")</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> Days</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>1.15276in</Top>
+            <Left>0.00001in</Left>
+            <Height>0.20833in</Height>
+            <Width>3.4268in</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox13">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Weight            : </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Weight</Label>
+                    <Value>=Sum(Fields!GrossWeight.Value, "RptDataSet")</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>0.01389in</Top>
+            <Left>3.49626in</Left>
+            <Height>0.20833in</Height>
+            <Width>2.73454in</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox14">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Berth                : </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Berth</Label>
+                    <Value>=First(Fields!Berth.Value, "RptDataSet")</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>0.25in</Top>
+            <Left>3.49626in</Left>
+            <Height>0.20833in</Height>
+            <Width>2.73454in</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox19">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Item/Line No   : </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>ItemLineNo</Label>
+                    <Value>=Sum(Fields!LineNos.Value, "RptDataSet")</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>0.93054in</Top>
+            <Left>3.49626in</Left>
+            <Height>0.20833in</Height>
+            <Width>2.73454in</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox20">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>PGR Free          : </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>PGRFree</Label>
+                    <Value>=Sum(Fields!PGRFree.Value, "RptDataSet")</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> Days</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>1.15276in</Top>
+            <Left>3.49625in</Left>
+            <Height>0.20833in</Height>
+            <Width>2.73454in</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox7">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Port of Loading : </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>LoadPort</Label>
+                    <Value>=First(Fields!LoadPort.Value, "RptDataSet")</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>0.04167in</Top>
+            <Left>0.00001in</Left>
+            <Height>0.20833in</Height>
+            <Width>3.4268in</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox15">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Exch Rate        : </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>ExchRate</Label>
+                    <Value>=Sum(Fields!ExchRate.Value, "RptDataSet")</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>0.49999in</Top>
+            <Left>3.52403in</Left>
+            <Height>0.20833in</Height>
+            <Width>2.73454in</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox16">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Containers       : 20' X </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Total20</Label>
+                    <Value>=Sum(Fields!Total20.Value, "RptDataSet")</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> &amp; 40' X </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Total40</Label>
+                    <Value>=Sum(Fields!Total40.Value, "RptDataSet")</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>0.7361in</Top>
+            <Left>3.52403in</Left>
+            <Height>0.20833in</Height>
+            <Width>2.72065in</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <KeepTogether>true</KeepTogether>
+        <Top>1.97222in</Top>
+        <Left>0.07584in</Left>
+        <Height>1.45805in</Height>
+        <Width>6.25857in</Width>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+        </Style>
+      </Rectangle>
+      <Textbox Name="Textbox21">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Container Details : </Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox21</rd:DefaultName>
+        <Top>3.44416in</Top>
+        <Left>0.03418in</Left>
+        <Height>0.19792in</Height>
+        <Width>6.23079in</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox4">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Shipment Details</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>1.73944in</Top>
+        <Left>0.07585in</Left>
+        <Height>0.21889in</Height>
+        <Width>1.65625in</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox1">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Label>Name</Label>
+                <Value>=First(Fields!Billto.Value, "RptDataSet")</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Label>Address</Label>
+                <Value>=First(Fields!BilltoDetail.Value, "RptDataSet")</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>0.8575in</Top>
+        <Left>0.07584in</Left>
+        <Height>0.85417in</Height>
+        <Width>3.48236in</Width>
+        <ZIndex>3</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox2">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Invoice No. </Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Normal</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>: </Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Label>InvNo</Label>
+                <Value>=First(Fields!InvoiceNo.Value, "RptDataSet")</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Date     </Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>       : </Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Label>InvoiceDate</Label>
+                <Value>=Format(First(Fields!InvoiceDate.Value, "RptDataSet"), "dd-MM-yyyy")</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value />
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>B/L No.        : </Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Label>BlNo</Label>
+                <Value>=First(Fields!BLNo.Value, "RptDataSet")</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Date            : </Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Label>BLDate</Label>
+                <Value>=Format(First(Fields!Datee.Value, "RptDataSet"), "dd-MM-yyyy")</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>0.8575in</Top>
+        <Left>3.61376in</Left>
+        <Height>0.85417in</Height>
+        <Width>2.74843in</Width>
+        <ZIndex>4</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox3">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Customer</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>0.24986in</Top>
+        <Left>0.19043in</Left>
+        <Height>0.21889in</Height>
+        <Width>0.78125in</Width>
+        <ZIndex>5</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Tablix Name="Tablix3">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>1.77083in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.77083in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.77083in</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.3125in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox48">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox48</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox44">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Charge Descr</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox44</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox46">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Gross Amount</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox46</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.3125in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Slno">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Sum(Fields!Slno.Value)</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Slno</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="ChargeDescr">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!ChargeDescr.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>ChargeDescr</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="GrossAmount">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Sum(Fields!GrossAmount.Value)</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>GrossAmount</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <KeepWithGroup>After</KeepWithGroup>
+            </TablixMember>
+            <TablixMember>
+              <Group Name="Details">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!InvoiceNo.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>RptDataSet</DataSetName>
+        <Top>3.71153in</Top>
+        <Left>0.07584in</Left>
+        <Height>0.625in</Height>
+        <Width>5.3125in</Width>
+        <ZIndex>6</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
+    </ReportItems>
+    <Height>4.54875in</Height>
+    <Style />
+  </Body>
+  <ReportParameters>
+    <ReportParameter Name="CompanyName">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Location">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Line">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="FromDate">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ToDate">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="BillType">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Width>7.26497in</Width>
+  <Page>
+    <PageHeader>
+      <Height>1.05917in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox18">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Label>Heading</Label>
+                  <Value>=First(Fields!DocHeading.Value, "RptDataSet")</Value>
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>12pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox17</rd:DefaultName>
+          <Top>0.75in</Top>
+          <Left>0.0064in</Left>
+          <Height>0.25in</Height>
+          <Width>6.24468in</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox17">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Parameters!CompanyName.Value</Value>
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>16pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Label>Address</Label>
+                  <Value>=First(Fields!CompAddress.Value, "RptDataSet")</Value>
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>11pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Label>CityPin</Label>
+                  <Value>=First(Fields!CompCity.Value, "RptDataSet")+" "+First(Fields!CompPIN.Value, "RptDataSet")</Value>
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>11pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox17</rd:DefaultName>
+          <Left>0.0064in</Left>
+          <Height>0.70833in</Height>
+          <Width>6.24468in</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageHeader>
+    <PageFooter>
+      <Height>0.29167in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageFooter>
+    <PageHeight>8.5in</PageHeight>
+    <PageWidth>11in</PageWidth>
+    <InteractiveHeight>8.5in</InteractiveHeight>
+    <InteractiveWidth>11in</InteractiveWidth>
+    <LeftMargin>0.25in</LeftMargin>
+    <RightMargin>0.25in</RightMargin>
+    <TopMargin>1in</TopMargin>
+    <BottomMargin>1in</BottomMargin>
+    <Style />
+  </Page>
+  <EmbeddedImages>
+    <EmbeddedImage Name="logo_benline">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <rd:ReportID>6a04b5d8-140d-4401-a449-02aa322ddd54</rd:ReportID>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+</Report>

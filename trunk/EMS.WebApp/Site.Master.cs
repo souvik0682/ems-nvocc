@@ -175,6 +175,10 @@ namespace EMS.WebApp
             {
                 menuId = (int)PageName.IGMFormII;
             }
+            //else if (Request.Path.Contains("/Reports/COPRAR.aspx"))
+            //{
+            //    menuId = (int)PageName.COPRAR;
+            //}
             else if (Request.Path.Contains("/Reports/IGMFormC.aspx"))
             {
                 menuId = (int)PageName.IGMFormC;

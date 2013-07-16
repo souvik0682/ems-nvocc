@@ -57,7 +57,6 @@ namespace EMS.WebApp.Transaction
 
                     btnSave.Enabled = false;
                 }
-
                 if (!ReferenceEquals(Request.QueryString["p1"], null))
                 {
                     string blNo = string.Empty;
@@ -436,9 +435,9 @@ namespace EMS.WebApp.Transaction
 
             if (Convert.ToBoolean(Charge.Rows[0]["ServiceTax"].ToString()))
             {
-                serviceTax = Math.Round((grossAmount * TaxPer) / 100,0);
-                cessAmount = Math.Round((serviceTax * TaxCess) / 100,0);
-                addCess = Math.Round((serviceTax * TaxAddCess) / 100,0);
+                serviceTax = Math.Round((grossAmount * TaxPer) / 100,2);
+                cessAmount = Math.Round((serviceTax * TaxCess) / 100,2);
+                addCess = Math.Round((serviceTax * TaxAddCess) / 100,2);
             }
 
             totalAmount = (grossAmount + serviceTax + cessAmount + addCess);
@@ -1009,6 +1008,8 @@ namespace EMS.WebApp.Transaction
             invoice.ServiceTax = chargeRate.Sum(c => c.STax);
             invoice.ServiceTaxACess = chargeRate.Sum(c => c.ServiceTaxACess);
             invoice.ServiceTaxCess = chargeRate.Sum(c => c.ServiceTaxCessAmount);
+            invoice.Roff = Convert.ToDecimal(txtROff.Text);
+            
             invoice.UserAdded = _userId;
             invoice.UserLastEdited = _userId;
 
@@ -1195,6 +1196,7 @@ namespace EMS.WebApp.Transaction
         {
             //For Invoice
             //IInvoice invoice = null;//new InvoiceBLL().GetInvoiceById(InvoiceId);
+            double Roff = 0;
 
             DataTable dt = new InvoiceBLL().GetLineLocation(BlNo);
 
@@ -1257,9 +1259,10 @@ namespace EMS.WebApp.Transaction
             gvwInvoice.DataSource = chargeRates;
             gvwInvoice.DataBind();
 
-
+            
             //Update Invoice Amount
-            txtTotalAmount.Text = chargeRates.Sum(cr => cr.TotalAmount).ToString();
+            txtROff.Text = (Math.Round(chargeRates.Sum(cr => cr.TotalAmount), 0)-chargeRates.Sum(cr => cr.TotalAmount)).ToString();
+            txtTotalAmount.Text = Math.Round(chargeRates.Sum(cr => cr.TotalAmount),0).ToString();
         }
 
         private void EditChargeRate(int InvoiceChargeId)

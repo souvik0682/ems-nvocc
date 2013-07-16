@@ -282,6 +282,7 @@ namespace EMS.DAL
                 oDq.AddDecimalParam("@ServiceTax", 12, 2, invoice.ServiceTax);
                 oDq.AddDecimalParam("@ServiceTaxCess", 12, 2, invoice.ServiceTaxCess);
                 oDq.AddDecimalParam("@ServiceTaxACess", 12, 2, invoice.ServiceTaxACess);
+                oDq.AddDecimalParam("@Roff", 12, 2, invoice.Roff);
                 oDq.AddIntegerParam("@UserAdded", invoice.UserAdded);
                 oDq.AddIntegerParam("@UserLastEdited", invoice.UserLastEdited);
                 oDq.AddDateTimeParam("@AddedOn", invoice.AddedOn);

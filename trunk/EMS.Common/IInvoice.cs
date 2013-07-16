@@ -25,6 +25,7 @@ namespace EMS.Common
         decimal ServiceTax { get; set; }
         decimal ServiceTaxCess { get; set; }
         decimal ServiceTaxACess { get; set; }
+        decimal Roff { get; set; }
         int UserAdded { get; set; }
         int UserLastEdited { get; set; }
         DateTime AddedOn { get; set; }

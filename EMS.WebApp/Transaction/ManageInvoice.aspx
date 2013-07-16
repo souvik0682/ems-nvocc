@@ -102,6 +102,7 @@
                                 <td>
                                     <asp:TextBox ID="txtTotalAmount" runat="server" Width="250px" Enabled="false" Style="text-align: right;"></asp:TextBox>
                                 </td>
+                            
                                 <td>
                                     Containers
                                 </td>
@@ -109,6 +110,15 @@
                                     <asp:TextBox ID="txtContainers" runat="server" Width="250px" Enabled="false"></asp:TextBox>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    Rounding Off
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtROff" runat="server" Width="250px" Enabled="false" Style="text-align: right;"></asp:TextBox>
+                                </td>
+                            </tr>
+                               
                             <tr>
                                 <td colspan="4" style="padding-top: 10; border: none;">
                                     <fieldset style="width: 95%;">

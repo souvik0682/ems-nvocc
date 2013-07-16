@@ -222,15 +222,15 @@ namespace EMS.Entity
 
             if (ColumnExists(reader, "ServiceTaxCessAmount"))
                 if (reader["ServiceTaxCessAmount"] != DBNull.Value)
-                    this.ServiceTaxCessAmount = Convert.ToInt32(reader["ServiceTaxCessAmount"]);
+                    this.ServiceTaxCessAmount = Convert.ToDecimal(reader["ServiceTaxCessAmount"]);
 
             if (ColumnExists(reader, "ServiceTaxACess"))
                 if (reader["ServiceTaxACess"] != DBNull.Value)
-                    this.ServiceTaxACess = Convert.ToInt32(reader["ServiceTaxACess"]);
+                    this.ServiceTaxACess = Convert.ToDecimal(reader["ServiceTaxACess"]);
 
             if (ColumnExists(reader, "TotalAmount"))
                 if (reader["TotalAmount"] != DBNull.Value)
-                    this.TotalAmount = Convert.ToInt32(reader["TotalAmount"]);
+                    this.TotalAmount = Convert.ToDecimal(reader["TotalAmount"]);
             //this.ServiceTax = Convert.ToDecimal(reader["ServiceTax"]);
         }
 

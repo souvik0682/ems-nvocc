@@ -27,6 +27,7 @@ namespace EMS.Entity
         public decimal ServiceTax { get; set; }
         public decimal ServiceTaxCess { get; set; }
         public decimal ServiceTaxACess { get; set; }
+        public decimal Roff { get; set; }
         public int UserAdded { get; set; }
         public int UserLastEdited { get; set; }
         public DateTime AddedOn { get; set; }
@@ -113,6 +114,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "ServiceTaxACess"))
                 if (reader["ServiceTaxACess"] != DBNull.Value)
                     ServiceTaxACess = Convert.ToDecimal(reader["ServiceTaxACess"]);
+
+            if (ColumnExists(reader, "Roff"))
+                if (reader["Roff"] != DBNull.Value)
+                    Roff = Convert.ToDecimal(reader["Roff"]);
 
             if (ColumnExists(reader, "UserAdded"))
                 if (reader["UserAdded"] != DBNull.Value)

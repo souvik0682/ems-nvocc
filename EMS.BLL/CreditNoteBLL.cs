@@ -42,6 +42,7 @@ namespace EMS.BLL
                         creditNoteChargeId = CreditNoteDAL.SaveCreditNoteFooter(cRate);
                     }
                 }
+                creditNoteId = CreditNoteDAL.UpdateCRN(creditNoteId);
             }
 
             return creditNoteId;

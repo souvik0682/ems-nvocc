@@ -104,6 +104,7 @@
                                                 <td style="text-align: right;font-weight:bold">
                                                     S/Tax
                                                 </td>
+
                                             </tr>
                                             <tr>
                                                 <td>
@@ -140,8 +141,7 @@
                                                         Enabled="false"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
-                                                
-                                                <td>
+                                                 <td>
                                                     <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" ValidationGroup="vgAdd" /><br />
                                                     &nbsp;
                                                 </td>
@@ -178,7 +178,7 @@
                                                             <HeaderStyle CssClass="gridviewheader_num" />
                                                             <ItemStyle CssClass="gridviewitem" Width="75" HorizontalAlign="Right" />
                                                         </asp:TemplateField>
-                                                        
+
                                                         <asp:TemplateField>
                                                             <HeaderStyle CssClass="gridviewheader" />
                                                             <ItemStyle CssClass="gridviewitem" Width="75" HorizontalAlign="Center" VerticalAlign="Middle" />

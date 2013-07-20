@@ -268,6 +268,7 @@ namespace EMS.WebApp.Transaction
             decimal serviceTax = 0;
             decimal cessAmount = 0;
             decimal addCess = 0;
+            decimal CrnTot = 0;
 
             decimal grossAmount = Convert.ToDecimal(txtCNAmount.Text);
 
@@ -282,16 +283,19 @@ namespace EMS.WebApp.Transaction
 
             if (Convert.ToDecimal(txtChargeServiceTax.Text) > 0)
             {
-                serviceTax = Math.Round((grossAmount * TaxPer) / 100, 0);
-                cessAmount = Math.Round((serviceTax * TaxCess) / 100, 0);
-                addCess = Math.Round((serviceTax * TaxAddCess) / 100, 0);
+                serviceTax = Math.Round((grossAmount * TaxPer) / 100, 2);
+                cessAmount = Math.Round((serviceTax * TaxCess) / 100, 2);
+                addCess = Math.Round((serviceTax * TaxAddCess) / 100, 2);
+               
             }
-
+            CrnTot = grossAmount + serviceTax + cessAmount + addCess;
             txtCNServiceTax.Text = (serviceTax + cessAmount + addCess).ToString();
+            //txtTotal.Text = CrnTot.ToString();
 
             ViewState["CESSAMOUNT"] = cessAmount;
             ViewState["ADDCESS"] = addCess;
             ViewState["STAX"] = serviceTax;
+            //ViewState["CRNTOT"] = CrnTot;
         }
 
         private void AddCreditNoteCharge()

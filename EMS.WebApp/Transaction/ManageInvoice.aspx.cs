@@ -962,7 +962,8 @@ namespace EMS.WebApp.Transaction
             gvwInvoice.DataBind();
 
             //Update Invoice Amount
-            txtTotalAmount.Text = ChargeRates.Sum(cr => cr.TotalAmount).ToString();
+            txtROff.Text = (Math.Round(ChargeRates.Sum(cr => cr.TotalAmount), 0) - ChargeRates.Sum(cr => cr.TotalAmount)).ToString();
+            txtTotalAmount.Text = Math.Round(ChargeRates.Sum(cr => cr.TotalAmount),0).ToString();
 
             ViewState["CHARGERATE"] = ChargeRates;
             ClearChargesRate();
@@ -1119,7 +1120,8 @@ namespace EMS.WebApp.Transaction
             RefreshGridView();
 
             //Update Invoice Amount
-            txtTotalAmount.Text = ChargeRates.Sum(cr => cr.TotalAmount).ToString();
+            txtROff.Text = (Math.Round(ChargeRates.Sum(cr => cr.TotalAmount), 0) - ChargeRates.Sum(cr => cr.TotalAmount)).ToString();
+            txtTotalAmount.Text = Math.Round(ChargeRates.Sum(cr => cr.TotalAmount),0).ToString();
         }
 
         private void RefreshGridView()
@@ -1196,7 +1198,6 @@ namespace EMS.WebApp.Transaction
         {
             //For Invoice
             //IInvoice invoice = null;//new InvoiceBLL().GetInvoiceById(InvoiceId);
-            double Roff = 0;
 
             DataTable dt = new InvoiceBLL().GetLineLocation(BlNo);
 

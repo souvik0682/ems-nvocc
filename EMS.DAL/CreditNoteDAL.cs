@@ -127,6 +127,32 @@ namespace EMS.DAL
             return creditNoteChargeId;
         }
 
+        public static long UpdateCRN(long CRNID)
+        {
+            string strExecution = "usp_CN_UpdCreditNoteHeader";
+            long creditNoteId = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@CRNID", CRNID);
+
+                //oDq.AddVarcharParam("@ExportImport", 1, creditNote.ExportImport);
+                //oDq.AddDateTimeParam("@CrnDate", creditNote.CrnDate);
+                //oDq.AddBigIntegerParam("@InvoiceID", creditNote.InvoiceID);
+                //oDq.AddIntegerParam("@LocationID", creditNote.LocationID);
+                //oDq.AddIntegerParam("@NVOCCID", creditNote.NVOCCID);
+                //oDq.AddIntegerParam("@InvoiceTypeID", creditNote.InvoiceTypeID);
+                //oDq.AddIntegerParam("@UserId", creditNote.UserAdded);
+
+                //if (creditNote.CrnNo != string.Empty)
+                //    oDq.AddVarcharParam("@CrnNumber", 40, creditNote.CrnNo);
+
+                return oDq.RunActionQuery(); ;
+            }
+
+        }
+
+
         public static ICreditNote GetCreditNoteHeaderForView(long CreditNoteId)
         {
             string strExecution = "usp_CN_GetHeaderForView";

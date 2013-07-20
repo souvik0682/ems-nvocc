@@ -97,5 +97,17 @@ namespace EMS.DAL
 
             return dquery.RunActionQuery();
         }
+
+        public static DataSet GetVessleByNVOCC(int nvoccId)
+        {
+            DataSet ds = new DataSet();
+            using (DbQuery dq = new DbQuery("prcGetVesselByNVOCCID"))
+            {
+                dq.AddIntegerParam("@line", nvoccId);
+                ds = dq.GetTables();
+            }
+            return ds;
+        }
+
     }
 }

@@ -297,6 +297,24 @@ namespace EMS.DAL
             return dt;
         }
 
+        public static DataTable GetMonthlyImportStatement(DateTime StartDate, DateTime EndDate, string LineId, string LocationId)
+        {
+            string strExecution = "prcRptMonthlyImport";
+            DataTable dt = new DataTable();
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddDateTimeParam("@StartDate", StartDate);
+                oDq.AddDateTimeParam("@EndDate", EndDate);
+                oDq.AddVarcharParam("@fk_LineID", 60, LineId);
+                oDq.AddVarcharParam("@fk_LocationID", 60, LocationId);
+                dt = oDq.GetTable();
+            }
+
+            return dt;
+        }
+
         #endregion
 
         #region Private Methods

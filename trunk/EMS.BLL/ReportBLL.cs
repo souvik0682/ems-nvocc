@@ -50,5 +50,10 @@ namespace EMS.BLL
         {
             return ReportDAL.GetDetentionReport(vord, StartDate, EndDate, VoyageID, VesselID, LineId, LocationId);
         }
+
+        public DataTable GetMonthlyImportStatement(DateTime StartDate, DateTime EndDate, string LineId, string LocationId)
+        {
+            return ReportDAL.GetMonthlyImportStatement(StartDate, EndDate, LineId, LocationId);
+        }
     }
 }

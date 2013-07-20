@@ -36,5 +36,11 @@ namespace EMS.BLL
        {
            return EMS.DAL.VoyageDAL.AddEditMLVoyage(voyageId,vesselId, MLvoyageNo, dtActivity, fk_PortID, _userId, isEdit);
        }
+
+       public static DataSet GetVessleByNVOCC(int nvoccId)
+       {
+           return EMS.DAL.VoyageDAL.GetVessleByNVOCC(nvoccId);
+
+       }
     }
 }

@@ -52,6 +52,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
 <center>
+    <div id="headercaption">
+        DETENTION STATEMENT
+     </div>
     <div style="padding-top: 10px;">
         <asp:HiddenField ID="hdnVessel" runat="server" />
         <asp:HiddenField ID="hdnVoyage" runat="server" />

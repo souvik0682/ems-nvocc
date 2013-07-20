@@ -101,8 +101,6 @@ namespace EMS.WebApp.Import
 
         }
 
-
-
         private void LoadData()
         {
             string pod = ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
@@ -382,7 +380,8 @@ namespace EMS.WebApp.Import
                                 + (Dr["IMO_IMDGCode"].ToString() + (''
                                 + (Dr["TPBondNo"].ToString() + (''
                                 + (Dr["CACode"].ToString() + (''
-                                + ((Dr["CargoMovementCode"].ToString() == "LC" ? "" : Dr["TransportMode"].ToString()) + ('' + Dr["MLOCode"].ToString()))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));
+                                + (Dr["TransportMode"].ToString() + ('' + Dr["MLOCode"].ToString()))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));
+                                //+ ((Dr["CargoMovementCode"].ToString() == "LC" ? "" : Dr["TransportMode"].ToString()) + ('' + Dr["MLOCode"].ToString()))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));
                 //
             }
             writer.WriteLine("<END-cargo>");

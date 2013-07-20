@@ -130,7 +130,22 @@ namespace EMS.WebApp.Reports
 
         protected void ddlLoc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //GenerateDDLVoyage();
+            //GenerateDDLVessel();
         }
+
+        protected void ddlLine_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GenerateDDLVessel();
+        }
+
+        private void GenerateDDLVessel()
+        {
+            
+            //int LocationId = Convert.ToInt32(ddlLoc.SelectedValue);
+            int nvoccID = Convert.ToInt32(ddlLine.SelectedValue);
+            GeneralFunctions.PopulateDropDownList(ddlVessel, EMS.BLL.VoyageBLL.GetVessleByNVOCC(nvoccID), true);
+        }
+
+
     }
 }

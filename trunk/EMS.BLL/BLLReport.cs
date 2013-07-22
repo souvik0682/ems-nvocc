@@ -14,9 +14,9 @@ namespace EMS.BLL
             return EMS.DAL.DALReport.GetMoneyRcptDetails(moneyRecptNo);
         }
 
-        public static System.Data.DataSet GetMoneyRcptDetailsAccounts(string Location, string Line)
+        public static System.Data.DataSet GetMoneyRcptDetailsAccounts(string Location, string Line, DateTime stdt, DateTime endt)
         {
-            return EMS.DAL.DALReport.GetMoneyRcptDetailsAccounts(Location, Line);
+            return EMS.DAL.DALReport.GetMoneyRcptDetailsAccounts(Location, Line, stdt, endt);
         }
         public static System.Data.DataSet FillDDLMoneyRcpt(string invNo)
         {

@@ -403,6 +403,9 @@ namespace EMS.WebApp.Reports.ReportViewer
                 case "gang":
                     litHeader.Text = "GANG LETTER";
                     break;
+                case "carting":
+                    litHeader.Text = "CARTING ORDER";
+                    break;
                 case "surveyor":
                     litHeader.Text = "SURVEYOR LETTER";
                     break;
@@ -502,6 +505,15 @@ namespace EMS.WebApp.Reports.ReportViewer
                     break;
                 case "gang":
                     //litHeader.Text = "GANG LETTER";
+                    rptParameters = new ReportParameter[3];
+                    rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedValue);
+                    rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
+                    rptParameters[2] = new ReportParameter("Shift", ddlShift.SelectedValue);
+                    //rptParameters[3] = new ReportParameter("GangDate", txtGangDate.Text);
+                    break;
+                case "carting":
+                    //litHeader.Text = "GANG LETTER";
+                    ddlShift.SelectedIndex = 0;
                     rptParameters = new ReportParameter[3];
                     rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedValue);
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);

@@ -23,7 +23,7 @@ namespace EMS.DAL
             return ds;
         }
 
-        public static System.Data.DataSet GetMoneyRcptDetailsAccounts(string Location, string Line)
+        public static System.Data.DataSet GetMoneyRcptDetailsAccounts(string Location, string Line, DateTime Stdt, DateTime Endt)
         {
             DataSet ds = new DataSet();
 
@@ -32,6 +32,8 @@ namespace EMS.DAL
                 //dq.AddVarcharParam("@invNo", 20, invNo);
                 dq.AddBigIntegerParam("@LocId", int.Parse(Location));
                 dq.AddBigIntegerParam("@LineId", int.Parse(Line));
+                dq.AddDateTimeParam("@StartDate", Stdt);
+                dq.AddDateTimeParam("@EndDate", Endt);
                 ds = dq.GetTables();
             }
             return ds;

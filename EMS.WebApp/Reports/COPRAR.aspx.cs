@@ -119,7 +119,7 @@ namespace EMS.WebApp.Reports
             //File.Create(Server.MapPath(@"~/Import/COPRARFILE/") + uniqueFileName + "_IMP_EDI.IGM");
             string FileName = Server.MapPath(@"~/Import/EDIFile/") + uniqueFileName + "_COPRAR.TXT";
             string PCSLogin = Convert.ToString(new DBInteraction().GetPCSLogin(LocationId).Tables[0].Rows[0]["PCSLoginID"]);
-            string CurDate = DateTime.Now.ToString("yyyyMMdd") + "00000001";
+            string CurDate = DateTime.Now.ToString("ddMMyyyy") + "00000001";
 
             string pod = ((TextBox)AutoCompletepPort1.FindControl("txtPort")).Text;
             pod = pod.Contains(',') ? pod.Split(',')[1] : "";
@@ -184,14 +184,15 @@ namespace EMS.WebApp.Reports
                             + (Dr["TareWeight"].ToString() + (''
                             + (Dr["CargoWtTon"].ToString() + ('' + (''
                             + (Dr["SealNo"].ToString() + (''
-                            + (Dr["issueport"].ToString()+"1" + (''
-                            + (Dr["loadport"].ToString() +"1" + (''+ (''
-                            //+ (Dr["discport"].ToString() + ('' + (''
+                            + (Dr["loadport"].ToString().Substring(0, 5)+"1" + (''
+                            + (Dr["loadport"].ToString().Substring(0, 5) +"1" + (''+ (''
+                            + (Dr["Commodity"].ToString() + (''
                             + (Dr["ImpLineBLNo"].ToString()  + ('' + (''
+                            + (Dr["ItemLineNo"].ToString()  + ('' + (''
                             +  ("12" + (''
                             + ("BLA" + ('' + ('' + ('' + (''
                             + (Dr["discport"].ToString() + (''
-                            + (Dr["finalDestination"].ToString() + (''
+                            + (Dr["finalDestination"].ToString().Substring(0, 5) + "1" + (''
                             + (Dr["TMODE"].ToString() + (''
                             + (Dr["ICD"].ToString() + (''
                             + ("1" + (''
@@ -203,7 +204,7 @@ namespace EMS.WebApp.Reports
                             + ("" + (''
                             + ("" + (''
 
-                )))))))))))))))))))))))))))))))))))))))))))))))))))))))));
+                ))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));
             }
             string dt = DateTime.Now.ToString("ddMMyyyyhhmmss");
 

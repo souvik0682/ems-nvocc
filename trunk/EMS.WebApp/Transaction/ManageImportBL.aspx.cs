@@ -2334,6 +2334,10 @@ namespace EMS.WebApp.Transaction
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "container", "<script>javascript:void alert('Container Number must be 11 characters in length!');</script>", false);
                 IsValid = false;
             }
+
+            //Done as per requirement
+            IsValid = true;
+
             return IsValid;
         }
 

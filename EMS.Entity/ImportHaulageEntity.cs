@@ -33,6 +33,11 @@ namespace EMS.Entity
             set;
         }
 
+        public Int32 LinerID
+        {
+            get;
+            set;
+        }
         public decimal WeightFrom
         {
             get;
@@ -110,6 +115,7 @@ namespace EMS.Entity
         {
             this.ContainerSize = Convert.ToString(reader["ContainerSize"]);
             this.HaulageChgID = Convert.ToInt32(reader["HaulageChgID"]);
+            this.LinerID = Convert.ToInt32(reader["LINER"]);
             this.HaulageRate = Convert.ToDecimal(reader["HaulageRate"]);
             this.HaulageStatus = Convert.ToBoolean(reader["HaulageStatus"]);
             this.LocationFrom = Convert.ToString(reader["LocationFrom"]);

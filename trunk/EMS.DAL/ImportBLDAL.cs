@@ -469,6 +469,17 @@ namespace EMS.DAL
             return blFooterId;
         }
 
+        public static void CheckSaveContainers(int BLID)
+        {
+            string strExecution = "[eqp].[AddContainerFromBL]";
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@fk_BLID", BLID);
+                oDq.RunActionQuery();
+            }
+        }
+
         public static IBLHeader GetBLHeaderinformation(long BlId)
         {
             string strExecution = "uspGetBLHeaderInfo";

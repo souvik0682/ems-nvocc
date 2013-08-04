@@ -49,6 +49,15 @@ namespace EMS.WebApp.MasterModule {
         protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender7;
         
         /// <summary>
+        /// ddlLine control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLine;
+        
+        /// <summary>
         /// hdnFromLocation control.
         /// </summary>
         /// <remarks>

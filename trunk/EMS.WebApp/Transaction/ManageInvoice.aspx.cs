@@ -33,6 +33,7 @@ namespace EMS.WebApp.Transaction
 
             if (!Page.IsPostBack)
             {
+                btnSave.Click +=new EventHandler(btnSave_Click);
                 Session["CHARGES"] = null;
 
                 LoadInvoiceTypeDDL();

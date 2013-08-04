@@ -1086,10 +1086,14 @@ namespace EMS.WebApp.Transaction
                 }
 
 
-                //if (user.UserRole.Id != (int)UserRole.Admin)
-                //{
-                //    Response.Redirect("~/Unauthorized.aspx");
-                //}
+                if (user.UserRole.Id != (int)UserRole.Admin)
+                {
+                    ddlLocation.Enabled = false;
+                }
+                else
+                {
+                    ddlLocation.Enabled=true ;
+                }
             }
             else
             {
@@ -2026,6 +2030,7 @@ namespace EMS.WebApp.Transaction
             rdoItemType.SelectedValue = header.ItemType;
             rdoLineBLType.SelectedValue = header.LineBLType;
             ddlLocation.SelectedValue = header.LocationID.ToString();
+            //ddlLocation.Enabled = false;
             txtMLOCode.Text = header.MLOCode;
             ddlNvocc.SelectedValue = header.NVOCCID.ToString();
             txtFEU.Text = header.NoofFEU.ToString();
@@ -2320,7 +2325,7 @@ namespace EMS.WebApp.Transaction
                 {
                     //errContainer.Text = "Container Number NOT Valid";
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "container", "<script>javascript:void alert('Container Number NOT Valid!');</script>", false);
-                    IsValid = false;
+                    IsValid = true;
                 }
                 else
                 {

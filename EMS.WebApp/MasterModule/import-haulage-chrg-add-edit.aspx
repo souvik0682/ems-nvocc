@@ -53,9 +53,24 @@
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender7" runat="server" TargetControlID="rfvDate"
                                 WarningIconImageUrl="">
                             </cc1:ValidatorCalloutExtender>
-                            <%--  <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="txtWFrom"
-                                FilterMode="ValidChars" FilterType="Custom,Numbers" ValidChars=".">
-                            </cc1:FilteredTextBoxExtender>--%>
+                            <%--    <asp:RequiredFieldValidator ID="rfvLine" runat="server" ErrorMessage="Please select Line"
+                                Display="None" ControlToValidate="ddLine" ValidationGroup="vgHaulage"
+                                InitialValue="0"></asp:RequiredFieldValidator>
+                            <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender8" runat="server" TargetControlID="rfvContainerSize"
+                                WarningIconImageUrl="">
+                            </cc1:ValidatorCalloutExtender>--%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Line<span class="errormessage1">*</span> :
+                        </td>
+                        <td>
+                            <%--<asp:HiddenField ID="hdnLine" runat="server" />--%>
+                            <asp:DropDownList ID="ddlLine" runat="server" Width="255">
+                            </asp:DropDownList>
+                            <%-- Make the completion list transparent and then show it --%>
+                            
                         </td>
                     </tr>
                     <tr>
@@ -181,6 +196,7 @@
                             </cc1:ValidatorCalloutExtender>
                         </td>
                     </tr>
+                   
                     <tr>
                         <td>
                             Weight From<span class="errormessage1">*</span> :
@@ -193,9 +209,8 @@
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender4" runat="server" TargetControlID="rfvWFrom"
                                 WarningIconImageUrl="">
                             </cc1:ValidatorCalloutExtender>
-                            <%--  <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="txtWFrom"
-                                FilterMode="ValidChars" FilterType="Custom,Numbers" ValidChars=".">
-                            </cc1:FilteredTextBoxExtender>--%>
+                            <%--Cache the original size of the completion list the first time
+                                                    the animation is played and then set it to zero --%>
                         </td>
                     </tr>
                     <tr>
@@ -210,9 +225,7 @@
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender5" runat="server" TargetControlID="rfvWTo"
                                 WarningIconImageUrl="">
                             </cc1:ValidatorCalloutExtender>
-                            <%--  <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" TargetControlID="txtWTo"
-                                FilterMode="ValidChars" FilterType="Custom,Numbers" ValidChars=".">
-                            </cc1:FilteredTextBoxExtender>--%>
+                            <%-- Expand from 0px to the appropriate size while fading in --%>
                         </td>
                     </tr>
                     <tr>
@@ -227,9 +240,7 @@
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender6" runat="server" TargetControlID="rfvRate"
                                 WarningIconImageUrl="">
                             </cc1:ValidatorCalloutExtender>
-                            <%--<cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" TargetControlID="txtRate"
-                                FilterMode="ValidChars" FilterType="Numbers">
-                            </cc1:FilteredTextBoxExtender>--%>
+                            <%-- Collapse down to 0px and fade out --%>
                         </td>
                     </tr>
                     <tr>

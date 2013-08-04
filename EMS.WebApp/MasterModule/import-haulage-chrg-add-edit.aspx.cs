@@ -38,7 +38,7 @@ namespace EMS.WebApp.MasterModule
             {
                 ListItem Li = null;
                 //Li = new ListItem("Select", "0");
-                //PopulateDropDown((int)Enums.DropDownPopulationFor.Port, ddlLocation, 0);
+                PopulateDropDown((int)Enums.DropDownPopulationFor.Line, ddlLine, 0);
                 //ddlLocation.Items.Insert(0, Li);
 
                 //Li = new ListItem("Select", "0");
@@ -124,6 +124,7 @@ namespace EMS.WebApp.MasterModule
 
             hdnToLocation.Value = oImportHaulage.LocationTo.Substring(oImportHaulage.LocationTo.IndexOf('|') + 1);
             txtToLocation.Text = oImportHaulage.LocationTo.Substring(0, oImportHaulage.LocationTo.IndexOf('|'));
+            ddlLine.SelectedValue = oImportHaulage.LinerID.ToString();
 
             ddlContainerSize.SelectedIndex = Convert.ToInt32(ddlContainerSize.Items.IndexOf(ddlContainerSize.Items.FindByText(oImportHaulage.ContainerSize)));
 
@@ -160,6 +161,7 @@ namespace EMS.WebApp.MasterModule
                 oImportHaulageEntity.HaulageRate = Convert.ToDecimal(txtRate.Text);
                 oImportHaulageEntity.LocationFrom = hdnFromLocation.Value;
                 oImportHaulageEntity.LocationTo = hdnToLocation.Value;
+                oImportHaulageEntity.LinerID = ddlLine.SelectedValue.ToInt();
                 oImportHaulageEntity.WeightFrom = Convert.ToDecimal(txtWFrom.Text.Trim());
                 oImportHaulageEntity.WeightTo = Convert.ToDecimal(txtWTo.Text.Trim());
                 oImportHaulageEntity.HaulageStatus = true;

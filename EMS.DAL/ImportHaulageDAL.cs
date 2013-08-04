@@ -23,6 +23,7 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@HaulageChgID", ImportHaulage.HaulageChgID);
+                oDq.AddIntegerParam("@LineID", ImportHaulage.LinerID);
                 oDq.AddIntegerParam("@LocationFrom", Convert.ToInt32(ImportHaulage.LocationFrom));
                 oDq.AddIntegerParam("@LocationTo", Convert.ToInt32(ImportHaulage.LocationTo));
                 oDq.AddVarcharParam("@ContainerSize", 2, ImportHaulage.ContainerSize);

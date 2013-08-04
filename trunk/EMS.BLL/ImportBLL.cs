@@ -124,6 +124,7 @@ namespace EMS.BLL
                         blFooterId = ImportBLDAL.SaveImportBLFooter(footer);
                     }
                 }
+                ImportBLDAL.CheckSaveContainers(blId);
             }
 
             return blId;

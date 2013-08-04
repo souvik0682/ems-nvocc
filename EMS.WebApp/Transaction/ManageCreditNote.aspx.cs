@@ -35,6 +35,8 @@ namespace EMS.WebApp.Transaction
                 //gvwCreditNote.DataSource = cnCharges;
                 //gvwCreditNote.DataBind();
 
+                btnSave.Click += new EventHandler(btnSave_Click);
+
                 if (!ReferenceEquals(Request.QueryString["CrnId"], null))
                 {
                     long CrnId = 0;
@@ -113,6 +115,8 @@ namespace EMS.WebApp.Transaction
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            btnSave.Enabled = false;
+
             ICreditNote creditNote = new CreditNoteEntity();
             BuildCreditNoteEntity(creditNote);
 

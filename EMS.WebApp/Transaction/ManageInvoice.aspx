@@ -315,7 +315,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="vgSave" OnClick="btnSave_Click" />
+                                    <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="vgSave" />
                                     &nbsp;&nbsp;
                                     <asp:Button ID="btnBack" runat="server" CssClass="button" Text="Back"
                                         OnClick="btnBack_Click" OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />

@@ -33,7 +33,6 @@ namespace EMS.WebApp.Transaction
 
             if (!Page.IsPostBack)
             {
-                btnSave.Click +=new EventHandler(btnSave_Click);
                 string strProcessScript = "this.value='Processing...';this.disabled=true;";
                 btnSave.Attributes.Add("onclick", strProcessScript + ClientScript.GetPostBackEventReference(btnSave, "").ToString());
 
@@ -911,8 +910,6 @@ namespace EMS.WebApp.Transaction
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            btnSave.Enabled = false;
-
             string misc = string.Empty;
             IInvoice invoice = new InvoiceEntity();
             BuildInvoiceEntity(invoice);
@@ -939,8 +936,6 @@ namespace EMS.WebApp.Transaction
             //ViewState["CHARGERATE"] = null;
             //gvwInvoice.DataSource = null;
             //gvwInvoice.DataBind();
-
-            //btnSave.Enabled = true;
         }
 
         protected void btnBack_Click(object sender, EventArgs e)

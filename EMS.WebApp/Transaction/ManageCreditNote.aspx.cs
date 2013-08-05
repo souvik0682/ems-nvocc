@@ -35,7 +35,8 @@ namespace EMS.WebApp.Transaction
                 //gvwCreditNote.DataSource = cnCharges;
                 //gvwCreditNote.DataBind();
 
-                btnSave.Click += new EventHandler(btnSave_Click);
+                string strProcessScript = "this.value='Processing...';this.disabled=true;";
+                btnSave.Attributes.Add("onclick", strProcessScript + ClientScript.GetPostBackEventReference(btnSave, "").ToString());
 
                 if (!ReferenceEquals(Request.QueryString["CrnId"], null))
                 {
@@ -115,8 +116,6 @@ namespace EMS.WebApp.Transaction
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            btnSave.Enabled = false;
-
             ICreditNote creditNote = new CreditNoteEntity();
             BuildCreditNoteEntity(creditNote);
 

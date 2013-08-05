@@ -34,6 +34,9 @@ namespace EMS.WebApp.Transaction
             if (!Page.IsPostBack)
             {
                 btnSave.Click +=new EventHandler(btnSave_Click);
+                string strProcessScript = "this.value='Processing...';this.disabled=true;";
+                btnSave.Attributes.Add("onclick", strProcessScript + ClientScript.GetPostBackEventReference(btnSave, "").ToString());
+
                 Session["CHARGES"] = null;
 
                 LoadInvoiceTypeDDL();

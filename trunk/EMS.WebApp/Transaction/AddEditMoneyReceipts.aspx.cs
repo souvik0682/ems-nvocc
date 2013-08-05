@@ -38,6 +38,9 @@ namespace EMS.WebApp.Transaction
 
             if (!IsPostBack)
             {
+                string strProcessScript = "this.value='Processing...';this.disabled=true;";
+                btnSave.Attributes.Add("onclick", strProcessScript + ClientScript.GetPostBackEventReference(btnSave, "").ToString());
+
                 LoadData();
             }
 

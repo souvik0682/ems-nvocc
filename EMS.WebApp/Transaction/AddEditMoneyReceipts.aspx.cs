@@ -146,6 +146,7 @@ namespace EMS.WebApp.Transaction
             MoneyReceiptsBLL mrBll = new MoneyReceiptsBLL();
             DataTable dt = mrBll.GetInvoiceDetailForMoneyReceipt(_InvoiceId);
 
+            txtDate.Text = DateTime.Now.ToShortDateString();
             txtBLNo.Text = dt.Rows[0]["BLNO"].ToString();
             txtNvocc.Text = dt.Rows[0]["LINE"].ToString();
             txtLocation.Text = dt.Rows[0]["LOCATION"].ToString();

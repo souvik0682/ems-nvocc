@@ -242,6 +242,7 @@ namespace EMS.WebApp.Transaction
                 txtContainers.Text = creditNote.Containers;
                 txtInvoiceDate.Text = creditNote.InvoiceDate.ToShortDateString();
                 txtBLRef.Text = creditNote.BLNumber;
+                txtCNDate.Text = DateTime.Now.ToShortDateString();
                 ViewState["INVOICETYPE_ID"] = creditNote.InvoiceTypeID;
             }
         }

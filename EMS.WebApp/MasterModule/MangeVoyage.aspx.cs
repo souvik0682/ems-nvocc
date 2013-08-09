@@ -376,7 +376,7 @@ namespace EMS.WebApp.MasterModule
             //Get user ID & permission.
 
             _userId = UserBLL.GetLoggedInUserId();
-            if (user.UserRole.Id != (int)UserRole.Admin)
+            if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.Manager)
             {
                 _userLocation = UserBLL.GetUserLocation();
             }

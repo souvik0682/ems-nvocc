@@ -10,9 +10,9 @@ namespace EMS.BLL
 {
     public class ContainerTranBLL
     {
-        public DataSet GetContainerTransactionList(SearchCriteria searchCriteria, int ID)
+        public DataSet GetContainerTransactionList(SearchCriteria searchCriteria, int ID, int LocationID)
         {
-            return ContainerTranDAL.GetContainerTransactionList(searchCriteria, ID);
+            return ContainerTranDAL.GetContainerTransactionList(searchCriteria, ID, LocationID);
         }
 
         public DataTable GetContainerTransactionListFiltered(int Status, int LocationId, DateTime MovementDate, int LineID)

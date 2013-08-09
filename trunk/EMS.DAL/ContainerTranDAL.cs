@@ -10,7 +10,7 @@ namespace EMS.DAL
 {
     public class ContainerTranDAL
     {
-        public static DataSet GetContainerTransactionList(SearchCriteria searchCriteria, int ID)
+        public static DataSet GetContainerTransactionList(SearchCriteria searchCriteria, int ID, int LocationID)
         {
             string strExecution = "[trn].[getContainerMovementList]";
             DataSet myDataSet;
@@ -18,6 +18,7 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@MovementId", ID);
+                oDq.AddIntegerParam("@LocationId", LocationID);
                 oDq.AddVarcharParam("@TransactionCode", 50, searchCriteria.StringOption4);
                 oDq.AddVarcharParam("@SchContainerNo", 100, searchCriteria.StringOption1);
                 oDq.AddVarcharParam("@SchVessel", 100, searchCriteria.StringOption2);

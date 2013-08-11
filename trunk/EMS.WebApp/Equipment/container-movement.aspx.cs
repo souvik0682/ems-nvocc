@@ -24,6 +24,7 @@ namespace EMS.WebApp.Equipment
         private bool _canEdit = false;
         private bool _canDelete = false;
         private bool _canView = false;
+        private int _userLocation = 0;
         #endregion
 
         #region Protected Event Handlers
@@ -32,6 +33,7 @@ namespace EMS.WebApp.Equipment
         {
             oUser = (IUser)Session[Constants.SESSION_USER_INFO];
             _userId = UserBLL.GetLoggedInUserId();
+            _userLocation = UserBLL.GetUserLocation();
 
             //Get user permission.
             UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
@@ -43,7 +45,7 @@ namespace EMS.WebApp.Equipment
             if (!IsPostBack)
             {
                 RetrieveSearchCriteria();
-                LoadContainer(0);
+                LoadContainer(0, _userLocation);
             }
         }
 
@@ -58,7 +60,7 @@ namespace EMS.WebApp.Equipment
             if (Page.IsValid)
             {
                 SaveNewPageIndex(0);
-                LoadContainer(0);
+                LoadContainer(0, _userLocation);
                 upLoc.Update();
             }
         }
@@ -68,7 +70,7 @@ namespace EMS.WebApp.Equipment
             int newIndex = e.NewPageIndex;
             gvwContainerTran.PageIndex = e.NewPageIndex;
             SaveNewPageIndex(e.NewPageIndex);
-            LoadContainer(0);
+            LoadContainer(0, _userLocation);
         }
         protected void gvwContainerTran_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -95,7 +97,7 @@ namespace EMS.WebApp.Equipment
                     }
                 }
 
-                LoadContainer(0);
+                LoadContainer(0, _userLocation);
             }
             else if (e.CommandName == "Edit")
             {
@@ -179,7 +181,7 @@ namespace EMS.WebApp.Equipment
         {
             int newPageSize = Convert.ToInt32(ddlPaging.SelectedValue);
             SaveNewPageSize(newPageSize);
-            LoadContainer(0);
+            LoadContainer(0, _userLocation);
             upLoc.Update();
         }
 
@@ -190,7 +192,7 @@ namespace EMS.WebApp.Equipment
             txtVoyage.Text = string.Empty;
             txtStatus.Text = string.Empty;
             txtTranCode.Text = string.Empty;
-            LoadContainer(0);
+            LoadContainer(0, _userLocation);
         }
 
         #endregion
@@ -242,6 +244,11 @@ namespace EMS.WebApp.Equipment
                     }
                     //Response.Redirect("~/Unauthorized.aspx");
                 }
+                else
+                {
+                    _userLocation = 0;
+                }
+
             }
             else
             {
@@ -272,7 +279,7 @@ namespace EMS.WebApp.Equipment
             gvwContainerTran.PagerSettings.PageButtonCount = Convert.ToInt32(ConfigurationManager.AppSettings["PageButtonCount"]);
         }
 
-        private void LoadContainer(int MovementId)
+        private void LoadContainer(int MovementId, int Locationid)
         {
             if (!ReferenceEquals(Session[Constants.SESSION_SEARCH_CRITERIA], null))
             {
@@ -287,7 +294,7 @@ namespace EMS.WebApp.Equipment
                     gvwContainerTran.PageIndex = searchCriteria.PageIndex;
                     if (searchCriteria.PageSize > 0) gvwContainerTran.PageSize = searchCriteria.PageSize;
 
-                    gvwContainerTran.DataSource = oContainerTranBLL.GetContainerTransactionList(searchCriteria, MovementId).Tables[0];
+                    gvwContainerTran.DataSource = oContainerTranBLL.GetContainerTransactionList(searchCriteria, MovementId, Locationid).Tables[0];
                     gvwContainerTran.DataBind();
                 }
             }
@@ -297,7 +304,7 @@ namespace EMS.WebApp.Equipment
         {
             ContainerTranBLL oBll = new ContainerTranBLL();
             oBll.DeleteTransaction(TranId);
-            LoadContainer(0);
+            LoadContainer(0, _userLocation);
             ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00006") + "');</script>", false);
         }
 

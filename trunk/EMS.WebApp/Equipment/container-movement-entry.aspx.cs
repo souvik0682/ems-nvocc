@@ -24,10 +24,12 @@ namespace EMS.WebApp.Equipment
         private bool _canEdit = false;
         private bool _canDelete = false;
         private bool _canView = false;
+        private int _userLocation = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             _userId = UserBLL.GetLoggedInUserId();
+            _userLocation = UserBLL.GetUserLocation();
 
             //Get user permission.
             UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
@@ -47,6 +49,7 @@ namespace EMS.WebApp.Equipment
                     Dt.Rows.Add(dr);
                     gvSelectedContainer.DataSource = Dt;
                     gvSelectedContainer.DataBind();
+                    txtDate.Text = DateTime.Now.ToShortDateString();
 
                 }
                 else
@@ -54,20 +57,19 @@ namespace EMS.WebApp.Equipment
                     btnShow.Visible = false;
                     txtDate.Attributes.Add("onchange", "ChangeActivityDate(this);");
 
-
                     ContainerTranBLL oContainerTranBLL = new ContainerTranBLL();
                     SearchCriteria searchCriteria = new SearchCriteria();
                     DataSet ds = new DataSet();
 
                     if (!string.IsNullOrEmpty(hdnContainerTransactionId.Value))
                     {
-                        ds = oContainerTranBLL.GetContainerTransactionList(searchCriteria, Convert.ToInt32(hdnContainerTransactionId.Value));
+                        ds = oContainerTranBLL.GetContainerTransactionList(searchCriteria, Convert.ToInt32(hdnContainerTransactionId.Value), _userLocation);
                     }
                     //else if(!string.IsNullOrEmpty(lblTranCode.Text))
                     else if (!string.IsNullOrEmpty(hdnTranCode.Value))
                     {
                         searchCriteria.StringOption4 = hdnTranCode.Value;
-                        ds = oContainerTranBLL.GetContainerTransactionList(searchCriteria, 0);
+                        ds = oContainerTranBLL.GetContainerTransactionList(searchCriteria, 0, _userLocation);
                     }
                     FillHeaderDetail(ds.Tables[0]);
                     DisableHeaderSection();
@@ -327,7 +329,7 @@ namespace EMS.WebApp.Equipment
                     ddlEmptyYard.SelectedIndex = 0;
             }
 
-            if (ddlToStatus.SelectedItem.Text == "TRFE") // || ddlToStatus.SelectedItem.Text == "TRFI")
+            if (ddlToStatus.SelectedItem.Text == "TRFE")
             {
                 //txtToLocation.Enabled = true;
                 ddlTolocation.Enabled = true;

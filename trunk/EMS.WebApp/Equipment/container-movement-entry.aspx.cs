@@ -101,10 +101,6 @@ namespace EMS.WebApp.Equipment
             rfvToLocation.Enabled = false;
             //rfvFeus.Enabled = false;
             rfvEmptyYard.Enabled = false;
-
-
-
-
         }
 
         private void CheckUserAccess(string xID)

@@ -76,22 +76,13 @@ namespace EMS.WebApp.Reports {
         protected global::AjaxControlToolkit.AutoCompleteExtender aceVessel;
         
         /// <summary>
-        /// txtVoyage control.
+        /// ddlVoyage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtVoyage;
-        
-        /// <summary>
-        /// aceVoyage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.AutoCompleteExtender aceVoyage;
+        protected global::System.Web.UI.WebControls.DropDownList ddlVoyage;
         
         /// <summary>
         /// btnShow control.

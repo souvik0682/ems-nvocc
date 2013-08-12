@@ -41,6 +41,14 @@ namespace EMS.WebApp.Reports
             {
                 PopulateControls();
             }
+            else
+            {
+                if (Convert.ToInt64(ddlVoyage.SelectedValue) == 0)
+                {
+                    Int64 vesselId = GetSelectedVesselId();
+                    Filler.FillData(ddlVoyage, CommonBLL.GetVoyages(vesselId.ToString(), ddlLine.SelectedValue.ToString()), "VoyageNo", "VoyageID", "Voyage");
+                }
+            }
         }
 
         protected void btnShow_Click(object sender, EventArgs e)
@@ -138,16 +146,17 @@ namespace EMS.WebApp.Reports
                 slNo++;
             }
 
-            if (string.IsNullOrEmpty(txtVoyage.Text))
-            {
-                isValid = false;
-                message += GeneralFunctions.FormatAlertMessage(slNo, "Please select voyage no");
-                slNo++;
-            }
+            //if (string.IsNullOrEmpty(txtVoyage.Text))
+            //{
+            //    isValid = false;
+            //    message += GeneralFunctions.FormatAlertMessage(slNo, "Please select voyage no");
+            //    slNo++;
+            //}
 
             //Validate selected voyage name and vessel no.
-            Int64 voyageId = GetSelectedVoyageId();
+            //Int64 voyageId = GetSelectedVoyageId();
             Int64 vesselId = GetSelectedVesselId();
+            Int64 voyageId = Convert.ToInt64(ddlVoyage.SelectedValue);
 
             if (vesselId == 0)
             {
@@ -171,20 +180,20 @@ namespace EMS.WebApp.Reports
             return isValid;
         }
 
-        private Int64 GetSelectedVoyageId()
-        {
-            string voyage = txtVoyage.Text.Trim();
-            int startIndex = voyage.IndexOf('(');
-            int endIndex = voyage.IndexOf(')');
-            Int64 voyageId = 0;
+        //private Int64 GetSelectedVoyageId()
+        //{
+        //    string voyage = txtVoyage.Text.Trim();
+        //    int startIndex = voyage.IndexOf('(');
+        //    int endIndex = voyage.IndexOf(')');
+        //    Int64 voyageId = 0;
 
-            if (startIndex > 0 && endIndex > 0 && endIndex > startIndex)
-            {
-                Int64.TryParse(voyage.Substring(startIndex + 1, endIndex - startIndex - 1), out voyageId);
-            }
+        //    if (startIndex > 0 && endIndex > 0 && endIndex > startIndex)
+        //    {
+        //        Int64.TryParse(voyage.Substring(startIndex + 1, endIndex - startIndex - 1), out voyageId);
+        //    }
 
-            return voyageId;
-        }
+        //    return voyageId;
+        //}
 
         private Int64 GetSelectedVesselId()
         {
@@ -205,7 +214,8 @@ namespace EMS.WebApp.Reports
         {
             ReportBLL cls = new ReportBLL();
             Int64 vesselId = GetSelectedVesselId();
-            Int64 voyageId = GetSelectedVoyageId();
+            //Int64 voyageId = GetSelectedVoyageId();
+            Int64 voyageId = Convert.ToInt64(ddlVoyage.SelectedValue);
             List<ImpBLChkLstEntity> lstEntity = ReportBLL.GetImportBLCheckList(Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue), voyageId, vesselId);
             LocalReportManager reportManager = new LocalReportManager(rptViewer, "ImpBLChkLst", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
             string rptName = "ImpBLChkLst.rdlc";
@@ -220,9 +230,15 @@ namespace EMS.WebApp.Reports
             rptViewer.LocalReport.SetParameters(new ReportParameter("CompanyName", Convert.ToString(ConfigurationManager.AppSettings["CompanyName"])));
             rptViewer.LocalReport.SetParameters(new ReportParameter("ReportDate", System.DateTime.Now.ToString("MMMM dd, yyyy")));
             rptViewer.LocalReport.Refresh();
+            ddlVoyage.SelectedValue = "0";
         }
 
         #endregion
+
+        protected void txtVessel_TextChanged(object sender, EventArgs e)
+        {
+            ddlVoyage.SelectedValue = "0";
+        }
 
     }
 }

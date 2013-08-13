@@ -41,6 +41,23 @@ namespace EMS.DAL
             return ds;
         }
 
+        public static DataSet GetRptYearlyReport(int Yr, int lineId, int locId, string sizes, string Stat)
+       
+        {
+            DataSet ds = new DataSet();
+            using (DbQuery dq = new DbQuery("[report].[uspGetYearlyMisReportData]"))
+            {
+                dq.AddIntegerParam("@LineId", lineId);
+                dq.AddIntegerParam("@LocId", locId);
+                dq.AddBigIntegerParam("@RptYear", Yr);
+                dq.AddVarcharParam("@Sizes", 3, sizes);
+                dq.AddVarcharParam("@LoadEmpty", 1, Stat);
+                ds = dq.GetTables();
+            }
+            return ds;
+        }
+
+
         public static IList<ContainerWiseStockEntity> GetRptContainerwiseStockSummery(string ContainerNo, int LineID, int LocationID)
         {
            /*

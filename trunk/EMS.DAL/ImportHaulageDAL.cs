@@ -27,8 +27,8 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@LocationFrom", Convert.ToInt32(ImportHaulage.LocationFrom));
                 oDq.AddIntegerParam("@LocationTo", Convert.ToInt32(ImportHaulage.LocationTo));
                 oDq.AddVarcharParam("@ContainerSize", 2, ImportHaulage.ContainerSize);
-                oDq.AddDecimalParam("@WeightFrom", 12, 2, Convert.ToDecimal(ImportHaulage.WeightFrom));
-                oDq.AddDecimalParam("@WeightTo", 12, 2, Convert.ToDecimal(ImportHaulage.WeightTo));
+                oDq.AddDecimalParam("@WeightFrom", 12, 3, Convert.ToDecimal(ImportHaulage.WeightFrom));
+                oDq.AddDecimalParam("@WeightTo", 12, 3, Convert.ToDecimal(ImportHaulage.WeightTo));
                 oDq.AddDecimalParam("@HaulageRate", 12, 2, Convert.ToDecimal(ImportHaulage.HaulageRate));
                 oDq.AddBooleanParam("@HaulageStatus", ImportHaulage.HaulageStatus);
                 oDq.AddDateTimeParam("@EffDate",ImportHaulage.EffectDate);

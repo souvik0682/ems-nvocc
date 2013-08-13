@@ -20,6 +20,10 @@ namespace EMS.BLL
         {
             return EMS.DAL.LogisticReportDAL.GetRptCntrStockSummery(Line, Loc, StockDate);
         }
+        public static DataSet GetRptYearlyReport(int Yr, int lineId, int locId, string sizes, string Stat)
+        {
+            return EMS.DAL.LogisticReportDAL.GetRptYearlyReport(Yr, lineId, locId, sizes, Stat);
+        }
 
         public static IList<ContainerWiseStockEntity> GetRptContainerwiseStockSummery(string ContainerNo, int LineID, int LocationID)
         {

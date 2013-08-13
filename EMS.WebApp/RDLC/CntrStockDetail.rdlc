@@ -12,96 +12,80 @@
   <DataSets>
     <DataSet Name="DataSet2">
       <Fields>
-        <Field Name="LOC">
-          <DataField>LOC</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+        <Field Name="Loc">
+          <DataField>Loc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="LINE">
-          <DataField>LINE</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+        <Field Name="Line">
+          <DataField>Line</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Container">
           <DataField>Container</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="SZ_TY">
-          <DataField>SZ_TY</DataField>
+        <Field Name="sz_ty">
+          <DataField>sz_ty</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="PRESENT_STATUS">
-          <DataField>PRESENT_STATUS</DataField>
+        <Field Name="present_status">
+          <DataField>present_status</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="fk_MovementOptID">
-          <DataField>fk_MovementOptID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+        <Field Name="dchf">
+          <DataField>dchf</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="DCHF">
-          <DataField>DCHF</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="DCHE">
-          <DataField>DCHE</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+        <Field Name="dche">
+          <DataField>dche</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="CFSI">
           <DataField>CFSI</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="SNTC">
           <DataField>SNTC</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="ONH">
           <DataField>ONH</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="TRFE">
           <DataField>TRFE</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="TRFI">
           <DataField>TRFI</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="RCVE">
           <DataField>RCVE</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="REPAIR">
-          <DataField>REPAIR</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+        <Field Name="URPR">
+          <DataField>URPR</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="SNTS">
           <DataField>SNTS</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="RCVF">
           <DataField>RCVF</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="LODF">
           <DataField>LODF</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="LODE">
           <DataField>LODE</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="col1">
-          <DataField>col1</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="col2">
-          <DataField>col2</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="col3">
-          <DataField>col3</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="col4">
-          <DataField>col4</DataField>
+        <Field Name="OFFH">
+          <DataField>OFFH</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -110,8 +94,8 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <rd:DataSetInfo>
-        <rd:DataSetName>NVOCCDataSet</rd:DataSetName>
-        <rd:SchemaPath>F:\Projects\Container\NVOCC\EMS.WebApp\NVOCCDataSet.xsd</rd:SchemaPath>
+        <rd:DataSetName>StockDataSet</rd:DataSetName>
+        <rd:SchemaPath>E:\ems\EMS.WebApp\StockDataSet.xsd</rd:SchemaPath>
         <rd:TableName>prcRptStockDetail</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
@@ -784,14 +768,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="LOC">
+                    <Textbox Name="Loc">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!LOC.Value</Value>
+                              <Value>=Fields!Loc.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -801,7 +785,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>LOC</rd:DefaultName>
+                      <rd:DefaultName>Loc</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -817,14 +801,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="LINE">
+                    <Textbox Name="Line">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!LINE.Value</Value>
+                              <Value>=Fields!Line.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -834,7 +818,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>LINE</rd:DefaultName>
+                      <rd:DefaultName>Line</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -883,14 +867,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="SZ_TY">
+                    <Textbox Name="sz_ty">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!SZ_TY.Value</Value>
+                              <Value>=Fields!sz_ty.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -900,7 +884,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>SZ_TY</rd:DefaultName>
+                      <rd:DefaultName>sz_ty</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -916,14 +900,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="PRESENT_STATUS">
+                    <Textbox Name="present_status">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!PRESENT_STATUS.Value</Value>
+                              <Value>=Fields!present_status.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -933,7 +917,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>PRESENT_STATUS</rd:DefaultName>
+                      <rd:DefaultName>present_status</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -949,18 +933,17 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="DCHF">
+                    <Textbox Name="Textbox9">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!DCHF.Value</Value>
+                              <Value>=First(Fields!dchf.Value, "DataSet2")</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
-                                <Format>dd-MM-yy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -969,7 +952,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>DCHF</rd:DefaultName>
+                      <rd:DefaultName>Textbox9</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -985,14 +968,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="DCHE">
+                    <Textbox Name="dche">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!DCHE.Value</Value>
+                              <Value>=Fields!dche.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -1003,7 +986,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>DCHE</rd:DefaultName>
+                      <rd:DefaultName>dche</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1223,14 +1206,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="REPAIR">
+                    <Textbox Name="URPR">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!REPAIR.Value</Value>
+                              <Value>=Fields!URPR.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -1241,7 +1224,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>REPAIR</rd:DefaultName>
+                      <rd:DefaultName>URPR</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>

@@ -1161,6 +1161,9 @@ namespace EMS.WebApp.Transaction
             lnkPrintAmend.Enabled = false;
             btnBondSave.Enabled = false;
 
+            rfvDOE.Enabled = false;
+            rfvEFD.Enabled = false;
+            rfvEFP.Enabled = false;
 
         }
 

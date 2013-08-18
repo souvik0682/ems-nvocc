@@ -355,7 +355,7 @@
                                     <asp:LinkButton ID="lnkGenInvFreightToCollect" runat="server" Text="Generate Invoice"
                                         ForeColor="Blue" Enabled="false" OnClick="lnkGenInvFreightToCollect_Click"></asp:LinkButton>
                                 </td>
-                               <td>
+                                <td>
                                     <%--<asp:CheckBox ID="" runat="server" AutoPostBack="true" />--%>
                                     <asp:Button ID="btnTemp10" runat="server" Style="display: none;" />
                                     <asp:RadioButton ID="chkFinalInvoice" runat="server" GroupName="Service" AutoPostBack="true"
@@ -477,7 +477,7 @@
                                     <asp:LinkButton ID="lnkGenerateInvoiceDo" runat="server" Text="Generate Invoice"
                                         ForeColor="Blue" Enabled="false" OnClick="lnkGenerateInvoiceDo_Click"></asp:LinkButton>
                                 </td>
-                                 <td>
+                                <td>
                                     <%-- <asp:CheckBox ID="" runat="server" AutoPostBack="true" />--%>
                                     <asp:Button ID="btnTemp8" runat="server" Style="display: none;" />
                                     <asp:RadioButton ID="chkOtherInv" runat="server" GroupName="Service" AutoPostBack="true"
@@ -517,7 +517,7 @@
                                 </td>
                             </tr>
                             <tr style="height: 30px;">
-                               <td>
+                                <td>
                                     <asp:Button ID="btnTemp3" runat="server" Style="display: none;" />
                                     <%--<asp:CheckBox ID="" Enabled="false" runat="server" OnCheckedChanged="chkSlotExtension_CheckedChanged"
                                         AutoPostBack="true" />--%>
@@ -607,13 +607,13 @@
                                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server" TargetControlID="rfvDOE">
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
-                                <td align="right" style=" padding-right: 5px;">
+                                <td align="right" style="padding-right: 5px;">
                                     <asp:LinkButton ID="lnkGenerateInvoiceDOE" runat="server" Text="Generate Invoice"
                                         ForeColor="Blue" Enabled="false" OnClick="lnkGenerateInvoiceDOE_Click" ValidationGroup="vgInv"></asp:LinkButton>
                                 </td>
                             </tr>
                             <tr style="height: 30px;">
-                                 <td align="left">
+                                <td align="left">
                                     <%--<asp:CheckBox ID="" Enabled="false" runat="server" AutoPostBack="true" />--%>
                                     <asp:Button ID="btnTemp6" runat="server" Style="display: none;" />
                                     <asp:RadioButton ID="chkPGRExtension" runat="server" GroupName="Service" AutoPostBack="true"
@@ -1059,9 +1059,18 @@
                     <asp:AsyncPostBackTrigger ControlID="txtBlNo" EventName="TextChanged" />
                     <asp:AsyncPostBackTrigger ControlID="lnkDO" EventName="Click" />
                     <asp:PostBackTrigger ControlID="btnUpload" />
-                    <%--  <asp:AsyncPostBackTrigger ControlID="lnkDoExtension" EventName="Click" />
-                    <asp:AsyncPostBackTrigger ControlID="lnkSlotExtension" EventName="Click" />
-                    <asp:AsyncPostBackTrigger ControlID="lnkPGRExtension" EventName="Click" />--%>
+
+                    <%--<asp:AsyncPostBackTrigger ControlID="chkFreightToCollect" EventName="OnCheckedChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="chkDo" EventName="OnCheckedChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="chkDetensionExtension" EventName="OnCheckedChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="chkPGRExtension" EventName="OnCheckedChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="chkSecurityInv" EventName="OnCheckedChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="chkFinalInvoice" EventName="OnCheckedChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="chkOtherInv" EventName="OnCheckedChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="chkDoExtension" EventName="OnCheckedChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="chkAmendment" EventName="OnCheckedChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="chkBondCancel" EventName="OnCheckedChanged" />--%>
+                      
                 </Triggers>
             </asp:UpdatePanel>
         </center>

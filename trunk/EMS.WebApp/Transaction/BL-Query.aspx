@@ -449,7 +449,7 @@
                                     De-stuffing
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlDestuffing" runat="server" Enabled="false" Width="79">
+                                    <asp:DropDownList ID="ddlDestuffing" runat="server" Enabled="false" Width="79" >
                                         <asp:ListItem Text="CFS" Value="1"></asp:ListItem>
                                         <asp:ListItem Text="Factory" Value="2"></asp:ListItem>
                                     </asp:DropDownList>
@@ -523,7 +523,7 @@
                                         AutoPostBack="true" />--%>
                                     <asp:RadioButton ID="chkDoExtension" runat="server" GroupName="Service" AutoPostBack="true"
                                         OnCheckedChanged="chkDoExtension_CheckedChanged" Enabled="false" />
-                                    <asp:LinkButton ID="lnkDoExtension" Enabled="false" runat="server" Text="Delivery Order Extension"
+                                    <asp:LinkButton ID="lnkDoExtension" Enabled="false" runat="server" Text="BL Closing"
                                         ForeColor="Blue" OnClick="lnkDoExtension_Click"></asp:LinkButton>
                                     <cc1:ModalPopupExtender ID="mpeDOE" runat="server" PopupControlID="pnlDOE" TargetControlID="btnTemp2"
                                         BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseDOE">

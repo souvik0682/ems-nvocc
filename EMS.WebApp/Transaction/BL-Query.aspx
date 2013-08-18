@@ -20,7 +20,7 @@
             return false;
         }
 
-        function ReportPrint2(a, b, c, d, e,f) {
+        function ReportPrint2(a, b, c, d, e, f) {
             window.open('../Popup/Report.aspx?' + a + b + c + d + e + f, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
             return false;
         }
@@ -355,110 +355,7 @@
                                     <asp:LinkButton ID="lnkGenInvFreightToCollect" runat="server" Text="Generate Invoice"
                                         ForeColor="Blue" Enabled="false" OnClick="lnkGenInvFreightToCollect_Click"></asp:LinkButton>
                                 </td>
-                                <td>
-                                    <%--<asp:CheckBox ID="" runat="server" AutoPostBack="true" />--%>
-                                    <asp:Button ID="btnTemp7" runat="server" Style="display: none;" />
-                                    <asp:RadioButton ID="chkSecurityInv" runat="server" GroupName="Service" AutoPostBack="true"
-                                        OnCheckedChanged="chkSecurityInv_CheckedChanged" Enabled="false" />
-                                    Security Invoice
-                                    <asp:LinkButton ID="lnkSecurityInv" Enabled="false" runat="server" Text="Security Invoice"
-                                        ForeColor="Blue" OnClick="lnkSecurityInv_Click" Style="display: none;"></asp:LinkButton>
-                                    <cc1:ModalPopupExtender ID="mpeSecurity" runat="server" PopupControlID="pnlSecurity"
-                                        TargetControlID="btnTemp7" BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseSecurity">
-                                    </cc1:ModalPopupExtender>
-                                    <asp:Panel ID="pnlSecurity" runat="server" Style="display: none;">
-                                        <div style="height: 300; width: 350px;">
-                                            <div style="background-color: #328DC4; padding-top: 5px;">
-                                                <div style="width: 85%; text-align: left; font-weight: bold; color: White; font-size: 12pt;
-                                                    padding-left: 15px; float: left;">
-                                                    Security Invoice</div>
-                                                <div style="float: left;">
-                                                    <asp:ImageButton ID="imgCloseSecurity" runat="server" ImageUrl="~/Images/close-icon.png"
-                                                        Style="display: block;" /></div>
-                                                <div style="clear: both;">
-                                                </div>
-                                            </div>
-                                            <div id="dvSecurity" runat="server" style="width: 100%; height: 200px; overflow: auto;
-                                                background-color: White; padding-top: 15px; text-align: center;">
-                                                No records found.
-                                            </div>
-                                        </div>
-                                    </asp:Panel>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td align="right">
-                                    <asp:LinkButton ID="lnkGenInvSecirity" runat="server" Text="Generate Invoice" ForeColor="Blue"
-                                        Enabled="false" OnClick="lnkGenInvSecirity_Click"></asp:LinkButton>
-                                </td>
-                            </tr>
-                            <tr style="height: 30px;">
-                                <td>
-                                    <asp:HiddenField ID="hdnDoNo" runat="server" />
-                                    <asp:HiddenField ID="hdnIsDoLock" runat="server" />
-                                    <asp:Button ID="btnTemp1" runat="server" Style="display: none;" />
-                                    <%--<asp:CheckBox ID="" runat="server" OnCheckedChanged="chkDo_CheckedChanged" AutoPostBack="true" />--%>
-                                    <asp:RadioButton ID="chkDo" runat="server" GroupName="Service" AutoPostBack="true"
-                                        OnCheckedChanged="chkDo_CheckedChanged" Enabled="false" />
-                                    <asp:LinkButton ID="lnkDO" Enabled="false" runat="server" Text="Delivery Order" ForeColor="Blue"
-                                        OnClick="lnkDO_Click"></asp:LinkButton>
-                                    <cc1:ModalPopupExtender ID="mpeDo" runat="server" PopupControlID="pnlDo" TargetControlID="btnTemp1"
-                                        BackgroundCssClass="ModalPopupBG" CancelControlID="imgClose">
-                                    </cc1:ModalPopupExtender>
-                                    <asp:Panel ID="pnlDo" runat="server" Style="display: none;">
-                                        <table style="width: 300px; height: 80px; background-color: White; text-align: center;"
-                                            border="0" cellspacing="0">
-                                            <%-- <tr>
-                                                <td colspan="2" align="right">
-                                                    <asp:ImageButton ID="imgClose" runat="server" ImageUrl="~/Images/close-icon.png" />
-                                                </td>
-                                            </tr>--%>
-                                            <tr style="background-color: #328DC4; height: 28px;">
-                                                <td style="font-weight: bold; color: White; font-size: 12pt;">
-                                                    Delivery Order
-                                                </td>
-                                                <td align="right">
-                                                    <asp:ImageButton ID="imgClose" runat="server" ImageUrl="~/Images/close-icon.png" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td id="tdExmDo" runat="server" width="50%" style="padding-top: 10px;">
-                                                    <asp:ImageButton ID="imgBtnExaminationDo" runat="server" ImageUrl="~/Images/p1.jpeg"
-                                                        ToolTip="Print Examination Do" Height="45" Width="45" AlternateText="Print Examination Do" />
-                                                    <br />
-                                                    Print Examination Do
-                                                </td>
-                                                <td id="tdFinalDo" runat="server" width="50%" style="padding-top: 10px;">
-                                                    <asp:Button ID="btnGenDoNo" runat="server" OnClick="GenDo" Style="display: none;" />
-                                                    <asp:ImageButton ID="imgBtnFinalDo" runat="server" ImageUrl="~/Images/p2.jpeg" ToolTip="Print Final Do"
-                                                        Height="45" Width="45" AlternateText="Print Final Do" />
-                                                    <br />
-                                                    <span id="spnPrintFinalDo" runat="server"></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" height="30px">
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </asp:Panel>
-                                </td>
-                                <td>
-                                    De-stuffing
-                                </td>
-                                <td>
-                                    <asp:DropDownList ID="ddlDestuffing" runat="server" Enabled="false" Width="79" >
-                                        <asp:ListItem Text="CFS" Value="1"></asp:ListItem>
-                                        <asp:ListItem Text="Factory" Value="2"></asp:ListItem>
-                                    </asp:DropDownList>
-                                </td>
-                                <td align="right" style="border-right: Solid 1px Black; padding-right: 5px;">
-                                    <asp:LinkButton ID="lnkGenerateInvoiceDo" runat="server" Text="Generate Invoice"
-                                        ForeColor="Blue" Enabled="false" OnClick="lnkGenerateInvoiceDo_Click"></asp:LinkButton>
-                                </td>
-                                <td>
+                               <td>
                                     <%--<asp:CheckBox ID="" runat="server" AutoPostBack="true" />--%>
                                     <asp:Button ID="btnTemp10" runat="server" Style="display: none;" />
                                     <asp:RadioButton ID="chkFinalInvoice" runat="server" GroupName="Service" AutoPostBack="true"
@@ -518,53 +415,69 @@
                             </tr>
                             <tr style="height: 30px;">
                                 <td>
-                                    <asp:Button ID="btnTemp2" runat="server" Style="display: none;" />
-                                    <%--<asp:CheckBox ID="" Enabled="false" runat="server" OnCheckedChanged="chkDoExtension_CheckedChanged"
-                                        AutoPostBack="true" />--%>
-                                    <asp:RadioButton ID="chkDoExtension" runat="server" GroupName="Service" AutoPostBack="true"
-                                        OnCheckedChanged="chkDoExtension_CheckedChanged" Enabled="false" />
-                                    <asp:LinkButton ID="lnkDoExtension" Enabled="false" runat="server" Text="BL Closing"
-                                        ForeColor="Blue" OnClick="lnkDoExtension_Click"></asp:LinkButton>
-                                    <cc1:ModalPopupExtender ID="mpeDOE" runat="server" PopupControlID="pnlDOE" TargetControlID="btnTemp2"
-                                        BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseDOE">
+                                    <asp:HiddenField ID="hdnDoNo" runat="server" />
+                                    <asp:HiddenField ID="hdnIsDoLock" runat="server" />
+                                    <asp:Button ID="btnTemp1" runat="server" Style="display: none;" />
+                                    <%--<asp:CheckBox ID="" runat="server" OnCheckedChanged="chkDo_CheckedChanged" AutoPostBack="true" />--%>
+                                    <asp:RadioButton ID="chkDo" runat="server" GroupName="Service" AutoPostBack="true"
+                                        OnCheckedChanged="chkDo_CheckedChanged" Enabled="false" />
+                                    <asp:LinkButton ID="lnkDO" Enabled="false" runat="server" Text="Delivery Order" ForeColor="Blue"
+                                        OnClick="lnkDO_Click"></asp:LinkButton>
+                                    <cc1:ModalPopupExtender ID="mpeDo" runat="server" PopupControlID="pnlDo" TargetControlID="btnTemp1"
+                                        BackgroundCssClass="ModalPopupBG" CancelControlID="imgClose">
                                     </cc1:ModalPopupExtender>
-                                    <asp:Panel ID="pnlDOE" runat="server" Style="display: none;">
-                                        <div style="height: 300; width: 350px;">
-                                            <div style="background-color: #328DC4; padding-top: 5px;">
-                                                <div style="width: 85%; text-align: left; font-weight: bold; color: White; font-size: 12pt;
-                                                    padding-left: 15px; float: left;">
-                                                    Delivery Order Extension</div>
-                                                <div style="float: left;">
-                                                    <asp:ImageButton ID="imgCloseDOE" runat="server" ImageUrl="~/Images/close-icon.png"
-                                                        Style="display: block;" /></div>
-                                                <div style="clear: both;">
-                                                </div>
-                                            </div>
-                                            <div id="dvDoExtension" runat="server" style="width: 100%; height: 200px; overflow: auto;
-                                                background-color: White; padding-top: 15px; text-align: center;">
-                                                No records found.
-                                            </div>
-                                        </div>
+                                    <asp:Panel ID="pnlDo" runat="server" Style="display: none;">
+                                        <table style="width: 300px; height: 80px; background-color: White; text-align: center;"
+                                            border="0" cellspacing="0">
+                                            <%-- <tr>
+                                                <td colspan="2" align="right">
+                                                    <asp:ImageButton ID="imgClose" runat="server" ImageUrl="~/Images/close-icon.png" />
+                                                </td>
+                                            </tr>--%>
+                                            <tr style="background-color: #328DC4; height: 28px;">
+                                                <td style="font-weight: bold; color: White; font-size: 12pt;">
+                                                    Delivery Order
+                                                </td>
+                                                <td align="right">
+                                                    <asp:ImageButton ID="imgClose" runat="server" ImageUrl="~/Images/close-icon.png" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="tdExmDo" runat="server" width="50%" style="padding-top: 10px;">
+                                                    <asp:ImageButton ID="imgBtnExaminationDo" runat="server" ImageUrl="~/Images/p1.jpeg"
+                                                        ToolTip="Print Examination Do" Height="45" Width="45" AlternateText="Print Examination Do" />
+                                                    <br />
+                                                    Print Examination Do
+                                                </td>
+                                                <td id="tdFinalDo" runat="server" width="50%" style="padding-top: 10px;">
+                                                    <asp:Button ID="btnGenDoNo" runat="server" OnClick="GenDo" Style="display: none;" />
+                                                    <asp:ImageButton ID="imgBtnFinalDo" runat="server" ImageUrl="~/Images/p2.jpeg" ToolTip="Print Final Do"
+                                                        Height="45" Width="45" AlternateText="Print Final Do" />
+                                                    <br />
+                                                    <span id="spnPrintFinalDo" runat="server"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" height="30px">
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </asp:Panel>
                                 </td>
                                 <td>
-                                    Validity Date
+                                    De-stuffing
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtVAlidityDate" runat="server" Width="75" Enabled="false"></asp:TextBox>
-                                    <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtVAlidityDate"
-                                        TargetControlID="txtValidityDate" Format="dd/MM/yyyy">
-                                    </cc1:CalendarExtender>
-                                    <asp:RequiredFieldValidator ControlToValidate="txtVAlidityDate" Enabled="false" ID="rfvDOE"
-                                        runat="server" ErrorMessage="Please enter date" Display="None" ValidationGroup="vgInv"></asp:RequiredFieldValidator>
-                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server" TargetControlID="rfvDOE">
-                                    </cc1:ValidatorCalloutExtender>
+                                    <asp:DropDownList ID="ddlDestuffing" runat="server" Enabled="false" Width="79">
+                                        <asp:ListItem Text="CFS" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="Factory" Value="2"></asp:ListItem>
+                                    </asp:DropDownList>
                                 </td>
                                 <td align="right" style="border-right: Solid 1px Black; padding-right: 5px;">
-                                    <asp:LinkButton ID="lnkGenerateInvoiceDOE" runat="server" Text="Generate Invoice"
-                                        ForeColor="Blue" Enabled="false" OnClick="lnkGenerateInvoiceDOE_Click" ValidationGroup="vgInv"></asp:LinkButton>
+                                    <asp:LinkButton ID="lnkGenerateInvoiceDo" runat="server" Text="Generate Invoice"
+                                        ForeColor="Blue" Enabled="false" OnClick="lnkGenerateInvoiceDo_Click"></asp:LinkButton>
                                 </td>
-                                <td>
+                                 <td>
                                     <%-- <asp:CheckBox ID="" runat="server" AutoPostBack="true" />--%>
                                     <asp:Button ID="btnTemp8" runat="server" Style="display: none;" />
                                     <asp:RadioButton ID="chkOtherInv" runat="server" GroupName="Service" AutoPostBack="true"
@@ -604,7 +517,7 @@
                                 </td>
                             </tr>
                             <tr style="height: 30px;">
-                                <td>
+                               <td>
                                     <asp:Button ID="btnTemp3" runat="server" Style="display: none;" />
                                     <%--<asp:CheckBox ID="" Enabled="false" runat="server" OnCheckedChanged="chkSlotExtension_CheckedChanged"
                                         AutoPostBack="true" />--%>
@@ -650,6 +563,100 @@
                                     <asp:LinkButton ID="lnkGenerateInvoiceSlotExtension" runat="server" Text="Generate Invoice"
                                         ForeColor="Blue" Enabled="false" OnClick="lnkGenerateInvoiceSlotExtension_Click"
                                         ValidationGroup="vgInv"></asp:LinkButton>
+                                </td>
+                                <td>
+                                    <asp:Button ID="btnTemp2" runat="server" Style="display: none;" />
+                                    <%--<asp:CheckBox ID="" Enabled="false" runat="server" OnCheckedChanged="chkDoExtension_CheckedChanged"
+                                        AutoPostBack="true" />--%>
+                                    <asp:RadioButton ID="chkDoExtension" runat="server" GroupName="Service" AutoPostBack="true"
+                                        OnCheckedChanged="chkDoExtension_CheckedChanged" Enabled="false" />
+                                    <asp:LinkButton ID="lnkDoExtension" Enabled="false" runat="server" Text="BL Closing"
+                                        ForeColor="Blue" OnClick="lnkDoExtension_Click"></asp:LinkButton>
+                                    <cc1:ModalPopupExtender ID="mpeDOE" runat="server" PopupControlID="pnlDOE" TargetControlID="btnTemp2"
+                                        BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseDOE">
+                                    </cc1:ModalPopupExtender>
+                                    <asp:Panel ID="pnlDOE" runat="server" Style="display: none;">
+                                        <div style="height: 300; width: 350px;">
+                                            <div style="background-color: #328DC4; padding-top: 5px;">
+                                                <div style="width: 85%; text-align: left; font-weight: bold; color: White; font-size: 12pt;
+                                                    padding-left: 15px; float: left;">
+                                                    Delivery Order Extension</div>
+                                                <div style="float: left;">
+                                                    <asp:ImageButton ID="imgCloseDOE" runat="server" ImageUrl="~/Images/close-icon.png"
+                                                        Style="display: block;" /></div>
+                                                <div style="clear: both;">
+                                                </div>
+                                            </div>
+                                            <div id="dvDoExtension" runat="server" style="width: 100%; height: 200px; overflow: auto;
+                                                background-color: White; padding-top: 15px; text-align: center;">
+                                                No records found.
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
+                                </td>
+                                <td>
+                                    Validity Date
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtVAlidityDate" runat="server" Width="75" Enabled="false"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtVAlidityDate"
+                                        TargetControlID="txtValidityDate" Format="dd/MM/yyyy">
+                                    </cc1:CalendarExtender>
+                                    <asp:RequiredFieldValidator ControlToValidate="txtVAlidityDate" Enabled="false" ID="rfvDOE"
+                                        runat="server" ErrorMessage="Please enter date" Display="None" ValidationGroup="vgInv"></asp:RequiredFieldValidator>
+                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server" TargetControlID="rfvDOE">
+                                    </cc1:ValidatorCalloutExtender>
+                                </td>
+                                <td align="right" style=" padding-right: 5px;">
+                                    <asp:LinkButton ID="lnkGenerateInvoiceDOE" runat="server" Text="Generate Invoice"
+                                        ForeColor="Blue" Enabled="false" OnClick="lnkGenerateInvoiceDOE_Click" ValidationGroup="vgInv"></asp:LinkButton>
+                                </td>
+                            </tr>
+                            <tr style="height: 30px;">
+                                 <td align="left">
+                                    <%--<asp:CheckBox ID="" Enabled="false" runat="server" AutoPostBack="true" />--%>
+                                    <asp:Button ID="btnTemp6" runat="server" Style="display: none;" />
+                                    <asp:RadioButton ID="chkPGRExtension" runat="server" GroupName="Service" AutoPostBack="true"
+                                        OnCheckedChanged="chkPGRExtension_CheckedChanged" Enabled="false" />
+                                    <asp:LinkButton ID="lnkPGRExtension" Enabled="false" runat="server" Text="Extension for PGR"
+                                        ForeColor="Blue" OnClick="lnkPGRExtension_Click"></asp:LinkButton>
+                                    <cc1:ModalPopupExtender ID="mpePGR" runat="server" PopupControlID="pnlPGR" TargetControlID="btnTemp6"
+                                        BackgroundCssClass="ModalPopupBG" CancelControlID="imgClosePGR">
+                                    </cc1:ModalPopupExtender>
+                                    <asp:Panel ID="pnlPGR" runat="server" Style="display: none;">
+                                        <div style="height: 300; width: 350px;">
+                                            <div style="background-color: #328DC4; padding-top: 5px;">
+                                                <div style="width: 85%; text-align: left; font-weight: bold; color: White; font-size: 12pt;
+                                                    padding-left: 15px; float: left;">
+                                                    Extension for PGR</div>
+                                                <div style="float: left;">
+                                                    <asp:ImageButton ID="imgClosePGR" runat="server" ImageUrl="~/Images/close-icon.png"
+                                                        Style="display: block;" /></div>
+                                                <div style="clear: both;">
+                                                </div>
+                                            </div>
+                                            <div id="dvPGR" runat="server" style="width: 100%; height: 200px; overflow: auto;
+                                                background-color: White; padding-top: 15px; text-align: center;">
+                                                No records found.
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtExtensionForPGR" runat="server" Width="75" Enabled="false"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="CalendarExtender3" runat="server" PopupButtonID="txtExtensionForPGR"
+                                        TargetControlID="txtExtensionForPGR" Format="dd/MM/yyyy">
+                                    </cc1:CalendarExtender>
+                                    <asp:RequiredFieldValidator ControlToValidate="txtExtensionForPGR" Enabled="false"
+                                        ID="rfvEFP" runat="server" ErrorMessage="Please enter date" Display="None" ValidationGroup="vgInv"></asp:RequiredFieldValidator>
+                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvEFP">
+                                    </cc1:ValidatorCalloutExtender>
+                                </td>
+                                <td align="right" style="border-right: Solid 1px Black; padding-right: 5px;">
+                                    <asp:LinkButton ID="lnkGenInvPGR" runat="server" Text="Generate Invoice" ForeColor="Blue"
+                                        Enabled="false" OnClick="lnkGenInvPGR_Click" ValidationGroup="vgInv"></asp:LinkButton>
                                 </td>
                                 <td>
                                     <asp:Button ID="btnTemp4" runat="server" Style="display: none;" />
@@ -726,29 +733,30 @@
                                 </td>
                             </tr>
                             <tr style="height: 30px;">
-                                <td align="left">
-                                    <%--<asp:CheckBox ID="" Enabled="false" runat="server" AutoPostBack="true" />--%>
-                                    <asp:Button ID="btnTemp6" runat="server" Style="display: none;" />
-                                    <asp:RadioButton ID="chkPGRExtension" runat="server" GroupName="Service" AutoPostBack="true"
-                                        OnCheckedChanged="chkPGRExtension_CheckedChanged" Enabled="false" />
-                                    <asp:LinkButton ID="lnkPGRExtension" Enabled="false" runat="server" Text="Extension for PGR"
-                                        ForeColor="Blue" OnClick="lnkPGRExtension_Click"></asp:LinkButton>
-                                    <cc1:ModalPopupExtender ID="mpePGR" runat="server" PopupControlID="pnlPGR" TargetControlID="btnTemp6"
-                                        BackgroundCssClass="ModalPopupBG" CancelControlID="imgClosePGR">
+                                <td>
+                                    <%--<asp:CheckBox ID="" runat="server" AutoPostBack="true" />--%>
+                                    <asp:Button ID="btnTemp7" runat="server" Style="display: none;" />
+                                    <asp:RadioButton ID="chkSecurityInv" runat="server" GroupName="Service" AutoPostBack="true"
+                                        OnCheckedChanged="chkSecurityInv_CheckedChanged" Enabled="false" />
+                                    Security Invoice
+                                    <asp:LinkButton ID="lnkSecurityInv" Enabled="false" runat="server" Text="Security Invoice"
+                                        ForeColor="Blue" OnClick="lnkSecurityInv_Click" Style="display: none;"></asp:LinkButton>
+                                    <cc1:ModalPopupExtender ID="mpeSecurity" runat="server" PopupControlID="pnlSecurity"
+                                        TargetControlID="btnTemp7" BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseSecurity">
                                     </cc1:ModalPopupExtender>
-                                    <asp:Panel ID="pnlPGR" runat="server" Style="display: none;">
+                                    <asp:Panel ID="pnlSecurity" runat="server" Style="display: none;">
                                         <div style="height: 300; width: 350px;">
                                             <div style="background-color: #328DC4; padding-top: 5px;">
                                                 <div style="width: 85%; text-align: left; font-weight: bold; color: White; font-size: 12pt;
                                                     padding-left: 15px; float: left;">
-                                                    Extension for PGR</div>
+                                                    Security Invoice</div>
                                                 <div style="float: left;">
-                                                    <asp:ImageButton ID="imgClosePGR" runat="server" ImageUrl="~/Images/close-icon.png"
+                                                    <asp:ImageButton ID="imgCloseSecurity" runat="server" ImageUrl="~/Images/close-icon.png"
                                                         Style="display: block;" /></div>
                                                 <div style="clear: both;">
                                                 </div>
                                             </div>
-                                            <div id="dvPGR" runat="server" style="width: 100%; height: 200px; overflow: auto;
+                                            <div id="dvSecurity" runat="server" style="width: 100%; height: 200px; overflow: auto;
                                                 background-color: White; padding-top: 15px; text-align: center;">
                                                 No records found.
                                             </div>
@@ -758,18 +766,10 @@
                                 <td>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtExtensionForPGR" runat="server" Width="75" Enabled="false"></asp:TextBox>
-                                    <cc1:CalendarExtender ID="CalendarExtender3" runat="server" PopupButtonID="txtExtensionForPGR"
-                                        TargetControlID="txtExtensionForPGR" Format="dd/MM/yyyy">
-                                    </cc1:CalendarExtender>
-                                    <asp:RequiredFieldValidator ControlToValidate="txtExtensionForPGR" Enabled="false"
-                                        ID="rfvEFP" runat="server" ErrorMessage="Please enter date" Display="None" ValidationGroup="vgInv"></asp:RequiredFieldValidator>
-                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvEFP">
-                                    </cc1:ValidatorCalloutExtender>
                                 </td>
                                 <td align="right" style="border-right: Solid 1px Black; padding-right: 5px;">
-                                    <asp:LinkButton ID="lnkGenInvPGR" runat="server" Text="Generate Invoice" ForeColor="Blue"
-                                        Enabled="false" OnClick="lnkGenInvPGR_Click" ValidationGroup="vgInv"></asp:LinkButton>
+                                    <asp:LinkButton ID="lnkGenInvSecirity" runat="server" Text="Generate Invoice" ForeColor="Blue"
+                                        Enabled="false" OnClick="lnkGenInvSecirity_Click"></asp:LinkButton>
                                 </td>
                                 <td>
                                     <asp:Button ID="btnTemp5" runat="server" Style="display: none;" />
@@ -1008,7 +1008,8 @@
                                                 <HeaderTemplate>
                                                     CRN Amount</HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <a id="A1" href="#" runat="server" onserverclick="ShowCreditNoteAmt"><%# Eval("CNAmt")%></a>
+                                                    <a id="A1" href="#" runat="server" onserverclick="ShowCreditNoteAmt">
+                                                        <%# Eval("CNAmt")%></a>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField>
@@ -1041,9 +1042,9 @@
                                                     <%-- <a href="#">
                                                         <img alt="Add" src="../Images/ADD.JPG" /></a>--%>
                                                     <a id="aAddCrdtNote" runat="server" href='<%# "ManageCreditNote.aspx?InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) + "&LocationId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue) + "&LineId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLine.SelectedValue) %>'
-                                                         style='<%# (Convert.ToDecimal(Eval("Ammount"))>0 && Convert.ToInt32(Eval("InvoiceTypeID"))!=2) ? "display:block;": "display:none;" %>'>
+                                                        style='<%# (Convert.ToDecimal(Eval("Ammount"))>0 && Convert.ToInt32(Eval("InvoiceTypeID"))!=2) ? "display:block;": "display:none;" %>'>
                                                         <img alt="Add" src="../Images/ADD.JPG" /></a>
-                                                        <%--style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Ammount")) ? "display:block;": "display:none;" %>'>--%>
+                                                    <%--style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Ammount")) ? "display:block;": "display:none;" %>'>--%>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                         </Columns>

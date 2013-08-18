@@ -1059,17 +1059,6 @@
                     <asp:AsyncPostBackTrigger ControlID="txtBlNo" EventName="TextChanged" />
                     <asp:AsyncPostBackTrigger ControlID="lnkDO" EventName="Click" />
                     <asp:PostBackTrigger ControlID="btnUpload" />
-
-                    <%--<asp:AsyncPostBackTrigger ControlID="chkFreightToCollect" EventName="OnCheckedChanged" />
-                    <asp:AsyncPostBackTrigger ControlID="chkDo" EventName="OnCheckedChanged" />
-                    <asp:AsyncPostBackTrigger ControlID="chkDetensionExtension" EventName="OnCheckedChanged" />
-                    <asp:AsyncPostBackTrigger ControlID="chkPGRExtension" EventName="OnCheckedChanged" />
-                    <asp:AsyncPostBackTrigger ControlID="chkSecurityInv" EventName="OnCheckedChanged" />
-                    <asp:AsyncPostBackTrigger ControlID="chkFinalInvoice" EventName="OnCheckedChanged" />
-                    <asp:AsyncPostBackTrigger ControlID="chkOtherInv" EventName="OnCheckedChanged" />
-                    <asp:AsyncPostBackTrigger ControlID="chkDoExtension" EventName="OnCheckedChanged" />
-                    <asp:AsyncPostBackTrigger ControlID="chkAmendment" EventName="OnCheckedChanged" />
-                    <asp:AsyncPostBackTrigger ControlID="chkBondCancel" EventName="OnCheckedChanged" />--%>
                       
                 </Triggers>
             </asp:UpdatePanel>

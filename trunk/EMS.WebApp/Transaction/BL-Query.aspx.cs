@@ -595,7 +595,7 @@ namespace EMS.WebApp.Transaction
             lnkGenerateInvoiceDo.Enabled = true;
             lnkGenerateInvoiceDo.Enabled = true;
             lnkDO.Enabled = true;
-
+            UpdatePanel2.Update();
         }
 
         protected void chkDoExtension_CheckedChanged(object sender, EventArgs e)
@@ -606,6 +606,8 @@ namespace EMS.WebApp.Transaction
             lnkGenerateInvoiceDOE.Enabled = true;
             lnkDoExtension.Enabled = true;
             rfvDOE.Enabled = true;
+
+            UpdatePanel2.Update();
         }
 
         protected void chkSlotExtension_CheckedChanged(object sender, EventArgs e)
@@ -617,7 +619,7 @@ namespace EMS.WebApp.Transaction
             lnkGenerateInvoiceSlotExtension.Enabled = true;
             lnkSlotExtension.Enabled = true;
             rfvEFD.Enabled = true;
-
+            UpdatePanel2.Update();
         }
 
         protected void chkAmendment_CheckedChanged(object sender, EventArgs e)
@@ -626,7 +628,7 @@ namespace EMS.WebApp.Transaction
             ddlAmendmentFor.Enabled = true;
             lnkPrintAmend.Enabled = true;
             //lnkAmendment.Enabled = true;
-
+            UpdatePanel2.Update();
         }
 
         protected void chkBondCancel_CheckedChanged(object sender, EventArgs e)
@@ -636,7 +638,7 @@ namespace EMS.WebApp.Transaction
             txtBondCancellation.Enabled = true;
             btnBondSave.Enabled = true;
             lnkBondCancel.Enabled = true;
-
+            UpdatePanel2.Update();
         }
 
         protected void imgBtnExaminationDo_Click(object sender, ImageClickEventArgs e)
@@ -947,7 +949,7 @@ namespace EMS.WebApp.Transaction
             lnkFreightToCollect.Enabled = true;
             txtFreightToCollect.Enabled = true;
             lnkGenInvFreightToCollect.Enabled = true;
-
+            UpdatePanel2.Update();
         }
 
         protected void chkPGRExtension_CheckedChanged(object sender, EventArgs e)
@@ -957,6 +959,7 @@ namespace EMS.WebApp.Transaction
             txtExtensionForPGR.Enabled = true;
             lnkGenInvPGR.Enabled = true;
             rfvEFP.Enabled = true;
+            UpdatePanel2.Update();
         }
 
         protected void chkSecurityInv_CheckedChanged(object sender, EventArgs e)
@@ -964,6 +967,7 @@ namespace EMS.WebApp.Transaction
             DisableAllServiceControls();
             lnkSecurityInv.Enabled = true;
             lnkGenInvSecirity.Enabled = true;
+            UpdatePanel2.Update();
         }
 
         protected void chkFinalInvoice_CheckedChanged(object sender, EventArgs e)
@@ -971,6 +975,8 @@ namespace EMS.WebApp.Transaction
             DisableAllServiceControls();
             lnkFinalInvoice.Enabled = true;
             lnkGenInvFinalDo.Enabled = true;
+
+            UpdatePanel2.Update();
         }
 
         protected void chkOtherInv_CheckedChanged(object sender, EventArgs e)
@@ -978,6 +984,8 @@ namespace EMS.WebApp.Transaction
             DisableAllServiceControls();
             lnkOtherInv.Enabled = true;
             lnkGenInvOtherInvoice.Enabled = true;
+
+            UpdatePanel2.Update();
         }
 
         void Redirect(string BLNo, string InvoiceName, string InvTypID, string Misc)
@@ -1164,6 +1172,14 @@ namespace EMS.WebApp.Transaction
             rfvDOE.Enabled = false;
             rfvEFD.Enabled = false;
             rfvEFP.Enabled = false;
+
+            txtFreightToCollect.Text = string.Empty;
+            ddlDestuffing.SelectedIndex = 0;
+            txtExtensionForDetention.Text = string.Empty;
+            txtExtensionForPGR.Text = string.Empty;
+            txtVAlidityDate.Text = string.Empty;
+            ddlAmendmentFor.SelectedIndex = 0;
+            txtBondCancellation.Text = string.Empty;
 
         }
 

@@ -33,7 +33,7 @@
                 <td class="label" style="padding-right:5px;vertical-align:top;">Size:</td>
                 <td style="padding-right:20px;vertical-align:top;">
                     <asp:DropDownList ID="ddlSize" runat="server">
-                        <asp:ListItem Value="All" Text="All"></asp:ListItem>
+                        <asp:ListItem Value="All" Text="TEUs"></asp:ListItem>
                         <asp:ListItem Value="20" Text="20'"></asp:ListItem>
                         <asp:ListItem Value="40" Text="40'"></asp:ListItem>
                     </asp:DropDownList>

@@ -66,14 +66,14 @@
                     <ContentTemplate>
                     <asp:Label runat="server" ID="lblErrorMsg" Text=""></asp:Label>
                         <asp:GridView ID="gvwLoc" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                BorderStyle="None" BorderWidth="0" OnPageIndexChanging="gvwLoc_PageIndexChanging" AllowSorting="true"
-                OnRowDataBound="gvwLoc_RowDataBound" OnRowCommand="gvwLoc_RowCommand" Width="100%" 
+                            BorderStyle="None" BorderWidth="0" OnPageIndexChanging="gvwLoc_PageIndexChanging" AllowSorting="true"
+                            OnRowDataBound="gvwLoc_RowDataBound" OnRowCommand="gvwLoc_RowCommand" Width="100%" 
                             onsorting="gvwLoc_Sorting">
-                <pagersettings mode="NumericFirstLast" position="TopAndBottom" />
-                <pagerstyle cssclass="gridviewpager" />
-                <emptydatarowstyle cssclass="gridviewemptydatarow" />
-                <emptydatatemplate>No Line(s) Found</emptydatatemplate>
-                <columns>
+                            <pagersettings mode="NumericFirstLast" position="TopAndBottom" />
+                            <pagerstyle cssclass="gridviewpager" />
+                            <emptydatarowstyle cssclass="gridviewemptydatarow" />
+                            <emptydatatemplate>No Line(s) Found</emptydatatemplate>
+                            <columns>
                                 <asp:TemplateField HeaderText="Sl#">
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="5%" />                                    

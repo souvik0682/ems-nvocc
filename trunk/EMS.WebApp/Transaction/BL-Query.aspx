@@ -571,7 +571,7 @@
                                     <asp:RadioButton ID="chkDoExtension" runat="server" GroupName="Service" AutoPostBack="true"
                                         OnCheckedChanged="chkDoExtension_CheckedChanged" Enabled="false" />
                                     <asp:LinkButton ID="lnkDoExtension" Enabled="false" runat="server" Text="BL Closing"
-                                        ForeColor="Blue" OnClick="lnkDoExtension_Click"></asp:LinkButton>
+                                        ForeColor="Black" OnClick="lnkDoExtension_Click"></asp:LinkButton>
                                     <cc1:ModalPopupExtender ID="mpeDOE" runat="server" PopupControlID="pnlDOE" TargetControlID="btnTemp2"
                                         BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseDOE">
                                     </cc1:ModalPopupExtender>
@@ -595,7 +595,7 @@
                                     </asp:Panel>
                                 </td>
                                 <td>
-                                    Validity Date
+                                    Closure Date
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtVAlidityDate" runat="server" Width="75" Enabled="false"></asp:TextBox>
@@ -608,7 +608,7 @@
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
                                 <td align="right" style="padding-right: 5px;">
-                                    <asp:LinkButton ID="lnkGenerateInvoiceDOE" runat="server" Text="Generate Invoice"
+                                    <asp:LinkButton ID="lnkGenerateInvoiceDOE" runat="server" Text="Close"
                                         ForeColor="Blue" Enabled="false" OnClick="lnkGenerateInvoiceDOE_Click" ValidationGroup="vgInv"></asp:LinkButton>
                                 </td>
                             </tr>

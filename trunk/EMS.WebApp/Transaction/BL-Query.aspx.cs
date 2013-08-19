@@ -604,7 +604,7 @@ namespace EMS.WebApp.Transaction
 
             txtVAlidityDate.Enabled = true;
             lnkGenerateInvoiceDOE.Enabled = true;
-            lnkDoExtension.Enabled = true;
+            //lnkDoExtension.Enabled = true;
             rfvDOE.Enabled = true;
 
             UpdatePanel2.Update();
@@ -1017,7 +1017,7 @@ namespace EMS.WebApp.Transaction
 
         protected void lnkGenerateInvoiceDOE_Click(object sender, EventArgs e)
         {
-            Redirect(txtBlNo.Text.Trim(), "DO Extension", "10", txtVAlidityDate.Text.Trim());
+            //Redirect(txtBlNo.Text.Trim(), "DO Extension", "10", txtVAlidityDate.Text.Trim());
         }
 
         protected void lnkGenerateInvoiceSlotExtension_Click(object sender, EventArgs e)

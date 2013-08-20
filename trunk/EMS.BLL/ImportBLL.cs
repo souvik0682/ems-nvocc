@@ -56,9 +56,9 @@ namespace EMS.BLL
             return ImportBLDAL.GetCFSCode(CFSName);
         }
 
-        public int GetDefaultFreeDays(int NvoccId)
+        public int GetDefaultFreeDays(int NvoccId, int Locn)
         {
-            return ImportBLDAL.GetDefaultFreeDays(NvoccId);
+            return ImportBLDAL.GetDefaultFreeDays(NvoccId, Locn);
         }
 
         public int GetPGRFreeDays(int LocationId)

@@ -169,7 +169,7 @@ namespace EMS.DAL
             return CFS;
         }
 
-        public static int GetDefaultFreeDays(int NvoccId)
+        public static int GetDefaultFreeDays(int NvoccId, int Locn)
         {
             string strExecution = "uspGetDefaultFreeDays";
             int DefaultFreeDays = 0;
@@ -178,6 +178,7 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@NvoccId", NvoccId);
+                oDq.AddIntegerParam("@LocId", Locn);
                 object val = oDq.GetScalar();
 
                 if (val != DBNull.Value)

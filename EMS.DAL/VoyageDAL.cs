@@ -22,7 +22,18 @@ namespace EMS.DAL
             return ds;
         }
 
-
+        public static DataSet DDLGetVoyageAccVessel_Loc_ICD(int locationId, int vesselId, int nvoccId)
+        {
+            DataSet ds = new DataSet();
+            using (DbQuery dq = new DbQuery("prcGetVoyageAccVessel_Loc_ICD"))
+            {
+                dq.AddIntegerParam("@LocationId", locationId);
+                dq.AddIntegerParam("@vesselId", vesselId);
+                dq.AddIntegerParam("@nvoccID", nvoccId);
+                ds = dq.GetTables();
+            }
+            return ds;
+        }
 
         public static DataTable IfExistInBL(int vesselId, int voyageId)
         {

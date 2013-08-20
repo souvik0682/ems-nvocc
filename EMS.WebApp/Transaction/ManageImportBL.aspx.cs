@@ -922,15 +922,21 @@ namespace EMS.WebApp.Transaction
         {
             List<ILine> lstLine = Session["NVOCC"] as List<ILine>;
             int nvoccId = Convert.ToInt32(ddlNvocc.SelectedValue);
+            int Locn = Convert.ToInt32(ddlLocation.SelectedValue);
 
             //imgLineLogo.ImageUrl = lstLine.Where(l => l.NVOCCID == nvoccId).FirstOrDefault().LogoPath;
 
-            int defaultFreeDays = new ImportBLL().GetDefaultFreeDays(nvoccId);
+            int defaultFreeDays = new ImportBLL().GetDefaultFreeDays(nvoccId, Locn);
             txtDestFreeDays.Text = defaultFreeDays.ToString();
         }
 
         protected void ddlLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int nvoccId = Convert.ToInt32(ddlNvocc.SelectedValue);
+            int Locn = Convert.ToInt32(ddlLocation.SelectedValue);
+            int defaultFreeDays = new ImportBLL().GetDefaultFreeDays(nvoccId, Locn);
+            txtDestFreeDays.Text = defaultFreeDays.ToString();
+
             int PGRFreeDays = new ImportBLL().GetPGRFreeDays(Convert.ToInt32(ddlLocation.SelectedValue));
             txtPGRFreeDays.Text = PGRFreeDays.ToString();
 

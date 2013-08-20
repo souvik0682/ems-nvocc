@@ -21,5 +21,18 @@ namespace EMS.DAL
            }
            return ds;
        }
+
+       public static DataSet GetRptCargoDescICD(int vesselId, int voyageId, int pod)
+       {
+           DataSet ds = new DataSet();
+           using (DbQuery dq = new DbQuery("prcRptCargoDescICD"))
+           {
+               dq.AddIntegerParam("@vesselId", vesselId);
+               dq.AddIntegerParam("@voyageId", voyageId);
+               dq.AddIntegerParam("@pod", pod);
+               ds = dq.GetTables();
+           }
+           return ds;
+       }
     }
 }

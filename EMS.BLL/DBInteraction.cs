@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using EMS.DAL.DbManager;
+using EMS.Entity;
 
 namespace EMS.BLL
 {
@@ -231,6 +233,49 @@ namespace EMS.BLL
 
         #endregion
 
+        #region SlotOperator
+
+        public DataTable GetSlotOperator(int pk_SlotOperatorID, string SlotOperatorName, SearchCriteria searchCriteria)
+        {
+             string strExecution = "exp.prcGetSlotOperatorList";
+            //List<ICharge> lstCharge = new List<ICharge>();
+            DataTable dt = new DataTable();
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@SlotOperatorID", pk_SlotOperatorID);
+                oDq.AddVarcharParam("@SchOperatorName", 6, SlotOperatorName);
+                oDq.AddVarcharParam("@SortExpression", 20, searchCriteria.SortExpression);
+                oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
+                dt = oDq.GetTable();
+            }
+            return dt;
+        }
+
+        public int AddEditSlotOperator(int userID, int pk_SlotOperatorId, string SlotOperatorName, bool isEdit)
+        {
+            string ProcName = "exp.prcAddEditSlotOperator";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+            dquery.AddIntegerParam("@userID", userID);
+            dquery.AddIntegerParam("@pk_SlotOperatorId", pk_SlotOperatorId);
+            dquery.AddVarcharParam("@SlotOperatorName", 50, SlotOperatorName);
+            dquery.AddIntegerParam("@fk_CompanyID", 1);
+            dquery.AddBooleanParam("@isEdit", isEdit);
+
+            return dquery.RunActionQuery();
+
+        }
+
+        public void DeleteSlotOperator(int pk_SlotOperatorId)
+        {
+            string ProcName = "exp.prcDeleteSlotOperator";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+            dquery.AddIntegerParam("@pk_SlotOperatorID", pk_SlotOperatorId);
+            dquery.RunActionQuery();
+
+        }
+
+        #endregion
+
         #region STax
 
         public DataSet GetSTaxDate(DateTime? Startdt)
@@ -271,6 +316,47 @@ namespace EMS.BLL
             return dquery.RunActionQuery();
 
         }
+
+        #endregion
+
+        #region DetentionFreeDays
+        public DataSet GetFreeDays(int FreeID, string Location, string Line, SearchCriteria searchCriteria)
+        {
+            string ProcName = "[admin].[prcGetFreeDaysList]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            dquery.AddIntegerParam("@pk_LinkId", FreeID);
+            dquery.AddVarcharParam("@SchLocationName", 70, Location);
+            dquery.AddVarcharParam("@SchLineName", 70, Line);
+            dquery.AddVarcharParam("@SortExpression", 20, searchCriteria.SortExpression);
+            dquery.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
+            return dquery.GetTables();
+        }
+
+        public int AddEditFreeDays(int userID, int pk_LinkID, int DefaultFreeDays, int Location, int NVOCC, bool isEdit)
+        {
+            string ProcName = "[admin].[prcAddEditFreeDays]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+            dquery.AddIntegerParam("@userID", userID);
+            dquery.AddIntegerParam("@pk_LinkID", pk_LinkID);
+            dquery.AddIntegerParam("@fk_LocationID", Location);
+            dquery.AddIntegerParam("@fk_NVOCCID", NVOCC);
+            dquery.AddIntegerParam("@DefaultFreeDays", DefaultFreeDays);
+            dquery.AddBooleanParam("@isEdit", isEdit);
+
+            return dquery.RunActionQuery();
+
+        }
+
+        public void DeleteFreeDays(int pk_LinkID)
+        {
+            string ProcName = "[admin].[prcDeleteFreeDays]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+            dquery.AddIntegerParam("@pk_LinkID", pk_LinkID);
+            dquery.RunActionQuery();
+
+        }
+
         #endregion
 
         #region Vessel
@@ -288,6 +374,8 @@ namespace EMS.BLL
 
             return dquery.GetTables();
         }
+
+        
 
         public void DeleteVessel(int vesselId)
         {

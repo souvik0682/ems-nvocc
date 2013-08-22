@@ -47,6 +47,9 @@ namespace EMS.Entity
         public string BookingNo { get; set; }
         public string ImportExport { get; set; }
 
+        public string SlotOperatorName { get; set; }
+        
+
         public string LocAbbr
         {
             get;

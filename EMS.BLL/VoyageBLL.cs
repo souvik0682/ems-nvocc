@@ -14,6 +14,11 @@ namespace EMS.BLL
           
        }
 
+       public static DataSet GetVoyageAccVessel_Loc_ICD(int locationId, int vesselId, int nvoccId)
+       {
+           return EMS.DAL.VoyageDAL.DDLGetVoyageAccVessel_Loc_ICD(locationId, vesselId, nvoccId);
+
+       }
        public static DataTable IfExistInBL(int vesselId, int voyageId)
        {
            return EMS.DAL.VoyageDAL.IfExistInBL(vesselId, voyageId);

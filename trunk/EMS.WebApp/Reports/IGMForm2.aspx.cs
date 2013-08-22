@@ -101,7 +101,7 @@ namespace EMS.WebApp.Reports
                 rptViewer.LocalReport.Dispose();
                 rptViewer.LocalReport.DataSources.Clear();
                 rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) +  ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
-
+                rptViewer.LocalReport.SetParameters(new ReportParameter("ReportName", "C A R G O    D E C L A R A T I O N"));
                 rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", ds.Tables[0]));
                 
                 rptViewer.LocalReport.Refresh();

@@ -131,6 +131,13 @@ namespace EMS.WebApp.Equipment
                     }
                 }
 
+                if (user.UserRole.Id != (int)UserRole.Admin)
+                {
+                    ddlFromLocation.SelectedValue = _userLocation.ToString();
+                    ddlFromLocation.Enabled = false;
+
+                }
+
             }
             else
             {
@@ -341,6 +348,15 @@ namespace EMS.WebApp.Equipment
                 rfvToLocation.Enabled = false;
                 //hdnToLocation.Value = "0";
             }
+
+            if (ddlToStatus.SelectedItem.Text == "ICDO" || ddlFromStatus.SelectedItem.Text == "ICDI")
+            {
+                ddlTolocation.Enabled = true;
+                ddlTolocation.SelectedIndex = 0;
+                rfvToLocation.Enabled = true;
+            }
+          
+
         }
 
         void fillContainer(int EmptyYardId)

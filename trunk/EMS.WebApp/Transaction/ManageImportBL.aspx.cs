@@ -2269,20 +2269,20 @@ namespace EMS.WebApp.Transaction
                 }
             }
 
-            if (IsPresentonBLFooter)
+            if (!IsPresentonBLFooter && AllowForOnHire)
             {
-                if (AllowForOnHire)
-                {
-                    IsValidContainer = true;
-                }
+                //if (AllowForOnHire)
+                //{
+                IsValidContainer = true;
+                //}
             }
-            else
-            {
-                if (AllowForOnHire)
-                {
-                    IsValidContainer = true;
-                }
-            }
+            //else
+            //{
+            //    if (AllowForOnHire)
+            //    {
+            //        IsValidContainer = true;
+            //    }
+            //}
 
             ViewState["IsValidContainer"] = IsValidContainer;
             ViewState["LCLDuplicate"] = LCLDuplicate;

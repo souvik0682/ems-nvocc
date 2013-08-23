@@ -32,9 +32,9 @@ namespace EMS.BLL
 
 
 
-       public static string CheckVoyageEntryAbilty(int vesselId, string voyageNo, int fk_pod, DateTime? LandingDate, bool isedit)
+       public static string CheckVoyageEntryAbilty(int vesselId, string voyageNo, int fk_pod, DateTime? LandingDate, decimal XchangeRate, bool isedit)
        {
-           return EMS.DAL.VoyageDAL.CheckVoyageEntryAbilty(vesselId, voyageNo,fk_pod, LandingDate, isedit);
+           return EMS.DAL.VoyageDAL.CheckVoyageEntryAbilty(vesselId, voyageNo,fk_pod, LandingDate, XchangeRate, isedit);
        }
 
        public static int AddEditMLVoyage(string voyageId, string vesselId, string MLvoyageNo, string dtActivity, int fk_PortID, int _userId,bool isEdit)

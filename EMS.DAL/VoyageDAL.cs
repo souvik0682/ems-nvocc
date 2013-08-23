@@ -67,7 +67,7 @@ namespace EMS.DAL
         }
 
 
-        public static string CheckVoyageEntryAbilty(int vesselId, string VoyageNo, int Pod, DateTime? LandingDate, bool isEdit)
+        public static string CheckVoyageEntryAbilty(int vesselId, string VoyageNo, int Pod, DateTime? LandingDate, decimal XchangeRate, bool isEdit)
         {
             DataSet ds = new DataSet();
             using (DbQuery dq = new DbQuery("prcCheckVoyageEntryAbilty"))
@@ -76,6 +76,7 @@ namespace EMS.DAL
                 dq.AddVarcharParam("@VoyageNo", 10, VoyageNo);
                 dq.AddIntegerParam("@Pod", Pod);
                 dq.AddDateTimeParam("@LandingDate", LandingDate);
+                dq.AddDecimalParam("@XchangeRate", 12, 2, XchangeRate);
                 dq.AddBooleanParam("@isEdit", isEdit);
                 ds = dq.GetTables();
             }

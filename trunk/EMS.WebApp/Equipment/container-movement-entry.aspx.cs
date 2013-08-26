@@ -39,7 +39,7 @@ namespace EMS.WebApp.Equipment
             if (!Page.IsPostBack)
             {
                 fillAllDropdown();
-
+                CheckUserAccess(hdnContainerTransactionId.Value);
                 //if (lblTranCode.Text == string.Empty && hdnContainerTransactionId.Value == "0")
                 if (hdnTranCode.Value == string.Empty && hdnContainerTransactionId.Value == "0")
                 {
@@ -76,7 +76,7 @@ namespace EMS.WebApp.Equipment
                     FillContainers(ds.Tables[1]);
                 }
             }
-            CheckUserAccess(hdnContainerTransactionId.Value);
+            //CheckUserAccess(hdnContainerTransactionId.Value);
         }
 
         void DisableHeaderSection()
@@ -135,6 +135,7 @@ namespace EMS.WebApp.Equipment
                 {
                     ddlFromLocation.SelectedValue = _userLocation.ToString();
                     ddlFromLocation.Enabled = false;
+                    ActionOnFromLocationChange();
 
                 }
 
@@ -525,7 +526,12 @@ namespace EMS.WebApp.Equipment
 
                 int FLocation = Convert.ToInt32(ddlFromLocation.SelectedValue);
                 int TLocation = Convert.ToInt32(ddlTolocation.SelectedValue);
-                int EYard = Convert.ToInt32(ddlEmptyYard.SelectedValue);
+                int EYard = 0;
+                if (ddlEmptyYard.SelectedIndex > -1)
+                {
+                    EYard = Convert.ToInt32(ddlEmptyYard.SelectedValue);
+                }
+                
 
                 int Result = oContainerTranBLL.AddEditContainerTransaction(out TranCode, hdnTranCode.Value, GenerateContainerXMLString(),
                     Convert.ToInt32(ddlToStatus.SelectedValue), Convert.ToInt32(txtTeus.Text), Convert.ToInt32(txtFEUs.Text), Convert.ToDateTime(txtDate.Text),

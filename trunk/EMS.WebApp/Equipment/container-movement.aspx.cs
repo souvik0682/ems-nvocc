@@ -167,7 +167,7 @@ namespace EMS.WebApp.Equipment
 
                 if (_hasEditAccess)
                 {
-                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00010") + "');";
+                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00012") + "');";
                 }
                 else
                 {

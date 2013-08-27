@@ -81,7 +81,12 @@
                 <td colspan="2" style="text-align:right; width:10%">
                     <asp:Button ID="btnSave" runat="server" onclick="btnSave_Click" Text="Show" 
                         ValidationGroup="Save" />
-                    &nbsp;&nbsp;
+                   <%-- &nbsp;&nbsp;--%>
+                </td>
+                <td colspan="2" style="text-align:right; width:10%">
+                    <asp:Button ID="btnExcel" runat="server" onclick="btnExcel_Click" Text="Excel" 
+                        ValidationGroup="Excel" />
+                    <%--&nbsp;&nbsp;--%>
                 </td>
             </tr>
     

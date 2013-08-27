@@ -592,12 +592,12 @@ namespace EMS.WebApp.Equipment
 
         void ClearAll()
         {
-            txtDate.Text = string.Empty;
+            //txtDate.Text = string.Empty;
             txtFEUs.Text = string.Empty;
             txtNarration.Text = string.Empty;
             txtTeus.Text = string.Empty;
 
-            ddlFromLocation.SelectedIndex = 0;
+            //ddlFromLocation.SelectedIndex = 0;
             ddlFromStatus.SelectedIndex = 0;
             ddlToStatus.SelectedIndex = 0;
 
@@ -610,6 +610,7 @@ namespace EMS.WebApp.Equipment
             if (ddlLine.Items.Count > 0)
                 ddlLine.SelectedIndex = 0;
 
+            ddlEmptyYard.Enabled = false;
             //hdnChargeID.Value = string.Empty;
             hdnContainerTransactionId.Value = "0";
             hdnTranCode.Value = string.Empty;

@@ -48,6 +48,7 @@ namespace EMS.Entity
         public string ImportExport { get; set; }
 
         public string SlotOperatorName { get; set; }
+        public string AgentName { get; set; }
         
 
         public string LocAbbr
@@ -170,8 +171,10 @@ namespace EMS.Entity
             this.LineBLNo = string.Empty;
             this.POD = string.Empty;
             this.POL = string.Empty;
-            this.Vessel = string.Empty;
+            this.Vessel = string.Empty; 
             this.Voyage = string.Empty;
+            this.SlotOperatorName = string.Empty;
+            this.AgentName = string.Empty;
         }
 
         #endregion

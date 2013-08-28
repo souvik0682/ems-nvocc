@@ -27,29 +27,19 @@
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <table border="0" cellpadding="2" cellspacing="3" width="100%">
-                            <tr>
-                                <td>
-                                </td>
-                                <td>
-                                    Charge Name<span class="errormessage1">*</span> :
-                                </td>
-                                <td colspan="3">
-                                    <asp:TextBox ID="txtChargeName" runat="server" Width="350" Style="text-transform: uppercase;"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="rfvChargeTitle" runat="server" ErrorMessage="Please enter charge title"
-                                        ControlToValidate="txtChargeName" Display="None" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
-                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender11" runat="server" TargetControlID="rfvChargeTitle">
-                                    </cc1:ValidatorCalloutExtender>
-                                </td>
-                            </tr>
+                            
                             <tr>
                                 <td style="width: 18%;">
                                 </td>
                                 <td style="width: 15%;">
-                                    Line<span class="errormessage1"></span> :
+                                    Charge Name<span class="errormessage1">*</span> :
                                 </td>
                                 <td style="width: 20%;">
-                                    <asp:DropDownList ID="ddlLine" runat="server" Width="155">
-                                    </asp:DropDownList>
+                                    <asp:TextBox ID="txtChargeName" runat="server" Width="150" Style="text-transform: uppercase;"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="rfvChargeTitle" runat="server" ErrorMessage="Please enter charge title"
+                                        ControlToValidate="txtChargeName" Display="None" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
+                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender11" runat="server" TargetControlID="rfvChargeTitle">
+                                    </cc1:ValidatorCalloutExtender>
                                 </td>
                                 <td style="width: 19%;">
                                     Terminal Specific<span class="errormessage1">*</span>
@@ -61,25 +51,18 @@
                                         <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
                                         <asp:ListItem Text="No" Value="0"></asp:ListItem>
                                     </asp:RadioButtonList>
-                                    <asp:RequiredFieldValidator ID="rfvTerminalRequired" runat="server" ErrorMessage="Please select your choice"
-                                        Display="None" ControlToValidate="rdbFPOD" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
-                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender18" runat="server" TargetControlID="rfvTerminalRequired">
-                                    </cc1:ValidatorCalloutExtender>
+                                   
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                 </td>
                                 <td>
-                                    Location<span class="errormessage1">*</span> :
+                                    Line<span class="errormessage1"></span> :
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlHeaderLocation" runat="server" AutoPostBack="true" Width="155">
+                                    <asp:DropDownList ID="ddlLine" runat="server" Width="155">
                                     </asp:DropDownList>
-                                    <asp:RequiredFieldValidator ID="rfvHeaderLocation" runat="server" ControlToValidate="ddlHeaderLocation"
-                                        Display="None" ErrorMessage="Please select location" InitialValue="0" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
-                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvHeaderLocation">
-                                    </cc1:ValidatorCalloutExtender>
                                 </td>
                                 <td>
                                     <%--Washing Charge<span class="errormessage1">*</span> :--%>
@@ -110,35 +93,31 @@
                             <tr>
                                 <td>
                                 </td>
+                                <td>                                    
+                                    Location<span class="errormessage1">*</span> :</td>
                                 <td>
-                                    Service:
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="txtService" runat="server" Width="150"></asp:TextBox>
-                                </td>
-                                <td>
-                                    FPOD<span class="errormessage1">*</span> :
-                                </td>
-                                <td>
-                                    <asp:RadioButtonList ID="rdbFPOD" runat="server" RepeatDirection="Horizontal"
-                                        RepeatLayout="Flow" AutoPostBack="true" Enabled="false">
-                                        <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
-                                        <asp:ListItem Text="No" Value="0"></asp:ListItem>
-                                    </asp:RadioButtonList>
-                                    <asp:RequiredFieldValidator ID="rfvPS" runat="server" ErrorMessage="Please select your choice"
-                                        Display="None" ControlToValidate="rdbFPOD" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
-                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender13" runat="server" TargetControlID="rfvPS">
+                                    <asp:DropDownList ID="ddlHeaderLocation" runat="server" AutoPostBack="true" Width="155">
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="rfvHeaderLocation" runat="server" ControlToValidate="ddlHeaderLocation"
+                                        Display="None" ErrorMessage="Please select location" InitialValue="0" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
+                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvHeaderLocation">
                                     </cc1:ValidatorCalloutExtender>
+                                </td>
+                                <td>
+                                    FPOD :
+                                </td>
+                                <td>
+                                   <asp:TextBox ID="txtFPOD" runat="server" Width="150"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                 </td>
                                 <td>
-                                    Charge Code
-                                </td>
+                                   
+                                    Service :</td>
                                 <td>
-                                    <asp:TextBox ID="txtChargeCode" runat="server" Width="150"></asp:TextBox>
+                                    <asp:DropDownList ID="ddlService" runat="server" Width="155"></asp:DropDownList>
                                 </td>
                                 <td>
                                     Invoice Link :
@@ -246,42 +225,21 @@
                                                     Terminal
                                                 </HeaderTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Washing Type" Visible="false">
-                                                <ItemTemplate>
-                                                    <%--<asp:HiddenField ID="hdnWashingTypeId" runat="server" Value='<%# Eval("WashingType")%>' />
-                                                    <%# (Eval("WashingType").ToString() == "0" ? string.Empty : ddlMWashingType.Items.FindByValue(Eval("WashingType").ToString()).Text )%>--%>
-                                                </ItemTemplate>
-                                                <HeaderTemplate>
-                                                    <asp:DropDownList ID="ddlFWashingType" runat="server" Width="90" Enabled="false">
-                                                    </asp:DropDownList>
-                                                    <asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select washing type"
-                                                        Display="None" ValidationGroup="vgGridFooter" ControlToValidate="ddlFWashingType"
-                                                        InitialValue="0"></asp:RequiredFieldValidator>
-                                                    <cc1:ValidatorCalloutExtender ID="vceW" runat="server" TargetControlID="rfvWashing">
-                                                    </cc1:ValidatorCalloutExtender>
-                                                    <br />
-                                                    <br />
-                                                    Washing Type
-                                                </HeaderTemplate>
-                                            </asp:TemplateField>
+                                            
                                             <asp:TemplateField HeaderText="Type" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
                                                 <ItemTemplate>
                                                     <%--<asp:Label ID="lblRatePerBl" runat="server" Text='<%# Eval("RatePerBL")%>'></asp:Label>--%></ItemTemplate>
                                                 <HeaderTemplate>
-                                                    <cc2:CustomTextBox ID="txtRatePerBL" runat="server" Width="60" Type="Decimal" MaxLength="10"
-                                                        Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
-                                                    <cc1:TextBoxWatermarkExtender ID="tw3" runat="server" TargetControlID="txtRatePerBL"
-                                                        WatermarkText="0.00">
-                                                    </cc1:TextBoxWatermarkExtender>
-                                                    <asp:RequiredFieldValidator ID="rfvRatePerBl" runat="server" ErrorMessage="Please enter rate / BL"
+                                                   <asp:DropDownList ID="ddlType" runat="server" Width="100"></asp:DropDownList>
+                                                   <%-- <asp:RequiredFieldValidator ID="rfvRatePerBl" runat="server" ErrorMessage="Please enter rate / BL"
                                                         Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtRatePerBL"></asp:RequiredFieldValidator>
                                                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender4" runat="server" TargetControlID="rfvRatePerBl">
-                                                    </cc1:ValidatorCalloutExtender>
+                                                    </cc1:ValidatorCalloutExtender>--%>
                                                     <br />
                                                     <br />
                                                     Type
                                                 </HeaderTemplate>
-                                                <HeaderStyle HorizontalAlign="Left" />
+                                                <HeaderStyle HorizontalAlign="Center" />
                                                 <ItemStyle HorizontalAlign="Right" />
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Size" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
@@ -289,20 +247,22 @@
                                                     <%--<asp:Label ID="lblRatePerTEU" runat="server" Text='<%# ddlChargeType.SelectedValue == "6" ? Eval("RatePerCBM") : Eval("RatePerTEU") %>'></asp:Label>--%>
                                                 </ItemTemplate>
                                                 <HeaderTemplate>
-                                                    <cc2:CustomTextBox ID="txtRatePerTEU" runat="server" Width="60" Type="Decimal" MaxLength="10"
-                                                        Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
-                                                    <cc1:TextBoxWatermarkExtender ID="tw4" runat="server" TargetControlID="txtRatePerTEU"
+                                                     <asp:DropDownList ID="ddlSize" runat="server" Width="100">
+                                                     <asp:ListItem Selected="True" Text="20"></asp:ListItem>
+                                                     <asp:ListItem Text="40"></asp:ListItem>
+                                                     </asp:DropDownList>
+                                                   <%-- <cc1:TextBoxWatermarkExtender ID="tw4" runat="server" TargetControlID="txtRatePerTEU"
                                                         WatermarkText="0.00">
                                                     </cc1:TextBoxWatermarkExtender>
                                                     <asp:RequiredFieldValidator ID="rfvRatePerTEU" runat="server" ErrorMessage="Please enter rate"
                                                         Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtRatePerTEU"></asp:RequiredFieldValidator>
                                                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender5" runat="server" TargetControlID="rfvRatePerTEU">
-                                                    </cc1:ValidatorCalloutExtender>
+                                                    </cc1:ValidatorCalloutExtender>--%>
                                                     <br />
                                                     <br />
                                                     <asp:Label ID="lblFRateTeu" runat="server" Text="Size"></asp:Label>
                                                 </HeaderTemplate>
-                                                <HeaderStyle HorizontalAlign="Left" />
+                                                <HeaderStyle HorizontalAlign="Center" />
                                                 <ItemStyle HorizontalAlign="Right" />
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Rate/UNIT" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">

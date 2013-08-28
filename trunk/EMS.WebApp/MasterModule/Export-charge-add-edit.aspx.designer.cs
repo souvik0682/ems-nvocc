@@ -49,15 +49,6 @@ namespace EMS.WebApp.MasterModule {
         protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender11;
         
         /// <summary>
-        /// ddlLine control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlLine;
-        
-        /// <summary>
         /// rdbTerminalRequired control.
         /// </summary>
         /// <remarks>
@@ -67,49 +58,13 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.RadioButtonList rdbTerminalRequired;
         
         /// <summary>
-        /// rfvTerminalRequired control.
+        /// ddlLine control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTerminalRequired;
-        
-        /// <summary>
-        /// ValidatorCalloutExtender18 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender18;
-        
-        /// <summary>
-        /// ddlHeaderLocation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlHeaderLocation;
-        
-        /// <summary>
-        /// rfvHeaderLocation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvHeaderLocation;
-        
-        /// <summary>
-        /// ValidatorCalloutExtender14 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender14;
+        protected global::System.Web.UI.WebControls.DropDownList ddlLine;
         
         /// <summary>
         /// rdbDestinationCharge control.
@@ -148,49 +103,49 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.RadioButtonList rdbWashing;
         
         /// <summary>
-        /// txtService control.
+        /// ddlHeaderLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtService;
+        protected global::System.Web.UI.WebControls.DropDownList ddlHeaderLocation;
         
         /// <summary>
-        /// rdbFPOD control.
+        /// rfvHeaderLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdbFPOD;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvHeaderLocation;
         
         /// <summary>
-        /// rfvPS control.
+        /// ValidatorCalloutExtender14 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPS;
+        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender14;
         
         /// <summary>
-        /// ValidatorCalloutExtender13 control.
+        /// txtFPOD control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender13;
+        protected global::System.Web.UI.WebControls.TextBox txtFPOD;
         
         /// <summary>
-        /// txtChargeCode control.
+        /// ddlService control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtChargeCode;
+        protected global::System.Web.UI.WebControls.DropDownList ddlService;
         
         /// <summary>
         /// ddlInvLink control.

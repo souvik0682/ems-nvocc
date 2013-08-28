@@ -66,7 +66,7 @@
                         <table border="0" cellpadding="0" cellspacing="2" width="100%">
                             <tr>
                                 <td style="width: 10%;">
-                                    B/L No :
+                                    Booking No
                                 </td>
                                 <td style="width: 5%;">
                                     <asp:HiddenField ID="hdnBLId" runat="server" Value="0" />
@@ -114,78 +114,35 @@
                                         </Animations>
                                     </cc1:AutoCompleteExtender>
                                 </td>
-                                <td style="width: 10%;">
-                                    Invoice No. :
+                                <td style="width: 3%;">
+                                    POR
                                 </td>
                                 <td style="width: 5%;">
-                                    <asp:HiddenField ID="hdnInvoiceNo" runat="server" Value="0" />
-                                    <asp:TextBox ID="txtInvoiceNo" runat="server" Width="130" AutoPostBack="True" onkeyup="SetContextKey();"
-                                        Enabled="true" Style="text-transform: uppercase;"></asp:TextBox>
-                                    <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx" ID="AutoCompleteExtender1"
-                                        TargetControlID="txtBlNo" ServicePath="~/GetLocation.asmx" ServiceMethod="GetBLNoList"
-                                        MinimumPrefixLength="1" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
-                                        CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
-                                        CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
-                                        ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected"
-                                        UseContextKey="true">
-                                        <Animations>
-                                        <OnShow>
-                                            <Sequence>
-                                                <%-- Make the completion list transparent and then show it --%>
-                                                <OpacityAction Opacity="0" />
-                                                <HideAction Visible="true" />
-                            
-                                                <%--Cache the original size of the completion list the first time
-                                                    the animation is played and then set it to zero --%>
-                                                <ScriptAction Script="
-                                                    // Cache the size and setup the initial size
-                                                    var behavior = $find('AutoCompleteEx');
-                                                    if (!behavior._height) {
-                                                        var target = behavior.get_completionList();
-                                                        behavior._height = target.offsetHeight - 2;
-                                                        target.style.height = '0px';
-                                                    }" />
-                            
-                                                <%-- Expand from 0px to the appropriate size while fading in --%>
-                                                <Parallel Duration=".4">
-                                                    <FadeIn />
-                                                    <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteEx')._height" />
-                                                </Parallel>
-                                            </Sequence>
-                                        </OnShow>
-                                        <OnHide>
-                                            <%-- Collapse down to 0px and fade out --%>
-                                            <Parallel Duration=".4">
-                                                <FadeOut />
-                                                <Length PropertyKey="height" StartValueScript="$find('AutoCompleteEx')._height" EndValue="0" />
-                                            </Parallel>
-                                        </OnHide>
-                                        </Animations>
-                                    </cc1:AutoCompleteExtender>
+                                    <asp:TextBox ID="txtPOR" runat="server"></asp:TextBox>
                                 </td>
                                 <td style="width: 10%;">
-                                    Booking Party
+                                    Vessel
                                 </td>
                                 <td style="width: 5%;">
                                     <asp:TextBox ID="txtBookingParty" runat="server" Width="130" AutoPostBack="True"
                                         onkeyup="SetContextKey();" Enabled="false" Style="text-transform: uppercase;"></asp:TextBox>
                                 </td>
                                 <td style="width: 3%;">
-                                    Containers :
+                                    Booking Party :
                                 </td>
                                 <td style="width: 10%;">
-                                    <asp:TextBox ID="txtContainers" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtContainers" runat="server" Width="200" Enabled="false"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    B/L Date :
+                                    Booking Date :
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtBLDate" runat="server" Width="130" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td class="style1">
-                                    Vessel :
+                                    POL :
                                 </td>
                                 <td>
                                     <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
@@ -195,31 +152,27 @@
                                     <asp:TextBox ID="txtVessel" runat="server" Width="130" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
-                                    POL :
+                                    Voyage :
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtPOL" runat="server" Width="130" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td style="width: 11%;">
-                                    Remarks :
+                                    Shipper :
                                 </td>
                                 <td style="width: 10%;">
-                                    <asp:TextBox ID="txtRemark" TextMode="MultiLine" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtRemark" runat="server" Width="200" Enabled="false"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    House B/L No :
+                                    B/L No.
                                 </td>
                                 <td>
-                                    <%-- <asp:RequiredFieldValidator ID="rfvSalutation" runat="server" ErrorMessage="Please select salutation"
-                                Display="None" ControlToValidate="ddlSalutation" ValidationGroup="vgVendor" InitialValue="0"></asp:RequiredFieldValidator>
-                            <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvSalutation" WarningIconImageUrl="" >
-                            </cc1:ValidatorCalloutExtender>--%>
-                                    <asp:TextBox ID="txtHouseBLNo" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="TextBox3" runat="server" Width="130"></asp:TextBox>
                                 </td>
                                 <td class="style1">
-                                    Voyage :
+                                    POD :
                                 </td>
                                 <td>
                                     <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
@@ -229,10 +182,39 @@
                                     <asp:TextBox ID="txtVoyage" runat="server" Width="130" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
-                                    Shipment Type :
+                                    Containers :
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtShipmentType" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                </td>
+                                <td>
+                                    Remarks :
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="TextBox4" TextMode="MultiLine" runat="server" Width="200"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>BL Date :
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="TextBox5" runat="server"  Width="130"></asp:TextBox>
+                                </td>
+                                <td class="style1">
+                                    FPOD :
+                                </td>
+                                <td>
+                                    <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
+                                Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
+                            <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
+                            </cc1:ValidatorCalloutExtender>--%>
+                                    <asp:TextBox ID="TextBox1" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                </td>
+                                <td>
+                                    Shipment Type :
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="TextBox2" runat="server" Width="130" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
                                     <td>
@@ -262,10 +244,12 @@
                     <fieldset style="width: 98%;">
                         <legend>Invoice Status</legend>
                         <table style="width: 100%;">
-                        <tr><td style="text-align:right;">
-                        <asp:Button ID="btnAddFreightInvoice" runat="server" Text="Add Freight Invoice" OnClientClick="return false;" />
-                        <asp:Button ID="btnAddOtherInvoice" runat="server" Text="Add Other Invoice" OnClientClick="return false;" />
-                        </td></tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <asp:Button ID="btnAddFreightInvoice" runat="server" Text="Add Freight Invoice" OnClientClick="return false;" />
+                                    <asp:Button ID="btnAddOtherInvoice" runat="server" Text="Add Other Invoice" OnClientClick="return false;" />
+                                </td>
+                            </tr>
                             <tr>
                                 <td>
                                     <asp:Button ID="btnTemp11" runat="server" Style="display: none;" />
@@ -370,8 +354,7 @@
                                                 <HeaderTemplate>
                                                     Add Money Recpt.</HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <a id="aMoneyRecpt" runat="server" >
-                                                        
+                                                    <a id="aMoneyRecpt" runat="server">
                                                         <img alt="Add" src="../Images/ADD.JPG" /></a>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
@@ -383,7 +366,7 @@
                                                 <ItemTemplate>
                                                     <%-- <a href="#">
                                                         <img alt="Add" src="../Images/ADD.JPG" /></a>--%>
-                                                    <a id="aAddCrdtNote" runat="server" >
+                                                    <a id="aAddCrdtNote" runat="server">
                                                         <img alt="Add" src="../Images/ADD.JPG" /></a>
                                                     <%--style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Ammount")) ? "display:block;": "display:none;" %>'>--%>
                                                 </ItemTemplate>

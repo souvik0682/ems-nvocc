@@ -54,8 +54,8 @@ namespace EMS.Utilities
         RoleMaster = 113,
         ImportBL = 3,
         Invoice = 53,
-        SlotMaster = 201
-        AgentMaster = 202
+        SlotMaster = 201,
+        AgentMaster = 202,
         ServiceMaster = 203
     };
 

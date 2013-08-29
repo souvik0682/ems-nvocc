@@ -118,7 +118,8 @@
                                     POR
                                 </td>
                                 <td style="width: 5%;">
-                                    <asp:TextBox ID="txtPOR" runat="server"></asp:TextBox>
+   <%--                                 <asp:TextBox ID="txtPOR" runat="server"></asp:TextBox>--%>
+                                    <asp:TextBox ID="TextBox6" runat="server" Width="130" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td style="width: 10%;">
                                     Vessel
@@ -141,7 +142,7 @@
                                 <td>
                                     <asp:TextBox ID="txtBLDate" runat="server" Width="130" Enabled="false"></asp:TextBox>
                                 </td>
-                                <td class="style1">
+                                <td style="width: 3%;">
                                     POL :
                                 </td>
                                 <td>
@@ -149,7 +150,7 @@
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
                             </cc1:ValidatorCalloutExtender>--%>
-                                    <asp:TextBox ID="txtVessel" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                   <asp:TextBox ID="txtBookingDate" runat="server" Width="130" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
                                     Voyage :

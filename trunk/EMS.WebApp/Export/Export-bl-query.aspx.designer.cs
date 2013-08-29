@@ -76,13 +76,13 @@ namespace EMS.WebApp.Transaction {
         protected global::AjaxControlToolkit.AutoCompleteExtender autoComplete1;
         
         /// <summary>
-        /// txtPOR control.
+        /// TextBox6 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPOR;
+        protected global::System.Web.UI.WebControls.TextBox TextBox6;
         
         /// <summary>
         /// txtBookingParty control.
@@ -112,13 +112,13 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.TextBox txtBLDate;
         
         /// <summary>
-        /// txtVessel control.
+        /// txtBookingDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtVessel;
+        protected global::System.Web.UI.WebControls.TextBox txtBookingDate;
         
         /// <summary>
         /// txtPOL control.

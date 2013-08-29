@@ -26,9 +26,9 @@ namespace EMS.WebApp.MasterModule
         protected void rdbDestinationCharge_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (rdbDestinationCharge.SelectedValue == "1")
-                rdbFPOD.Enabled = true;
+                rdbDestinationCharge.Enabled = true;
             else
-                rdbFPOD.Enabled = false;
+                rdbDestinationCharge.Enabled = false;
         }
 
         protected void rdbTerminalRequired_SelectedIndexChanged(object sender, EventArgs e)

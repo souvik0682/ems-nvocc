@@ -147,6 +147,29 @@ namespace EMS.DAL
             return lstLoc;
         }
 
+        //public static List<ISlot> GetOperator(SearchCriteria searchCriteria)
+        //{
+        //    string strExecution = "[exp].[prcGetSlotOperatorList]";
+        //    List<ISlot> lstSlot = new List<ISlot>();
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddVarcharParam("@SchOperatorName", 50, searchCriteria.SlotOperatorName);
+        //        oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
+        //        oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
+        //        DataTableReader reader = oDq.GetTableReader();
+
+        //        while (reader.Read())
+        //        {
+        //            ISlot Oper = new SlotEntity(reader);
+        //            lstSlot.Add(Oper);
+        //        }
+
+        //        reader.Close();
+        //    }
+
+        //    return lstSlot;
+        //}
         public static ILocation GetLocation(int locId, char isActiveOnly, SearchCriteria searchCriteria)
         {
             string strExecution = "[common].[uspGetLocation]";

@@ -49,6 +49,7 @@ namespace EMS.Entity
 
         public string SlotOperatorName { get; set; }
         public string AgentName { get; set; }
+        public string ServiceName { get; set; }
         
 
         public string LocAbbr
@@ -175,6 +176,7 @@ namespace EMS.Entity
             this.Voyage = string.Empty;
             this.SlotOperatorName = string.Empty;
             this.AgentName = string.Empty;
+            this.ServiceName = string.Empty;
         }
 
         #endregion

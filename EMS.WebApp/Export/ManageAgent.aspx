@@ -92,8 +92,8 @@
                         </Triggers>
                         <ContentTemplate>
                             <asp:GridView ID="gvwAgent" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                                BorderStyle="None" BorderWidth="0" OnPageIndexChanging="gvwImportHaulage_PageIndexChanging"
-                                OnRowDataBound="gvwImportHaulage_RowDataBound" OnRowCommand="gvwAgent_RowCommand"
+                                BorderStyle="None" BorderWidth="0" OnPageIndexChanging="gvwAgent_PageIndexChanging"
+                                OnRowDataBound="gvwAgent_RowDataBound" OnRowCommand="gvwAgent_RowCommand"
                                 Width="100%">
                                 <PagerSettings Mode="NumericFirstLast" Position="TopAndBottom" />
                                 <PagerStyle CssClass="gridviewpager" />
@@ -160,6 +160,7 @@
                                                 Height="16" Width="16" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
+
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />

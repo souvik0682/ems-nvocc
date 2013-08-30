@@ -65,7 +65,7 @@
                         <legend>B/L Detail</legend>
                         <table border="0" cellpadding="0" cellspacing="2" width="100%">
                             <tr>
-                                <td style="width: 10%;">
+                                <td style="width: 7%;">
                                     Booking No
                                 </td>
                                 <td style="width: 5%;">
@@ -114,25 +114,25 @@
                                         </Animations>
                                     </cc1:AutoCompleteExtender>
                                 </td>
-                                <td style="width: 3%;">
+                                <td style="width: 2%;">
                                     POR
                                 </td>
                                 <td style="width: 5%;">
    <%--                                 <asp:TextBox ID="txtPOR" runat="server"></asp:TextBox>--%>
                                     <asp:TextBox ID="TextBox6" runat="server" Width="130" Enabled="false"></asp:TextBox>
                                 </td>
-                                <td style="width: 10%;">
+                                <td style="width: 8%;">
                                     Vessel
                                 </td>
                                 <td style="width: 5%;">
                                     <asp:TextBox ID="txtBookingParty" runat="server" Width="130" AutoPostBack="True"
                                         onkeyup="SetContextKey();" Enabled="false" Style="text-transform: uppercase;"></asp:TextBox>
                                 </td>
-                                <td style="width: 3%;">
+                                <td style="width: 2%;">
                                     Booking Party :
                                 </td>
-                                <td style="width: 10%;">
-                                    <asp:TextBox ID="txtContainers" runat="server" Width="200" Enabled="false"></asp:TextBox>
+                                <td style="width: 20%;">
+                                    <asp:TextBox ID="txtContainers" runat="server" Width="350" Enabled="false"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -162,7 +162,7 @@
                                     Shipper :
                                 </td>
                                 <td style="width: 10%;">
-                                    <asp:TextBox ID="txtRemark" runat="server" Width="200" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtRemark" runat="server" Width="350" Enabled="false"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -192,7 +192,7 @@
                                     Remarks :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="TextBox4" TextMode="MultiLine" runat="server" Width="200"></asp:TextBox>
+                                    <asp:TextBox ID="TextBox4" runat="server" Width="350"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -369,6 +369,19 @@
                                                         <img alt="Add" src="../Images/ADD.JPG" /></a>--%>
                                                     <a id="aAddCrdtNote" runat="server">
                                                         <img alt="Add" src="../Images/ADD.JPG" /></a>
+                                                    <%--style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Ammount")) ? "display:block;": "display:none;" %>'>--%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField>
+                                                <HeaderStyle CssClass="gridviewheader_center" />
+                                                <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" />
+                                                <HeaderTemplate>
+                                                    Invoice Status</HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <%-- <a href="#">
+                                                        <img alt="Add" src="../Images/ADD.JPG" /></a>--%>
+                                                    <a id="dStatus" runat="server">
+                                                        <img alt="Add" src="../Images/status.JPG" /></a>
                                                     <%--style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Ammount")) ? "display:block;": "display:none;" %>'>--%>
                                                 </ItemTemplate>
                                             </asp:TemplateField>

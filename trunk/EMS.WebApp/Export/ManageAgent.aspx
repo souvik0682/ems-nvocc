@@ -103,12 +103,12 @@
                                 <Columns>
                                     <asp:TemplateField HeaderText="Sl#">
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="5%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="4%" />
                                     </asp:TemplateField>
                                     
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="6%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHLine" runat="server" CommandName="Sort" CommandArgument="LineName"
                                                 Text="Line"></asp:LinkButton></HeaderTemplate>
@@ -138,7 +138,7 @@
 
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="12%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="18%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHPhone" runat="server" CommandName="Sort" CommandArgument="Phone"
                                                 Text="Phone"></asp:LinkButton></HeaderTemplate>
@@ -146,7 +146,7 @@
 
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="20%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="18%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHContactPerson" runat="server" CommandName="Sort" CommandArgument="ContactPerson"
                                                 Text="Contact Person"></asp:LinkButton></HeaderTemplate>

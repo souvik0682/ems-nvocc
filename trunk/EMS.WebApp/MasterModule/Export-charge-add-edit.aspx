@@ -188,6 +188,28 @@
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
                             </tr>
+                            <tr> 
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    Allow Rate Change<span class="errormessage1">*</span> :
+                                </td>
+                                <td>
+                                    <asp:RadioButtonList ID="rdbRateChange" runat="server" RepeatDirection="Horizontal"
+                                        RepeatLayout="Flow">
+                                        <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="No" Value="0"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                    <asp:RequiredFieldValidator ID="rfvRateChange" runat="server" ErrorMessage="Please select your choice"
+                                        Display="None" ControlToValidate="rdbRateChange" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
+                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender17" runat="server" TargetControlID="rfvRateChange">
+                                    </cc1:ValidatorCalloutExtender>
+                                </td>
+                            </tr>
                             <tr>
                                 <td colspan="5" style="padding-top: 30px; border: none;" align="center">
                                     <%-- <asp:UpdatePanel ID="UpdatePanel2" runat="server">

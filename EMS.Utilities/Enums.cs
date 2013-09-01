@@ -18,7 +18,7 @@ namespace EMS.Utilities
             ContainerMovementStatus = 7,
             VendorList = 8,
             InvoiceLink = 9,
-            Booking = 101
+            Booking = 101,
             Vessel = 102
         }
 

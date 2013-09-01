@@ -19,7 +19,8 @@ namespace EMS.Utilities
             VendorList = 8,
             InvoiceLink = 9,
             Booking = 101,
-            Vessel = 102
+            Vessel = 102,
+            ExpVoyage = 103
         }
 
 

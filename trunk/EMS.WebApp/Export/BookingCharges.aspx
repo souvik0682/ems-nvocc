@@ -30,14 +30,14 @@
                 <asp:UpdatePanel ID="upCharges" runat="server" UpdateMode="Always">
                     <ContentTemplate>
                         <table style="width: 100%;">
-                            <tr>
+ <%--                           <tr>
                                 <td>
                                     Shipper
                                 </td>
                                 <td colspan="4">
                                     <asp:TextBox ID="txtShipper" runat="server" Width="855px" Enabled="false"></asp:TextBox>
                                 </td>
-                            </tr>
+                            </tr>--%>
                             <tr>
                                 <td>
                                     POL
@@ -125,13 +125,20 @@
                                     <asp:TextBox ID="txtRemarks" runat="server" Width="250px" TextMode="MultiLine" Rows="3"></asp:TextBox>
                                 </td>
                                 <td>
+                                    Shipper
+                                </td>
+                                <td colspan="4">
+                                    <asp:TextBox ID="txtShipper" runat="server" Width="250px" TextMode="MultiLine" Rows="3" Enabled="false"></asp:TextBox>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
                                     Rate Reference
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtRateReference" runat="server" Width="250px"></asp:TextBox>
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
                                     Rate Type
                                 </td>
@@ -140,7 +147,10 @@
                                         <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
-                                <td>
+                             
+                            </tr>
+                            <tr>
+                               <td>
                                     Upload
                                 </td>
                                 <td>

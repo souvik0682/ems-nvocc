@@ -101,6 +101,24 @@
                             </tr>
                             <tr>
                                 <td>
+                                    Refund Payable
+                                </td>
+                                <td>
+                                    <asp:RadioButtonList ID="rdblRefund" runat="server" RepeatDirection="Horizontal"
+                                        RepeatLayout="Flow">
+                                        <asp:ListItem Text="Yes" Value="Y" Selected="True"></asp:ListItem>
+                                        <asp:ListItem Text="No" Value="N"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </td>
+                                <td>
+                                    Refund Payable To
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="TextBox1" runat="server" Width="250px" Text="Auto Correct"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     Remarks
                                 </td>
                                 <td>

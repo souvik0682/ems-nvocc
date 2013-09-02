@@ -238,6 +238,24 @@ namespace EMS.WebApp.Export {
         protected global::EMS.WebApp.CustomControls.CustomTextBox txtCharged;
         
         /// <summary>
+        /// txtRefund control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtRefund;
+        
+        /// <summary>
+        /// txtBrokerageBasic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtBrokerageBasic;
+        
+        /// <summary>
         /// btnAdd control.
         /// </summary>
         /// <remarks>

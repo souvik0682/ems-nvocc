@@ -305,7 +305,7 @@
                                                             </td>
                                                             <td style="width: 4%;">
                                                                 <asp:TextBox ID="txtShipper" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="250" TabIndex="1"></asp:TextBox>
+                                                                    Width="250" TabIndex="1" TextMode="MultiLine" Rows="3"></asp:TextBox>
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 Description of Goods:
@@ -324,7 +324,7 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtConsignee" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="250" TabIndex="1"></asp:TextBox><br />
+                                                                    Width="250" TabIndex="1" TextMode="MultiLine" Rows="3"></asp:TextBox><br />
                                                                 <asp:RequiredFieldValidator ID="rfvConsignee" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtConsignee" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
@@ -346,14 +346,14 @@
                                                             </td>
                                                             <td style="width: 4%;">
                                                                 <asp:TextBox ID="txtNotifyingParty" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="250" TabIndex="5"></asp:TextBox>
+                                                                    Width="250" TabIndex="5" TextMode="MultiLine" Rows="3"></asp:TextBox>
                                                             </td>
                                                             <td style="width: 28%;">
-                                                                BL Closure:
+                                                                BL Clause:
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtBLClosure" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="250" TabIndex="7"></asp:TextBox><br />
+                                                                    Width="250" TabIndex="7" TextMode="MultiLine" Rows="3"></asp:TextBox><br />
                                                             </td>
                                                         </tr>
                                                         <tr>

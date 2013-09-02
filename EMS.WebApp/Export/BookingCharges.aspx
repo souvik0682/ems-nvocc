@@ -165,6 +165,12 @@
                                                 <td style="text-align: right; font-weight: bold">
                                                     Charged
                                                 </td>
+                                                <td style="text-align: right; font-weight: bold">
+                                                    Refund
+                                                </td>
+                                                <td style="text-align: right; font-weight: bold">
+                                                    Brokerage Basic
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -228,6 +234,18 @@
                                                 </td>
                                                 <td>
                                                     <cc2:CustomTextBox ID="txtCharged" runat="server" Width="80" Type="Decimal" MaxLength="10"
+                                                        Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox>
+                                                    <br />
+                                                    &nbsp;
+                                                </td>
+                                                <td>
+                                                    <cc2:CustomTextBox ID="txtRefund" runat="server" Width="80" Type="Decimal" MaxLength="10"
+                                                        Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox>
+                                                    <br />
+                                                    &nbsp;
+                                                </td>
+                                                <td>
+                                                    <cc2:CustomTextBox ID="txtBrokerageBasic" runat="server" Width="80" Type="Decimal" MaxLength="10"
                                                         Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox>
                                                     <br />
                                                     &nbsp;

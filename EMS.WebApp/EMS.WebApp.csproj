@@ -13,6 +13,7 @@
     <RootNamespace>EMS.WebApp</RootNamespace>
     <AssemblyName>EMS.WebApp</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -61,6 +62,7 @@
   <ItemGroup>
     <Content Include="CustomControls\AC_CANotice.ascx" />
     <Content Include="CustomControls\AC_CFSCode.ascx" />
+    <Content Include="CustomControls\AC_CHA.ascx" />
     <Content Include="CustomControls\AC_Consignee.ascx" />
     <Content Include="CustomControls\AC_DeliveryTo.ascx" />
     <Content Include="CustomControls\AC_NParty.ascx" />
@@ -102,6 +104,7 @@
     <Content Include="Import\EDI_Custom.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="MasterModule\AddEditCountry.aspx" />
+    <Content Include="MasterModule\ExpAddEditSlotCost.aspx" />
     <Content Include="MasterModule\AddEditLine.aspx" />
     <Content Include="MasterModule\AddEditPort.aspx" />
     <Content Include="MasterModule\AddEditSTax.aspx" />
@@ -109,6 +112,7 @@
     <Content Include="MasterModule\AddEditVoyage.aspx" />
     <Content Include="MasterModule\charge-add-edit.aspx" />
     <Content Include="MasterModule\charge-list.aspx" />
+    <Content Include="MasterModule\ExpSlotCostList.aspx" />
     <Content Include="MasterModule\Image\Chrysanthemum.jpg" />
     <Content Include="MasterModule\Image\Defaultlogo.png" />
     <Content Include="MasterModule\Image\Hydrangeas.jpg" />
@@ -197,7 +201,6 @@
     <Content Include="Transaction\WaiverFile\TASK-BL.txt" />
     <Content Include="Unauthorized.aspx" />
     <Content Include="View\AddEditCustomer.aspx" />
-    <Content Include="View\AddEditLocation.aspx" />
     <Content Include="View\AddEditUser.aspx" />
     <Content Include="View\ChangePassword.aspx" />
     <Content Include="View\AddEditExchRate.aspx" />
@@ -238,6 +241,13 @@
     </Compile>
     <Compile Include="CustomControls\AC_CFSCode.ascx.designer.cs">
       <DependentUpon>AC_CFSCode.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\AC_CHA.ascx.cs">
+      <DependentUpon>AC_CHA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomControls\AC_CHA.ascx.designer.cs">
+      <DependentUpon>AC_CHA.ascx</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\AC_Consignee.ascx.cs">
       <DependentUpon>AC_Consignee.ascx</DependentUpon>
@@ -405,6 +415,13 @@
     <Compile Include="MasterModule\AddEditCountry.aspx.designer.cs">
       <DependentUpon>AddEditCountry.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MasterModule\ExpAddEditSlotCost.aspx.cs">
+      <DependentUpon>ExpAddEditSlotCost.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\ExpAddEditSlotCost.aspx.designer.cs">
+      <DependentUpon>ExpAddEditSlotCost.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MasterModule\AddEditLine.aspx.cs">
       <DependentUpon>AddEditLine.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -453,6 +470,13 @@
     </Compile>
     <Compile Include="MasterModule\charge-list.aspx.designer.cs">
       <DependentUpon>charge-list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\ExpSlotCostList.aspx.cs">
+      <DependentUpon>ExpSlotCostList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\ExpSlotCostList.aspx.designer.cs">
+      <DependentUpon>ExpSlotCostList.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterModule\import-haulage-chrg-add-edit.aspx.cs">
       <DependentUpon>import-haulage-chrg-add-edit.aspx</DependentUpon>
@@ -632,13 +656,6 @@
     </Compile>
     <Compile Include="View\AddEditCustomer.aspx.designer.cs">
       <DependentUpon>AddEditCustomer.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="View\AddEditLocation.aspx.cs">
-      <DependentUpon>AddEditLocation.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="View\AddEditLocation.aspx.designer.cs">
-      <DependentUpon>AddEditLocation.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\AddEditUser.aspx.cs">
       <DependentUpon>AddEditUser.aspx</DependentUpon>

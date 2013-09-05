@@ -50,8 +50,8 @@ namespace EMS.Entity
         public string SlotOperatorName { get; set; }
         public string AgentName { get; set; }
         public string ServiceName { get; set; }
-        
 
+        public IList<string> StringParams { get; set; }
         public string LocAbbr
         {
             get;
@@ -142,7 +142,7 @@ namespace EMS.Entity
 
         public SearchCriteria()
         {
-
+            StringParams = new List<string>();
         }
 
         #endregion
@@ -180,5 +180,8 @@ namespace EMS.Entity
         }
 
         #endregion
+
+
+      
     }
 }

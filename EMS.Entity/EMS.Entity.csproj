@@ -73,6 +73,7 @@
     <Compile Include="RoleEntity.cs" />
     <Compile Include="RoleMenuEntity.cs" />
     <Compile Include="SearchCriteria.cs" />
+    <Compile Include="SLOTCOST.cs" />
     <Compile Include="UserEntity.cs" />
     <Compile Include="UserPermission.cs" />
     <Compile Include="VendorEntity.cs" />

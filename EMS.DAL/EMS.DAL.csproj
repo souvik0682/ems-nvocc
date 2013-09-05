@@ -47,6 +47,7 @@
     <Compile Include="DALReport.cs" />
     <Compile Include="EDIDAL.cs" />
     <Compile Include="EquipmentDAL.cs" />
+    <Compile Include="ExpSlotCost.cs" />
     <Compile Include="IGMReportDAL.cs" />
     <Compile Include="ImportBLDAL.cs" />
     <Compile Include="ImportHaulageDAL.cs" />

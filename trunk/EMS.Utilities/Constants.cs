@@ -56,7 +56,9 @@ namespace EMS.Utilities
         Invoice = 53,
         SlotMaster = 201,
         AgentMaster = 202,
-        ServiceMaster = 203
+        ServiceMaster = 203, 
+        Booking = 250
+
     };
 
     public enum UserRole

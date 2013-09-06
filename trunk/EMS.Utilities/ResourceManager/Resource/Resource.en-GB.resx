@@ -363,4 +363,7 @@
   <data name="ERR00081" xml:space="preserve">
     <value>Record added successfully.</value>
   </data>
+  <data name="ERR00082" xml:space="preserve">
+    <value>Click to Add / Edit Charges</value>
+  </data>
 </root>

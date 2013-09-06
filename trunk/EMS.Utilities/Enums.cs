@@ -17,17 +17,15 @@ namespace EMS.Utilities
             Line = 6,
             ContainerMovementStatus = 7,
             VendorList = 8,
-            InvoiceLink = 9,            
+            InvoiceLink = 9,
             Booking = 101,
             Vessel = 102,
             ExpVoyage = 103,
+            //ExpBookingParty = 104,
+            //Services = 105,
             ContainerType = 10
         }
 
-
-        /// <summary>
-        /// Use "_" as a seperator for item having more than one word
-        /// </summary>
         public enum ChargeType
         {
             PER_UNIT = 1,
@@ -146,5 +144,14 @@ namespace EMS.Utilities
             Factory_de__stuffing =1,
             CFS_de__stuffing = 2
         }
+
+        public enum ShipmentType
+        {
+            FCL = 0,
+            LCL = 1,
+            Bulk = 2,
+            BBulk = 3
+        }
+
     }
 }

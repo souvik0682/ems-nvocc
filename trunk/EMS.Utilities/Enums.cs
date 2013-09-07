@@ -21,9 +21,8 @@ namespace EMS.Utilities
             Booking = 101,
             Vessel = 102,
             ExpVoyage = 103,
-            //ExpBookingParty = 104,
-            //Services = 105,
-            ContainerType = 10
+            ExpBookingParty = 104,
+            Services = 105,
             ContainerType = 10,
             Service = 11
         }

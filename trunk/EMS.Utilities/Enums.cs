@@ -24,6 +24,8 @@ namespace EMS.Utilities
             //ExpBookingParty = 104,
             //Services = 105,
             ContainerType = 10
+            ContainerType = 10,
+            Service = 11
         }
 
         public enum ChargeType
@@ -37,7 +39,18 @@ namespace EMS.Utilities
             SLAB_UNIT = 7,
             SLAB_DOCS = 8,
             //REPAIRING_MATERIAL = 9,
-            REPAIRING =10
+            REPAIRING =10,
+            PER_CBM = 11,
+            PER_TON = 12
+
+        }
+
+        public enum ExportChargeType
+        {
+            PER_UNIT = 50,
+            PER_DOCUMENT = 51,           
+            PER_CBM = 52,
+            PER_TON = 53
 
         }
 

@@ -101,7 +101,7 @@ namespace EMS.DAL
 
         #region Chargr Master
 
-        public static DataTable GetAllCharges(SearchCriteria searchCriteria, int CompanyId)
+        public static DataTable GetAllCharges(SearchCriteria searchCriteria, int CompanyId, char IEC)
         {
             string strExecution = "[mst].[spGetCharge]";
             //List<ICharge> lstCharge = new List<ICharge>();
@@ -116,6 +116,8 @@ namespace EMS.DAL
                 oDq.AddDateTimeParam("@EDate", searchCriteria.Date);
                 oDq.AddVarcharParam("@SortExpression", 20, searchCriteria.SortExpression);
                 oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
+                oDq.AddCharParam("@Type", 1, IEC);
+                oDq.AddVarcharParam("@Service", 200, searchCriteria.StringOption1);
 
                 dt = oDq.GetTable();
                 //DataTableReader reader = oDq.GetTableReader();
@@ -157,7 +159,11 @@ namespace EMS.DAL
                 oDq.AddBooleanParam("@IsSpecialRate", Charge.IsSpecialRate);
                 oDq.AddCharParam("@DeliveryMode", 1, Charge.DeliveryMode);
                 oDq.AddIntegerParam("@DocType", Charge.DocumentType);
-     
+
+                oDq.AddIntegerParam("@Service", Charge.Service);
+                oDq.AddBooleanParam("@DestinationCharge", Charge.DestinationCharge);
+                oDq.AddVarcharParam("@FPOD",5, Charge.FPOD);
+
 
                 //oDq.AddNVarcharParam("@ChargeRate",8000,Charge.ConvertListToXML((List<IChargeRate>)Charge.ChargeRates));
 
@@ -199,17 +205,13 @@ namespace EMS.DAL
                 oDq.AddDecimalParam("@SharingBL", 12, 2, ChargeRate.SharingBL);
                 oDq.AddDecimalParam("@SharingTEU", 12, 2, ChargeRate.SharingTEU);
                 oDq.AddDecimalParam("@SharingFEU", 12, 2, ChargeRate.SharingFEU);
-                //oDq.AddDecimalParam("@ServiceTax", 12, 2, ChargeRate.ServiceTax);
                 oDq.AddBooleanParam("@RateActive", ChargeRate.RateActive);
+                oDq.AddIntegerParam("@Type", ChargeRate.Type);
+                oDq.AddNVarcharParam("@Size", 2, ChargeRate.Size);
+                oDq.AddDecimalParam("@RatePerUnit", 12, 2, ChargeRate.RatePerUnit);
+                oDq.AddDecimalParam("@RatePerDoc", 12, 2, ChargeRate.RatePerDoc);
 
 
-                //if (ChargeRate.ChargesRateID <= 0)
-                //{
-                //    oDq.AddIntegerParam("@CreatedBy", Charge.CreatedBy);
-                //    oDq.AddDateTimeParam("@CreatedOn", Charge.CreatedOn);
-                //}
-                //oDq.AddIntegerParam("@ModifiedBy", Charge.ModifiedBy);
-                //oDq.AddDateTimeParam("@ModifiedOn", Charge.ModifiedOn);
                 oDq.AddIntegerParam("@RESULT", Result, QueryParameterDirection.Output);
                 oDq.RunActionQuery();
                 Result = Convert.ToInt32(oDq.GetParaValue("@Result"));

@@ -58,7 +58,7 @@
                         <td class="style2">
                             <asp:HiddenField ID="hdnFPOD" runat="server" />
                             <asp:TextBox runat="server" ID="txtFPOD" Width="250" autocomplete="off" Style="text-transform: uppercase;" />
-                            <asp:RequiredFieldValidator ID="rfvFPOD" runat="server" ErrorMessage="Please select location"
+                            <asp:RequiredFieldValidator ID="rfvFPOD" runat="server" ErrorMessage="Please select Final Destination"
                                 Display="None" ControlToValidate="txtFPOD" ValidationGroup="vgAgent"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server" TargetControlID="rfvFPOD"
                                 WarningIconImageUrl="">

@@ -38,6 +38,8 @@ namespace EMS.Entity
         public string ContainerNo { get; set; }
         public string Vessel { get; set; }
         public string Voyage { get; set; }
+        public int VoyageID { get; set; }
+
         public string POL { get; set; }
         public string POD { get; set; }
         public string Location { get; set; }
@@ -50,7 +52,8 @@ namespace EMS.Entity
         public string SlotOperatorName { get; set; }
         public string AgentName { get; set; }
         public string ServiceName { get; set; }
-
+        public string Terminal { get; set; }
+        public int LocationID { get; set; }
         public IList<string> StringParams { get; set; }
         public string LocAbbr
         {
@@ -177,6 +180,8 @@ namespace EMS.Entity
             this.SlotOperatorName = string.Empty;
             this.AgentName = string.Empty;
             this.ServiceName = string.Empty;
+            this.Terminal = string.Empty;
+            this.VoyageID = 0;
         }
 
         #endregion

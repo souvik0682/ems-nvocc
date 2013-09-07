@@ -1,7 +1,7 @@
 USE [Liner]
 GO
 
-/****** Object:  StoredProcedure [exp].[prcAddEditSlot]    Script Date: 05/01/2013 21:17:01 ******/
+/****** Object:  StoredProcedure [exp].[prcAddEditSlot]    Script Date: 05/01/2013 18:18:02 ******/
 SET ANSI_NULLS ON
 GO
 

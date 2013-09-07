@@ -8,7 +8,7 @@ namespace EMS.Entity
     public class Slot
     {
         public long SLOTID { get; set; }        
-        public int OPERATOR { get; set; }
+        public long OPERATOR { get; set; }
         public long PORTLOADING { get; set; }
         public int MOVORIGIN { get; set; }
         public long PORTDISCHARGE { get; set; }
@@ -16,6 +16,8 @@ namespace EMS.Entity
         public DateTime? EFFECTIVEDATE { get; set; }
         public int MOVDESTINATION { get; set; }
         public long LINE { get; set; }
+        public string PORTDISCHARGENAME { get; set; }
+        public string PORTLOADINGNAME { get; set; }
 
     }
     public class SlotCost

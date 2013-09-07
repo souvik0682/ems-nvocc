@@ -54,6 +54,14 @@ namespace EMS.BLL
             return dquery.GetTables();
         }
 
+        public DataSet PopulateDDLDS(string tableName, string textField, string valuefield, string WhereClause, bool isDSR)
+        {
+
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery("Select [" + textField + "] ListItemValue, [" + valuefield + "] ListItemText from " + tableName + " " + WhereClause + ") order by ListItemText", true);
+
+            return dquery.GetTables();
+
+        }
 
         public int GetId(string ItemName, string ItemValue)
         {
@@ -198,6 +206,28 @@ namespace EMS.BLL
 
             dquery.AddIntegerParam("@pk_NVOCCID", pk_NVOCCID);
             dquery.AddVarcharParam("@NVOCCName", 6, NVOCCName);
+
+            return dquery.GetTables();
+        }
+
+        public DataSet GetActiveOperator()
+        {
+            string ProcName = "[exp].[prcGetSlotOperatorList]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            dquery.AddVarcharParam("@SortExpression", 30, "");
+            dquery.AddVarcharParam("@SortDirection", 4, "");
+
+            return dquery.GetTables();
+        }
+
+        public DataSet GetMovType()
+        {
+            string ProcName = "exp.prcGetMovementType";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            //dquery.AddIntegerParam("@pk_NVOCCID", pk_NVOCCID);
+            //dquery.AddVarcharParam("@NVOCCName", 6, NVOCCName);
 
             return dquery.GetTables();
         }

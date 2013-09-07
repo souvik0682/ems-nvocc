@@ -69,9 +69,9 @@ namespace EMS.BLL
             return ChargeDAL.GetChargeRates(ChargesID);
         }
 
-        public static DataTable GetAllCharges(SearchCriteria searchCriteria, int CompanyId)
+        public static DataTable GetAllCharges(SearchCriteria searchCriteria, int CompanyId, char IEC)
         {
-            return ChargeDAL.GetAllCharges(searchCriteria, CompanyId);
+            return ChargeDAL.GetAllCharges(searchCriteria, CompanyId, IEC);
         }
 
         public static int DeleteCharge(int ChargeId)

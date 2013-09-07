@@ -326,7 +326,7 @@ namespace EMS.WebApp.MasterModule
                     gvwCharge.PageIndex = searchCriteria.PageIndex;
                     if (searchCriteria.PageSize > 0) gvwCharge.PageSize = searchCriteria.PageSize;
 
-                    gvwCharge.DataSource = ChargeBLL.GetAllCharges(searchCriteria, 1);
+                    gvwCharge.DataSource = ChargeBLL.GetAllCharges(searchCriteria, 1,'I');
                     gvwCharge.DataBind();
                 }
             }

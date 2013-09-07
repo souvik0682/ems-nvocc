@@ -38,6 +38,7 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@SchPOLName", 30, searchCriteria.StringParams[2]);
                 oDq.AddVarcharParam("@SchPODName", 30, searchCriteria.StringParams[3]);
                 oDq.AddVarcharParam("@SchLine", 30, searchCriteria.StringParams[0]);
+                oDq.AddVarcharParam("@SchEffDate", 30, searchCriteria.StringParams[4]);
                 oDq.AddVarcharParam("@SortExpression", 30, searchCriteria.SortExpression);
                 oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
 
@@ -71,7 +72,7 @@ namespace EMS.DAL
                     oDq.AddBooleanParam("@isedit", false);
                     oDq.AddIntegerParam("@pk_SlotID", 0);
                     oDq.AddIntegerParam("@fk_CompanyID", slotCostModel.CompanyID);
-                    oDq.AddIntegerParam("@fk_SlotOperatorID", slotCostModel.Slot.OPERATOR);
+                    oDq.AddIntegerParam("@fk_SlotOperatorID", Convert.ToInt32( slotCostModel.Slot.OPERATOR));
                     oDq.AddIntegerParam("@fk_LineID", Convert.ToInt32(slotCostModel.Slot.LINE));
                     oDq.AddBigIntegerParam("@fk_POD", slotCostModel.Slot.PORTLOADING);
                     oDq.AddBigIntegerParam("@fk_POL", slotCostModel.Slot.PORTDISCHARGE);

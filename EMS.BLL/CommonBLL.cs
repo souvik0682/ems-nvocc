@@ -215,6 +215,12 @@ namespace EMS.BLL
             searchCriteria.SortDirection = "ASC";
         }
 
+        private void SetDefaultSearchCriteriaForOperator(SearchCriteria searchCriteria)
+        {
+            searchCriteria.SortExpression = "Operator";
+            searchCriteria.SortDirection = "ASC";
+        }
+
         public List<ILocation> GetAllLocation(SearchCriteria searchCriteria)
         {
             return CommonDAL.GetLocation('N', searchCriteria);
@@ -235,6 +241,13 @@ namespace EMS.BLL
             SetDefaultSearchCriteriaForLocation(searchCriteria);
             return CommonDAL.GetLocation('Y', searchCriteria);
         }
+
+        //public List<ISlot> GetActiveOperator()
+        //{
+        //    SearchCriteria searchCriteria = new SearchCriteria();
+        //    SetDefaultSearchCriteriaForOperator(searchCriteria);
+        //    return CommonDAL.GetOperator(searchCriteria);
+        //}
 
         public ILocation GetLocation(int locId)
         {

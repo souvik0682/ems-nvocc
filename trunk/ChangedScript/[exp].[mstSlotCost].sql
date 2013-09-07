@@ -1,7 +1,7 @@
 USE [Liner]
 GO
 
-/****** Object:  Table [exp].[mstSlotCost]    Script Date: 05/01/2013 21:16:52 ******/
+/****** Object:  Table [exp].[mstSlotCost]    Script Date: 05/01/2013 18:16:46 ******/
 SET ANSI_NULLS ON
 GO
 

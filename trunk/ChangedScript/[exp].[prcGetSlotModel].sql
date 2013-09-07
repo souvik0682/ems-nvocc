@@ -1,7 +1,7 @@
 USE [Liner]
 GO
 
-/****** Object:  StoredProcedure [exp].[prcGetSlotModel]    Script Date: 05/01/2013 21:17:30 ******/
+/****** Object:  StoredProcedure [exp].[prcGetSlotModel]    Script Date: 05/01/2013 18:19:13 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -33,7 +33,8 @@ BEGIN
       ,[fk_MovDest] MOVDESTINATION
       ,[PODTerminal] PODTERMINAL
       ,[EffDate] EFFECTIVEDATE
-      
+	  ,exp.GetPortName(s.fk_POD,'B') PORTDISCHARGENAME
+       ,exp.GetPortName(s.fk_POL,'B') PORTLOADINGNAME   
 	FROM	exp.mstSlot s
 	WHERE	pk_SlotID = @SlotID 
 	

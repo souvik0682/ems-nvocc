@@ -4,6 +4,27 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Import Namespace="EMS.Utilities" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<style type="text/css">
+        .custtable
+        {
+            width: 100%;
+        }
+        .custtable td
+        {
+            vertical-align: top;
+        }
+        button[type="reset"] {
+background-color: #f3f6f8;
+color: black;
+border: solid 1px #c8c8c8;
+cursor: pointer;
+font-family: "Trebuchet MS", Helvetica, sans-serif;
+font-size: 10pt;
+height: 28px;
+}
+
+    </style>
+  
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
     <script src="../Scripts/Common.js" type="text/javascript"></script>
@@ -26,26 +47,7 @@
             else { }
         }
     </script>
-    <style type="text/css">
-        .custtable
-        {
-            width: 100%;
-        }
-        .custtable td
-        {
-            vertical-align: top;
-        }
-        button[type="reset"] {
-background-color: #f3f6f8;
-color: black;
-border: solid 1px #c8c8c8;
-cursor: pointer;
-font-family: "Trebuchet MS", Helvetica, sans-serif;
-font-size: 10pt;
-height: 28px;
-}
-user agent stylesheetin
-    </style>
+    
     <div id="dvAsync" style="padding: 5px; display: none;">
         <div class="asynpanel">
             <div id="dvAsyncClose">
@@ -64,25 +66,19 @@ user agent stylesheetin
                 <table>
                     <tr>
                         <td>
-                            Slot Operator
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtSlotOperator" runat="server"></asp:TextBox>
-                        </td>
-                        <td>
-                            Line
+                            <asp:TextBox ID="txtSlotOperator" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
+                              <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtSlotOperator" WatermarkText="SLOT OPERATOR" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
                             <asp:DropDownList ID="ddlLine" runat="server" CssClass="dropdownlist">
                             </asp:DropDownList>
+
                         </td>
                     </tr>
-                    <tr>
+                    <tr>                        
                         <td>
-                            Load Port
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtLoadPort" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtLoadPort" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
+                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="txtLoadPort" WatermarkText="LOAD PORT" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                             <asp:HiddenField ID="hdnLoadPort" runat="server" />
                             <cc1:AutoCompleteExtender runat="server" BehaviorID="LoadPortBehaviorID" ID="AutoCompleteExtenderLoadPort"
                                 TargetControlID="txtLoadPort" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
@@ -125,11 +121,10 @@ user agent stylesheetin
                                     </animations>
                             </cc1:AutoCompleteExtender>
                         </td>
+                       
                         <td>
-                            Destination Port
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtDestinationPort" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtDestinationPort" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
+                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender3" runat="server" TargetControlID="txtDestinationPort" WatermarkText="DESTINATION PORT" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                             <asp:HiddenField ID="hdnDestinationPort" runat="server" />
                             <cc1:AutoCompleteExtender runat="server" BehaviorID="DestinationPortBehaviorID" ID="AutoCompleteExtenderDestinationPort"
                                 TargetControlID="txtDestinationPort" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
@@ -175,10 +170,8 @@ user agent stylesheetin
                     </tr>
                     <tr>
                         <td>
-                            Effective Date
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtEffectiveDate" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtEffectiveDate" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
+                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender4" runat="server" TargetControlID="txtEffectiveDate" WatermarkText="EFFECTIVE DATE" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                             <cc1:CalendarExtender Format="dd/MM/yyyy" ID="CalendarExtender1" runat="server" PopupButtonID="txtEffectiveDate"
                                 TargetControlID="txtEffectiveDate">
                             </cc1:CalendarExtender>
@@ -190,7 +183,7 @@ user agent stylesheetin
                     <tr>
                         <td colspan="4">
                             <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click"/>
-                            <button type="reset" value="Reset" >Reset</button>
+                          <asp:Button ID="Button1" runat="server" Text="Reset" PostBackUrl="~/MasterModule/ExpSlotCostList.aspx"/>  
                         </td>
                     </tr>
                 </table>
@@ -218,6 +211,9 @@ user agent stylesheetin
                     &nbsp;&nbsp;
                     <asp:Button ID="btnAdd" runat="server" Text="Add New" Width="130px" PostBackUrl="ExpAddEditSlotCost.aspx" />
                 </div>
+                 <div style="height: 30px;">
+                    &nbsp; <span class="errormessage" style="display: none;">* Indicates Inactive Location(s)</span>
+                </div>
                 <br />
                 <div>
                     <asp:UpdatePanel ID="upLoc" runat="server" UpdateMode="Conditional">
@@ -226,6 +222,7 @@ user agent stylesheetin
                             <asp:AsyncPostBackTrigger ControlID="ddlPaging" EventName="SelectedIndexChanged" />
                         </Triggers>
                         <ContentTemplate>
+                       
                             <asp:GridView ID="gvwSlotCost" runat="server" AutoGenerateColumns="false" AllowPaging="true"
                                 BorderStyle="None" BorderWidth="0" OnPageIndexChanging="gvwSlotCost_PageIndexChanging"
                                 OnRowCommand="gvwSlotCost_RowCommand" Width="100%" OnRowDataBound="gvwSlotCost_RowDataBound">
@@ -242,33 +239,33 @@ user agent stylesheetin
                                             <%=counter++%>
                                         </ItemTemplate>
                                     </asp:TemplateField>                                   
-                                    <asp:BoundField ItemStyle-CssClass="gridviewitem" HeaderStyle-Width="13%" HeaderStyle-CssClass="gridviewheader"
-                                        DataField="SlotOperatorName" HeaderText="Slot Operator Name" />
-                                    <asp:BoundField ItemStyle-CssClass="gridviewitem" HeaderStyle-Width="13%" ItemStyle-HorizontalAlign="Left"
-                                        HeaderStyle-CssClass="gridviewheader" DataField="LineName" HeaderText="Line Name" />
-                                    <asp:BoundField ItemStyle-CssClass="gridviewitem" HeaderStyle-Width="13%" ItemStyle-HorizontalAlign="Left"
-                                        HeaderStyle-CssClass="gridviewheader" DataField="LoadPort" HeaderText="Load Port" />
-                                    <asp:BoundField ItemStyle-CssClass="gridviewitem" HeaderStyle-Width="13%" HeaderStyle-CssClass="gridviewheader"
-                                        DataField="DischargePort" HeaderText="Discharge Port" />
+                                    <asp:BoundField ItemStyle-CssClass="gridviewitem"   HeaderStyle-CssClass="gridviewheader" SortExpression="SlotOperatorName"
+                                        DataField="SlotOperatorName" HeaderText="Operator Name" />
+                                    <asp:BoundField ItemStyle-CssClass="gridviewitem"   ItemStyle-HorizontalAlign="Left"
+                                        HeaderStyle-CssClass="gridviewheader" DataField="LineName" HeaderText="Line Name" SortExpression="LINE"/>
+                                    <asp:BoundField ItemStyle-CssClass="gridviewitem"   ItemStyle-HorizontalAlign="Left"
+                                        HeaderStyle-CssClass="gridviewheader" DataField="LoadPort" HeaderText="Load Port" SortExpression="POL"/>
+                                    <asp:BoundField ItemStyle-CssClass="gridviewitem"   HeaderStyle-CssClass="gridviewheader"
+                                        DataField="DischargePort" HeaderText="Discharge Port" SortExpression="POD"/>
                                    
-                                        <asp:TemplateField ItemStyle-Width="8%"  HeaderText="Effective Date">
+                                        <asp:TemplateField   HeaderText="Effective Date">
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" HorizontalAlign="Center" VerticalAlign="Middle" />
                                         <ItemTemplate>
                                         <%# Convert.ToDateTime(Eval("effDate")).ToString("d")%>                                          
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:BoundField ItemStyle-CssClass="gridviewitem" HeaderStyle-Width="13%" ItemStyle-HorizontalAlign="Left"
+                                    <asp:BoundField ItemStyle-CssClass="gridviewitem"   ItemStyle-HorizontalAlign="Left"
                                         HeaderStyle-CssClass="gridviewheader" DataField="Terms" HeaderText="Terms" />
-                                    <asp:TemplateField ItemStyle-Width="8%">
+                                    <asp:TemplateField ItemStyle-Width="5%">
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                        <ItemStyle   CssClass="gridviewitem" HorizontalAlign="Center" VerticalAlign="Middle" />
                                         <ItemTemplate>
                                             <asp:ImageButton ID="btnEdit" runat="server" PostBackUrl='<%# String.Format("~/MasterModule/ExpAddEditSlotCost.aspx?id={0}",EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("pk_SlotID").ToString()) ) %>'
                                                 ImageUrl="~/Images/edit.png" Height="16" Width="16" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField ItemStyle-Width="8%">
+                                    <asp:TemplateField ItemStyle-Width="5%">
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" HorizontalAlign="Center" VerticalAlign="Middle" />
                                         <ItemTemplate>
@@ -282,7 +279,7 @@ user agent stylesheetin
                     </asp:UpdatePanel>
                 </div>
                 <div style="display: none;">
-                    <asp:DropDownList ID="ddlIEC" runat="server" Width="255">
+                    <asp:DropDownList ID="ddlIEC" runat="server" Width="255" >
                         <asp:ListItem Text="Import" Value="I"></asp:ListItem>
                         <asp:ListItem Text="Export" Value="E"></asp:ListItem>
                         <asp:ListItem Text="General" Value="G"></asp:ListItem>

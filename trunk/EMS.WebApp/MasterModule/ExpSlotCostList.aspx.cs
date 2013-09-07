@@ -35,9 +35,9 @@ namespace EMS.WebApp.MasterModule
         {
             if (!IsPostBack)
             {
-               // RetriveParameters();
+                //RetriveParameters();
                 //CheckUserAccess();
-                Filler.FillData(ddlLine, new DBInteraction().GetNVOCCLine(-1, "").Tables[0], "NVOCCName", "pk_NVOCCID", "---Size---");
+                Filler.FillData(ddlLine, new DBInteraction().GetNVOCCLine(-1, "").Tables[0], "NVOCCName", "pk_NVOCCID", "--LINE--");
                 SetDeafaultSetting();
                 
                 FillData(); 
@@ -103,6 +103,7 @@ namespace EMS.WebApp.MasterModule
         private void FillData()
         {
             counter = 1;
+            if (SearchCriteriaProp.PageSize == 0) {SearchCriteriaProp.PageSize=Convert.ToInt32(ddlPaging.SelectedValue); }
             gvwSlotCost.PageSize = SearchCriteriaProp.PageSize;
             gvwSlotCost.DataSource = BLL.ExpSlotCostBLL.GetSlotCost(SearchCriteriaProp);
             gvwSlotCost.DataBind();
@@ -117,11 +118,11 @@ namespace EMS.WebApp.MasterModule
             
             ISearchCriteria searchCriteria = new SearchCriteria();
             if (searchCriteria == null) { searchCriteria = new SearchCriteria(); }
-            searchCriteria.StringParams.Add(ddlLine.SelectedValue=="0"?"":ddlLine.SelectedItem.Text);
+            searchCriteria.StringParams.Add(ddlLine.SelectedValue=="0"?String.Empty:ddlLine.SelectedItem.Text);
             searchCriteria.StringParams.Add(txtSlotOperator.Text);
-            searchCriteria.StringParams.Add(txtDestinationPort.Text);
             searchCriteria.StringParams.Add(txtLoadPort.Text);
-            searchCriteria.StringParams.Add(txtEffectiveDate.Text);
+            searchCriteria.StringParams.Add(txtDestinationPort.Text);
+            searchCriteria.StringParams.Add(string.IsNullOrEmpty(txtEffectiveDate.Text)?string.Empty:Convert.ToDateTime(txtEffectiveDate.Text).ToString("yyyy-MM-dd"));
             searchCriteria.StringParams.Add("1");//CompanyId
             searchCriteria.StringParams.Add("0");//SlotID
             SearchCriteriaProp = searchCriteria;
@@ -192,34 +193,7 @@ namespace EMS.WebApp.MasterModule
         protected void gvwSlotCost_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             
-            if(e.Row.RowType==DataControlRowType.DataRow )
-            {
-                //var t = ((System.Data.DataRowView)e.Row.DataItem).Row.ItemArray;
-                //var m = t[3].ToString();
-                //var m1 = t[29].ToString();
-                //if (m == "On Hire" && m1 == "RCVE")
-                //{
-                //    var btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
-                //    var btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
-                //    if (btnEdit != null) { btnEdit.Visible = false; }
-                //    if (btnRemove != null) { btnRemove.Visible = false; }
-                //}
-                 if (_canDelete == true)
-                {
-                    ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
-                    
-                    btnRemove.Visible = true;
-                    //btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00007");
-                    //btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLID"));
-
-                }
-                else
-                {
-                    ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
-                    btnRemove.Visible = false;
-                }
-
-            }
+            
         }
     }
 }

@@ -22,6 +22,15 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.TextBox txtSlotOperator;
         
         /// <summary>
+        /// TextBoxWatermarkExtender1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender1;
+        
+        /// <summary>
         /// ddlLine control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace EMS.WebApp.MasterModule {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLoadPort;
+        
+        /// <summary>
+        /// TextBoxWatermarkExtender2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender2;
         
         /// <summary>
         /// hdnLoadPort control.
@@ -67,6 +85,15 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.TextBox txtDestinationPort;
         
         /// <summary>
+        /// TextBoxWatermarkExtender3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender3;
+        
+        /// <summary>
         /// hdnDestinationPort control.
         /// </summary>
         /// <remarks>
@@ -94,6 +121,15 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.TextBox txtEffectiveDate;
         
         /// <summary>
+        /// TextBoxWatermarkExtender4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender4;
+        
+        /// <summary>
         /// CalendarExtender1 control.
         /// </summary>
         /// <remarks>
@@ -119,6 +155,15 @@ namespace EMS.WebApp.MasterModule {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSearch;
+        
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
         /// uProgressLoc control.

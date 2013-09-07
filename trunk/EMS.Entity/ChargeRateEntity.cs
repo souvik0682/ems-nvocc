@@ -140,6 +140,38 @@ namespace EMS.Entity
             set;
         }
 
+
+
+        [XmlAnyElement]
+        public int Type
+        {
+            get;
+            set;
+        }
+
+        [XmlAnyElement]
+        public string Size
+        {
+            get;
+            set;
+        }
+
+        [XmlAnyElement]
+        public decimal RatePerUnit
+        {
+            get;
+            set;
+        }
+
+        [XmlAnyElement]
+        public decimal RatePerDoc
+        {
+            get;
+            set;
+        }    
+
+
+
         public string ChangeName { get; set; }
         public string TerminalName { get; set; }
         public string WashingTypeName { get; set; }
@@ -232,6 +264,12 @@ namespace EMS.Entity
                 if (reader["TotalAmount"] != DBNull.Value)
                     this.TotalAmount = Convert.ToDecimal(reader["TotalAmount"]);
             //this.ServiceTax = Convert.ToDecimal(reader["ServiceTax"]);
+
+            this.Type = Convert.ToInt32(reader["Type"]);
+            this.Size = Convert.ToString(reader["Size"]);
+            this.RatePerUnit = Convert.ToDecimal(reader["RatePerUnit"]);
+            this.RatePerDoc = Convert.ToDecimal(reader["RatePerDoc"]);
+
         }
 
         //public string ConvertListToXML(List<ChargeRateEntity> Items)

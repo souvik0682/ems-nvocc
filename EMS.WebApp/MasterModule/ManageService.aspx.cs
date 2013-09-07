@@ -112,7 +112,7 @@ namespace EMS.WebApp.MasterModule
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 7);
+                GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 4);
 
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
 

@@ -163,6 +163,9 @@ namespace EMS.Entity
             this.PrincipleSharing = Convert.ToBoolean(reader["IsPrincipleShared"]);
             this.RateChangeable = Convert.ToBoolean(reader["RateChangable"]);            
             this.ServiceTax = Convert.ToBoolean(reader["ServiceTax"]);
+            this.FPOD = Convert.ToString(reader["Fpod"]);
+            this.DestinationCharge = Convert.ToBoolean(reader["DestinationCharge"]);
+            this.Service = Convert.ToInt32(reader["Service"]);
 
             if (ColumnExists(reader, "IsSpecialRate"))
                 if (reader["IsSpecialRate"] != DBNull.Value)
@@ -181,11 +184,9 @@ namespace EMS.Entity
                 if (reader["LocationId"] != DBNull.Value)
                     this.Location = Convert.ToInt32(reader["LocationId"]);
 
-            //if (!string.IsNullOrEmpty(Convert.ToString(reader["ChargeRates"])))
-            //{
-            //    ChargeRateEntity oChargeRate = new ChargeRateEntity();
-            //    ChargeRates = oChargeRate.ConvertXMLToList(Convert.ToString(reader["ChargeRates"]));
-            //}            
+            //if (ColumnExists(reader, "Service"))
+            //    if (reader["LocationId"] != DBNull.Value)
+            //        this.Location = Convert.ToInt32(reader["LocationId"]); 
 
         }
 
@@ -232,6 +233,25 @@ namespace EMS.Entity
 
 
         public int DocumentType
+        {
+            get;
+            set;
+        }
+
+        public int Service
+        {
+            get;
+            set;
+        }
+
+        public bool DestinationCharge
+        {
+            get;
+            set;
+        }
+
+
+        public string FPOD
         {
             get;
             set;

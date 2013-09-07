@@ -22,9 +22,10 @@ namespace EMS.Utilities
             Vessel = 102,
             ExpVoyage = 103,
             ExpBookingParty = 104,
-            Services = 105,
             ContainerType = 10,
-            Service = 11
+            Service = 11,
+            ExpCurrency = 105
+
         }
 
         public enum ChargeType

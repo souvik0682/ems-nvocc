@@ -28,7 +28,7 @@ namespace EMS.WebApp.MasterModule
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // RetriveParameters();
+          //   RetriveParameters();
             user = (IUser)Session[Constants.SESSION_USER_INFO];
             if (!IsPostBack)
             {
@@ -40,7 +40,7 @@ namespace EMS.WebApp.MasterModule
                         ViewState["SlotCostId"] = GeneralFunctions.DecryptQueryString(Request.QueryString["id"]).LongRequired();
                         Hid = GeneralFunctions.DecryptQueryString(Request.QueryString["id"]).LongRequired();
                         //GetValue
-                        Hid = 11;
+                       
                     }
                     else
                     {
@@ -50,7 +50,7 @@ namespace EMS.WebApp.MasterModule
                 }
                 catch { }
             }
-            //  CheckUserAccess(Hid);
+           //  CheckUserAccess(Hid);
         }
 
         private void RetriveParameters()
@@ -96,12 +96,12 @@ namespace EMS.WebApp.MasterModule
 
         private void SetDefault()
         {
-            Filler.FillData<IContainerType>(ddlContainerType, CommonBLL.GetContainerType(), "ContainerAbbr", "ContainerTypeID", "---Container Type---");
+            Filler.FillData<IContainerType>(ddlContainerType, CommonBLL.GetContainerType(), "ContainerAbbr", "ContainerTypeID", "--Container Type--");
 
-            Filler.FillData(ddlOperator, ExpSlotCostBLL.GetSlotOperatorList(new SearchCriteria() { StringParams = new List<string>() { "0", "", "", "" } }), "SlotOperatorName", "pk_SlotOperatorID", "---Operator---");//
-            Filler.FillData(ddlMovOrigin, ExpSlotCostBLL.GetMovementType(), "MovTypeName", "pk_MovTypeID", "---Movement Origin---");
-            Filler.FillData(ddlMovDestination, ExpSlotCostBLL.GetMovementType(), "MovTypeName", "pk_MovTypeID", "---Movement Destination---");
-            Filler.FillData(ddlLineCode, new DBInteraction().GetNVOCCLine(-1, "").Tables[0], "NVOCCName", "pk_NVOCCID", "---Line---");
+            Filler.FillData(ddlOperator, ExpSlotCostBLL.GetSlotOperatorList(new SearchCriteria() { StringParams = new List<string>() { "0", "", "", "" } }), "SlotOperatorName", "pk_SlotOperatorID", "--Operator--");//
+            Filler.FillData(ddlMovOrigin, ExpSlotCostBLL.GetMovementType(), "MovTypeName", "pk_MovTypeID", "--Movement Origin--");
+            Filler.FillData(ddlMovDestination, ExpSlotCostBLL.GetMovementType(), "MovTypeName", "pk_MovTypeID", "--Movement Destination--");
+            Filler.FillData(ddlLineCode, new DBInteraction().GetNVOCCLine(-1, "").Tables[0], "NVOCCName", "pk_NVOCCID", "--Line--");
             IList<SlotCost> lst=null;
             if (ViewState["SlotCostId"] != null) { 
              var temp= ExpSlotCostBLL.GetSlotCost(Hid);
@@ -117,6 +117,8 @@ namespace EMS.WebApp.MasterModule
             ddlMovOrigin.SelectedValue = temp.Slot.MOVORIGIN.ToString();
             ddlMovDestination.SelectedValue = temp.Slot.MOVDESTINATION.ToString();
             ddlLineCode.SelectedValue =temp.Slot.LINE.ToString();
+            txtLoadPort.Text = temp.Slot.PORTLOADINGNAME;
+            txtDestinationPort.Text =temp.Slot.PORTDISCHARGENAME;
                     GetSlotCost=temp.SlotCostList;
                     lst=temp.SlotCostList;
                 }
@@ -189,6 +191,7 @@ namespace EMS.WebApp.MasterModule
                      CONTAINERTYPE = Convert.ToInt32((ddlContainerType.SelectedValue.Equals("0") ? "" : ddlContainerType.SelectedValue).StringRequired()),
                      TYPE = (ddlType.SelectedValue.Equals("0") ? "" : ddlType.SelectedValue).StringRequired()[0]
                  });
+                
             }
             GetSlotCost = lstSLOTCOST;
             ClearFieldLower();
@@ -210,11 +213,12 @@ namespace EMS.WebApp.MasterModule
         }
         protected void gvwSlotCost_RowEditing(object sender, GridViewEditEventArgs e)
         {
+            
             e.Cancel = true;
         }
         protected void gvwSlotCost_OnRowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-
+           
             // throw new NotImplementedException();
         }
         protected void gvwSlotCost_OnRowCommand(object sender, GridViewCommandEventArgs e)
@@ -274,7 +278,9 @@ namespace EMS.WebApp.MasterModule
                 try
                 {
                     lstslotcost.Remove(lstslotcost.FirstOrDefault(e => e.SLOTCOSTID == slotcostid.To<long>()));
+                    GetSlotCost = lstslotcost;
                     Filler.GridDataBind(lstslotcost, gvwSlotCost);
+                   
                 }
                 catch { }
 
@@ -305,7 +311,10 @@ namespace EMS.WebApp.MasterModule
                 catch { }
                 return lstslotcost;
             }
-            set { Session["lstslotcost"] = value; }
+            set {
+                try { TextBox1.Text = value.Count().ToString(); }
+                catch { TextBox1.Text = "0"; }
+                Session["lstslotcost"] = value; }
         }
         protected void btnSave_Click(object sender, EventArgs e)
         {
@@ -341,8 +350,8 @@ namespace EMS.WebApp.MasterModule
 
             }
             if (retrunVal > 0)
-            {
-                // Session.Remove("IEqpOnHireContainer");
+            { 
+                Session.Remove("lstslotcost");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Saved successfully.');", true);
                 Response.Redirect("ExpSlotCostList.aspx");
             }

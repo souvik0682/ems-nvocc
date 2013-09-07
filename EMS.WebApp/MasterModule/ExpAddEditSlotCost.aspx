@@ -74,14 +74,12 @@
                                 Load Port:<span class="errormessage">*</span>
                             </td>
                             <td>
-                                <asp:TextBox ID="txtLoadPort" runat="server"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" CssClass="errormessage"
-                                    ControlToValidate="txtLoadPort" InitialValue="0" ValidationGroup="Save" Display="Dynamic"
+                                <asp:TextBox ID="txtLoadPort" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
+                                   <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtLoadPort" WatermarkText="Load Port" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
+                                 <br /> <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" CssClass="errormessage"
+                                    ControlToValidate="txtLoadPort" InitialValue="" ValidationGroup="Save" Display="Dynamic"
                                     ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                                 <asp:HiddenField ID="hdnLoadPort" runat="server" />
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" CssClass="errormessage"
-                                    ControlToValidate="txtLoadPort" InitialValue="0" ValidationGroup="Save" Display="Dynamic"
-                                    ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                                 <cc1:AutoCompleteExtender runat="server" BehaviorID="LoadPortBehaviorID" ID="AutoCompleteExtenderLoadPort"
                                     TargetControlID="txtLoadPort" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
                                     MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
@@ -140,9 +138,10 @@
                                 Destination Port:<span class="errormessage">*</span>
                             </td>
                             <td>
-                                <asp:TextBox ID="txtDestinationPort" runat="server"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" CssClass="errormessage"
-                                    ControlToValidate="txtDestinationPort" InitialValue="0" ValidationGroup="Save"
+                                <asp:TextBox ID="txtDestinationPort" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
+                                 <cc1:TextBoxWatermarkExtender ID="txtWMEtxtDestinationPort" runat="server" TargetControlID="txtDestinationPort" WatermarkText="Destination Port" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
+                                  <br /><asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" CssClass="errormessage"
+                                    ControlToValidate="txtDestinationPort" InitialValue="" ValidationGroup="Save"
                                     Display="Dynamic" ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                                 <asp:HiddenField ID="hdnDestinationPort" runat="server" />
                                 <cc1:AutoCompleteExtender runat="server" BehaviorID="DestinationPortBehaviorID" ID="AutoCompleteExtenderDestinationPort"
@@ -204,8 +203,9 @@
                             </td>
                             <td>
                                 <asp:HiddenField ID="hdnReturn" runat="server" Value="0" />
-                                <asp:TextBox ID="txtPodTerminal" runat="server" CssClass="textboxuppercase" MaxLength="50"
+                                <asp:TextBox ID="txtPodTerminal" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862" MaxLength="50"
                                     Width="250"></asp:TextBox>
+                                      <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="txtPodTerminal" WatermarkText=" Pod Terminal" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                                 <br />
                                 <asp:RequiredFieldValidator ID="rfvReturn" runat="server" CssClass="errormessage"
                                     ControlToValidate="txtPodTerminal" ValidationGroup="Save" Display="Dynamic" ErrorMessage="[Required]">
@@ -230,16 +230,17 @@
                                     Text="*"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="txtEffectiveDate" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtEffectiveDate" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
+                                  <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender3" runat="server" TargetControlID="txtEffectiveDate" WatermarkText="EFFECTIVE DATE" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                                 <cc1:CalendarExtender Format="dd/MM/yyyy" ID="CalendarExtender1" runat="server" PopupButtonID="txtEffectiveDate"
                                     TargetControlID="txtEffectiveDate">
                                 </cc1:CalendarExtender>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" CssClass="errormessage"
+                                 <br /> <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" CssClass="errormessage"
                                     ControlToValidate="txtEffectiveDate" ValidationGroup="Save" Display="Dynamic"
                                     ErrorMessage="[Required]">
                                 </asp:RequiredFieldValidator>
                                 <asp:RegularExpressionValidator ControlToValidate="txtEffectiveDate" ID="RegularExpressionValidator6"
-                                    runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]"
+                                    runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]" ValidationGroup="Save"
                                     Display="Dynamic" ValidationExpression="^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$"></asp:RegularExpressionValidator>
                             </td>
                         </tr>
@@ -252,7 +253,12 @@
                         </tr>
                         <tr>
                             <td>
-                                <table cellspacing="0" style="border-width: 0px; border-style: None; width: 100%;
+                             <div style="display:none">
+                            <asp:TextBox ID="TextBox1" runat="server" Width="0" Text="0"></asp:TextBox>
+                            </div>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" CssClass="errormessage" runat="server" ControlToValidate="TextBox1" InitialValue="0"
+                                 ErrorMessage="Please add atleast one Slot Cost." ValidationGroup="Save"></asp:RequiredFieldValidator>
+                                <table id="gvwSlotCostUpper" cellspacing="0" style="border-width: 0px; border-style: None; width: 100%;
                                     border-collapse: collapse;" rules="all">
                                     <tr>
                                         <th style="width: 2%; color: #fff" class="gridviewheader" scope="col">
@@ -270,7 +276,7 @@
                                             </asp:DropDownList>
                                             <br />
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" CssClass="errormessage"
-                                                ValidationGroup="AddToList" ErrorMessage="[Required]" ControlToValidate="ddlType"
+                                                ValidationGroup="AddToList" ErrorMessage="[Required]" ControlToValidate="ddlType" InitialValue="0"
                                                 Display="Dynamic"></asp:RequiredFieldValidator>
                                         </th>
                                         <th style="width: 13%;" class="gridviewheader" scope="col">
@@ -280,7 +286,7 @@
                                                 <asp:ListItem Value="40" Text="40"></asp:ListItem>
                                             </asp:DropDownList>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" CssClass="errormessage"
-                                                ValidationGroup="ddlSize" ErrorMessage="[Required]" ControlToValidate="ddlType"
+                                                ValidationGroup="AddToList" ErrorMessage="[Required]" ControlToValidate="ddlSize" InitialValue="0"
                                                 Display="Dynamic"></asp:RequiredFieldValidator>
                                         </th>
                                         <th style="width: 13%;" class="gridviewheader" scope="col">
@@ -304,7 +310,8 @@
                                                 InitialValue="0" Display="Dynamic"></asp:RequiredFieldValidator>
                                         </th>
                                         <th style="width: 13%;" class="gridviewheader" scope="col">
-                                            <asp:TextBox ID="txtAmount" runat="server" CssClass="textboxuppercase" ForeColor="#747862"></asp:TextBox>
+                                            <asp:TextBox ID="txtAmount" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
+                                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender5" runat="server" TargetControlID="txtAmount" WatermarkText="AMOUNT" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" CssClass="errormessage"
                                                 ValidationGroup="AddToList" ErrorMessage="[Required]" ControlToValidate="txtAmount"
                                                 Display="Dynamic"></asp:RequiredFieldValidator>
@@ -313,7 +320,8 @@
                                                 Display="Dynamic" ValidationExpression="^\d{1,6}.\d{1,2}|\d{1,6}$"></asp:RegularExpressionValidator>
                                         </th>
                                         <th style="width: 13%;" class="gridviewheader" scope="col">
-                                            <asp:TextBox ID="txtRevTon" runat="server" CssClass="textboxuppercase" ForeColor="#747862"></asp:TextBox>
+                                            <asp:TextBox ID="txtRevTon"  runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
+                                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender4" runat="server" TargetControlID="txtRevTon" WatermarkText="REVTON" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage"
                                                 ValidationGroup="AddToList" ErrorMessage="[Required]" ControlToValidate="txtRevTon"
                                                 Display="Dynamic"></asp:RequiredFieldValidator> <asp:RegularExpressionValidator ControlToValidate="txtRevTon" ID="RegularExpressionValidator1"
@@ -321,7 +329,7 @@
                                                 Display="Dynamic" ValidationExpression="^\d{1,6}.\d{1,2}|\d{1,6}$"></asp:RegularExpressionValidator>
                                       
                                         </th>
-                                        <th style="width: 22%;" class="gridviewheader" scope="col">
+                                        <th style="width: 22%;" class="gridviewheader" scope="col" colspan="2">
                                             <asp:Button ID="btnAddToList" ValidationGroup="AddToList" runat="server" Style="float: right;"
                                                 CssClass="button" Text="Add to List" OnClick="btnAddToList_Click" />
                             </td>
@@ -339,17 +347,17 @@
                                 <ItemStyle CssClass="gridviewitem" />
                             </asp:TemplateField>
                                  <asp:TemplateField HeaderText="TYPE" >
-                                <HeaderStyle CssClass="gridviewheader" Width="4%" />
+                                <HeaderStyle CssClass="gridviewheader" Width="8%" />
                                 <ItemStyle CssClass="gridviewitem" HorizontalAlign="Center" VerticalAlign="Middle" />
                                 <ItemTemplate>
                                   <%#GetItemFromValue(Eval("TYPE"), "ddlType")%>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField ItemStyle-CssClass="gridviewitem" HeaderStyle-Width="13%" HeaderStyle-CssClass="gridviewheader"
+                            <asp:BoundField ItemStyle-CssClass="gridviewitem" HeaderStyle-Width="8%" HeaderStyle-CssClass="gridviewheader"
                                 DataField="SIZE" HeaderText="SIZE" />
 
-                                <asp:TemplateField HeaderText="CONTAINERTYPE" >
-                                <HeaderStyle CssClass="gridviewheader" Width="4%" />
+                                <asp:TemplateField HeaderText="CONTAINERTYPE"  HeaderStyle-Width="13%">
+                                <HeaderStyle CssClass="gridviewheader" />
                                 <ItemStyle CssClass="gridviewitem" HorizontalAlign="Center" VerticalAlign="Middle" />
                                 <ItemTemplate>
                                   <%#GetItemFromValue(Eval("CONTAINERTYPE"), "ddlContainerType")%>
@@ -357,18 +365,18 @@
                             </asp:TemplateField>
                             
 
-                                 <asp:TemplateField HeaderText="CARGO" >
-                                <HeaderStyle CssClass="gridviewheader" Width="4%" />
+                                 <asp:TemplateField HeaderText="CARGO" HeaderStyle-Width="8%">
+                                <HeaderStyle CssClass="gridviewheader"  />
                                 <ItemStyle CssClass="gridviewitem" HorizontalAlign="Center" VerticalAlign="Middle" />
                                 <ItemTemplate>
                                   <%#GetItemFromValue(Eval("CARGO"), "ddlCargo")%>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField ItemStyle-CssClass="gridviewitem" HeaderStyle-Width="13%" ItemStyle-HorizontalAlign="Left"
+                            <asp:BoundField ItemStyle-CssClass="gridviewitem" ItemStyle-HorizontalAlign="Left" HeaderStyle-Width="15%"
                                 HeaderStyle-CssClass="gridviewheader" DataField="AMOUNT" HeaderText="AMOUNT" />
-                            <asp:BoundField ItemStyle-CssClass="gridviewitem" HeaderStyle-Width="13%" ItemStyle-HorizontalAlign="Left"
-                                HeaderStyle-CssClass="gridviewheader" DataField="REVTON" HeaderText="REV TON" />
-                            <asp:TemplateField>
+                            <asp:BoundField ItemStyle-CssClass="gridviewitem" ItemStyle-HorizontalAlign="Left"
+                                HeaderStyle-CssClass="gridviewheader" DataField="REVTON" HeaderText="REV TON" HeaderStyle-Width="15%"/>
+                            <asp:TemplateField >
                                 <HeaderStyle CssClass="gridviewheader" Width="4%" />
                                 <ItemStyle CssClass="gridviewitem" HorizontalAlign="Center" VerticalAlign="Middle" />
                                 <ItemTemplate>
@@ -403,7 +411,19 @@
 
                     //prm.add_endRequest();
                     function pageLoad(sender, args) {
-                        //InitialzeDP();
+                        var idGr = '#<%=gvwSlotCost.ClientID %>';
+                        var idgvwSlotCostUpper = '#gvwSlotCostUpper';
+                        $(idGr).find('th').each(function (i) {
+                            if (i < 8) {
+                                var th = $(idgvwSlotCostUpper).find('th').eq(i);
+                                $(th).attr('style', $(this).attr('style'));
+                                $(th).position().left = $(this).position().left;
+                            }
+                        });
+//                        var t = '<tr>' + $(idgvwSlotCostUpper).find('tr').eq(0).html() + '</tr><tr>' + $(idGr).find('tr').eq(0).html() + '</tr>';
+//                        $(idgvwSlotCostUpper).remove();
+//                        $(idGr).find('tr').eq(0).html(t);
+                       
                     }
                 </script>
             </ContentTemplate>

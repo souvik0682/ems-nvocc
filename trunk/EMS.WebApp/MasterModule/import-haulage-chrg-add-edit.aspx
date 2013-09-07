@@ -70,7 +70,6 @@
                             <asp:DropDownList ID="ddlLine" runat="server" Width="255">
                             </asp:DropDownList>
                             <%-- Make the completion list transparent and then show it --%>
-                            
                         </td>
                     </tr>
                     <tr>
@@ -196,7 +195,6 @@
                             </cc1:ValidatorCalloutExtender>
                         </td>
                     </tr>
-                   
                     <tr>
                         <td>
                             Weight From<span class="errormessage1">*</span> :

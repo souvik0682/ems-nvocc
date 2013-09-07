@@ -16,6 +16,17 @@
         }
 
     </script>
+
+    <script type="text/javascript">
+        function AutoCompleteItemSelected(sender, e) {
+
+            if (sender._id == "AutoCompleteEx") {
+                var hdnFPOD = $get('<%=hdnFPOD.ClientID %>');
+                hdnFPOD.value = e.get_value();
+            }           
+        }
+    </script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
     <div>
@@ -27,7 +38,6 @@
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <table border="0" cellpadding="2" cellspacing="3" width="100%">
-                            
                             <tr>
                                 <td style="width: 18%;">
                                 </td>
@@ -46,12 +56,12 @@
                                 </td>
                                 <td>
                                     <asp:RadioButtonList ID="rdbTerminalRequired" runat="server" RepeatDirection="Horizontal"
-                                        RepeatLayout="Flow" AutoPostBack="true" 
-                                        onselectedindexchanged="rdbTerminalRequired_SelectedIndexChanged">
+                                        RepeatLayout="Flow" AutoPostBack="true" OnSelectedIndexChanged="rdbTerminalRequired_SelectedIndexChanged">
                                         <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
-                                        <asp:ListItem Text="No" Value="0"></asp:ListItem>
+                                        <asp:ListItem Text="No" Value="0" ></asp:ListItem>
                                     </asp:RadioButtonList>
-                                   
+                                    <asp:RequiredFieldValidator ID="rfvTR" runat="server" ErrorMessage="Please select your choice"
+                                        Display="None" ControlToValidate="rdbTerminalRequired" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -61,7 +71,8 @@
                                     Line<span class="errormessage1"></span> :
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlLine" runat="server" Width="155">
+                                    <asp:DropDownList ID="ddlLine" runat="server" Width="155" 
+                                        OnSelectedIndexChanged="ddlLine_SelectedIndexChanged" AutoPostBack="True">
                                     </asp:DropDownList>
                                 </td>
                                 <td>
@@ -70,8 +81,7 @@
                                 </td>
                                 <td>
                                     <asp:RadioButtonList ID="rdbDestinationCharge" AutoPostBack="true" runat="server"
-                                        RepeatDirection="Horizontal" RepeatLayout="Flow" 
-                                        onselectedindexchanged="rdbDestinationCharge_SelectedIndexChanged">
+                                        RepeatDirection="Horizontal" RepeatLayout="Flow" OnSelectedIndexChanged="rdbDestinationCharge_SelectedIndexChanged">
                                         <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
                                         <asp:ListItem Text="No" Value="0"></asp:ListItem>
                                     </asp:RadioButtonList>
@@ -79,11 +89,6 @@
                                         Display="None" ControlToValidate="rdbDestinationCharge" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender19" runat="server" TargetControlID="rfvFreight">
                                     </cc1:ValidatorCalloutExtender>
-                                    <asp:RadioButtonList ID="rdbWashing" AutoPostBack="true" runat="server" Style="display: none;"
-                                        RepeatDirection="Horizontal" RepeatLayout="Flow">
-                                        <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
-                                        <asp:ListItem Text="No" Value="0"></asp:ListItem>
-                                    </asp:RadioButtonList>
                                     <%-- <asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
                                         Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
@@ -93,10 +98,12 @@
                             <tr>
                                 <td>
                                 </td>
-                                <td>                                    
-                                    Location<span class="errormessage1">*</span> :</td>
                                 <td>
-                                    <asp:DropDownList ID="ddlHeaderLocation" runat="server" AutoPostBack="true" Width="155">
+                                    Location<span class="errormessage1">*</span> :
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="ddlHeaderLocation" runat="server" AutoPostBack="true" Width="155"
+                                        OnSelectedIndexChanged="ddlHeaderLocation_SelectedIndexChanged">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvHeaderLocation" runat="server" ControlToValidate="ddlHeaderLocation"
                                         Display="None" ErrorMessage="Please select location" InitialValue="0" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
@@ -107,28 +114,78 @@
                                     FPOD :
                                 </td>
                                 <td>
-                                   <asp:TextBox ID="txtFPOD" runat="server" Width="150"></asp:TextBox>
+                                    <%--<asp:TextBox ID="txtFPOD" runat="server" Width="150" Enabled="false"></asp:TextBox>--%>
+                                    <asp:HiddenField ID="hdnFPOD" runat="server" Value="0" />
+                                    <asp:TextBox runat="server" ID="txtFPOD" Width="150" autocomplete="off" 
+                                        Enabled="false" Style="text-transform: uppercase;" 
+                                        ontextchanged="txtFPOD_TextChanged" AutoPostBack="True" />
+                                    <asp:RequiredFieldValidator ID="rfvFPOD" runat="server" ErrorMessage="Please select FPOD"
+                                        Display="None" ControlToValidate="txtFPOD" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
+                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server" TargetControlID="rfvFPOD"
+                                        WarningIconImageUrl="">
+                                    </cc1:ValidatorCalloutExtender>
+                                    <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx" ID="autoComplete1"
+                                        TargetControlID="txtFPOD" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
+                                        MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
+                                        CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
+                                        CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
+                                        ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected">
+                                        <Animations>
+                                        <OnShow>
+                                            <Sequence>
+                                                <%-- Make the completion list transparent and then show it --%>
+                                                <OpacityAction Opacity="0" />
+                                                <HideAction Visible="true" />
+                            
+                                                <%--Cache the original size of the completion list the first time
+                                                    the animation is played and then set it to zero --%>
+                                                <ScriptAction Script="
+                                                    // Cache the size and setup the initial size
+                                                    var behavior = $find('AutoCompleteEx');
+                                                    if (!behavior._height) {
+                                                        var target = behavior.get_completionList();
+                                                        behavior._height = target.offsetHeight - 2;
+                                                        target.style.height = '0px';
+                                                    }" />
+                            
+                                                <%-- Expand from 0px to the appropriate size while fading in --%>
+                                                <Parallel Duration=".4">
+                                                    <FadeIn />
+                                                    <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteEx')._height" />
+                                                </Parallel>
+                                            </Sequence>
+                                        </OnShow>
+                                        <OnHide>
+                                            <%-- Collapse down to 0px and fade out --%>
+                                            <Parallel Duration=".4">
+                                                <FadeOut />
+                                                <Length PropertyKey="height" StartValueScript="$find('AutoCompleteEx')._height" EndValue="0" />
+                                            </Parallel>
+                                        </OnHide>
+                                        </Animations>
+                                    </cc1:AutoCompleteExtender>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                 </td>
                                 <td>
-                                   
-                                    Service :</td>
+                                    Service :
+                                </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlService" runat="server" Width="155"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlService" runat="server" Width="155">
+                                    </asp:DropDownList>
                                 </td>
                                 <td>
                                     Invoice Link :
                                 </td>
                                 <td>
-                                
-                                <asp:DropDownList ID="ddlInvLink" runat="server" Width="155">
-                                    <asp:ListItem Selected="True" Text="Select Invoice"></asp:ListItem>
-                                    <asp:ListItem Text="Freight Invoice"></asp:ListItem>
-                                    <asp:ListItem Text="Other Invoice"></asp:ListItem>
-                                </asp:DropDownList></td>
+                                    <asp:DropDownList ID="ddlInvLink" runat="server" Width="155">
+                                        <asp:ListItem Selected="True" Text="Select Invoice"></asp:ListItem>
+                                        <asp:ListItem Text="Freight Invoice" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="Other Invoice" Value="2"></asp:ListItem>
+                                    </asp:DropDownList>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -137,12 +194,8 @@
                                     Charge Basis<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlChargeType" runat="server" Width="155" AutoPostBack="true">
-                                        <asp:ListItem Selected="True" Text="Select Type"></asp:ListItem>
-                                        <asp:ListItem Text="Per Doc"></asp:ListItem>
-                                        <asp:ListItem Text="Per Unit"></asp:ListItem>
-                                        <asp:ListItem Text="Type & Size"></asp:ListItem>
-                                        <asp:ListItem Text="CBM / TON"></asp:ListItem>
+                                    <asp:DropDownList ID="ddlChargeType" runat="server" Width="155" AutoPostBack="true"
+                                        OnSelectedIndexChanged="ddlChargeType_SelectedIndexChanged">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvChargeType" runat="server" ErrorMessage="Please select charge type"
                                         Display="None" ControlToValidate="ddlChargeType" ValidationGroup="vgCharge" InitialValue="0"></asp:RequiredFieldValidator>
@@ -151,12 +204,19 @@
                                 </td>
                                 <td>
                                     <%--Is Freight Component ?<span class="errormessage1">*</span> :--%>
-                                    Effective Date
+                                    Effective Date <span class="errormessage1">*</span>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtEffectDate" runat="server" Width="150" AutoCompleteType="None"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please select date"
                                         ControlToValidate="txtEffectDate" Display="None" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
+                                    <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtEffectDate"
+                                        PopupPosition="BottomLeft" TargetControlID="txtEffectDate" Format="dd/MM/yyyy"
+                                        OnClientDateSelectionChanged="checkDate">
+                                    </cc1:CalendarExtender>
+                                    <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="txtEffectDate"
+                                        FilterMode="ValidChars" FilterType="Numbers,Custom" ValidChars="/">
+                                    </cc1:FilteredTextBoxExtender>
                                 </td>
                             </tr>
                             <tr>
@@ -188,7 +248,7 @@
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
                             </tr>
-                            <tr> 
+                            <tr>
                                 <td>
                                 </td>
                                 <td>
@@ -215,29 +275,14 @@
                                     <%-- <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                         <ContentTemplate>--%>
                                     <asp:GridView ID="dgChargeRates" runat="server" AutoGenerateColumns="false" ShowFooter="false"
-                                        Font-Names="Calibri" Font-Size="11pt">
+                                        Font-Names="Calibri" Font-Size="11pt" OnRowDataBound="dgChargeRates_RowDataBound"
+                                        OnRowCommand="dgChargeRates_RowCommand" 
+                                        ondatabound="dgChargeRates_DataBound">
                                         <Columns>
-                                            <asp:TemplateField HeaderText="Location" Visible="false">
-                                                <ItemTemplate>
-                                                    <%--<asp:HiddenField ID="hdnLocationId" runat="server" Value='<%# Eval("LocationId")%>' />
-                                                    <%# (Eval("LocationId").ToString() == "0" ? string.Empty : ddlMLocation.Items.FindByValue(Eval("LocationId").ToString()).Text)%>--%></ItemTemplate>
-                                                <HeaderTemplate>
-                                                    <asp:DropDownList ID="ddlFLocation" runat="server" Width="60" AutoPostBack="true">
-                                                    </asp:DropDownList>
-                                                    <asp:RequiredFieldValidator ID="rfvLocation" runat="server" ErrorMessage="Please select location"
-                                                        Display="None" ValidationGroup="vgGridFooter" ControlToValidate="ddlFLocation"
-                                                        InitialValue="0"></asp:RequiredFieldValidator>
-                                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server" TargetControlID="rfvLocation">
-                                                    </cc1:ValidatorCalloutExtender>
-                                                    <br />
-                                                    <br />
-                                                    Location
-                                                </HeaderTemplate>
-                                            </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Terminal">
                                                 <ItemTemplate>
-                                                    <%-- <asp:HiddenField ID="hdnTerminalId" runat="server" Value='<%# Eval("TerminalId")%>' />
-                                                    <%# (Eval("TerminalId").ToString() == "0" ? string.Empty : ddlMTerminal.Items.FindByValue(Eval("TerminalId").ToString()).Text)%>--%>
+                                                    <asp:HiddenField ID="hdnTerminalId" runat="server" Value='<%# Eval("TerminalId")%>' />
+                                                    <%# (Eval("TerminalId").ToString() == "0" ? string.Empty : ddlMTerminal.Items.FindByValue(Eval("TerminalId").ToString()).Text)%>
                                                 </ItemTemplate>
                                                 <HeaderTemplate>
                                                     <asp:DropDownList ID="ddlFTerminal" runat="server" Width="100" Enabled="false">
@@ -247,16 +292,18 @@
                                                     Terminal
                                                 </HeaderTemplate>
                                             </asp:TemplateField>
-                                            
                                             <asp:TemplateField HeaderText="Type" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
                                                 <ItemTemplate>
-                                                    <%--<asp:Label ID="lblRatePerBl" runat="server" Text='<%# Eval("RatePerBL")%>'></asp:Label>--%></ItemTemplate>
+                                                    <asp:HiddenField ID="hdnTypeId" runat="server" Value='<%# Eval("Type")%>' />
+                                                    <%# (Eval("Type").ToString() == "0" ? string.Empty : ddlMType.Items.FindByValue(Eval("Type").ToString()).Text)%>
+                                                </ItemTemplate>
                                                 <HeaderTemplate>
-                                                   <asp:DropDownList ID="ddlType" runat="server" Width="100"></asp:DropDownList>
-                                                   <%-- <asp:RequiredFieldValidator ID="rfvRatePerBl" runat="server" ErrorMessage="Please enter rate / BL"
-                                                        Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtRatePerBL"></asp:RequiredFieldValidator>
-                                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender4" runat="server" TargetControlID="rfvRatePerBl">
-                                                    </cc1:ValidatorCalloutExtender>--%>
+                                                    <asp:DropDownList ID="ddlType" runat="server" Width="100">
+                                                    </asp:DropDownList>
+                                                    <asp:RequiredFieldValidator ID="rfvType" runat="server" ErrorMessage="Please select type"
+                                                        Display="None" ValidationGroup="vgGridFooter" ControlToValidate="ddlType" InitialValue="0"></asp:RequiredFieldValidator>
+                                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender6" runat="server" TargetControlID="rfvType">
+                                                    </cc1:ValidatorCalloutExtender>
                                                     <br />
                                                     <br />
                                                     Type
@@ -266,61 +313,59 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Size" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
                                                 <ItemTemplate>
-                                                    <%--<asp:Label ID="lblRatePerTEU" runat="server" Text='<%# ddlChargeType.SelectedValue == "6" ? Eval("RatePerCBM") : Eval("RatePerTEU") %>'></asp:Label>--%>
+                                                    <asp:Label ID="lblSize" runat="server" Text='<%# Eval("Size") %>'></asp:Label>
                                                 </ItemTemplate>
                                                 <HeaderTemplate>
-                                                     <asp:DropDownList ID="ddlSize" runat="server" Width="100">
-                                                     <asp:ListItem Selected="True" Text="20"></asp:ListItem>
-                                                     <asp:ListItem Text="40"></asp:ListItem>
-                                                     </asp:DropDownList>
-                                                   <%-- <cc1:TextBoxWatermarkExtender ID="tw4" runat="server" TargetControlID="txtRatePerTEU"
-                                                        WatermarkText="0.00">
-                                                    </cc1:TextBoxWatermarkExtender>
-                                                    <asp:RequiredFieldValidator ID="rfvRatePerTEU" runat="server" ErrorMessage="Please enter rate"
-                                                        Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtRatePerTEU"></asp:RequiredFieldValidator>
-                                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender5" runat="server" TargetControlID="rfvRatePerTEU">
-                                                    </cc1:ValidatorCalloutExtender>--%>
+                                                    <asp:DropDownList ID="ddlSize" runat="server" Width="100">
+                                                        <asp:ListItem Selected="True" Text="Select" Value="0"></asp:ListItem>
+                                                        <asp:ListItem Text="20" Value="20"></asp:ListItem>
+                                                        <asp:ListItem Text="40" Value="40"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                    <asp:RequiredFieldValidator ID="rfvSize" runat="server" ErrorMessage="Please select size"
+                                                        Display="None" ValidationGroup="vgGridFooter" ControlToValidate="ddlSize" InitialValue="0"></asp:RequiredFieldValidator>
+                                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender10" runat="server" TargetControlID="rfvSize">
+                                                    </cc1:ValidatorCalloutExtender>
                                                     <br />
                                                     <br />
-                                                    <asp:Label ID="lblFRateTeu" runat="server" Text="Size"></asp:Label>
+                                                    <asp:Label ID="lblSize" runat="server" Text="Size"></asp:Label>
                                                 </HeaderTemplate>
                                                 <HeaderStyle HorizontalAlign="Center" />
                                                 <ItemStyle HorizontalAlign="Right" />
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Rate/UNIT" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
                                                 <ItemTemplate>
-                                                    <%--<asp:Label ID="lblRatePerFEU" runat="server" Text='<%#  ddlChargeType.SelectedValue == "6" ? Eval("RatePerTON") : Eval("RatePerFEU") %>'></asp:Label>--%>
+                                                    <asp:Label ID="lblRatePerUnit" runat="server" Text='<%#  Eval("RatePerUnit") %>'></asp:Label>
                                                 </ItemTemplate>
                                                 <HeaderTemplate>
-                                                    <cc2:CustomTextBox ID="txtRateperFEU" runat="server" Width="60" Type="Decimal" MaxLength="10"
+                                                    <cc2:CustomTextBox ID="txtRateperUnit" runat="server" Width="60" Type="Decimal" MaxLength="10"
                                                         Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
-                                                    <cc1:TextBoxWatermarkExtender ID="tw5" runat="server" TargetControlID="txtRateperFEU"
+                                                    <cc1:TextBoxWatermarkExtender ID="tw5" runat="server" TargetControlID="txtRateperUnit"
                                                         WatermarkText="0.00">
                                                     </cc1:TextBoxWatermarkExtender>
-                                                    <asp:RequiredFieldValidator ID="rfvRatePerFEU" runat="server" ErrorMessage="Please enter rate"
-                                                        Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtRateperFEU"></asp:RequiredFieldValidator>
-                                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender6" runat="server" TargetControlID="rfvRatePerFEU">
+                                                    <asp:RequiredFieldValidator ID="rfvRatePerUnit" runat="server" ErrorMessage="Please enter rate"
+                                                        Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtRateperUnit"></asp:RequiredFieldValidator>
+                                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender18" runat="server" TargetControlID="rfvRatePerUnit">
                                                     </cc1:ValidatorCalloutExtender>
                                                     <br />
                                                     <br />
-                                                    <asp:Label ID="lblFRateFeu" runat="server" Text="Rate/Unit"></asp:Label>
+                                                    <asp:Label ID="lblFRateUnit" runat="server" Text="Rate/Unit"></asp:Label>
                                                 </HeaderTemplate>
                                                 <HeaderStyle HorizontalAlign="Right" />
                                                 <ItemStyle HorizontalAlign="Right" />
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Rate/Doc" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
                                                 <ItemTemplate>
-                                                    <%--<asp:Label ID="lblSharingBL" runat="server" Text='<%# Eval("SharingBL")%>'></asp:Label>--%>
+                                                    <asp:Label ID="lblRatePerDoc" runat="server" Text='<%# Eval("RatePerDoc")%>'></asp:Label>
                                                 </ItemTemplate>
                                                 <HeaderTemplate>
-                                                    <cc2:CustomTextBox ID="txtSharingBL" runat="server" Width="60" Type="Decimal" MaxLength="10"
+                                                    <cc2:CustomTextBox ID="txtRatePerDoc" runat="server" Width="60" Type="Decimal" MaxLength="10"
                                                         Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
-                                                    <cc1:TextBoxWatermarkExtender ID="tw6" runat="server" TargetControlID="txtSharingBL"
+                                                    <cc1:TextBoxWatermarkExtender ID="tw6" runat="server" TargetControlID="txtRatePerDoc"
                                                         WatermarkText="0.00">
                                                     </cc1:TextBoxWatermarkExtender>
-                                                    <asp:RequiredFieldValidator ID="rfvSharingBL" runat="server" ErrorMessage="Please enter shared rate"
-                                                        Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtSharingBL"></asp:RequiredFieldValidator>
-                                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender7" runat="server" TargetControlID="rfvSharingBL">
+                                                    <asp:RequiredFieldValidator ID="rfvRatePerDoc" runat="server" ErrorMessage="Please enter rate"
+                                                        Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtRatePerDoc"></asp:RequiredFieldValidator>
+                                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender7" runat="server" TargetControlID="rfvRatePerDoc">
                                                     </cc1:ValidatorCalloutExtender>
                                                     <br />
                                                     <br />
@@ -331,42 +376,42 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Rate/CBM" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
                                                 <ItemTemplate>
-                                                    <%--<asp:Label ID="lblSharingTEU" runat="server" Text='<%# Eval("SharingTEU")%>'></asp:Label>--%>
+                                                    <asp:Label ID="lblRatePerCBM" runat="server" Text='<%# Eval("RatePerCBM")%>'></asp:Label>
                                                 </ItemTemplate>
                                                 <HeaderTemplate>
-                                                    <cc2:CustomTextBox ID="txtSharingTEU" runat="server" Width="60" Type="Decimal" MaxLength="10"
+                                                    <cc2:CustomTextBox ID="txtRatePerCBM" runat="server" Width="60" Type="Decimal" MaxLength="10"
                                                         Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
-                                                    <cc1:TextBoxWatermarkExtender ID="tw7" runat="server" TargetControlID="txtSharingTEU"
+                                                    <cc1:TextBoxWatermarkExtender ID="tw7" runat="server" TargetControlID="txtRatePerCBM"
                                                         WatermarkText="0.00">
                                                     </cc1:TextBoxWatermarkExtender>
-                                                    <asp:RequiredFieldValidator ID="rfvSharingTEU" runat="server" ErrorMessage="Please enter shared rate"
-                                                        Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtSharingTEU"></asp:RequiredFieldValidator>
-                                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender8" runat="server" TargetControlID="rfvSharingTEU">
+                                                    <asp:RequiredFieldValidator ID="rfvRatePerCBM" runat="server" ErrorMessage="Please enter rate"
+                                                        Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtRatePerCBM"></asp:RequiredFieldValidator>
+                                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender8" runat="server" TargetControlID="rfvRatePerCBM">
                                                     </cc1:ValidatorCalloutExtender>
                                                     <br />
                                                     <br />
-                                                    <asp:Label ID="lblFShareTeu" runat="server" Text="Rate/CBM"></asp:Label>
+                                                    <asp:Label ID="lblFRatePerCBM" runat="server" Text="Rate/CBM"></asp:Label>
                                                 </HeaderTemplate>
                                                 <HeaderStyle HorizontalAlign="Right" />
                                                 <ItemStyle HorizontalAlign="Right" />
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Rate/TON" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
                                                 <ItemTemplate>
-                                                    <%--<asp:Label ID="lblSharingFEU" runat="server" Text='<%# Eval("SharingFEU")%>'></asp:Label>--%>
+                                                    <asp:Label ID="lblRatePerTON" runat="server" Text='<%# Eval("RatePerTON")%>'></asp:Label>
                                                 </ItemTemplate>
                                                 <HeaderTemplate>
-                                                    <cc2:CustomTextBox ID="txtSharingFEU" runat="server" Width="60" Type="Decimal" MaxLength="10"
+                                                    <cc2:CustomTextBox ID="txtRatePerTON" runat="server" Width="60" Type="Decimal" MaxLength="10"
                                                         Precision="8" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>
-                                                    <cc1:TextBoxWatermarkExtender ID="tw8" runat="server" TargetControlID="txtSharingFEU"
+                                                    <cc1:TextBoxWatermarkExtender ID="tw8" runat="server" TargetControlID="txtRatePerTON"
                                                         WatermarkText="0.00">
                                                     </cc1:TextBoxWatermarkExtender>
-                                                    <asp:RequiredFieldValidator ID="rfvSharingFEU" runat="server" ErrorMessage="Please enter shared rate"
-                                                        Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtSharingFEU"></asp:RequiredFieldValidator>
-                                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender9" runat="server" TargetControlID="rfvSharingFEU">
+                                                    <asp:RequiredFieldValidator ID="rfvRatePerTON" runat="server" ErrorMessage="Please enter rate"
+                                                        Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtRatePerTON"></asp:RequiredFieldValidator>
+                                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender9" runat="server" TargetControlID="rfvRatePerTON">
                                                     </cc1:ValidatorCalloutExtender>
                                                     <br />
                                                     <br />
-                                                    <asp:Label ID="lblFShareFeu" runat="server" Text="Rate/TON"></asp:Label>
+                                                    <asp:Label ID="lblFRatePerTON" runat="server" Text="Rate/TON"></asp:Label>
                                                 </HeaderTemplate>
                                                 <HeaderStyle HorizontalAlign="Right" />
                                                 <ItemStyle HorizontalAlign="Right" />
@@ -374,8 +419,8 @@
                                             <asp:TemplateField HeaderText="Edit" ItemStyle-Font-Bold="true" ItemStyle-HorizontalAlign="Center"
                                                 FooterStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Top">
                                                 <ItemTemplate>
-                                                    <%--<asp:HiddenField ID="hdnSlno" runat="server" Value='<%# Eval("SlNo")%>' />
-                                                    <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("ChargesRateID")%>' />--%>
+                                                    <asp:HiddenField ID="hdnSlno" runat="server" Value='<%# Eval("SlNo")%>' />
+                                                    <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("ChargesRateID")%>' />
                                                     <asp:ImageButton ID="lnkEdit" runat="server" CommandArgument="Edit" ImageUrl="~/Images/edit.png"
                                                         Height="16" Width="16" ToolTip="Edit" />
                                                 </ItemTemplate>
@@ -425,7 +470,7 @@
                                 </td>
                                 <td colspan="4">
                                     <asp:HiddenField ID="hdnChargeID" runat="server" Value="0" />
-                                    <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="vgCharge" />&nbsp;&nbsp;<asp:Button
+                                    <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="vgCharge" OnClick="btnSave_Click" />&nbsp;&nbsp;<asp:Button
                                         ID="btnBack" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
                                         OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" OnClick="btnBack_Click" />
                                     <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
@@ -437,7 +482,7 @@
                                     </asp:DropDownList>
                                     <asp:DropDownList ID="ddlMTerminal" runat="server">
                                     </asp:DropDownList>
-                                    <asp:DropDownList ID="ddlMWashingType" runat="server">
+                                    <asp:DropDownList ID="ddlMType" runat="server">
                                     </asp:DropDownList>
                                 </td>
                             </tr>

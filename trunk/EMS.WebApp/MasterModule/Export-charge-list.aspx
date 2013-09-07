@@ -22,6 +22,32 @@
                 <table border="0">
                     <tr>
                         <td>
+                            <asp:TextBox ID="txtChargeName" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
+                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterMode="InvalidChars"
+                                InvalidChars="<>-" TargetControlID="txtChargeName">
+                            </cc1:FilteredTextBoxExtender>
+                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtChargeName"
+                                WatermarkText="Charge Title">
+                            </cc1:TextBoxWatermarkExtender>
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlChargeType" runat="server" Width="200" Visible="false">
+                            </asp:DropDownList>
+                            <asp:TextBox ID="txtService" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
+                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters"
+                                FilterMode="ValidChars" ValidChars=" " TargetControlID="txtService">
+                            </cc1:FilteredTextBoxExtender>
+                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender4" runat="server" TargetControlID="txtService"
+                                WatermarkText="Service">
+                            </cc1:TextBoxWatermarkExtender>
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlLocation" runat="server" Width="200">
+                            </asp:DropDownList>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             <asp:TextBox ID="txtLine" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters"
                                 FilterMode="ValidChars" ValidChars=" " TargetControlID="txtLine">
@@ -31,34 +57,22 @@
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlLocation" runat="server" Width="200">
-                                <asp:ListItem Selected="True" Text="Select Location"></asp:ListItem>
-                            </asp:DropDownList>
-                        </td>
-                        <td>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+                            <%--  <asp:DropDownList ID="ddlLine" runat="server" Width="200">
+                            </asp:DropDownList>--%>
                             <asp:TextBox ID="txtEfectDate" runat="server" CssClass="watermark" ForeColor="#747862"
                                 onkeyup="return false;"></asp:TextBox>
                             <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtEfectDate"
                                 TargetControlID="txtEfectDate" Format="dd/MM/yyyy">
                             </cc1:CalendarExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="txtEfectDate"
-                                WatermarkText="On Date">
+                                WatermarkText="Effective Date">
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
-                            <asp:TextBox ID="txtService" runat="server" CssClass="watermark" ForeColor="#747862"
-                                onkeyup="return false;"></asp:TextBox>
-                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtService"
-                                WatermarkText="Service">
-                            </cc1:TextBoxWatermarkExtender>
-                        </td>
-                        <td>
-                            <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" />
-                            <asp:Button ID="btnRefresh" runat="server" Text="Reset" CssClass="button" Width="100px" />
+                            <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px"
+                                OnClick="btnSearch_Click" />
+                            <asp:Button ID="btnRefresh" runat="server" Text="Reset" CssClass="button" Width="100px"
+                                OnClick="btnRefresh_Click" />
                         </td>
                     </tr>
                 </table>
@@ -74,17 +88,17 @@
                 </ProgressTemplate>
             </asp:UpdateProgress>
             <fieldset id="fsList" runat="server" style="width: 100%; min-height: 100px;">
-                <legend>Export Charge List</legend>
+                <legend>Charge List</legend>
                 <div style="float: right; padding-bottom: 5px;">
-                    Results Per Page:<asp:DropDownList ID="ddlPaging" runat="server" Width="50px" AutoPostBack="true">
+                    Results Per Page:<asp:DropDownList ID="ddlPaging" runat="server" Width="50px" AutoPostBack="true"
+                        OnSelectedIndexChanged="ddlPaging_SelectedIndexChanged">
                         <asp:ListItem Text="10" Value="10" />
                         <asp:ListItem Text="30" Value="30" />
                         <asp:ListItem Text="50" Value="50" />
                         <asp:ListItem Text="100" Value="100" />
                     </asp:DropDownList>
                     &nbsp;&nbsp;
-                    <asp:Button ID="btnAdd" runat="server" Text="Add New Charge" Width="130px" 
-                        onclick="btnAdd_Click" />
+                    <asp:Button ID="btnAdd" runat="server" Text="Add New Charge" Width="130px" OnClick="btnAdd_Click" />
                 </div>
                 <div style="height: 30px;">
                     &nbsp; <span class="errormessage" style="display: none;">* Indicates Inactive Location(s)</span>
@@ -98,7 +112,8 @@
                         </Triggers>
                         <ContentTemplate>
                             <asp:GridView ID="gvwCharge" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                                BorderStyle="None" BorderWidth="0" Width="100%">
+                                BorderStyle="None" BorderWidth="0" OnPageIndexChanging="gvwCharge_PageIndexChanging"
+                                OnRowDataBound="gvwCharge_RowDataBound" OnRowCommand="gvwCharge_RowCommand" Width="100%">
                                 <PagerSettings Mode="NumericFirstLast" Position="TopAndBottom" />
                                 <PagerStyle CssClass="gridviewpager" />
                                 <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
@@ -118,20 +133,13 @@
                                         <ItemTemplate>
                                             <asp:Label ID="lblChargeTitle" runat="server" Style="text-transform: uppercase;"></asp:Label>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
+                                    </asp:TemplateField> 
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="12%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="13%" />
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkHIEc" runat="server" CommandName="Sort" CommandArgument="CB"
+                                            <asp:LinkButton ID="lnkHType" runat="server" CommandName="Sort" CommandArgument="Type"
                                                 Text="Charge Basis"></asp:LinkButton></HeaderTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
-                                        <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkHLine" runat="server" CommandName="Sort" CommandArgument="Line"
-                                                Text="Line"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
@@ -144,29 +152,22 @@
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkHDate" runat="server" CommandName="Sort" CommandArgument="Date"
-                                                Text="Up To Date"></asp:LinkButton></HeaderTemplate>
+                                            <asp:LinkButton ID="lnkHLine" runat="server" CommandName="Sort" CommandArgument="Line"
+                                                Text="Line"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="13%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkHType" runat="server" CommandName="Sort" CommandArgument="Type"
-                                                Text="Charge Type"></asp:LinkButton></HeaderTemplate>
+                                            <asp:LinkButton ID="lnkHDate" runat="server" CommandName="Sort" CommandArgument="Date"
+                                                Text="Up To Date"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Service">
-                                        <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Center" />
-                                        <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" />
+                                        <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Left" />
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkHType" runat="server" CommandName="Sort" CommandArgument="Type"
+                                            <asp:LinkButton ID="lnkHService" runat="server" CommandName="Sort" CommandArgument="Service"
                                                 Text="Service"></asp:LinkButton></HeaderTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="EDI">
-                                        <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Center" />
-                                        <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" />
-                                        <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkHType" runat="server" CommandName="Sort" CommandArgument="Type"
-                                                Text="EDI"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />

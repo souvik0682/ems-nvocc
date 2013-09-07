@@ -37,5 +37,28 @@ namespace EMS.Common
         decimal TotalAmount { get; set; }
         int InvoiceChargeId { get; set; }
         long InvoiceId { get; set; }
+
+        int Type
+        {
+            get;
+            set;
+        }      
+        string Size
+        {
+            get;
+            set;
+        }        
+        decimal RatePerUnit
+        {
+            get;
+            set;
+        }        
+        decimal RatePerDoc
+        {
+            get;
+            set;
+        }
+                
+        
     }
 }

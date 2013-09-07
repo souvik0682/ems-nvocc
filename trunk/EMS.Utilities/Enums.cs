@@ -50,7 +50,8 @@ namespace EMS.Utilities
             PER_UNIT = 50,
             PER_DOCUMENT = 51,           
             PER_CBM = 52,
-            PER_TON = 53
+            PER_TON = 53,
+            TYPE_SIZE = 54
 
         }
 

@@ -424,6 +424,7 @@ namespace EMS.WebApp.MasterModule
 
             //////ddlType.Enabled = false;
             rfvType.Enabled = false;
+            ddlType.Enabled = false;
             ddlType.SelectedIndex = 0;
 
             ddlSize.Enabled = false;
@@ -448,7 +449,7 @@ namespace EMS.WebApp.MasterModule
 
             switch (ddlChargeType.SelectedValue)
             {
-                case "50": // Per Unit
+                case "54": // Per Unit TYPE & SIZE
                     ddlType.Enabled = true;
                     rfvType.Enabled = true;
 
@@ -472,6 +473,17 @@ namespace EMS.WebApp.MasterModule
                 case "53": // Per TON
                     txtRatePerTON.Enabled = true;
                     rfvRatePerTON.Enabled = true;
+                    break;
+
+                case "50": // Per Unit 
+                    ddlType.Enabled = false;
+                    rfvType.Enabled = false;
+
+                    ddlSize.Enabled = true;
+                    rfvSize.Enabled = true;
+
+                    txtRateperUnit.Enabled = true;
+                    rfvRatePerUnit.Enabled = true;
                     break;
 
 
@@ -600,8 +612,12 @@ namespace EMS.WebApp.MasterModule
             rdbDestinationCharge.Items.FindByValue(oChargeEntity.DestinationCharge.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
 
             //hdnFPOD.Value = oChargeEntity.FPOD;
-            hdnFPOD.Value = oChargeEntity.FPOD.Substring(oChargeEntity.FPOD.IndexOf('|') + 1);
-            txtFPOD.Text = oChargeEntity.FPOD.Substring(0, oChargeEntity.FPOD.IndexOf('|'));
+            if (oChargeEntity.FPOD != string.Empty)
+            {
+                hdnFPOD.Value = oChargeEntity.FPOD.Substring(oChargeEntity.FPOD.IndexOf('|') + 1);
+                txtFPOD.Text = oChargeEntity.FPOD.Substring(0, oChargeEntity.FPOD.IndexOf('|'));
+            }
+
 
             FillServices();
             if (ddlService.Items.Count > 0)

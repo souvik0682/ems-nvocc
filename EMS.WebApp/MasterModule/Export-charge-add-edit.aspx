@@ -115,7 +115,7 @@
                                 </td>
                                 <td>
                                     <%--<asp:TextBox ID="txtFPOD" runat="server" Width="150" Enabled="false"></asp:TextBox>--%>
-                                    <asp:HiddenField ID="hdnFPOD" runat="server" Value="0" />
+                                    <asp:HiddenField ID="hdnFPOD" runat="server" Value="0" /> 
                                     <asp:TextBox runat="server" ID="txtFPOD" Width="150" autocomplete="off" 
                                         Enabled="false" Style="text-transform: uppercase;" 
                                         ontextchanged="txtFPOD_TextChanged" AutoPostBack="True" />

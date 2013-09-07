@@ -52,6 +52,7 @@ namespace EMS.WebApp.MasterModule
                 else
                 {
                     DefaultSelection();
+
                     //FillDocType();
                     oChargeRates = new List<ChargeRateEntity>();
                     ChargeRateEntity Ent = new ChargeRateEntity();
@@ -483,8 +484,9 @@ namespace EMS.WebApp.MasterModule
             rdbServiceTaxApplicable.SelectedIndex = 1;
             rdbDestinationCharge.SelectedIndex = 1;
             rdbTerminalRequired.SelectedIndex = 1;
-
+            ddlLine.SelectedIndex = -1;
             ddlService.Items.Clear();
+            rfvFPOD.Enabled = false;
             txtFPOD.Text = string.Empty;
             hdnFPOD.Value = "0";
             ddlInvLink.SelectedIndex = 0;
@@ -515,12 +517,15 @@ namespace EMS.WebApp.MasterModule
             #endregion
 
             #region Currency
-            foreach (Enums.Currency r in Enum.GetValues(typeof(Enums.Currency)))
-            {
-                //Li = new ListItem("SELECT", "0");
-                ListItem item = new ListItem(Enum.GetName(typeof(Enums.Currency), r).Replace('_', ' '), ((int)r).ToString());
-                ddlCurrency.Items.Add(item);
-            }
+
+            PopulateDropDown((int)Enums.DropDownPopulationFor.ExpCurrency, ddlCurrency, 0, 0);
+
+            //foreach (Enums.Currency r in Enum.GetValues(typeof(Enums.Currency)))
+            //{
+            //    //Li = new ListItem("SELECT", "0");
+            //    ListItem item = new ListItem(Enum.GetName(typeof(Enums.Currency), r).Replace('_', ' '), ((int)r).ToString());
+            //    ddlCurrency.Items.Add(item);
+            //}
             //ddlCurrency.Items.Insert(0, Li);
             #endregion
 
@@ -632,7 +637,7 @@ namespace EMS.WebApp.MasterModule
             txtChargeName.Enabled = false;
             txtEffectDate.Enabled = false;
             txtFPOD.Enabled = false;
-
+            rfvFPOD.Enabled = false;
             ddlChargeType.Enabled = false;
             ddlCurrency.Enabled = false;
             ddlLine.Enabled = false;
@@ -652,7 +657,7 @@ namespace EMS.WebApp.MasterModule
             txtChargeName.Enabled = true;
             txtEffectDate.Enabled = true;
             txtFPOD.Enabled = true;
-
+            rfvFPOD.Enabled = true;
             ddlChargeType.Enabled = true;
             ddlCurrency.Enabled = true;
             ddlLine.Enabled = true;
@@ -892,9 +897,15 @@ namespace EMS.WebApp.MasterModule
         protected void rdbDestinationCharge_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (rdbDestinationCharge.SelectedValue == "1")
+            {
                 txtFPOD.Enabled = true;
+                rfvFPOD.Enabled = true;
+            }
             else
+            {
                 txtFPOD.Enabled = false;
+                rfvFPOD.Enabled = false;
+            }
         }
 
         protected void ddlHeaderLocation_SelectedIndexChanged1(object sender, EventArgs e)
@@ -909,13 +920,17 @@ namespace EMS.WebApp.MasterModule
 
         private void FillServices()
         {
-            if (ddlLine.SelectedIndex > 0 && Convert.ToInt32(hdnFPOD.Value) > 0)
+            if (ddlLine.SelectedIndex > 0) // && Convert.ToInt32(hdnFPOD.Value) > 0)
             {
                 ListItem Li;
-                PopulateDropDown((int)Enums.DropDownPopulationFor.Service, ddlService, Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(hdnFPOD.Value));
+                PopulateDropDown((int)Enums.DropDownPopulationFor.Service, ddlService, Convert.ToInt32(ddlLine.SelectedValue), 0);
 
-                Li = new ListItem("SELECT", "0");
+                Li = new ListItem("ALL", "0");
                 ddlService.Items.Insert(0, Li);
+            }
+            else
+            {
+                ddlService.Items.Clear();
             }
         }
 

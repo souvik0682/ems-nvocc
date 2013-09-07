@@ -16,7 +16,7 @@
     <div id="headercaption">
         EXPORT CHARGE ENTRY</div>
     <center>
-        <div style="width: 90%;">
+        <div style="width: 78%; height: 468px;">
             <fieldset style="width: 100%;">
                 <legend>Search Export Charge</legend>
                 <table border="0">

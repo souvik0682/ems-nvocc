@@ -17,7 +17,7 @@
 
     </script>
 
-    <script type="text/javascript">
+    <script language="javascript" type="text/javascript">
         function AutoCompleteItemSelected(sender, e) {
 
             if (sender._id == "AutoCompleteEx") {
@@ -181,8 +181,8 @@
                                 </td>
                                 <td>
                                     <asp:DropDownList ID="ddlInvLink" runat="server" Width="155">
-                                        <asp:ListItem Selected="True" Text="Select Invoice"></asp:ListItem>
-                                        <asp:ListItem Text="Freight Invoice" Value="1"></asp:ListItem>
+<%--                                        <asp:ListItem Selected="True" Text="Select Invoice"></asp:ListItem>--%>
+                                        <asp:ListItem Selected="True" Text="Freight Invoice" Value="1"></asp:ListItem>
                                         <asp:ListItem Text="Other Invoice" Value="2"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>

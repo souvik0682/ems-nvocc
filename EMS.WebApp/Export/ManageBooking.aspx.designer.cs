@@ -49,6 +49,15 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.DropDownList ddlLocation;
         
         /// <summary>
+        /// rfvloc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvloc;
+        
+        /// <summary>
         /// ddlBookingParty control.
         /// </summary>
         /// <remarks>
@@ -58,13 +67,13 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.DropDownList ddlBookingParty;
         
         /// <summary>
-        /// errBookingParty control.
+        /// rfvParty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label errBookingParty;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvParty;
         
         /// <summary>
         /// txtAccounts control.
@@ -130,15 +139,6 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtRefBookingNo;
         
         /// <summary>
-        /// rfvRefBookingNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvRefBookingNo;
-        
-        /// <summary>
         /// txtRefBookingDate control.
         /// </summary>
         /// <remarks>
@@ -157,49 +157,184 @@ namespace EMS.WebApp.Export {
         protected global::AjaxControlToolkit.CalendarExtender cbeRefBookingNo;
         
         /// <summary>
-        /// rfbRefBookingDate control.
+        /// hdnPOR control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfbRefBookingDate;
+        protected global::System.Web.UI.WebControls.HiddenField hdnPOR;
         
         /// <summary>
-        /// TextBox1 control.
+        /// txtPOR control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txtPOR;
         
         /// <summary>
-        /// TextBox2 control.
+        /// rfvPOR control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPOR;
         
         /// <summary>
-        /// TextBox3 control.
+        /// ValidatorCalloutExtender1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
+        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender1;
         
         /// <summary>
-        /// TextBox4 control.
+        /// autoComplete1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox4;
+        protected global::AjaxControlToolkit.AutoCompleteExtender autoComplete1;
+        
+        /// <summary>
+        /// hdnPOL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnPOL;
+        
+        /// <summary>
+        /// txtPOL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPOL;
+        
+        /// <summary>
+        /// rfvPOL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPOL;
+        
+        /// <summary>
+        /// ValidatorCalloutExtender2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender2;
+        
+        /// <summary>
+        /// AutoCompleteExtender1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender AutoCompleteExtender1;
+        
+        /// <summary>
+        /// hdnPOD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnPOD;
+        
+        /// <summary>
+        /// txtPOD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPOD;
+        
+        /// <summary>
+        /// rfvPOD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPOD;
+        
+        /// <summary>
+        /// ValidatorCalloutExtender3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender3;
+        
+        /// <summary>
+        /// AutoCompleteExtender2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender AutoCompleteExtender2;
+        
+        /// <summary>
+        /// hdnFPOD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnFPOD;
+        
+        /// <summary>
+        /// txtFPOD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFPOD;
+        
+        /// <summary>
+        /// rfvFPOD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFPOD;
+        
+        /// <summary>
+        /// ValidatorCalloutExtender4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender4;
+        
+        /// <summary>
+        /// AutoCompleteExtender3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender AutoCompleteExtender3;
         
         /// <summary>
         /// txtCommodity control.
@@ -211,6 +346,15 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtCommodity;
         
         /// <summary>
+        /// rfvCommodity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCommodity;
+        
+        /// <summary>
         /// ddlShipmentType control.
         /// </summary>
         /// <remarks>
@@ -220,13 +364,40 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.DropDownList ddlShipmentType;
         
         /// <summary>
-        /// txtLoadingVessel control.
+        /// hdnVessel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLoadingVessel;
+        protected global::System.Web.UI.WebControls.HiddenField hdnVessel;
+        
+        /// <summary>
+        /// txtVessel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtVessel;
+        
+        /// <summary>
+        /// rfvVessel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvVessel;
+        
+        /// <summary>
+        /// aceVessel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender aceVessel;
         
         /// <summary>
         /// ddlLoadingVoyage control.
@@ -238,6 +409,15 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.DropDownList ddlLoadingVoyage;
         
         /// <summary>
+        /// hdnMainLineVessel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnMainLineVessel;
+        
+        /// <summary>
         /// txtMainLineVessel control.
         /// </summary>
         /// <remarks>
@@ -247,31 +427,49 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtMainLineVessel;
         
         /// <summary>
-        /// txtMainLineVoyage control.
+        /// rfvMLVessel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMainLineVoyage;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMLVessel;
         
         /// <summary>
-        /// ddlBLEdge control.
+        /// AutoCompleteExtender4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlBLEdge;
+        protected global::AjaxControlToolkit.AutoCompleteExtender AutoCompleteExtender4;
         
         /// <summary>
-        /// ddlHAZCargo control.
+        /// ddlMainLineVoyage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlHAZCargo;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMainLineVoyage;
+        
+        /// <summary>
+        /// rdoBLThruEdge control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rdoBLThruEdge;
+        
+        /// <summary>
+        /// rdoHazardousCargo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rdoHazardousCargo;
         
         /// <summary>
         /// txtImo control.
@@ -319,13 +517,13 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.DropDownList ddlService;
         
         /// <summary>
-        /// ddlReefer control.
+        /// rdoReefer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlReefer;
+        protected global::System.Web.UI.WebControls.RadioButtonList rdoReefer;
         
         /// <summary>
         /// lnkContainerDtls control.
@@ -380,6 +578,24 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::EMS.WebApp.CustomControls.CustomTextBox txtTempMax;
+        
+        /// <summary>
+        /// lblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessage;
+        
+        /// <summary>
+        /// hdnBookingID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnBookingID;
         
         /// <summary>
         /// btnSave control.

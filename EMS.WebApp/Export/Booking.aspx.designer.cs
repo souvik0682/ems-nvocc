@@ -85,13 +85,13 @@ namespace EMS.WebApp.Export {
         protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender1;
         
         /// <summary>
-        /// TextBoxWatermarkExtender1 control.
+        /// tbwBookingRef control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender1;
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender tbwBookingRef;
         
         /// <summary>
         /// txtVessel control.

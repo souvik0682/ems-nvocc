@@ -44,7 +44,7 @@
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
                                 FilterMode="InvalidChars" ValidChars=" " TargetControlID="txtBookingRef">
                             </cc1:FilteredTextBoxExtender>
-                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtLocation"
+                            <cc1:TextBoxWatermarkExtender ID="tbwBookingRef" runat="server" TargetControlID="txtBookingRef"
                                 WatermarkText="Booking Ref.">
                             </cc1:TextBoxWatermarkExtender>
                         </td>
@@ -153,16 +153,16 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="5%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkLine" runat="server" CommandName="Sort" CommandArgument="Line" Text="Line"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="20%" />
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkBooking" runat="server" CommandName="Sort" CommandArgument="Booking" Text="Booking"></asp:LinkButton>
+                                            <asp:LinkButton ID="lnkBooking" runat="server" CommandName="Sort" CommandArgument="BookingNo" Text="Booking No."></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
@@ -174,7 +174,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="18%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkVessel" runat="server" CommandName="Sort" CommandArgument="Vessel" Text="Vessel"></asp:LinkButton>
                                         </HeaderTemplate>
@@ -188,24 +188,34 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkPOL" runat="server" CommandName="Sort" CommandArgument="POL" Text="POL"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <%--<ItemStyle CssClass="gridviewitem" Width="10%" />--%>
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkCharges" runat="server" CommandName="Sort" CommandArgument="Charges" Text="Charges"></asp:LinkButton>
+                                            <asp:LinkButton ID="lnkCharges" runat="server" Text="Charges"></asp:LinkButton>
                                         </HeaderTemplate>
+                                        <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                        <ItemTemplate>
+                                            <asp:ImageButton ID="btnCharges" runat="server" CommandName="Status" ImageUrl="~/Images/Charges.gif"
+                                                Height="16" Width="16" />
+                                        </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <%--<ItemStyle CssClass="gridviewitem" Width="10%" />--%>
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkStatus" runat="server" CommandName="Sort" CommandArgument="Status" Text="Status"></asp:LinkButton>
+                                            <asp:LinkButton ID="lnkStatus" runat="server" Text="Status"></asp:LinkButton>
                                         </HeaderTemplate>
+                                        <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                        <ItemTemplate>
+                                            <asp:ImageButton ID="btnStatus" runat="server" CommandName="Status" ImageUrl="~/Images/Status.jpg"
+                                                Height="16" Width="16" />
+                                        </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />

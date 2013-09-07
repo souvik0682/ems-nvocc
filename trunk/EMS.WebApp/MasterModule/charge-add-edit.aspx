@@ -162,7 +162,7 @@
                                     Import / Export<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlImportExportGeneral" runat="server" Width="155" 
+                                    <asp:DropDownList ID="ddlImportExportGeneral" runat="server" Width="155" Enabled="false"
                                         onselectedindexchanged="ddlImportExportGeneral_SelectedIndexChanged" AutoPostBack="true" >
                                         <asp:ListItem Text="IMPORT" Value="I"></asp:ListItem>
                                         <asp:ListItem Text="EXPORT" Value="E"></asp:ListItem>

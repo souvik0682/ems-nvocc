@@ -703,6 +703,23 @@ namespace EMS.DAL
         }
         #endregion
 
+        //#region Export
+        //public static DataTable GetExportVoyages(string Vessel)
+        //{
+        //    string strExecution = "[exp].[spGetVoyageByVesselID]";
+        //    DataTable myDataTable;
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddIntegerParam("@Vessel", Vessel.ToInt());
+        //        myDataTable = oDq.GetTable();
+        //    }
+
+        //    return myDataTable;
+        //}
+
+        //#endregion
+
         #region Report
 
         public static DataTable GenerateExcel(string Location, string Vessel, string PortOfDischarge, string Line, string Voyage, string VIANo)
@@ -823,6 +840,7 @@ namespace EMS.DAL
 
             return myDataTable;
         }
+
         public static DataTable GetBLNo(string line, string Vessel, string Voyage)
         {
             string strExecution = "rptUspGetLineBLNo";

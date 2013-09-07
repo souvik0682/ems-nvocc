@@ -47,6 +47,7 @@ namespace EMS.WebApp.MasterModule
             //IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
             //_userId = user == null ? 0 : user.Id;
 
+            ddlImportExportGeneral.SelectedIndex = 0;
             RetriveParameters();
             if (!Page.IsPostBack)
             {
@@ -1753,7 +1754,7 @@ namespace EMS.WebApp.MasterModule
 
             ddlChargeType.Enabled = true;
             ddlCurrency.Enabled = true;
-            ddlImportExportGeneral.Enabled = true;
+            ddlImportExportGeneral.Enabled = false;
             ddlLine.Enabled = true;
             ddlHeaderLocation.Enabled = true;
 

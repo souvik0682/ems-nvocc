@@ -28,6 +28,7 @@ namespace EMS.WebApp.Equipment
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            RetriveParameters();
             _userId = UserBLL.GetLoggedInUserId();
             _userLocation = UserBLL.GetUserLocation();
 
@@ -76,7 +77,7 @@ namespace EMS.WebApp.Equipment
                     FillContainers(ds.Tables[1]);
                 }
             }
-            //CheckUserAccess(hdnContainerTransactionId.Value);
+            CheckUserAccess(hdnContainerTransactionId.Value);
         }
 
         void DisableHeaderSection()
@@ -86,6 +87,7 @@ namespace EMS.WebApp.Equipment
             ddlToStatus.Enabled = false;
             ddlTolocation.Enabled = false;
             ddlEmptyYard.Enabled = false;
+            ddlLine.Enabled = false;
 
             txtTeus.Enabled = false;
             txtNarration.Enabled = false;
@@ -186,6 +188,8 @@ namespace EMS.WebApp.Equipment
 
                 ddlTolocation.SelectedIndex = ddlTolocation.Items.IndexOf(ddlTolocation.Items.FindByValue(dt.Rows[0]["ToLocation"].ToString()));
                 ddlEmptyYard.SelectedIndex = ddlEmptyYard.Items.IndexOf(ddlEmptyYard.Items.FindByValue(dt.Rows[0]["EmptyYard"].ToString()));
+
+                ddlLine.SelectedIndex = ddlLine.Items.IndexOf(ddlLine.Items.FindByValue(dt.Rows[0]["LINEID"].ToString()));
 
                 txtTeus.Text = dt.Rows[0]["TEUs"].ToString();
                 txtFEUs.Text = dt.Rows[0]["FEUs"].ToString();

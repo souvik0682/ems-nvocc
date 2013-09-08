@@ -47,12 +47,13 @@ namespace EMS.WebApp.MasterModule
                     ActionOnLocationChange(ddlHeaderLocation as object);
                     //WashingSelection(rdbWashing);
                     ShowHideControlofFooter(ddlChargeType);
+                
                     DisableAllField();
                 }
                 else
                 {
                     DefaultSelection();
-
+                    DateTime Cdate = DateTime.Now;
                     //FillDocType();
                     oChargeRates = new List<ChargeRateEntity>();
                     ChargeRateEntity Ent = new ChargeRateEntity();
@@ -60,6 +61,7 @@ namespace EMS.WebApp.MasterModule
                     dgChargeRates.DataSource = oChargeRates;
                     dgChargeRates.DataBind();
                     dgChargeRates.Rows[0].Visible = false;
+                    txtEffectDate.Text = Cdate.AddDays(1).ToShortDateString();
 
                     //WashingSelection(rdbWashing);
                 }

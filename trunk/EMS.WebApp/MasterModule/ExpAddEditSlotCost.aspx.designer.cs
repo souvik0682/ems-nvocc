@@ -397,7 +397,7 @@ namespace EMS.WebApp.MasterModule {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAmount;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtAmount;
         
         /// <summary>
         /// TextBoxWatermarkExtender5 control.
@@ -433,7 +433,7 @@ namespace EMS.WebApp.MasterModule {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRevTon;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtRevTon;
         
         /// <summary>
         /// TextBoxWatermarkExtender4 control.

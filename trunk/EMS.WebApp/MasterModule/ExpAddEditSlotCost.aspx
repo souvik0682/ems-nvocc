@@ -3,6 +3,7 @@
 
 <%@ Import Namespace="EMS.Utilities" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<%@ Register Assembly="EMS.WebApp" Namespace="EMS.WebApp.CustomControls" TagPrefix="cc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script src="../Scripts/Common.js" type="text/javascript"></script>
     <script type="text/javascript" language="javascript">
@@ -261,10 +262,10 @@
                                 <table id="gvwSlotCostUpper" cellspacing="0" style="border-width: 0px; border-style: None; width: 100%;
                                     border-collapse: collapse;" rules="all">
                                     <tr>
-                                        <th style="width: 2%; color: #fff" class="gridviewheader" scope="col">
+                                        <th style="width: 53px;" color: #fff" class="gridviewheader" scope="col">
                                             SI#
                                         </th>
-                                        <th style="width: 13%;" class="gridviewheader" scope="col">
+                                        <th style="width: 118px;" class="gridviewheader" scope="col">
                                             <asp:DropDownList ID="ddlType" runat="server" CssClass="dropdownlist">
                                                 <asp:ListItem Value="0" Selected="True" Text="---Type---"></asp:ListItem>                                                
                                                 <asp:ListItem  Text="FCL" Value="F"></asp:ListItem>
@@ -279,7 +280,7 @@
                                                 ValidationGroup="AddToList" ErrorMessage="[Required]" ControlToValidate="ddlType" InitialValue="0"
                                                 Display="Dynamic"></asp:RequiredFieldValidator>
                                         </th>
-                                        <th style="width: 13%;" class="gridviewheader" scope="col">
+                                        <th style="width: 118px;" class="gridviewheader" scope="col">
                                             <asp:DropDownList ID="ddlSize" runat="server" CssClass="dropdownlist">
                                                 <asp:ListItem Value="0" Text="---Size---"></asp:ListItem>
                                                 <asp:ListItem Value="20" Text="20"></asp:ListItem>
@@ -289,7 +290,7 @@
                                                 ValidationGroup="AddToList" ErrorMessage="[Required]" ControlToValidate="ddlSize" InitialValue="0"
                                                 Display="Dynamic"></asp:RequiredFieldValidator>
                                         </th>
-                                        <th style="width: 13%;" class="gridviewheader" scope="col">
+                                        <th style="width: 194px;" class="gridviewheader" scope="col">
                                             <asp:DropDownList ID="ddlContainerType" runat="server" CssClass="dropdownlist">
                                             </asp:DropDownList>
                                             <br />
@@ -297,7 +298,7 @@
                                                 ValidationGroup="AddToList" ErrorMessage="[Required]" ControlToValidate="ddlContainerType"
                                                 InitialValue="0" Display="Dynamic"></asp:RequiredFieldValidator>
                                         </th>
-                                        <th style="width: 13%;" class="gridviewheader" scope="col" align="center">
+                                        <th style="width: 181px;" class="gridviewheader" scope="col" align="center">
                                             <asp:DropDownList ID="ddlCargo" runat="server" CssClass="dropdownlist">
                                                <asp:ListItem Selected="True" Value="0" Text="---Cargo---"></asp:ListItem>                                                
                                                 <asp:ListItem  Text="GEN" Value="G"></asp:ListItem>
@@ -309,8 +310,10 @@
                                                 runat="server" CssClass="errormessage" ErrorMessage="[Required]" ControlToValidate="ddlCargo"
                                                 InitialValue="0" Display="Dynamic"></asp:RequiredFieldValidator>
                                         </th>
-                                        <th style="width: 13%;" class="gridviewheader" scope="col">
-                                            <asp:TextBox ID="txtAmount" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
+                                        <th style="width: 181px;" class="gridviewheader" scope="col" align="right">
+                                           <%-- <asp:TextBox ID="txtAmount" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>--%>
+                                             <cc2:CustomTextBox style="float:right" ID="txtAmount" runat="server" CssClass="numerictextbox"
+                                                    Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc2:CustomTextBox>
                                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender5" runat="server" TargetControlID="txtAmount" WatermarkText="AMOUNT" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" CssClass="errormessage"
                                                 ValidationGroup="AddToList" ErrorMessage="[Required]" ControlToValidate="txtAmount"
@@ -319,8 +322,11 @@
                                                 runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]"
                                                 Display="Dynamic" ValidationExpression="^\d{1,6}.\d{1,2}|\d{1,6}$"></asp:RegularExpressionValidator>
                                         </th>
-                                        <th style="width: 13%;" class="gridviewheader" scope="col">
-                                            <asp:TextBox ID="txtRevTon"  runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
+                                        <th style="width: 181px;text-align:right" class="gridviewheader" scope="col" align="right">
+                                         <cc2:CustomTextBox style="float:right" ID="txtRevTon" runat="server" CssClass="numerictextbox"
+                                                    Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc2:CustomTextBox>
+
+                                            <%--<asp:TextBox ID=""  runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>--%>
                                              <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender4" runat="server" TargetControlID="txtRevTon" WatermarkText="REVTON" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage"
                                                 ValidationGroup="AddToList" ErrorMessage="[Required]" ControlToValidate="txtRevTon"
@@ -329,7 +335,7 @@
                                                 Display="Dynamic" ValidationExpression="^\d{1,6}.\d{1,2}|\d{1,6}$"></asp:RegularExpressionValidator>
                                       
                                         </th>
-                                        <th style="width: 22%;" class="gridviewheader" scope="col" colspan="2">
+                                        <th style="width: 78px;" class="gridviewheader" scope="col" colspan="2">
                                             <asp:Button ID="btnAddToList" ValidationGroup="AddToList" runat="server" Style="float: right;"
                                                 CssClass="button" Text="Add to List" OnClick="btnAddToList_Click" />
                             </td>
@@ -339,7 +345,7 @@
                         ShowHeaderWhenEmpty="true" BorderWidth="0" Width="100%" EnableViewState="true"
                         OnRowCommand="gvwSlotCost_OnRowCommand" OnRowEditing="gvwSlotCost_RowEditing" OnRowDeleting="gvwSlotCost_OnRowDeleting">
                         <Columns>
-                            <asp:TemplateField HeaderText="Sl#" HeaderStyle-Width="2%" ItemStyle-HorizontalAlign="Right">
+                            <asp:TemplateField HeaderText="Sl#" HeaderStyle-Width="5%" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
                                 <%=counter++ %>
                                 </ItemTemplate>
@@ -347,16 +353,16 @@
                                 <ItemStyle CssClass="gridviewitem" />
                             </asp:TemplateField>
                                  <asp:TemplateField HeaderText="TYPE" >
-                                <HeaderStyle CssClass="gridviewheader" Width="8%" />
+                                <HeaderStyle CssClass="gridviewheader" Width="10%" />
                                 <ItemStyle CssClass="gridviewitem" HorizontalAlign="Center" VerticalAlign="Middle" />
                                 <ItemTemplate>
                                   <%#GetItemFromValue(Eval("TYPE"), "ddlType")%>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField ItemStyle-CssClass="gridviewitem" HeaderStyle-Width="8%" HeaderStyle-CssClass="gridviewheader"
+                            <asp:BoundField ItemStyle-CssClass="gridviewitem" HeaderStyle-Width="10%" HeaderStyle-CssClass="gridviewheader"
                                 DataField="SIZE" HeaderText="SIZE" />
 
-                                <asp:TemplateField HeaderText="CONTAINERTYPE"  HeaderStyle-Width="13%">
+                                <asp:TemplateField HeaderText="CONTAINERTYPE"  HeaderStyle-Width="16%">
                                 <HeaderStyle CssClass="gridviewheader" />
                                 <ItemStyle CssClass="gridviewitem" HorizontalAlign="Center" VerticalAlign="Middle" />
                                 <ItemTemplate>
@@ -365,19 +371,19 @@
                             </asp:TemplateField>
                             
 
-                                 <asp:TemplateField HeaderText="CARGO" HeaderStyle-Width="8%">
+                                 <asp:TemplateField HeaderText="CARGO" HeaderStyle-Width="15%">
                                 <HeaderStyle CssClass="gridviewheader"  />
                                 <ItemStyle CssClass="gridviewitem" HorizontalAlign="Center" VerticalAlign="Middle" />
                                 <ItemTemplate>
                                   <%#GetItemFromValue(Eval("CARGO"), "ddlCargo")%>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField ItemStyle-CssClass="gridviewitem" ItemStyle-HorizontalAlign="Left" HeaderStyle-Width="15%"
-                                HeaderStyle-CssClass="gridviewheader" DataField="AMOUNT" HeaderText="AMOUNT" />
-                            <asp:BoundField ItemStyle-CssClass="gridviewitem" ItemStyle-HorizontalAlign="Left"
-                                HeaderStyle-CssClass="gridviewheader" DataField="REVTON" HeaderText="REV TON" HeaderStyle-Width="15%"/>
+                            <asp:BoundField ItemStyle-CssClass="gridviewitem"  HeaderStyle-Width="15%"
+                                HeaderStyle-CssClass="gridviewheader" HeaderStyle-HorizontalAlign="Right" DataField="AMOUNT" HeaderText="AMOUNT" ItemStyle-HorizontalAlign="Right" />
+                            <asp:BoundField ItemStyle-CssClass="gridviewitem" 
+                                HeaderStyle-CssClass="gridviewheader"  HeaderStyle-HorizontalAlign="Right"  ItemStyle-HorizontalAlign="Right" DataField="REVTON" HeaderText="REV TON" HeaderStyle-Width="15%"/>
                             <asp:TemplateField >
-                                <HeaderStyle CssClass="gridviewheader" Width="4%" />
+                                <HeaderStyle CssClass="gridviewheader" Width="7%" />
                                 <ItemStyle CssClass="gridviewitem" HorizontalAlign="Center" VerticalAlign="Middle" />
                                 <ItemTemplate>
                                     <asp:ImageButton ID="btnEdit" runat="server" CommandArgument='<%#Eval("SLOTCOSTID")%>'
@@ -385,7 +391,7 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField>
-                                <HeaderStyle CssClass="gridviewheader" Width="4%" />
+                                <HeaderStyle CssClass="gridviewheader" Width="7%" />
                                 <ItemStyle CssClass="gridviewitem" HorizontalAlign="Center" VerticalAlign="Middle" />
                                 <ItemTemplate>
                                     <asp:ImageButton ID="btnRemove" runat="server" OnClientClick="return Confirm()" CommandArgument='<%#Eval("SLOTCOSTID")%>'
@@ -417,7 +423,11 @@
                             if (i < 8) {
                                 var th = $(idgvwSlotCostUpper).find('th').eq(i);
                                 $(th).attr('style', $(this).attr('style'));
+                                $(th).width($(this).width() + 1);
                                 $(th).position().left = $(this).position().left;
+                                if (i == 5 || i == 6) {
+                                    $(this).css('text-align', 'right');
+                                }
                             }
                         });
 //                        var t = '<tr>' + $(idgvwSlotCostUpper).find('tr').eq(0).html() + '</tr><tr>' + $(idGr).find('tr').eq(0).html() + '</tr>';

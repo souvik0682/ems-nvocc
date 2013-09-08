@@ -183,7 +183,8 @@
                                     <asp:DropDownList ID="ddlInvLink" runat="server" Width="155">
 <%--                                        <asp:ListItem Selected="True" Text="Select Invoice"></asp:ListItem>--%>
                                         <asp:ListItem Selected="True" Text="Freight Invoice" Value="1"></asp:ListItem>
-                                        <asp:ListItem Text="Other Invoice" Value="2"></asp:ListItem>
+                                         <asp:ListItem Text="Freight Related" Value="2"></asp:ListItem>
+                                        <asp:ListItem Text="Other Invoice" Value="3"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
                             </tr>

@@ -28,7 +28,7 @@ namespace EMS.WebApp.MasterModule
 
         protected void Page_Load(object sender, EventArgs e)
         {
-          //   RetriveParameters();
+             RetriveParameters();
             user = (IUser)Session[Constants.SESSION_USER_INFO];
             if (!IsPostBack)
             {
@@ -168,11 +168,11 @@ namespace EMS.WebApp.MasterModule
                 var temp = lstSLOTCOST.FirstOrDefault(f => f.SLOTCOSTID == Convert.ToInt64(ViewState["EditId"]));
                 if (temp != null)
                 {
-                    temp.AMOUNT = txtAmount.Text.StringRequired().To<decimal>();
-                    temp.REVTON = txtRevTon.Text.StringRequired().To<int>();
+                    temp.AMOUNT = Convert.ToDecimal(txtAmount.Text.StringRequired());
+                    temp.REVTON = Convert.ToDecimal(txtRevTon.Text.StringRequired());
                     temp.SIZE = (ddlSize.SelectedValue.Equals("0") ? "" : ddlSize.SelectedValue).StringRequired();
                     temp.CARGO = (ddlCargo.SelectedValue.Equals("0") ? "" : ddlCargo.SelectedValue).StringRequired()[0];
-                    temp.CONTAINERTYPE = (ddlContainerType.SelectedValue.Equals("0") ? "" : ddlContainerType.SelectedValue).StringRequired().To<int>();
+                    temp.CONTAINERTYPE = Convert.ToInt32((ddlContainerType.SelectedValue.Equals("0") ? "" : ddlContainerType.SelectedValue).StringRequired());
                     temp.TYPE = (ddlType.SelectedValue.Equals("0") ? "" : ddlType.SelectedValue).StringRequired()[0];
 
                     ViewState["EditId"] = null;
@@ -184,8 +184,8 @@ namespace EMS.WebApp.MasterModule
                 lstSLOTCOST.Add(new SlotCost
                  {
                      SLOTCOSTID = DateTime.Now.Ticks,
-                     AMOUNT = txtAmount.Text.StringRequired().To<decimal>(),
-                     REVTON = txtRevTon.Text.StringRequired().To<int>(),
+                     AMOUNT = Convert.ToDecimal(txtAmount.Text.StringRequired()),
+                     REVTON = Convert.ToDecimal(txtRevTon.Text.StringRequired()),
                      SIZE = (ddlSize.SelectedValue.Equals("0") ? "" : ddlSize.SelectedValue).StringRequired(),
                      CARGO = (ddlCargo.SelectedValue.Equals("0") ? "" : ddlCargo.SelectedValue).StringRequired()[0],
                      CONTAINERTYPE = Convert.ToInt32((ddlContainerType.SelectedValue.Equals("0") ? "" : ddlContainerType.SelectedValue).StringRequired()),

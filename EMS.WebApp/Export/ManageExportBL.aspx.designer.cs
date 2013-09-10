@@ -166,13 +166,13 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.DropDownList ddlVessel;
         
         /// <summary>
-        /// rfvVessel control.
+        /// RequiredFieldValidator2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvVessel;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
         /// ddlVoyage control.
@@ -301,13 +301,13 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvOrigine;
         
         /// <summary>
-        /// ddlDestination control.
+        /// txtIssuePlace control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDestination;
+        protected global::System.Web.UI.WebControls.TextBox txtIssuePlace;
         
         /// <summary>
         /// rfvDestination control.
@@ -319,15 +319,6 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDestination;
         
         /// <summary>
-        /// txtBLStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBLStatus;
-        
-        /// <summary>
         /// txtContainers control.
         /// </summary>
         /// <remarks>
@@ -335,6 +326,15 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtContainers;
+        
+        /// <summary>
+        /// txtNetWt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNetWt;
         
         /// <summary>
         /// tpOther control.
@@ -346,6 +346,42 @@ namespace EMS.WebApp.Export {
         protected global::AjaxControlToolkit.TabPanel tpOther;
         
         /// <summary>
+        /// txtShipperName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtShipperName;
+        
+        /// <summary>
+        /// rfvShipperName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvShipperName;
+        
+        /// <summary>
+        /// txtConsigneeName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtConsigneeName;
+        
+        /// <summary>
+        /// rfvConsigneeName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvConsigneeName;
+        
+        /// <summary>
         /// txtShipper control.
         /// </summary>
         /// <remarks>
@@ -355,22 +391,13 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtShipper;
         
         /// <summary>
-        /// txtDescGoods control.
+        /// rfvShipper control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescGoods;
-        
-        /// <summary>
-        /// rfvGoods control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvGoods;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvShipper;
         
         /// <summary>
         /// txtConsignee control.
@@ -391,6 +418,69 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvConsignee;
         
         /// <summary>
+        /// TextNotifyName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextNotifyName;
+        
+        /// <summary>
+        /// rfvNotifyName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNotifyName;
+        
+        /// <summary>
+        /// ddlBLClause control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlBLClause;
+        
+        /// <summary>
+        /// txtNotify control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNotify;
+        
+        /// <summary>
+        /// rfvNotify control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNotify;
+        
+        /// <summary>
+        /// txtGoodsDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtGoodsDescription;
+        
+        /// <summary>
+        /// rfvGoodsDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvGoodsDescription;
+        
+        /// <summary>
         /// txtMarks control.
         /// </summary>
         /// <remarks>
@@ -407,24 +497,6 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMarks;
-        
-        /// <summary>
-        /// txtNotifyingParty control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNotifyingParty;
-        
-        /// <summary>
-        /// txtBLClosure control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBLClosure;
         
         /// <summary>
         /// ddlAgent control.

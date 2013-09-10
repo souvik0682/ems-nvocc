@@ -129,11 +129,11 @@
                                                                 Vessel:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
-                                                                <asp:DropDownList ID="ddlVessel" runat="server" CssClass="dropdownlist" TabIndex="60">
+                                                                <asp:DropDownList ID="ddlVessel" runat="server" CssClass="dropdownlist" TabIndex="4" Width="250px" >
                                                                     <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
                                                                 </asp:DropDownList>
                                                                 <br />
-                                                                <asp:RequiredFieldValidator ID="rfvVessel" runat="server" ControlToValidate="ddlVessel"
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddlVessel"
                                                                     ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
                                                                     ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </td>
@@ -143,7 +143,7 @@
                                                                 Voyage:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
-                                                                <asp:DropDownList ID="ddlVoyage" runat="server" CssClass="dropdownlist" TabIndex="4">
+                                                                <asp:DropDownList ID="ddlVoyage" runat="server" CssClass="dropdownlist" TabIndex="4" Width="250px" >
                                                                     <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
                                                                 </asp:DropDownList>
                                                                 <br />
@@ -226,12 +226,13 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                Shipment Type:
+                                                                Nos. Original B/L:
                                                             </td>
                                                             <td>
                                                                 <asp:RadioButtonList ID="rdoShipment" runat="server" TabIndex="9" RepeatDirection="Horizontal">
-                                                                    <asp:ListItem Selected="True" Text="LCL" Value="L"></asp:ListItem>
-                                                                    <asp:ListItem Text="FCL" Value="F"></asp:ListItem>
+                                                                    <asp:ListItem Text="1" Value="1"></asp:ListItem>
+                                                                    <asp:ListItem Text="2" Value="2"></asp:ListItem>
+                                                                    <asp:ListItem Selected="True" Text="3" Value="3"></asp:ListItem>
                                                                 </asp:RadioButtonList>
                                                             </td>
                                                             <td>
@@ -246,7 +247,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                Origine:<span class="errormessage">*</span>
+                                                                Shipment Mode:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
                                                                 <asp:DropDownList ID="ddlOrigine" runat="server" CssClass="dropdownlist" TabIndex="60">
@@ -260,33 +261,31 @@
                                                             <td>
                                                             </td>
                                                             <td>
-                                                                Destination:<span class="errormessage">*</span>
+                                                                BL Issue Place:<span class="errormessage">*</span>
                                                             </td>
-                                                            <td>
-                                                                <asp:DropDownList ID="ddlDestination" runat="server" CssClass="dropdownlist" TabIndex="4">
-                                                                    <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
-                                                                </asp:DropDownList>
-                                                                <br />
-                                                                <asp:RequiredFieldValidator ID="rfvDestination" runat="server" ControlToValidate="ddlDestination"
+                                                            <td style="width: 28%;">
+                                                                <asp:TextBox ID="txtIssuePlace" runat="server" CssClass="textboxuppercase" MaxLength="8"
+                                                                    Width="250px" TabIndex="13"></asp:TextBox><br />
+                                                                <asp:RequiredFieldValidator ID="rfvDestination" runat="server" ControlToValidate="txtIssuePlace"
                                                                     ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
                                                                     ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width: 20%;">
-                                                                BL Status:
-                                                            </td>
-                                                            <td style="width: 28%;">
-                                                                <asp:TextBox ID="txtBLStatus" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13" Enabled="false"></asp:TextBox><br />
-                                                            </td>
-                                                             <td>
-                                                            </td>
-                                                            <td style="width: 20%;">
                                                                 Containers:
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtContainers" runat="server" CssClass="textboxuppercase" MaxLength="8"
+                                                                    Width="250px" TabIndex="13" Enabled="false"></asp:TextBox><br />
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                            <td style="width: 20%;">
+                                                                Net Weight:
+                                                            </td>
+                                                            <td style="width: 28%;">
+                                                                <asp:TextBox ID="txtNetWt" runat="server" CssClass="textboxuppercase" MaxLength="8"
                                                                     Width="250px" TabIndex="13" Enabled="false"></asp:TextBox><br />
                                                             </td>
                                                         </tr>
@@ -299,62 +298,118 @@
                                                     Other Information</HeaderTemplate>
                                                 <ContentTemplate>
                                                     <table border="0" cellpadding="1" cellspacing="0" width="100%" class="custtable">
+                                                         <tr>
+                                                            <td style="width: 20%;">
+                                                            </td>
+                                                            <td style="width: 4%;">
+                                                            </td>
+                                                            <td style="width: 20%;">
+                                                            </td>
+                                                            <td style="width: 28%;">
+                                                            </td>
+                                                        </tr>
+                                                         <tr>
+                                                            <td style="width: 28%;">
+                                                                Shipper Name:
+                                                            </td>
+                                                            <td style="width: 4%;">
+                                                                <asp:TextBox ID="txtShipperName" runat="server" CssClass="textboxuppercase" MaxLength="50"
+                                                                    Width="300" TabIndex="1" ></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="rfvShipperName" runat="server" CssClass="errormessage"
+                                                                    ErrorMessage="This field is required" ControlToValidate="txtShipperName" ValidationGroup="Save"
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+
+                                                            </td>
+                                                            <td style="width: 40%;">
+                                                                Consignee Name:
+                                                            </td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtConsigneeName" runat="server" CssClass="textboxuppercase" MaxLength="50"
+                                                                    Width="300" TabIndex="9"></asp:TextBox><br />
+                                                                <asp:RequiredFieldValidator ID="rfvConsigneeName" runat="server" CssClass="errormessage"
+                                                                    ErrorMessage="This field is required" ControlToValidate="txtConsigneeName" ValidationGroup="Save"
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                            </td>
+                                                        </tr>
                                                         <tr>
                                                             <td style="width: 28%;">
                                                                 Shipper:
                                                             </td>
                                                             <td style="width: 4%;">
                                                                 <asp:TextBox ID="txtShipper" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="250" TabIndex="1" TextMode="MultiLine" Rows="3"></asp:TextBox>
-                                                            </td>
-                                                            <td style="width: 28%;">
-                                                                Description of Goods:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="txtDescGoods" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="250" TabIndex="9" TextMode="MultiLine" Rows="3"></asp:TextBox><br />
-                                                                <asp:RequiredFieldValidator ID="rfvGoods" runat="server" CssClass="errormessage"
-                                                                    ErrorMessage="This field is required" ControlToValidate="txtDescGoods" ValidationGroup="Save"
+                                                                    Width="300" TabIndex="1" TextMode="MultiLine" Rows="4"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="rfvShipper" runat="server" CssClass="errormessage"
+                                                                    ErrorMessage="This field is required" ControlToValidate="txtShipper" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </td>
-                                                        </tr>
-                                                        <tr>
                                                             <td style="width: 28%;">
-                                                                Consignee:<span class="errormessage">*</span>
+                                                                Consignee:
                                                             </td>
-                                                            <td style="width: 28%;">
+                                                            <td>
                                                                 <asp:TextBox ID="txtConsignee" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="250" TabIndex="1" TextMode="MultiLine" Rows="3"></asp:TextBox><br />
+                                                                    Width="300" TabIndex="9" TextMode="MultiLine" Rows="4"></asp:TextBox><br />
                                                                 <asp:RequiredFieldValidator ID="rfvConsignee" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtConsignee" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </td>
-                                                            <td style="width: 28%;">
-                                                                Marks & Nos:<span class="errormessage">*</span>
-                                                            </td>
-                                                            <td style="width: 28%;">
-                                                                <asp:TextBox ID="txtMarks" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="250" TabIndex="8" Text="N/M" TextMode="MultiLine" Rows="3"></asp:TextBox><br />
-                                                                <asp:RequiredFieldValidator ID="rfvMarks" runat="server" CssClass="errormessage"
-                                                                    ErrorMessage="This field is required" ControlToValidate="txtMarks" ValidationGroup="Save"
-                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
-                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width: 28%;">
-                                                                Notifying Party:
+                                                                Notify Party Name:
                                                             </td>
                                                             <td style="width: 4%;">
-                                                                <asp:TextBox ID="txtNotifyingParty" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="250" TabIndex="5" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                                                                <asp:TextBox ID="TextNotifyName" runat="server" CssClass="textboxuppercase" MaxLength="50"
+                                                                    Width="300" TabIndex="1" ></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="rfvNotifyName" runat="server" CssClass="errormessage"
+                                                                    ErrorMessage="This field is required" ControlToValidate="TextNotifyName" ValidationGroup="Save"
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 BL Clause:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="txtBLClosure" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="250" TabIndex="7" TextMode="MultiLine" Rows="3"></asp:TextBox><br />
+                                                                <asp:DropDownList ID="ddlBLClause" runat="server" CssClass="dropdownlist" TabIndex="60">
+                                                                    <asp:ListItem  Selected="True" Text="Shipped On Board" Value="S"></asp:ListItem>
+                                                                    <asp:ListItem Text="Receipt of Shipment" Value="R"></asp:ListItem>
+<%--                                                                    <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>--%>
+                                                                </asp:DropDownList>
                                                             </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 28%;">
+                                                                Notify Party:<span class="errormessage">*</span>
+                                                            </td>
+                                                            <td style="width: 28%;">
+                                                                <asp:TextBox ID="txtNotify" runat="server" CssClass="textboxuppercase" MaxLength="50"
+                                                                    Width="300" TabIndex="1" TextMode="MultiLine" Rows="4"></asp:TextBox><br />
+                                                                <asp:RequiredFieldValidator ID="rfvNotify" runat="server" CssClass="errormessage"
+                                                                    ErrorMessage="This field is required" ControlToValidate="txtNotify" ValidationGroup="Save"
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                            </td>
+                                                            <td style="width: 28%;">
+                                                                Description of Goods:<span class="errormessage">*</span>
+                                                            </td>
+                                                            <td style="width: 28%;">
+                                                                <asp:TextBox ID="txtGoodsDescription" runat="server" CssClass="textboxuppercase" MaxLength="50"
+                                                                    Width="300" TabIndex="8" Text="N/M" TextMode="MultiLine" Rows="4"></asp:TextBox><br />
+                                                                <asp:RequiredFieldValidator ID="rfvGoodsDescription" runat="server" CssClass="errormessage"
+                                                                    ErrorMessage="This field is required" ControlToValidate="txtGoodsDescription" ValidationGroup="Save"
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 28%;">
+                                                                Marks & Nos:<span class="errormessage">*</span>
+                                                            </td>
+                                                            <td style="width: 4%;">
+                                                                <asp:TextBox ID="txtMarks" runat="server" CssClass="textboxuppercase" MaxLength="50"
+                                                                    Width="300" TabIndex="5" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="rfvMarks" runat="server" CssClass="errormessage"
+                                                                    ErrorMessage="This field is required" ControlToValidate="txtMarks" ValidationGroup="Save"
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                            </td>
+                                                        
                                                         </tr>
                                                         <tr>
                                                             <td style="width: 28%;">

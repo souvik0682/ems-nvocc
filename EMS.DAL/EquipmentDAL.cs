@@ -65,6 +65,16 @@ namespace EMS.DAL
           return ds;
       }
 
+      public static DataSet DDLGetEmptyYard(int loc)
+      {
+          DataSet ds = new DataSet();
+          using (DbQuery dq = new DbQuery("Select fk_Addressid ListItemValue, upper(AddrName) ListItemText from mstAddress where AddrActive=1 and fk_LocationID=" + loc + " and AddrType=3", true))
+          {
+              ds = dq.GetTables();
+          }
+          return ds;
+      }
+
       public static int AddEditEquipEstimate(int userID,bool isEdit, IEqpRepairing ieqp)
       {
           int result = 0;

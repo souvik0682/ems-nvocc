@@ -32,13 +32,13 @@ namespace EMS.DAL
             string strExecution = "[exp].[prcGetSlotList]";
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                oDq.AddIntegerParam("@CompanyID", Convert.ToInt32(searchCriteria.StringParams[5]));
-                oDq.AddBigIntegerParam("@SlotID", Convert.ToInt64(searchCriteria.StringParams[6]));
+                oDq.AddIntegerParam("@CompanyID", Convert.ToInt32(searchCriteria.StringParams[4]));
+                oDq.AddBigIntegerParam("@SlotID", Convert.ToInt64(searchCriteria.StringParams[5]));
                 oDq.AddVarcharParam("@SchOperatorName", 50, searchCriteria.StringParams[1]);
                 oDq.AddVarcharParam("@SchPOLName", 30, searchCriteria.StringParams[2]);
                 oDq.AddVarcharParam("@SchPODName", 30, searchCriteria.StringParams[3]);
                 oDq.AddVarcharParam("@SchLine", 30, searchCriteria.StringParams[0]);
-                oDq.AddVarcharParam("@SchEffDate", 30, searchCriteria.StringParams[4]);
+                //oDq.AddVarcharParam("@SchEffDate", 30, searchCriteria.StringParams[4]);
                 oDq.AddVarcharParam("@SortExpression", 30, searchCriteria.SortExpression);
                 oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
 
@@ -80,7 +80,7 @@ namespace EMS.DAL
                     oDq.AddVarcharParam("@PODterminal", 50, slotCostModel.Slot.PODTERMINAL);
                     oDq.AddBooleanParam("@SlotStatus", true);
                     oDq.AddBigIntegerParam("@fk_MovOrg", slotCostModel.Slot.MOVORIGIN);
-                    oDq.AddBigIntegerParam("@fk_MovDst", slotCostModel.Slot.MOVDESTINATION);
+                    //oDq.AddBigIntegerParam("@fk_MovDst", slotCostModel.Slot.MOVDESTINATION);
                     oDq.AddIntegerParam("@Result", 0, QueryParameterDirection.Output);
                     oDq.RunActionQuery();
                     result = Convert.ToInt32(oDq.GetParaValue("@Result"));

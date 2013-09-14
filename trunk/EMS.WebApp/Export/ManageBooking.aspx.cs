@@ -16,10 +16,14 @@ namespace EMS.WebApp.Export
 {
     public partial class ManageBooking : System.Web.UI.Page
     {
+        List<BookingContainerEntity> oBookingContainers;
+        BookingContainerEntity oBookingContainerEntity;
         BookingEntity oBookingEntity;
         BookingBLL oBookingBll;
         UserEntity oUserEntity;
+        //DataTable Dt;
 
+        List<IBookingContainer> Containers = new List<IBookingContainer>();
 
         #region Private Member Variables
 
@@ -35,44 +39,35 @@ namespace EMS.WebApp.Export
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             RetriveParameters();
-            pnlContainer.Visible = false;
-            pnlTransit.Visible = false;
+         
+
             if (!Page.IsPostBack)
             {
                 fillAllDropdown();
-                txtImo.Enabled = false;
-                txtUno.Enabled = false;
-                txtTempMax.Enabled = false;
-                txtTempMin.Enabled = false;
-                if (hdnBookingID.Value != "0")
-                    LoadData();
+                if (hdnBookingID.Value == "0" || hdnBookingID.Value == string.Empty)
+                {
+                    txtImo.Enabled = false;
+                    txtUno.Enabled = false;
+                    txtTempMax.Enabled = false;
+                    txtTempMin.Enabled = false;
+                    txtImo.Text = "ZZZ";
+                    txtUno.Text = "ZZZZZ";
+                    oBookingContainers = new List<BookingContainerEntity>();
+                    BookingContainerEntity Ent = new BookingContainerEntity();
+                    oBookingContainers.Add(Ent);
+                    gvContainer.DataSource = oBookingContainers;
+                    gvContainer.DataBind();
+                    gvContainer.Rows[0].Visible = false;
+                }
+                else
+                {
+                    FillBooking(Convert.ToInt32(hdnBookingID.Value));
+                    FillBookingContainer(Convert.ToInt32(hdnBookingID.Value));
+                }
             }
             CheckUserAccess(hdnBookingID.Value);
         }
-
-        //private void CheckUserAccess()
-        //{
-        //    if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
-        //    {
-        //        IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
-
-        //        if (ReferenceEquals(user, null) || user.Id == 0)
-        //        {
-        //            Response.Redirect("~/Login.aspx");
-        //        }
-
-        //        if (user.UserRole.Id != (int)UserRole.Admin)
-        //        {
-        //            Response.Redirect("~/Unauthorized.aspx");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Response.Redirect("~/Login.aspx");
-        //    }
-        //}
 
         private void CheckUserAccess(string xID)
         {
@@ -126,11 +121,11 @@ namespace EMS.WebApp.Export
             #region ShipmentType
             foreach (Enums.ShipmentType r in Enum.GetValues(typeof(Enums.ShipmentType)))
             {
-                Li = new ListItem("SELECT", "0");
+                //Li = new ListItem("SELECT", "0");
                 ListItem item = new ListItem(Enum.GetName(typeof(Enums.ShipmentType), r).Replace('_', ' '), ((int)r).ToString());
                 ddlShipmentType.Items.Add(item);
             }
-            ddlShipmentType.Items.Insert(0, Li);
+            //ddlShipmentType.Items.Insert(0, Li);
             #endregion
 
             #region Line
@@ -151,17 +146,26 @@ namespace EMS.WebApp.Export
             #endregion
 
 
-            //#region Services
-            //GeneralFunctions.PopulateDropDownList(ddlService, dbinteract.PopulateDDLDS("exp.mstServices", "pk_ServiceID", "ServiceName", "Where ServiceStatus=1 AND fpod=" + hdnFPOD.Value + " AND fk_LineID=" + ddlNvocc.SelectedValue));
+            #region ContainerType
+
+            //GridViewRow cntrtypes = gvContainer.HeaderRow;
+
+            ////GridViewRow item = (GridViewRow)((DropDownList)sender).NamingContainer;
+
+            //DropDownList ddlCntrType = (DropDownList)cntrtypes.FindControl("ddlCntrType");
+            GeneralFunctions.PopulateDropDownList(ddlCntrType, dbinteract.PopulateDDLDS("mstContainerType", "pk_ContainerTypeID", "ContainerAbbr"));
             ////Li = new ListItem("ALL", "-1");
             ////PopulateDropDown((int)Enums.DropDownPopulationFor.Services, ddlService, 0);
             ////ddlService.Items.Insert(0, Li);
-
-            //#endregion
-
+            #endregion
         }
-        private void LoadData()
+
+        private void FillBooking(Int32 BookingID)
         {
+            //oBookingEntity = new BookingEntity();
+            //oBookingBll = new BookingBLL();
+            //oBookingEntity = (BookingEntity)oBookingBll.GetBooking(BookingID);
+
             BookingEntity oBooking = (BookingEntity)BookingBLL.GetBooking(Convert.ToInt32(hdnBookingID.Value));
 
             //ddlFromLocation.SelectedIndex = Convert.ToInt32(ddlFromLocation.Items.IndexOf(ddlFromLocation.Items.FindByValue(oImportHaulage.LocationFrom)));
@@ -183,7 +187,7 @@ namespace EMS.WebApp.Export
             txtBookingDate.Text = oBooking.BookingDate.ToShortDateString();
             txtBookingNo.Text = oBooking.BookingNo.ToString();
             txtCommodity.Text = oBooking.Commodity.ToString();
-            txtGrossSeight.Text = oBooking.GrossWt.ToString();
+            txtGrossWeight.Text = oBooking.GrossWt.ToString();
             txtCbm.Text = oBooking.CBM.ToString();
             txtFPOD.Text = oBooking.FPOD.ToString();
             txtPOD.Text = oBooking.POD.ToString();
@@ -211,7 +215,7 @@ namespace EMS.WebApp.Export
             else
                 rdoBLThruEdge.SelectedValue = "No";
 
-            txtGrossSeight.Text = oBooking.GrossWt.ToString();
+            txtGrossWeight.Text = oBooking.GrossWt.ToString();
             txtCbm.Text = oBooking.CBM.ToString();
             txtTempMax.Text = oBooking.TempMax.ToString();
             txtTempMin.Text = oBooking.TempMin.ToString();
@@ -386,7 +390,7 @@ namespace EMS.WebApp.Export
             txtCommodity.Text = string.Empty;
 
             txtContainerDtls.Text = string.Empty;
-            txtGrossSeight.Text = string.Empty;
+            txtGrossWeight.Text = string.Empty;
             txtImo.Text = string.Empty;
             txtVessel.Text = string.Empty;
             txtMainLineVessel.Text = string.Empty;
@@ -401,11 +405,13 @@ namespace EMS.WebApp.Export
         protected void lnkContainerDtls_Click(object sender, EventArgs e)
         {
 
+            //DataTable Dt = CreateDataTable();
+            ModalPopupExtender1.Show();
         }
 
         protected void lnkTransitRoute_Click(object sender, EventArgs e)
         {
-
+            ModalPopupExtender2.Show();
         }
 
         protected void rdoBLThruEdge_SelectedIndexChanged(object sender, EventArgs e)
@@ -433,49 +439,6 @@ namespace EMS.WebApp.Export
             }
         }
 
-        //protected void txtVessel_TextChanged(object sender, EventArgs e)
-        //{
-        //    //string VesselNm = txtVessel.Text;
-        //    //txtVessel.Text = VesselNm.Split('(')[0].Trim();
-        //    Filler.FillData(ddlLoadingVoyage, CommonBLL.GetExportVoyages(hdnVessel.Value), "VoyageNo", "VoyageID", "Voyage");
-
-        //}
-
-        //protected void txtMainLineVessel_TextChanged(object sender, EventArgs e)
-        //{
-        //    //string VesselNm = txtMainLineVessel.Text;
-        //    //txtMainLineVessel.Text = VesselNm.Split('(')[0].Trim();
-        //    Filler.FillData(ddlMainLineVoyage, CommonBLL.GetExportVoyages(hdnMainLineVessel.Value), "VoyageNo", "VoyageID", "Voyage");
-        //}
-
-        //protected void txtPOD_TextChanged(object sender, EventArgs e)
-        //{
-        //    string FDPort = txtFPOD.Text;
-
-        //    if (FDPort == string.Empty)
-        //    {
-        //        hdnFPOD.Value = hdnPOD.Value;
-        //        txtFPOD.Text = txtPOD.Text;
-        //    }
-
-
-        //}
-
-        //protected void txtPOR_TextChanged(object sender, EventArgs e)
-        //{
-        //    string LPort = txtPOL.Text;
-
-        //    if (LPort == string.Empty)
-        //    {
-        //        hdnPOL.Value = hdnPOR.Value;
-        //        txtPOL.Text = txtPOR.Text;
-        //    }
-
-                
-                
-            
-        //}
-
         protected void btnSave_Click1(object sender, EventArgs e)
         {
             if (Page.IsValid)
@@ -493,19 +456,20 @@ namespace EMS.WebApp.Export
 
                 oBookingEntity.LinerID = ddlNvocc.SelectedValue.ToInt();
                 oBookingEntity.LocationID = ddlLocation.SelectedValue.ToInt();
+                oBookingEntity.BookingID = Convert.ToInt32(hdnBookingID.Value);
 
                 oBookingEntity.VesselID = hdnVessel.Value.ToInt();
                 oBookingEntity.MainLineVesselID = hdnMainLineVessel.Value.ToInt();
                 oBookingEntity.VoyageID = ddlLoadingVoyage.SelectedValue.ToInt();
                 oBookingEntity.MainLineVoyageID = ddlMainLineVoyage.SelectedValue.ToInt();
                 oBookingEntity.BookingNo = txtBookingNo.Text.ToString();
+                oBookingEntity.BookingDate = txtBookingDate.Text.ToDateTime();
 
                 oBookingEntity.FPODID = hdnFPOD.Value;
                 oBookingEntity.PODID = hdnPOD.Value;
                 oBookingEntity.POLID = hdnPOL.Value;
                 oBookingEntity.PORID = hdnPOR.Value;
 
-                oBookingEntity.BookingDate = txtBookingDate.Text.ToDateTime();
                 oBookingEntity.Accounts = Convert.ToString(txtAccounts.Text.Trim());
                 oBookingEntity.Commodity = Convert.ToString(txtCommodity.Text.Trim());
                 oBookingEntity.BookingStatus = true;
@@ -515,8 +479,20 @@ namespace EMS.WebApp.Export
                 oBookingEntity.RefBookingNo = txtRefBookingNo.Text.ToString();
                 oBookingEntity.RefBookingDate = txtRefBookingDate.Text.ToDateTime();
                 oBookingEntity.ShipmentType = Convert.ToChar(ddlShipmentType.SelectedValue);
-                oBookingEntity.TempMin = Convert.ToDecimal(txtTempMin.Text);
-                oBookingEntity.TempMax = Convert.ToDecimal(txtTempMax.Text);
+                oBookingEntity.ServicesID = ddlService.SelectedValue.ToInt();
+                if (txtTempMin.Text.Trim() != string.Empty)
+                    oBookingEntity.TempMin = Convert.ToDecimal(txtTempMin.Text);
+                if (txtTempMax.Text.Trim() != string.Empty)
+                    oBookingEntity.TempMax = Convert.ToDecimal(txtTempMax.Text);
+                //oBookingEntity.TempMin = Convert.ToDecimal(txtTempMin.Text);
+                //oBookingEntity.TempMax = Convert.ToDecimal(txtTempMax.Text);
+                if (txtGrossWeight.Text.Trim() != string.Empty)
+                    oBookingEntity.GrossWt = Convert.ToDecimal(txtGrossWeight.Text);
+                if (txtCbm.Text.Trim() != string.Empty)
+                    oBookingEntity.CBM = Convert.ToDecimal(txtCbm.Text);
+                //oBookingEntity.GrossWt = Convert.ToDecimal(txtGrossWeight.Text);
+                //oBookingEntity.CBM = Convert.ToDecimal(txtCbm.Text);
+                oBookingEntity.AcceptBooking = false;
                 if (Convert.ToString(rdoHazardousCargo.SelectedValue) == "Yes")
                     oBookingEntity.HazCargo = true;
                 else
@@ -568,8 +544,6 @@ namespace EMS.WebApp.Export
                             break;
                     }
                 }
-
-
             }
         }
 
@@ -582,8 +556,11 @@ namespace EMS.WebApp.Export
                 hdnPOL.Value = hdnPOR.Value;
                 txtPOL.Text = txtPOR.Text;
             }
+        }
 
-
+        protected void txtPOT_TextChanged(object sender, EventArgs e)
+        {
+           
         }
 
         protected void txtPOD_TextChanged(object sender, EventArgs e)
@@ -594,6 +571,7 @@ namespace EMS.WebApp.Export
             {
                 hdnFPOD.Value = hdnPOD.Value;
                 txtFPOD.Text = txtPOD.Text;
+                PopulateSevices(ddlNvocc.SelectedValue.ToInt(), Convert.ToInt32(hdnFPOD.Value));
             }
         }
 
@@ -605,7 +583,7 @@ namespace EMS.WebApp.Export
 
         protected void txtMainLineVessel_TextChanged(object sender, EventArgs e)
         {
-            PopulateVessel(Convert.ToInt32(hdnMainLineVessel.Value));
+            PopulateMLVessel(Convert.ToInt32(hdnMainLineVessel.Value));
             //Filler.FillData(ddlMainLineVoyage, CommonBLL.GetExportVoyages(hdnMainLineVessel.Value), "VoyageNo", "VoyageID", "Voyage");
         }
 
@@ -620,18 +598,399 @@ namespace EMS.WebApp.Export
             //ddlLoadingVoyage.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
         }
 
+        private void PopulateMLVessel(int vesselID)
+        {
+            //BLL.DBInteraction dbinteract = new BLL.DBInteraction();
+            DataSet ds = BookingBLL.GetExportVoyages(vesselID);
+            ddlMainLineVoyage.DataValueField = "VoyageID";
+            ddlMainLineVoyage.DataTextField = "VoyageNo";
+            ddlMainLineVoyage.DataSource = ds;
+            ddlMainLineVoyage.DataBind();
+            //ddlLoadingVoyage.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
+        }
+
         private void PopulateSevices(int Lineid, Int32 fpod)
         {
             DataSet ds = BookingBLL.GetExportServices(Lineid, fpod);
-            ddlLoadingVoyage.DataValueField = "ServiceID";
-            ddlLoadingVoyage.DataTextField = "ServiceName";
-            ddlLoadingVoyage.DataSource = ds;
-            ddlLoadingVoyage.DataBind();
+            ddlService.DataValueField = "ServiceID";
+            ddlService.DataTextField = "ServiceName";
+            ddlService.DataSource = ds;
+            ddlService.DataBind();
         }
 
         protected void txtFPOD_TextChanged(object sender, EventArgs e)
         {
             PopulateSevices(ddlNvocc.SelectedValue.ToInt(), Convert.ToInt32(hdnFPOD.Value));
+        }
+
+        protected void ddlNvocc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (hdnFPOD.Value != "")
+                PopulateSevices(ddlNvocc.SelectedValue.ToInt(), Convert.ToInt32(hdnFPOD.Value));
+
+        }
+
+        void AddContainers()
+        {
+            Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
+            if (Containers == null)
+                Containers = new List<IBookingContainer>();
+            oBookingBll = new BookingBLL();
+
+            oBookingBll.DeactivateAllContainersAgainstBookingId(Convert.ToInt32(hdnBookingID.Value));
+
+            foreach (IBookingContainer Container in Containers)
+            {
+                Container.BookingID = Convert.ToInt32(hdnBookingID.Value);
+                oBookingBll.AddEditBookingContainer(Container);
+            }
+        }
+
+        void FillBookingContainer(Int32 BookingID)
+        {
+            //oChargeRates = new List<ChargeRateEntity>();
+            //oChargeRates = new List<ChargeRateEntity>();
+            oBookingBll = new BookingBLL();
+            Containers = new List<IBookingContainer>();
+            Containers = oBookingBll.GetBookingContainers(BookingID);
+            if (Containers.Count <= 0)
+            {
+                IBookingContainer rt = new BookingContainerEntity();
+                Containers.Add(rt);
+            }
+            else
+            {
+                ViewState["BookingCntr"] = Containers;
+            }
+
+            gvContainer.DataSource = Containers;
+            gvContainer.DataBind();
+        }
+
+        protected void gvContainer_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.Header)
+            {
+                BLL.DBInteraction dbinteract = new BLL.DBInteraction();
+
+                DropDownList ddlCntrType = (DropDownList)e.Row.FindControl("ddlCntrType");
+                DropDownList ddlSize = (DropDownList)e.Row.FindControl("ddlSize");
+                GeneralFunctions.PopulateDropDownList(ddlCntrType, dbinteract.PopulateDDLDS("mstContainerType", "pk_ContainerTypeID", "ContainerAbbr"));
+            }
+            else if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+                ImageButton btnRemove = (ImageButton)e.Row.FindControl("lnkDelete");
+                btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
+
+                btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
+
+                ////Delete link
+                //GridViewRow Row = (GridViewRow)(((ImageButton)e.CommandSource).NamingContainer);
+                //HiddenField hdnId = (HiddenField)Row.FindControl("hdnId");
+
+                ////ChargeBLL.DeleteChargeRate(Convert.ToInt32(hdnId.Value));
+                ////FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
+                //Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
+                ////Rates[Row.RowIndex].RateActive = false;
+                //Containers.RemoveAt(Row.RowIndex);
+                //ViewState["BookingCntr"] = Containers;
+
+                //FillContainers();
+
+                //ImageButton btnRemove = (ImageButton)e.Row.FindControl("lnkDelete");
+                //btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
+                ////btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "pk_PortId"));
+
+
+                //btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
+
+                ////btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
+                ////btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
+
+            }
+        }
+   
+        protected void gvContainer_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (ViewState["BookingCntr"] == null)
+            {
+                ViewState["BookingCntr"] = Containers;
+            }
+            else
+            {
+                Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
+            }
+
+
+            #region Save
+            if (e.CommandArgument == "Save")
+            {
+                //if (hdnChargeID.Value != "0")
+                //{
+
+
+                oBookingBll = new BookingBLL();
+                GridViewRow Row = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
+
+                TextBox txtNos = (TextBox)Row.FindControl("txtNos");
+                TextBox txtWtPerCntr = (TextBox)Row.FindControl("txtWtPerCntr");
+                DropDownList ddlCntrType = (DropDownList)Row.FindControl("ddlCntrType");
+                DropDownList ddlSize = (DropDownList)Row.FindControl("ddlSize");
+
+                if ((String.IsNullOrEmpty(txtNos.Text) || String.IsNullOrEmpty(txtWtPerCntr.Text)))
+                {
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00077") + "');</script>", false);
+                    return;
+                }
+
+                oBookingContainerEntity = new BookingContainerEntity();
+
+                oBookingContainerEntity.BookingID = Convert.ToInt32(hdnBookingID.Value);
+                oBookingContainerEntity.CntrSize = Convert.ToString(ddlSize.SelectedValue);
+                oBookingContainerEntity.ContainerTypeID = Convert.ToInt32(ddlCntrType.SelectedValue);
+                oBookingContainerEntity.NoofContainers = Convert.ToInt32(txtNos.Text);
+                oBookingContainerEntity.wtPerCntr = Convert.ToInt32(txtWtPerCntr.Text);
+                ViewState["BookingCntr"] = Containers;
+                FillContainers();
+                //DisableAllField();
+            }
+
+            #endregion
+
+            #region Edit
+            if (e.CommandArgument == "Edit")
+            {
+                GridViewRow FootetRow = gvContainer.HeaderRow;
+
+                DropDownList ddlCntrtype = (DropDownList)FootetRow.FindControl("ddlCntrType");
+                DropDownList ddlSize = (DropDownList)FootetRow.FindControl("ddlSize");
+
+                TextBox txtNos = (TextBox)FootetRow.FindControl("txtNos");
+                TextBox txtwtPerCntr = (TextBox)FootetRow.FindControl("txtWtPerCntr");
+
+                HiddenField hdnBookingContainerID = (HiddenField)FootetRow.FindControl("hdnBookingContainerID");
+
+                GridViewRow Row = (GridViewRow)(((ImageButton)e.CommandSource).NamingContainer);
+                HiddenField hdnLocationId = (HiddenField)Row.FindControl("hdnLocationId");
+                HiddenField hdnTerminalId = (HiddenField)Row.FindControl("hdnTerminalId");
+                HiddenField hdnWashingTypeId = (HiddenField)Row.FindControl("hdnWashingTypeId");
+                HiddenField hdnId = (HiddenField)Row.FindControl("hdnId");
+
+                Label lblLow = (Label)Row.FindControl("lblLow");
+                Label lblHigh = (Label)Row.FindControl("lblHigh");
+                Label lblRatePerBl = (Label)Row.FindControl("lblRatePerBl");
+                Label lblRatePerTEU = (Label)Row.FindControl("lblRatePerTEU");
+                Label lblRatePerFEU = (Label)Row.FindControl("lblRatePerFEU");
+                Label lblSharingBL = (Label)Row.FindControl("lblSharingBL");
+                Label lblSharingTEU = (Label)Row.FindControl("lblSharingTEU");
+                Label lblSharingFEU = (Label)Row.FindControl("lblSharingFEU");
+
+                //ddlFLocation.SelectedIndex = ddlFLocation.Items.IndexOf(ddlFLocation.Items.FindByValue(hdnLocationId.Value));
+                //PopulateDropDown((int)Enums.DropDownPopulationFor.TerminalCode, ddlFTerminal, Convert.ToInt32(ddlFLocation.SelectedValue));
+
+                //ddlFTerminal.SelectedIndex = ddlFTerminal.Items.IndexOf(ddlFTerminal.Items.FindByValue(hdnTerminalId.Value));
+                //ddlFWashingType.SelectedIndex = ddlFWashingType.Items.IndexOf(ddlFWashingType.Items.FindByValue(hdnWashingTypeId.Value));
+
+
+                //txtLow.Text = lblLow.Text;
+                //txtHigh.Text = lblHigh.Text;
+                //txtRatePerBL.Text = lblRatePerBl.Text;
+                //txtRatePerTEU.Text = lblRatePerTEU.Text;
+                //txtRateperFEU.Text = lblRatePerFEU.Text;
+                //txtSharingBL.Text = lblSharingBL.Text;
+                //txtSharingTEU.Text = lblSharingTEU.Text;
+                //txtSharingFEU.Text = lblSharingFEU.Text;
+                //hdnFId.Value = hdnId.Value.ToString();
+                //hdnFSlno.Value = Row.RowIndex.ToString();
+
+            }
+            #endregion
+
+            #region Delete
+            if (e.CommandArgument == "Delete")
+            {
+                GridViewRow Row = (GridViewRow)(((ImageButton)e.CommandSource).NamingContainer);
+                HiddenField hdnId = (HiddenField)Row.FindControl("hdnBookingContainerID");
+                //ChargeBLL.DeleteChargeRate(Convert.ToInt32(hdnId.Value));
+                //FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
+                Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
+                //Rates[Row.RowIndex].RateActive = false;
+                Containers.RemoveAt(Row.RowIndex);
+                ViewState["BookingCntr"] = Containers;
+                //if (Rates.Count <= 0 && hdnChargeID.Value == "0")
+                //{
+                //    EnableAllField();
+                //    UpdatePanel1.Update();
+                //}
+                FillContainers();
+                //FillRates();
+
+            }
+            #endregion
+
+            #region Cancel
+            if (e.CommandArgument == "Cancel")
+            //if (e.CommandArgument == "Cancel")
+            {
+                GridViewRow Row = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
+                TextBox txtHigh = (TextBox)Row.FindControl("txtHigh");
+                TextBox txtLow = (TextBox)Row.FindControl("txtLow");
+                DropDownList ddlFLocation = (DropDownList)Row.FindControl("ddlFLocation");
+                DropDownList ddlFTerminal = (DropDownList)Row.FindControl("ddlFTerminal");
+                DropDownList ddlFWashingType = (DropDownList)Row.FindControl("ddlFWashingType");
+
+                TextBox txtRatePerBL = (TextBox)Row.FindControl("txtRatePerBL");
+                TextBox txtRatePerTEU = (TextBox)Row.FindControl("txtRatePerTEU");
+                TextBox txtRateperFEU = (TextBox)Row.FindControl("txtRateperFEU");
+                TextBox txtSharingBL = (TextBox)Row.FindControl("txtSharingBL");
+                TextBox txtSharingTEU = (TextBox)Row.FindControl("txtSharingTEU");
+                TextBox txtSharingFEU = (TextBox)Row.FindControl("txtSharingFEU");
+                HiddenField hdnFId = (HiddenField)Row.FindControl("hdnFId");
+                HiddenField hdnFSlno = (HiddenField)Row.FindControl("hdnFSlno");
+
+                txtHigh.Text = String.Empty;// "0";
+                txtLow.Text = String.Empty;// "0";
+                ddlFLocation.SelectedIndex = 0;
+                if (ddlFTerminal.Items.Count > 0)
+                {
+                    //ddlFTerminal.SelectedIndex = 0;
+                    ddlFTerminal.Items.Clear();
+                    //ddlFTerminal.Enabled = false;
+                }
+                ddlFWashingType.SelectedIndex = 0;
+                txtRatePerBL.Text = String.Empty;// "0.00";
+                txtRatePerTEU.Text = String.Empty;//"0.00";
+                txtRateperFEU.Text = String.Empty;//"0.00";
+                txtSharingBL.Text = String.Empty;//"0.00";
+                txtSharingTEU.Text = String.Empty;//"0.00";
+                txtSharingFEU.Text = String.Empty;//"0.00";
+
+                hdnFId.Value = "0";
+                hdnFSlno.Value = "-1";
+            }
+            #endregion
+
+            //TerminalSelection(rdbTerminalRequired);
+            //WashingSelection(rdbWashing);
+            //SharingSelection(rdbPrincipleSharing);
+            //ShowHideControlofFooterOnEdit(ddlChargeType);
+            ////DisableAllField();
+
+        }
+
+        void FillContainers()
+        {
+            Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
+            IEnumerable<IBookingContainer> Rts = from IBookingContainer rt in Containers
+                                           where rt.BkCntrStatus == true
+                                           select rt;
+
+            gvContainer.DataSource = Rts.ToList();
+            gvContainer.DataBind();
+
+            if (Rts.Count() <= 0)
+            {
+                List<IBookingContainer> EmptyRates = new List<IBookingContainer>();
+                IBookingContainer rt = new BookingContainerEntity();
+                EmptyRates.Add(rt);
+
+                gvContainer.DataSource = EmptyRates;
+                gvContainer.DataBind();
+                gvContainer.Rows[0].Visible = false;
+            }
+
+
+        }
+
+        protected void gvContainer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            //oBookingBll = new BookingBLL();
+            //GridViewRow Row = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
+
+            //TextBox txtNos = (TextBox)Row.FindControl("txtNos");
+            //TextBox txtWtPerCntr = (TextBox)Row.FindControl("txtWtPerCntr");
+            //DropDownList ddlCntrType = (DropDownList)Row.FindControl("ddlCntrType");
+            //DropDownList ddlSize = (DropDownList)Row.FindControl("ddlSize");
+
+            DataTable dt;
+            object otabSelItems = Session["dt"];
+
+            if (otabSelItems is DataTable)
+
+                dt = (DataTable)otabSelItems;
+            else
+            {
+                dt = new DataTable();
+                dt = CreateDataTable(dt);
+            }
+
+            lblMessage.Text = string.Empty;
+            DataRow dr = dt.NewRow();
+
+            //DataTable Dt = CreateDataTable();
+
+            if ((String.IsNullOrEmpty(txtNos.Text) || String.IsNullOrEmpty(txtWtPerCntr.Text)))
+            {
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00077") + "');</script>", false);
+                return;
+            }
+            Label lblContainerType = (Label)FindControl("lblContainerType");
+            Label lblContainerSize = (Label)FindControl("lblContainerSize");
+            Label lblUnit = (Label)FindControl("lblUnit");
+            Label lblwtPerCont = (Label)FindControl("lblwtPerCont");
+            HiddenField cntsize = (HiddenField)FindControl("hdnSize");
+
+            dr["BookingID"] = hdnBookingID.Value;
+            dr["CntrSize"] = lblSize.Text;
+            dr["ContainerType"] = lblType.Text;
+            dr["NoofContainers"] = lblUnit.Text;
+            dr["wtPerCntr"] = lblWt.Text;
+            dt.Rows.Add(dr);
+
+            //oBookingContainerEntity = new BookingContainerEntity();
+
+            //oBookingContainerEntity.BookingID = Convert.ToInt32(hdnBookingID.Value);
+            //oBookingContainerEntity.CntrSize = Convert.ToString(ddlSize.SelectedValue);
+            //oBookingContainerEntity.ContainerTypeID = Convert.ToInt32(ddlCntrType.SelectedValue);
+            //oBookingContainerEntity.NoofContainers = Convert.ToInt32(txtNos.Text);
+            //oBookingContainerEntity.wtPerCntr = Convert.ToInt32(txtWtPerCntr.Text);
+            ViewState["BookingCntr"] = dt;
+            //FillContainers();
+        }
+
+
+        private DataTable CreateDataTable(DataTable Dt)
+        {
+            Dt = new DataTable();
+            DataColumn dc;
+
+            dc = new DataColumn("BookingID");
+            Dt.Columns.Add(dc);
+
+            dc = new DataColumn("CntrSize");
+            Dt.Columns.Add(dc);
+
+            dc = new DataColumn("ContainerType");
+            Dt.Columns.Add(dc);
+
+            dc = new DataColumn("NoofContainers");
+            Dt.Columns.Add(dc);
+
+            dc = new DataColumn("wtPerCntr");
+            Dt.Columns.Add(dc);
+
+            return Dt;
         }
 
     }

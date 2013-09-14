@@ -110,7 +110,7 @@
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="6%" />
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkHLine" runat="server" CommandName="Sort" CommandArgument="LineName"
+                                            <asp:LinkButton ID="lnkHLine" runat="server" CommandName="Sort" CommandArgument="NVOCC"
                                                 Text="Line"></asp:LinkButton></HeaderTemplate>
                                         <ItemTemplate>
                                             <asp:Label ID="lblLineName" runat="server"></asp:Label>

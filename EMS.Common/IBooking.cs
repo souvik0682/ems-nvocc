@@ -45,6 +45,9 @@ namespace EMS.Common
         decimal TempMin { get; set; }
         bool AcceptBooking { get; set; }
         bool BookingStatus { get; set; }
+        int ServicesID { get; set; }
+        string Services { get; set; }
         int LinerID { get; set; }
+
     }
 }

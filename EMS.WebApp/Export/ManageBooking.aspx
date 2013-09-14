@@ -23,6 +23,10 @@
                 var hdnFPOD = $get('<%=hdnFPOD.ClientID %>');
                 hdnFPOD.value = e.get_value();
             }
+            else if (sender._id == "AutoCompleteExPOT") {
+                var hdnPOT = $get('<%=hdnPOT.ClientID %>');
+                hdnPOT.value = e.get_value();
+            }
             else if (sender._id == "AutoCompleteVes") {
                 var hdnVessel = $get('<%=hdnVessel.ClientID %>');
                 hdnVessel.value = e.get_value();
@@ -59,8 +63,9 @@
                                         Line/NVOCC<span class="errormessage">*</span>
                                     </td>
                                     <td style="width: 28%;">
-                                        <asp:DropDownList ID="ddlNvocc" runat="server" CssClass="dropdownlist" TabIndex="1">
-                                            <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
+                                        <asp:DropDownList ID="ddlNvocc" runat="server" CssClass="dropdownlist" AutoPostBack="True"
+                                            TabIndex="1" onselectedindexchanged="ddlNvocc_SelectedIndexChanged">
+<%--                                            <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>--%>
                                         </asp:DropDownList>
                                         <br />
                                         <asp:RequiredFieldValidator ID="rfvNvocc" runat="server" CssClass="errormessage"
@@ -100,7 +105,8 @@
                                         <asp:TextBox ID="txtAccounts" runat="server" CssClass="textboxuppercase" MaxLength="60"
                                             Width="250px" TabIndex="4"></asp:TextBox><br />
                                         <asp:RequiredFieldValidator ID="rfvAccounts" runat="server" ControlToValidate="txtAccounts"
-                                            Display="Dynamic" CssClass="errormessage" ValidationGroup="Save"></asp:RequiredFieldValidator>
+                                            ErrorMessage="This field is required*" CssClass="errormessage" ValidationGroup="Save"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
                                 <tr>
@@ -156,13 +162,16 @@
                                         <asp:HiddenField ID="hdnPOR" runat="server" />
                                         <asp:TextBox runat="server" ID="txtPOR" Width="250" autocomplete="off" AutoPostBack="True"
                                             MaxLength="50" TabIndex="9" Style="text-transform: uppercase;" ontextchanged="txtPOR_TextChanged" />
-<%--                                        <asp:TextBox ID="txtPOR" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                            Width="250px" TabIndex="6" Test="Auto Correct"></asp:TextBox>--%>
-                                        <asp:RequiredFieldValidator ID="rfvPOR" runat="server" ErrorMessage="Please select Place of Receipt"
-                                            Display="None" ControlToValidate="txtPOR" ValidationGroup="vgBooking"></asp:RequiredFieldValidator>
-                                        <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server" TargetControlID="rfvPOR"
+                                       <br />
+                                       <asp:RequiredFieldValidator ID="rfvPOR" runat="server" ControlToValidate="txtPOR"
+                                            CssClass="errormessage" ValidationGroup="Save" ErrorMessage="Please select Place of Receipt"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>
+
+                                       <%-- <asp:RequiredFieldValidator ID="rfvPOR" runat="server" ErrorMessage="Please select Place of Receipt"
+                                            Display="None" ControlToValidate="txtPOR" ValidationGroup="vgBooking" ></asp:RequiredFieldValidator>--%>
+<%--                                        <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server" TargetControlID="rfvPOR"
                                             WarningIconImageUrl="">
-                                        </cc1:ValidatorCalloutExtender>
+                                        </cc1:ValidatorCalloutExtender>--%>
                                         <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteExPOR" ID="autoComplete1"
                                             TargetControlID="txtPOR" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
                                             MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
@@ -210,11 +219,13 @@
                                     <td>
                                         <asp:HiddenField ID="hdnPOL" runat="server" />
                                         <asp:TextBox runat="server" ID="txtPOL" Width="250" autocomplete="off" MaxLength="50" TabIndex="10" Style="text-transform: uppercase;" />
-                                        <asp:RequiredFieldValidator ID="rfvPOL" runat="server" ErrorMessage="Please select Place of Loading"
-                                            Display="None" ControlToValidate="txtPOL" ValidationGroup="vgBooking"></asp:RequiredFieldValidator>
-                                        <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender2" runat="server" TargetControlID="rfvPOL"
+                                        <br />
+                                        <asp:RequiredFieldValidator ID="rfvPOL" runat="server" ControlToValidate="txtPOL"
+                                            CssClass="errormessage" ValidationGroup="Save" ErrorMessage="Please select Load Port"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>
+<%--                                        <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender2" runat="server" TargetControlID="rfvPOL"
                                             WarningIconImageUrl="">
-                                        </cc1:ValidatorCalloutExtender>
+                                        </cc1:ValidatorCalloutExtender>--%>
                                         <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteExPOL" ID="AutoCompleteExtender1"
                                             TargetControlID="txtPOL" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
                                             MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
@@ -267,11 +278,12 @@
                                             MaxLength="50" TabIndex="11" Style="text-transform: uppercase;" ontextchanged="txtPOD_TextChanged" />
 <%--                                        <asp:TextBox ID="txtPOR" runat="server" CssClass="textboxuppercase" MaxLength="50"
                                             Width="250px" TabIndex="6" Test="Auto Correct"></asp:TextBox>--%>
-                                        <asp:RequiredFieldValidator ID="rfvPOD" runat="server" ErrorMessage="Please select Place of Discharge"
-                                            Display="None" ControlToValidate="txtPOD" ValidationGroup="vgBooking"></asp:RequiredFieldValidator>
-                                        <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvPOD"
-                                            WarningIconImageUrl="">
-                                        </cc1:ValidatorCalloutExtender>
+                                        <br />
+                                        <asp:RequiredFieldValidator ID="rfvPOD" runat="server" ControlToValidate="txtPOD"
+                                            CssClass="errormessage" ValidationGroup="Save" ErrorMessage="Please select Discharge Port"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>
+<%--                                        <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvPOD"
+                                            WarningIconImageUrl="">--%>
                                         <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteExPOD" ID="AutoCompleteExtender2"
                                             TargetControlID="txtPOD" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
                                             MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
@@ -320,11 +332,11 @@
                                         <asp:HiddenField ID="hdnFPOD" runat="server" />
                                         <asp:TextBox runat="server" ID="txtFPOD" Width="250" autocomplete="off" AutoPostBack="True"
                                             MaxLength="50" TabIndex="12" Style="text-transform: uppercase;" ontextchanged="txtFPOD_TextChanged" />
-                                        <asp:RequiredFieldValidator ID="rfvFPOD" runat="server" ErrorMessage="Please select Place of Discharge"
-                                            Display="None" ControlToValidate="txtFPOD" ValidationGroup="vgBooking"></asp:RequiredFieldValidator>
-                                        <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender4" runat="server" TargetControlID="rfvFPOD"
-                                            WarningIconImageUrl="">
-                                        </cc1:ValidatorCalloutExtender>
+                                        <br />
+                                        <asp:RequiredFieldValidator ID="rfvFPOD" runat="server" ControlToValidate="txtFPOD"
+                                            CssClass="errormessage" ValidationGroup="Save" ErrorMessage="Please select final Destination"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>
+
                                         <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteExFPOD" ID="AutoCompleteExtender3"
                                             TargetControlID="txtFPOD" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
                                             MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
@@ -376,15 +388,15 @@
                                             Width="250px" TabIndex="13"></asp:TextBox>
                                         <br />
                                         <asp:RequiredFieldValidator ID="rfvCommodity" runat="server" ControlToValidate="txtCommodity"
-                                            ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
-                                            Display="Dynamic" Visible="False"></asp:RequiredFieldValidator>
+                                            CssClass="errormessage" ValidationGroup="Save" ErrorMessage="Please select Commodity"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>
                                     </td>
                                     <td>
                                         Shipment Type<span class="errormessage">*</span>
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="ddlShipmentType" runat="server" Width="250" CssClass="dropdownlist" TabIndex="14">
-                                            <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
+                                            <%--<asp:ListItem Value="0" Text="--Select--"></asp:ListItem>--%>
                                         </asp:DropDownList>
                                     </td>
                                 </tr>
@@ -396,8 +408,10 @@
                                         <asp:HiddenField ID="hdnVessel" runat="server" />
                                         <asp:TextBox runat="server" ID="txtVessel" MaxLength="100" Width="250" ontextchanged="txtVessel_TextChanged" autocomplete="off" 
                                             AutoPostBack="True" TabIndex="15" Style="text-transform: uppercase;"/>
-                                        <asp:RequiredFieldValidator ID="rfvVessel" runat="server" ErrorMessage="Please select Vessel"
-                                            Display="None" ControlToValidate="txtVessel" ValidationGroup="vgBooking"></asp:RequiredFieldValidator>
+                                        <br />
+                                        <asp:RequiredFieldValidator ID="rfvVessel" runat="server" ControlToValidate="txtVessel"
+                                            CssClass="errormessage" ValidationGroup="Save" ErrorMessage="Please select Vessel"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>
                                         <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteVes" ID="aceVessel"
                                             TargetControlID="txtVessel" ServicePath="~/GetLocation.asmx" ServiceMethod="GetVesselList"
                                             MinimumPrefixLength="1" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20" OnClientItemSelected="AutoCompleteItemSelected"
@@ -463,8 +477,10 @@
                                         <asp:HiddenField ID="hdnMainLineVessel" runat="server" />
                                         <asp:TextBox runat="server" ID="txtMainLineVessel" MaxLength="100" Width="250" ontextchanged="txtMainLineVessel_TextChanged"
                                             Style="text-transform: uppercase;" autocomplete="off" TabIndex="17" AutoPostBack="True"/>
-                                        <asp:RequiredFieldValidator ID="rfvMLVessel" runat="server" ErrorMessage="Please select Vessel"
-                                            Display="None" ControlToValidate="txtMainLineVessel" ValidationGroup="vgBooking"></asp:RequiredFieldValidator>
+                                        <br />
+                                        <asp:RequiredFieldValidator ID="rfvMainLineVessel" runat="server" ControlToValidate="txtMainLineVessel"
+                                            CssClass="errormessage" ValidationGroup="Save" ErrorMessage="Please select Vessel"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>
                                         <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteMVes" ID="AutoCompleteExtender4"
                                             TargetControlID="txtMainLineVessel" ServicePath="~/GetLocation.asmx" ServiceMethod="GetVesselList"
                                             MinimumPrefixLength="1" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20" OnClientItemSelected="AutoCompleteItemSelected"
@@ -570,7 +586,7 @@
                                         Gross Weight
                                     </td>
                                     <td>
-                                        <cc2:CustomTextBox ID="txtGrossSeight" runat="server" TabIndex="23" CssClass="numerictextbox" Width="250px"
+                                        <cc2:CustomTextBox ID="txtGrossWeight" runat="server" TabIndex="23" CssClass="numerictextbox" Width="250px"
                                             Type="Decimal" MaxLength="13" Precision="10" Scale="2">
                                         </cc2:CustomTextBox>
                                     </td>
@@ -657,34 +673,54 @@
                             <cc1:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="Button1"
                                 PopupControlID="pnlContainer" Drag="true" BackgroundCssClass="ModalPopupBG" CancelControlID="btnCancelContainer">
                             </cc1:ModalPopupExtender>
-                            <asp:Panel ID="pnlContainer" runat="server" Style="height: 250px; width: 400px; background-color: White;">
+                            <asp:Panel ID="pnlContainer" runat="server" Style="height: 330px; width: 450px; background-color: White; ">
                                 <center>
-                                    <fieldset>
+                                  
                                         <legend>Container Breakup</legend>
-                                        <div>
+
+                                        <div style="overflow: auto; height: 70px; width: 420px;">
                                             <table>
                                                 <tr>
-                                                    <td style="width: 5%;">
-                                                        <asp:TextBox ID="TextBox5" Text="Type" runat="server" Width="80px"></asp:TextBox>
+                                                    <td style="width: 20%;">
+                                                        <asp:Label ID="lblType" Text="Type" runat="server"></asp:Label>
                                                     </td>
-                                                     <td>
-                                                        <asp:TextBox ID="TextBox6" Text="Size" runat="server" Width="86px"></asp:TextBox>
+                                                    <td style="width: 20%;">
+                                                        <asp:Label ID="lblSize" Text="Size" runat="server"></asp:Label>
                                                     </td>
-                                                     <td class="style1">
-                                                        <asp:TextBox ID="TextBox7" Text="Units" runat="server" Width="77px"></asp:TextBox>
+                                                    <td style="width: 20%;">
+                                                        <asp:Label ID="lblUnit" Text="Unit" runat="server"></asp:Label>
                                                     </td>
-                                                     <td>
-                                                        <asp:TextBox ID="TextBox8" Text="Wt/Cont." runat="server" Width="82px"></asp:TextBox>
+                                                    <td style="width: 20%;">
+                                                        <asp:Label ID="lblWt" Text="Wt/Cont" runat="server"></asp:Label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 20%;">
+                                                        <asp:DropDownList ID="ddlCntrType" runat="server" CssClass="dropdownlist" Width="80px" TabIndex="25">
+                                                        </asp:DropDownList>
+                                                    </td>
+                                                    <td style="width: 20%;">
+                                                        <asp:DropDownList ID="ddlSize" runat="server" CssClass="dropdownlist" Width="80px" TabIndex="25">
+                                                        <asp:ListItem Text="20" Value="20" Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="40" Value="40"></asp:ListItem>
+                                                        </asp:DropDownList>
+                                                    </td>
+                                                    <td style="width: 20%;">
+                                                        <asp:TextBox ID="txtNos" Text="" runat="server" Width="77px"></asp:TextBox>
+                                                    </td>
+                                                     <td style="width: 20%;">
+                                                        <asp:TextBox ID="txtWtPerCntr" Text="" runat="server" Width="82px"></asp:TextBox>
                                                     </td>
                                                     <td>
-                                                        <asp:Button ID="Button3" runat="server" Text="Add" />
+                                                        <asp:Button ID="btnAdd" runat="server" Text="Add" onclick="btnAdd_Click" />
                                                     </td>
                                                 </tr>
                                             </table>
                                         </div>
                                         <div style="overflow: auto; height: 180px; width: 380px;">
                                             <asp:GridView ID="gvContainer" runat="server" AutoGenerateColumns="false" AllowPaging="false"
-                                                BorderStyle="None" BorderWidth="0" Width="100%" style="margin-right: 0px">
+                                                BorderStyle="None" BorderWidth="0" Width="100%" style="margin-right: 0px" 
+                                                onselectedindexchanged="gvContainer_SelectedIndexChanged" >
                                                 <PagerSettings Mode="NumericFirstLast" Position="TopAndBottom" />
                                                 <PagerStyle CssClass="gridviewpager" />
                                                 <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
@@ -692,21 +728,34 @@
                                                     No Page(s) Found
                                                 </EmptyDataTemplate>
                                                 <Columns>
-                                                    <asp:TemplateField HeaderText="Type">
-                                                        <HeaderStyle CssClass="gridviewheader" />
+                                                    <asp:TemplateField>
+                                                        <ItemTemplate>
+                                                            <asp:HiddenField ID="hdnBookingContainerID" runat="server" Value='<%# Eval("BookingContainerID") %>' />
+                                                            <asp:HiddenField ID="hdnContainerTypeId" runat="server" Value='<%# Eval("ContainerTypeID") %>' />
+                                                            <asp:HiddenField ID="hdnSize" runat="server" Value='<%# Eval("CntrSize") %>' />
+                                                            <asp:HiddenField ID="hdnUnits" runat="server" Value='<%# Eval("NoofContainers") %>' />
+                                                            <asp:HiddenField ID="hdnWtPerCont" runat="server" Value='<%# Eval("wtPerCntr") %>' />
+                                                        </ItemTemplate>
                                                         <ItemStyle CssClass="gridviewitem" Width="20%" />
                                                     </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Size">
-                                                        <HeaderStyle CssClass="gridviewheader_num" />
+                                                    <asp:TemplateField>
                                                         <ItemStyle CssClass="gridviewitem" Width="20%" HorizontalAlign="Right" />
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="lblContainerSize" runat="server" Text='<%# Eval("CntrSize")%>'></asp:Label>
+                                                        </ItemTemplate>
                                                     </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Units">
-                                                        <HeaderStyle CssClass="gridviewheader_num" />
+                                                    <asp:TemplateField>
                                                         <ItemStyle CssClass="gridviewitem" Width="20%" HorizontalAlign="Right" />
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="lblUnit" runat="server" Text='<%# Eval("NoofContainers")%>'></asp:Label>
+                                                        </ItemTemplate>
+                                                       
                                                     </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="WT/CONT.">
-                                                        <HeaderStyle CssClass="gridviewheader_num" />
+                                                    <asp:TemplateField>
                                                         <ItemStyle CssClass="gridviewitem" Width="20%" HorizontalAlign="Right" />
+                                                         <ItemTemplate>
+                                                            <asp:Label ID="lblwtPerCont" runat="server" Text='<%# Eval("wtPerCntr")%>'></asp:Label>
+                                                        </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:TemplateField>
                                                         <HeaderStyle CssClass="gridviewheader" />
@@ -719,10 +768,126 @@
                                                 </Columns>
                                             </asp:GridView>
                                         </div>
+
+           <%--                             <tr>
+                                            <td colspan="5" style="padding-top: 30px; border: none;" align="center">
+
+                                                <asp:GridView ID="gvContainer" runat="server" AutoGenerateColumns="false" ShowFooter="false"
+                                                    OnItemCommand="gvContainer_ItemCommand" OnItemDataBound="gvContainer_ItemDataBound"
+                                                    OnRowCommand="gvContainer_RowCommand" OnRowDataBound="gvContainer_RowDataBound"
+                                                    Font-Names="Calibri" Font-Size="11pt" 
+                                                    onselectedindexchanged="gvContainer_SelectedIndexChanged">
+                                                    <Columns>
+                                                        
+                                                        <asp:TemplateField HeaderText="Type">
+                                                            <ItemTemplate>
+                                                                <asp:HiddenField ID="hdnConainerTypeId" runat="server" Value='<%# Eval("ContainerTypeID")%>' />
+                                                            </ItemTemplate>
+                                                            <HeaderTemplate>
+                                                                <asp:DropDownList ID="ddlCntrType" runat="server" Width="100">
+                                                                </asp:DropDownList>
+                                                                <br />
+                                                                <br />
+                                                                Type
+                                                            </HeaderTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Size">
+                                                            <ItemTemplate>
+                                                                <asp:HiddenField ID="hdnSize" runat="server" Value='<%# Eval("CntrSize")%>' />
+                                                            </ItemTemplate>
+                                                            <HeaderTemplate>
+                                                                <asp:DropDownList ID="ddlSize" runat="server" Width="90">
+                                                                <asp:ListItem Text="20" Value="20" Selected="True"></asp:ListItem>
+                                                                <asp:ListItem Text="40" Value="40"></asp:ListItem>
+                                                                </asp:DropDownList>
+                                                                <br />
+                                                                <br />
+                                                                Size
+                                                            </HeaderTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Units" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblNos" runat="server" Text='<%# Eval("NoofContainers")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                            <HeaderTemplate>
+                                                                <cc2:CustomTextBox ID="txtNos" runat="server" Width="40" Type="Numeric" Style="text-align: right;"></cc2:CustomTextBox>
+                                                                <asp:RequiredFieldValidator ID="rfvNos" runat="server" ErrorMessage="Please enter Nos"
+                                                                    Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtNos"></asp:RequiredFieldValidator>
+                                                                <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender2" runat="server" TargetControlID="rfvNos">
+                                                                </cc1:ValidatorCalloutExtender>
+                                                                <br />
+                                                                <br />
+                                                                Containers
+                                                            </HeaderTemplate>
+                                                            <HeaderStyle HorizontalAlign="Right" />
+                                                            <ItemStyle HorizontalAlign="Right" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Wt/Cntr" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblwtPerCntr" runat="server" Text='<%# Eval("wtPerCntr")%>'></asp:Label></ItemTemplate>
+                                                            <HeaderTemplate>
+                                                                <cc2:CustomTextBox ID="txtWtPerCntr" runat="server" Width="40" Type="Numeric" Style="text-align: right;"></cc2:CustomTextBox>
+                                                                <asp:RequiredFieldValidator ID="rfvwtPerCntr" runat="server" ErrorMessage="Please wt/Container"
+                                                                    Display="None" ValidationGroup="vgGridFooter" ControlToValidate="txtWtPerCntr"></asp:RequiredFieldValidator>
+                                                                <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvwtPerCntr">
+                                                                </cc1:ValidatorCalloutExtender>
+                                                                <br />
+                                                                <br />
+                                                                Wt/Cntr
+                                                            </HeaderTemplate>
+                                                            <HeaderStyle HorizontalAlign="Right" />
+                                                            <ItemStyle HorizontalAlign="Right" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Edit" ItemStyle-Font-Bold="true" ItemStyle-HorizontalAlign="Center"
+                                                            FooterStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Top">
+                                                            <ItemTemplate>
+                                                                <asp:HiddenField ID="hdnSlno" runat="server" Value='<%# Eval("SlNo")%>' />
+                                                                <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("BookingContainerID")%>' />
+                                                                <asp:ImageButton ID="lnkEdit" runat="server" CommandArgument="Edit" ImageUrl="~/Images/edit.png"
+                                                                    Height="16" Width="16" ToolTip="Edit" />
+                                                            </ItemTemplate>
+                                                            <HeaderTemplate>
+                                                                <asp:HiddenField ID="hdnFSlno" runat="server" Value="-1" />
+                                                                <asp:HiddenField ID="hdnFId" runat="server" Value="0" />
+                                                                <asp:Button ID="lnkAdd" runat="server" CommandArgument="Save" Text="Add" Font-Bold="true"
+                                                                    ValidationGroup="vgGridFooter" Height="24" />
+                                                                <br />
+                                                                <br />
+                                                                Edit
+                                                            </HeaderTemplate>
+                                                            <FooterStyle HorizontalAlign="Center" />
+                                                            <HeaderStyle VerticalAlign="Top" />
+                                                            <ItemStyle Font-Bold="True" HorizontalAlign="Center" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Delete" ItemStyle-Font-Bold="true" ItemStyle-HorizontalAlign="Center"
+                                                            FooterStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Top">
+                                                            <ItemTemplate>
+                                                                <asp:ImageButton ID="lnkDelete" runat="server" CommandArgument="Delete" ImageUrl="~/Images/remove.png"
+                                                                    Height="16" Width="16" ToolTip="Delete" />
+                                                            </ItemTemplate>
+                                                            <HeaderTemplate>
+                                                                <asp:Button ID="lnkCancel" runat="server" CommandArgument="Cancel" Text="Cancel"
+                                                                    Font-Bold="true" Height="24" />
+                                                                <br />
+                                                                <br />
+                                                                Delete
+                                                            </HeaderTemplate>
+                                                            <FooterStyle HorizontalAlign="Center" />
+                                                            <HeaderStyle VerticalAlign="Top" />
+                                                            <ItemStyle Font-Bold="True" HorizontalAlign="Center" />
+                                                        </asp:TemplateField>
+                                                    </Columns>
+                                                    <HeaderStyle Font-Bold="true" HorizontalAlign="Center" BackColor="#F8F8F8" />
+                                                    <RowStyle Wrap="true" />
+                                                    <FooterStyle BackColor="#F8F8F8" HorizontalAlign="Center" />
+                                                </asp:GridView>
+                                            </td>
+                                        </tr>--%>
+
                                         <br />
                                         <asp:Button ID="btnSaveContainer" runat="server" Text="Save" />
                                         <asp:Button ID="btnCancelContainer" runat="server" Text="Cancel" />
-                                    </fieldset>
+                            
                                 </center>
                             </asp:Panel>
                         </td>
@@ -733,11 +898,11 @@
                 <table border="0" cellpadding="2" cellspacing="3" width="100%">
                     <tr>
                         <td>
-                            <asp:Button ID="Button2" runat="server" Style="display: none;" />
+                            <asp:Button ID="Button2" runat="server" onclick="Button2_Click"/>
                             <cc1:ModalPopupExtender ID="ModalPopupExtender2" runat="server" TargetControlID="Button2"
                                 PopupControlID="pnlTransit" Drag="true" BackgroundCssClass="ModalPopupBG" CancelControlID="btnCalcelTransit">
                             </cc1:ModalPopupExtender>
-                            <asp:Panel ID="pnlTransit" runat="server" Style="height: 250px; width: 400px; background-color: White;">
+                            <asp:Panel ID="pnlTransit" runat="server" Style="height: 300px; width: 400px; background-color: White; display: none">
                                 <center>
                                     <fieldset>
                                         <legend>Transit Route</legend>
@@ -745,8 +910,59 @@
                                             <table>
                                                 <tr>
                                                     <td>
-                                                        <asp:TextBox Text="Ports" runat="server" Width="260px"></asp:TextBox>
+                                                        Port Name<span class="errormessage">*</span>
                                                     </td>
+                                                    <td>
+                                                        <asp:HiddenField ID="hdnPOT" runat="server" />
+                                                        <asp:TextBox runat="server" ID="txtPOT" Width="250" autocomplete="off" AutoPostBack="True"
+                                                            MaxLength="50" TabIndex="9" Style="text-transform: uppercase;" ontextchanged="txtPOT_TextChanged" />
+                                                        <asp:RequiredFieldValidator ID="rfvPOT" runat="server" ErrorMessage="Please select Place of Receipt"
+                                                            Display="None" ControlToValidate="txtPOT" ValidationGroup="vgBooking"></asp:RequiredFieldValidator>
+                                                        <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender5" runat="server" TargetControlID="rfvPOT"
+                                                            WarningIconImageUrl="">
+                                                        </cc1:ValidatorCalloutExtender>
+                                                        <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteExPOT" ID="AutoCompleteExtender5"
+                                                            TargetControlID="txtPOT" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
+                                                            MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
+                                                            CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
+                                                            CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";,:"
+                                                            ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected">
+                                                            <Animations>
+                                                                    <OnShow>
+                                                                        <Sequence>
+                                                                            <%-- Make the completion list transparent and then show it --%>
+                                                                            <OpacityAction Opacity="0" />
+                                                                            <HideAction Visible="true" />
+                            
+                                                                            <%--Cache the original size of the completion list the first time
+                                                                                the animation is played and then set it to zero --%>
+                                                                            <ScriptAction Script="
+                                                                                // Cache the size and setup the initial size
+                                                                                var behavior = $find('AutoCompleteExPOT');
+                                                                                if (!behavior._height) {
+                                                                                    var target = behavior.get_completionList();
+                                                                                    behavior._height = target.offsetHeight - 2;
+                                                                                    target.style.height = '0px';
+                                                                                }" />
+                            
+                                                                            <%-- Expand from 0px to the appropriate size while fading in --%>
+                                                                            <Parallel Duration=".4">
+                                                                                <FadeIn />
+                                                                                <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteExPOT')._height" />
+                                                                            </Parallel>
+                                                                        </Sequence>
+                                                                    </OnShow>
+                                                                    <OnHide>
+                                                                        <%-- Collapse down to 0px and fade out --%>
+                                                                        <Parallel Duration=".4">
+                                                                            <FadeOut />
+                                                                            <Length PropertyKey="height" StartValueScript="$find('AutoCompleteExPOT')._height" EndValue="0" />
+                                                                        </Parallel>
+                                                                    </OnHide>
+                                                            </Animations>
+                                                        </cc1:AutoCompleteExtender>
+                                                    </td>
+
                                                     <td>
                                                         <asp:Button ID="btnAddToGrid" runat="server" Text="Add" />
                                                     </td>
@@ -755,7 +971,7 @@
                                         </div>
                                         <div style="overflow: auto; height: 180px; width: 380px;">
                                             <asp:GridView ID="gvTransit" runat="server" AutoGenerateColumns="false" AllowPaging="false"
-                                                BorderStyle="None" BorderWidth="0" Width="100%">
+                                                BorderStyle="None" BorderWidth="0" Width="100%" HeaderStyle-Wrap="true">
                                                 <PagerSettings Mode="NumericFirstLast" Position="TopAndBottom" />
                                                 <PagerStyle CssClass="gridviewpager" />
                                                 <EmptyDataRowStyle CssClass="gridviewemptydatarow" />

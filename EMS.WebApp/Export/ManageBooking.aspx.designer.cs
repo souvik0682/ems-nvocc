@@ -184,15 +184,6 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPOR;
         
         /// <summary>
-        /// ValidatorCalloutExtender1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender1;
-        
-        /// <summary>
         /// autoComplete1 control.
         /// </summary>
         /// <remarks>
@@ -227,15 +218,6 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPOL;
-        
-        /// <summary>
-        /// ValidatorCalloutExtender2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender2;
         
         /// <summary>
         /// AutoCompleteExtender1 control.
@@ -274,15 +256,6 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPOD;
         
         /// <summary>
-        /// ValidatorCalloutExtender3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender3;
-        
-        /// <summary>
         /// AutoCompleteExtender2 control.
         /// </summary>
         /// <remarks>
@@ -317,15 +290,6 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFPOD;
-        
-        /// <summary>
-        /// ValidatorCalloutExtender4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender4;
         
         /// <summary>
         /// AutoCompleteExtender3 control.
@@ -427,13 +391,13 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtMainLineVessel;
         
         /// <summary>
-        /// rfvMLVessel control.
+        /// rfvMainLineVessel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMLVessel;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMainLineVessel;
         
         /// <summary>
         /// AutoCompleteExtender4 control.
@@ -490,13 +454,13 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtUno;
         
         /// <summary>
-        /// txtGrossSeight control.
+        /// txtGrossWeight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::EMS.WebApp.CustomControls.CustomTextBox txtGrossSeight;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtGrossWeight;
         
         /// <summary>
         /// txtCbm control.
@@ -652,49 +616,85 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.Panel pnlContainer;
         
         /// <summary>
-        /// TextBox5 control.
+        /// lblType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox5;
+        protected global::System.Web.UI.WebControls.Label lblType;
         
         /// <summary>
-        /// TextBox6 control.
+        /// lblSize control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox6;
+        protected global::System.Web.UI.WebControls.Label lblSize;
         
         /// <summary>
-        /// TextBox7 control.
+        /// lblUnit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox7;
+        protected global::System.Web.UI.WebControls.Label lblUnit;
         
         /// <summary>
-        /// TextBox8 control.
+        /// lblWt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox8;
+        protected global::System.Web.UI.WebControls.Label lblWt;
         
         /// <summary>
-        /// Button3 control.
+        /// ddlCntrType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button3;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCntrType;
+        
+        /// <summary>
+        /// ddlSize control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSize;
+        
+        /// <summary>
+        /// txtNos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNos;
+        
+        /// <summary>
+        /// txtWtPerCntr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtWtPerCntr;
+        
+        /// <summary>
+        /// btnAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdd;
         
         /// <summary>
         /// gvContainer control.
@@ -749,6 +749,51 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlTransit;
+        
+        /// <summary>
+        /// hdnPOT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnPOT;
+        
+        /// <summary>
+        /// txtPOT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPOT;
+        
+        /// <summary>
+        /// rfvPOT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPOT;
+        
+        /// <summary>
+        /// ValidatorCalloutExtender5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender5;
+        
+        /// <summary>
+        /// AutoCompleteExtender5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender AutoCompleteExtender5;
         
         /// <summary>
         /// btnAddToGrid control.

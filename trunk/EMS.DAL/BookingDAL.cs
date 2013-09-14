@@ -77,14 +77,35 @@ namespace EMS.DAL
             return oIH;
         }
 
+        public static List<IBookingContainer> GetBookingContainers(int BookingID)
+        {
+            string strExecution = "[exp].[spGetBookingContainerList]";
+            List<IBookingContainer> Containers = new List<IBookingContainer>();
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@BookingId", BookingID);
+                //oDq.AddIntegerParam("@Mode", 2); // @Mode = 2 to fetch ChargeRate
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    IBookingContainer Cont = new BookingContainerEntity(reader);
+                    Containers.Add(Cont);
+                }
+                reader.Close();
+            }
+            return Containers;
+        }
+
         public static int AddEditBooking(IBooking Booking, int CompanyId)
         {
-            string strExecution = "[exp].[prcAddEditAgent]";
+            string strExecution = "[exp].[prcAddEditBooking]";
             int Result = 0;
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@userID", Booking.CreatedBy);
+                oDq.AddIntegerParam("@fk_FinYearID", 1);
                 oDq.AddIntegerParam("@fk_CompanyID", CompanyId);
                 oDq.AddBooleanParam("@isedit", Booking.Action);
                 oDq.AddIntegerParam("@pk_BookingID", Booking.BookingID);
@@ -101,6 +122,7 @@ namespace EMS.DAL
                 oDq.AddDateTimeParam("@BookingDate", Booking.BookingDate);
                 oDq.AddVarcharParam("@Bookingno", 40, Booking.BookingNo);
                 oDq.AddIntegerParam("@fk_CustomerID", Booking.CustID);
+                oDq.AddVarcharParam("@Accounts", 200, Booking.Accounts);
                 oDq.AddVarcharParam("@RefBookingNo", 50, Booking.RefBookingNo);
                 oDq.AddDateTimeParam("@RefBookingDate", Booking.RefBookingDate);
                 oDq.AddBooleanParam("@HazCargo", Booking.HazCargo);
@@ -117,6 +139,7 @@ namespace EMS.DAL
                 oDq.AddBooleanParam("@Reefer", Booking.Reefer);
                 oDq.AddDecimalParam("@TempMax", 12, 3, Convert.ToDecimal(Booking.TempMax));
                 oDq.AddDecimalParam("@TempMin", 12, 3, Convert.ToDecimal(Booking.TempMin));
+                oDq.AddIntegerParam("@fk_ServiceID", Booking.ServicesID);
                 //oDq.AddDecimalParam("@HaulageRate", 12, 2, Convert.ToDecimal(ImportHaulage.HaulageRate));
                 //oDq.AddBooleanParam("@HaulageStatus", ImportHaulage.HaulageStatus);
 
@@ -148,5 +171,36 @@ namespace EMS.DAL
             return dquery.GetTables();
         }
 
+        public static void DeactivateAllContainersAgainstBookingId(int BookingId)
+        {
+            string strExecution = "[exp].[spBookingContainersUpdate]";
+            //int Result = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@BookingId", BookingId);
+                oDq.RunActionQuery();
+            }
+        }
+
+        public static int AddEditBookingContainer(IBookingContainer Container)
+        {
+            string strExecution = "[exp].[spAddEditBookingContainers]";
+            int Result = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@BookingContainerID", Container.BookingContainerID);
+                oDq.AddIntegerParam("@BookingID", Container.BookingID);
+                oDq.AddIntegerParam("@ContainerTypeID", Container.ContainerTypeID);
+                oDq.AddVarcharParam("@CntrSize", 2, Container.CntrSize);
+                oDq.AddDecimalParam("@WtPerCntr", 12, 3, Container.wtPerCntr);
+                oDq.AddIntegerParam("@RESULT", Result, QueryParameterDirection.Output);
+                oDq.RunActionQuery();
+                Result = Convert.ToInt32(oDq.GetParaValue("@Result"));
+
+            }
+            return Result;
+        }
     }
 }

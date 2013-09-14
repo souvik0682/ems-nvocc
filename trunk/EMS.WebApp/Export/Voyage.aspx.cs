@@ -250,7 +250,7 @@ namespace EMS.WebApp.Export
                         ViewState[Constants.SORT_EXPRESSION] = e.CommandArgument.ToString();
                     }
                 }
-
+                SearchCriteria searchCriteria = (SearchCriteria)Session[Constants.SESSION_SEARCH_CRITERIA];
                 LoadVoyage();
             }
             else if (e.CommandName == "Edit")

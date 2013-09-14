@@ -31,7 +31,12 @@ namespace EMS.BLL
         {
             return BookingDAL.GetBooking(ID);
         }
-        
+
+        public List<IBookingContainer> GetBookingContainers(int ChargesID)
+        {
+            return BookingDAL.GetBookingContainers(ChargesID);
+        }
+
         public static DataSet GetExportVoyages(int Vessel)
         {
             return BookingDAL.GetExportVoyages(Vessel);
@@ -41,5 +46,16 @@ namespace EMS.BLL
         {
             return BookingDAL.GetExportServices(Line, Fpod);
         }
+
+        public void DeactivateAllContainersAgainstBookingId(int BookingId)
+        {
+            BookingDAL.DeactivateAllContainersAgainstBookingId(BookingId);
+
+        }
+        public int AddEditBookingContainer(IBookingContainer Containers)
+        {
+            return BookingDAL.AddEditBookingContainer(Containers);
+        }
+
     }
 }

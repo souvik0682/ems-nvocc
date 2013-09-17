@@ -1,0 +1,29 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AC_Brockerage.ascx.cs" Inherits="EMS.WebApp.CustomControls.AC_Brockerage" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<link href="../CustomControls/StyleSheet.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    .watermark1
+    {
+        text-transform: uppercase;
+        color: #747862;
+        height: 20px;
+        border: 0.5;
+        padding: 1px 1px;
+        margin-bottom: 0px;
+    }
+</style>
+
+<div>
+    <asp:TextBox runat="server" ID="txtBrockerage" autocomplete="off" 
+        ForeColor="#747862" MaxLength="50" Width="250px" CssClass="textboxuppercase"
+        AutoPostBack="true" OnTextChanged="txtBrockerage_TextChanged" />
+ 
+    <cc1:autocompleteextender runat="server"  ID="AutoBrockerage"
+        targetcontrolid="txtBrockerage" servicepath="AutoComplete.asmx" servicemethod="GetBrockeragePayableTo"
+        minimumprefixlength="1" completioninterval="1000" enablecaching="true" completionsetcount="20"
+        completionlistcssclass="autocomplete_completionListElement" completionlistitemcssclass="autocomplete_listItem"
+        completionlisthighlighteditemcssclass="autocomplete_highlightedListItem" delimitercharacters=";,:"
+        showonlycurrentwordincompletionlistitem="true">
+    </cc1:autocompleteextender>
+ 
+</div>

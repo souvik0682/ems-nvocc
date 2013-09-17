@@ -3,6 +3,10 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="EMS.WebApp" Namespace="EMS.WebApp.CustomControls" TagPrefix="cc2" %>
+<%@ Register Src="~/CustomControls/AC_Brockerage.ascx" TagName="AC_Brockerage" TagPrefix="uc1" %>
+<%@ Register Src="~/CustomControls/AC_Refund.ascx" TagName="AC_Refund" TagPrefix="uc2" %>
+<%@ Register Src="~/CustomControls/AC_Port.ascx" TagName="AC_Port" TagPrefix="uc3" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
@@ -30,14 +34,20 @@
                 <asp:UpdatePanel ID="upCharges" runat="server" UpdateMode="Always">
                     <ContentTemplate>
                         <table style="width: 100%;">
- <%--                           <tr>
+                        <tr>
                                 <td>
-                                    Shipper
+                                    Booking No
                                 </td>
-                                <td colspan="4">
-                                    <asp:TextBox ID="txtShipper" runat="server" Width="855px" Enabled="false"></asp:TextBox>
+                                <td>
+                                    <asp:TextBox ID="txtBookingNo" runat="server" Width="250px" Enabled="false"></asp:TextBox>
                                 </td>
-                            </tr>--%>
+                                <td>
+                                    Booking Date
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtBookingDate" runat="server" Width="250px" Enabled="false"></asp:TextBox>
+                                </td>
+                            </tr>
                             <tr>
                                 <td>
                                     POL
@@ -71,16 +81,16 @@
                                     Freight Payable At
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtFreight" runat="server" Width="250px"></asp:TextBox>
+                                    <uc3:AC_Port ID="txtFreightPayableAt" runat="server" />
                                 </td>
                                 <td>
                                     Brokerage Payable
                                 </td>
                                 <td>
                                     <asp:RadioButtonList ID="rdblBorkerage" runat="server" RepeatDirection="Horizontal"
-                                        RepeatLayout="Flow">
-                                        <asp:ListItem Text="Yes" Value="Y" Selected="True"></asp:ListItem>
-                                        <asp:ListItem Text="No" Value="N"></asp:ListItem>
+                                        RepeatLayout="Flow" AutoPostBack="true" OnSelectedIndexChanged="rdblBorkerage_SelectedIndexChanged">
+                                        <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+                                        <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
                                     </asp:RadioButtonList>
                                 </td>
                             </tr>
@@ -90,13 +100,14 @@
                                 </td>
                                 <td>
                                     <cc2:CustomTextBox ID="txtBrokeragePercent" runat="server" Width="250px" Type="Decimal"
-                                        MaxLength="10" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox>
+                                        Enabled="false" MaxLength="10" Precision="8" Scale="2" Style="text-align: right;"
+                                        Text="0.00"></cc2:CustomTextBox>
                                 </td>
                                 <td>
                                     Brokerage Payable To
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtBrokeragePayableTo" runat="server" Width="250px" Text="Auto Correct"></asp:TextBox>
+                                    <uc1:AC_Brockerage ID="txtBrokeragePayableTo" runat="server" Width="250px" />
                                 </td>
                             </tr>
                             <tr>
@@ -104,17 +115,17 @@
                                     Refund Payable
                                 </td>
                                 <td>
-                                    <asp:RadioButtonList ID="rdblRefund" runat="server" RepeatDirection="Horizontal"
-                                        RepeatLayout="Flow">
-                                        <asp:ListItem Text="Yes" Value="Y" Selected="True"></asp:ListItem>
-                                        <asp:ListItem Text="No" Value="N"></asp:ListItem>
+                                    <asp:RadioButtonList ID="rdblRefundPayable" runat="server" RepeatDirection="Horizontal"
+                                        RepeatLayout="Flow" AutoPostBack="true" OnSelectedIndexChanged="rdblRefundPayable_SelectedIndexChanged">
+                                        <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+                                        <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
                                     </asp:RadioButtonList>
                                 </td>
                                 <td>
                                     Refund Payable To
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="TextBox1" runat="server" Width="250px" Text="Auto Correct"></asp:TextBox>
+                                    <uc2:AC_Refund ID="txtRefundPayableTo" runat="server" Width="250px" />
                                 </td>
                             </tr>
                             <tr>
@@ -128,29 +139,32 @@
                                     Shipper
                                 </td>
                                 <td colspan="4">
-                                    <asp:TextBox ID="txtShipper" runat="server" Width="250px" TextMode="MultiLine" Rows="3" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtShipper" runat="server" Width="250px" TextMode="MultiLine" Rows="3"></asp:TextBox>
                                 </td>
-
                             </tr>
                             <tr>
                                 <td>
-                                    Rate Reference
+                                    Rate Reference<span class="errormessage">*</span>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtRateReference" runat="server" Width="250px"></asp:TextBox>
+                                    <br />
+                                    <asp:RequiredFieldValidator ID="rfvRateReference" runat="server" ControlToValidate="txtRateReference"
+                                        Display="Dynamic" CssClass="errormessage" ValidationGroup="Save"></asp:RequiredFieldValidator>
                                 </td>
                                 <td>
                                     Rate Type
                                 </td>
                                 <td>
                                     <asp:DropDownList ID="ddlRateType" runat="server" CssClass="dropdownlist">
-                                        <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
+                                        <asp:ListItem Value="FreeHand" Text="Free Hand"></asp:ListItem>
+                                        <asp:ListItem Value="Nomination" Text="Nomination"></asp:ListItem>
+                                        <asp:ListItem Value="SalesLead" Text="Sales Lead"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
-                             
                             </tr>
                             <tr>
-                               <td>
+                                <td>
                                     Upload
                                 </td>
                                 <td>
@@ -159,6 +173,29 @@
                                     <asp:HiddenField ID="hdnFilePath" runat="server" />
                                     &nbsp;&nbsp; &nbsp;
                                 </td>
+                                <td>
+                                    Slot perator<span class="errormessage">*</span>
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="ddlSlot" runat="server" CssClass="dropdownlist">
+                                        <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
+                                    </asp:DropDownList>
+                                    <br />
+                                    <asp:RequiredFieldValidator ID="rfvSlot" runat="server" CssClass="errormessage"
+                                        ErrorMessage="This field is required" ControlToValidate="ddlSlot" InitialValue="0"
+                                        ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    PP/CC
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="ddlPpCc" runat="server">
+                                        <asp:ListItem Value="P" Text="Pre Paid" Selected="True" />
+                                        <asp:ListItem Value="T" Text="To Pay" />
+                                    </asp:DropDownList>
+                                </td>
                             </tr>
                             <tr>
                                 <td colspan="4" style="padding-top: 10; border: none;">
@@ -166,195 +203,65 @@
                                         <legend>Add Charges</legend>
                                         <table>
                                             <tr>
-                                                <td style="font-weight: bold">
-                                                    Charge Name
-                                                </td>
-                                                <td style="font-weight: bold">
-                                                    Applicable
-                                                </td>
-                                                <td style="text-align: right; font-weight: bold">
-                                                    Currency
-                                                </td>
-                                                <td style="text-align: right; font-weight: bold">
-                                                    PP/CC
-                                                </td>
-                                                <td style="text-align: right; font-weight: bold">
-                                                    Size/Type
-                                                </td>
-                                                <td style="text-align: right; font-weight: bold">
-                                                    Weight CBM
-                                                </td>
-                                                <td style="text-align: right; font-weight: bold">
-                                                    Weight Ton
-                                                </td>
-                                                <td style="text-align: right; font-weight: bold">
-                                                    Manifest
-                                                </td>
-                                                <td style="text-align: right; font-weight: bold">
-                                                    Charged
-                                                </td>
-                                                <td style="text-align: right; font-weight: bold">
-                                                    Refund
-                                                </td>
-                                                <td style="text-align: right; font-weight: bold">
-                                                    Brokerage Basic
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlFChargeName" runat="server" Width="150">
-                                                        <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
-                                                    </asp:DropDownList>
-                                                    <br />
-                                                    <asp:RequiredFieldValidator ID="rfvChargeName" runat="server" ErrorMessage="Required"
-                                                        CssClass="errormessage" ValidationGroup="vgAdd" ControlToValidate="ddlFChargeName"
-                                                        InitialValue="0"></asp:RequiredFieldValidator>
-                                                </td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlApplicable" runat="server" Width="80">
-                                                        <asp:ListItem Text="Yes" Value="Y" Selected="True"></asp:ListItem>
-                                                        <asp:ListItem Text="No" Value="N"></asp:ListItem>
-                                                    </asp:DropDownList>
-                                                    <br />
-                                                    &nbsp;
-                                                </td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlCurrency" runat="server" Width="80">
-                                                        <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
-                                                    </asp:DropDownList>
-                                                    <br />
-                                                    &nbsp;
-                                                </td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlPpCc" runat="server" Width="60">
-                                                        <asp:ListItem Text="PP" Value="P" Selected="True"></asp:ListItem>
-                                                        <asp:ListItem Text="CC" Value="C"></asp:ListItem>
-                                                    </asp:DropDownList>
-                                                    <br />
-                                                    &nbsp;
-                                                </td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlSizeType" runat="server" Width="60">
-                                                        <asp:ListItem Text="20GP" Value="G" Selected="True"></asp:ListItem>
-                                                        <asp:ListItem Text="40HC" Value="H"></asp:ListItem>
-                                                    </asp:DropDownList>
-                                                    <br />
-                                                    &nbsp;
-                                                </td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlCbm" runat="server" Width="80">
-                                                        <asp:ListItem Text="For LCL" Value="L" Selected="True"></asp:ListItem>
-                                                        <asp:ListItem Text="Bulk" Value="B"></asp:ListItem>
-                                                    </asp:DropDownList>
-                                                    <br />
-                                                    &nbsp;
-                                                </td>
-                                                <td>
-                                                    <cc2:CustomTextBox ID="txtWeightTon" runat="server" Width="80" MaxLength="10" Style="text-align: right;"></cc2:CustomTextBox>
-                                                    <br />
-                                                    &nbsp;
-                                                </td>
-                                                <td>
-                                                    <cc2:CustomTextBox ID="txtManifest" runat="server" Width="80" Type="Decimal" MaxLength="10"
-                                                        Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox>
-                                                    <br />
-                                                    &nbsp;
-                                                </td>
-                                                <td>
-                                                    <cc2:CustomTextBox ID="txtCharged" runat="server" Width="80" Type="Decimal" MaxLength="10"
-                                                        Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox>
-                                                    <br />
-                                                    &nbsp;
-                                                </td>
-                                                <td>
-                                                    <cc2:CustomTextBox ID="txtRefund" runat="server" Width="80" Type="Decimal" MaxLength="10"
-                                                        Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox>
-                                                    <br />
-                                                    &nbsp;
-                                                </td>
-                                                <td>
-                                                    <cc2:CustomTextBox ID="txtBrokerageBasic" runat="server" Width="80" Type="Decimal" MaxLength="10"
-                                                        Enabled="false" Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox>
-                                                    <br />
-                                                    &nbsp;
-                                                </td>
-                                                <td>
-                                                    <asp:Button ID="btnAdd" runat="server" Text="Add" ValidationGroup="vgAdd" /><br />
-                                                    &nbsp;
-                                                </td>
-                                            </tr>
-                                            <tr>
                                                 <td colspan="10">
-                                                    <asp:GridView ID="gvwCharges" runat="server" AutoGenerateColumns="false" AllowPaging="false"
-                                                        BorderStyle="None" BorderWidth="0" Width="100%">
-                                                        <PagerSettings Mode="NumericFirstLast" Position="TopAndBottom" />
-                                                        <PagerStyle CssClass="gridviewpager" />
-                                                        <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
-                                                        <EmptyDataTemplate>
-                                                            No Page(s) Found
-                                                        </EmptyDataTemplate>
+                                                    <asp:GridView ID="gvwCharges" runat="server" AllowPaging="True" AutoGenerateColumns="False"
+                                                        BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px"
+                                                        CellPadding="3" DataKeyNames="BookingChargeId">
+                                                        <FooterStyle BackColor="White" ForeColor="#000066" />
                                                         <Columns>
-                                                            <asp:TemplateField HeaderText="Charge Name">
-                                                                <HeaderStyle CssClass="gridviewheader" />
-                                                                <ItemStyle CssClass="gridviewitem" Width="20%" />
-                                                            </asp:TemplateField>
+                                                            <asp:BoundField DataField="ChargeName" HeaderText="Charge Name" InsertVisible="False"
+                                                                ReadOnly="True" SortExpression="ChargeName" />
                                                             <asp:TemplateField HeaderText="Applicable">
-                                                                <HeaderStyle CssClass="gridviewheader" />
-                                                                <ItemStyle CssClass="gridviewitem" Width="15%" />
-                                                            </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Currency">
-                                                                <HeaderStyle CssClass="gridviewheader_num" />
-                                                                <ItemStyle CssClass="gridviewitem" Width="6%" HorizontalAlign="Right" />
-                                                            </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="PP/PC">
-                                                                <HeaderStyle CssClass="gridviewheader_num" />
-                                                                <ItemStyle CssClass="gridviewitem" Width="6%" HorizontalAlign="Right" />
-                                                            </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Size/Type">
-                                                                <HeaderStyle CssClass="gridviewheader_num" />
-                                                                <ItemStyle CssClass="gridviewitem" Width="6%" HorizontalAlign="Right" />
-                                                            </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Weight CBM">
-                                                                <HeaderStyle CssClass="gridviewheader_num" />
-                                                                <ItemStyle CssClass="gridviewitem" Width="6%" HorizontalAlign="Right" />
-                                                            </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Weight Ton">
-                                                                <HeaderStyle CssClass="gridviewheader_num" />
-                                                                <ItemStyle CssClass="gridviewitem" Width="6%" HorizontalAlign="Right" />
-                                                            </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Manifest">
-                                                                <HeaderStyle CssClass="gridviewheader_num" />
-                                                                <ItemStyle CssClass="gridviewitem" Width="4%" HorizontalAlign="Right" />
-                                                            </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Charged">
-                                                                <HeaderStyle CssClass="gridviewheader_num" />
-                                                                <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right" />
-                                                            </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Refund">
-                                                                <HeaderStyle CssClass="gridviewheader_num" />
-                                                                <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right" />
-                                                            </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Brokerage Basic">
-                                                                <HeaderStyle CssClass="gridviewheader_num" />
-                                                                <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right" />
-                                                            </asp:TemplateField>
-                                                            <asp:TemplateField>
-                                                                <HeaderStyle CssClass="gridviewheader" />
-                                                                <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                                                 <ItemTemplate>
-                                                                    <asp:ImageButton ID="btnEdit" runat="server" CommandName="EditRow" ImageUrl="~/Images/edit.png"
-                                                                        Height="16" Width="16" />
+                                                                    <asp:DropDownList ID="ddlApplicable" runat="server">
+                                                                        <asp:ListItem Value="True" Text="Yes" Selected="True" />
+                                                                        <asp:ListItem Value="False" Text="No" />
+                                                                    </asp:DropDownList>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:BoundField DataField="CurrencyName" HeaderText="Currency" InsertVisible="False" ReadOnly="True" />
+                                                            <asp:BoundField DataField="Size" HeaderText="Size" InsertVisible="False"
+                                                                ReadOnly="True" SortExpression="Size" />
+                                                            <asp:BoundField DataField="ContainerType" HeaderText="Type" InsertVisible="False"
+                                                                ReadOnly="True" SortExpression="ContainerType" />
+                                                            <asp:BoundField DataField="WtInCBM" HeaderText="Weight CBM" InsertVisible="False"
+                                                                ReadOnly="True" SortExpression="WtInCBM" />
+                                                            <asp:BoundField DataField="WtInTon" HeaderText="Weight Ton" InsertVisible="False"
+                                                                ReadOnly="True" SortExpression="WtInTon" />
+                                                             <asp:BoundField DataField="ManifestRate" HeaderText="Manifest" InsertVisible="False"
+                                                                ReadOnly="True" SortExpression="ManifestRate" />
+                                                            <asp:TemplateField HeaderText="Charged" SortExpression="ActualRate">
+                                                                <ItemTemplate>
+                                                                    <asp:TextBox ID="txtCharged" runat="server" Text='<%# Bind("ActualRate") %>' BorderStyle="None" 
+                                                                    OnTextChanged="TextBox_TextChanged" Enabled='<%# Eval("ChargedEditable").ToString() == "True" %>'></asp:TextBox>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Refund" SortExpression="RefundAmount">
+                                                                <ItemTemplate>
+                                                                    <asp:TextBox ID="txtRefund" runat="server" Text='<%# Bind("RefundAmount") %>' OnTextChanged="TextBox_TextChanged"
+                                                                        BorderStyle="None" Enabled='<%# Eval("RefundEditable").ToString() == "True" %>'></asp:TextBox>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Brokerage Basic" SortExpression="BrokerageBasic">
+                                                                <ItemTemplate>
+                                                                    <asp:TextBox ID="txtBrokerageBasic" runat="server" Text='<%# Bind("BrokerageBasic") %>' OnTextChanged="TextBox_TextChanged"
+                                                                        BorderStyle="None" Enabled='<%# Eval("BrokerageEditable").ToString() == "True" %>'></asp:TextBox>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField>
-                                                                <HeaderStyle CssClass="gridviewheader" />
+                                                                <%--<HeaderStyle CssClass="gridviewheader" />--%>
                                                                 <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                                                 <ItemTemplate>
-                                                                    <asp:ImageButton ID="btnRemove" runat="server" CommandName="Remove" ImageUrl="~/Images/remove.png"
+                                                                    <asp:ImageButton ID="btnRemove" runat="server" OnClick="btnRemove_Click" ImageUrl="~/Images/remove.png"
                                                                         Height="16" Width="16" />
+                                                                    <asp:HiddenField ID="hdnBookingChargeId" runat="server" Value='<%# Eval("BookingChargeId") %>' />
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                         </Columns>
+                                                        <RowStyle ForeColor="#000066" />
+                                                        <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                                                        <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                                                        <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
                                                     </asp:GridView>
                                                 </td>
                                             </tr>
@@ -364,10 +271,10 @@
                             </tr>
                             <tr>
                                 <td colspan="10">
-                                    <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="vgSave" />
+                                    <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" 
+                                        onclick="btnSave_Click" />
                                     &nbsp;&nbsp;
-                                    <asp:Button ID="btnBack" runat="server" CssClass="button" Text="Back"
-                                        OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
+                                    <asp:Button ID="btnBack" runat="server" CssClass="button" Text="Back" OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
                                     &nbsp;&nbsp;
                                     <asp:Button ID="btnLock" runat="server" Text="Save/Locked" ValidationGroup="vgSave" />
                                     <br />

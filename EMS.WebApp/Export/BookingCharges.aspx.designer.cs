@@ -22,6 +22,24 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.UpdatePanel upCharges;
         
         /// <summary>
+        /// txtBookingNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBookingNo;
+        
+        /// <summary>
+        /// txtBookingDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBookingDate;
+        
+        /// <summary>
         /// txtPOL control.
         /// </summary>
         /// <remarks>
@@ -58,13 +76,13 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtContainers;
         
         /// <summary>
-        /// txtFreight control.
+        /// txtFreightPayableAt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFreight;
+        protected global::EMS.WebApp.CustomControls.AC_Port txtFreightPayableAt;
         
         /// <summary>
         /// rdblBorkerage control.
@@ -91,25 +109,25 @@ namespace EMS.WebApp.Export {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBrokeragePayableTo;
+        protected global::EMS.WebApp.CustomControls.AC_Brockerage txtBrokeragePayableTo;
         
         /// <summary>
-        /// rdblRefund control.
+        /// rdblRefundPayable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdblRefund;
+        protected global::System.Web.UI.WebControls.RadioButtonList rdblRefundPayable;
         
         /// <summary>
-        /// TextBox1 control.
+        /// txtRefundPayableTo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::EMS.WebApp.CustomControls.AC_Refund txtRefundPayableTo;
         
         /// <summary>
         /// txtRemarks control.
@@ -139,6 +157,15 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtRateReference;
         
         /// <summary>
+        /// rfvRateReference control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvRateReference;
+        
+        /// <summary>
         /// ddlRateType control.
         /// </summary>
         /// <remarks>
@@ -166,40 +193,22 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.HiddenField hdnFilePath;
         
         /// <summary>
-        /// ddlFChargeName control.
+        /// ddlSlot control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlFChargeName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlSlot;
         
         /// <summary>
-        /// rfvChargeName control.
+        /// rfvSlot control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvChargeName;
-        
-        /// <summary>
-        /// ddlApplicable control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlApplicable;
-        
-        /// <summary>
-        /// ddlCurrency control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCurrency;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSlot;
         
         /// <summary>
         /// ddlPpCc control.
@@ -209,78 +218,6 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlPpCc;
-        
-        /// <summary>
-        /// ddlSizeType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSizeType;
-        
-        /// <summary>
-        /// ddlCbm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCbm;
-        
-        /// <summary>
-        /// txtWeightTon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::EMS.WebApp.CustomControls.CustomTextBox txtWeightTon;
-        
-        /// <summary>
-        /// txtManifest control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::EMS.WebApp.CustomControls.CustomTextBox txtManifest;
-        
-        /// <summary>
-        /// txtCharged control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::EMS.WebApp.CustomControls.CustomTextBox txtCharged;
-        
-        /// <summary>
-        /// txtRefund control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::EMS.WebApp.CustomControls.CustomTextBox txtRefund;
-        
-        /// <summary>
-        /// txtBrokerageBasic control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::EMS.WebApp.CustomControls.CustomTextBox txtBrokerageBasic;
-        
-        /// <summary>
-        /// btnAdd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdd;
         
         /// <summary>
         /// gvwCharges control.

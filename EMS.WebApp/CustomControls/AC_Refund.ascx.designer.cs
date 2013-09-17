@@ -7,36 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EMS.WebApp {
+namespace EMS.WebApp.CustomControls {
     
     
-    public partial class Error {
+    public partial class AC_Refund {
         
         /// <summary>
-        /// ltlTitle control.
+        /// txtRefund control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltlTitle;
+        protected global::System.Web.UI.WebControls.TextBox txtRefund;
         
         /// <summary>
-        /// lblErrMessage control.
+        /// AutoRefund control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrMessage;
-        
-        /// <summary>
-        /// AC_CHA1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::EMS.WebApp.CustomControls.AC_CHA AC_CHA1;
+        protected global::AjaxControlToolkit.AutoCompleteExtender AutoRefund;
     }
 }

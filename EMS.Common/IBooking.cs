@@ -7,7 +7,7 @@ namespace EMS.Common
 {
     public interface IBooking : ICommon
     {
-        int BookingID { get; set; }
+        long BookingID { get; set; }
         bool Action { get; set; }
         string NVOCC { get; set; }
         string FPOD { get; set; }
@@ -48,6 +48,23 @@ namespace EMS.Common
         int ServicesID { get; set; }
         string Services { get; set; }
         int LinerID { get; set; }
-
+        
+        string PpCc { get; set; }
+        string Containers { get; set; }
+        int FreightPayableId { get; set; }
+        string FreightPayableName { get; set; }
+        bool BrokeragePayable { get; set; }
+        decimal BrokeragePercentage { get; set; }
+        int BrokeragePayableId { get; set; }
+        string BrokeragePayableName { get; set; }
+        bool RefundPayable { get; set; }
+        int RefundPayableId { get; set; }
+        string RefundPayableName { get; set; }
+        string ExportRemarks { get; set; }
+        string RateReference { get; set; }
+        string RateType { get; set; }
+        string UploadPath { get; set; }
+        int SlotOperatorId { get; set; }
+        string Shipper { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace EMS.Entity
 {
     public class BookingEntity : IBooking
     {
-        public int BookingID
+        public long BookingID
         {
             get;
             set;
@@ -303,17 +303,43 @@ namespace EMS.Entity
 
         }
 
+        public string PpCc { get; set; }
+
+        public string Containers { get; set; }
+
+        public int FreightPayableId { get; set; }
+        public string FreightPayableName { get; set; }
+
+        public bool BrokeragePayable { get; set; }
+
+        public decimal BrokeragePercentage { get; set; }
+
+        public int BrokeragePayableId { get; set; }
+
+        public string BrokeragePayableName { get; set; }
+
+        public bool RefundPayable { get; set; }
+
+        public int RefundPayableId { get; set; }
+        public string RefundPayableName { get; set; }
+
+        public string ExportRemarks { get; set; }
+
+        public string RateReference { get; set; }
+        public string RateType { get; set; }
+        public string UploadPath { get; set; }
+        public int SlotOperatorId { get; set; }
+        public string Shipper { get; set; }
+
 
         public BookingEntity(DataTableReader reader)
         {
-            this.BookingID = Convert.ToInt32(reader["pk_BookingID"]);
+            this.BookingID = Convert.ToInt64(reader["pk_BookingID"]);
             //this.AgentName = Convert.ToString(reader["AgentName"]);
             this.LocationName = Convert.ToString(reader["LocationName"]);
-
             this.BookingNo = Convert.ToString(reader["BookingNo"]);
             this.BookingDate = Convert.ToDateTime(reader["BookingDate"]);
             this.LinerID = Convert.ToInt32(reader["fk_NVOCCID"]);
-
             this.NVOCC = Convert.ToString(reader["LineName"]);
             this.FPOD = Convert.ToString(reader["FPortName"]);
             this.FPODID = Convert.ToString(reader["FK_FPOD"]);
@@ -332,7 +358,7 @@ namespace EMS.Entity
             this.MainLineVoyageID = Convert.ToInt32(reader["fk_VoyageID"]);
             this.RefBookingNo = Convert.ToString(reader["RefBookingNo"]);
             this.RefBookingDate = Convert.ToDateTime(reader["RefBookingDate"]);
-            this.HazCargo = Convert.ToBoolean(reader["HazCargo"]); 
+            this.HazCargo = Convert.ToBoolean(reader["HazCargo"]);
             this.UNO = Convert.ToString(reader["UNO"]);
             this.IMO = Convert.ToString(reader["IMO"]);
             this.Commodity = Convert.ToString(reader["Commodity"]);
@@ -353,6 +379,93 @@ namespace EMS.Entity
                 this.TempMax = Convert.ToDecimal(reader["TempMax"]);
             if (!String.IsNullOrEmpty(Convert.ToString(reader["TempMin"])))
                 this.TempMin = Convert.ToDecimal(reader["TempMin"]);
+
+
+
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["PpCc"])))
+                this.PpCc = Convert.ToString(reader["PpCc"]);
+            else
+                this.PpCc = string.Empty;
+
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["Containers"])))
+                this.Containers = Convert.ToString(reader["Containers"]);
+            else
+                this.Containers = string.Empty;
+
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["FreightPayableId"])))
+                this.FreightPayableId = Convert.ToInt32(reader["FreightPayableId"]);
+            else
+                this.FreightPayableId = 0;
+
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["FreightPayableName"])))
+                this.FreightPayableName = Convert.ToString(reader["FreightPayableName"]);
+            else
+                this.FreightPayableName = string.Empty;
+
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["BrokeragePayable"])))
+                this.BrokeragePayable = Convert.ToBoolean(reader["BrokeragePayable"]);
+            else
+                this.BrokeragePayable = false;
+
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["BrokeragePercentage"])))
+                this.BrokeragePercentage = Convert.ToDecimal(reader["BrokeragePercentage"]);
+            else
+                this.BrokeragePercentage = 0;
+
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["BrokeragePayableId"])))
+                this.BrokeragePayableId = Convert.ToInt32(reader["BrokeragePayableId"]);
+            else
+                this.BrokeragePayableId = 0;
+
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["BrokeragePayableName"])))
+                this.BrokeragePayableName = Convert.ToString(reader["BrokeragePayableName"]);
+            else
+                this.BrokeragePayableName = string.Empty;
+
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["RefundPayable"])))
+                this.RefundPayable = Convert.ToBoolean(reader["RefundPayable"]);
+            else
+                this.RefundPayable = false;
+
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["RefundPayableId"])))
+                this.RefundPayableId = Convert.ToInt32(reader["RefundPayableId"]);
+            else
+                this.RefundPayableId = 0;
+
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["RefundPayableName"])))
+                this.RefundPayableName = Convert.ToString(reader["RefundPayableName"]);
+            else
+                this.RefundPayableName = string.Empty;
+
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["ExportRemarks"])))
+                this.ExportRemarks = Convert.ToString(reader["ExportRemarks"]);
+            else
+                this.ExportRemarks = string.Empty;
+
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["RateReference"])))
+                this.RateReference = Convert.ToString(reader["RateReference"]);
+            else
+                this.RateReference = string.Empty;
+
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["RateType"])))
+                this.RateType = Convert.ToString(reader["RateType"]);
+            else
+                this.RateType = string.Empty;
+
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["UploadPath"])))
+                this.UploadPath = Convert.ToString(reader["UploadPath"]);
+            else
+                this.UploadPath = string.Empty;
+
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["SlotOperatorId"])))
+                this.SlotOperatorId = Convert.ToInt32(reader["SlotOperatorId"]);
+            else
+                this.SlotOperatorId = 0;
+
+            if (!String.IsNullOrEmpty(Convert.ToString(reader["Shipper"])))
+                this.Shipper = Convert.ToString(reader["Shipper"]);
+            else
+                this.Shipper = string.Empty;
         }
     }
 }

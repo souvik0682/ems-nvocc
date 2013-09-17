@@ -171,6 +171,196 @@ namespace EMS.DAL
             return dquery.GetTables();
         }
 
+        //SA Souvik
+        public static IBooking GetBookingByBookingId(int BookingId)
+        {
+            string strExecution = "[exp].[uspGetBookingByBookingId]";
+            IBooking objBooking = null;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@BookingID", BookingId);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    objBooking = new BookingEntity(reader);
+                }
+                reader.Close();
+            }
+            return objBooking;
+        }
+
+        public static List<IBookingCharges> GetBookingChargesForAdd(int BookingId)
+        {
+            List<IBookingCharges> lstCharge = new List<IBookingCharges>();
+            string strExecution = "[exp].[usp_GetBookingChg]";
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@BookingID", BookingId);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    IBookingCharges objCharge = new BookingChargesEntity(reader);
+                    lstCharge.Add(objCharge);
+                }
+                reader.Close();
+            }
+
+            return lstCharge;
+        }
+
+        public static List<IBookingCharges> GetBookingChargesForEdit(int BookingId)
+        {
+            List<IBookingCharges> lstCharge = new List<IBookingCharges>();
+            string strExecution = "[exp].[usp_GetBookingChgForEdit]";
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@BookingID", BookingId);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    IBookingCharges objCharge = new BookingChargesEntity(reader);
+                    lstCharge.Add(objCharge);
+                }
+                reader.Close();
+            }
+
+            return lstCharge;
+        }
+
+        public static DataTable GetSlotOperators()
+        {
+            string ProcName = "[exp].[usp_GetSlotOperators]";
+            DbQuery dquery = new DbQuery(ProcName);
+
+            return dquery.GetTable();
+        }
+
+        public static string GetBrokeragePayableId(string BrokeragePayable)
+        {
+            string strExecution = "[exp].[usp_GetBrokeragePayableId]";
+            string BrokeragePayableId = string.Empty;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@BrokeragePayable", 50, BrokeragePayable);
+                BrokeragePayableId = Convert.ToString(oDq.GetScalar());
+            }
+            return BrokeragePayableId;
+        }
+
+        public static string GetRefundPayableId(string RefundPayable)
+        {
+            string strExecution = "[exp].[usp_GetRefundPayableId]";
+            string RefundPayableId = string.Empty;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@RefundPayable", 50, RefundPayable);
+                RefundPayableId = Convert.ToString(oDq.GetScalar());
+            }
+            return RefundPayableId;
+        }
+
+        public static void UpdateBooking(IBooking Booking)
+        {
+            string strExecution = "[exp].[usp_UpdateBookingFromCharges]";
+            long bookingId = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@BookingId", Booking.BookingID);
+
+                oDq.AddBooleanParam("@BrokeragePayable", Booking.BrokeragePayable);
+                oDq.AddDecimalParam("@BrokeragePercent", 12, 2, Booking.BrokeragePercentage);
+                oDq.AddIntegerParam("@BrokeragePayableId", Booking.BrokeragePayableId);
+                oDq.AddBooleanParam("@RefundPayable", Booking.RefundPayable);
+                oDq.AddIntegerParam("@RefundPayableId", Booking.RefundPayableId);
+                oDq.AddVarcharParam("@ExportRemarks", 300, Booking.ExportRemarks);
+                oDq.AddVarcharParam("@RateReference", 50, Booking.RateReference);
+                oDq.AddVarcharParam("@RateType", 20, Booking.RateType);
+                oDq.AddVarcharParam("@UploadFilePath", 200, Booking.UploadPath);
+                oDq.AddIntegerParam("@SlotOperatorId", Booking.SlotOperatorId);
+                oDq.AddVarcharParam("@Shipper", 300, Booking.Shipper);
+                oDq.AddVarcharParam("@PpCc", 10, Booking.PpCc);
+                oDq.AddIntegerParam("@ModifiedBy", Booking.ModifiedBy);
+                oDq.AddDateTimeParam("@ModifiedOn", Booking.ModifiedOn);
+
+                bookingId = Convert.ToInt64(oDq.GetScalar());
+            }
+        }
+
+        public static void InsertBookingCharges(List<IBookingCharges> BookingCharges)
+        {
+            if (!ReferenceEquals(BookingCharges, null))
+            {
+                foreach (IBookingCharges charges in BookingCharges)
+                {
+                    string strExecution = "[exp].[usp_BookingCharge_Insert]";
+                    long bookingChargeId = 0;
+
+                    using (DbQuery oDq = new DbQuery(strExecution))
+                    {
+                        //oDq.AddBigIntegerParam("@BookingChargeId", charges.BookingChargeId);
+                        oDq.AddBigIntegerParam("@BookingId", charges.BookingId);
+                        oDq.AddIntegerParam("@ChargeId", charges.ChargeId);
+                        oDq.AddIntegerParam("@ChargeRateId", charges.ChargeRateId);
+                        oDq.AddIntegerParam("@CurrencyId", charges.CurrencyId);
+                        oDq.AddIntegerParam("@ContainerTypeId", charges.ContainerTypeId);
+                        oDq.AddBooleanParam("@ChargeApplicable", charges.ChargeApplicable);
+                        oDq.AddVarcharParam("@Size", 2, charges.Size);
+                        oDq.AddDecimalParam("@WtInCBM", 12, 2, charges.WtInCBM);
+                        oDq.AddDecimalParam("@WtInTon", 12, 2, charges.WtInTon);
+                        oDq.AddDecimalParam("@ActualRate", 12, 2, charges.ActualRate);
+                        oDq.AddDecimalParam("@ManifestRate", 12, 2, charges.ManifestRate);
+                        oDq.AddDecimalParam("@BrokerageBasic", 12, 2, charges.BrokerageBasic);
+                        oDq.AddDecimalParam("@RefundAmount", 12, 2, charges.RefundAmount);
+                        oDq.AddBooleanParam("@ChargeStatus", charges.ChargeStatus);
+
+                        bookingChargeId = Convert.ToInt64(oDq.GetScalar());
+                    }
+                }
+            }
+        }
+
+        public static void UpdateBookingCharges(List<IBookingCharges> BookingCharges)
+        {
+            if (!ReferenceEquals(BookingCharges, null))
+            {
+                foreach (IBookingCharges charges in BookingCharges)
+                {
+                    string strExecution = "[exp].[usp_BookingCharge_Update]";
+                    long bookingChargeId = 0;
+
+                    using (DbQuery oDq = new DbQuery(strExecution))
+                    {
+                        oDq.AddBigIntegerParam("@BookingChargeId", charges.BookingChargeId);
+                        oDq.AddBigIntegerParam("@BookingId", charges.BookingId);
+                        oDq.AddIntegerParam("@ChargeId", charges.ChargeId);
+                        oDq.AddIntegerParam("@ChargeRateId", charges.ChargeRateId);
+                        oDq.AddIntegerParam("@CurrencyId", charges.CurrencyId);
+                        oDq.AddIntegerParam("@ContainerTypeId", charges.ContainerTypeId);
+                        oDq.AddBooleanParam("@ChargeApplicable", charges.ChargeApplicable);
+                        oDq.AddVarcharParam("@Size", 2, charges.Size);
+                        oDq.AddDecimalParam("@WtInCBM", 12, 2, charges.WtInCBM);
+                        oDq.AddDecimalParam("@WtInTon", 12, 2, charges.WtInTon);
+                        oDq.AddDecimalParam("@ActualRate", 12, 2, charges.ActualRate);
+                        oDq.AddDecimalParam("@ManifestRate", 12, 2, charges.ManifestRate);
+                        oDq.AddDecimalParam("@BrokerageBasic", 12, 2, charges.BrokerageBasic);
+                        oDq.AddDecimalParam("@RefundAmount", 12, 2, charges.RefundAmount);
+                        oDq.AddBooleanParam("@ChargeStatus", charges.ChargeStatus);
+
+                        bookingChargeId = Convert.ToInt64(oDq.GetScalar());
+                    }
+                }
+            }
+        }
+        //EA Souvik
         public static void DeactivateAllContainersAgainstBookingId(int BookingId)
         {
             string strExecution = "[exp].[spBookingContainersUpdate]";

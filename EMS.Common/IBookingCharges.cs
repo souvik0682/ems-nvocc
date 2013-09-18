@@ -29,5 +29,6 @@ namespace EMS.Common
         bool ChargedEditable { get; set; }
         bool RefundEditable { get; set; }
         bool BrokerageEditable { get; set; }
+        bool ManifestEditabe { get; set; }
     }
 }

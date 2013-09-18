@@ -92,7 +92,7 @@ namespace EMS.WebApp.Export
 
         void txtRefundPayableTo_TextChanged(object sender, EventArgs e)
         {
-            string payableTo = ((TextBox)txtBrokeragePayableTo.FindControl("txtRefund")).Text.Trim();
+            string payableTo = ((TextBox)txtRefundPayableTo.FindControl("txtRefund")).Text.Trim();
 
             if (payableTo != string.Empty)
             {
@@ -265,6 +265,7 @@ namespace EMS.WebApp.Export
                 TextBox txtCharged = (TextBox)thisGridViewRow.FindControl("txtCharged");
                 TextBox txtRefund = (TextBox)thisGridViewRow.FindControl("txtRefund");
                 TextBox txtBrokerageBasic = (TextBox)thisGridViewRow.FindControl("txtBrokerageBasic");
+                TextBox txtManifest = (TextBox)thisGridViewRow.FindControl("txtManifest");
 
                 lstData = ViewState["DataSource"] as List<IBookingCharges>;
                 lstData.Where(d => d.BookingChargeId == Convert.ToInt32(hdnBookingChargeId.Value))
@@ -272,6 +273,7 @@ namespace EMS.WebApp.Export
                     {
                         d.BookingId = BookingId;
                         d.ChargeApplicable = Convert.ToBoolean(ddlApplicable.SelectedValue);
+                        d.ManifestRate = Convert.ToDecimal(txtManifest.Text);
                         d.ActualRate = Convert.ToDecimal(txtCharged.Text);
                         d.RefundAmount = Convert.ToDecimal(txtRefund.Text);
                         d.BrokerageBasic = Convert.ToDecimal(txtBrokerageBasic.Text);

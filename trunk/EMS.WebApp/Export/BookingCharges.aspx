@@ -6,7 +6,6 @@
 <%@ Register Src="~/CustomControls/AC_Brockerage.ascx" TagName="AC_Brockerage" TagPrefix="uc1" %>
 <%@ Register Src="~/CustomControls/AC_Refund.ascx" TagName="AC_Refund" TagPrefix="uc2" %>
 <%@ Register Src="~/CustomControls/AC_Port.ascx" TagName="AC_Port" TagPrefix="uc3" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
@@ -34,7 +33,7 @@
                 <asp:UpdatePanel ID="upCharges" runat="server" UpdateMode="Always">
                     <ContentTemplate>
                         <table style="width: 100%;">
-                        <tr>
+                            <tr>
                                 <td>
                                     Booking No
                                 </td>
@@ -181,9 +180,8 @@
                                         <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                     </asp:DropDownList>
                                     <br />
-                                    <asp:RequiredFieldValidator ID="rfvSlot" runat="server" CssClass="errormessage"
-                                        ErrorMessage="This field is required" ControlToValidate="ddlSlot" InitialValue="0"
-                                        ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="rfvSlot" runat="server" CssClass="errormessage" ErrorMessage="This field is required"
+                                        ControlToValidate="ddlSlot" InitialValue="0" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -210,7 +208,7 @@
                                                         <FooterStyle BackColor="White" ForeColor="#000066" />
                                                         <Columns>
                                                             <asp:BoundField DataField="ChargeName" HeaderText="Charge Name" InsertVisible="False"
-                                                                ReadOnly="True" SortExpression="ChargeName" />
+                                                                ReadOnly="True" SortExpression="ChargeName" HeaderStyle-Width="300" />
                                                             <asp:TemplateField HeaderText="Applicable">
                                                                 <ItemTemplate>
                                                                     <asp:DropDownList ID="ddlApplicable" runat="server">
@@ -219,41 +217,49 @@
                                                                     </asp:DropDownList>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:BoundField DataField="CurrencyName" HeaderText="Currency" InsertVisible="False" ReadOnly="True" />
-                                                            <asp:BoundField DataField="Size" HeaderText="Size" InsertVisible="False"
-                                                                ReadOnly="True" SortExpression="Size" />
+                                                            <asp:BoundField DataField="CurrencyName" HeaderText="Currency" InsertVisible="False"
+                                                                ReadOnly="True" />
+                                                            <asp:BoundField DataField="Size" HeaderText="Size" InsertVisible="False" ReadOnly="True"
+                                                                SortExpression="Size" />
                                                             <asp:BoundField DataField="ContainerType" HeaderText="Type" InsertVisible="False"
                                                                 ReadOnly="True" SortExpression="ContainerType" />
-                                                            <asp:BoundField DataField="WtInCBM" HeaderText="Weight CBM" InsertVisible="False"
-                                                                ReadOnly="True" SortExpression="WtInCBM" />
-                                                            <asp:BoundField DataField="WtInTon" HeaderText="Weight Ton" InsertVisible="False"
-                                                                ReadOnly="True" SortExpression="WtInTon" />
-                                                             <asp:BoundField DataField="ManifestRate" HeaderText="Manifest" InsertVisible="False"
-                                                                ReadOnly="True" SortExpression="ManifestRate" />
-                                                            <asp:TemplateField HeaderText="Charged" SortExpression="ActualRate">
+                                                            <asp:BoundField DataField="WtInCBM" HeaderText="Weight CBM" InsertVisible="False" HeaderStyle-Width="150"
+                                                                ReadOnly="True" SortExpression="WtInCBM" ItemStyle-HorizontalAlign="Right"/>
+                                                            <asp:BoundField DataField="WtInTon" HeaderText="Weight Ton" InsertVisible="False" HeaderStyle-Width="150"
+                                                                ReadOnly="True" SortExpression="WtInTon" ItemStyle-HorizontalAlign="Right"  />
+                                                            <asp:TemplateField HeaderText="Manifest" SortExpression="ManifestRate" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
-                                                                    <asp:TextBox ID="txtCharged" runat="server" Text='<%# Bind("ActualRate") %>' BorderStyle="None" 
-                                                                    OnTextChanged="TextBox_TextChanged" Enabled='<%# Eval("ChargedEditable").ToString() == "True" %>'></asp:TextBox>
+                                                                    <cc2:CustomTextBox ID="txtManifest" runat="server" Text='<%# Bind("ManifestRate") %>' Width="80"
+                                                                        BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"
+                                                                        MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("ManifestEditabe").ToString() == "True" %>'></cc2:CustomTextBox>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Refund" SortExpression="RefundAmount">
+                                                            <asp:TemplateField HeaderText="Charged" SortExpression="ActualRate" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
-                                                                    <asp:TextBox ID="txtRefund" runat="server" Text='<%# Bind("RefundAmount") %>' OnTextChanged="TextBox_TextChanged"
-                                                                        BorderStyle="None" Enabled='<%# Eval("RefundEditable").ToString() == "True" %>'></asp:TextBox>
+                                                                    <cc2:CustomTextBox ID="txtCharged" runat="server" Text='<%# Bind("ActualRate") %>' Width="80"
+                                                                        BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"
+                                                                        MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("ChargedEditable").ToString() == "True" %>'></cc2:CustomTextBox>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Brokerage Basic" SortExpression="BrokerageBasic">
+                                                            <asp:TemplateField HeaderText="Refund" SortExpression="RefundAmount" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
-                                                                    <asp:TextBox ID="txtBrokerageBasic" runat="server" Text='<%# Bind("BrokerageBasic") %>' OnTextChanged="TextBox_TextChanged"
-                                                                        BorderStyle="None" Enabled='<%# Eval("BrokerageEditable").ToString() == "True" %>'></asp:TextBox>
+                                                                    <cc2:CustomTextBox ID="txtRefund" runat="server" Text='<%# Bind("RefundAmount") %>' Width="80"
+                                                                        BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"
+                                                                        MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("RefundEditable").ToString() == "True" %>'></cc2:CustomTextBox>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField>
-                                                                <%--<HeaderStyle CssClass="gridviewheader" />--%>
+                                                            <asp:TemplateField HeaderText="Brokerage Basic" SortExpression="BrokerageBasic" HeaderStyle-Width="80">
+                                                                <ItemTemplate>
+                                                                    <cc2:CustomTextBox ID="txtBrokerageBasic" runat="server" Text='<%# Bind("BrokerageBasic") %>' Width="100"
+                                                                        BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"
+                                                                        MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("BrokerageEditable").ToString() == "True" %>'></cc2:CustomTextBox>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Remove">
                                                                 <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                                                 <ItemTemplate>
                                                                     <asp:ImageButton ID="btnRemove" runat="server" OnClick="btnRemove_Click" ImageUrl="~/Images/remove.png"
-                                                                        Height="16" Width="16" />
+                                                                        Height="16" Width="16" OnClientClick="javascript:return confirm('Are you sure about delete?');" />
                                                                     <asp:HiddenField ID="hdnBookingChargeId" runat="server" Value='<%# Eval("BookingChargeId") %>' />
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
@@ -271,12 +277,11 @@
                             </tr>
                             <tr>
                                 <td colspan="10">
-                                    <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" 
-                                        onclick="btnSave_Click" />
+                                    <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" OnClick="btnSave_Click" />
                                     &nbsp;&nbsp;
                                     <asp:Button ID="btnBack" runat="server" CssClass="button" Text="Back" OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
                                     &nbsp;&nbsp;
-                                    <asp:Button ID="btnLock" runat="server" Text="Save/Locked" ValidationGroup="vgSave" />
+                                    <%--<asp:Button ID="btnLock" runat="server" Text="Save/Locked" ValidationGroup="vgSave" />--%>
                                     <br />
                                     <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
                                 </td>

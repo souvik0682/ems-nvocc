@@ -32,6 +32,7 @@ namespace EMS.Entity
         public bool ChargedEditable { get; set; }
         public bool RefundEditable { get; set; }
         public bool BrokerageEditable { get; set; }
+        public bool ManifestEditabe { get; set; }
 
         public int CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
@@ -101,12 +102,20 @@ namespace EMS.Entity
                     ManifestRate = Convert.ToDecimal(reader["ManifestRate"]);
 
             if (ColumnExists(reader, "RefundAmount"))
+            {
                 if (reader["RefundAmount"] != DBNull.Value)
                     RefundAmount = Convert.ToDecimal(reader["RefundAmount"]);
+            }
+            else
+                RefundAmount = Convert.ToDecimal("0.00");
 
             if (ColumnExists(reader, "BrokerageBasic"))
+            {
                 if (reader["BrokerageBasic"] != DBNull.Value)
                     BrokerageBasic = Convert.ToDecimal(reader["BrokerageBasic"]);
+            }
+            else
+                BrokerageBasic = Convert.ToDecimal("0.00");
 
             if (ColumnExists(reader, "ChargeStatus"))
             {
@@ -118,6 +127,16 @@ namespace EMS.Entity
             else
             {
                 ChargeStatus = true;
+            }
+
+            RefundEditable = true;
+            ChargedEditable = true;
+            BrokerageEditable = true;
+
+            if (ColumnExists(reader, "RateChangeable"))
+            {
+                if (reader["RateChangeable"] != DBNull.Value)
+                    ManifestEditabe = Convert.ToBoolean(reader["RateChangeable"]);
             }
         }
 

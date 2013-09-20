@@ -255,14 +255,14 @@
                                                                         MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("BrokerageEditable").ToString() == "True" %>'></cc2:CustomTextBox>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Remove">
+<%--                                                            <asp:TemplateField HeaderText="Remove">
                                                                 <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                                                 <ItemTemplate>
                                                                     <asp:ImageButton ID="btnRemove" runat="server" OnClick="btnRemove_Click" ImageUrl="~/Images/remove.png"
                                                                         Height="16" Width="16" OnClientClick="javascript:return confirm('Are you sure about delete?');" />
                                                                     <asp:HiddenField ID="hdnBookingChargeId" runat="server" Value='<%# Eval("BookingChargeId") %>' />
                                                                 </ItemTemplate>
-                                                            </asp:TemplateField>
+                                                            </asp:TemplateField>--%>
                                                         </Columns>
                                                         <RowStyle ForeColor="#000066" />
                                                         <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
@@ -279,7 +279,9 @@
                                 <td colspan="10">
                                     <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" OnClick="btnSave_Click" />
                                     &nbsp;&nbsp;
-                                    <asp:Button ID="btnBack" runat="server" CssClass="button" Text="Back" OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
+                                    <asp:Button ID="btnBack" runat="server" CssClass="button" Text="Back" 
+                                        OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" 
+                                        onclick="btnBack_Click" />
                                     &nbsp;&nbsp;
                                     <%--<asp:Button ID="btnLock" runat="server" Text="Save/Locked" ValidationGroup="vgSave" />--%>
                                     <br />

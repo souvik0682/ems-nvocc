@@ -29,12 +29,18 @@ namespace EMS.WebApp.Export
 
             if (!IsPostBack)
             {
-                //if (!ReferenceEquals(Request.QueryString["BookingId"], null))
+                //if (!ReferenceEquals(Request.QueryString["id"], null))
                 //{
+                //    Int32 BookingID = 0;
+                //    Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["id"].ToString()), out BookingID);
+                //    hdnBookingID.Value = _locId.ToString();
+                //}
+                if (!ReferenceEquals(Request.QueryString["Id"], null))
+                {
                     int BookingId = 0;
-                    //Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["BookingId"].ToString()), out BookingId);
+                    Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["Id"].ToString()), out BookingId);
 
-                    BookingId = 1; //For testing
+                    //BookingId = 1; //For testing
 
                     if (BookingId > 0)
                     {
@@ -60,7 +66,7 @@ namespace EMS.WebApp.Export
                     {
                         ViewState["BOOKINGID"] = null;
                     }
-                //}
+                }
             }
             txtBrokeragePayableTo.TextChanged += new EventHandler(txtBrokeragePayableTo_TextChanged);
             txtRefundPayableTo.TextChanged += new EventHandler(txtRefundPayableTo_TextChanged);
@@ -186,7 +192,10 @@ namespace EMS.WebApp.Export
             }
         }
 
-
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Export/Booking.aspx");
+        }
 
         private void RetriveParameters()
         {
@@ -227,7 +236,7 @@ namespace EMS.WebApp.Export
             }
         }
 
-        private void SaveBookingHeaderDetails(long BookingId)
+        private void SaveBookingHeaderDetails(int BookingId)
         {
             IBooking objBooking = new BookingEntity();
 
@@ -268,7 +277,7 @@ namespace EMS.WebApp.Export
                 TextBox txtManifest = (TextBox)thisGridViewRow.FindControl("txtManifest");
 
                 lstData = ViewState["DataSource"] as List<IBookingCharges>;
-                lstData.Where(d => d.BookingChargeId == Convert.ToInt32(hdnBookingChargeId.Value))
+                lstData.Where(d => d.BookingChargeId == Convert.ToInt32(hdnBookingChargeId.Value) || d.BookingChargeId == 0)
                     .Select(d =>
                     {
                         d.BookingId = BookingId;
@@ -354,10 +363,20 @@ namespace EMS.WebApp.Export
         {
             int bookingId = Convert.ToInt32(ViewState["BOOKINGID"]);
             bool isEdit = Convert.ToBoolean(ViewState["ISEDIT"]);
+            bool isEditCharges = false;
 
             if (bookingId > 0)
             {
                 List<IBookingCharges> objData = new List<IBookingCharges>();
+
+        
+                DataSet ds = new DataSet();
+                BookingBLL oBookChgBLL = new BookingBLL();
+                ds = oBookChgBLL.GetBookingChargesList(bookingId);
+                if (ds.Tables[0].Rows.Count>0)
+                    isEditCharges = true;
+                else
+                    isEditCharges = false;
 
                 if (!ReferenceEquals(ViewState["DataSource"], null) && ((List<IBookingCharges>)(ViewState["DataSource"])).Count > 0)
                 {
@@ -365,7 +384,7 @@ namespace EMS.WebApp.Export
                 }
                 else
                 {
-                    if (!isEdit)
+                    if (!isEditCharges)
                         objData = BookingBLL.GetBookingChargesForAdd(bookingId);
                     else
                         objData = BookingBLL.GetBookingChargesForEdit(bookingId); ;
@@ -396,5 +415,11 @@ namespace EMS.WebApp.Export
                 ddlSlot.DataBind();
             }
         }
+
+        private void CheckforEdit(int BookingID)
+        {
+
+        }
+
     }
 }

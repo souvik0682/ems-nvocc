@@ -157,40 +157,22 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtLine;
         
         /// <summary>
-        /// ddlVessel control.
+        /// txtVessel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlVessel;
+        protected global::System.Web.UI.WebControls.TextBox txtVessel;
         
         /// <summary>
-        /// RequiredFieldValidator2 control.
+        /// txtVoyage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
-        
-        /// <summary>
-        /// ddlVoyage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlVoyage;
-        
-        /// <summary>
-        /// revVoyage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator revVoyage;
+        protected global::System.Web.UI.WebControls.TextBox txtVoyage;
         
         /// <summary>
         /// txtPOR control.

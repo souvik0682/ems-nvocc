@@ -50,7 +50,7 @@
                                                             <td>
                                                             </td>
                                                             <td>
-                                                                Booking Date:<span class="errormessage">*</span>
+                                                                Booking Date:
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtBookingDate" runat="server" CssClass="textboxuppercase" MaxLength="15"
@@ -126,30 +126,20 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                Vessel:<span class="errormessage">*</span>
+                                                                Vessel:
                                                             </td>
-                                                            <td>
-                                                                <asp:DropDownList ID="ddlVessel" runat="server" CssClass="dropdownlist" TabIndex="4" Width="250px" >
-                                                                    <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
-                                                                </asp:DropDownList>
-                                                                <br />
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddlVessel"
-                                                                    ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
-                                                                    ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                            <td style="width: 28%;">
+                                                                <asp:TextBox ID="txtVessel" runat="server" CssClass="textboxuppercase" MaxLength="8"
+                                                                    Width="250px" TabIndex="13" Enabled="false"></asp:TextBox><br />
                                                             </td>
                                                             <td>
                                                             </td>
                                                             <td>
-                                                                Voyage:<span class="errormessage">*</span>
+                                                                Voyage:
                                                             </td>
-                                                            <td>
-                                                                <asp:DropDownList ID="ddlVoyage" runat="server" CssClass="dropdownlist" TabIndex="4" Width="250px" >
-                                                                    <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
-                                                                </asp:DropDownList>
-                                                                <br />
-                                                                <asp:RequiredFieldValidator ID="revVoyage" runat="server" ControlToValidate="ddlVoyage"
-                                                                    ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
-                                                                    ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                            <td style="width: 28%;">
+                                                                <asp:TextBox ID="txtVoyage" runat="server" CssClass="textboxuppercase" MaxLength="8"
+                                                                    Width="250px" TabIndex="13" Enabled="false"></asp:TextBox><br />
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -238,7 +228,7 @@
                                                             <td>
                                                             </td>
                                                             <td>
-                                                                Commodity:
+                                                                Commodity:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtCommodity" runat="server" CssClass="textboxuppercase" MaxLength="8"
@@ -282,7 +272,7 @@
                                                             <td>
                                                             </td>
                                                             <td style="width: 20%;">
-                                                                Net Weight:
+                                                                Net Weight:<span class="errormessage">*</span>
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtNetWt" runat="server" CssClass="textboxuppercase" MaxLength="8"

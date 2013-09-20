@@ -119,6 +119,11 @@ namespace EMS.WebApp.Export
             {
                 DeleteBooking(Convert.ToInt32(e.CommandArgument));
             }
+
+            else if (e.CommandName == "Charge")
+            {
+                RedirecToChargePage(Convert.ToInt32(e.CommandArgument));
+            }
         }
 
         protected void gvBooking_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -188,9 +193,10 @@ namespace EMS.WebApp.Export
                 else
                 {
                     btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
-                    btnStatus.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
-                    btnStatus.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
                 }
+                //btnStatus.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
+                //btnCharges.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
+                
             }
         }
 
@@ -291,7 +297,7 @@ namespace EMS.WebApp.Export
                     gvBooking.PageIndex = searchCriteria.PageIndex;
                     if (searchCriteria.PageSize > 0) gvBooking.PageSize = searchCriteria.PageSize;
 
-                    gvBooking.DataSource = BookingBLL.GetBooking(searchCriteria, 0);
+                    gvBooking.DataSource = BookingBLL.GetBooking(searchCriteria, 0, "C");
                     gvBooking.DataBind();
                 }
             }
@@ -308,6 +314,12 @@ namespace EMS.WebApp.Export
         {
             string encryptedId = GeneralFunctions.EncryptQueryString(id.ToString());
             Response.Redirect("~/Export/ManageBooking.aspx?id=" + encryptedId);
+        }
+
+        private void RedirecToChargePage(int id)
+        {
+            string encryptedId = GeneralFunctions.EncryptQueryString(id.ToString());
+            Response.Redirect("~/Export/BookingCharges.aspx?id=" + encryptedId);
         }
 
         private void BuildSearchCriteria(SearchCriteria criteria)

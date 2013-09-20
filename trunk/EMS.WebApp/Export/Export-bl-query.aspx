@@ -66,12 +66,13 @@
                         <table border="0" cellpadding="0" cellspacing="2" width="100%">
                             <tr>
                                 <td style="width: 7%;">
-                                    Booking No
+                                     B/L No. 
                                 </td>
                                 <td style="width: 5%;">
                                     <asp:HiddenField ID="hdnBLId" runat="server" Value="0" />
                                     <asp:TextBox ID="txtBlNo" runat="server" Width="130" AutoPostBack="True" onkeyup="SetContextKey();"
-                                        Enabled="true" Style="text-transform: uppercase;"></asp:TextBox>
+                                        Enabled="true" Style="text-transform: uppercase;" 
+                                        ontextchanged="txtBlNo_TextChanged"></asp:TextBox>
                                     <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx" ID="autoComplete1"
                                         TargetControlID="txtBlNo" ServicePath="~/GetLocation.asmx" ServiceMethod="GetBLNoList"
                                         MinimumPrefixLength="1" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
@@ -119,20 +120,20 @@
                                 </td>
                                 <td style="width: 5%;">
    <%--                                 <asp:TextBox ID="txtPOR" runat="server"></asp:TextBox>--%>
-                                    <asp:TextBox ID="TextBox6" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtPOR" runat="server" Width="130" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td style="width: 8%;">
                                     Vessel
                                 </td>
                                 <td style="width: 5%;">
-                                    <asp:TextBox ID="txtBookingParty" runat="server" Width="130" AutoPostBack="True"
+                                    <asp:TextBox ID="txtVessel" runat="server" Width="130" AutoPostBack="True"
                                         onkeyup="SetContextKey();" Enabled="false" Style="text-transform: uppercase;"></asp:TextBox>
                                 </td>
                                 <td style="width: 2%;">
                                     Booking Party :
                                 </td>
                                 <td style="width: 20%;">
-                                    <asp:TextBox ID="txtContainers" runat="server" Width="350" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtBookingParty" runat="server" Width="350" Enabled="false"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -140,7 +141,7 @@
                                     Booking Date :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtBLDate" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtBookingDate" runat="server" Width="130" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td style="width: 3%;">
                                     POL :
@@ -150,27 +151,27 @@
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
                             </cc1:ValidatorCalloutExtender>--%>
-                                   <asp:TextBox ID="txtBookingDate" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                   <asp:TextBox ID="txtPOL" runat="server" Width="130" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
                                     Voyage :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtPOL" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtVoyage" runat="server" Width="130" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td style="width: 11%;">
                                     Shipper :
                                 </td>
                                 <td style="width: 10%;">
-                                    <asp:TextBox ID="txtRemark" runat="server" Width="350" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtShipper" runat="server" Width="350" Enabled="false"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    B/L No.
+                                   Booking No
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="TextBox3" runat="server" Width="130"></asp:TextBox>
+                                    <asp:TextBox ID="txtBookingNo" runat="server" Width="130"></asp:TextBox>
                                 </td>
                                 <td class="style1">
                                     POD :
@@ -180,26 +181,26 @@
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
                             </cc1:ValidatorCalloutExtender>--%>
-                                    <asp:TextBox ID="txtVoyage" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtPOD" runat="server" Width="130" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
                                     Containers :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtShipmentType" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtContainer" runat="server" Width="130" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
                                     Remarks :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="TextBox4" runat="server" Width="350"></asp:TextBox>
+                                    <asp:TextBox ID="txtRemarks" runat="server" Width="350"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td>BL Date :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="TextBox5" runat="server"  Width="130"></asp:TextBox>
+                                    <asp:TextBox ID="txtBLDate" runat="server"  Width="130"></asp:TextBox>
                                 </td>
                                 <td class="style1">
                                     FPOD :
@@ -209,13 +210,13 @@
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
                             </cc1:ValidatorCalloutExtender>--%>
-                                    <asp:TextBox ID="TextBox1" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtFPOD" runat="server" Width="130" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
                                     Shipment Type :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="TextBox2" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtShipmentType" runat="server" Width="130" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
                                     <td>
@@ -276,7 +277,8 @@
                                         </div>
                                     </asp:Panel>
                                     <asp:GridView ID="gvwInvoice" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                                        BorderStyle="None" BorderWidth="0" Width="100%">
+                                        BorderStyle="None" BorderWidth="0" Width="100%" 
+                                        onrowdatabound="gvwInvoice_RowDataBound">
                                         <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
                                         <EmptyDataTemplate>
                                             No Record(s) Found</EmptyDataTemplate>
@@ -287,7 +289,7 @@
                                                 <HeaderTemplate>
                                                     Invoice Type</HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <%-- <%# Eval("InvoiceType")%>--%>
+                                                    <%# Eval("InvoiceType")%>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Location">
@@ -296,8 +298,8 @@
                                                 <HeaderTemplate>
                                                     Invoice No.</HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <%-- <a id="aInvoice" runat="server" href='<%# "ManageInvoice.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'>
-                                                        <%# Eval("InvoiceNo")%></a>--%>
+                                                     <a id="aInvoice" runat="server" href='<%# "ManageInvoice.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'>
+                                                        <%# Eval("InvoiceNo")%></a>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Location">
@@ -306,7 +308,7 @@
                                                 <HeaderTemplate>
                                                     Invoice Date</HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <%-- <%# Eval("InvoiceDate")%></a>--%>
+                                                     <%# Eval("InvoiceDate")%></a>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Address">
@@ -315,7 +317,7 @@
                                                 <HeaderTemplate>
                                                     Invoice Amount</HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <%-- <%# Eval("Ammount")%>--%>
+                                                     <%# Eval("Ammount")%>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField>
@@ -325,8 +327,8 @@
                                                     Received Amount</HeaderTemplate>
                                                 <ItemTemplate>
                                                     <%-- <asp:HiddenField ID="hdnInvID" runat="server" Value='<%# Eval("InvoiceID")%>' />
-                                                    <a href="#" runat="server" onserverclick="ShowReceivedAmt">
-                                                        <%# Eval("ReceivedAmt")%></a>--%>
+                                                    <a href="#" runat="server" onserverclick="ShowReceivedAmt">--%>
+                                                        <%# Eval("ReceivedAmt")%></a>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField>
@@ -335,8 +337,8 @@
                                                 <HeaderTemplate>
                                                     CRN Amount</HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <%--  <a id="A1" href="#" runat="server" onserverclick="ShowCreditNoteAmt">
-                                                        <%# Eval("CNAmt")%></a>--%>
+                                                    <%--  <a id="A1" href="#" runat="server" onserverclick="ShowCreditNoteAmt">--%>
+                                                        <%# Eval("CNAmt")%></a>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField>

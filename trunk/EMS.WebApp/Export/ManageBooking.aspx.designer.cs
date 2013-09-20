@@ -616,6 +616,33 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.Panel pnlContainer;
         
         /// <summary>
+        /// udpContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel udpContainer;
+        
+        /// <summary>
+        /// hdnBookingContainerID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnBookingContainerID;
+        
+        /// <summary>
+        /// hdnIndex control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnIndex;
+        
+        /// <summary>
         /// lblType control.
         /// </summary>
         /// <remarks>
@@ -676,7 +703,7 @@ namespace EMS.WebApp.Export {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNos;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtNos;
         
         /// <summary>
         /// txtWtPerCntr control.
@@ -685,16 +712,52 @@ namespace EMS.WebApp.Export {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtWtPerCntr;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtWtPerCntr;
         
         /// <summary>
-        /// btnAdd control.
+        /// btnimgSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdd;
+        protected global::System.Web.UI.WebControls.ImageButton btnimgSave;
+        
+        /// <summary>
+        /// btnimgReset control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnimgReset;
+        
+        /// <summary>
+        /// rfvType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvType;
+        
+        /// <summary>
+        /// rfvNos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNos;
+        
+        /// <summary>
+        /// rfvwt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvwt;
         
         /// <summary>
         /// gvContainer control.
@@ -704,15 +767,6 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvContainer;
-        
-        /// <summary>
-        /// btnSaveContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSaveContainer;
         
         /// <summary>
         /// btnCancelContainer control.
@@ -751,6 +805,15 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.Panel pnlTransit;
         
         /// <summary>
+        /// UpdatePanel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        
+        /// <summary>
         /// hdnPOT control.
         /// </summary>
         /// <remarks>
@@ -787,13 +850,13 @@ namespace EMS.WebApp.Export {
         protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender5;
         
         /// <summary>
-        /// AutoCompleteExtender5 control.
+        /// AutoCompleteExPOT control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.AutoCompleteExtender AutoCompleteExtender5;
+        protected global::AjaxControlToolkit.AutoCompleteExtender AutoCompleteExPOT;
         
         /// <summary>
         /// btnAddToGrid control.

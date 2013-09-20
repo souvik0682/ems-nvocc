@@ -24,6 +24,7 @@ namespace EMS.WebApp.Export
         //DataTable Dt;
 
         List<IBookingContainer> Containers = new List<IBookingContainer>();
+        List<IBookingTranshipment> Transhipments = new List<IBookingTranshipment>();
 
         #region Private Member Variables
 
@@ -40,7 +41,6 @@ namespace EMS.WebApp.Export
         protected void Page_Load(object sender, EventArgs e)
         {
             RetriveParameters();
-         
 
             if (!Page.IsPostBack)
             {
@@ -53,17 +53,18 @@ namespace EMS.WebApp.Export
                     txtTempMin.Enabled = false;
                     txtImo.Text = "ZZZ";
                     txtUno.Text = "ZZZZZ";
-                    oBookingContainers = new List<BookingContainerEntity>();
-                    BookingContainerEntity Ent = new BookingContainerEntity();
-                    oBookingContainers.Add(Ent);
-                    gvContainer.DataSource = oBookingContainers;
-                    gvContainer.DataBind();
-                    gvContainer.Rows[0].Visible = false;
+                    //oBookingContainers = new List<BookingContainerEntity>();
+                    //BookingContainerEntity Ent = new BookingContainerEntity();
+                    //oBookingContainers.Add(Ent);
+                    //gvContainer.DataSource = oBookingContainers;
+                    //gvContainer.DataBind();
+                    //gvContainer.Rows[0].Visible = false;
                 }
                 else
                 {
                     FillBooking(Convert.ToInt32(hdnBookingID.Value));
                     FillBookingContainer(Convert.ToInt32(hdnBookingID.Value));
+                    FillBookingTranshipment(Convert.ToInt32(hdnBookingID.Value));
                 }
             }
             CheckUserAccess(hdnBookingID.Value);
@@ -166,7 +167,7 @@ namespace EMS.WebApp.Export
             //oBookingBll = new BookingBLL();
             //oBookingEntity = (BookingEntity)oBookingBll.GetBooking(BookingID);
 
-            BookingEntity oBooking = (BookingEntity)BookingBLL.GetBooking(Convert.ToInt32(hdnBookingID.Value));
+            BookingEntity oBooking = (BookingEntity)BookingBLL.GetBooking(Convert.ToInt32(hdnBookingID.Value), "N");
 
             //ddlFromLocation.SelectedIndex = Convert.ToInt32(ddlFromLocation.Items.IndexOf(ddlFromLocation.Items.FindByValue(oImportHaulage.LocationFrom)));
             hdnFPOD.Value = oBooking.FPODID.ToString();
@@ -175,9 +176,12 @@ namespace EMS.WebApp.Export
             hdnPOR.Value = oBooking.PORID.ToString();
             hdnVessel.Value = oBooking.VesselID.ToString();
             hdnMainLineVessel.Value = oBooking.MainLineVesselID.ToString();
-
-            
             ddlNvocc.SelectedValue = oBooking.LinerID.ToString();
+
+            PopulateSevices(ddlNvocc.SelectedValue.ToInt(), Convert.ToInt32(hdnFPOD.Value));
+            PopulateVoyage(Convert.ToInt32(hdnVessel.Value));
+            PopulateMLVoyage(Convert.ToInt32(hdnMainLineVessel.Value));
+
             ddlService.SelectedValue = oBooking.ServicesID.ToString();
             ddlBookingParty.SelectedValue = oBooking.CustID.ToString();
             ddlLoadingVoyage.SelectedValue = oBooking.VoyageID.ToString();
@@ -195,6 +199,8 @@ namespace EMS.WebApp.Export
             txtPOR.Text = oBooking.POR.ToString();
             txtImo.Text = oBooking.IMO.ToString();
             txtUno.Text = oBooking.UNO.ToString();
+
+
             txtVessel.Text = oBooking.VesselName.ToString();
             txtMainLineVessel.Text = oBooking.MainLineVesselName.ToString();
             txtRefBookingNo.Text = oBooking.RefBookingNo.ToString();
@@ -360,6 +366,7 @@ namespace EMS.WebApp.Export
                 txtImo.Enabled = true;
             }
         }
+
         void ClearAll()
         {
             rdoBLThruEdge.SelectedValue = "Yes";
@@ -400,6 +407,12 @@ namespace EMS.WebApp.Export
             txtTempMax.Text = string.Empty;
             txtTempMin.Text = string.Empty;
             txtTransitRoute.Text = string.Empty;
+
+            ViewState["BookingCntr"] = null;
+
+            gvContainer.DataSource = null;
+            gvContainer.DataBind();
+            hdnBookingID.Value = "0";
         }
 
         protected void lnkContainerDtls_Click(object sender, EventArgs e)
@@ -514,16 +527,27 @@ namespace EMS.WebApp.Export
                     oBookingEntity.CreatedOn = DateTime.Today.Date;
                     oBookingEntity.ModifiedBy = _userId;// oUserEntity.Id;
                     oBookingEntity.ModifiedOn = DateTime.Today.Date;
-
-                    switch (oBookingBll.AddEditBooking(oBookingEntity, _CompanyId))
+                    int outBookingId = 0;
+                    switch (oBookingBll.AddEditBooking(oBookingEntity, _CompanyId, ref outBookingId))
                     {
                         case -1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00076");
                             break;
                         case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
                             ClearAll();
                             break;
-                        case 1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
-                            ClearAll();
+                        case 1:
+                            oBookingBll.DeactivateAllContainersAgainstBookingId(outBookingId);
+                            switch (AddContainers(outBookingId))
+                            {
+                                case -1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00076");
+                                    break;
+                                case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
+                                    ClearAll();
+                                    break;
+                                case 1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
+                                    ClearAll();
+                                    break;
+                            }
                             break;
                     }
                 }
@@ -534,13 +558,26 @@ namespace EMS.WebApp.Export
                     oBookingEntity.ModifiedOn = DateTime.Today.Date;
                     oBookingEntity.Action = true;
                     //
-                    switch (oBookingBll.AddEditBooking(oBookingEntity, _CompanyId))
+                    int outBookingId = 0;
+                    switch (oBookingBll.AddEditBooking(oBookingEntity, _CompanyId, ref outBookingId))
                     {
                         case -1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00076");
                             break;
                         case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
                             break;
-                        case 1: Response.Redirect("~/Export/ManageBooking.aspx");
+                        case 1: 
+                            oBookingBll.DeactivateAllContainersAgainstBookingId(outBookingId);
+                            switch (AddContainers(outBookingId))
+                            {
+                                case -1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00076");
+                                    break;
+                                case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
+                                    ClearAll();
+                                    break;
+                                case 1:
+                                    Response.Redirect("~/Export/ManageBooking.aspx");
+                                    break;
+                            }                            
                             break;
                     }
                 }
@@ -560,7 +597,7 @@ namespace EMS.WebApp.Export
 
         protected void txtPOT_TextChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         protected void txtPOD_TextChanged(object sender, EventArgs e)
@@ -577,17 +614,17 @@ namespace EMS.WebApp.Export
 
         protected void txtVessel_TextChanged(object sender, EventArgs e)
         {
-            PopulateVessel(Convert.ToInt32(hdnVessel.Value));
+            PopulateVoyage(Convert.ToInt32(hdnVessel.Value));
             //Filler.FillData(ddlLoadingVoyage, CommonBLL.GetExportVoyages(hdnVessel.Value), "VoyageNo", "VoyageID", "Voyage");
         }
 
         protected void txtMainLineVessel_TextChanged(object sender, EventArgs e)
         {
-            PopulateMLVessel(Convert.ToInt32(hdnMainLineVessel.Value));
+            PopulateMLVoyage(Convert.ToInt32(hdnMainLineVessel.Value));
             //Filler.FillData(ddlMainLineVoyage, CommonBLL.GetExportVoyages(hdnMainLineVessel.Value), "VoyageNo", "VoyageID", "Voyage");
         }
 
-        private void PopulateVessel(int vesselID)
+        private void PopulateVoyage(int vesselID)
         {
             //BLL.DBInteraction dbinteract = new BLL.DBInteraction();
             DataSet ds = BookingBLL.GetExportVoyages(vesselID);
@@ -598,7 +635,7 @@ namespace EMS.WebApp.Export
             //ddlLoadingVoyage.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
         }
 
-        private void PopulateMLVessel(int vesselID)
+        private void PopulateMLVoyage(int vesselID)
         {
             //BLL.DBInteraction dbinteract = new BLL.DBInteraction();
             DataSet ds = BookingBLL.GetExportVoyages(vesselID);
@@ -653,252 +690,71 @@ namespace EMS.WebApp.Export
             oBookingBll = new BookingBLL();
             Containers = new List<IBookingContainer>();
             Containers = oBookingBll.GetBookingContainers(BookingID);
-            if (Containers.Count <= 0)
-            {
-                IBookingContainer rt = new BookingContainerEntity();
-                Containers.Add(rt);
-            }
-            else
-            {
-                ViewState["BookingCntr"] = Containers;
-            }
-
+            
+            ViewState["BookingCntr"] = Containers;
+            
             gvContainer.DataSource = Containers;
             gvContainer.DataBind();
-        }
-
-        protected void gvContainer_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.Header)
-            {
-                BLL.DBInteraction dbinteract = new BLL.DBInteraction();
-
-                DropDownList ddlCntrType = (DropDownList)e.Row.FindControl("ddlCntrType");
-                DropDownList ddlSize = (DropDownList)e.Row.FindControl("ddlSize");
-                GeneralFunctions.PopulateDropDownList(ddlCntrType, dbinteract.PopulateDDLDS("mstContainerType", "pk_ContainerTypeID", "ContainerAbbr"));
-            }
-            else if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-
-                ImageButton btnRemove = (ImageButton)e.Row.FindControl("lnkDelete");
-                btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
-
-                btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
-
-                ////Delete link
-                //GridViewRow Row = (GridViewRow)(((ImageButton)e.CommandSource).NamingContainer);
-                //HiddenField hdnId = (HiddenField)Row.FindControl("hdnId");
-
-                ////ChargeBLL.DeleteChargeRate(Convert.ToInt32(hdnId.Value));
-                ////FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
-                //Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
-                ////Rates[Row.RowIndex].RateActive = false;
-                //Containers.RemoveAt(Row.RowIndex);
-                //ViewState["BookingCntr"] = Containers;
-
-                //FillContainers();
-
-                //ImageButton btnRemove = (ImageButton)e.Row.FindControl("lnkDelete");
-                //btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
-                ////btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "pk_PortId"));
-
-
-                //btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
-
-                ////btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
-                ////btnRemove.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
-
-            }
-        }
-   
-        protected void gvContainer_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (ViewState["BookingCntr"] == null)
-            {
-                ViewState["BookingCntr"] = Containers;
-            }
-            else
-            {
-                Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
-            }
-
-
-            #region Save
-            if (e.CommandArgument == "Save")
-            {
-                //if (hdnChargeID.Value != "0")
-                //{
-
-
-                oBookingBll = new BookingBLL();
-                GridViewRow Row = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
-
-                TextBox txtNos = (TextBox)Row.FindControl("txtNos");
-                TextBox txtWtPerCntr = (TextBox)Row.FindControl("txtWtPerCntr");
-                DropDownList ddlCntrType = (DropDownList)Row.FindControl("ddlCntrType");
-                DropDownList ddlSize = (DropDownList)Row.FindControl("ddlSize");
-
-                if ((String.IsNullOrEmpty(txtNos.Text) || String.IsNullOrEmpty(txtWtPerCntr.Text)))
-                {
-                    ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00077") + "');</script>", false);
-                    return;
-                }
-
-                oBookingContainerEntity = new BookingContainerEntity();
-
-                oBookingContainerEntity.BookingID = Convert.ToInt32(hdnBookingID.Value);
-                oBookingContainerEntity.CntrSize = Convert.ToString(ddlSize.SelectedValue);
-                oBookingContainerEntity.ContainerTypeID = Convert.ToInt32(ddlCntrType.SelectedValue);
-                oBookingContainerEntity.NoofContainers = Convert.ToInt32(txtNos.Text);
-                oBookingContainerEntity.wtPerCntr = Convert.ToInt32(txtWtPerCntr.Text);
-                ViewState["BookingCntr"] = Containers;
-                FillContainers();
-                //DisableAllField();
-            }
-
-            #endregion
-
-            #region Edit
-            if (e.CommandArgument == "Edit")
-            {
-                GridViewRow FootetRow = gvContainer.HeaderRow;
-
-                DropDownList ddlCntrtype = (DropDownList)FootetRow.FindControl("ddlCntrType");
-                DropDownList ddlSize = (DropDownList)FootetRow.FindControl("ddlSize");
-
-                TextBox txtNos = (TextBox)FootetRow.FindControl("txtNos");
-                TextBox txtwtPerCntr = (TextBox)FootetRow.FindControl("txtWtPerCntr");
-
-                HiddenField hdnBookingContainerID = (HiddenField)FootetRow.FindControl("hdnBookingContainerID");
-
-                GridViewRow Row = (GridViewRow)(((ImageButton)e.CommandSource).NamingContainer);
-                HiddenField hdnLocationId = (HiddenField)Row.FindControl("hdnLocationId");
-                HiddenField hdnTerminalId = (HiddenField)Row.FindControl("hdnTerminalId");
-                HiddenField hdnWashingTypeId = (HiddenField)Row.FindControl("hdnWashingTypeId");
-                HiddenField hdnId = (HiddenField)Row.FindControl("hdnId");
-
-                Label lblLow = (Label)Row.FindControl("lblLow");
-                Label lblHigh = (Label)Row.FindControl("lblHigh");
-                Label lblRatePerBl = (Label)Row.FindControl("lblRatePerBl");
-                Label lblRatePerTEU = (Label)Row.FindControl("lblRatePerTEU");
-                Label lblRatePerFEU = (Label)Row.FindControl("lblRatePerFEU");
-                Label lblSharingBL = (Label)Row.FindControl("lblSharingBL");
-                Label lblSharingTEU = (Label)Row.FindControl("lblSharingTEU");
-                Label lblSharingFEU = (Label)Row.FindControl("lblSharingFEU");
-
-                //ddlFLocation.SelectedIndex = ddlFLocation.Items.IndexOf(ddlFLocation.Items.FindByValue(hdnLocationId.Value));
-                //PopulateDropDown((int)Enums.DropDownPopulationFor.TerminalCode, ddlFTerminal, Convert.ToInt32(ddlFLocation.SelectedValue));
-
-                //ddlFTerminal.SelectedIndex = ddlFTerminal.Items.IndexOf(ddlFTerminal.Items.FindByValue(hdnTerminalId.Value));
-                //ddlFWashingType.SelectedIndex = ddlFWashingType.Items.IndexOf(ddlFWashingType.Items.FindByValue(hdnWashingTypeId.Value));
-
-
-                //txtLow.Text = lblLow.Text;
-                //txtHigh.Text = lblHigh.Text;
-                //txtRatePerBL.Text = lblRatePerBl.Text;
-                //txtRatePerTEU.Text = lblRatePerTEU.Text;
-                //txtRateperFEU.Text = lblRatePerFEU.Text;
-                //txtSharingBL.Text = lblSharingBL.Text;
-                //txtSharingTEU.Text = lblSharingTEU.Text;
-                //txtSharingFEU.Text = lblSharingFEU.Text;
-                //hdnFId.Value = hdnId.Value.ToString();
-                //hdnFSlno.Value = Row.RowIndex.ToString();
-
-            }
-            #endregion
-
-            #region Delete
-            if (e.CommandArgument == "Delete")
-            {
-                GridViewRow Row = (GridViewRow)(((ImageButton)e.CommandSource).NamingContainer);
-                HiddenField hdnId = (HiddenField)Row.FindControl("hdnBookingContainerID");
-                //ChargeBLL.DeleteChargeRate(Convert.ToInt32(hdnId.Value));
-                //FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
-                Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
-                //Rates[Row.RowIndex].RateActive = false;
-                Containers.RemoveAt(Row.RowIndex);
-                ViewState["BookingCntr"] = Containers;
-                //if (Rates.Count <= 0 && hdnChargeID.Value == "0")
-                //{
-                //    EnableAllField();
-                //    UpdatePanel1.Update();
-                //}
-                FillContainers();
-                //FillRates();
-
-            }
-            #endregion
-
-            #region Cancel
-            if (e.CommandArgument == "Cancel")
-            //if (e.CommandArgument == "Cancel")
-            {
-                GridViewRow Row = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
-                TextBox txtHigh = (TextBox)Row.FindControl("txtHigh");
-                TextBox txtLow = (TextBox)Row.FindControl("txtLow");
-                DropDownList ddlFLocation = (DropDownList)Row.FindControl("ddlFLocation");
-                DropDownList ddlFTerminal = (DropDownList)Row.FindControl("ddlFTerminal");
-                DropDownList ddlFWashingType = (DropDownList)Row.FindControl("ddlFWashingType");
-
-                TextBox txtRatePerBL = (TextBox)Row.FindControl("txtRatePerBL");
-                TextBox txtRatePerTEU = (TextBox)Row.FindControl("txtRatePerTEU");
-                TextBox txtRateperFEU = (TextBox)Row.FindControl("txtRateperFEU");
-                TextBox txtSharingBL = (TextBox)Row.FindControl("txtSharingBL");
-                TextBox txtSharingTEU = (TextBox)Row.FindControl("txtSharingTEU");
-                TextBox txtSharingFEU = (TextBox)Row.FindControl("txtSharingFEU");
-                HiddenField hdnFId = (HiddenField)Row.FindControl("hdnFId");
-                HiddenField hdnFSlno = (HiddenField)Row.FindControl("hdnFSlno");
-
-                txtHigh.Text = String.Empty;// "0";
-                txtLow.Text = String.Empty;// "0";
-                ddlFLocation.SelectedIndex = 0;
-                if (ddlFTerminal.Items.Count > 0)
-                {
-                    //ddlFTerminal.SelectedIndex = 0;
-                    ddlFTerminal.Items.Clear();
-                    //ddlFTerminal.Enabled = false;
-                }
-                ddlFWashingType.SelectedIndex = 0;
-                txtRatePerBL.Text = String.Empty;// "0.00";
-                txtRatePerTEU.Text = String.Empty;//"0.00";
-                txtRateperFEU.Text = String.Empty;//"0.00";
-                txtSharingBL.Text = String.Empty;//"0.00";
-                txtSharingTEU.Text = String.Empty;//"0.00";
-                txtSharingFEU.Text = String.Empty;//"0.00";
-
-                hdnFId.Value = "0";
-                hdnFSlno.Value = "-1";
-            }
-            #endregion
-
-            //TerminalSelection(rdbTerminalRequired);
-            //WashingSelection(rdbWashing);
-            //SharingSelection(rdbPrincipleSharing);
-            //ShowHideControlofFooterOnEdit(ddlChargeType);
-            ////DisableAllField();
-
         }
 
         void FillContainers()
         {
             Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
             IEnumerable<IBookingContainer> Rts = from IBookingContainer rt in Containers
-                                           where rt.BkCntrStatus == true
-                                           select rt;
+                                                 where rt.BkCntrStatus == true
+                                                 select rt;
 
             gvContainer.DataSource = Rts.ToList();
             gvContainer.DataBind();
 
-            if (Rts.Count() <= 0)
-            {
-                List<IBookingContainer> EmptyRates = new List<IBookingContainer>();
-                IBookingContainer rt = new BookingContainerEntity();
-                EmptyRates.Add(rt);
+            //if (Rts.Count() <= 0)
+            //{
+            //    List<IBookingContainer> EmptyRates = new List<IBookingContainer>();
+            //    IBookingContainer rt = new BookingContainerEntity();
+            //    EmptyRates.Add(rt);
 
-                gvContainer.DataSource = EmptyRates;
-                gvContainer.DataBind();
-                gvContainer.Rows[0].Visible = false;
-            }
+            //    gvContainer.DataSource = EmptyRates;
+            //    gvContainer.DataBind();
+            //    gvContainer.Rows[0].Visible = false;
+            //}
+
+
+        }
+
+        void FillBookingTranshipment(Int32 BookingID)
+        {
+            //oChargeRates = new List<ChargeRateEntity>();
+            //oChargeRates = new List<ChargeRateEntity>();
+            oBookingBll = new BookingBLL();
+            Transhipments = new List<IBookingTranshipment>();
+            Transhipments = oBookingBll.GetBookingTranshipments(BookingID);
+
+            ViewState["BookingTran"] = Transhipments;
+
+            gvTransit.DataSource = Transhipments;
+            gvTransit.DataBind();
+        }
+
+        void FillTranshipments()
+        {
+            Transhipments = (List<IBookingTranshipment>)ViewState["BookingTran"];
+            IEnumerable<IBookingTranshipment> Rts = from IBookingTranshipment rt in Containers
+                                                 where rt.BkTransStatus == true
+                                                 select rt;
+
+            gvTransit.DataSource = Rts.ToList();
+            gvTransit.DataBind();
+
+            //if (Rts.Count() <= 0)
+            //{
+            //    List<IBookingContainer> EmptyRates = new List<IBookingContainer>();
+            //    IBookingContainer rt = new BookingContainerEntity();
+            //    EmptyRates.Add(rt);
+
+            //    gvContainer.DataSource = EmptyRates;
+            //    gvContainer.DataBind();
+            //    gvContainer.Rows[0].Visible = false;
+            //}
 
 
         }
@@ -913,75 +769,21 @@ namespace EMS.WebApp.Export
 
         }
 
-        protected void btnAdd_Click(object sender, EventArgs e)
-        {
-            //oBookingBll = new BookingBLL();
-            //GridViewRow Row = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
-
-            //TextBox txtNos = (TextBox)Row.FindControl("txtNos");
-            //TextBox txtWtPerCntr = (TextBox)Row.FindControl("txtWtPerCntr");
-            //DropDownList ddlCntrType = (DropDownList)Row.FindControl("ddlCntrType");
-            //DropDownList ddlSize = (DropDownList)Row.FindControl("ddlSize");
-
-            DataTable dt;
-            object otabSelItems = Session["dt"];
-
-            if (otabSelItems is DataTable)
-
-                dt = (DataTable)otabSelItems;
-            else
-            {
-                dt = new DataTable();
-                dt = CreateDataTable(dt);
-            }
-
-            lblMessage.Text = string.Empty;
-            DataRow dr = dt.NewRow();
-
-            //DataTable Dt = CreateDataTable();
-
-            if ((String.IsNullOrEmpty(txtNos.Text) || String.IsNullOrEmpty(txtWtPerCntr.Text)))
-            {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00077") + "');</script>", false);
-                return;
-            }
-            Label lblContainerType = (Label)FindControl("lblContainerType");
-            Label lblContainerSize = (Label)FindControl("lblContainerSize");
-            Label lblUnit = (Label)FindControl("lblUnit");
-            Label lblwtPerCont = (Label)FindControl("lblwtPerCont");
-            HiddenField cntsize = (HiddenField)FindControl("hdnSize");
-
-            dr["BookingID"] = hdnBookingID.Value;
-            dr["CntrSize"] = lblSize.Text;
-            dr["ContainerType"] = lblType.Text;
-            dr["NoofContainers"] = lblUnit.Text;
-            dr["wtPerCntr"] = lblWt.Text;
-            dt.Rows.Add(dr);
-
-            //oBookingContainerEntity = new BookingContainerEntity();
-
-            //oBookingContainerEntity.BookingID = Convert.ToInt32(hdnBookingID.Value);
-            //oBookingContainerEntity.CntrSize = Convert.ToString(ddlSize.SelectedValue);
-            //oBookingContainerEntity.ContainerTypeID = Convert.ToInt32(ddlCntrType.SelectedValue);
-            //oBookingContainerEntity.NoofContainers = Convert.ToInt32(txtNos.Text);
-            //oBookingContainerEntity.wtPerCntr = Convert.ToInt32(txtWtPerCntr.Text);
-            ViewState["BookingCntr"] = dt;
-            //FillContainers();
-        }
-
-
         private DataTable CreateDataTable(DataTable Dt)
         {
             Dt = new DataTable();
             DataColumn dc;
 
-            dc = new DataColumn("BookingID");
+            dc = new DataColumn("BookingContainerID");
             Dt.Columns.Add(dc);
 
-            dc = new DataColumn("CntrSize");
+            dc = new DataColumn("ContainerTypeID");
             Dt.Columns.Add(dc);
 
             dc = new DataColumn("ContainerType");
+            Dt.Columns.Add(dc);
+
+            dc = new DataColumn("CntrSize");
             Dt.Columns.Add(dc);
 
             dc = new DataColumn("NoofContainers");
@@ -991,6 +793,186 @@ namespace EMS.WebApp.Export
             Dt.Columns.Add(dc);
 
             return Dt;
+        }
+
+        protected void btnimgSave_Click(object sender, ImageClickEventArgs e)
+        {
+            if(ViewState["BookingCntr"] != null)
+                Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
+            //IEnumerable<IBookingContainer> Rts = from IBookingContainer rt in Containers
+            //                                     where rt.BkCntrStatus == true
+            //                                     select rt;
+
+            lblMessage.Text = string.Empty;
+
+            IBookingContainer obj = new BookingContainerEntity();
+            if (!string.IsNullOrEmpty(hdnIndex.Value))
+                obj = Containers.ElementAt(Convert.ToInt32(hdnIndex.Value));
+            else
+            {
+                foreach (BookingContainerEntity objBookingContainer in Containers)
+                {
+                    if (objBookingContainer.ContainerTypeID.ToString() == ddlCntrType.SelectedValue && objBookingContainer.CntrSize == ddlSize.SelectedValue)
+                    {
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00076") + "');</script>", false);
+                        return;
+                    }
+                }
+            }
+
+            if ((String.IsNullOrEmpty(txtNos.Text) || String.IsNullOrEmpty(txtWtPerCntr.Text)))
+            {
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00077") + "');</script>", false);
+                return;
+            }
+
+            obj.BookingContainerID = Convert.ToInt32(hdnBookingContainerID.Value);
+            obj.ContainerTypeID = Convert.ToInt32(ddlCntrType.SelectedValue);
+            obj.ContainerType = ddlCntrType.SelectedItem.Text;
+            obj.CntrSize = ddlSize.SelectedValue;
+            obj.NoofContainers = Convert.ToInt32(txtNos.Text);
+            obj.wtPerCntr = Convert.ToDecimal(txtWtPerCntr.Text);
+            if (string.IsNullOrEmpty(hdnIndex.Value))
+                Containers.Add(obj);
+
+            gvContainer.DataSource = Containers;
+            gvContainer.DataBind();
+
+            ViewState["BookingCntr"] = Containers;
+            ResetContainer();
+            //ModalPopupExtender1.Show();
+        }
+
+        protected void btnimgReset_Click(object sender, ImageClickEventArgs e)
+        {
+            ResetContainer();
+        }
+
+        private void ResetContainer()
+        {
+            hdnBookingContainerID.Value = "0";
+            hdnIndex.Value = string.Empty;
+            ddlCntrType.SelectedIndex = 0;
+            ddlSize.SelectedIndex = 0;
+            txtNos.Text = string.Empty;
+            txtWtPerCntr.Text = string.Empty;
+        }
+
+        protected void gvContainer_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            GridViewRow row = (GridViewRow)(((ImageButton)e.CommandSource).NamingContainer);
+            int RowIndex = row.RowIndex;
+
+            if (e.CommandName == "EditGrid")
+            {
+                HiddenField gvhdnBookingContainerID = (HiddenField)gvContainer.Rows[RowIndex].FindControl("gvhdnBookingContainerID");
+                HiddenField gvhdnContainerTypeId = (HiddenField)gvContainer.Rows[RowIndex].FindControl("gvhdnContainerTypeId");
+                Label lblContainerSize = (Label)gvContainer.Rows[RowIndex].FindControl("lblContainerSize");
+                Label lblUnit = (Label)gvContainer.Rows[RowIndex].FindControl("lblUnit");
+                Label lblwtPerCont = (Label)gvContainer.Rows[RowIndex].FindControl("lblwtPerCont");
+
+                hdnIndex.Value = RowIndex.ToString();
+                hdnBookingContainerID.Value = gvhdnBookingContainerID.Value;
+                ddlCntrType.SelectedValue = gvhdnContainerTypeId.Value;
+                ddlSize.SelectedValue = lblContainerSize.Text;
+                txtNos.Text = lblUnit.Text;
+                txtWtPerCntr.Text = lblwtPerCont.Text;
+            }
+            else if (e.CommandName == "Remove")
+            {
+                if (ViewState["BookingCntr"] != null)
+                    Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
+                
+                if (Containers.Count>0)
+                {
+                    //dt = (DataTable)otabSelItems;
+                    Containers.RemoveAt(RowIndex);
+                    //dt.Rows.RemoveAt(RowIndex);
+                    //dt.AcceptChanges();
+
+                    gvContainer.DataSource = Containers;
+                    gvContainer.DataBind();
+
+                    ViewState["BookingCntr"] = gvContainer.DataSource = Containers;
+                    
+                    //ModalPopupExtender1.Show();
+                }
+            }
+        }
+
+        private int AddContainers(int BookingId)
+        {
+            if (ViewState["BookingCntr"] != null)
+                Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
+
+            if (Containers.Count > 0)
+            {
+                foreach(BookingContainerEntity obj in Containers)
+                {
+                    oBookingBll = new BookingBLL();
+                    //oBookingContainerEntity = new BookingContainerEntity();
+
+                    obj.BookingID = BookingId;
+                    //oBookingContainerEntity.BookingContainerID = Convert.ToInt32(dt.Rows[i]["BookingContainerID"].ToString());
+                    //oBookingContainerEntity.ContainerTypeID = Convert.ToInt32(dt.Rows[i]["ContainerTypeID"].ToString());
+                    //oBookingContainerEntity.CntrSize = dt.Rows[i]["CntrSize"].ToString();
+                    //oBookingContainerEntity.NoofContainers = Convert.ToInt32(dt.Rows[i]["NoofContainers"].ToString());
+                    //oBookingContainerEntity.wtPerCntr = Convert.ToDecimal(dt.Rows[i]["wtPerCntr"].ToString());
+                    
+                    int res = oBookingBll.AddEditBookingContainer(obj);
+                    if (res != 1)
+                        return res;
+                }
+                return 1;
+            }
+            return 1;
+        }
+
+        private int AddTranshipments(int BookingId)
+        {
+            if (ViewState["BookingTran"] != null)
+                Transhipments = (List<IBookingTranshipment>)ViewState["BookingTran"];
+
+            if (Transhipments.Count > 0)
+            {
+                foreach (BookingTranshipmentEntity obj in Transhipments)
+                {
+                    oBookingBll = new BookingBLL();
+                    //oBookingContainerEntity = new BookingContainerEntity();
+
+                    obj.BookingID = BookingId;
+                    //oBookingContainerEntity.BookingContainerID = Convert.ToInt32(dt.Rows[i]["BookingContainerID"].ToString());
+                    //oBookingContainerEntity.ContainerTypeID = Convert.ToInt32(dt.Rows[i]["ContainerTypeID"].ToString());
+                    //oBookingContainerEntity.CntrSize = dt.Rows[i]["CntrSize"].ToString();
+                    //oBookingContainerEntity.NoofContainers = Convert.ToInt32(dt.Rows[i]["NoofContainers"].ToString());
+                    //oBookingContainerEntity.wtPerCntr = Convert.ToDecimal(dt.Rows[i]["wtPerCntr"].ToString());
+
+                    int res = oBookingBll.AddEditBookingTranshipment(obj);
+                    if (res != 1)
+                        return res;
+                }
+                return 1;
+            }
+            return 1;
+        }
+
+        protected void gvContainer_DataBound(object sender, EventArgs e)
+        {
+            if (ViewState["BookingCntr"] != null)
+                Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
+            
+            txtContainerDtls.Text = string.Empty;
+
+            if (Containers.Count > 0)
+            {
+                foreach (BookingContainerEntity obj in Containers)
+                {
+                    if (string.IsNullOrEmpty(txtContainerDtls.Text))
+                        txtContainerDtls.Text = obj.ContainerType + "(" + obj.CntrSize + ") X " + obj.NoofContainers.ToString();
+                    else
+                        txtContainerDtls.Text += "," + obj.ContainerType + "(" + obj.CntrSize + ") X " + obj.NoofContainers.ToString();
+                }
+            }
         }
 
     }

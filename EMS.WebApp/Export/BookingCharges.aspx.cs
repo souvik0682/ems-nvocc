@@ -40,15 +40,16 @@ namespace EMS.WebApp.Export
                     {
                         ViewState["BOOKINGID"] = BookingId;
 
-                        if (!ReferenceEquals(Request.QueryString["IsEdit"], null))
-                        {
+                        DataSet ds = new DataSet();
+                        BookingBLL oBookChgBLL = new BookingBLL();
+                        
+                        ds = oBookChgBLL.GetBookingChargesList(BookingId);
+                        if (ds.Tables[0].Rows.Count > 0)
                             ViewState["ISEDIT"] = "True";
-                        }
                         else
-                        {
                             ViewState["ISEDIT"] = "False";
-                        }
 
+                      
                         (txtBrokeragePayableTo.FindControl("txtBrockerage") as TextBox).Enabled = false;
                         ((TextBox)txtRefundPayableTo.FindControl("txtRefund")).Enabled = false;
 

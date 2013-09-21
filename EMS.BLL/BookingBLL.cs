@@ -12,14 +12,14 @@ namespace EMS.BLL
 {
     public class BookingBLL
     {
-        public int AddEditBooking(IBooking Booking, int CompanyID)
+        public int AddEditBooking(IBooking Booking, int CompanyID, ref int BookingId)
         {
-            return BookingDAL.AddEditBooking(Booking, CompanyID);
+            return BookingDAL.AddEditBooking(Booking, CompanyID, ref BookingId);
         }
 
-        public static List<IBooking> GetBooking(SearchCriteria searchCriteria, int ID)
+        public static List<IBooking> GetBooking(SearchCriteria searchCriteria, int ID, string CalledFrom)
         {
-            return BookingDAL.GetBooking(searchCriteria, ID);
+            return BookingDAL.GetBooking(searchCriteria, ID, CalledFrom);
         }
 
         public static int DeleteBooking(int BookingId)
@@ -27,15 +27,15 @@ namespace EMS.BLL
             return BookingDAL.DeleteBooking(BookingId);
         }
 
-        public static IBooking GetBooking(int ID)
+        public static IBooking GetBooking(int ID, string CalledFrom)
         {
-            return BookingDAL.GetBooking(ID);
+            return BookingDAL.GetBooking(ID, CalledFrom);
         }
 
-        //public List<IBookingContainer> GetBookingContainers(int ChargesID)
-        //{
-        //    return BookingDAL.GetBookingContainers(ChargesID);
-        //}
+        public List<IBookingContainer> GetBookingContainers(int ChargesID)
+        {
+            return BookingDAL.GetBookingContainers(ChargesID);
+        }
 
         public static DataSet GetExportVoyages(int Vessel)
         {
@@ -99,11 +99,24 @@ namespace EMS.BLL
             BookingDAL.DeactivateAllContainersAgainstBookingId(BookingId);
 
         }
-        //public int AddEditBookingContainer(IBookingContainer Containers)
-        //{
-        //    return BookingDAL.AddEditBookingContainer(Containers);
-        //}
+        public int AddEditBookingContainer(IBookingContainer Containers)
+        {
+            return BookingDAL.AddEditBookingContainer(Containers);
+        }
 
+        public List<IBookingTranshipment> GetBookingTranshipments(int BookingId)
+        {
+            return BookingDAL.GetBookingTranshipments(BookingId);
+        }
 
+        public int AddEditBookingTranshipment(IBookingTranshipment Transhipments)
+        {
+            return BookingDAL.AddEditBookingTranshipment(Transhipments);
+        }
+
+        public DataSet GetBookingChargesList(Int32 BookingID)
+        {
+            return BookingDAL.GetBookingChargesList(BookingID);
+        }
     }
 }

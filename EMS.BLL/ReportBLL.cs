@@ -56,9 +56,9 @@ namespace EMS.BLL
             return ReportDAL.GetMonthlyImportStatement(StartDate, EndDate, LineId, LocationId);
         }
 
-        public DataTable GetContainerStockDetail(string Line, string Loc, string Stat, string CntrType, DateTime StockDate)
+        public DataTable GetContainerStockDetail(string Line, string Loc, string Stat, string CntrType, string StockDate, int EmptyYard)
         {
-            return ReportDAL.GetContainerStockDetail(Line, Loc, Stat, CntrType, StockDate);
+            return ReportDAL.GetContainerStockDetail(Line, Loc, Stat, CntrType, StockDate, EmptyYard);
         }
     }
 }

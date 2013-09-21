@@ -29,6 +29,12 @@ namespace EMS.BLL
        {
            return EquipmentDAL.DDLGetContainerType();
        }
+
+       public static DataSet DDLGetEmptyYard(int loc)
+       {
+           return EquipmentDAL.DDLGetEmptyYard(loc);
+       }
+
        public static int AddEditEquipEstimate(int userId,bool isEdit,IEqpRepairing ieqp)
        {
            return EquipmentDAL.AddEditEquipEstimate(userId, isEdit, ieqp);

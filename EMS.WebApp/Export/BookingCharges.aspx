@@ -243,6 +243,7 @@
                                                                 <ItemTemplate>
                                                                     <asp:DropDownList ID="ddlApplicable" runat="server">
                                                                     </asp:DropDownList>
+                                                                    <asp:HiddenField ID="hdnBookingChargeId" runat="server" Value='<%# Eval("BookingChargeId") %>' />
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:BoundField DataField="CurrencyName" HeaderText="Currency" InsertVisible="False"
@@ -296,7 +297,6 @@
                                                                 <ItemTemplate>
                                                                     <asp:ImageButton ID="btnRemove" runat="server" OnClick="btnRemove_Click" ImageUrl="~/Images/remove.png"
                                                                         Height="16" Width="16" OnClientClick="javascript:return confirm('Are you sure about delete?');" />
-                                                                    <asp:HiddenField ID="hdnBookingChargeId" runat="server" Value='<%# Eval("BookingChargeId") %>' />
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>--%>
                                                         </Columns>

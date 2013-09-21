@@ -814,6 +814,15 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
         
         /// <summary>
+        /// ctbSlNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox ctbSlNo;
+        
+        /// <summary>
         /// hdnPOT control.
         /// </summary>
         /// <remarks>
@@ -859,13 +868,13 @@ namespace EMS.WebApp.Export {
         protected global::AjaxControlToolkit.AutoCompleteExtender AutoCompleteExPOT;
         
         /// <summary>
-        /// btnAddToGrid control.
+        /// imgbtnAddToGrid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddToGrid;
+        protected global::System.Web.UI.WebControls.ImageButton imgbtnAddToGrid;
         
         /// <summary>
         /// gvTransit control.
@@ -875,15 +884,6 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvTransit;
-        
-        /// <summary>
-        /// btnSaveTransit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSaveTransit;
         
         /// <summary>
         /// btnCalcelTransit control.

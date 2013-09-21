@@ -6,8 +6,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
         function AutoCompleteItemSelected(sender, e) {
-
-            alert(e.get_value());
             if (sender._id == "AutoCompleteExPOR") {
                 var hdnPOR = $get('<%=hdnPOR.ClientID %>');
                 hdnPOR.value = e.get_value();
@@ -38,6 +36,13 @@
             }
         }
 
+        function onDataShown(sender, args) {
+            sender._popupBehavior._element.style.zIndex = 1000001;
+            //sender._popupBehavior._element.style.left = "54px"; //set positions according to your requriment.
+            //sender._popupBehavior._element.style.top = "50px"; //set top postion accorind to you requirement.
+
+            //you can either use left,top or right,bottom or any combination u want to set ur divlist.           
+        }
 
     </script>
     <style type="text/css">
@@ -624,8 +629,7 @@
                                     </td>
                                     <td>
                                         <asp:TextBox ID="txtContainerDtls" runat="server" CssClass="textboxuppercase" Width="250px"
-                                            Enabled="False"></asp:TextBox>
-    <%--                                    TextMode="MultiLine" Height="75px"--%>
+                                            Enabled="False" Height="50px" TextMode="MultiLine"></asp:TextBox>
                                     </td>
                                     <td>
                                         Temp Min<span class="errormessage">*</span>
@@ -641,8 +645,7 @@
                                     </td>
                                     <td>
                                         <asp:TextBox ID="txtTransitRoute" runat="server" CssClass="textboxuppercase" Width="250px"
-                                            Enabled="False"></asp:TextBox>
- <%--                                        Height="75px" TextMode="MultiLine"--%>
+                                            Enabled="False" Height="50px" TextMode="MultiLine"></asp:TextBox>
                                     </td>
                                     <td>
                                         Temp Max<span class="errormessage">*</span>
@@ -691,16 +694,13 @@
                                                             <asp:Label ID="lblType" Text="Type" runat="server"></asp:Label><span class="errormessage">*</span>
                                                         </td>
                                                         <td style="width: 20%;">
-                                                            <asp:Label ID="lblSize" Text="Size" runat="server"></asp:Label><span
-                                                                class="errormessage">*</span>
+                                                            <asp:Label ID="lblSize" Text="Size" runat="server"></asp:Label><span class="errormessage">*</span>
                                                         </td>
                                                         <td style="width: 20%;">
-                                                            <asp:Label ID="lblUnit" Text="Unit" runat="server"></asp:Label><span
-                                                                class="errormessage">*</span>
+                                                            <asp:Label ID="lblUnit" Text="Unit" runat="server"></asp:Label><span class="errormessage">*</span>
                                                         </td>
                                                         <td style="width: 20%;">
-                                                            <asp:Label ID="lblWt" Text="Wt/Cont" runat="server"></asp:Label><span
-                                                                class="errormessage">*</span>
+                                                            <asp:Label ID="lblWt" Text="Wt/Cont" runat="server"></asp:Label><span class="errormessage">*</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -810,11 +810,12 @@
                 <table border="0" cellpadding="2" cellspacing="3" width="100%">
                     <tr>
                         <td>
-                            <asp:Button ID="Button2" runat="server" Style=" display: none;" />
+                            <asp:Button ID="Button2" runat="server" Style="display: none;" />
                             <cc1:ModalPopupExtender ID="ModalPopupExtender2" runat="server" TargetControlID="Button2"
                                 PopupControlID="pnlTransit" Drag="true" BackgroundCssClass="ModalPopupBG" CancelControlID="btnCalcelTransit">
                             </cc1:ModalPopupExtender>
-                            <asp:Panel ID="pnlTransit" runat="server" Style="height: 300px; width: 400px; background-color: White;">
+                            <asp:Panel ID="pnlTransit" runat="server" Style="height: 330px; width: 400px; background-color: White;
+                                display: none">
                                 <center>
                                     <fieldset>
                                         <legend>Transit Route</legend>
@@ -823,24 +824,34 @@
                                                 <div>
                                                     <table>
                                                         <tr>
-                                                            <td>
+                                                            <td style="width: 10%;">
+                                                                Order
+                                                            </td>
+                                                            <td style="width: 70%;">
                                                                 Port Name<span class="errormessage">*</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <cc2:CustomTextBox ID="ctbSlNo" runat="server" CssClass="numerictextbox" Width="30px"
+                                                                    Type="Numeric" MaxLength="8" Precision="10" Scale="2">
+                                                                </cc2:CustomTextBox>
                                                             </td>
                                                             <td>
                                                                 <asp:HiddenField ID="hdnPOT" runat="server" />
-                                                                <asp:TextBox runat="server" ID="txtPOT" Width="250" autocomplete="off"
-                                                                    MaxLength="50" TabIndex="9" Style="text-transform: uppercase;" />
+                                                                <asp:TextBox runat="server" ID="txtPOT" Width="250" autocomplete="off" MaxLength="50"
+                                                                    TabIndex="9" Style="text-transform: uppercase;" AutoPostBack="true" OnTextChanged="txtPOT_TextChanged" />
                                                                 <asp:RequiredFieldValidator ID="rfvPOT" runat="server" ErrorMessage="Please select Place of Receipt"
-                                                                    Display="None" ControlToValidate="txtPOT" ValidationGroup="vgBooking"></asp:RequiredFieldValidator>
+                                                                    Display="None" ControlToValidate="txtPOT" ValidationGroup="vgTransit"></asp:RequiredFieldValidator>
                                                                 <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender5" runat="server" TargetControlID="rfvPOT"
                                                                     WarningIconImageUrl="">
                                                                 </cc1:ValidatorCalloutExtender>
                                                                 <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteExPOT" ID="AutoCompleteExPOT"
-                                                                    TargetControlID="txtPOT" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
-                                                                    MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
-                                                                    CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
-                                                                    CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";,:"
-                                                                    ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected">
+                                                                    OnClientShown="onDataShown" TargetControlID="txtPOT" ServicePath="~/GetLocation.asmx"
+                                                                    ServiceMethod="GetCompletionList" MinimumPrefixLength="2" CompletionInterval="100"
+                                                                    EnableCaching="true" CompletionSetCount="20" CompletionListCssClass="autocomplete_completionListElement"
+                                                                    CompletionListItemCssClass="autocomplete_listItem" CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem"
+                                                                    DelimiterCharacters=";,:" ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected">
                                                                     <Animations>
                                                                     <OnShow>
                                                                         <Sequence>
@@ -875,37 +886,19 @@
                                                                     </OnHide>
                                                                     </Animations>
                                                                 </cc1:AutoCompleteExtender>
-                                                                <script type="text/javascript">
-                                                                    function itemSelected(ev) {
-                                                                        alert(ev.get_value());
-                                                                        var hdnPOT = $get('<%=hdnPOT.ClientID %>');
-                                                                        hdnPOT.value = ev.get_value();
-
-                                                                    }
-                                                                    function dd() {
-                                                                        var comletionList = $find("AutoCompleteEx").get_completionList();
-                                                                        for (i = 0; i < comletionList.childNodes.length; i++) {
-
-                                                                            var _value = comletionList.childNodes[i]._value;
-                                                                            comletionList.childNodes[i]._value = _value.substring(_value.lastIndexOf('|') + 1); // parse id to _value
-                                                                            comletionList.childNodes[i]._data = _value.substring(0, _value.IndexOf('|')); // parse text to _data
-
-                                                                            _value = _value.substring(0, _value.lastIndexOf('|'));
-                                                                            comletionList.childNodes[i].innerHTML = _value.replace('|', '<br/>');
-                                                                        }
-
-                                                                    }
-                                                                </script>
                                                             </td>
-                                                            <td>
-                                                                <asp:Button ID="btnAddToGrid" runat="server" Text="Add" />
+                                                            <td style="width: 10%;">
+                                                                <asp:ImageButton ID="imgbtnAddToGrid" runat="server" ImageUrl="~/Images/action_add2.gif"
+                                                                    Height="16" Width="16" OnClick="imgbtnAddToGrid_Click" CausesValidation="true"
+                                                                    ValidationGroup="vgTransit" />
                                                             </td>
                                                         </tr>
                                                     </table>
                                                 </div>
                                                 <div style="overflow: auto; height: 180px; width: 380px;">
                                                     <asp:GridView ID="gvTransit" runat="server" AutoGenerateColumns="false" AllowPaging="false"
-                                                        BorderStyle="None" BorderWidth="0" Width="100%" HeaderStyle-Wrap="true">
+                                                        BorderStyle="None" BorderWidth="0" Width="100%" HeaderStyle-Wrap="true" OnDataBound="gvTransit_DataBound"
+                                                        OnRowCommand="gvTransit_RowCommand" ShowHeader="false">
                                                         <PagerSettings Mode="NumericFirstLast" Position="TopAndBottom" />
                                                         <PagerStyle CssClass="gridviewpager" />
                                                         <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
@@ -913,17 +906,31 @@
                                                             No Page(s) Found
                                                         </EmptyDataTemplate>
                                                         <Columns>
-                                                            <asp:TemplateField HeaderText="Serial No">
-                                                                <HeaderStyle CssClass="gridviewheader" />
-                                                                <ItemStyle CssClass="gridviewitem" Width="5%" />
+                                                            <asp:TemplateField>
+                                                                <%--<HeaderStyle CssClass="gridviewheader_num" />
+                                                                <HeaderTemplate>
+                                                                    Order
+                                                                </HeaderTemplate>--%>
+                                                                <ItemTemplate>
+                                                                    <asp:HiddenField ID="gvhdnBookingTranshipmentID" runat="server" Value='<%# Eval("BookingTranshipmentID") %>' />
+                                                                    <asp:HiddenField ID="gvhdnPortId" runat="server" Value='<%# Eval("PortId") %>' />
+                                                                    <asp:Label ID="lblSlNo" runat="server" Text='<%# Eval("OrderNo")%>'></asp:Label>
+                                                                </ItemTemplate>
+                                                                <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Right" />
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Ports">
-                                                                <HeaderStyle CssClass="gridviewheader_num" />
-                                                                <ItemStyle CssClass="gridviewitem" Width="50%" HorizontalAlign="Right" />
+                                                            <asp:TemplateField>
+                                                                <%--<HeaderStyle CssClass="gridviewheader" />
+                                                                <HeaderTemplate>
+                                                                    Port
+                                                                </HeaderTemplate>--%>
+                                                                <ItemStyle CssClass="gridviewitem" Width="80%" HorizontalAlign="Left" />
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblPortName" runat="server" Text='<%# Eval("PortName")%>'></asp:Label>
+                                                                </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField>
                                                                 <HeaderStyle CssClass="gridviewheader" />
-                                                                <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                                                 <ItemTemplate>
                                                                     <asp:ImageButton ID="btnRemove" runat="server" CommandName="Remove" ImageUrl="~/Images/remove.png"
                                                                         Height="16" Width="16" />
@@ -935,7 +942,7 @@
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
                                         <br />
-                                        <asp:Button ID="btnSaveTransit" runat="server" Text="Save" />
+                                        <%--<asp:Button ID="btnSaveTransit" runat="server" Text="Save" />--%>
                                         <asp:Button ID="btnCalcelTransit" runat="server" Text="Cancel" />
                                     </fieldset>
                                 </center>

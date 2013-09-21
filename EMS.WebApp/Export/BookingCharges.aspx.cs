@@ -189,8 +189,6 @@ namespace EMS.WebApp.Export
             }
         }
 
-
-
         private void RetriveParameters()
         {
             _userId = UserBLL.GetLoggedInUserId();
@@ -303,10 +301,12 @@ namespace EMS.WebApp.Export
                     SaveBookingHeaderDetails(BookingId);
                     SaveChargesDetails(BookingId);
                 }
+                Response.Redirect("Booking.aspx");
             }
 
             //Save Booking Charges
             List<IBookingCharges> lstData = ViewState["DataSource"] as List<IBookingCharges>;
+
         }
 
         private void LoadBookingHeader()
@@ -422,6 +422,10 @@ namespace EMS.WebApp.Export
                 }
             }
         }
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Booking.aspx");
+        }
     }
 
     public class ChargeApplicable
@@ -429,4 +433,6 @@ namespace EMS.WebApp.Export
         public string Text { get; set; }
         public string Value { get; set; }
     }
+
+
 }

@@ -28,7 +28,7 @@ namespace EMS.DAL
             return Result;
         }
 
-        public static List<IBooking> GetBooking(SearchCriteria searchCriteria, int ID)
+        public static List<IBooking> GetBooking(SearchCriteria searchCriteria, int ID, string CalledFrom)
         {
             string strExecution = "[exp].[prcGetBookingList]";
             List<IBooking> lstBooking = new List<IBooking>();
@@ -36,6 +36,7 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@BookingID", ID);
+                oDq.AddVarcharParam("@CalledFrom", 1, CalledFrom);
                 oDq.AddVarcharParam("@SchBookingNo", 100, searchCriteria.BookingNo);
                 oDq.AddVarcharParam("@SchBookingRefNo", 100, searchCriteria.StringOption1);
                 oDq.AddVarcharParam("@SchBookingParty", 100, searchCriteria.StringOption2);
@@ -57,13 +58,14 @@ namespace EMS.DAL
             return lstBooking;
         }
 
-        public static IBooking GetBooking(int ID)
+        public static IBooking GetBooking(int ID, string CalledFrom)
         {
             string strExecution = "[exp].[prcGetBookingList]";
             IBooking oIH = null;
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@BookingID", ID);
+                oDq.AddVarcharParam("@CalledFrom", 1, CalledFrom);
                 oDq.AddVarcharParam("@SortExpression", 30, "");
                 oDq.AddVarcharParam("@SortDirection", 4, "");
                 DataTableReader reader = oDq.GetTableReader();
@@ -97,10 +99,11 @@ namespace EMS.DAL
             return Containers;
         }
 
-        public static int AddEditBooking(IBooking Booking, int CompanyId)
+        public static int AddEditBooking(IBooking Booking, int CompanyId, ref int BookingId)
         {
             string strExecution = "[exp].[prcAddEditBooking]";
             int Result = 0;
+            int outBookingId = 0;
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
@@ -108,7 +111,7 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@fk_FinYearID", 1);
                 oDq.AddIntegerParam("@fk_CompanyID", CompanyId);
                 oDq.AddBooleanParam("@isedit", Booking.Action);
-                oDq.AddIntegerParam("@pk_BookingID", Booking.BookingID);
+                oDq.AddBigIntegerParam("@pk_BookingID", Booking.BookingID);
                 oDq.AddIntegerParam("@fk_LineID", Booking.LinerID);
                 oDq.AddIntegerParam("@fk_LocationID", Booking.LocationID);
                 oDq.AddIntegerParam("@fk_FPOD", Convert.ToInt32(Booking.FPODID));
@@ -144,8 +147,10 @@ namespace EMS.DAL
                 //oDq.AddBooleanParam("@HaulageStatus", ImportHaulage.HaulageStatus);
 
                 oDq.AddIntegerParam("@RESULT", Result, QueryParameterDirection.Output);
+                oDq.AddIntegerParam("@BookingId", outBookingId, QueryParameterDirection.Output);
                 oDq.RunActionQuery();
                 Result = Convert.ToInt32(oDq.GetParaValue("@RESULT"));
+                BookingId = Convert.ToInt32(oDq.GetParaValue("@BookingId"));
             }
             return Result;
         }
@@ -306,7 +311,7 @@ namespace EMS.DAL
 
                     using (DbQuery oDq = new DbQuery(strExecution))
                     {
-                        //oDq.AddBigIntegerParam("@BookingChargeId", charges.BookingChargeId);
+                        //oDq.AddBigIntegerParam("@BookingChargeId", charges.BookngChargeId);
                         oDq.AddBigIntegerParam("@BookingId", charges.BookingId);
                         oDq.AddIntegerParam("@ChargeId", charges.ChargeId);
                         oDq.AddIntegerParam("@ChargeRateId", charges.ChargeRateId);
@@ -385,12 +390,65 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@ContainerTypeID", Container.ContainerTypeID);
                 oDq.AddVarcharParam("@CntrSize", 2, Container.CntrSize);
                 oDq.AddDecimalParam("@WtPerCntr", 12, 3, Container.wtPerCntr);
+                oDq.AddIntegerParam("@Nos", Container.NoofContainers);
                 oDq.AddIntegerParam("@RESULT", Result, QueryParameterDirection.Output);
                 oDq.RunActionQuery();
                 Result = Convert.ToInt32(oDq.GetParaValue("@Result"));
 
             }
             return Result;
+        }
+
+        public static List<IBookingTranshipment> GetBookingTranshipments(int BookingID)
+        {
+            string strExecution = "[exp].[spGetBookingTranshipmentList]";
+            List<IBookingTranshipment> Transhipments = new List<IBookingTranshipment>();
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@BookingId", BookingID);
+                //oDq.AddIntegerParam("@Mode", 2); // @Mode = 2 to fetch ChargeRate
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    IBookingTranshipment trans = new BookingTranshipmentEntity(reader);
+                    Transhipments.Add(trans);
+                }
+                reader.Close();
+            }
+            return Transhipments;
+        }
+
+        public static int AddEditBookingTranshipment(IBookingTranshipment Transhipment)
+        {
+            string strExecution = "[exp].[spAddEditBookingTranshipments]";
+            int Result = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@BookingTranshipmentID", Transhipment.BookingTranshipmentID);
+                oDq.AddIntegerParam("@BookingID", Transhipment.BookingID);
+                oDq.AddIntegerParam("@PortID", Transhipment.PortId);
+                oDq.AddIntegerParam("@OrderNo", Transhipment.OrderNo);
+                oDq.AddIntegerParam("@RESULT", Result, QueryParameterDirection.Output);
+                oDq.RunActionQuery();
+                Result = Convert.ToInt32(oDq.GetParaValue("@Result"));
+
+            }
+            return Result;
+        }
+
+        public static DataSet GetBookingChargesList(int BookingID)
+        {
+            string strExecution = "[exp].[prcGetBookingChargesList]";
+            DataSet myDataSet;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@BookingID", BookingID);
+                myDataSet = oDq.GetTables();
+            }
+            return myDataSet;
         }
     }
 }

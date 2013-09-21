@@ -29,8 +29,8 @@ namespace EMS.WebApp.Export
 
             if (!IsPostBack)
             {
-                //if (!ReferenceEquals(Request.QueryString["BookingId"], null))
-                //{
+                if (!ReferenceEquals(Request.QueryString["BookingId"], null))
+                {
                     int BookingId = 0;
                     Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["BookingId"].ToString()), out BookingId);
 
@@ -60,7 +60,7 @@ namespace EMS.WebApp.Export
                     {
                         ViewState["BOOKINGID"] = null;
                     }
-                //}
+                }
             }
             txtBrokeragePayableTo.TextChanged += new EventHandler(txtBrokeragePayableTo_TextChanged);
             txtRefundPayableTo.TextChanged += new EventHandler(txtRefundPayableTo_TextChanged);
@@ -406,10 +406,10 @@ namespace EMS.WebApp.Export
                 if (e.Row.RowType == DataControlRowType.DataRow)
                 {
                     List<ChargeApplicable> lstApplicable = new List<ChargeApplicable>();
-                    lstApplicable.Add(new ChargeApplicable{Text="Yes", Value="True"});
-                    lstApplicable.Add(new ChargeApplicable{Text="No", Value="False"});
+                    lstApplicable.Add(new ChargeApplicable { Text = "Yes", Value = "True" });
+                    lstApplicable.Add(new ChargeApplicable { Text = "No", Value = "False" });
 
-                    // Bind drop down to cities
+                    // Bind drop down to Applicable
                     DropDownList ddl = (DropDownList)e.Row.FindControl("ddlApplicable");
                     ddl.DataTextField = "Text";
                     ddl.DataValueField = "Value";

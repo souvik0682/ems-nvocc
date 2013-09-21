@@ -226,13 +226,15 @@
                                                                 </asp:RadioButtonList>
                                                             </td>
                                                             <td>
+                                                             <td style="width: 28%;">
+                                                                BL Type:
                                                             </td>
                                                             <td>
-                                                                Commodity:<span class="errormessage">*</span>
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="txtCommodity" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13" Enabled="false"></asp:TextBox><br />
+                                                                <asp:RadioButtonList ID="rdoBLType" runat="server" TabIndex="9" RepeatDirection="Horizontal">
+                                                                    <asp:ListItem Selected="True" Text="Original" Value="O"></asp:ListItem>
+                                                                    <asp:ListItem Text="Express" Value="E"></asp:ListItem>
+                                                                    <asp:ListItem Text="Seaway" Value="S"></asp:ListItem>
+                                                                </asp:RadioButtonList><br />
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -251,15 +253,13 @@
                                                             <td>
                                                             </td>
                                                             <td>
-                                                                BL Issue Place:<span class="errormessage">*</span>
+                                                                Commodity:<span class="errormessage">*</span>
                                                             </td>
-                                                            <td style="width: 28%;">
-                                                                <asp:TextBox ID="txtIssuePlace" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13"></asp:TextBox><br />
-                                                                <asp:RequiredFieldValidator ID="rfvDestination" runat="server" ControlToValidate="txtIssuePlace"
-                                                                    ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
-                                                                    ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                            <td>
+                                                                <asp:TextBox ID="txtCommodity" runat="server" CssClass="textboxuppercase" MaxLength="8"
+                                                                    Width="250px" TabIndex="13" Enabled="false"></asp:TextBox><br />
                                                             </td>
+                                                            
                                                         </tr>
                                                         <tr>
                                                             <td style="width: 20%;">
@@ -271,6 +271,20 @@
                                                             </td>
                                                             <td>
                                                             </td>
+                                                            <td>
+                                                                BL Issue Place:<span class="errormessage">*</span>
+                                                            </td>
+                                                            <td style="width: 28%;">
+                                                                <asp:TextBox ID="txtIssuePlace" runat="server" CssClass="textboxuppercase" MaxLength="8"
+                                                                    Width="250px" TabIndex="13"></asp:TextBox><br />
+                                                                <asp:RequiredFieldValidator ID="rfvDestination" runat="server" ControlToValidate="txtIssuePlace"
+                                                                    ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
+                                                                    ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                            </td>
+                                                            
+                                                        </tr>
+
+                                                        <tr>
                                                             <td style="width: 20%;">
                                                                 Net Weight:<span class="errormessage">*</span>
                                                             </td>
@@ -278,6 +292,18 @@
                                                                 <asp:TextBox ID="txtNetWt" runat="server" CssClass="textboxuppercase" MaxLength="8"
                                                                     Width="250px" TabIndex="13" Enabled="false"></asp:TextBox><br />
                                                             </td>
+                                                            <td>
+                                                            </td>
+                                                            <td style="width: 20%;">
+                                                                B/L Release Date:
+                                                            </td>
+                                                            <td style="width: 28%;">
+                                                                <asp:TextBox ID="TextBox1" runat="server" CssClass="textboxuppercase" MaxLength="8"
+                                                                    Width="250px" TabIndex="13" Enabled="false"></asp:TextBox><br />
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                            
                                                         </tr>
                                                     </table>
                                                 </ContentTemplate>
@@ -414,7 +440,7 @@
                                                                     ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
                                                                     ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </td>
-                                                            <td style="width: 28%;">
+                                                           <%-- <td style="width: 28%;">
                                                                 BL Type:
                                                             </td>
                                                             <td>
@@ -423,7 +449,7 @@
                                                                     <asp:ListItem Text="Express" Value="E"></asp:ListItem>
                                                                     <asp:ListItem Text="Seaway" Value="S"></asp:ListItem>
                                                                 </asp:RadioButtonList><br />
-                                                            </td>
+                                                            </td>--%>
                                                         </tr>
                                                     </table>
                                                 </ContentTemplate>

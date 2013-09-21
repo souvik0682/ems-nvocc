@@ -319,7 +319,7 @@ namespace EMS.WebApp.Export
         private void RedirecToChargePage(int id)
         {
             string encryptedId = GeneralFunctions.EncryptQueryString(id.ToString());
-            Response.Redirect("~/Export/BookingCharges.aspx?id=" + encryptedId);
+            Response.Redirect("~/Export/BookingCharges.aspx?BookingId=" + encryptedId);
         }
 
         private void BuildSearchCriteria(SearchCriteria criteria)

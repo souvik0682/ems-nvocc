@@ -260,39 +260,50 @@
                                                                 <ItemTemplate>
                                                                     <cc2:CustomTextBox ID="txtManifest" runat="server" Text='<%# Bind("ManifestRate") %>'
                                                                         Width="80" BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"
-                                                                        MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("ManifestEditabe").ToString() == "True" %>'></cc2:CustomTextBox>
+                                                                        MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("ManifestEditabe").ToString() == "True" %>'>
+                                                                    </cc2:CustomTextBox>
                                                                     <asp:RequiredFieldValidator ID="rfv1" runat="server" ControlToValidate="txtManifest"
                                                                         Display="Dynamic" ValidationGroup="Save">
-                                                                        <asp:CompareValidator ID="cv1" runat="server" ControlToValidate="txtManifest"
-                                                                            Operator="GreaterThan" Type="Double" ValueToCompare="0" ValidationGroup="Save" />
-                                                                    </asp:RequiredFieldValidator></ItemTemplate></asp:TemplateField><asp:TemplateField HeaderText="Charged" SortExpression="ActualRate" HeaderStyle-Width="100">
+                                                                    </asp:RequiredFieldValidator>
+                                                                    <asp:CompareValidator ID="cv1" runat="server" ControlToValidate="txtManifest" Operator="GreaterThan"
+                                                                        Type="Double" ValueToCompare="0" ValidationGroup="Save">
+                                                                    </asp:CompareValidator>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Charged" SortExpression="ActualRate" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
                                                                     <cc2:CustomTextBox ID="txtCharged" runat="server" Text='<%# Bind("ActualRate") %>'
                                                                         Width="80" BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"
-                                                                        MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("ChargedEditable").ToString() == "True" %>'></cc2:CustomTextBox><asp:RequiredFieldValidator
-                                                                            ID="rfv2" runat="server" ControlToValidate="txtCharged" Display="Dynamic"
-                                                                            ValidationGroup="Save">
-                                                                            <asp:CompareValidator ID="cv2" runat="server" ControlToValidate="txtCharged"
-                                                                                Operator="GreaterThan" Type="Double" ValueToCompare="0" ValidationGroup="Save" />
-                                                                        </asp:RequiredFieldValidator></ItemTemplate></asp:TemplateField><asp:TemplateField HeaderText="Refund" SortExpression="RefundAmount" HeaderStyle-Width="100">
+                                                                        MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("ChargedEditable").ToString() == "True" %>'>
+                                                                    </cc2:CustomTextBox>
+                                                                    <asp:RequiredFieldValidator ID="rfv2" runat="server" ControlToValidate="txtCharged" Display="Dynamic" ValidationGroup="Save">
+                                                                    </asp:RequiredFieldValidator>
+                                                                    <asp:CompareValidator ID="cv2" runat="server" ControlToValidate="txtCharged" Operator="GreaterThan"
+                                                                        Type="Double" ValueToCompare="0" ValidationGroup="Save" >
+                                                                    </asp:CompareValidator>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Refund" SortExpression="RefundAmount" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
                                                                     <cc2:CustomTextBox ID="txtRefund" runat="server" Text='<%# Bind("RefundAmount") %>'
                                                                         Width="80" BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"
-                                                                        MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("RefundEditable").ToString() == "True" %>'></cc2:CustomTextBox><asp:RequiredFieldValidator ID="rfv3" runat="server" ControlToValidate="txtRefund"
-                                                                        Display="Dynamic" ValidationGroup="Save">
-                                                                        <asp:CompareValidator ID="cv3" runat="server" ControlToValidate="txtRefund"
-                                                                            Operator="GreaterThan" Type="Double" ValueToCompare="0" ValidationGroup="Save" />
-                                                                    </asp:RequiredFieldValidator></ItemTemplate></asp:TemplateField>
-                                                             <asp:TemplateField HeaderText="Brokerage Basic" SortExpression="BrokerageBasic" HeaderStyle-Width="120">
+                                                                        MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("RefundEditable").ToString() == "True" %>'>
+                                                                    </cc2:CustomTextBox>
+                                                                    <asp:RequiredFieldValidator ID="rfv3" runat="server" ControlToValidate="txtRefund" Display="Dynamic" ValidationGroup="Save">
+                                                                    </asp:RequiredFieldValidator>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Brokerage Basic" SortExpression="BrokerageBasic" HeaderStyle-Width="120">
                                                                 <ItemTemplate>
                                                                     <cc2:CustomTextBox ID="txtBrokerageBasic" runat="server" Text='<%# Bind("BrokerageBasic") %>'
                                                                         Width="100" BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"
-                                                                        MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("BrokerageEditable").ToString() == "True" %>'></cc2:CustomTextBox><asp:RequiredFieldValidator ID="rfv4" runat="server" ControlToValidate="txtBrokerageBasic"
-                                                                        Display="Dynamic" ValidationGroup="Save">
-                                                                        <asp:CompareValidator ID="cv4" runat="server" ControlToValidate="txtBrokerageBasic"
-                                                                            Operator="GreaterThan" Type="Double" ValueToCompare="0" ValidationGroup="Save" />
-                                                                    </asp:RequiredFieldValidator></ItemTemplate></asp:TemplateField>
-                                                             <%--<asp:TemplateField HeaderText="Remove">
+                                                                        MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("BrokerageEditable").ToString() == "True" %>'>
+                                                                    </cc2:CustomTextBox>
+                                                                    <asp:RequiredFieldValidator ID="rfv4" runat="server" ControlToValidate="txtBrokerageBasic" Display="Dynamic" ValidationGroup="Save">
+                                                                    </asp:RequiredFieldValidator>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <%--<asp:TemplateField HeaderText="Remove">
                                                                 <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                                                 <ItemTemplate>
                                                                     <asp:ImageButton ID="btnRemove" runat="server" OnClick="btnRemove_Click" ImageUrl="~/Images/remove.png"
@@ -309,14 +320,32 @@
                                             </tr>
                                         </table>
                                     </fieldset>
-                                  </td></tr><tr>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td colspan="10">
                                     <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" OnClick="btnSave_Click" />
-                                    &nbsp;&nbsp; <asp:Button ID="btnBack" runat="server" CssClass="button" Text="Back" OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
-                                    &nbsp;&nbsp; <%--<asp:Button ID="btnLock" runat="server" Text="Save/Locked" ValidationGroup="vgSave" />--%><br /><asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label></td></tr></table></ContentTemplate></asp:UpdatePanel></fieldset> <asp:UpdateProgress ID="uProgressCharges" runat="server" AssociatedUpdatePanelID="upCharges">
+                                    &nbsp;&nbsp;
+                                    <asp:Button ID="btnBack" runat="server" CssClass="button" Text="Back" OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
+                                    &nbsp;&nbsp;
+                                    <%--<asp:Button ID="btnLock" runat="server" Text="Save/Locked" ValidationGroup="vgSave" />--%><br />
+                                    <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
+                                </td>
+                            </tr>
+                        </table>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </fieldset>
+            <asp:UpdateProgress ID="uProgressCharges" runat="server" AssociatedUpdatePanelID="upCharges">
                 <ProgressTemplate>
                     <div class="progress">
                         <div id="image">
                             <img src="../Images/PleaseWait.gif" alt="" /></div>
                         <div id="text">
-                            Please Wait...</div></div></ProgressTemplate></asp:UpdateProgress></center></div></asp:Content>
+                            Please Wait...</div>
+                    </div>
+                </ProgressTemplate>
+            </asp:UpdateProgress>
+        </center>
+    </div>
+</asp:Content>

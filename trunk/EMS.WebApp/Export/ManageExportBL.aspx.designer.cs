@@ -256,13 +256,13 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.RadioButtonList rdoShipment;
         
         /// <summary>
-        /// txtCommodity control.
+        /// rdoBLType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCommodity;
+        protected global::System.Web.UI.WebControls.RadioButtonList rdoBLType;
         
         /// <summary>
         /// ddlOrigine control.
@@ -283,6 +283,24 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvOrigine;
         
         /// <summary>
+        /// txtCommodity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCommodity;
+        
+        /// <summary>
+        /// txtContainers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtContainers;
+        
+        /// <summary>
         /// txtIssuePlace control.
         /// </summary>
         /// <remarks>
@@ -301,15 +319,6 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDestination;
         
         /// <summary>
-        /// txtContainers control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtContainers;
-        
-        /// <summary>
         /// txtNetWt control.
         /// </summary>
         /// <remarks>
@@ -317,6 +326,15 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNetWt;
+        
+        /// <summary>
+        /// TextBox1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox1;
         
         /// <summary>
         /// tpOther control.
@@ -497,15 +515,6 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
-        
-        /// <summary>
-        /// RadioButtonList1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RadioButtonList1;
         
         /// <summary>
         /// tpFooter control.

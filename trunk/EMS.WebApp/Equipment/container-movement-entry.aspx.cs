@@ -77,7 +77,7 @@ namespace EMS.WebApp.Equipment
                     FillContainers(ds.Tables[1]);
                 }
             }
-            CheckUserAccess(hdnContainerTransactionId.Value);
+            //CheckUserAccess(hdnContainerTransactionId.Value);
         }
 
         void DisableHeaderSection()

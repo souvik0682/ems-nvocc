@@ -59,6 +59,7 @@ namespace EMS.WebApp.Export
                     //gvContainer.DataSource = oBookingContainers;
                     //gvContainer.DataBind();
                     //gvContainer.Rows[0].Visible = false;
+                    checkTransitRoot();
                 }
                 else
                 {
@@ -413,6 +414,12 @@ namespace EMS.WebApp.Export
             gvContainer.DataSource = null;
             gvContainer.DataBind();
             hdnBookingID.Value = "0";
+
+            ddlService.Items.Clear();
+            txtContainerDtls.Text = string.Empty;
+            ddlLoadingVoyage.Items.Clear();
+            ddlMainLineVoyage.Items.Clear();
+
         }
 
         protected void lnkContainerDtls_Click(object sender, EventArgs e)
@@ -425,6 +432,11 @@ namespace EMS.WebApp.Export
         protected void lnkTransitRoute_Click(object sender, EventArgs e)
         {
             ModalPopupExtender2.Show();
+            if (ViewState["BookingTran"] != null)
+                Transhipments = (List<IBookingTranshipment>)ViewState["BookingTran"];
+            gvTransit.DataSource = Transhipments;
+            gvTransit.DataBind();
+            UpdatePanel2.Update();
         }
 
         protected void rdoBLThruEdge_SelectedIndexChanged(object sender, EventArgs e)
@@ -545,7 +557,18 @@ namespace EMS.WebApp.Export
                                     ClearAll();
                                     break;
                                 case 1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
-                                    ClearAll();
+                                    oBookingBll.DeactivateAllTranshipmentsAgainstBookingId(outBookingId);
+                                    switch (AddTranshipments(outBookingId))
+                                    {
+                                        case -1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00076");
+                                            break;
+                                        case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
+                                            ClearAll();
+                                            break;
+                                        case 1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
+                                            ClearAll();
+                                            break;
+                                    }
                                     break;
                             }
                             break;
@@ -565,7 +588,7 @@ namespace EMS.WebApp.Export
                             break;
                         case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
                             break;
-                        case 1: 
+                        case 1:
                             oBookingBll.DeactivateAllContainersAgainstBookingId(outBookingId);
                             switch (AddContainers(outBookingId))
                             {
@@ -591,6 +614,7 @@ namespace EMS.WebApp.Export
                             }
                             break;
                     }
+                    Response.Redirect("~/Export/Booking.aspx");
                 }
             }
         }
@@ -604,6 +628,7 @@ namespace EMS.WebApp.Export
                 hdnPOL.Value = hdnPOR.Value;
                 txtPOL.Text = txtPOR.Text;
             }
+            checkTransitRoot();
         }
 
         protected void txtPOT_TextChanged(object sender, EventArgs e)
@@ -621,12 +646,14 @@ namespace EMS.WebApp.Export
                 txtFPOD.Text = txtPOD.Text;
                 PopulateSevices(ddlNvocc.SelectedValue.ToInt(), Convert.ToInt32(hdnFPOD.Value));
             }
+            checkTransitRoot();
         }
 
         protected void txtVessel_TextChanged(object sender, EventArgs e)
         {
             PopulateVoyage(Convert.ToInt32(hdnVessel.Value));
             //Filler.FillData(ddlLoadingVoyage, CommonBLL.GetExportVoyages(hdnVessel.Value), "VoyageNo", "VoyageID", "Voyage");
+            checkTransitRoot();
         }
 
         protected void txtMainLineVessel_TextChanged(object sender, EventArgs e)
@@ -669,6 +696,7 @@ namespace EMS.WebApp.Export
         protected void txtFPOD_TextChanged(object sender, EventArgs e)
         {
             PopulateSevices(ddlNvocc.SelectedValue.ToInt(), Convert.ToInt32(hdnFPOD.Value));
+            checkTransitRoot();
         }
 
         protected void ddlNvocc_SelectedIndexChanged(object sender, EventArgs e)
@@ -701,9 +729,9 @@ namespace EMS.WebApp.Export
             oBookingBll = new BookingBLL();
             Containers = new List<IBookingContainer>();
             Containers = oBookingBll.GetBookingContainers(BookingID);
-            
+
             ViewState["BookingCntr"] = Containers;
-            
+
             gvContainer.DataSource = Containers;
             gvContainer.DataBind();
         }
@@ -813,7 +841,7 @@ namespace EMS.WebApp.Export
 
         protected void btnimgSave_Click(object sender, ImageClickEventArgs e)
         {
-            if(ViewState["BookingCntr"] != null)
+            if (ViewState["BookingCntr"] != null)
                 Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
             //IEnumerable<IBookingContainer> Rts = from IBookingContainer rt in Containers
             //                                     where rt.BkCntrStatus == true
@@ -898,8 +926,8 @@ namespace EMS.WebApp.Export
             {
                 if (ViewState["BookingCntr"] != null)
                     Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
-                
-                if (Containers.Count>0)
+
+                if (Containers.Count > 0)
                 {
                     //dt = (DataTable)otabSelItems;
                     Containers.RemoveAt(RowIndex);
@@ -910,7 +938,7 @@ namespace EMS.WebApp.Export
                     gvContainer.DataBind();
 
                     ViewState["BookingCntr"] = gvContainer.DataSource = Containers;
-                    
+
                     //ModalPopupExtender1.Show();
                 }
             }
@@ -923,7 +951,7 @@ namespace EMS.WebApp.Export
 
             if (Containers.Count > 0)
             {
-                foreach(BookingContainerEntity obj in Containers)
+                foreach (BookingContainerEntity obj in Containers)
                 {
                     oBookingBll = new BookingBLL();
                     //oBookingContainerEntity = new BookingContainerEntity();
@@ -934,7 +962,7 @@ namespace EMS.WebApp.Export
                     //oBookingContainerEntity.CntrSize = dt.Rows[i]["CntrSize"].ToString();
                     //oBookingContainerEntity.NoofContainers = Convert.ToInt32(dt.Rows[i]["NoofContainers"].ToString());
                     //oBookingContainerEntity.wtPerCntr = Convert.ToDecimal(dt.Rows[i]["wtPerCntr"].ToString());
-                    
+
                     int res = oBookingBll.AddEditBookingContainer(obj);
                     if (res != 1)
                         return res;
@@ -981,7 +1009,7 @@ namespace EMS.WebApp.Export
         {
             if (ViewState["BookingCntr"] != null)
                 Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
-            
+
             txtContainerDtls.Text = string.Empty;
 
             if (Containers.Count > 0)
@@ -1092,6 +1120,108 @@ namespace EMS.WebApp.Export
 
         }
 
+        private void checkTransitRoot()
+        {
+            if (string.IsNullOrEmpty(txtPOL.Text.Trim()) || string.IsNullOrEmpty(txtPOD.Text.Trim()) || string.IsNullOrEmpty(txtFPOD.Text.Trim()) || string.IsNullOrEmpty(txtVessel.Text.Trim()) || ddlLoadingVoyage.SelectedValue == "0" || ddlLoadingVoyage.SelectedValue == "")
+            {
+                lnkTransitRoute.Enabled = false;
+                ViewState["BookingTran"] = null;
+                gvTransit.DataSource = null;
+                gvTransit.DataBind();
+            }
+            else
+            {
+                lnkTransitRoute.Enabled = true;
+                Transhipments = new List<IBookingTranshipment>();
+                ViewState["BookingTran"] = Transhipments;
+                int val = 0;
+                if (!(ddlLoadingVoyage.SelectedValue == "0" || ddlLoadingVoyage.SelectedValue == ""))
+                {
+                    if (ViewState["BookingTran"] != null)
+                        Transhipments = (List<IBookingTranshipment>)ViewState["BookingTran"];
 
+                    SearchCriteria sc = new SearchCriteria();
+                    sc.VoyageID = -1;
+                    sc.Voyage = ddlLoadingVoyage.SelectedItem.Text;
+                    expVoyageBLL objBLL = new expVoyageBLL();
+                    List<IexpVoyage> lst = objBLL.GetVoyage(sc);
+
+                    IBookingTranshipment obj = new BookingTranshipmentEntity();
+
+                    obj.PortId = lst[0].NextPortID;
+                    val = lst[0].NextPortID;
+                    string[] nextPort = lst[0].NextPort.Split(',');
+                    obj.PortName = nextPort[0] + " (" + nextPort[1] + ")";
+
+                    Transhipments.Insert(0,obj);
+
+                    for (int i = 0; i < Transhipments.Count; i++)
+                    {
+                        Transhipments[i].OrderNo = i + 1;
+                    }
+
+                    gvTransit.DataSource = Transhipments;
+                    gvTransit.DataBind();
+
+                    ViewState["BookingTran"] = Transhipments;
+                }
+
+                if (!(string.IsNullOrEmpty(txtPOD.Text.Trim()) || val.ToString() == hdnPOD.Value.Trim()))
+                {
+                    if (ViewState["BookingTran"] != null)
+                        Transhipments = (List<IBookingTranshipment>)ViewState["BookingTran"];
+
+                    IBookingTranshipment obj = new BookingTranshipmentEntity();
+
+                    obj.PortId = Convert.ToInt32(hdnPOD.Value.Trim());
+                    obj.PortName = txtPOD.Text.Trim();
+                
+                    Transhipments.Add(obj);
+                    
+                    for (int i = 0; i < Transhipments.Count; i++)
+                    {
+                        Transhipments[i].OrderNo = i + 1;
+                    }
+
+                    gvTransit.DataSource = Transhipments;
+                    gvTransit.DataBind();
+
+                    ViewState["BookingTran"] = Transhipments;
+                }
+                
+                if (!(string.IsNullOrEmpty(txtFPOD.Text.Trim()) || hdnFPOD.Value.Trim() == hdnPOD.Value.Trim()))
+                {
+                    if (ViewState["BookingTran"] != null)
+                        Transhipments = (List<IBookingTranshipment>)ViewState["BookingTran"];
+
+                    IBookingTranshipment obj = new BookingTranshipmentEntity();
+
+                    obj.PortId = Convert.ToInt32(hdnFPOD.Value.Trim());
+                    obj.PortName = txtFPOD.Text.Trim();
+
+                    Transhipments.Add(obj);
+
+                    for (int i = 0; i < Transhipments.Count; i++)
+                    {
+                        Transhipments[i].OrderNo = i + 1;
+                    }
+
+                    gvTransit.DataSource = Transhipments;
+                    gvTransit.DataBind();
+
+                    ViewState["BookingTran"] = Transhipments;
+                }
+            }
+        }
+
+        protected void txtPOL_TextChanged(object sender, EventArgs e)
+        {
+            checkTransitRoot();
+        }
+
+        protected void ddlLoadingVoyage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            checkTransitRoot();
+        }
     }
 }

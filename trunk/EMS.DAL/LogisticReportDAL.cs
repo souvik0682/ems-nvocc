@@ -10,7 +10,7 @@ namespace EMS.DAL
 {
     public class LogisticReportDAL
     {
-        public static System.Data.DataSet GetRptCargoDesc(string Line, string Loc, string Stat, string CntrType, string StockDate)
+        public static System.Data.DataSet GetRptCargoDesc(string Line, string Loc, string Stat, string CntrType, string StockDate, int EmptyYard)
         {
             DateTime dt=string.IsNullOrEmpty(StockDate)?DateTime.Now:Convert.ToDateTime(StockDate);
             DataSet ds = new DataSet();
@@ -21,6 +21,7 @@ namespace EMS.DAL
                 dq.AddVarcharParam("@Stat", 100, Stat);
                 dq.AddVarcharParam("@CntrType", 100, CntrType);
                 dq.AddDateTimeParam("@StockDate", dt);
+                dq.AddIntegerParam("@EmptyYard", EmptyYard);
                 ds = dq.GetTables();
             }
             return ds;

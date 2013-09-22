@@ -26,7 +26,7 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@pk_ServiceID", Service.ServiceID);
                 oDq.AddIntegerParam("@fk_LineID", Service.LinerID);
                 oDq.AddIntegerParam("@fk_FPOD", Convert.ToInt32(Service.FPODID));
-                oDq.AddVarcharParam("@ServiceName", 50, Service.ServiceName);
+                oDq.AddIntegerParam("@ServiceNameID", Service.ServiceNameID);
                 oDq.AddIntegerParam("@RESULT", Result, QueryParameterDirection.Output);
                 oDq.RunActionQuery();
                 Result = Convert.ToInt32(oDq.GetParaValue("@RESULT"));

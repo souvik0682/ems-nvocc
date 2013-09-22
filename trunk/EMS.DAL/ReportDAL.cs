@@ -276,10 +276,11 @@ namespace EMS.DAL
             return dt;
         }
 
-        public static DataTable GetContainerStockDetail(string Line, string Loc, string Stat, string CntrType, DateTime StockDate)
+        public static DataTable GetContainerStockDetail(string Line, string Loc, string Stat, string CntrType, string StockDate, int EmptyYard)
         {
             
             DataTable dt = new DataTable();
+            DateTime dt1 = string.IsNullOrEmpty(StockDate) ? DateTime.Now : Convert.ToDateTime(StockDate);
             string strExecution = "prcRptStockDetail";
             //DateTime dt1 = string.IsNullOrEmpty(StockDate) ? DateTime.Now : Convert.ToDateTime(StockDate);
             //DataSet ds = new DataSet();
@@ -291,7 +292,8 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@Loc", 100, Loc);
                 oDq.AddVarcharParam("@Stat", 100, Stat);
                 oDq.AddVarcharParam("@CntrType", 100, CntrType);
-                oDq.AddDateTimeParam("@StockDate", StockDate);
+                oDq.AddDateTimeParam("@StockDate", dt1);
+                oDq.AddIntegerParam("@EmptyYard", EmptyYard);
                 dt = oDq.GetTable();
             }
 

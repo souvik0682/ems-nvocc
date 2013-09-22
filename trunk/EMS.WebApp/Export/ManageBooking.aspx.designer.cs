@@ -841,24 +841,6 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtPOT;
         
         /// <summary>
-        /// rfvPOT control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPOT;
-        
-        /// <summary>
-        /// ValidatorCalloutExtender5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender5;
-        
-        /// <summary>
         /// AutoCompleteExPOT control.
         /// </summary>
         /// <remarks>
@@ -875,6 +857,15 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgbtnAddToGrid;
+        
+        /// <summary>
+        /// rfvPOT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPOT;
         
         /// <summary>
         /// gvTransit control.

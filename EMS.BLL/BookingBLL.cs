@@ -118,5 +118,11 @@ namespace EMS.BLL
         {
             return BookingDAL.GetBookingChargesList(BookingID);
         }
+
+        public void DeactivateAllTranshipmentsAgainstBookingId(int BookingId)
+        {
+            BookingDAL.DeactivateAllTranshipmentsAgainstBookingId(BookingId);
+
+        }
     }
 }

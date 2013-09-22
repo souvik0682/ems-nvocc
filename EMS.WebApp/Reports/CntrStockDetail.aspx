@@ -34,39 +34,53 @@
             <tr>
               <td style="width:60%" >
               <table width="100%">
-                    <tr>
-                    <td style="text-align:right">Line:</td>
+                 <tr>
+                    <td style="text-align:left">Line:</td>
                     <td>
                      <asp:DropDownList ID="ddlLine" runat="server" Width="100%">
                          
                       </asp:DropDownList>
                     </td>
            
-                    <td style="text-align:right">Location:<%--<span class="errormessage1">*</span>--%></td>
+                    <td style="text-align:left">Location:<%--<span class="errormessage1">*</span>--%></td>
                     <td>
-                      <asp:DropDownList ID="ddlLoc" runat="server" Width="100%" 
-                            ></asp:DropDownList>
+                      <asp:DropDownList ID="ddlLoc" runat="server" Width="100%" OnSelectedIndexChanged="ddlLoc_SelectedIndexChanged"
+                                        AutoPostBack="true"></asp:DropDownList>
                            <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage" 
                             ControlToValidate="ddlLoc" Display="Dynamic" InitialValue="0" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
                     </td>
-                    <td style="text-align:right">Status:<%--<span class="errormessage1">*</span>--%></td>
+                    <td style="text-align:left">Status:<%--<span class="errormessage1">*</span>--%></td>
                     <td>
                       <asp:DropDownList ID="ddlStatus" runat="server" Width="100%" 
                             ></asp:DropDownList>
                            <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage" 
                             ControlToValidate="ddlLoc" Display="Dynamic" InitialValue="0" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
                     </td>
-                    
-                    <td style="text-align:right">Type:<%--<span class="errormessage1">*</span>--%></td>
+                 </tr>
+                    <tr>
+                    <td style="text-align:left">Type:<%--<span class="errormessage1">*</span>--%></td>
                     <td>
                       <asp:DropDownList ID="ddlContainerType" runat="server" Width="100%" 
                             ></asp:DropDownList>
                            <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage" 
                             ControlToValidate="ddlLoc" Display="Dynamic" InitialValue="0" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
-                    </td>                   
+                    </td>  
+                    <td style="text-align:left">Empty:<%--<span class="errormessage1">*</span>--%></td>
+                    <td>
+                      <asp:DropDownList ID="ddlEmptyYard" runat="server" Width="100%" 
+                            ></asp:DropDownList>
+                           <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage" 
+                            ControlToValidate="ddlLoc" Display="Dynamic" InitialValue="0" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
+                    </td>
+                    <td style="text-align:left" >Stock Date:</td>
+                    <td>
+                        <asp:TextBox ID="txtdtStock" runat="server" CssClass="textboxuppercase" Width="150"></asp:TextBox>
+                        <cc2:CalendarExtender ID="CalendarExtender1" Format="dd/MM/yyyy" TargetControlID="txtdtStock" runat="server" />
+                    </td>
+                 </tr>                    
               </table>
               </td>
-              <td style="width:30%" colspan="2" align="right"><table width="100%">
+    <%--          <td style="width:30%" colspan="2" align="right"><table width="100%">
                 <tr>
                     <td style="text-align:right" >Stock Date:</td>
                     <td>
@@ -76,14 +90,14 @@
              
                    
                 </tr>
-              </table></td>
+              </table></td>--%>
                     
-                <td colspan="2" style="text-align:right; width:10%">
+                <td colspan="2" style="text-align:right; width:5%">
                     <asp:Button ID="btnSave" runat="server" onclick="btnSave_Click" Text="Show" 
                         ValidationGroup="Save" />
                    <%-- &nbsp;&nbsp;--%>
                 </td>
-                <td colspan="2" style="text-align:right; width:10%">
+                <td colspan="2" style="text-align:right; width:5%">
                     <asp:Button ID="btnExcel" runat="server" onclick="btnExcel_Click" Text="Excel" 
                         ValidationGroup="Excel" />
                     <%--&nbsp;&nbsp;--%>

@@ -9,6 +9,7 @@ using EMS.BLL;
 using EMS.Utilities.ReportManager;
 using System.Configuration;
 using System.Data;
+using EMS.Common;
 using Microsoft.Reporting.WebForms;
 
 namespace EMS.WebApp.Reports
@@ -20,6 +21,7 @@ namespace EMS.WebApp.Reports
         private bool _canDelete = false;
         private bool _canView = false;
         private int _userId = 0;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             RetriveParameters();
@@ -31,6 +33,8 @@ namespace EMS.WebApp.Reports
                 GeneralFunctions.PopulateDropDownList(ddlLoc, dbinteract.PopulateDDLDS("DSR.dbo.mstLocation", "pk_LocID", "LocAbbr", true), true);
                 GeneralFunctions.PopulateDropDownList(ddlStatus, EMS.BLL.EquipmentBLL.DDLGetStatus());
                 GeneralFunctions.PopulateDropDownList(ddlContainerType, EMS.BLL.EquipmentBLL.DDLGetContainerType());
+                //GeneralFunctions.PopulateDropDownList(ddlEmptyYard, EMS.BLL.EquipmentBLL.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt()));
+
                //GenerateReport();
             }
         }
@@ -57,9 +61,8 @@ namespace EMS.WebApp.Reports
 
             LocalReportManager reportManager = new LocalReportManager(rptViewer, "CntrStockDetail", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
             string rptName = "CntrStockDetail.rdlc";
-         
            
-            DataSet ds = EMS.BLL.LogisticReportBLL.GetRptCntrStockDetails(ddlLine.SelectedValue,ddlLoc.SelectedValue, ddlStatus.SelectedValue, ddlContainerType.SelectedValue, txtdtStock.Text.Trim());
+            DataSet ds = EMS.BLL.LogisticReportBLL.GetRptCntrStockDetails(ddlLine.SelectedValue,ddlLoc.SelectedValue, ddlStatus.SelectedValue, ddlContainerType.SelectedValue, txtdtStock.Text.Trim(), ddlEmptyYard.SelectedValue.ToInt());
             try
             {
                 rptViewer.Reset();
@@ -81,7 +84,6 @@ namespace EMS.WebApp.Reports
 
         }
        
-
         protected void btnSave_Click(object sender, EventArgs e)
         {
             GenerateReport();
@@ -94,9 +96,9 @@ namespace EMS.WebApp.Reports
 
             try
             {
-                DateTime dt = Convert.ToDateTime(txtdtStock.Text.Trim());
+                //DateTime dt = Convert.ToDateTime(txtdtStock.Text.Trim());
                 DataTable dtExcel = new DataTable();
-                dtExcel = cls.GetContainerStockDetail(ddlLine.SelectedValue, ddlLoc.SelectedValue, ddlStatus.SelectedValue, ddlContainerType.SelectedValue, dt);
+                dtExcel = cls.GetContainerStockDetail(ddlLine.SelectedValue, ddlLoc.SelectedValue, ddlStatus.SelectedValue, ddlContainerType.SelectedValue, txtdtStock.Text.Trim(), ddlEmptyYard.SelectedValue.ToInt());
                 ExporttoExcel(dtExcel);
             }
             catch (Exception ex)
@@ -147,6 +149,11 @@ namespace EMS.WebApp.Reports
             HttpContext.Current.Response.Flush();
             HttpContext.Current.ApplicationInstance.CompleteRequest();
             HttpContext.Current.Response.End();
+        }
+
+        protected void ddlLoc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GeneralFunctions.PopulateDropDownList(ddlEmptyYard, EMS.BLL.EquipmentBLL.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt()));
         }
     }
 }

@@ -378,6 +378,18 @@ namespace EMS.DAL
             }
         }
 
+        public static void DeactivateAllTranshipmentsAgainstBookingId(int BookingId)
+        {
+            string strExecution = "[exp].[spBookingTranshipmentsDeactive]";
+            //int Result = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@BookingId", BookingId);
+                oDq.RunActionQuery();
+            }
+        }
+
         public static int AddEditBookingContainer(IBookingContainer Container)
         {
             string strExecution = "[exp].[spAddEditBookingContainers]";

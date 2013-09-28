@@ -83,6 +83,8 @@
     <Content Include="Equipment\container-movement.aspx" />
     <Content Include="Equipment\RepairingEstimate.aspx" />
     <Content Include="Error.aspx" />
+    <Content Include="Export\DOEdit.aspx" />
+    <Content Include="Export\DOList.aspx" />
     <Content Include="FileNotFound.aspx" />
     <Content Include="GetLocation.asmx" />
     <Content Include="Hire\AddEditHire.aspx" />
@@ -375,6 +377,20 @@
     </Compile>
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\DOEdit.aspx.cs">
+      <DependentUpon>DOEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\DOEdit.aspx.designer.cs">
+      <DependentUpon>DOEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\DOList.aspx.cs">
+      <DependentUpon>DOList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\DOList.aspx.designer.cs">
+      <DependentUpon>DOList.aspx</DependentUpon>
     </Compile>
     <Compile Include="FileNotFound.aspx.cs">
       <DependentUpon>FileNotFound.aspx</DependentUpon>
@@ -730,7 +746,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Export\" />
     <Folder Include="Finance\" />
     <Folder Include="Import\EDIFile\" />
   </ItemGroup>

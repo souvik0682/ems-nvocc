@@ -174,7 +174,8 @@ namespace EMS.WebApp.Export
                 if (!ReferenceEquals(exportBL, null))
                 {
                     ViewState["BOOKINGID"] = exportBL.BookingId;
-                    txtBookingDate.Text = Convert.ToString(exportBL.BookingDate.ToString("dd-MM-yyyy"));
+                    txtBookingDate.Text = exportBL.BookingDate.ToString("dd-MM-yyyy");
+                    txtBLDate.Text = DateTime.Now.ToString("dd-MM-yyyy");
                     txtBookingParty.Text = exportBL.BookingParty;
                     txtRefBookingNo.Text = exportBL.RefBookingNumber;
                     txtLocation.Text = exportBL.Location;

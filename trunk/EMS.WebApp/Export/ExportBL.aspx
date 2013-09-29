@@ -80,9 +80,11 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" />
+                            <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" 
+                                Width="100px" onclick="btnSearch_Click" />
                             &nbsp;&nbsp;&nbsp;
-                            <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="button" Width="100px" />
+                            <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="button" 
+                                Width="100px" onclick="btnReset_Click" />
                         </td>
                     </tr>
                     </table>
@@ -100,7 +102,8 @@
             <fieldset id="fsList" runat="server" style="width: 100%; min-height: 100px;">
                 <legend>Export BL List</legend>
                 <div style="float: right; padding-bottom: 5px;">
-                    Results Per Page:<asp:DropDownList ID="ddlPaging" runat="server" Width="50px">
+                    Results Per Page:<asp:DropDownList ID="ddlPaging" runat="server" Width="50px" 
+                        onselectedindexchanged="ddlPaging_SelectedIndexChanged">
                         <asp:ListItem Text="10" Value="10" />
                         <asp:ListItem Text="30" Value="30" />
                         <asp:ListItem Text="50" Value="50" />
@@ -122,7 +125,9 @@
                         </Triggers>
                         <ContentTemplate>
                             <asp:GridView ID="gvExportBL" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                                BorderStyle="None" BorderWidth="0" Width="100%" >
+                                BorderStyle="None" BorderWidth="0" Width="100%" 
+                                onpageindexchanging="gvExportBL_PageIndexChanging" 
+                                onrowcommand="gvExportBL_RowCommand" onrowdatabound="gvExportBL_RowDataBound" >
                                 <PagerSettings Mode="NumericFirstLast" Position="TopAndBottom" />
                                 <PagerStyle CssClass="gridviewpager" />
                                 <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
@@ -157,6 +162,13 @@
                                             <asp:LinkButton ID="lnkEdgeBLNo" runat="server" CommandName="Sort" CommandArgument="EdgeBLNo" Text="Edge BL No"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
+                                     <asp:TemplateField>
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lnkRefBLNo" runat="server" CommandName="Sort" CommandArgument="RefBLNo" Text="Ref BL No"></asp:LinkButton>
+                                        </HeaderTemplate>
+                                    </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="10%" />
@@ -170,6 +182,18 @@
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkPOD" runat="server" CommandName="Sort" CommandArgument="PortOfDischarge" Text="POD"></asp:LinkButton>
                                         </HeaderTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <%--<HeaderTemplate>
+                                            <asp:Label ID="lblDashboard" runat="server" Text="Dashboard"></asp:Label>
+                                        </HeaderTemplate>--%>
+                                        <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                        <ItemTemplate>
+                                            <asp:ImageButton ID="btnDashboard" runat="server" CommandName="Dashboard" ImageUrl="~/Images/status.jpg"
+                                                Height="16" Width="16" />
+                                        </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />

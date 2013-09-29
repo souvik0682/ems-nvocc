@@ -230,5 +230,35 @@ namespace EMS.DAL
                 return exportBLId;
             }
         }
+
+        public static List<IExportBL> GetExportBLForListing(SearchCriteria searchCriteria)
+        {
+            string strExecution = "[exp].[usp_GetExportBLForListing]";
+            List<IExportBL> lstBL = new List<IExportBL>();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@BookingNumber", 100, searchCriteria.BookingNo);
+                oDq.AddVarcharParam("@EdgeBLNo", 100, searchCriteria.EdgeBLNumber);
+                oDq.AddVarcharParam("@RefBLNo", 100, searchCriteria.RefBLNumber);
+                oDq.AddVarcharParam("@POL", 100, searchCriteria.POL);
+                oDq.AddVarcharParam("@Line", 100, searchCriteria.LineName);
+                oDq.AddVarcharParam("@Location", 100, searchCriteria.Location);
+                oDq.AddVarcharParam("@SortExpression", 100, searchCriteria.SortExpression);
+                oDq.AddVarcharParam("@SortDirection", 100, searchCriteria.SortDirection);
+
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    IExportBL bl = new ExportBLEntity(reader);
+                    lstBL.Add(bl);
+                }
+
+                reader.Close();
+            }
+
+            return lstBL;
+        }
     }
 }

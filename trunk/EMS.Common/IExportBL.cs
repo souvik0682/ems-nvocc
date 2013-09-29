@@ -56,5 +56,9 @@ namespace EMS.Common
         string TotalFEU { get; set; }
         string TotalTon { get; set; }
         string TotalCBM { get; set; }
+
+        string EdgeBLNumber { get; set; }
+        string RefBLNumber { get; set; }
+        bool BLStatus { get; set; }
     }
 }

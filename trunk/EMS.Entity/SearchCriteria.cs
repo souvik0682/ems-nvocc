@@ -139,6 +139,9 @@ namespace EMS.Entity
             set;
         }
 
+        public string EdgeBLNumber { get; set; }
+        public string RefBLNumber { get; set; }
+
         #endregion
 
         #region Constructor
@@ -182,6 +185,8 @@ namespace EMS.Entity
             this.ServiceName = string.Empty;
             this.Terminal = string.Empty;
             this.VoyageID = 0;
+            this.EdgeBLNumber = string.Empty;
+            this.RefBLNumber = string.Empty;
         }
 
         #endregion

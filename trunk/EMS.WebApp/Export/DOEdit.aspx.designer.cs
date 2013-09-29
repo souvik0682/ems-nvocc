@@ -13,13 +13,13 @@ namespace EMS.WebApp.Export {
     public partial class DOEdit {
         
         /// <summary>
-        /// txtBookingNo control.
+        /// ddlBooking control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBookingNo;
+        protected global::System.Web.UI.WebControls.DropDownList ddlBooking;
         
         /// <summary>
         /// ddlYard control.
@@ -83,6 +83,15 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
+        
+        /// <summary>
+        /// btnPrint control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPrint;
         
         /// <summary>
         /// btnBack control.

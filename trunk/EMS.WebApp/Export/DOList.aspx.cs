@@ -194,12 +194,12 @@ namespace EMS.WebApp.Export
 
                 if (user.UserRole.Id != (int)UserRole.Admin)
                 {
-                    if (_canView == false)
+                    if (!_canView)
                     {
                         Response.Redirect("~/Unauthorized.aspx");
                     }
 
-                    if (_canAdd == false)
+                    if (!_canAdd)
                     {
                         btnAdd.Visible = false;
                     }

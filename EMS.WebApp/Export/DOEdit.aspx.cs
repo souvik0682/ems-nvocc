@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using EMS.BLL;
+using EMS.Common;
+using EMS.Utilities;
 
 namespace EMS.WebApp.Export
 {
@@ -11,28 +16,36 @@ namespace EMS.WebApp.Export
     {
         #region Private Member Variables
 
+        private int _userId = 0;
+        private bool _canAdd = false;
+        private bool _canEdit = false;
+        private bool _canDelete = false;
+        private bool _canView = false;
+        private Int64 _doId = 0;
+        private IFormatProvider _culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"].ToString());
+
         #endregion
 
         #region Protected Event Handlers
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            RetriveParameters();
+            CheckUserAccess();
+            SetAttributes();
+
             if (!IsPostBack)
             {
-                System.Data.DataTable dt = new System.Data.DataTable();
-                dt.Columns.Add(new System.Data.DataColumn("ID"));
-                System.Data.DataRow row = dt.NewRow();
-                dt.Rows.Add(row);
 
-                System.Data.DataRow row1 = dt.NewRow();
-                dt.Rows.Add(row1);
-
-                gvwList.DataSource = dt;
-                gvwList.DataBind();
             }
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnPrint_Click(object sender, EventArgs e)
         {
 
         }
@@ -51,19 +64,55 @@ namespace EMS.WebApp.Export
 
         #region Private Methods
 
-        private void CheckUserAccess()
+        private void SetAttributes()
         {
 
         }
 
         private void RetriveParameters()
         {
+            if (!ReferenceEquals(Request.QueryString["id"], null))
+            {
+                Int64.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["id"].ToString()), out _doId);
+            }
 
+            _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
+            UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
         }
 
-        private void SetAttributes()
+        private void CheckUserAccess()
         {
+            if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+            {
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
 
+                if (ReferenceEquals(user, null) || user.Id == 0)
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
+
+                if (user.UserRole.Id != (int)UserRole.Admin)
+                {
+                    if (!_canView)
+                    {
+                        Response.Redirect("~/Unauthorized.aspx");
+                    }
+
+                    if (!_canEdit)
+                    {
+                        btnSave.Visible = false;
+                    }
+                }
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+
+            if (!_canView)
+            {
+                Response.Redirect("~/Unauthorized.aspx");
+            }
         }
 
         #endregion

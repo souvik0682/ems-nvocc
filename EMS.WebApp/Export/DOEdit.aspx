@@ -11,7 +11,7 @@
                 <table border="0" cellpadding="1" cellspacing="0" width="100%" class="custtable">
                     <tr>
                         <td style="width: 22%;">Booking No<span class="errormessage">*</span></td>
-                        <td style="width: 28%;"><asp:TextBox ID="txtBookingNo" runat="server"></asp:TextBox></td>
+                        <td style="width: 28%;"><asp:DropDownList ID="ddlBooking" runat="server" CssClass="dropdownlist"></asp:DropDownList></td>
                         <td style="width: 22%;">Empty Yard<span class="errormessage">*</span></td>
                         <td style="width: 28%;"><asp:DropDownList ID="ddlYard" runat="server" CssClass="dropdownlist"></asp:DropDownList></td>
                     </tr>
@@ -60,7 +60,7 @@
                 </asp:GridView>
             </fieldset>
             <div style="text-align:left;">
-                <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" OnClick="btnSave_Click" />&nbsp;&nbsp;<asp:Button ID="btnBack" runat="server" CssClass="button" Text="Back" onclick="btnBack_Click" />
+                <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" OnClick="btnSave_Click" />&nbsp;&nbsp;<asp:Button ID="btnPrint" runat="server" Text="Save & Print" ValidationGroup="Save" OnClick="btnPrint_Click" />&nbsp;&nbsp;<asp:Button ID="btnBack" runat="server" CssClass="button" Text="Back" onclick="btnBack_Click" />
             </div>
         </div>
     </center>

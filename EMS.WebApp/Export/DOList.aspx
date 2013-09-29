@@ -34,19 +34,19 @@
                         <td colspan="2">
                             <asp:TextBox ID="txtLocation" runat="server" CssClass="watermark" ForeColor="#747862" MaxLength="50" Width="250"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="ftbeLocation" runat="server" TargetControlID="txtLocation" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers" FilterMode="InvalidChars" ValidChars=" "></cc1:FilteredTextBoxExtender>
-                            <cc1:TextBoxWatermarkExtender ID="tbweLocation" runat="server" TargetControlID="txtLocation" WatermarkText="Booking No"></cc1:TextBoxWatermarkExtender>
+                            <cc1:TextBoxWatermarkExtender ID="tbweLocation" runat="server" TargetControlID="txtLocation" WatermarkText="Location"></cc1:TextBoxWatermarkExtender>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <asp:TextBox ID="txtDONo" runat="server" CssClass="watermark" ForeColor="#747862" MaxLength="50" Width="250"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="ftbeDONo" runat="server" TargetControlID="txtDONo" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers" FilterMode="InvalidChars" ValidChars=" "></cc1:FilteredTextBoxExtender>
-                            <cc1:TextBoxWatermarkExtender ID="tbweDONo" runat="server" TargetControlID="txtDONo" WatermarkText="Booking No"></cc1:TextBoxWatermarkExtender>
+                            <cc1:TextBoxWatermarkExtender ID="tbweDONo" runat="server" TargetControlID="txtDONo" WatermarkText="DO No"></cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
                             <asp:TextBox ID="txtLine" runat="server" CssClass="watermark" ForeColor="#747862" MaxLength="50" Width="250"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="ftbeLine" runat="server" TargetControlID="txtLine" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers" FilterMode="InvalidChars" ValidChars=" "></cc1:FilteredTextBoxExtender>
-                            <cc1:TextBoxWatermarkExtender ID="tbweLine" runat="server" TargetControlID="txtLine" WatermarkText="Booking No"></cc1:TextBoxWatermarkExtender>
+                            <cc1:TextBoxWatermarkExtender ID="tbweLine" runat="server" TargetControlID="txtLine" WatermarkText="Line"></cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
                             <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" onclick="btnSearch_Click"/>
@@ -105,17 +105,26 @@
                                             <asp:LinkButton ID="lnkLine" runat="server" CommandName="Sort" CommandArgument="LineName" Text="Line"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Booking No">
+                                    <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="15%" />                                    
+                                        <ItemStyle CssClass="gridviewitem" Width="15%" />    
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lnkBookingNo" runat="server" CommandName="Sort" CommandArgument="BookingNo" Text="Booking No"></asp:LinkButton>
+                                        </HeaderTemplate>                                
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="DO No">
+                                    <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="15%" />                                    
+                                        <ItemStyle CssClass="gridviewitem" Width="15%" />  
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lnkDONo" runat="server" CommandName="Sort" CommandArgument="DONo" Text="DO No"></asp:LinkButton>
+                                        </HeaderTemplate>                                  
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="DO Date">
+                                    <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="11%" />                                    
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lnkDODt" runat="server" CommandName="Sort" CommandArgument="DODate" Text="DO Date"></asp:LinkButton>
+                                        </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Containers">
                                         <HeaderStyle CssClass="gridviewheader" />

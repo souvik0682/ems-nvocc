@@ -110,7 +110,7 @@ namespace EMS.WebApp.Export
             else if (e.CommandName == "Dashboard")
             {
                 string encryptedId = GeneralFunctions.EncryptQueryString(Convert.ToString(e.CommandArgument));
-                Response.Redirect("~/Export/ExportDashboard.aspx?BLNumber=" + encryptedId);
+                Response.Redirect("~/Export/Export-bl-query.aspx?BLNumber=" + encryptedId);
             }
         }
 

@@ -67,24 +67,6 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtBookingDate;
         
         /// <summary>
-        /// CalendarExtender1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
-        
-        /// <summary>
-        /// rfvBookingDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBookingDate;
-        
-        /// <summary>
         /// txtBLNo control.
         /// </summary>
         /// <remarks>
@@ -247,13 +229,13 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtFPodDesc;
         
         /// <summary>
-        /// rdoShipment control.
+        /// rdoOriginal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdoShipment;
+        protected global::System.Web.UI.WebControls.RadioButtonList rdoOriginal;
         
         /// <summary>
         /// rdoBLType control.
@@ -265,22 +247,22 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.RadioButtonList rdoBLType;
         
         /// <summary>
-        /// ddlOrigine control.
+        /// ddlShipmentMode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlOrigine;
+        protected global::System.Web.UI.WebControls.DropDownList ddlShipmentMode;
         
         /// <summary>
-        /// rfvOrigine control.
+        /// rfvShipmentMode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvOrigine;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvShipmentMode;
         
         /// <summary>
         /// txtCommodity control.
@@ -307,16 +289,7 @@ namespace EMS.WebApp.Export {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIssuePlace;
-        
-        /// <summary>
-        /// rfvDestination control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDestination;
+        protected global::EMS.WebApp.CustomControls.AC_Port txtIssuePlace;
         
         /// <summary>
         /// txtNetWt control.
@@ -328,13 +301,31 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtNetWt;
         
         /// <summary>
-        /// TextBox1 control.
+        /// txtBLReleaseDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txtBLReleaseDate;
+        
+        /// <summary>
+        /// ceReleaseDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender ceReleaseDate;
+        
+        /// <summary>
+        /// rfvBookingDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBookingDate;
         
         /// <summary>
         /// tpOther control.
@@ -418,13 +409,13 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvConsignee;
         
         /// <summary>
-        /// TextNotifyName control.
+        /// txtNotifyName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextNotifyName;
+        protected global::System.Web.UI.WebControls.TextBox txtNotifyName;
         
         /// <summary>
         /// rfvNotifyName control.
@@ -562,40 +553,40 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtCBLDate;
         
         /// <summary>
-        /// txtCTeu control.
+        /// txtTeu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCTeu;
+        protected global::System.Web.UI.WebControls.TextBox txtTeu;
         
         /// <summary>
-        /// txtCFeu control.
+        /// txtFeu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCFeu;
+        protected global::System.Web.UI.WebControls.TextBox txtFeu;
         
         /// <summary>
-        /// txtCTon control.
+        /// txtTon control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCTon;
+        protected global::System.Web.UI.WebControls.TextBox txtTon;
         
         /// <summary>
-        /// txtCCbm control.
+        /// txtCbm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCCbm;
+        protected global::System.Web.UI.WebControls.TextBox txtCbm;
         
         /// <summary>
         /// gvwContainers control.

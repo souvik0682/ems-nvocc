@@ -5,6 +5,7 @@ using System.Text;
 using EMS.Common;
 using EMS.DAL;
 using System.Data;
+using EMS.Entity;
 
 namespace EMS.BLL
 {
@@ -54,6 +55,11 @@ namespace EMS.BLL
         public static long SaveExportBLHeader(IExportBL objBL)
         {
             return ExportBLDAL.SaveExportBLHeader(objBL);
+        }
+
+        public static List<IExportBL> GetExportBLForListing(SearchCriteria searchCriteria)
+        {
+            return ExportBLDAL.GetExportBLForListing(searchCriteria);
         }
     }
 }

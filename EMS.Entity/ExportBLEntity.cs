@@ -56,6 +56,10 @@ namespace EMS.Entity
         public string MarksNumnbers { get; set; }
         public int AgentId { get; set; }
 
+        public string EdgeBLNumber { get; set; }
+        public string RefBLNumber { get; set; }
+        public bool BLStatus { get; set; }
+
         //Container Tab
         public string TotalTEU { get; set; }
         public string TotalFEU { get; set; }
@@ -286,6 +290,18 @@ namespace EMS.Entity
             if (ColumnExists(reader, "TotalCBM"))
                 if (reader["TotalCBM"] != DBNull.Value)
                     TotalCBM = Convert.ToString(reader["TotalCBM"]);
+
+            if (ColumnExists(reader, "EdgeBLNumber"))
+                if (reader["EdgeBLNumber"] != DBNull.Value)
+                    EdgeBLNumber = Convert.ToString(reader["EdgeBLNumber"]);
+
+            if (ColumnExists(reader, "RefBLNumber"))
+                if (reader["RefBLNumber"] != DBNull.Value)
+                    RefBLNumber = Convert.ToString(reader["RefBLNumber"]);
+
+            if (ColumnExists(reader, "BLStatus"))
+                if (reader["BLStatus"] != DBNull.Value)
+                    BLStatus = Convert.ToBoolean(reader["BLStatus"]);
         }
 
         public bool ColumnExists(IDataReader reader, string columnName)

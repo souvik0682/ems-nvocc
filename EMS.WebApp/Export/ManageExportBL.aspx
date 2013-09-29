@@ -406,7 +406,7 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtGoodsDescription" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="300" TabIndex="8" Text="N/M" TextMode="MultiLine" Rows="4"></asp:TextBox><br />
+                                                                    Width="300" TabIndex="8" TextMode="MultiLine" Rows="4"></asp:TextBox><br />
                                                                 <asp:RequiredFieldValidator ID="rfvGoodsDescription" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtGoodsDescription" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
@@ -418,7 +418,7 @@
                                                             </td>
                                                             <td style="width: 4%;">
                                                                 <asp:TextBox ID="txtMarks" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                                                    Width="300" TabIndex="5" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                                                                    Width="300" TabIndex="5" TextMode="MultiLine" Rows="3" Text="N/M" ></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="rfvMarks" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtMarks" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>

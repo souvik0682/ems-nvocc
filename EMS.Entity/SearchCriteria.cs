@@ -188,12 +188,9 @@ namespace EMS.Entity
             this.ServiceName = string.Empty;
             this.Terminal = string.Empty;
             this.VoyageID = 0;
-<<<<<<< .mine
             this.DONumber = string.Empty;
-=======
             this.EdgeBLNumber = string.Empty;
             this.RefBLNumber = string.Empty;
->>>>>>> .r1231
         }
 
         #endregion      

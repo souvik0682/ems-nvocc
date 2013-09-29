@@ -266,8 +266,8 @@ namespace EMS.WebApp.Export
             }
             else
             {
-                sortExpression = "BookingNo";
-                sortDirection = "ASC";
+                sortExpression = "DONo";
+                sortDirection = "DESC";
             }
 
             criteria.SortExpression = sortExpression;

@@ -7,11 +7,23 @@ using EMS.Common;
 
 namespace EMS.Entity
 {
-    public class DeliveryOrderEntity
-    {        
-        #region Public Properties
+    public class DeliveryOrderEntity : IDeliveryOrder
+    {
+        #region IDeliveryOrder Members
 
-        public Int32 LocationId
+        public Int64 DeliveryOrderId
+        {
+            get;
+            set;
+        }
+
+        public Int64 BookingId
+        {
+            get;
+            set;
+        }
+
+        public int LocationId
         {
             get;
             set;
@@ -53,19 +65,32 @@ namespace EMS.Entity
             set;
         }
 
+        public string Containers
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region Constructors
 
         public DeliveryOrderEntity()
         {
-            
+
         }
 
         public DeliveryOrderEntity(DataTableReader reader)
         {
-
-        }       
+            this.DeliveryOrderId = Convert.ToInt64(reader["DOId"]);
+            this.BookingId = Convert.ToInt64(reader["BookingId"]);
+            this.LocationName = Convert.ToString(reader["LocationName"]);
+            this.NVOCCName = Convert.ToString(reader["NVOCCName"]);
+            this.BookingNumber = Convert.ToString(reader["BookingNumber"]);
+            this.DeliveryOrderNumber = Convert.ToString(reader["DONo"]);
+            this.DeliveryOrderDate = Convert.ToDateTime(reader["DODate"]);
+            this.Containers = Convert.ToString(reader["Containers"]);
+        }
 
         #endregion
     }

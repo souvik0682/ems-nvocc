@@ -51,5 +51,33 @@ namespace EMS.DAL
 
             return Result;
         }
+
+        public static DataTable GetEmptyYard(int userId)
+        {
+            string strExecution = "[exp].[uspGetEmptyYardForDO]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@UserId", userId);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+
+        public static DataTable GetBookingList(int userId)
+        {
+            string strExecution = "[exp].[uspGetBookingListForDO]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@UserId", userId);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
     }
 }

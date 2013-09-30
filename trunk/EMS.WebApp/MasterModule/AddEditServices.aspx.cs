@@ -40,6 +40,7 @@ namespace EMS.WebApp.MasterModule
                 ListItem Li = null;
                 //Li = new ListItem("Select", "0");
                 PopulateDropDown((int)Enums.DropDownPopulationFor.Line, ddlLine, 0);
+                PopulateDropDown((int)Enums.DropDownPopulationFor.Service, ddlServices, 0);
                 //ddlLocation.Items.Insert(0, Li);
 
                 //Li = new ListItem("Select", "0");
@@ -121,7 +122,8 @@ namespace EMS.WebApp.MasterModule
             //ddlFromLocation.SelectedIndex = Convert.ToInt32(ddlFromLocation.Items.IndexOf(ddlFromLocation.Items.FindByValue(oImportHaulage.LocationFrom)));
             hdnFPOD.Value = oService.FPODID.ToString();
             ddlLine.SelectedValue = oService.LinerID.ToString();
-            txtService.Text = Convert.ToString(oService.ServiceName);
+            ddlServices.SelectedValue = oService.ServiceNameID.ToString();
+            //txtService.Text = Convert.ToString(oService.ServiceName);
             txtFPOD.Text = Convert.ToString(oService.FPOD);
             hdnServiceID.Value = Convert.ToString(oService.ServiceID);
 
@@ -150,7 +152,8 @@ namespace EMS.WebApp.MasterModule
                 oServiceEntity.LinerID = ddlLine.SelectedValue.ToInt();
 
                 oServiceEntity.FPODID = hdnFPOD.Value;
-                oServiceEntity.ServiceName = Convert.ToString(txtService.Text.Trim());
+                oServiceEntity.ServiceNameID = ddlServices.SelectedValue.ToInt();
+                //oServiceEntity.ServiceName = Convert.ToString(txtService.Text.Trim());
 
                 if (hdnServiceID.Value == "0") // Insert
                 {
@@ -217,7 +220,7 @@ namespace EMS.WebApp.MasterModule
             ddlLine.SelectedIndex = 0;
             txtFPOD.Text = string.Empty;
             hdnFPOD.Value = "0";
-            txtService.Text = string.Empty;
+            ddlServices.SelectedIndex = 0;
         }
     }
 }

@@ -11,6 +11,11 @@
             return (obj.value.length < maxLen);
         }
 
+        function checkTextField(field) {
+            if (field.value == '') {
+                field.value = 0;
+            }
+        }
         function AutoCompleteItemSelected(sender, e) {
             if (sender._id == "AutoCompleteEx") {
                 var hdnFromLocation = $get('<%=hdnReturn.ClientID %>');
@@ -34,6 +39,7 @@
             }
             else { }
         }
+
     </script>
     <style type="text/css">
         .custtable
@@ -75,7 +81,9 @@
                                 Load Port:<span class="errormessage">*</span>
                             </td>
                             <td>
-                                <asp:TextBox ID="txtLoadPort" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
+                                <asp:TextBox ID="txtLoadPort" runat="server" 
+                                    CssClass="textboxuppercase watermark1" ForeColor="#747862" Height="25px" 
+                                    Width="255px"></asp:TextBox>
                                    <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtLoadPort" WatermarkText="Load Port" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                                  <br /> <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" CssClass="errormessage"
                                     ControlToValidate="txtLoadPort" InitialValue="" ValidationGroup="Save" Display="Dynamic"
@@ -85,7 +93,7 @@
                                     TargetControlID="txtLoadPort" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
                                     MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
                                     CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
-                                    CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
+                                    CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";,:"
                                     ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected">
                                     <animations>
                                         <OnShow>
@@ -125,7 +133,7 @@
                         </tr>
                         <tr>
                             <td>
-                                Mov Origin:<span class="errormessage">*</span>
+                                Shipment Mode:<span class="errormessage">*</span>
                             </td>
                             <td>
                                 <asp:DropDownList ID="ddlMovOrigin" runat="server" CssClass="dropdownlist">
@@ -139,7 +147,8 @@
                                 Destination Port:<span class="errormessage">*</span>
                             </td>
                             <td>
-                                <asp:TextBox ID="txtDestinationPort" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
+                                <asp:TextBox ID="txtDestinationPort" runat="server" 
+                                    CssClass="textboxuppercase watermark1" ForeColor="#747862" Width="255px"></asp:TextBox>
                                  <cc1:TextBoxWatermarkExtender ID="txtWMEtxtDestinationPort" runat="server" TargetControlID="txtDestinationPort" WatermarkText="Destination Port" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                                   <br /><asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" CssClass="errormessage"
                                     ControlToValidate="txtDestinationPort" InitialValue="" ValidationGroup="Save"
@@ -149,7 +158,7 @@
                                     TargetControlID="txtDestinationPort" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
                                     MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
                                     CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
-                                    CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
+                                    CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";,:"
                                     ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected">
                                     <animations>
                                         <OnShow>
@@ -189,33 +198,6 @@
                         </tr>
                         <tr>
                             <td>
-                                Mov Destination:<asp:Label ID="lblValid" runat="server" CssClass="errormessage" Text="*"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:DropDownList ID="ddlMovDestination" runat="server" CssClass="dropdownlist">
-                                </asp:DropDownList>
-                                <br />
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" CssClass="errormessage"
-                                    ControlToValidate="ddlMovDestination" InitialValue="0" ValidationGroup="Save"
-                                    Display="Dynamic" ErrorMessage="[Required]"></asp:RequiredFieldValidator>
-                            </td>
-                            <td>
-                                Pod Terminal:<asp:Label ID="lblReturn" runat="server" CssClass="errormessage" Text="*"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:HiddenField ID="hdnReturn" runat="server" Value="0" />
-                                <asp:TextBox ID="txtPodTerminal" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862" MaxLength="50"
-                                    Width="250"></asp:TextBox>
-                                      <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="txtPodTerminal" WatermarkText=" Pod Terminal" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
-                                <br />
-                                <asp:RequiredFieldValidator ID="rfvReturn" runat="server" CssClass="errormessage"
-                                    ControlToValidate="txtPodTerminal" ValidationGroup="Save" Display="Dynamic" ErrorMessage="[Required]">
-                                </asp:RequiredFieldValidator>
-                                <br />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
                                 Line Code:<span class="errormessage">*</span>
                             </td>
                             <td>
@@ -227,11 +209,49 @@
                                     ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                             </td>
                             <td>
+                                Pod Terminal:<asp:Label ID="lblReturn" runat="server" CssClass="errormessage" Text="*"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:HiddenField ID="hdnReturn" runat="server" Value="0" />
+                                <asp:TextBox ID="txtPodTerminal" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862" MaxLength="50"
+                                    Width="255"></asp:TextBox>
+                                      <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="txtPodTerminal" WatermarkText=" Pod Terminal" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
+                                <br />
+                                <asp:RequiredFieldValidator ID="rfvReturn" runat="server" CssClass="errormessage"
+                                    ControlToValidate="txtPodTerminal" ValidationGroup="Save" Display="Dynamic" ErrorMessage="[Required]">
+                                </asp:RequiredFieldValidator>
+<%--                                <br />--%>
+                            </td>
+                        </tr>
+                        <tr>
+<%--                            <td>
+                                Line Code:<span class="errormessage">*</span>
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="ddlLineCode" runat="server" CssClass="dropdownlist">
+                                </asp:DropDownList>
+                                <br />
+                                <asp:RequiredFieldValidator ID="rfvLineCode" runat="server" CssClass="errormessage"
+                                    ControlToValidate="ddlLineCode" ValidationGroup="Save" Display="Dynamic" InitialValue="0"
+                                    ErrorMessage="[Required]"></asp:RequiredFieldValidator>
+                            </td>--%>
+                            <td>
                                 Effective Date:<asp:Label ID="lblEffective" runat="server" CssClass="errormessage"
                                     Text="*"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="txtEffectiveDate" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
+                                <asp:TextBox ID="txtEffectiveDate" runat="server" Width="150" AutoCompleteType="None"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvEffectiveDate" runat="server" ErrorMessage="Please select date"
+                                    ControlToValidate="txtEffectiveDate" Display="None" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
+                                <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender15" runat="server" TargetControlID="rfvEffectiveDate">
+                                </cc1:ValidatorCalloutExtender>
+                                <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtEffectiveDate"
+                                    PopupPosition="BottomLeft" TargetControlID="txtEffectiveDate" Format="dd/MM/yyyy">
+                                </cc1:CalendarExtender>
+                                <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="txtEffectiveDate"
+                                    FilterMode="ValidChars" FilterType="Numbers,Custom" ValidChars="/">
+                                </cc1:FilteredTextBoxExtender>
+                              <%--  <asp:TextBox ID="txtEffectiveDate" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
                                   <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender3" runat="server" TargetControlID="txtEffectiveDate" WatermarkText="EFFECTIVE DATE" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                                 <cc1:CalendarExtender Format="dd/MM/yyyy" ID="CalendarExtender1" runat="server" PopupButtonID="txtEffectiveDate"
                                     TargetControlID="txtEffectiveDate">
@@ -242,7 +262,7 @@
                                 </asp:RequiredFieldValidator>
                                 <asp:RegularExpressionValidator ControlToValidate="txtEffectiveDate" ID="RegularExpressionValidator6"
                                     runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]" ValidationGroup="Save"
-                                    Display="Dynamic" ValidationExpression="^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$"></asp:RegularExpressionValidator>
+                                    Display="Dynamic" ValidationExpression="^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$"></asp:RegularExpressionValidator>--%>
                             </td>
                         </tr>
                     </table>
@@ -262,7 +282,7 @@
                                 <table id="gvwSlotCostUpper" cellspacing="0" style="border-width: 0px; border-style: None; width: 100%;
                                     border-collapse: collapse;" rules="all">
                                     <tr>
-                                        <th style="width: 53px;" color: #fff" class="gridviewheader" scope="col">
+                                        <th style="width: 53px;" class="gridviewheader" scope="col">
                                             SI#
                                         </th>
                                         <th style="width: 118px;" class="gridviewheader" scope="col">
@@ -311,33 +331,33 @@
                                                 InitialValue="0" Display="Dynamic"></asp:RequiredFieldValidator>
                                         </th>
                                         <th style="width: 181px;" class="gridviewheader" scope="col" align="right">
-                                           <%-- <asp:TextBox ID="txtAmount" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>--%>
-                                             <cc2:CustomTextBox style="float:right" ID="txtAmount" runat="server" CssClass="numerictextbox"
-                                                    Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc2:CustomTextBox>
-                                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender5" runat="server" TargetControlID="txtAmount" WatermarkText="AMOUNT" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
+                                            <cc2:CustomTextBox style="float:right" ID="txtAmount" runat="server" CssClass="numerictextbox"
+                                                    Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100" onblur="checkTextField(this);"></cc2:CustomTextBox>
+                                            <%--<cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender5" runat="server" TargetControlID="txtAmount" WatermarkText="AMOUNT" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" CssClass="errormessage"
                                                 ValidationGroup="AddToList" ErrorMessage="[Required]" ControlToValidate="txtAmount"
-                                                Display="Dynamic"></asp:RequiredFieldValidator>
-                                            <asp:RegularExpressionValidator ControlToValidate="txtAmount" ID="RegularExpressionValidator3"
+                                                Display="Dynamic"></asp:RequiredFieldValidator>--%>
+                                            <%--<asp:RegularExpressionValidator ControlToValidate="txtAmount" ID="RegularExpressionValidator3"
                                                 runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]"
-                                                Display="Dynamic" ValidationExpression="^\d{1,6}.\d{1,2}|\d{1,6}$"></asp:RegularExpressionValidator>
+                                                Display="Dynamic" ValidationExpression="^\d{1,6}.\d{1,2}|\d{1,6}$"></asp:RegularExpressionValidator>--%>
                                         </th>
                                         <th style="width: 181px;text-align:right" class="gridviewheader" scope="col" align="right">
-                                         <cc2:CustomTextBox style="float:right" ID="txtRevTon" runat="server" CssClass="numerictextbox"
-                                                    Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100"></cc2:CustomTextBox>
+                                            <cc2:CustomTextBox style="float:right" ID="txtRevTon" runat="server" CssClass="numerictextbox"
+                                                    Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="100" onblur="checkTextField(this);"></cc2:CustomTextBox>
 
-                                            <%--<asp:TextBox ID=""  runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>--%>
-                                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender4" runat="server" TargetControlID="txtRevTon" WatermarkText="REVTON" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
+                                            <%--<cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender4" runat="server" TargetControlID="txtRevTon" WatermarkText="REVTON" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage"
                                                 ValidationGroup="AddToList" ErrorMessage="[Required]" ControlToValidate="txtRevTon"
-                                                Display="Dynamic"></asp:RequiredFieldValidator> <asp:RegularExpressionValidator ControlToValidate="txtRevTon" ID="RegularExpressionValidator1"
+                                                Display="Dynamic"></asp:RequiredFieldValidator> --%>
+                                            <%--<asp:RegularExpressionValidator ControlToValidate="txtRevTon" ID="RegularExpressionValidator1"
                                                 runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]"
-                                                Display="Dynamic" ValidationExpression="^\d{1,6}.\d{1,2}|\d{1,6}$"></asp:RegularExpressionValidator>
+                                                Display="Dynamic" ValidationExpression="^\d{1,6}.\d{1,2}|\d{1,6}$"></asp:RegularExpressionValidator>--%>
                                       
                                         </th>
                                         <th style="width: 78px;" class="gridviewheader" scope="col" colspan="2">
                                             <asp:Button ID="btnAddToList" ValidationGroup="AddToList" runat="server" Style="float: right;"
                                                 CssClass="button" Text="Add to List" OnClick="btnAddToList_Click" />
+                                </tr>
                             </td>
                         </tr>
                     </table>
@@ -405,8 +425,8 @@
                         <td>
                             <asp:Button ID="btnSave" OnClick="btnSave_Click" runat="server" Style="margin-right: 10px"
                                 CssClass="button" Text="Save" ValidationGroup="Save" />
-                            <asp:Button ID="btnCancel" runat="server" CssClass="button" PostBackUrl="~/Hire/Hire.aspx"
-                                Text="Cancel" />
+                            <asp:Button ID="btnCancel" runat="server" CssClass="button"
+                                Text="Cancel" onclick="btnCancel_Click" />
                         </td>
                     </tr>
                     </table>

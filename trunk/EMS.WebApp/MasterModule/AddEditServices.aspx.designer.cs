@@ -13,13 +13,13 @@ namespace EMS.WebApp.MasterModule {
     public partial class AddEditServices {
         
         /// <summary>
-        /// txtService control.
+        /// ddlServices control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtService;
+        protected global::System.Web.UI.WebControls.DropDownList ddlServices;
         
         /// <summary>
         /// ddlLine control.

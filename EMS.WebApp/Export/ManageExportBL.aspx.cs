@@ -483,6 +483,11 @@ namespace EMS.WebApp.Export
                 throw ex;
             }
         }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Export/ExportBL.aspx");
+        }
     }
 
     public class Part

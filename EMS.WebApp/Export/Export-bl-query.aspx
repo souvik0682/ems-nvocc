@@ -70,8 +70,8 @@
                                 </td>
                                 <td style="width: 5%;">
                                     <asp:HiddenField ID="hdnBLId" runat="server" Value="0" />
-                                    <asp:TextBox ID="txtBlNo" runat="server" Width="130" AutoPostBack="True" onkeyup="SetContextKey();"
-                                        Enabled="true" Style="text-transform: uppercase;" 
+                                    <asp:TextBox ID="txtBlNo" runat="server" Width="160" AutoPostBack="True" onkeyup="SetContextKey();"
+                                        Enabled="false" Style="text-transform: uppercase;" 
                                         ontextchanged="txtBlNo_TextChanged"></asp:TextBox>
                                     <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx" ID="autoComplete1"
                                         TargetControlID="txtBlNo" ServicePath="~/GetLocation.asmx" ServiceMethod="GetBLNoList"
@@ -120,7 +120,7 @@
                                 </td>
                                 <td style="width: 5%;">
    <%--                                 <asp:TextBox ID="txtPOR" runat="server"></asp:TextBox>--%>
-                                    <asp:TextBox ID="txtPOR" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtPOR" runat="server" Width="100" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td style="width: 8%;">
                                     Vessel
@@ -141,7 +141,7 @@
                                     Booking Date :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtBookingDate" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtBookingDate" runat="server" Width="160" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td style="width: 3%;">
                                     POL :
@@ -151,7 +151,7 @@
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
                             </cc1:ValidatorCalloutExtender>--%>
-                                   <asp:TextBox ID="txtPOL" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                   <asp:TextBox ID="txtPOL" runat="server" Width="100" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
                                     Voyage :
@@ -171,7 +171,7 @@
                                    Booking No
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtBookingNo" runat="server" Width="130"></asp:TextBox>
+                                    <asp:TextBox ID="txtBookingNo" runat="server" Width="160"></asp:TextBox>
                                 </td>
                                 <td class="style1">
                                     POD :
@@ -181,7 +181,7 @@
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
                             </cc1:ValidatorCalloutExtender>--%>
-                                    <asp:TextBox ID="txtPOD" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtPOD" runat="server" Width="100" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
                                     Containers :
@@ -200,7 +200,7 @@
                                 <td>BL Date :
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtBLDate" runat="server"  Width="130"></asp:TextBox>
+                                    <asp:TextBox ID="txtBLDate" runat="server"  Width="160"></asp:TextBox>
                                 </td>
                                 <td class="style1">
                                     FPOD :
@@ -210,7 +210,7 @@
                                 Display="None" ControlToValidate="rdbWashing" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
                             <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvWashing">
                             </cc1:ValidatorCalloutExtender>--%>
-                                    <asp:TextBox ID="txtFPOD" runat="server" Width="130" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtFPOD" runat="server" Width="100" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
                                     Shipment Type :
@@ -233,7 +233,8 @@
                                     <%-- <asp:HiddenField ID="hdnBlQueryID" runat="server" Value="0" />--%>
                                     <asp:Button ID="btnSave1" runat="server" Text="Save" ValidationGroup="vgCharge" />&nbsp;&nbsp;<asp:Button
                                         ID="btnBack1" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
-                                        OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
+                                        OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" 
+                                        onclick="btnBack1_Click" />
                                     <asp:Label ID="lblMessageBLQuery" runat="server" ForeColor="Red"></asp:Label>
                                 </td>
                             </tr>
@@ -248,7 +249,11 @@
                         <table style="width: 100%;">
                             <tr>
                                 <td style="text-align: right;">
-                                    <asp:Button ID="btnAddFreightInvoice" runat="server" Text="Add Freight Invoice" OnClientClick="return false;" />
+
+                                    <asp:Button ID="btnExit" runat="server" Text="Exit To Exp BL" 
+                                        ValidationGroup="BQExit" onclick="btnExit_Click" />
+                                    <asp:Button ID="btnAddFreightInvoice" runat="server" Text="Add Freight Invoice" 
+                                        OnClientClick="return false;" onclick="btnAddFreightInvoice_Click" />
                                     <asp:Button ID="btnAddOtherInvoice" runat="server" Text="Add Other Invoice" OnClientClick="return false;" />
                                 </td>
                             </tr>

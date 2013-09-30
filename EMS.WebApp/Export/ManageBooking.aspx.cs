@@ -789,18 +789,6 @@ namespace EMS.WebApp.Export
             gvTransit.DataSource = Rts.ToList();
             gvTransit.DataBind();
 
-            //if (Rts.Count() <= 0)
-            //{
-            //    List<IBookingContainer> EmptyRates = new List<IBookingContainer>();
-            //    IBookingContainer rt = new BookingContainerEntity();
-            //    EmptyRates.Add(rt);
-
-            //    gvContainer.DataSource = EmptyRates;
-            //    gvContainer.DataBind();
-            //    gvContainer.Rows[0].Visible = false;
-            //}
-
-
         }
 
         protected void gvContainer_SelectedIndexChanged(object sender, EventArgs e)

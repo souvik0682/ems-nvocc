@@ -143,7 +143,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkLocation" runat="server" CommandName="Sort" CommandArgument="Location" Text="Location"></asp:LinkButton>
                                         </HeaderTemplate>
@@ -157,7 +157,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="15%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkEdgeBLNo" runat="server" CommandName="Sort" CommandArgument="EdgeBLNo" Text="Edge BL No"></asp:LinkButton>
                                         </HeaderTemplate>

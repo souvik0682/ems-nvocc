@@ -146,6 +146,9 @@ namespace EMS.WebApp.Export
             if (rdblBorkerage.SelectedValue == "True")
             {
                 (txtBrokeragePayableTo.FindControl("txtBrockerage") as TextBox).Enabled = true;
+                //if (((TextBox)txtBrokeragePayableTo.FindControl("txtBrockerage")).Text == "")
+                //    ((TextBox)txtBrokeragePayableTo.FindControl("txtBrockerage")).Text = 
+
                 txtBrokeragePercent.Enabled = true;
             }
         }
@@ -334,13 +337,32 @@ namespace EMS.WebApp.Export
                     rdblBorkerage.SelectedValue = Convert.ToString(objBooking.BrokeragePayable);
                     rdblBorkerage_SelectedIndexChanged(rdblBorkerage, new EventArgs());
                     txtBrokeragePercent.Text = Convert.ToString(objBooking.BrokeragePercentage);
-                    ((TextBox)txtBrokeragePayableTo.FindControl("txtBrockerage")).Text = objBooking.BrokeragePayableName;
-                    ViewState["BROKERAGEPAYABLEID"] = objBooking.BrokeragePayableId;
+
+                    if (!ReferenceEquals(ViewState["ISEDIT"], false))
+                    {
+                        ((TextBox)txtBrokeragePayableTo.FindControl("txtBrockerage")).Text = objBooking.BookingParty;
+                        ViewState["BROKERAGEPAYABLEID"] = objBooking.CustID;
+                    }
+                    else
+                    {
+                        ((TextBox)txtBrokeragePayableTo.FindControl("txtBrockerage")).Text = objBooking.BrokeragePayableName;
+                        ViewState["BROKERAGEPAYABLEID"] = objBooking.BrokeragePayableId;
+                    }
 
                     rdblRefundPayable.SelectedValue = Convert.ToString(objBooking.RefundPayable);
                     rdblRefundPayable_SelectedIndexChanged(rdblRefundPayable, new EventArgs());
-                    ((TextBox)txtRefundPayableTo.FindControl("txtRefund")).Text = objBooking.RefundPayableName;
-                    ViewState["REFUNDPAYABLEID"] = objBooking.RefundPayableId;
+
+
+                    if (!ReferenceEquals(ViewState["ISEDIT"], false))
+                    {
+                        ((TextBox)txtRefundPayableTo.FindControl("txtRefund")).Text = objBooking.BookingParty;
+                        ViewState["REFUNDPAYABLEID"] = objBooking.CustID;
+                    }
+                    else
+                    {
+                        ((TextBox)txtRefundPayableTo.FindControl("txtRefund")).Text = objBooking.RefundPayableName;
+                        ViewState["REFUNDPAYABLEID"] = objBooking.RefundPayableId;
+                    }
 
                     txtRemarks.Text = objBooking.ExportRemarks;
                     txtShipper.Text = objBooking.Shipper;

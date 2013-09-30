@@ -617,7 +617,7 @@
                                         <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" 
                                             TabIndex="70" onclick="btnSave_Click" />&nbsp;&nbsp;
                                         <asp:Button ID="btnBack" runat="server" CssClass="button" TabIndex="71" OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;"
-                                            Text="Back" />
+                                            Text="Back" onclick="btnBack_Click" />
                                         <br />
                                         <asp:Label ID="lblErr" runat="server" CssClass="errormessage"></asp:Label>
                                     </td>

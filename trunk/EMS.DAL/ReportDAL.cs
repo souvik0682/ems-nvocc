@@ -232,32 +232,32 @@ namespace EMS.DAL
             return lstEntity;
         }
 
-        public static List<ImportInvoiceEntity> GetImportInvoicePrint(int lineId, int locId, int billType, DateTime dtFrom, DateTime dtTo)
-        {
-            string strExecution = "[report].[uspRptInvoiceDateRange]";
-            List<ImportInvoiceEntity> lstEntity = new List<ImportInvoiceEntity>();
-            ImportInvoiceEntity entity = null;
+        //public static List<ImportInvoiceEntity> GetImportInvoicePrint(int lineId, int locId, int billType, DateTime dtFrom, DateTime dtTo)
+        //{
+        //    string strExecution = "[report].[uspRptInvoiceDateRange]";
+        //    List<ImportInvoiceEntity> lstEntity = new List<ImportInvoiceEntity>();
+        //    ImportInvoiceEntity entity = null;
 
-            using (DbQuery oDq = new DbQuery(strExecution))
-            {
-                oDq.AddIntegerParam("@LocationID", locId);
-                oDq.AddIntegerParam("@LineID", lineId);
-                oDq.AddIntegerParam("@BillType", billType);
-                oDq.AddDateTimeParam("@StartDate", dtFrom);
-                oDq.AddDateTimeParam("@EndDate", dtTo);
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddIntegerParam("@LocationID", locId);
+        //        oDq.AddIntegerParam("@LineID", lineId);
+        //        oDq.AddIntegerParam("@BillType", billType);
+        //        oDq.AddDateTimeParam("@StartDate", dtFrom);
+        //        oDq.AddDateTimeParam("@EndDate", dtTo);
 
-                DataTableReader reader = oDq.GetTableReader();
+        //        DataTableReader reader = oDq.GetTableReader();
 
-                while (reader.Read())
-                {
-                    entity = new ImportInvoiceEntity(reader);
-                    lstEntity.Add(entity);
-                }
-            }
+        //        while (reader.Read())
+        //        {
+        //            entity = new ImportInvoiceEntity(reader);
+        //            lstEntity.Add(entity);
+        //        }
+        //    }
 
 
-            return lstEntity;
-        }
+        //    return lstEntity;
+        //}
 
         public static DataTable GetTypeWiseStockSummary(string LineId, string LocationId, DateTime StockDate)
         {
@@ -357,6 +357,39 @@ namespace EMS.DAL
             }
         }
 
+        #endregion
+
+        #region Manifest
+        public static DataSet GetRptFrieghtManifest_TFS(string blNo)
+        {
+            DataSet ds = new DataSet();
+            using (DbQuery dq = new DbQuery("[exp].[rptFrieghtManifest_TFS]"))
+            {
+                dq.AddVarcharParam("@EXPBLID", 60, blNo);
+                ds = dq.GetTables();
+            }
+            return ds;
+        }
+        public static DataSet GetRptFrieghtManifest_CTRS(string blNo)
+        {
+            DataSet ds = new DataSet();
+            using (DbQuery dq = new DbQuery("[exp].[rptFrieghtManifest_CTRS]"))
+            {
+                dq.AddVarcharParam("@EXPBLID", 60, blNo);
+                ds = dq.GetTables();
+            }
+            return ds;
+        }
+        public static DataSet GetRptFrieghtManifest(string blNo)
+        {
+            DataSet ds = new DataSet();
+            using (DbQuery dq = new DbQuery("[exp].[rptFrieghtManifest]"))
+            {
+                dq.AddVarcharParam("@EXPBLID", 60, blNo);
+                ds = dq.GetTables();
+            }
+            return ds;
+        }
         #endregion
     }
 }

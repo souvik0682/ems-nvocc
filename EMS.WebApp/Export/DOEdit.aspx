@@ -10,18 +10,18 @@
                 <legend>General</legend>
                 <table border="0" cellpadding="1" cellspacing="0" width="100%" class="custtable">
                     <tr>
-                        <td style="width: 22%;">Booking No<span class="errormessage">*</span></td>
-                        <td style="width: 28%;"><asp:DropDownList ID="ddlBooking" runat="server" CssClass="dropdownlist"></asp:DropDownList></td>
-                        <td style="width: 22%;">Empty Yard<span class="errormessage">*</span></td>
-                        <td style="width: 28%;"><asp:DropDownList ID="ddlYard" runat="server" CssClass="dropdownlist"></asp:DropDownList></td>
+                        <td style="width: 18%;padding-bottom:5px;">Booking No<span class="errormessage">*</span></td>
+                        <td style="width: 32%;padding-bottom:5px;"><asp:DropDownList ID="ddlBooking" runat="server" AutoPostBack="true" CssClass="dropdownlist" OnSelectedIndexChanged="ddlBooking_SelectedIndexChanged"></asp:DropDownList></td>
+                        <td style="width: 18%;padding-bottom:5px;">Empty Yard<span class="errormessage">*</span></td>
+                        <td style="width: 32%;padding-bottom:5px;"><asp:DropDownList ID="ddlYard" runat="server" AutoPostBack="true" CssClass="dropdownlist" OnSelectedIndexChanged="ddlYard_SelectedIndexChanged"></asp:DropDownList></td>
                     </tr>
                     <tr>
-                        <td style="width: 22%;">DO No<span class="errormessage">*</span></td>
-                        <td style="width: 28%;"><asp:TextBox ID="txtDoNo" runat="server"></asp:TextBox></td>
-                        <td style="width: 22%;">DO Date<span class="errormessage">*</span></td>
-                        <td style="width: 28%;">
-                            <asp:TextBox ID="txtDoDate" runat="server" CssClass="textboxuppercase" MaxLength="50" Width="250px" TabIndex="6"></asp:TextBox>
-                            <cc1:CalendarExtender ID="cbeDoDate" TargetControlID="txtDoDate" runat="server" Format="dd-MM-yyyy" Enabled="True" />
+                        <td>DO No<span class="errormessage">*</span></td>
+                        <td><asp:TextBox ID="txtDoNo" runat="server"></asp:TextBox></td>
+                        <td>DO Date<span class="errormessage">*</span></td>
+                        <td>
+                            <asp:TextBox ID="txtDoDate" runat="server" CssClass="textboxuppercase" MaxLength="50" Width="80px" TabIndex="6"></asp:TextBox>
+                            <cc1:CalendarExtender ID="cbeDoDate" TargetControlID="txtDoDate" runat="server" Format="dd/MM/yyyy" Enabled="True" />
                             <br />
                             <asp:RequiredFieldValidator ID="rfvDoDate" runat="server" ControlToValidate="txtDoDate" ErrorMessage="This field is required*" CssClass="errormessage" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
                         </td>

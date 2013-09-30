@@ -152,7 +152,7 @@ namespace EMS.WebApp.Export
                 ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
                 //btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00007");
                 btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PK_LBID"));
-                btnRemove.Visible = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Editable"));
+                //btnRemove.Visible = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Editable"));
 
                 if (_canDelete == true)
                 {

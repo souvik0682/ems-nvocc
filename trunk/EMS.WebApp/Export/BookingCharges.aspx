@@ -165,10 +165,19 @@
                                     <asp:TextBox ID="txtRemarks" runat="server" Width="250px" TextMode="MultiLine" Rows="3"></asp:TextBox>
                                 </td>
                                 <td>
-                                    Shipper
+                                    PP/CC
                                 </td>
+                                <td>
+                                    <asp:DropDownList ID="ddlPpCc" runat="server">
+                                        <asp:ListItem Value="P" Text="Pre Paid" Selected="True" />
+                                        <asp:ListItem Value="T" Text="To Pay" />
+                                    </asp:DropDownList>
+                                </td>
+                               <%-- <td>
+                                    Shipper
+                                </td>--%>
                                 <td colspan="4">
-                                    <asp:TextBox ID="txtShipper" runat="server" Width="250px" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                                    <asp:TextBox ID="txtShipper" runat="server" Width="250px" TextMode="MultiLine" Rows="3" Visible="false"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -214,17 +223,7 @@
                                         ControlToValidate="ddlSlot" InitialValue="0" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    PP/CC
-                                </td>
-                                <td>
-                                    <asp:DropDownList ID="ddlPpCc" runat="server">
-                                        <asp:ListItem Value="P" Text="Pre Paid" Selected="True" />
-                                        <asp:ListItem Value="T" Text="To Pay" />
-                                    </asp:DropDownList>
-                                </td>
-                            </tr>
+                            
                             <tr>
                                 <td colspan="4" style="padding-top: 10; border: none;">
                                     <fieldset style="width: 95%;">

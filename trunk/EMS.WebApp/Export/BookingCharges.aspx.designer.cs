@@ -139,6 +139,15 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtRemarks;
         
         /// <summary>
+        /// ddlPpCc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPpCc;
+        
+        /// <summary>
         /// txtShipper control.
         /// </summary>
         /// <remarks>
@@ -209,15 +218,6 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSlot;
-        
-        /// <summary>
-        /// ddlPpCc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPpCc;
         
         /// <summary>
         /// gvwCharges control.

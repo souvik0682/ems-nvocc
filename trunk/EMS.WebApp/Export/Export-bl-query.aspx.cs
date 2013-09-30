@@ -80,9 +80,9 @@ namespace EMS.WebApp.Transaction
         }
         private void RetriveParameters()
         {
-            if (!ReferenceEquals(Request.QueryString["blno"], null))
+            if (!ReferenceEquals(Request.QueryString["BLNumber"], null))
             {
-                txtBlNo.Text = GeneralFunctions.DecryptQueryString(Request.QueryString["blno"].ToString());
+                txtBlNo.Text = GeneralFunctions.DecryptQueryString(Request.QueryString["BLNumber"].ToString());
                 PopulateAllData();
             }
         }
@@ -108,7 +108,7 @@ namespace EMS.WebApp.Transaction
         {
             try
             {
-                hdnBLId.Value = dtDetail.Rows[0]["BLID"].ToString();
+                hdnBLId.Value = dtDetail.Rows[0]["pk_ExpBLID"].ToString();
                 txtBlNo.Text = dtDetail.Rows[0]["ExpBLno"].ToString();
                 txtPOR.Text = dtDetail.Rows[0]["RcvdPort"].ToString();
                 txtBookingParty.Text = dtDetail.Rows[0]["BookingParty"].ToString();
@@ -119,10 +119,30 @@ namespace EMS.WebApp.Transaction
                 txtPOL.Text = dtDetail.Rows[0]["LoadPort"].ToString();
                 txtShipper.Text = dtDetail.Rows[0]["SHIPPER"].ToString();
                 txtPOD.Text = dtDetail.Rows[0]["DshgPort"].ToString();
-                //txtContainer.Text = dtDetail.Rows[0]["CONTAINER"].ToString();
+                txtContainer.Text = dtDetail.Rows[0]["QTYSTRING"].ToString();
                 txtRemarks.Text = dtDetail.Rows[0]["ExportRemarks"].ToString();
                 txtBLDate.Text = Convert.ToDateTime(dtDetail.Rows[0]["ExpBLDate"].ToString()).ToString("dd/MM/yyyy");
                 txtFPOD.Text = dtDetail.Rows[0]["FinalDest"].ToString();
+                switch (dtDetail.Rows[0]["Shipmenttype"].ToString())
+                {
+                    case "0": // Per Unit TYPE & SIZE
+                        txtShipmentType.Text = "FCL";
+                        break;
+
+                    case "1": // Per Document
+                        txtShipmentType.Text = "LCL";
+                        break;
+
+                    case "2": // Per CBM
+                        txtShipmentType.Text = "BULK";
+                        break;
+
+                    case "3": // Per TON
+                        txtShipmentType.Text = "BREAK BULK";
+                        break;
+
+                }
+
                 //txtShipmentType.Text = dtDetail.Rows[0]["SHIPMENTTYPE"].ToString();                
             }
             catch
@@ -184,5 +204,21 @@ namespace EMS.WebApp.Transaction
             // DisableAllServiceControls();
             // DisableAllCheckBoxes();
         }
+
+        protected void btnAddFreightInvoice_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnExit_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Export/ExportBL.aspx");
+        }
+
+        protected void btnBack1_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

@@ -36,7 +36,9 @@
                              Service Name<span class="errormessage1">*</span> :
                         </td>
                         <td class="style2">
-                            <asp:TextBox ID="txtService" runat="server" CssClass="textboxuppercase" MaxLength="50" Width="250"></asp:TextBox><br />
+<%--                            <asp:TextBox ID="txtService" runat="server" CssClass="textboxuppercase" MaxLength="50" Width="250"></asp:TextBox><br />--%>
+                            <asp:DropDownList ID="ddlServices" runat="server" Width="255">
+                            </asp:DropDownList>
                         </td>
                     </tr>
                     <tr>
@@ -67,7 +69,7 @@
                                 TargetControlID="txtFPOD" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
                                 MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
                                 CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
-                                CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
+                                CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";,:"
                                 ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected">
                                 <Animations>
                                         <OnShow>

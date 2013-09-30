@@ -100,7 +100,7 @@ namespace EMS.WebApp.MasterModule
 
             Filler.FillData(ddlOperator, ExpSlotCostBLL.GetSlotOperatorList(new SearchCriteria() { StringParams = new List<string>() { "0", "", "", "" } }), "SlotOperatorName", "pk_SlotOperatorID", "--Operator--");//
             Filler.FillData(ddlMovOrigin, ExpSlotCostBLL.GetMovementType(), "MovTypeName", "pk_MovTypeID", "--Movement Origin--");
-            Filler.FillData(ddlMovDestination, ExpSlotCostBLL.GetMovementType(), "MovTypeName", "pk_MovTypeID", "--Movement Destination--");
+            //Filler.FillData(ddlMovDestination, ExpSlotCostBLL.GetMovementType(), "MovTypeName", "pk_MovTypeID", "--Movement Destination--");
             Filler.FillData(ddlLineCode, new DBInteraction().GetNVOCCLine(-1, "").Tables[0], "NVOCCName", "pk_NVOCCID", "--Line--");
             IList<SlotCost> lst=null;
             if (ViewState["SlotCostId"] != null) { 
@@ -115,7 +115,7 @@ namespace EMS.WebApp.MasterModule
             txtPodTerminal.Text = temp.Slot.PODTERMINAL;
             ddlOperator.SelectedValue = temp.Slot.OPERATOR.ToString();
             ddlMovOrigin.SelectedValue = temp.Slot.MOVORIGIN.ToString();
-            ddlMovDestination.SelectedValue = temp.Slot.MOVDESTINATION.ToString();
+            //ddlMovDestination.SelectedValue = temp.Slot.MOVDESTINATION.ToString();
             ddlLineCode.SelectedValue =temp.Slot.LINE.ToString();
             txtLoadPort.Text = temp.Slot.PORTLOADINGNAME;
             txtDestinationPort.Text =temp.Slot.PORTDISCHARGENAME;
@@ -147,7 +147,7 @@ namespace EMS.WebApp.MasterModule
             txtPodTerminal.Text = string.Empty;
             ddlOperator.SelectedValue = "0";
             ddlMovOrigin.SelectedValue = "0";
-            ddlMovDestination.SelectedValue = "0";
+            //ddlMovDestination.SelectedValue = "0";
             ddlLineCode.SelectedValue = "0";
         }
 
@@ -236,7 +236,6 @@ namespace EMS.WebApp.MasterModule
                     break;
             }
         }
-
 
         private bool SetCorVal(IList<SlotCost> lstslotcost, string slotcostid)
         {
@@ -327,7 +326,7 @@ namespace EMS.WebApp.MasterModule
                 {
                     EFFECTIVEDATE = Convert.ToDateTime(txtEffectiveDate.Text.Trim()),
                     LINE = Convert.ToInt64(ddlLineCode.SelectedValue),
-                    MOVDESTINATION = Convert.ToInt32(ddlMovDestination.SelectedValue),
+                    //MOVDESTINATION = Convert.ToInt32(ddlMovDestination.SelectedValue),
                     MOVORIGIN = Convert.ToInt32(ddlMovOrigin.SelectedValue),
                     OPERATOR = Convert.ToInt32(ddlOperator.SelectedValue),
                     PODTERMINAL = txtPodTerminal.Text,
@@ -345,23 +344,24 @@ namespace EMS.WebApp.MasterModule
             }
             else
             {
-
                 retrunVal = ExpSlotCostBLL.SaveSlotCost(slotCostModel);
-
             }
             if (retrunVal > 0)
             { 
                 Session.Remove("lstslotcost");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Saved successfully.');", true);
-                Response.Redirect("ExpSlotCostList.aspx");
+                Response.Redirect("~/MasterModule/ExpSlotCostList.aspx");
             }
             else
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Error! Please try again.')", true);
             }
+        }
 
-
-
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Session.Remove("lstslotcost");
+            Response.Redirect("~/MasterModule/ExpSlotCostList.aspx");
         }
 
 

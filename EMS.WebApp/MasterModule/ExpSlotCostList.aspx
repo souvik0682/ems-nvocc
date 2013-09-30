@@ -13,15 +13,16 @@
         {
             vertical-align: top;
         }
-        button[type="reset"] {
-background-color: #f3f6f8;
-color: black;
-border: solid 1px #c8c8c8;
-cursor: pointer;
-font-family: "Trebuchet MS", Helvetica, sans-serif;
-font-size: 10pt;
-height: 28px;
-}
+        button[type="reset"] 
+        {
+        background-color: #f3f6f8;
+        color: black;
+        border: solid 1px #c8c8c8;
+        cursor: pointer;
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+        font-size: 10pt;
+        height: 28px;
+        }
 
     </style>
   
@@ -57,7 +58,7 @@ height: 28px;
         </div>
     </div>
     <div id="headercaption">
-        ON HIRE & OFF HIRE
+        SLOT COST LIST
     </div>
     <center>
         <div style="width: 850px;">
@@ -84,7 +85,7 @@ height: 28px;
                                 TargetControlID="txtLoadPort" ServicePath="~/GetLocation.asmx" ServiceMethod="GetCompletionList"
                                 MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
                                 CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
-                                CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
+                                CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";,:"
                                 ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected">
                                 <animations>
                                         <OnShow>
@@ -168,22 +169,11 @@ height: 28px;
                             </cc1:AutoCompleteExtender>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <asp:TextBox ID="txtEffectiveDate" runat="server" CssClass="textboxuppercase watermark1" ForeColor="#747862"></asp:TextBox>
-                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender4" runat="server" TargetControlID="txtEffectiveDate" WatermarkText="EFFECTIVE DATE" WatermarkCssClass="watermark"></cc1:TextBoxWatermarkExtender>
-                            <cc1:CalendarExtender Format="dd/MM/yyyy" ID="CalendarExtender1" runat="server" PopupButtonID="txtEffectiveDate"
-                                TargetControlID="txtEffectiveDate">
-                            </cc1:CalendarExtender>
-                            <asp:RegularExpressionValidator ControlToValidate="txtEffectiveDate" ID="RegularExpressionValidator6"
-                                runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]"
-                                Display="Dynamic" ValidationExpression="^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$"></asp:RegularExpressionValidator>
-                        </td>
-                    </tr>
+                 
                     <tr>
                         <td colspan="4">
                             <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click"/>
-                          <asp:Button ID="Button1" runat="server" Text="Reset" PostBackUrl="~/MasterModule/ExpSlotCostList.aspx"/>  
+                          <asp:Button ID="Button1" runat="server" Text="Reset" />  
                         </td>
                     </tr>
                 </table>
@@ -209,7 +199,8 @@ height: 28px;
                         <asp:ListItem Text="100" Value="100" />
                     </asp:DropDownList>
                     &nbsp;&nbsp;
-                    <asp:Button ID="btnAdd" runat="server" Text="Add New" Width="130px" PostBackUrl="ExpAddEditSlotCost.aspx" />
+                    <asp:Button ID="btnAdd" runat="server" Text="Add New" Width="130px" 
+                        PostBackUrl="ExpAddEditSlotCost.aspx" onclick="btnAdd_Click" />
                 </div>
                  <div style="height: 30px;">
                     &nbsp; <span class="errormessage" style="display: none;">* Indicates Inactive Location(s)</span>
@@ -239,21 +230,21 @@ height: 28px;
                                             <%=counter++%>
                                         </ItemTemplate>
                                     </asp:TemplateField>                                   
-                                    <asp:BoundField ItemStyle-CssClass="gridviewitem"   HeaderStyle-CssClass="gridviewheader" SortExpression="SlotOperatorName"
-                                        DataField="SlotOperatorName" HeaderText="Operator Name" />
+                                    <asp:BoundField ItemStyle-CssClass="gridviewitem" HeaderStyle-CssClass="gridviewheader" SortExpression="SlotOperatorName"
+                                        DataField="SlotOperatorName" HeaderText="Operator Name" ItemStyle-Width="30%" />
                                     <asp:BoundField ItemStyle-CssClass="gridviewitem"   ItemStyle-HorizontalAlign="Left"
-                                        HeaderStyle-CssClass="gridviewheader" DataField="LineName" HeaderText="Line Name" SortExpression="LINE"/>
-                                    <asp:BoundField ItemStyle-CssClass="gridviewitem"   ItemStyle-HorizontalAlign="Left"
-                                        HeaderStyle-CssClass="gridviewheader" DataField="LoadPort" HeaderText="Load Port" SortExpression="POL"/>
+                                        HeaderStyle-CssClass="gridviewheader" DataField="LineName" HeaderText="Line" SortExpression="LINE"/>
+                                    <asp:BoundField ItemStyle-CssClass="gridviewitem"  ItemStyle-HorizontalAlign="Left"
+                                        HeaderStyle-CssClass="gridviewheader" DataField="LoadPort" HeaderText="Load Port" SortExpression="POL" ItemStyle-Width="18%"/>
                                     <asp:BoundField ItemStyle-CssClass="gridviewitem"   HeaderStyle-CssClass="gridviewheader"
-                                        DataField="DischargePort" HeaderText="Discharge Port" SortExpression="POD"/>
+                                        DataField="DischargePort" HeaderText="Discharge Port" SortExpression="POD" ItemStyle-Width="18%"/>
                                    
-                                        <asp:TemplateField   HeaderText="Effective Date">
-                                        <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" HorizontalAlign="Center" VerticalAlign="Middle" />
-                                        <ItemTemplate>
+                                    <asp:TemplateField HeaderText="Effective Date">
+                                    <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Center" VerticalAlign="Middle"/>
+                                    <ItemStyle CssClass="gridviewitem" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                    <ItemTemplate>
                                         <%# Convert.ToDateTime(Eval("effDate")).ToString("d")%>                                          
-                                        </ItemTemplate>
+                                    </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField ItemStyle-CssClass="gridviewitem"   ItemStyle-HorizontalAlign="Left"
                                         HeaderStyle-CssClass="gridviewheader" DataField="Terms" HeaderText="Terms" />

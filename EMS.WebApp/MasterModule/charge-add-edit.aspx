@@ -254,7 +254,8 @@
                                     <asp:GridView ID="dgChargeRates" runat="server" AutoGenerateColumns="false" ShowFooter="false"
                                         OnItemCommand="dgChargeRates_ItemCommand" OnItemDataBound="dgChargeRates_ItemDataBound"
                                         OnRowCommand="dgChargeRates_RowCommand" OnRowDataBound="dgChargeRates_RowDataBound"
-                                        Font-Names="Calibri" Font-Size="11pt">
+                                        Font-Names="Calibri" Font-Size="11pt" 
+                                        onselectedindexchanged="dgChargeRates_SelectedIndexChanged">
                                         <Columns>
                                             <asp:TemplateField HeaderText="Location" Visible="false">
                                                 <ItemTemplate>

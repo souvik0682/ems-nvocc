@@ -122,7 +122,7 @@ namespace EMS.WebApp.MasterModule
             searchCriteria.StringParams.Add(txtSlotOperator.Text);
             searchCriteria.StringParams.Add(txtLoadPort.Text);
             searchCriteria.StringParams.Add(txtDestinationPort.Text);
-            searchCriteria.StringParams.Add(string.IsNullOrEmpty(txtEffectiveDate.Text)?string.Empty:Convert.ToDateTime(txtEffectiveDate.Text).ToString("yyyy-MM-dd"));
+            //searchCriteria.StringParams.Add(string.IsNullOrEmpty(txtEffectiveDate.Text) ? string.Empty : Convert.ToDateTime(txtEffectiveDate.Text).ToString("yyyy-MM-dd"));
             searchCriteria.StringParams.Add("1");//CompanyId
             searchCriteria.StringParams.Add("0");//SlotID
             SearchCriteriaProp = searchCriteria;
@@ -159,6 +159,7 @@ namespace EMS.WebApp.MasterModule
             }
             else if (e.CommandName == "Edit")
             {
+                RedirecToAddEditPage(Convert.ToInt32(e.CommandArgument));
               
             }
             else if (e.CommandName == "Remove")
@@ -194,6 +195,26 @@ namespace EMS.WebApp.MasterModule
         {
             
             
+        }
+
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/MasterModule/ExpAddEditSlotCost.aspx");
+        }
+
+        private void RedirecToAddEditPage(int id)
+        {
+            string encryptedId = GeneralFunctions.EncryptQueryString(id.ToString());
+            Response.Redirect("~/MasterModule/ExpAddEditSlotCost.aspx?id=" + encryptedId);
+        }
+
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {
+            txtSlotOperator.Text = string.Empty;
+            ddlLine.SelectedIndex = 0;
+            txtLoadPort.Text = string.Empty;
+            txtDestinationPort.Text = string.Empty;
+            FillData();
         }
     }
 }

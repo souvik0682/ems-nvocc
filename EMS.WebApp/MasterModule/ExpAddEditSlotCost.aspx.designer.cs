@@ -157,31 +157,22 @@ namespace EMS.WebApp.MasterModule {
         protected global::AjaxControlToolkit.AutoCompleteExtender AutoCompleteExtenderDestinationPort;
         
         /// <summary>
-        /// lblValid control.
+        /// ddlLineCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblValid;
+        protected global::System.Web.UI.WebControls.DropDownList ddlLineCode;
         
         /// <summary>
-        /// ddlMovDestination control.
+        /// rfvLineCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMovDestination;
-        
-        /// <summary>
-        /// RequiredFieldValidator8 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLineCode;
         
         /// <summary>
         /// lblReturn control.
@@ -229,24 +220,6 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvReturn;
         
         /// <summary>
-        /// ddlLineCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlLineCode;
-        
-        /// <summary>
-        /// rfvLineCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLineCode;
-        
-        /// <summary>
         /// lblEffective control.
         /// </summary>
         /// <remarks>
@@ -265,13 +238,22 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.TextBox txtEffectiveDate;
         
         /// <summary>
-        /// TextBoxWatermarkExtender3 control.
+        /// rfvEffectiveDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender3;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEffectiveDate;
+        
+        /// <summary>
+        /// ValidatorCalloutExtender15 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender15;
         
         /// <summary>
         /// CalendarExtender1 control.
@@ -283,22 +265,13 @@ namespace EMS.WebApp.MasterModule {
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
         
         /// <summary>
-        /// RequiredFieldValidator9 control.
+        /// FilteredTextBoxExtender1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator9;
-        
-        /// <summary>
-        /// RegularExpressionValidator6 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator6;
+        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender1;
         
         /// <summary>
         /// TextBox1 control.
@@ -400,33 +373,6 @@ namespace EMS.WebApp.MasterModule {
         protected global::EMS.WebApp.CustomControls.CustomTextBox txtAmount;
         
         /// <summary>
-        /// TextBoxWatermarkExtender5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender5;
-        
-        /// <summary>
-        /// RequiredFieldValidator12 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator12;
-        
-        /// <summary>
-        /// RegularExpressionValidator3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
-        
-        /// <summary>
         /// txtRevTon control.
         /// </summary>
         /// <remarks>
@@ -434,33 +380,6 @@ namespace EMS.WebApp.MasterModule {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::EMS.WebApp.CustomControls.CustomTextBox txtRevTon;
-        
-        /// <summary>
-        /// TextBoxWatermarkExtender4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender4;
-        
-        /// <summary>
-        /// RequiredFieldValidator2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
-        
-        /// <summary>
-        /// RegularExpressionValidator1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
         
         /// <summary>
         /// btnAddToList control.

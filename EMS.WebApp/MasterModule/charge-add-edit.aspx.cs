@@ -1797,5 +1797,10 @@ namespace EMS.WebApp.MasterModule
         {
             FillDocType();
         }
+
+        protected void dgChargeRates_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

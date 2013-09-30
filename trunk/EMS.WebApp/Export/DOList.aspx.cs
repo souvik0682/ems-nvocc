@@ -244,9 +244,9 @@ namespace EMS.WebApp.Export
 
         private void DeleteDeliveryOrder(Int64 doId)
         {
-            DOBLL.DeleteDeliveryOrder(doId);
+            string message = DOBLL.DeleteDeliveryOrder(doId);
             LoadDeliveryOrder();
-            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00010") + "');</script>", false);
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + message + "');</script>", false);
         }
 
         private void GenerateReport(Int64 doId)

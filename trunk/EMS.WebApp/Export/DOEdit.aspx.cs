@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using EMS.BLL;
 using EMS.Common;
 using EMS.Utilities;
+using System.Data;
 
 namespace EMS.WebApp.Export
 {
@@ -36,7 +37,7 @@ namespace EMS.WebApp.Export
 
             if (!IsPostBack)
             {
-
+                PopulateControls();
             }
         }
 
@@ -53,6 +54,16 @@ namespace EMS.WebApp.Export
         protected void btnBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Export/DOList.aspx");
+        }
+
+        protected void ddlBooking_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlYard_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         protected void gvwList_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -112,6 +123,40 @@ namespace EMS.WebApp.Export
             if (!_canView)
             {
                 Response.Redirect("~/Unauthorized.aspx");
+            }
+        }
+
+        private void PopulateControls()
+        {
+            PopulateBookingNo();
+            PopulateEmptyYard();
+        }
+
+        private void PopulateBookingNo()
+        {
+            DataTable dt = DOBLL.GetBookingList(_userId);
+
+            if (!ReferenceEquals(dt, null))
+            {
+                ddlBooking.DataValueField = "BookingId";
+                ddlBooking.DataTextField = "BookingNo";
+                ddlBooking.DataSource = dt;
+                ddlBooking.DataBind();
+                ddlBooking.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
+            }
+        }
+
+        private void PopulateEmptyYard()
+        {
+            DataTable dt = DOBLL.GetEmptyYard(_userId);
+
+            if (!ReferenceEquals(dt, null))
+            {
+                ddlYard.DataValueField = "AddrId";
+                ddlYard.DataTextField = "AddrName";
+                ddlYard.DataSource = dt;
+                ddlYard.DataBind();
+                ddlYard.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
             }
         }
 

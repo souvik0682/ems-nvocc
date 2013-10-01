@@ -163,7 +163,7 @@ namespace EMS.WebApp.Transaction
                             EnableDisableServiceRequestSection();
                         }
                         else
-                            chkDo.Enabled = false;
+                            chkDo.Enabled = true;
 
                         chkFreightToCollect.Enabled = true;
                         txtFreightToCollect.Text = BLDataSet.Tables[0].Rows[0]["FREIGHTTOCOLLECT"].ToString();
@@ -171,8 +171,26 @@ namespace EMS.WebApp.Transaction
                 }
                 else
                 {
-                    chkDo.Enabled = true;
-                    EnableDisableServiceRequestSection();
+                    if (BLDataSet.Tables[0].Rows[0]["FREIGHTTYPE"].ToString().ToLower() == "pp")
+                    {
+                        chkDo.Enabled = true;
+                        EnableDisableServiceRequestSection();
+                    }
+                    else
+                    {
+                        if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["RECPTCHECK"].ToString()) == true)
+                        {
+                            chkDo.Enabled = true;
+                            EnableDisableServiceRequestSection();
+                        }
+                        else
+                            chkDo.Enabled = false;
+
+                        chkFreightToCollect.Enabled = true;
+                        txtFreightToCollect.Text = BLDataSet.Tables[0].Rows[0]["FREIGHTTOCOLLECT"].ToString();
+                    }
+
+
                 }
 
                 //if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["FREIGHTTOCOLLECT"]) == true)

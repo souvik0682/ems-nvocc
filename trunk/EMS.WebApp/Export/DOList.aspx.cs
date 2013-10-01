@@ -236,7 +236,7 @@ namespace EMS.WebApp.Export
                     gvwList.PageIndex = searchCriteria.PageIndex;
                     if (searchCriteria.PageSize > 0) gvwList.PageSize = searchCriteria.PageSize;
 
-                    gvwList.DataSource = DOBLL.GetDeliveryOrder(searchCriteria);
+                    gvwList.DataSource = DOBLL.GetDeliveryOrder(searchCriteria, _userId);
                     gvwList.DataBind();
                 }
             }

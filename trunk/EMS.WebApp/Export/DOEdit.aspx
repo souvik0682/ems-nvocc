@@ -54,7 +54,10 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Required Units">
                             <HeaderStyle CssClass="gridviewheader" />
-                            <ItemStyle CssClass="gridviewitem" Width="5%" />                                    
+                            <ItemStyle CssClass="gridviewitem" Width="5%" /> 
+                            <ItemTemplate>
+                                <asp:TextBox ID="txtReqUnit" runat="server" CssClass="numerictextbox" MaxLength="3"></asp:TextBox>
+                            </ItemTemplate>                                   
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>

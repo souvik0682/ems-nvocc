@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -9,7 +10,6 @@ using System.Web.UI.WebControls;
 using EMS.BLL;
 using EMS.Common;
 using EMS.Utilities;
-using System.Data;
 
 namespace EMS.WebApp.Export
 {
@@ -58,17 +58,25 @@ namespace EMS.WebApp.Export
 
         protected void ddlBooking_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            LoadContainerList();
         }
 
         protected void ddlYard_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            LoadContainerList();
         }
 
         protected void gvwList_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 5);
+                e.Row.Cells[0].Text = ((gvwList.PageSize * gvwList.PageIndex) + e.Row.RowIndex + 1).ToString();
+                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerType"));
+                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerSize"));
+                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "AvailableUnit"));
+                ((TextBox)e.Row.Cells[4].FindControl("txtReqUnit")).Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "RequiredUnit"));
+            }
         }
 
         #endregion
@@ -158,6 +166,17 @@ namespace EMS.WebApp.Export
                 ddlYard.DataBind();
                 ddlYard.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
             }
+        }
+
+        private void LoadContainerList()
+        {
+            Int64 bookingId = Convert.ToInt64(ddlBooking.SelectedValue);
+            Int32 emptyYardId = Convert.ToInt32(ddlYard.SelectedValue);
+
+            List<IDeliveryOrderContainer> lstCntr = DOBLL.GetDeliveryOrderContriner(bookingId, emptyYardId);
+
+            gvwList.DataSource = lstCntr;
+            gvwList.DataBind();
         }
 
         #endregion

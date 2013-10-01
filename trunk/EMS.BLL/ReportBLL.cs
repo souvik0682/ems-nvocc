@@ -36,10 +36,10 @@ namespace EMS.BLL
             return ReportDAL.GetImportInvoiceRegister(lineId, locId, billType, dtFrom, dtTo);
         }
 
-        public static List<ImportInvoiceEntity> GetImportInvoicePrint(int lineId, int locId, int billType, DateTime dtFrom, DateTime dtTo)
-        {
-            return ReportDAL.GetImportInvoicePrint(lineId, locId, billType, dtFrom, dtTo);
-        }
+        //public static List<ImportInvoiceEntity> GetImportInvoicePrint(int lineId, int locId, int billType, DateTime dtFrom, DateTime dtTo)
+        //{
+        //    return ReportDAL.GetImportInvoicePrint(lineId, locId, billType, dtFrom, dtTo);
+        //}
 
         public DataTable GetTypeWiseStockSummary(string LineId, string LocationId, DateTime StockDate)
         {
@@ -60,10 +60,10 @@ namespace EMS.BLL
         {
             return ReportDAL.GetContainerStockDetail(Line, Loc, Stat, CntrType, StockDate, EmptyYard);
         }
- #region Manifest
-        public static DataSet GetRptFrieghtManifest_TFS(string blNo) { return ReportDAL.GetRptFrieghtManifest_TFS(blNo); }
-        public static DataSet GetRptFrieghtManifest(string blNo) { return ReportDAL.GetRptFrieghtManifest(blNo); }
-        public static DataSet GetRptFrieghtManifest_CTRS(string blNo) { return ReportDAL.GetRptFrieghtManifest_CTRS(blNo); } 
-         #endregion
+        #region Manifest
+            public static DataSet GetRptFrieghtManifest_TFS(string blNo) { return ReportDAL.GetRptFrieghtManifest_TFS(blNo); }
+            public static DataSet GetRptFrieghtManifest(string blNo) { return ReportDAL.GetRptFrieghtManifest(blNo); }
+            public static DataSet GetRptFrieghtManifest_CTRS(string blNo) { return ReportDAL.GetRptFrieghtManifest_CTRS(blNo); } 
+        #endregion
     }
 }

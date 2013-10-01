@@ -469,6 +469,14 @@ namespace EMS.BLL
         }
         #endregion
 
+
+        #region ExpBLHeader
+        public static DataTable GetExpBLHeaderByBLNo(long LocationId)
+        {
+            return CommonDAL.GetExpBLHeaderByBLNo(LocationId);
+        }
+        #endregion
+
         #region Report
         public static string GetTerminalType(int VoyageID, int VesselID, int PortOfDischarge)
         { return CommonDAL.GetTerminalType(VoyageID, VesselID, PortOfDischarge); }
@@ -488,6 +496,13 @@ namespace EMS.BLL
 
             return CommonDAL.GetLine(Location);
         }
+
+        public static DataTable GetExpLine(string Location)
+        {
+
+            return CommonDAL.GetExpLine(Location);
+        }
+
         public static DataTable GetVessels(string Line)
         {
             return CommonDAL.GetVessels(Line);

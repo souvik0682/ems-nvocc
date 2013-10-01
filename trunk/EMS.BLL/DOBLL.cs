@@ -12,9 +12,9 @@ namespace EMS.BLL
 {
     public class DOBLL
     {
-        public static List<IDeliveryOrder> GetDeliveryOrder(SearchCriteria searchCriteria)
+        public static List<IDeliveryOrder> GetDeliveryOrder(SearchCriteria searchCriteria, int userId)
         {
-            return DODAL.GetDeliveryOrder(searchCriteria);
+            return DODAL.GetDeliveryOrder(searchCriteria, userId);
         }
 
         public static string DeleteDeliveryOrder(Int64 doId)
@@ -37,6 +37,11 @@ namespace EMS.BLL
             }
 
             return message;
+        }
+
+        public static List<IDeliveryOrderContainer> GetDeliveryOrderContriner(Int64 bookingId, int emptyYardId)
+        {
+            return DODAL.GetDeliveryOrderContriner(bookingId, emptyYardId);
         }
 
         public static DataTable GetEmptyYard(int userId)

@@ -442,7 +442,10 @@ namespace EMS.WebApp.Reports.ReportViewer
             if (user.UserRole.Id != 2)
             {
                 ddlLine.SelectedValue = user.UserLocation.Id.ToString();
-                ddlLine.Enabled = false;
+                if (user.UserlocationSpecific == true)
+                    ddlLine.Enabled = false;
+                else
+                    ddlLine.Enabled = true;
                 strReportName = ViewState["strReportName"].ToString();
                 switch (strReportName.ToLower())
                 {

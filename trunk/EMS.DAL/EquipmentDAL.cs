@@ -189,5 +189,15 @@ namespace EMS.DAL
 
       }
 
+      public static DataSet GetExportBLHeader(string Initial)
+      {
+
+          string ProcName = "[exp].[prcGetExportBLHeader]";
+          DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+          dquery.AddVarcharParam("@initial", 250, Initial);
+          return dquery.GetTables();
+
+      }
+
     }
 }

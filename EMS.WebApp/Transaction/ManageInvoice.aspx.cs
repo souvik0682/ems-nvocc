@@ -797,7 +797,8 @@ namespace EMS.WebApp.Transaction
                 txtUSD.Text = chargeRates[0].Usd.ToString();
                 txtGrossAmount.Text = chargeRates[0].GrossAmount.ToString();
                 txtServiceTax.Text = (chargeRates[0].STax + chargeRates[0].ServiceTaxCessAmount + chargeRates[0].ServiceTaxACess).ToString();
-                txtTotal.Text = (chargeRates[0].TotalAmount + chargeRates[0].STax + chargeRates[0].ServiceTaxCessAmount + chargeRates[0].ServiceTaxACess).ToString();
+                txtTotal.Text = (chargeRates[0].TotalAmount).ToString();
+                    //+ chargeRates[0].STax + chargeRates[0].ServiceTaxCessAmount + chargeRates[0].ServiceTaxACess).ToString();
 
                 ViewState["RATEPERPTEU"] = chargeRates[0].SharingTEU;
                 ViewState["RATEPERPFEU"] = chargeRates[0].SharingFEU;

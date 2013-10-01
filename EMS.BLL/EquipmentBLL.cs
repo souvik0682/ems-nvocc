@@ -65,5 +65,10 @@ namespace EMS.BLL
        {
            return EquipmentDAL.GetCOPRARContainerInfo(VesselID, VoyageID, POD);
        }
+
+       public static DataSet GetExportBLHeader(string Initial)
+       {
+           return EquipmentDAL.GetExportBLHeader(Initial);
+       }
     }
 }

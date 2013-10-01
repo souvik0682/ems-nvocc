@@ -11,13 +11,14 @@ namespace EMS.DAL
 {
     public class DODAL
     {
-        public static List<IDeliveryOrder> GetDeliveryOrder(SearchCriteria searchCriteria)
+        public static List<IDeliveryOrder> GetDeliveryOrder(SearchCriteria searchCriteria, int userId)
         {
             string strExecution = "[exp].[uspGetDOList]";
             List<IDeliveryOrder> lstDO = new List<IDeliveryOrder>();
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
+                oDq.AddIntegerParam("@UserId", userId);
                 oDq.AddVarcharParam("@SchBookingNo", 50, searchCriteria.BookingNo);
                 oDq.AddVarcharParam("@SchDONo", 50, searchCriteria.DONumber);
                 oDq.AddVarcharParam("@SchLocation", 50, searchCriteria.Location);
@@ -50,6 +51,29 @@ namespace EMS.DAL
             }
 
             return Result;
+        }
+
+        public static List<IDeliveryOrderContainer> GetDeliveryOrderContriner(Int64 bookingId, int emptyYardId)
+        {
+            string strExecution = "[exp].[uspGetContainerForDO]";
+            List<IDeliveryOrderContainer> lstCntr = new List<IDeliveryOrderContainer>();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@BookingId", bookingId);
+                oDq.AddIntegerParam("@EmptyYardId", emptyYardId);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    IDeliveryOrderContainer container = new DeliveryOrderContainerEntity(reader);
+                    lstCntr.Add(container);
+                }
+
+                reader.Close();
+            }
+
+            return lstCntr;
         }
 
         public static DataTable GetEmptyYard(int userId)

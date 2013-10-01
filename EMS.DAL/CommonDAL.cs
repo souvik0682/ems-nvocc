@@ -703,6 +703,21 @@ namespace EMS.DAL
         }
         #endregion
 
+        #region ExpBLHeader
+        public static DataTable GetExpBLHeaderByBLNo(long LocationId)
+        {
+            string strExecution = "[exp].[uspExpGetBLHeaderByBLNo]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@LocationId", LocationId);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+        #endregion
         //#region Export
         //public static DataTable GetExportVoyages(string Vessel)
         //{
@@ -800,6 +815,22 @@ namespace EMS.DAL
 
             return myDataTable;
         }
+
+        public static DataTable GetExpLine(string Location)
+        {
+            string strExecution = "[exp].[rptUspGetLineByLoc]";
+            DataTable myDataTable;
+            if (Location == "All")
+                Location = "0";
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@Location", Location.ToInt());
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+
         public static DataTable GetLineForHire(string Location)
         {
             string strExecution = "rptUspGetLineByLocForHireContainer";

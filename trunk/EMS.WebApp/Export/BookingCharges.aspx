@@ -212,7 +212,7 @@
                                     &nbsp;&nbsp; &nbsp;
                                 </td>
                                 <td>
-                                    Slot perator<span class="errormessage">*</span>
+                                    Slot Operator<span class="errormessage">*</span>
                                 </td>
                                 <td>
                                     <asp:DropDownList ID="ddlSlot" runat="server" CssClass="dropdownlist">

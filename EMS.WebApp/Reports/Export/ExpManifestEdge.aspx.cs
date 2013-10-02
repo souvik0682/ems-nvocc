@@ -31,7 +31,7 @@ namespace EMS.WebApp.Reports
                 Filler.FillData<ILocation>(ddlLine, new CommonBLL().GetActiveLocation(), "Name", "Id", "Location");
                 //tr1.Visible = false;
                 tr2.Visible = false;
-              //  GenerateReport();
+               // GenerateReport();
             }
         }
         protected void ddlLine_SelectedIndexChanged(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace EMS.WebApp.Reports
             var lng = ddlLine.SelectedValue.ToLong();
             if (lng > 0)
             {
-                Filler.FillData(ddlBlNo, CommonBLL.GetExpBLHeaderByBLNo(lng), "ExpBLNo", "ExpBLNo", "Bl. No.");
+               Filler.FillData(ddlBlNo, CommonBLL.GetExpBLHeaderByBLNo(lng), "ExpBLNo", "ExpBLNo", "Bl. No.");
             }
         }
 
@@ -60,6 +60,7 @@ namespace EMS.WebApp.Reports
             
             LocalReportManager reportManager = new LocalReportManager(rptViewer, "ExpManifestEdge", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
             string rptName = "ExpManifestEdge.rdlc";
+            //("MUM/UA/13-14/000001");// (ddlBlNo.SelectedValue);//
             var main = ReportBLL.GetRptFrieghtManifest(ddlBlNo.SelectedValue);
             var TFS = ReportBLL.GetRptFrieghtManifest_TFS(ddlBlNo.SelectedValue);
             var CTRS = ReportBLL.GetRptFrieghtManifest_CTRS(ddlBlNo.SelectedValue);

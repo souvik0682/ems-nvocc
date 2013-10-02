@@ -76,6 +76,24 @@ namespace EMS.DAL
             return lstCntr;
         }
 
+        public static int SaveDeliveryOrder(IDeliveryOrder deliveryOrder, string xmlDoc, int modifiedBy)
+        {
+            int result = 0;
+            string strExecution = "[exp].[uspSaveDeliveryOrder]";
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@BookingId", deliveryOrder.BookingId);
+                oDq.AddIntegerParam("@EmptyYardId", deliveryOrder.EmptyYardId);
+                oDq.AddDateTimeParam("@DeliveryOrderDate", deliveryOrder.DeliveryOrderDate);
+                oDq.AddVarcharParam("@XmlDoc",1000, xmlDoc);
+                oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
+                result=oDq.RunActionQuery();
+            }
+
+            return result;
+        }
+
         public static DataTable GetEmptyYard(int userId)
         {
             string strExecution = "[exp].[uspGetEmptyYardForDO]";

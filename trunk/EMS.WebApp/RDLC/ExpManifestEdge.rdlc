@@ -456,7 +456,7 @@
                 <TextRuns>
                   <TextRun>
                     <Label>ETA_ETD</Label>
-                    <Value>=First(Fields!ETA.Value, "dsLin")+"/"+First(Fields!ETD.Value, "dsLin")</Value>
+                    <Value>=Format(First(Fields!ETA.Value, "dsLin"),"dd/MM/yyyy")+"/"+Format(First(Fields!ETD.Value, "dsLin"),"dd-MM-yyyy")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1305,7 +1305,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>

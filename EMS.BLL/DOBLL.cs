@@ -7,6 +7,7 @@ using EMS.DAL;
 using EMS.Entity;
 using EMS.Utilities.ResourceManager;
 using System.Data;
+using EMS.Utilities;
 
 namespace EMS.BLL
 {
@@ -15,6 +16,55 @@ namespace EMS.BLL
         public static List<IDeliveryOrder> GetDeliveryOrder(SearchCriteria searchCriteria, int userId)
         {
             return DODAL.GetDeliveryOrder(searchCriteria, userId);
+        }
+
+        public static bool ValidateContainer(List<IDeliveryOrderContainer> lstCntr, out string message)
+        {
+            bool valid = true;
+            int slNo = 1;
+            message = "Please correct the following error(s):";
+
+            for (int index = 0; index < lstCntr.Count; index++)
+            {
+                if (lstCntr[index].RequiredUnit > lstCntr[index].AvailableUnit)
+                {
+                    valid = false;
+                    message += GeneralFunctions.FormatAlertMessage(slNo, "Required unit cannot be greater than available unit");
+                    slNo++;
+                }
+
+                if (lstCntr[index].RequiredUnit > lstCntr[index].BookingUnit)
+                {
+                    valid = false;
+                    message += GeneralFunctions.FormatAlertMessage(slNo, "Required unit cannot be greater than booking unit");
+                    slNo++;
+                }
+            }
+
+            return valid;
+        }
+
+        public static string SaveDeliveryOrder(IDeliveryOrder deliveryOrder, List<IDeliveryOrderContainer> lstCntr, int modifiedBy)
+        {
+            int result = 0;
+            string message = string.Empty;
+            string xmlDoc = GeneralFunctions.Serialize(lstCntr);
+            result = DODAL.SaveDeliveryOrder(deliveryOrder, xmlDoc, modifiedBy);
+
+            switch (result)
+            {
+                case -1://Transaction error occurs.
+                    message = "Transaction error occurs";
+                    break;
+                case 0: //No records saved.
+                    message = "No records saved";
+                    break;
+                default: //Successfully saved
+                    message = ResourceManager.GetStringWithoutName("ERR00009");
+                    break;
+            }
+
+            return message;
         }
 
         public static string DeleteDeliveryOrder(Int64 doId)

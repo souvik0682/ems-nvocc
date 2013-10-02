@@ -65,6 +65,12 @@ namespace EMS.Entity
             set;
         }
 
+        public int EmptyYardId
+        {
+            get;
+            set;
+        }
+
         public string Containers
         {
             get;
@@ -89,6 +95,7 @@ namespace EMS.Entity
             this.BookingNumber = Convert.ToString(reader["BookingNumber"]);
             this.DeliveryOrderNumber = Convert.ToString(reader["DONo"]);
             this.DeliveryOrderDate = Convert.ToDateTime(reader["DODate"]);
+            this.EmptyYardId = Convert.ToInt32(reader["EmptyYardId"]);
             this.Containers = Convert.ToString(reader["Containers"]);
         }
 

@@ -22,6 +22,15 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.DropDownList ddlBooking;
         
         /// <summary>
+        /// rfvBooking control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBooking;
+        
+        /// <summary>
         /// ddlYard control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlYard;
+        
+        /// <summary>
+        /// rfvYard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvYard;
         
         /// <summary>
         /// txtDoNo control.

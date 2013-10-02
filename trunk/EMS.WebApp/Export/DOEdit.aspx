@@ -1,5 +1,6 @@
 ﻿<%@ Page Title=":: Liner :: Add / Edit Delivery Order" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DOEdit.aspx.cs" Inherits="EMS.WebApp.Export.DOEdit" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<%@ Register Assembly="EMS.WebApp" Namespace="EMS.WebApp.CustomControls" TagPrefix="cc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
@@ -11,13 +12,19 @@
                 <table border="0" cellpadding="1" cellspacing="0" width="100%" class="custtable">
                     <tr>
                         <td style="width: 18%;padding-bottom:5px;">Booking No<span class="errormessage">*</span></td>
-                        <td style="width: 32%;padding-bottom:5px;"><asp:DropDownList ID="ddlBooking" runat="server" AutoPostBack="true" CssClass="dropdownlist" OnSelectedIndexChanged="ddlBooking_SelectedIndexChanged"></asp:DropDownList></td>
+                        <td style="width: 32%;padding-bottom:5px;">
+                            <asp:DropDownList ID="ddlBooking" runat="server" AutoPostBack="true" CssClass="dropdownlist" OnSelectedIndexChanged="ddlBooking_SelectedIndexChanged"></asp:DropDownList>
+                            <br /><asp:RequiredFieldValidator ID="rfvBooking" runat="server" ControlToValidate="ddlBooking" InitialValue="0" ErrorMessage="This field is required*" CssClass="errormessage" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                        </td>
                         <td style="width: 18%;padding-bottom:5px;">Empty Yard<span class="errormessage">*</span></td>
-                        <td style="width: 32%;padding-bottom:5px;"><asp:DropDownList ID="ddlYard" runat="server" AutoPostBack="true" CssClass="dropdownlist" OnSelectedIndexChanged="ddlYard_SelectedIndexChanged"></asp:DropDownList></td>
+                        <td style="width: 32%;padding-bottom:5px;">
+                            <asp:DropDownList ID="ddlYard" runat="server" AutoPostBack="true" CssClass="dropdownlist" OnSelectedIndexChanged="ddlYard_SelectedIndexChanged"></asp:DropDownList>
+                            <br /><asp:RequiredFieldValidator ID="rfvYard" runat="server" ControlToValidate="ddlYard" InitialValue="0" ErrorMessage="This field is required*" CssClass="errormessage" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                        </td>
                     </tr>
                     <tr>
                         <td>DO No<span class="errormessage">*</span></td>
-                        <td><asp:TextBox ID="txtDoNo" runat="server"></asp:TextBox></td>
+                        <td><asp:TextBox ID="txtDoNo" runat="server" ReadOnly="true" MaxLength="50"></asp:TextBox></td>
                         <td>DO Date<span class="errormessage">*</span></td>
                         <td>
                             <asp:TextBox ID="txtDoDate" runat="server" CssClass="textboxuppercase" MaxLength="50" Width="80px" TabIndex="6"></asp:TextBox>
@@ -34,11 +41,19 @@
                     <PagerSettings Mode="NumericFirstLast" Position="TopAndBottom" />
                     <PagerStyle CssClass="gridviewpager" />
                     <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
-                    <EmptyDataTemplate>No Record(s) Found</EmptyDataTemplate>
+                    <EmptyDataTemplate>No Container(s) Found</EmptyDataTemplate>
                     <Columns>
                         <asp:TemplateField HeaderText="Sl#">
                             <HeaderStyle CssClass="gridviewheader" />
-                            <ItemStyle CssClass="gridviewitem" Width="5%" />                                    
+                            <ItemStyle CssClass="gridviewitem" Width="5%" />    
+                            <ItemTemplate>
+                                <asp:Label ID="lblSlNo" runat="server"></asp:Label>
+                                <asp:HiddenField ID="hdnBookingCntrId" runat="server" />
+                                <asp:HiddenField ID="hdnTypeId" runat="server" />
+                                <asp:HiddenField ID="hdnSize" runat="server" />
+                                <asp:HiddenField ID="hdnAvlUnit" runat="server" />
+                                <asp:HiddenField ID="hdnBookingUnit" runat="server" />
+                            </ItemTemplate>                                
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Type">
                             <HeaderStyle CssClass="gridviewheader" />
@@ -56,7 +71,7 @@
                             <HeaderStyle CssClass="gridviewheader" />
                             <ItemStyle CssClass="gridviewitem" Width="5%" /> 
                             <ItemTemplate>
-                                <asp:TextBox ID="txtReqUnit" runat="server" CssClass="numerictextbox" MaxLength="3"></asp:TextBox>
+                                <cc2:CustomTextBox ID="txtReqUnit" runat="server" CssClass="numerictextbox" Type="Numeric" MaxLength="5" Width="50"></cc2:CustomTextBox>
                             </ItemTemplate>                                   
                         </asp:TemplateField>
                     </Columns>

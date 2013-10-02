@@ -16,6 +16,7 @@ namespace EMS.Common
         String BookingNumber { get; set; }
         String DeliveryOrderNumber { get; set; }
         DateTime DeliveryOrderDate { get; set; }
+        int EmptyYardId { get; set; }
         String Containers { get; set; }
     }
 }

@@ -9,7 +9,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using EMS.BLL;
 using EMS.Common;
+using EMS.Entity;
 using EMS.Utilities;
+using EMS.WebApp.CustomControls;
 
 namespace EMS.WebApp.Export
 {
@@ -43,7 +45,11 @@ namespace EMS.WebApp.Export
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-
+            List<IDeliveryOrderContainer> lstContainer = new List<IDeliveryOrderContainer>();
+            IDeliveryOrder deliveryOrder = new DeliveryOrderEntity();
+            BuildDeliveryOrderEntity(deliveryOrder);
+            BuildContainerEntity(lstContainer);
+            DoSave(deliveryOrder, lstContainer);
         }
 
         protected void btnPrint_Click(object sender, EventArgs e)
@@ -71,11 +77,17 @@ namespace EMS.WebApp.Export
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 5);
-                e.Row.Cells[0].Text = ((gvwList.PageSize * gvwList.PageIndex) + e.Row.RowIndex + 1).ToString();
+                ((Label)e.Row.Cells[0].FindControl("lblSlNo")).Text = ((gvwList.PageSize * gvwList.PageIndex) + e.Row.RowIndex + 1).ToString();
+                ((HiddenField)e.Row.Cells[0].FindControl("hdnBookingCntrId")).Value = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookingContainerId"));
+                ((HiddenField)e.Row.Cells[0].FindControl("hdnTypeId")).Value = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerTypeId"));
+                ((HiddenField)e.Row.Cells[0].FindControl("hdnSize")).Value = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerSize"));
+                ((HiddenField)e.Row.Cells[0].FindControl("hdnAvlUnit")).Value = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "AvailableUnit"));
+                ((HiddenField)e.Row.Cells[0].FindControl("hdnBookingUnit")).Value = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookingUnit"));
+                
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerType"));
                 e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerSize"));
                 e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "AvailableUnit"));
-                ((TextBox)e.Row.Cells[4].FindControl("txtReqUnit")).Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "RequiredUnit"));
+                ((CustomTextBox)e.Row.Cells[4].FindControl("txtReqUnit")).Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "RequiredUnit"));
             }
         }
 
@@ -177,6 +189,65 @@ namespace EMS.WebApp.Export
 
             gvwList.DataSource = lstCntr;
             gvwList.DataBind();
+        }
+
+        private void BuildDeliveryOrderEntity(IDeliveryOrder deliveryOrder)
+        {
+            deliveryOrder.EmptyYardId = Convert.ToInt32(ddlYard.SelectedValue);
+            deliveryOrder.BookingId = Convert.ToInt64(ddlBooking.SelectedValue);
+            deliveryOrder.DeliveryOrderDate = Convert.ToDateTime(txtDoDate.Text.Trim(), _culture);
+        }
+
+        private void BuildContainerEntity(List<IDeliveryOrderContainer> lstContainer)
+        {
+            for (int index = 0; index < gvwList.Rows.Count; index++)
+            {
+                HiddenField hdnBookingCntrId = (HiddenField)gvwList.Rows[index].Cells[0].FindControl("hdnBookingCntrId");
+                HiddenField hdnTypeId = (HiddenField)gvwList.Rows[index].Cells[0].FindControl("hdnTypeId");
+                HiddenField hdnSize = (HiddenField)gvwList.Rows[index].Cells[0].FindControl("hdnSize");
+                HiddenField hdnAvlUnit = (HiddenField)gvwList.Rows[index].Cells[0].FindControl("hdnAvlUnit");
+                HiddenField hdnBookingUnit = (HiddenField)gvwList.Rows[index].Cells[0].FindControl("hdnBookingUnit");
+                CustomTextBox txtReqUnit = (CustomTextBox)gvwList.Rows[index].Cells[4].FindControl("txtReqUnit");
+
+                if (!ReferenceEquals(hdnTypeId, null) && !ReferenceEquals(hdnSize, null) && !ReferenceEquals(txtReqUnit, null))
+                {
+                    Int64 bookingCntrId = 0;
+                    int containerTypeId = 0;
+                    int availableUnit = 0;
+                    int requiredUnit = 0;
+                    int bookingUnit = 0;
+                    Int64.TryParse(hdnBookingCntrId.Value.Trim(), out bookingCntrId);
+                    int.TryParse(hdnTypeId.Value.Trim(), out containerTypeId);
+                    int.TryParse(hdnAvlUnit.Value.Trim(), out availableUnit);
+                    int.TryParse(hdnBookingUnit.Value.Trim(), out bookingUnit);
+                    int.TryParse(txtReqUnit.Text.Trim(), out requiredUnit);
+
+                    IDeliveryOrderContainer container = new DeliveryOrderContainerEntity();
+                    container.BookingContainerId = bookingCntrId;
+                    container.ContainerTypeId = containerTypeId;
+                    container.ContainerSize = hdnSize.Value.Trim();
+                    container.AvailableUnit = availableUnit;
+                    container.BookingUnit = bookingUnit;
+                    container.RequiredUnit = requiredUnit;
+
+                    lstContainer.Add(container);
+                }
+            }
+        }
+
+        private void DoSave(IDeliveryOrder deliveryOrder, List<IDeliveryOrderContainer> lstContainer)
+        {
+            string message = string.Empty;
+
+            if (DOBLL.ValidateContainer(lstContainer, out message))
+            {
+                message = DOBLL.SaveDeliveryOrder(deliveryOrder, lstContainer, _userId);
+                GeneralFunctions.RegisterAlertScript(this, message);
+            }
+            else
+            {
+                GeneralFunctions.RegisterAlertScript(this, message);
+            }
         }
 
         #endregion

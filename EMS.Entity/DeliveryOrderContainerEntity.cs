@@ -11,6 +11,12 @@ namespace EMS.Entity
     {
         #region DeliveryOrderContainerEntity Members
 
+        public Int64 BookingContainerId
+        {
+            get;
+            set;
+        }
+
         public int ContainerTypeId
         {
             get;
@@ -24,6 +30,12 @@ namespace EMS.Entity
         }
 
         public string ContainerSize
+        {
+            get;
+            set;
+        }
+
+        public int BookingUnit
         {
             get;
             set;
@@ -52,9 +64,11 @@ namespace EMS.Entity
 
         public DeliveryOrderContainerEntity(DataTableReader reader)
         {
+            this.BookingContainerId = Convert.ToInt64(reader["BookingCntrId"]);
             this.ContainerTypeId = Convert.ToInt32(reader["ContainerTypeId"]);
             this.ContainerType = Convert.ToString(reader["ContainerType"]);
             this.ContainerSize = Convert.ToString(reader["ContainerSize"]);
+            this.BookingUnit = Convert.ToInt32(reader["RequiredUnit"]);
             this.AvailableUnit = Convert.ToInt32(reader["AvailableUnit"]);
             this.RequiredUnit = Convert.ToInt32(reader["RequiredUnit"]);
         }

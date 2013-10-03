@@ -50,6 +50,11 @@ namespace EMS.Entity
             set;
         }
 
+        public int ServiceNameID
+        {
+            get;
+            set;
+        }
         public bool ServiceStatus
         {
             get;
@@ -95,6 +100,7 @@ namespace EMS.Entity
             this.NVOCC = Convert.ToString(reader["NVOCC"]);
             this.FPOD = Convert.ToString(reader["PortName"]);
             this.FPODID = Convert.ToString(reader["FK_FPOD"]);
+            this.ServiceNameID = Convert.ToInt32(reader["fk_ServiceNameID"]);
         }
     }
 }

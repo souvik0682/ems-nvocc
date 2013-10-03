@@ -265,10 +265,25 @@ namespace EMS.Entity
                     this.TotalAmount = Convert.ToDecimal(reader["TotalAmount"]);
             //this.ServiceTax = Convert.ToDecimal(reader["ServiceTax"]);
 
-            this.Type = Convert.ToInt32(reader["Type"]);
-            this.Size = Convert.ToString(reader["Size"]);
-            this.RatePerUnit = Convert.ToDecimal(reader["RatePerUnit"]);
-            this.RatePerDoc = Convert.ToDecimal(reader["RatePerDoc"]);
+            if (ColumnExists(reader, "Type"))
+                if (reader["Type"] != DBNull.Value)
+                    this.Type = Convert.ToInt32(reader["Type"]);
+            //this.Type = Convert.ToInt32(reader["Type"]);
+
+            if (ColumnExists(reader, "Size"))
+                if (reader["Size"] != DBNull.Value)
+                    this.Size = Convert.ToString(reader["Size"]);
+            //this.Size = Convert.ToString(reader["Size"]);
+
+            if (ColumnExists(reader, "RatePerUnit"))
+                if (reader["RatePerUnit"] != DBNull.Value)
+                    this.RatePerUnit = Convert.ToDecimal(reader["RatePerUnit"]);
+            //this.RatePerUnit = Convert.ToDecimal(reader["RatePerUnit"]);
+
+            if (ColumnExists(reader, "RatePerDoc"))
+                if (reader["RatePerDoc"] != DBNull.Value)
+                    this.RatePerDoc = Convert.ToDecimal(reader["RatePerDoc"]);
+            //this.RatePerDoc = Convert.ToDecimal(reader["RatePerDoc"]);
 
         }
 

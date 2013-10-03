@@ -40,6 +40,18 @@ namespace EMS.Entity
             set;
         }
 
+        public int BookingUnit
+        {
+            get;
+            set;
+        }
+
+        public long BookingContainerId
+        {
+            get;
+            set;
+        }
+
         #endregion
     }
 }

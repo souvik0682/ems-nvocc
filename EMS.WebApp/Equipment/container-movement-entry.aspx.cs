@@ -25,6 +25,7 @@ namespace EMS.WebApp.Equipment
         private bool _canDelete = false;
         private bool _canView = false;
         private int _userLocation = 0;
+        //private int _reqfield = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -101,6 +102,7 @@ namespace EMS.WebApp.Equipment
             rfvDate.Enabled = false;
             rfvToStatus.Enabled = false;
             rfvToLocation.Enabled = false;
+            //_reqfield = 0;
             //rfvFeus.Enabled = false;
             rfvEmptyYard.Enabled = false;
         }
@@ -298,6 +300,7 @@ namespace EMS.WebApp.Equipment
             if (ddlFromStatus.SelectedItem.Text == "RCVE")
             {
                 ddlEmptyYard.Enabled = true;
+                //_reqfield = 1;
             }
             else
             {
@@ -308,6 +311,7 @@ namespace EMS.WebApp.Equipment
             {
                 //ddlToStatus.Enabled = false;
                 ddlTolocation.Enabled = true;
+                //_reqfield = 3;
             }
             else
             {
@@ -324,10 +328,12 @@ namespace EMS.WebApp.Equipment
 
         private void ActionOnToStatusChange()
         {
+            //_reqfield = 0;
             if (ddlToStatus.SelectedItem.Text == "RCVE" || ddlFromStatus.SelectedItem.Text == "RCVE")
             {
                 ddlEmptyYard.Enabled = true;
                 rfvEmptyYard.Enabled = true;
+                //_reqfield = 1;
             }
             else
             {
@@ -337,29 +343,35 @@ namespace EMS.WebApp.Equipment
                     ddlEmptyYard.SelectedIndex = 0;
             }
 
-            if (ddlToStatus.SelectedItem.Text == "TRFE")
+            if (ddlToStatus.SelectedItem.Text == "TRFE" || ddlToStatus.SelectedItem.Text == "ICDO" || ddlFromStatus.SelectedItem.Text == "ICDI")
             {
                 //txtToLocation.Enabled = true;
                 ddlTolocation.Enabled = true;
                 rfvToLocation.Enabled = true;
+                ddlTolocation.SelectedIndex = 0;
+                //if (_reqfield == 1)
+                //    _reqfield = 2;
+                //else
+                //    _reqfield = 3;
                 //hdnToLocation.Value = "0";
             }
             else
             {
                 //txtToLocation.Enabled = false;
                 //txtToLocation.Text = string.Empty;
-                ddlTolocation.SelectedIndex = 0;
+                ddlTolocation.SelectedIndex = -1;
                 ddlTolocation.Enabled = false;
                 rfvToLocation.Enabled = false;
+                //_reqfield = 0;
                 //hdnToLocation.Value = "0";
             }
 
-            if (ddlToStatus.SelectedItem.Text == "ICDO" || ddlFromStatus.SelectedItem.Text == "ICDI")
-            {
-                ddlTolocation.Enabled = true;
-                ddlTolocation.SelectedIndex = 0;
-                rfvToLocation.Enabled = true;
-            }
+            //if (ddlToStatus.SelectedItem.Text == "ICDO" || ddlFromStatus.SelectedItem.Text == "ICDI")
+            //{
+            //    ddlTolocation.Enabled = true;
+            //    ddlTolocation.SelectedIndex = 0;
+            //    rfvToLocation.Enabled = true;
+            //}
           
 
         }
@@ -478,6 +490,27 @@ namespace EMS.WebApp.Equipment
 
         protected void btnShow_Click(object sender, EventArgs e)
         {
+            if ((ddlFromStatus.SelectedItem.Text == "RCVE") || (ddlToStatus.SelectedItem.Text == "RCVE"))
+            {
+                if (ddlEmptyYard.SelectedIndex == 0)
+                    return;
+            }
+
+            if (ddlToStatus.SelectedItem.Text == "TRFE" || ddlToStatus.SelectedItem.Text == "ICDO" || ddlFromStatus.SelectedItem.Text == "ICDI")
+            {
+                if (ddlTolocation.SelectedIndex == 0)
+                    return;
+            }
+
+            //if (_reqfield == 1 && ddlEmptyYard.SelectedIndex < 1)
+            //    return;
+
+            //if (_reqfield == 2 && (ddlTolocation.SelectedIndex < 1 || ddlEmptyYard.SelectedIndex < 1))
+            //    return;
+
+            //if (_reqfield == 3 && ddlTolocation.SelectedIndex < 1)
+            //    return;
+
             if (ddlFromStatus.SelectedItem.Text == "RCVE")
             {
                 fillContainer(Convert.ToInt32(ddlEmptyYard.SelectedValue));
@@ -493,8 +526,11 @@ namespace EMS.WebApp.Equipment
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+
             if (Page.IsValid)
             {
+
+
                 foreach (GridViewRow gvRow in gvSelectedContainer.Rows)
                 {
                     //HiddenField hdnLMDT = (HiddenField)gvRow.FindControl("hdnLMDT");

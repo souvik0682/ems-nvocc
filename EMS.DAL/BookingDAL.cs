@@ -462,5 +462,23 @@ namespace EMS.DAL
             }
             return myDataSet;
         }
+
+        public static IBooking GetBookingById(int ID)
+        {
+            string strExecution = "[exp].[prcGetBookingById]";
+            IBooking oIH = null;
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@BookingID", ID);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    oIH = new BookingEntity(reader);
+                }
+                reader.Close();
+            }
+            return oIH;
+        }
     }
 }

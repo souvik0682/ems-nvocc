@@ -46,7 +46,7 @@ namespace EMS.DAL
             return Result;
         }
 
-        public static DataTable GetContainerTransactionListFiltered(int BookingID)
+        public static DataTable GetContainerTransactionListFiltered(int BookingID, int LineID)
         {
             string strExecution = "[exp].[prcGetContainerFromBooking]";
             DataTable myDataTable;
@@ -54,6 +54,7 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@BookingID", BookingID);
+                oDq.AddIntegerParam("@LineID", LineID);
                 myDataTable = oDq.GetTable();
             }
             return myDataTable;

@@ -391,5 +391,15 @@ namespace EMS.DAL
             return ds;
         }
         #endregion
+
+        public static DataSet GetBooking(string Initial)
+        {
+
+            string ProcName = "[exp].[prcGetBooking]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+            dquery.AddVarcharParam("@initial", 250, Initial);
+            return dquery.GetTables();
+
+        }
     }
 }

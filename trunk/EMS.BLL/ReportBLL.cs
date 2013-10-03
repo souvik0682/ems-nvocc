@@ -60,6 +60,12 @@ namespace EMS.BLL
         {
             return ReportDAL.GetContainerStockDetail(Line, Loc, Stat, CntrType, StockDate, EmptyYard);
         }
+
+        public static DataSet GetBooking(string Initial)
+        {
+            return ReportDAL.GetBooking(Initial);
+        }
+
         #region Manifest
             public static DataSet GetRptFrieghtManifest_TFS(string blNo) { return ReportDAL.GetRptFrieghtManifest_TFS(blNo); }
             public static DataSet GetRptFrieghtManifest(string blNo) { return ReportDAL.GetRptFrieghtManifest(blNo); }

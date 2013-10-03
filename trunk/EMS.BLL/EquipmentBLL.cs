@@ -70,5 +70,10 @@ namespace EMS.BLL
        {
            return EquipmentDAL.GetExportBLHeader(Initial);
        }
+
+       //public static DataSet GetBooking(string Initial)
+       //{
+       //    return EquipmentDAL.GetBooking(Initial);
+       //}
     }
 }

@@ -124,5 +124,10 @@ namespace EMS.BLL
             BookingDAL.DeactivateAllTranshipmentsAgainstBookingId(BookingId);
 
         }
+
+        public static IBooking GetBookingById(int ID)
+        {
+            return BookingDAL.GetBookingById(ID);
+        }
     }
 }

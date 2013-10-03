@@ -60,6 +60,7 @@ namespace EMS.WebApp.Export
                     else
                     {
                         ViewState["BOOKINGID"] = null;
+                        ((TextBox)txtRefundPayableTo.FindControl("txtRefund")).Enabled = false;
                     }
                 }
             }
@@ -146,6 +147,7 @@ namespace EMS.WebApp.Export
             if (rdblBorkerage.SelectedValue == "True")
             {
                 (txtBrokeragePayableTo.FindControl("txtBrockerage") as TextBox).Enabled = true;
+                
                 //if (((TextBox)txtBrokeragePayableTo.FindControl("txtBrockerage")).Text == "")
                 //    ((TextBox)txtBrokeragePayableTo.FindControl("txtBrockerage")).Text = 
 

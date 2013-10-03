@@ -163,9 +163,21 @@ namespace EMS.Entity
             this.PrincipleSharing = Convert.ToBoolean(reader["IsPrincipleShared"]);
             this.RateChangeable = Convert.ToBoolean(reader["RateChangable"]);            
             this.ServiceTax = Convert.ToBoolean(reader["ServiceTax"]);
-            this.FPOD = Convert.ToString(reader["Fpod"]);
-            this.DestinationCharge = Convert.ToBoolean(reader["DestinationCharge"]);
-            this.Service = Convert.ToInt32(reader["Service"]);
+
+            if (ColumnExists(reader, "FPOD"))
+                if (reader["FPOD"] != DBNull.Value)
+                    this.FPOD = Convert.ToString(reader["FPOD"]);
+            //this.FPOD = Convert.ToString(reader["Fpod"]);
+
+            if (ColumnExists(reader, "DestinationCharge"))
+                if (reader["DestinationCharge"] != DBNull.Value)
+                    this.DestinationCharge = Convert.ToBoolean(reader["DestinationCharge"]);
+            //this.DestinationCharge = Convert.ToBoolean(reader["DestinationCharge"]);
+
+            if (ColumnExists(reader, "Service"))
+                if (reader["Service"] != DBNull.Value)
+                    this.Service = Convert.ToInt32(reader["Service"]);
+            //this.Service = Convert.ToInt32(reader["Service"]);
 
             if (ColumnExists(reader, "IsSpecialRate"))
                 if (reader["IsSpecialRate"] != DBNull.Value)

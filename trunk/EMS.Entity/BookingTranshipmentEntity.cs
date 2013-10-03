@@ -102,6 +102,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "bkTransStatus"))
                 if (reader["bkTransStatus"] != DBNull.Value)
                     this.BkTransStatus = Convert.ToBoolean(reader["bkTransStatus"]);
+
+            if (ColumnExists(reader, "PortName"))
+                if (reader["PortName"] != DBNull.Value)
+                    this.PortName = reader["PortName"].ToString();
         }
 
         public bool ColumnExists(IDataReader reader, string columnName)

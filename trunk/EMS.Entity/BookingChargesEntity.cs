@@ -129,9 +129,9 @@ namespace EMS.Entity
                 ChargeStatus = true;
             }
 
-            RefundEditable = true;
+            RefundEditable = false;
             ChargedEditable = true;
-            BrokerageEditable = true;
+            BrokerageEditable = false;
 
             if (ColumnExists(reader, "RateChangeable"))
             {

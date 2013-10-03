@@ -19,6 +19,7 @@ namespace EMS.Common
         string POLID { get; set; }
         string PORID { get; set; }
         int CustID { get; set; }
+        string BookingParty { get; set; }
         int LocationID { get; set; }
         int VesselID { get; set; }
         Int32 VoyageID { get; set; }
@@ -66,5 +67,10 @@ namespace EMS.Common
         string UploadPath { get; set; }
         int SlotOperatorId { get; set; }
         string Shipper { get; set; }
+
+        string VesselName { get; set; }
+        string VoyageNo { get; set; }
+        int Customer { get; set; }
+        string CustomerERAS { get; set; }
     }
 }

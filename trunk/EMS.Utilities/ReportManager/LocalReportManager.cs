@@ -18,8 +18,8 @@ namespace EMS.Utilities.ReportManager
     {
         #region Protected Member Variables
 
-        protected List<DataTable> _lstReportDataSource = new List<DataTable>();
-        protected List<DataTable> _lstSubReportDataSource = new List<DataTable>();
+        protected List<ReportDataSource> _lstReportDataSource = new List<ReportDataSource>();
+        protected List<ReportDataSource> _lstSubReportDataSource = new List<ReportDataSource>();
         protected List<ReportParameter> _lstReportParameter = new List<ReportParameter>();
 
         #endregion
@@ -193,7 +193,7 @@ namespace EMS.Utilities.ReportManager
         /// <param name="dataSource">An instance of <see cref="Microsoft.Reporting.WebForms.ReportDataSource"/> containing the Data Source.</param>
         /// <createdby>Amit Kumar Chandra</createdby>
         /// <createddate>30/06/2012</createddate>
-        public void AddDataSource(DataTable dataSource)
+        public void AddDataSource(ReportDataSource dataSource)
         {
             _lstReportDataSource.Add(dataSource);
         }
@@ -204,7 +204,7 @@ namespace EMS.Utilities.ReportManager
         /// <param name="dataSource">An instance of <see cref="Microsoft.Reporting.WebForms.ReportDataSource"/> containing the Data Source.</param>
         /// <createdby>Amit Kumar Chandra</createdby>
         /// <createddate>30/06/2012</createddate>
-        public void AddSubReportDataSource(DataTable dataSource)
+        public void AddSubReportDataSource(ReportDataSource dataSource)
         {
             _lstSubReportDataSource.Add(dataSource);
         }
@@ -258,7 +258,7 @@ namespace EMS.Utilities.ReportManager
             // Add DataSources for the report
             for (int index = 0; index < _lstReportDataSource.Count; index++)
             {
-                this.RptViewer.LocalReport.DataSources.Add(new ReportDataSource(_lstReportDataSource[index].TableName, _lstReportDataSource[index]));
+                this.RptViewer.LocalReport.DataSources.Add(_lstReportDataSource[index]);
             }
 
             // Add Report Parameters
@@ -299,7 +299,7 @@ namespace EMS.Utilities.ReportManager
             // Add DataSources for the report
             for (int index = 0; index < _lstReportDataSource.Count; index++)
             {
-                this.RptViewer.LocalReport.DataSources.Add(new ReportDataSource(_lstReportDataSource[index].TableName, _lstReportDataSource[index]));
+                this.RptViewer.LocalReport.DataSources.Add(_lstReportDataSource[index]);
             }
 
             // Add Report Parameters

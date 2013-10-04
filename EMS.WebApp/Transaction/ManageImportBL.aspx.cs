@@ -43,6 +43,7 @@ namespace EMS.WebApp.Transaction
         private bool _canEdit = false;
         private bool _canDelete = false;
         private bool _canView = false;
+  
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -57,6 +58,7 @@ namespace EMS.WebApp.Transaction
                 {
                     long blHeaderId = 0;
                     Int64.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["BLId"].ToString()), out blHeaderId);
+                    hdnCntrEdit.Value = Convert.ToString("0");
 
                     if (blHeaderId > 0)
                         LoadForEdit(blHeaderId);
@@ -541,7 +543,14 @@ namespace EMS.WebApp.Transaction
 
                     if (!ReferenceEquals(blFooter, null))
                     {
-                        errContainer.Text = "Please enter unique Container No";
+                        if (Convert.ToString(ViewState[EDITBLFOOTER]) == "")
+                        {
+                            errContainer.Text = "Please enter unique Container No";
+                        }
+                        else
+                        {
+                            EditFooterDetails();
+                        }
                     }
                     else
                     {
@@ -1836,6 +1845,7 @@ namespace EMS.WebApp.Transaction
             txtFtrCargo.Text = "";
             txtFtrStowage.Text = "";
             txtFtrCallNo.Text = "";
+            hdnCntrEdit.Value = Convert.ToString("0");
         }
 
         private void RefreshGridView()
@@ -1883,7 +1893,7 @@ namespace EMS.WebApp.Transaction
             txtFtrCargo.Text = footer.Cargo;
             txtFtrStowage.Text = footer.Stowage;
             txtFtrCallNo.Text = footer.CallNo;
-
+            hdnCntrEdit.Value = Convert.ToString("0");
             if (FooterId < 0)
                 ViewState[BLFOOTERID] = FooterId;
             else

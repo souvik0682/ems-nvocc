@@ -124,6 +124,7 @@
                                                                     TabIndex="1" OnSelectedIndexChanged="ddlNvocc_SelectedIndexChanged">
                                                                     <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                                                 </asp:DropDownList>
+                                                                <asp:HiddenField ID="hdnCntrEdit" runat="server" />
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvNvocc" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="ddlNvocc" InitialValue="0"
@@ -504,7 +505,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtPackage" runat="server" CssClass="numerictextbox" MaxLength="30"
-                                                                    Width="250px" TabIndex="35"></cc2:CustomTextBox>
+                                                                    Width="250px" TabIndex="35" Type="Numeric"></cc2:CustomTextBox>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvPackage" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtPackage" ValidationGroup="Save"
@@ -591,7 +592,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtDestFreeDays" runat="server" CssClass="numerictextbox"
-                                                                    MaxLength="13" Width="250px" TabIndex="43"></cc2:CustomTextBox>
+                                                                    MaxLength="13" Width="250px" TabIndex="43" Type="Numeric"></cc2:CustomTextBox>
                                                                 <asp:RequiredFieldValidator ID="rfvDestFreeDays" runat="server" ControlToValidate="txtDestFreeDays"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
@@ -614,7 +615,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtPGRFreeDays" runat="server" CssClass="numerictextbox" MaxLength="13"
-                                                                    Width="250px" TabIndex="45"></cc2:CustomTextBox>
+                                                                    Width="250px" TabIndex="45" Type="Numeric"></cc2:CustomTextBox>
                                                                 <asp:RequiredFieldValidator ID="rfvPGRFreeDays" runat="server" ControlToValidate="txtPGRFreeDays"
                                                                     ErrorMessage="This field is required" CssClass="errormessage" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
@@ -728,7 +729,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtTEU" runat="server" CssClass="numerictextbox" MaxLength="13"
-                                                                    Width="250px" TabIndex="55" Text="0"></cc2:CustomTextBox>
+                                                                    Width="250px" TabIndex="55" Text="0" Type="Numeric"></cc2:CustomTextBox>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvTEU" runat="server" CssClass="errormessage" ErrorMessage="This field is required"
                                                                     ControlToValidate="txtTEU" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -740,7 +741,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtFEU" runat="server" CssClass="numerictextbox" MaxLength="13"
-                                                                    Width="250px" TabIndex="56"  Text="0"></cc2:CustomTextBox>
+                                                                    Width="250px" TabIndex="56"  Text="0" Type="Numeric"></cc2:CustomTextBox>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvFEU" runat="server" CssClass="errormessage" ErrorMessage="This field is required"
                                                                     ControlToValidate="txtFEU" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>

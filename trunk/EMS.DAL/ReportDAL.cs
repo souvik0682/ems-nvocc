@@ -401,5 +401,16 @@ namespace EMS.DAL
             return dquery.GetTables();
 
         }
+
+        #region Delivery Order Print
+        
+        public static List<DOPrintEntity> GetDeliveryOrder(Int64 doId)
+        {
+            List<DOPrintEntity> lstDO = new List<DOPrintEntity>();
+
+            return lstDO;
+        }
+
+        #endregion
     }
 }

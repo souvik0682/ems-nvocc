@@ -10,8 +10,11 @@ using System.Web.UI.WebControls;
 using EMS.BLL;
 using EMS.Common;
 using EMS.Entity;
+using EMS.Entity.Report;
 using EMS.Utilities;
+using EMS.Utilities.ReportManager;
 using EMS.WebApp.CustomControls;
+using Microsoft.Reporting.WebForms;
 
 namespace EMS.WebApp.Export
 {
@@ -24,6 +27,7 @@ namespace EMS.WebApp.Export
         private bool _canEdit = false;
         private bool _canDelete = false;
         private bool _canView = false;
+        private bool _isEditable = true;
         private Int64 _doId = 0;
         private IFormatProvider _culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"].ToString());
 
@@ -50,11 +54,22 @@ namespace EMS.WebApp.Export
             BuildDeliveryOrderEntity(deliveryOrder);
             BuildContainerEntity(lstContainer);
             DoSave(deliveryOrder, lstContainer);
+            LoadContainerList();
+            _isEditable = false;
+            LockControls(true);
         }
 
         protected void btnPrint_Click(object sender, EventArgs e)
         {
-
+            List<IDeliveryOrderContainer> lstContainer = new List<IDeliveryOrderContainer>();
+            IDeliveryOrder deliveryOrder = new DeliveryOrderEntity();
+            BuildDeliveryOrderEntity(deliveryOrder);
+            BuildContainerEntity(lstContainer);
+            DoSave(deliveryOrder, lstContainer);
+            LoadContainerList();
+            _isEditable = false;
+            LockControls(true);
+            GenerateReport(deliveryOrder.DeliveryOrderId);
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
@@ -83,11 +98,14 @@ namespace EMS.WebApp.Export
                 ((HiddenField)e.Row.Cells[0].FindControl("hdnSize")).Value = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerSize"));
                 ((HiddenField)e.Row.Cells[0].FindControl("hdnAvlUnit")).Value = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "AvailableUnit"));
                 ((HiddenField)e.Row.Cells[0].FindControl("hdnBookingUnit")).Value = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookingUnit"));
-                
+
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerType"));
                 e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerSize"));
                 e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "AvailableUnit"));
-                ((CustomTextBox)e.Row.Cells[4].FindControl("txtReqUnit")).Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "RequiredUnit"));
+
+                CustomTextBox txtReqUnit = (CustomTextBox)e.Row.Cells[4].FindControl("txtReqUnit");
+                txtReqUnit.Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "RequiredUnit"));
+                txtReqUnit.ReadOnly = !_isEditable;
             }
         }
 
@@ -97,15 +115,20 @@ namespace EMS.WebApp.Export
 
         private void SetAttributes()
         {
-
+            LockControls(!_isEditable);
         }
 
         private void RetriveParameters()
         {
-            if (!ReferenceEquals(Request.QueryString["id"], null))
+            if (!ReferenceEquals(ViewState["DOId"], null))
             {
-                Int64.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["id"].ToString()), out _doId);
+                Int64.TryParse(Convert.ToString(ViewState["DOId"]), out _doId);
             }
+
+            if (_doId > 0)
+                _isEditable = false;
+            else
+                _isEditable = true;
 
             _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
             UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
@@ -193,6 +216,7 @@ namespace EMS.WebApp.Export
 
         private void BuildDeliveryOrderEntity(IDeliveryOrder deliveryOrder)
         {
+            deliveryOrder.DeliveryOrderId = _doId;
             deliveryOrder.EmptyYardId = Convert.ToInt32(ddlYard.SelectedValue);
             deliveryOrder.BookingId = Convert.ToInt64(ddlBooking.SelectedValue);
             deliveryOrder.DeliveryOrderDate = Convert.ToDateTime(txtDoDate.Text.Trim(), _culture);
@@ -242,12 +266,31 @@ namespace EMS.WebApp.Export
             if (DOBLL.ValidateContainer(lstContainer, out message))
             {
                 message = DOBLL.SaveDeliveryOrder(deliveryOrder, lstContainer, _userId);
+                ViewState["DOId"] = deliveryOrder.DeliveryOrderId;
                 GeneralFunctions.RegisterAlertScript(this, message);
             }
             else
             {
                 GeneralFunctions.RegisterAlertScript(this, message);
             }
+        }
+
+        private void GenerateReport(Int64 doId)
+        {
+            ReportBLL cls = new ReportBLL();
+            ReportViewer rptViewer = new ReportViewer();
+            List<DOPrintEntity> lstDO = ReportBLL.GetDeliveryOrder(doId);
+            LocalReportManager reportManager = new LocalReportManager("DeliveryOrder", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
+            ReportDataSource dsDeliveryOrder = new ReportDataSource("dsDeliveryOrder", lstDO);
+            reportManager.AddDataSource(dsDeliveryOrder);
+            reportManager.ReportFormat = ReportFormat.PDF;
+            reportManager.Export();
+        }
+
+        private void LockControls(bool isLock)
+        {
+            ddlBooking.Enabled = !isLock;
+            ddlYard.Enabled = !isLock;
         }
 
         #endregion

@@ -11,6 +11,10 @@ using EMS.Common;
 using EMS.Entity;
 using EMS.Utilities;
 using EMS.Utilities.ResourceManager;
+using EMS.Entity.Report;
+using EMS.Utilities.ReportManager;
+using Microsoft.Reporting.WebForms;
+using System.Data;
 
 namespace EMS.WebApp.Export
 {
@@ -62,7 +66,7 @@ namespace EMS.WebApp.Export
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            RedirecToAddEditPage(-1);
+            RedirecToAddEditPage();
         }
 
         protected void ddlPaging_SelectedIndexChanged(object sender, EventArgs e)
@@ -102,7 +106,7 @@ namespace EMS.WebApp.Export
             }
             else if (e.CommandName == "EditData")
             {
-                RedirecToAddEditPage(Convert.ToInt64(e.CommandArgument));
+                RedirecToAddEditPage();
             }
             else if (e.CommandName == "RemoveData")
             {
@@ -216,10 +220,9 @@ namespace EMS.WebApp.Export
             }
         }
 
-        private void RedirecToAddEditPage(Int64 doId)
+        private void RedirecToAddEditPage()
         {
-            string encryptedId = GeneralFunctions.EncryptQueryString(doId.ToString());
-            Response.Redirect("~/Export/DOEdit.aspx?id=" + encryptedId);
+            Response.Redirect("~/Export/DOEdit.aspx");
         }
 
         private void LoadDeliveryOrder()
@@ -251,7 +254,14 @@ namespace EMS.WebApp.Export
 
         private void GenerateReport(Int64 doId)
         {
-            // TODO::
+            ReportBLL cls = new ReportBLL();
+            ReportViewer rptViewer = new ReportViewer();
+            List<DOPrintEntity> lstDO = ReportBLL.GetDeliveryOrder(doId);
+            LocalReportManager reportManager = new LocalReportManager("DeliveryOrder", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
+            ReportDataSource dsDeliveryOrder = new ReportDataSource("dsDeliveryOrder", lstDO);
+            reportManager.AddDataSource(dsDeliveryOrder);
+            reportManager.ReportFormat = ReportFormat.PDF;
+            reportManager.Export();    
         }
 
         private void BuildSearchCriteria(SearchCriteria criteria)

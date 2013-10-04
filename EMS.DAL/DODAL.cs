@@ -79,16 +79,23 @@ namespace EMS.DAL
         public static int SaveDeliveryOrder(IDeliveryOrder deliveryOrder, string xmlDoc, int modifiedBy)
         {
             int result = 0;
+            Int64 newDOId = 0;
+            string newDONo = string.Empty;
             string strExecution = "[exp].[uspSaveDeliveryOrder]";
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
+                oDq.AddBigIntegerParam("@DOId", deliveryOrder.DeliveryOrderId);
                 oDq.AddBigIntegerParam("@BookingId", deliveryOrder.BookingId);
                 oDq.AddIntegerParam("@EmptyYardId", deliveryOrder.EmptyYardId);
                 oDq.AddDateTimeParam("@DeliveryOrderDate", deliveryOrder.DeliveryOrderDate);
-                oDq.AddVarcharParam("@XmlDoc",1000, xmlDoc);
+                oDq.AddVarcharParam("@XmlDoc", 1000, xmlDoc);
                 oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
-                result=oDq.RunActionQuery();
+                oDq.AddBigIntegerParam("@NewDOId", newDOId, QueryParameterDirection.Output);
+                oDq.AddVarcharParam("@DONumber", 50, newDONo, QueryParameterDirection.Output);
+                result = oDq.RunActionQuery();
+                deliveryOrder.DeliveryOrderId = newDOId;
+                deliveryOrder.DeliveryOrderNumber = newDONo;
             }
 
             return result;

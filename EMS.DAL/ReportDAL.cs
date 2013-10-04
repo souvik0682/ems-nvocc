@@ -408,6 +408,23 @@ namespace EMS.DAL
         {
             List<DOPrintEntity> lstDO = new List<DOPrintEntity>();
 
+            string strExecution = "[exp].[uspRptDO]";
+            List<DOPrintEntity> lstCntr = new List<DOPrintEntity>();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@DOID", doId);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    DOPrintEntity container = new DOPrintEntity();
+                    lstCntr.Add(container);
+                }
+
+                reader.Close();
+            }
+
             return lstDO;
         }
 

@@ -67,9 +67,18 @@ namespace EMS.BLL
         }
 
         #region Manifest
-            public static DataSet GetRptFrieghtManifest_TFS(string blNo) { return ReportDAL.GetRptFrieghtManifest_TFS(blNo); }
-            public static DataSet GetRptFrieghtManifest(string blNo) { return ReportDAL.GetRptFrieghtManifest(blNo); }
-            public static DataSet GetRptFrieghtManifest_CTRS(string blNo) { return ReportDAL.GetRptFrieghtManifest_CTRS(blNo); } 
+        public static DataSet GetRptFrieghtManifest_TFS(string blNo) { return ReportDAL.GetRptFrieghtManifest_TFS(blNo); }
+        public static DataSet GetRptFrieghtManifest(string blNo) { return ReportDAL.GetRptFrieghtManifest(blNo); }
+        public static DataSet GetRptFrieghtManifest_CTRS(string blNo) { return ReportDAL.GetRptFrieghtManifest_CTRS(blNo); }
+        #endregion
+
+        #region Delivery Order Print
+
+        public static List<DOPrintEntity> GetDeliveryOrder(Int64 doId)
+        {
+            return ReportDAL.GetDeliveryOrder(doId);
+        }
+
         #endregion
     }
 }

@@ -115,13 +115,39 @@ namespace EMS.WebApp.Export
 
         protected void btnRemove_Click(object sender, EventArgs e)
         {
+            List<IExportBLContainer> lstData = ViewState["DataSource"] as List<IExportBLContainer>;
+            int totalRows = gvwContainers.Rows.Count;
+
+            for (int r = 0; r < totalRows; r++)
+            {
+                GridViewRow thisGridViewRow = gvwContainers.Rows[r];
+                HiddenField hdnContainerId = (HiddenField)thisGridViewRow.FindControl("hdnContainerId");
+
+                DropDownList ddlPart = (DropDownList)thisGridViewRow.FindControl("ddlPart");
+                TextBox txtSealNo = (TextBox)thisGridViewRow.FindControl("txtSealNo");
+                TextBox txtPackage = (TextBox)thisGridViewRow.FindControl("txtPackage");
+                TextBox txtGrossWeight = (TextBox)thisGridViewRow.FindControl("txtGrossWeight");
+                TextBox txtShippingBillNumber = (TextBox)thisGridViewRow.FindControl("txtShippingBillNumber");
+                TextBox txtShippingBillDate = (TextBox)thisGridViewRow.FindControl("txtShippingBillDate");
+                
+                lstData.Where(d => d.ContainerId == Convert.ToInt64(hdnContainerId.Value))
+                    .Select(d =>
+                    {
+                        d.Part = Convert.ToBoolean(ddlPart.SelectedValue);
+                        d.SealNumber = txtSealNo.Text.Trim();
+                        d.Package = Convert.ToInt32(txtPackage.Text);
+                        d.GrossWeight = Convert.ToDecimal(txtGrossWeight.Text);
+                        d.ShippingBillNumber = txtShippingBillNumber.Text.Trim();
+                        d.ShippingBillDate = Convert.ToDateTime(txtShippingBillDate.Text.Trim());
+                        return d;
+                    }).ToList();
+            }
+
             ImageButton btnRemove = (ImageButton)sender;
             GridViewRow gvContainerRow = (GridViewRow)btnRemove.Parent.Parent;
-            HiddenField hdnContainerId = gvContainerRow.FindControl("hdnContainerId") as HiddenField;
+            HiddenField hdnContainerId2 = gvContainerRow.FindControl("hdnContainerId") as HiddenField;
 
-            List<IExportBLContainer> lstData = ViewState["DataSource"] as List<IExportBLContainer>;
-
-            lstData.Where(d => d.ContainerId == Convert.ToInt64(hdnContainerId.Value))
+            lstData.Where(d => d.ContainerId == Convert.ToInt64(hdnContainerId2.Value))
                     .Select(d =>
                     {
                         d.IsDeleted = true;

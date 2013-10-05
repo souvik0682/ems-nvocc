@@ -8,6 +8,45 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
+<style type="text/css">
+        body
+        {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+        .ErrorControl
+        {
+            background-color: #EE3B3B;
+            border: solid 1px Red;
+        }
+    </style>
+    <script type="text/javascript">
+        function WebForm_OnSubmit() {
+            if (typeof (ValidatorOnSubmit) == 'function' && ValidatorOnSubmit() == false) {
+                var cntr = null;
+                for (var i in Page_Validators) {
+                    try {
+                        var control = document.getElementById(Page_Validators[i].controltovalidate);
+                        if (!Page_Validators[i].isvalid) {
+                            control.className = 'ErrorControl';
+                            cntr = control;
+                        } else {
+                            if (cntr == control) {
+                                control.className = 'ErrorControl';
+                            }
+                            else {
+                                control.className = '';
+                            }
+                        }
+
+                        
+                    } catch (e) { }
+                }
+                return false;
+            }
+            return true;
+        }
+    </script>
     <div id="headercaption">
         ADD / EDIT EXPORT BL</div>
     <center>
@@ -557,7 +596,7 @@
                                                                 ReadOnly="True" SortExpression="TareWeight" />
                                                             <asp:TemplateField HeaderText="Gross Weight" SortExpression="GrossWeight" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
-                                                                    <cc2:CustomTextBox ID="txtGrossWeight" runat="server" Text='<%# Bind("GrossWeight") %>' 
+                                                                    <cc2:CustomTextBox ID="txtGrossWeight" runat="server" Text='<%# Bind("GrossWeight", "{0:n2}") %>' 
                                                                         Style="text-align: right;" Width="80" BorderStyle="None" MaxLength="10" 
                                                                         Precision="8" Scale="2" Type="Decimal">
                                                                     </cc2:CustomTextBox>
@@ -582,13 +621,19 @@
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="ShippingBillDate" SortExpression="ShippingBillDate" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
-                                                                    <asp:TextBox ID="txtShippingBillDate" runat="server" Text='<%# Bind("ShippingBillDate") %>'
+                                                                    <asp:TextBox ID="txtShippingBillDate" runat="server" Text='<%# Bind("ShippingBillDate","{0:dd-MM-yyyy}") %>'
                                                                         Width="80" BorderStyle="None" MaxLength="10">
                                                                     </asp:TextBox>
                                                                     <cc1:CalendarExtender ID="ceBillDate" TargetControlID="txtShippingBillDate" runat="server"
                                                                     Format="dd-MM-yyyy" Enabled="True" />
-                                                                    <asp:RequiredFieldValidator ID="rfv5" runat="server" ControlToValidate="txtShippingBillDate" Display="Dynamic" 
-                                                                    ValidationGroup="Save"></asp:RequiredFieldValidator>
+                                                                   
+                                                                    <asp:CompareValidator ID="cvShippingDate" runat="server" ControlToValidate="txtShippingBillDate"  
+                                                                        Operator="LessThanEqual" Display="Dynamic" ValueToCompare="<%# DateTime.Today.ToShortDateString() %>" 
+                                                                        Type="Date" ToolTip="Date should be less than equals to current date!" ValidationGroup="Save" >
+                                                                    </asp:CompareValidator>
+                                                                     <asp:RequiredFieldValidator ID="rfv5" runat="server" ControlToValidate="txtShippingBillDate" 
+                                                                        Display="Dynamic" ValidationGroup="Save">
+                                                                    </asp:RequiredFieldValidator>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:BoundField DataField="IsDeleted" HeaderText="Is Deleted" InsertVisible="False"

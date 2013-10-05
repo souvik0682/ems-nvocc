@@ -32,9 +32,9 @@ namespace EMS.WebApp.Export
                 if (!ReferenceEquals(Request.QueryString["BookingId"], null))
                 {
                     int BookingId = 0;
-                    Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["BookingId"].ToString()), out BookingId);
+                    //Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["BookingId"].ToString()), out BookingId);
 
-                    //BookingId = 1; //For testing
+                    BookingId = 1; //For testing
 
                     if (BookingId > 0)
                     {
@@ -42,14 +42,14 @@ namespace EMS.WebApp.Export
 
                         DataSet ds = new DataSet();
                         BookingBLL oBookChgBLL = new BookingBLL();
-                        
+
                         ds = oBookChgBLL.GetBookingChargesList(BookingId);
                         if (ds.Tables[0].Rows.Count > 0)
                             ViewState["ISEDIT"] = "True";
                         else
                             ViewState["ISEDIT"] = "False";
 
-                      
+
                         (txtBrokeragePayableTo.FindControl("txtBrockerage") as TextBox).Enabled = false;
                         ((TextBox)txtRefundPayableTo.FindControl("txtRefund")).Enabled = false;
 
@@ -132,26 +132,87 @@ namespace EMS.WebApp.Export
 
         protected void rdblRefundPayable_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ((TextBox)txtRefundPayableTo.FindControl("txtRefund")).Enabled = false;
+            List<IBookingCharges> lstData = new List<IBookingCharges>();
+            int totalRows = gvwCharges.Rows.Count;
+
+            for (int r = 0; r < totalRows; r++)
+            {
+                GridViewRow thisGridViewRow = gvwCharges.Rows[r];
+                HiddenField hdnBookingChargeId = (HiddenField)thisGridViewRow.FindControl("hdnBookingChargeId");
+
+                DropDownList ddlApplicable = (DropDownList)thisGridViewRow.FindControl("ddlApplicable");
+                TextBox txtCharged = (TextBox)thisGridViewRow.FindControl("txtCharged");
+                TextBox txtRefund = (TextBox)thisGridViewRow.FindControl("txtRefund");
+                TextBox txtBrokerageBasic = (TextBox)thisGridViewRow.FindControl("txtBrokerageBasic");
+                TextBox txtManifest = (TextBox)thisGridViewRow.FindControl("txtManifest");
+
+                lstData = ViewState["DataSource"] as List<IBookingCharges>;
+                lstData.Where(d => d.BookingChargeId == Convert.ToInt32(hdnBookingChargeId.Value))
+                    .Select(d =>
+                    {
+                        d.ChargeApplicable = Convert.ToBoolean(ddlApplicable.SelectedValue);
+                        d.ManifestRate = Convert.ToDecimal(txtManifest.Text);
+                        d.ActualRate = Convert.ToDecimal(txtCharged.Text);
+                        d.RefundAmount = 0;
+                        d.BrokerageBasic = Convert.ToDecimal(txtBrokerageBasic.Text);
+                        return d;
+                    }).ToList();
+            }
+            ViewState["DataSource"] = lstData;
 
             if (rdblRefundPayable.SelectedValue == "True")
+            {
                 ((TextBox)txtRefundPayableTo.FindControl("txtRefund")).Enabled = true;
+                LoadChargeDetails();
+            }
+            else
+            {
+                ((TextBox)txtRefundPayableTo.FindControl("txtRefund")).Enabled = false;
+                LoadChargeDetails();
+            }
         }
 
         protected void rdblBorkerage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            (txtBrokeragePayableTo.FindControl("txtBrockerage") as TextBox).Enabled = false;
+            List<IBookingCharges> lstData = new List<IBookingCharges>();
+            int totalRows = gvwCharges.Rows.Count;
 
-            txtBrokeragePercent.Enabled = false;
+            for (int r = 0; r < totalRows; r++)
+            {
+                GridViewRow thisGridViewRow = gvwCharges.Rows[r];
+                HiddenField hdnBookingChargeId = (HiddenField)thisGridViewRow.FindControl("hdnBookingChargeId");
+
+                DropDownList ddlApplicable = (DropDownList)thisGridViewRow.FindControl("ddlApplicable");
+                TextBox txtCharged = (TextBox)thisGridViewRow.FindControl("txtCharged");
+                TextBox txtRefund = (TextBox)thisGridViewRow.FindControl("txtRefund");
+                TextBox txtBrokerageBasic = (TextBox)thisGridViewRow.FindControl("txtBrokerageBasic");
+                TextBox txtManifest = (TextBox)thisGridViewRow.FindControl("txtManifest");
+
+                lstData = ViewState["DataSource"] as List<IBookingCharges>;
+                lstData.Where(d => d.BookingChargeId == Convert.ToInt32(hdnBookingChargeId.Value))
+                    .Select(d =>
+                    {
+                        d.ChargeApplicable = Convert.ToBoolean(ddlApplicable.SelectedValue);
+                        d.ManifestRate = Convert.ToDecimal(txtManifest.Text);
+                        d.ActualRate = Convert.ToDecimal(txtCharged.Text);
+                        d.RefundAmount = Convert.ToDecimal(txtRefund.Text); ;
+                        d.BrokerageBasic = 0;
+                        return d;
+                    }).ToList();
+            }
+            ViewState["DataSource"] = lstData;
 
             if (rdblBorkerage.SelectedValue == "True")
             {
                 (txtBrokeragePayableTo.FindControl("txtBrockerage") as TextBox).Enabled = true;
-                
-                //if (((TextBox)txtBrokeragePayableTo.FindControl("txtBrockerage")).Text == "")
-                //    ((TextBox)txtBrokeragePayableTo.FindControl("txtBrockerage")).Text = 
-
                 txtBrokeragePercent.Enabled = true;
+                LoadChargeDetails();
+            }
+            else
+            {
+                (txtBrokeragePayableTo.FindControl("txtBrockerage") as TextBox).Enabled = false;
+                txtBrokeragePercent.Enabled = false;
+                LoadChargeDetails();
             }
         }
 
@@ -398,7 +459,18 @@ namespace EMS.WebApp.Export
                         objData = BookingBLL.GetBookingChargesForEdit(bookingId); ;
                 }
 
-                objData = objData.Where(d => d.ChargeStatus == true).ToList();
+                //objData = objData.Where(d => d.ChargeStatus == true).ToList();
+
+                if (rdblBorkerage.SelectedValue == "True")
+                    objData = objData.Where(d => d.ChargeStatus == true).Select(d => { d.BrokerageEditable = true; return d; }).ToList();
+                else
+                    objData = objData.Where(d => d.ChargeStatus == true).Select(d => { d.BrokerageEditable = false; return d; }).ToList();
+
+                if (rdblRefundPayable.SelectedValue == "True")
+                    objData = objData.Where(d => d.ChargeStatus == true).Select(d => { d.RefundEditable = true; return d; }).ToList();
+                else
+                    objData = objData.Where(d => d.ChargeStatus == true).Select(d => { d.RefundEditable = false; return d; }).ToList();
+
                 ViewState["DataSource"] = objData;
 
                 gvwCharges.DataSource = objData;
@@ -424,26 +496,23 @@ namespace EMS.WebApp.Export
             }
         }
 
-        protected void gvwCharges_RowCreated(object sender, GridViewRowEventArgs e)
+        protected void gvwContainers_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (!IsPostBack)
+            if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                if (e.Row.RowType == DataControlRowType.DataRow)
-                {
-                    List<ChargeApplicable> lstApplicable = new List<ChargeApplicable>();
-                    lstApplicable.Add(new ChargeApplicable { Text = "Yes", Value = "True" });
-                    lstApplicable.Add(new ChargeApplicable { Text = "No", Value = "False" });
+                List<ChargeApplicable> lstApplicable = new List<ChargeApplicable>();
+                lstApplicable.Add(new ChargeApplicable { Text = "Yes", Value = "True" });
+                lstApplicable.Add(new ChargeApplicable { Text = "No", Value = "False" });
 
-                    // Bind drop down to Applicable
-                    DropDownList ddl = (DropDownList)e.Row.FindControl("ddlApplicable");
-                    ddl.DataTextField = "Text";
-                    ddl.DataValueField = "Value";
-                    ddl.DataSource = lstApplicable;
-                    ddl.DataBind();
+                // Bind drop down to Applicable
+                DropDownList ddl = (DropDownList)e.Row.FindControl("ddlApplicable");
+                ddl.DataTextField = "Text";
+                ddl.DataValueField = "Value";
+                ddl.DataSource = lstApplicable;
+                ddl.DataBind();
 
-                    IBookingCharges charge = e.Row.DataItem as IBookingCharges;
-                    ddl.SelectedValue = charge.ChargeApplicable.ToString();
-                }
+                IBookingCharges charge = e.Row.DataItem as IBookingCharges;
+                ddl.SelectedValue = charge.ChargeApplicable.ToString();
             }
         }
         protected void btnBack_Click(object sender, EventArgs e)

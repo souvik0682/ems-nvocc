@@ -23,7 +23,7 @@ namespace EMS.Common
          int Package { get; set; }
          bool Part { get; set; }
          string ShippingBillNumber { get; set; }
-         DateTime ShippingBillDate { get; set; }
+         DateTime? ShippingBillDate { get; set; }
          long ImportBLFooterId { get; set; }
          bool IsDeleted { get; set; }
     }

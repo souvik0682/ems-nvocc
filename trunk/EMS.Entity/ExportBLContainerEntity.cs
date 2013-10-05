@@ -26,7 +26,7 @@ namespace EMS.Entity
         public int Package { get; set; }
         public bool Part { get; set; }
         public string ShippingBillNumber { get; set; }
-        public DateTime ShippingBillDate { get; set; }
+        public DateTime? ShippingBillDate { get; set; }
         public long ImportBLFooterId { get; set; }
         public bool IsDeleted { get; set; }
 
@@ -98,14 +98,29 @@ namespace EMS.Entity
                     ShippingBillNumber = Convert.ToString(reader["ShippingBillNumber"]);
 
             if (ColumnExists(reader, "ShippingBillDate"))
+            {
                 if (reader["ShippingBillDate"] != DBNull.Value)
                     ShippingBillDate = Convert.ToDateTime(reader["ShippingBillDate"]);
+                else
+                    ShippingBillDate = null;
+            }
 
             if (ColumnExists(reader, "ImportBLFooterId"))
                 if (reader["ImportBLFooterId"] != DBNull.Value)
                     ImportBLFooterId = Convert.ToInt64(reader["ImportBLFooterId"]);
 
-            IsDeleted = false;
+            if (ColumnExists(reader, "IsDeleted"))
+            {
+                if (reader["IsDeleted"] != DBNull.Value)
+                    IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                else
+                    IsDeleted = false;
+            }
+            else
+            {
+                IsDeleted = false;
+            }
+            
         }
 
         public bool ColumnExists(IDataReader reader, string columnName)

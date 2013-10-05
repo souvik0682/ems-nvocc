@@ -24,14 +24,23 @@
     <script type="text/javascript">
         function WebForm_OnSubmit() {
             if (typeof (ValidatorOnSubmit) == 'function' && ValidatorOnSubmit() == false) {
+                var cntr = null;
                 for (var i in Page_Validators) {
                     try {
                         var control = document.getElementById(Page_Validators[i].controltovalidate);
                         if (!Page_Validators[i].isvalid) {
                             control.className = 'ErrorControl';
+                            cntr = control;
                         } else {
-                            control.className = '';
+                            if (cntr == control) {
+                                control.className = 'ErrorControl';
+                            }
+                            else {
+                                control.className = '';
+                            }
                         }
+
+
                     } catch (e) { }
                 }
                 return false;
@@ -233,7 +242,7 @@
                                                 <td colspan="10">
                                                     <asp:GridView ID="gvwCharges" runat="server" AllowPaging="True" AutoGenerateColumns="False"
                                                         BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px"
-                                                        CellPadding="3" DataKeyNames="BookingChargeId" OnRowCreated="gvwCharges_RowCreated">
+                                                        CellPadding="3" DataKeyNames="BookingChargeId" OnRowDataBound="gvwContainers_RowDataBound">
                                                         <FooterStyle BackColor="White" ForeColor="#000066" />
                                                         <Columns>
                                                             <asp:BoundField DataField="ChargeName" HeaderText="Charge Name" InsertVisible="False"
@@ -263,9 +272,9 @@
                                                                     </cc2:CustomTextBox>
                                                                     <asp:RequiredFieldValidator ID="rfv1" runat="server" ControlToValidate="txtManifest"
                                                                         Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>
-                                                                    <%--<asp:CompareValidator ID="cv1" runat="server" ControlToValidate="txtManifest" Operator="GreaterThan"
+                                                                    <asp:CompareValidator ID="cv1" runat="server" ControlToValidate="txtManifest" Operator="GreaterThan"
                                                                         Type="Double" ValueToCompare="0" ValidationGroup="Save">
-                                                                    </asp:CompareValidator>--%>
+                                                                    </asp:CompareValidator>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Charged" SortExpression="ActualRate" HeaderStyle-Width="100">
@@ -276,9 +285,9 @@
                                                                     </cc2:CustomTextBox>
                                                                     <asp:RequiredFieldValidator ID="rfv2" runat="server" ControlToValidate="txtCharged" Display="Dynamic" 
                                                                     ValidationGroup="Save"></asp:RequiredFieldValidator>
-                                                                   <%-- <asp:CompareValidator ID="cv2" runat="server" ControlToValidate="txtCharged" Operator="GreaterThan"
+                                                                    <asp:CompareValidator ID="cv2" runat="server" ControlToValidate="txtCharged" Operator="GreaterThan"
                                                                         Type="Double" ValueToCompare="0" ValidationGroup="Save" >
-                                                                    </asp:CompareValidator>--%>
+                                                                    </asp:CompareValidator>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Refund" SortExpression="RefundAmount" HeaderStyle-Width="100">

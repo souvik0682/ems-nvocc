@@ -44,6 +44,7 @@ namespace EMS.WebApp.Export
             if (!IsPostBack)
             {
                 PopulateControls();
+                LoadContainerList();
             }
         }
 
@@ -208,10 +209,20 @@ namespace EMS.WebApp.Export
             Int64 bookingId = Convert.ToInt64(ddlBooking.SelectedValue);
             Int32 emptyYardId = Convert.ToInt32(ddlYard.SelectedValue);
 
-            List<IDeliveryOrderContainer> lstCntr = DOBLL.GetDeliveryOrderContriner(bookingId, emptyYardId);
+            if (bookingId > 0 && emptyYardId > 0)
+            {
+                List<IDeliveryOrderContainer> lstCntr = DOBLL.GetDeliveryOrderContriner(bookingId, emptyYardId);
 
-            gvwList.DataSource = lstCntr;
-            gvwList.DataBind();
+                gvwList.DataSource = lstCntr;
+                gvwList.DataBind();
+            }
+            else
+            {
+                List<IDeliveryOrderContainer> lstCntr = new List<IDeliveryOrderContainer>();
+
+                gvwList.DataSource = lstCntr;
+                gvwList.DataBind();
+            }
         }
 
         private void BuildDeliveryOrderEntity(IDeliveryOrder deliveryOrder)

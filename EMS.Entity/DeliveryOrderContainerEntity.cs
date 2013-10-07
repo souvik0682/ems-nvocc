@@ -7,6 +7,7 @@ using System.Data;
 
 namespace EMS.Entity
 {
+    [Serializable]
     public class DeliveryOrderContainerEntity : IDeliveryOrderContainer
     {
         #region DeliveryOrderContainerEntity Members

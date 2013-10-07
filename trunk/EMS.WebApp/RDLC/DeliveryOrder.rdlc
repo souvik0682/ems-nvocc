@@ -20,6 +20,22 @@
           <DataField>LineCode</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="AddrName">
+          <DataField>AddrName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AddrAddress">
+          <DataField>AddrAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Phone">
+          <DataField>Phone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BookingNo">
+          <DataField>BookingNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="LoadPort">
           <DataField>LoadPort</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -40,8 +56,12 @@
           <DataField>HazClass</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Vessel">
-          <DataField>Vessel</DataField>
+        <Field Name="VesselName">
+          <DataField>VesselName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="VoyageNo">
+          <DataField>VoyageNo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="ETATerminal">
@@ -208,7 +228,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>FLY Logistics</Value>
+                <Value>=First(Fields!AddrName.Value, "dsDeliveryOrder")</Value>
                 <Style>
                   <FontFamily>Times New Roman</FontFamily>
                   <FontSize>12pt</FontSize>
@@ -241,7 +261,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Opp. Reliance Petrol Pump, Near Chirle Toll Naka,</Value>
+                <Value>=First(Fields!AddrAddress.Value, "dsDeliveryOrder")</Value>
                 <Style>
                   <FontFamily>Times New Roman</FontFamily>
                   <FontSize>12pt</FontSize>
@@ -266,38 +286,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox6">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Tal-Uran, Dist. Raigad, Maharashtra.</Value>
-                <Style>
-                  <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>12pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>1.5in</Top>
-        <Height>0.25in</Height>
-        <Width>3.5in</Width>
-        <ZIndex>5</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
       <Textbox Name="Textbox7">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -305,7 +293,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Contact No.: +91-969941766</Value>
+                <Value>="Contact No.: " + First(Fields!Phone.Value, "dsDeliveryOrder")</Value>
                 <Style>
                   <FontFamily>Times New Roman</FontFamily>
                   <FontSize>12pt</FontSize>
@@ -317,10 +305,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>1.75in</Top>
+        <Top>1.5in</Top>
         <Height>0.25in</Height>
         <Width>3.5in</Width>
-        <ZIndex>6</ZIndex>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -353,7 +341,7 @@
         <Left>4.8in</Left>
         <Height>0.25in</Height>
         <Width>1.2in</Width>
-        <ZIndex>7</ZIndex>
+        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -371,7 +359,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>UAFL</Value>
+                <Value>=First(Fields!LineCode.Value, "dsDeliveryOrder")</Value>
                 <Style>
                   <FontFamily>Times New Roman</FontFamily>
                   <FontSize>12pt</FontSize>
@@ -387,7 +375,7 @@
         <Left>6in</Left>
         <Height>0.25in</Height>
         <Width>1.5in</Width>
-        <ZIndex>8</ZIndex>
+        <ZIndex>7</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -420,7 +408,7 @@
         <Left>4.8in</Left>
         <Height>0.25in</Height>
         <Width>1.2in</Width>
-        <ZIndex>9</ZIndex>
+        <ZIndex>8</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -453,7 +441,7 @@
         <Left>4.8in</Left>
         <Height>0.25in</Height>
         <Width>1.2in</Width>
-        <ZIndex>10</ZIndex>
+        <ZIndex>9</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -471,7 +459,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>2066</Value>
+                <Value>=First(Fields!BookingNo.Value, "dsDeliveryOrder")</Value>
                 <Style>
                   <FontFamily>Times New Roman</FontFamily>
                   <FontSize>12pt</FontSize>
@@ -487,7 +475,7 @@
         <Left>6in</Left>
         <Height>0.25in</Height>
         <Width>1.5in</Width>
-        <ZIndex>11</ZIndex>
+        <ZIndex>10</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -520,7 +508,7 @@
         <Left>6in</Left>
         <Height>0.25in</Height>
         <Width>1.5in</Width>
-        <ZIndex>12</ZIndex>
+        <ZIndex>11</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -553,7 +541,7 @@
         <Left>0.00708in</Left>
         <Height>0.25in</Height>
         <Width>3.5in</Width>
-        <ZIndex>13</ZIndex>
+        <ZIndex>12</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -585,7 +573,7 @@
         <Top>2.625in</Top>
         <Height>0.25in</Height>
         <Width>3.8in</Width>
-        <ZIndex>14</ZIndex>
+        <ZIndex>13</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -603,7 +591,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>BHARAT EXPO (A/c. ... ).</Value>
+                <Value>="BHARAT EXPO (A/c. " + First(Fields!BookingNo.Value, "dsDeliveryOrder") + ")"</Value>
                 <Style>
                   <FontFamily>Times New Roman</FontFamily>
                   <FontSize>12pt</FontSize>
@@ -619,7 +607,7 @@
         <Left>3.8in</Left>
         <Height>0.25in</Height>
         <Width>3.7in</Width>
-        <ZIndex>15</ZIndex>
+        <ZIndex>14</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -878,7 +866,7 @@
         <Top>3.125in</Top>
         <Height>0.5in</Height>
         <Width>3in</Width>
-        <ZIndex>16</ZIndex>
+        <ZIndex>15</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -910,7 +898,7 @@
         <Top>3.875in</Top>
         <Height>0.25in</Height>
         <Width>7.5in</Width>
-        <ZIndex>17</ZIndex>
+        <ZIndex>16</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -995,7 +983,6 @@
                             <TextRun>
                               <Value>=Fields!AgentCode.Value</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -1066,9 +1053,8 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Vessel.Value</Value>
+                              <Value>=Fields!VesselName.Value + "V." + Fields!VoyageNo.Value</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -1150,7 +1136,6 @@
                             <TextRun>
                               <Value>=Fields!LineCode.Value</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -1223,7 +1208,6 @@
                             <TextRun>
                               <Value>=Fields!ETATerminal.Value</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -1297,7 +1281,6 @@
                             <TextRun>
                               <Value>=Fields!VIANo.Value</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -1376,7 +1359,6 @@
                             <TextRun>
                               <Value>=Fields!LoadPort.Value</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -1449,7 +1431,6 @@
                             <TextRun>
                               <Value>=Fields!ETDTerminal.Value</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -1523,7 +1504,6 @@
                             <TextRun>
                               <Value>=Fields!ROTNo.Value</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -1602,7 +1582,6 @@
                             <TextRun>
                               <Value>=Fields!PODForm1.Value</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -1676,9 +1655,8 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!VesselCutoffDate.Value</Value>
+                              <Value>=Format(Fields!VesselCutoffDate.Value,"dd/MM/yyyy hhmm")</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -1759,7 +1737,6 @@
                             <TextRun>
                               <Value>=Fields!FinalPort.Value</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -1833,9 +1810,8 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!SICutoffDate.Value</Value>
+                              <Value>=Format(Fields!SICutoffDate.Value,"dd/MM/yyyy hhmm")</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -1916,7 +1892,6 @@
                             <TextRun>
                               <Value>=Fields!Cargo.Value</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -1990,9 +1965,8 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!DocumentCutoffDate.Value</Value>
+                              <Value>=Format(Fields!DocumentCutoffDate.Value,"dd/MM/yyyy hhmm")</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -2073,7 +2047,6 @@
                             <TextRun>
                               <Value>=Fields!HazClass.Value</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -2147,7 +2120,6 @@
                             <TextRun>
                               <Value>=Fields!Dimensions.Value</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -2205,7 +2177,7 @@
         <Top>4.125in</Top>
         <Height>1.75in</Height>
         <Width>7.5in</Width>
-        <ZIndex>18</ZIndex>
+        <ZIndex>17</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2236,7 +2208,7 @@
         <Top>6.125in</Top>
         <Height>0.25in</Height>
         <Width>7.5in</Width>
-        <ZIndex>19</ZIndex>
+        <ZIndex>18</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2302,7 +2274,7 @@
         <Top>6.625in</Top>
         <Height>0.4in</Height>
         <Width>7.5in</Width>
-        <ZIndex>20</ZIndex>
+        <ZIndex>19</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2368,7 +2340,7 @@
         <Top>7.025in</Top>
         <Height>0.4in</Height>
         <Width>7.5in</Width>
-        <ZIndex>21</ZIndex>
+        <ZIndex>20</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2468,7 +2440,7 @@
         <Top>7.425in</Top>
         <Height>0.7in</Height>
         <Width>7.5in</Width>
-        <ZIndex>22</ZIndex>
+        <ZIndex>21</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2534,7 +2506,7 @@
         <Top>8.125in</Top>
         <Height>0.4in</Height>
         <Width>7.5in</Width>
-        <ZIndex>23</ZIndex>
+        <ZIndex>22</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2634,7 +2606,7 @@
         <Top>8.525in</Top>
         <Height>0.7in</Height>
         <Width>7.5in</Width>
-        <ZIndex>24</ZIndex>
+        <ZIndex>23</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2717,7 +2689,7 @@
         <Top>9.225in</Top>
         <Height>0.55in</Height>
         <Width>7.5in</Width>
-        <ZIndex>25</ZIndex>
+        <ZIndex>24</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2766,7 +2738,7 @@
         <Top>9.775in</Top>
         <Height>0.25in</Height>
         <Width>7.5in</Width>
-        <ZIndex>26</ZIndex>
+        <ZIndex>25</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2832,7 +2804,7 @@
         <Top>10.025in</Top>
         <Height>0.4in</Height>
         <Width>7.5in</Width>
-        <ZIndex>27</ZIndex>
+        <ZIndex>26</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2898,7 +2870,7 @@
         <Top>10.425in</Top>
         <Height>0.4in</Height>
         <Width>7.5in</Width>
-        <ZIndex>28</ZIndex>
+        <ZIndex>27</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2947,7 +2919,7 @@
         <Top>10.825in</Top>
         <Height>0.25in</Height>
         <Width>7.5in</Width>
-        <ZIndex>29</ZIndex>
+        <ZIndex>28</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2985,7 +2957,7 @@
         <Top>11.075in</Top>
         <Height>0.25in</Height>
         <Width>7.5in</Width>
-        <ZIndex>30</ZIndex>
+        <ZIndex>29</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3040,7 +3012,7 @@
         <Top>11.325in</Top>
         <Height>0.4in</Height>
         <Width>7.5in</Width>
-        <ZIndex>31</ZIndex>
+        <ZIndex>30</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3076,7 +3048,7 @@
         <Top>11.975in</Top>
         <Height>0.25in</Height>
         <Width>2.1in</Width>
-        <ZIndex>32</ZIndex>
+        <ZIndex>31</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3112,7 +3084,7 @@
         <Top>12.225in</Top>
         <Height>0.25in</Height>
         <Width>2.1in</Width>
-        <ZIndex>33</ZIndex>
+        <ZIndex>32</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3149,7 +3121,7 @@
         <Left>2.1in</Left>
         <Height>0.25in</Height>
         <Width>5.4in</Width>
-        <ZIndex>34</ZIndex>
+        <ZIndex>33</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3186,7 +3158,7 @@
         <Left>2.1in</Left>
         <Height>0.25in</Height>
         <Width>5.4in</Width>
-        <ZIndex>35</ZIndex>
+        <ZIndex>34</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3220,7 +3192,7 @@
         <Top>12.725in</Top>
         <Height>0.25in</Height>
         <Width>2.6in</Width>
-        <ZIndex>36</ZIndex>
+        <ZIndex>35</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3254,7 +3226,7 @@
         <Top>12.975in</Top>
         <Height>0.25in</Height>
         <Width>2.6in</Width>
-        <ZIndex>37</ZIndex>
+        <ZIndex>36</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3290,7 +3262,7 @@
         <Top>13.475in</Top>
         <Height>0.25in</Height>
         <Width>2.6in</Width>
-        <ZIndex>38</ZIndex>
+        <ZIndex>37</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3325,7 +3297,7 @@
         <Top>13.975in</Top>
         <Height>0.25in</Height>
         <Width>7.5in</Width>
-        <ZIndex>39</ZIndex>
+        <ZIndex>38</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3452,7 +3424,7 @@
         <Top>14.475in</Top>
         <Height>0.9in</Height>
         <Width>7.5in</Width>
-        <ZIndex>40</ZIndex>
+        <ZIndex>39</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>

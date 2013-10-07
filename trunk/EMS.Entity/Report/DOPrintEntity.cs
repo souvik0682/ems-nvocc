@@ -12,17 +12,22 @@ namespace EMS.Entity.Report
 
         public string AgentCode { get; set; }
         public string LineCode { get; set; }
+        public string AddrName { get; set; }
+        public string AddrAddress { get; set; }
+        public string Phone { get; set; }
+        public string BookingNo { get; set; }
         public string LoadPort { get; set; }
         public string PODForm1 { get; set; }
         public string FinalPort { get; set; }
         public string Cargo { get; set; }
         public string HazClass { get; set; }
-        public string Vessel { get; set; }
-        public string ETATerminal { get; set; }
-        public string ETDTerminal { get; set; }
-        public DateTime VesselCutoffDate { get; set; }
-        public DateTime SICutoffDate { get; set; }
-        public DateTime DocumentCutoffDate { get; set; }
+        public string VesselName { get; set; }
+        public string VoyageNo { get; set; }
+        public DateTime? ETATerminal { get; set; }
+        public DateTime? ETDTerminal { get; set; }
+        public DateTime? VesselCutoffDate { get; set; }
+        public DateTime? SICutoffDate { get; set; }
+        public DateTime? DocumentCutoffDate { get; set; }
         public string Dimensions { get; set; }
         public string VIANo { get; set; }
         public string ROTNo { get; set; }
@@ -36,12 +41,32 @@ namespace EMS.Entity.Report
 
         public DOPrintEntity()
         {
-            
+
         }
 
         public DOPrintEntity(DataTableReader reader)
         {
-
+            this.AgentCode = Convert.ToString(reader["AgentCode"]);
+            this.AgentCode = Convert.ToString(reader["LineCode"]);
+            this.LoadPort = Convert.ToString(reader["LPortName"]);
+            this.PODForm1 = Convert.ToString(reader["DPortName"]);
+            this.FinalPort = Convert.ToString(reader["FPortName"]);
+            this.Cargo = Convert.ToString(reader["Commodity"]);
+            this.HazClass = Convert.ToString(reader["HazCargo"]);
+            this.VesselName = Convert.ToString(reader["VesselName"]);
+            this.VoyageNo = Convert.ToString(reader["VoyageNo"]);
+            if (reader["ETA"] != DBNull.Value) this.ETATerminal = Convert.ToDateTime(reader["ETA"]);
+            if (reader["ETD"] != DBNull.Value) this.ETDTerminal = Convert.ToDateTime(reader["ETD"]);
+            this.VIANo = Convert.ToString(reader["VIA"]);
+            this.ROTNo = Convert.ToString(reader["RotationNo"]);
+            if (reader["VesselcutOffDate"] != DBNull.Value) this.VesselCutoffDate = Convert.ToDateTime(reader["VesselcutOffDate"]);
+            if (reader["DocsCutOffDate"] != DBNull.Value) this.DocumentCutoffDate = Convert.ToDateTime(reader["DocsCutOffDate"]);
+            //this.Dimensions = Convert.ToString(reader["Dimensions"]);
+            this.AddrName = Convert.ToString(reader["AddrName"]);
+            this.AddrAddress = Convert.ToString(reader["AddrAddress"]);
+            this.Phone = Convert.ToString(reader["Phone"]);
+            this.BookingNo = Convert.ToString(reader["BookingNo"]);
+            this.LineCode = Convert.ToString(reader["LineName"]);
         }
 
         #endregion

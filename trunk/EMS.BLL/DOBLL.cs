@@ -18,7 +18,7 @@ namespace EMS.BLL
             return DODAL.GetDeliveryOrder(searchCriteria, userId);
         }
 
-        public static bool ValidateContainer(List<IDeliveryOrderContainer> lstCntr, out string message)
+        public static bool ValidateContainer(List<DeliveryOrderContainerEntity> lstCntr, out string message)
         {
             bool valid = true;
             int slNo = 1;
@@ -44,7 +44,7 @@ namespace EMS.BLL
             return valid;
         }
 
-        public static string SaveDeliveryOrder(IDeliveryOrder deliveryOrder, List<IDeliveryOrderContainer> lstCntr, int modifiedBy)
+        public static string SaveDeliveryOrder(IDeliveryOrder deliveryOrder, List<DeliveryOrderContainerEntity> lstCntr, int modifiedBy)
         {
             int result = 0;
             string message = string.Empty;

@@ -254,13 +254,13 @@ namespace EMS.WebApp.Export
 
         private void GenerateReport(Int64 doId)
         {
-            ReportBLL cls = new ReportBLL();
-            ReportViewer rptViewer = new ReportViewer();
-            List<DOPrintEntity> lstDO = ReportBLL.GetDeliveryOrder(doId);
             LocalReportManager reportManager = new LocalReportManager("DeliveryOrder", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
+            ReportBLL cls = new ReportBLL();
+
+            List<DOPrintEntity> lstDO = ReportBLL.GetDeliveryOrder(doId);
             ReportDataSource dsDeliveryOrder = new ReportDataSource("dsDeliveryOrder", lstDO);
-            reportManager.AddDataSource(dsDeliveryOrder);
             reportManager.ReportFormat = ReportFormat.PDF;
+            reportManager.AddDataSource(dsDeliveryOrder);           
             reportManager.Export();    
         }
 

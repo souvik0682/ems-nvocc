@@ -159,13 +159,13 @@ namespace EMS.Utilities.ReportManager
         /// <param name="e">The <see cref="Microsoft.Reporting.WebForms.SubreportProcessingEventArgs"/> instance containing the event data.</param>
         /// <createdby>Amit Kumar Chandra</createdby>
         /// <createddate>30/06/2012</createddate>
-        //private void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
-        //{
-        //    for (int index = 0; index < _lstSubReportDataSource.Count; index++)
-        //    {
-        //        e.DataSources.Add(_lstSubReportDataSource[index]);
-        //    }
-        //}
+        private void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
+        {
+            for (int index = 0; index < _lstSubReportDataSource.Count; index++)
+            {
+                e.DataSources.Add(_lstSubReportDataSource[index]);
+            }
+        }
 
         #endregion
 
@@ -238,6 +238,11 @@ namespace EMS.Utilities.ReportManager
                     contentType = "application/vnd.ms-excel";
                     fileName = ReportName + ".xls";
                     break;
+                case ReportFormat.Word:
+                    reportFormat = "WORD";
+                    contentType = "application/ms-word";
+                    fileName = ReportName + ".doc";
+                    break;
                 case ReportFormat.XML:
                     reportFormat = "XML";
                     contentType = "application/xml";
@@ -268,10 +273,10 @@ namespace EMS.Utilities.ReportManager
             }
 
             // If the report contains any subreport, then add corresponding datasources.
-            //if (this.HasSubReport)
-            //{
-            //    this.RptViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(LocalReport_SubreportProcessing);
-            //}
+            if (this.HasSubReport)
+            {
+                this.RptViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(LocalReport_SubreportProcessing);
+            }
 
             this.RptViewer.LocalReport.Refresh();
 
@@ -306,6 +311,12 @@ namespace EMS.Utilities.ReportManager
             for (int index = 0; index < _lstReportParameter.Count; index++)
             {
                 this.RptViewer.LocalReport.SetParameters(new ReportParameter[] { _lstReportParameter[index] });
+            }
+
+            // If the report contains any subreport, then add corresponding datasources.
+            if (this.HasSubReport)
+            {
+                this.RptViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(LocalReport_SubreportProcessing);
             }
 
             this.RptViewer.LocalReport.Refresh();

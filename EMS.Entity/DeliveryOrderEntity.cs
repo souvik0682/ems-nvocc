@@ -92,7 +92,7 @@ namespace EMS.Entity
             this.BookingId = Convert.ToInt64(reader["BookingId"]);
             this.LocationName = Convert.ToString(reader["LocationName"]);
             this.NVOCCName = Convert.ToString(reader["NVOCCName"]);
-            this.BookingNumber = Convert.ToString(reader["BookingNumber"]);
+            this.BookingNumber = Convert.ToString(reader["BookingNo"]);
             this.DeliveryOrderNumber = Convert.ToString(reader["DONo"]);
             this.DeliveryOrderDate = Convert.ToDateTime(reader["DODate"]);
             this.EmptyYardId = Convert.ToInt32(reader["EmptyYardId"]);

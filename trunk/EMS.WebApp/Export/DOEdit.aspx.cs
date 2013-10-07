@@ -50,7 +50,7 @@ namespace EMS.WebApp.Export
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            List<IDeliveryOrderContainer> lstContainer = new List<IDeliveryOrderContainer>();
+            List<DeliveryOrderContainerEntity> lstContainer = new List<DeliveryOrderContainerEntity>();
             IDeliveryOrder deliveryOrder = new DeliveryOrderEntity();
             BuildDeliveryOrderEntity(deliveryOrder);
             BuildContainerEntity(lstContainer);
@@ -62,7 +62,7 @@ namespace EMS.WebApp.Export
 
         protected void btnPrint_Click(object sender, EventArgs e)
         {
-            List<IDeliveryOrderContainer> lstContainer = new List<IDeliveryOrderContainer>();
+            List<DeliveryOrderContainerEntity> lstContainer = new List<DeliveryOrderContainerEntity>();
             IDeliveryOrder deliveryOrder = new DeliveryOrderEntity();
             BuildDeliveryOrderEntity(deliveryOrder);
             BuildContainerEntity(lstContainer);
@@ -233,7 +233,7 @@ namespace EMS.WebApp.Export
             deliveryOrder.DeliveryOrderDate = Convert.ToDateTime(txtDoDate.Text.Trim(), _culture);
         }
 
-        private void BuildContainerEntity(List<IDeliveryOrderContainer> lstContainer)
+        private void BuildContainerEntity(List<DeliveryOrderContainerEntity> lstContainer)
         {
             for (int index = 0; index < gvwList.Rows.Count; index++)
             {
@@ -257,7 +257,7 @@ namespace EMS.WebApp.Export
                     int.TryParse(hdnBookingUnit.Value.Trim(), out bookingUnit);
                     int.TryParse(txtReqUnit.Text.Trim(), out requiredUnit);
 
-                    IDeliveryOrderContainer container = new DeliveryOrderContainerEntity();
+                    DeliveryOrderContainerEntity container = new DeliveryOrderContainerEntity();
                     container.BookingContainerId = bookingCntrId;
                     container.ContainerTypeId = containerTypeId;
                     container.ContainerSize = hdnSize.Value.Trim();
@@ -270,7 +270,7 @@ namespace EMS.WebApp.Export
             }
         }
 
-        private void DoSave(IDeliveryOrder deliveryOrder, List<IDeliveryOrderContainer> lstContainer)
+        private void DoSave(IDeliveryOrder deliveryOrder, List<DeliveryOrderContainerEntity> lstContainer)
         {
             string message = string.Empty;
 

@@ -6,6 +6,7 @@ using EMS.Common;
 
 namespace EMS.Entity
 {
+    [Serializable]
     public class DeliveryOrderContainer:IDeliveryOrderContainer
     {
         #region IDeliveryOrderContainer Members

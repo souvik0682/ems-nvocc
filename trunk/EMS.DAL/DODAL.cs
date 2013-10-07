@@ -89,7 +89,7 @@ namespace EMS.DAL
                 oDq.AddBigIntegerParam("@BookingId", deliveryOrder.BookingId);
                 oDq.AddIntegerParam("@EmptyYardId", deliveryOrder.EmptyYardId);
                 oDq.AddDateTimeParam("@DeliveryOrderDate", deliveryOrder.DeliveryOrderDate);
-                oDq.AddVarcharParam("@XmlDoc", 1000, xmlDoc);
+                oDq.AddNTextParam("@XmlDoc", xmlDoc);
                 oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
                 oDq.AddBigIntegerParam("@NewDOId", newDOId, QueryParameterDirection.Output);
                 oDq.AddVarcharParam("@DONumber", 50, newDONo, QueryParameterDirection.Output);

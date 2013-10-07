@@ -418,7 +418,7 @@ namespace EMS.DAL
 
                 while (reader.Read())
                 {
-                    DOPrintEntity container = new DOPrintEntity();
+                    DOPrintEntity container = new DOPrintEntity(reader);
                     lstCntr.Add(container);
                 }
 

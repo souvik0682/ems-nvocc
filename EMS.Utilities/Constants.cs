@@ -25,8 +25,12 @@ namespace EMS.Utilities
         /// <summary>
         /// Report will be generated in XML format.
         /// </summary>
-        XML = 3
-    }
+        XML = 3,
+        /// <summary>
+        /// Report will be generated in MS Word format.
+        /// </summary>
+        Word = 4
+    };
 
     public enum PageName
     {

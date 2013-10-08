@@ -406,10 +406,8 @@ namespace EMS.DAL
         
         public static List<DOPrintEntity> GetDeliveryOrder(Int64 doId)
         {
-            List<DOPrintEntity> lstDO = new List<DOPrintEntity>();
-
             string strExecution = "[exp].[uspRptDO]";
-            List<DOPrintEntity> lstCntr = new List<DOPrintEntity>();
+            List<DOPrintEntity> lstDO = new List<DOPrintEntity>();
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
@@ -419,7 +417,7 @@ namespace EMS.DAL
                 while (reader.Read())
                 {
                     DOPrintEntity container = new DOPrintEntity(reader);
-                    lstCntr.Add(container);
+                    lstDO.Add(container);
                 }
 
                 reader.Close();
@@ -430,8 +428,6 @@ namespace EMS.DAL
 
         public static List<DOPrintEntity> GetDeliveryOrderContainer(Int64 doId)
         {
-            List<DOPrintEntity> lstDO = new List<DOPrintEntity>();
-
             string strExecution = "[exp].[uspRptDOContainer]";
             List<DOPrintEntity> lstCntr = new List<DOPrintEntity>();
 
@@ -442,7 +438,7 @@ namespace EMS.DAL
 
                 while (reader.Read())
                 {
-                    DOPrintEntity container = new DOPrintEntity(reader);
+                    DOPrintEntity container = new DOPrintEntity();
                     container.CntrNos = Convert.ToInt32(reader["CntrNos"]);
                     container.CntrType = Convert.ToString(reader["CntrType"]);
                     container.CntrSize = Convert.ToString(reader["CntrSize"]);
@@ -452,7 +448,7 @@ namespace EMS.DAL
                 reader.Close();
             }
 
-            return lstDO;
+            return lstCntr;
         }
 
         #endregion

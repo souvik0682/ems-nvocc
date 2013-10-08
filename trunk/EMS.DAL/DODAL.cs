@@ -101,14 +101,14 @@ namespace EMS.DAL
             return result;
         }
 
-        public static DataTable GetEmptyYard(int userId)
+        public static DataTable GetEmptyYard(int BookingID)
         {
             string strExecution = "[exp].[uspGetEmptyYardForDO]";
             DataTable myDataTable;
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                oDq.AddIntegerParam("@UserId", userId);
+                oDq.AddIntegerParam("@BookingId", BookingID);
                 myDataTable = oDq.GetTable();
             }
 

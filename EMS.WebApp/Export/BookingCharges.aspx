@@ -171,7 +171,7 @@
                                     Remarks
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtRemarks" runat="server" Width="250px" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                                    <asp:TextBox ID="txtRemarks" runat="server" Width="250px" TextMode="MultiLine" Rows="3" CssClass="textboxuppercase"></asp:TextBox>
                                 </td>
                                 <td>
                                     PP/CC
@@ -186,7 +186,7 @@
                                     Shipper
                                 </td>--%>
                                 <td colspan="4">
-                                    <asp:TextBox ID="txtShipper" runat="server" Width="250px" TextMode="MultiLine" Rows="3" Visible="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtShipper" runat="server" Width="250px" TextMode="MultiLine" Rows="3" Visible="false" CssClass="textboxuppercase"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -194,7 +194,7 @@
                                     Rate Reference<span class="errormessage">*</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtRateReference" runat="server" Width="250px"></asp:TextBox>
+                                    <asp:TextBox ID="txtRateReference" runat="server" Width="250px" CssClass="textboxuppercase"></asp:TextBox>
                                     <br />
                                     <asp:RequiredFieldValidator ID="rfvRateReference" runat="server" ControlToValidate="txtRateReference"
                                         Display="Dynamic" CssClass="errormessage" ValidationGroup="Save"></asp:RequiredFieldValidator>
@@ -204,9 +204,9 @@
                                 </td>
                                 <td>
                                     <asp:DropDownList ID="ddlRateType" runat="server" CssClass="dropdownlist">
-                                        <asp:ListItem Value="FreeHand" Text="Free Hand"></asp:ListItem>
-                                        <asp:ListItem Value="Nomination" Text="Nomination"></asp:ListItem>
-                                        <asp:ListItem Value="SalesLead" Text="Sales Lead"></asp:ListItem>
+                                        <asp:ListItem Value="FreeHand" Text="FREE HAND"></asp:ListItem>
+                                        <asp:ListItem Value="Nomination" Text="NOMINATION"></asp:ListItem>
+                                        <asp:ListItem Value="SalesLead" Text="SALES LEAD"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
                             </tr>

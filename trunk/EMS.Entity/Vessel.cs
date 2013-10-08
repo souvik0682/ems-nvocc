@@ -18,6 +18,8 @@ namespace EMS.Entity
         public string MasterName { get; set; }
         public string AgentCode { get; set; }
         public string CallSign { get; set; }
+        public string VesselAbbr { get; set; }
+
        // public int LastPortCalled { get; set; }
 
         

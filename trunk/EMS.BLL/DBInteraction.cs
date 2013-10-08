@@ -435,6 +435,8 @@ namespace EMS.BLL
             dquery.AddVarcharParam("@VesselName", 60, vessel.VesselName);
             dquery.AddIntegerParam("@VesselPrefix", vessel.VesselPrefix);
             dquery.AddVarcharParam("@CallSign", 14, vessel.CallSign);
+            dquery.AddVarcharParam("@VesselAbbr", 2, vessel.VesselAbbr);
+
 
             return dquery.RunActionQuery();
 

@@ -11,8 +11,8 @@ namespace EMS.Common
         Int32 ContainerTypeId { get; set; }
         String ContainerType { get; set; }
         String ContainerSize { get; set; }
-        Int32 BookingUnit { get; set; }
-        Int32 AvailableUnit { get; set; }
-        Int32 RequiredUnit { get; set; }
+        int BookingUnit { get; set; }
+        int AvailableUnit { get; set; }
+        int RequiredUnit { get; set; }
     }
 }

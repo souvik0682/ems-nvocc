@@ -94,9 +94,9 @@ namespace EMS.BLL
             return DODAL.GetDeliveryOrderContriner(bookingId, emptyYardId);
         }
 
-        public static DataTable GetEmptyYard(int userId)
+        public static DataTable GetEmptyYard(int BookingId)
         {
-            return DODAL.GetEmptyYard(userId);
+            return DODAL.GetEmptyYard(BookingId);
         }
 
         public static DataTable GetBookingList(int userId)

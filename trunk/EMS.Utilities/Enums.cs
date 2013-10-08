@@ -24,7 +24,9 @@ namespace EMS.Utilities
             ExpBookingParty = 104,
             ContainerType = 10,
             Service = 11,
-            ExpCurrency = 105
+            ExpCurrency = 105,
+            DO = 106
+
 
         }
 

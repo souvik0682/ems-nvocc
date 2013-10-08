@@ -139,6 +139,7 @@ namespace EMS.WebApp.MasterModule
                 txtVesselName.Text = ds.Tables[0].Rows[0]["VesselName"].ToString();
                 TxtCallSign.Text = ds.Tables[0].Rows[0]["CallSign"].ToString();
                 ddlVesselPrefix.SelectedValue = ds.Tables[0].Rows[0]["fk_VesselPrefixID"].ToString();
+                txtVesselAbbr.Text = ds.Tables[0].Rows[0]["VesselAbbr"].ToString();
             }
         }
         private void ClearText()
@@ -152,6 +153,7 @@ namespace EMS.WebApp.MasterModule
             txtShipLineCode.Text = "";
             // txtVesselFlag.Text = "";
             txtVesselName.Text = "";
+            txtVesselAbbr.Text = "";
         }
         private void SaveData(string VesselId)
         {
@@ -182,6 +184,7 @@ namespace EMS.WebApp.MasterModule
             vessel.VesselName = txtVesselName.Text.ToUpper(); 
             vessel.VesselPrefix = Convert.ToInt32(ddlVesselPrefix.SelectedValue);
             vessel.CallSign = TxtCallSign.Text.ToUpper();
+            vessel.VesselAbbr = txtVesselAbbr.Text.ToUpper();
 
             //if (vessel.LastPortCalled == 0)
             //{

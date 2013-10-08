@@ -79,6 +79,11 @@ namespace EMS.BLL
             return ReportDAL.GetDeliveryOrder(doId);
         }
 
+        public static List<DOPrintEntity> GetDeliveryOrderContainer(Int64 doId)
+        {
+            return ReportDAL.GetDeliveryOrderContainer(doId);
+        }
+
         #endregion
     }
 }

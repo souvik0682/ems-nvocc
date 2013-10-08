@@ -149,7 +149,7 @@
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                         <ItemTemplate>
-                                            <asp:ImageButton ID="btnPrint" runat="server" CommandName="PrintData" ImageUrl="~/Images/remove.png" Height="16" Width="16" />
+                                            <asp:ImageButton ID="btnPrint" runat="server" CommandName="PrintData" ImageUrl="~/Images/print_icon.png" Height="16" Width="16" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>

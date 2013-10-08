@@ -32,7 +32,7 @@ namespace EMS.Entity.Report
         public string VIANo { get; set; }
         public string ROTNo { get; set; }
         public int CntrNos { get; set; }
-        public int CntrSize { get; set; }
+        public string CntrSize { get; set; }
         public string CntrType { get; set; }
 
         #endregion

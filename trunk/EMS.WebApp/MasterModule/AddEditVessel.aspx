@@ -89,6 +89,13 @@
                             MaxLength="10" Width="250" TextMode="SingleLine"></asp:TextBox><br />
                    </td>
                 </tr>
+
+                <tr>
+                    <td>Vessel Abbr:</td>
+                    <td><asp:TextBox ID="txtVesselAbbr" runat="server" CssClass="textboxuppercase" 
+                            MaxLength="10" Width="250" TextMode="SingleLine"></asp:TextBox><br />
+                   </td>
+                </tr>
                  <%--<tr>
                     <td>Last Port:<span class="errormessage1">*</span></td>
                     <td>

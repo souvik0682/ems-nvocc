@@ -574,9 +574,9 @@
                                                                 SortExpression="ContainerSize" />
                                                             <asp:BoundField DataField="ContainerType" HeaderText="Type" InsertVisible="False"
                                                                 ReadOnly="True" SortExpression="ContainerType" />
-                                                            <asp:TemplateField HeaderText="SealNumber" SortExpression="Seal Number" HeaderStyle-Width="100">
+                                                            <asp:TemplateField HeaderText="SealNumber" SortExpression="Seal Number" HeaderStyle-Width="100" >
                                                                 <ItemTemplate>
-                                                                    <asp:TextBox ID="txtSealNo" runat="server" Text='<%# Bind("SealNumber") %>'
+                                                                    <asp:TextBox ID="txtSealNo" runat="server" CssClass="textboxuppercase" Text='<%# Bind("SealNumber") %>'
                                                                         Width="80" BorderStyle="None" MaxLength="10">
                                                                     </asp:TextBox>
                                                                     <asp:RequiredFieldValidator ID="rfv3" runat="server" ControlToValidate="txtSealNo" Display="Dynamic" 
@@ -612,7 +612,7 @@
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="ShippingBillNo" SortExpression="ShippingBillNumber" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
-                                                                    <asp:TextBox ID="txtShippingBillNumber" runat="server" Text='<%# Bind("ShippingBillNumber") %>'
+                                                                    <asp:TextBox ID="txtShippingBillNumber" runat="server" CssClass="textboxuppercase" Text='<%# Bind("ShippingBillNumber") %>'
                                                                         Width="80" BorderStyle="None" MaxLength="10">
                                                                     </asp:TextBox>
                                                                     <asp:RequiredFieldValidator ID="rfv4" runat="server" ControlToValidate="txtShippingBillNumber" Display="Dynamic" 

@@ -32,9 +32,9 @@ namespace EMS.WebApp.Export
                 if (!ReferenceEquals(Request.QueryString["BookingId"], null))
                 {
                     int BookingId = 0;
-                    //Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["BookingId"].ToString()), out BookingId);
+                    Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["BookingId"].ToString()), out BookingId);
 
-                    BookingId = 1; //For testing
+                    //BookingId = 1; //For testing
 
                     if (BookingId > 0)
                     {

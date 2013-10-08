@@ -138,7 +138,8 @@ namespace EMS.WebApp.Export
                         d.Package = Convert.ToInt32(txtPackage.Text);
                         d.GrossWeight = Convert.ToDecimal(txtGrossWeight.Text);
                         d.ShippingBillNumber = txtShippingBillNumber.Text.Trim();
-                        d.ShippingBillDate = Convert.ToDateTime(txtShippingBillDate.Text.Trim());
+                        if (txtShippingBillDate.Text != string.Empty)
+                            d.ShippingBillDate = Convert.ToDateTime(txtShippingBillDate.Text.Trim());
                         return d;
                     }).ToList();
             }
@@ -484,7 +485,10 @@ namespace EMS.WebApp.Export
                         d.Package = Convert.ToInt32(txtPackage.Text);
                         d.GrossWeight = Convert.ToDecimal(txtGrossWeight.Text);
                         d.ShippingBillNumber = txtShippingBillNumber.Text.Trim();
-                        d.ShippingBillDate = Convert.ToDateTime(txtShippingBillDate.Text.Trim());
+                        if (txtShippingBillDate.Text != string.Empty)
+                            d.ShippingBillDate = Convert.ToDateTime(txtShippingBillDate.Text.Trim());
+                        else
+                            d.ShippingBillDate = null;
                         return d;
                     }).ToList();
             }

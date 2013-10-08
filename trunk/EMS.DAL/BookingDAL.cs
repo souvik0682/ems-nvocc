@@ -289,6 +289,7 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@ExportRemarks", 300, Booking.ExportRemarks);
                 oDq.AddVarcharParam("@RateReference", 50, Booking.RateReference);
                 oDq.AddVarcharParam("@RateType", 20, Booking.RateType);
+                oDq.AddIntegerParam("@fk_FreightPayable", Booking.FreightPayableId);
                 oDq.AddVarcharParam("@UploadFilePath", 200, Booking.UploadPath);
                 oDq.AddIntegerParam("@SlotOperatorId", Booking.SlotOperatorId);
                 oDq.AddVarcharParam("@Shipper", 300, Booking.Shipper);

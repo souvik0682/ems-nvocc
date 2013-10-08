@@ -27,8 +27,9 @@ namespace EMS.Utilities
         {
             XmlSerializer xs = null;
             MemoryStream memoryStream = new MemoryStream();
+            Type type = objSerialize.GetType();
 
-            xs = new XmlSerializer(objSerialize.GetType());
+            xs = new XmlSerializer(type);
             XmlTextWriter xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.Unicode);
 
             if (xs != null)

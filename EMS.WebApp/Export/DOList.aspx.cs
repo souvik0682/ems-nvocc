@@ -150,7 +150,11 @@ namespace EMS.WebApp.Export
                 }
 
                 // Print link
+                
                 ImageButton btnPrint = (ImageButton)e.Row.FindControl("btnPrint");
+                ScriptManager sManager = ScriptManager.GetCurrent(this);
+                if (!ReferenceEquals(sManager, null)) sManager.RegisterPostBackControl(btnPrint);
+
                 btnPrint.ToolTip = ResourceManager.GetStringWithoutName("ERR00083");
                 btnPrint.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "DeliveryOrderId"));
             }
@@ -258,9 +262,12 @@ namespace EMS.WebApp.Export
             ReportBLL cls = new ReportBLL();
 
             List<DOPrintEntity> lstDO = ReportBLL.GetDeliveryOrder(doId);
-            ReportDataSource dsDeliveryOrder = new ReportDataSource("dsDeliveryOrder", lstDO);
+            List<DOPrintEntity> lstDOCntr = ReportBLL.GetDeliveryOrderContainer(doId);
+            ReportDataSource dsDO = new ReportDataSource("dsDeliveryOrder", lstDO);
+            ReportDataSource dsDOCntr = new ReportDataSource("dsDeliveryOrderContainer", lstDOCntr);
             reportManager.ReportFormat = ReportFormat.PDF;
-            reportManager.AddDataSource(dsDeliveryOrder);           
+            reportManager.AddDataSource(dsDO);
+            reportManager.AddDataSource(dsDOCntr);
             reportManager.Export();    
         }
 

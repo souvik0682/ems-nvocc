@@ -44,7 +44,7 @@ namespace EMS.WebApp.Export
             if (!IsPostBack)
             {
                 PopulateControls();
-                LoadContainerList();
+                //LoadContainerList();
             }
         }
 
@@ -80,6 +80,7 @@ namespace EMS.WebApp.Export
 
         protected void ddlBooking_SelectedIndexChanged(object sender, EventArgs e)
         {
+            PopulateEmptyYard();
             LoadContainerList();
         }
 
@@ -173,7 +174,7 @@ namespace EMS.WebApp.Export
         private void PopulateControls()
         {
             PopulateBookingNo();
-            PopulateEmptyYard();
+            //PopulateEmptyYard();
         }
 
         private void PopulateBookingNo()
@@ -192,7 +193,8 @@ namespace EMS.WebApp.Export
 
         private void PopulateEmptyYard()
         {
-            DataTable dt = DOBLL.GetEmptyYard(_userId);
+            //DataTable dt = DOBLL.GetEmptyYard(_userId);
+            DataTable dt = DOBLL.GetEmptyYard(ddlBooking.SelectedValue.ToInt());
 
             if (!ReferenceEquals(dt, null))
             {

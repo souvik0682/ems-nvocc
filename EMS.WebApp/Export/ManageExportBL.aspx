@@ -642,7 +642,7 @@
                                                                 <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                                                 <ItemTemplate>
                                                                     <asp:ImageButton ID="btnRemove" runat="server" OnClick="btnRemove_Click" ImageUrl="~/Images/remove.png"
-                                                                        Height="16" Width="16" OnClientClick="javascript:return confirm('Are you sure about delete?');" />
+                                                                        Height="16" Width="16" />
                                                                     <asp:HiddenField ID="hdnContainerId" runat="server" Value='<%# Eval("ContainerId") %>' />
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>

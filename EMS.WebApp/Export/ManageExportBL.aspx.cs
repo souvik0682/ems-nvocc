@@ -92,8 +92,6 @@ namespace EMS.WebApp.Export
 
         protected void gvwContainers_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            //if (!IsPostBack)
-            //{
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 List<Part> lstPart = new List<Part>();
@@ -109,8 +107,24 @@ namespace EMS.WebApp.Export
 
                 IExportBLContainer cntr = e.Row.DataItem as IExportBLContainer;
                 ddl.SelectedValue = cntr.Part.ToString();
+
+                ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+
+                if ((e.Row.DataItem as IExportBLContainer).IsDeleted)
+                {
+                    btnRemove.ImageUrl = "~/Images/undelete.png";
+                    btnRemove.Attributes.Add("onclick", "javascript:return confirm('Are you sure about undelete?');");
+                    btnRemove.CommandName = "UnDelete";
+                    btnRemove.ToolTip = "Undelete";
+                }
+                else
+                {
+                    btnRemove.ImageUrl = "~/Images/remove.png";
+                    btnRemove.Attributes.Add("onclick", "javascript:return confirm('Are you sure about delete?');");
+                    btnRemove.CommandName = "Delete";
+                    btnRemove.ToolTip = "Delete";
+                }
             }
-            //}
         }
 
         protected void btnRemove_Click(object sender, EventArgs e)
@@ -129,7 +143,7 @@ namespace EMS.WebApp.Export
                 TextBox txtGrossWeight = (TextBox)thisGridViewRow.FindControl("txtGrossWeight");
                 TextBox txtShippingBillNumber = (TextBox)thisGridViewRow.FindControl("txtShippingBillNumber");
                 TextBox txtShippingBillDate = (TextBox)thisGridViewRow.FindControl("txtShippingBillDate");
-                
+
                 lstData.Where(d => d.ContainerId == Convert.ToInt64(hdnContainerId.Value))
                     .Select(d =>
                     {
@@ -138,7 +152,7 @@ namespace EMS.WebApp.Export
                         d.Package = Convert.ToInt32(txtPackage.Text);
                         d.GrossWeight = Convert.ToDecimal(txtGrossWeight.Text);
                         d.ShippingBillNumber = txtShippingBillNumber.Text.Trim();
-                        if (txtShippingBillDate.Text != string.Empty)
+                        if (txtShippingBillDate.Text.Trim() != string.Empty)
                             d.ShippingBillDate = Convert.ToDateTime(txtShippingBillDate.Text.Trim());
                         return d;
                     }).ToList();
@@ -148,14 +162,29 @@ namespace EMS.WebApp.Export
             GridViewRow gvContainerRow = (GridViewRow)btnRemove.Parent.Parent;
             HiddenField hdnContainerId2 = gvContainerRow.FindControl("hdnContainerId") as HiddenField;
 
-            lstData.Where(d => d.ContainerId == Convert.ToInt64(hdnContainerId2.Value))
-                    .Select(d =>
-                    {
-                        d.IsDeleted = true;
-                        return d;
-                    }).ToList();
+            if (btnRemove.CommandName == "Delete")
+            {
+                lstData.Where(d => d.ContainerId == Convert.ToInt64(hdnContainerId2.Value))
+                        .Select(d =>
+                        {
+                            d.IsDeleted = true;
+                            return d;
+                        }).ToList();
 
-            btnRemove.Enabled = false;
+                btnRemove.Enabled = false;
+            }
+            else
+            {
+                lstData.Where(d => d.ContainerId == Convert.ToInt64(hdnContainerId2.Value))
+                        .Select(d =>
+                        {
+                            d.IsDeleted = false;
+                            return d;
+                        }).ToList();
+
+                btnRemove.Enabled = true;
+            }
+
             ViewState["DataSource"] = lstData;
             LoadExportBLContainers(0, 0);
         }

@@ -50,7 +50,8 @@ namespace EMS.DAL
         }
 
         public static int AddEditContainerTransaction(out string TransactionCode, string OldTransactionCode, string Containers, int MovementOptID, int TotalTEU, int TotalFEU
-            , DateTime MovementDate, string Narration, int FromLocationID, int TransferLocationID, int AddressID, int CreatedBy, DateTime CreatedOn, int ModifiedBy, DateTime ModifiedOn)
+            , DateTime MovementDate, string Narration, int FromLocationID, int TransferLocationID, int AddressID, int CreatedBy, DateTime CreatedOn, int ModifiedBy
+            , DateTime ModifiedOn, Int32 BookingID, Int32 DOId)
         {
             //
             string strExecution = "[eqp].[AddEditContainerTransaction]";
@@ -69,6 +70,8 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@FromLocationID", FromLocationID);
                 oDq.AddIntegerParam("@TransferLocationID", TransferLocationID);
                 oDq.AddIntegerParam("@AddressID", AddressID);
+                oDq.AddIntegerParam("@BookingID", BookingID);
+                oDq.AddIntegerParam("@DOID", DOId);
 
                 if (string.IsNullOrEmpty(OldTransactionCode))
                 {

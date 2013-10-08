@@ -428,6 +428,33 @@ namespace EMS.DAL
             return lstDO;
         }
 
+        public static List<DOPrintEntity> GetDeliveryOrderContainer(Int64 doId)
+        {
+            List<DOPrintEntity> lstDO = new List<DOPrintEntity>();
+
+            string strExecution = "[exp].[uspRptDOContainer]";
+            List<DOPrintEntity> lstCntr = new List<DOPrintEntity>();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@DOID", doId);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    DOPrintEntity container = new DOPrintEntity(reader);
+                    container.CntrNos = Convert.ToInt32(reader["CntrNos"]);
+                    container.CntrType = Convert.ToString(reader["CntrType"]);
+                    container.CntrSize = Convert.ToString(reader["CntrSize"]);
+                    lstCntr.Add(container);
+                }
+
+                reader.Close();
+            }
+
+            return lstDO;
+        }
+
         #endregion
     }
 }

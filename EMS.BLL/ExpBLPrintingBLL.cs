@@ -16,5 +16,9 @@ namespace EMS.BLL
         {
             return EMS.DAL.ExpBLPrintingDAL.GetxpBLPrinting(searchCriteria);
         }
+        public static DataSet GetxpBLPrintingDS(ISearchCriteria searchCriteria)
+        {
+            return EMS.DAL.ExpBLPrintingDAL.GetxpBLPrintingDS(searchCriteria);
+        }
     }
 }

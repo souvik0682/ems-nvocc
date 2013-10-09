@@ -17,7 +17,7 @@ namespace EMS.DAL
         {
             if (searchCriteria != null)
             {
-                string strExecution = "[exp].[prcGetBLPrinting]";
+                string strExecution = "[exp].[prcGetBLPrintingCL]";
                 using (DbQuery oDq = new DbQuery(strExecution))
                 {
                     oDq.AddVarcharParam("@BLID", 50, searchCriteria.StringParams[0]);
@@ -85,6 +85,21 @@ namespace EMS.DAL
             }
             
             return (BLPrintModel)null;
+        }
+        public static DataSet GetxpBLPrintingDS(ISearchCriteria searchCriteria = null)
+        {
+            DataSet ds = new DataSet();
+            if (searchCriteria != null)
+            {
+                string strExecution = "[exp].[prcGetBLPrintingCL]";
+                using (DbQuery oDq = new DbQuery(strExecution))
+                {
+                    oDq.AddVarcharParam("@BLID", 50, searchCriteria.StringParams[0]);
+                    ds = oDq.GetTables();
+                }
+            }
+
+            return ds;
         }
     }
 }

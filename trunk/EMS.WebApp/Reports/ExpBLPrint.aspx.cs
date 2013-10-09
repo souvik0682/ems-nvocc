@@ -16,6 +16,8 @@ using EMS.Entity;
 using System.Collections.Specialized;
 using EMS.Utilities.Cryptography;
 using System.Text;
+using System.Data;
+using EMS.Utilities.ReportManager;
 namespace EMS.WebApp.Reports
 {
     public partial class ExpBLPrint : System.Web.UI.Page
@@ -25,6 +27,8 @@ namespace EMS.WebApp.Reports
         {
             if (!IsPostBack)
             {
+
+                btnReport_Click(sender, e);
                 Filler.FillData<ILocation>(ddlLine, new CommonBLL().GetActiveLocation(), "Name", "Id", "Location");
             }
         }
@@ -45,22 +49,67 @@ namespace EMS.WebApp.Reports
             }
         }
 
+        private void fillFakData(DataTable dt){
+            int j = 0;
+            for (int i = 0; i < 10;i++ )
+            {
+                var dr = dt.NewRow();
+                dr.ItemArray=new object[]{"Con"+j.ToString(),j,"Type"+j.ToString(),j,j};
+                dt.Rows.Add(dr);
+            }
+        }
         protected void btnReport_Click(object sender, EventArgs e)
         {
             ISearchCriteria iSearchCriteria = new SearchCriteria();
-            iSearchCriteria.StringParams = new List<string>() { ddlBlNo.SelectedValue };
-           // iSearchCriteria = null;
-            var temp = ExpBLPrintingBLL.GetxpBLPrinting(iSearchCriteria);
-            Model = temp==null?(List<BLPrintModel>)null:new List<BLPrintModel>() {temp  };
+            iSearchCriteria.StringParams = new List<string>() {
+            //    ddlBlNo.SelectedValue 
+            "MUM/UA/13-14/000001"
+            };
+            // iSearchCriteria = null;
+            // var temp = ExpBLPrintingBLL.GetxpBLPrinting(iSearchCriteria);
+
+            // Model = temp==null?(List<BLPrintModel>)null:new List<BLPrintModel>() {temp  };
+            var temp = ExpBLPrintingBLL.GetxpBLPrintingDS(iSearchCriteria);
+            DataSet dsBLPrinting = new DataSet();
+            DataTable dtBLPrintingCons = null;
+            DataTable dtBLPrintingCons5 = null; 
+            int i = 0;
+            if (temp != null && temp.Tables.Count > 0)
+            {
+                
+               //fillFakData(temp.Tables[1]);
+                var top5=temp.Tables[1].AsEnumerable().Take(5);
+                var Next5=temp.Tables[1].AsEnumerable().Skip(5);
+                dtBLPrintingCons = temp.Tables[1].Clone();
+                dtBLPrintingCons5 = temp.Tables[1].Clone();
+                foreach (DataRow dr in top5){   
+                    dtBLPrintingCons5.ImportRow(dr);
+                }
+                foreach (DataRow dr in Next5){   
+                    dtBLPrintingCons.ImportRow(dr);
+                }
+                LocalReportManager reportManager = new LocalReportManager(rptViewer, "BLPrint", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
+                string rptName = "BLPrint.rdlc";
+
+                rptViewer.Reset();
+                rptViewer.LocalReport.Dispose();
+                rptViewer.LocalReport.DataSources.Clear();
+                rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
+                rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DSBLPrinting", temp.Tables[0]));
+                rptViewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintingContainerTopFive", dtBLPrintingCons5));
+                rptViewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintingContainer", dtBLPrintingCons));
+                //rptViewer.LocalReport.SetParameters(new ReportParameter("EXPBLID", ddlBlNo.SelectedValue));
+                rptViewer.LocalReport.Refresh();
+            }
         }
-        public int StartCount=0;
+        public int StartCount = 0;
         public int EndCount = 0;
         public string GetTable(IList<ItemDetail> model)
         {
             StringBuilder sb = new StringBuilder();
             if (model != null)
             {
-                if (StartCount == 0) {  EndCount = model.Count > 5 ? 5 : model.Count; }
+                if (StartCount == 0) { EndCount = model.Count > 5 ? 5 : model.Count; }
                 sb.Append(@" <table style='width: 100%; margin-top: 20px' border='1' cellpadding='0' cellspacing='0'>");
                 sb.Append(@"<tr><th style='width: 20%'>Container No</th>");
                 sb.Append(@"<th style='width: 20%'>Size / Type</th>");
@@ -72,7 +121,8 @@ namespace EMS.WebApp.Reports
                     sb.AppendFormat(@"<tr><td>{0} </td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td></tr>", model[cnt].ContainerNo, model[cnt].Size, model[cnt].SealNo, model[cnt].Package, model[cnt].GrossWeight);
                 }
                 sb.Append(@"</table>");
-                if (model.Count > 5) {
+                if (model.Count > 5)
+                {
                     EndCount = model.Count;
                     StartCount = 5;
                 }

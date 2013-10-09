@@ -1,6 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ExpBLPrint.aspx.cs" MasterPageFile="~/Site.Master"
     Inherits="EMS.WebApp.Reports.ExpBLPrint" %>
 
+<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+
 <%@ Import Namespace="EMS.Utilities" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
@@ -74,6 +76,11 @@
                     </td>
                 </tr>
             </table>
+        </fieldset>
+         <fieldset>
+         <div style="padding-left:5px;width:100%;">
+            <rsweb:ReportViewer ID="rptViewer" runat="server" Width="100%"></rsweb:ReportViewer>        
+        </div>    
         </fieldset>
         <fieldset>
             <% if (Model != null && Model.Count>0) %>

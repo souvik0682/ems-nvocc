@@ -108,7 +108,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="15%" />    
+                                        <ItemStyle CssClass="gridviewitem" Width="18%" />    
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkBookingNo" runat="server" CommandName="Sort" CommandArgument="BookingNo" Text="Booking No"></asp:LinkButton>
                                         </HeaderTemplate>                                
@@ -122,16 +122,16 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="11%" />                                    
+                                        <ItemStyle CssClass="gridviewitem" Width="12%" />                                    
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkDODt" runat="server" CommandName="Sort" CommandArgument="DODate" Text="DO Date"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Containers">
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="15%" />                                    
+                                        <ItemStyle CssClass="gridviewitem" Width="16%" />                                    
                                     </asp:TemplateField>
-                                    <asp:TemplateField>
+                                    <asp:TemplateField Visible="false">
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                         <ItemTemplate>

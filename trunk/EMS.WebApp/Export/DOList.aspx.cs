@@ -142,6 +142,7 @@ namespace EMS.WebApp.Export
                 if (_canDelete)
                 {
                     btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
+                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
                     btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "DeliveryOrderId"));
                 }
                 else

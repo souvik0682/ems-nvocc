@@ -94,28 +94,32 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="12%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkLoc" runat="server" CommandName="Sort" CommandArgument="LocationName" Text="Location"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="12%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkLine" runat="server" CommandName="Sort" CommandArgument="LineName" Text="Line"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
+<%--<<<<<<< .mine
+                                        <ItemStyle CssClass="gridviewitem" Width="16%" />    
+=======--%>
                                         <ItemStyle CssClass="gridviewitem" Width="18%" />    
+
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkBookingNo" runat="server" CommandName="Sort" CommandArgument="BookingNo" Text="Booking No"></asp:LinkButton>
                                         </HeaderTemplate>                                
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="15%" />  
+                                        <ItemStyle CssClass="gridviewitem" Width="16%" />  
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkDONo" runat="server" CommandName="Sort" CommandArgument="DONo" Text="DO No"></asp:LinkButton>
                                         </HeaderTemplate>                                  
@@ -129,6 +133,9 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Containers">
                                         <HeaderStyle CssClass="gridviewheader" />
+<%--<<<<<<< .mine
+                                        <ItemStyle CssClass="gridviewitem" Width="12%" />                                    
+=======--%>
                                         <ItemStyle CssClass="gridviewitem" Width="16%" />                                    
                                     </asp:TemplateField>
                                     <asp:TemplateField Visible="false">

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -9,12 +10,11 @@ using System.Web.UI.WebControls;
 using EMS.BLL;
 using EMS.Common;
 using EMS.Entity;
-using EMS.Utilities;
-using EMS.Utilities.ResourceManager;
 using EMS.Entity.Report;
+using EMS.Utilities;
 using EMS.Utilities.ReportManager;
+using EMS.Utilities.ResourceManager;
 using Microsoft.Reporting.WebForms;
-using System.Data;
 
 namespace EMS.WebApp.Export
 {
@@ -66,7 +66,7 @@ namespace EMS.WebApp.Export
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            RedirecToAddEditPage();
+            RedirecToAddEditPage(0);
         }
 
         protected void ddlPaging_SelectedIndexChanged(object sender, EventArgs e)
@@ -106,7 +106,7 @@ namespace EMS.WebApp.Export
             }
             else if (e.CommandName == "EditData")
             {
-                RedirecToAddEditPage();
+                RedirecToAddEditPage(Convert.ToInt64(e.CommandArgument));
             }
             else if (e.CommandName == "RemoveData")
             {
@@ -150,7 +150,7 @@ namespace EMS.WebApp.Export
                 }
 
                 // Print link
-                
+
                 ImageButton btnPrint = (ImageButton)e.Row.FindControl("btnPrint");
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
                 if (!ReferenceEquals(sManager, null)) sManager.RegisterPostBackControl(btnPrint);
@@ -224,9 +224,10 @@ namespace EMS.WebApp.Export
             }
         }
 
-        private void RedirecToAddEditPage()
+        private void RedirecToAddEditPage(Int64 doId)
         {
-            Response.Redirect("~/Export/DOEdit.aspx");
+            string encryptedId = GeneralFunctions.EncryptQueryString(doId.ToString());
+            Response.Redirect("~/Export/DOEdit.aspx?id=" + encryptedId);
         }
 
         private void LoadDeliveryOrder()
@@ -268,7 +269,7 @@ namespace EMS.WebApp.Export
             reportManager.ReportFormat = ReportFormat.PDF;
             reportManager.AddDataSource(dsDO);
             reportManager.AddDataSource(dsDOCntr);
-            reportManager.Export();    
+            reportManager.Export();
         }
 
         private void BuildSearchCriteria(SearchCriteria criteria)

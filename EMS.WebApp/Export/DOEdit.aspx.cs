@@ -46,31 +46,37 @@ namespace EMS.WebApp.Export
                 PopulateControls();
                 //LoadContainerList();
             }
-        }
+        }        
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            List<DeliveryOrderContainerEntity> lstContainer = new List<DeliveryOrderContainerEntity>();
-            IDeliveryOrder deliveryOrder = new DeliveryOrderEntity();
-            BuildDeliveryOrderEntity(deliveryOrder);
-            BuildContainerEntity(lstContainer);
-            DoSave(deliveryOrder, lstContainer);
-            LoadContainerList();
-            _isEditable = false;
-            LockControls(true);
+            if (ValidateData())
+            {
+                List<DeliveryOrderContainerEntity> lstContainer = new List<DeliveryOrderContainerEntity>();
+                IDeliveryOrder deliveryOrder = new DeliveryOrderEntity();
+                BuildDeliveryOrderEntity(deliveryOrder);
+                BuildContainerEntity(lstContainer);
+                DoSave(deliveryOrder, lstContainer);
+                LoadContainerList();
+                _isEditable = false;
+                LockControls(true);
+            }
         }
 
         protected void btnPrint_Click(object sender, EventArgs e)
         {
-            List<DeliveryOrderContainerEntity> lstContainer = new List<DeliveryOrderContainerEntity>();
-            IDeliveryOrder deliveryOrder = new DeliveryOrderEntity();
-            BuildDeliveryOrderEntity(deliveryOrder);
-            BuildContainerEntity(lstContainer);
-            DoSave(deliveryOrder, lstContainer);
-            LoadContainerList();
-            _isEditable = false;
-            LockControls(true);
-            GenerateReport(deliveryOrder.DeliveryOrderId);
+            if (ValidateData())
+            {
+                List<DeliveryOrderContainerEntity> lstContainer = new List<DeliveryOrderContainerEntity>();
+                IDeliveryOrder deliveryOrder = new DeliveryOrderEntity();
+                BuildDeliveryOrderEntity(deliveryOrder);
+                BuildContainerEntity(lstContainer);
+                DoSave(deliveryOrder, lstContainer);
+                LoadContainerList();
+                _isEditable = false;
+                LockControls(true);
+                GenerateReport(deliveryOrder.DeliveryOrderId);
+            }
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
@@ -125,6 +131,14 @@ namespace EMS.WebApp.Export
             if (!ReferenceEquals(ViewState["DOId"], null))
             {
                 Int64.TryParse(Convert.ToString(ViewState["DOId"]), out _doId);
+            }
+            else
+            {
+                if (!ReferenceEquals(Request.QueryString["id"], null))
+                {
+                    Int64.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["id"].ToString()), out _doId);
+                    ViewState["DOId"] = _doId;
+                }
             }
 
             if (_doId > 0)
@@ -288,16 +302,44 @@ namespace EMS.WebApp.Export
             }
         }
 
+        private bool ValidateData()
+        {
+            bool isValid = true;
+
+            if (ddlYard.SelectedValue == "0")
+            {
+                GeneralFunctions.RegisterAlertScript(this, "Please select empty yard");
+                isValid = false;
+            }
+
+            if (ddlBooking.SelectedValue == "0")
+            {
+                GeneralFunctions.RegisterAlertScript(this, "Please select booking number");
+                isValid = false;
+            }
+
+            if (txtDoDate.Text.Trim() == string.Empty)
+            {
+                GeneralFunctions.RegisterAlertScript(this, "Please select empty yard");
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
         private void GenerateReport(Int64 doId)
         {
             LocalReportManager reportManager = new LocalReportManager("DeliveryOrder", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
             ReportBLL cls = new ReportBLL();
 
             List<DOPrintEntity> lstDO = ReportBLL.GetDeliveryOrder(doId);
-            ReportDataSource dsDeliveryOrder = new ReportDataSource("dsDeliveryOrder", lstDO);
+            List<DOPrintEntity> lstDOCntr = ReportBLL.GetDeliveryOrderContainer(doId);
+            ReportDataSource dsDO = new ReportDataSource("dsDeliveryOrder", lstDO);
+            ReportDataSource dsDOCntr = new ReportDataSource("dsDeliveryOrderContainer", lstDOCntr);
             reportManager.ReportFormat = ReportFormat.PDF;
-            reportManager.AddDataSource(dsDeliveryOrder);
-            reportManager.Export();  
+            reportManager.AddDataSource(dsDO);
+            reportManager.AddDataSource(dsDOCntr);
+            reportManager.Export();    
         }
 
         private void LockControls(bool isLock)

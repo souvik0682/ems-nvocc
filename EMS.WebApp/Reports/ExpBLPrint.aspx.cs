@@ -28,16 +28,17 @@ namespace EMS.WebApp.Reports
             if (!IsPostBack)
             {
 
-                btnReport_Click(sender, e);
+                //btnReport_Click(sender, e);
                 Filler.FillData<ILocation>(ddlLine, new CommonBLL().GetActiveLocation(), "Name", "Id", "Location");
             }
+            btnPrint.Visible = false;
         }
         protected void ddlLine_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlLine.SelectedIndex > 0)
             {
 
-                Filler.FillData(ddlLocation, CommonBLL.GetLine(ddlLine.SelectedValue), "ProspectName", "ProspectID", "Line");
+                Filler.FillData(ddlLocation, CommonBLL.GetExpLine(ddlLine.SelectedValue), "ProspectName", "ProspectID", "Line");
             }
         }
         protected void ddlLocation_SelectedIndexChanged(object sender, EventArgs e)
@@ -45,27 +46,18 @@ namespace EMS.WebApp.Reports
             var lng = ddlLine.SelectedValue.ToLong();
             if (lng > 0)
             {
-                Filler.FillData(ddlBlNo, CommonBLL.GetBLHeaderByBLNo(lng), "ImpLineBLNo", "ImpLineBLNo", "Bl. No.");
+                Filler.FillData(ddlBlNo, CommonBLL.GetExpBLHeaderByBLNo(lng), "ExpBLNo", "ExpBLNo", "Bl. No.");
             }
         }
-
-        //private void fillFakData(DataTable dt){
-        //    int j = 0;
-        //    for (int i = 0; i < 10;i++ )
-        //    {
-        //        var dr = dt.NewRow();
-        //        dr.ItemArray=new object[]{"Con"+j.ToString(),j,"Type"+j.ToString(),j,j};
-        //        dt.Rows.Add(dr);
-        //    }
-        //}
+ 
         protected void btnReport_Click(object sender, EventArgs e)
         {
             DownLoadPDF();
             return;
             ISearchCriteria iSearchCriteria = new SearchCriteria();
             iSearchCriteria.StringParams = new List<string>() {
-            //    ddlBlNo.SelectedValue 
-            "MUM/UA/13-14/000001"
+                ddlBlNo.SelectedValue 
+            //"MUM/UA/13-14/000001"
             };
             /*Report Viewer PDF on aspx*/
             // iSearchCriteria = null;
@@ -96,6 +88,7 @@ namespace EMS.WebApp.Reports
 
                 rptViewer.Reset();
                 rptViewer.LocalReport.Dispose();
+                
                 rptViewer.LocalReport.DataSources.Clear();
                 rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
                 rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DSBLPrinting", temp.Tables[0]));
@@ -140,13 +133,13 @@ namespace EMS.WebApp.Reports
                 }
 
 
-                ReportViewer viewer = new ReportViewer();
+                var viewer = new Microsoft.Reporting.WebForms.ReportViewer();
                 viewer.ProcessingMode = ProcessingMode.Local;
                 viewer.LocalReport.ReportPath =  this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + "BLPrint.rdlc";
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DSBLPrinting", temp.Tables[0]));
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintingContainerTopFive", dtBLPrintingCons5));
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintingContainer", dtBLPrintingCons));
-                viewer.LocalReport.SetParameters(new ReportParameter("ImageShow", "true"));
+                //viewer.LocalReport.SetParameters(new ReportParameter("ImageShow", "true"));
                 Warning[] warnings;
                 string[] streamIds;
                 string mimeType = string.Empty;
@@ -160,7 +153,7 @@ namespace EMS.WebApp.Reports
                 Response.Buffer = true;
                 Response.Clear();
                 Response.ContentType = mimeType;
-                Response.AddHeader("content-disposition", "attachment; filename=TEst." + extension);
+                Response.AddHeader("content-disposition", "attachment; filename=ExpBL" + ddlBlNo.Text +"." + extension);
                 Response.BinaryWrite(bytes); // create the file
                 Response.Flush(); // send it to the client to download
             }

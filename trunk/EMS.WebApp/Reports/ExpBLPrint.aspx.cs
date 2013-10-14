@@ -49,22 +49,25 @@ namespace EMS.WebApp.Reports
             }
         }
 
-        private void fillFakData(DataTable dt){
-            int j = 0;
-            for (int i = 0; i < 10;i++ )
-            {
-                var dr = dt.NewRow();
-                dr.ItemArray=new object[]{"Con"+j.ToString(),j,"Type"+j.ToString(),j,j};
-                dt.Rows.Add(dr);
-            }
-        }
+        //private void fillFakData(DataTable dt){
+        //    int j = 0;
+        //    for (int i = 0; i < 10;i++ )
+        //    {
+        //        var dr = dt.NewRow();
+        //        dr.ItemArray=new object[]{"Con"+j.ToString(),j,"Type"+j.ToString(),j,j};
+        //        dt.Rows.Add(dr);
+        //    }
+        //}
         protected void btnReport_Click(object sender, EventArgs e)
         {
+            DownLoadPDF();
+            return;
             ISearchCriteria iSearchCriteria = new SearchCriteria();
             iSearchCriteria.StringParams = new List<string>() {
             //    ddlBlNo.SelectedValue 
             "MUM/UA/13-14/000001"
             };
+            /*Report Viewer PDF on aspx*/
             // iSearchCriteria = null;
             // var temp = ExpBLPrintingBLL.GetxpBLPrinting(iSearchCriteria);
 
@@ -98,12 +101,70 @@ namespace EMS.WebApp.Reports
                 rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DSBLPrinting", temp.Tables[0]));
                 rptViewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintingContainerTopFive", dtBLPrintingCons5));
                 rptViewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintingContainer", dtBLPrintingCons));
-                //rptViewer.LocalReport.SetParameters(new ReportParameter("EXPBLID", ddlBlNo.SelectedValue));
+                rptViewer.LocalReport.SetParameters(new ReportParameter("ImageShow", "false"));
                 rptViewer.LocalReport.Refresh();
+                
+                 
             }
         }
         public int StartCount = 0;
         public int EndCount = 0;
+        public void DownLoadPDF()
+        {
+            ISearchCriteria iSearchCriteria = new SearchCriteria();
+            iSearchCriteria.StringParams = new List<string>() {
+                ddlBlNo.SelectedValue 
+            //"MUM/UA/13-14/000001"
+            };
+           
+            var temp = ExpBLPrintingBLL.GetxpBLPrintingDS(iSearchCriteria);
+            DataSet dsBLPrinting = new DataSet();
+            DataTable dtBLPrintingCons = null;
+            DataTable dtBLPrintingCons5 = null;
+            int i = 0;
+            if (temp != null && temp.Tables.Count > 0)
+            {
+
+                //fillFakData(temp.Tables[1]);
+                var top5 = temp.Tables[1].AsEnumerable().Take(5);
+                var Next5 = temp.Tables[1].AsEnumerable().Skip(5);
+                dtBLPrintingCons = temp.Tables[1].Clone();
+                dtBLPrintingCons5 = temp.Tables[1].Clone();
+                foreach (DataRow dr in top5)
+                {
+                    dtBLPrintingCons5.ImportRow(dr);
+                }
+                foreach (DataRow dr in Next5)
+                {
+                    dtBLPrintingCons.ImportRow(dr);
+                }
+
+
+                ReportViewer viewer = new ReportViewer();
+                viewer.ProcessingMode = ProcessingMode.Local;
+                viewer.LocalReport.ReportPath =  this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + "BLPrint.rdlc";
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DSBLPrinting", temp.Tables[0]));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintingContainerTopFive", dtBLPrintingCons5));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintingContainer", dtBLPrintingCons));
+                viewer.LocalReport.SetParameters(new ReportParameter("ImageShow", "true"));
+                Warning[] warnings;
+                string[] streamIds;
+                string mimeType = string.Empty;
+                string encoding = string.Empty;
+                string extension = string.Empty;
+
+                byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+
+                // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+                Response.Buffer = true;
+                Response.Clear();
+                Response.ContentType = mimeType;
+                Response.AddHeader("content-disposition", "attachment; filename=TEst." + extension);
+                Response.BinaryWrite(bytes); // create the file
+                Response.Flush(); // send it to the client to download
+            }
+        }
         public string GetTable(IList<ItemDetail> model)
         {
             StringBuilder sb = new StringBuilder();

@@ -235,6 +235,9 @@
         <Sizing>Fit</Sizing>
         <Height>46.88417cm</Height>
         <Width>30.66521cm</Width>
+        <Visibility>
+          <Hidden>=Parameters!ImageShow.Value</Hidden>
+        </Visibility>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1823,11 +1826,47 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox12">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!ImageShow.Value</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox12</rd:DefaultName>
+        <Top>4.54237cm</Top>
+        <Left>21.18466cm</Left>
+        <Height>0.72125cm</Height>
+        <Width>5.87375cm</Width>
+        <ZIndex>20</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>25.77792in</Height>
+    <Height>19.67375in</Height>
     <Style />
   </Body>
-  <Width>14.52792in</Width>
+  <ReportParameters>
+    <ReportParameter Name="ImageShow">
+      <DataType>Boolean</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Width>12.1425in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>

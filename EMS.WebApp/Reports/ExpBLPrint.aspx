@@ -78,8 +78,8 @@
             </table>
         </fieldset>
          <fieldset>
-         <div style="padding-left:5px;width:100%;">
-            <rsweb:ReportViewer ID="rptViewer" runat="server" Width="100%"></rsweb:ReportViewer>        
+         <div style="padding-left:5px;width:100%;"> 
+            <rsweb:ReportViewer ID="rptViewer" runat="server" Width="100%" EnableExternalImages="True" EnableHyperlinks="True"></rsweb:ReportViewer>        
         </div>    
         </fieldset>
         <fieldset>

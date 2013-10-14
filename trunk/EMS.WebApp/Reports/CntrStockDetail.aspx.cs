@@ -33,6 +33,7 @@ namespace EMS.WebApp.Reports
                 GeneralFunctions.PopulateDropDownList(ddlLoc, dbinteract.PopulateDDLDS("DSR.dbo.mstLocation", "pk_LocID", "LocAbbr", true), true);
                 GeneralFunctions.PopulateDropDownList(ddlStatus, EMS.BLL.EquipmentBLL.DDLGetStatus());
                 GeneralFunctions.PopulateDropDownList(ddlContainerType, EMS.BLL.EquipmentBLL.DDLGetContainerType());
+                ddlEmptyYard.Enabled = false;
                 //GeneralFunctions.PopulateDropDownList(ddlEmptyYard, EMS.BLL.EquipmentBLL.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt()));
 
                //GenerateReport();
@@ -153,7 +154,21 @@ namespace EMS.WebApp.Reports
 
         protected void ddlLoc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GeneralFunctions.PopulateDropDownList(ddlEmptyYard, EMS.BLL.EquipmentBLL.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt()));
+            //GeneralFunctions.PopulateDropDownList(ddlEmptyYard, EMS.BLL.EquipmentBLL.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt()));
+        }
+
+        protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlStatus.SelectedValue == "9" && ddlLoc.SelectedIndex!=0)
+            {
+                ddlEmptyYard.Enabled = true;
+                GeneralFunctions.PopulateDropDownList(ddlEmptyYard, EMS.BLL.EquipmentBLL.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt()));
+            }
+            else
+            {
+                ddlEmptyYard.SelectedIndex = -1;
+                ddlEmptyYard.Enabled = false;
+            }   
         }
     }
 }

@@ -37,17 +37,17 @@
                     </td>
                     <td align="left" style="width: 35%">
                         <asp:DropDownList ID="ddlLine" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlLine_SelectedIndexChanged"
-                            Width="120">
+                            Width="172px">
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" CssClass="errormessage"
                             ControlToValidate="ddlLine" InitialValue="0" ValidationGroup="Report" Display="Dynamic"
                             ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                     </td>
                     <td>
-                        Line / NVOCC::<span class="errormessage" style="width: 15%">*</span>
+                        Line / NVOCC::<span class="errormessage" style="width: 10%">*</span>
                     </td>
                     <td align="left" style="width: 35%">
-                        <asp:DropDownList ID="ddlLocation" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged">
+                        <asp:DropDownList ID="ddlLocation" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged" Width="70px">
                             <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="errormessage"
@@ -60,7 +60,7 @@
                         BL No.:<span class="errormessage">*</span>
                     </td>
                     <td align="left" colspan="3">
-                        <asp:DropDownList ID="ddlBlNo" runat="server" Width="120">
+                        <asp:DropDownList ID="ddlBlNo" runat="server" Width="172px">
                             <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="rfvLocation" runat="server" CssClass="errormessage"

@@ -51,8 +51,8 @@
                     </td>
                     <td style="text-align:left">Status:<%--<span class="errormessage1">*</span>--%></td>
                     <td>
-                      <asp:DropDownList ID="ddlStatus" runat="server" Width="100%" 
-                            ></asp:DropDownList>
+                      <asp:DropDownList ID="ddlStatus" runat="server" Width="100%" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged"
+                                        AutoPostBack="true"></asp:DropDownList>
                            <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errormessage" 
                             ControlToValidate="ddlLoc" Display="Dynamic" InitialValue="0" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
                     </td>

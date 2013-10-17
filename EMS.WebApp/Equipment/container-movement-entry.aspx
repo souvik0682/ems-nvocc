@@ -141,7 +141,8 @@
                                 <td>
                                     
 
-                                    <asp:DropDownList ID="ddlLine" runat="server" Width="155" AutoPostBack="true">
+                                    <asp:DropDownList ID="ddlLine" runat="server" Width="155" AutoPostBack="true" 
+                                        onselectedindexchanged="ddlLine_SelectedIndexChanged">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvLine" runat="server" ErrorMessage="Please select line"
                                         Display="None" ControlToValidate="ddlLine" InitialValue="0" ValidationGroup="vgContainer"
@@ -173,8 +174,31 @@
                                     <asp:TextBox ID="txtNarration" runat="server" Width="150" TextMode="MultiLine" Style="text-transform: uppercase;"></asp:TextBox>
                                 </td>
                                 <td>
+                                    Booking No.:</td>
+                                <td>
+                                    <asp:DropDownList ID="ddlBookingNo" runat="server" Enabled="false" Width="155" OnSelectedIndexChanged="ddlBookingNo_SelectedIndexChanged"
+                                        AutoPostBack="true">
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="rfvBookingNo" runat="server" ErrorMessage="Please select Booking No"
+                                        Display="None" ControlToValidate="ddlBookingNo" InitialValue="0" ValidationGroup="vgContainer"
+                                        Enabled="false"></asp:RequiredFieldValidator>
+                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender2" runat="server" TargetControlID="rfvBookingNo">
+                                    </cc1:ValidatorCalloutExtender>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    DO No.:
                                 </td>
                                 <td>
+                                    <asp:DropDownList ID="ddlDONo" runat="server" Enabled="false" Width="155" OnSelectedIndexChanged="ddlDONo_SelectedIndexChanged"
+                                        AutoPostBack="true">
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="rfvDONo" runat="server" ErrorMessage="Please select DO No"
+                                        Display="None" ControlToValidate="ddlDONo" InitialValue="0" ValidationGroup="vgContainer"
+                                        Enabled="false"></asp:RequiredFieldValidator>
+                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvDONo">
+                                    </cc1:ValidatorCalloutExtender>
                                 </td>
                             </tr>
                         </table>
@@ -205,11 +229,17 @@
                                                             <asp:Label ID="lblContainerNo" runat="server" Text='<%# Eval("ContainerNo")%>'></asp:Label>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Type" HeaderStyle-Width="25%" ItemStyle-HorizontalAlign="Center">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="lblContainerType" runat="server" Text='<%# Eval("ContainerType")%>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Size" HeaderStyle-Width="25%" ItemStyle-HorizontalAlign="Center">
                                                         <ItemTemplate>
                                                             <asp:Label ID="lblContainerSize" runat="server" Text='<%# Eval("Size")%>'></asp:Label>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
+
                                                     <asp:TemplateField HeaderText="Select" HeaderStyle-Width="25%" ItemStyle-HorizontalAlign="Center">
                                                         <ItemTemplate>
                                                             <asp:CheckBox ID="chkContainer" runat="server" />

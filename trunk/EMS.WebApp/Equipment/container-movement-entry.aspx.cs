@@ -190,6 +190,11 @@ namespace EMS.WebApp.Equipment
 
                 ddlTolocation.SelectedIndex = ddlTolocation.Items.IndexOf(ddlTolocation.Items.FindByValue(dt.Rows[0]["ToLocation"].ToString()));
                 ddlEmptyYard.SelectedIndex = ddlEmptyYard.Items.IndexOf(ddlEmptyYard.Items.FindByValue(dt.Rows[0]["EmptyYard"].ToString()));
+                ddlBookingNo.SelectedIndex = ddlBookingNo.Items.IndexOf(ddlBookingNo.Items.FindByValue(dt.Rows[0]["fk_BookingID"].ToString()));
+
+                ddlBookingNo_SelectedIndexChanged(null, null);
+
+                ddlDONo.SelectedIndex = ddlDONo.Items.IndexOf(ddlDONo.Items.FindByValue(dt.Rows[0]["fk_DOID"].ToString()));
 
                 ddlLine.SelectedIndex = ddlLine.Items.IndexOf(ddlLine.Items.FindByValue(dt.Rows[0]["LINEID"].ToString()));
 
@@ -318,6 +323,7 @@ namespace EMS.WebApp.Equipment
                 ddlToStatus.Enabled = true;
                 ddlTolocation.Enabled = false;
             }
+
         }
 
         protected void ddlToStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -366,6 +372,24 @@ namespace EMS.WebApp.Equipment
                 //hdnToLocation.Value = "0";
             }
 
+            if (ddlToStatus.SelectedItem.Text == "SNTS" && ddlFromStatus.SelectedItem.Text == "RCVE")
+            {
+                ddlBookingNo.Enabled = true;
+                ddlDONo.Enabled = true;
+                ListItem Li = new ListItem("Select", "0");
+                PopulateDropDown((int)Enums.DropDownPopulationFor.Booking, ddlBookingNo, Convert.ToInt32(ddlFromLocation.SelectedValue), 0);
+                ddlBookingNo.Items.Insert(0, Li);
+                ddlBookingNo.SelectedIndex = 0;
+                //_reqfield = 1;
+            }
+            else
+            {
+                ddlBookingNo.Items.Clear();
+                ddlDONo.Items.Clear();
+                ddlBookingNo.Enabled = false;
+                ddlDONo.Enabled = false;
+            }
+
             //if (ddlToStatus.SelectedItem.Text == "ICDO" || ddlFromStatus.SelectedItem.Text == "ICDI")
             //{
             //    ddlTolocation.Enabled = true;
@@ -390,6 +414,9 @@ namespace EMS.WebApp.Equipment
         {
             lblMessage.Text = string.Empty;
 
+            //Checking for container requirement for SNTS with DO and Booking
+
+
             DataTable Dt = CreateDataTable();
 
             foreach (GridViewRow Row in gvContainer.Rows)
@@ -406,6 +433,7 @@ namespace EMS.WebApp.Equipment
                     HiddenField hdnLMDT = (HiddenField)Row.FindControl("hdnLMDT");
                     Label lblContainerNo = (Label)Row.FindControl("lblContainerNo");
                     Label lblContainerSize = (Label)Row.FindControl("lblContainerSize");
+                    Label lblContainerType = (Label)Row.FindControl("lblContainerType");
 
                     dr["OldTransactionId"] = hdnOldTransactionId.Value;
                     dr["NewTransactionId"] = "0";
@@ -476,6 +504,7 @@ namespace EMS.WebApp.Equipment
         protected void ddlFromLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
             ActionOnFromLocationChange();
+            ActionOnLocLineChange();
 
         }
 
@@ -485,7 +514,41 @@ namespace EMS.WebApp.Equipment
             PopulateDropDown((int)Enums.DropDownPopulationFor.VendorList, ddlEmptyYard, Convert.ToInt32(ddlFromLocation.SelectedValue), 3);
             ddlEmptyYard.Items.Insert(0, Li);
 
+            //if (ddlToStatus.SelectedItem.Text == "SNTS" && ddlFromStatus.SelectedItem.Text == "RCVE")
+            //{
+            //    ddlBookingNo.Enabled = true;
+            //    ddlDONo.Enabled = true;
+            //    ListItem Lx = new ListItem("Select", "0");
+            //    PopulateDropDown((int)Enums.DropDownPopulationFor.Booking, ddlBookingNo, Convert.ToInt32(ddlFromLocation.SelectedValue), 0);
+            //    ddlBookingNo.Items.Insert(0, Lx);
+            //    //_reqfield = 1;
+            //}
+            //else
+            //{
+            //    ddlBookingNo.Enabled = false;
+            //    ddlDONo.Enabled = false;
+            //}
+        }
 
+        private void ActionOnLocLineChange()
+        {
+            
+            if (ddlFromLocation.SelectedIndex > 0 && ddlLine.SelectedIndex > 0)
+
+                if (ddlToStatus.SelectedItem.Text == "SNTS" && ddlFromStatus.SelectedItem.Text == "RCVE")
+                {
+                    ddlBookingNo.Enabled = true;
+                    ddlDONo.Enabled = true;
+                    ListItem Lx = new ListItem("Select", "0");
+                    PopulateDropDown((int)Enums.DropDownPopulationFor.Booking, ddlBookingNo, Convert.ToInt32(ddlFromLocation.SelectedValue), 0);
+                    ddlBookingNo.Items.Insert(0, Lx);
+                    //_reqfield = 1;
+                }
+                else
+                {
+                    ddlBookingNo.Enabled = false;
+                    ddlDONo.Enabled = false;
+                }
         }
 
         protected void btnShow_Click(object sender, EventArgs e)
@@ -526,6 +589,8 @@ namespace EMS.WebApp.Equipment
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            Int32 bkID;
+            Int32 doID;
 
             if (Page.IsValid)
             {
@@ -572,11 +637,20 @@ namespace EMS.WebApp.Equipment
                     EYard = Convert.ToInt32(ddlEmptyYard.SelectedValue);
                 }
                 
+                if (ddlBookingNo.SelectedValue == "")
+                    bkID = 0;
+                else
+                    bkID = Convert.ToInt32(ddlBookingNo.SelectedValue);
+
+                if (ddlDONo.SelectedValue == "")
+                    doID = 0;
+                else
+                    doID = Convert.ToInt32(ddlDONo.SelectedValue);
 
                 int Result = oContainerTranBLL.AddEditContainerTransaction(out TranCode, hdnTranCode.Value, GenerateContainerXMLString(),
                     Convert.ToInt32(ddlToStatus.SelectedValue), Convert.ToInt32(txtTeus.Text), Convert.ToInt32(txtFEUs.Text), Convert.ToDateTime(txtDate.Text),
                     Convert.ToString(txtNarration.Text), FLocation, TLocation,
-                    EYard, _userId, DateTime.Now.Date, _userId, DateTime.Now.Date);
+                    EYard, _userId, DateTime.Now.Date, _userId, DateTime.Now.Date,bkID, doID);
 
 
                 switch (Result)
@@ -674,6 +748,46 @@ namespace EMS.WebApp.Equipment
         {
             lblMessage.Text = string.Empty;
         }
+
+        protected void ddlBookingNo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListItem Li = new ListItem("Select", "0");
+            PopulateDropDown((int)Enums.DropDownPopulationFor.DO, ddlDONo, Convert.ToInt32(ddlBookingNo.SelectedValue), 3);
+            ddlDONo.Items.Insert(0, Li);
+            ddlDONo.SelectedIndex = 0;
+
+        }
+
+        protected void ddlDONo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          
+        }
+
+        protected void ddlLine_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ActionOnLocLineChange();
+            //if (ddlToStatus.SelectedItem.Text == "SNTS" && ddlFromStatus.SelectedItem.Text == "RCVE")
+            //{
+            //    ddlBookingNo.Enabled = true;
+            //    ddlDONo.Enabled = true;
+            //    ListItem Lx = new ListItem("Select", "0");
+            //    PopulateDropDown((int)Enums.DropDownPopulationFor.Booking, ddlBookingNo, Convert.ToInt32(ddlFromLocation.SelectedValue), 0);
+            //    ddlBookingNo.Items.Insert(0, Lx);
+            //    //_reqfield = 1;
+            //}
+            //else
+            //{
+            //    ddlBookingNo.Enabled = false;
+            //    ddlDONo.Enabled = false;
+            //}
+        }
+
+        protected void gvSelectedContainer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
 
     }
 }

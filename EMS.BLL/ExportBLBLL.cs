@@ -61,5 +61,10 @@ namespace EMS.BLL
         {
             return ExportBLDAL.GetExportBLForListing(searchCriteria);
         }
+
+        public static DataTable GetUnitsForExportBlContainer()
+        {
+            return ExportBLDAL.GetUnitsForExportBlContainer();
+        }
     }
 }

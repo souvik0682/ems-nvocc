@@ -144,6 +144,7 @@ namespace EMS.DAL
                         oDq.AddBooleanParam("@Part", container.Part);
                         oDq.AddVarcharParam("@ShippingBillNumber", 50, container.ShippingBillNumber);
                         oDq.AddDateTimeParam("@ShippingBillDate", container.ShippingBillDate);
+                        oDq.AddVarcharParam("@UnitId", 10, container.Unit);
 
                         exportBLContainerId = Convert.ToInt64(oDq.GetScalar());
                     }
@@ -179,6 +180,7 @@ namespace EMS.DAL
                         oDq.AddVarcharParam("@ShippingBillNumber", 50, container.ShippingBillNumber);
                         oDq.AddDateTimeParam("@ShippingBillDate", container.ShippingBillDate);
                         oDq.AddBooleanParam("@IsDeleted", container.IsDeleted);
+                        oDq.AddVarcharParam("@UnitId", 10, container.Unit);
 
                         exportBLContainerId = Convert.ToInt64(oDq.GetScalar());
                     }
@@ -259,6 +261,14 @@ namespace EMS.DAL
             }
 
             return lstBL;
+        }
+
+        public static DataTable GetUnitsForExportBlContainer()
+        {
+            string ProcName = "[exp].[usp_GetUnitsForExportBlContainer]";
+            DbQuery dquery = new DbQuery(ProcName);
+
+            return dquery.GetTable();
         }
     }
 }

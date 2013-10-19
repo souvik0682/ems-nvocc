@@ -26,5 +26,6 @@ namespace EMS.Common
          DateTime? ShippingBillDate { get; set; }
          long ImportBLFooterId { get; set; }
          bool IsDeleted { get; set; }
+         string Unit { get; set; }
     }
 }

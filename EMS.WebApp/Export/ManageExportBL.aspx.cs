@@ -9,6 +9,7 @@ using EMS.Common;
 using EMS.Utilities;
 using System.Data;
 using EMS.Entity;
+using System.Text;
 
 namespace EMS.WebApp.Export
 {
@@ -94,19 +95,37 @@ namespace EMS.WebApp.Export
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                //Part
                 List<Part> lstPart = new List<Part>();
                 lstPart.Add(new Part { Text = "Yes", Value = "True" });
                 lstPart.Add(new Part { Text = "No", Value = "False" });
 
                 // Bind drop down to Part
-                DropDownList ddl = (DropDownList)e.Row.FindControl("ddlPart");
-                ddl.DataTextField = "Text";
-                ddl.DataValueField = "Value";
-                ddl.DataSource = lstPart;
-                ddl.DataBind();
+                DropDownList ddlPart = (DropDownList)e.Row.FindControl("ddlPart");
+                ddlPart.DataTextField = "Text";
+                ddlPart.DataValueField = "Value";
+                ddlPart.DataSource = lstPart;
+                ddlPart.DataBind();
 
                 IExportBLContainer cntr = e.Row.DataItem as IExportBLContainer;
-                ddl.SelectedValue = cntr.Part.ToString();
+                ddlPart.SelectedValue = cntr.Part.ToString();
+
+                //Unit
+                List<Unit> lstUnit = new List<Unit>();
+                DataTable dtUnits = ExportBLBLL.GetUnitsForExportBlContainer();
+
+                foreach (DataRow dr in dtUnits.Rows)
+                {
+                    lstUnit.Add(new Unit { Value = dr[0].ToString(), Text = dr[1].ToString() });
+                }
+
+                DropDownList ddlUnit = (DropDownList)e.Row.FindControl("ddlUnit");
+                ddlUnit.DataTextField = "Text";
+                ddlUnit.DataValueField = "Value";
+                ddlUnit.DataSource = lstUnit;
+                ddlUnit.DataBind();
+
+                ddlUnit.SelectedValue = cntr.Unit.ToString();
 
                 ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
 
@@ -138,6 +157,7 @@ namespace EMS.WebApp.Export
                 HiddenField hdnContainerId = (HiddenField)thisGridViewRow.FindControl("hdnContainerId");
 
                 DropDownList ddlPart = (DropDownList)thisGridViewRow.FindControl("ddlPart");
+                DropDownList ddlUnit = (DropDownList)thisGridViewRow.FindControl("ddlUnit");
                 TextBox txtSealNo = (TextBox)thisGridViewRow.FindControl("txtSealNo");
                 TextBox txtPackage = (TextBox)thisGridViewRow.FindControl("txtPackage");
                 TextBox txtGrossWeight = (TextBox)thisGridViewRow.FindControl("txtGrossWeight");
@@ -148,6 +168,7 @@ namespace EMS.WebApp.Export
                     .Select(d =>
                     {
                         d.Part = Convert.ToBoolean(ddlPart.SelectedValue);
+                        d.Unit = ddlUnit.SelectedValue;
                         d.SealNumber = txtSealNo.Text.Trim();
                         d.Package = Convert.ToInt32(txtPackage.Text);
                         d.GrossWeight = Convert.ToDecimal(txtGrossWeight.Text);
@@ -496,6 +517,7 @@ namespace EMS.WebApp.Export
                 HiddenField hdnContainerId = (HiddenField)thisGridViewRow.FindControl("hdnContainerId");
 
                 DropDownList ddlPart = (DropDownList)thisGridViewRow.FindControl("ddlPart");
+                DropDownList ddlUnit = (DropDownList)thisGridViewRow.FindControl("ddlUnit");
                 TextBox txtSealNo = (TextBox)thisGridViewRow.FindControl("txtSealNo");
                 TextBox txtPackage = (TextBox)thisGridViewRow.FindControl("txtPackage");
                 TextBox txtGrossWeight = (TextBox)thisGridViewRow.FindControl("txtGrossWeight");
@@ -510,6 +532,7 @@ namespace EMS.WebApp.Export
                         d.BLId = exportBLId;
                         d.BookingId = Convert.ToInt64(ViewState["BOOKINGID"]);
                         d.Part = Convert.ToBoolean(ddlPart.SelectedValue);
+                        d.Unit = ddlUnit.SelectedValue;
                         d.SealNumber = txtSealNo.Text.Trim();
                         d.Package = Convert.ToInt32(txtPackage.Text);
                         d.GrossWeight = Convert.ToDecimal(txtGrossWeight.Text);
@@ -550,6 +573,12 @@ namespace EMS.WebApp.Export
     }
 
     public class Part
+    {
+        public string Text { get; set; }
+        public string Value { get; set; }
+    }
+
+    public class Unit
     {
         public string Text { get; set; }
         public string Value { get; set; }

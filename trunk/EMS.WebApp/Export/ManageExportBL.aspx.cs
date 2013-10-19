@@ -31,7 +31,7 @@ namespace EMS.WebApp.Export
             if (!IsPostBack)
             {
                 LoadShipmentModeDDL();
-                LoadDeliveryAgentDDL();
+                //LoadDeliveryAgentDDL();
 
                 if (!ReferenceEquals(Request.QueryString["BLNumber"], null))
                 {
@@ -40,7 +40,7 @@ namespace EMS.WebApp.Export
 
                     string BLNumber = string.Empty;
                     BLNumber = GeneralFunctions.DecryptQueryString(Request.QueryString["BLNumber"].ToString());
-
+                    //LoadDeliveryAgentDDL(bl);
                     LoadExportBLHeaderForEdit(BLNumber);
                 }
                 else
@@ -272,6 +272,7 @@ namespace EMS.WebApp.Export
                     txtFPOD.Text = exportBL.FPOD;
                     txtFPodDesc.Text = exportBL.FPODDesc;
                     txtCommodity.Text = exportBL.Commodity;
+                    LoadDeliveryAgentDDL(exportBL.fk_FPOD);
 
                     txtCBookingNo.Text = exportBL.BookingNumber;
                     txtCBookingDate.Text = exportBL.BookingDate.ToString("dd-MM-yyyy");
@@ -310,7 +311,7 @@ namespace EMS.WebApp.Export
             try
             {
                 IExportBL exportBL = ExportBLBLL.GetExportBLHeaderInfoForEdit(BLNumber);
-
+                LoadDeliveryAgentDDL(exportBL.fk_FPOD);
                 if (!ReferenceEquals(exportBL, null))
                 {
                     txtBookingNo.Text = exportBL.BookingNumber;
@@ -384,9 +385,9 @@ namespace EMS.WebApp.Export
             }
         }
 
-        private void LoadDeliveryAgentDDL()
+        private void LoadDeliveryAgentDDL(int FPOD)
         {
-            DataTable dt = ExportBLBLL.GetDeliveryAgents();
+            DataTable dt = ExportBLBLL.GetDeliveryAgents(FPOD);
 
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -559,6 +560,7 @@ namespace EMS.WebApp.Export
             {
                 long exportBLId = SaveExportBLHeaderDetails();
                 SaveExportBLContainers(exportBLId);
+                Response.Redirect("~/Export/ExportBL.aspx");
             }
             catch (Exception ex)
             {

@@ -568,13 +568,13 @@
                                                         CellPadding="3" DataKeyNames="ContainerId" OnRowDataBound="gvwContainers_RowDataBound">
                                                         <FooterStyle BackColor="White" ForeColor="#000066" />
                                                         <Columns>
-                                                            <asp:BoundField DataField="HireContainerNumber" HeaderText="Container Number" InsertVisible="False"
-                                                                ReadOnly="True" SortExpression="HireContainerNumber" HeaderStyle-Width="300" />
+                                                            <asp:BoundField DataField="HireContainerNumber" HeaderText="Container No" InsertVisible="False"
+                                                                ReadOnly="True" SortExpression="HireContainerNumber" HeaderStyle-Width="150" />
                                                             <asp:BoundField DataField="ContainerSize" HeaderText="Size" InsertVisible="False" ReadOnly="True"
                                                                 SortExpression="ContainerSize" />
                                                             <asp:BoundField DataField="ContainerType" HeaderText="Type" InsertVisible="False"
                                                                 ReadOnly="True" SortExpression="ContainerType" />
-                                                            <asp:TemplateField HeaderText="SealNumber" SortExpression="Seal Number" HeaderStyle-Width="100" >
+                                                            <asp:TemplateField HeaderText="Seal Number" SortExpression="Seal Number" HeaderStyle-Width="100" >
                                                                 <ItemTemplate>
                                                                     <asp:TextBox ID="txtSealNo" runat="server" CssClass="textboxuppercase" Text='<%# Bind("SealNumber") %>'
                                                                         Width="80" BorderStyle="None" MaxLength="10">
@@ -604,7 +604,7 @@
                                                                         Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Unit">
+                                                            <asp:TemplateField HeaderText="Unit" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
                                                                     <asp:DropDownList ID="ddlUnit" runat="server">
                                                                     </asp:DropDownList>
@@ -616,7 +616,7 @@
                                                                     </asp:DropDownList>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="ShippingBillNo" SortExpression="ShippingBillNumber" HeaderStyle-Width="100">
+                                                            <asp:TemplateField HeaderText="Shipping Bill No" SortExpression="ShippingBillNumber" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
                                                                     <asp:TextBox ID="txtShippingBillNumber" runat="server" CssClass="textboxuppercase" Text='<%# Bind("ShippingBillNumber") %>'
                                                                         Width="80" BorderStyle="None" MaxLength="10">
@@ -625,7 +625,7 @@
                                                                     ValidationGroup="Save"></asp:RequiredFieldValidator>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="ShippingBillDate" SortExpression="ShippingBillDate" HeaderStyle-Width="100">
+                                                            <asp:TemplateField HeaderText="Shipping Bill Date" SortExpression="ShippingBillDate" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
                                                                     <asp:TextBox ID="txtShippingBillDate" runat="server" Text='<%# Bind("ShippingBillDate","{0:dd-MM-yyyy}") %>'
                                                                         Width="80" BorderStyle="None" MaxLength="10">

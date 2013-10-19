@@ -109,11 +109,11 @@ namespace EMS.DAL
             return dquery.GetTable();
         }
 
-        public static DataTable GetDeliveryAgents()
+        public static DataTable GetDeliveryAgents(int fk_FPOD)
         {
             string ProcName = "[exp].[usp_GetDeliveryAgents]";
             DbQuery dquery = new DbQuery(ProcName);
-
+            dquery.AddIntegerParam("@FPOD", fk_FPOD);
             return dquery.GetTable();
         }
 

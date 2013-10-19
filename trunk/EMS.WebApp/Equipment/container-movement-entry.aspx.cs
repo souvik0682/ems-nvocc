@@ -142,6 +142,8 @@ namespace EMS.WebApp.Equipment
                     ActionOnFromLocationChange();
 
                 }
+                else
+                    _userLocation = 0;
 
             }
             else
@@ -751,10 +753,13 @@ namespace EMS.WebApp.Equipment
 
         protected void ddlBookingNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListItem Li = new ListItem("Select", "0");
-            PopulateDropDown((int)Enums.DropDownPopulationFor.DO, ddlDONo, Convert.ToInt32(ddlBookingNo.SelectedValue), 3);
-            ddlDONo.Items.Insert(0, Li);
-            ddlDONo.SelectedIndex = 0;
+            if (ddlBookingNo.SelectedIndex > 0)
+            {
+                ListItem Li = new ListItem("Select", "0");
+                PopulateDropDown((int)Enums.DropDownPopulationFor.DO, ddlDONo, Convert.ToInt32(ddlBookingNo.SelectedValue), 3);
+                ddlDONo.Items.Insert(0, Li);
+                ddlDONo.SelectedIndex = 0;
+            }
 
         }
 

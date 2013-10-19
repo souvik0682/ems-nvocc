@@ -604,6 +604,12 @@
                                                                         Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Unit">
+                                                                <ItemTemplate>
+                                                                    <asp:DropDownList ID="ddlUnit" runat="server">
+                                                                    </asp:DropDownList>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Part">
                                                                 <ItemTemplate>
                                                                     <asp:DropDownList ID="ddlPart" runat="server">

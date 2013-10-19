@@ -29,6 +29,7 @@ namespace EMS.Entity
         public DateTime? ShippingBillDate { get; set; }
         public long ImportBLFooterId { get; set; }
         public bool IsDeleted { get; set; }
+        public string Unit { get; set; }
 
 
         public ExportBLContainerEntity(DataTableReader reader)
@@ -120,7 +121,10 @@ namespace EMS.Entity
             {
                 IsDeleted = false;
             }
-            
+
+            if (ColumnExists(reader, "Unit"))
+                if (reader["Unit"] != DBNull.Value)
+                    Unit = Convert.ToString(reader["Unit"]);
         }
 
         public bool ColumnExists(IDataReader reader, string columnName)

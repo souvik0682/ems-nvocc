@@ -36,9 +36,9 @@ namespace EMS.BLL
             return ExportBLDAL.GetShipmentModes();
         }
 
-        public static DataTable GetDeliveryAgents()
+        public static DataTable GetDeliveryAgents(int fk_fpod)
         {
-            return ExportBLDAL.GetDeliveryAgents();
+            return ExportBLDAL.GetDeliveryAgents(fk_fpod);
         }
 
         public static void InsertBLContainers(List<IExportBLContainer> lstData)

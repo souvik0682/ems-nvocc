@@ -96,8 +96,6 @@ namespace EMS.WebApp.Reports
                 rptViewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintingContainer", dtBLPrintingCons));
                 rptViewer.LocalReport.SetParameters(new ReportParameter("ImageShow", "false"));
                 rptViewer.LocalReport.Refresh();
-                
-                 
             }
         }
         public int StartCount = 0;

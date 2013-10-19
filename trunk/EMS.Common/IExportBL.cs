@@ -31,6 +31,7 @@ namespace EMS.Common
         string FPOD { get; set; }
         string PODDesc { get; set; }
         string FPODDesc { get; set; }
+        int fk_FPOD { get; set; }
         int NoOfBL { get; set; }
         string BLType { get; set; }
         int ShipmentMode { get; set; }

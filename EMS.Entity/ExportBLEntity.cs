@@ -43,6 +43,7 @@ namespace EMS.Entity
         public string BLIssuePlace { get; set; }
         public decimal NetWeight { get; set; }
         public DateTime BLReleaseDate { get; set; }
+        public int fk_FPOD { get; set; }
 
         //Other Information Tab
         public string ShipperName { get; set; }
@@ -195,6 +196,12 @@ namespace EMS.Entity
             else
             {
                 FPODDesc = FPOD;
+            }
+
+            if (ColumnExists(reader, "fk_FPOD"))
+            {
+                if (reader["fk_FPOD"] != DBNull.Value)
+                    fk_FPOD = Convert.ToInt32(reader["fk_FPOD"]);
             }
 
             if (ColumnExists(reader, "NoOfBL"))

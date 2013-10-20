@@ -235,6 +235,17 @@ namespace EMS.WebApp.Export
 
                 gvwContainers.DataSource = objData;
                 gvwContainers.DataBind();
+
+                List<Unit> lstUnit = new List<Unit>();
+                DataTable dtUnits = ExportBLBLL.GetUnitsForExportBlContainer();
+
+                foreach (DataRow dr in dtUnits.Rows)
+                {
+                    lstUnit.Add(new Unit { Value = dr[0].ToString(), Text = dr[1].ToString() });
+                }
+
+                txtNetWt.Text = objData.Where(o => o.IsDeleted == false).Sum(o => o.GrossWeight).ToString() + " " + lstUnit.Where(u => u.Value == objData[0].Unit).ToList()[0].Text;
+                txtContainers.Text = objData.Where(o => o.IsDeleted == false).Where(o => o.ContainerSize == "20").Count().ToString() + " x 20 - " + objData.Where(o => o.IsDeleted == false).Where(o => o.ContainerSize == "40").Count().ToString() + " x 40";
             }
             catch (Exception ex)
             {
@@ -572,6 +583,45 @@ namespace EMS.WebApp.Export
         {
             Response.Redirect("~/Export/ExportBL.aspx");
         }
+
+        protected void txtGrossWeight_TextChanged(object sender, EventArgs e)
+        {
+            //TextBox thisTextBox = (TextBox)sender;
+            //GridViewRow thisGridViewRow = (GridViewRow)thisTextBox.Parent.Parent;
+
+            List<IExportBLContainer> lstData = ViewState["DataSource"] as List<IExportBLContainer>;
+            int totalRows = gvwContainers.Rows.Count;
+
+            for (int r = 0; r < totalRows; r++)
+            {
+                GridViewRow thisGridViewRow = gvwContainers.Rows[r];
+                HiddenField hdnContainerId = (HiddenField)thisGridViewRow.FindControl("hdnContainerId");
+
+                DropDownList ddlPart = (DropDownList)thisGridViewRow.FindControl("ddlPart");
+                DropDownList ddlUnit = (DropDownList)thisGridViewRow.FindControl("ddlUnit");
+                TextBox txtSealNo = (TextBox)thisGridViewRow.FindControl("txtSealNo");
+                TextBox txtPackage = (TextBox)thisGridViewRow.FindControl("txtPackage");
+                TextBox txtGrossWeight = (TextBox)thisGridViewRow.FindControl("txtGrossWeight");
+                TextBox txtShippingBillNumber = (TextBox)thisGridViewRow.FindControl("txtShippingBillNumber");
+                TextBox txtShippingBillDate = (TextBox)thisGridViewRow.FindControl("txtShippingBillDate");
+
+                lstData.Where(d => d.ContainerId == Convert.ToInt64(hdnContainerId.Value))
+                    .Select(d =>
+                    {
+                        d.Part = Convert.ToBoolean(ddlPart.SelectedValue);
+                        d.Unit = ddlUnit.SelectedValue;
+                        d.SealNumber = txtSealNo.Text.Trim();
+                        d.Package = Convert.ToInt32(txtPackage.Text);
+                        d.GrossWeight = Convert.ToDecimal(txtGrossWeight.Text);
+                        d.ShippingBillNumber = txtShippingBillNumber.Text.Trim();
+                        if (txtShippingBillDate.Text.Trim() != string.Empty)
+                            d.ShippingBillDate = Convert.ToDateTime(txtShippingBillDate.Text.Trim());
+                        return d;
+                    }).ToList();
+            }
+            ViewState["DataSource"] = lstData;
+            LoadExportBLContainers(0, 0);
+        }
     }
 
     public class Part
@@ -579,7 +629,7 @@ namespace EMS.WebApp.Export
         public string Text { get; set; }
         public string Value { get; set; }
     }
-
+    
     public class Unit
     {
         public string Text { get; set; }

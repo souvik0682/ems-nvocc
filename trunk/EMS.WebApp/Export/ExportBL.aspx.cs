@@ -112,6 +112,20 @@ namespace EMS.WebApp.Export
                 string encryptedId = GeneralFunctions.EncryptQueryString(Convert.ToString(e.CommandArgument));
                 Response.Redirect("~/Export/Export-bl-query.aspx?BLNumber=" + encryptedId);
             }
+            else if (e.CommandName == "Status")
+            {
+                bool IsActive = false;
+
+                if (((System.Web.UI.WebControls.LinkButton)(e.CommandSource)).Text == "Active")
+                    IsActive = false;
+                else
+                    IsActive = true;
+
+                //Active/InActive
+                ExportBLBLL.ChangeBLStatus(Convert.ToString(e.CommandArgument), IsActive);
+
+                LoadExportBL();
+            }
         }
 
         protected void gvExportBL_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -129,10 +143,19 @@ namespace EMS.WebApp.Export
                 e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "POD"));
                 e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "POL"));
 
+                LinkButton lnkStatus = (LinkButton)e.Row.FindControl("lnkStatus");
+                lnkStatus.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLNumber"));
+
                 if (Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "BLStatus")))
-                    e.Row.Cells[9].Text = "Active";
+                {
+                    lnkStatus.ToolTip = "Active";
+                    lnkStatus.Text = "Active";
+                }
                 else
-                    e.Row.Cells[9].Text = "InActive";
+                {
+                    lnkStatus.ToolTip = "InActive";
+                    lnkStatus.Text = "InActive";
+                }
 
                 //Edit Link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");

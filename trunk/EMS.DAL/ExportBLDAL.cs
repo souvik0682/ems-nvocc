@@ -270,5 +270,16 @@ namespace EMS.DAL
 
             return dquery.GetTable();
         }
+
+        public static void ChangeBLStatus(string BLNumber, bool IsActive)
+        {
+            string strExecution = "[exp].[usp_ChangeBLStatus]";
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@BLNumber", 50, BLNumber);
+                oDq.AddBooleanParam("@IsActive", IsActive);
+                oDq.RunActionQuery();
+            }
+        }
     }
 }

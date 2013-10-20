@@ -66,5 +66,10 @@ namespace EMS.BLL
         {
             return ExportBLDAL.GetUnitsForExportBlContainer();
         }
+
+        public static void ChangeBLStatus(string BLNumber, bool IsActive)
+        {
+            ExportBLDAL.ChangeBLStatus(BLNumber, IsActive);
+        }
     }
 }

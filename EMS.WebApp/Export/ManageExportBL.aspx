@@ -321,7 +321,7 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtNetWt" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13" Enabled="false"></asp:TextBox><br />
                                                             </td>
                                                             <td>
                                                             </td>
@@ -597,8 +597,8 @@
                                                             <asp:TemplateField HeaderText="Gross Weight" SortExpression="GrossWeight" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
                                                                     <cc2:CustomTextBox ID="txtGrossWeight" runat="server" Text='<%# Bind("GrossWeight", "{0:n2}") %>' 
-                                                                        Style="text-align: right;" Width="80" BorderStyle="None" MaxLength="10" 
-                                                                        Precision="8" Scale="2" Type="Decimal">
+                                                                        Style="text-align: right;" Width="80" BorderStyle="None" MaxLength="10" AutoPostBack="true"
+                                                                        Precision="8" Scale="2" Type="Decimal" OnTextChanged="txtGrossWeight_TextChanged">
                                                                     </cc2:CustomTextBox>
                                                                     <asp:RequiredFieldValidator ID="rfvGrossWeight" runat="server" ControlToValidate="txtGrossWeight"
                                                                         Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>

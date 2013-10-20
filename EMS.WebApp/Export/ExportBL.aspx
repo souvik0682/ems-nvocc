@@ -210,7 +210,7 @@
                                             <asp:Label ID="lblStatus" runat="server" Text="Status"></asp:Label>
                                         </HeaderTemplate>
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="lnkStatus" runat="server" Text="Active/Inactive"></asp:LinkButton>
+                                            <asp:LinkButton ID="lnkStatus" runat="server" Text="Active/Inactive" CommandName="Status"></asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>

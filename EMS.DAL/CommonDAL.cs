@@ -901,5 +901,20 @@ namespace EMS.DAL
             return myDataTable;
         }
         #endregion
+
+        #region Currency
+        public static DataTable GetAllCurrency()
+        {
+            string strExecution = "[exp[.[prcGetAllCurrency]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {              
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+        #endregion
     }
 }

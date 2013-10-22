@@ -207,9 +207,31 @@ namespace EMS.WebApp.Transaction
 
         protected void btnAddFreightInvoice_Click(object sender, EventArgs e)
         {
+            
+            Response.Redirect("~/Export/ExportInvoice.aspx?p1=" + GeneralFunctions.EncryptQueryString(txtBlNo.Text)
+                + "&p3=" + GeneralFunctions.EncryptQueryString("1")
+                + "&p4="+ GeneralFunctions.EncryptQueryString("1")
+            +"&p5=" + GeneralFunctions.EncryptQueryString(txtBookingNo.Text)
+                 + "&p6=" + GeneralFunctions.EncryptQueryString(txtBLDate.Text)
+                   + "&p7=" + GeneralFunctions.EncryptQueryString(txtBookingDate.Text)
+                     + "&p8=" + GeneralFunctions.EncryptQueryString(txtContainer.Text)
+                );
 
         }
+        protected void btnAddOtherInvoice_Click(object sender, EventArgs e)
+        {
+            
+            Response.Redirect("~/Export/ExportInvoice.aspx?p1=" + GeneralFunctions.EncryptQueryString(txtBlNo.Text)
+                + "&p3=" + GeneralFunctions.EncryptQueryString("3")
+                + "&p4="+ GeneralFunctions.EncryptQueryString("3")
+            +"&p5=" + GeneralFunctions.EncryptQueryString(txtBookingNo.Text)
+                 + "&p6=" + GeneralFunctions.EncryptQueryString(txtBLDate.Text)
+                   + "&p7=" + GeneralFunctions.EncryptQueryString(txtBookingDate.Text)
+                     + "&p8=" + GeneralFunctions.EncryptQueryString(txtContainer.Text)
+                );
 
+        }
+        
         protected void btnExit_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Export/ExportBL.aspx");

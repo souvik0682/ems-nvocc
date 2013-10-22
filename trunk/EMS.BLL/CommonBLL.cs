@@ -215,12 +215,6 @@ namespace EMS.BLL
             searchCriteria.SortDirection = "ASC";
         }
 
-        private void SetDefaultSearchCriteriaForOperator(SearchCriteria searchCriteria)
-        {
-            searchCriteria.SortExpression = "Operator";
-            searchCriteria.SortDirection = "ASC";
-        }
-
         public List<ILocation> GetAllLocation(SearchCriteria searchCriteria)
         {
             return CommonDAL.GetLocation('N', searchCriteria);
@@ -241,13 +235,6 @@ namespace EMS.BLL
             SetDefaultSearchCriteriaForLocation(searchCriteria);
             return CommonDAL.GetLocation('Y', searchCriteria);
         }
-
-        //public List<ISlot> GetActiveOperator()
-        //{
-        //    SearchCriteria searchCriteria = new SearchCriteria();
-        //    SetDefaultSearchCriteriaForOperator(searchCriteria);
-        //    return CommonDAL.GetOperator(searchCriteria);
-        //}
 
         public ILocation GetLocation(int locId)
         {
@@ -469,14 +456,6 @@ namespace EMS.BLL
         }
         #endregion
 
-
-        #region ExpBLHeader
-        public static DataTable GetExpBLHeaderByBLNo(long LocationId)
-        {
-            return CommonDAL.GetExpBLHeaderByBLNo(LocationId);
-        }
-        #endregion
-
         #region Report
         public static string GetTerminalType(int VoyageID, int VesselID, int PortOfDischarge)
         { return CommonDAL.GetTerminalType(VoyageID, VesselID, PortOfDischarge); }
@@ -496,13 +475,6 @@ namespace EMS.BLL
 
             return CommonDAL.GetLine(Location);
         }
-
-        public static DataTable GetExpLine(string Location)
-        {
-
-            return CommonDAL.GetExpLine(Location);
-        }
-
         public static DataTable GetVessels(string Line)
         {
             return CommonDAL.GetVessels(Line);
@@ -521,6 +493,13 @@ namespace EMS.BLL
             return CommonDAL.GetInvoiceByBLNo(BLNo);
         }
 
+        #endregion
+
+        #region Currency
+        public static DataTable GetAllCurrency()
+        {
+            return CommonDAL.GetAllCurrency();
+        }
         #endregion
     }
 }

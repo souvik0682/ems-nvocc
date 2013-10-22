@@ -253,8 +253,8 @@
                                     <asp:Button ID="btnExit" runat="server" Text="Exit To Exp BL" 
                                         ValidationGroup="BQExit" onclick="btnExit_Click" />
                                     <asp:Button ID="btnAddFreightInvoice" runat="server" Text="Add Freight Invoice" 
-                                        OnClientClick="return false;" onclick="btnAddFreightInvoice_Click" />
-                                    <asp:Button ID="btnAddOtherInvoice" runat="server" Text="Add Other Invoice" OnClientClick="return false;" />
+                                        onclick="btnAddFreightInvoice_Click" />
+                                    <asp:Button ID="btnAddOtherInvoice" runat="server" Text="Add Other Invoice"  onclick="btnAddOtherInvoice_Click"/>
                                 </td>
                             </tr>
                             <tr>

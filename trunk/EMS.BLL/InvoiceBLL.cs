@@ -31,6 +31,10 @@ namespace EMS.BLL
         #endregion
 
         #region BL No
+        public DataTable GetExpBLno(long NvoccId, long LocationId)
+        {
+            return InvoiceDAL.GetExpBLno(NvoccId, LocationId);
+        }
         public DataTable GetBLno(long NvoccId, long LocationId)
         {
             return InvoiceDAL.GetBLno(NvoccId, LocationId);
@@ -77,6 +81,10 @@ namespace EMS.BLL
         public List<ICharge> GetAllCharges(int docTypeId)
         {
             return InvoiceDAL.GetAllCharges(docTypeId);
+        }
+        public List<ICharge> GetAllExpCharges(int docTypeId)
+        {
+            return InvoiceDAL.GetAllExpCharges(docTypeId);
         }
 
         public DataTable GetTerminals(long LocationId)
@@ -125,7 +133,27 @@ namespace EMS.BLL
 
             return invoiceId;
         }
+        public long SaveInvoiceExp(IInvoice invoice, string misc, List<ExpInvoiceCharge> expInvoiceCharge)
+        {
+            long invoiceId = 0;
+            int invoiceChargeId = 0;
 
+            invoiceId = InvoiceDAL.SaveInvoice(invoice, misc);
+
+            if (invoiceId > 0)
+            {
+                if (!ReferenceEquals(expInvoiceCharge, null))
+                {
+                    foreach (ExpInvoiceCharge cRate in expInvoiceCharge)
+                    {
+                        cRate.InvoiceID = invoiceId;
+                        invoiceChargeId = InvoiceDAL.SaveInvoiceChargesExp(cRate);
+                    }
+                }
+            }
+
+            return invoiceId;
+        }
         public IInvoice GetInvoiceById(long InvoiceId)
         {
             return InvoiceDAL.GetInvoiceById(InvoiceId);
@@ -160,12 +188,19 @@ namespace EMS.BLL
         {
             return InvoiceDAL.GetLineLocation(BLNo);
         }
+        public DataTable GetExpLineLocation(string BLNo)
+        {
+            return InvoiceDAL.GetExpLineLocation(BLNo);
+        }
 
         public List<IChargeRate> GetInvoiceCharges_New(long BlId, int ChargesID, int TerminalID, decimal ExchangeRate, int DocTypeId, string Param3, DateTime InvoiceDate)
         {
             return InvoiceDAL.GetInvoiceCharges_New(BlId, ChargesID, TerminalID, ExchangeRate, DocTypeId, Param3, InvoiceDate);
         }
-
+        public static IList<ExpInvoiceCharge> GetExpInvoiceCharges_New(long BlId, int ChargesID, int TerminalID, int DocTypeId, DateTime InvoiceDate)
+        {
+            return InvoiceDAL.GetExpInvoiceCharges_New(BlId, ChargesID, TerminalID,  DocTypeId,  InvoiceDate);
+        }
         public DataTable ChargeEditable(int ChargeId)
         {
             return InvoiceDAL.ChargeEditable(ChargeId);

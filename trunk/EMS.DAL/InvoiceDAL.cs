@@ -82,6 +82,19 @@ namespace EMS.DAL
             return dt;
         }
 
+        public static DataTable ExpGrossWeight(string BLno)
+        {
+            string strExecution = "[exp].[usp_Invoice_GetGrossWeight]";
+            DataTable dt = new DataTable();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@BLno", 60, BLno);
+                dt = oDq.GetTable();
+            }
+            return dt;
+        }
+
         public static DataTable TEU(string BLno)
         {
             string strExecution = "usp_Invoice_GetTEU";
@@ -111,6 +124,19 @@ namespace EMS.DAL
         public static DataTable Volume(string BLno)
         {
             string strExecution = "usp_Invoice_GetVolume";
+            DataTable dt = new DataTable();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@BLno", 60, BLno);
+                dt = oDq.GetTable();
+            }
+            return dt;
+        }
+
+        public static DataTable ExpBLContainers(string BLno)
+        {
+            string strExecution = "[exp].[usp_Invoice_GetContainers]";
             DataTable dt = new DataTable();
 
             using (DbQuery oDq = new DbQuery(strExecution))

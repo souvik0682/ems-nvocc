@@ -104,5 +104,20 @@ namespace EMS.DAL
             }
             return Result;
         }
+
+             public static DataTable GetBookingList(int Loc, int Line)
+        {
+            string strExecution = "[exp].[uspGetBookingListForEqp]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@LocID", Loc);
+                oDq.AddIntegerParam("@LineID", Line);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
     }
 }

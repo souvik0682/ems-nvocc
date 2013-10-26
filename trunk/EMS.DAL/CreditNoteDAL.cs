@@ -130,7 +130,7 @@ namespace EMS.DAL
         public static long UpdateCRN(long CRNID)
         {
             string strExecution = "usp_CN_UpdCreditNoteHeader";
-            long creditNoteId = 0;
+            //long creditNoteId = 0;
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {

@@ -34,6 +34,8 @@ namespace EMS.Entity.Report
         public int CntrNos { get; set; }
         public string CntrSize { get; set; }
         public string CntrType { get; set; }
+        public string BookingParty { get; set; }
+        public string Containers { get; set; }
 
         #endregion
 
@@ -67,6 +69,8 @@ namespace EMS.Entity.Report
             this.Phone = Convert.ToString(reader["Phone"]);
             this.BookingNo = Convert.ToString(reader["BookingNo"]);
             this.LineCode = Convert.ToString(reader["LineName"]);
+            this.BookingParty = Convert.ToString(reader["BookingParty"]);
+            this.Containers = Convert.ToString(reader["Containers"]);
         }
 
         #endregion

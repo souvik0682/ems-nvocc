@@ -12,6 +12,11 @@ namespace EMS.BLL
 {
     public class BookingBLL
     {
+        public string GetLocation(int User)
+        {
+            return BookingDAL.GetLocation(User);
+        }
+
         public int AddEditBooking(IBooking Booking, int CompanyID, ref int BookingId)
         {
             return BookingDAL.AddEditBooking(Booking, CompanyID, ref BookingId);
@@ -47,6 +52,10 @@ namespace EMS.BLL
             return BookingDAL.GetExportServices(Line, Fpod);
         }
 
+        public static DataSet GetPortWithServices(int ServiceID, Int32 Lineid)
+        {
+            return BookingDAL.GetPortWithServices(ServiceID, Lineid);
+        }
 
         //Souvik
         public static IBooking GetBookingByBookingId(int BookingId)
@@ -129,5 +138,16 @@ namespace EMS.BLL
         {
             return BookingDAL.GetBookingById(ID);
         }
+
+        public static DataSet GetSalesman(int SalesmanID)
+        {
+            return BookingDAL.GetSalesman(SalesmanID);
+        }
+
+        public static string GetBookingChargeExists(int BookingID)
+        {
+            return BookingDAL.GetBookingChargeExists(BookingID);
+        }
+        
     }
 }

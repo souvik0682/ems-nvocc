@@ -493,6 +493,17 @@ namespace EMS.BLL
             return CommonDAL.GetInvoiceByBLNo(BLNo);
         }
 
+        public static DataTable GetExpLine(string Location)
+        {
+
+            return CommonDAL.GetExpLine(Location);
+        }
+
+        public static DataTable GetExpBLHeaderByBLNo(long Location)
+        {
+
+            return CommonDAL.GetExpBLHeaderByBLNo(Location);
+        }
         #endregion
 
         #region Currency

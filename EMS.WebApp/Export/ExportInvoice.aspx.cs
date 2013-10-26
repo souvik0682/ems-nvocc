@@ -217,15 +217,17 @@ namespace EMS.WebApp.Export
 
         private void GrossWeight(string BLNo)
         {
-            DataTable dt = new InvoiceBLL().GrossWeight(BLNo);
+            DataTable dt = new InvoiceBLL().ExpGrossWeight(BLNo);
             ViewState["GROSSWEIGHT"] = dt.Rows[0]["GrossWeight"].ToString();
+            ViewState["VOLUME"] = dt.Rows[0]["Volume"].ToString();
 
         }
 
         private void TEU(string BLNo)
         {
-            DataTable dt = new InvoiceBLL().TEU(BLNo);
+            DataTable dt = new InvoiceBLL().ExpBLContainers(BLNo);
             ViewState["NOOFTEU"] = dt.Rows[0]["NoofTEU"].ToString();
+            ViewState["NOOFFEU"] = dt.Rows[0]["NoofFEU"].ToString();
 
         }
 
@@ -985,7 +987,7 @@ namespace EMS.WebApp.Export
 
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Record saved successfully! Invoice Number: " + invoiceNo + "');</script>", false);
             }
-            Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(ddlBLno.SelectedItem.Text));
+            Response.Redirect("~/Export/Export-bl-query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(ddlBLno.SelectedItem.Text));
 
             //ViewState["CHARGERATE"] = null;
             //gvwInvoice.DataSource = null;
@@ -994,7 +996,7 @@ namespace EMS.WebApp.Export
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(ddlBLno.SelectedItem.Text));
+            Response.Redirect("~/Export/Export-bl-query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(ddlBLno.SelectedItem.Text));
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)

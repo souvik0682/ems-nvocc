@@ -767,7 +767,7 @@
                                                 <div style="overflow: auto; height: 180px; width: 420px;">
                                                     <asp:GridView ID="gvContainer" runat="server" AutoGenerateColumns="false" AllowPaging="false"
                                                         BorderStyle="None" BorderWidth="0" Width="100%" Style="margin-right: 0px" ShowHeader="False"
-                                                        OnRowCommand="gvContainer_RowCommand" OnDataBound="gvContainer_DataBound">
+                                                        OnRowCommand="gvContainer_RowCommand" OnDataBound="gvContainer_DataBound" OnRowDataBound="gvContainer_OnRowDataBound">
                                                         <PagerSettings Mode="NumericFirstLast" Position="TopAndBottom" />
                                                         <PagerStyle CssClass="gridviewpager" />
                                                         <EmptyDataRowStyle CssClass="gridviewemptydatarow" />

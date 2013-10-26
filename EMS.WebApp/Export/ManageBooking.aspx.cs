@@ -658,6 +658,21 @@ namespace EMS.WebApp.Export
 
         }
 
+        protected void gvContainer_OnRowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
+                ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+
+                if (BookingBLL.GetBookingChargeExists(Convert.ToInt32(hdnBookingID.Value)) != string.Empty)
+                {
+                    btnEdit.Visible = false;
+                    btnRemove.Visible = false;
+                }
+            }
+        }
+
         protected void txtPOD_TextChanged(object sender, EventArgs e)
         {
             string FDPort = txtFPOD.Text;
@@ -1060,9 +1075,9 @@ namespace EMS.WebApp.Export
                 foreach (BookingContainerEntity obj in Containers)
                 {
                     if (string.IsNullOrEmpty(txtContainerDtls.Text))
-                        txtContainerDtls.Text = obj.ContainerType + "(" + obj.CntrSize + ") X " + obj.NoofContainers.ToString();
+                        txtContainerDtls.Text = obj.NoofContainers.ToString() + " X " + obj.CntrSize + "'" + obj.ContainerType;
                     else
-                        txtContainerDtls.Text += "," + obj.ContainerType + "(" + obj.CntrSize + ") X " + obj.NoofContainers.ToString();
+                        txtContainerDtls.Text += "," + obj.NoofContainers.ToString() + " X " + obj.CntrSize + "'" + obj.ContainerType;
                 }
             }
         }

@@ -25,6 +25,20 @@ namespace EMS.DAL
             return dt;
         }
 
+        public static DataTable GetExpInvoiceType()
+        {
+            string strExecution = "exp.uspGetInvoiceType";
+            DataTable dt = new DataTable();
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                dt = oDq.GetTable();
+            }
+
+            return dt;
+        }
+
         public static DataTable GetLocation()
         {
             string strExecution = "usp_Invoice_GetLocation";
@@ -313,6 +327,49 @@ namespace EMS.DAL
         public static long SaveInvoice(IInvoice invoice, string misc)
         {
             string strExecution = "usp_Invoice_Save";
+            long invoiceId = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                if (invoice.InvoiceID != 0)
+                    oDq.AddBigIntegerParam("@InvoiceID", invoice.InvoiceID);
+
+                oDq.AddVarcharParam("@Misc", 20, misc);
+                oDq.AddIntegerParam("@CompanyID", invoice.CompanyID);
+                oDq.AddIntegerParam("@LocationID", invoice.LocationID);
+                oDq.AddIntegerParam("@NVOCCID", invoice.NVOCCID);
+
+                if (invoice.InvoiceTypeID != 0)
+                    oDq.AddIntegerParam("@InvoiceTypeID", invoice.InvoiceTypeID);
+                if (invoice.BookingID != 0)
+                    oDq.AddBigIntegerParam("@BookingID", invoice.BookingID);
+
+                oDq.AddBigIntegerParam("@BLID", invoice.BLID);
+                oDq.AddVarcharParam("@ExportImport", 1, invoice.ExportImport);
+                oDq.AddDecimalParam("@XchangeRate", 12, 2, invoice.XchangeRate);
+                oDq.AddDateTimeParam("@InvoiceDate", invoice.InvoiceDate);
+                oDq.AddIntegerParam("@CHAID", invoice.CHAID);
+                oDq.AddVarcharParam("@Account", 300, invoice.Account);
+                oDq.AddBooleanParam("@AllInFreight", invoice.AllInFreight);
+                oDq.AddDecimalParam("@GrossAmount", 12, 2, invoice.GrossAmount);
+                oDq.AddDecimalParam("@ServiceTax", 12, 2, invoice.ServiceTax);
+                oDq.AddDecimalParam("@ServiceTaxCess", 12, 2, invoice.ServiceTaxCess);
+                oDq.AddDecimalParam("@ServiceTaxACess", 12, 2, invoice.ServiceTaxACess);
+                oDq.AddDecimalParam("@Roff", 12, 2, invoice.Roff);
+                oDq.AddIntegerParam("@UserAdded", invoice.UserAdded);
+                oDq.AddIntegerParam("@UserLastEdited", invoice.UserLastEdited);
+                oDq.AddDateTimeParam("@AddedOn", invoice.AddedOn);
+                oDq.AddDateTimeParam("@EditedOn", invoice.EditedOn);
+
+                invoiceId = Convert.ToInt64(oDq.GetScalar());
+            }
+
+            return invoiceId;
+        }
+
+        public static long SaveExpInvoice(IInvoice invoice, string misc)
+        {
+            string strExecution = "[exp].[usp_Exp_Invoice_Save]";
             long invoiceId = 0;
 
             using (DbQuery oDq = new DbQuery(strExecution))

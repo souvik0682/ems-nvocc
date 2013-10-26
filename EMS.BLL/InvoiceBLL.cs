@@ -21,6 +21,11 @@ namespace EMS.BLL
         {
             return InvoiceDAL.GetInvoiceType();
         }
+
+        public DataTable GetExpInvoiceType()
+        {
+            return InvoiceDAL.GetExpInvoiceType();
+        }
         #endregion
 
         #region Location
@@ -148,7 +153,7 @@ namespace EMS.BLL
             long invoiceId = 0;
             int invoiceChargeId = 0;
 
-            invoiceId = InvoiceDAL.SaveInvoice(invoice, misc);
+            invoiceId = InvoiceDAL.SaveExpInvoice(invoice, misc);
 
             if (invoiceId > 0)
             {

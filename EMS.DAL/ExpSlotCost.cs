@@ -24,7 +24,7 @@ namespace EMS.DAL
 
                 return oDq.GetTable();
             }
-            return (DataTable)null;
+            //return (DataTable)null;
         }
 
         public static DataTable GetSlotCost(ISearchCriteria searchCriteria)
@@ -142,7 +142,7 @@ namespace EMS.DAL
             {
                 return oDq.GetTable();
             }
-            return (DataTable)null;
+            //return (DataTable)null;
         }
 
         public static SlotCostModel GetSlotCost(long slotID)

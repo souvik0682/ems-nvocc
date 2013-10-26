@@ -14,6 +14,21 @@ namespace EMS.DAL
         private BookingDAL()
         { }
 
+        public static string GetLocation(int UserID)
+        {
+            string strExecution = "[exp].[uspGetLocationForExport]";
+            string Location = "";
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@UserId", UserID);
+
+                Location = Convert.ToString(oDq.GetScalar());
+            }
+
+            return Location;
+        }
 
         public static int DeleteBooking(int BookingId)
         {
@@ -176,6 +191,17 @@ namespace EMS.DAL
             return dquery.GetTables();
         }
 
+        public static DataSet GetPortWithServices(int ServiceID, Int32 Lineid)
+        {
+            string ProcName = "[exp].[spGetPortWithServices]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            dquery.AddIntegerParam("@ServiceID", ServiceID);
+            dquery.AddIntegerParam("@LineID", Lineid);
+
+            return dquery.GetTables();
+        }
+
         //SA Souvik
         public static IBooking GetBookingByBookingId(int BookingId)
         {
@@ -317,6 +343,7 @@ namespace EMS.DAL
                         oDq.AddIntegerParam("@ChargeId", charges.ChargeId);
                         oDq.AddIntegerParam("@ChargeRateId", charges.ChargeRateId);
                         oDq.AddIntegerParam("@CurrencyId", charges.CurrencyId);
+                        oDq.AddIntegerParam("@Unit", charges.Unit);
                         oDq.AddIntegerParam("@ContainerTypeId", charges.ContainerTypeId);
                         oDq.AddBooleanParam("@ChargeApplicable", charges.ChargeApplicable);
                         oDq.AddVarcharParam("@Size", 2, charges.Size);
@@ -348,6 +375,7 @@ namespace EMS.DAL
                         oDq.AddBigIntegerParam("@BookingChargeId", charges.BookingChargeId);
                         oDq.AddBigIntegerParam("@BookingId", charges.BookingId);
                         oDq.AddIntegerParam("@ChargeId", charges.ChargeId);
+                        oDq.AddIntegerParam("@Unit", charges.Unit);
                         oDq.AddIntegerParam("@ChargeRateId", charges.ChargeRateId);
                         oDq.AddIntegerParam("@CurrencyId", charges.CurrencyId);
                         oDq.AddIntegerParam("@ContainerTypeId", charges.ContainerTypeId);
@@ -481,5 +509,34 @@ namespace EMS.DAL
             }
             return oIH;
         }
+
+        public static DataSet GetSalesman(int SalesmanID)
+        {
+            string ProcName = "[exp].[prcGetSalesman]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            dquery.AddIntegerParam("@fk_CustID", SalesmanID);
+
+            return dquery.GetTables();
+        }
+
+        public static string GetBookingChargeExists(int BookingID)
+        {
+            string ProcName = "[exp].[prcBookingChargesExist]";
+            string Approver = "";
+            //DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+            //string Result = "";
+
+            using (DbQuery oDq = new DbQuery(ProcName))
+            {
+                oDq.AddIntegerParam("@BookingID", BookingID);
+                //oDq.AddTextParam("@RESULT", Result, QueryParameterDirection.Output);
+
+                Approver = Convert.ToString(oDq.GetScalar());
+            }
+
+            return Approver;
+
+         }
     }
 }

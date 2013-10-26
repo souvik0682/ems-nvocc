@@ -905,7 +905,7 @@ namespace EMS.DAL
         #region Currency
         public static DataTable GetAllCurrency()
         {
-            string strExecution = "[exp[.[prcGetAllCurrency]";
+            string strExecution = "[exp].[prcGetAllCurrency]";
             DataTable myDataTable;
 
             using (DbQuery oDq = new DbQuery(strExecution))

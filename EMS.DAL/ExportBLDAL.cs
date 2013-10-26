@@ -227,6 +227,7 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@NoOfBL", objBL.NoOfBL);
                 oDq.AddDecimalParam("@NetWeight", 12, 2, objBL.NetWeight);
                 oDq.AddDateTimeParam("@BLReleaseDate", objBL.BLReleaseDate);
+                oDq.AddBooleanParam("@BLThruEdge", objBL.BLthruEdge);
 
                 exportBLId = Convert.ToInt64(oDq.GetScalar());
                 return exportBLId;
@@ -281,5 +282,22 @@ namespace EMS.DAL
                 oDq.RunActionQuery();
             }
         }
+
+        public static bool CheckBookingLocation(string BookingNo, int Loc)
+        {
+            string strExecution = "[exp].[usp_CheckBookingLocation]";
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+
+                oDq.AddNVarcharParam("@BookingNo", 50, BookingNo);
+                oDq.AddIntegerParam("@Loc", Loc);
+                oDq.AddBooleanParam("@Result", false, QueryParameterDirection.Output);
+                oDq.RunActionQuery();
+                return Convert.ToBoolean(oDq.GetParaValue("@Result"));
+            }
+        }
+
     }
 }

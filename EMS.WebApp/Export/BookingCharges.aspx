@@ -7,20 +7,16 @@
 <%@ Register Src="~/CustomControls/AC_Refund.ascx" TagName="AC_Refund" TagPrefix="uc2" %>
 <%@ Register Src="~/CustomControls/AC_Port.ascx" TagName="AC_Port" TagPrefix="uc3" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
-    <style type="text/css">
-        body
+   <style type="text/css">
+        .style1
         {
-            font-family: Arial;
-            font-size: 10pt;
-        }
-        .ErrorControl
-        {
-            background-color: #EE3B3B;
-            border: solid 1px Red;
+            width: 85px;
         }
     </style>
+
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
+    
     <script type="text/javascript">
         function WebForm_OnSubmit() {
             if (typeof (ValidatorOnSubmit) == 'function' && ValidatorOnSubmit() == false) {
@@ -195,9 +191,9 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtRateReference" runat="server" Width="250px" CssClass="textboxuppercase"></asp:TextBox>
-                                    <br />
+                                    <%--<br />
                                     <asp:RequiredFieldValidator ID="rfvRateReference" runat="server" ControlToValidate="txtRateReference"
-                                        Display="Dynamic" CssClass="errormessage" ValidationGroup="Save"></asp:RequiredFieldValidator>
+                                        Display="Dynamic" CssClass="errormessage" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
                                 </td>
                                 <td>
                                     Rate Type

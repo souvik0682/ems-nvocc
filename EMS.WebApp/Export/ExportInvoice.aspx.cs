@@ -29,6 +29,7 @@ namespace EMS.WebApp.Export
         protected void Page_Load(object sender, EventArgs e)
         {
             RetriveParameters();
+            int NewType = 0;
             //CheckUserAccess();
 
             if (!Page.IsPostBack)
@@ -76,6 +77,10 @@ namespace EMS.WebApp.Export
                     txtBLDate.Text = BLDate;
                     txtBooking.Text = BookingNo;
                     txtContainers.Text = Containers;
+                    if (docTypeId == 1)
+                        NewType = 19;
+                    else
+                        NewType = 9;
                     LoadForBLQuery(blNo, docTypeId, misc);
 
                     btnSave.Enabled = true;
@@ -987,7 +992,7 @@ namespace EMS.WebApp.Export
 
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Record saved successfully! Invoice Number: " + invoiceNo + "');</script>", false);
             }
-            Response.Redirect("~/Export/Export-bl-query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(ddlBLno.SelectedItem.Text));
+            Response.Redirect("~/Export/Export-bl-query.aspx?BLNumber=" + GeneralFunctions.EncryptQueryString(ddlBLno.SelectedItem.Text));
 
             //ViewState["CHARGERATE"] = null;
             //gvwInvoice.DataSource = null;
@@ -996,7 +1001,7 @@ namespace EMS.WebApp.Export
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Export/Export-bl-query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(ddlBLno.SelectedItem.Text));
+            Response.Redirect("~/Export/Export-bl-query.aspx?BLNumber=" + GeneralFunctions.EncryptQueryString(ddlBLno.SelectedItem.Text));
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)

@@ -104,7 +104,14 @@
                                
                             </tr>
                             <tr>
-                                <td colspan="2">&nbsp; </td>
+                                <td>
+                                    Invoice amount
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtTotalAmount" runat="server" Width="250px" Enabled="false" Style="text-align: right;"></asp:TextBox>
+                                </td>
+
+                                <%--<td colspan="2">&nbsp; </td>--%>
                             
                                 <td>
                                     Containers
@@ -114,7 +121,14 @@
                                 </td>
                             </tr>
                             
-                               
+                            <tr>
+                                <td>
+                                    Rounding Off
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtROff" runat="server" Width="250px" Enabled="false" Style="text-align: right;"></asp:TextBox>
+                                </td>
+                            </tr>
                             <tr>
                                 <td colspan="4" style="padding-top: 10; border: none;">
                                     <fieldset style="width: 95%;">

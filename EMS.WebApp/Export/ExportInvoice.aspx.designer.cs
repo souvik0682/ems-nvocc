@@ -139,6 +139,15 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.DropDownList ddlInvoiceType;
         
         /// <summary>
+        /// txtTotalAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTotalAmount;
+        
+        /// <summary>
         /// txtContainers control.
         /// </summary>
         /// <remarks>
@@ -146,6 +155,15 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtContainers;
+        
+        /// <summary>
+        /// txtROff control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtROff;
         
         /// <summary>
         /// ddlFChargeName control.

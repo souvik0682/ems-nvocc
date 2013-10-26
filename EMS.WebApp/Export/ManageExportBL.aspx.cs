@@ -290,10 +290,17 @@ namespace EMS.WebApp.Export
                     txtFPodDesc.Text = exportBL.FPODDesc;
                     txtCommodity.Text = exportBL.Commodity;
                     LoadDeliveryAgentDDL(exportBL.fk_FPOD);
+
                     if (exportBL.BLthruEdge == false)
+                    {
+                        hdnBLThruEdge.Value = "0";
                         txtBLNo.Enabled = true;
+                    }
                     else
+                    {
                         txtBLNo.Enabled = false;
+                        hdnBLThruEdge.Value = "1";
+                    }
                     txtCBookingNo.Text = exportBL.BookingNumber;
                     txtCBookingDate.Text = exportBL.BookingDate.ToString("dd-MM-yyyy");
 
@@ -369,7 +376,8 @@ namespace EMS.WebApp.Export
                     ViewState["BLISSUEID"] = exportBL.BLIssuePlaceId;
                     txtNetWt.Text = exportBL.NetWeight.ToString();
                     txtBLReleaseDate.Text = exportBL.BLReleaseDate.ToString("dd-MM-yyyy");
-                    if (exportBL.BLthruEdge == false)
+                    if (hdnBLThruEdge.Value == "0")
+                    //if (exportBL.BLthruEdge == false)
                         txtBLNo.Enabled = true;
                     else
                         txtBLNo.Enabled = false;
@@ -502,10 +510,17 @@ namespace EMS.WebApp.Export
             objBL.NvoccId = Convert.ToInt32(ViewState["NVOCCID"]);
             objBL.BookingId = Convert.ToInt64(ViewState["BOOKINGID"]);
             objBL.BLIssuePlaceId = Convert.ToInt32(ViewState["BLISSUEID"]);
-            if (objBL.BLthruEdge == true)
+
+            if (hdnBLThruEdge.Value == "1")
+            {
                 objBL.BLNumber = string.Empty;
+                objBL.BLthruEdge = true;
+            }
             else
+            {
                 objBL.BLNumber = txtBLNo.Text;
+                objBL.BLthruEdge = false;
+            }
             objBL.BLDate = Convert.ToDateTime(txtBLDate.Text.Trim());
             objBL.PORDesc = txtPorDesc.Text.Trim();
             objBL.POLDesc = txtPolDesc.Text.Trim();

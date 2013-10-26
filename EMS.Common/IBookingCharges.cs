@@ -25,7 +25,8 @@ namespace EMS.Common
         decimal RefundAmount { get; set; }
         decimal BrokerageBasic { get; set; }
         bool ChargeStatus { get; set; }
-
+        int ChgExist { get; set; }
+        int Unit { get; set; }
         bool ChargedEditable { get; set; }
         bool RefundEditable { get; set; }
         bool BrokerageEditable { get; set; }

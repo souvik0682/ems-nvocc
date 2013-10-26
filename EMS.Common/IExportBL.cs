@@ -41,6 +41,7 @@ namespace EMS.Common
         string BLIssuePlace { get; set; }
         decimal NetWeight { get; set; }
         DateTime BLReleaseDate { get; set; }
+        bool BLthruEdge { get; set; }
 
         string ShipperName { get; set; }
         string Shipper { get; set; }

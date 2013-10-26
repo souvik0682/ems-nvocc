@@ -67,6 +67,7 @@ namespace EMS.Common
         string UploadPath { get; set; }
         int SlotOperatorId { get; set; }
         string Shipper { get; set; }
+        int ChgExist { get; set; }
 
         string VesselName { get; set; }
         string VoyageNo { get; set; }

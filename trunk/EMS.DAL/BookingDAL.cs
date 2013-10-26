@@ -191,7 +191,7 @@ namespace EMS.DAL
             return dquery.GetTables();
         }
 
-        public static DataSet GetPortWithServices(int ServiceID, Int32 Lineid)
+        public static DataTable GetPortWithServices(int ServiceID, Int32 Lineid)
         {
             string ProcName = "[exp].[spGetPortWithServices]";
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
@@ -199,7 +199,8 @@ namespace EMS.DAL
             dquery.AddIntegerParam("@ServiceID", ServiceID);
             dquery.AddIntegerParam("@LineID", Lineid);
 
-            return dquery.GetTables();
+            return dquery.GetTable();
+            //return dquery.GetTables();
         }
 
         //SA Souvik

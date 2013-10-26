@@ -122,6 +122,9 @@ namespace EMS.Entity
             if (ColumnExists(reader, "AgentCode"))
                 if (reader["AgentCode"] != DBNull.Value)
                     AgentCode = Convert.ToString(reader["AgentCode"]);
+                else
+                    AgentCode = "";
+
 
             if (ColumnExists(reader, "LineCode"))
                 if (reader["LineCode"] != DBNull.Value)

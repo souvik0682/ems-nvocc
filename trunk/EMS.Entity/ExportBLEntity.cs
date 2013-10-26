@@ -44,6 +44,7 @@ namespace EMS.Entity
         public decimal NetWeight { get; set; }
         public DateTime BLReleaseDate { get; set; }
         public int fk_FPOD { get; set; }
+        public bool BLthruEdge { get; set; }
 
         //Other Information Tab
         public string ShipperName { get; set; }
@@ -149,6 +150,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "POL"))
                 if (reader["POL"] != DBNull.Value)
                     POL = Convert.ToString(reader["POL"]);
+
+            if (ColumnExists(reader, "BLThruApp"))
+                if (reader["BLThruApp"] != DBNull.Value)
+                    BLthruEdge = Convert.ToBoolean(reader["BLThruApp"]);
 
             if (ColumnExists(reader, "PORDesc"))
             {

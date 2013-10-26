@@ -63,7 +63,8 @@
                                             <!-- General Tab-->
                                             <cc1:TabPanel ID="tpHeader" runat="server">
                                                 <HeaderTemplate>
-                                                    General Section</HeaderTemplate>
+                                                    General Section
+                                                </HeaderTemplate>
                                                 <ContentTemplate>
                                                     <table border="0" cellpadding="1" cellspacing="0" width="100%" class="custtable">
                                                         <tr>
@@ -117,6 +118,7 @@
                                                                     Width="250px" TabIndex="12" AutoPostBack="True"></asp:TextBox>
                                                                 <cc1:CalendarExtender ID="ceBLDate" TargetControlID="txtBLDate" runat="server" Format="dd-MM-yyyy"
                                                                     Enabled="True" />
+
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvBLDate" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtBLDate" ValidationGroup="Save"
@@ -129,7 +131,8 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtBookingParty" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox>
+                                                                <br />
                                                             </td>
                                                             <td>
                                                             </td>
@@ -138,7 +141,8 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtRefBookingNo" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox>
+                                                                <br />
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -147,7 +151,8 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtLocation" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox>
+                                                                <br />
                                                             </td>
                                                              <td>
                                                             </td>
@@ -156,7 +161,8 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtLine" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox>
+                                                                <br />
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -165,7 +171,9 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtVessel" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox>
+
+                                                                <br />
                                                             </td>
                                                             <td>
                                                             </td>
@@ -174,7 +182,8 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtVoyage" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox>
+                                                                <br />
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -183,7 +192,8 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtPOR" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox>
+                                                                <br />
                                                             </td>
                                                              <td>
                                                             </td>
@@ -192,7 +202,8 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtPOL" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox>
+                                                                <br />
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -201,7 +212,8 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtPorDesc" runat="server" CssClass="textboxuppercase" MaxLength="300"
-                                                                    Width="250px" TabIndex="13"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13"></asp:TextBox>
+                                                                <br />
                                                             </td>
                                                              <td>
                                                             </td>
@@ -210,7 +222,8 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtPolDesc" runat="server" CssClass="textboxuppercase" MaxLength="300"
-                                                                    Width="250px" TabIndex="13"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13"></asp:TextBox>
+                                                                <br />
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -219,7 +232,8 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtPOD" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox>
+                                                                <br />
                                                             </td>
                                                              <td>
                                                             </td>
@@ -228,7 +242,8 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtFPOD" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox>
+                                                                <br />
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -237,7 +252,8 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtPodDesc" runat="server" CssClass="textboxuppercase" MaxLength="300"
-                                                                    Width="250px" TabIndex="13"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13"></asp:TextBox>
+                                                                <br />
                                                             </td>
                                                              <td>
                                                             </td>
@@ -246,7 +262,8 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtFPodDesc" runat="server" CssClass="textboxuppercase" MaxLength="300"
-                                                                    Width="250px" TabIndex="13"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13"></asp:TextBox>
+                                                                <br />
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -254,10 +271,9 @@
                                                                 Nos. Original B/L:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoOriginal" runat="server" TabIndex="9" RepeatDirection="Horizontal">
-                                                                    <asp:ListItem Text="1" Value="1"></asp:ListItem>
-                                                                    <asp:ListItem Text="2" Value="2"></asp:ListItem>
-                                                                    <asp:ListItem Selected="True" Text="3" Value="3"></asp:ListItem>
+                                                                <asp:RadioButtonList ID="rdoOriginal" runat="server" TabIndex="9" RepeatDirection="Horizontal"><asp:ListItem Text="1" Value="1"></asp:ListItem>
+                                                                <asp:ListItem Text="2" Value="2"></asp:ListItem>
+                                                                <asp:ListItem Selected="True" Text="3" Value="3"></asp:ListItem>
                                                                 </asp:RadioButtonList>
                                                             </td>
                                                             <td>
@@ -265,11 +281,11 @@
                                                                 BL Type:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoBLType" runat="server" TabIndex="9" RepeatDirection="Horizontal">
-                                                                    <asp:ListItem Selected="True" Text="Original" Value="O"></asp:ListItem>
-                                                                    <asp:ListItem Text="Express" Value="E"></asp:ListItem>
-                                                                    <asp:ListItem Text="Seaway" Value="S"></asp:ListItem>
-                                                                </asp:RadioButtonList><br />
+                                                                <asp:RadioButtonList ID="rdoBLType" runat="server" TabIndex="9" RepeatDirection="Horizontal"><asp:ListItem Selected="True" Text="Original" Value="O"></asp:ListItem>
+                                                                <asp:ListItem Text="Express" Value="E"></asp:ListItem>
+                                                                <asp:ListItem Text="Seaway" Value="S"></asp:ListItem>
+                                                                </asp:RadioButtonList>
+                                                                <br />
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -277,8 +293,7 @@
                                                                 Shipment Mode:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
-                                                                <asp:DropDownList ID="ddlShipmentMode" runat="server" CssClass="dropdownlist" TabIndex="60">
-                                                                    <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
+                                                                <asp:DropDownList ID="ddlShipmentMode" runat="server" CssClass="dropdownlist" TabIndex="60"><asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
                                                                 </asp:DropDownList>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvShipmentMode" runat="server" ControlToValidate="ddlShipmentMode"
@@ -292,9 +307,9 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtCommodity" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox>
+                                                                <br />
                                                             </td>
-                                                            
                                                         </tr>
                                                         <tr>
                                                             <td style="width: 20%;">
@@ -302,7 +317,8 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtContainers" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox>
+                                                                <br />
                                                             </td>
                                                             <td>
                                                             </td>
@@ -312,16 +328,15 @@
                                                             <td style="width: 28%;">
                                                                 <uc1:AC_Port ID="txtIssuePlace" runat="server" />
                                                             </td>
-                                                            
                                                         </tr>
-
                                                         <tr>
                                                             <td style="width: 20%;">
                                                                 Net Weight:<span class="errormessage">*</span>
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtNetWt" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13" Enabled="false"></asp:TextBox><br />
+                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox>
+                                                                <br />
                                                             </td>
                                                             <td>
                                                             </td>
@@ -343,12 +358,14 @@
                                                             
                                                         </tr>
                                                     </table>
-                                                </ContentTemplate>
+                                                
+                                                 </ContentTemplate>
                                             </cc1:TabPanel>
                                             <!-- Other Tab-->
                                             <cc1:TabPanel ID="tpOther" runat="server">
                                                 <HeaderTemplate>
-                                                    Other Information</HeaderTemplate>
+                                                    Other Information
+                                                </HeaderTemplate>
                                                 <ContentTemplate>
                                                     <table border="0" cellpadding="1" cellspacing="0" width="100%" class="custtable">
                                                          <tr>
@@ -371,7 +388,6 @@
                                                                 <asp:RequiredFieldValidator ID="rfvShipperName" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtShipperName" ValidationGroup="Save"
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
-
                                                             </td>
                                                             <td style="width: 40%;">
                                                                 Consignee Name:
@@ -473,7 +489,7 @@
                                                                     <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
                                                                 </asp:DropDownList>
                                                                 <br />
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="ddlAgent"
+                                                                <asp:RequiredFieldValidator ID="rfvAgent" runat="server" ControlToValidate="ddlAgent"
                                                                     ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
                                                                     ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </td>
@@ -494,7 +510,8 @@
                                             <!-- Container Tab-->
                                             <cc1:TabPanel ID="tpFooter" runat="server">
                                                 <HeaderTemplate>
-                                                    Container Section</HeaderTemplate>
+                                                    Container Section
+                                                </HeaderTemplate>
                                                 <ContentTemplate>
                                                     <table border="0" cellpadding="1" cellspacing="0" width="100%" class="custtable">
                                                         <tr>
@@ -592,6 +609,12 @@
                                                                         Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Unit" HeaderStyle-Width="100">
+                                                                <ItemTemplate>
+                                                                    <asp:DropDownList ID="ddlUnit" runat="server">
+                                                                    </asp:DropDownList>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
                                                             <asp:BoundField DataField="TareWeight" HeaderText="Tare Weight" InsertVisible="False"
                                                                 ReadOnly="True" SortExpression="TareWeight" />
                                                             <asp:TemplateField HeaderText="Gross Weight" SortExpression="GrossWeight" HeaderStyle-Width="100">
@@ -604,12 +627,7 @@
                                                                         Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Unit" HeaderStyle-Width="100">
-                                                                <ItemTemplate>
-                                                                    <asp:DropDownList ID="ddlUnit" runat="server">
-                                                                    </asp:DropDownList>
-                                                                </ItemTemplate>
-                                                            </asp:TemplateField>
+                                                           
                                                             <asp:TemplateField HeaderText="Part">
                                                                 <ItemTemplate>
                                                                     <asp:DropDownList ID="ddlPart" runat="server">

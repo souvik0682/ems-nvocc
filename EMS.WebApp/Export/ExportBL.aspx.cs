@@ -19,11 +19,13 @@ namespace EMS.WebApp.Export
 
         private int _userId = 0;
         private int _roleId = 0;
+        private IUser oUser = null;
         private bool _canAdd = false;
         private bool _canEdit = false;
         private bool _canDelete = false;
         private bool _canView = false;
         private bool _LocationSpecific = true;
+        private int _userLocation = 0;
         //private int _locId = 0;
         //private bool _hasEditAccess = true;
 
@@ -31,8 +33,11 @@ namespace EMS.WebApp.Export
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //RetriveParameters();
-            //CheckUserAccess();
+            oUser = (IUser)Session[Constants.SESSION_USER_INFO];
+            _userId = UserBLL.GetLoggedInUserId();
+            _userLocation = UserBLL.GetUserLocation();
+            RetriveParameters();
+            CheckUserAccess();
             //SetAttributes();
 
             if (!IsPostBack)
@@ -204,6 +209,8 @@ namespace EMS.WebApp.Export
                         btnAdd.Visible = false;
                     }
                 }
+                else
+                    _userLocation = 0;
 
                 //if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.Manager && user.UserRole.Id != (int)UserRole.SalesExecutive)
                 //{
@@ -304,7 +311,10 @@ namespace EMS.WebApp.Export
             criteria.RefBLNumber = (txtRefBLNo.Text == "") ? string.Empty : txtRefBLNo.Text.Trim();
             criteria.POL = (txtPOL.Text == "") ? string.Empty : txtPOL.Text.Trim();
             criteria.LineName = (txtLine.Text == "") ? string.Empty : txtLine.Text.Trim();
-            criteria.Location = (txtLocation.Text == "") ? string.Empty : txtLocation.Text.Trim();
+            if (_userLocation != 0)
+                criteria.Location = new BookingBLL().GetLocation(_userId);
+            else
+                criteria.Location = (txtLocation.Text == "") ? string.Empty : txtLocation.Text.Trim();
 
             Session[Constants.SESSION_SEARCH_CRITERIA] = criteria;
         }

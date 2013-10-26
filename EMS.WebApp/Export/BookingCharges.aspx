@@ -247,13 +247,16 @@
                                                         <Columns>
                                                             <asp:BoundField DataField="ChargeName" HeaderText="Charge Name" InsertVisible="False"
                                                                 ReadOnly="True" SortExpression="ChargeName" HeaderStyle-Width="300" />
-                                                            <asp:TemplateField HeaderText="Applicable">
+                                                            <asp:BoundField DataField="Unit" HeaderText="Unit" InsertVisible="False"
+                                                                ReadOnly="True" SortExpression="Unit"  />
+                                                            <%--<asp:TemplateField HeaderText="Applicable">
                                                                 <ItemTemplate>
+                                                                
                                                                     <asp:DropDownList ID="ddlApplicable" runat="server">
                                                                     </asp:DropDownList>
                                                                     <asp:HiddenField ID="hdnBookingChargeId" runat="server" Value='<%# Eval("BookingChargeId") %>' />
                                                                 </ItemTemplate>
-                                                            </asp:TemplateField>
+                                                            </asp:TemplateField>--%>
                                                             <asp:BoundField DataField="CurrencyName" HeaderText="Currency" InsertVisible="False"
                                                                 ReadOnly="True" />
                                                             <asp:BoundField DataField="Size" HeaderText="Size" InsertVisible="False" ReadOnly="True"
@@ -264,8 +267,9 @@
                                                                 HeaderStyle-Width="150" ReadOnly="True" SortExpression="WtInCBM" ItemStyle-HorizontalAlign="Right" />
                                                             <asp:BoundField DataField="WtInTon" HeaderText="Weight Ton" InsertVisible="False"
                                                                 HeaderStyle-Width="150" ReadOnly="True" SortExpression="WtInTon" ItemStyle-HorizontalAlign="Right" />
-                                                            <asp:TemplateField HeaderText="Manifest" SortExpression="ManifestRate" HeaderStyle-Width="100">
+                                                            <asp:TemplateField HeaderText="Manifest @" SortExpression="ManifestRate" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
+                                                                    <asp:HiddenField ID="hdnBookingChargeId" runat="server" Value='<%# Eval("BookingChargeId") %>' />
                                                                     <cc2:CustomTextBox ID="txtManifest" runat="server" Text='<%# Bind("ManifestRate") %>'
                                                                         Width="80" BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"
                                                                         MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("ManifestEditabe").ToString() == "True" %>'>
@@ -277,7 +281,7 @@
                                                                     </asp:CompareValidator>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Charged" SortExpression="ActualRate" HeaderStyle-Width="100">
+                                                            <asp:TemplateField HeaderText="Charged @" SortExpression="ActualRate" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
                                                                     <cc2:CustomTextBox ID="txtCharged" runat="server" Text='<%# Bind("ActualRate") %>'
                                                                         Width="80" BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"
@@ -300,7 +304,7 @@
                                                                     ValidationGroup="Save"></asp:RequiredFieldValidator>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Brokerage Basic" SortExpression="BrokerageBasic" HeaderStyle-Width="120">
+                                                            <asp:TemplateField HeaderText="Brkg. Basic" SortExpression="BrokerageBasic" HeaderStyle-Width="120">
                                                                 <ItemTemplate>
                                                                     <cc2:CustomTextBox ID="txtBrokerageBasic" runat="server" Text='<%# Bind("BrokerageBasic") %>'
                                                                         Width="100" BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"

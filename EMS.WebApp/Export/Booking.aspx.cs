@@ -26,11 +26,13 @@ namespace EMS.WebApp.Export
         //private bool _LocationSpecific = true;
 
         private int _userId = 0;
+        private IUser oUser = null;
         private bool _hasEditAccess = true;
         private bool _canAdd = false;
         private bool _canEdit = false;
         private bool _canDelete = false;
         private bool _canView = false;
+        private int _userLocation = 0;
 
         #endregion
 
@@ -38,6 +40,10 @@ namespace EMS.WebApp.Export
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            oUser = (IUser)Session[Constants.SESSION_USER_INFO];
+            _userId = UserBLL.GetLoggedInUserId();
+            _userLocation = UserBLL.GetUserLocation();
+
             RetriveParameters();
             CheckUserAccess();
             SetAttributes();
@@ -130,6 +136,12 @@ namespace EMS.WebApp.Export
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                ImageButton btnCharge = (ImageButton)e.Row.FindControl("btnCharges");
+
+                if (Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "ChgExist")) == 0)
+                    btnCharge.ImageUrl = "~/Images/BookingWithcharge.ico";
+                //else
+                //    btnCharge.ImageUrl = "~/Images/Status.jpg";
                 GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 7);
 
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
@@ -266,6 +278,8 @@ namespace EMS.WebApp.Export
                     }
                     //Response.Redirect("~/Unauthorized.aspx");
                 }
+                else
+                    _userLocation = 0;
             }
             else
             {
@@ -344,7 +358,11 @@ namespace EMS.WebApp.Export
             criteria.StringOption1 = txtBookingRef.Text.Trim();
             criteria.StringOption2 = txtCustomer.Text.Trim();
             criteria.LineName = txtLine.Text.Trim();
-            criteria.Location = txtLocation.Text.Trim();
+
+            if (_userLocation != 0)
+                criteria.Location = new BookingBLL().GetLocation(_userId);
+            else
+                criteria.Location = txtLocation.Text.Trim();
             criteria.Vessel = txtVessel.Text.Trim();
             criteria.Voyage = txtVoyage.Text.Trim();
 

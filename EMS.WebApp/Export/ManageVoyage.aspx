@@ -33,7 +33,7 @@
     </div>
     <center>
         <fieldset style="width: 60%;">
-            <legend>Add / Edit Invoice</legend>
+            <legend>Add / Edit Voyage</legend>
             <table border="0" cellpadding="2" cellspacing="3">
             <%--<asp:UpdatePanel ID="upInvoice" runat="server" UpdateMode="Always">--%>
 <%--

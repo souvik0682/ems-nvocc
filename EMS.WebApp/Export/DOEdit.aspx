@@ -11,6 +11,18 @@
                 <legend>General</legend>
                 <table border="0" cellpadding="1" cellspacing="0" width="100%" class="custtable">
                     <tr>
+                        <td style="width: 18%;padding-bottom:5px;">Location<span class="errormessage">*</span></td>
+                        <td style="width: 32%;padding-bottom:5px;">
+                            <asp:DropDownList ID="ddlLocation" runat="server" AutoPostBack="true" CssClass="dropdownlist" OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged"><asp:ListItem Value="0" Text="--Select--"></asp:ListItem></asp:DropDownList>
+                            <br /><asp:RequiredFieldValidator ID="rfvLocation" runat="server" ControlToValidate="ddlLocation" InitialValue="0" ErrorMessage="This field is required*" CssClass="errormessage" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                        </td>
+                        <td style="width: 18%;padding-bottom:5px;">Line<span class="errormessage">*</span></td>
+                        <td style="width: 32%;padding-bottom:5px;">
+                            <asp:DropDownList ID="ddlNVOCC" runat="server" AutoPostBack="true" CssClass="dropdownlist" OnSelectedIndexChanged="ddlLine_SelectedIndexChanged"><asp:ListItem Value="0" Text="--Select--"></asp:ListItem></asp:DropDownList>
+                            <br /><asp:RequiredFieldValidator ID="rfvLIne" runat="server" ControlToValidate="ddlNVOCC" InitialValue="0" ErrorMessage="This field is required*" CssClass="errormessage" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
                         <td style="width: 18%;padding-bottom:5px;">Booking No<span class="errormessage">*</span></td>
                         <td style="width: 32%;padding-bottom:5px;">
                             <asp:DropDownList ID="ddlBooking" runat="server" AutoPostBack="true" CssClass="dropdownlist" OnSelectedIndexChanged="ddlBooking_SelectedIndexChanged"><asp:ListItem Value="0" Text="--Select--"></asp:ListItem></asp:DropDownList>

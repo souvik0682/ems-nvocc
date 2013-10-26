@@ -304,6 +304,8 @@ namespace EMS.Entity
             set;
         }
 
+        public int ChgExist { get; set; }
+
         public BookingEntity()
         {
 
@@ -359,6 +361,9 @@ namespace EMS.Entity
                 if (reader["BookingNo"] != DBNull.Value)
                     this.BookingNo = Convert.ToString(reader["BookingNo"]);
 
+            if (ColumnExists(reader, "fk_CustomerID"))
+                if (reader["fk_CustomerID"] != DBNull.Value)
+                    this.CustID = Convert.ToInt32(reader["fk_CustomerID"]);
 
             if (ColumnExists(reader, "BookingDate"))
                 if (reader["BookingDate"] != DBNull.Value)
@@ -669,6 +674,10 @@ namespace EMS.Entity
                     this.CustomerERAS = Convert.ToString(reader["CustName"]);
                 else
                     this.CustomerERAS = string.Empty;
+
+            if (ColumnExists(reader, "ChgExist"))
+                if (reader["ChgExist"] != DBNull.Value)
+                    ChgExist = Convert.ToInt32(reader["ChgExist"]);
         }
 
         public bool ColumnExists(IDataReader reader, string columnName)

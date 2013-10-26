@@ -6,13 +6,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script language="javascript" type="text/javascript">
         function checkDate(sender, args) {
-            if (sender._selectedDate < new Date()) {
-                alert("Please select advance date only!");
-                sender._selectedDate = new Date();
-                // set the date back to the current date
-                //sender._textbox.set_Value(sender._selectedDate.format(sender._format))
-                sender._textbox.set_Value("")
-            }
+            
         }
 
     </script>

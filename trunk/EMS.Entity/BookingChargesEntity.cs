@@ -28,7 +28,9 @@ namespace EMS.Entity
         public decimal RefundAmount { get; set; }
         public decimal BrokerageBasic { get; set; }
         public bool ChargeStatus { get; set; }
-        
+        public int ChgExist { get; set; }
+        public int Unit { get; set; }
+
         public bool ChargedEditable { get; set; }
         public bool RefundEditable { get; set; }
         public bool BrokerageEditable { get; set; }
@@ -89,6 +91,10 @@ namespace EMS.Entity
                 if (reader["WtInCBM"] != DBNull.Value)
                     WtInCBM = Convert.ToDecimal(reader["WtInCBM"]);
 
+            if (ColumnExists(reader, "ChgExist"))
+                if (reader["ChgExist"] != DBNull.Value)
+                    ChgExist = Convert.ToInt32(reader["ChgExist"]);
+
             if (ColumnExists(reader, "WtInTon"))
                 if (reader["WtInTon"] != DBNull.Value)
                     WtInTon = Convert.ToDecimal(reader["WtInTon"]);
@@ -100,6 +106,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "ManifestRate"))
                 if (reader["ManifestRate"] != DBNull.Value)
                     ManifestRate = Convert.ToDecimal(reader["ManifestRate"]);
+
+            if (ColumnExists(reader, "Unit"))
+                if (reader["Unit"] != DBNull.Value)
+                    Unit = Convert.ToInt32(reader["Unit"]);
 
             if (ColumnExists(reader, "RefundAmount"))
             {

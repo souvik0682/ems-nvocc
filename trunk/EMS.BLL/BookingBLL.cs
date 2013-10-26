@@ -52,7 +52,7 @@ namespace EMS.BLL
             return BookingDAL.GetExportServices(Line, Fpod);
         }
 
-        public static DataSet GetPortWithServices(int ServiceID, Int32 Lineid)
+        public static DataTable GetPortWithServices(int ServiceID, Int32 Lineid)
         {
             return BookingDAL.GetPortWithServices(ServiceID, Lineid);
         }

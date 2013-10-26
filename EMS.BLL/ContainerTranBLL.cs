@@ -32,5 +32,10 @@ namespace EMS.BLL
         {
             return ContainerTranDAL.DeleteTransaction(TransactionId);
         }
+
+        public static DataTable GetBookingList(int Loc, int Line)
+        {
+            return ContainerTranDAL.GetBookingList(Loc, Line);
+        }
     }
 }

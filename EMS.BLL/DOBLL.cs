@@ -99,9 +99,9 @@ namespace EMS.BLL
             return DODAL.GetEmptyYard(BookingId);
         }
 
-        public static DataTable GetBookingList(int userId)
+        public static DataTable GetBookingList(int Loc, int Line)
         {
-            return DODAL.GetBookingList(userId);
+            return DODAL.GetBookingList(Loc, Line);
         }
     }
 }

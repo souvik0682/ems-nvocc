@@ -46,6 +46,11 @@ namespace EMS.BLL
         {
             return InvoiceDAL.GrossWeight(BLno);
         }
+
+        public DataTable ExpGrossWeight(string BLno)
+        {
+            return InvoiceDAL.ExpGrossWeight(BLno);
+        }
         #endregion
 
         public DataTable TEU(string BLno)
@@ -61,6 +66,11 @@ namespace EMS.BLL
         public DataTable Volume(string BLno)
         {
             return InvoiceDAL.Volume(BLno);
+        }
+
+        public DataTable ExpBLContainers(string BLno)
+        {
+            return InvoiceDAL.ExpBLContainers(BLno);
         }
 
         public DataTable BLdate(string BLno)

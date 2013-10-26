@@ -71,5 +71,10 @@ namespace EMS.BLL
         {
             ExportBLDAL.ChangeBLStatus(BLNumber, IsActive);
         }
+
+        public static bool CheckBookingLocation(string BookingNo, int Loc)
+        {
+            return ExportBLDAL.CheckBookingLocation(BookingNo, Loc);
+        }
     }
 }

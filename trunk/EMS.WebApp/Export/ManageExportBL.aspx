@@ -82,6 +82,7 @@
                                                                 Booking No:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
+                                                                <asp:HiddenField ID="hdnBLThruEdge" runat="server" />
                                                                 <asp:TextBox ID="txtBookingNo" runat="server" CssClass="textboxuppercase" MaxLength="60"
                                                                     Width="250px" TabIndex="11" AutoPostBack="True"></asp:TextBox>
                                                                 <br />
@@ -617,7 +618,7 @@
                                                             </asp:TemplateField>
                                                             <asp:BoundField DataField="TareWeight" HeaderText="Tare Weight" InsertVisible="False"
                                                                 ReadOnly="True" SortExpression="TareWeight" />
-                                                            <asp:TemplateField HeaderText="Gross Weight" SortExpression="GrossWeight" HeaderStyle-Width="100">
+                                                            <asp:TemplateField HeaderText="Gross Weight (KG)" SortExpression="GrossWeight" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
                                                                     <cc2:CustomTextBox ID="txtGrossWeight" runat="server" Text='<%# Bind("GrossWeight", "{0:n2}") %>' 
                                                                         Style="text-align: right;" Width="80" BorderStyle="None" MaxLength="10" AutoPostBack="true"

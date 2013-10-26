@@ -51,6 +51,7 @@ namespace EMS.WebApp.Transaction
                     //ddlLine.Enabled = true;
                 }
                 RetriveParameters();
+
             }
 
             //string[] Names = new string[5] { "A", "A", "A", "A", "A"};
@@ -123,6 +124,11 @@ namespace EMS.WebApp.Transaction
                 txtRemarks.Text = dtDetail.Rows[0]["ExportRemarks"].ToString();
                 txtBLDate.Text = Convert.ToDateTime(dtDetail.Rows[0]["ExpBLDate"].ToString()).ToString("dd/MM/yyyy");
                 txtFPOD.Text = dtDetail.Rows[0]["FinalDest"].ToString();
+                if (dtDetail.Rows[0]["FrtInvExist"].ToInt() == 1)
+                    btnAddFreightInvoice.Visible = false;
+                else
+                    btnAddFreightInvoice.Visible = true;
+
                 switch (dtDetail.Rows[0]["Shipmenttype"].ToString())
                 {
                     case "0": // Per Unit TYPE & SIZE

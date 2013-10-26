@@ -40,6 +40,15 @@ namespace EMS.WebApp.Export {
         protected global::AjaxControlToolkit.TabPanel tpHeader;
         
         /// <summary>
+        /// hdnBLThruEdge control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnBLThruEdge;
+        
+        /// <summary>
         /// txtBookingNo control.
         /// </summary>
         /// <remarks>

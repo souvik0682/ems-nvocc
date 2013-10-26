@@ -201,7 +201,7 @@
                                         </HeaderTemplate>
                                         <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                         <ItemTemplate>
-                                            <asp:ImageButton ID="btnCharges" runat="server" CommandName="Charge" ImageUrl="~/Images/Charges.gif"
+                                            <asp:ImageButton ID="btnCharges" runat="server" CommandName="Charge" ImageUrl="~/Images/BookingWOcharge.ico"
                                                 Height="16" Width="16" />
                                         </ItemTemplate>
                                     </asp:TemplateField>

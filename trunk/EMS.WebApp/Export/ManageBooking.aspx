@@ -81,8 +81,8 @@
                                         Location<span class="errormessage">*</span>
                                     </td>
                                     <td style="width: 28%;">
-                                        <asp:DropDownList ID="ddlLocation" runat="server" CssClass="dropdownlist" Width="250px"
-                                            TabIndex="2">
+                                        <asp:DropDownList ID="ddlLocation" runat="server" CssClass="dropdownlist" Width="250px" AutoPostBack="true"
+                                            TabIndex="2" OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged">
                                             <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                         </asp:DropDownList>
                                         <br />
@@ -95,8 +95,8 @@
                                         Booking Party<span class="errormessage">*</span>
                                     </td>
                                     <td>
-                                        <asp:DropDownList ID="ddlBookingParty" runat="server" CssClass="dropdownlist" Width="250px"
-                                            TabIndex="3">
+                                        <asp:DropDownList ID="ddlBookingParty" runat="server" CssClass="dropdownlist" Width="250px" AutoPostBack="true"
+                                            OnSelectedIndexChanged="ddlBookingParty_SelectedIndexChanged" TabIndex="3">
                                             <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                         </asp:DropDownList>
                                         <br />
@@ -591,7 +591,7 @@
                                         Gross Weight
                                     </td>
                                     <td>
-                                        <cc2:CustomTextBox ID="txtGrossWeight" runat="server" TabIndex="23" CssClass="numerictextbox"
+                                        <cc2:CustomTextBox ID="txtGrossWeight" runat="server" TabIndex="23" CssClass="numerictextbox" Enabled="false"
                                             Width="250px" Type="Decimal" MaxLength="13" Precision="10" Scale="2">
                                         </cc2:CustomTextBox>
                                     </td>
@@ -657,6 +657,21 @@
                                             Width="250px" Type="Decimal" MaxLength="7" Precision="4" Scale="2"></cc2:CustomTextBox>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        Related Sales Person
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="lblSalesman" runat="server"></asp:Label>
+                                     </td>
+                                    <td>
+                                        Charge Approver
+                                    </td>
+                                    <td>
+                                       <asp:Label ID="lblApprover" runat="server"></asp:Label>
+                                    </td>
+                                </tr>
+                                
                                 <tr>
                                     <td colspan="2" style="padding-top: 10px;">
                                         <asp:Label ID="lblMessage" runat="server"></asp:Label>

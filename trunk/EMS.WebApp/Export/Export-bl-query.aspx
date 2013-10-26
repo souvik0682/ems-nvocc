@@ -303,7 +303,7 @@
                                                 <HeaderTemplate>
                                                     Invoice No.</HeaderTemplate>
                                                 <ItemTemplate>
-                                                     <a id="aInvoice" runat="server" href='<%# "ManageInvoice.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'>
+                                                     <a id="aInvoice" runat="server" href='<%# "ExportInvoice.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'>
                                                         <%# Eval("InvoiceNo")%></a>
                                                 </ItemTemplate>
                                             </asp:TemplateField>

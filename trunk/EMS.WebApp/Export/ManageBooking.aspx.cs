@@ -35,12 +35,16 @@ namespace EMS.WebApp.Export
         private bool _canDelete = false;
         private bool _canView = false;
         private int _CompanyId = 1;
+        private int _userLocation = 0;
+        private decimal _TotWeight = 0;
 
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             RetriveParameters();
+            _userId = UserBLL.GetLoggedInUserId();
+            _userLocation = UserBLL.GetUserLocation();
 
             if (!Page.IsPostBack)
             {
@@ -66,6 +70,7 @@ namespace EMS.WebApp.Export
                     FillBooking(Convert.ToInt32(hdnBookingID.Value));
                     FillBookingContainer(Convert.ToInt32(hdnBookingID.Value));
                     FillBookingTranshipment(Convert.ToInt32(hdnBookingID.Value));
+                    CheckForBookingCharges(Convert.ToInt32(hdnBookingID.Value));
                 }
             }
             CheckUserAccess(hdnBookingID.Value);
@@ -98,6 +103,17 @@ namespace EMS.WebApp.Export
                         btnSave.Visible = false;
                     }
                 }
+
+                if (user.UserRole.Id != (int)UserRole.Admin)
+                {
+                    ddlLocation.SelectedValue = _userLocation.ToString();
+                    ddlLocation.Enabled = false;
+                    ddlLocation_SelectedIndexChanged(null, null);
+                    //ActionOnFromLocationChange();
+
+                }
+                else
+                    _userLocation = 0;
 
             }
             else
@@ -133,17 +149,18 @@ namespace EMS.WebApp.Export
             #region Line
 
             PopulateDropDown((int)Enums.DropDownPopulationFor.Line, ddlNvocc, 0);
-            //Li = new ListItem("NA", "0");
-            //ddlNvocc.Items.Insert(0, Li);
+            Li = new ListItem("SELECT", "0");
+            ddlNvocc.Items.Insert(0, Li);
+
             #endregion
 
             #region Party Master
 
-            //Li = new ListItem("ALL", "-1");
-            //GeneralFunctions.PopulateDropDownList(ddlBookingParty, dbinteract.PopulateDDLDS("DSR.dbo.mstCustomer", "pk_CustID", "CustName", true), false);
-            GeneralFunctions.PopulateDropDownList(ddlBookingParty, dbinteract.PopulateDDLDS("dsr.dbo.mstCustomer", "pk_CustID", "CustName", "Where Active='Y' and (CorporateorLocal='C' OR fk_LocID=" + ddlLocation.SelectedValue, true), false);
-            //PopulateDropDown((int)Enums.DropDownPopulationFor.ExpBookingParty, ddlBookingParty, 0);
-            //ddlBookingParty.Items.Insert(0, Li);
+            ////Li = new ListItem("ALL", "-1");
+            ////GeneralFunctions.PopulateDropDownList(ddlBookingParty, dbinteract.PopulateDDLDS("DSR.dbo.mstCustomer", "pk_CustID", "CustName", true), false);
+            //GeneralFunctions.PopulateDropDownList(ddlBookingParty, dbinteract.PopulateDDLDS("dsr.dbo.mstCustomer", "pk_CustID", "CustName", "Where Active='Y' and (CorporateorLocal='C' OR fk_LocID=" + ddlLocation.SelectedValue, true), false);
+            ////PopulateDropDown((int)Enums.DropDownPopulationFor.ExpBookingParty, ddlBookingParty, 0);
+            ////ddlBookingParty.Items.Insert(0, Li);
 
             #endregion
 
@@ -169,9 +186,11 @@ namespace EMS.WebApp.Export
             //oBookingEntity = (BookingEntity)oBookingBll.GetBooking(BookingID);
 
             BookingEntity oBooking = (BookingEntity)BookingBLL.GetBooking(Convert.ToInt32(hdnBookingID.Value), "N");
-
+            //ddlLocation.SelectedIndexChanged += new EventHandler(ddlLocation_SelectedIndexChanged);
             //ddlFromLocation.SelectedIndex = Convert.ToInt32(ddlFromLocation.Items.IndexOf(ddlFromLocation.Items.FindByValue(oImportHaulage.LocationFrom)));
             ddlLocation.SelectedValue = oBooking.LocationID.ToString();
+            ddlLocation_SelectedIndexChanged(null, null);
+
             hdnFPOD.Value = oBooking.FPODID.ToString();
             hdnPOD.Value = oBooking.PODID.ToString();
             hdnPOL.Value = oBooking.POLID.ToString();
@@ -186,6 +205,7 @@ namespace EMS.WebApp.Export
 
             ddlService.SelectedValue = oBooking.ServicesID.ToString();
             ddlBookingParty.SelectedValue = oBooking.CustID.ToString();
+            ddlBookingParty_SelectedIndexChanged(null, null);
             ddlLoadingVoyage.SelectedValue = oBooking.VoyageID.ToString();
             ddlMainLineVoyage.SelectedValue = oBooking.MainLineVoyageID.ToString();
             ddlShipmentType.SelectedIndex = ddlShipmentType.Items.IndexOf(ddlShipmentType.Items.FindByValue(oBooking.ShipmentType.ToString()));
@@ -546,6 +566,7 @@ namespace EMS.WebApp.Export
                             break;
                         case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
                             ClearAll();
+                            _TotWeight = 0;
                             break;
                         case 1:
                             oBookingBll.DeactivateAllContainersAgainstBookingId(outBookingId);
@@ -587,6 +608,7 @@ namespace EMS.WebApp.Export
                         case -1: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00076");
                             break;
                         case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
+                            _TotWeight = 0;
                             break;
                         case 1:
                             oBookingBll.DeactivateAllContainersAgainstBookingId(outBookingId);
@@ -729,8 +751,16 @@ namespace EMS.WebApp.Export
             oBookingBll = new BookingBLL();
             Containers = new List<IBookingContainer>();
             Containers = oBookingBll.GetBookingContainers(BookingID);
+            foreach (BookingContainerEntity obj in Containers)
+            {
+                _TotWeight = _TotWeight + obj.NoofContainers.ToDecimal() * obj.wtPerCntr.ToDecimal();
+            }
+
+            txtGrossWeight.Text = _TotWeight.ToString();
+
 
             ViewState["BookingCntr"] = Containers;
+
 
             gvContainer.DataSource = Containers;
             gvContainer.DataBind();
@@ -791,6 +821,19 @@ namespace EMS.WebApp.Export
 
         }
 
+        void CheckForBookingCharges(Int32 BookingID)
+        {
+            //DataSet ds = BookingBLL.GetBookingChargeExists(BookingID);
+            //lblApprover.Text = ds.Tables[0].Rows[0]["UserName"].ToString();
+
+            lblApprover.Text = BookingBLL.GetBookingChargeExists(BookingID);
+            if (lblApprover.Text != string.Empty)
+            {
+                btnimgSave.Visible = false;
+            }
+
+        }
+
         protected void gvContainer_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -834,7 +877,7 @@ namespace EMS.WebApp.Export
             //IEnumerable<IBookingContainer> Rts = from IBookingContainer rt in Containers
             //                                     where rt.BkCntrStatus == true
             //                                     select rt;
-
+            _TotWeight = 0;
             lblMessage.Text = string.Empty;
 
             IBookingContainer obj = new BookingContainerEntity();
@@ -848,6 +891,10 @@ namespace EMS.WebApp.Export
                     {
                         ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00076") + "');</script>", false);
                         return;
+                    }
+                    else
+                    {
+                        _TotWeight = _TotWeight + (objBookingContainer.NoofContainers.ToDecimal() * objBookingContainer.wtPerCntr.ToDecimal());
                     }
                 }
             }
@@ -864,11 +911,13 @@ namespace EMS.WebApp.Export
             obj.CntrSize = ddlSize.SelectedValue;
             obj.NoofContainers = Convert.ToInt32(txtNos.Text);
             obj.wtPerCntr = Convert.ToDecimal(txtWtPerCntr.Text);
+            _TotWeight = _TotWeight + (obj.NoofContainers.ToDecimal() * obj.wtPerCntr.ToDecimal());
             if (string.IsNullOrEmpty(hdnIndex.Value))
                 Containers.Add(obj);
 
             gvContainer.DataSource = Containers;
             gvContainer.DataBind();
+            txtGrossWeight.Text = _TotWeight.ToString();
 
             ViewState["BookingCntr"] = Containers;
             ResetContainer();
@@ -921,6 +970,12 @@ namespace EMS.WebApp.Export
                     Containers.RemoveAt(RowIndex);
                     //dt.Rows.RemoveAt(RowIndex);
                     //dt.AcceptChanges();
+                    foreach (BookingContainerEntity obj in Containers)
+                    {
+                        _TotWeight = _TotWeight + obj.NoofContainers.ToDecimal() * obj.wtPerCntr.ToDecimal();
+                    }
+
+                    txtGrossWeight.Text = _TotWeight.ToString();
 
                     gvContainer.DataSource = Containers;
                     gvContainer.DataBind();
@@ -1210,6 +1265,23 @@ namespace EMS.WebApp.Export
         protected void ddlLoadingVoyage_SelectedIndexChanged(object sender, EventArgs e)
         {
             checkTransitRoot();
+        }
+
+        protected void ddlLocation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListItem Li = null;
+            ddlBookingParty.Items.Clear();
+            BLL.DBInteraction dbinteract = new BLL.DBInteraction();
+            GeneralFunctions.PopulateDropDownList(ddlBookingParty, dbinteract.PopulateDDLDS("dsr.dbo.mstCustomer", "pk_CustID", "CustName", "Where Active='Y' and Isdeleted=0 and (fk_LocID=" + ddlLocation.SelectedValue, true), false);
+           
+            Li = new ListItem("SELECT", "0");
+            ddlBookingParty.Items.Insert(0, Li);
+        }
+
+        protected void ddlBookingParty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataSet ds = BookingBLL.GetSalesman(ddlBookingParty.SelectedValue.ToInt());
+            lblSalesman.Text = ds.Tables[0].Rows[0]["Name"].ToString();
         }
     }
 }

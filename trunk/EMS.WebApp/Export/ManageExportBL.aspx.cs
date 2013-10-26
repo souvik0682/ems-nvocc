@@ -20,13 +20,16 @@ namespace EMS.WebApp.Export
         private bool _canEdit = false;
         private bool _canDelete = false;
         private bool _canView = false;
+        private int _userLocation = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*
+            
            RetriveParameters();
+           _userId = UserBLL.GetLoggedInUserId();
+           _userLocation = UserBLL.GetUserLocation();
            CheckUserAccess();
-           */
+
 
             if (!IsPostBack)
             {
@@ -63,7 +66,10 @@ namespace EMS.WebApp.Export
         {
             if (!string.IsNullOrEmpty(txtBookingNo.Text))
             {
-                LoadExportBLHeaderForAdd(txtBookingNo.Text);
+                if (ExportBLBLL.CheckBookingLocation(txtBookingNo.Text, _userLocation) == true)
+                    LoadExportBLHeaderForAdd(txtBookingNo.Text);
+                else
+                    rfvBookingNo.Visible = true;
             }
         }
 
@@ -244,7 +250,7 @@ namespace EMS.WebApp.Export
                     lstUnit.Add(new Unit { Value = dr[0].ToString(), Text = dr[1].ToString() });
                 }
 
-                txtNetWt.Text = objData.Where(o => o.IsDeleted == false).Sum(o => o.GrossWeight).ToString() + " " + lstUnit.Where(u => u.Value == objData[0].Unit).ToList()[0].Text;
+                txtNetWt.Text = objData.Where(o => o.IsDeleted == false).Sum(o => o.GrossWeight).ToString(); // + " " + lstUnit.Where(u => u.Value == objData[0].Unit).ToList()[0].Text;
                 txtContainers.Text = objData.Where(o => o.IsDeleted == false).Where(o => o.ContainerSize == "20").Count().ToString() + " x 20 - " + objData.Where(o => o.IsDeleted == false).Where(o => o.ContainerSize == "40").Count().ToString() + " x 40";
             }
             catch (Exception ex)
@@ -284,7 +290,10 @@ namespace EMS.WebApp.Export
                     txtFPodDesc.Text = exportBL.FPODDesc;
                     txtCommodity.Text = exportBL.Commodity;
                     LoadDeliveryAgentDDL(exportBL.fk_FPOD);
-
+                    if (exportBL.BLthruEdge == false)
+                        txtBLNo.Enabled = true;
+                    else
+                        txtBLNo.Enabled = false;
                     txtCBookingNo.Text = exportBL.BookingNumber;
                     txtCBookingDate.Text = exportBL.BookingDate.ToString("dd-MM-yyyy");
 
@@ -310,6 +319,8 @@ namespace EMS.WebApp.Export
 
                     LoadExportBLContainers(exportBL.BookingId, 0);
                 }
+                else
+                    rfvBookingNo.Visible = true;
             }
             catch (Exception ex)
             {
@@ -358,6 +369,10 @@ namespace EMS.WebApp.Export
                     ViewState["BLISSUEID"] = exportBL.BLIssuePlaceId;
                     txtNetWt.Text = exportBL.NetWeight.ToString();
                     txtBLReleaseDate.Text = exportBL.BLReleaseDate.ToString("dd-MM-yyyy");
+                    if (exportBL.BLthruEdge == false)
+                        txtBLNo.Enabled = true;
+                    else
+                        txtBLNo.Enabled = false;
 
                     txtShipperName.Text = exportBL.ShipperName;
                     txtShipper.Text = exportBL.Shipper;
@@ -458,10 +473,12 @@ namespace EMS.WebApp.Export
 
                 if (user.UserRole.Id != (int)UserRole.Admin)
                 {
+                   
                     //ddlLocation.Enabled = false;
                 }
                 else
                 {
+                    _userLocation = 0;
                     //ddlLocation.Enabled = true;
                 }
             }
@@ -485,7 +502,10 @@ namespace EMS.WebApp.Export
             objBL.NvoccId = Convert.ToInt32(ViewState["NVOCCID"]);
             objBL.BookingId = Convert.ToInt64(ViewState["BOOKINGID"]);
             objBL.BLIssuePlaceId = Convert.ToInt32(ViewState["BLISSUEID"]);
-            objBL.BLNumber = string.Empty;
+            if (objBL.BLthruEdge == true)
+                objBL.BLNumber = string.Empty;
+            else
+                objBL.BLNumber = txtBLNo.Text;
             objBL.BLDate = Convert.ToDateTime(txtBLDate.Text.Trim());
             objBL.PORDesc = txtPorDesc.Text.Trim();
             objBL.POLDesc = txtPolDesc.Text.Trim();

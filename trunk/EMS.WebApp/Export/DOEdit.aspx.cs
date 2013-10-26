@@ -187,13 +187,26 @@ namespace EMS.WebApp.Export
 
         private void PopulateControls()
         {
-            PopulateBookingNo();
-            //PopulateEmptyYard();
+            ListItem Li = null;
+            PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlLocation, 0);
+            Li = new ListItem("SELECT", "0");
+            ddlLocation.Items.Insert(0, Li);
+
+
+            PopulateDropDown((int)Enums.DropDownPopulationFor.Line, ddlNVOCC, 0);
+            ddlNVOCC.Items.Insert(0, Li);
+            //PopulateBookingNo();
+
         }
 
-        private void PopulateBookingNo()
+        void PopulateDropDown(int Number, DropDownList ddl, int? Filter)
         {
-            DataTable dt = DOBLL.GetBookingList(_userId);
+            CommonBLL.PopulateDropdown(Number, ddl, Filter, 0);
+        }
+
+        private void PopulateBookingNo(int Loc, int Line)
+        {
+            DataTable dt = DOBLL.GetBookingList(Loc, Line);
 
             if (!ReferenceEquals(dt, null))
             {
@@ -349,5 +362,18 @@ namespace EMS.WebApp.Export
         }
 
         #endregion
+
+        protected void ddlLocation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlNVOCC.SelectedIndex != -1 && ddlLocation.SelectedIndex != -1)
+                PopulateBookingNo(ddlLocation.SelectedValue.ToInt(), ddlNVOCC.SelectedValue.ToInt());
+
+        }
+
+        protected void ddlLine_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlNVOCC.SelectedIndex != -1 && ddlLocation.SelectedIndex != -1)
+                PopulateBookingNo(ddlLocation.SelectedValue.ToInt(), ddlNVOCC.SelectedValue.ToInt());
+        }
     }
 }

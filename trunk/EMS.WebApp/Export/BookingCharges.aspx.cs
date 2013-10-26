@@ -140,7 +140,7 @@ namespace EMS.WebApp.Export
                 GridViewRow thisGridViewRow = gvwCharges.Rows[r];
                 HiddenField hdnBookingChargeId = (HiddenField)thisGridViewRow.FindControl("hdnBookingChargeId");
 
-                DropDownList ddlApplicable = (DropDownList)thisGridViewRow.FindControl("ddlApplicable");
+                //DropDownList ddlApplicable = (DropDownList)thisGridViewRow.FindControl("ddlApplicable");
                 TextBox txtCharged = (TextBox)thisGridViewRow.FindControl("txtCharged");
                 TextBox txtRefund = (TextBox)thisGridViewRow.FindControl("txtRefund");
                 TextBox txtBrokerageBasic = (TextBox)thisGridViewRow.FindControl("txtBrokerageBasic");
@@ -150,7 +150,7 @@ namespace EMS.WebApp.Export
                 lstData.Where(d => d.BookingChargeId == Convert.ToInt32(hdnBookingChargeId.Value))
                     .Select(d =>
                     {
-                        d.ChargeApplicable = Convert.ToBoolean(ddlApplicable.SelectedValue);
+                        //d.ChargeApplicable = Convert.ToBoolean(ddlApplicable.SelectedValue);
                         d.ManifestRate = Convert.ToDecimal(txtManifest.Text);
                         d.ActualRate = Convert.ToDecimal(txtCharged.Text);
                         d.RefundAmount = 0;
@@ -182,7 +182,7 @@ namespace EMS.WebApp.Export
                 GridViewRow thisGridViewRow = gvwCharges.Rows[r];
                 HiddenField hdnBookingChargeId = (HiddenField)thisGridViewRow.FindControl("hdnBookingChargeId");
 
-                DropDownList ddlApplicable = (DropDownList)thisGridViewRow.FindControl("ddlApplicable");
+                //DropDownList ddlApplicable = (DropDownList)thisGridViewRow.FindControl("ddlApplicable");
                 TextBox txtCharged = (TextBox)thisGridViewRow.FindControl("txtCharged");
                 TextBox txtRefund = (TextBox)thisGridViewRow.FindControl("txtRefund");
                 TextBox txtBrokerageBasic = (TextBox)thisGridViewRow.FindControl("txtBrokerageBasic");
@@ -192,7 +192,7 @@ namespace EMS.WebApp.Export
                 lstData.Where(d => d.BookingChargeId == Convert.ToInt32(hdnBookingChargeId.Value))
                     .Select(d =>
                     {
-                        d.ChargeApplicable = Convert.ToBoolean(ddlApplicable.SelectedValue);
+                        //d.ChargeApplicable = Convert.ToBoolean(ddlApplicable.SelectedValue);
                         d.ManifestRate = Convert.ToDecimal(txtManifest.Text);
                         d.ActualRate = Convert.ToDecimal(txtCharged.Text);
                         d.RefundAmount = Convert.ToDecimal(txtRefund.Text); ;
@@ -328,7 +328,7 @@ namespace EMS.WebApp.Export
                 GridViewRow thisGridViewRow = gvwCharges.Rows[r];
                 HiddenField hdnBookingChargeId = (HiddenField)thisGridViewRow.FindControl("hdnBookingChargeId");
 
-                DropDownList ddlApplicable = (DropDownList)thisGridViewRow.FindControl("ddlApplicable");
+                //DropDownList ddlApplicable = (DropDownList)thisGridViewRow.FindControl("ddlApplicable");
                 TextBox txtCharged = (TextBox)thisGridViewRow.FindControl("txtCharged");
                 TextBox txtRefund = (TextBox)thisGridViewRow.FindControl("txtRefund");
                 TextBox txtBrokerageBasic = (TextBox)thisGridViewRow.FindControl("txtBrokerageBasic");
@@ -339,7 +339,7 @@ namespace EMS.WebApp.Export
                     .Select(d =>
                     {
                         d.BookingId = BookingId;
-                        d.ChargeApplicable = Convert.ToBoolean(ddlApplicable.SelectedValue);
+                        //d.ChargeApplicable = Convert.ToBoolean(ddlApplicable.SelectedValue);
                         d.ManifestRate = Convert.ToDecimal(txtManifest.Text);
                         d.ActualRate = Convert.ToDecimal(txtCharged.Text);
                         d.RefundAmount = Convert.ToDecimal(txtRefund.Text);
@@ -364,8 +364,16 @@ namespace EMS.WebApp.Export
 
                 if (BookingId > 0)
                 {
-                    SaveBookingHeaderDetails(BookingId);
-                    SaveChargesDetails(BookingId);
+                    if (CheckValidity())
+                    {
+                        SaveBookingHeaderDetails(BookingId);
+                        SaveChargesDetails(BookingId);
+                    }
+                    else
+                    {
+                        //lblMessage.Text = "Check Amout. Should have a positive Value";
+                        return;
+                    }
                 }
                 Response.Redirect("Booking.aspx");
             }
@@ -500,32 +508,103 @@ namespace EMS.WebApp.Export
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                List<ChargeApplicable> lstApplicable = new List<ChargeApplicable>();
-                lstApplicable.Add(new ChargeApplicable { Text = "Yes", Value = "True" });
-                lstApplicable.Add(new ChargeApplicable { Text = "No", Value = "False" });
+                //List<ChargeApplicable> lstApplicable = new List<ChargeApplicable>();
+                //lstApplicable.Add(new ChargeApplicable { Text = "Yes", Value = "True" });
+                //lstApplicable.Add(new ChargeApplicable { Text = "No", Value = "False" });
 
-                // Bind drop down to Applicable
-                DropDownList ddl = (DropDownList)e.Row.FindControl("ddlApplicable");
-                ddl.DataTextField = "Text";
-                ddl.DataValueField = "Value";
-                ddl.DataSource = lstApplicable;
-                ddl.DataBind();
+                //// Bind drop down to Applicable
+                //DropDownList ddl = (DropDownList)e.Row.FindControl("ddlApplicable");
+                //ddl.DataTextField = "Text";
+                //ddl.DataValueField = "Value";
+                //ddl.DataSource = lstApplicable;
+                //ddl.DataBind();
 
-                IBookingCharges charge = e.Row.DataItem as IBookingCharges;
-                ddl.SelectedValue = charge.ChargeApplicable.ToString();
+                //IBookingCharges charge = e.Row.DataItem as IBookingCharges;
+                //ddl.SelectedValue = charge.ChargeApplicable.ToString();
             }
         }
         protected void btnBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("Booking.aspx");
         }
+
+        protected bool CheckValidity()
+        {
+            bool IsValid = true;
+            int totalRows = gvwCharges.Rows.Count;
+
+            for (int r = 0; r < totalRows; r++)
+            {
+                GridViewRow thisGridViewRow = gvwCharges.Rows[r];
+                HiddenField hdnBookingChargeId = (HiddenField)thisGridViewRow.FindControl("hdnBookingChargeId");
+                 
+                //DropDownList ddlApplicable = (DropDownList)thisGridViewRow.FindControl("ddlApplicable");
+                TextBox txtCharged = (TextBox)thisGridViewRow.FindControl("txtCharged");
+                TextBox txtRefund = (TextBox)thisGridViewRow.FindControl("txtRefund");
+                TextBox txtBrokerageBasic = (TextBox)thisGridViewRow.FindControl("txtBrokerageBasic");
+                TextBox txtManifest = (TextBox)thisGridViewRow.FindControl("txtManifest");
+                lblMessage.Text = "";
+
+                if (txtCharged.Text.ToDecimal() == 0)
+                {
+                    IsValid = false;
+                    lblMessage.Text = "Invalid Charged Amount";
+                    return IsValid;
+                }
+
+                if (txtManifest.Text.ToDecimal() == 0)
+                {
+                    IsValid = false;
+                    lblMessage.Text = "Invalid Manifest Amount";
+                    return IsValid;
+                    
+                }
+
+                if (txtCharged.Text.ToDecimal() < txtManifest.Text.ToDecimal())
+                {
+                    IsValid = false;
+                    lblMessage.Text = "Charged amount < Manifest Amount";
+                    return IsValid;
+                }
+
+                if (rdblBorkerage.SelectedValue == "True" && txtBrokerageBasic.Text.ToDecimal() == 0)
+                {
+                    IsValid = false;
+                    lblMessage.Text = "Invalid Brokerage Basic Amount";
+                    return IsValid;
+                }
+
+                if (rdblRefundPayable.SelectedValue == "True" && txtBrokerageBasic.Text.ToDecimal() == 0)
+                {
+                    IsValid = false;
+                    lblMessage.Text = "Invalid Refund Payable Amount";
+                    return IsValid;
+                }
+
+                if (txtBrokerageBasic.Text.ToDecimal() > txtCharged.Text.ToDecimal() - txtRefund.Text.ToDecimal())
+                {
+                    IsValid = false;
+                    lblMessage.Text = "Brokerage Basic <= Charged - Refund amount";
+                    return IsValid;
+                }
+
+                if (txtCharged.Text.ToDecimal() < txtManifest.Text.ToDecimal() + txtRefund.Text.ToDecimal())
+                {
+                    IsValid = false;
+                    lblMessage.Text = "Charged Freight < Manifest + Refund";
+                    return IsValid;
+                }
+
+            }
+            return IsValid;
+        }
     }
 
-    public class ChargeApplicable
-    {
-        public string Text { get; set; }
-        public string Value { get; set; }
-    }
+    //public class ChargeApplicable
+    //{
+    //    public string Text { get; set; }
+    //    public string Value { get; set; }
+    //}
 
 
 }

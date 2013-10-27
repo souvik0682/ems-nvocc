@@ -22,10 +22,6 @@
                 var hdnFPOD = $get('<%=hdnFPOD.ClientID %>');
                 hdnFPOD.value = e.get_value();
             }
-            else if (sender._id == "AutoCompleteExPOT") {
-                var hdnPOT = $get('<%=hdnPOT.ClientID %>');
-                hdnPOT.value = e.get_value();
-            }
             else if (sender._id == "AutoCompleteVes") {
                 var hdnVessel = $get('<%=hdnVessel.ClientID %>');
                 hdnVessel.value = e.get_value();
@@ -610,7 +606,7 @@
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="ddlService" runat="server" CssClass="dropdownlist" Width="250"
-                                            TabIndex="25" AutoPostBack="True">
+                                            TabIndex="25" AutoPostBack="True" OnSelectedIndexChanged="ddlService_OnSelectedIndexChanged">
                                             <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                         </asp:DropDownList>
                                     </td>
@@ -856,7 +852,8 @@
                                                                 </cc2:CustomTextBox>
                                                             </td>
                                                             <td>
-                                                                <asp:HiddenField ID="hdnPOT" runat="server" />
+                                                                <asp:DropDownList ID="ddlModalPort" runat="server"></asp:DropDownList>
+                                                                <%--<asp:HiddenField ID="hdnPOT" runat="server" />
                                                                 <asp:TextBox runat="server" ID="txtPOT" Width="250" autocomplete="off" MaxLength="50" ValidationGroup="vgTransit"
                                                                     Style="text-transform: uppercase;" AutoPostBack="true" OnTextChanged="txtPOT_TextChanged" />
                                                                 <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteExPOT" ID="AutoCompleteExPOT"
@@ -868,22 +865,15 @@
                                                                     <Animations>
                                                                     <OnShow>
                                                                         <Sequence>
-                                                                            <%-- Make the completion list transparent and then show it --%>
                                                                             <OpacityAction Opacity="0" />
                                                                             <HideAction Visible="true" />
-                            
-                                                                            <%--Cache the original size of the completion list the first time
-                                                                                the animation is played and then set it to zero --%>
                                                                             <ScriptAction Script="
-                                                                                // Cache the size and setup the initial size
                                                                                 var behavior = $find('AutoCompleteExPOT');
                                                                                 if (!behavior._height) {
                                                                                     var target = behavior.get_completionList();
                                                                                     behavior._height = target.offsetHeight - 2;
                                                                                     target.style.height = '0px';
                                                                                 }" />
-                            
-                                                                            <%-- Expand from 0px to the appropriate size while fading in --%>
                                                                             <Parallel Duration=".4">
                                                                                 <FadeIn />
                                                                                 <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteExPOT')._height" />
@@ -891,14 +881,13 @@
                                                                         </Sequence>
                                                                     </OnShow>
                                                                     <OnHide>
-                                                                        <%-- Collapse down to 0px and fade out --%>
                                                                         <Parallel Duration=".4">
                                                                             <FadeOut />
                                                                             <Length PropertyKey="height" StartValueScript="$find('AutoCompleteExPOT')._height" EndValue="0" />
                                                                         </Parallel>
                                                                     </OnHide>
                                                                     </Animations>
-                                                                </cc1:AutoCompleteExtender>
+                                                                </cc1:AutoCompleteExtender>--%>
                                                             </td>
                                                             <td style="width: 10%;">
                                                                 <asp:ImageButton ID="imgbtnAddToGrid" runat="server" ImageUrl="~/Images/action_add2.gif"
@@ -911,11 +900,8 @@
                                                                 &nbsp;
                                                             </td>
                                                             <td colspan="2">
-                                                                <asp:RequiredFieldValidator ID="rfvPOT" runat="server" ErrorMessage="Please select Place of Receipt"
-                                                                    ControlToValidate="txtPOT" ValidationGroup="vgTransit" ForeColor="Red"></asp:RequiredFieldValidator>
-                                                                <%--<cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender5" runat="server" TargetControlID="rfvPOT"
-                                                                    WarningIconImageUrl="">
-                                                                </cc1:ValidatorCalloutExtender>--%>
+                                                                <%--<asp:RequiredFieldValidator ID="rfvPOT" runat="server" ErrorMessage="Please select Place of Receipt"
+                                                                    ControlToValidate="txtPOT" ValidationGroup="vgTransit" ForeColor="Red"></asp:RequiredFieldValidator>--%>
                                                             </td>
                                                         </tr>
                                                     </table>

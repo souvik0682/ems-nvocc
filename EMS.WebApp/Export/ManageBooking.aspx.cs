@@ -71,6 +71,7 @@ namespace EMS.WebApp.Export
                     FillBookingContainer(Convert.ToInt32(hdnBookingID.Value));
                     FillBookingTranshipment(Convert.ToInt32(hdnBookingID.Value));
                     CheckForBookingCharges(Convert.ToInt32(hdnBookingID.Value));
+                    LoadModalPortDDL();
                 }
             }
             CheckUserAccess(hdnBookingID.Value);
@@ -1084,8 +1085,9 @@ namespace EMS.WebApp.Export
 
         private void ResetTranshipment()
         {
-            hdnPOT.Value = string.Empty;
-            txtPOT.Text = string.Empty;
+            //hdnPOT.Value = string.Empty;
+            //txtPOT.Text = string.Empty;
+            ddlModalPort.SelectedValue = "0";
             ctbSlNo.Text = string.Empty;
         }
 
@@ -1148,15 +1150,15 @@ namespace EMS.WebApp.Export
             IBookingTranshipment obj = new BookingTranshipmentEntity();
             foreach (BookingTranshipmentEntity objBookingTranshipment in Transhipments)
             {
-                if (objBookingTranshipment.PortId.ToString() == hdnPOT.Value)
+                if (objBookingTranshipment.PortId.ToString() == ddlModalPort.SelectedValue)
                 {
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00076") + "');</script>", false);
                     return;
                 }
             }
 
-            obj.PortId = Convert.ToInt32(hdnPOT.Value);
-            obj.PortName = txtPOT.Text;
+            obj.PortId = Convert.ToInt32(ddlModalPort.SelectedValue);
+            obj.PortName = ddlModalPort.SelectedItem.Text;
 
             if (string.IsNullOrEmpty(ctbSlNo.Text))
                 Transhipments.Add(obj);
@@ -1211,7 +1213,7 @@ namespace EMS.WebApp.Export
                     string[] nextPort = lst[0].NextPort.Split(',');
                     obj.PortName = nextPort[0] + " (" + nextPort[1] + ")";
 
-                    Transhipments.Insert(0,obj);
+                    Transhipments.Insert(0, obj);
 
                     for (int i = 0; i < Transhipments.Count; i++)
                     {
@@ -1233,9 +1235,9 @@ namespace EMS.WebApp.Export
 
                     obj.PortId = Convert.ToInt32(hdnPOD.Value.Trim());
                     obj.PortName = txtPOD.Text.Trim();
-                
+
                     Transhipments.Add(obj);
-                    
+
                     for (int i = 0; i < Transhipments.Count; i++)
                     {
                         Transhipments[i].OrderNo = i + 1;
@@ -1246,7 +1248,7 @@ namespace EMS.WebApp.Export
 
                     ViewState["BookingTran"] = Transhipments;
                 }
-                
+
                 if (!(string.IsNullOrEmpty(txtFPOD.Text.Trim()) || hdnFPOD.Value.Trim() == hdnPOD.Value.Trim()))
                 {
                     if (ViewState["BookingTran"] != null)
@@ -1288,7 +1290,7 @@ namespace EMS.WebApp.Export
             ddlBookingParty.Items.Clear();
             BLL.DBInteraction dbinteract = new BLL.DBInteraction();
             GeneralFunctions.PopulateDropDownList(ddlBookingParty, dbinteract.PopulateDDLDS("dsr.dbo.mstCustomer", "pk_CustID", "CustName", "Where Active='Y' and Isdeleted=0 and (fk_LocID=" + ddlLocation.SelectedValue, true), false);
-           
+
             Li = new ListItem("SELECT", "0");
             ddlBookingParty.Items.Insert(0, Li);
         }
@@ -1297,6 +1299,29 @@ namespace EMS.WebApp.Export
         {
             DataSet ds = BookingBLL.GetSalesman(ddlBookingParty.SelectedValue.ToInt());
             lblSalesman.Text = ds.Tables[0].Rows[0]["Name"].ToString();
+        }
+
+        protected void ddlService_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadModalPortDDL();
+        }
+
+        private void LoadModalPortDDL()
+        {
+            DataTable dt = BookingBLL.GetPortWithServices(Convert.ToInt32(ddlService.SelectedValue), Convert.ToInt32(ddlNvocc.SelectedValue));
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                DataRow dr = dt.NewRow();
+                dr["fk_FPOD"] = "0";
+                dr["PortName"] = "--Select--";
+                dt.Rows.InsertAt(dr, 0);
+
+                ddlModalPort.DataValueField = "fk_FPOD";
+                ddlModalPort.DataTextField = "PortName";
+                ddlModalPort.DataSource = dt;
+                ddlModalPort.DataBind();
+            }
         }
     }
 }

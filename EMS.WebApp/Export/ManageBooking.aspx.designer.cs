@@ -841,31 +841,13 @@ namespace EMS.WebApp.Export {
         protected global::EMS.WebApp.CustomControls.CustomTextBox ctbSlNo;
         
         /// <summary>
-        /// hdnPOT control.
+        /// ddlModalPort control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnPOT;
-        
-        /// <summary>
-        /// txtPOT control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPOT;
-        
-        /// <summary>
-        /// AutoCompleteExPOT control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.AutoCompleteExtender AutoCompleteExPOT;
+        protected global::System.Web.UI.WebControls.DropDownList ddlModalPort;
         
         /// <summary>
         /// imgbtnAddToGrid control.
@@ -875,15 +857,6 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgbtnAddToGrid;
-        
-        /// <summary>
-        /// rfvPOT control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPOT;
         
         /// <summary>
         /// gvTransit control.

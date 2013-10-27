@@ -361,8 +361,9 @@
                                                 <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" />
                                                 <HeaderTemplate>
                                                     Add Money Recpt.</HeaderTemplate>
-                                                <ItemTemplate>
-                                                    <a id="aMoneyRecpt" runat="server">
+                                                 <ItemTemplate>
+                                                    <a id="aMoneyRecpt" runat="server" href='<%# "AddEditMoneyReceipts.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'
+                                                        style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Ammount")) ? "display:block;": "display:none;" %>'>
                                                         <img alt="Add" src="../Images/ADD.JPG" /></a>
                                                 </ItemTemplate>
                                             </asp:TemplateField>

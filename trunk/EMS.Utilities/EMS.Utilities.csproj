@@ -51,6 +51,7 @@
     <Compile Include="Converter\Filler.cs" />
     <Compile Include="Cryptography\Encryption.cs" />
     <Compile Include="DUtil.cs" />
+    <Compile Include="Encrypt.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="ExtentionClass.cs" />
     <Compile Include="GeneralFunctions.cs" />

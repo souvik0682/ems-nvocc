@@ -687,5 +687,18 @@ namespace EMS.DAL
 
             return charge;
         }
+
+        public static decimal GetExchangeRateForExport(long BlId)
+        {
+            string strExecution = "[exp].[usp_GetExchangeRate]";
+            decimal exchangeRate = 0;
+            
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@BLID", BlId);
+                exchangeRate = Convert.ToInt64(oDq.GetScalar());
+            }
+            return exchangeRate;
+        }
     }
 }

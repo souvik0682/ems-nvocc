@@ -220,5 +220,10 @@ namespace EMS.BLL
         {
             return InvoiceDAL.ChargeEditable(ChargeId);
         }
+
+        public decimal GetExchangeRateForExport(long BlId)
+        {
+            return InvoiceDAL.GetExchangeRateForExport(BlId);
+        }
     }
 }

@@ -135,11 +135,14 @@
                                         <legend>Add Charges</legend>
                                         <div>
                                         <table width="100%" cellpadding="0" cellspacing="0" style="border-width:0px;border-style:None;width:100%;border-collapse:collapse;">
-                                            <%--<tr>
+                                            <tr>
                                                 <td style="font-weight:bold">
                                                     Charge Name
                                                 </td>
                                                 <td style="font-weight:bold">
+                                                    Terminal
+                                                </td>
+                                                <td style="text-align: right;font-weight:bold">
                                                     Per BL
                                                 </td>
                                                 <td style="text-align: right;font-weight:bold">
@@ -156,7 +159,7 @@
                                                     Ton
                                                 </td>
 
-                                                <td style="text-align: right;font-weight:bold">
+                                                <td style="text-align: center;font-weight:bold">
                                                     Currency
                                                 </td>
                                                 <td style="text-align: right;font-weight:bold">
@@ -172,55 +175,65 @@
                                                 <td style="text-align: right;font-weight:bold">
                                                     Total Amt
                                                 </td>
-                                            </tr>--%>
+                                            </tr>
                                             <tbody>
                                           
                                             <tr>
                                                 <td class="gridviewitem" style="width:20%;">
                                                     <asp:DropDownList ID="ddlFChargeName" runat="server" Width="213" AutoPostBack="true"
-                                                        OnSelectedIndexChanged="ddlChargeName_SelectedIndexChanged">
+                                                        OnSelectedIndexChanged="ddlChargeName_SelectedIndexChanged" Enabled="false">
                                                         <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                                     </asp:DropDownList>
                                                     <br />
                                                     <asp:RequiredFieldValidator ID="rfvChargeName" runat="server" ErrorMessage="Required"
                                                         CssClass="errormessage" ValidationGroup="vgAdd" ControlToValidate="ddlFChargeName"
                                                         InitialValue="0"></asp:RequiredFieldValidator>
-                                                </td>                                                
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlFTerminal" runat="server" Width="150" Enabled="false">
+                                                        <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                    <br />
+                                                    <asp:RequiredFieldValidator ID="rfvTerminal" runat="server" ErrorMessage="Required"
+                                                        CssClass="errormessage" ValidationGroup="vgAdd" ControlToValidate="ddlFTerminal"
+                                                        InitialValue="0"></asp:RequiredFieldValidator>
+                                                    &nbsp;
+                                                </td>                                             
                                                 <td class="gridviewitem" style="width:6%;">
                                                     <cc2:CustomTextBox ID="txtRatePerBL" runat="server" Width="50" Type="Decimal" MaxLength="10"
-                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
+                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00" Enabled="false"
                                                         OnTextChanged="txtRatePerBL_TextChanged" AutoPostBack="true" ></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <td class="gridviewitem" align="right" style="width:6%;">
                                                     <cc2:CustomTextBox ID="txtRatePerTEU" runat="server" Width="60" Type="Decimal" MaxLength="10"
-                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
+                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00" Enabled="false"
                                                         OnTextChanged="txtRatePerTEU_TextChanged" AutoPostBack="true"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
 
                                                 <td class="gridviewitem"  style="width:6%">
                                                     <cc2:CustomTextBox ID="txtRateperFEU" runat="server" Width="55" Type="Decimal" MaxLength="10"
-                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
+                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00" Enabled="false"
                                                         OnTextChanged="txtRateperFEU_TextChanged" AutoPostBack="true"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <td class="gridviewitem"  style="width:6%">
                                                     <cc2:CustomTextBox ID="txtRatePerCBM" runat="server" Width="55" Type="Decimal" MaxLength="10"
-                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
+                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00" Enabled="false"
                                                         OnTextChanged="txtRatePerCBM_TextChanged" AutoPostBack="true"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <td style="width:6%">
                                                     <cc2:CustomTextBox ID="txtRatePerTon" runat="server" Width="55" Type="Decimal" MaxLength="10"
-                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
+                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00" Enabled="false"
                                                         OnTextChanged="txtRatePerTon_TextChanged" AutoPostBack="true"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
 
-                                                <td class="gridviewitem"  style="width:10%">
+                                                <td class="gridviewitem" style="width:10%">
                                                    <asp:DropDownList ID="ddlCurrency" runat="server"  AutoPostBack="true"
-                                                        OnSelectedIndexChanged="ddlCurrency_SelectedIndexChanged"  >
+                                                        OnSelectedIndexChanged="ddlCurrency_SelectedIndexChanged">
                                                         <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                                     </asp:DropDownList>
                                                     <br />
@@ -229,25 +242,25 @@
                                                         InitialValue="0"></asp:RequiredFieldValidator>
                                                 </td>
                                                 <td class="gridviewitem"  style="width:8%">
-                                                    <cc2:CustomTextBox ID="custTxtConvRate" runat="server" Width="80" Type="Decimal" MaxLength="10"
+                                                    <cc2:CustomTextBox ID="custTxtConvRate" runat="server" Width="80" Type="Decimal" MaxLength="10" Enabled="false"
                                                           Precision="8" Scale="2" Style="text-align: right;" Text="0.00"  OnTextChanged="txtRatePerBL_TextChanged" AutoPostBack="true"></cc2:CustomTextBox><br />
                                                     &nbsp; <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Required"
                                                         CssClass="errormessage" ValidationGroup="vgAdd" ControlToValidate="custTxtConvRate"
                                                        ></asp:RequiredFieldValidator>
                                                 </td>
                                                 <td class="gridviewitem"  style="width:8%">
-                                                    <cc2:CustomTextBox ID="txtGrossAmount" runat="server" Width="80" Type="Decimal" MaxLength="10"
+                                                    <cc2:CustomTextBox ID="txtGrossAmount" runat="server" Width="80" Type="Decimal" MaxLength="10" Enabled="false"
                                                           Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
 
                                                 <td class="gridviewitem" style="width:6%">
-                                                    <cc2:CustomTextBox ID="txtServiceTax" runat="server" Width="80" Type="Decimal" MaxLength="10"
+                                                    <cc2:CustomTextBox ID="txtServiceTax" runat="server" Width="80" Type="Decimal" MaxLength="10" Enabled="false"
                                                           Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <td class="gridviewitem"  style="width:8%">
-                                                    <cc2:CustomTextBox ID="txtTotal" runat="server" Width="75" Type="Decimal" MaxLength="10"
+                                                    <cc2:CustomTextBox ID="txtTotal" runat="server" Width="75" Type="Decimal" MaxLength="10" Enabled="false"
                                                           Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
@@ -271,6 +284,10 @@
                                                             <HeaderStyle CssClass="gridviewheader" />
                                                             <ItemStyle CssClass="gridviewitem" Width="20%" />
                                                         </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Terminal">
+                                                            <HeaderStyle CssClass="gridviewheader" />
+                                                            <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                        </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="Per BL">
                                                             <HeaderStyle CssClass="gridviewheader" />
                                                             <ItemStyle CssClass="gridviewitem" Width="6%" />
@@ -292,7 +309,7 @@
                                                             <ItemStyle CssClass="gridviewitem" Width="6%" HorizontalAlign="Right" />
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="Currency">
-                                                            <HeaderStyle CssClass="gridviewheader_num" />
+                                                            <HeaderStyle CssClass="gridviewheader" />
                                                             <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Left" />
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="Conv Rate">

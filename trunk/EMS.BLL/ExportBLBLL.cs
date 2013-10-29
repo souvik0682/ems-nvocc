@@ -76,5 +76,10 @@ namespace EMS.BLL
         {
             return ExportBLDAL.CheckBookingLocation(BookingNo, Loc);
         }
+
+        public static bool CheckExpBLExistance(string BookingNo)
+        {
+            return ExportBLDAL.CheckExpBLExistance(BookingNo);
+        }
     }
 }

@@ -205,7 +205,7 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@CanFooter", 300, loc.CanFooter);
                 oDq.AddVarcharParam("@SlotFooter", 300, loc.SlotFooter);
                 oDq.AddVarcharParam("@CartingFooter", 300, loc.CartingFooter);
-                oDq.AddVarcharParam("@PickUpFooter", 300, loc.PickUpFooter);
+                oDq.AddVarcharParam("@PickUpFooter", 3000, loc.PickUpFooter);
                 oDq.AddVarcharParam("@CustomHouseCode", 6, loc.CustomHouseCode);
                 oDq.AddVarcharParam("@GatewayPort", 6, loc.GatewayPort);
                 oDq.AddVarcharParam("@ICEGateLoginD", 20, loc.ICEGateLoginD);

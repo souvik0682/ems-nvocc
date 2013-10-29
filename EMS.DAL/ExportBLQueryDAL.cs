@@ -28,7 +28,7 @@ namespace EMS.DAL
         }
         public static DataTable GetAllInvoice(Int64 BLId)
         {
-            string strExecution = "[trn].[GetInvoiceStatus]";
+            string strExecution = "[exp].[GetExpInvoiceStatus]";
             DataTable dt = new DataTable();
 
 

@@ -187,7 +187,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Rate Reference<span class="errormessage">*</span>
+                                    Rate Reference
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtRateReference" runat="server" Width="250px" CssClass="textboxuppercase"></asp:TextBox>

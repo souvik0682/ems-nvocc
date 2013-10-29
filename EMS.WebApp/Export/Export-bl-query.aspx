@@ -197,6 +197,23 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td style="width: 6%;">
+                                    Location :
+                                </td>
+                                <td width="6%">
+                                    <asp:DropDownList ID="ddlLocation" runat="server" Visible="false">
+                                    </asp:DropDownList>
+                                </td>
+                                <td style="width: 5%;">
+                                    Line :
+                                </td>
+                                <td style="width: 5%;">
+                                    <asp:DropDownList ID="ddlLine" runat="server" Visible="false" >
+                                    </asp:DropDownList>
+                                </td>
+                            </tr>
+
+                            <tr>
                                 <td>BL Date :
                                 </td>
                                 <td>
@@ -299,7 +316,7 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Location">
                                                 <HeaderStyle CssClass="gridviewheader" />
-                                                <ItemStyle CssClass="gridviewitem" Width="7%" />
+                                                <ItemStyle CssClass="gridviewitem" Width="15%" />
                                                 <HeaderTemplate>
                                                     Invoice No.</HeaderTemplate>
                                                 <ItemTemplate>
@@ -331,8 +348,8 @@
                                                 <HeaderTemplate>
                                                     Received Amount</HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <%-- <asp:HiddenField ID="hdnInvID" runat="server" Value='<%# Eval("InvoiceID")%>' />
-                                                    <a href="#" runat="server" onserverclick="ShowReceivedAmt">--%>
+                                                    <asp:HiddenField ID="hdnInvID" runat="server" Value='<%# Eval("InvoiceID")%>' />
+                                                    <a href="#" runat="server" onserverclick="ShowReceivedAmt">
                                                         <%# Eval("ReceivedAmt")%></a>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
@@ -362,7 +379,7 @@
                                                 <HeaderTemplate>
                                                     Add Money Recpt.</HeaderTemplate>
                                                  <ItemTemplate>
-                                                    <a id="aMoneyRecpt" runat="server" href='<%# "AddEditMoneyReceipts.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'
+                                                    <a id="aMoneyRecpt" runat="server" href='<%# "../Transaction/AddEditMoneyReceipts.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'
                                                         style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Ammount")) ? "display:block;": "display:none;" %>'>
                                                         <img alt="Add" src="../Images/ADD.JPG" /></a>
                                                 </ItemTemplate>
@@ -373,11 +390,17 @@
                                                 <HeaderTemplate>
                                                     Add Credit Note</HeaderTemplate>
                                                 <ItemTemplate>
+                             
                                                     <%-- <a href="#">
                                                         <img alt="Add" src="../Images/ADD.JPG" /></a>--%>
-                                                    <a id="aAddCrdtNote" runat="server">
+                                                    <a id="aAddCrdtNote" runat="server" href='<%# "../Transaction/ManageCreditNote.aspx?InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) + "&LocationId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue) + "&LineId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLine.SelectedValue) %>'
+                                                        style='<%# (Convert.ToDecimal(Eval("Ammount"))>0 && Convert.ToInt32(Eval("InvoiceTypeID"))!=2) ? "display:block;": "display:none;" %>'>
                                                         <img alt="Add" src="../Images/ADD.JPG" /></a>
                                                     <%--style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Ammount")) ? "display:block;": "display:none;" %>'>--%>
+      
+
+                                                    <%--<a id="aAddCrdtNote" runat="server">
+                                                        <img alt="Add" src="../Images/ADD.JPG" /></a>--%>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField>
@@ -386,6 +409,9 @@
                                                 <HeaderTemplate>
                                                     Invoice Status</HeaderTemplate>
                                                 <ItemTemplate>
+                                                   <%-- <a id="aAddCrdtNote" runat="server" href='<%# "../Transaction/ManageCreditNote.aspx?InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) + "&LocationId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue) + "&LineId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLine.SelectedValue) %>'
+                                                        style='<%# (Convert.ToDecimal(Eval("Ammount"))>0 && Convert.ToInt32(Eval("InvoiceTypeID"))!=2) ? "display:block;": "display:none;" %>'>
+                                                        <img alt="Add" src="../Images/ADD.JPG" /></a>--%>
                                                     <%-- <a href="#">
                                                         <img alt="Add" src="../Images/ADD.JPG" /></a>--%>
                                                     <a id="dStatus" runat="server">

@@ -60,6 +60,7 @@ namespace EMS.WebApp.Export
                 LoadContainerList();
                 _isEditable = false;
                 LockControls(true);
+                Response.Redirect("~/Export/DOList.aspx");
             }
         }
 

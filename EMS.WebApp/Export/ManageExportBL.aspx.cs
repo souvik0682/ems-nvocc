@@ -56,6 +56,10 @@ namespace EMS.WebApp.Export
             txtBookingNo.TextChanged += new EventHandler(txtBookingNo_TextChanged);
             txtBLDate.TextChanged += new EventHandler(txtBLDate_TextChanged);
         }
+        protected void txtBLNo_TextChanged(object sender, EventArgs e)
+        {
+            txtCBLNo.Text = txtBLNo.Text;
+        }
 
         void txtBLDate_TextChanged(object sender, EventArgs e)
         {
@@ -67,7 +71,16 @@ namespace EMS.WebApp.Export
             if (!string.IsNullOrEmpty(txtBookingNo.Text))
             {
                 if (ExportBLBLL.CheckBookingLocation(txtBookingNo.Text, _userLocation) == true)
-                    LoadExportBLHeaderForAdd(txtBookingNo.Text);
+                    if (ExportBLBLL.CheckExpBLExistance(txtBookingNo.Text) == true)
+                    {
+                        LoadExportBLHeaderForAdd(txtBookingNo.Text);
+                        lblErr.Text = "";
+                    }
+                    else
+                    {
+                        lblErr.Text = "Export B/L Exists for Booking";
+                        return;
+                    }
                 else
                     rfvBookingNo.Visible = true;
             }
@@ -131,7 +144,7 @@ namespace EMS.WebApp.Export
                 ddlUnit.DataSource = lstUnit;
                 ddlUnit.DataBind();
 
-                ddlUnit.SelectedValue = cntr.Unit.ToString();
+                //ddlUnit.SelectedValue = cntr.Unit.ToString();
 
                 ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
 
@@ -259,6 +272,7 @@ namespace EMS.WebApp.Export
             }
         }
 
+        
         private void LoadExportBLHeaderForAdd(string BookingNumber)
         {
             try
@@ -295,14 +309,35 @@ namespace EMS.WebApp.Export
                     {
                         hdnBLThruEdge.Value = "0";
                         txtBLNo.Enabled = true;
+                        rfvShipper.Enabled = false;
+                        rfvShipperName.Enabled = false;
+                        rfvConsignee.Enabled = false;
+                        rfvConsigneeName.Enabled = false;
+                        rfvGoodsDescription.Enabled = false;
+                        rfvMarks.Enabled = false;
+                        rfvNotify.Enabled = false;
+                        rfvNotifyName.Enabled = false;
+                        rfvAgent.Enabled = false;
+
+
                     }
                     else
                     {
                         txtBLNo.Enabled = false;
                         hdnBLThruEdge.Value = "1";
+                        rfvShipper.Enabled = true;
+                        rfvShipperName.Enabled = true;
+                        rfvConsignee.Enabled = true;
+                        rfvConsigneeName.Enabled = true;
+                        rfvGoodsDescription.Enabled = true;
+                        rfvMarks.Enabled = true;
+                        rfvNotify.Enabled = true;
+                        rfvNotifyName.Enabled = true;
+                        rfvAgent.Enabled = true;
                     }
                     txtCBookingNo.Text = exportBL.BookingNumber;
                     txtCBookingDate.Text = exportBL.BookingDate.ToString("dd-MM-yyyy");
+                    txtCBLDate.Text = txtBLDate.Text;
 
                     if (exportBL.TotalTon != null)
                         txtTon.Text = exportBL.TotalTon;

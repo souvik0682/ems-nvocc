@@ -121,7 +121,7 @@ namespace EMS.WebApp.Export
             {
                 RedirecToAddEditPage(Convert.ToInt32(e.CommandArgument));
             }
-            else if (e.CommandName == "Remove")
+            else if (e.CommandName == "Status")
             {
                 DeleteBooking(Convert.ToInt32(e.CommandArgument));
             }
@@ -140,6 +140,16 @@ namespace EMS.WebApp.Export
 
                 if (Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "ChgExist")) == 0)
                     btnCharge.ImageUrl = "~/Images/BookingWithcharge.ico";
+
+                if (Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "DOExist")) == 1 || (Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "BLExist")) == 1))
+                    _canDelete = false;
+                else
+                    _canDelete = true;
+
+                //if (Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "BLExist")) == 1)
+                //    _canDelete = false;
+                //else
+                //    _canDelete = true;
                 //else
                 //    btnCharge.ImageUrl = "~/Images/Status.jpg";
                 GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 7);
@@ -173,7 +183,7 @@ namespace EMS.WebApp.Export
 
                 //Status link
                 ImageButton btnStatus = (ImageButton)e.Row.FindControl("btnStatus");
-                btnStatus.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
+                btnStatus.ToolTip = ResourceManager.GetStringWithoutName("ERR00084");
                 btnStatus.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookingID"));
 
 
@@ -182,12 +192,12 @@ namespace EMS.WebApp.Export
                 btnCharges.ToolTip = ResourceManager.GetStringWithoutName("ERR00082");
                 btnCharges.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookingID"));
 
-                if (_canDelete == true)
+                if (_canEdit == true)
                 {
                     //ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
                     btnStatus.Visible = true;
-                    btnStatus.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
-                    btnCharges.ToolTip = ResourceManager.GetStringWithoutName("ERR00007");
+                    btnStatus.ToolTip = ResourceManager.GetStringWithoutName("ERR00084");
+                    btnCharges.ToolTip = ResourceManager.GetStringWithoutName("ERR00082");
                     //btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLID"));
 
                 }
@@ -198,13 +208,15 @@ namespace EMS.WebApp.Export
                     btnCharges.Visible = false;
                 }
 
-                if (_hasEditAccess)
+                if (_canDelete)
                 {
                     btnStatus.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
                 }
                 else
                 {
-                    btnEdit.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
+                    btnStatus.Visible = false;
+                    
+                    //btnStatus.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
                 }
                 //btnStatus.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
                 //btnCharges.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";

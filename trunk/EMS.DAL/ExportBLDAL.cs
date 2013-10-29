@@ -299,5 +299,18 @@ namespace EMS.DAL
             }
         }
 
+        public static bool CheckExpBLExistance(string BookingNo)
+        {
+            string strExecution = "[exp].[usp_CheckExpBLExistance]";
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddNVarcharParam("@BookingNo", 50, BookingNo);
+                oDq.AddBooleanParam("@Result", false, QueryParameterDirection.Output);
+                oDq.RunActionQuery();
+                return Convert.ToBoolean(oDq.GetParaValue("@Result"));
+            }
+        }
+
     }
 }

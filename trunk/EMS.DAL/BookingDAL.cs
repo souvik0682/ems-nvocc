@@ -32,12 +32,12 @@ namespace EMS.DAL
 
         public static int DeleteBooking(int BookingId)
         {
-            string strExecution = "[exp].[prcDeleteBooking]";
+            string strExecution = "[exp].[uspDeleteBooking]";
             int Result = 0;
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                oDq.AddIntegerParam("@pk_BookingID", BookingId);
+                oDq.AddIntegerParam("@BookingID", BookingId);
                 Result = oDq.RunActionQuery();
             }
             return Result;

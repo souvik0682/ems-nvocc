@@ -29,6 +29,9 @@ namespace EMS.Entity
         public decimal BrokerageBasic { get; set; }
         public bool ChargeStatus { get; set; }
         public int ChgExist { get; set; }
+        public int DOExist { get; set; }
+        public int BLExist { get; set; }
+
         public int Unit { get; set; }
 
         public bool ChargedEditable { get; set; }
@@ -94,6 +97,14 @@ namespace EMS.Entity
             if (ColumnExists(reader, "ChgExist"))
                 if (reader["ChgExist"] != DBNull.Value)
                     ChgExist = Convert.ToInt32(reader["ChgExist"]);
+
+            if (ColumnExists(reader, "DOExist"))
+                if (reader["DOExist"] != DBNull.Value)
+                    DOExist = Convert.ToInt32(reader["DOExist"]);
+
+            if (ColumnExists(reader, "BLExist"))
+                if (reader["BLExist"] != DBNull.Value)
+                    BLExist = Convert.ToInt32(reader["BLExist"]);
 
             if (ColumnExists(reader, "WtInTon"))
                 if (reader["WtInTon"] != DBNull.Value)

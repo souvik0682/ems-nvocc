@@ -148,7 +148,7 @@ namespace EMS.BLL
 
             return invoiceId;
         }
-        public long SaveInvoiceExp(IInvoice invoice, string misc, List<ExpInvoiceCharge> expInvoiceCharge)
+        public long SaveInvoiceExp(IInvoice invoice, string misc, List<IExpChargeRate> expInvoiceCharge)
         {
             long invoiceId = 0;
             int invoiceChargeId = 0;
@@ -159,7 +159,7 @@ namespace EMS.BLL
             {
                 if (!ReferenceEquals(expInvoiceCharge, null))
                 {
-                    foreach (ExpInvoiceCharge cRate in expInvoiceCharge)
+                    foreach (ExpInvoiceChargeEntity cRate in expInvoiceCharge)
                     {
                         cRate.InvoiceID = invoiceId;
                         invoiceChargeId = InvoiceDAL.SaveInvoiceChargesExp(cRate);
@@ -212,7 +212,7 @@ namespace EMS.BLL
         {
             return InvoiceDAL.GetInvoiceCharges_New(BlId, ChargesID, TerminalID, ExchangeRate, DocTypeId, Param3, InvoiceDate);
         }
-        public static IList<ExpInvoiceCharge> GetExpInvoiceCharges_New(long BlId, int ChargesID, int TerminalID, int DocTypeId, DateTime InvoiceDate)
+        public static IList<IExpChargeRate> GetExpInvoiceCharges_New(long BlId, int ChargesID, int TerminalID, int DocTypeId, DateTime InvoiceDate)
         {
             return InvoiceDAL.GetExpInvoiceCharges_New(BlId, ChargesID, TerminalID,  DocTypeId,  InvoiceDate);
         }

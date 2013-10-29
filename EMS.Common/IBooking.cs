@@ -68,6 +68,8 @@ namespace EMS.Common
         int SlotOperatorId { get; set; }
         string Shipper { get; set; }
         int ChgExist { get; set; }
+        int DOExist { get; set; }
+        int BLExist { get; set; }
 
         string VesselName { get; set; }
         string VoyageNo { get; set; }

@@ -155,11 +155,13 @@ namespace EMS.WebApp.Export
                 {
                     lnkStatus.ToolTip = "Active";
                     lnkStatus.Text = "Active";
+                    lnkStatus.Attributes.Add("onclick", "javascript:return confirm('Are you sure about make it InActive?');");
                 }
                 else
                 {
                     lnkStatus.ToolTip = "InActive";
                     lnkStatus.Text = "InActive";
+                    lnkStatus.Attributes.Add("onclick", "javascript:return confirm('Are you sure about make it Active?');");
                 }
 
                 //Edit Link

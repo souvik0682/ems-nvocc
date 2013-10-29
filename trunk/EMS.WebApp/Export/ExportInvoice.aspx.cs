@@ -18,7 +18,7 @@ namespace EMS.WebApp.Export
     public partial class ExportInvoice : System.Web.UI.Page
     {
         List<ICharge> Charges = null;
-        List<ExpInvoiceCharge> ChargeRates = null;
+        List<ExpInvoiceChargeEntity> ChargeRates = null;
 
         private int _userId = 0;
         private bool _canAdd = false;
@@ -1009,7 +1009,7 @@ namespace EMS.WebApp.Export
             IInvoice invoice = new InvoiceEntity();
             BuildInvoiceEntity(invoice);
 
-            List<ExpInvoiceCharge> chargeRate = ViewState["CHARGERATE"] as List<ExpInvoiceCharge>;
+            List<IExpChargeRate> chargeRate = ViewState["CHARGERATE"] as List<IExpChargeRate>;
 
 
             misc = GeneralFunctions.DecryptQueryString(Request.QueryString["p4"].ToString());
@@ -1046,13 +1046,13 @@ namespace EMS.WebApp.Export
 
         private void AddChargesRate()
         {
-            ExpInvoiceCharge chargeRate = new ExpInvoiceCharge();
+            ExpInvoiceChargeEntity chargeRate = new ExpInvoiceChargeEntity();
             BuildChargesRate(chargeRate);
 
             if (ViewState["CHARGERATE"] != null)
-                ChargeRates = ViewState["CHARGERATE"] as List<ExpInvoiceCharge>;
+                ChargeRates = ViewState["CHARGERATE"] as List<ExpInvoiceChargeEntity>;
             else
-                ChargeRates = new List<ExpInvoiceCharge>();
+                ChargeRates = new List<ExpInvoiceChargeEntity>();
 
             ChargeRates.Add(chargeRate);
 
@@ -1060,8 +1060,8 @@ namespace EMS.WebApp.Export
             gvwInvoice.DataBind();
 
             //Update Invoice Amount
-            //txtROff.Text = (Math.Round(ChargeRates.Sum(cr => cr.TotalAmount), 0) - ChargeRates.Sum(cr => cr.TotalAmount)).ToString();
-            //txtTotalAmount.Text = Math.Round(ChargeRates.Sum(cr => cr.TotalAmount),0).ToString();
+            txtROff.Text = (Math.Round(ChargeRates.Sum(cr => cr.TotalAmount), 0) - ChargeRates.Sum(cr => cr.TotalAmount)).ToString();
+            txtTotalAmount.Text = Math.Round(ChargeRates.Sum(cr => cr.TotalAmount), 0).ToString();
 
             ViewState["CHARGERATE"] = ChargeRates;
             ClearChargesRate();
@@ -1069,7 +1069,7 @@ namespace EMS.WebApp.Export
 
         private void BuildInvoiceEntity(IInvoice invoice)
         {
-            List<ExpInvoiceCharge> chargeRate = ViewState["CHARGERATE"] as List<ExpInvoiceCharge>;
+            List<ExpInvoiceChargeEntity> chargeRate = ViewState["CHARGERATE"] as List<ExpInvoiceChargeEntity>;
 
             if (ViewState["InvoiceID"] == null)
                 invoice.InvoiceID = 0;
@@ -1107,7 +1107,7 @@ namespace EMS.WebApp.Export
             invoice.ServiceTax = chargeRate.Sum(c => c.ServiceTaxAmount);
             invoice.ServiceTaxACess = chargeRate.Sum(c => c.ServiceTaxACess);
             invoice.ServiceTaxCess = chargeRate.Sum(c => c.ServiceTaxCessAmount);
-            // invoice.Roff = Convert.ToDecimal(txtROff.Text);
+            invoice.Roff = Convert.ToDecimal(txtROff.Text);
 
             invoice.UserAdded = _userId;
             invoice.UserLastEdited = _userId;
@@ -1118,7 +1118,7 @@ namespace EMS.WebApp.Export
             //    invoice.XchangeRate = Convert.ToDecimal(txtExchangeRate.Text);
         }
 
-        private void BuildChargesRate(ExpInvoiceCharge charge)
+        private void BuildChargesRate(ExpInvoiceChargeEntity charge)
         {
             if (ViewState["EDITINVOICECHARGEID"] == null)
             {
@@ -1132,11 +1132,11 @@ namespace EMS.WebApp.Export
             else
             {
                 if (ViewState["CHARGERATE"] != null)
-                    ChargeRates = ViewState["CHARGERATE"] as List<ExpInvoiceCharge>;
+                    ChargeRates = ViewState["CHARGERATE"] as List<ExpInvoiceChargeEntity>;
 
                 charge.InvoiceChargeID = Convert.ToInt32(ViewState["EDITINVOICECHARGEID"]);
 
-                ExpInvoiceCharge cRate = ChargeRates.Single(c => c.InvoiceChargeID == Convert.ToInt64(ViewState["EDITINVOICECHARGEID"]));
+                ExpInvoiceChargeEntity cRate = ChargeRates.Single(c => c.InvoiceChargeID == Convert.ToInt64(ViewState["EDITINVOICECHARGEID"]));
                 ChargeRates.Remove(cRate);
                 ViewState["CHARGERATE"] = ChargeRates;
                 ViewState["EDITINVOICECHARGEID"] = null;
@@ -1215,9 +1215,9 @@ namespace EMS.WebApp.Export
         {
             //Then Delete from List
             if (ViewState["CHARGERATE"] != null)
-                ChargeRates = ViewState["CHARGERATE"] as List<ExpInvoiceCharge>;
+                ChargeRates = ViewState["CHARGERATE"] as List<ExpInvoiceChargeEntity>;
 
-            ExpInvoiceCharge cRate = ChargeRates.Single(c => c.InvoiceChargeID == InvoiceChargeId);
+            ExpInvoiceChargeEntity cRate = ChargeRates.Single(c => c.InvoiceChargeID == InvoiceChargeId);
             ChargeRates.Remove(cRate);
 
             //Delete from DB
@@ -1227,14 +1227,14 @@ namespace EMS.WebApp.Export
             RefreshGridView();
 
             //Update Invoice Amount
-            //txtROff.Text = (Math.Round(ChargeRates.Sum(cr => cr.TotalAmount), 0) - ChargeRates.Sum(cr => cr.TotalAmount)).ToString();
-            //txtTotalAmount.Text = Math.Round(ChargeRates.Sum(cr => cr.TotalAmount),0).ToString();
+            txtROff.Text = (Math.Round(ChargeRates.Sum(cr => cr.TotalAmount), 0) - ChargeRates.Sum(cr => cr.TotalAmount)).ToString();
+            txtTotalAmount.Text = Math.Round(ChargeRates.Sum(cr => cr.TotalAmount), 0).ToString();
         }
 
         private void RefreshGridView()
         {
             if (ViewState["CHARGERATE"] != null)
-                ChargeRates = ViewState["CHARGERATE"] as List<ExpInvoiceCharge>;
+                ChargeRates = ViewState["CHARGERATE"] as List<ExpInvoiceChargeEntity>;
 
             gvwInvoice.DataSource = ChargeRates;
             gvwInvoice.DataBind();
@@ -1342,8 +1342,8 @@ namespace EMS.WebApp.Export
 
             if (chargeRates != null && chargeRates.Count > 0)
             {
-                if (chargeRates.Min(c => c.InvoiceChargeID) < 0)
-                    ViewState["INVOICECHARGEID"] = chargeRates.Min(c => c.InvoiceChargeID);
+                if (chargeRates.Min(c => c.InvoiceChargeId) < 0)
+                    ViewState["INVOICECHARGEID"] = chargeRates.Min(c => c.InvoiceChargeId);
                 else
                     ViewState["INVOICECHARGEID"] = null;
             }
@@ -1370,20 +1370,20 @@ namespace EMS.WebApp.Export
 
 
             //Update Invoice Amount
-            //txtROff.Text = (Math.Round(chargeRates.Sum(cr => cr.TotalAmount), 0)-chargeRates.Sum(cr => cr.TotalAmount)).ToString();
-            //txtTotalAmount.Text = Math.Round(chargeRates.Sum(cr => cr.TotalAmount),0).ToString();
+            txtROff.Text = (Math.Round(chargeRates.Sum(cr => cr.TotalAmount), 0) - chargeRates.Sum(cr => cr.TotalAmount)).ToString();
+            txtTotalAmount.Text = Math.Round(chargeRates.Sum(cr => cr.TotalAmount), 0).ToString();
         }
 
         private void EditChargeRate(int InvoiceChargeId)
         {
             ddlFChargeName.Enabled = false;
 
-            List<ExpInvoiceCharge> chargeRates = null;
+            List<ExpInvoiceChargeEntity> chargeRates = null;
 
             if (ViewState["CHARGERATE"] != null)
-                chargeRates = ViewState["CHARGERATE"] as List<ExpInvoiceCharge>;
+                chargeRates = ViewState["CHARGERATE"] as List<ExpInvoiceChargeEntity>;
 
-            ExpInvoiceCharge chargeRate = chargeRates.Single(c => c.InvoiceChargeID == InvoiceChargeId);
+            ExpInvoiceChargeEntity chargeRate = chargeRates.Single(c => c.InvoiceChargeID == InvoiceChargeId);
 
             DataTable Charge = new InvoiceBLL().ChargeEditable(chargeRate.ChargesID);
             if (Charge != null && Charge.Rows.Count > 0)

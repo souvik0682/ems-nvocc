@@ -21,7 +21,8 @@ namespace EMS.WebApp.Transaction
     public partial class Export_bl_query : System.Web.UI.Page
     {
         DataSet BLDataSet = new DataSet();
-        ExportBLQueryBLL oImportBLL = new ExportBLQueryBLL();
+        ImportBLL oImportBLL = new ImportBLL();
+        ExportBLQueryBLL oExportBLL = new ExportBLQueryBLL();
         #region Private Member Variables
 
         private int _userId = 0;
@@ -43,7 +44,8 @@ namespace EMS.WebApp.Transaction
             if (!Page.IsPostBack)
             {
                 autoComplete1.ContextKey = "0|0";
-                //FillDropDown();
+
+                FillDropDown();
                 if (_LocationSpecific)
                 {
                    // ddlLocation.SelectedValue = Convert.ToString(_userLocation);
@@ -87,11 +89,20 @@ namespace EMS.WebApp.Transaction
                 PopulateAllData();
             }
         }
+
+        private void FillDropDown()
+        {
+            ListItem Li = null;
+           
+            Li = new ListItem("SELECT", "0");
+            ddlLocation.Items.Insert(0, Li);
+        }
+
         private void PopulateAllData()
         {
             ClearAll();
             //DisableAllServiceControls();
-            BLDataSet = oImportBLL.GetBLQuery(txtBlNo.Text.Trim(), (int)EMS.Utilities.Enums.BLActivity.DOE);
+            BLDataSet = oExportBLL.GetBLQuery(txtBlNo.Text.Trim(), (int)EMS.Utilities.Enums.BLActivity.DOE);
             txtBlNo.Text = string.Empty;
             if (BLDataSet.Tables[0].Rows.Count > 0)
             {
@@ -101,7 +112,7 @@ namespace EMS.WebApp.Transaction
         }
         void FillInvoiceStatus(Int64 BLId)
         {
-            DataTable dtInvoices = oImportBLL.GetAllInvoice(BLId);
+            DataTable dtInvoices = oExportBLL.GetAllInvoice(BLId);
             gvwInvoice.DataSource = dtInvoices;
             gvwInvoice.DataBind();
         }
@@ -149,6 +160,17 @@ namespace EMS.WebApp.Transaction
 
                 }
 
+                ListItem Li = null;
+
+                Li = new ListItem(dtDetail.Rows[0]["fk_LocationID"].ToString(), dtDetail.Rows[0]["fk_LocationID"].ToString());
+                ddlLocation.Items.Insert(0, Li);
+
+                Li = null;
+
+                Li = new ListItem(dtDetail.Rows[0]["fk_NVOCCID"].ToString(), dtDetail.Rows[0]["fk_NVOCCID"].ToString());
+                ddlLine.Items.Insert(0, Li);
+
+     
                 //txtShipmentType.Text = dtDetail.Rows[0]["SHIPMENTTYPE"].ToString();                
             }
             catch
@@ -178,19 +200,25 @@ namespace EMS.WebApp.Transaction
         }
         protected void gvwInvoice_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            //if (e.Row.RowType == DataControlRowType.DataRow)
-            //{
-            //    IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
-            //    HiddenField hdnInvID = (HiddenField)e.Row.FindControl("hdnInvID");
-            //    System.Web.UI.HtmlControls.HtmlAnchor aPrint = (System.Web.UI.HtmlControls.HtmlAnchor)e.Row.FindControl("aPrint");
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                ImageButton btnCharge = (ImageButton)e.Row.FindControl("btnCharges");
 
-            //    //aPrint.Attributes.Add("onclick", string.Format("return ReportPrint1('{0}','{1}','{2}','{3}','{4}');",
-            //    //    "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("InvoiceDeveloper"),
-            //    //    "&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text),
-            //    //    "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue),
-            //    //    "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(user.FirstName + " " + user.LastName),
-            //    //    "&InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(hdnInvID.Value)));
-            //}
+
+            }
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+                HiddenField hdnInvID = (HiddenField)e.Row.FindControl("hdnInvID");
+                System.Web.UI.HtmlControls.HtmlAnchor aPrint = (System.Web.UI.HtmlControls.HtmlAnchor)e.Row.FindControl("aPrint");
+
+                aPrint.Attributes.Add("onclick", string.Format("return ReportPrint1('{0}','{1}','{2}','{3}','{4}');",
+                    "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("InvoiceDeveloper"),
+                    "&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text),
+                    "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue),
+                    "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(user.FirstName + " " + user.LastName),
+                    "&InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(hdnInvID.Value)));
+            }
         }
         protected void txtBlNo_TextChanged(object sender, EventArgs e)
         {
@@ -245,6 +273,155 @@ namespace EMS.WebApp.Transaction
 
         protected void btnBack1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        protected void ShowReceivedAmt(object sender, EventArgs e)
+        {
+            System.Web.UI.HtmlControls.HtmlAnchor a = (System.Web.UI.HtmlControls.HtmlAnchor)sender;
+            headerTest.InnerText = "Received Amount Details";
+
+            GridViewRow Row = (GridViewRow)a.NamingContainer;
+            HiddenField hdnInvID = (HiddenField)Row.FindControl("hdnInvID");
+
+            DataTable dtDoc = oImportBLL.GetReceivedAmtBreakup(Convert.ToInt64(hdnInvID.Value));
+
+            StringBuilder sbr = new StringBuilder();
+            sbr.Append("<table style='width: 100%; border: none;' cellpadding='0' cellspacing='0'>");
+            sbr.Append("<tr style='background-color:#328DC4;color:White; font-weight:bold;'>");
+            sbr.Append("<td style='width: 70px;padding-left:2px;'>MRNo.</td>");
+            sbr.Append("<td style='width: 80px;'>Date</td>");
+            sbr.Append("<td style='width: 80px;text-align:right;'>Cash</td>");
+            sbr.Append("<td style='width: 80px;text-align:right;'>Cheque</td>");
+            sbr.Append("<td style='width: 80px;text-align:right;'>TDS</td>");
+            sbr.Append("<td style='width: 50px;text-align:center;'>Print</td>");
+            sbr.Append("</tr>");
+
+            for (int rowCount = 0; rowCount < dtDoc.Rows.Count; rowCount++)
+            {
+                string MRID = dtDoc.Rows[rowCount]["MRID"].ToString();
+                string CASH = dtDoc.Rows[rowCount]["CASH"].ToString();
+                string CHEQUE = dtDoc.Rows[rowCount]["CHEQUE"].ToString();
+                string DATE = Convert.ToDateTime(dtDoc.Rows[rowCount]["DATE"].ToString()).ToString("dd/MM/yyyy");
+                string MRNO = dtDoc.Rows[rowCount]["MRNO"].ToString();
+                string TDS = dtDoc.Rows[rowCount]["TDS"].ToString();
+
+
+                if (rowCount % 2 == 0) //For ODD row
+                {
+                    sbr.Append("<tr>");
+                    sbr.Append("<td>" + MRNO + "</td>");
+                    sbr.Append("<td>" + DATE + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + CASH + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + CHEQUE + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + TDS + "</td>");
+                    //sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
+                    sbr.Append("<td><a target='_blank' href='../Reports/MoneyRcpt.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/Print.png' /></a></td>");
+
+                    sbr.Append("</tr>");
+                }
+                else // For Even Row
+                {
+                    sbr.Append("<tr style='background-color:#99CCFF;'>");
+                    sbr.Append("<td>" + MRNO + "</td>");
+                    sbr.Append("<td>" + DATE + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + CASH + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + CHEQUE + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + TDS + "</td>");
+                    //sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
+                    sbr.Append("<td><a target='_blank' href='../Reports/MoneyRcpt.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/Print.png' /></a></td>");
+
+                    sbr.Append("</tr>");
+                }
+            }
+
+            sbr.Append("</table>");
+
+            dvMoneyReceived.InnerHtml = sbr.ToString();
+
+            mpeMoneyReceivedDetail.Show();
+
+        }
+
+        protected void ShowCreditNoteAmt(object sender, EventArgs e)
+        {
+            System.Web.UI.HtmlControls.HtmlAnchor a = (System.Web.UI.HtmlControls.HtmlAnchor)sender;
+            headerTest.InnerText = "Credit Note Amount Details";
+
+            GridViewRow Row = (GridViewRow)a.NamingContainer;
+            HiddenField hdnInvID = (HiddenField)Row.FindControl("hdnInvID");
+
+            DataTable dtDoc = oImportBLL.GetCNAmtBreakup(Convert.ToInt64(hdnInvID.Value));
+
+            StringBuilder sbr = new StringBuilder();
+            sbr.Append("<table style='width: 100%; border: none;' cellpadding='0' cellspacing='0'>");
+            sbr.Append("<tr style='background-color:#328DC4;color:White; font-weight:bold;'>");
+            sbr.Append("<td style='width: 170px;padding-left:2px;'>CRNNo.</td>");
+            sbr.Append("<td style='width: 60px;'>Date</td>");
+            sbr.Append("<td style='width: 70px;text-align:right;'>Gross</td>");
+            sbr.Append("<td style='width: 70px;text-align:right;'>STax</td>");
+            sbr.Append("<td style='width: 70px;text-align:right;'>Cess</td>");
+            sbr.Append("<td style='width: 70px;text-align:right;'>ACess</td>");
+            sbr.Append("<td style='width: 50px;text-align:center;'>Print</td>");
+            sbr.Append("</tr>");
+
+            for (int rowCount = 0; rowCount < dtDoc.Rows.Count; rowCount++)
+            {
+                string CRNID = dtDoc.Rows[rowCount]["CRNID"].ToString();
+                string GROSS = dtDoc.Rows[rowCount]["GROSS"].ToString();
+                string STAX = dtDoc.Rows[rowCount]["STAX"].ToString();
+                string DATE = Convert.ToDateTime(dtDoc.Rows[rowCount]["DATE"].ToString()).ToString("dd/MM/yyyy");
+                string CRNNO = dtDoc.Rows[rowCount]["CRNNO"].ToString();
+                string CESS = dtDoc.Rows[rowCount]["CESS"].ToString();
+                string ACESS = dtDoc.Rows[rowCount]["ACESS"].ToString();
+
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+
+                string ss = string.Format("ReportPrint2('{0}','{1}','{2}','{3}','{4}','{5}');",
+                "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("CreditNote"),
+                "&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text),
+                "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue),
+                "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(user.FirstName + " " + user.LastName),
+                "&InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(hdnInvID.Value),
+                "&CreditNoteNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(CRNID));
+
+                if (rowCount % 2 == 0) //For ODD row
+                {
+                    sbr.Append("<tr>");
+                    sbr.Append("<td>" + CRNNO + "</td>");
+                    sbr.Append("<td>" + DATE + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + GROSS + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + STAX + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + CESS + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + ACESS + "</td>");
+                    //sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
+                    //sbr.Append("<td><a target='_blank' href='../Reports/MoneyRcpt.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/Print.png' /></a></td>");
+                    sbr.Append("<td><a target='_blank' onclick=" + ss + "><img src='../Images/Print.png' /></a></td>");
+
+                    sbr.Append("</tr>");
+                }
+                else // For Even Row
+                {
+                    sbr.Append("<tr style='background-color:#99CCFF;'>");
+                    sbr.Append("<td>" + CRNNO + "</td>");
+                    sbr.Append("<td>" + DATE + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + GROSS + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + STAX + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + CESS + "</td>");
+                    sbr.Append("<td style='text-align:right;'>" + ACESS + "</td>");
+                    //sbr.Append("<td><a href='AddEditMoneyReceipts.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/edit.png' /></a></td>");
+                    //sbr.Append("<td><a target='_blank' href='../Reports/MoneyRcpt.aspx?mrid=" + GeneralFunctions.EncryptQueryString(MRID) + "'><img src='../Images/Print.png' /></a></td>");
+                    sbr.Append("<td><a target='_blank' onclick=" + ss + "><img src='../Images/Print.png' /></a></td>");
+
+                    sbr.Append("</tr>");
+                }
+            }
+
+            sbr.Append("</table>");
+
+            dvMoneyReceived.InnerHtml = sbr.ToString();
+
+            mpeMoneyReceivedDetail.Show();
 
         }
 

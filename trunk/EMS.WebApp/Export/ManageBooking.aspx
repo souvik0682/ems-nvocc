@@ -101,14 +101,14 @@
                                             ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
                                     </td>
                                     <td>
-                                        Accounts<span class="errormessage">*</span>
+                                        Accounts 
                                     </td>
                                     <td>
                                         <asp:TextBox ID="txtAccounts" runat="server" CssClass="textboxuppercase" MaxLength="60"
                                             Width="250px" TabIndex="4"></asp:TextBox><br />
-                                        <asp:RequiredFieldValidator ID="rfvAccounts" runat="server" ControlToValidate="txtAccounts"
+    <%--                                    <asp:RequiredFieldValidator ID="rfvAccounts" runat="server" ControlToValidate="txtAccounts"
                                             ErrorMessage="This field is required*" CssClass="errormessage" ValidationGroup="Save"
-                                            Display="Dynamic"></asp:RequiredFieldValidator>
+                                            Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                     </td>
                                 </tr>
                                 <tr>
@@ -420,7 +420,7 @@
                                             MinimumPrefixLength="1" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
                                             OnClientItemSelected="AutoCompleteItemSelected" CompletionListCssClass="autocomplete_completionListElement"
                                             CompletionListItemCssClass="autocomplete_listItem" CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem"
-                                            DelimiterCharacters=";, :" ShowOnlyCurrentWordInCompletionListItem="true">
+                                            DelimiterCharacters=";,:" ShowOnlyCurrentWordInCompletionListItem="true" UseContextKey="true">
                                             <Animations>
                                                     <OnShow>
                                                         <Sequence>

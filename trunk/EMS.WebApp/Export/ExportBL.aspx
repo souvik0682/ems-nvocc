@@ -191,7 +191,7 @@
                                         </HeaderTemplate>--%>
                                         <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                         <ItemTemplate>
-                                            <asp:ImageButton ID="btnDashboard" runat="server" CommandName="Dashboard" ImageUrl="~/Images/status.jpg"
+                                            <asp:ImageButton ID="btnDashboard" runat="server" CommandName="Dashboard" ImageUrl="~/Images/Dashboard.ico"
                                                 Height="16" Width="16" />
                                         </ItemTemplate>
                                     </asp:TemplateField>

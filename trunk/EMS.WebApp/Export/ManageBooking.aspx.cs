@@ -131,8 +131,8 @@ namespace EMS.WebApp.Export
             #region Location
             //
             PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlLocation, 0);
-            //Li = new ListItem("SELECT", "0");
-            //ddlLocation.Items.Insert(0, Li);
+            Li = new ListItem("SELECT", "0");
+            ddlLocation.Items.Insert(0, Li);
             //Li = new ListItem("ALL", "-1");
             //ddlLocation.Items.Insert(1, Li);
             #endregion
@@ -440,6 +440,8 @@ namespace EMS.WebApp.Export
             txtContainerDtls.Text = string.Empty;
             ddlLoadingVoyage.Items.Clear();
             ddlMainLineVoyage.Items.Clear();
+            lblApprover.Text = "";
+            lblSalesman.Text = "";
 
         }
 
@@ -496,6 +498,13 @@ namespace EMS.WebApp.Export
                 //    return;
                 //}
 
+                if (ViewState["BookingCntr"] != null)
+                    Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
+                if (Containers.Count == 0)
+                {
+                    lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00078");
+                    return;
+                }
                 oBookingBll = new BookingBLL();
                 oBookingEntity = new BookingEntity();
                 //oUserEntity = (UserEntity)Session[Constants.SESSION_USER_INFO]; // This section has been commented temporarily
@@ -683,6 +692,8 @@ namespace EMS.WebApp.Export
                 hdnFPOD.Value = hdnPOD.Value;
                 txtFPOD.Text = txtPOD.Text;
                 PopulateSevices(ddlNvocc.SelectedValue.ToInt(), Convert.ToInt32(hdnFPOD.Value));
+                ddlService.SelectedIndex = 0;
+                LoadModalPortDDL();
             }
             checkTransitRoot();
         }
@@ -734,6 +745,8 @@ namespace EMS.WebApp.Export
         protected void txtFPOD_TextChanged(object sender, EventArgs e)
         {
             PopulateSevices(ddlNvocc.SelectedValue.ToInt(), Convert.ToInt32(hdnFPOD.Value));
+            ddlService.SelectedIndex = 0;
+            LoadModalPortDDL();
             checkTransitRoot();
         }
 

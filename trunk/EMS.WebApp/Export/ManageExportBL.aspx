@@ -105,7 +105,8 @@
                                                                 B/L No:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="txtBLNo" runat="server" CssClass="textboxuppercase" MaxLength="60"
+                                                                <asp:TextBox ID="txtBLNo" runat="server" CssClass="textboxuppercase" 
+                                                                    MaxLength="60" AutoPostBack="True" OnTextChanged="txtBLNo_TextChanged"
                                                                     Enabled="False" Width="250px" TabIndex="11"></asp:TextBox>
                                                                 <br />
                                                             </td>

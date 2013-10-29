@@ -175,6 +175,24 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.TextBox txtRemarks;
         
         /// <summary>
+        /// ddlLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLocation;
+        
+        /// <summary>
+        /// ddlLine control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLine;
+        
+        /// <summary>
         /// txtBLDate control.
         /// </summary>
         /// <remarks>

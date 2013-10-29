@@ -271,6 +271,7 @@ namespace EMS.WebApp.View
         private void RetriveParameters()
         {
             _userId = UserBLL.GetLoggedInUserId();
+            UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
 
             IUser user = new UserBLL().GetUser(_userId);
 

@@ -305,6 +305,8 @@ namespace EMS.Entity
         }
 
         public int ChgExist { get; set; }
+        public int DOExist { get; set; }
+        public int BLExist { get; set; }
 
         public BookingEntity()
         {
@@ -678,6 +680,14 @@ namespace EMS.Entity
             if (ColumnExists(reader, "ChgExist"))
                 if (reader["ChgExist"] != DBNull.Value)
                     ChgExist = Convert.ToInt32(reader["ChgExist"]);
+
+            if (ColumnExists(reader, "DOExist"))
+                if (reader["DOExist"] != DBNull.Value)
+                    DOExist = Convert.ToInt32(reader["DOExist"]);
+
+            if (ColumnExists(reader, "BLExist"))
+                if (reader["BLExist"] != DBNull.Value)
+                    BLExist = Convert.ToInt32(reader["BLExist"]);
         }
 
         public bool ColumnExists(IDataReader reader, string columnName)

@@ -278,7 +278,7 @@ namespace EMS.DAL
 
         public static DataTable GetContainerStockDetail(string Line, string Loc, string Stat, string CntrType, string StockDate, int EmptyYard)
         {
-            
+
             DataTable dt = new DataTable();
             DateTime dt1 = string.IsNullOrEmpty(StockDate) ? DateTime.Now : Convert.ToDateTime(StockDate);
             string strExecution = "prcRptStockDetail";
@@ -403,7 +403,7 @@ namespace EMS.DAL
         }
 
         #region Delivery Order Print
-        
+
         public static List<DOPrintEntity> GetDeliveryOrder(Int64 doId)
         {
             string strExecution = "[exp].[uspRptDO]";
@@ -451,6 +451,66 @@ namespace EMS.DAL
             return lstCntr;
         }
 
+        #endregion
+
+        #region Export EDI
+
+        public static List<ExportEDIEntity> GetExportEdiHeader(Int64 vesselId, Int64 voyageId, Int32 polId, Int32 locId)
+        {
+            string strExecution = "[exp].[rptExportEDI]";
+            List<ExportEDIEntity> lstDO = new List<ExportEDIEntity>();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@VesselID", vesselId);
+                oDq.AddBigIntegerParam("@VoyageID", voyageId);
+                oDq.AddBigIntegerParam("@POLID", polId);
+                oDq.AddBigIntegerParam("@LocationID", locId);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    ExportEDIEntity container = new ExportEDIEntity(reader, true);
+                    lstDO.Add(container);
+                }
+
+                reader.Close();
+            }
+
+            return lstDO;
+        }
+
+        public static List<ExportEDIEntity> GetExportEdi(Int64 vesselId, Int64 voyageId, Int32 polId, Int32 locId)
+        {
+            string strExecution = "[exp].[rptExportEDI]";
+            List<ExportEDIEntity> lstDO = new List<ExportEDIEntity>();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@VesselID", vesselId);
+                oDq.AddBigIntegerParam("@VoyageID", voyageId);
+                oDq.AddBigIntegerParam("@POLID", polId);
+                oDq.AddBigIntegerParam("@LocationID", locId);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    //Do nothing
+                }
+
+                reader.NextResult();
+
+                while (reader.Read())
+                {
+                    ExportEDIEntity container = new ExportEDIEntity(reader, false);
+                    lstDO.Add(container);
+                }
+
+                reader.Close();
+            }
+
+            return lstDO;
+        }
         #endregion
     }
 }

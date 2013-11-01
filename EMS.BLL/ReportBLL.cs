@@ -85,5 +85,19 @@ namespace EMS.BLL
         }
 
         #endregion
+
+        #region Export EDI
+
+        public static List<ExportEDIEntity> GetExportEdiHeader(Int64 vesselId, Int64 voyageId, Int32 polId, Int32 locId)
+        {
+            return ReportDAL.GetExportEdiHeader(vesselId, voyageId, polId, locId);
+        }
+
+        public static List<ExportEDIEntity> GetExportEdi(Int64 vesselId, Int64 voyageId, Int32 polId, Int32 locId)
+        {
+            return ReportDAL.GetExportEdi(vesselId, voyageId, polId, locId);
+        }
+
+        #endregion
     }
 }

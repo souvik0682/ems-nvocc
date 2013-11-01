@@ -484,6 +484,10 @@ namespace EMS.BLL
         {
             return CommonDAL.GetVoyages(Vessel, Line);
         }
+        public static DataTable GetVoyages(string Vessel)
+        {
+            return CommonDAL.GetVoyages(Vessel);
+        }
         public static DataTable GetBLNo(string line, string Vessel, string Voyage)
         {
             return CommonDAL.GetBLNo(line, Vessel, Voyage);

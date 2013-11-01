@@ -40,26 +40,26 @@ namespace EMS.Entity.Report
         {
             if (isHeader)
             {
-                this.MainLineOperator = Convert.ToString(reader["MainLineOperator"]);
-                this.VesselOperator = Convert.ToString(reader["VesselOperator"]);
-                this.AgentName = Convert.ToString(reader["AgentName"]);
-                this.VesselVoyage = Convert.ToString(reader["VesselVoyage"]);
-                this.ExportRotationNo = Convert.ToString(reader["ExportRotationNo"]);
-                if (reader["ExportRotationDate"] != DBNull.Value) this.ExportRotationDate = Convert.ToDateTime(reader["ExportRotationDate"]);
-                if (reader["SailDate"] != DBNull.Value) this.SailDate = Convert.ToDateTime(reader["SailDate"]);
-                this.GatewayPort = Convert.ToString(reader["GatewayPort"]);
+                //this.MainLineOperator = Convert.ToString(reader["MainLineOperator"]);
+                this.VesselOperator = Convert.ToString(reader["VESSELOPERATOR"]);
+                //this.AgentName = Convert.ToString(reader["AgentName"]);
+                //this.VesselVoyage = Convert.ToString(reader["VesselVoyage"]);
+                this.ExportRotationNo = Convert.ToString(reader["EGMNo"]);
+                if (reader["EGMDate"] != DBNull.Value) this.ExportRotationDate = Convert.ToDateTime(reader["EGMDate"]);
+                //if (reader["SailDate"] != DBNull.Value) this.SailDate = Convert.ToDateTime(reader["SailDate"]);
+                this.GatewayPort = Convert.ToString(reader["GateWayPort"]);
             }
             else
             {
-                this.GatewayPort = Convert.ToString(reader["GatewayPort"]);
+                this.GatewayPort = Convert.ToString(reader["GateWayPort"]);
                 this.ShippingBillNo = Convert.ToString(reader["ShippingBillNo"]);
                 if (reader["ShippingBillDate"] != DBNull.Value) this.ShippingBillDate = Convert.ToDateTime(reader["ShippingBillDate"]);
-                this.SBFiled = Convert.ToString(reader["SBFiled"]);
+                //this.SBFiled = Convert.ToString(reader["SBFiled"]);
                 this.DestinationPort = Convert.ToString(reader["DestinationPort"]);
-                this.TotalQty = Convert.ToString(reader["TotalQty"]);
-                this.Package = Convert.ToString(reader["Package"]);
-                this.CntrNos = Convert.ToString(reader["CntrNos"]);
-                this.Status = Convert.ToString(reader["Status"]);
+                //this.TotalQty = Convert.ToString(reader["TotalQty"]);
+                this.Package = Convert.ToString(reader["PACKAGE"]);
+                this.CntrNos = Convert.ToString(reader["CONTAINERNO"]);
+                this.Status = Convert.ToString(reader["CONTSTATUS"]);
             }
         }
 

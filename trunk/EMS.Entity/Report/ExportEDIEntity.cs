@@ -46,7 +46,7 @@ namespace EMS.Entity.Report
                 //this.VesselVoyage = Convert.ToString(reader["VesselVoyage"]);
                 this.ExportRotationNo = Convert.ToString(reader["EGMNo"]);
                 if (reader["EGMDate"] != DBNull.Value) this.ExportRotationDate = Convert.ToDateTime(reader["EGMDate"]);
-                //if (reader["SailDate"] != DBNull.Value) this.SailDate = Convert.ToDateTime(reader["SailDate"]);
+                if (reader["SailDate"] != DBNull.Value) this.SailDate = Convert.ToDateTime(reader["SailDate"]);
                 this.GatewayPort = Convert.ToString(reader["GateWayPort"]);
             }
             else
@@ -54,9 +54,9 @@ namespace EMS.Entity.Report
                 this.GatewayPort = Convert.ToString(reader["GateWayPort"]);
                 this.ShippingBillNo = Convert.ToString(reader["ShippingBillNo"]);
                 if (reader["ShippingBillDate"] != DBNull.Value) this.ShippingBillDate = Convert.ToDateTime(reader["ShippingBillDate"]);
-                //this.SBFiled = Convert.ToString(reader["SBFiled"]);
+                this.SBFiled = Convert.ToString(reader["BLIssuePort"]);
                 this.DestinationPort = Convert.ToString(reader["DestinationPort"]);
-                //this.TotalQty = Convert.ToString(reader["TotalQty"]);
+                this.TotalQty = Convert.ToString(reader["WEIGHT"]);
                 this.Package = Convert.ToString(reader["PACKAGE"]);
                 this.CntrNos = Convert.ToString(reader["CONTAINERNO"]);
                 this.Status = Convert.ToString(reader["CONTSTATUS"]);

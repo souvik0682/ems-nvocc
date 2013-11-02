@@ -144,7 +144,7 @@ namespace EMS.WebApp.Export
                 ddlUnit.DataSource = lstUnit;
                 ddlUnit.DataBind();
 
-                //ddlUnit.SelectedValue = cntr.Unit.ToString();
+                ddlUnit.SelectedValue = cntr.Unit.ToString();
 
                 ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
 

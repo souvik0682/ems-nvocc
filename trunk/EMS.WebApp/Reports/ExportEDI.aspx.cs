@@ -122,7 +122,7 @@ namespace EMS.WebApp.Reports
 
         private bool ValidateData(out string message)
         {
-            
+
             bool isValid = true;
             int slNo = 1;
             message = GeneralFunctions.FormatAlertMessage("Please correct the following errors:");
@@ -192,12 +192,16 @@ namespace EMS.WebApp.Reports
         private void GenerateReport()
         {
             ReportBLL cls = new ReportBLL();
+            string agentName = string.Empty;
             Int64 vesselId = GetSelectedVesselId();
             Int64 voyageId = Convert.ToInt64(ddlVoyage.SelectedValue);
             List<ExportEDIEntity> lstHeader = ReportBLL.GetExportEdiHeader(vesselId, voyageId, Convert.ToInt32(ddlPort.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue));
             List<ExportEDIEntity> lstData = ReportBLL.GetExportEdi(vesselId, voyageId, Convert.ToInt32(ddlPort.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue));
 
             LocalReportManager reportManager = new LocalReportManager(rptViewer, "ExportEDI", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
+            reportManager.AddParameter("VesselVoyage", txtVessel.Text.Trim() + " V." + ddlVoyage.SelectedItem.Text);
+            reportManager.AddParameter("AgentName", agentName);
+            reportManager.AddParameter("MainLineOperator", txtMLO.Text.Trim());
             reportManager.AddDataSource(new ReportDataSource("DataSetHeader", lstHeader));
             reportManager.AddDataSource(new ReportDataSource("DataSetContainer", lstData));
             reportManager.Show();

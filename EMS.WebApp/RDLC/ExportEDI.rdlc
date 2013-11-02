@@ -1461,7 +1461,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!MainLineOperator.Value</Value>
+                              <Value>=Parameters!MainLineOperator.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1877,7 +1877,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!AgentName.Value</Value>
+                              <Value>=Parameters!AgentName.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2085,7 +2085,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!VesselVoyage.Value</Value>
+                              <Value>=Parameters!VesselVoyage.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2467,6 +2467,23 @@
     <Height>2.125in</Height>
     <Style />
   </Body>
+  <ReportParameters>
+    <ReportParameter Name="VesselVoyage">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="AgentName">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MainLineOperator">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <Width>10in</Width>
   <Page>
     <PageHeader>

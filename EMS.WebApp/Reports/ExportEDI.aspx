@@ -48,13 +48,21 @@
     <asp:HiddenField ID="hdnVoyage" runat="server" />
     <div id="headercaption">EXPORT EDI</div>
     <div style="padding-top: 10px;">
-        <fieldset style="width:964px;height:65px;">
+        <fieldset style="width:964px;height:95px;">
             <table>
                 <tr>
                     <td class="label" style="padding-right:5px;vertical-align:top;">
-                        Vessel:<span class="errormessage">*</span>
+                        Location:<span class="errormessage">*</span>
                     </td>
                     <td style="padding-right:20px;vertical-align:top;">
+                        <asp:DropDownList ID="ddlLoc" runat="server">
+                            <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                    <td class="label" style="padding-right:5px;vertical-align:top;">
+                        Vessel:<span class="errormessage">*</span>
+                    </td>
+                    <td style="vertical-align:top;">
                         <asp:TextBox runat="server" ID="txtVessel" MaxLength="100" Width="200" 
                             autocomplete="off" AutoPostBack="True" ontextchanged="txtVessel_TextChanged" />
                         <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx2" ID="aceVessel"
@@ -96,34 +104,33 @@
                                         </Parallel>
                                     </OnHide>
                             </Animations>
-                        </cc1:AutoCompleteExtender>
+                        </cc1:AutoCompleteExtender>                    
                     </td>
+                </tr>
+                <tr>
                     <td class="label" style="padding-right:5px;vertical-align:top;">
                         Voyage:<span class="errormessage">*</span>
                     </td>
-                    <td style="vertical-align:top;">
+                    <td style="padding-right:20px;vertical-align:top;">
                         <asp:DropDownList ID="ddlVoyage" runat="server">
                             <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                         </asp:DropDownList>
                     </td>
-                    <td></td>
-                </tr>
-                <tr>
                     <td class="label" style="padding-right:5px;vertical-align:top;">
                         Port of Loading:<span class="errormessage">*</span>
                     </td>
-                    <td style="padding-right:20px;vertical-align:top;">
+                    <td style="vertical-align:top;">
                         <asp:DropDownList ID="ddlPort" runat="server">
                             <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                         </asp:DropDownList>
                     </td>
+                </tr>
+                <tr>
                     <td class="label" style="padding-right:5px;vertical-align:top;">
-                        Location:<span class="errormessage">*</span>
+                        Main Line Operator:<span class="errormessage">*</span>
                     </td>
-                    <td style="padding-right:20px;vertical-align:top;">
-                        <asp:DropDownList ID="ddlLoc" runat="server">
-                            <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
-                        </asp:DropDownList>
+                    <td colspan="3" style="padding-right:5px;vertical-align:top;">
+                        <asp:TextBox ID="txtMLO" runat="server" MaxLength="50"></asp:TextBox>
                     </td>
                     <td style="vertical-align:top;"><asp:Button ID="btnShow" runat="server" Text="Show" CssClass="button" OnClientClick="javascript:return validateData();" OnClick="btnShow_Click" /></td>
                 </tr>

@@ -31,6 +31,15 @@ namespace EMS.WebApp.Reports {
         protected global::System.Web.UI.WebControls.HiddenField hdnVoyage;
         
         /// <summary>
+        /// ddlLoc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLoc;
+        
+        /// <summary>
         /// txtVessel control.
         /// </summary>
         /// <remarks>
@@ -67,13 +76,13 @@ namespace EMS.WebApp.Reports {
         protected global::System.Web.UI.WebControls.DropDownList ddlPort;
         
         /// <summary>
-        /// ddlLoc control.
+        /// txtMLO control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlLoc;
+        protected global::System.Web.UI.WebControls.TextBox txtMLO;
         
         /// <summary>
         /// btnShow control.

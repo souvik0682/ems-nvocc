@@ -732,5 +732,28 @@ namespace EMS.DAL
             return exchangeRate;
         }
 
+        public static List<IExpChargeRate> GetExpInvoiceChargesById(long InvoiceId)
+        {
+            string strExecution = "[exp].[usp_Invoice_GetChargesById]";
+            List<IExpChargeRate> lstRates = new List<IExpChargeRate>();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@InvoiceID", InvoiceId);
+
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    IExpChargeRate footer = new ExpChargeRateEntity(reader);
+                    lstRates.Add(footer);
+                }
+
+                reader.Close();
+            }
+
+            return lstRates;
+        }
+
     }
 }

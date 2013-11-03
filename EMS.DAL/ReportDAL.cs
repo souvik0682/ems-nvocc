@@ -466,12 +466,14 @@ namespace EMS.DAL
                 oDq.AddBigIntegerParam("@VoyageID", voyageId);
                 oDq.AddBigIntegerParam("@POLID", polId);
                 oDq.AddBigIntegerParam("@LocationID", locId);
+                oDq.AddBigIntegerParam("@cf", 1);
+
                 DataTableReader reader = oDq.GetTableReader();
 
                 while (reader.Read())
                 {
-                    ExportEDIEntity container = new ExportEDIEntity(reader, true);
-                    lstDO.Add(container);
+                    ExportEDIEntity shpbl = new ExportEDIEntity(reader, true);
+                    lstDO.Add(shpbl);
                 }
 
                 reader.Close();
@@ -491,14 +493,15 @@ namespace EMS.DAL
                 oDq.AddBigIntegerParam("@VoyageID", voyageId);
                 oDq.AddBigIntegerParam("@POLID", polId);
                 oDq.AddBigIntegerParam("@LocationID", locId);
+                oDq.AddBigIntegerParam("@cf", 2);
                 DataTableReader reader = oDq.GetTableReader();
 
-                while (reader.Read())
-                {
-                    //Do nothing
-                }
+                //while (reader.Read())
+                //{
+                //    //Do nothing
+                //}
 
-                reader.NextResult();
+                //reader.NextResult();
 
                 while (reader.Read())
                 {

@@ -105,7 +105,7 @@ namespace EMS.DAL
             return Result;
         }
 
-             public static DataTable GetBookingList(int Loc, int Line)
+        public static DataTable GetBookingList(int Loc, int Line)
         {
             string strExecution = "[exp].[uspGetBookingListForEqp]";
             DataTable myDataTable;
@@ -118,6 +118,23 @@ namespace EMS.DAL
             }
 
             return myDataTable;
+        }
+
+        public static DataTable GetExpBLno(string Initial)
+        {
+            string strExecution = "[exp].[prcGetBLNoFromEDGE]";
+            DataTable dt = new DataTable();
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@InitialChar", 250, Initial);
+                //oDq.AddBigIntegerParam("@NvoccID", NvoccId);
+                //oDq.AddBigIntegerParam("@LocationID", LocationId);
+                dt = oDq.GetTable();
+            }
+
+            return dt;
         }
     }
 }

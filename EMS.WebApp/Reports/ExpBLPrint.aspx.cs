@@ -68,7 +68,7 @@ namespace EMS.WebApp.Reports
             DataSet dsBLPrinting = new DataSet();
             DataTable dtBLPrintingCons = null;
             DataTable dtBLPrintingCons5 = null; 
-            int i = 0;
+            //int i = 0;
             if (temp != null && temp.Tables.Count > 0)
             {
                 

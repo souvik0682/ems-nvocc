@@ -36,6 +36,13 @@ namespace EMS.Entity.Report
         public string CntrType { get; set; }
         public string BookingParty { get; set; }
         public string Containers { get; set; }
+        public string PickUpFooter { get; set; }
+        public string DONo { get; set; }
+        public DateTime? DODate { get; set; }
+        public string CompanyName { get; set; }
+        public string LocationAddress { get; set; }
+        public string LineName { get; set; }
+
 
         #endregion
 
@@ -49,7 +56,7 @@ namespace EMS.Entity.Report
         public DOPrintEntity(DataTableReader reader)
         {
             this.AgentCode = Convert.ToString(reader["AgentCode"]);
-            this.AgentCode = Convert.ToString(reader["LineCode"]);
+            this.LineCode = Convert.ToString(reader["LineCode"]);
             this.LoadPort = Convert.ToString(reader["LPortName"]);
             this.PODForm1 = Convert.ToString(reader["DPortName"]);
             this.FinalPort = Convert.ToString(reader["FPortName"]);
@@ -68,9 +75,14 @@ namespace EMS.Entity.Report
             this.AddrAddress = Convert.ToString(reader["AddrAddress"]);
             this.Phone = Convert.ToString(reader["Phone"]);
             this.BookingNo = Convert.ToString(reader["BookingNo"]);
-            this.LineCode = Convert.ToString(reader["LineName"]);
+            this.LineName = Convert.ToString(reader["LineName"]);
             this.BookingParty = Convert.ToString(reader["BookingParty"]);
             this.Containers = Convert.ToString(reader["Containers"]);
+            this.PickUpFooter = Convert.ToString(reader["PickupFooter"]);
+            this.DONo = Convert.ToString(reader["DONo"]);
+            this.DODate = Convert.ToDateTime(reader["DODate"]);
+            this.CompanyName = Convert.ToString(reader["CompName"]);
+            this.LocationAddress = Convert.ToString(reader["LocAddress"]);
         }
 
         #endregion

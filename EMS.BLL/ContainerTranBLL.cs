@@ -37,5 +37,10 @@ namespace EMS.BLL
         {
             return ContainerTranDAL.GetBookingList(Loc, Line);
         }
+
+        public DataTable GetExpBLno(string Initial)
+        {
+            return ContainerTranDAL.GetExpBLno(Initial);
+        }
     }
 }

@@ -148,6 +148,10 @@ namespace EMS.BLL
         {
             return BookingDAL.GetBookingChargeExists(BookingID);
         }
-        
+
+        public static string GetBLFromEDGE(int NVOCCID)
+        {
+            return BookingDAL.GetBLFromEDGE(NVOCCID);
+        }
     }
 }

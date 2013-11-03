@@ -119,5 +119,15 @@ namespace EMS.DAL
 
             dquery.RunActionQuery();
         }
+
+        public static DataSet GetLoadingPort(Int64 VoyageId)
+        {
+            string ProcName = "[exp].[uspGetLoadingPort]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            dquery.AddBigIntegerParam("@VoyageID", VoyageId);
+
+            return dquery.GetTables();
+        }
     }
 }

@@ -44,6 +44,10 @@ namespace EMS.BLL
        {
            EDIDAL.SaveEDINo(VoyageID, VesselID, POD, NvoccID, StartNo,SurveyorID);
        }
-    }
 
+       public static DataSet GetLoadingPort(Int64 VoyageId)
+       {
+           return EDIDAL.GetLoadingPort(VoyageId);
+       }
+    }
 }

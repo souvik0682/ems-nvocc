@@ -188,7 +188,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Parameters!MainLineOperator.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -396,7 +398,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=First(Fields!VesselOperator.Value)</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -604,7 +608,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Parameters!AgentName.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -812,7 +818,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Parameters!VesselVoyage.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -870,7 +878,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Sail Date</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -928,7 +938,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Format(First(Fields!SailDate.Value),"dd-MM-yyyy")</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1020,7 +1032,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=First(Fields!ExportRotationNo.Value) + " dt. " + Format(First(Fields!ExportRotationDate.Value),"dd-MM-yyyy")</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1078,7 +1092,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Gateway</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1136,7 +1152,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=First(Fields!GatewayPort.Value)</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1186,6 +1204,7 @@
           <Border>
             <Style>None</Style>
           </Border>
+          <FontFamily>Calibri</FontFamily>
         </Style>
       </Tablix>
       <Tablix Name="Tablix1">
@@ -1238,6 +1257,7 @@
                               <Value>Shipping Bill</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontWeight>Normal</FontWeight>
                                 <TextDecoration>None</TextDecoration>
                                 <Color>#000000</Color>
@@ -1287,7 +1307,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Where S/B Filed</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1333,6 +1355,7 @@
                               <Value>Gateway Port</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontWeight>Normal</FontWeight>
                                 <TextDecoration>None</TextDecoration>
                                 <Color>#000000</Color>
@@ -1382,6 +1405,7 @@
                               <Value>Destination Port</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontWeight>Normal</FontWeight>
                                 <TextDecoration>None</TextDecoration>
                                 <Color>#000000</Color>
@@ -1431,6 +1455,7 @@
                               <Value>Total Quantity</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontWeight>Normal</FontWeight>
                                 <TextDecoration>None</TextDecoration>
                                 <Color>#000000</Color>
@@ -1438,7 +1463,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Right</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -1451,9 +1476,6 @@
                         <TopBorder>
                           <Style>Dashed</Style>
                         </TopBorder>
-                        <BottomBorder>
-                          <Style>None</Style>
-                        </BottomBorder>
                         <LeftBorder>
                           <Style>Dashed</Style>
                         </LeftBorder>
@@ -1480,6 +1502,7 @@
                               <Value>Package</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontWeight>Normal</FontWeight>
                                 <TextDecoration>None</TextDecoration>
                                 <Color>#000000</Color>
@@ -1487,7 +1510,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Right</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -1500,9 +1523,6 @@
                         <TopBorder>
                           <Style>Dashed</Style>
                         </TopBorder>
-                        <BottomBorder>
-                          <Style>None</Style>
-                        </BottomBorder>
                         <LeftBorder>
                           <Style>Dashed</Style>
                         </LeftBorder>
@@ -1527,7 +1547,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>CONTAINER DETAILS</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1560,7 +1582,6 @@
                       </Style>
                     </Textbox>
                     <ColSpan>3</ColSpan>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />
@@ -1888,7 +1909,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Sl.</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1932,7 +1955,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Container No</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1976,7 +2001,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Status</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -2025,7 +2052,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!ShippingBillNo.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -2055,7 +2084,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Format(Fields!ShippingBillDate.Value,"dd-MM-yyyy")</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -2085,7 +2116,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!SBFiled.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -2115,7 +2148,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!GatewayPort.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -2145,7 +2180,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!DestinationPort.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -2175,10 +2212,14 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!TotalQty.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>TotalQty</rd:DefaultName>
@@ -2205,10 +2246,14 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!Package.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Package</rd:DefaultName>

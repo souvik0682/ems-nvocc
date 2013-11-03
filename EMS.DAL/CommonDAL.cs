@@ -930,5 +930,13 @@ namespace EMS.DAL
             return myDataTable;
         }
         #endregion
+
+        public static DataSet GetCompanyDetails(Int32 companyId)
+        {
+            string ProcName = "[dbo].[PrcRptCompanyDetails]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+            dquery.AddIntegerParam("@CompanyId", companyId);
+            return dquery.GetTables();
+        }
     }
 }

@@ -11,16 +11,24 @@
                 hdnExpBL.value = e.get_value();
             }
             else if (sender._id == "AutoCompleteVes") {
-                var hdnExpBL = $get('<%=hdnExpBL.ClientID %>');
-                hdnExpBL.value = e.get_value();
+                var hdnVessel = $get('<%=hdnVessel.ClientID %>');
+                hdnVessel.value = e.get_value();
             }
         }
 
     </script>
     <style type="text/css">
-        .style1
+        .style3
         {
-            width: 85px;
+            width: 230px;
+        }
+        .style4
+        {
+            width: 86px;
+        }
+        .style5
+        {
+            width: 200px;
         }
     </style>
 </asp:Content>
@@ -37,10 +45,57 @@
                     <ContentTemplate>
                         <table border="0" cellpadding="2" cellspacing="3" width="100%">
                             <tr>
-                                <td>
+                                <td class="style3">
                                     B/L No<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
+                                    <asp:HiddenField ID="hdnExpBL" runat="server" />
+                                    <asp:TextBox ID="txtExpBL" runat="server" Width="203px" AutoPostBack="True" onkeyup="SetContextKey();"
+                                        Enabled="true" Style="text-transform: uppercase;" 
+                                        ontextchanged="txtExpBL_TextChanged"></asp:TextBox>
+                                    <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteExExpBL" ID="autoComplete1"
+                                        TargetControlID="txtExpBL" ServicePath="~/GetLocation.asmx" ServiceMethod="GetExpBLNoList"
+                                        MinimumPrefixLength="1" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
+                                        CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
+                                        CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
+                                        ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected"
+                                        UseContextKey="true">
+                                        <Animations>
+                                        <OnShow>
+                                            <Sequence>
+                                                <%-- Make the completion list transparent and then show it --%>
+                                                <OpacityAction Opacity="0" />
+                                                <HideAction Visible="true" />
+                            
+                                                <%--Cache the original size of the completion list the first time
+                                                    the animation is played and then set it to zero --%>
+                                                <ScriptAction Script="
+                                                    // Cache the size and setup the initial size
+                                                    var behavior = $find('AutoCompleteExExpBL');
+                                                    if (!behavior._height) {
+                                                        var target = behavior.get_completionList();
+                                                        behavior._height = target.offsetHeight - 2;
+                                                        target.style.height = '0px';
+                                                    }" />
+                            
+                                                <%-- Expand from 0px to the appropriate size while fading in --%>
+                                                <Parallel Duration=".4">
+                                                    <FadeIn />
+                                                    <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteExExpBL')._height" />
+                                                </Parallel>
+                                            </Sequence>
+                                        </OnShow>
+                                        <OnHide>
+                                            <%-- Collapse down to 0px and fade out --%>
+                                            <Parallel Duration=".4">
+                                                <FadeOut />
+                                                <Length PropertyKey="height" StartValueScript="$find('AutoCompleteExExpBL')._height" EndValue="0" />
+                                            </Parallel>
+                                        </OnHide>
+                                        </Animations>
+                                    </cc1:AutoCompleteExtender>
+                                </td>
+                                <%--<td>
                                     <asp:HiddenField ID="hdnExpBL" runat="server" />
                                     <asp:TextBox runat="server" ID="txtExpBL" Width="250" autocomplete="off" AutoPostBack="True"
                                         MaxLength="50" Style="text-transform: uppercase;" OnTextChanged="txtExpBL_TextChanged" />
@@ -59,12 +114,11 @@
                                         <Animations>
                                                     <OnShow>
                                                         <Sequence>
-                                                            <%-- Make the completion list transparent and then show it --%>
+                                                           
                                                             <OpacityAction Opacity="0" />
                                                             <HideAction Visible="true" />
                             
-                                                            <%--Cache the original size of the completion list the first time
-                                                                the animation is played and then set it to zero --%>
+                                                          
                                                             <ScriptAction Script="
                                                                 // Cache the size and setup the initial size
                                                                 var behavior = $find('AutoCompleteExExpBL');
@@ -74,7 +128,7 @@
                                                                     target.style.height = '0px';
                                                                 }" />
                             
-                                                            <%-- Expand from 0px to the appropriate size while fading in --%>
+                                                            
                                                             <Parallel Duration=".4">
                                                                 <FadeIn />
                                                                 <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteExExpBL')._height" />
@@ -82,7 +136,7 @@
                                                         </Sequence>
                                                     </OnShow>
                                                     <OnHide>
-                                                        <%-- Collapse down to 0px and fade out --%>
+                                                        
                                                         <Parallel Duration=".4">
                                                             <FadeOut />
                                                             <Length PropertyKey="height" StartValueScript="$find('AutoCompleteExExpBL')._height" EndValue="0" />
@@ -90,8 +144,8 @@
                                                     </OnHide>
                                         </Animations>
                                     </cc1:AutoCompleteExtender>
-                                </td>
-                                <td>
+                                </td>--%>
+                                <td class="style5">
                                     B/L Date :
                                 </td>
                                 <td>
@@ -99,7 +153,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td class="style3">
                                     Port Name :
                                 </td>
                                 <td>
@@ -111,7 +165,7 @@
                                     <cc1:ValidatorCalloutExtender ID="vcePortName" runat="server" TargetControlID="rfvPortName">
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
-                                <td>
+                                <td class="style5">
                                     Booking No :
                                 </td>
                                 <td>
@@ -120,7 +174,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td class="style3">
                                     Vessel Name<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
@@ -172,7 +226,7 @@
                                         </Animations>
                                     </cc1:AutoCompleteExtender>
                                 </td>
-                                <td>
+                                <td class="style5">
                                     Voyage<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
@@ -186,7 +240,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td class="style3">
                                     Date of Arrival<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
@@ -199,7 +253,7 @@
                                     <cc1:ValidatorCalloutExtender ID="vceDateofArrival" runat="server" TargetControlID="rfvDateofArrival">
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
-                                <td>
+                                <td class="style5">
                                     Date of Departure<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
@@ -238,12 +292,19 @@
                                                             <asp:HiddenField ID="hdnImpFooterId" runat="server" Value='<%# Eval("fk_ImpBLFooterID") %>' />
                                                             <asp:HiddenField ID="hdnContainerId" runat="server" Value='<%# Eval("fk_HireContainerID") %>' />
                                                             <asp:HiddenField ID="hdnTranshipmentId" runat="server" Value='<%# Eval("TranshipmentID") %>' />
+                                                            <asp:HiddenField ID="hdnExpBLContainerID" runat="server" Value='<%# Eval("pk_ExpBLContainerID") %>' />
                                                             <asp:Label ID="lblContainerNo" runat="server" Text='<%# Eval("ContainerNo")%>'></asp:Label>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
+                                                    
                                                     <asp:TemplateField HeaderText="Size" HeaderStyle-Width="25%" ItemStyle-HorizontalAlign="Center">
                                                         <ItemTemplate>
                                                             <asp:Label ID="lblContainerSize" runat="server" Text='<%# Eval("CntrSize")%>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Type" HeaderStyle-Width="25%" ItemStyle-HorizontalAlign="Center">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="lblContainerType" runat="server" Text='<%# Eval("ContainerType")%>'></asp:Label>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Select" HeaderStyle-Width="25%" ItemStyle-HorizontalAlign="Center">
@@ -267,7 +328,7 @@
                     <tr>
                         <td>
                             <asp:GridView ID="gvSelectedContainer" runat="server" AutoGenerateColumns="false"
-                                ShowFooter="false" Width="100%">
+                                ShowFooter="false" Width="65%">
                                 <Columns>
                                     <asp:TemplateField HeaderText="Container No" HeaderStyle-Width="50%">
                                         <ItemTemplate>
@@ -280,6 +341,11 @@
                                     <asp:TemplateField HeaderText="Size" HeaderStyle-Width="25%" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
                                             <asp:Label ID="lblContainerSize" runat="server" Text='<%# Eval("Size")%>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Type" HeaderStyle-Width="25%" ItemStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblContainerType" runat="server" Text='<%# Eval("ContainerType")%>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>

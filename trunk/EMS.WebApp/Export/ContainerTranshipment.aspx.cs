@@ -148,6 +148,21 @@ namespace EMS.WebApp.Export
                 ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
 
                 btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
+                btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "pk_ActualTrasShipID"));
+
+                if (_canDelete == true)
+                {
+                    //ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                    btnRemove.Visible = true;
+                    btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00007");
+                    //btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLID"));
+
+                }
+                else
+                {
+                    //ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                    btnRemove.Visible = false;
+                }
 
             }
         }

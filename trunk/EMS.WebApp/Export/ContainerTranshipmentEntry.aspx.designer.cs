@@ -40,24 +40,6 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtExpBL;
         
         /// <summary>
-        /// rfvExpBL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvExpBL;
-        
-        /// <summary>
-        /// vceExpBL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender vceExpBL;
-        
-        /// <summary>
         /// autoComplete1 control.
         /// </summary>
         /// <remarks>

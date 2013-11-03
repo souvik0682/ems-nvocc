@@ -112,7 +112,7 @@
                         Voyage:<span class="errormessage">*</span>
                     </td>
                     <td style="padding-right:20px;vertical-align:top;">
-                        <asp:DropDownList ID="ddlVoyage" runat="server">
+                        <asp:DropDownList ID="ddlVoyage" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlVoyage_SelectedIndexChanged">
                             <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                         </asp:DropDownList>
                     </td>

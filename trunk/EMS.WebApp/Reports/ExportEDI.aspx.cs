@@ -11,6 +11,7 @@ using System.Configuration;
 using EMS.Utilities.ReportManager;
 using EMS.Entity.Report;
 using EMS.Common;
+using System.Data;
 
 namespace EMS.WebApp.Reports
 {
@@ -49,6 +50,11 @@ namespace EMS.WebApp.Reports
         protected void txtVessel_TextChanged(object sender, EventArgs e)
         {
             ddlVoyage.SelectedValue = "0";
+        }
+
+        protected void ddlVoyage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateLoadingPort();
         }
 
         protected void btnShow_Click(object sender, EventArgs e)
@@ -117,16 +123,32 @@ namespace EMS.WebApp.Reports
 
         private void PopulateLoadingPort()
         {
+            DataSet ds = EDIBLL.GetLoadingPort(Convert.ToInt64(ddlVoyage.SelectedValue));
 
+            if (!ReferenceEquals(ds, null))
+            {
+                ddlPort.DataValueField = "PortId";
+                ddlPort.DataTextField = "PortName";
+                ddlPort.DataSource = ds;
+                ddlPort.DataBind();
+            }
+
+            ddlPort.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
         }
 
         private bool ValidateData(out string message)
         {
-
             bool isValid = true;
             int slNo = 1;
             message = GeneralFunctions.FormatAlertMessage("Please correct the following errors:");
             return true;
+            if (ddlLoc.SelectedValue == "0")
+            {
+                isValid = false;
+                message += GeneralFunctions.FormatAlertMessage(slNo, "Please select valid location");
+                slNo++;
+            }
+
             if (string.IsNullOrEmpty(txtVessel.Text))
             {
                 isValid = false;
@@ -156,13 +178,6 @@ namespace EMS.WebApp.Reports
             {
                 isValid = false;
                 message += GeneralFunctions.FormatAlertMessage(slNo, "Please select port of loading");
-                slNo++;
-            }
-
-            if (ddlLoc.SelectedValue == "0")
-            {
-                isValid = false;
-                message += GeneralFunctions.FormatAlertMessage(slNo, "Please select valid location");
                 slNo++;
             }
 
@@ -198,12 +213,20 @@ namespace EMS.WebApp.Reports
             List<ExportEDIEntity> lstHeader = ReportBLL.GetExportEdiHeader(vesselId, voyageId, Convert.ToInt32(ddlPort.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue));
             List<ExportEDIEntity> lstData = ReportBLL.GetExportEdi(vesselId, voyageId, Convert.ToInt32(ddlPort.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue));
 
+            DataSet dsCompany = CommonBLL.GetCompanyDetails(1);
+
+            if (!ReferenceEquals(dsCompany, null) && dsCompany.Tables.Count > 0 && dsCompany.Tables[0].Rows.Count > 0)
+            {
+                agentName = Convert.ToString(dsCompany.Tables[0].Rows[0]["CompName"]);
+            }
+
             LocalReportManager reportManager = new LocalReportManager(rptViewer, "ExportEDI", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
+            reportManager.HasSubReport = true;
             reportManager.AddParameter("VesselVoyage", txtVessel.Text.Trim() + " V." + ddlVoyage.SelectedItem.Text);
             reportManager.AddParameter("AgentName", agentName);
             reportManager.AddParameter("MainLineOperator", txtMLO.Text.Trim());
             reportManager.AddDataSource(new ReportDataSource("DataSetHeader", lstHeader));
-            reportManager.AddDataSource(new ReportDataSource("DataSetContainer", lstData));
+            reportManager.AddSubReportDataSource(new ReportDataSource("DataSetContainer", lstData));
             reportManager.Show();
         }
 

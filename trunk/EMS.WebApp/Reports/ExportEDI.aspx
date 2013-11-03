@@ -44,6 +44,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
+    <center>
     <asp:HiddenField ID="hdnVessel" runat="server" />
     <asp:HiddenField ID="hdnVoyage" runat="server" />
     <div id="headercaption">EXPORT EDI</div>
@@ -67,7 +68,7 @@
                             autocomplete="off" AutoPostBack="True" ontextchanged="txtVessel_TextChanged" />
                         <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx2" ID="aceVessel"
                             TargetControlID="txtVessel" ServicePath="~/GetLocation.asmx" ServiceMethod="GetVesselList"
-                            MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20" OnClientItemSelected="getSelectedVesselId"
+                            MinimumPrefixLength="1" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20" OnClientItemSelected="getSelectedVesselId"
                             CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
                             CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
                             ShowOnlyCurrentWordInCompletionListItem="true">
@@ -140,4 +141,5 @@
             <rsweb:ReportViewer ID="rptViewer" runat="server" Width="100%"></rsweb:ReportViewer>        
         </div> 
     </div>
+    </center>
 </asp:Content>

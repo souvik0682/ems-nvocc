@@ -35,21 +35,28 @@ namespace EMS.WebApp.Reports
         {
             if (!IsPostBack)
             {
+                RetriveParameters();
                 PopulateControls();
             }
             else
             {
                 if (Convert.ToInt64(ddlVoyage.SelectedValue) == 0)
                 {
-                    Int64 vesselId = GetSelectedVesselId();
-                    Filler.FillData(ddlVoyage, CommonBLL.GetVoyages(vesselId.ToString()), "VoyageNo", "VoyageID", "Voyage");
+                    //Int64 vesselId = GetSelectedVesselId();
+                    
+                    int vesselId = Convert.ToInt32(hdnVessel.Value);
+                    PopulateVoyage(vesselId);
+                    //Filler.FillData(ddlVoyage, CommonBLL.GetVoyages(vesselId.ToString()), "VoyageNo", "VoyageID", "Voyage");
                 }
             }
         }
 
         protected void txtVessel_TextChanged(object sender, EventArgs e)
         {
-            ddlVoyage.SelectedValue = "0";
+            int vesselId = Convert.ToInt32(hdnVessel.Value);
+            PopulateVoyage(vesselId);
+            //ddlVoyage.SelectedValue = "0";
+
         }
 
         protected void ddlVoyage_SelectedIndexChanged(object sender, EventArgs e)
@@ -81,6 +88,17 @@ namespace EMS.WebApp.Reports
         #endregion
 
         #region Private Methods
+
+        private void PopulateVoyage(int vesselID)
+        {
+            //BLL.DBInteraction dbinteract = new BLL.DBInteraction();
+            DataSet ds = BookingBLL.GetExportVoyages(vesselID);
+            ddlVoyage.DataValueField = "VoyageID";
+            ddlVoyage.DataTextField = "VoyageNo";
+            ddlVoyage.DataSource = ds;
+            ddlVoyage.DataBind();
+            ddlVoyage.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
+        }
 
         private void RetriveParameters()
         {
@@ -208,10 +226,11 @@ namespace EMS.WebApp.Reports
         {
             ReportBLL cls = new ReportBLL();
             string agentName = string.Empty;
-            Int64 vesselId = GetSelectedVesselId();
+            int vesselId = Convert.ToInt32(hdnVessel.Value);
+            //Int64 vesselId = GetSelectedVesselId();
             Int64 voyageId = Convert.ToInt64(ddlVoyage.SelectedValue);
-            List<ExportEDIEntity> lstHeader = ReportBLL.GetExportEdiHeader(vesselId, voyageId, Convert.ToInt32(ddlPort.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue));
-            List<ExportEDIEntity> lstData = ReportBLL.GetExportEdi(vesselId, voyageId, Convert.ToInt32(ddlPort.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue));
+            List<ExportEDIEntity> lstHeader = ReportBLL.GetExportEdi(vesselId, voyageId, Convert.ToInt32(ddlPort.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue));
+            List<ExportEDIEntity> lstData = ReportBLL.GetExportEdiCntr(vesselId, voyageId, Convert.ToInt32(ddlPort.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue));
 
             DataSet dsCompany = CommonBLL.GetCompanyDetails(1);
 

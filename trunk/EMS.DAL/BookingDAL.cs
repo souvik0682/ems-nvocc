@@ -539,5 +539,24 @@ namespace EMS.DAL
             return Approver;
 
          }
+
+        public static string GetBLFromEDGE(int NVOCCID)
+        {
+            string ProcName = "[exp].[prcGetBLFromEDGE]";
+            string Approver = "";
+            //DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+            //string Result = "";
+
+            using (DbQuery oDq = new DbQuery(ProcName))
+            {
+                oDq.AddIntegerParam("@NVOCCID", NVOCCID);
+                //oDq.AddTextParam("@RESULT", Result, QueryParameterDirection.Output);
+
+                Approver = Convert.ToString(oDq.GetScalar());
+            }
+
+            return Approver;
+
+        }
     }
 }

@@ -64,6 +64,7 @@ namespace EMS.DAL
                     oDq.AddIntegerParam("@TranshipmentId", Convert.ToInt32(obj.TranshipmentId));
                 oDq.AddDateTimeParam("@ActualArrival", Convert.ToDateTime(obj.ActualArrival));
                 oDq.AddDateTimeParam("@ActualDeparture", Convert.ToDateTime(obj.ActualDeparture));
+                oDq.AddIntegerParam("@ExpBLContainerId", Convert.ToInt32(obj.ExpBLContainerID));
                 oDq.RunActionQuery();
 
             }

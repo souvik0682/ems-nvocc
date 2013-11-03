@@ -516,5 +516,10 @@ namespace EMS.BLL
             return CommonDAL.GetAllCurrency();
         }
         #endregion
+
+        public static DataSet GetCompanyDetails(Int32 companyId)
+        {
+            return CommonDAL.GetCompanyDetails(companyId);
+        }
     }
 }

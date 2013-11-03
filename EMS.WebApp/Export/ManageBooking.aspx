@@ -541,7 +541,7 @@
                                     </td>
                                     <td>
                                         <asp:RadioButtonList ID="rdoBLThruEdge" runat="server" TabIndex="19" RepeatDirection="Horizontal"
-                                            OnSelectedIndexChanged="rdoBLThruEdge_SelectedIndexChanged" AutoPostBack="True">
+                                            OnSelectedIndexChanged="rdoBLThruEdge_SelectedIndexChanged" AutoPostBack="True" Enabled="false">
                                             <asp:ListItem Selected="True" Text="Yes" Value="Yes"></asp:ListItem>
                                             <asp:ListItem Text="No" Value="No"></asp:ListItem>
                                         </asp:RadioButtonList>

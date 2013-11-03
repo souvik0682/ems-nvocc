@@ -755,6 +755,10 @@ namespace EMS.WebApp.Export
             if (hdnFPOD.Value != "")
                 PopulateSevices(ddlNvocc.SelectedValue.ToInt(), Convert.ToInt32(hdnFPOD.Value));
 
+            if (BookingBLL.GetBLFromEDGE(ddlNvocc.SelectedValue.ToInt()).ToString() == "False")
+                rdoBLThruEdge.SelectedValue = "No";
+            else
+                rdoBLThruEdge.SelectedValue = "Yes";
         }
 
         void AddContainers()

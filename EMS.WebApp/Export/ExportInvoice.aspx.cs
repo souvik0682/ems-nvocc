@@ -34,6 +34,7 @@ namespace EMS.WebApp.Export
 
             if (!Page.IsPostBack)
             {
+               
                 string strProcessScript = "this.value='Processing...';this.disabled=true;";
                 btnSave.Attributes.Add("onclick", strProcessScript + ClientScript.GetPostBackEventReference(btnSave, "").ToString());
                 FillCurrency();
@@ -238,7 +239,7 @@ namespace EMS.WebApp.Export
             ViewState["NOOFFEU"] = dt.Rows[0]["NoofFEU"].ToString();
 
         }
-
+        /*
         private void FEU(string BLNo)
         {
             DataTable dt = new InvoiceBLL().FEU(BLNo);
@@ -252,7 +253,7 @@ namespace EMS.WebApp.Export
             ViewState["VOLUME"] = dt.Rows[0]["Volume"].ToString();
 
         }
-
+        */
         /*
         private void BLdate(string BLNo)
         {
@@ -391,8 +392,8 @@ namespace EMS.WebApp.Export
             {
                 GrossWeight(ddlBLno.SelectedItem.Text);
                 TEU(ddlBLno.SelectedItem.Text);
-                FEU(ddlBLno.SelectedItem.Text);
-                Volume(ddlBLno.SelectedItem.Text);
+                //FEU(ddlBLno.SelectedItem.Text);
+                //Volume(ddlBLno.SelectedItem.Text);
                 /*
                 BLdate(ddlBLno.SelectedItem.Text);
                 */
@@ -1281,8 +1282,8 @@ namespace EMS.WebApp.Export
 
             GrossWeight(ddlBLno.SelectedItem.Text);
             TEU(ddlBLno.SelectedItem.Text);
-            FEU(ddlBLno.SelectedItem.Text);
-            Volume(ddlBLno.SelectedItem.Text);
+            //FEU(ddlBLno.SelectedItem.Text);
+            //Volume(ddlBLno.SelectedItem.Text);
             /*
             BLdate(ddlBLno.SelectedItem.Text);
             */
@@ -1293,7 +1294,7 @@ namespace EMS.WebApp.Export
             txtContainers.Text = ViewState["NOOFTEU"].ToString() + " x 20' & " + ViewState["NOOFFEU"] + " x 40'";
 
             //For Charge Rates
-            List<IChargeRate> chargeRates = new InvoiceBLL().GetInvoiceChargesById(InvoiceId);
+            List<IExpChargeRate> chargeRates = new InvoiceBLL().GetExpInvoiceChargesById(InvoiceId);
 
             ViewState["CHARGERATE"] = chargeRates;
 

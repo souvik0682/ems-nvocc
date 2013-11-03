@@ -490,7 +490,7 @@ namespace EMS.WebApp.Transaction
         {
 
             string fileName = Server.MapPath("~/Export/ChargesFile/") + lnkDownload.CommandArgument;
-            DownloadFile(fileName, false);
+            DownloadFile(fileName, true);
             
         }
 

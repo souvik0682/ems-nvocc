@@ -114,8 +114,18 @@ namespace EMS.WebApp.Export
         {
             TranshipmentDetailsBLL objBLL = new TranshipmentDetailsBLL();
             DataSet ds = objBLL.GetContainerTranshipment(Convert.ToInt32(ddlPortName.SelectedValue.Trim()), Convert.ToInt32(hdnExpBL.Value.Trim()), Convert.ToInt32(hdnBookingId.Value.Trim()));
-            gvContainer.DataSource = ds;
-            gvContainer.DataBind();
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                lblMessage.Text = "";
+                gvContainer.DataSource = ds;
+                gvContainer.DataBind();
+            }
+            else
+            {
+                lblMessage.Text = "Invalid Port code";
+                return;
+            }
 
             List<TranshipmentDetails> objTrans = new List<TranshipmentDetails>();
             TranshipmentDetails objTran = new TranshipmentDetails();
@@ -128,6 +138,7 @@ namespace EMS.WebApp.Export
             ViewState["Data"] = objTrans;
 
             ModalPopupExtender1.Show();
+            
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -167,7 +178,7 @@ namespace EMS.WebApp.Export
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Export/ContainerTranshipmentEntry.aspx");
+            Response.Redirect("~/Export/ContainerTranshipment.aspx");
         }
 
         protected void btnProceed_Click(object sender, EventArgs e)
@@ -178,8 +189,10 @@ namespace EMS.WebApp.Export
                 HiddenField hdnImpFooterId = (HiddenField)gvr.FindControl("hdnImpFooterId");
                 HiddenField hdnContainerId = (HiddenField)gvr.FindControl("hdnContainerId");
                 HiddenField hdnTranshipmentId = (HiddenField)gvr.FindControl("hdnTranshipmentId");
+                HiddenField hdnExpBLContainerID = (HiddenField)gvr.FindControl("hdnExpBLContainerID");
                 Label lblContainerNo = (Label)gvr.FindControl("lblContainerNo");
                 Label lblContainerSize = (Label)gvr.FindControl("lblContainerSize");
+                Label lblContainerType = (Label)gvr.FindControl("lblContainerType");
                 CheckBox chkContainer = (CheckBox)gvr.FindControl("chkContainer");
 
                 if (chkContainer.Checked)
@@ -193,7 +206,9 @@ namespace EMS.WebApp.Export
                     objTran.ActualArrival = Convert.ToDateTime(txtDateofArrival.Text.Trim());
                     objTran.ActualDeparture = Convert.ToDateTime(txtDateofDeparture.Text.Trim());
                     objTran.ContainerNo = lblContainerNo.Text.Trim();
+                    objTran.ContainerType = lblContainerType.Text.Trim();
                     objTran.Size = lblContainerSize.Text.Trim();
+                    objTran.ExpBLContainerID = Convert.ToInt64(hdnExpBLContainerID.Value.Trim());
 
                     objTrans.Add(objTran);
                 }

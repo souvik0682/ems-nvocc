@@ -33,6 +33,7 @@ namespace EMS.WebApp.Export
         private bool _canDelete = false;
         private bool _canView = false;
         private int _userLocation = 0;
+        private int CalledFrom;
 
         #endregion
 
@@ -51,8 +52,25 @@ namespace EMS.WebApp.Export
             if (!IsPostBack)
             {
                 RetrieveSearchCriteria();
+                if (!ReferenceEquals(Request.QueryString["frmod"], null))
+                {
+                    CalledFrom = Request.QueryString["frmod"].ToInt();
+
+                    //Int64.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["frmod"].ToString()), out CalledFrom);
+
+                    //if (invoiveId > 0)
+                    //    LoadForEdit(invoiveId);
+
+                    //btnSave.Enabled = false;
+                    if (CalledFrom == 2)   // Sales Man
+                        btnAdd.Visible = false;
+                }
                 LoadBooking();
+                
+               
             }
+
+           
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
@@ -218,6 +236,9 @@ namespace EMS.WebApp.Export
                     
                     //btnStatus.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
                 }
+
+                if (CalledFrom == 1)   // Sales Man
+                    btnCharge.Enabled = false;
                 //btnStatus.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
                 //btnCharges.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
                 

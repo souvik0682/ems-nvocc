@@ -42,6 +42,11 @@ namespace EMS.Entity.Report
             {
                 //this.MainLineOperator = Convert.ToString(reader["MainLineOperator"]);
                 this.VesselOperator = Convert.ToString(reader["VESSELOPERATOR"]);
+                this.ShippingBillNo = Convert.ToString(reader["ShippingBillNo"]);
+                this.DestinationPort = Convert.ToString(reader["DestinationPort"]);
+                this.TotalQty = Convert.ToString(reader["WEIGHT"]);
+                this.Package = Convert.ToString(reader["PACKAGE"]);
+                if (reader["ShippingBillDate"] != DBNull.Value) this.ShippingBillDate = Convert.ToDateTime(reader["ShippingBillDate"]);
                 //this.AgentName = Convert.ToString(reader["AgentName"]);
                 //this.VesselVoyage = Convert.ToString(reader["VesselVoyage"]);
                 this.ExportRotationNo = Convert.ToString(reader["EGMNo"]);
@@ -56,8 +61,8 @@ namespace EMS.Entity.Report
                 if (reader["ShippingBillDate"] != DBNull.Value) this.ShippingBillDate = Convert.ToDateTime(reader["ShippingBillDate"]);
                 this.SBFiled = Convert.ToString(reader["BLIssuePort"]);
                 this.DestinationPort = Convert.ToString(reader["DestinationPort"]);
-                this.TotalQty = Convert.ToString(reader["WEIGHT"]);
-                this.Package = Convert.ToString(reader["PACKAGE"]);
+                //this.TotalQty = Convert.ToString(reader["WEIGHT"]);
+                //this.Package = Convert.ToString(reader["PACKAGE"]);
                 this.CntrNos = Convert.ToString(reader["CONTAINERNO"]);
                 this.Status = Convert.ToString(reader["CONTSTATUS"]);
             }

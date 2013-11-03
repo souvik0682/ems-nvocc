@@ -170,7 +170,7 @@ namespace EMS.WebApp.Transaction
                 Li = new ListItem(dtDetail.Rows[0]["fk_NVOCCID"].ToString(), dtDetail.Rows[0]["fk_NVOCCID"].ToString());
                 ddlLine.Items.Insert(0, Li);
 
-     
+                lnkDownload.CommandArgument = dtDetail.Rows[0]["DocUploaded"].ToString();
                 //txtShipmentType.Text = dtDetail.Rows[0]["SHIPMENTTYPE"].ToString();                
             }
             catch
@@ -203,15 +203,50 @@ namespace EMS.WebApp.Transaction
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 ImageButton btnCharge = (ImageButton)e.Row.FindControl("btnCharges");
+               
+                //long Status_Invoice_ID = Convert.ToInt64(e.CommandArgument);
+                ImageButton btnStatus = (ImageButton)e.Row.FindControl("btnStatus");
+                //LinkButton moneyReceipt = (LinkButton)e.Row.FindControl("aMoneyRecpt");
+                HiddenField hdnInvID = (HiddenField)e.Row.FindControl("hdnInvID");
+                btnStatus.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
 
+                System.Web.UI.HtmlControls.HtmlAnchor aPrint = (System.Web.UI.HtmlControls.HtmlAnchor)e.Row.FindControl("aPrint");
+                System.Web.UI.HtmlControls.HtmlAnchor aAddCrdtNote = (System.Web.UI.HtmlControls.HtmlAnchor)e.Row.FindControl("aAddCrdtNote");
+                System.Web.UI.HtmlControls.HtmlAnchor aMoneyRecpt = (System.Web.UI.HtmlControls.HtmlAnchor)e.Row.FindControl("aMoneyRecpt");
+                System.Web.UI.HtmlControls.HtmlAnchor RcvdLnk = (System.Web.UI.HtmlControls.HtmlAnchor)e.Row.FindControl("RcvdLnk");
+                System.Web.UI.HtmlControls.HtmlAnchor CrnLnk = (System.Web.UI.HtmlControls.HtmlAnchor)e.Row.FindControl("CrnLnk");
+                
+                var data = (DataRowView)e.Row.DataItem;
+                bool Actv = Convert.ToBoolean(data["invoiceActive"]);
+
+                if (Actv == false)
+                {
+                    btnStatus.Visible = false;
+                    aPrint.Visible = false;
+                    aAddCrdtNote.Visible = false;
+                    aMoneyRecpt.Visible = false;
+                    CrnLnk.Visible = false;
+                    RcvdLnk.Visible = false;
+                }
+                else
+                {
+                    btnStatus.Visible = true;
+                    aPrint.Visible = true;
+                    aAddCrdtNote.Visible = true;
+                    aMoneyRecpt.Visible = true;
+                    CrnLnk.Visible = true;
+                    RcvdLnk.Visible = true;
+                }
 
             }
+
+            
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
                 HiddenField hdnInvID = (HiddenField)e.Row.FindControl("hdnInvID");
                 System.Web.UI.HtmlControls.HtmlAnchor aPrint = (System.Web.UI.HtmlControls.HtmlAnchor)e.Row.FindControl("aPrint");
-
+                aPrint.Visible = false;
                 aPrint.Attributes.Add("onclick", string.Format("return ReportPrint1('{0}','{1}','{2}','{3}','{4}');",
                     "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("InvoiceDeveloper"),
                     "&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text),
@@ -425,5 +460,76 @@ namespace EMS.WebApp.Transaction
 
         }
 
+        protected void gvwInvoice_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Status")
+            {
+                DeleteInvoice(Convert.ToInt64(e.CommandArgument));
+                //if (e.Row.RowType == DataControlRowType.DataRow)
+                //{
+                //    gvwInvoice.Columns[6].Visible = false;
+                //}
+            }
+        }
+
+        private void DeleteInvoice(long InvId)
+        {
+            //BookingBLL.DeleteInvoice(InvId);
+            FillInvoiceStatus(Convert.ToInt64(hdnBLId.Value));
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00010") + "');</script>", false);
+            foreach (GridViewRow itemrow in gvwInvoice.Rows)
+            {
+                if (itemrow.Cells[6].Text == "False")
+                {
+                    itemrow.Cells[6].Visible = false;
+                }
+            }
+        }
+
+        protected void lnkDownload_Click(object sender, EventArgs e)
+        {
+
+            string fileName = Server.MapPath("~/Export/ChargesFile/") + lnkDownload.CommandArgument;
+            DownloadFile(fileName, false);
+            
+        }
+
+        private void DownloadFile(string fname, bool forceDownload)
+        {
+            string path = fname;
+            string name = Path.GetFileName(path);
+            string ext = Path.GetExtension(path);
+            string type = "";
+            // set known types based on file extension  
+            if (ext != null)
+            {
+                switch (ext.ToLower())
+                {
+                    case ".htm":
+                    case ".html":
+                        type = "text/HTML";
+                        break;
+
+                    case ".txt":
+                        type = "text/plain";
+                        break;
+
+                    case ".doc":
+                    case ".docx":
+                    case ".rtf":
+                        type = "Application/msword";
+                        break;
+                }
+            }
+            if (forceDownload)
+            {
+                Response.AppendHeader("content-disposition",
+                    "attachment; filename=" + name);
+            }
+            if (type != "")
+                Response.ContentType = type;
+            Response.WriteFile(path);
+            Response.End();
+        }
     }
 }

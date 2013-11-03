@@ -225,5 +225,10 @@ namespace EMS.BLL
         {
             return InvoiceDAL.GetExchangeRateForExport(BlId);
         }
+
+        public List<IExpChargeRate> GetExpInvoiceChargesById(long InvoiceId)
+        {
+            return InvoiceDAL.GetExpInvoiceChargesById(InvoiceId);
+        }
     }
 }

@@ -88,12 +88,12 @@ namespace EMS.BLL
 
         #region Export EDI
 
-        public static List<ExportEDIEntity> GetExportEdiHeader(Int64 vesselId, Int64 voyageId, Int32 polId, Int32 locId)
+        public static List<ExportEDIEntity> GetExportEdi(Int64 vesselId, Int64 voyageId, Int32 polId, Int32 locId)
         {
             return ReportDAL.GetExportEdiHeader(vesselId, voyageId, polId, locId);
         }
 
-        public static List<ExportEDIEntity> GetExportEdi(Int64 vesselId, Int64 voyageId, Int32 polId, Int32 locId)
+        public static List<ExportEDIEntity> GetExportEdiCntr(Int64 vesselId, Int64 voyageId, Int32 polId, Int32 locId)
         {
             return ReportDAL.GetExportEdi(vesselId, voyageId, polId, locId);
         }

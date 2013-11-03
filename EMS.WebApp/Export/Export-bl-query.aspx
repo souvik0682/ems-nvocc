@@ -197,16 +197,16 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 6%;">
+     <%--                           <td style="width: 6%;">
                                     Location :
-                                </td>
+                                </td>--%>
                                 <td width="6%">
                                     <asp:DropDownList ID="ddlLocation" runat="server" Visible="false">
                                     </asp:DropDownList>
                                 </td>
-                                <td style="width: 5%;">
+     <%--                           <td style="width: 5%;">
                                     Line :
-                                </td>
+                                </td>--%>
                                 <td style="width: 5%;">
                                     <asp:DropDownList ID="ddlLine" runat="server" Visible="false" >
                                     </asp:DropDownList>
@@ -237,7 +237,8 @@
                                 </td>
                                 <td>
                                     <td>
-                                        <a href="#">DOWNLOAD</a>
+                                      <%--  <a href="#">DOWNLOAD</a>--%>
+                                        <asp:LinkButton ID="lnkDownload" runat="server" onclick="lnkDownload_Click" Text="Download"></asp:LinkButton>
                                     </td>
                                 </td>
                             </tr>
@@ -300,7 +301,8 @@
                                     </asp:Panel>
                                     <asp:GridView ID="gvwInvoice" runat="server" AutoGenerateColumns="false" AllowPaging="true"
                                         BorderStyle="None" BorderWidth="0" Width="100%" 
-                                        onrowdatabound="gvwInvoice_RowDataBound">
+                                        onrowdatabound="gvwInvoice_RowDataBound" 
+                                        onrowcommand="gvwInvoice_RowCommand">
                                         <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
                                         <EmptyDataTemplate>
                                             No Record(s) Found</EmptyDataTemplate>
@@ -349,7 +351,7 @@
                                                     Received Amount</HeaderTemplate>
                                                 <ItemTemplate>
                                                     <asp:HiddenField ID="hdnInvID" runat="server" Value='<%# Eval("InvoiceID")%>' />
-                                                    <a href="#" runat="server" onserverclick="ShowReceivedAmt">
+                                                    <a id="RcvdLnk" href="#" runat="server" onserverclick="ShowReceivedAmt">
                                                         <%# Eval("ReceivedAmt")%></a>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
@@ -359,7 +361,7 @@
                                                 <HeaderTemplate>
                                                     CRN Amount</HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <%--  <a id="A1" href="#" runat="server" onserverclick="ShowCreditNoteAmt">--%>
+                                                      <a id="CrnLnk" href="#" runat="server" onserverclick="ShowCreditNoteAmt">
                                                         <%# Eval("CNAmt")%></a>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
@@ -408,15 +410,15 @@
                                                 <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" />
                                                 <HeaderTemplate>
                                                     Invoice Status</HeaderTemplate>
-                                                <ItemTemplate>
+                                                <ItemTemplate >
                                                    <%-- <a id="aAddCrdtNote" runat="server" href='<%# "../Transaction/ManageCreditNote.aspx?InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) + "&LocationId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue) + "&LineId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLine.SelectedValue) %>'
                                                         style='<%# (Convert.ToDecimal(Eval("Ammount"))>0 && Convert.ToInt32(Eval("InvoiceTypeID"))!=2) ? "display:block;": "display:none;" %>'>
                                                         <img alt="Add" src="../Images/ADD.JPG" /></a>--%>
                                                     <%-- <a href="#">
                                                         <img alt="Add" src="../Images/ADD.JPG" /></a>--%>
-                                                    <a id="dStatus" runat="server">
-                                                        <img alt="Add" src="../Images/status.JPG" /></a>
-                                                    <%--style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Ammount")) ? "display:block;": "display:none;" %>'>--%>
+                                                   <%-- <a id="dStatus" runat="server">--%>
+                                                        <asp:ImageButton ID="btnStatus" runat="server" ImageUrl="../Images/status.JPG" CommandArgument='<%# Eval("InvoiceID","{0}") %>' CommandName="Status"/>
+                                                                                                  <%--style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Ammount")) ? "display:block;": "display:none;" %>'>--%>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                         </Columns>

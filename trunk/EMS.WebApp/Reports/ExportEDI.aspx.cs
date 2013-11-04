@@ -43,7 +43,7 @@ namespace EMS.WebApp.Reports
                 if (Convert.ToInt64(ddlVoyage.SelectedValue) == 0)
                 {
                     //Int64 vesselId = GetSelectedVesselId();
-                    
+
                     int vesselId = Convert.ToInt32(hdnVessel.Value);
                     PopulateVoyage(vesselId);
                     //Filler.FillData(ddlVoyage, CommonBLL.GetVoyages(vesselId.ToString()), "VoyageNo", "VoyageID", "Voyage");
@@ -159,7 +159,7 @@ namespace EMS.WebApp.Reports
             bool isValid = true;
             int slNo = 1;
             message = GeneralFunctions.FormatAlertMessage("Please correct the following errors:");
-            return true;
+
             if (ddlLoc.SelectedValue == "0")
             {
                 isValid = false;
@@ -176,7 +176,11 @@ namespace EMS.WebApp.Reports
 
             //Validate selected voyage name and vessel no.
             Int64 voyageId = Convert.ToInt64(ddlVoyage.SelectedValue);
-            Int64 vesselId = GetSelectedVesselId();
+            //Int64 vesselId = GetSelectedVesselId();
+            Int64 vesselId = 0;
+
+            if (hdnVessel.Value.Trim() != string.Empty)
+                Int64.TryParse(hdnVessel.Value, out vesselId);
 
             if (vesselId == 0)
             {
@@ -196,6 +200,13 @@ namespace EMS.WebApp.Reports
             {
                 isValid = false;
                 message += GeneralFunctions.FormatAlertMessage(slNo, "Please select port of loading");
+                slNo++;
+            }
+
+            if (txtMLO.Text.Trim() == string.Empty)
+            {
+                isValid = false;
+                message += GeneralFunctions.FormatAlertMessage(slNo, "Please enter main line operator");
                 slNo++;
             }
 

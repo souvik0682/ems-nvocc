@@ -3,10 +3,11 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" language="javascript">
-        function validateData() {return true;
+        function validateData() {
             var ddlLoc = document.getElementById('<%=ddlLoc.ClientID %>');
             var ddlVoyage = document.getElementById('<%=ddlVoyage.ClientID %>');
             var ddlPort = document.getElementById('<%=ddlPort.ClientID %>');
+            var txtMLO = document.getElementById('<%=txtMLO.ClientID %>');
 
             if (ddlLoc.options[ddlLoc.selectedIndex].value == '0') {
                 alert('Please select location');
@@ -25,6 +26,11 @@
 
             if (ddlVoyage.options[ddlVoyage.selectedIndex].value == '0') {
                 alert('Please select voyage');
+                return false;
+            }
+
+            if (txtMLO.value == '') {
+                alert('Please enter Main Line Operator');
                 return false;
             }
 

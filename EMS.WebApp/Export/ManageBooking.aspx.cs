@@ -725,7 +725,7 @@ namespace EMS.WebApp.Export
         private void PopulateMLVoyage(int vesselID)
         {
             //BLL.DBInteraction dbinteract = new BLL.DBInteraction();
-            DataSet ds = BookingBLL.GetExportVoyages(vesselID);
+            DataSet ds = BookingBLL.GetExportMLVoyages(vesselID);
             ddlMainLineVoyage.DataValueField = "VoyageID";
             ddlMainLineVoyage.DataTextField = "VoyageNo";
             ddlMainLineVoyage.DataSource = ds;
@@ -752,6 +752,7 @@ namespace EMS.WebApp.Export
 
         protected void ddlNvocc_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ddlLocation_SelectedIndexChanged(null, null);
             if (hdnFPOD.Value != "")
                 PopulateSevices(ddlNvocc.SelectedValue.ToInt(), Convert.ToInt32(hdnFPOD.Value));
 

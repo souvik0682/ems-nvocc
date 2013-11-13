@@ -29,6 +29,7 @@ namespace EMS.WebApp.Export
         private bool _canView = false;
         private bool _isEditable = true;
         private Int64 _doId = 0;
+        private int _userLocation = 0;
         private IFormatProvider _culture = new CultureInfo(ConfigurationManager.AppSettings["Culture"].ToString());
 
         #endregion
@@ -38,12 +39,15 @@ namespace EMS.WebApp.Export
         protected void Page_Load(object sender, EventArgs e)
         {
             RetriveParameters();
-            CheckUserAccess();
+            //CheckUserAccess();
             SetAttributes();
+            _userId = UserBLL.GetLoggedInUserId();
+            _userLocation = UserBLL.GetUserLocation();
 
             if (!IsPostBack)
             {
                 PopulateControls();
+                CheckUserAccess();
                 //LoadContainerList();
             }
         }        
@@ -173,7 +177,13 @@ namespace EMS.WebApp.Export
                     {
                         btnSave.Visible = false;
                     }
+
+                    ddlLocation.SelectedValue = _userLocation.ToString();
+                    ddlLocation.Enabled = false;
+                    ddlLocation_SelectedIndexChanged(null, null);
                 }
+                else
+                    ddlLocation.Enabled = true;
             }
             else
             {
@@ -193,8 +203,8 @@ namespace EMS.WebApp.Export
             Li = new ListItem("SELECT", "0");
             ddlLocation.Items.Insert(0, Li);
 
-
             PopulateDropDown((int)Enums.DropDownPopulationFor.Line, ddlNVOCC, 0);
+            Li = new ListItem("SELECT", "0");
             ddlNVOCC.Items.Insert(0, Li);
             //PopulateBookingNo();
 

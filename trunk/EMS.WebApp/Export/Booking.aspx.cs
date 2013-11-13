@@ -33,7 +33,7 @@ namespace EMS.WebApp.Export
         private bool _canDelete = false;
         private bool _canView = false;
         private int _userLocation = 0;
-        private int CalledFrom;
+        private Int32 CalledFrom;
 
         #endregion
 
@@ -44,6 +44,7 @@ namespace EMS.WebApp.Export
             oUser = (IUser)Session[Constants.SESSION_USER_INFO];
             _userId = UserBLL.GetLoggedInUserId();
             _userLocation = UserBLL.GetUserLocation();
+            
 
             RetriveParameters();
             CheckUserAccess();
@@ -52,6 +53,11 @@ namespace EMS.WebApp.Export
             if (!IsPostBack)
             {
                 RetrieveSearchCriteria();
+
+                //Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["frmod"].ToString()), out CalledFrom);
+
+     
+                //if (CalledFrom > 0)
                 if (!ReferenceEquals(Request.QueryString["frmod"], null))
                 {
                     CalledFrom = Request.QueryString["frmod"].ToInt();
@@ -67,7 +73,6 @@ namespace EMS.WebApp.Export
                 }
                 LoadBooking();
                 
-               
             }
 
            
@@ -177,22 +182,26 @@ namespace EMS.WebApp.Export
                 //e.Row.Cells[0].Text = ((gvBooking.PageSize * gvBooking.PageIndex) + e.Row.RowIndex + 1).ToString();
                 //e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Abbreviation"));
 
-                e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LocationName"));// +"<br/><font style='font-size:x-small;font-weight:bold;'>CODE : (" + Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LFCode")) + ")</font>";
+                //e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LocationName"));
 
-                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "NVOCC"));// +"<br/><font style='font-size:x-small;font-weight:bold;'>CODE : (" + Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LTCode")) + ")</font>";
+                //e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "NVOCC"));
 
-                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookingNo"));
+                e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookingNo"));
 
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookingDate")).Split(' ')[0];
+                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookingDate")).Split(' ')[0];
+                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "refBookingNo"));
+
                 //e.Row.Cells[4].Text = Convert.ToString(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "WeightFrom")));
 
                 //e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "WeightTo"));
 
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "VesselName"));
+                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "VesselName"));
 
-                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "VoyageNo"));
+                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "VoyageNo"));
 
-                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "POL"));
+                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "FPOD"));
+                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "SMAN"));
+
 
                 // Edit link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");

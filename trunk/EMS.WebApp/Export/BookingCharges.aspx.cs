@@ -54,6 +54,7 @@ namespace EMS.WebApp.Export
                         ((TextBox)txtRefundPayableTo.FindControl("txtRefund")).Enabled = false;
 
                         LoadSlotOperatorsDDL();
+                       
                         LoadBookingHeader();
                         LoadChargeDetails();
                     }
@@ -216,7 +217,7 @@ namespace EMS.WebApp.Export
             }
         }
 
-        /* //Do Not Remove this section. May require later.
+        //Do Not Remove this section. May require later.
         protected void btnRemove_Click(object sender, EventArgs e)
         {
             ImageButton txtRemove = (ImageButton)sender;
@@ -236,7 +237,7 @@ namespace EMS.WebApp.Export
             ViewState["DataSource"] = lstData;
             LoadChargeDetails();
         }
-        */
+        
 
         protected void TextBox_TextChanged(object sender, EventArgs e)
         {
@@ -312,6 +313,7 @@ namespace EMS.WebApp.Export
             objBooking.SlotOperatorId = Convert.ToInt32(ddlSlot.SelectedValue);
             objBooking.Shipper = txtShipper.Text.Trim();
             objBooking.ModifiedBy = _userId;
+            objBooking.PpCc = ddlPpCc.SelectedValue;
             objBooking.ModifiedOn = DateTime.Now;
 
             BookingBLL.UpdateBooking(objBooking);
@@ -392,6 +394,8 @@ namespace EMS.WebApp.Export
                 if (bookingId > 0)
                 {
                     //Get Booking Header
+                    rdblRefundPayable.SelectedIndexChanged -= this.rdblRefundPayable_SelectedIndexChanged; // new EventHandler(rdblRefundPayable_SelectedIndexChanged);
+                    rdblBorkerage.SelectedIndexChanged -= this.rdblBorkerage_SelectedIndexChanged; // new EventHandler(rdblRefundPayable_SelectedIndexChanged);
                     IBooking objBooking = BookingBLL.GetBookingByBookingId(bookingId);
 
                     txtBookingNo.Text = objBooking.BookingNo;
@@ -406,7 +410,7 @@ namespace EMS.WebApp.Export
                     ViewState["FRIEGHTPAYABLEATID"] = objBooking.FreightPayableId;
 
                     rdblBorkerage.SelectedValue = Convert.ToString(objBooking.BrokeragePayable);
-                    rdblBorkerage_SelectedIndexChanged(rdblBorkerage, new EventArgs());
+                    //rdblBorkerage_SelectedIndexChanged(rdblBorkerage, new EventArgs());
                     txtBrokeragePercent.Text = Convert.ToString(objBooking.BrokeragePercentage);
 
                     if (!ReferenceEquals(ViewState["ISEDIT"], false))
@@ -421,7 +425,7 @@ namespace EMS.WebApp.Export
                     }
 
                     rdblRefundPayable.SelectedValue = Convert.ToString(objBooking.RefundPayable);
-                    rdblRefundPayable_SelectedIndexChanged(rdblRefundPayable, new EventArgs());
+                    //rdblRefundPayable_SelectedIndexChanged(rdblRefundPayable, new EventArgs());
 
 
                     if (!ReferenceEquals(ViewState["ISEDIT"], false))
@@ -462,12 +466,19 @@ namespace EMS.WebApp.Export
                 else
                 {
                     if (!isEdit)
+                    {
                         objData = BookingBLL.GetBookingChargesForAdd(bookingId);
+                        btnDel.Visible = false;
+                    }
                     else
-                        objData = BookingBLL.GetBookingChargesForEdit(bookingId); ;
+                    {
+                        objData = BookingBLL.GetBookingChargesForEdit(bookingId);
+                        btnDel.Visible = true;
+                    }
                 }
 
                 //objData = objData.Where(d => d.ChargeStatus == true).ToList();
+                
 
                 if (rdblBorkerage.SelectedValue == "True")
                     objData = objData.Where(d => d.ChargeStatus == true).Select(d => { d.BrokerageEditable = true; return d; }).ToList();
@@ -537,6 +548,7 @@ namespace EMS.WebApp.Export
             {
                 GridViewRow thisGridViewRow = gvwCharges.Rows[r];
                 HiddenField hdnBookingChargeId = (HiddenField)thisGridViewRow.FindControl("hdnBookingChargeId");
+                HiddenField hdnDocumentType = (HiddenField)thisGridViewRow.FindControl("hdnDocumentType");
                  
                 //DropDownList ddlApplicable = (DropDownList)thisGridViewRow.FindControl("ddlApplicable");
                 TextBox txtCharged = (TextBox)thisGridViewRow.FindControl("txtCharged");
@@ -545,58 +557,81 @@ namespace EMS.WebApp.Export
                 TextBox txtManifest = (TextBox)thisGridViewRow.FindControl("txtManifest");
                 lblMessage.Text = "";
 
-                if (txtCharged.Text.ToDecimal() == 0)
+                if (hdnDocumentType.Value.ToInt() == 1)
                 {
-                    IsValid = false;
-                    lblMessage.Text = "Invalid Charged Amount";
-                    return IsValid;
-                }
+                    if (txtCharged.Text.ToDecimal() == 0)
+                    {
+                        IsValid = false;
+                        lblMessage.Text = "Invalid Charged Amount";
+                        return IsValid;
+                    }
 
-                if (txtManifest.Text.ToDecimal() == 0)
-                {
-                    IsValid = false;
-                    lblMessage.Text = "Invalid Manifest Amount";
-                    return IsValid;
-                    
-                }
+                    if (txtManifest.Text.ToDecimal() == 0)
+                    {
+                        IsValid = false;
+                        lblMessage.Text = "Invalid Manifest Amount";
+                        return IsValid;
 
-                if (txtCharged.Text.ToDecimal() < txtManifest.Text.ToDecimal())
-                {
-                    IsValid = false;
-                    lblMessage.Text = "Charged amount < Manifest Amount";
-                    return IsValid;
-                }
+                    }
 
-                if (rdblBorkerage.SelectedValue == "True" && txtBrokerageBasic.Text.ToDecimal() == 0)
-                {
-                    IsValid = false;
-                    lblMessage.Text = "Invalid Brokerage Basic Amount";
-                    return IsValid;
-                }
+                    if (txtCharged.Text.ToDecimal() < txtManifest.Text.ToDecimal())
+                    {
+                        IsValid = false;
+                        lblMessage.Text = "Charged amount < Manifest Amount";
+                        return IsValid;
+                    }
 
-                if (rdblRefundPayable.SelectedValue == "True" && txtBrokerageBasic.Text.ToDecimal() == 0)
-                {
-                    IsValid = false;
-                    lblMessage.Text = "Invalid Refund Payable Amount";
-                    return IsValid;
-                }
+                    if (rdblBorkerage.SelectedValue == "True" && txtBrokerageBasic.Text.ToDecimal() == 0)
+                    {
+                        IsValid = false;
+                        lblMessage.Text = "Invalid Brokerage Basic Amount";
+                        return IsValid;
+                    }
 
-                if (txtBrokerageBasic.Text.ToDecimal() > txtCharged.Text.ToDecimal() - txtRefund.Text.ToDecimal())
-                {
-                    IsValid = false;
-                    lblMessage.Text = "Brokerage Basic <= Charged - Refund amount";
-                    return IsValid;
-                }
+                    if (rdblRefundPayable.SelectedValue == "True" && txtBrokerageBasic.Text.ToDecimal() == 0)
+                    {
+                        IsValid = false;
+                        lblMessage.Text = "Invalid Refund Payable Amount";
+                        return IsValid;
+                    }
 
-                if (txtCharged.Text.ToDecimal() < txtManifest.Text.ToDecimal() + txtRefund.Text.ToDecimal())
-                {
-                    IsValid = false;
-                    lblMessage.Text = "Charged Freight < Manifest + Refund";
-                    return IsValid;
+                    if (txtBrokerageBasic.Text.ToDecimal() > txtCharged.Text.ToDecimal() - txtRefund.Text.ToDecimal())
+                    {
+                        IsValid = false;
+                        lblMessage.Text = "Brokerage Basic <= Charged - Refund amount";
+                        return IsValid;
+                    }
+
+                    if (txtCharged.Text.ToDecimal() < txtManifest.Text.ToDecimal() + txtRefund.Text.ToDecimal())
+                    {
+                        IsValid = false;
+                        lblMessage.Text = "Charged Freight < Manifest + Refund";
+                        return IsValid;
+                    }
                 }
 
             }
             return IsValid;
+        }
+
+        protected void btnDel_Click(object sender, EventArgs e)
+        {
+            if (!ReferenceEquals(ViewState["BOOKINGID"], null))
+            {
+                int BookingId = Convert.ToInt32(ViewState["BOOKINGID"]);
+
+                if (BookingId > 0)
+                {
+
+                    BookingBLL.DeleteBookingCharges(BookingId);
+                    Response.Redirect("Booking.aspx");
+                  
+                }
+            }
+
+            //Save Booking Charges
+            List<IBookingCharges> lstData = ViewState["DataSource"] as List<IBookingCharges>;
+
         }
     }
 

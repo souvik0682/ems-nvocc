@@ -266,6 +266,7 @@
                                                             <asp:TemplateField HeaderText="Manifest @" SortExpression="ManifestRate" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
                                                                     <asp:HiddenField ID="hdnBookingChargeId" runat="server" Value='<%# Eval("BookingChargeId") %>' />
+                                                                    <asp:HiddenField ID="hdnDocumentType" runat="server" Value='<%# Eval("DocumentTypeID") %>' />
                                                                     <cc2:CustomTextBox ID="txtManifest" runat="server" Text='<%# Bind("ManifestRate") %>'
                                                                         Width="80" BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"
                                                                         MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("ManifestEditabe").ToString() == "True" %>'>
@@ -294,29 +295,29 @@
                                                                 <ItemTemplate>
                                                                     <cc2:CustomTextBox ID="txtRefund" runat="server" Text='<%# Bind("RefundAmount") %>'
                                                                         Width="80" BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"
-                                                                        MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("RefundEditable").ToString() == "True" %>'>
+                                                                        MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("RefundEditable").ToString() == "True" && Eval("DocumentTypeID").ToString() == "1" %>'>
                                                                     </cc2:CustomTextBox>
                                                                     <asp:RequiredFieldValidator ID="rfv3" runat="server" ControlToValidate="txtRefund" Display="Dynamic" 
                                                                     ValidationGroup="Save"></asp:RequiredFieldValidator>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Brkg. Basic" SortExpression="BrokerageBasic" HeaderStyle-Width="120">
+                                                            <asp:TemplateField HeaderText="Brkg. Basic" SortExpression="BrokerageBasic" HeaderStyle-Width="120"> 
                                                                 <ItemTemplate>
                                                                     <cc2:CustomTextBox ID="txtBrokerageBasic" runat="server" Text='<%# Bind("BrokerageBasic") %>'
                                                                         Width="100" BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"
-                                                                        MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("BrokerageEditable").ToString() == "True" %>'>
+                                                                        MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("BrokerageEditable").ToString() == "True" && Eval("DocumentTypeID").ToString() == "1" %>'>
                                                                     </cc2:CustomTextBox>
                                                                     <asp:RequiredFieldValidator ID="rfv4" runat="server" ControlToValidate="txtBrokerageBasic" Display="Dynamic" 
                                                                     ValidationGroup="Save"></asp:RequiredFieldValidator>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
-                                                            <%--<asp:TemplateField HeaderText="Remove">
+                                                            <asp:TemplateField HeaderText="Remove">
                                                                 <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                                                 <ItemTemplate>
                                                                     <asp:ImageButton ID="btnRemove" runat="server" OnClick="btnRemove_Click" ImageUrl="~/Images/remove.png"
-                                                                        Height="16" Width="16" OnClientClick="javascript:return confirm('Are you sure about delete?');" />
+                                                                        Height="16" Width="16" OnClientClick="javascript:if(!confirm('Want to Delete?')) return false;"/>
                                                                 </ItemTemplate>
-                                                            </asp:TemplateField>--%>
+                                                            </asp:TemplateField>
                                                         </Columns>
                                                         <RowStyle ForeColor="#000066" />
                                                         <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
@@ -333,9 +334,13 @@
                                 <td colspan="10">
                                     <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" OnClick="btnSave_Click" />
                                     &nbsp;&nbsp;
+                                     <asp:Button ID="btnDel" runat="server" CssClass="button" Text="Delete" OnClientClick="javascript:if(!confirm('Want to Delete?')) return false;" 
+                                    OnClick="btnDel_Click" />
+                                    &nbsp;&nbsp;
                                     <asp:Button ID="btnBack" runat="server" CssClass="button" Text="Back" OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" 
                                     OnClick="btnBack_Click" />
                                     &nbsp;&nbsp;
+                                   
                                     <%--<asp:Button ID="btnLock" runat="server" Text="Save/Locked" ValidationGroup="vgSave" />--%><br />
                                     <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
                                 </td>

@@ -49,15 +49,6 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtCustomer;
         
         /// <summary>
-        /// ftbCustomer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender ftbCustomer;
-        
-        /// <summary>
         /// tbwCustomer control.
         /// </summary>
         /// <remarks>
@@ -101,15 +92,6 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtVessel;
-        
-        /// <summary>
-        /// ftbVessel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender ftbVessel;
         
         /// <summary>
         /// tbwVessel control.

@@ -49,6 +49,7 @@ namespace EMS.WebApp.Export
             if (!Page.IsPostBack)
             {
                 fillAllDropdown();
+                CheckUserAccess(hdnBookingID.Value);
                 if (hdnBookingID.Value == "0" || hdnBookingID.Value == string.Empty)
                 {
                     txtImo.Enabled = false;
@@ -74,7 +75,7 @@ namespace EMS.WebApp.Export
                     LoadModalPortDDL();
                 }
             }
-            CheckUserAccess(hdnBookingID.Value);
+           
         }
 
         private void CheckUserAccess(string xID)
@@ -186,7 +187,7 @@ namespace EMS.WebApp.Export
             //oBookingBll = new BookingBLL();
             //oBookingEntity = (BookingEntity)oBookingBll.GetBooking(BookingID);
 
-            BookingEntity oBooking = (BookingEntity)BookingBLL.GetBooking(Convert.ToInt32(hdnBookingID.Value), "N");
+            BookingEntity oBooking = (BookingEntity)BookingBLL.GetBooking(Convert.ToInt32(hdnBookingID.Value), "W");
             //ddlLocation.SelectedIndexChanged += new EventHandler(ddlLocation_SelectedIndexChanged);
             //ddlFromLocation.SelectedIndex = Convert.ToInt32(ddlFromLocation.Items.IndexOf(ddlFromLocation.Items.FindByValue(oImportHaulage.LocationFrom)));
             ddlLocation.SelectedValue = oBooking.LocationID.ToString();
@@ -532,7 +533,13 @@ namespace EMS.WebApp.Export
                 oBookingEntity.IMO = Convert.ToString(txtImo.Text);
                 oBookingEntity.UNO = Convert.ToString(txtUno.Text);
                 oBookingEntity.RefBookingNo = txtRefBookingNo.Text.ToString();
-                oBookingEntity.RefBookingDate = txtRefBookingDate.Text.ToDateTime();
+                if (string.IsNullOrEmpty(txtRefBookingDate.Text))
+                {
+                    txtRefBookingDate.Text = null;
+                    oBookingEntity.RefBookingDate = null;
+                }
+                else
+                    oBookingEntity.RefBookingDate = txtRefBookingDate.Text.ToDateTime();
                 oBookingEntity.ShipmentType = Convert.ToChar(ddlShipmentType.SelectedValue);
                 oBookingEntity.ServicesID = ddlService.SelectedValue.ToInt();
                 if (txtTempMin.Text.Trim() != string.Empty)
@@ -646,8 +653,9 @@ namespace EMS.WebApp.Export
                             }
                             break;
                     }
-                    Response.Redirect("~/Export/Booking.aspx");
+                    
                 }
+                Response.Redirect("~/Export/Booking.aspx");
             }
         }
 
@@ -752,7 +760,7 @@ namespace EMS.WebApp.Export
 
         protected void ddlNvocc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ddlLocation_SelectedIndexChanged(null, null);
+            //ddlLocation_SelectedIndexChanged(null, null);
             if (hdnFPOD.Value != "")
                 PopulateSevices(ddlNvocc.SelectedValue.ToInt(), Convert.ToInt32(hdnFPOD.Value));
 
@@ -1307,10 +1315,10 @@ namespace EMS.WebApp.Export
             ListItem Li = null;
             ddlBookingParty.Items.Clear();
             BLL.DBInteraction dbinteract = new BLL.DBInteraction();
-            GeneralFunctions.PopulateDropDownList(ddlBookingParty, dbinteract.PopulateDDLDS("dsr.dbo.mstCustomer", "pk_CustID", "CustName", "Where Active='Y' and Isdeleted=0 and (fk_LocID=" + ddlLocation.SelectedValue, true), false);
+            GeneralFunctions.PopulateDropDownList(ddlBookingParty, dbinteract.PopulateDDLDS("dsr.dbo.mstCustomer", "pk_CustID", "CustName", "Where Active='Y' and Isdeleted=0 and (CorporateorLocal='C' or (fk_LocID=" + ddlLocation.SelectedValue + ")", true), true);
 
-            Li = new ListItem("SELECT", "0");
-            ddlBookingParty.Items.Insert(0, Li);
+            //Li = new ListItem("SELECT", "0");
+            //ddlBookingParty.Items.Insert(0, Li);
         }
 
         protected void ddlBookingParty_SelectedIndexChanged(object sender, EventArgs e)

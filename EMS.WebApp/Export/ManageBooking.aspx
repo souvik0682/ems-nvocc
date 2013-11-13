@@ -116,8 +116,16 @@
                                         Booking Number<span class="errormessage">*</span>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtBookingNo" runat="server" CssClass="textboxuppercase" MaxLength="60"
-                                            Width="250px" TabIndex="5" Enabled="false"></asp:TextBox><br />
+<%--                                        <asp:TextBox ID="txtBookingNo" runat="server" CssClass="textboxuppercase" MaxLength="60"
+                                            Width="250px" TabIndex="5" Enabled="false"></asp:TextBox><br />--%>
+
+                                        <asp:textbox runat="server" id="txtBookingNo" MaxLength="60"  Width="250px" TabIndex="5" onfocus="if (this.value == 'Display Only') this.value = '';" 
+                                        onblur="if (this.value == '') this.value = 'Display Only';" value="Display Only"  xmlns:asp="#unknown" CssClass="textboxuppercase"
+                                        style="color:Gray;" Enabled="false">
+                                        </asp:textbox><br />
+                                        
+<%--                                        style="border-top-left-radius: 20px; border-top-right-radius: 20px;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px; 
+                                        color:Gray; text-align:center;"--%>
                                     </td>
                                     <td>
                                         Booking Date<span class="errormessage">*</span>

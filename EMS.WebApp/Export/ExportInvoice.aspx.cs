@@ -18,7 +18,7 @@ namespace EMS.WebApp.Export
     public partial class ExportInvoice : System.Web.UI.Page
     {
         List<ICharge> Charges = null;
-        List<ExpInvoiceChargeEntity> ChargeRates = null;
+        List<IChargeRate> ChargeRates = null;
 
         private int _userId = 0;
         private bool _canAdd = false;
@@ -49,7 +49,6 @@ namespace EMS.WebApp.Export
                  */
 
                 //Charge
-                LoadChargeDDL(0);
 
 
                 if (!ReferenceEquals(Request.QueryString["invid"], null))
@@ -78,15 +77,19 @@ namespace EMS.WebApp.Export
                     txtBLDate.Text = BLDate;
                     txtBooking.Text = BookingNo;
                     txtContainers.Text = Containers;
-                    if (docTypeId == 1)
-                        NewType = 19;
-                    else
-                        NewType = 9;
+                  
+                    //if (docTypeId == 1)
+                    //    NewType = 19;
+                    //else
+                    //    NewType = 9;
 
-                    if (docTypeId == 3)
-                        docTypeId = -1;
+                    //if (docTypeId == 3)
+                    //    NewType = -1;
+
+                    
                     LoadForBLQuery(blNo, docTypeId, misc);
-
+                    LoadChargeDDL(docTypeId);
+                    SetDefaultTerminal();
                     btnSave.Enabled = true;
                 }
             }
@@ -129,7 +132,7 @@ namespace EMS.WebApp.Export
 
         private void LoadChargeDDL(int docTypeId)
         {
-            List<ICharge> lstCharge = new InvoiceBLL().GetAllExpCharges(docTypeId);
+            List<ICharge> lstCharge = new InvoiceBLL().GetAllExpCharges(docTypeId, ddlLocation.SelectedValue.ToInt(), ddlNvocc.SelectedValue.ToInt(), txtBooking.Text);
             Session["CHARGES"] = lstCharge;
             ddlFChargeName.DataValueField = "ChargesID";
             ddlFChargeName.DataTextField = "ChargeDescr";
@@ -164,32 +167,6 @@ namespace EMS.WebApp.Export
             }
 
         }
-
-        //private void LoadLocationDDL()
-        //{
-
-        //    try
-        //    {
-        //        DataTable dt = new InvoiceBLL().GetLocation();
-
-        //        if (dt != null && dt.Rows.Count > 0)
-        //        {
-        //            DataRow dr = dt.NewRow();
-        //            dr["pk_LocID"] = "0";
-        //            dr["LocAbbr"] = "--Select--";
-        //            dt.Rows.InsertAt(dr, 0);
-        //            ddlLocation.DataValueField = "pk_LocID";
-        //            ddlLocation.DataTextField = "LocAbbr";
-        //            ddlLocation.DataSource = dt;
-        //            ddlLocation.DataBind();
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
 
         private void LoadLocationDDL()
         {
@@ -311,7 +288,7 @@ namespace EMS.WebApp.Export
         {
             LoadTerminalDDL();
 
-            long TerminalId = new InvoiceBLL().GetDefaultTerminal(Convert.ToInt64(ddlBLno.SelectedValue));
+            long TerminalId = new InvoiceBLL().GetExpDefaultTerminal(Convert.ToInt64(ddlBLno.SelectedValue));
             ddlFTerminal.SelectedValue = TerminalId.ToString();
         }
 
@@ -514,7 +491,10 @@ namespace EMS.WebApp.Export
         protected void ddlChargeName_SelectedIndexChanged(object sender, EventArgs e)
         {
             //List<IChargeRate> chargeRates = new InvoiceBLL().GetInvoiceCharges_New(Convert.ToInt64(ddlBLno.SelectedValue), Convert.ToInt32(ddlFChargeName.SelectedValue), Convert.ToInt32(ddlFTerminal.SelectedValue), Convert.ToDecimal(txtExchangeRate.Text), 0, "", Convert.ToDateTime(txtInvoiceDate.Text));
-            List<IChargeRate> chargeRates = new InvoiceBLL().GetInvoiceCharges_New(Convert.ToInt64(ddlBLno.SelectedValue), Convert.ToInt32(ddlFChargeName.SelectedValue), Convert.ToInt32(ddlFTerminal.SelectedValue), Convert.ToDecimal(0), 0, "", Convert.ToDateTime(txtInvoiceDate.Text));
+            //List<IExpChargeRate> chargeRates = new InvoiceBLL().GetExpInvoiceCharges_New(Convert.ToInt64(ddlBLno.SelectedValue), Convert.ToInt32(ddlFChargeName.SelectedValue), Convert.ToInt32(ddlFTerminal.SelectedValue), Convert.ToDecimal(0), 0, "", Convert.ToDateTime(txtInvoiceDate.Text));
+
+            List<IChargeRate> chargeRates = new InvoiceBLL().GetExpInvoiceCharges(Convert.ToInt64(ddlBLno.SelectedValue), Convert.ToInt32(ddlFChargeName.SelectedValue), Convert.ToInt32(ddlFTerminal.SelectedValue), Convert.ToInt32(0), Convert.ToDateTime(txtInvoiceDate.Text));
+
 
             DataTable Charge = new InvoiceBLL().ChargeEditable(Convert.ToInt32(ddlFChargeName.SelectedValue));
 
@@ -623,16 +603,16 @@ namespace EMS.WebApp.Export
                 txtRatePerTon.Text = chargeRates[0].RatePerTON.ToString();
                 //  txtUSD.Text = chargeRates[0].Usd.ToString();
                 txtGrossAmount.Text = chargeRates[0].GrossAmount.ToString();
-                txtServiceTax.Text = (chargeRates[0].STax + chargeRates[0].ServiceTaxCessAmount + chargeRates[0].ServiceTaxACess).ToString();
+                txtServiceTax.Text = (chargeRates[0].ServiceTax + chargeRates[0].ServiceTaxCessAmount + chargeRates[0].ServiceTaxACess).ToString();
                 txtTotal.Text = (chargeRates[0].TotalAmount).ToString();
                 //+ chargeRates[0].STax + chargeRates[0].ServiceTaxCessAmount + chargeRates[0].ServiceTaxACess).ToString();
 
-                ViewState["RATEPERPTEU"] = chargeRates[0].SharingTEU;
-                ViewState["RATEPERPFEU"] = chargeRates[0].SharingFEU;
-                ViewState["RATEPERPBL"] = chargeRates[0].SharingBL;
+                //ViewState["RATEPERPTEU"] = chargeRates[0].SharingTEU;
+                //ViewState["RATEPERPFEU"] = chargeRates[0].SharingFEU;
+                //ViewState["RATEPERPBL"] = chargeRates[0].SharingBL;
                 ViewState["CESSAMOUNT"] = chargeRates[0].ServiceTaxCessAmount;
                 ViewState["ADDCESS"] = chargeRates[0].ServiceTaxACess;
-                ViewState["STAX"] = chargeRates[0].STax;
+                ViewState["STAX"] = chargeRates[0].ServiceTax;
             }
             else
             {
@@ -973,7 +953,7 @@ namespace EMS.WebApp.Export
                 e.Row.Cells[7].Text = Convert.ToString(GetCurrencyCode(Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "fk_CurrencyID"))));
                 e.Row.Cells[8].Text = Convert.ToString(Math.Round(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ExchgRate")), 2));
                 e.Row.Cells[9].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "GrossAmount"));
-                e.Row.Cells[10].Text = Convert.ToString(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ServiceTaxAmount")) + Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ServiceTaxCessAmount")) + Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ServiceTaxACess")));
+                e.Row.Cells[10].Text = Convert.ToString(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ServiceTax")) + Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ServiceTaxCessAmount")) + Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ServiceTaxACess")));
                 e.Row.Cells[11].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "TotalAmount"));
 
                 if (!ReferenceEquals(Request.QueryString["invid"], null))
@@ -1047,13 +1027,18 @@ namespace EMS.WebApp.Export
 
         private void AddChargesRate()
         {
-            ExpInvoiceChargeEntity chargeRate = new ExpInvoiceChargeEntity();
+            IChargeRate chargeRate = new ChargeRateEntity();
             BuildChargesRate(chargeRate);
 
+            //if (ChargeRates == null)
+            //{
+            //    ChargeRates = new List<IChargeRate>();
+            //}
+
             if (ViewState["CHARGERATE"] != null)
-                ChargeRates = ViewState["CHARGERATE"] as List<ExpInvoiceChargeEntity>;
+                ChargeRates = ViewState["CHARGERATE"] as List<IChargeRate>;
             else
-                ChargeRates = new List<ExpInvoiceChargeEntity>();
+                ChargeRates = new List<IChargeRate>();
 
             ChargeRates.Add(chargeRate);
 
@@ -1070,7 +1055,7 @@ namespace EMS.WebApp.Export
 
         private void BuildInvoiceEntity(IInvoice invoice)
         {
-            List<ExpInvoiceChargeEntity> chargeRate = ViewState["CHARGERATE"] as List<ExpInvoiceChargeEntity>;
+            List<IChargeRate> chargeRate = ViewState["CHARGERATE"] as List<IChargeRate>;
 
             if (ViewState["InvoiceID"] == null)
                 invoice.InvoiceID = 0;
@@ -1100,12 +1085,13 @@ namespace EMS.WebApp.Export
             invoice.EditedOn = DateTime.Now;
             invoice.ExportImport = "E";
             invoice.GrossAmount = chargeRate.Sum(c => c.GrossAmount);
+
             invoice.InvoiceDate = Convert.ToDateTime(txtInvoiceDate.Text);
 
             invoice.InvoiceTypeID = Convert.ToInt32(ddlInvoiceType.SelectedValue);
             invoice.LocationID = Convert.ToInt32(ddlLocation.SelectedValue);
             invoice.NVOCCID = Convert.ToInt32(ddlNvocc.SelectedValue);
-            invoice.ServiceTax = chargeRate.Sum(c => c.ServiceTaxAmount);
+            invoice.ServiceTax = chargeRate.Sum(c => c.STax);
             invoice.ServiceTaxACess = chargeRate.Sum(c => c.ServiceTaxACess);
             invoice.ServiceTaxCess = chargeRate.Sum(c => c.ServiceTaxCessAmount);
             invoice.Roff = Convert.ToDecimal(txtROff.Text);
@@ -1119,25 +1105,25 @@ namespace EMS.WebApp.Export
             //    invoice.XchangeRate = Convert.ToDecimal(txtExchangeRate.Text);
         }
 
-        private void BuildChargesRate(ExpInvoiceChargeEntity charge)
+        private void BuildChargesRate(IChargeRate charge)
         {
             if (ViewState["EDITINVOICECHARGEID"] == null)
             {
                 if (ViewState["INVOICECHARGEID"] == null)
-                    charge.InvoiceChargeID = -1;
+                    charge.InvoiceChargeId = -1;
                 else
-                    charge.InvoiceChargeID = Convert.ToInt32(ViewState["INVOICECHARGEID"]) - 1;
+                    charge.InvoiceChargeId = Convert.ToInt32(ViewState["INVOICECHARGEID"]) - 1;
 
-                ViewState["INVOICECHARGEID"] = charge.InvoiceChargeID;
+                ViewState["INVOICECHARGEID"] = charge.InvoiceChargeId;
             }
             else
             {
                 if (ViewState["CHARGERATE"] != null)
-                    ChargeRates = ViewState["CHARGERATE"] as List<ExpInvoiceChargeEntity>;
+                    ChargeRates = ViewState["CHARGERATE"] as List<IChargeRate>;
 
-                charge.InvoiceChargeID = Convert.ToInt32(ViewState["EDITINVOICECHARGEID"]);
+                charge.InvoiceChargeId = Convert.ToInt32(ViewState["EDITINVOICECHARGEID"]);
 
-                ExpInvoiceChargeEntity cRate = ChargeRates.Single(c => c.InvoiceChargeID == Convert.ToInt64(ViewState["EDITINVOICECHARGEID"]));
+                IChargeRate cRate = ChargeRates.Single(c => c.InvoiceChargeId == Convert.ToInt64(ViewState["EDITINVOICECHARGEID"]));
                 ChargeRates.Remove(cRate);
                 ViewState["CHARGERATE"] = ChargeRates;
                 ViewState["EDITINVOICECHARGEID"] = null;
@@ -1148,14 +1134,14 @@ namespace EMS.WebApp.Export
             charge.GrossAmount = Convert.ToDecimal(txtGrossAmount.Text);
             charge.RatePerBL = Convert.ToDecimal(txtRatePerBL.Text);
             charge.RatePerCBM = Convert.ToDecimal(txtRatePerCBM.Text);
-            charge.RateperFEU = Convert.ToDecimal(txtRateperFEU.Text);
+            charge.RatePerFEU = Convert.ToDecimal(txtRateperFEU.Text);
             charge.RatePerTEU = Convert.ToDecimal(txtRatePerTEU.Text);
-            charge.RatePerTon = Convert.ToDecimal(txtRatePerTon.Text);
-            charge.RatePerTon = Convert.ToDecimal(custTxtConvRate.Text);
+            charge.RatePerTON = Convert.ToDecimal(txtRatePerTon.Text);
+            //charge.RatePerTon = Convert.ToDecimal(custTxtConvRate.Text);
             charge.fk_CurrencyID = Convert.ToInt32(ddlCurrency.SelectedValue);
             charge.ExchgRate = Math.Round(Convert.ToDecimal(custTxtConvRate.Text), 2);
             if (ViewState["STAX"] != null)
-                charge.ServiceTaxAmount = Convert.ToDecimal(ViewState["STAX"]);  //Convert.ToDecimal(txtServiceTax.Text);
+                charge.ServiceTax = Convert.ToDecimal(ViewState["STAX"]);  //Convert.ToDecimal(txtServiceTax.Text);
 
             //if (ViewState["RATEPERPBL"] != null)
             //    charge.SharingBL = Convert.ToDecimal(ViewState["RATEPERPBL"]);
@@ -1173,7 +1159,7 @@ namespace EMS.WebApp.Export
 
             if (Convert.ToInt32(ddlFTerminal.SelectedValue) != 0)
             {
-                charge.TerminalID = Convert.ToInt32(ddlFTerminal.SelectedValue);
+                charge.TerminalId = Convert.ToInt32(ddlFTerminal.SelectedValue);
                 charge.TerminalName = Convert.ToString(ddlFTerminal.SelectedItem.Text);
             }
 
@@ -1216,13 +1202,13 @@ namespace EMS.WebApp.Export
         {
             //Then Delete from List
             if (ViewState["CHARGERATE"] != null)
-                ChargeRates = ViewState["CHARGERATE"] as List<ExpInvoiceChargeEntity>;
+                ChargeRates = ViewState["CHARGERATE"] as List<IChargeRate>;
 
-            ExpInvoiceChargeEntity cRate = ChargeRates.Single(c => c.InvoiceChargeID == InvoiceChargeId);
+            IChargeRate cRate = ChargeRates.Single(c => c.InvoiceChargeId == InvoiceChargeId);
             ChargeRates.Remove(cRate);
 
             //Delete from DB
-            int retVal = new InvoiceBLL().DeleteInvoiceCharge((Convert.ToInt32(cRate.InvoiceChargeID)));
+            int retVal = new InvoiceBLL().DeleteInvoiceCharge((Convert.ToInt32(cRate.InvoiceChargeId)));
 
             ViewState["CHARGERATE"] = ChargeRates;
             RefreshGridView();
@@ -1235,7 +1221,7 @@ namespace EMS.WebApp.Export
         private void RefreshGridView()
         {
             if (ViewState["CHARGERATE"] != null)
-                ChargeRates = ViewState["CHARGERATE"] as List<ExpInvoiceChargeEntity>;
+                ChargeRates = ViewState["CHARGERATE"] as List<IChargeRate>;
 
             gvwInvoice.DataSource = ChargeRates;
             gvwInvoice.DataBind();
@@ -1307,6 +1293,7 @@ namespace EMS.WebApp.Export
             //For Invoice
             //IInvoice invoice = null;//new InvoiceBLL().GetInvoiceById(InvoiceId);
 
+
             DataTable dt = new InvoiceBLL().GetExpLineLocation(BlNo);
 
             int line = Convert.ToInt32(dt.Rows[0]["fk_NVOCCID"]);
@@ -1337,7 +1324,8 @@ namespace EMS.WebApp.Export
 
             //For Charge Rates
             //List<IChargeRate> chargeRates = new InvoiceBLL().GetInvoiceCharges_New(Convert.ToInt64(ddlBLno.SelectedValue), Convert.ToInt32(ddlFChargeName.SelectedValue), Convert.ToInt32(ddlFTerminal.SelectedValue), Convert.ToDecimal(txtExchangeRate.Text), DocType, Misc, Convert.ToDateTime(txtInvoiceDate.Text));
-            var chargeRates = InvoiceBLL.GetExpInvoiceCharges_New(Convert.ToInt64(ddlBLno.SelectedValue), 0, Convert.ToInt32(ddlFTerminal.SelectedValue), DocType, Convert.ToDateTime(txtInvoiceDate.Text));
+            //var chargeRates = InvoiceBLL.GetExpInvoiceCharges_New(Convert.ToInt64(ddlBLno.SelectedValue), 0, Convert.ToInt32(ddlFTerminal.SelectedValue), DocType, Convert.ToDateTime(txtInvoiceDate.Text));
+            List<IChargeRate> chargeRates = new InvoiceBLL().GetExpInvoiceCharges(Convert.ToInt64(ddlBLno.SelectedValue), Convert.ToInt32(ddlFChargeName.SelectedValue), Convert.ToInt32(ddlFTerminal.SelectedValue), DocType, Convert.ToDateTime(txtInvoiceDate.Text));
 
             ViewState["CHARGERATE"] = chargeRates;
 
@@ -1347,16 +1335,20 @@ namespace EMS.WebApp.Export
                     ViewState["INVOICECHARGEID"] = chargeRates.Min(c => c.InvoiceChargeId);
                 else
                     ViewState["INVOICECHARGEID"] = null;
+
+                var Cur = chargeRates.Where(c => c.fk_CurrencyID == 2).FirstOrDefault().ExchgRate;
+                //txtUSDExRate.Text = Cur.ToString();
             }
             else
-            {
+            {   
                 ViewState["INVOICECHARGEID"] = null;
             }
 
 
+
             LoadChargeDDL(DocType);
 
-            if (DocType == -1)
+            if (DocType == 3)
             {
 
                 ddlFChargeName.Enabled = true;
@@ -1379,12 +1371,12 @@ namespace EMS.WebApp.Export
         {
             ddlFChargeName.Enabled = false;
 
-            List<ExpInvoiceChargeEntity> chargeRates = null;
+            List<IChargeRate> chargeRates = null;
 
             if (ViewState["CHARGERATE"] != null)
-                chargeRates = ViewState["CHARGERATE"] as List<ExpInvoiceChargeEntity>;
+                chargeRates = ViewState["CHARGERATE"] as List<IChargeRate>;
 
-            ExpInvoiceChargeEntity chargeRate = chargeRates.Single(c => c.InvoiceChargeID == InvoiceChargeId);
+            IChargeRate chargeRate = chargeRates.Single(c => c.InvoiceChargeId == InvoiceChargeId);
 
             DataTable Charge = new InvoiceBLL().ChargeEditable(chargeRate.ChargesID);
             if (Charge != null && Charge.Rows.Count > 0)
@@ -1467,10 +1459,10 @@ namespace EMS.WebApp.Export
             txtGrossAmount.Text = chargeRate.GrossAmount.ToString();
             txtRatePerBL.Text = chargeRate.RatePerBL.ToString();
             txtRatePerCBM.Text = chargeRate.RatePerCBM.ToString();
-            txtRateperFEU.Text = chargeRate.RateperFEU.ToString();
+            txtRateperFEU.Text = chargeRate.RatePerFEU.ToString();
             txtRatePerTEU.Text = chargeRate.RatePerTEU.ToString();
-            txtRatePerTon.Text = chargeRate.RatePerTon.ToString();
-            txtServiceTax.Text = (chargeRate.ServiceTaxAmount + chargeRate.ServiceTaxCessAmount + chargeRate.ServiceTaxACess).ToString();
+            txtRatePerTon.Text = chargeRate.RatePerTON.ToString();
+            txtServiceTax.Text = (chargeRate.STax + chargeRate.ServiceTaxCessAmount + chargeRate.ServiceTaxACess).ToString();
             ddlCurrency.SelectedValue = chargeRate.fk_CurrencyID.ToString();
 
             if (chargeRate.fk_CurrencyID.ToString() == "1")
@@ -1483,15 +1475,15 @@ namespace EMS.WebApp.Export
             }
 
             custTxtConvRate.Text = chargeRate.ExchgRate.ToString("0.00");
-            ViewState["STAX"] = chargeRate.ServiceTaxAmount;
+            ViewState["STAX"] = chargeRate.STax;
             ViewState["CESSAMOUNT"] = chargeRate.ServiceTaxCessAmount;
             ViewState["ADDCESS"] = chargeRate.ServiceTaxACess;
 
-            ddlFTerminal.SelectedValue = chargeRate.TerminalID.ToString();
+            ddlFTerminal.SelectedValue = chargeRate.TerminalId.ToString();
             txtTotal.Text = chargeRate.TotalAmount.ToString();
             //txtUSD.Text = chargeRate.Usd.ToString();
 
-            ViewState["EDITINVOICECHARGEID"] = chargeRate.InvoiceChargeID;
+            ViewState["EDITINVOICECHARGEID"] = chargeRate.InvoiceChargeId;
         }
     }
 }

@@ -198,8 +198,10 @@ namespace EMS.WebApp.Transaction
             gvwInvoice.DataSource = null;
             gvwInvoice.DataBind();
         }
+
+      
         protected void gvwInvoice_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
+        { 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 ImageButton btnCharge = (ImageButton)e.Row.FindControl("btnCharges");
@@ -227,6 +229,7 @@ namespace EMS.WebApp.Transaction
                     aMoneyRecpt.Visible = false;
                     CrnLnk.Visible = false;
                     RcvdLnk.Visible = false;
+                    e.Row.Cells[0].ForeColor = System.Drawing.Color.Red;
                 }
                 else
                 {
@@ -236,11 +239,12 @@ namespace EMS.WebApp.Transaction
                     aMoneyRecpt.Visible = true;
                     CrnLnk.Visible = true;
                     RcvdLnk.Visible = true;
+                    e.Row.Cells[0].ForeColor = System.Drawing.Color.Black;
                 }
 
             }
 
-            
+         
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
@@ -254,6 +258,7 @@ namespace EMS.WebApp.Transaction
                     "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(user.FirstName + " " + user.LastName),
                     "&InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(hdnInvID.Value)));
             }
+
         }
         protected void txtBlNo_TextChanged(object sender, EventArgs e)
         {
@@ -464,7 +469,7 @@ namespace EMS.WebApp.Transaction
         {
             if (e.CommandName == "Status")
             {
-                DeleteInvoice(Convert.ToInt64(e.CommandArgument));
+                DeleteInvoice(Convert.ToInt32(e.CommandArgument));
                 //if (e.Row.RowType == DataControlRowType.DataRow)
                 //{
                 //    gvwInvoice.Columns[6].Visible = false;
@@ -472,9 +477,9 @@ namespace EMS.WebApp.Transaction
             }
         }
 
-        private void DeleteInvoice(long InvId)
+        private void DeleteInvoice(Int32 InvId)
         {
-            //BookingBLL.DeleteInvoice(InvId);
+            ExportBLQueryBLL.DeleteInvoice(InvId);
             FillInvoiceStatus(Convert.ToInt64(hdnBLId.Value));
             ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00010") + "');</script>", false);
             foreach (GridViewRow itemrow in gvwInvoice.Rows)

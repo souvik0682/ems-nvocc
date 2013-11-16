@@ -337,6 +337,15 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBookingDate;
         
         /// <summary>
+        /// TxtNtWt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox TxtNtWt;
+        
+        /// <summary>
         /// tpOther control.
         /// </summary>
         /// <remarks>
@@ -391,15 +400,6 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtShipper;
         
         /// <summary>
-        /// rfvShipper control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvShipper;
-        
-        /// <summary>
         /// txtConsignee control.
         /// </summary>
         /// <remarks>
@@ -409,15 +409,6 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtConsignee;
         
         /// <summary>
-        /// rfvConsignee control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvConsignee;
-        
-        /// <summary>
         /// txtNotifyName control.
         /// </summary>
         /// <remarks>
@@ -425,15 +416,6 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNotifyName;
-        
-        /// <summary>
-        /// rfvNotifyName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNotifyName;
         
         /// <summary>
         /// ddlBLClause control.

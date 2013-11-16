@@ -218,25 +218,25 @@ namespace EMS.WebApp.Export
         }
 
         //Do Not Remove this section. May require later.
-        protected void btnRemove_Click(object sender, EventArgs e)
-        {
-            ImageButton txtRemove = (ImageButton)sender;
-            GridViewRow gvChargesRow = (GridViewRow)txtRemove.Parent.Parent;
-            HiddenField hdnBookingChargeId = gvChargesRow.FindControl("hdnBookingChargeId") as HiddenField;
+        //protected void btnRemove_Click(object sender, EventArgs e)
+        //{
+        //    ImageButton txtRemove = (ImageButton)sender;
+        //    GridViewRow gvChargesRow = (GridViewRow)txtRemove.Parent.Parent;
+        //    HiddenField hdnBookingChargeId = gvChargesRow.FindControl("hdnBookingChargeId") as HiddenField;
 
-            List<IBookingCharges> lstData = ViewState["DataSource"] as List<IBookingCharges>;
+        //    List<IBookingCharges> lstData = ViewState["DataSource"] as List<IBookingCharges>;
 
-            lstData.Where(d => d.BookingChargeId == Convert.ToInt64(hdnBookingChargeId.Value))
-                    .Select(d =>
-                    {
-                        d.ChargeStatus = false;
-                        return d;
-                    }).ToList();
+        //    lstData.Where(d => d.BookingChargeId == Convert.ToInt64(hdnBookingChargeId.Value))
+        //            .Select(d =>
+        //            {
+        //                d.ChargeStatus = false;
+        //                return d;
+        //            }).ToList();
 
 
-            ViewState["DataSource"] = lstData;
-            LoadChargeDetails();
-        }
+        //    ViewState["DataSource"] = lstData;
+        //    LoadChargeDetails();
+        //}
         
 
         protected void TextBox_TextChanged(object sender, EventArgs e)
@@ -588,7 +588,7 @@ namespace EMS.WebApp.Export
                         return IsValid;
                     }
 
-                    if (rdblRefundPayable.SelectedValue == "True" && txtBrokerageBasic.Text.ToDecimal() == 0)
+                    if (rdblRefundPayable.SelectedValue == "True" && txtRefund.Text.ToDecimal() == 0)
                     {
                         IsValid = false;
                         lblMessage.Text = "Invalid Refund Payable Amount";

@@ -236,7 +236,7 @@
                                         <table>
                                             <tr>
                                                 <td colspan="10">
-                                                    <asp:GridView ID="gvwCharges" runat="server" AllowPaging="True" AutoGenerateColumns="False"
+                                                    <asp:GridView ID="gvwCharges" runat="server" AllowPaging="false" AutoGenerateColumns="False"
                                                         BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px"
                                                         CellPadding="3" DataKeyNames="BookingChargeId" OnRowDataBound="gvwContainers_RowDataBound">
                                                         <FooterStyle BackColor="White" ForeColor="#000066" />
@@ -271,11 +271,11 @@
                                                                         Width="80" BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"
                                                                         MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("ManifestEditabe").ToString() == "True" %>'>
                                                                     </cc2:CustomTextBox>
-                                                                    <asp:RequiredFieldValidator ID="rfv1" runat="server" ControlToValidate="txtManifest"
+                                                                    <%--<asp:RequiredFieldValidator ID="rfv1" runat="server" ControlToValidate="txtManifest"
                                                                         Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>
                                                                     <asp:CompareValidator ID="cv1" runat="server" ControlToValidate="txtManifest" Operator="GreaterThan"
                                                                         Type="Double" ValueToCompare="0" ValidationGroup="Save">
-                                                                    </asp:CompareValidator>
+                                                                    </asp:CompareValidator>--%>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Charged @" SortExpression="ActualRate" HeaderStyle-Width="100">
@@ -284,11 +284,11 @@
                                                                         Width="80" BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"
                                                                         MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("ChargedEditable").ToString() == "True" %>'>
                                                                     </cc2:CustomTextBox>
-                                                                    <asp:RequiredFieldValidator ID="rfv2" runat="server" ControlToValidate="txtCharged" Display="Dynamic" 
+                                                                    <%--<asp:RequiredFieldValidator ID="rfv2" runat="server" ControlToValidate="txtCharged" Display="Dynamic" 
                                                                     ValidationGroup="Save"></asp:RequiredFieldValidator>
                                                                     <asp:CompareValidator ID="cv2" runat="server" ControlToValidate="txtCharged" Operator="GreaterThan"
                                                                         Type="Double" ValueToCompare="0" ValidationGroup="Save" >
-                                                                    </asp:CompareValidator>
+                                                                    </asp:CompareValidator>--%>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Refund" SortExpression="RefundAmount" HeaderStyle-Width="100">
@@ -297,8 +297,8 @@
                                                                         Width="80" BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"
                                                                         MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("RefundEditable").ToString() == "True" && Eval("DocumentTypeID").ToString() == "1" %>'>
                                                                     </cc2:CustomTextBox>
-                                                                    <asp:RequiredFieldValidator ID="rfv3" runat="server" ControlToValidate="txtRefund" Display="Dynamic" 
-                                                                    ValidationGroup="Save"></asp:RequiredFieldValidator>
+                                                                    <%--<asp:RequiredFieldValidator ID="rfv3" runat="server" ControlToValidate="txtRefund" Display="Dynamic" 
+                                                                    ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Brkg. Basic" SortExpression="BrokerageBasic" HeaderStyle-Width="120"> 
@@ -307,17 +307,17 @@
                                                                         Width="100" BorderStyle="None" Style="text-align: right;" OnTextChanged="TextBox_TextChanged"
                                                                         MaxLength="10" Precision="8" Scale="2" Type="Decimal" Enabled='<%# Eval("BrokerageEditable").ToString() == "True" && Eval("DocumentTypeID").ToString() == "1" %>'>
                                                                     </cc2:CustomTextBox>
-                                                                    <asp:RequiredFieldValidator ID="rfv4" runat="server" ControlToValidate="txtBrokerageBasic" Display="Dynamic" 
-                                                                    ValidationGroup="Save"></asp:RequiredFieldValidator>
+<%--                                                                    <asp:RequiredFieldValidator ID="rfv4" runat="server" ControlToValidate="txtBrokerageBasic" Display="Dynamic" 
+                                                                    ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Remove">
+<%--                                                            <asp:TemplateField HeaderText="Remove">
                                                                 <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                                                 <ItemTemplate>
                                                                     <asp:ImageButton ID="btnRemove" runat="server" OnClick="btnRemove_Click" ImageUrl="~/Images/remove.png"
                                                                         Height="16" Width="16" OnClientClick="javascript:if(!confirm('Want to Delete?')) return false;"/>
                                                                 </ItemTemplate>
-                                                            </asp:TemplateField>
+                                                            </asp:TemplateField>--%>
                                                         </Columns>
                                                         <RowStyle ForeColor="#000066" />
                                                         <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />

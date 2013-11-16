@@ -1337,7 +1337,7 @@ namespace EMS.WebApp.Export
                     ViewState["INVOICECHARGEID"] = null;
 
                 var Cur = chargeRates.Where(c => c.fk_CurrencyID == 2).FirstOrDefault().ExchgRate;
-                //txtUSDExRate.Text = Cur.ToString();
+                txtUSDExRate.Text = Cur.ToString();
             }
             else
             {   
@@ -1484,6 +1484,47 @@ namespace EMS.WebApp.Export
             //txtUSD.Text = chargeRate.Usd.ToString();
 
             ViewState["EDITINVOICECHARGEID"] = chargeRate.InvoiceChargeId;
+        }
+
+        protected void txtUSDExRate_TextChanged(object sender, EventArgs e)
+        {
+            List<IChargeRate> lstData = ViewState["CHARGERATE"] as List<IChargeRate>;
+            decimal TaxPer = 0;
+            decimal TaxCess = 0;
+            decimal TaxAddCess = 0;
+
+            DataTable dtSTax = new InvoiceBLL().GetServiceTax(Convert.ToDateTime(txtInvoiceDate.Text));
+
+            if (dtSTax != null && dtSTax.Rows.Count > 0)
+            {
+                TaxPer = Convert.ToDecimal(dtSTax.Rows[0]["TaxPer"].ToString());
+                TaxCess = Convert.ToDecimal(dtSTax.Rows[0]["TaxCess"].ToString());
+                TaxAddCess = Convert.ToDecimal(dtSTax.Rows[0]["TaxAddCess"].ToString());
+            }
+
+            lstData.Where(d => d.fk_CurrencyID == 2)
+                .Select(d =>
+                    {
+                        d.ExchgRate = Convert.ToDecimal(txtUSDExRate.Text);
+                        d.GrossAmount = (d.ExchgRate * d.RatePerTEU) + (d.ExchgRate * d.RatePerFEU) + (d.ExchgRate * d.RatePerTON) + (d.ExchgRate * d.RatePerUnit);
+                        DataTable Charge = new InvoiceBLL().ChargeEditable(d.ChargesID);
+                        if (Convert.ToBoolean(Charge.Rows[0]["ServiceTax"].ToString()))
+                        {
+                            d.ServiceTax = Math.Round((d.GrossAmount * TaxPer) / 100, 2);
+                            d.ServiceTaxCessAmount = Math.Round((d.ServiceTax * TaxCess) / 100, 2);
+                            d.ServiceTaxACess = Math.Round((d.ServiceTax * TaxAddCess) / 100, 2);
+                        };
+                        d.TotalAmount = d.GrossAmount + d.ServiceTax + d.ServiceTaxCessAmount + d.ServiceTaxACess;
+                        return d;
+                    }).ToList();
+
+            ViewState["CHARGERATE"] = lstData;
+
+            gvwInvoice.DataSource = lstData;
+            gvwInvoice.DataBind();
+
+            txtROff.Text = (Math.Round(lstData.Sum(cr => cr.TotalAmount), 0) - lstData.Sum(cr => cr.TotalAmount)).ToString();
+            txtTotalAmount.Text = Math.Round(lstData.Sum(cr => cr.TotalAmount), 0).ToString();
         }
     }
 }

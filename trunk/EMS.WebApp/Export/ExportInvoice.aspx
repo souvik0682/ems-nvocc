@@ -139,6 +139,18 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>
+                                    USD Exchange Rate
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtUSDExRate" runat="server" Width="250px" Style="text-align: right;"
+                                        OnTextChanged="txtUSDExRate_TextChanged" AutoPostBack="true">
+                                    </asp:TextBox>
+                                </td>
+                            
+                            </tr>
+
+                            <tr>
                                 <td colspan="4" style="padding-top: 10; border: none;">
                                     <fieldset style="width: 95%;">
                                         <legend>Add Charges</legend>

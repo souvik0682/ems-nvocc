@@ -21,9 +21,9 @@ namespace EMS.BLL
             return ExportBLDAL.GetExportBLHeaderInfoForEdit(BLNumber);
         }
 
-        public static List<IExportBLContainer> GetExportBLContainersForAdd(long BookingId)
+        public static List<IExportBLContainer> GetExportBLContainersForAdd(long BookingId, int Status)
         {
-            return ExportBLDAL.GetExportBLContainersForAdd(BookingId);
+            return ExportBLDAL.GetExportBLContainersForAdd(BookingId, Status);
         }
 
         public static List<IExportBLContainer> GetExportBLContainersForEdit(long BLId)
@@ -77,7 +77,7 @@ namespace EMS.BLL
             return ExportBLDAL.CheckBookingLocation(BookingNo, Loc);
         }
 
-        public static bool CheckExpBLExistance(string BookingNo)
+        public static int CheckExpBLExistance(string BookingNo)
         {
             return ExportBLDAL.CheckExpBLExistance(BookingNo);
         }

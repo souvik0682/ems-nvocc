@@ -168,11 +168,24 @@ namespace EMS.Entity
         {
             get;
             set;
-        }    
+        }
 
+        [XmlAnyElement]
+        public int fk_CurrencyID
+        {
+            get;
+            set;
+        }
 
+        [XmlAnyElement]
+        public decimal ExchgRate
+        {
+            get;
+            set;
+        }
+       
 
-        public string ChangeName { get; set; }
+        public string ChargeName { get; set; }
         public string TerminalName { get; set; }
         public string WashingTypeName { get; set; }
         public decimal Usd { get; set; }
@@ -250,7 +263,7 @@ namespace EMS.Entity
 
             if (ColumnExists(reader, "ChargeName"))
                 if (reader["ChargeName"] != DBNull.Value)
-                    this.ChangeName = Convert.ToString(reader["ChargeName"]);
+                    this.ChargeName = Convert.ToString(reader["ChargeName"]);
 
             if (ColumnExists(reader, "ServiceTaxCessAmount"))
                 if (reader["ServiceTaxCessAmount"] != DBNull.Value)
@@ -285,6 +298,13 @@ namespace EMS.Entity
                     this.RatePerDoc = Convert.ToDecimal(reader["RatePerDoc"]);
             //this.RatePerDoc = Convert.ToDecimal(reader["RatePerDoc"]);
 
+            if (ColumnExists(reader, "fk_CurrencyID"))
+                if (reader["fk_CurrencyID"] != DBNull.Value)
+                    this.fk_CurrencyID = Convert.ToInt32(reader["fk_CurrencyID"]);
+
+            if (ColumnExists(reader, "ExchgRate"))
+                if (reader["ExchgRate"] != DBNull.Value)
+                    this.ExchgRate = Convert.ToDecimal(reader["ExchgRate"]);
         }
 
         //public string ConvertListToXML(List<ChargeRateEntity> Items)

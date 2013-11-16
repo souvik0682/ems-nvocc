@@ -109,6 +109,13 @@ namespace EMS.Entity
             set;
         }
 
+        public string Sman
+        {
+            get;
+            set;
+        }
+
+
         public int LocationID
         {
             get;
@@ -184,7 +191,7 @@ namespace EMS.Entity
             set;
         }
 
-        public DateTime RefBookingDate
+        public DateTime ? RefBookingDate
         {
             get;
             set;
@@ -367,6 +374,10 @@ namespace EMS.Entity
                 if (reader["fk_CustomerID"] != DBNull.Value)
                     this.CustID = Convert.ToInt32(reader["fk_CustomerID"]);
 
+            if (ColumnExists(reader, "Salesman"))
+                if (reader["Salesman"] != DBNull.Value)
+                    this.Sman = Convert.ToString(reader["Salesman"]);
+
             if (ColumnExists(reader, "BookingDate"))
                 if (reader["BookingDate"] != DBNull.Value)
                     this.BookingDate = Convert.ToDateTime(reader["BookingDate"]);
@@ -536,8 +547,12 @@ namespace EMS.Entity
                     this.ServicesID = Convert.ToInt32(reader["fk_ServiceID"]);
 
             if (ColumnExists(reader, "Accounts"))
+            {
                 if (!String.IsNullOrEmpty(Convert.ToString(reader["Accounts"])))
                     this.Accounts = Convert.ToString(reader["Accounts"]);
+                else
+                    this.Accounts = string.Empty;
+            }
 
             if (ColumnExists(reader, "GrossWt"))
                 if (!String.IsNullOrEmpty(Convert.ToString(reader["GrossWt"])))

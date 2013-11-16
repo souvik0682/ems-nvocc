@@ -68,19 +68,23 @@ namespace EMS.WebApp.Export
 
         void txtBookingNo_TextChanged(object sender, EventArgs e)
         {
+            int Status;
             if (!string.IsNullOrEmpty(txtBookingNo.Text))
             {
                 if (ExportBLBLL.CheckBookingLocation(txtBookingNo.Text, _userLocation) == true)
-                    if (ExportBLBLL.CheckExpBLExistance(txtBookingNo.Text) == true)
+                {
+                    Status = ExportBLBLL.CheckExpBLExistance(txtBookingNo.Text);
+                    if (Status != 0)
                     {
-                        LoadExportBLHeaderForAdd(txtBookingNo.Text);
+                        LoadExportBLHeaderForAdd(txtBookingNo.Text, Status);
                         lblErr.Text = "";
                     }
                     else
                     {
-                        lblErr.Text = "Export B/L Exists for Booking";
+                        lblErr.Text = "Error!!! Container(s) Missing or B/L Exists against Booking";
                         return;
                     }
+                }
                 else
                     rfvBookingNo.Visible = true;
             }
@@ -226,10 +230,10 @@ namespace EMS.WebApp.Export
             }
 
             ViewState["DataSource"] = lstData;
-            LoadExportBLContainers(0, 0);
+            LoadExportBLContainers(0, 0,1);
         }
 
-        private void LoadExportBLContainers(long BookingId, long BLId)
+        private void LoadExportBLContainers(long BookingId, long BLId, int Status)
         {
             try
             {
@@ -244,7 +248,7 @@ namespace EMS.WebApp.Export
                 else
                 {
                     if (!isEdit)
-                        objData = ExportBLBLL.GetExportBLContainersForAdd(BookingId);
+                        objData = ExportBLBLL.GetExportBLContainersForAdd(BookingId, Status);
                     else
                         objData = ExportBLBLL.GetExportBLContainersForEdit(BLId);
                 }
@@ -273,7 +277,7 @@ namespace EMS.WebApp.Export
         }
 
         
-        private void LoadExportBLHeaderForAdd(string BookingNumber)
+        private void LoadExportBLHeaderForAdd(string BookingNumber, int Status)
         {
             try
             {
@@ -309,14 +313,14 @@ namespace EMS.WebApp.Export
                     {
                         hdnBLThruEdge.Value = "0";
                         txtBLNo.Enabled = true;
-                        rfvShipper.Enabled = false;
+                        //rfvShipper.Enabled = false;
                         rfvShipperName.Enabled = false;
-                        rfvConsignee.Enabled = false;
+                        //rfvConsignee.Enabled = false;
                         rfvConsigneeName.Enabled = false;
                         rfvGoodsDescription.Enabled = false;
                         rfvMarks.Enabled = false;
                         rfvNotify.Enabled = false;
-                        rfvNotifyName.Enabled = false;
+                        //rfvNotifyName.Enabled = false;
                         rfvAgent.Enabled = false;
 
 
@@ -325,14 +329,14 @@ namespace EMS.WebApp.Export
                     {
                         txtBLNo.Enabled = false;
                         hdnBLThruEdge.Value = "1";
-                        rfvShipper.Enabled = true;
+                        //rfvShipper.Enabled = true;
                         rfvShipperName.Enabled = true;
-                        rfvConsignee.Enabled = true;
+                        //rfvConsignee.Enabled = true;
                         rfvConsigneeName.Enabled = true;
                         rfvGoodsDescription.Enabled = true;
                         rfvMarks.Enabled = true;
                         rfvNotify.Enabled = true;
-                        rfvNotifyName.Enabled = true;
+                        //rfvNotifyName.Enabled = true;
                         rfvAgent.Enabled = true;
                     }
                     txtCBookingNo.Text = exportBL.BookingNumber;
@@ -359,7 +363,7 @@ namespace EMS.WebApp.Export
                     else
                         txtFeu.Text = "0";
 
-                    LoadExportBLContainers(exportBL.BookingId, 0);
+                    LoadExportBLContainers(exportBL.BookingId, 0, Status);
                 }
                 else
                     rfvBookingNo.Visible = true;
@@ -409,7 +413,8 @@ namespace EMS.WebApp.Export
                     ddlShipmentMode.SelectedValue = exportBL.ShipmentMode.ToString();
                     ((TextBox)txtIssuePlace.FindControl("txtPort")).Text = exportBL.BLIssuePlace;
                     ViewState["BLISSUEID"] = exportBL.BLIssuePlaceId;
-                    txtNetWt.Text = exportBL.NetWeight.ToString();
+                    TxtNtWt.Text = exportBL.NetWeight.ToString();
+                    //txtNetWt.Text = exportBL.NetWeight.ToString();
                     txtBLReleaseDate.Text = exportBL.BLReleaseDate.ToString("dd-MM-yyyy");
                     if (hdnBLThruEdge.Value == "0")
                     //if (exportBL.BLthruEdge == false)
@@ -445,7 +450,7 @@ namespace EMS.WebApp.Export
                     else
                         txtFeu.Text = "0";
 
-                    LoadExportBLContainers(0, exportBL.BLId);
+                    LoadExportBLContainers(0, exportBL.BLId,0);
                 }
             }
             catch (Exception ex)
@@ -579,7 +584,8 @@ namespace EMS.WebApp.Export
             objBL.BLClause = ddlBLClause.SelectedValue;
             objBL.BLType = rdoBLType.SelectedValue;
             objBL.NoOfBL = Convert.ToInt32(rdoOriginal.SelectedValue);
-            objBL.NetWeight = Convert.ToDecimal(txtNetWt.Text.Trim());
+            objBL.NetWeight = Convert.ToDecimal(TxtNtWt.Text.Trim());
+            //objBL.NetWeight = Convert.ToDecimal(txtNetWt.Text.Trim());
             objBL.BLReleaseDate = Convert.ToDateTime(txtBLReleaseDate.Text.Trim());
 
             exportBLId = ExportBLBLL.SaveExportBLHeader(objBL);
@@ -639,6 +645,7 @@ namespace EMS.WebApp.Export
         {
             try
             {
+                
                 long exportBLId = SaveExportBLHeaderDetails();
                 SaveExportBLContainers(exportBLId);
                 Response.Redirect("~/Export/ExportBL.aspx");
@@ -690,7 +697,7 @@ namespace EMS.WebApp.Export
                     }).ToList();
             }
             ViewState["DataSource"] = lstData;
-            LoadExportBLContainers(0, 0);
+            LoadExportBLContainers(0, 0, 0);
         }
     }
 

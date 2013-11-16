@@ -8,7 +8,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
-<style type="text/css">
+    <style type="text/css">
         body
         {
             font-family: Arial;
@@ -333,7 +333,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td style="width: 20%;">
-                                                                Net Weight:<span class="errormessage">*</span>
+                                                                Gross Weight:<span class="errormessage">*</span>
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtNetWt" runat="server" CssClass="textboxuppercase" MaxLength="8"
@@ -359,7 +359,23 @@
                                                             </td>
                                                             
                                                         </tr>
+                                                        <tr>
+                                                            <td style="width: 20%;">
+                                                                Net Weight:<span class="errormessage">*</span>
+                                                            </td>
+                                                            <td style="width: 28%;">
+                                                                <cc2:CustomTextBox ID="TxtNtWt" runat="server" CssClass="numerictextbox" TabIndex="13"
+                                                                    Width="250px" Type="Decimal" MaxLength="15" Precision="6" Scale="3"></cc2:CustomTextBox>
+                                                                <br />
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                            
+                                                        </tr>
                                                     </table>
+
                                                 
                                                  </ContentTemplate>
                                             </cc1:TabPanel>
@@ -382,7 +398,7 @@
                                                         </tr>
                                                          <tr>
                                                             <td style="width: 28%;">
-                                                                Shipper Name:
+                                                                Shipper Name:<span class="errormessage">*</span>
                                                             </td>
                                                             <td style="width: 4%;">
                                                                 <asp:TextBox ID="txtShipperName" runat="server" CssClass="textboxuppercase" MaxLength="50"
@@ -392,7 +408,7 @@
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </td>
                                                             <td style="width: 40%;">
-                                                                Consignee Name:
+                                                                Consignee Name:<span class="errormessage">*</span>
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtConsigneeName" runat="server" CssClass="textboxuppercase" MaxLength="50"
@@ -409,9 +425,9 @@
                                                             <td style="width: 4%;">
                                                                 <asp:TextBox ID="txtShipper" runat="server" CssClass="textboxuppercase" MaxLength="50"
                                                                     Width="300" TabIndex="1" TextMode="MultiLine" Rows="4"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="rfvShipper" runat="server" CssClass="errormessage"
+                                                              <%--  <asp:RequiredFieldValidator ID="rfvShipper" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtShipper" ValidationGroup="Save"
-                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 Consignee:
@@ -419,21 +435,21 @@
                                                             <td>
                                                                 <asp:TextBox ID="txtConsignee" runat="server" CssClass="textboxuppercase" MaxLength="50"
                                                                     Width="300" TabIndex="9" TextMode="MultiLine" Rows="4"></asp:TextBox><br />
-                                                                <asp:RequiredFieldValidator ID="rfvConsignee" runat="server" CssClass="errormessage"
+                                                               <%-- <asp:RequiredFieldValidator ID="rfvConsignee" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtConsignee" ValidationGroup="Save"
-                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width: 28%;">
-                                                                Notify Party Name:
+                                                                Notify Party Name:<span class="errormessage">*</span>
                                                             </td>
                                                             <td style="width: 4%;">
                                                                 <asp:TextBox ID="txtNotifyName" runat="server" CssClass="textboxuppercase" MaxLength="50"
                                                                     Width="300" TabIndex="1" ></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="rfvNotifyName" runat="server" CssClass="errormessage"
+                                                               <%-- <asp:RequiredFieldValidator ID="rfvNotifyName" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtNotifyName" ValidationGroup="Save"
-                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 BL Clause:
@@ -449,7 +465,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td style="width: 28%;">
-                                                                Notify Party:<span class="errormessage">*</span>
+                                                                Notify Party:
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtNotify" runat="server" CssClass="textboxuppercase" MaxLength="50"
@@ -621,7 +637,7 @@
                                                                 ReadOnly="True" SortExpression="TareWeight" />
                                                             <asp:TemplateField HeaderText="Gross Weight (KG)" SortExpression="GrossWeight" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
-                                                                    <cc2:CustomTextBox ID="txtGrossWeight" runat="server" Text='<%# Bind("GrossWeight", "{0:n2}") %>' 
+                                                                    <cc2:CustomTextBox ID="txtGrossWeight" runat="server" Text='<%# Bind("GrossWeight", "{0:n3}") %>' 
                                                                         Style="text-align: right;" Width="80" BorderStyle="None" MaxLength="10" AutoPostBack="true"
                                                                         Precision="8" Scale="2" Type="Decimal" OnTextChanged="txtGrossWeight_TextChanged">
                                                                     </cc2:CustomTextBox>

@@ -54,6 +54,7 @@ namespace EMS.WebApp.Export
                 ViewState["VoyageID"] = voyage.VoyageID;           
                 //txtGatewayPort.Text= voyage.GatewayPort.ToString();
                 ddlVessel.SelectedValue=voyage.VesselID.ToString();
+                ddlLocation.SelectedValue = voyage.LocationID.ToString();
                 hdnPOL.Value = voyage.POL.ToString();
                 hdnNextPortCall.Value = voyage.NextPortID.ToString();
                 //txtPOD.Text= voyage.POD.ToString();

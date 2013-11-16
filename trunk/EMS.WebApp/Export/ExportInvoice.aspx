@@ -128,6 +128,15 @@
                                 <td>
                                     <asp:TextBox ID="txtROff" runat="server" Width="250px" Enabled="false" Style="text-align: right;"></asp:TextBox>
                                 </td>
+                                <td>
+                                    All In Freight
+                                </td>
+                                <td>
+                                   <asp:RadioButtonList ID="rdoHazardousCargo" runat="server" TabIndex="20" RepeatDirection="Horizontal">
+                                            <asp:ListItem Selected="True" Text="Yes" Value="Yes"></asp:ListItem>
+                                            <asp:ListItem Text="No" Value="No"></asp:ListItem>
+                                        </asp:RadioButtonList>
+                                </td>
                             </tr>
                             <tr>
                                 <td colspan="4" style="padding-top: 10; border: none;">

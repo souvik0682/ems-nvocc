@@ -378,11 +378,12 @@ namespace EMS.WebApp.Equipment
             {
                 ddlBookingNo.Enabled = true;
                 ddlDONo.Enabled = true;
-                ListItem Li = new ListItem("Select", "0");
-                PopulateDropDown((int)Enums.DropDownPopulationFor.Booking, ddlBookingNo, Convert.ToInt32(ddlFromLocation.SelectedValue), 0);
-                ddlBookingNo.Items.Insert(0, Li);
-                ddlBookingNo.SelectedIndex = 0;
-                //_reqfield = 1;
+                if (ddlFromLocation.SelectedIndex != 0 && ddlLine.SelectedIndex != 0)
+                    PopulateBookingNo(ddlFromLocation.SelectedValue.ToInt(), ddlLine.SelectedValue.ToInt());
+
+                //PopulateDropDown((int)Enums.DropDownPopulationFor.Booking, ddlBookingNo, Convert.ToInt32(ddlFromLocation.SelectedValue), 0);
+                //ddlBookingNo.Items.Insert(0, Li);
+                //ddlBookingNo.SelectedIndex = 0;
             }
             else
             {
@@ -414,10 +415,163 @@ namespace EMS.WebApp.Equipment
 
         protected void btnProceed_Click(object sender, EventArgs e)
         {
+
+            DataSet ds = new DataSet();
+            int BalQty = 0;
+            int i;
+            int j;
+            bool RecFound = false;
+
             lblMessage.Text = string.Empty;
 
             //Checking for container requirement for SNTS with DO and Booking
 
+            if (ddlDONo.SelectedIndex != -1 && ddlBookingNo.SelectedIndex != -1)
+            {
+                if ((ddlFromStatus.SelectedItem.Text == "RCVE") || (ddlToStatus.SelectedItem.Text == "SNTS"))
+                {
+                    //if (ddlDONo.SelectedIndex == 0 || ddlBookingNo.SelectedIndex == 0)
+                    //{
+                    //    lblMessage.Text = "Do and Booking is compulsory";
+                    //    return;
+                    //}
+
+
+                    // Get Balance Containers
+                    string[] ContTypeSize = new string[0];
+                    string FindCont = "";
+                    int[] CntrNos = new int[0];
+                    int cIndex = -1;
+                    int Ind = 0;
+
+                    foreach (GridViewRow Row in gvContainer.Rows)
+                    {
+                        CheckBox chkContainer = (CheckBox)Row.FindControl("chkContainer");
+                        if (chkContainer.Checked == true)
+                        {
+                            // check in the array
+                            Label lblContainerSize = (Label)Row.FindControl("lblContainerSize");
+                            Label lblContainerType = (Label)Row.FindControl("lblContainerType");
+                            FindCont = lblContainerType.Text + lblContainerSize.Text;
+
+                            Ind = Array.IndexOf(ContTypeSize, FindCont);
+
+                            if (Ind == -1)
+                            {
+                                Array.Resize(ref ContTypeSize, ContTypeSize.Length + 1);
+                                Array.Resize(ref CntrNos, CntrNos.Length + 1);
+                                cIndex++;
+                                ContTypeSize[cIndex] = FindCont;
+                                CntrNos[cIndex]++;
+                            }
+                            else
+                            {
+                                cIndex = Ind;
+                                CntrNos[cIndex]++;
+                            }
+
+                            //string[] myArray = new string[10];
+                            //Array.Resize(ref myArray, myArray.Length + 1);
+                            //string value2 = Array.Find(myArray, element => element.Equals("abc", StringComparison.Ordinal));
+                            //int ind1 = Array.IndexOf(myArray, "banana");
+
+
+                            //Label lblContainerSize = (Label)Row.FindControl("lblContainerSize");
+                            //Label lblContainerType = (Label)Row.FindControl("lblContainerType");
+                            //if (ContSize[i] == lblContainerSize.Text && ContType[i] == lblContainerType.Text)
+                            //{
+                            //    QtyEntered += 1;
+                            //}
+                            //else
+                            //    SaveRec = false;
+                        }
+                    }
+
+                    ContainerTranBLL oContainerTranBLL = new ContainerTranBLL();
+                    ds = oContainerTranBLL.GetPendingDOList(Convert.ToInt32(ddlDONo.SelectedValue));
+                    string cst = "";
+
+                    for (i = 0; i < CntrNos.Length; i++)
+                    {
+                        RecFound = false;
+                        for (j = 0; j < ds.Tables[0].Rows.Count; j++)
+                        {
+                            cst = ds.Tables[0].Rows[j]["ContainerType"].ToString() + ds.Tables[0].Rows[j]["CntrSize"].ToString();
+                            BalQty = ds.Tables[0].Rows[j]["DOQty"].ToInt() - ds.Tables[0].Rows[j]["DelQty"].ToInt();
+                            if (cst == ContTypeSize[i])
+                            {
+                                RecFound = true;
+                                if (CntrNos[i] > BalQty)
+                                    RecFound = false;
+                            }
+                        }
+                        if (RecFound == false)
+                        {
+                            break;
+                        }
+                    }
+                    if (RecFound == false)
+                    {
+                        lblMessage.Text = "Currenty qty > Required balance";
+                        return;
+                    }
+                }
+                //if (ds.Tables[0].Rows.Count > 0)
+                //{
+                //    cst = ds.Tables[0].Rows[i]["ContainerType"].ToString() + ds.Tables[0].Rows[i]["CntrSize"].ToString();
+
+                //    for (i=0; i < ds.Tables[0].Rows.Count; i++)
+
+                //    string[] ContSize = new string[ds.Tables[0].Rows.Count];
+                //    string[] ContType = new string[ds.Tables[0].Rows.Count];
+                //    for (i = 0; i < ds.Tables[0].Rows.Count; i++)
+                //    {
+                //        ContSize[i] = ds.Tables[0].Rows[i]["CntrSize"].ToString();
+                //        ContType[i] = ds.Tables[0].Rows[i]["ContainerType"].ToString();
+                //    }
+
+                //    for (i = 0; i < ds.Tables[0].Rows.Count; i++)
+                //    {
+                //        BalQty = ds.Tables[0].Rows[i]["DOQty"].ToInt() - ds.Tables[0].Rows[i]["DelQty"].ToInt();
+                //        QtyEntered = 0;
+                //        foreach (GridViewRow Row in gvContainer.Rows)
+                //        {
+                //            CheckBox chkContainer = (CheckBox)Row.FindControl("chkContainer");
+                //            if (chkContainer.Checked == true)
+                //            {
+                //                // check in the array
+                //                string[] myArray = new string[10];
+                //                Array.Resize(ref myArray, myArray.Length + 1);
+                //                string value2 = Array.Find(myArray, element => element.Equals("abc", StringComparison.Ordinal));
+                //                int ind1 = Array.IndexOf(myArray, "banana");
+
+
+                //                Label lblContainerSize = (Label)Row.FindControl("lblContainerSize");
+                //                Label lblContainerType = (Label)Row.FindControl("lblContainerType");
+                //                if (ContSize[i] == lblContainerSize.Text && ContType[i] == lblContainerType.Text)
+                //                {
+                //                    QtyEntered += 1;
+                //                }
+                //                else
+                //                    SaveRec = false;
+                //            }
+                //        }
+                //        if (QtyEntered > BalQty)
+                //        {
+                //            SaveRec = false;
+                //        }
+                //    }
+                //}
+                //else
+                //    SaveRec = false;
+
+                //if (SaveRec == false)
+                //{
+                //    lblMessage.Text = "Currenty qty > Required balance";
+                //    return;
+                //}
+
+            }
 
             DataTable Dt = CreateDataTable();
 
@@ -541,10 +695,11 @@ namespace EMS.WebApp.Equipment
                 {
                     ddlBookingNo.Enabled = true;
                     ddlDONo.Enabled = true;
-                    ListItem Lx = new ListItem("Select", "0");
-                    PopulateDropDown((int)Enums.DropDownPopulationFor.Booking, ddlBookingNo, Convert.ToInt32(ddlFromLocation.SelectedValue), 0);
-                    ddlBookingNo.Items.Insert(0, Lx);
-                    //_reqfield = 1;
+                    //ListItem Lx = new ListItem("Select", "0");
+                    //PopulateDropDown((int)Enums.DropDownPopulationFor.Booking, ddlBookingNo, Convert.ToInt32(ddlFromLocation.SelectedValue), 0);
+                    PopulateBookingNo(ddlFromLocation.SelectedValue.ToInt(), ddlLine.SelectedValue.ToInt());
+                    //ddlBookingNo.Items.Insert(0, Lx);
+
                 }
                 else
                 {
@@ -726,6 +881,9 @@ namespace EMS.WebApp.Equipment
             if (ddlLine.Items.Count > 0)
                 ddlLine.SelectedIndex = 0;
 
+            ddlDONo.Items.Clear();
+            ddlBookingNo.Items.Clear();
+
             ddlEmptyYard.Enabled = false;
             //hdnChargeID.Value = string.Empty;
             hdnContainerTransactionId.Value = "0";
@@ -761,6 +919,20 @@ namespace EMS.WebApp.Equipment
                 ddlDONo.SelectedIndex = 0;
             }
 
+        }
+
+        private void PopulateBookingNo(int Loc, int Line)
+        {
+            DataTable dt = ContainerTranBLL.GetBookingList(Loc, Line);
+
+            if (!ReferenceEquals(dt, null))
+            {
+                ddlBookingNo.DataValueField = "BookingId";
+                ddlBookingNo.DataTextField = "BookingNo";
+                ddlBookingNo.DataSource = dt;
+                ddlBookingNo.DataBind();
+                ddlBookingNo.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
+            }
         }
 
         protected void ddlDONo_SelectedIndexChanged(object sender, EventArgs e)

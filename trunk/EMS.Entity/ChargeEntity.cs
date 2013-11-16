@@ -30,6 +30,12 @@ namespace EMS.Entity
             set;
         }
 
+        public string ChgAbbr
+        {
+            get;
+            set;
+        }
+
         public int ChargeType
         {
             get;
@@ -190,11 +196,14 @@ namespace EMS.Entity
             if (ColumnExists(reader, "DocType"))
                 if (reader["DocType"] != DBNull.Value)
                     this.DocumentType = Convert.ToInt32(reader["DocType"]);
-            
 
             if (ColumnExists(reader, "LocationId"))
                 if (reader["LocationId"] != DBNull.Value)
                     this.Location = Convert.ToInt32(reader["LocationId"]);
+
+            if (ColumnExists(reader, "ChgAbbr"))
+                if (reader["ChgAbbr"] != DBNull.Value)
+                    this.ChgAbbr = Convert.ToString(reader["ChgAbbr"]);
 
             //if (ColumnExists(reader, "Service"))
             //    if (reader["LocationId"] != DBNull.Value)

@@ -150,6 +150,10 @@ namespace EMS.Entity
                 if (reader["VCNNo"] != DBNull.Value)
                     VCNNo = Convert.ToString(reader["VCNNo"]);
 
+            if (ColumnExists(reader, "fk_LocationID"))
+                if (reader["fk_LocationID"] != DBNull.Value)
+                    LocationID= Convert.ToInt32(reader["fk_LocationID"]);
+
             if (ColumnExists(reader, "SailDate"))
                 if (reader["SailDate"] != DBNull.Value)
                     SailDate = Convert.ToDateTime(reader["SailDate"]);

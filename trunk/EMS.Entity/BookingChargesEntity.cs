@@ -20,6 +20,7 @@ namespace EMS.Entity
         public bool ChargeApplicable { get; set; }
         public string Size { get; set; }
         public int ContainerTypeId { get; set; }
+        public int DocumentTypeID { get; set; }
         public string ContainerType { get; set; }
         public decimal WtInCBM { get; set; }
         public decimal WtInTon { get; set; }
@@ -86,6 +87,10 @@ namespace EMS.Entity
                 if (reader["ContainerTypeId"] != DBNull.Value)
                     ContainerTypeId = Convert.ToInt32(reader["ContainerTypeId"]);
 
+            if (ColumnExists(reader, "DocumentTypeId"))
+                if (reader["DocumentTypeId"] != DBNull.Value)
+                    DocumentTypeID = Convert.ToInt32(reader["DocumentTypeId"]);
+
             if (ColumnExists(reader, "ContainerType"))
                 if (reader["ContainerType"] != DBNull.Value)
                     ContainerType = Convert.ToString(reader["ContainerType"]);
@@ -123,10 +128,8 @@ namespace EMS.Entity
                     Unit = Convert.ToInt32(reader["Unit"]);
 
             if (ColumnExists(reader, "RefundAmount"))
-            {
                 if (reader["RefundAmount"] != DBNull.Value)
                     RefundAmount = Convert.ToDecimal(reader["RefundAmount"]);
-            }
             else
                 RefundAmount = Convert.ToDecimal("0.00");
 
@@ -157,7 +160,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "RateChangeable"))
             {
                 if (reader["RateChangeable"] != DBNull.Value)
+                {
                     ManifestEditabe = Convert.ToBoolean(reader["RateChangeable"]);
+                    ChargedEditable = Convert.ToBoolean(reader["RateChangeable"]);
+                }
             }
         }
 

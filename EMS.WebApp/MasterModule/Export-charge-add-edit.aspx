@@ -247,8 +247,15 @@
                                 <td>
                                 </td>
                                 <td>
+                                    Charge Abbr<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
+                                    <asp:TextBox ID="txtChgAbbr" runat="server" Width="150" Style="text-transform: uppercase;"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="rfvChgAbbr" runat="server" ErrorMessage="Please enter charge Abbreviation"
+                                        ControlToValidate="txtChgAbbr" Display="None" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
+                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender2" runat="server" TargetControlID="rfvChgAbbr">
+                                    </cc1:ValidatorCalloutExtender>
+                               
                                 </td>
                                 <td>
                                     Allow Rate Change<span class="errormessage1">*</span> :

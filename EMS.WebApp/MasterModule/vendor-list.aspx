@@ -72,7 +72,7 @@
                     <asp:Button ID="btnAdd" runat="server" Text="Add New Vendor" Width="130px" OnClick="btnAdd_Click" />
                 </div>
                 <div style="height: 30px;">
-                    &nbsp; <span class="errormessage" style="display: none;">* Indicates Inactive Location(s)</span>
+                    &nbsp; <span class="errormessage" style="display: none;">* Indicates Inactive Vendors(s)</span>
                 </div>
                 <br />
                 <div>

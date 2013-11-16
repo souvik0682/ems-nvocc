@@ -38,9 +38,6 @@ namespace EMS.WebApp.MasterModule
             //
         }
 
-   
-
-
         private void LoadData(string VoyageId)
         {
             int intVoyageId = 0;
@@ -53,37 +50,32 @@ namespace EMS.WebApp.MasterModule
             {
                 ddlVessel.SelectedValue = ds.Tables[0].Rows[0]["fk_VesselID"].ToString();
                 txtVoyageNo.Text = ds.Tables[0].Rows[0]["MLVoyageNo"].ToString();
-                txtdtActivity.Text = ds.Tables[0].Rows[0]["ActivityDate"].ToString();
-                ((TextBox)AutoCompletepPort4.FindControl("txtPort")).Text = ds.Tables[0].Rows[0]["lastport"].ToString();
+                //txtdtActivity.Text = ds.Tables[0].Rows[0]["ActivityDate"].ToString();
+                //((TextBox)AutoCompletepPort4.FindControl("txtPort")).Text = ds.Tables[0].Rows[0]["lastport"].ToString();
 
             }
         }
-
-      
-     
-
-       
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
             VoyageId = GeneralFunctions.DecryptQueryString(Request.QueryString["id"]);
             bool isedit = VoyageId != "-1" ? true : false;
 
-            int fk_PortID = 0; 
-            try
-            {
-                string port = ((TextBox)AutoCompletepPort4.FindControl("txtPort")).Text;
-                port = port.Contains(',') && port.Split(',').Length >= 1 ? port.Split(',')[1].Trim() : "";
-                 fk_PortID = dbinteract.GetId("Port", port);
-            }
-            catch
-            {
+            //int fk_PortID = 0; 
+            //try
+            //{
+            //    string port = ((TextBox)AutoCompletepPort4.FindControl("txtPort")).Text;
+            //    port = port.Contains(',') && port.Split(',').Length >= 1 ? port.Split(',')[1].Trim() : "";
+            //     fk_PortID = dbinteract.GetId("Port", port);
+            //}
+            //catch
+            //{
                 
                
-            }
+            //}
 
 
-            int result = EMS.BLL.VoyageBLL.AddEditMLVoyage(VoyageId,ddlVessel.SelectedValue, txtVoyageNo.Text.ToUpper(), txtdtActivity.Text, fk_PortID, _userId, isedit);
+            int result = EMS.BLL.VoyageBLL.AddEditMLVoyage(VoyageId,ddlVessel.SelectedValue, txtVoyageNo.Text.ToUpper(), _userId, isedit);
 
             if (result > 0)
             {

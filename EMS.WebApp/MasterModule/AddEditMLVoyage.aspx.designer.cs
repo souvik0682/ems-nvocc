@@ -49,33 +49,6 @@ namespace EMS.WebApp.MasterModule {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
-        /// AutoCompletepPort4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::EMS.WebApp.CustomControls.AutoCompletePort AutoCompletepPort4;
-        
-        /// <summary>
-        /// txtdtActivity control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtdtActivity;
-        
-        /// <summary>
-        /// dtActivity_ control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender dtActivity_;
-        
-        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>

@@ -18,6 +18,7 @@ namespace EMS.Common
         string Size { get; set; }
         int ContainerTypeId { get; set; }
         string ContainerType { get; set; }
+        int DocumentTypeID {get; set;}
         decimal WtInCBM { get; set; }
         decimal WtInTon { get; set; }
         decimal ActualRate { get; set; }

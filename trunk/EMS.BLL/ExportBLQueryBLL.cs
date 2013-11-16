@@ -20,5 +20,10 @@ namespace EMS.BLL
        {
            return ExportBLQueryDAL.GetAllInvoice(BLId);
        }
+
+       public static int DeleteInvoice(Int32 InvoiceId)
+       {
+           return ExportBLQueryDAL.DeleteInvoice(InvoiceId);
+       }
     }
 }

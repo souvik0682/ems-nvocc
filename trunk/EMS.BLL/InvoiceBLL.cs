@@ -97,9 +97,9 @@ namespace EMS.BLL
         {
             return InvoiceDAL.GetAllCharges(docTypeId);
         }
-        public List<ICharge> GetAllExpCharges(int docTypeId)
+        public List<ICharge> GetAllExpCharges(int docTypeId, int LocationID, int LineID, string BookingNo)
         {
-            return InvoiceDAL.GetAllExpCharges(docTypeId);
+            return InvoiceDAL.GetAllExpCharges(docTypeId, LocationID, LineID, BookingNo);
         }
 
         public DataTable GetTerminals(long LocationId)
@@ -159,9 +159,9 @@ namespace EMS.BLL
             {
                 if (!ReferenceEquals(expInvoiceCharge, null))
                 {
-                    foreach (ExpInvoiceChargeEntity cRate in expInvoiceCharge)
+                    foreach (IExpChargeRate cRate in expInvoiceCharge)
                     {
-                        cRate.InvoiceID = invoiceId;
+                        cRate.InvoiceId = invoiceId;
                         invoiceChargeId = InvoiceDAL.SaveInvoiceChargesExp(cRate);
                     }
                 }
@@ -189,6 +189,11 @@ namespace EMS.BLL
             return InvoiceDAL.GetDefaultTerminal(BlId);
         }
 
+        public long GetExpDefaultTerminal(long BlId)
+        {
+            return InvoiceDAL.GetExpDefaultTerminal(BlId);
+        }
+
         public int DeleteInvoiceCharge(int InvoiceChargeId)
         {
             return InvoiceDAL.DeleteInvoiceCharge(InvoiceChargeId);
@@ -212,9 +217,9 @@ namespace EMS.BLL
         {
             return InvoiceDAL.GetInvoiceCharges_New(BlId, ChargesID, TerminalID, ExchangeRate, DocTypeId, Param3, InvoiceDate);
         }
-        public static IList<IExpChargeRate> GetExpInvoiceCharges_New(long BlId, int ChargesID, int TerminalID, int DocTypeId, DateTime InvoiceDate)
+        public List<IChargeRate> GetExpInvoiceCharges(long BlId, int ChargesID, int TerminalID, int DocTypeId, DateTime InvoiceDate)
         {
-            return InvoiceDAL.GetExpInvoiceCharges_New(BlId, ChargesID, TerminalID,  DocTypeId,  InvoiceDate);
+            return InvoiceDAL.GetExpInvoiceCharges(BlId, ChargesID, TerminalID, DocTypeId, InvoiceDate);
         }
         public DataTable ChargeEditable(int ChargeId)
         {

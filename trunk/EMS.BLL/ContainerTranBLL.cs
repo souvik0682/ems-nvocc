@@ -42,5 +42,10 @@ namespace EMS.BLL
         {
             return ContainerTranDAL.GetExpBLno(Initial);
         }
+
+        public DataSet GetPendingDOList(Int32 DOID)
+        {
+            return ContainerTranDAL.GetPendingDOList(DOID);
+        }
     }
 }

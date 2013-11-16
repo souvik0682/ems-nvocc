@@ -47,6 +47,11 @@ namespace EMS.BLL
             return BookingDAL.GetExportVoyages(Vessel);
         }
 
+        public static DataSet GetExportMLVoyages(int Vessel)
+        {
+            return BookingDAL.GetExportMLVoyages(Vessel);
+        }
+
         public static DataSet GetExportServices(int Line, Int32 Fpod)
         {
             return BookingDAL.GetExportServices(Line, Fpod);
@@ -152,6 +157,11 @@ namespace EMS.BLL
         public static string GetBLFromEDGE(int NVOCCID)
         {
             return BookingDAL.GetBLFromEDGE(NVOCCID);
+        }
+
+        public static int DeleteBookingCharges(int BookingId)
+        {
+            return BookingDAL.DeleteBookingCharges(BookingId);
         }
     }
 }

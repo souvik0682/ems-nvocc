@@ -872,6 +872,22 @@ namespace EMS.DAL
             return myDataTable;
         }
 
+        public static DataTable GetExpVoyages(string Vessel, string Line)
+        {
+            string strExecution = "[exp].[spGetVoyageByVesselID]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@Vessel", Vessel.ToInt()); 
+                //oDq.AddIntegerParam("@line", Line.ToInt());
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+
+
         public static DataTable GetVoyages(string Vessel)
         {
             string strExecution = "[dbo].[rptUspGetVoyageByVessel]";

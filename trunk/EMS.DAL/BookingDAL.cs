@@ -180,6 +180,16 @@ namespace EMS.DAL
             return dquery.GetTables();
         }
 
+        public static DataSet GetExportMLVoyages(int Vessel)
+        {
+            string ProcName = "[exp].[spGetMLVoyageByVesselID]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            dquery.AddIntegerParam("@Vessel", Vessel);
+
+            return dquery.GetTables();
+        }
+
         public static DataSet GetExportServices(int Line, Int32 fpod)
         {
             string ProcName = "[exp].[spGetServiceByLineFPOD]";
@@ -558,5 +568,19 @@ namespace EMS.DAL
             return Approver;
 
         }
+
+        public static int DeleteBookingCharges(int BookingId)
+        {
+            string strExecution = "[exp].[uspDeleteBookingCharges]";
+            int Result = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@BookingID", BookingId);
+                Result = oDq.RunActionQuery();
+            }
+            return Result;
+        }
+
     }
 }

@@ -159,7 +159,7 @@ namespace EMS.DAL
                 oDq.AddBooleanParam("@IsSpecialRate", Charge.IsSpecialRate);
                 oDq.AddCharParam("@DeliveryMode", 1, Charge.DeliveryMode);
                 oDq.AddIntegerParam("@DocType", Charge.DocumentType);
-
+                oDq.AddVarcharParam("@ChgAbbr", 10, Charge.ChgAbbr);
                 oDq.AddIntegerParam("@Service", Charge.Service);
                 oDq.AddBooleanParam("@DestinationCharge", Charge.DestinationCharge);
                 oDq.AddVarcharParam("@FPOD",5, Charge.FPOD);

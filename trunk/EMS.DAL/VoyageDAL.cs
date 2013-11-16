@@ -86,7 +86,7 @@ namespace EMS.DAL
                 return "True";
         }
 
-        public static int AddEditMLVoyage(string voyageId, string vesselId, string MLvoyageNo, string dtActivity, int fk_PortID, int _userId, bool isEdit)
+        public static int AddEditMLVoyage(string voyageId, string vesselId, string MLvoyageNo, int _userId, bool isEdit)
         {
             int intvesselId = 0;
             int.TryParse(vesselId, out  intvesselId);
@@ -94,8 +94,8 @@ namespace EMS.DAL
             int intVoyageId = 0;
             int.TryParse(voyageId, out intVoyageId);
 
-            dtActivity = dtActivity == "" ? DateTime.Now.ToShortDateString() : dtActivity;
-            DateTime dt = Convert.ToDateTime(dtActivity);
+            //dtActivity = dtActivity == "" ? DateTime.Now.ToShortDateString() : dtActivity;
+            //DateTime dt = Convert.ToDateTime(dtActivity);
             string ProcName = "prcAddEditMLVoyage";
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
 
@@ -103,8 +103,8 @@ namespace EMS.DAL
             dquery.AddIntegerParam("@VoyageId",intVoyageId);
             dquery.AddIntegerParam("@vesselId", intvesselId);
             dquery.AddVarcharParam("@MLvoyageNo", 15, MLvoyageNo);
-            dquery.AddDateTimeParam("@ActivityDate", dt);
-            dquery.AddIntegerParam("@fk_PortID", fk_PortID);
+            //dquery.AddDateTimeParam("@ActivityDate", dt);
+            //dquery.AddIntegerParam("@fk_PortID", fk_PortID);
             dquery.AddBooleanParam("@isEdit", isEdit);
 
             return dquery.RunActionQuery();

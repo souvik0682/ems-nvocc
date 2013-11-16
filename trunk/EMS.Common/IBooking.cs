@@ -19,6 +19,8 @@ namespace EMS.Common
         string POLID { get; set; }
         string PORID { get; set; }
         int CustID { get; set; }
+        string Sman { get; set; }
+
         string BookingParty { get; set; }
         int LocationID { get; set; }
         int VesselID { get; set; }
@@ -29,7 +31,7 @@ namespace EMS.Common
         string BookingNo { get; set; }
         DateTime BookingDate { get; set; }
         string RefBookingNo {get; set;}
-        DateTime RefBookingDate { get; set; }
+        DateTime ? RefBookingDate { get; set; }
         bool HazCargo { get; set; }
         string IMO { get; set; }
         string UNO { get; set; }

@@ -26,7 +26,7 @@ namespace EMS.Common
         bool RateActive { get; set; }
         decimal ServiceTax { get; set; }
 
-	    string ChangeName { get; set; }
+	    string ChargeName { get; set; }
         string TerminalName { get; set; }
         string WashingTypeName { get; set; }
         decimal Usd { get; set; }
@@ -37,6 +37,8 @@ namespace EMS.Common
         decimal TotalAmount { get; set; }
         int InvoiceChargeId { get; set; }
         long InvoiceId { get; set; }
+        int fk_CurrencyID { get; set; }
+        decimal ExchgRate { get; set; }
 
         int Type
         {

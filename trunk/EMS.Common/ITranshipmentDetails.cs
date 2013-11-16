@@ -28,5 +28,6 @@ namespace EMS.Common
         string VoyageNo { get; set; }
         string ContainerNo { get; set; }
         string Size { get; set; }
+        string ContainerType { get; set; }
     }
 }

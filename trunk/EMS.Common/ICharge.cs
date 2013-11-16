@@ -10,6 +10,7 @@ namespace EMS.Common
         int ChargesID { get; set; }
         int CompanyID { get; set; }
         string ChargeDescr { get; set; }
+        string ChgAbbr { get; set; }
         int ChargeType { get; set; }
         char IEC { get; set; }
         int NVOCCID { get; set; }

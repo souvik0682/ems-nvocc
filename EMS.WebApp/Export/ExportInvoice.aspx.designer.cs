@@ -175,6 +175,15 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.RadioButtonList rdoHazardousCargo;
         
         /// <summary>
+        /// txtUSDExRate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtUSDExRate;
+        
+        /// <summary>
         /// ddlFChargeName control.
         /// </summary>
         /// <remarks>

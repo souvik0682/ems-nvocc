@@ -49,9 +49,11 @@
                 </tr>--%>
 
                   <tr>
-                    <td>IMO Number</td>
+                    <td>IMO Number:<span class="errormessage1">*</span></td>
                     <td><asp:TextBox ID="txtIMO" runat="server" CssClass="textboxuppercase" 
                             MaxLength="14" Width="250" ></asp:TextBox><br />
+                        <asp:RequiredFieldValidator ID="rfvIMO" runat="server" CssClass="errormessage" 
+                        ControlToValidate="txtIMO" Display="Dynamic" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator>
                    </td>
                 </tr>
 
@@ -84,16 +86,20 @@
                 </tr>
 
                 <tr>
-                    <td>Call Sign:</td>
+                    <td>Call Sign:<span class="errormessage1">*</span></td>
                     <td><asp:TextBox ID="TxtCallSign" runat="server" CssClass="textboxuppercase" 
                             MaxLength="10" Width="250" TextMode="SingleLine"></asp:TextBox><br />
+                     <asp:RequiredFieldValidator ID="rfvCallSign" runat="server" CssClass="errormessage" 
+                        ControlToValidate="TxtCallSign" Display="Dynamic" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator>
                    </td>
                 </tr>
 
                 <tr>
-                    <td>Vessel Abbr:</td>
+                    <td>Vessel Abbr:<span class="errormessage1">*</span></td>
                     <td><asp:TextBox ID="txtVesselAbbr" runat="server" CssClass="textboxuppercase" 
                             MaxLength="10" Width="250" TextMode="SingleLine"></asp:TextBox><br />
+                        <asp:RequiredFieldValidator ID="rfvVesselAbbr" runat="server" CssClass="errormessage" 
+                        ControlToValidate="txtVesselAbbr" Display="Dynamic" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator>
                    </td>
                 </tr>
                  <%--<tr>

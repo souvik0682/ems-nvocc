@@ -310,6 +310,33 @@ namespace EMS.WebApp.MasterModule {
         protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender16;
         
         /// <summary>
+        /// txtChgAbbr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtChgAbbr;
+        
+        /// <summary>
+        /// rfvChgAbbr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvChgAbbr;
+        
+        /// <summary>
+        /// ValidatorCalloutExtender2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender2;
+        
+        /// <summary>
         /// rdbRateChange control.
         /// </summary>
         /// <remarks>

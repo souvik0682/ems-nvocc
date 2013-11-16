@@ -110,7 +110,7 @@
 
                               
 
-                                <asp:TemplateField HeaderText="Port" SortExpression="LastPort">
+                            <%--    <asp:TemplateField HeaderText="Port" SortExpression="LastPort">
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="20%" />                                       
                                 </asp:TemplateField>
@@ -118,7 +118,7 @@
                                  <asp:TemplateField HeaderText="Activity Date" >
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" Width="18%" />                                       
-                                </asp:TemplateField>
+                                </asp:TemplateField>--%>
 
                                 <asp:TemplateField>
                                     <HeaderStyle CssClass="gridviewheader" />

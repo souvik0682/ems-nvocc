@@ -40,7 +40,7 @@
                             ControlToValidate="ddlVessel" InitialValue="0" Display="Dynamic" Text="This field is Required" ValidationGroup="Save"></asp:RequiredFieldValidator></td>
                 </tr>
                 
-           <tr>
+                <%--<tr>
                     <td style="width:120px;">Port:<span class="errormessage1">*</span></td>
                     <td >
                     <div style="width:230px">
@@ -52,11 +52,10 @@
                 <tr  >
                     <td style="width:120px;">Activity Date:</td>
                     <td>
-                        <%--<uc3:DatePicker ID="dtLand" runat="server" />--%>
                          <asp:TextBox ID="txtdtActivity" runat="server" CssClass="textboxuppercase" Width="220"></asp:TextBox>
                         <cc2:CalendarExtender ID="dtActivity_" Format="dd/MM/yyyy" TargetControlID="txtdtActivity" runat="server" />
                    </td>
-                </tr>
+                </tr>--%>
              
                 <tr>
                     <td colspan="2">

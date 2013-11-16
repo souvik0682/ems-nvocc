@@ -37,7 +37,7 @@ namespace EMS.WebApp.MasterModule
             if (!IsPostBack)
             {
                 RetrieveSearchCriteria();
-                LoadLocation();
+                LoadAddress();
             }
         }
 
@@ -52,7 +52,7 @@ namespace EMS.WebApp.MasterModule
             if (Page.IsValid)
             {
                 SaveNewPageIndex(0);
-                LoadLocation();
+                LoadAddress();
                 upLoc.Update();
             }
         }
@@ -62,7 +62,7 @@ namespace EMS.WebApp.MasterModule
             int newIndex = e.NewPageIndex;
             gvwVendor.PageIndex = e.NewPageIndex;
             SaveNewPageIndex(e.NewPageIndex);
-            LoadLocation();
+            LoadAddress();
         }
         protected void gvwVendor_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -89,7 +89,7 @@ namespace EMS.WebApp.MasterModule
                     }
                 }
 
-                LoadLocation();
+                LoadAddress();
             }
             else if (e.CommandName == "Edit")
             {
@@ -160,7 +160,7 @@ namespace EMS.WebApp.MasterModule
         {
             int newPageSize = Convert.ToInt32(ddlPaging.SelectedValue);
             SaveNewPageSize(newPageSize);
-            LoadLocation();
+            LoadAddress();
             upLoc.Update();
         }
 
@@ -252,7 +252,7 @@ namespace EMS.WebApp.MasterModule
             gvwVendor.PagerSettings.PageButtonCount = Convert.ToInt32(ConfigurationManager.AppSettings["PageButtonCount"]);
         }
 
-        private void LoadLocation()
+        private void LoadAddress()
         {
             if (!ReferenceEquals(Session[Constants.SESSION_SEARCH_CRITERIA], null))
             {
@@ -275,7 +275,7 @@ namespace EMS.WebApp.MasterModule
         private void DeleteLocation(int locId)
         {
             VendorBLL.DeleteVndor(locId);
-            LoadLocation();
+            LoadAddress();
             ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00010") + "');</script>", false);
         }
 
@@ -386,7 +386,7 @@ namespace EMS.WebApp.MasterModule
         {
             txtLocationName.Text = string.Empty;
             txtVendorName.Text = string.Empty;
-            LoadLocation();
+            LoadAddress();
         }
 
     }

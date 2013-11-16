@@ -111,6 +111,7 @@ namespace EMS.WebApp.MasterModule
                 oChargeEntity.RateChangeable = Convert.ToBoolean(Convert.ToInt32(rdbRateChange.SelectedItem.Value));
                 oChargeEntity.ServiceTax = Convert.ToBoolean(Convert.ToInt32(rdbServiceTaxApplicable.SelectedItem.Value));
                 oChargeEntity.Location = Convert.ToInt32(ddlHeaderLocation.SelectedValue);
+                oChargeEntity.ChgAbbr = txtChgAbbr.Text;
 
                 if (ddlService.SelectedIndex > 0)
                     oChargeEntity.Service = Convert.ToInt32(ddlService.SelectedValue);
@@ -598,7 +599,7 @@ namespace EMS.WebApp.MasterModule
             //oChargeEntity.ChargeActive = true;
             txtChargeName.Text = oChargeEntity.ChargeDescr;
             ddlChargeType.SelectedIndex = ddlChargeType.Items.IndexOf(ddlChargeType.Items.FindByValue(oChargeEntity.ChargeType.ToString()));
-
+            txtChgAbbr.Text = oChargeEntity.ChgAbbr;
 
             ddlCurrency.SelectedIndex = ddlCurrency.Items.IndexOf(ddlCurrency.Items.FindByValue(oChargeEntity.Currency.ToString()));
             txtEffectDate.Text = oChargeEntity.EffectDt.ToShortDateString();

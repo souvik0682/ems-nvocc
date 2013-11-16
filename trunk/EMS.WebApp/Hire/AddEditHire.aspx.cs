@@ -107,8 +107,8 @@ namespace EMS.WebApp.Hire
             if (rdTransactionType.SelectedValue == "F" )
                 {
                     txtContainerNo.TextChanged+=txtContainerNo_TextChanged;
-                ddlSize.Enabled=false;
-                ddlType.Enabled=false;
+                    ddlSize.Enabled=false;
+                    ddlType.Enabled=false;
                 }
         }
 

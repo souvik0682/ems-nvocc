@@ -70,7 +70,7 @@ namespace EMS.Entity.Report
             this.ROTNo = Convert.ToString(reader["RotationNo"]);
             if (reader["VesselcutOffDate"] != DBNull.Value) this.VesselCutoffDate = Convert.ToDateTime(reader["VesselcutOffDate"]);
             if (reader["DocsCutOffDate"] != DBNull.Value) this.DocumentCutoffDate = Convert.ToDateTime(reader["DocsCutOffDate"]);
-            //this.Dimensions = Convert.ToString(reader["Dimensions"]);
+            this.Dimensions = Convert.ToString(reader["TempMin"]);
             this.AddrName = Convert.ToString(reader["AddrName"]);
             this.AddrAddress = Convert.ToString(reader["AddrAddress"]);
             this.Phone = Convert.ToString(reader["Phone"]);

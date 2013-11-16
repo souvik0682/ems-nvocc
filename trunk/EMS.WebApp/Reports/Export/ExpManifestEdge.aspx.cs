@@ -74,6 +74,7 @@ namespace EMS.WebApp.Reports
             rptViewer.LocalReport.DataSources.Add(new ReportDataSource("dsTFS", TFS.Tables[0]));
             rptViewer.LocalReport.DataSources.Add(new ReportDataSource("dsCTRS", CTRS.Tables[0]));
             rptViewer.LocalReport.SetParameters(new ReportParameter("EXPBLID", ddlBlNo.SelectedValue));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("ReportName", "FREIGHT MANIFEST - ("+ddlLocation.SelectedItem+")"));
             rptViewer.LocalReport.Refresh();
            
         }

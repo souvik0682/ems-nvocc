@@ -13,6 +13,20 @@
         {
             width: 139px;
         }
+        .style2
+        {
+            width: 25%;
+            height: 18px;
+        }
+        .style3
+        {
+            width: 139px;
+            height: 18px;
+        }
+        .style4
+        {
+            height: 18px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
@@ -22,7 +36,7 @@
         <fieldset style="padding: 5px; width: 55%">
             <table style="width: 100%" cellpadding="1" cellspacing="0">
                 <tr id="main">
-                    <td align="left" style="width: 25%">
+                    <td align="left" style="width: 15%">
                         Location:<span class="errormessage">*</span>
                     </td>
                     <td align="left" style="width: 35%">
@@ -34,10 +48,11 @@
                             ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                     </td>
                     <td>
-                        Line:<span class="errormessage" style="width: 15%">*</span>
+                        Line:<span class="errormessage" style="width: 25%">*</span>
                     </td>
                     <td align="left" class="style1">
-                        <asp:DropDownList ID="ddlLocation" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged">
+                        <asp:DropDownList ID="ddlLocation" runat="server" AutoPostBack="true" 
+                            OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged" Width="140px">
                             <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="errormessage"
@@ -46,9 +61,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 25%">BL Or Manifest:<span class="errormessage">*</span>
+                    <td class="style2">BL Or Manifest:<span class="errormessage">*</span>
                     </td>
-                    <td align="left" class="style1">  
+                    <td align="left" class="style3">  
                         <asp:DropDownList AutoPostBack="true" ID="ddlBLMan" runat="server" 
                                 onselectedindexchanged="ddlBLMan_SelectedIndexChanged"  >
                                 <asp:ListItem Text="Select" Value="0"></asp:ListItem>
@@ -60,11 +75,11 @@
                             ErrorMessage="[Required]">
                         </asp:RequiredFieldValidator>
                     </td>
-                    <td>
+                    <td class="style2">
                         BL No.:<span class="errormessage">*</span>
                     </td>
-                    <td align="left" colspan="3">
-                        <asp:DropDownList ID="ddlBlNo" runat="server" Width="120">
+                    <td align="left" colspan="3" class="style4">
+                        <asp:DropDownList ID="ddlBlNo" runat="server" Width="200px">
                             <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="rfvBlNo" runat="server" CssClass="errormessage"

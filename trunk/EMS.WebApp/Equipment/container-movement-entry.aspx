@@ -155,7 +155,7 @@
                                     Empty Yard <span class="errormessage1">*</span>:
                                 </td>
                                 <td valign="top">
-                                    <asp:DropDownList ID="ddlEmptyYard" runat="server" Enabled="false" Width="155" OnSelectedIndexChanged="ddlEmptyYard_SelectedIndexChanged"
+                                    <asp:DropDownList ID="ddlEmptyYard" runat="server" Enabled="false" Width="193px" OnSelectedIndexChanged="ddlEmptyYard_SelectedIndexChanged"
                                         AutoPostBack="true">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvEmptyYard" runat="server" ErrorMessage="Please select yard location"
@@ -176,7 +176,8 @@
                                 <td>
                                     Booking No.:</td>
                                 <td>
-                                    <asp:DropDownList ID="ddlBookingNo" runat="server" Enabled="false" Width="155" OnSelectedIndexChanged="ddlBookingNo_SelectedIndexChanged"
+                                    <asp:DropDownList ID="ddlBookingNo" runat="server" Enabled="false" 
+                                        Width="193px" OnSelectedIndexChanged="ddlBookingNo_SelectedIndexChanged"
                                         AutoPostBack="true">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvBookingNo" runat="server" ErrorMessage="Please select Booking No"
@@ -306,7 +307,8 @@
                                             <%--<asp:CheckBox ID="chkHeader" runat="server" />--%>
                                         </HeaderTemplate>
                                         <ItemTemplate>
-                                            <asp:CheckBox ID="chkItem" runat="server" Checked="true" Visible='<%# Convert.ToBoolean(Eval("Editable").ToString()) %>' />
+                                            <asp:CheckBox ID="chkItem" runat="server" Checked="true" Visible='<%# Convert.ToBoolean(Eval("Editable").ToString()) %>' 
+                                            OnSelectedIndexChanged="ddlchkItem_SelectedIndexChanged"/>
                                         </ItemTemplate>
                                         <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderStyle CssClass="gridviewheader_center" />

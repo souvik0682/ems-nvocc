@@ -378,18 +378,6 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value />
-                <Style>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
                 <Label>Phone</Label>
                 <Value>=IIf(IsNothing(First(Fields!Phone.Value, "dsDeliveryOrder")),"",First(Fields!Phone.Value, "dsDeliveryOrder"))</Value>
                 <Style>
@@ -738,13 +726,13 @@
               <Width>1.3in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.4in</Width>
+              <Width>0.77875in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.60917in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.09584in</Width>
+              <Width>1.71in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -867,7 +855,8 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!VesselName.Value + "V." + Fields!VoyageNo.Value</Value>
+                              <Label>Vessel&amp;Voyage</Label>
+                              <Value>=Fields!VesselName.Value + " Voy." + Fields!VoyageNo.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontWeight>Bold</FontWeight>
@@ -1876,7 +1865,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Dimensions</Value>
+                              <Value>Refer Temperature</Value>
                               <Style>
                                 <FontStyle>Italic</FontStyle>
                                 <FontFamily>Calibri</FontFamily>
@@ -1970,7 +1959,7 @@
         <Top>3.00347in</Top>
         <Left>0.2995cm</Left>
         <Height>1.75in</Height>
-        <Width>7.20501in</Width>
+        <Width>7.19792in</Width>
         <ZIndex>12</ZIndex>
         <Style>
           <Border>

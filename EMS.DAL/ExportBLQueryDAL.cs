@@ -40,5 +40,18 @@ namespace EMS.DAL
 
             return dt;
         }
+
+        public static int DeleteInvoice(Int32 InvoiceId)
+        {
+            string strExecution = "[exp].[uspDeleteInvoice]";
+            int Result = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@InvoiceID", InvoiceId);
+                Result = oDq.RunActionQuery();
+            }
+            return Result;
+        }
     }
 }

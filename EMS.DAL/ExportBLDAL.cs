@@ -55,14 +55,15 @@ namespace EMS.DAL
             return objHeader;
         }
 
-        public static List<IExportBLContainer> GetExportBLContainersForAdd(long BookingId)
+        public static List<IExportBLContainer> GetExportBLContainersForAdd(long BookingId, int Status)
         {
-            string strExecution = "[exp].[usp_GetExpBLCorntainerForAdd]";
+            string strExecution = "[exp].[usp_GetExpBLContainerForAdd]";
             List<IExportBLContainer> lstContainer = new List<IExportBLContainer>();
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddBigIntegerParam("@BookingId", BookingId);
+                oDq.AddIntegerParam("@Status", Status);
 
                 DataTableReader reader = oDq.GetTableReader();
 
@@ -210,10 +211,10 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@Shipper", 300, objBL.Shipper);
                 oDq.AddVarcharParam("@ConsigneeName", 100, objBL.ConsigneeName);
                 oDq.AddVarcharParam("@Consignee", 300, objBL.Consignee);
-                oDq.AddVarcharParam("@NotifyPartyName", 20, objBL.NotifyPartyName);
-                oDq.AddVarcharParam("@NotifyParty", 20, objBL.NotifyParty);
-                oDq.AddVarcharParam("@GoodDesc", 20, objBL.GoodDesc);
-                oDq.AddVarcharParam("@MarksNumnbers", 20, objBL.MarksNumnbers);
+                oDq.AddVarcharParam("@NotifyPartyName", 100, objBL.NotifyPartyName);
+                oDq.AddVarcharParam("@NotifyParty", 300, objBL.NotifyParty);
+                oDq.AddVarcharParam("@GoodDesc", 300, objBL.GoodDesc);
+                oDq.AddVarcharParam("@MarksNumnbers", 300, objBL.MarksNumnbers);
                 oDq.AddIntegerParam("@ShipmentMode", objBL.ShipmentMode);
                 oDq.AddIntegerParam("@AgentId", objBL.AgentId);
                 //oDq.AddVarcharParam("@RateType", 20, objBL.); // BL Status
@@ -225,7 +226,7 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@BLClause", 20, objBL.BLClause);
                 oDq.AddVarcharParam("@BLType", 20, objBL.BLType);
                 oDq.AddIntegerParam("@NoOfBL", objBL.NoOfBL);
-                oDq.AddDecimalParam("@NetWeight", 12, 2, objBL.NetWeight);
+                oDq.AddDecimalParam("@NetWeight", 12, 3, objBL.NetWeight);
                 oDq.AddDateTimeParam("@BLReleaseDate", objBL.BLReleaseDate);
                 oDq.AddBooleanParam("@BLThruEdge", objBL.BLthruEdge);
 
@@ -299,16 +300,16 @@ namespace EMS.DAL
             }
         }
 
-        public static bool CheckExpBLExistance(string BookingNo)
+        public static int CheckExpBLExistance(string BookingNo)
         {
             string strExecution = "[exp].[usp_CheckExpBLExistance]";
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddNVarcharParam("@BookingNo", 50, BookingNo);
-                oDq.AddBooleanParam("@Result", false, QueryParameterDirection.Output);
+                oDq.AddIntegerParam("@Result", 0, QueryParameterDirection.Output);
                 oDq.RunActionQuery();
-                return Convert.ToBoolean(oDq.GetParaValue("@Result"));
+                return Convert.ToInt32(oDq.GetParaValue("@Result"));
             }
         }
 

@@ -201,7 +201,7 @@ namespace EMS.DAL
 
             return ExchangeRate;
         }
-        public static List<ICharge> GetAllExpCharges(int docTypeId)
+        public static List<ICharge> GetAllExpCharges(int docTypeId, int LocationID, int LineID, string BookingNo)
         {
             string strExecution = "[exp].[uspExp_Invoice_GetAllCharges]";
 
@@ -210,6 +210,9 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddBigIntegerParam("@DocTypeId", docTypeId);
+                oDq.AddBigIntegerParam("@LineId", LineID);
+                oDq.AddBigIntegerParam("@LocationId", LocationID);
+                oDq.AddVarcharParam("@BookingNo", 40, BookingNo);
                 DataTableReader reader = oDq.GetTableReader();
 
                 while (reader.Read())
@@ -447,7 +450,7 @@ namespace EMS.DAL
             return invoiceChargeId;
         }
 
-        public static int SaveInvoiceChargesExp(ExpInvoiceChargeEntity cRate)
+        public static int SaveInvoiceChargesExp(IExpChargeRate cRate)
 
         {
             string strExecution = "[exp].[uspExp_Invoice_Charges_Save]";
@@ -455,16 +458,16 @@ namespace EMS.DAL
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                oDq.AddBigIntegerParam("@InvoiceID", cRate.InvoiceID);
+                oDq.AddBigIntegerParam("@InvoiceID", cRate.InvoiceId);
 
-                if (cRate.InvoiceChargeID > 0)
-                    oDq.AddBigIntegerParam("@InvoiceChargeID", cRate.InvoiceChargeID);
+                if (cRate.InvoiceChargeId > 0)
+                    oDq.AddBigIntegerParam("@InvoiceChargeID", cRate.InvoiceChargeId);
 
-                oDq.AddIntegerParam("@ChargeID", cRate.ChargesID);
+                oDq.AddIntegerParam("@ChargeID", cRate.ChargesId);
 
                 oDq.AddDecimalParam("@RatePerUnit", 12, 2, cRate.RatePerBL);
                 oDq.AddDecimalParam("@RatePerTEU", 12, 2, cRate.RatePerTEU);
-                oDq.AddDecimalParam("@RatePerFEU", 12, 2, cRate.RateperFEU);
+                oDq.AddDecimalParam("@RatePerFEU", 12, 2, cRate.RatePerFEU);
                 oDq.AddDecimalParam("@RatePerCBM", 12, 2, cRate.RatePerCBM);
                 oDq.AddDecimalParam("@RatePerTon", 12, 2, cRate.RatePerTon);
                 oDq.AddDecimalParam("@RateUSD", 12, 2, 0);
@@ -472,7 +475,7 @@ namespace EMS.DAL
                 oDq.AddDecimalParam("@ServiceTaxAmount", 12, 2, cRate.ServiceTaxAmount);
                 oDq.AddDecimalParam("@ServiceTaxCessAmount", 12, 2, cRate.ServiceTaxCessAmount);
                 oDq.AddDecimalParam("@ServiceTaxACess", 12, 2, cRate.ServiceTaxACess);
-                oDq.AddBigIntegerParam("@TerminalId", cRate.TerminalID);
+                oDq.AddBigIntegerParam("@TerminalId", cRate.TerminalId);
                 oDq.AddDecimalParam("@SharingBL", 12, 2, 0);
                 oDq.AddDecimalParam("@SharingTEU", 12, 2,0);
                 oDq.AddDecimalParam("@SharingFEU", 12, 2, 0);
@@ -560,6 +563,22 @@ namespace EMS.DAL
             return terminalId;
         }
 
+        public static long GetExpDefaultTerminal(long BlId)
+        {
+            string strExecution = "[exp].[usp_Invoice_GetDefaultTerminal]";
+            long terminalId = 0;
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@BlID", BlId);
+
+                terminalId = Convert.ToInt64(oDq.GetScalar());
+            }
+
+            return terminalId;
+        }
+
         public static int DeleteInvoiceCharge(int InvoiceChargeId)
         {
             string strExecution = "usp_Invoice_RemoveInvoiceCharge";
@@ -629,15 +648,54 @@ namespace EMS.DAL
             return dt;
         }
 
-        public static List<IExpChargeRate> GetExpInvoiceCharges_New(long BlId, int ServicesID, int TerminalID, int DocTypeId, DateTime InvoiceDate)
+        //public static List<IExpChargeRate> GetExpInvoiceCharges(long BlId, int ChargeID, int TerminalID, int DocTypeId, DateTime InvoiceDate)
+        //{
+        //    string strExecution;
+        //    if (DocTypeId == 1)
+        //        strExecution = "[exp].[usp_ExpInvFrt_Charge]";
+        //    else
+        //        strExecution = "[exp].[usp_ExpInvoice_Charge]";
+
+        //    List<IExpChargeRate> lstRates = new List<IExpChargeRate>();
+
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddBigIntegerParam("@BLID", BlId);
+        //        oDq.AddIntegerParam("@ChargeID", ChargeID);
+        //        oDq.AddIntegerParam("@TerminalID", TerminalID);
+        //        oDq.AddIntegerParam("@DoctypeID", DocTypeId);
+        //        oDq.AddDateTimeParam("@InvoiceDate", InvoiceDate);
+
+        //        DataTableReader reader = oDq.GetTableReader();
+
+        //        while (reader.Read())
+        //        {
+        //            IExpChargeRate chargeRate = new ExpChargeRateEntity(reader);
+        //            lstRates.Add(chargeRate);
+        //        }
+
+        //        reader.Close();
+        //    }
+
+        //    return lstRates;
+        //}
+
+
+
+        public static List<IChargeRate> GetExpInvoiceCharges(long BlId, int ChargeID, int TerminalID, int DocTypeId, DateTime InvoiceDate)
         {
-            string strExecution = "[exp].[usp_ExpInvoice_Charge]";
-            List<IExpChargeRate> lstRates = new List<IExpChargeRate>();
+            string strExecution;
+            if (DocTypeId == 1)
+                strExecution = "[exp].[usp_ExpInvFrt_Charge]";
+            else
+                strExecution = "[exp].[usp_ExpInvoice_Charge]";
+
+            List<IChargeRate> lstRates = new List<IChargeRate>();
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddBigIntegerParam("@BLID", BlId);
-                oDq.AddIntegerParam("@ServicesID", ServicesID);
+                oDq.AddIntegerParam("@ChargeID", ChargeID);
                 oDq.AddIntegerParam("@TerminalID", TerminalID);
                 oDq.AddIntegerParam("@DoctypeID", DocTypeId);
                 oDq.AddDateTimeParam("@InvoiceDate", InvoiceDate);
@@ -646,7 +704,7 @@ namespace EMS.DAL
 
                 while (reader.Read())
                 {
-                    IExpChargeRate chargeRate = new ExpChargeRateEntity(reader);
+                    IChargeRate chargeRate = new ChargeRateEntity(reader);
                     lstRates.Add(chargeRate);
                 }
 
@@ -656,24 +714,8 @@ namespace EMS.DAL
             return lstRates;
         }
 
-        //public static IList<ExpInvoiceCharge> GetExpInvoiceCharges_New(long BlId, int ChargesID, int TerminalID, int DocTypeId, DateTime InvoiceDate)
-        //{
-        //    string strExecution = "[exp].[usp_ExpInvoice_Charge]";
-        //    IList<ExpInvoiceCharge> lstRates =null;
-          
-        //    using (DbQuery oDq = new DbQuery(strExecution))
-        //    {
-        //        oDq.AddIntegerParam("@DoctypeID", DocTypeId);
-        //        oDq.AddBigIntegerParam("@BLID", BlId);
-        //        oDq.AddIntegerParam("@ServicesID", ChargesID);
-        //        oDq.AddIntegerParam("@TerminalID", TerminalID);
-        //        oDq.AddDateTimeParam("@InvoiceDate", InvoiceDate);
-        //       var dt = oDq.GetTable();
-        //       lstRates = dt.DataTableToCollectionType<ExpInvoiceCharge>();
-        //    }
-
-        //    return lstRates;
-        //}
+      
+      
         public static List<IChargeRate> GetInvoiceCharges_New(long BlId, int ChargesID, int TerminalID, decimal ExchangeRate, int DocTypeId, string Param3, DateTime InvoiceDate)
         {
             string strExecution = "usp_Invoice_CalculateCharge";

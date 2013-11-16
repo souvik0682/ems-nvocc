@@ -136,5 +136,19 @@ namespace EMS.DAL
 
             return dt;
         }
+
+        public static DataSet GetPendingDOList(Int32 DOID)
+        {
+            string strExecution = "[exp].[uspPendingDOList]";
+            DataSet myDataSet;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@DOID", DOID);
+          
+                myDataSet = oDq.GetTables();
+            }
+            return myDataSet;
+        }
     }
 }

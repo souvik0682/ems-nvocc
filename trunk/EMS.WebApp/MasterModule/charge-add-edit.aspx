@@ -9,8 +9,6 @@
             if (sender._selectedDate < new Date()) {
                 alert("Please select advance date only!");
                 sender._selectedDate = new Date();
-                // set the date back to the current date
-                //sender._textbox.set_Value(sender._selectedDate.format(sender._format))
                 sender._textbox.set_Value("")
             }
         }
@@ -37,7 +35,7 @@
                                     <asp:TextBox ID="txtEffectDate" runat="server" Width="150" AutoCompleteType="None"></asp:TextBox>
                                     <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtEffectDate"
                                         PopupPosition="BottomLeft" TargetControlID="txtEffectDate" Format="dd/MM/yyyy"
-                                        OnClientDateSelectionChanged="checkDate">
+                                       >
                                     </cc1:CalendarExtender>
                                     <asp:RequiredFieldValidator ID="rfvDate" runat="server" ErrorMessage="Please select date"
                                         ControlToValidate="txtEffectDate" Display="None" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>

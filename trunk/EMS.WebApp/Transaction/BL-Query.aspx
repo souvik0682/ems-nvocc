@@ -140,7 +140,7 @@
                                 <td style="width: 5%;">
                                     <asp:HiddenField ID="hdnBLId" runat="server" Value="0" />
                                     <asp:TextBox ID="txtBlNo" runat="server" Width="150" AutoPostBack="True" OnTextChanged="txtBlNo_TextChanged"
-                                        onkeyup="SetContextKey();" Enabled="false" Style="text-transform: uppercase;"></asp:TextBox>
+                                        onkeyup="SetContextKey();" Enabled="true" Style="text-transform: uppercase;"></asp:TextBox>
                                     <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx" ID="autoComplete1"
                                         TargetControlID="txtBlNo" ServicePath="~/GetLocation.asmx" ServiceMethod="GetBLNoList"
                                         MinimumPrefixLength="1" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"

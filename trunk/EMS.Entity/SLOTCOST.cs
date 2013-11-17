@@ -14,7 +14,7 @@ namespace EMS.Entity
         public long PORTDISCHARGE { get; set; }
         public string PODTERMINAL { get; set; }
         public DateTime? EFFECTIVEDATE { get; set; }
-        public int MOVDESTINATION { get; set; }
+        //public int MOVDESTINATION { get; set; }
         public long LINE { get; set; }
         public string PORTDISCHARGENAME { get; set; }
         public string PORTLOADINGNAME { get; set; }

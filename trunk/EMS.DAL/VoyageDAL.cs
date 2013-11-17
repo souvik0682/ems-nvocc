@@ -45,8 +45,6 @@ namespace EMS.DAL
                 //dq.AddIntegerParam("@voyageId", voyageId);
 
                 ds = dq.GetTable();
-
-
             }
             return ds;
         }
@@ -65,7 +63,6 @@ namespace EMS.DAL
 
             return dquery.RunActionQuery();
         }
-
 
         public static string CheckVoyageEntryAbilty(int vesselId, string VoyageNo, int Pod, DateTime? LandingDate, decimal XchangeRate, bool isEdit)
         {

@@ -41,16 +41,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAgent.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="IBLFooter.cs" />
     <Compile Include="IBLHeader.cs" />
+    <Compile Include="IBooking.cs" />
+    <Compile Include="IBookingCharges.cs" />
+    <Compile Include="IBookingContainer.cs" />
+    <Compile Include="IBookingTranshipment.cs" />
     <Compile Include="IChargeRate.cs" />
     <Compile Include="IContainerType.cs" />
+    <Compile Include="IContainerWiseStock.cs" />
     <Compile Include="ICreditNote.cs" />
     <Compile Include="ICreditNoteCharge.cs" />
+    <Compile Include="IDeliveryOrder.cs" />
+    <Compile Include="IDeliveryOrderContainer.cs" />
     <Compile Include="IEqpContainerTransaction.cs" />
     <Compile Include="IEqpOnHire.cs" />
     <Compile Include="IEqpOnHireContainer.cs" />
     <Compile Include="IEqpRepairing.cs" />
+    <Compile Include="IExpChargeRate.cs" />
+    <Compile Include="IExpInv.cs" />
+    <Compile Include="IExpInvoiceCharge.cs" />
+    <Compile Include="IExportBL.cs" />
+    <Compile Include="IExportBLContainer.cs" />
+    <Compile Include="IexpVoyage.cs" />
     <Compile Include="IIGMReport.cs" />
     <Compile Include="IInvoice.cs" />
     <Compile Include="ILine.cs" />
@@ -70,10 +86,14 @@
     <Compile Include="ILocation.cs" />
     <Compile Include="IRole.cs" />
     <Compile Include="ISearchCriteria.cs" />
+    <Compile Include="IService.cs" />
+    <Compile Include="ISlot.cs" />
+    <Compile Include="ITranshipmentDetails.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="IUserPermission.cs" />
     <Compile Include="IVendor.cs" />
     <Compile Include="IVesselVoyageEDI.cs" />
+    <Compile Include="IYearlyMIS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

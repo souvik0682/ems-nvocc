@@ -103,6 +103,26 @@ namespace EMS.WebApp
         [WebMethod]
         [System.Web.Script.Services.ScriptMethod]
         //public string[] GetBLNoList(string prefixText, int count,int Location, int Line)
+        public string[] GetExpBLNoList(string prefixText, int count)
+        {
+            //int Location = Convert.ToInt32(contextKey.Split('|')[0].ToString());
+            //int Line = Convert.ToInt32(contextKey.Split('|')[1].ToString());
+
+            ContainerTranBLL oExpContBLL = new ContainerTranBLL();
+            DataTable dt = oExpContBLL.GetExpBLno(prefixText);
+            string[] BlNos = new string[dt.Rows.Count];
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                BlNos[i] = AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(Convert.ToString(dt.Rows[i]["BLNo"]), Convert.ToString(dt.Rows[i]["BLID"]));
+            }
+
+            return BlNos;
+        }
+
+        [WebMethod]
+        [System.Web.Script.Services.ScriptMethod]
+        //public string[] GetBLNoList(string prefixText, int count,int Location, int Line)
         public string[] GetContainerList(string prefixText, int count, string contextKey)
         {
             int Location = Convert.ToInt32(contextKey);

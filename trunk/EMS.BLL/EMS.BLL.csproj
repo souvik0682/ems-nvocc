@@ -41,24 +41,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgentBLL.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="BLLReport.cs" />
+    <Compile Include="BookingBLL.cs" />
     <Compile Include="CommonBLL.cs" />
     <Compile Include="ContainerTranBLL.cs" />
     <Compile Include="CreditNoteBLL.cs" />
     <Compile Include="DBInteraction.cs" />
+    <Compile Include="DOBLL.cs" />
     <Compile Include="EDIBLL.cs" />
     <Compile Include="EquipmentBLL.cs" />
+    <Compile Include="ExpBLPrintingBLL.cs" />
+    <Compile Include="ExportBLBLL.cs" />
+    <Compile Include="ExportBLQueryBLL.cs" />
+    <Compile Include="ExportContainerBLL.cs" />
+    <Compile Include="ExportEDIBLL.cs" />
+    <Compile Include="ExportMonthlyReportBLL.cs" />
+    <Compile Include="ExportPerformanceBLL.cs" />
     <Compile Include="ExpSlotCostBLL.cs" />
+    <Compile Include="expVoyageBLL.cs" />
     <Compile Include="IGMReportBLL.cs" />
     <Compile Include="ImportBLL.cs" />
     <Compile Include="ImportHaulageBLL.cs" />
     <Compile Include="ChargeBLL.cs" />
     <Compile Include="InvoiceBLL.cs" />
+    <Compile Include="LBCntrBLL.cs" />
     <Compile Include="LogisticReportBLL.cs" />
     <Compile Include="MoneyReceiptsBLL.cs" />
     <Compile Include="OnHireBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportBLL.cs" />
+    <Compile Include="ServiceBLL.cs" />
+    <Compile Include="SlotBLL.cs" />
+    <Compile Include="TerminalDispatchBLL.cs" />
+    <Compile Include="TranshipmentDetailsBLL.cs" />
     <Compile Include="UserBLL.cs" />
     <Compile Include="VendorBLL.cs" />
     <Compile Include="VoyageBLL.cs" />

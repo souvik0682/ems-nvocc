@@ -154,7 +154,7 @@ function endRequest(sender, args) {
         if ($get('ctl00_container_UpdateProgress1') != null)
             $get('ctl00_container_UpdateProgress1').style.display = 'none';
 
-        $get('dvAsyncMessage').innerHTML = "* An error has occured. Please contact system administrator.";
+//        $get('dvAsyncMessage').innerHTML = "* An error has occured. Please contact system administrator.";
     }
 }
 

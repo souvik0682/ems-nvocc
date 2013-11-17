@@ -42,26 +42,44 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressEntity.cs" />
+    <Compile Include="AgentEntity.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="AreaEntity.cs" />
     <Compile Include="BLFooterEntity.cs" />
     <Compile Include="BLHeaderEntity.cs" />
+    <Compile Include="BLPrintModel.cs" />
+    <Compile Include="BookingChargesEntity.cs" />
+    <Compile Include="BookingContainerEntity.cs" />
+    <Compile Include="BookingEntity.cs" />
+    <Compile Include="BookingTranshipmentEntity.cs" />
     <Compile Include="ChargeEntity.cs" />
     <Compile Include="ChargeRateEntity.cs" />
     <Compile Include="ContactPersonEntity.cs" />
     <Compile Include="ContainerType.cs" />
     <Compile Include="ContainerEntity.cs" />
+    <Compile Include="DeliveryOrderContainer.cs" />
+    <Compile Include="DeliveryOrderContainerEntity.cs" />
     <Compile Include="DeliveryOrderEntity.cs" />
     <Compile Include="CreditNoteChargeEntity.cs" />
     <Compile Include="CreditNoteEntity.cs" />
     <Compile Include="EqpOnHire.cs" />
     <Compile Include="EqpOnHireContainer.cs" />
     <Compile Include="EquipmentRepairEntity.cs" />
+    <Compile Include="ExpChargeRateEntity.cs" />
+    <Compile Include="ExpInvoiceChargeEntity.cs" />
+    <Compile Include="ExportBLContainerEntity.cs" />
+    <Compile Include="ExportBLEntity.cs" />
+    <Compile Include="expVoyageEntity.cs" />
     <Compile Include="InvoiceEntity.cs" />
     <Compile Include="LineEntity.cs" />
     <Compile Include="MoneyReceiptEntity.cs" />
     <Compile Include="Report\CANEntity.cs" />
     <Compile Include="Report\ContainerWiseStockEntity.cs" />
+    <Compile Include="Report\DOPrintEntity.cs" />
+    <Compile Include="Report\ExportEDIEntity.cs" />
     <Compile Include="Report\ImpInvRegisterEntity.cs" />
+    <Compile Include="Report\ImportInvoiceChargesEntity.cs" />
     <Compile Include="Report\ImportInvoiceEntity.cs" />
     <Compile Include="Report\ImpRegisterSummaryEntity.cs" />
     <Compile Include="Report\ImpRegisterEntity.cs" />
@@ -77,13 +95,17 @@
     <Compile Include="RoleEntity.cs" />
     <Compile Include="RoleMenuEntity.cs" />
     <Compile Include="SearchCriteria.cs" />
+    <Compile Include="ServiceEntity.cs" />
     <Compile Include="SLOTCOST.cs" />
+    <Compile Include="SlotEntity.cs" />
+    <Compile Include="TranshipmentDetails.cs" />
     <Compile Include="UserEntity.cs" />
     <Compile Include="UserPermission.cs" />
     <Compile Include="VendorEntity.cs" />
     <Compile Include="Vessel.cs" />
     <Compile Include="VesselVoyageEDI.cs" />
     <Compile Include="VoyageEntity.cs" />
+    <Compile Include="YearlyMISEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EMS.Common\EMS.Common.csproj">

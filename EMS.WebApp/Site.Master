@@ -68,7 +68,7 @@
         </cc1:ToolkitScriptManager>
         <div id="header">
             <div class="logo">
-                <img alt="" src="<%=Page.ResolveClientUrl("~/Images/App Logo.png") %>" height="55" />
+                <img alt="" src="<%=Page.ResolveClientUrl("~/Images/AppLogo.png") %>" height="55" />
             </div>
             <div class="productname" style="margin-top: 10px;">
                 <center>

@@ -868,7 +868,7 @@ namespace EMS.WebApp.Transaction
             {
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
 
-                e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChangeName"));
+                e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChargeName"));
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "TerminalName"));
                 //e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "WashingTypeName"));
                 e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "RatePerBL"));
@@ -1048,7 +1048,7 @@ namespace EMS.WebApp.Transaction
                 ViewState["EDITINVOICECHARGEID"] = null;
             }
             
-            charge.ChangeName = ddlFChargeName.SelectedItem.Text;
+            charge.ChargeName = ddlFChargeName.SelectedItem.Text;
             charge.ChargesID = Convert.ToInt32(ddlFChargeName.SelectedValue);
             charge.GrossAmount = Convert.ToDecimal(txtGrossAmount.Text);
             charge.RatePerBL = Convert.ToDecimal(txtRatePerBL.Text);

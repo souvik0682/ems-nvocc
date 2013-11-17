@@ -24,6 +24,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
+//using EMS.Common;
+//using EMS.Entity;
+//using EMS.BLL;
 
 /// <summary>
 /// Summary description for AutoComplete
@@ -88,9 +91,6 @@ public class AutoComplete : System.Web.Services.WebService {
             //i++;
         }
         return items;
-
-
-      
     }
 
     [WebMethod]
@@ -385,7 +385,7 @@ public class AutoComplete : System.Web.Services.WebService {
         string sql = @"SELECT a.[AddrName] FROM [DBO].[mstAddress] a 
                         INNER JOIN [dbo].[mstAddressType] at 
                         ON CAST(a.AddrType as int) = at.pk_AddrTypeID 
-                        WHERE a.[AddrActive] = 1 AND at.[AddrType] = 'CF' 
+                        WHERE a.[AddrActive] = 1 AND (at.[AddrType] = 'CF')
                         AND a.[fk_LocationID] = " + contextKey +
                         " AND [AddrName] LIKE @prefixText";
 
@@ -458,10 +458,18 @@ public class AutoComplete : System.Web.Services.WebService {
         count = 10;
         AppCodeClass ac = new AppCodeClass();
 
-        string sql = @"SELECT a.[AddrName] FROM [DBO].[mstAddress] a 
-                        INNER JOIN [dbo].[mstAddressType] at 
-                        ON CAST(a.AddrType as int) = at.pk_AddrTypeID 
-                        WHERE a.[AddrActive] = 1 AND at.[AddrType] = 'Broker' AND [AddrName] LIKE @prefixText";
+//        string sql = @"SELECT a.[AddrName] FROM [DBO].[mstAddress] a 
+//                        INNER JOIN [dbo].[mstAddressType] at 
+//                        ON CAST(a.AddrType as int) = at.pk_AddrTypeID 
+//                        WHERE a.[AddrActive] = 1 AND at.[AddrType] = 'Broker' AND [AddrName] LIKE @prefixText";
+
+        string sql = @"SELECT [CustName] FROM [DSR].[DBO].[mstCustomer] 
+                        WHERE [ACTIVE]='Y' AND [ISDELETED]=0 AND [CustName] LIKE @prefixText
+                        ORDER BY [CUSTNAME]" ;
+                        //a 
+                        //INNER JOIN [dbo].[mstAddressType] at 
+                        //ON CAST(a.AddrType as int) = at.pk_AddrTypeID 
+                        //WHERE a.[AddrActive] = 1 AND at.[AddrType] = 'Broker' AND [AddrName] LIKE @prefixText";
 
         SqlDataAdapter da = new SqlDataAdapter(sql, ac.ConnectionString);
         da.SelectCommand.Parameters.Add("@prefixText", SqlDbType.VarChar, 50).Value = prefixText + "%";
@@ -471,7 +479,7 @@ public class AutoComplete : System.Web.Services.WebService {
         int i = 0;
         foreach (DataRow dr in dt.Rows)
         {
-            items.SetValue(dr["AddrName"].ToString(), i);
+            items.SetValue(dr["CustName"].ToString(), i);
             i++;
         }
         return items;
@@ -483,10 +491,14 @@ public class AutoComplete : System.Web.Services.WebService {
         count = 10;
         AppCodeClass ac = new AppCodeClass();
 
-        string sql = @"SELECT a.[AddrName] FROM [DBO].[mstAddress] a 
-                        INNER JOIN [dbo].[mstAddressType] at 
-                        ON CAST(a.AddrType as int) = at.pk_AddrTypeID 
-                        WHERE a.[AddrActive] = 1 AND at.[AddrType] = 'FD' AND [AddrName] LIKE @prefixText";
+//        string sql = @"SELECT a.[AddrName] FROM [DBO].[mstAddress] a 
+//                        INNER JOIN [dbo].[mstAddressType] at 
+//                        ON CAST(a.AddrType as int) = at.pk_AddrTypeID 
+//                        WHERE a.[AddrActive] = 1 AND at.[AddrType] = 'FD' AND [AddrName] LIKE @prefixText";
+
+        string sql = @"SELECT [CustName] FROM [DSR].[DBO].[mstCustomer] 
+                        WHERE [ACTIVE]='Y' AND [ISDELETED]=0  AND [CustName] LIKE @prefixText
+                        ORDER BY [CUSTNAME]";
 
         SqlDataAdapter da = new SqlDataAdapter(sql, ac.ConnectionString);
         da.SelectCommand.Parameters.Add("@prefixText", SqlDbType.VarChar, 50).Value = prefixText + "%";
@@ -496,18 +508,72 @@ public class AutoComplete : System.Web.Services.WebService {
         int i = 0;
         foreach (DataRow dr in dt.Rows)
         {
-            items.SetValue(dr["AddrName"].ToString(), i);
+            items.SetValue(dr["CustName"].ToString(), i);
             i++;
         }
         return items;
     }
+
+    //[WebMethod]
+    //[System.Web.Script.Services.ScriptMethod]
+    //public string[] GetExportBLList(string prefixText)
+    //{
+    //    //EquipmentBLL oEquipmentBLL = new EquipmentBLL();
+    //    AppCodeClass ac = new AppCodeClass();
+
+    //    string sql = @"SELECT bh.pk_ExpBLID, bh.ExpBLNo FROM [exp].BLHeader bh WHERE bh.ExpBLNo LIKE @prefixText";
+    //    SqlDataAdapter da = new SqlDataAdapter(sql, ac.ConnectionString);
+    //    da.SelectCommand.Parameters.Add("@prefixText", SqlDbType.VarChar, 50).Value = prefixText + "%";
+    //    DataTable dt = new DataTable();
+    //    da.Fill(dt);
+    //    //DataTable dt = EquipmentBLL.GetExportBLHeader(prefixText).Tables[0];
+    //    string[] ContNos = new string[dt.Rows.Count];
+
+    //    for (int i = 0; i < dt.Rows.Count; i++)
+    //    {
+    //        ContNos[i] = AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(Convert.ToString(dt.Rows[i]["ExpBLNo"]), Convert.ToString(dt.Rows[i]["pk_ExpBLID"]));
+    //    }
+
+    //    return ContNos;
+    //}
+
+    //[WebMethod]
+    //[System.Web.Script.Services.ScriptMethod]
+    //public string[] GetBooking(string prefixText)
+    //{
+    //    //EquipmentBLL oEquipmentBLL = new EquipmentBLL();
+
+    //    AppCodeClass ac = new AppCodeClass();
+
+    //    string sql = @"SELECT b.pk_BookingID, b.BookingNo FROM [exp].Booking b WHERE b.BookingNo LIKE @prefixText";
+    //    SqlDataAdapter da = new SqlDataAdapter(sql, ac.ConnectionString);
+    //    da.SelectCommand.Parameters.Add("@prefixText", SqlDbType.VarChar, 50).Value = prefixText + "%";
+    //    DataTable dt = new DataTable();
+    //    da.Fill(dt);
+        
+
+    //    //DataTable dt = EquipmentBLL.GetBooking(prefixText).Tables[0];
+    //    string[] ContNos = new string[dt.Rows.Count];
+
+    //    for (int i = 0; i < dt.Rows.Count; i++)
+    //    {
+    //        ContNos[i] = AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(Convert.ToString(dt.Rows[i]["BookingNo"]), Convert.ToString(dt.Rows[i]["pk_BookingID"]));
+    //    }
+
+    //    return ContNos;
+    //}
 }
 
 public class AppCodeClass
 {
+
+ //  public string ConnectionString = "Data Source=CHNBAIWEB1V;Initial Catalog=Liner;User Id=sa;Password=Welcome@123;Pooling=true;Connection Timeout=30;Max Pool Size=40;Min Pool Size=5";
+   public string ConnectionString = @"Data Source=tapas-pc;Initial Catalog=Liner06062013;User Id=sa;Password=123456;Pooling=true;Connection Timeout=30;Max Pool Size=40;Min Pool Size=5";
+
+   // public string ConnectionString = "Data Source=WIN-SERVER;Initial Catalog=Liner;User Id=sa;Password=Welcome@123;Pooling=true;Connection Timeout=30;Max Pool Size=40;Min Pool Size=5";
     //public string ConnectionString = "Data Source=WIN-SERVER;Initial Catalog=Liner;User Id=sa;Password=P@ssw0rd;Pooling=true;Connection Timeout=30;Max Pool Size=40;Min Pool Size=5";
     
-    public string ConnectionString = @"Data Source=SOUVIK-PC\SQLEXPRESS;Initial Catalog=NVOCC;Integrated Security=SSPI;";
+    //public string ConnectionString = @"Data Source=SOUVIK-PC\SQLEXPRESS;Initial Catalog=NVOCC;Integrated Security=SSPI;";
 
     //public string ConnectionString = "Data Source=WIN-SERVER;Initial Catalog=Liner;User Id=sa;Password=P@ssw0rd;Pooling=true;Connection Timeout=30;Max Pool Size=40;Min Pool Size=5";
     //public string ConnectionString = @"Data Source=JOYASREE\SQLEXPRESS;Initial Catalog=Nvocc;User Id=sa;Password=pass;Pooling=true;Connection Timeout=30;Max Pool Size=40;Min Pool Size=5";

@@ -60,7 +60,9 @@
     <Compile Include="ResourceManager\ResourceManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ResourceManager\Resource\Resource.en-GB.resx" />
+    <EmbeddedResource Include="ResourceManager\Resource\Resource.en-GB.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ResourceManager\Resource\Resource.en-US.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

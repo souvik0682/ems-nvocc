@@ -231,8 +231,6 @@ namespace EMS.WebApp.MasterModule
                 ddlDeliveryMode.Items.Add(item);
             }
             #endregion
-
-
         }
 
         void PopulateDropDown(int Number, DropDownList ddl, int? Filter)

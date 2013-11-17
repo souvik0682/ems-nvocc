@@ -167,7 +167,7 @@ namespace EMS.WebApp.Transaction
         {
             MoneyReceiptsBLL mrBll = new MoneyReceiptsBLL();
             MoneyReceiptEntity moneyReceipt = new MoneyReceiptEntity();
-            int returnVal = 0;
+            //int returnVal = 0;
 
             moneyReceipt.InvoiceId = Convert.ToInt64(_InvoiceId);
             moneyReceipt.LocationId = Convert.ToInt32(hdnLocationID.Value);
@@ -199,7 +199,10 @@ namespace EMS.WebApp.Transaction
                 case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
                     break;
                 case 1:
-                    Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(txtBLNo.Text));
+                    if (ddlExportImport.Text == "I")
+                        Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(txtBLNo.Text));
+                    else
+                        Response.Redirect("~/Export/Export-bl-query.aspx?BLNumber=" + GeneralFunctions.EncryptQueryString(txtBLNo.Text));
                     break;
             }
 
@@ -213,7 +216,10 @@ namespace EMS.WebApp.Transaction
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(txtBLNo.Text));
+            if (ddlExportImport.Text == "I")
+                Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(txtBLNo.Text));
+            else
+                Response.Redirect("~/Export/Export-bl-query.aspx?BLNumber=" + GeneralFunctions.EncryptQueryString(txtBLNo.Text));
         }
 
     }

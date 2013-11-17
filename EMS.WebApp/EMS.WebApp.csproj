@@ -13,7 +13,6 @@
     <RootNamespace>EMS.WebApp</RootNamespace>
     <AssemblyName>EMS.WebApp</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,6 +59,7 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CustomControls\AC_Brockerage.ascx" />
     <Content Include="CustomControls\AC_CANotice.ascx" />
     <Content Include="CustomControls\AC_CFSCode.ascx" />
     <Content Include="CustomControls\AC_CHA.ascx" />
@@ -68,6 +68,7 @@
     <Content Include="CustomControls\AC_NParty.ascx" />
     <Content Include="CustomControls\AC_PackageUnit.ascx" />
     <Content Include="CustomControls\AC_Port.ascx" />
+    <Content Include="CustomControls\AC_Refund.ascx" />
     <Content Include="CustomControls\AC_Shipper.ascx" />
     <Content Include="CustomControls\AC_Surveyor.ascx" />
     <Content Include="CustomControls\AC_Vessel.ascx" />
@@ -76,6 +77,7 @@
     <Content Include="CustomControls\AutoComplete.asmx" />
     <Content Include="CustomControls\AutoComplete.aspx" />
     <Content Include="CustomControls\AutoCompleteCountry.ascx" />
+    <Content Include="CustomControls\AutoCompletepInvoice.ascx" />
     <Content Include="CustomControls\AutoCompletepPort.ascx" />
     <Content Include="CustomControls\DatePicker.ascx" />
     <Content Include="Equipment\AddEditRepairEstimate.aspx" />
@@ -83,9 +85,29 @@
     <Content Include="Equipment\container-movement.aspx" />
     <Content Include="Equipment\RepairingEstimate.aspx" />
     <Content Include="Error.aspx" />
+    <Content Include="Export\AddEditAgent.aspx" />
+    <Content Include="Export\AddEditLBCntr.aspx" />
+    <Content Include="Export\AddEditSlotOperator.aspx" />
+    <Content Include="Export\Booking.aspx" />
+    <Content Include="Export\BookingCharges.aspx" />
+    <Content Include="Export\ContainerTranshipment.aspx" />
+    <Content Include="Export\ContainerTranshipmentEntry.aspx" />
     <Content Include="Export\DOEdit.aspx" />
     <Content Include="Export\DOList.aspx" />
+    <Content Include="Export\Export-bl-query.aspx" />
+    <Content Include="Export\ExportBL.aspx" />
+    <Content Include="Export\ExportInvoice.aspx" />
+    <Content Include="Export\FileUpload.aspx" />
+    <Content Include="Export\ManageAgent.aspx" />
+    <Content Include="Export\ManageBooking.aspx" />
+    <Content Include="Export\ManageExportBL.aspx" />
+    <Content Include="Export\ManageLBCntr.aspx" />
+    <Content Include="Export\ManageSlot.aspx" />
+    <Content Include="Export\ManageSlotOperator.aspx" />
+    <Content Include="Export\ManageVoyage.aspx" />
+    <Content Include="Export\Voyage.aspx" />
     <Content Include="FileNotFound.aspx" />
+    <Content Include="FileTemplate\ContainerList.txt" />
     <Content Include="GetLocation.asmx" />
     <Content Include="Hire\AddEditHire.aspx" />
     <Content Include="Hire\Hire.aspx" />
@@ -106,14 +128,20 @@
     <Content Include="Import\EDI_Custom.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="MasterModule\AddEditCountry.aspx" />
+    <Content Include="MasterModule\AddEditFreeDays.aspx" />
     <Content Include="MasterModule\ExpAddEditSlotCost.aspx" />
     <Content Include="MasterModule\AddEditLine.aspx" />
+    <Content Include="MasterModule\AddEditMLVoyage.aspx" />
     <Content Include="MasterModule\AddEditPort.aspx" />
+    <Content Include="MasterModule\AddEditServices.aspx" />
     <Content Include="MasterModule\AddEditSTax.aspx" />
     <Content Include="MasterModule\AddEditVessel.aspx" />
     <Content Include="MasterModule\AddEditVoyage.aspx" />
     <Content Include="MasterModule\charge-add-edit.aspx" />
     <Content Include="MasterModule\charge-list.aspx" />
+    <Content Include="MasterModule\Default.aspx" />
+    <Content Include="MasterModule\Export-charge-add-edit.aspx" />
+    <Content Include="MasterModule\Export-charge-list.aspx" />
     <Content Include="MasterModule\ExpSlotCostList.aspx" />
     <Content Include="MasterModule\Image\Chrysanthemum.jpg" />
     <Content Include="MasterModule\Image\Defaultlogo.png" />
@@ -121,22 +149,52 @@
     <Content Include="MasterModule\Image\Tulips.jpg" />
     <Content Include="MasterModule\import-haulage-chrg-add-edit.aspx" />
     <Content Include="MasterModule\ImportHaulage-list.aspx" />
+    <Content Include="MasterModule\MainLineVoyage.aspx" />
     <Content Include="MasterModule\ManageCountry.aspx" />
+    <Content Include="MasterModule\ManageFreeDays.aspx" />
     <Content Include="MasterModule\ManageLine.aspx" />
     <Content Include="MasterModule\ManageLoc.aspx" />
     <Content Include="MasterModule\ManagePort.aspx" />
+    <Content Include="MasterModule\ManageService.aspx" />
     <Content Include="MasterModule\ManageServTax.aspx" />
     <Content Include="MasterModule\ManageVessel.aspx" />
     <Content Include="MasterModule\MangeVoyage.aspx" />
     <Content Include="MasterModule\vendor-add-edit.aspx" />
     <Content Include="MasterModule\vendor-list.aspx" />
+    <Content Include="Popup\Report.aspx" />
+    <Content Include="Reports\AdvanceContainerList.aspx" />
     <Content Include="Reports\CargoArrivalNotice.aspx" />
+    <Content Include="Reports\CntrStockDetail.aspx" />
+    <Content Include="Reports\CntrStockSummery.aspx" />
+    <Content Include="Reports\cntwisestock.aspx" />
+    <Content Include="Reports\COPRAR.aspx" />
+    <Content Include="Reports\DetentionStatement.aspx" />
+    <Content Include="Reports\ExpBLPrint.aspx" />
+    <Content Include="Reports\ExportEDI.aspx" />
+    <Content Include="Reports\Export\EDI_Export.aspx" />
+    <Content Include="Reports\Export\ExpCntrStatus.aspx" />
+    <Content Include="Reports\Export\ExpManifestEdge.aspx" />
+    <Content Include="Reports\Export\ExportPerformanceReport.aspx" />
+    <Content Include="Reports\Export\Export_Monthly_Report_Excel.aspx" />
+    <Content Include="Reports\Export\TerminalDispatchReport.aspx" />
+    <Content Include="Reports\IGMForm2ICD.aspx" />
+    <Content Include="Reports\ImportInvRegister.aspx" />
     <Content Include="Reports\ImportSummary.aspx" />
     <Content Include="Reports\IGMForm2.aspx" />
     <Content Include="Reports\IGMFormC.aspx" />
     <Content Include="Reports\FileLandingGurantee.aspx" />
     <Content Include="Reports\ImportRegister.aspx" />
     <Content Include="Reports\ImpBLChkLst.aspx" />
+    <Content Include="Reports\InvDO.aspx" />
+    <Content Include="Reports\InvDOExt.aspx" />
+    <Content Include="Reports\InvSlotExt.aspx" />
+    <Content Include="Reports\MoneyRcpt.aspx" />
+    <Content Include="Reports\MoneyRecieptAccounts.aspx" />
+    <Content Include="Reports\MonthlyImportStatement.aspx" />
+    <Content Include="Reports\ReportViewer\ReportList.aspx" />
+    <Content Include="Reports\ReportViewer\ShowReport.aspx" />
+    <Content Include="Reports\RptImportBilling.aspx" />
+    <Content Include="Reports\YearlyMIS.aspx" />
     <Content Include="Scripts\Common.js" />
     <Content Include="Scripts\css\ellipsis-xbl.xml" />
     <Content Include="Scripts\css\images\ui-icons_222222_256x240.png" />
@@ -196,9 +254,16 @@
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Styles\EMS.css" />
     <Content Include="Styles\StyleSheet.css" />
+    <Content Include="Styles\Ufal.png" />
+    <Content Include="Transaction\AddEditMoneyReceipts.aspx" />
+    <Content Include="Transaction\BL-Query.aspx" />
     <Content Include="Transaction\FileUpload.aspx" />
     <Content Include="Transaction\ImportBL.aspx" />
+    <Content Include="Transaction\Invoice.aspx" />
+    <Content Include="Transaction\ManageCreditNote.aspx" />
     <Content Include="Transaction\ManageImportBL.aspx" />
+    <Content Include="Transaction\ManageInvoice.aspx" />
+    <Content Include="Transaction\ManageMoneyReceipt.aspx" />
     <Content Include="Transaction\WaiverFile\StyleSheet1.css" />
     <Content Include="Transaction\WaiverFile\TASK-BL.txt" />
     <Content Include="Unauthorized.aspx" />
@@ -207,13 +272,16 @@
     <Content Include="View\ChangePassword.aspx" />
     <Content Include="View\AddEditExchRate.aspx" />
     <Content Include="View\AddEditRole.aspx" />
+    <Content Include="View\EditLocation.aspx" />
     <Content Include="View\Home.aspx" />
     <Content Include="View\ManageCustomer.aspx" />
     <Content Include="View\ManageExchRate.aspx" />
     <Content Include="View\ManageLocation.aspx" />
     <Content Include="View\ManageRole.aspx" />
     <Content Include="View\ManageUser.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -222,6 +290,197 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContainerStockSummary.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContainerStockSummary.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\AC_Brockerage.ascx.cs">
+      <DependentUpon>AC_Brockerage.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomControls\AC_Brockerage.ascx.designer.cs">
+      <DependentUpon>AC_Brockerage.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\AC_Refund.ascx.cs">
+      <DependentUpon>AC_Refund.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomControls\AC_Refund.ascx.designer.cs">
+      <DependentUpon>AC_Refund.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DSBLPrinting.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSBLPrinting.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCompany.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCompany.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsLin.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsLin.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Export\AddEditAgent.aspx.cs">
+      <DependentUpon>AddEditAgent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\AddEditAgent.aspx.designer.cs">
+      <DependentUpon>AddEditAgent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\AddEditLBCntr.aspx.cs">
+      <DependentUpon>AddEditLBCntr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\AddEditLBCntr.aspx.designer.cs">
+      <DependentUpon>AddEditLBCntr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\AddEditSlotOperator.aspx.cs">
+      <DependentUpon>AddEditSlotOperator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\AddEditSlotOperator.aspx.designer.cs">
+      <DependentUpon>AddEditSlotOperator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\Booking.aspx.cs">
+      <DependentUpon>Booking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\Booking.aspx.designer.cs">
+      <DependentUpon>Booking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\BookingCharges.aspx.cs">
+      <DependentUpon>BookingCharges.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\BookingCharges.aspx.designer.cs">
+      <DependentUpon>BookingCharges.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\ContainerTranshipment.aspx.cs">
+      <DependentUpon>ContainerTranshipment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\ContainerTranshipment.aspx.designer.cs">
+      <DependentUpon>ContainerTranshipment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\ContainerTranshipmentEntry.aspx.cs">
+      <DependentUpon>ContainerTranshipmentEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\ContainerTranshipmentEntry.aspx.designer.cs">
+      <DependentUpon>ContainerTranshipmentEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\DOEdit.aspx.cs">
+      <DependentUpon>DOEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\DOEdit.aspx.designer.cs">
+      <DependentUpon>DOEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\DOList.aspx.cs">
+      <DependentUpon>DOList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\DOList.aspx.designer.cs">
+      <DependentUpon>DOList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\Export-bl-query.aspx.cs">
+      <DependentUpon>Export-bl-query.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\Export-bl-query.aspx.designer.cs">
+      <DependentUpon>Export-bl-query.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\ExportBL.aspx.cs">
+      <DependentUpon>ExportBL.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\ExportBL.aspx.designer.cs">
+      <DependentUpon>ExportBL.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\ExportInvoice.aspx.cs">
+      <DependentUpon>ExportInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\ExportInvoice.aspx.designer.cs">
+      <DependentUpon>ExportInvoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\FileUpload.aspx.cs">
+      <DependentUpon>FileUpload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\FileUpload.aspx.designer.cs">
+      <DependentUpon>FileUpload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\ManageAgent.aspx.cs">
+      <DependentUpon>ManageAgent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\ManageAgent.aspx.designer.cs">
+      <DependentUpon>ManageAgent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\ManageBooking.aspx.cs">
+      <DependentUpon>ManageBooking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\ManageBooking.aspx.designer.cs">
+      <DependentUpon>ManageBooking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\ManageExportBL.aspx.cs">
+      <DependentUpon>ManageExportBL.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\ManageExportBL.aspx.designer.cs">
+      <DependentUpon>ManageExportBL.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\ManageLBCntr.aspx.cs">
+      <DependentUpon>ManageLBCntr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\ManageLBCntr.aspx.designer.cs">
+      <DependentUpon>ManageLBCntr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\ManageSlot.aspx.cs">
+      <DependentUpon>ManageSlot.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\ManageSlot.aspx.designer.cs">
+      <DependentUpon>ManageSlot.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\ManageSlotOperator.aspx.cs">
+      <DependentUpon>ManageSlotOperator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\ManageSlotOperator.aspx.designer.cs">
+      <DependentUpon>ManageSlotOperator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\ManageVoyage.aspx.cs">
+      <DependentUpon>ManageVoyage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\ManageVoyage.aspx.designer.cs">
+      <DependentUpon>ManageVoyage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\Voyage.aspx.cs">
+      <DependentUpon>Voyage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\Voyage.aspx.designer.cs">
+      <DependentUpon>Voyage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LINEMRAccounts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LINEMRAccounts.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="LinerInvoiceDataset.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LinerInvoiceDataset.xsd</DependentUpon>
+    </Compile>
     <Content Include="App_Code\AutoComplete.cs" />
     <Compile Include="Blank.Master.cs">
       <DependentUpon>Blank.Master</DependentUpon>
@@ -328,6 +587,13 @@
     <Compile Include="CustomControls\AutoCompleteCountry.ascx.designer.cs">
       <DependentUpon>AutoCompleteCountry.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\AutoCompletepInvoice.ascx.cs">
+      <DependentUpon>AutoCompletepInvoice.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomControls\AutoCompletepInvoice.ascx.designer.cs">
+      <DependentUpon>AutoCompletepInvoice.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\AutoCompletepPort.ascx.cs">
       <DependentUpon>AutoCompletepPort.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -378,20 +644,6 @@
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Export\DOEdit.aspx.cs">
-      <DependentUpon>DOEdit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Export\DOEdit.aspx.designer.cs">
-      <DependentUpon>DOEdit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Export\DOList.aspx.cs">
-      <DependentUpon>DOList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Export\DOList.aspx.designer.cs">
-      <DependentUpon>DOList.aspx</DependentUpon>
-    </Compile>
     <Compile Include="FileNotFound.aspx.cs">
       <DependentUpon>FileNotFound.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -424,12 +676,54 @@
     <Compile Include="Import\EDI_Custom.aspx.designer.cs">
       <DependentUpon>EDI_Custom.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Liner23052013DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Liner23052013DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Liner29042013DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Liner29042013DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="LinerBillAnnex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LinerBillAnnex.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="LinerDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LinerDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="LinerImportInivoicePrintDataset.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LinerImportInivoicePrintDataset.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="LinerImportInvoiceRegister.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LinerImportInvoiceRegister.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="linerMRDataset.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>linerMRDataset.xsd</DependentUpon>
+    </Compile>
     <Compile Include="MasterModule\AddEditCountry.aspx.cs">
       <DependentUpon>AddEditCountry.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterModule\AddEditCountry.aspx.designer.cs">
       <DependentUpon>AddEditCountry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\AddEditFreeDays.aspx.cs">
+      <DependentUpon>AddEditFreeDays.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\AddEditFreeDays.aspx.designer.cs">
+      <DependentUpon>AddEditFreeDays.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterModule\ExpAddEditSlotCost.aspx.cs">
       <DependentUpon>ExpAddEditSlotCost.aspx</DependentUpon>
@@ -445,12 +739,26 @@
     <Compile Include="MasterModule\AddEditLine.aspx.designer.cs">
       <DependentUpon>AddEditLine.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MasterModule\AddEditMLVoyage.aspx.cs">
+      <DependentUpon>AddEditMLVoyage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\AddEditMLVoyage.aspx.designer.cs">
+      <DependentUpon>AddEditMLVoyage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MasterModule\AddEditPort.aspx.cs">
       <DependentUpon>AddEditPort.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterModule\AddEditPort.aspx.designer.cs">
       <DependentUpon>AddEditPort.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\AddEditServices.aspx.cs">
+      <DependentUpon>AddEditServices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\AddEditServices.aspx.designer.cs">
+      <DependentUpon>AddEditServices.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterModule\AddEditSTax.aspx.cs">
       <DependentUpon>AddEditSTax.aspx</DependentUpon>
@@ -487,6 +795,27 @@
     <Compile Include="MasterModule\charge-list.aspx.designer.cs">
       <DependentUpon>charge-list.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MasterModule\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\Export-charge-add-edit.aspx.cs">
+      <DependentUpon>Export-charge-add-edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\Export-charge-add-edit.aspx.designer.cs">
+      <DependentUpon>Export-charge-add-edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\Export-charge-list.aspx.cs">
+      <DependentUpon>Export-charge-list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\Export-charge-list.aspx.designer.cs">
+      <DependentUpon>Export-charge-list.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MasterModule\ExpSlotCostList.aspx.cs">
       <DependentUpon>ExpSlotCostList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -508,12 +837,26 @@
     <Compile Include="MasterModule\ImportHaulage-list.aspx.designer.cs">
       <DependentUpon>ImportHaulage-list.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MasterModule\MainLineVoyage.aspx.cs">
+      <DependentUpon>MainLineVoyage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\MainLineVoyage.aspx.designer.cs">
+      <DependentUpon>MainLineVoyage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MasterModule\ManageCountry.aspx.cs">
       <DependentUpon>ManageCountry.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterModule\ManageCountry.aspx.designer.cs">
       <DependentUpon>ManageCountry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\ManageFreeDays.aspx.cs">
+      <DependentUpon>ManageFreeDays.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\ManageFreeDays.aspx.designer.cs">
+      <DependentUpon>ManageFreeDays.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterModule\ManageLine.aspx.cs">
       <DependentUpon>ManageLine.aspx</DependentUpon>
@@ -535,6 +878,13 @@
     </Compile>
     <Compile Include="MasterModule\ManagePort.aspx.designer.cs">
       <DependentUpon>ManagePort.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterModule\ManageService.aspx.cs">
+      <DependentUpon>ManageService.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterModule\ManageService.aspx.designer.cs">
+      <DependentUpon>ManageService.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterModule\ManageServTax.aspx.cs">
       <DependentUpon>ManageServTax.aspx</DependentUpon>
@@ -571,12 +921,136 @@
     <Compile Include="MasterModule\vendor-list.aspx.designer.cs">
       <DependentUpon>vendor-list.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MoneyReceiptAccounts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MoneyReceiptAccounts.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Popup\Report.aspx.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Popup\Report.aspx.designer.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\AdvanceContainerList.aspx.cs">
+      <DependentUpon>AdvanceContainerList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\AdvanceContainerList.aspx.designer.cs">
+      <DependentUpon>AdvanceContainerList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\CargoArrivalNotice.aspx.cs">
       <DependentUpon>CargoArrivalNotice.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Reports\CargoArrivalNotice.aspx.designer.cs">
       <DependentUpon>CargoArrivalNotice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CntrStockDetail.aspx.cs">
+      <DependentUpon>CntrStockDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CntrStockDetail.aspx.designer.cs">
+      <DependentUpon>CntrStockDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CntrStockSummery.aspx.cs">
+      <DependentUpon>CntrStockSummery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CntrStockSummery.aspx.designer.cs">
+      <DependentUpon>CntrStockSummery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\cntwisestock.aspx.cs">
+      <DependentUpon>cntwisestock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\cntwisestock.aspx.designer.cs">
+      <DependentUpon>cntwisestock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\COPRAR.aspx.cs">
+      <DependentUpon>COPRAR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\COPRAR.aspx.designer.cs">
+      <DependentUpon>COPRAR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DetentionStatement.aspx.cs">
+      <DependentUpon>DetentionStatement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\DetentionStatement.aspx.designer.cs">
+      <DependentUpon>DetentionStatement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ExpBLPrint.aspx.cs">
+      <DependentUpon>ExpBLPrint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ExpBLPrint.aspx.designer.cs">
+      <DependentUpon>ExpBLPrint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ExportEDI.aspx.cs">
+      <DependentUpon>ExportEDI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ExportEDI.aspx.designer.cs">
+      <DependentUpon>ExportEDI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Export\EDI_Export.aspx.cs">
+      <DependentUpon>EDI_Export.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Export\EDI_Export.aspx.designer.cs">
+      <DependentUpon>EDI_Export.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Export\ExpCntrStatus.aspx.cs">
+      <DependentUpon>ExpCntrStatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Export\ExpCntrStatus.aspx.designer.cs">
+      <DependentUpon>ExpCntrStatus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Export\ExpManifestEdge.aspx.cs">
+      <DependentUpon>ExpManifestEdge.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Export\ExpManifestEdge.aspx.designer.cs">
+      <DependentUpon>ExpManifestEdge.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Export\ExportPerformanceReport.aspx.cs">
+      <DependentUpon>ExportPerformanceReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Export\ExportPerformanceReport.aspx.designer.cs">
+      <DependentUpon>ExportPerformanceReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Export\Export_Monthly_Report_Excel.aspx.cs">
+      <DependentUpon>Export_Monthly_Report_Excel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Export\Export_Monthly_Report_Excel.aspx.designer.cs">
+      <DependentUpon>Export_Monthly_Report_Excel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Export\TerminalDispatchReport.aspx.cs">
+      <DependentUpon>TerminalDispatchReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Export\TerminalDispatchReport.aspx.designer.cs">
+      <DependentUpon>TerminalDispatchReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\IGMForm2ICD.aspx.cs">
+      <DependentUpon>IGMForm2ICD.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\IGMForm2ICD.aspx.designer.cs">
+      <DependentUpon>IGMForm2ICD.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ImportInvRegister.aspx.cs">
+      <DependentUpon>ImportInvRegister.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ImportInvRegister.aspx.designer.cs">
+      <DependentUpon>ImportInvRegister.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\ImportSummary.aspx.cs">
       <DependentUpon>ImportSummary.aspx</DependentUpon>
@@ -620,6 +1094,76 @@
     <Compile Include="Reports\ImpBLChkLst.aspx.designer.cs">
       <DependentUpon>ImpBLChkLst.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\InvDO.aspx.cs">
+      <DependentUpon>InvDO.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\InvDO.aspx.designer.cs">
+      <DependentUpon>InvDO.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\InvDOExt.aspx.cs">
+      <DependentUpon>InvDOExt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\InvDOExt.aspx.designer.cs">
+      <DependentUpon>InvDOExt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\InvSlotExt.aspx.cs">
+      <DependentUpon>InvSlotExt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\InvSlotExt.aspx.designer.cs">
+      <DependentUpon>InvSlotExt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\MoneyRcpt.aspx.cs">
+      <DependentUpon>MoneyRcpt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\MoneyRcpt.aspx.designer.cs">
+      <DependentUpon>MoneyRcpt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\MoneyRecieptAccounts.aspx.cs">
+      <DependentUpon>MoneyRecieptAccounts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\MoneyRecieptAccounts.aspx.designer.cs">
+      <DependentUpon>MoneyRecieptAccounts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\MonthlyImportStatement.aspx.cs">
+      <DependentUpon>MonthlyImportStatement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\MonthlyImportStatement.aspx.designer.cs">
+      <DependentUpon>MonthlyImportStatement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportViewer\ReportList.aspx.cs">
+      <DependentUpon>ReportList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportViewer\ReportList.aspx.designer.cs">
+      <DependentUpon>ReportList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportViewer\ShowReport.aspx.cs">
+      <DependentUpon>ShowReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportViewer\ShowReport.aspx.designer.cs">
+      <DependentUpon>ShowReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\RptImportBilling.aspx.cs">
+      <DependentUpon>RptImportBilling.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\RptImportBilling.aspx.designer.cs">
+      <DependentUpon>RptImportBilling.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\YearlyMIS.aspx.cs">
+      <DependentUpon>YearlyMIS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\YearlyMIS.aspx.designer.cs">
+      <DependentUpon>YearlyMIS.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -638,6 +1182,32 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StockDataSet.cs">
+      <DependentUpon>StockDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="StockDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StockDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Transaction\AddEditMoneyReceipts.aspx.cs">
+      <DependentUpon>AddEditMoneyReceipts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Transaction\AddEditMoneyReceipts.aspx.designer.cs">
+      <DependentUpon>AddEditMoneyReceipts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Transaction\BL-Query.aspx.cs">
+      <DependentUpon>BL-Query.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Transaction\BL-Query.aspx.designer.cs">
+      <DependentUpon>BL-Query.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Transaction\DocDownload.ashx.cs">
+      <DependentUpon>DocDownload.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Transaction\FileUpload.aspx.cs">
       <DependentUpon>FileUpload.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -652,12 +1222,40 @@
     <Compile Include="Transaction\ImportBL.aspx.designer.cs">
       <DependentUpon>ImportBL.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Transaction\Invoice.aspx.cs">
+      <DependentUpon>Invoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Transaction\Invoice.aspx.designer.cs">
+      <DependentUpon>Invoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Transaction\ManageCreditNote.aspx.cs">
+      <DependentUpon>ManageCreditNote.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Transaction\ManageCreditNote.aspx.designer.cs">
+      <DependentUpon>ManageCreditNote.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Transaction\ManageImportBL.aspx.cs">
       <DependentUpon>ManageImportBL.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Transaction\ManageImportBL.aspx.designer.cs">
       <DependentUpon>ManageImportBL.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Transaction\ManageInvoice.aspx.cs">
+      <DependentUpon>ManageInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Transaction\ManageInvoice.aspx.designer.cs">
+      <DependentUpon>ManageInvoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Transaction\ManageMoneyReceipt.aspx.cs">
+      <DependentUpon>ManageMoneyReceipt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Transaction\ManageMoneyReceipt.aspx.designer.cs">
+      <DependentUpon>ManageMoneyReceipt.aspx</DependentUpon>
     </Compile>
     <Compile Include="Unauthorized.aspx.cs">
       <DependentUpon>Unauthorized.aspx</DependentUpon>
@@ -700,6 +1298,13 @@
     </Compile>
     <Compile Include="View\AddEditRole.aspx.designer.cs">
       <DependentUpon>AddEditRole.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditLocation.aspx.cs">
+      <DependentUpon>EditLocation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\EditLocation.aspx.designer.cs">
+      <DependentUpon>EditLocation.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
@@ -746,6 +1351,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Download\" />
     <Folder Include="Finance\" />
     <Folder Include="Import\EDIFile\" />
   </ItemGroup>
@@ -774,17 +1380,200 @@
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="RDLC\BLPrint.rdlc" />
     <EmbeddedResource Include="RDLC\CargoArrivalNotice.rdlc" />
+    <EmbeddedResource Include="RDLC\CntrStockDetail.rdlc" />
+    <EmbeddedResource Include="RDLC\CntrStockSummery.rdlc" />
+    <EmbeddedResource Include="RDLC\CntrWiseStock.rdlc" />
+    <EmbeddedResource Include="RDLC\DeliveryOrder.rdlc" />
+    <EmbeddedResource Include="RDLC\ExpManifestEdge.rdlc" />
+    <EmbeddedResource Include="RDLC\ExportEDI.rdlc" />
+    <EmbeddedResource Include="RDLC\ExportEDIContainer.rdlc" />
     <EmbeddedResource Include="RDLC\FileLandingGurantee.rdlc" />
+    <EmbeddedResource Include="RDLC\IGMCargoDesc.rdlc" />
     <EmbeddedResource Include="RDLC\IGMForm2.rdlc" />
     <EmbeddedResource Include="RDLC\IGMFormC.rdlc" />
     <EmbeddedResource Include="RDLC\ImpBLChkLst.rdlc" />
+    <EmbeddedResource Include="RDLC\ImportInvoice.rdlc" />
+    <EmbeddedResource Include="RDLC\ImportInvRegister.rdlc" />
     <EmbeddedResource Include="RDLC\ImportRegister.rdlc" />
     <EmbeddedResource Include="RDLC\ImportSummary.rdlc" />
+    <EmbeddedResource Include="RDLC\MoneyReciept.rdlc" />
+    <EmbeddedResource Include="RDLC\MoneyRecieptAccounts.rdlc" />
+    <EmbeddedResource Include="RDLC\RptImpBill.rdlc" />
+    <EmbeddedResource Include="RDLC\RptImpBillAnnex.rdlc" />
+    <EmbeddedResource Include="RDLC\RptMRAc.rdlc" />
+    <EmbeddedResource Include="RDLC\YearlyMIS.rdlc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ContainerStockSummary.xsc">
+      <DependentUpon>ContainerStockSummary.xsd</DependentUpon>
+    </None>
+    <None Include="ContainerStockSummary.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ContainerStockSummary.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ContainerStockSummary.xss">
+      <DependentUpon>ContainerStockSummary.xsd</DependentUpon>
+    </None>
+    <None Include="DSBLPrinting.xsc">
+      <DependentUpon>DSBLPrinting.xsd</DependentUpon>
+    </None>
+    <None Include="DSBLPrinting.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSBLPrinting.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DSBLPrinting.xss">
+      <DependentUpon>DSBLPrinting.xsd</DependentUpon>
+    </None>
+    <None Include="DSCompany.xsc">
+      <DependentUpon>DSCompany.xsd</DependentUpon>
+    </None>
+    <None Include="DSCompany.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCompany.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DSCompany.xss">
+      <DependentUpon>DSCompany.xsd</DependentUpon>
+    </None>
+    <None Include="dsLin.xsc">
+      <DependentUpon>dsLin.xsd</DependentUpon>
+    </None>
+    <None Include="dsLin.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsLin.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="dsLin.xss">
+      <DependentUpon>dsLin.xsd</DependentUpon>
+    </None>
+    <None Include="FileTemplate\Template.xlsx" />
+    <None Include="LINEMRAccounts.xsc">
+      <DependentUpon>LINEMRAccounts.xsd</DependentUpon>
+    </None>
+    <None Include="LINEMRAccounts.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>LINEMRAccounts.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="LINEMRAccounts.xss">
+      <DependentUpon>LINEMRAccounts.xsd</DependentUpon>
+    </None>
+    <None Include="Liner23052013DataSet.xsc">
+      <DependentUpon>Liner23052013DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Liner23052013DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Liner23052013DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Liner23052013DataSet.xss">
+      <DependentUpon>Liner23052013DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Liner29042013DataSet.xsc">
+      <DependentUpon>Liner29042013DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Liner29042013DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Liner29042013DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Liner29042013DataSet.xss">
+      <DependentUpon>Liner29042013DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="LinerBillAnnex.xsc">
+      <DependentUpon>LinerBillAnnex.xsd</DependentUpon>
+    </None>
+    <None Include="LinerBillAnnex.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>LinerBillAnnex.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="LinerBillAnnex.xss">
+      <DependentUpon>LinerBillAnnex.xsd</DependentUpon>
+    </None>
+    <None Include="LinerDataSet.xsc">
+      <DependentUpon>LinerDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="LinerDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>LinerDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="LinerDataSet.xss">
+      <DependentUpon>LinerDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="LinerImportInivoicePrintDataset.xsc">
+      <DependentUpon>LinerImportInivoicePrintDataset.xsd</DependentUpon>
+    </None>
+    <None Include="LinerImportInivoicePrintDataset.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>LinerImportInivoicePrintDataset.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="LinerImportInivoicePrintDataset.xss">
+      <DependentUpon>LinerImportInivoicePrintDataset.xsd</DependentUpon>
+    </None>
+    <None Include="LinerImportInvoiceRegister.xsc">
+      <DependentUpon>LinerImportInvoiceRegister.xsd</DependentUpon>
+    </None>
+    <None Include="LinerImportInvoiceRegister.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>LinerImportInvoiceRegister.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="LinerImportInvoiceRegister.xss">
+      <DependentUpon>LinerImportInvoiceRegister.xsd</DependentUpon>
+    </None>
+    <None Include="LinerInvoiceDataset.xsc">
+      <DependentUpon>LinerInvoiceDataset.xsd</DependentUpon>
+    </None>
+    <None Include="LinerInvoiceDataset.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>LinerInvoiceDataset.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="LinerInvoiceDataset.xss">
+      <DependentUpon>LinerInvoiceDataset.xsd</DependentUpon>
+    </None>
+    <None Include="linerMRDataset.xsc">
+      <DependentUpon>linerMRDataset.xsd</DependentUpon>
+    </None>
+    <None Include="linerMRDataset.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>linerMRDataset.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="linerMRDataset.xss">
+      <DependentUpon>linerMRDataset.xsd</DependentUpon>
+    </None>
+    <None Include="MoneyReceiptAccounts.xsc">
+      <DependentUpon>MoneyReceiptAccounts.xsd</DependentUpon>
+    </None>
+    <None Include="MoneyReceiptAccounts.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MoneyReceiptAccounts.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MoneyReceiptAccounts.xss">
+      <DependentUpon>MoneyReceiptAccounts.xsd</DependentUpon>
+    </None>
     <None Include="Scripts\css\themes\base\images\Thumbs.db" />
     <None Include="Scripts\jquery-ui-1.8.14.custom.min.js.Prev" />
+    <Content Include="Transaction\DocDownload.ashx" />
+    <None Include="StockDataSet.xsc">
+      <DependentUpon>StockDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="StockDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StockDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="StockDataSet.xss">
+      <DependentUpon>StockDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
@@ -794,7 +1583,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>24120</DevelopmentServerPort>
+          <DevelopmentServerPort>36844</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

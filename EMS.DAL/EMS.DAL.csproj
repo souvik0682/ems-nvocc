@@ -41,12 +41,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgentDAL.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BookingDAL.cs" />
     <Compile Include="CommonDAL.cs" />
     <Compile Include="ContainerTranDAL.cs" />
     <Compile Include="CreditNoteDAL.cs" />
     <Compile Include="DALReport.cs" />
+    <Compile Include="DODAL.cs" />
     <Compile Include="EDIDAL.cs" />
     <Compile Include="EquipmentDAL.cs" />
+    <Compile Include="ExpBLPrinting.cs" />
+    <Compile Include="ExportBLDAL.cs" />
+    <Compile Include="ExportBLQueryDAL.cs" />
+    <Compile Include="ExportContainerDAL.cs" />
+    <Compile Include="ExportEDIDAL.cs" />
+    <Compile Include="ExportMonthlyReportDAL.cs" />
+    <Compile Include="ExportPerformanceDAL.cs" />
+    <Compile Include="expVoyageDAL.cs" />
     <Compile Include="ExpSlotCost.cs" />
     <Compile Include="IGMReportDAL.cs" />
     <Compile Include="ImportBLDAL.cs" />
@@ -56,11 +69,16 @@
     <Compile Include="DBManager\DbManagerBase.cs" />
     <Compile Include="DBManager\DbQuery.cs" />
     <Compile Include="InvoiceDAL.cs" />
+    <Compile Include="LBCntrDAL.cs" />
     <Compile Include="LogisticReportDAL.cs" />
     <Compile Include="MoneyReceiptsDAL.cs" />
     <Compile Include="OnHire.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportDAL.cs" />
+    <Compile Include="ServiceDAL.cs" />
+    <Compile Include="SlotDAL.cs" />
+    <Compile Include="TerminalDiapatchDAL.cs" />
+    <Compile Include="TranshipmentDetailsDAL.cs" />
     <Compile Include="UserDAL.cs" />
     <Compile Include="VendorDAL.cs" />
     <Compile Include="VoyageDAL.cs" />

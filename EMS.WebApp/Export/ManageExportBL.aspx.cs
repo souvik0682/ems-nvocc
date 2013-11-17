@@ -647,8 +647,13 @@ namespace EMS.WebApp.Export
             {
                 
                 long exportBLId = SaveExportBLHeaderDetails();
-                SaveExportBLContainers(exportBLId);
-                Response.Redirect("~/Export/ExportBL.aspx");
+                if (exportBLId == 0)
+                    lblErr.Text = "Error Saving B/L";
+                else
+                {
+                    SaveExportBLContainers(exportBLId);
+                    Response.Redirect("~/Export/ExportBL.aspx");
+                }
             }
             catch (Exception ex)
             {

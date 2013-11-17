@@ -189,7 +189,6 @@
     <Content Include="Reports\InvDOExt.aspx" />
     <Content Include="Reports\InvSlotExt.aspx" />
     <Content Include="Reports\MoneyRcpt.aspx" />
-    <Content Include="Reports\MoneyRecieptAccounts.aspx" />
     <Content Include="Reports\MonthlyImportStatement.aspx" />
     <Content Include="Reports\ReportViewer\ReportList.aspx" />
     <Content Include="Reports\ReportViewer\ShowReport.aspx" />
@@ -471,11 +470,6 @@
     <Compile Include="Export\Voyage.aspx.designer.cs">
       <DependentUpon>Voyage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LINEMRAccounts.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LINEMRAccounts.xsd</DependentUpon>
-    </Compile>
     <Compile Include="LinerInvoiceDataset.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -675,16 +669,6 @@
     </Compile>
     <Compile Include="Import\EDI_Custom.aspx.designer.cs">
       <DependentUpon>EDI_Custom.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Liner23052013DataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Liner23052013DataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Liner29042013DataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Liner29042013DataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="LinerBillAnnex.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -921,11 +905,6 @@
     <Compile Include="MasterModule\vendor-list.aspx.designer.cs">
       <DependentUpon>vendor-list.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MoneyReceiptAccounts.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MoneyReceiptAccounts.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Popup\Report.aspx.cs">
       <DependentUpon>Report.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1121,13 +1100,6 @@
     </Compile>
     <Compile Include="Reports\MoneyRcpt.aspx.designer.cs">
       <DependentUpon>MoneyRcpt.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\MoneyRecieptAccounts.aspx.cs">
-      <DependentUpon>MoneyRecieptAccounts.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\MoneyRecieptAccounts.aspx.designer.cs">
-      <DependentUpon>MoneyRecieptAccounts.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\MonthlyImportStatement.aspx.cs">
       <DependentUpon>MonthlyImportStatement.aspx</DependentUpon>
@@ -1399,10 +1371,8 @@
     <EmbeddedResource Include="RDLC\ImportRegister.rdlc" />
     <EmbeddedResource Include="RDLC\ImportSummary.rdlc" />
     <EmbeddedResource Include="RDLC\MoneyReciept.rdlc" />
-    <EmbeddedResource Include="RDLC\MoneyRecieptAccounts.rdlc" />
     <EmbeddedResource Include="RDLC\RptImpBill.rdlc" />
     <EmbeddedResource Include="RDLC\RptImpBillAnnex.rdlc" />
-    <EmbeddedResource Include="RDLC\RptMRAc.rdlc" />
     <EmbeddedResource Include="RDLC\YearlyMIS.rdlc" />
   </ItemGroup>
   <ItemGroup>
@@ -1450,39 +1420,6 @@
       <DependentUpon>dsLin.xsd</DependentUpon>
     </None>
     <None Include="FileTemplate\Template.xlsx" />
-    <None Include="LINEMRAccounts.xsc">
-      <DependentUpon>LINEMRAccounts.xsd</DependentUpon>
-    </None>
-    <None Include="LINEMRAccounts.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>LINEMRAccounts.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="LINEMRAccounts.xss">
-      <DependentUpon>LINEMRAccounts.xsd</DependentUpon>
-    </None>
-    <None Include="Liner23052013DataSet.xsc">
-      <DependentUpon>Liner23052013DataSet.xsd</DependentUpon>
-    </None>
-    <None Include="Liner23052013DataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Liner23052013DataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Liner23052013DataSet.xss">
-      <DependentUpon>Liner23052013DataSet.xsd</DependentUpon>
-    </None>
-    <None Include="Liner29042013DataSet.xsc">
-      <DependentUpon>Liner29042013DataSet.xsd</DependentUpon>
-    </None>
-    <None Include="Liner29042013DataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Liner29042013DataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Liner29042013DataSet.xss">
-      <DependentUpon>Liner29042013DataSet.xsd</DependentUpon>
-    </None>
     <None Include="LinerBillAnnex.xsc">
       <DependentUpon>LinerBillAnnex.xsd</DependentUpon>
     </None>
@@ -1548,17 +1485,6 @@
     </None>
     <None Include="linerMRDataset.xss">
       <DependentUpon>linerMRDataset.xsd</DependentUpon>
-    </None>
-    <None Include="MoneyReceiptAccounts.xsc">
-      <DependentUpon>MoneyReceiptAccounts.xsd</DependentUpon>
-    </None>
-    <None Include="MoneyReceiptAccounts.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>MoneyReceiptAccounts.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="MoneyReceiptAccounts.xss">
-      <DependentUpon>MoneyReceiptAccounts.xsd</DependentUpon>
     </None>
     <None Include="Scripts\css\themes\base\images\Thumbs.db" />
     <None Include="Scripts\jquery-ui-1.8.14.custom.min.js.Prev" />

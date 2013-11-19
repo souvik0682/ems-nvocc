@@ -120,8 +120,8 @@
           <DataField>ShipmentMode</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Containers">
-          <DataField>Containers</DataField>
+        <Field Name="Cntr">
+          <DataField>Cntr</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="NoofBLs">
@@ -136,14 +136,18 @@
           <DataField>NetWt</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="BookingNo">
+          <DataField>BookingNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>dsBLPrinting</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <rd:DataSetInfo>
-        <rd:DataSetName>DSBLPrinting</rd:DataSetName>
-        <rd:SchemaPath>E:\ems\EMS.WebApp\DSBLPrinting.xsd</rd:SchemaPath>
+        <rd:DataSetName>dsBLPrinting</rd:DataSetName>
+        <rd:SchemaPath>E:\ems\EMS.WebApp\dsBLPrinting.xsd</rd:SchemaPath>
         <rd:TableName>prcGetBLPrinting</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
@@ -651,17 +655,17 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>0.59042in</Height>
+    <Height>0.78834in</Height>
     <Style>
       <Border>
         <Style>None</Style>
       </Border>
     </Style>
   </Body>
-  <Width>7.31767in</Width>
+  <Width>7.41842in</Width>
   <Page>
     <PageHeader>
-      <Height>15.27673cm</Height>
+      <Height>15cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <ReportItems>
         <Textbox Name="Textbox2">
@@ -728,7 +732,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox11</rd:DefaultName>
-          <Top>1.18057cm</Top>
+          <Top>0.6416cm</Top>
           <Left>13.79397cm</Left>
           <Height>0.6cm</Height>
           <Width>4.41854cm</Width>
@@ -1063,7 +1067,7 @@
                   <Value>=First(Fields!MarksNumbers.Value, "DSBLPrinting")</Value>
                   <Style>
                     <FontFamily>Calibri</FontFamily>
-                    <FontSize>9pt</FontSize>
+                    <FontSize>8pt</FontSize>
                   </Style>
                 </TextRun>
               </TextRuns>
@@ -1097,7 +1101,7 @@
                   <Value>=First(Fields!GoodsDescription.Value, "DSBLPrinting")</Value>
                   <Style>
                     <FontFamily>Calibri</FontFamily>
-                    <FontSize>9pt</FontSize>
+                    <FontSize>8pt</FontSize>
                   </Style>
                 </TextRun>
               </TextRuns>
@@ -1139,8 +1143,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox14</rd:DefaultName>
-          <Top>11.27188cm</Top>
-          <Left>13.79397cm</Left>
+          <Top>11.29834cm</Top>
+          <Left>13.76751cm</Left>
           <Height>0.6cm</Height>
           <Width>2.4959cm</Width>
           <ZIndex>12</ZIndex>
@@ -1168,50 +1172,25 @@
                     <Color>#000000</Color>
                   </Style>
                 </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox15</rd:DefaultName>
-          <Top>12.04827cm</Top>
-          <Left>13.85571cm</Left>
-          <Height>0.6cm</Height>
-          <Width>2.5cm</Width>
-          <ZIndex>13</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox16">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
                 <TextRun>
-                  <Label>NetWeight</Label>
+                  <Label>netwt</Label>
                   <Value>=Sum(Fields!NetWt.Value, "DSBLPrinting")</Value>
                   <Style>
                     <FontFamily>Calibri</FontFamily>
                     <FontSize>9pt</FontSize>
+                    <Color>#000000</Color>
                   </Style>
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
-          <rd:DefaultName>Textbox16</rd:DefaultName>
-          <Top>12.78938cm</Top>
-          <Left>13.85571cm</Left>
+          <rd:DefaultName>Textbox15</rd:DefaultName>
+          <Top>12.07473cm</Top>
+          <Left>13.82925cm</Left>
           <Height>0.6cm</Height>
-          <Width>2.5cm</Width>
-          <ZIndex>14</ZIndex>
+          <Width>3.58479cm</Width>
+          <ZIndex>13</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1245,6 +1224,37 @@
           <Left>0.95286cm</Left>
           <Height>0.6cm</Height>
           <Width>5.08411cm</Width>
+          <ZIndex>14</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox16">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Label>cntr</Label>
+                  <Value>=First(Fields!Cntr.Value, "DSBLPrinting")</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox16</rd:DefaultName>
+          <Top>14.1732cm</Top>
+          <Left>10.23091cm</Left>
+          <Height>0.6cm</Height>
+          <Width>2.5cm</Width>
           <ZIndex>15</ZIndex>
           <Style>
             <Border>
@@ -1264,8 +1274,9 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>9.19871cm</Height>
+      <Height>11cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
         <Textbox Name="Textbox3">
           <CanGrow>true</CanGrow>
@@ -1324,7 +1335,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.03528cm</Top>
+          <Top>0.77639cm</Top>
           <Left>0.89112cm</Left>
           <Height>2.46062cm</Height>
           <Width>6.61458cm</Width>
@@ -1357,7 +1368,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox59</rd:DefaultName>
-          <Top>2.63701cm</Top>
+          <Top>3.37812cm</Top>
           <Left>0.89112cm</Left>
           <Height>0.6cm</Height>
           <Width>6.61458cm</Width>
@@ -1391,7 +1402,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox60</rd:DefaultName>
-          <Top>5.37083cm</Top>
+          <Top>7.77854cm</Top>
           <Left>8.24699cm</Left>
           <Height>0.6cm</Height>
           <Width>5.15937cm</Width>
@@ -1440,7 +1451,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox70</rd:DefaultName>
-          <Top>5.37083cm</Top>
+          <Top>7.77854cm</Top>
           <Left>13.48043cm</Left>
           <Height>0.54709cm</Height>
           <Width>5.10646cm</Width>
@@ -1474,7 +1485,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox69</rd:DefaultName>
-          <Top>6.93185cm</Top>
+          <Top>8.73102cm</Top>
           <Left>8.24699cm</Left>
           <Height>0.6cm</Height>
           <Width>5.15937cm</Width>
@@ -1500,7 +1511,7 @@
     <PageWidth>21cm</PageWidth>
     <LeftMargin>1cm</LeftMargin>
     <RightMargin>0cm</RightMargin>
-    <TopMargin>0.5cm</TopMargin>
+    <TopMargin>0cm</TopMargin>
     <BottomMargin>0cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />

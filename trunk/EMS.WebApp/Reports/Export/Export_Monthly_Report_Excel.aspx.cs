@@ -66,6 +66,8 @@ namespace EMS.WebApp.Transaction
                 DataTable dtExcel = new DataTable();
                 dt1 = Convert.ToDateTime(txtStartDt.Text.Trim());
                 dt2 = Convert.ToDateTime(txtEndDt.Text.Trim());
+                if (hdnVessel.Value == "")
+                    hdnVessel.Value = "0";
                 dtExcel = cls.GetExportMonthlyReport( Convert.ToInt32(ddlLoc.SelectedValue),Convert.ToInt32(ddlLine.SelectedValue),
                 Convert.ToInt32(hdnVessel.Value), Convert.ToInt64(ddlVoyage.SelectedValue),dt1,dt2);
                 int val=0;
@@ -199,11 +201,11 @@ namespace EMS.WebApp.Transaction
                     dtExcel.Columns.Remove("VesselName");
                     dtExcel.Columns.Remove("VoyageNo");
                     dtExcel.Columns.Remove("ExpBLDate");
-                    dtExcel.Columns.Remove("AddrName");
-                    dtExcel.Columns.Remove("actual");
+                    //dtExcel.Columns.Remove("AddrName");
+                    dtExcel.Columns.Remove("Charged");
                     dtExcel.Columns.Remove("Manifest");
                     dtExcel.Columns.Remove("Diff");
-                    dtExcel.Columns.Remove("BrokeragePercent");
+                    dtExcel.Columns.Remove("Commper");
                     dtExcel.Columns.Remove("Shipper");
                     dtExcel.Columns.Remove("Commodity");
                     dtExcel.Columns.Remove("Gross");
@@ -211,7 +213,7 @@ namespace EMS.WebApp.Transaction
                     dtExcel.Columns.Remove("InvoiceNo");
                     dtExcel.Columns.Remove("InvoiceDate");
                     dtExcel.Columns.Remove("RefAmt");
-                    dtExcel.Columns.Remove("AddrName1");
+                    dtExcel.Columns.Remove("RefundTo");
                 }
                 else if (val == 2)
                 {
@@ -219,18 +221,19 @@ namespace EMS.WebApp.Transaction
                     dtExcel.Columns.Remove("VesselName");
                     dtExcel.Columns.Remove("VoyageNo");
                     dtExcel.Columns.Remove("ExpBLDate");
-                    dtExcel.Columns.Remove("AddrName");
-                    dtExcel.Columns.Remove("actual");
+                    dtExcel.Columns.Remove("Brok");
+                    //dtExcel.Columns.Remove("actual");
                     dtExcel.Columns.Remove("BasicFreight");
-                    dtExcel.Columns.Remove("BrokeragePercent");
-                    dtExcel.Columns.Remove("BrkAmt");
+                    //dtExcel.Columns.Remove("Commper");
+                    //dtExcel.Columns.Remove("CommAmt");
                     dtExcel.Columns.Remove("Brokerage");
                     dtExcel.Columns.Remove("Gross");
                     dtExcel.Columns.Remove("Stax");
-                    dtExcel.Columns.Remove("InvoiceNo");
-                    dtExcel.Columns.Remove("InvoiceDate");
+                    //dtExcel.Columns.Remove("InvoiceNo");
+                    //dtExcel.Columns.Remove("InvoiceDate");
                     dtExcel.Columns.Remove("RefAmt");
-                    dtExcel.Columns.Remove("AddrName1");
+                    dtExcel.Columns.Remove("Commodity");
+                    dtExcel.Columns.Remove("RefundTo");
                 }
                 else if (val == 3)
                 {
@@ -238,19 +241,20 @@ namespace EMS.WebApp.Transaction
                     dtExcel.Columns.Remove("VesselName");
                     dtExcel.Columns.Remove("VoyageNo");
                     dtExcel.Columns.Remove("ExpBLDate");
-                    dtExcel.Columns.Remove("AddrName");
-                    dtExcel.Columns.Remove("actual");
+                    dtExcel.Columns.Remove("Brok");
+                    //dtExcel.Columns.Remove("Charged");
                     dtExcel.Columns.Remove("BasicFreight");
-                    dtExcel.Columns.Remove("BrokeragePercent");
-                    dtExcel.Columns.Remove("BrkAmt");
-                    dtExcel.Columns.Remove("Shipper");
+                    dtExcel.Columns.Remove("Commper");
+                    dtExcel.Columns.Remove("CommAmt");
                     dtExcel.Columns.Remove("Brokerage");
+                    dtExcel.Columns.Remove("Shipper");
                     dtExcel.Columns.Remove("Commodity");
                     dtExcel.Columns.Remove("Gross");
                     dtExcel.Columns.Remove("Stax");
                     dtExcel.Columns.Remove("InvoiceNo");
                     dtExcel.Columns.Remove("InvoiceDate");
-                    dtExcel.Columns.Remove("AddrName1");
+                    dtExcel.Columns.Remove("ReceiptAmt");
+                    //dtExcel.Columns.Remove("RefundTo");
                 }
                 else if (val == 4)
                 {
@@ -258,19 +262,19 @@ namespace EMS.WebApp.Transaction
                     dtExcel.Columns.Remove("VesselName");
                     dtExcel.Columns.Remove("VoyageNo");
                     dtExcel.Columns.Remove("ExpBLDate");
-                    dtExcel.Columns.Remove("AddrName");
-                    dtExcel.Columns.Remove("actual");
+                    dtExcel.Columns.Remove("Brok");
+                    dtExcel.Columns.Remove("Charged");
                     dtExcel.Columns.Remove("Manifest");
                     dtExcel.Columns.Remove("Diff");
                     dtExcel.Columns.Remove("BasicFreight");
-                    dtExcel.Columns.Remove("BrokeragePercent");
-                    dtExcel.Columns.Remove("BrkAmt");
+                    dtExcel.Columns.Remove("Commper");
+                    dtExcel.Columns.Remove("CommAmt");
                     dtExcel.Columns.Remove("Shipper");
                     dtExcel.Columns.Remove("Brokerage");
                     dtExcel.Columns.Remove("Commodity");
                     dtExcel.Columns.Remove("ROE");
                     dtExcel.Columns.Remove("RefAmt");
-                    dtExcel.Columns.Remove("AddrName1");
+                    dtExcel.Columns.Remove("RefundTo");
                 }
             }
         }

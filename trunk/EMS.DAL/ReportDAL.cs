@@ -514,6 +514,31 @@ namespace EMS.DAL
 
             return lstDO;
         }
+
+        public static DataSet GetBlNumberFromVoyageID(Int64 VoyageID)
+        {
+
+            DataSet ds = new DataSet();
+            using (DbQuery dq = new DbQuery("[exp].[uspGetBlNumberFromVoyageID]"))
+            {
+                dq.AddBigIntegerParam("@VoyageID", VoyageID);
+                ds = dq.GetTables();
+            }
+            return ds;
+
+
+            //string strExecution = "prcRptTypeWiseStockSummary";
+            //DataTable dt = new DataTable();
+
+
+            //using (DbQuery oDq = new DbQuery(strExecution))
+            //{
+            //    oDq.AddBigIntegerParam("@VoyageNo", VoyageID);
+            //    dt = oDq.GetTable();
+            //}
+
+            //return dt;
+        }
         #endregion
     }
 }

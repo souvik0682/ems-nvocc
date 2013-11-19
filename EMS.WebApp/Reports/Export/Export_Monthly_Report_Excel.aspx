@@ -67,18 +67,18 @@
             </tr>
             <tr>
                 <td class="label" style="padding-right: 50px; vertical-align: top;">
-                    Vessel :<span class="errormessage">*</span>
+                    Vessel :
                 </td>
                 <td style="padding-right: 20px; vertical-align: top;">
                     <asp:HiddenField ID="hdnVessel" runat="server" />
                     <asp:TextBox ID="txtVessel" runat="server" CssClass="textbox" Width="180" autocomplete="off"
                         AutoPostBack="True" ontextchanged="txtVessel_TextChanged">
                     </asp:TextBox>
-                    <asp:RequiredFieldValidator ID="rqfVessel" runat="server" 
+             <%--       <asp:RequiredFieldValidator ID="rqfVessel" runat="server" 
                         ErrorMessage="Please Enter Vessel" ControlToValidate="txtVessel" 
                         ForeColor="#CC3300"></asp:RequiredFieldValidator>
                     <cc1:ValidatorCalloutExtender ID="vceVessel" runat="server" TargetControlID="rqfVessel">
-                    </cc1:ValidatorCalloutExtender>
+                    </cc1:ValidatorCalloutExtender>--%>
                     <cc1:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" BehaviorID="AutoCompleteEx"
                         TargetControlID="txtVessel" ServicePath="~/GetLocation.asmx" ServiceMethod="GetVesselList"
                         MinimumPrefixLength="1" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
@@ -115,7 +115,7 @@
                 </td>
 
                 <td class="label" style="padding-right: 50px; vertical-align: top;">
-                    Voyage :<span class="errormessage">*</span>
+                    Voyage :
                 </td>
                 <td style="padding-right:20px;vertical-align:top;">
                         <asp:DropDownList ID="ddlVoyage" runat="server">

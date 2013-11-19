@@ -201,6 +201,23 @@ namespace EMS.DAL
 
             return ExchangeRate;
         }
+
+        public static decimal GetExchangeRateByDate(DateTime Dt)
+        {
+            string strExecution = "[exp].[usp_Invoice_GetExchangeRateByDate]";
+            decimal ExchangeRate = 0;
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddDateTimeParam("@Dt", Dt);
+
+                ExchangeRate = Convert.ToDecimal(oDq.GetScalar());
+            }
+
+            return ExchangeRate;
+        }
+
         public static List<ICharge> GetAllExpCharges(int docTypeId, int LocationID, int LineID, string BookingNo)
         {
             string strExecution = "[exp].[uspExp_Invoice_GetAllCharges]";

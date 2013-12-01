@@ -75,7 +75,6 @@ namespace EMS.WebApp.Reports.Export
             {
                 //Response.Write(ex.Message.ToString());
             }
-           
         }
         private void ExporttoExcel(DataTable table)
         {

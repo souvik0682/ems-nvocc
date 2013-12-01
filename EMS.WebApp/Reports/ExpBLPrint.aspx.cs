@@ -30,6 +30,7 @@ namespace EMS.WebApp.Reports
 
                 //btnReport_Click(sender, e);
                 Filler.FillData<ILocation>(ddlLine, new CommonBLL().GetActiveLocation(), "Name", "Id", "Location");
+                Filler.FillData(ddlVessel, new expVoyageBLL().GetVessels(), "VesselName", "pk_VesselID", "Vessel");
             }
             btnPrint.Visible = false;
         }
@@ -44,9 +45,11 @@ namespace EMS.WebApp.Reports
         protected void ddlLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
             var lng = ddlLine.SelectedValue.ToLong();
+            var lng1 = ddlLocation.SelectedValue.ToLong();
+            var lng2 = ddlVoyage.SelectedValue.ToLong();
             if (lng > 0)
             {
-                Filler.FillData(ddlBlNo, CommonBLL.GetExpBLHeaderByBLNo(lng), "ExpBLNo", "ExpBLNo", "Bl. No.");
+                Filler.FillData(ddlBlNo, CommonBLL.GetExpBL(lng, lng1, lng2), "ExpBLNo", "ExpBLNo", "Bl. No.");
             }
         }
  
@@ -77,12 +80,12 @@ namespace EMS.WebApp.Reports
                 var Next5=temp.Tables[1].AsEnumerable().Skip(5);
                 dtBLPrintingCons = temp.Tables[1].Clone();
                 dtBLPrintingCons5 = temp.Tables[1].Clone();
-                foreach (DataRow dr in top5){   
-                    dtBLPrintingCons5.ImportRow(dr);
-                }
-                foreach (DataRow dr in Next5){   
-                    dtBLPrintingCons.ImportRow(dr);
-                }
+                //foreach (DataRow dr in top5){   
+                //    dtBLPrintingCons5.ImportRow(dr);
+                //}
+                //foreach (DataRow dr in Next5){   
+                //    dtBLPrintingCons.ImportRow(dr);
+                //}
                 LocalReportManager reportManager = new LocalReportManager(rptViewer, "BLPrint", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
                 string rptName = "BLPrint.rdlc";
 
@@ -112,15 +115,17 @@ namespace EMS.WebApp.Reports
             DataSet dsBLPrinting = new DataSet();
             DataTable dtBLPrintingCons = null;
             DataTable dtBLPrintingCons5 = null;
+            DataTable dtBLPrintingDesc = null;
             int i = 0;
             if (temp != null && temp.Tables.Count > 0)
             {
 
                 //fillFakData(temp.Tables[1]);
-                var top5 = temp.Tables[1].AsEnumerable().Take(5);
-                var Next5 = temp.Tables[1].AsEnumerable().Skip(5);
+                var top5 = temp.Tables[1].AsEnumerable().Take(100);
+                var Next5 = temp.Tables[1].AsEnumerable().Skip(100);
                 dtBLPrintingCons = temp.Tables[1].Clone();
                 dtBLPrintingCons5 = temp.Tables[1].Clone();
+                dtBLPrintingDesc = temp.Tables[2];
                 foreach (DataRow dr in top5)
                 {
                     dtBLPrintingCons5.ImportRow(dr);
@@ -137,6 +142,7 @@ namespace EMS.WebApp.Reports
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DSBLPrinting", temp.Tables[0]));
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintingContainerTopFive", dtBLPrintingCons5));
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintingContainer", dtBLPrintingCons));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintDesc", dtBLPrintingDesc));
                 //viewer.LocalReport.SetParameters(new ReportParameter("ImageShow", "true"));
                 Warning[] warnings;
                 string[] streamIds;
@@ -181,5 +187,31 @@ namespace EMS.WebApp.Reports
 
             } return model != null ? sb.ToString() : string.Empty;
         }
+
+        protected void ddlVessle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlVessel.SelectedIndex > 0)
+            {
+               
+                Filler.FillData(ddlVoyage, BookingBLL.GetExportVoyages(Convert.ToInt32(ddlVessel.SelectedValue)).Tables[0], "VoyageNo", "VoyageID", "Voyage No");
+            }
+
+
+        }
+
+        protected void ddlVoyage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            {
+                var lng = ddlLine.SelectedValue.ToLong();
+                var lng1 = ddlLocation.SelectedValue.ToLong();
+                var lng2 = ddlVoyage.SelectedValue.ToLong();
+                if (lng > 0)
+                {
+                    Filler.FillData(ddlBlNo, CommonBLL.GetExpBL(lng, lng1, lng2), "ExpBLNo", "ExpBLNo", "Bl. No.");
+                }
+            }
+        }
+
+        
     }
 }

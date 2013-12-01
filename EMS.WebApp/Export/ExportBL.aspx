@@ -173,14 +173,14 @@
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="10%" />
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkPOL" runat="server" CommandName="Sort" CommandArgument="PortOfLoading" Text="POL"></asp:LinkButton>
+                                            <asp:LinkButton ID="lnkPOL" runat="server" CommandName="Sort" CommandArgument="PortOfLoading" Text="POD"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField>
+                                    <asp:TemplateField> 
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="10%" />
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkPOD" runat="server" CommandName="Sort" CommandArgument="PortOfDischarge" Text="POD"></asp:LinkButton>
+                                            <asp:LinkButton ID="lnkPOD" runat="server" CommandName="Sort" CommandArgument="PortOfDischarge" Text="POL"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>

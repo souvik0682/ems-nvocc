@@ -49,6 +49,7 @@ namespace EMS.WebApp.Export
                 else
                 {
                     ViewState["ISEDIT"] = false;
+                    
                 }
             }
 
@@ -56,6 +57,18 @@ namespace EMS.WebApp.Export
             txtBookingNo.TextChanged += new EventHandler(txtBookingNo_TextChanged);
             txtBLDate.TextChanged += new EventHandler(txtBLDate_TextChanged);
         }
+
+        protected void ddlBLClause_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlBLClause.SelectedValue == "R")
+                txtBLReleaseDate.Enabled = true;
+            else
+            {
+                txtBLReleaseDate.Text = "";
+                txtBLReleaseDate.Enabled = false;
+            }
+        }
+
         protected void txtBLNo_TextChanged(object sender, EventArgs e)
         {
             txtCBLNo.Text = txtBLNo.Text;
@@ -287,7 +300,9 @@ namespace EMS.WebApp.Export
                 {
                     ViewState["BOOKINGID"] = exportBL.BookingId;
                     txtBookingDate.Text = exportBL.BookingDate.ToString("dd-MM-yyyy");
-                    txtBLDate.Text = DateTime.Now.ToString("dd-MM-yyyy");
+                    txtBLDate.Text = exportBL.BLDate.ToString("dd-MM-yyyy");
+                    //txtBLDate.Text = DateTime.Now.ToString("dd-MM-yyyy");
+                    txtBLDate.Enabled = false;
                     txtBookingParty.Text = exportBL.BookingParty;
                     txtRefBookingNo.Text = exportBL.RefBookingNumber;
                     txtLocation.Text = exportBL.Location;
@@ -308,6 +323,7 @@ namespace EMS.WebApp.Export
                     txtFPodDesc.Text = exportBL.FPODDesc;
                     txtCommodity.Text = exportBL.Commodity;
                     LoadDeliveryAgentDDL(exportBL.fk_FPOD);
+                    txtBLReleaseDate.Enabled = false;
 
                     if (exportBL.BLthruEdge == false)
                     {
@@ -385,6 +401,7 @@ namespace EMS.WebApp.Export
                     txtBookingNo.Text = exportBL.BookingNumber;
                     ViewState["BOOKINGID"] = exportBL.BookingId;
                     txtBookingDate.Text = exportBL.BookingDate.ToString("dd-MM-yyyy");
+                    txtBLDate.Enabled = false;
                     txtBLNo.Text = exportBL.BLNumber;
                     ViewState["BLID"] = exportBL.BLId;
                     txtBLDate.Text = exportBL.BLDate.ToString("dd-MM-yyyy");
@@ -409,14 +426,22 @@ namespace EMS.WebApp.Export
                     txtCommodity.Text = exportBL.Commodity;
                     txtContainers.Text = exportBL.Containers;
                     rdoOriginal.SelectedValue = exportBL.NoOfBL.ToString();
+
+                    if (ddlBLClause.SelectedValue == "R")
+                        txtBLReleaseDate.Enabled = true;
+                    else
+                        txtBLReleaseDate.Enabled = false;
+
+                    //rdoOriginal.SelectedIndex = exportBL.NoOfBL.ToInt();
                     rdoBLType.SelectedValue = exportBL.BLType;
                     ddlShipmentMode.SelectedValue = exportBL.ShipmentMode.ToString();
                     ((TextBox)txtIssuePlace.FindControl("txtPort")).Text = exportBL.BLIssuePlace;
                     ViewState["BLISSUEID"] = exportBL.BLIssuePlaceId;
                     TxtNtWt.Text = exportBL.NetWeight.ToString();
                     //txtNetWt.Text = exportBL.NetWeight.ToString();
-                    txtBLReleaseDate.Text = exportBL.BLReleaseDate.ToString("dd-MM-yyyy");
-                    if (hdnBLThruEdge.Value == "0")
+                    txtBLReleaseDate.Text = exportBL.BLReleaseDate.ToString();
+                    //txtBLReleaseDate.Text = exportBL.BLReleaseDate.ToString("dd-MM-yyyy");
+                    if (hdnBLThruEdge.Value == "" || hdnBLThruEdge.Value == "0")
                     //if (exportBL.BLthruEdge == false)
                         txtBLNo.Enabled = true;
                     else
@@ -586,7 +611,10 @@ namespace EMS.WebApp.Export
             objBL.NoOfBL = Convert.ToInt32(rdoOriginal.SelectedValue);
             objBL.NetWeight = Convert.ToDecimal(TxtNtWt.Text.Trim());
             //objBL.NetWeight = Convert.ToDecimal(txtNetWt.Text.Trim());
-            objBL.BLReleaseDate = Convert.ToDateTime(txtBLReleaseDate.Text.Trim());
+            if (ddlBLClause.SelectedValue == "R")
+                objBL.BLReleaseDate = Convert.ToDateTime(txtBLReleaseDate.Text.Trim());
+            else
+                objBL.BLReleaseDate = null;
 
             exportBLId = ExportBLBLL.SaveExportBLHeader(objBL);
 

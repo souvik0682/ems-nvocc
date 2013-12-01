@@ -56,6 +56,7 @@ namespace EMS.WebApp.Export
         protected void btnReset_Click(object sender, EventArgs e)
         {
             txtBookingNo.Text = string.Empty;
+            txtBookingRef.Text = string.Empty;
             txtDONo.Text = string.Empty;
             txtLocation.Text = string.Empty;
             txtLine.Text = string.Empty;
@@ -127,9 +128,10 @@ namespace EMS.WebApp.Export
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LocationName"));
                 e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "NVOCCName"));
                 e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookingNumber"));
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "DeliveryOrderNumber"));
-                e.Row.Cells[5].Text = Convert.ToDateTime(DataBinder.Eval(e.Row.DataItem, "DeliveryOrderDate"), _culture).ToString(Convert.ToString(ConfigurationManager.AppSettings["DateFormat"]));
-                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Containers"));
+                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookingRef"));
+                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "DeliveryOrderNumber"));
+                e.Row.Cells[6].Text = Convert.ToDateTime(DataBinder.Eval(e.Row.DataItem, "DeliveryOrderDate"), _culture).ToString(Convert.ToString(ConfigurationManager.AppSettings["DateFormat"]));
+                e.Row.Cells[7].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Containers"));
 
                 // Edit link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
@@ -295,6 +297,7 @@ namespace EMS.WebApp.Export
             criteria.DONumber = txtDONo.Text.Trim();
             criteria.LineName = txtLine.Text.Trim();
             criteria.Location = txtLocation.Text.Trim();
+            criteria.BookingRef = txtBookingRef.Text.Trim();
 
             Session[Constants.SESSION_SEARCH_CRITERIA] = criteria;
         }
@@ -320,6 +323,7 @@ namespace EMS.WebApp.Export
                         txtDONo.Text = criteria.DONumber;
                         txtLine.Text = criteria.LineName;
                         txtLocation.Text = criteria.Location;
+                        txtBookingRef.Text = criteria.BookingRef;
                         gvwList.PageIndex = criteria.PageIndex;
                         gvwList.PageSize = criteria.PageSize;
                         ddlPaging.SelectedValue = criteria.PageSize.ToString();

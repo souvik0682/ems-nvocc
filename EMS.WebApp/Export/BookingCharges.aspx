@@ -112,10 +112,11 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Freight Payable At
+                                    Freight Payable At<span class="errormessage">*</span>
                                 </td>
                                 <td>
                                     <uc3:AC_Port ID="txtFreightPayableAt" runat="server" />
+                                    <asp:Label ID="errFreightPayableAt" runat="server" CssClass="errormessage"></asp:Label>
                                 </td>
                                 <td>
                                     Brokerage Payable

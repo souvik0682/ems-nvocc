@@ -93,8 +93,7 @@
                             <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" 
                                 Width="100px" onclick="btnSearch_Click"/>
                             &nbsp;&nbsp;&nbsp;
-                            <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="button" 
-                                Width="100px" onclick="btnReset_Click"/>
+                            	NHV-2652
                         </td>
                     </tr>
                     </table>

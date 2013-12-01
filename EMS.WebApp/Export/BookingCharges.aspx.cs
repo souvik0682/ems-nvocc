@@ -9,6 +9,7 @@ using EMS.BLL;
 using EMS.Common;
 using System.Data;
 using EMS.Entity;
+using EMS.Utilities.ResourceManager;
 
 namespace EMS.WebApp.Export
 {
@@ -26,7 +27,7 @@ namespace EMS.WebApp.Export
             RetriveParameters();
             CheckUserAccess();
             */
-
+            RetriveParameters();
             if (!IsPostBack)
             {
                 if (!ReferenceEquals(Request.QueryString["BookingId"], null))
@@ -261,7 +262,7 @@ namespace EMS.WebApp.Export
             _userId = UserBLL.GetLoggedInUserId();
 
             //Get user permission.
-            UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+            //UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
         }
 
         private void CheckUserAccess()
@@ -298,7 +299,11 @@ namespace EMS.WebApp.Export
         private void SaveBookingHeaderDetails(long BookingId)
         {
             IBooking objBooking = new BookingEntity();
-
+            if (Convert.ToInt32(ViewState["FRIEGHTPAYABLEATID"]) == 0)
+            {
+                lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00085");
+                return;
+            }
             objBooking.BookingID = BookingId;
             objBooking.FreightPayableId = Convert.ToInt32(ViewState["FRIEGHTPAYABLEATID"]);
             objBooking.BrokeragePayable = Convert.ToBoolean(rdblBorkerage.SelectedValue);
@@ -363,7 +368,7 @@ namespace EMS.WebApp.Export
             if (!ReferenceEquals(ViewState["BOOKINGID"], null))
             {
                 int BookingId = Convert.ToInt32(ViewState["BOOKINGID"]);
-
+              
                 if (BookingId > 0)
                 {
                     if (CheckValidity())
@@ -556,6 +561,15 @@ namespace EMS.WebApp.Export
                 TextBox txtBrokerageBasic = (TextBox)thisGridViewRow.FindControl("txtBrokerageBasic");
                 TextBox txtManifest = (TextBox)thisGridViewRow.FindControl("txtManifest");
                 lblMessage.Text = "";
+
+                errFreightPayableAt.Text = "";
+                if (Convert.ToString(ViewState["FRIEGHTPAYABLEATID"]) == string.Empty || Convert.ToString(ViewState["FRIEGHTPAYABLEATID"]) == "0")
+                {
+                    errFreightPayableAt.Text = "Freight Payable at is compulsory";
+                    return false;
+
+                }
+
 
                 if (hdnDocumentType.Value.ToInt() == 1)
                 {

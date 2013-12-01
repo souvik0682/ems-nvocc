@@ -310,6 +310,24 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtNetWt;
         
         /// <summary>
+        /// ddlBLClause control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlBLClause;
+        
+        /// <summary>
+        /// TxtNtWt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox TxtNtWt;
+        
+        /// <summary>
         /// txtBLReleaseDate control.
         /// </summary>
         /// <remarks>
@@ -335,15 +353,6 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBookingDate;
-        
-        /// <summary>
-        /// TxtNtWt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::EMS.WebApp.CustomControls.CustomTextBox TxtNtWt;
         
         /// <summary>
         /// tpOther control.
@@ -418,13 +427,22 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtNotifyName;
         
         /// <summary>
-        /// ddlBLClause control.
+        /// ddlAgent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlBLClause;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAgent;
+        
+        /// <summary>
+        /// rfvAgent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAgent;
         
         /// <summary>
         /// txtNotify control.
@@ -479,24 +497,6 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMarks;
-        
-        /// <summary>
-        /// ddlAgent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlAgent;
-        
-        /// <summary>
-        /// rfvAgent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAgent;
         
         /// <summary>
         /// tpFooter control.

@@ -342,19 +342,17 @@
                                                             </td>
                                                             <td>
                                                             </td>
-                                                            <td style="width: 20%;">
-                                                                B/L Release Date:
-                                                            </td>
                                                             <td style="width: 28%;">
-                                                                <asp:TextBox ID="txtBLReleaseDate" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13"></asp:TextBox>
-                                                                <cc1:CalendarExtender ID="ceReleaseDate" TargetControlID="txtBLReleaseDate" runat="server"
-                                                                    Format="dd-MM-yyyy" Enabled="True" />
-                                                                <br />
-                                                                <asp:RequiredFieldValidator ID="rfvBookingDate" runat="server" CssClass="errormessage"
-                                                                    ErrorMessage="This field is required" ControlToValidate="txtBLReleaseDate" ValidationGroup="Save"
-                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                BL Clause:
                                                             </td>
+                                                            <td>
+                                                                <asp:DropDownList ID="ddlBLClause" runat="server" CssClass="dropdownlist" TabIndex="60"
+                                                                    AutoPostBack="True" OnSelectedIndexChanged="ddlBLClause_OnSelectedIndexChanged">
+                                                                    <asp:ListItem  Selected="True" Text="Shipped On Board" Value="S"></asp:ListItem>
+                                                                    <asp:ListItem Text="Received For Shipment" Value="R"></asp:ListItem>
+                                                                </asp:DropDownList>
+                                                            </td>
+
                                                             <td>
                                                             </td>
                                                             
@@ -370,8 +368,20 @@
                                                             </td>
                                                             <td>
                                                             </td>
-                                                            <td>
+                                                            <td style="width: 20%;">
+                                                                RFS B/L Date:
                                                             </td>
+                                                            <td style="width: 28%;">
+                                                                <asp:TextBox ID="txtBLReleaseDate" runat="server" CssClass="textboxuppercase" MaxLength="8"
+                                                                    Width="250px" TabIndex="13"></asp:TextBox>
+                                                                <cc1:CalendarExtender ID="ceReleaseDate" TargetControlID="txtBLReleaseDate" runat="server"
+                                                                    Format="dd-MM-yyyy" Enabled="True" />
+                                                                <br />
+                                                                <asp:RequiredFieldValidator ID="rfvBookingDate" runat="server" CssClass="errormessage"
+                                                                    ErrorMessage="This field is required" ControlToValidate="txtBLReleaseDate" ValidationGroup="Save"
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                            </td>
+                                                            
                                                             
                                                         </tr>
                                                     </table>
@@ -452,15 +462,18 @@
                                                                     Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                                             </td>
                                                             <td style="width: 28%;">
-                                                                BL Clause:
+                                                                Delivery Agent:
                                                             </td>
-                                                            <td>
-                                                                <asp:DropDownList ID="ddlBLClause" runat="server" CssClass="dropdownlist" TabIndex="60">
-                                                                    <asp:ListItem  Selected="True" Text="Shipped On Board" Value="S"></asp:ListItem>
-                                                                    <asp:ListItem Text="Receipt of Shipment" Value="R"></asp:ListItem>
-<%--                                                                    <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>--%>
+                                                            <td style="width: 4%;">
+                                                                <asp:DropDownList ID="ddlAgent" runat="server" CssClass="dropdownlist" TabIndex="60">
+                                                                    <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
                                                                 </asp:DropDownList>
+                                                                <br />
+                                                                <asp:RequiredFieldValidator ID="rfvAgent" runat="server" ControlToValidate="ddlAgent"
+                                                                    ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
+                                                                    ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </td>
+
 
                                                         </tr>
                                                         <tr>
@@ -498,30 +511,7 @@
                                                             </td>
                                                         
                                                         </tr>
-                                                        <tr>
-                                                            <td style="width: 28%;">
-                                                                Delivery Agent:
-                                                            </td>
-                                                            <td style="width: 4%;">
-                                                                <asp:DropDownList ID="ddlAgent" runat="server" CssClass="dropdownlist" TabIndex="60">
-                                                                    <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
-                                                                </asp:DropDownList>
-                                                                <br />
-                                                                <asp:RequiredFieldValidator ID="rfvAgent" runat="server" ControlToValidate="ddlAgent"
-                                                                    ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
-                                                                    ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                            </td>
-                                                           <%-- <td style="width: 28%;">
-                                                                BL Type:
-                                                            </td>
-                                                            <td>
-                                                                <asp:RadioButtonList ID="RadioButtonList1" runat="server" TabIndex="9" RepeatDirection="Horizontal">
-                                                                    <asp:ListItem Selected="True" Text="Original" Value="O"></asp:ListItem>
-                                                                    <asp:ListItem Text="Express" Value="E"></asp:ListItem>
-                                                                    <asp:ListItem Text="Seaway" Value="S"></asp:ListItem>
-                                                                </asp:RadioButtonList><br />
-                                                            </td>--%>
-                                                        </tr>
+                                                        
                                                     </table>
                                                 </ContentTemplate>
                                             </cc1:TabPanel>

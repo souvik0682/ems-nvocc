@@ -130,6 +130,33 @@ namespace EMS.WebApp.Export {
         protected global::AjaxControlToolkit.TextBoxWatermarkExtender tbweLine;
         
         /// <summary>
+        /// txtBookingRef control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBookingRef;
+        
+        /// <summary>
+        /// ftbeBookingRef control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.FilteredTextBoxExtender ftbeBookingRef;
+        
+        /// <summary>
+        /// tbweBookingRef control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender tbweBookingRef;
+        
+        /// <summary>
         /// btnSearch control.
         /// </summary>
         /// <remarks>

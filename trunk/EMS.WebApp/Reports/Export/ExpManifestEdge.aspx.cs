@@ -22,6 +22,7 @@ namespace EMS.WebApp.Reports1
 {
     public partial class ExpManifestEdge : System.Web.UI.Page
     {
+        private string _reportName = string.Empty;
         protected void Page_Init(object sender, EventArgs e)
         {
             rptViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(SubreportEventHandler);
@@ -36,6 +37,7 @@ namespace EMS.WebApp.Reports1
                 Filler.FillData<ILocation>(ddlLine, new CommonBLL().GetActiveLocation(), "Name", "Id", "Location");
                 tr1.Visible = false;
                 tr2.Visible = false;
+                tr3.Visible = false;
                 //  GenerateReport();
             }
         }
@@ -44,7 +46,7 @@ namespace EMS.WebApp.Reports1
             if (ddlLine.SelectedIndex > 0)
             {
 
-                Filler.FillData(ddlLocation, CommonBLL.GetLine(ddlLine.SelectedValue), "ProspectName", "ProspectID", "Line");
+                Filler.FillData(ddlLocation, CommonBLL.GetExpLine(ddlLine.SelectedValue), "ProspectName", "ProspectID", "Line");
             }
         }
         protected void ddlLocation_SelectedIndexChanged(object sender, EventArgs e)
@@ -71,25 +73,59 @@ namespace EMS.WebApp.Reports1
 
             LocalReportManager reportManager = new LocalReportManager(rptViewer, "MME", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
             string rptName = "MME.rdlc";
-            var main = ReportBLL.GetBlNumberFromVoyageID(Convert.ToInt64(ddlVoyage.SelectedValue));
-  
+            string rptSelect="F";
+            var main = ReportBLL.GetBlNumberFromVoyageID(Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(ddlPOD.SelectedValue));
+            if (ddlCargoOrFreight.SelectedIndex == 2)
+            {
+                rptSelect = "C";
+                _reportName = "CARGO MANIFEST - (" + ddlLocation.SelectedItem + ")";
+            }
+            else
+                _reportName = "FREIGHT MANIFEST - (" + ddlLocation.SelectedItem + ")";
+
             rptViewer.Reset();
             rptViewer.LocalReport.Dispose();
             rptViewer.LocalReport.DataSources.Clear();
             rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
             rptViewer.LocalReport.DataSources.Add(new ReportDataSource("dsVoyage", main.Tables[0]));
-            rptViewer.LocalReport.SetParameters(new ReportParameter("RptHeader", "FREIGHT MANIFEST - (" + ddlLocation.SelectedItem + ")"));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("ReportName", _reportName));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("FreightOrCargo", rptSelect));
             rptViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(SubreportEventHandler);
             rptViewer.LocalReport.Refresh();
+           
+
+            //LocalReportManager reportManager = new LocalReportManager(rptViewer, "MME", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
+            //string rptName = "MME.rdlc";
+            //var main = ReportBLL.GetBlNumberFromVoyageID(Convert.ToInt64(ddlVoyage.SelectedValue));
+
+            //_reportName = "ReportName";
+            //rptViewer.Reset();
+            //rptViewer.LocalReport.Dispose();
+            //rptViewer.LocalReport.DataSources.Clear();
+            //rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
+            //rptViewer.LocalReport.DataSources.Add(new ReportDataSource("dsVoyage", main.Tables[0]));
+            //rptViewer.LocalReport.SetParameters(new ReportParameter("ReportName", _reportName));
+            ////rptViewer.LocalReport.SetParameters(new ReportParameter("RptHeader", "FREIGHT MANIFEST - (" + ddlLocation.SelectedItem + ")"));
+            //rptViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(SubreportEventHandler);
+            //rptViewer.LocalReport.Refresh();
            
 
         }
         
         private void GenerateReport()
         {
-
             LocalReportManager reportManager = new LocalReportManager(rptViewer, "ExpManifestEdge", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
             string rptName = "ExpManifestEdge.rdlc";
+            string rptSelect = "F";
+            if (ddlCargoOrFreight.SelectedIndex == 2)
+            {
+                rptSelect = "C";
+                _reportName = "CARGO MANIFEST - (" + ddlLocation.SelectedItem + ")";
+            }
+            else
+                _reportName = "FREIGHT MANIFEST - (" + ddlLocation.SelectedItem + ")";
+
+           
             var main = ReportBLL.GetRptFrieghtManifest(ddlBLNo.SelectedValue);
             var TFS = ReportBLL.GetRptFrieghtManifest_TFS(ddlBLNo.SelectedValue);
             var CTRS = ReportBLL.GetRptFrieghtManifest_CTRS(ddlBLNo.SelectedValue);
@@ -103,7 +139,8 @@ namespace EMS.WebApp.Reports1
             rptViewer.LocalReport.DataSources.Add(new ReportDataSource("dsTFS", TFS.Tables[0]));
             rptViewer.LocalReport.DataSources.Add(new ReportDataSource("dsCTRS", CTRS.Tables[0]));
             rptViewer.LocalReport.SetParameters(new ReportParameter("EXPBLID", ddlBLNo.SelectedValue));
-            rptViewer.LocalReport.SetParameters(new ReportParameter("ReportName", "FREIGHT MANIFEST - (" + ddlLocation.SelectedItem + ")"));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("ReportName", _reportName));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("FreightOrCargo", rptSelect));
             rptViewer.LocalReport.Refresh();
 
         }
@@ -149,18 +186,35 @@ namespace EMS.WebApp.Reports1
                 if (ddlVoyBL.SelectedIndex == 1)
                 {
                     tr1.Visible = true;
+                    tr3.Visible = true;
                     tr2.Visible = false;
                     Filler.FillData(ddlVessel, new expVoyageBLL().GetVessels(), "VesselName", "pk_VesselID", "Vessel");
                 }
                 else
                 {
                     tr1.Visible = false;
+                    tr3.Visible = false;
                     tr2.Visible = true;
                     Filler.FillData(ddlBLNo, CommonBLL.GetExpBLHeaderByBLNo(lng), "ExpBLNo", "ExpBLNo", "Bl. No.");
                 }
             }
         }
 
+        protected void ddlVoyage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulatePort(Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue));
+        }
+
+        private void PopulatePort(Int32 Vessel, Int32 Voyage)
+        {
+            ReportBLL objBLL = new ReportBLL();
+            DataSet ds = objBLL.GetPOD(Vessel, Voyage);
+            ddlPOD.DataValueField = "fk_PortID";
+            ddlPOD.DataTextField = "PortName";
+            ddlPOD.DataSource = ds;
+            ddlPOD.DataBind();
+            ddlPOD.Items.Insert(0, new ListItem("All", "0"));
+        }
 
     }
 }

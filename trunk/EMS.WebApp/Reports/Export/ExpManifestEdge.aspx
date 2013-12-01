@@ -13,6 +13,9 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
+    <div id="headercaption">
+        EXPORT MANIFEST
+    </div>
     <center>
   
         <fieldset style="padding: 5px; width: 55%">
@@ -88,7 +91,7 @@
                         Voyage:<span class="errormessage">*</span>
                     </td>
                     <td align="left" colspan="3">
-                        <asp:DropDownList ID="ddlVoyage" runat="server" Width="120">
+                        <asp:DropDownList ID="ddlVoyage" runat="server" Width="120" onselectedindexchanged="ddlVoyage_SelectedIndexChanged" AutoPostBack="true">
                             <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="rfvVoyage" runat="server" CssClass="errormessage"
@@ -96,6 +99,19 @@
                             ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
+
+                <tr runat="server" id="tr3">
+                    <td>POD:<span class="errormessage">*</span></td><td align="left" colspan="3">  
+                    <asp:DropDownList ID="ddlPOD" runat="server">
+                        <asp:ListItem Text="All" Value="0"></asp:ListItem>
+                        </asp:DropDownList>
+                    <%--<asp:RequiredFieldValidator ID="rfvPOD" runat="server" CssClass="errormessage"
+                            ControlToValidate="ddlPOD" InitialValue="0" ValidationGroup="Report" Display="Dynamic"
+                            ErrorMessage="[Required]"></asp:RequiredFieldValidator>--%>
+                    </td>
+                
+                </tr>
+
                 <tr runat="server" id="tr2">
                     <td>B/L No:<span class="errormessage">*</span></td><td align="left" colspan="3">  
                     <asp:DropDownList ID="ddlBLNo" runat="server">

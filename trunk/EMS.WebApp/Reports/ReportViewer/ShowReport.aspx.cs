@@ -203,6 +203,34 @@ namespace EMS.WebApp.Reports.ReportViewer
                         catch(Exception ex) {  System.IO.File.AppendAllText(@"C:\Exception.txt", ex.Message+"\n"+ex.StackTrace);}
                     }
                 }
+                else if (ReportName.ToLower().Equals("exportinvoice"))
+                {
+                    //HttpContext.Current.Response.Redirect(GetUrl(ReportName, reportParma));
+                    using (WebClient myWebClient = new WebClient())
+                    {
+                        try
+                        {
+                            // Download the Web resource and save it into the current filesystem folder.
+                            myWebClient.DownloadDataCompleted += new DownloadDataCompletedEventHandler(myWebClient_DownloadDataCompleted);
+                            myWebClient.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["UserName"], ConfigurationManager.AppSettings["Password"]);
+                            path = HttpContext.Current.Server.MapPath("~/Download/" + "ExpInvoice_" + DateTime.Now.Ticks.ToString() + ".pdf");
+                            var str = GetUrl(ReportName, reportParma);
+                            // System.IO.File.WriteAllText(@"C:\WriteText.txt", str + "\n" + path);
+                            myWebClient.DownloadFile(GetUrl(ReportName, reportParma).Replace(ConfigurationManager.AppSettings["ReplaceString"], "http://localhost"), path);
+                            if (!string.IsNullOrEmpty(path))
+                            {
+                                var fileInfo = new System.IO.FileInfo(path);
+                                HttpContext.Current.Response.ContentType = "Application/pdf";
+                                HttpContext.Current.Response.AddHeader("Content-Disposition", String.Format("attachment;filename=\"{0}\"", fileInfo.Name));
+                                HttpContext.Current.Response.AddHeader("Content-Length", fileInfo.Length.ToString());
+                                HttpContext.Current.Response.WriteFile(path);
+                                HttpContext.Current.Response.Flush();
+                                HttpContext.Current.Response.End();
+                            }
+                        }
+                        catch (Exception ex) { System.IO.File.AppendAllText(@"C:\Exception.txt", ex.Message + "\n" + ex.StackTrace); }
+                    }
+                }
                 else if (ReportName.ToLower().Equals("deliveryorder"))
                 {
                     using (WebClient myWebClient = new WebClient())
@@ -250,6 +278,26 @@ namespace EMS.WebApp.Reports.ReportViewer
                         myWebClient.DownloadDataCompleted += new DownloadDataCompletedEventHandler(myWebClient_DownloadDataCompleted);
                         myWebClient.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["UserName"], ConfigurationManager.AppSettings["Password"]);
                         path = HttpContext.Current.Server.MapPath("~/Download/" + "mid" + DateTime.Now.Ticks.ToString() + ".pdf");
+                        myWebClient.DownloadFile(GetUrl(ReportName, reportParma).Replace(ConfigurationManager.AppSettings["ReplaceString"], "http://localhost"), path);
+                        if (!string.IsNullOrEmpty(path))
+                        {
+                            var fileInfo = new System.IO.FileInfo(path);
+                            HttpContext.Current.Response.ContentType = "Application/pdf";
+                            HttpContext.Current.Response.AddHeader("Content-Disposition", String.Format("attachment;filename=\"{0}\"", fileInfo.Name));
+                            HttpContext.Current.Response.AddHeader("Content-Length", fileInfo.Length.ToString());
+                            HttpContext.Current.Response.WriteFile(path);
+                            HttpContext.Current.Response.Flush();
+                            HttpContext.Current.Response.End();
+                        }
+                    }
+                }
+                else if (ReportName.ToLower().Equals("emid"))
+                {
+                    using (WebClient myWebClient = new WebClient())
+                    {
+                        myWebClient.DownloadDataCompleted += new DownloadDataCompletedEventHandler(myWebClient_DownloadDataCompleted);
+                        myWebClient.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["UserName"], ConfigurationManager.AppSettings["Password"]);
+                        path = HttpContext.Current.Server.MapPath("~/Download/" + "emid" + DateTime.Now.Ticks.ToString() + ".pdf");
                         myWebClient.DownloadFile(GetUrl(ReportName, reportParma).Replace(ConfigurationManager.AppSettings["ReplaceString"], "http://localhost"), path);
                         if (!string.IsNullOrEmpty(path))
                         {
@@ -333,6 +381,11 @@ namespace EMS.WebApp.Reports.ReportViewer
                     lblLine.Text = "Line";
                     break;
                 case "invoicedeveloper":
+                    trInvoice.Visible = true;
+                    btnPrint.Visible = true;
+                    ddlLocation.SelectedIndexChanged += ddlLocation_SelectedIndexChanged_Invoice;
+                    break;
+                case "exportinvoice":
                     trInvoice.Visible = true;
                     btnPrint.Visible = true;
                     ddlLocation.SelectedIndexChanged += ddlLocation_SelectedIndexChanged_Invoice;
@@ -427,6 +480,9 @@ namespace EMS.WebApp.Reports.ReportViewer
                 case "invoicedeveloper":
                     litHeader.Text = "INVOICE";
                     break;
+                case "exportinvoice":
+                    litHeader.Text = "EXPORT INVOICE";
+                    break;
                 case "creditnote":
                     litHeader.Text = "CREDIT NOTE";
                     break;
@@ -460,6 +516,9 @@ namespace EMS.WebApp.Reports.ReportViewer
                         ddlLine_SelectedIndexChanged1(null, null);
                         break;
                     case "invoicedeveloper":
+                        ddlLocation_SelectedIndexChanged_Invoice(null, null);
+                        break;
+                    case "exportinvoice":
                         ddlLocation_SelectedIndexChanged_Invoice(null, null);
                         break;
                     case "onoffhire":
@@ -567,6 +626,14 @@ namespace EMS.WebApp.Reports.ReportViewer
                     rptParameters[5] = new ReportParameter("eta", txtETA.Text);
                     break;
                 case "invoicedeveloper":
+                    //litHeader.Text = "INVOICE DEVELOPER";
+                    rptParameters = new ReportParameter[4];
+                    rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedItem.Text);
+                    rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
+                    rptParameters[2] = new ReportParameter("LoginUserName", txtPrintedBy.Text);
+                    rptParameters[3] = new ReportParameter("InvoiceId", ddlInvoice.SelectedValue);
+                    break;
+                case "exportinvoice":
                     //litHeader.Text = "INVOICE DEVELOPER";
                     rptParameters = new ReportParameter[4];
                     rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedItem.Text);

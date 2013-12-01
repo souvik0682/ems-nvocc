@@ -596,7 +596,7 @@
                                     </td>
                                     <td>
                                         <cc2:CustomTextBox ID="txtGrossWeight" runat="server" TabIndex="23" CssClass="numerictextbox" Enabled="false"
-                                            Width="250px" Type="Decimal" MaxLength="13" Precision="10" Scale="2">
+                                            Width="250px" Type="Decimal" MaxLength="14" Precision="10" Scale="3">
                                         </cc2:CustomTextBox>
                                     </td>
                                     <td>
@@ -604,7 +604,7 @@
                                     </td>
                                     <td>
                                         <cc2:CustomTextBox ID="txtCbm" runat="server" CssClass="numerictextbox" TabIndex="24"
-                                            Width="250px" Type="Decimal" MaxLength="13" Precision="10" Scale="2">
+                                            Width="250px" Type="Decimal" MaxLength="14" Precision="10" Scale="3">
                                         </cc2:CustomTextBox>
                                     </td>
                                 </tr>

@@ -281,7 +281,10 @@ namespace EMS.WebApp.Export
 
         private void LoadExchangeRate()
         {
-            //  txtExchangeRate.Text = new InvoiceBLL().GetExchangeRate(Convert.ToInt64(ddlBLno.SelectedValue)).ToString("0.00", CultureInfo.InvariantCulture);
+            decimal ExRate;
+
+            ExRate = new InvoiceBLL().GetExchangeRateByDate(Convert.ToDateTime(txtInvoiceDate.Text)).ToDecimal();
+            txtUSDExRate.Text = ExRate.ToString();
         }
 
         private void SetDefaultTerminal()
@@ -990,7 +993,7 @@ namespace EMS.WebApp.Export
             IInvoice invoice = new InvoiceEntity();
             BuildInvoiceEntity(invoice);
 
-            List<IExpChargeRate> chargeRate = ViewState["CHARGERATE"] as List<IExpChargeRate>;
+            List<IChargeRate> chargeRate = ViewState["CHARGERATE"] as List<IChargeRate>;
 
 
             misc = GeneralFunctions.DecryptQueryString(Request.QueryString["p4"].ToString());
@@ -1062,7 +1065,7 @@ namespace EMS.WebApp.Export
             else
                 invoice.InvoiceID = Convert.ToInt64(ViewState["InvoiceID"]);
 
-            //invoice.Account = rdblAccountFor.SelectedValue;
+            invoice.Account = rdblAccountFor.SelectedValue;
             invoice.AddedOn = DateTime.Now;
 
             /*
@@ -1091,7 +1094,7 @@ namespace EMS.WebApp.Export
             invoice.InvoiceTypeID = Convert.ToInt32(ddlInvoiceType.SelectedValue);
             invoice.LocationID = Convert.ToInt32(ddlLocation.SelectedValue);
             invoice.NVOCCID = Convert.ToInt32(ddlNvocc.SelectedValue);
-            invoice.ServiceTax = chargeRate.Sum(c => c.STax);
+            invoice.ServiceTax = chargeRate.Sum(c => c.ServiceTax);
             invoice.ServiceTaxACess = chargeRate.Sum(c => c.ServiceTaxACess);
             invoice.ServiceTaxCess = chargeRate.Sum(c => c.ServiceTaxCessAmount);
             invoice.Roff = Convert.ToDecimal(txtROff.Text);
@@ -1280,7 +1283,7 @@ namespace EMS.WebApp.Export
             txtContainers.Text = ViewState["NOOFTEU"].ToString() + " x 20' & " + ViewState["NOOFFEU"] + " x 40'";
 
             //For Charge Rates
-            List<IExpChargeRate> chargeRates = new InvoiceBLL().GetExpInvoiceChargesById(InvoiceId);
+            List<IChargeRate> chargeRates = new InvoiceBLL().GetExpInvoiceChargesById(InvoiceId);
 
             ViewState["CHARGERATE"] = chargeRates;
 
@@ -1505,16 +1508,16 @@ namespace EMS.WebApp.Export
             lstData.Where(d => d.fk_CurrencyID == 2)
                 .Select(d =>
                     {
-                        d.ExchgRate = Convert.ToDecimal(txtUSDExRate.Text);
-                        d.GrossAmount = (d.ExchgRate * d.RatePerTEU) + (d.ExchgRate * d.RatePerFEU) + (d.ExchgRate * d.RatePerTON) + (d.ExchgRate * d.RatePerUnit);
+                        d.ExchgRate = System.Math.Round(Convert.ToDecimal(txtUSDExRate.Text),2);
+                        d.GrossAmount = System.Math.Round((d.ExchgRate * d.RatePerTEU) + (d.ExchgRate * d.RatePerFEU) + (d.ExchgRate * d.RatePerTON) + (d.ExchgRate * d.RatePerUnit),0);
                         DataTable Charge = new InvoiceBLL().ChargeEditable(d.ChargesID);
                         if (Convert.ToBoolean(Charge.Rows[0]["ServiceTax"].ToString()))
                         {
-                            d.ServiceTax = Math.Round((d.GrossAmount * TaxPer) / 100, 2);
-                            d.ServiceTaxCessAmount = Math.Round((d.ServiceTax * TaxCess) / 100, 2);
-                            d.ServiceTaxACess = Math.Round((d.ServiceTax * TaxAddCess) / 100, 2);
+                            d.ServiceTax = Math.Round((d.GrossAmount * TaxPer) / 100, 0);
+                            d.ServiceTaxCessAmount = Math.Round((d.ServiceTax * TaxCess) / 100, 0);
+                            d.ServiceTaxACess = Math.Round((d.ServiceTax * TaxAddCess) / 100, 0);
                         };
-                        d.TotalAmount = d.GrossAmount + d.ServiceTax + d.ServiceTaxCessAmount + d.ServiceTaxACess;
+                        d.TotalAmount = Math.Round(d.GrossAmount + d.ServiceTax + d.ServiceTaxCessAmount + d.ServiceTaxACess,0);
                         return d;
                     }).ToList();
 
@@ -1525,6 +1528,12 @@ namespace EMS.WebApp.Export
 
             txtROff.Text = (Math.Round(lstData.Sum(cr => cr.TotalAmount), 0) - lstData.Sum(cr => cr.TotalAmount)).ToString();
             txtTotalAmount.Text = Math.Round(lstData.Sum(cr => cr.TotalAmount), 0).ToString();
+        }
+
+        protected void txtInvoiceDate_TextChanged(object sender, EventArgs e)
+        {
+            LoadExchangeRate();
+            txtUSDExRate_TextChanged(null, null);
         }
     }
 }

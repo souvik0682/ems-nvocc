@@ -184,6 +184,15 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtUSDExRate;
         
         /// <summary>
+        /// rdblAccountFor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rdblAccountFor;
+        
+        /// <summary>
         /// ddlFChargeName control.
         /// </summary>
         /// <remarks>

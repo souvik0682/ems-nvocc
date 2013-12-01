@@ -501,7 +501,7 @@ namespace EMS.WebApp.Export
 
                 if (ViewState["BookingCntr"] != null)
                     Containers = (List<IBookingContainer>)ViewState["BookingCntr"];
-                if (Containers.Count == 0)
+                if (Containers.Count == 0 && ddlShipmentType.SelectedValue.ToInt()==0)
                 {
                     lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00078");
                     return;

@@ -118,6 +118,7 @@ namespace EMS.WebApp.Transaction
         }
         void fillBLDetail(DataTable dtDetail)
         {
+            bool FrtInvButton = true;
             try
             {
                 hdnBLId.Value = dtDetail.Rows[0]["pk_ExpBLID"].ToString();
@@ -136,10 +137,18 @@ namespace EMS.WebApp.Transaction
                 txtBLDate.Text = Convert.ToDateTime(dtDetail.Rows[0]["ExpBLDate"].ToString()).ToString("dd/MM/yyyy");
                 txtFPOD.Text = dtDetail.Rows[0]["FinalDest"].ToString();
                 if (dtDetail.Rows[0]["FrtInvExist"].ToInt() == 1)
+                    FrtInvButton = false;
+                if (dtDetail.Rows[0]["ppcc"].ToString() == "T")
+                    FrtInvButton = false;
+                if (dtDetail.Rows[0]["BILABLE"].ToInt() == 0)
+                    FrtInvButton = false;
+
+                if (FrtInvButton == false)
                     btnAddFreightInvoice.Visible = false;
                 else
                     btnAddFreightInvoice.Visible = true;
 
+                
                 switch (dtDetail.Rows[0]["Shipmenttype"].ToString())
                 {
                     case "0": // Per Unit TYPE & SIZE
@@ -250,9 +259,9 @@ namespace EMS.WebApp.Transaction
                 IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
                 HiddenField hdnInvID = (HiddenField)e.Row.FindControl("hdnInvID");
                 System.Web.UI.HtmlControls.HtmlAnchor aPrint = (System.Web.UI.HtmlControls.HtmlAnchor)e.Row.FindControl("aPrint");
-                aPrint.Visible = false;
+                //aPrint.Visible = false;
                 aPrint.Attributes.Add("onclick", string.Format("return ReportPrint1('{0}','{1}','{2}','{3}','{4}');",
-                    "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("InvoiceDeveloper"),
+                    "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("ExportInvoice"),
                     "&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text),
                     "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue),
                     "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(user.FirstName + " " + user.LastName),

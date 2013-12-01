@@ -36,6 +36,7 @@
                             <cc1:FilteredTextBoxExtender ID="ftbeLocation" runat="server" TargetControlID="txtLocation" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers" FilterMode="InvalidChars" ValidChars=" "></cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="tbweLocation" runat="server" TargetControlID="txtLocation" WatermarkText="Location"></cc1:TextBoxWatermarkExtender>
                         </td>
+
                     </tr>
                     <tr>
                         <td>
@@ -47,6 +48,14 @@
                             <asp:TextBox ID="txtLine" runat="server" CssClass="watermark" ForeColor="#747862" MaxLength="50" Width="250"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="ftbeLine" runat="server" TargetControlID="txtLine" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers" FilterMode="InvalidChars" ValidChars=" "></cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="tbweLine" runat="server" TargetControlID="txtLine" WatermarkText="Line"></cc1:TextBoxWatermarkExtender>
+                        </td>
+                   
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:TextBox ID="txtBookingRef" runat="server" CssClass="watermark" ForeColor="#747862"  MaxLength="50" Width="250"></asp:TextBox>
+                            <cc1:FilteredTextBoxExtender ID="ftbeBookingRef" runat="server" TargetControlID="txtBookingRef" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers" FilterMode="InvalidChars" ValidChars=" "></cc1:FilteredTextBoxExtender>
+                            <cc1:TextBoxWatermarkExtender ID="tbweBookingRef" runat="server" TargetControlID="txtBookingRef" WatermarkText="Booking Ref No"></cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
                             <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" onclick="btnSearch_Click"/>
@@ -90,7 +99,7 @@
                                 <Columns>
                                     <asp:TemplateField HeaderText="Sl#">
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="5%" />                                    
+                                        <ItemStyle CssClass="gridviewitem" Width="4%" />                                    
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
@@ -108,34 +117,36 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-<%--<<<<<<< .mine
-                                        <ItemStyle CssClass="gridviewitem" Width="16%" />    
-=======--%>
-                                        <ItemStyle CssClass="gridviewitem" Width="18%" />    
+                                        <ItemStyle CssClass="gridviewitem" Width="15%" />    
 
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkBookingNo" runat="server" CommandName="Sort" CommandArgument="BookingNo" Text="Booking No"></asp:LinkButton>
                                         </HeaderTemplate>                                
                                     </asp:TemplateField>
+
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="16%" />  
+                                        <ItemStyle CssClass="gridviewitem" Width="15%" />    
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lnkBookingRefNo" runat="server" CommandName="Sort" CommandArgument="RefBookingNo" Text="Booking Ref."></asp:LinkButton>
+                                        </HeaderTemplate>                                
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="17%" />  
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkDONo" runat="server" CommandName="Sort" CommandArgument="DONo" Text="DO No"></asp:LinkButton>
                                         </HeaderTemplate>                                  
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="12%" />                                    
+                                        <ItemStyle CssClass="gridviewitem" Width="10%" />                                    
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkDODt" runat="server" CommandName="Sort" CommandArgument="DODate" Text="DO Date"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Containers">
                                         <HeaderStyle CssClass="gridviewheader" />
-<%--<<<<<<< .mine
-                                        <ItemStyle CssClass="gridviewitem" Width="12%" />                                    
-=======--%>
                                         <ItemStyle CssClass="gridviewitem" Width="16%" />                                    
                                     </asp:TemplateField>
                                     <asp:TemplateField Visible="false">

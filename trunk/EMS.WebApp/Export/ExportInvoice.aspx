@@ -28,7 +28,7 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtBooking" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                        Width="250px"></asp:TextBox>
+                                        Width="250px" Enabled="false"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtBooking"
                                         ValidationGroup="vgSave" ErrorMessage="This field is required*" CssClass="errormessage"
                                         Display="Dynamic"></asp:RequiredFieldValidator>
@@ -39,8 +39,8 @@
                                     Invoice Date<span class="errormessage1">*</span>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtInvoiceDate" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                        Width="250px"></asp:TextBox>
+                                    <asp:TextBox ID="txtInvoiceDate" runat="server" CssClass="textboxuppercase" MaxLength="50" 
+                                        OnTextChanged="txtInvoiceDate_TextChanged" AutoPostBack="true" Width="250px"></asp:TextBox>
                                     <cc1:CalendarExtender ID="cbeInvoiceDate" TargetControlID="txtInvoiceDate" runat="server"
                                         Format="dd-MM-yyyy" Enabled="True" />
                                     <asp:RequiredFieldValidator ID="rfvLineBLDate" runat="server" ControlToValidate="txtInvoiceDate"
@@ -85,7 +85,7 @@
                                 </td>
                                 <td>
                                   <asp:TextBox ID="txtBLDate" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                        Width="250px"></asp:TextBox>
+                                        Width="250px" Enabled="false"></asp:TextBox>
                                     <cc1:CalendarExtender ID="CalendarExtender1" TargetControlID="txtBLDate" runat="server"
                                         Format="dd-MM-yyyy" Enabled="True" />
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtBLDate"
@@ -147,7 +147,15 @@
                                         OnTextChanged="txtUSDExRate_TextChanged" AutoPostBack="true">
                                     </asp:TextBox>
                                 </td>
-                            
+                                <td>
+                                    Account For
+                                </td>
+                                <td>
+                                   <asp:RadioButtonList ID="rdblAccountFor" runat="server" TabIndex="20" RepeatDirection="Horizontal">
+                                            <asp:ListItem Selected="True" Text="Shipper" Value="S"></asp:ListItem>
+                                            <asp:ListItem Text="Booking Party" Value="B"></asp:ListItem>
+                                        </asp:RadioButtonList>
+                                </td>
                             </tr>
 
                             <tr>

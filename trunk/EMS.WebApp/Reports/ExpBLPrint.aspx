@@ -28,6 +28,9 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
+    <div id="headercaption">
+        EXPORT B/L PRINTING
+    </div>
     <center>
         <fieldset style="padding: 5px; width: 55%">
             <table style="width: 100%" cellpadding="1" cellspacing="0">
@@ -44,7 +47,7 @@
                             ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                     </td>
                     <td>
-                        Line / NVOCC::<span class="errormessage" style="width: 10%">*</span>
+                        Line / NVOCC:<span class="errormessage" style="width: 10%">*</span>
                     </td>
                     <td align="left" style="width: 35%">
                         <asp:DropDownList ID="ddlLocation" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged" Width="70px">
@@ -52,6 +55,30 @@
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="errormessage"
                             ControlToValidate="ddlLocation" InitialValue="0" ValidationGroup="Report" Display="Dynamic"
+                            ErrorMessage="[Required]"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr id="Tr1">
+                    <td align="left" style="width: 15%">
+                        Vessel:<span class="errormessage">*</span>
+                    </td>
+                    <td align="left" style="width: 35%">
+                        <asp:DropDownList ID="ddlVessel" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlVessle_SelectedIndexChanged"
+                            Width="172px">
+                        </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="rfvVessel" runat="server" CssClass="errormessage"
+                            ControlToValidate="ddlVessel" InitialValue="0" ValidationGroup="Report" Display="Dynamic"
+                            ErrorMessage="[Required]"></asp:RequiredFieldValidator>
+                    </td>
+                    <td>
+                        Voyage:<span class="errormessage" style="width: 10%">*</span>
+                    </td>
+                    <td align="left" style="width: 35%">
+                        <asp:DropDownList ID="ddlVoyage" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlVoyage_SelectedIndexChanged" Width="70px">
+                            <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                        </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="rfvVoyage" runat="server" CssClass="errormessage"
+                            ControlToValidate="ddlVoyage" InitialValue="0" ValidationGroup="Report" Display="Dynamic"
                             ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                     </td>
                 </tr>

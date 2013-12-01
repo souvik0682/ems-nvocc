@@ -140,6 +140,10 @@
           <DataField>LineName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="BookingDate">
+          <DataField>BookingDate</DataField>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>EMSBLL</DataSourceName>
@@ -393,7 +397,7 @@
         <Top>1.07569in</Top>
         <Left>0.23809cm</Left>
         <Height>0.69722in</Height>
-        <Width>3.50709in</Width>
+        <Width>3.5in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -423,7 +427,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>1.50346in</Top>
+        <Top>1.4703in</Top>
         <Left>4.10541in</Left>
         <Height>0.25in</Height>
         <Width>1.2in</Width>
@@ -457,44 +461,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>1.50346in</Top>
+        <Top>1.4703in</Top>
         <Left>5.29875in</Left>
         <Height>0.25in</Height>
         <Width>2in</Width>
         <ZIndex>4</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox10">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>CRO No.</Value>
-                <Style>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontSize>11pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>0.71944in</Top>
-        <Left>4.10541in</Left>
-        <Height>0.25in</Height>
-        <Width>1.2in</Width>
-        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -527,41 +498,7 @@
         <Left>4.10541in</Left>
         <Height>0.25in</Height>
         <Width>1.2in</Width>
-        <ZIndex>6</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox12">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Label>DoNo</Label>
-                <Value>=First(Fields!DONo.Value, "dsDeliveryOrder")</Value>
-                <Style>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontSize>11pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>0.71944in</Top>
-        <Left>5.29875in</Left>
-        <Height>0.25in</Height>
-        <Width>2in</Width>
-        <ZIndex>7</ZIndex>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -594,7 +531,7 @@
         <Left>5.29875in</Left>
         <Height>0.25in</Height>
         <Width>2in</Width>
-        <ZIndex>8</ZIndex>
+        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -626,7 +563,7 @@
         <Left>0.09374in</Left>
         <Height>0.25in</Height>
         <Width>3.5in</Width>
-        <ZIndex>9</ZIndex>
+        <ZIndex>7</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -665,7 +602,7 @@
         <Left>0.29104cm</Left>
         <Height>0.25in</Height>
         <Width>7.19792in</Width>
-        <ZIndex>10</ZIndex>
+        <ZIndex>8</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -702,7 +639,7 @@
         <Left>0.2995cm</Left>
         <Height>0.25in</Height>
         <Width>7.19792in</Width>
-        <ZIndex>11</ZIndex>
+        <ZIndex>9</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1960,7 +1897,7 @@
         <Left>0.2995cm</Left>
         <Height>1.75in</Height>
         <Width>7.19792in</Width>
-        <ZIndex>12</ZIndex>
+        <ZIndex>10</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1992,7 +1929,7 @@
         <Left>0.26457cm</Left>
         <Height>0.25in</Height>
         <Width>7.20501in</Width>
-        <ZIndex>13</ZIndex>
+        <ZIndex>11</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2028,7 +1965,7 @@
         <Left>0.23809cm</Left>
         <Height>0.25in</Height>
         <Width>3.18333in</Width>
-        <ZIndex>14</ZIndex>
+        <ZIndex>12</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2064,7 +2001,7 @@
         <Left>0.23809cm</Left>
         <Height>0.20833in</Height>
         <Width>2.6in</Width>
-        <ZIndex>15</ZIndex>
+        <ZIndex>13</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2099,7 +2036,7 @@
         <Left>0.20317cm</Left>
         <Height>0.1875in</Height>
         <Width>7.38542in</Width>
-        <ZIndex>16</ZIndex>
+        <ZIndex>14</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2131,7 +2068,7 @@
         <Left>0.11791in</Left>
         <Height>0.25in</Height>
         <Width>7.19459in</Width>
-        <ZIndex>17</ZIndex>
+        <ZIndex>15</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2165,7 +2102,7 @@
         <Left>0.09374in</Left>
         <Height>0.25681in</Height>
         <Width>7.19459in</Width>
-        <ZIndex>18</ZIndex>
+        <ZIndex>16</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2194,11 +2131,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>0.98333in</Top>
+        <Top>0.71944in</Top>
         <Left>4.10541in</Left>
-        <Height>0.25625in</Height>
-        <Width>1.20723in</Width>
-        <ZIndex>19</ZIndex>
+        <Height>0.21458in</Height>
+        <Width>1.2in</Width>
+        <ZIndex>17</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2228,11 +2165,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>0.98333in</Top>
+        <Top>0.71944in</Top>
         <Left>5.29875in</Left>
-        <Height>0.25in</Height>
+        <Height>0.22847in</Height>
         <Width>2in</Width>
-        <ZIndex>20</ZIndex>
+        <ZIndex>18</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2262,11 +2199,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>1.25346in</Top>
+        <Top>0.98107in</Top>
         <Left>5.29875in</Left>
-        <Height>0.25in</Height>
+        <Height>0.20069in</Height>
         <Width>2in</Width>
-        <ZIndex>21</ZIndex>
+        <ZIndex>19</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2295,11 +2232,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>1.25346in</Top>
+        <Top>0.96718in</Top>
         <Left>4.10541in</Left>
-        <Height>0.25in</Height>
+        <Height>0.21458in</Height>
         <Width>1.2in</Width>
-        <ZIndex>22</ZIndex>
+        <ZIndex>20</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2335,7 +2272,7 @@
         <Left>0.09374in</Left>
         <Height>0.25402in</Height>
         <Width>7.20501in</Width>
-        <ZIndex>23</ZIndex>
+        <ZIndex>21</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2371,7 +2308,115 @@
         <Left>0.09374in</Left>
         <Height>0.15986in</Height>
         <Width>7.20501in</Width>
+        <ZIndex>22</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox3">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Ref.CRO/</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Label>DONo</Label>
+                <Value>=First(Fields!DONo.Value, "dsDeliveryOrder")</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>5.76028in</Top>
+        <Left>5.11125in</Left>
+        <Height>0.20833in</Height>
+        <Width>2.17708in</Width>
+        <ZIndex>23</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox20">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Booking Date</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>11pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox8</rd:DefaultName>
+        <Top>1.21492in</Top>
+        <Left>4.10541in</Left>
+        <Height>0.22222in</Height>
+        <Width>1.2in</Width>
         <ZIndex>24</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox27">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Label>BookingDate</Label>
+                <Value>=Format(First(Fields!BookingDate.Value, "dsDeliveryOrder"),"dd-MM-yyyy")</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>11pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox8</rd:DefaultName>
+        <Top>1.21492in</Top>
+        <Left>5.29875in</Left>
+        <Height>0.22222in</Height>
+        <Width>2in</Width>
+        <ZIndex>25</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>

@@ -213,7 +213,7 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@Consignee", 300, objBL.Consignee);
                 oDq.AddVarcharParam("@NotifyPartyName", 100, objBL.NotifyPartyName);
                 oDq.AddVarcharParam("@NotifyParty", 300, objBL.NotifyParty);
-                oDq.AddVarcharParam("@GoodDesc", 300, objBL.GoodDesc);
+                oDq.AddVarcharParam("@GoodDesc", 1000, objBL.GoodDesc);
                 oDq.AddVarcharParam("@MarksNumnbers", 300, objBL.MarksNumnbers);
                 oDq.AddIntegerParam("@ShipmentMode", objBL.ShipmentMode);
                 oDq.AddIntegerParam("@AgentId", objBL.AgentId);

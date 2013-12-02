@@ -467,7 +467,7 @@ namespace EMS.DAL
             return invoiceChargeId;
         }
 
-        public static int SaveInvoiceChargesExp(IExpChargeRate cRate)
+        public static int SaveInvoiceChargesExp(IChargeRate cRate)
 
         {
             string strExecution = "[exp].[uspExp_Invoice_Charges_Save]";
@@ -480,16 +480,16 @@ namespace EMS.DAL
                 if (cRate.InvoiceChargeId > 0)
                     oDq.AddBigIntegerParam("@InvoiceChargeID", cRate.InvoiceChargeId);
 
-                oDq.AddIntegerParam("@ChargeID", cRate.ChargesId);
+                oDq.AddIntegerParam("@ChargeID", cRate.ChargesID);
 
                 oDq.AddDecimalParam("@RatePerUnit", 12, 2, cRate.RatePerBL);
                 oDq.AddDecimalParam("@RatePerTEU", 12, 2, cRate.RatePerTEU);
                 oDq.AddDecimalParam("@RatePerFEU", 12, 2, cRate.RatePerFEU);
                 oDq.AddDecimalParam("@RatePerCBM", 12, 2, cRate.RatePerCBM);
-                oDq.AddDecimalParam("@RatePerTon", 12, 2, cRate.RatePerTon);
+                oDq.AddDecimalParam("@RatePerTon", 12, 2, cRate.RatePerTON);
                 oDq.AddDecimalParam("@RateUSD", 12, 2, 0);
                 oDq.AddDecimalParam("@GrossAmount", 12, 2, cRate.GrossAmount);
-                oDq.AddDecimalParam("@ServiceTaxAmount", 12, 2, cRate.ServiceTaxAmount);
+                oDq.AddDecimalParam("@ServiceTaxAmount", 12, 2, cRate.ServiceTax);
                 oDq.AddDecimalParam("@ServiceTaxCessAmount", 12, 2, cRate.ServiceTaxCessAmount);
                 oDq.AddDecimalParam("@ServiceTaxACess", 12, 2, cRate.ServiceTaxACess);
                 oDq.AddBigIntegerParam("@TerminalId", cRate.TerminalId);
@@ -791,10 +791,10 @@ namespace EMS.DAL
             return exchangeRate;
         }
 
-        public static List<IExpChargeRate> GetExpInvoiceChargesById(long InvoiceId)
+        public static List<IChargeRate> GetExpInvoiceChargesById(long InvoiceId)
         {
             string strExecution = "[exp].[usp_Invoice_GetChargesById]";
-            List<IExpChargeRate> lstRates = new List<IExpChargeRate>();
+            List<IChargeRate> lstRates = new List<IChargeRate>();
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
@@ -804,7 +804,7 @@ namespace EMS.DAL
 
                 while (reader.Read())
                 {
-                    IExpChargeRate footer = new ExpChargeRateEntity(reader);
+                    IChargeRate footer = new ChargeRateEntity(reader);
                     lstRates.Add(footer);
                 }
 

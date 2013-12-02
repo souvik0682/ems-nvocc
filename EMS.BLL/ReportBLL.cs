@@ -98,11 +98,15 @@ namespace EMS.BLL
             return ReportDAL.GetExportEdi(vesselId, voyageId, polId, locId);
         }
 
-        public static DataSet GetBlNumberFromVoyageID(Int64 Voyage)
+        public static DataSet GetBlNumberFromVoyageID(Int32 Voyage, Int32 Vessel, Int32 POD)
         {
-            return ReportDAL.GetBlNumberFromVoyageID(Voyage);
+            return ReportDAL.GetBlNumberFromVoyageID(Voyage, Vessel, POD);
         }
-
+        
+        public DataSet GetPOD(Int32 VesselID, Int32 VoyageID)
+        {
+            return ReportDAL.GetPOD(VesselID, VoyageID);
+        }
         #endregion
     }
 }

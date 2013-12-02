@@ -42,7 +42,7 @@ namespace EMS.Entity
         public int BLIssuePlaceId { get; set; }
         public string BLIssuePlace { get; set; }
         public decimal NetWeight { get; set; }
-        public DateTime BLReleaseDate { get; set; }
+        public DateTime ? BLReleaseDate { get; set; }
         public int fk_FPOD { get; set; }
         public bool BLthruEdge { get; set; }
 
@@ -209,9 +209,9 @@ namespace EMS.Entity
                     fk_FPOD = Convert.ToInt32(reader["fk_FPOD"]);
             }
 
-            if (ColumnExists(reader, "NoOfBL"))
-                if (reader["NoOfBL"] != DBNull.Value)
-                    NoOfBL = Convert.ToInt32(reader["NoOfBL"]);
+            if (ColumnExists(reader, "NoOfBLs"))
+                if (reader["NoOfBLs"] != DBNull.Value)
+                    NoOfBL = Convert.ToInt32(reader["NoOfBLs"]);
 
             if (ColumnExists(reader, "BLType"))
                 if (reader["BLType"] != DBNull.Value)

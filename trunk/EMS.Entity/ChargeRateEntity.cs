@@ -253,6 +253,10 @@ namespace EMS.Entity
                 if (reader["ServiceTaxAmount"] != DBNull.Value)
                     this.STax = Convert.ToDecimal(reader["ServiceTaxAmount"]);
 
+            if (ColumnExists(reader, "ServiceTaxAmount"))
+                if (reader["ServiceTaxAmount"] != DBNull.Value)
+                    this.ServiceTax = Convert.ToDecimal(reader["ServiceTaxAmount"]);
+
             if (ColumnExists(reader, "GrossAmount"))
                 if (reader["GrossAmount"] != DBNull.Value)
                     this.GrossAmount = Convert.ToDecimal(reader["GrossAmount"]);

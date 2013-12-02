@@ -57,6 +57,7 @@ namespace EMS.Entity
         public IList<string> StringParams { get; set; }
 
         public string DONumber { get; set; }
+        public string BookingRef { get; set; }
 
         public string LocAbbr
         {

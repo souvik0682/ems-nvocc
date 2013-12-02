@@ -77,6 +77,11 @@ namespace EMS.Entity
             set;
         }
 
+        public string BookingRef
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors
@@ -97,6 +102,7 @@ namespace EMS.Entity
             this.DeliveryOrderDate = Convert.ToDateTime(reader["DODate"]);
             this.EmptyYardId = Convert.ToInt32(reader["EmptyYardId"]);
             this.Containers = Convert.ToString(reader["Containers"]);
+            this.BookingRef = Convert.ToString(reader["RefBookingNo"]);
         }
 
         #endregion

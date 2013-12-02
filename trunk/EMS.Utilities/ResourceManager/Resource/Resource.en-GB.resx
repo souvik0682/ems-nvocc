@@ -372,4 +372,7 @@
   <data name="ERR00084" xml:space="preserve">
     <value>Click to Change Status</value>
   </data>
+  <data name="ERR00085" xml:space="preserve">
+    <value>Freight Payable At is Compulsory field</value>
+  </data>
 </root>

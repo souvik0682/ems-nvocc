@@ -451,6 +451,7 @@ namespace EMS.DAL
             return lstCntr;
         }
 
+
         #endregion
 
         #region Export EDI
@@ -514,14 +515,17 @@ namespace EMS.DAL
 
             return lstDO;
         }
-
-        public static DataSet GetBlNumberFromVoyageID(Int64 VoyageID)
+        #endregion
+        #region Export Manifest
+        public static DataSet GetBlNumberFromVoyageID(Int32 VoyageID, Int32 VesselID, Int32 POD)
         {
 
             DataSet ds = new DataSet();
             using (DbQuery dq = new DbQuery("[exp].[uspGetBlNumberFromVoyageID]"))
             {
                 dq.AddBigIntegerParam("@VoyageID", VoyageID);
+                dq.AddBigIntegerParam("@VesselID", VesselID);
+                dq.AddBigIntegerParam("@fk_POD", POD);
                 ds = dq.GetTables();
             }
             return ds;
@@ -538,6 +542,18 @@ namespace EMS.DAL
             //}
 
             //return dt;
+        }
+ 
+
+        public static DataSet GetPOD(Int32 VesselID, Int32 VoyageID)
+        {
+            string ProcName = "[exp].[PODWithVesselVoyage]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            dquery.AddIntegerParam("@VesselId", VesselID);
+            dquery.AddIntegerParam("@VoyageId", VoyageID);
+
+            return dquery.GetTables();
         }
         #endregion
     }

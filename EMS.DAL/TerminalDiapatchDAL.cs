@@ -16,10 +16,15 @@ namespace EMS.DAL
             DataTable dt = new DataTable();
             using (DbQuery oDq = new DbQuery(strExecution))
             {
+                oDq.AddIntegerParam("@VesselID", VesselID);
+                oDq.AddBigIntegerParam("@POLID", POLID);
+                oDq.AddIntegerParam("@LineID", LineID);
+                oDq.AddIntegerParam("@LocationID", LocationID);
+
                 dt = oDq.GetTable();
             }
             return dt;
-        }    
+       }    
        public static int GetVesselId(string VesseleName)
        {
            string strExecution = "uspGetVesselIdByVesselName";

@@ -717,6 +717,22 @@ namespace EMS.DAL
 
             return myDataTable;
         }
+
+        public static DataTable GetExpBL(long LocationId, long LineID, long VoyageID)
+        {
+            string strExecution = "[exp].[uspGetExpBLno]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@LocationId", LocationId);
+                oDq.AddBigIntegerParam("@NVOCCId", LineID);
+                oDq.AddBigIntegerParam("@VoyageID", VoyageID);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
         #endregion
         //#region Export
         //public static DataTable GetExportVoyages(string Vessel)

@@ -54,6 +54,7 @@ namespace EMS.Entity
 
         private System.Nullable<System.DateTime> _EditedOn;
         private  IList<EMS.Common.IEqpOnHireContainer> _lstEqpOnHireContainer;
+        private int _fk_LeaseID;
 
 
 
@@ -78,6 +79,20 @@ namespace EMS.Entity
             }
         }
 
+        public Int32 LeaseID
+        {
+            get
+            {
+                return this._fk_LeaseID;
+            }
+            set
+            {
+                if ((this._fk_LeaseID != value))
+                {
+                    this._fk_LeaseID = value;
+                }
+            }
+        }
 
         public char OnOffHire
         {

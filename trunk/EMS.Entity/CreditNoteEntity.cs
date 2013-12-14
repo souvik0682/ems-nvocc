@@ -159,6 +159,10 @@ namespace EMS.Entity
                 if (reader["ProspectName"] != DBNull.Value)
                     NVOCCName = Convert.ToString(reader["ProspectName"]);
 
+            if (ColumnExists(reader, "ExportImport"))
+                if (reader["ExportImport"] != DBNull.Value)
+                    ExportImport = Convert.ToString(reader["ExportImport"]);
+
             if (ColumnExists(reader, "InvoiceTypeID"))
                 if (reader["InvoiceTypeID"] != DBNull.Value)
                     InvoiceTypeID = Convert.ToInt32(reader["InvoiceTypeID"]);

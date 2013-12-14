@@ -41,6 +41,12 @@ namespace EMS.Entity
             set;
         }
 
+        public Int32 LeaseID
+        {
+            get;
+            set;
+        }
+
         public string NVOCCName
         {
             get;
@@ -103,8 +109,25 @@ namespace EMS.Entity
             this.EmptyYardId = Convert.ToInt32(reader["EmptyYardId"]);
             this.Containers = Convert.ToString(reader["Containers"]);
             this.BookingRef = Convert.ToString(reader["RefBookingNo"]);
+            if (ColumnExists(reader, "LeaseID"))
+                if (reader["LeaseID"] != DBNull.Value)
+                    this.LeaseID = Convert.ToInt32(reader["LeaseID"]);
+
         }
 
         #endregion
+        public bool ColumnExists(IDataReader reader, string columnName)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                if (reader.GetName(i).ToUpper() == columnName.ToUpper())
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
+
 }

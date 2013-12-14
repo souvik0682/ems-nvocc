@@ -121,7 +121,7 @@ namespace EMS.WebApp.Hire
                 {
                     if (i++ == 0)
                     {
-                        txtHireReference.Text = rw["HireReference"].DataToValue<String>();
+                        //txtHireReference.Text = rw["HireReference"].DataToValue<String>();
                         txtReferenceDate.Text = rw["HireReferenceDate"].DataToValue<DateTime>();
                         txtReleaseDate.Text = rw["ReleaseRefDate"].DataToValue<DateTime>();
                         txtReleaseRefNo.Text = rw["ReleaseRefNo"].DataToValue<String>();
@@ -132,6 +132,8 @@ namespace EMS.WebApp.Hire
                         ddlLineCode.SelectedValue = rw["NVOCCID"].DataToValue<String>();
                         txtReturn.Text = rw["PortName"].DataToValue<String>();
                         txtValidTill.Text = rw["ValidTill"].DataToValue<DateTime>();
+                        PopulateLeaseReference(ddlLocation.SelectedValue.ToInt(), ddlLineCode.SelectedValue.ToInt());
+                        ddlHireReference.SelectedValue = rw["fk_LeaseRefID"].ToString();
                         break;
                     }
                 }
@@ -441,7 +443,8 @@ namespace EMS.WebApp.Hire
                     CompanyID = 1,//                    user.CompanyId
                     EditedOn = DateTime.Now,
                     FEUs = feu,
-                    HireReference = txtHireReference.Text.Trim().JToUpper(),
+                    //HireReference = txtHireReference.Text.Trim().JToUpper(),
+                    LeaseID = ddlHireReference.SelectedValue.ToInt(),
                     HireReferenceDate = txtReferenceDate.Text.Trim().ToNullDateTime(),
                     LstEqpOnHireContainer = lst,
                     LocationID = ddlLocation.SelectedValue.ToInt(),
@@ -539,5 +542,39 @@ namespace EMS.WebApp.Hire
                  
             }
         }
+
+        protected void ddlLocation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlLineCode.SelectedValue.ToInt() > 0 && ddlLocation.SelectedValue.ToInt() > 0)
+                PopulateLeaseReference(ddlLocation.SelectedValue.ToInt(), ddlLineCode.SelectedValue.ToInt());
+        }
+
+        protected void ddlLine_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlLineCode.SelectedValue.ToInt() > 0 && ddlLocation.SelectedValue.ToInt() > 0)
+                PopulateLeaseReference(ddlLocation.SelectedValue.ToInt(), ddlLineCode.SelectedValue.ToInt());
+        }
+
+        private void PopulateLeaseReference(int Loc, int Line)
+        {
+            DataTable dt = OnHireBLL.GetLeaseRefList(Loc, Line);
+
+            if (!ReferenceEquals(dt, null))
+            {
+                ddlHireReference.DataValueField = "FK_LeaseId";
+                ddlHireReference.DataTextField = "LeaseNo";
+                ddlHireReference.DataSource = dt;
+                ddlHireReference.DataBind();
+                ddlHireReference.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
+            }
+        }
+
+        protected void ddlHireReference_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataTable dt = OnHireBLL.GetLeaseForOnhire(ddlHireReference.SelectedValue.ToInt());
+            txtReferenceDate.Text = dt.Rows[0]["LeaseDate"].ToString();
+            txtValidTill.Text = dt.Rows[0]["LeaseValidTill"].ToString();
+        }
+
     }
 }

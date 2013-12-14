@@ -47,7 +47,8 @@
                                 Stock Location:<asp:Label ID="lblStock" runat="server" CssClass="errormessage" Text="*"></asp:Label> 
                             </td>
                             <td>
-                                <asp:DropDownList ID="ddlLocation" runat="server" CssClass="dropdownlist">
+                                <asp:DropDownList ID="ddlLocation" runat="server" CssClass="dropdownlist" AutoPostBack="True"
+                                    OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged"> 
                                 </asp:DropDownList>
                                 <br />
                                 <asp:RequiredFieldValidator ID="rfvLocation" runat="server" CssClass="errormessage"
@@ -58,7 +59,8 @@
                                 Line Code:<span class="errormessage">*</span>
                             </td>
                             <td>
-                                <asp:DropDownList ID="ddlLineCode" runat="server" CssClass="dropdownlist">
+                                <asp:DropDownList ID="ddlLineCode" runat="server" CssClass="dropdownlist" AutoPostBack="True"
+                                 OnSelectedIndexChanged="ddlLine_SelectedIndexChanged">
                                 </asp:DropDownList>
                                 <br />
                                 <asp:RequiredFieldValidator ID="rfvLineCode" runat="server" CssClass="errormessage"
@@ -81,14 +83,24 @@
                             <td>
                                 Hire Reference:<span class="errormessage">*</span>
                             </td>
-                            <td>
+
+                             <td>
+                                <asp:DropDownList ID="ddlHireReference" runat="server" CssClass="dropdownlist" AutoPostBack="True"
+                                     onselectedindexchanged="ddlHireReference_SelectedIndexChanged">
+                                </asp:DropDownList>
+                                <br />
+                                <asp:RequiredFieldValidator ID="rfvHireList" runat="server" CssClass="errormessage"
+                                    ControlToValidate="ddlHireReference" ValidationGroup="Save" Display="Dynamic"  InitialValue="0" ErrorMessage="[Required]"></asp:RequiredFieldValidator>
+                            </td>
+
+                            <%--<td>
                                 <asp:TextBox ID="txtHireReference" runat="server" CssClass="textboxuppercase" MaxLength="50"
                                     Width="250"></asp:TextBox>
                                 <br />
                                 <asp:RequiredFieldValidator ID="rfvHireReference" runat="server" CssClass="errormessage"
                                     ControlToValidate="txtHireReference" ValidationGroup="Save" Display="Dynamic"
                                     ErrorMessage="[Required]"></asp:RequiredFieldValidator>
-                            </td>
+                            </td>--%>
                         </tr>
                         <tr>
                             <td>

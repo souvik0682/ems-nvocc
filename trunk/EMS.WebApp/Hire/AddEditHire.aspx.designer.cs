@@ -76,22 +76,22 @@ namespace EMS.WebApp.Hire {
         protected global::System.Web.UI.WebControls.RadioButtonList rdTransactionType;
         
         /// <summary>
-        /// txtHireReference control.
+        /// ddlHireReference control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHireReference;
+        protected global::System.Web.UI.WebControls.DropDownList ddlHireReference;
         
         /// <summary>
-        /// rfvHireReference control.
+        /// rfvHireList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvHireReference;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvHireList;
         
         /// <summary>
         /// txtReferenceDate control.

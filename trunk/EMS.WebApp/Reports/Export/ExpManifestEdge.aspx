@@ -101,7 +101,7 @@
                 </tr>
 
                 <tr runat="server" id="tr3">
-                    <td>POD:<span class="errormessage">*</span></td><td align="left" colspan="3">  
+                    <td>FPOD:<span class="errormessage">*</span></td><td align="left" colspan="3">  
                     <asp:DropDownList ID="ddlPOD" runat="server">
                         <asp:ListItem Text="All" Value="0"></asp:ListItem>
                         </asp:DropDownList>

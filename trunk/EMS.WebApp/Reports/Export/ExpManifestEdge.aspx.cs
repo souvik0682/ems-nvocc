@@ -74,7 +74,7 @@ namespace EMS.WebApp.Reports1
             LocalReportManager reportManager = new LocalReportManager(rptViewer, "MME", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
             string rptName = "MME.rdlc";
             string rptSelect="F";
-            var main = ReportBLL.GetBlNumberFromVoyageID(Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(ddlPOD.SelectedValue));
+            var main = ReportBLL.GetBlNumberFromVoyageID(Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(ddlPOD.SelectedValue), Convert.ToInt32(ddlLocation.SelectedValue), Convert.ToInt32(ddlLine.SelectedValue));
             if (ddlCargoOrFreight.SelectedIndex == 2)
             {
                 rptSelect = "C";
@@ -173,7 +173,7 @@ namespace EMS.WebApp.Reports1
                 //    tr1.Visible = false;
                 //    tr2.Visible = true;
                 //}
-                Filler.FillData(ddlVoyage, BookingBLL.GetExportVoyages(Convert.ToInt32(ddlVessel.SelectedValue)).Tables[0], "VoyageNo", "VoyageID", "Voyage No");
+                Filler.FillData(ddlVoyage, BookingBLL.GetExportVoyages(Convert.ToInt32(ddlVessel.SelectedValue), ddlLine.SelectedValue.ToInt()).Tables[0], "VoyageNo", "VoyageID", "Voyage No");
             }
 
         }
@@ -202,13 +202,13 @@ namespace EMS.WebApp.Reports1
 
         protected void ddlVoyage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PopulatePort(Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue));
+            PopulatePort(Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(ddlLocation.SelectedValue));
         }
 
-        private void PopulatePort(Int32 Vessel, Int32 Voyage)
+        private void PopulatePort(Int32 Vessel, Int32 Voyage, Int32 Line)
         {
             ReportBLL objBLL = new ReportBLL();
-            DataSet ds = objBLL.GetPOD(Vessel, Voyage);
+            DataSet ds = objBLL.GetPOD(Vessel, Voyage, Line);
             ddlPOD.DataValueField = "fk_PortID";
             ddlPOD.DataTextField = "PortName";
             ddlPOD.DataSource = ds;

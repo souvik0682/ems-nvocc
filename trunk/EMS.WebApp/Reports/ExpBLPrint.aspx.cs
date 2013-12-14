@@ -193,7 +193,7 @@ namespace EMS.WebApp.Reports
             if (ddlVessel.SelectedIndex > 0)
             {
                
-                Filler.FillData(ddlVoyage, BookingBLL.GetExportVoyages(Convert.ToInt32(ddlVessel.SelectedValue)).Tables[0], "VoyageNo", "VoyageID", "Voyage No");
+                Filler.FillData(ddlVoyage, BookingBLL.GetExportVoyages(Convert.ToInt32(ddlVessel.SelectedValue), ddlLine.SelectedValue.ToInt()).Tables[0], "VoyageNo", "VoyageID", "Voyage No");
             }
 
 

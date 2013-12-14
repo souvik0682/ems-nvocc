@@ -82,6 +82,14 @@
                                     <asp:TextBox ID="txtBLRef" runat="server" Width="250px" Enabled="false"></asp:TextBox>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    Export / Import
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtExpImp" runat="server" Width="250px" Enabled="false"></asp:TextBox>
+                                </td>
+                            </tr>
                             <!-- Footer Section -->
                             <tr>
                                 <td colspan="6" style="padding-top: 10; border: none;">

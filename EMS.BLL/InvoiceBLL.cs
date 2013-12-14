@@ -93,9 +93,9 @@ namespace EMS.BLL
             return InvoiceDAL.GetExchangeRate(BlId);
         }
 
-        public decimal GetExchangeRateByDate(DateTime Dt)
+        public decimal GetExchangeRateByDate(DateTime Dt, int Line)
         {
-            return InvoiceDAL.GetExchangeRateByDate(Dt);
+            return InvoiceDAL.GetExchangeRateByDate(Dt, Line);
         }
 
         public List<ICharge> GetAllCharges(int docTypeId)

@@ -36,5 +36,10 @@ namespace EMS.BLL
         {
             TranshipmentDetailsDAL.DeleteTranshipmentList(TranshipmentId);
         }
+
+        public static DataSet GetExportVoyages(int Vessel)
+        {
+            return TranshipmentDetailsDAL.GetExportVoyages(Vessel);
+        }
     }
 }

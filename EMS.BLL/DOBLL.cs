@@ -89,9 +89,9 @@ namespace EMS.BLL
             return message;
         }
 
-        public static List<IDeliveryOrderContainer> GetDeliveryOrderContriner(Int64 bookingId, int emptyYardId)
+        public static List<IDeliveryOrderContainer> GetDeliveryOrderContriner(Int64 bookingId, int emptyYardId, int StockorLease, Int32 LeaseNo)
         {
-            return DODAL.GetDeliveryOrderContriner(bookingId, emptyYardId);
+            return DODAL.GetDeliveryOrderContriner(bookingId, emptyYardId, StockorLease, LeaseNo);
         }
 
         public static DataTable GetEmptyYard(int BookingId)
@@ -102,6 +102,21 @@ namespace EMS.BLL
         public static DataTable GetBookingList(int Loc, int Line)
         {
             return DODAL.GetBookingList(Loc, Line);
+        }
+
+
+        public static DataTable GetPendingLease(int LocID, int LineID)
+        {
+            return DODAL.GetPendingLease(LocID, LineID);
+        }
+
+        public static int GetLeaseYard(int LeaseID)
+        {
+            int result = 0;
+         
+            result = DODAL.GetLeaseYard(LeaseID);
+
+            return result;
         }
     }
 }

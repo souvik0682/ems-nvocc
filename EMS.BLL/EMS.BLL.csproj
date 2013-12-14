@@ -68,6 +68,7 @@
     <Compile Include="ChargeBLL.cs" />
     <Compile Include="InvoiceBLL.cs" />
     <Compile Include="LBCntrBLL.cs" />
+    <Compile Include="LeaseBLL.cs" />
     <Compile Include="LogisticReportBLL.cs" />
     <Compile Include="MoneyReceiptsBLL.cs" />
     <Compile Include="OnHireBLL.cs" />

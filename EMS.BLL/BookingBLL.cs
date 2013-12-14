@@ -42,9 +42,9 @@ namespace EMS.BLL
             return BookingDAL.GetBookingContainers(ChargesID);
         }
 
-        public static DataSet GetExportVoyages(int Vessel)
+        public static DataSet GetExportVoyages(int Vessel, int LocationID)
         {
-            return BookingDAL.GetExportVoyages(Vessel);
+            return BookingDAL.GetExportVoyages(Vessel, LocationID);
         }
 
         public static DataSet GetExportMLVoyages(int Vessel)

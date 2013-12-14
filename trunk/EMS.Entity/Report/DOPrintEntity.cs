@@ -43,6 +43,7 @@ namespace EMS.Entity.Report
         public string LocationAddress { get; set; }
         public string LineName { get; set; }
         public DateTime? BookingDate { get; set; }
+        public string LeaseNo { get; set; }
 
 
         #endregion
@@ -85,6 +86,7 @@ namespace EMS.Entity.Report
             this.CompanyName = Convert.ToString(reader["CompName"]);
             this.LocationAddress = Convert.ToString(reader["LocAddress"]);
             this.BookingDate = Convert.ToDateTime(reader["BookingDate"]);
+            this.LeaseNo = Convert.ToString(reader["LeaseNo"]);
         }
 
         #endregion

@@ -117,14 +117,14 @@ namespace EMS.WebApp.Export
                 string encryptedId = GeneralFunctions.EncryptQueryString(Convert.ToString(e.CommandArgument));
                 Response.Redirect("~/Export/Export-bl-query.aspx?BLNumber=" + encryptedId);
             }
-            else if (e.CommandName == "Status")
+            else if (e.CommandName == "RemoveData")
             {
                 bool IsActive = false;
 
-                if (((System.Web.UI.WebControls.LinkButton)(e.CommandSource)).Text == "Active")
-                    IsActive = false;
-                else
-                    IsActive = true;
+                //if (((System.Web.UI.WebControls.LinkButton)(e.CommandSource)).Text == "Active")
+                //    IsActive = false;
+                //else
+                //    IsActive = true;
 
                 //Active/InActive
                 ExportBLBLL.ChangeBLStatus(Convert.ToString(e.CommandArgument), IsActive);
@@ -148,21 +148,35 @@ namespace EMS.WebApp.Export
                 e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "POD"));
                 e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "POL"));
 
-                LinkButton lnkStatus = (LinkButton)e.Row.FindControl("lnkStatus");
-                lnkStatus.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLNumber"));
+                // Delete link
+                ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
 
-                if (Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "BLStatus")))
+                if (_canDelete)
                 {
-                    lnkStatus.ToolTip = "Active";
-                    lnkStatus.Text = "Active";
-                    lnkStatus.Attributes.Add("onclick", "javascript:return confirm('Are you sure about make it InActive?');");
+                    btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00012");
+                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
+                    btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLNumber"));
                 }
                 else
                 {
-                    lnkStatus.ToolTip = "InActive";
-                    lnkStatus.Text = "InActive";
-                    lnkStatus.Attributes.Add("onclick", "javascript:return confirm('Are you sure about make it Active?');");
+                    btnRemove.Style["display"] = "none";
                 }
+
+                //LinkButton lnkStatus = (LinkButton)e.Row.FindControl("lnkStatus");
+                //lnkStatus.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLNumber"));
+
+                //if (Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "BLStatus")))
+                //{
+                //    lnkStatus.ToolTip = "Active";
+                //    lnkStatus.Text = "Active";
+                //    lnkStatus.Attributes.Add("onclick", "javascript:return confirm('Are you sure about make it InActive?');");
+                //}
+                //else
+                //{
+                //    lnkStatus.ToolTip = "InActive";
+                //    lnkStatus.Text = "InActive";
+                //    lnkStatus.Attributes.Add("onclick", "javascript:return confirm('Are you sure about make it Active?');");
+                //}
 
                 //Edit Link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");

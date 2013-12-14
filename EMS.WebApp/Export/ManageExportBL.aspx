@@ -273,7 +273,8 @@
                                                                 Nos. Original B/L:
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rdoOriginal" runat="server" TabIndex="9" RepeatDirection="Horizontal"><asp:ListItem Text="1" Value="1"></asp:ListItem>
+                                                                <asp:RadioButtonList ID="rdoOriginal" runat="server" TabIndex="9" RepeatDirection="Horizontal">
+                                                                <asp:ListItem Text="1" Value="1"></asp:ListItem>
                                                                 <asp:ListItem Text="2" Value="2"></asp:ListItem>
                                                                 <asp:ListItem Selected="True" Text="3" Value="3"></asp:ListItem>
                                                                 </asp:RadioButtonList>
@@ -377,9 +378,6 @@
                                                                 <cc1:CalendarExtender ID="ceReleaseDate" TargetControlID="txtBLReleaseDate" runat="server"
                                                                     Format="dd-MM-yyyy" Enabled="True" />
                                                                 <br />
-                                                                <asp:RequiredFieldValidator ID="rfvBookingDate" runat="server" CssClass="errormessage"
-                                                                    ErrorMessage="This field is required" ControlToValidate="txtBLReleaseDate" ValidationGroup="Save"
-                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
                                                             </td>
                                                             
                                                             
@@ -588,7 +586,7 @@
                                                         </tr>
                                                     </table>
 
-                                                    <asp:GridView ID="gvwContainers" runat="server" AllowPaging="True" AutoGenerateColumns="False"
+                                                    <asp:GridView ID="gvwContainers" runat="server" AllowPaging="false" AutoGenerateColumns="False"
                                                         BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px"
                                                         CellPadding="3" DataKeyNames="ContainerId" OnRowDataBound="gvwContainers_RowDataBound">
                                                         <FooterStyle BackColor="White" ForeColor="#000066" />
@@ -628,8 +626,8 @@
                                                             <asp:TemplateField HeaderText="Gross Weight (KG)" SortExpression="GrossWeight" HeaderStyle-Width="100">
                                                                 <ItemTemplate>
                                                                     <cc2:CustomTextBox ID="txtGrossWeight" runat="server" Text='<%# Bind("GrossWeight", "{0:n3}") %>' 
-                                                                        Style="text-align: right;" Width="80" BorderStyle="None" MaxLength="10" AutoPostBack="true"
-                                                                        Precision="8" Scale="2" Type="Decimal" OnTextChanged="txtGrossWeight_TextChanged">
+                                                                        Style="text-align: right;" Width="80" BorderStyle="None" MaxLength="12" AutoPostBack="true"
+                                                                        Precision="8" Scale="3" Type="Decimal" OnTextChanged="txtGrossWeight_TextChanged">
                                                                     </cc2:CustomTextBox>
                                                                     <asp:RequiredFieldValidator ID="rfvGrossWeight" runat="server" ControlToValidate="txtGrossWeight"
                                                                         Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>

@@ -91,7 +91,7 @@ namespace EMS.WebApp.Export
         private void PopulateVoyage(int vesselID)
         {
             //BLL.DBInteraction dbinteract = new BLL.DBInteraction();
-            DataSet ds = BookingBLL.GetExportVoyages(vesselID);
+            DataSet ds = TranshipmentDetailsBLL.GetExportVoyages(vesselID);
             ddlVoyage.DataValueField = "VoyageID";
             ddlVoyage.DataTextField = "VoyageNo";
             ddlVoyage.DataSource = ds;

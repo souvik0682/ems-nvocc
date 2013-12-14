@@ -132,7 +132,7 @@
                                     All In Freight
                                 </td>
                                 <td>
-                                   <asp:RadioButtonList ID="rdoHazardousCargo" runat="server" TabIndex="20" RepeatDirection="Horizontal">
+                                   <asp:RadioButtonList ID="rdoAllInFreight" runat="server" TabIndex="20" RepeatDirection="Horizontal">
                                             <asp:ListItem Selected="True" Text="Yes" Value="Yes"></asp:ListItem>
                                             <asp:ListItem Text="No" Value="No"></asp:ListItem>
                                         </asp:RadioButtonList>
@@ -152,8 +152,8 @@
                                 </td>
                                 <td>
                                    <asp:RadioButtonList ID="rdblAccountFor" runat="server" TabIndex="20" RepeatDirection="Horizontal">
-                                            <asp:ListItem Selected="True" Text="Shipper" Value="S"></asp:ListItem>
-                                            <asp:ListItem Text="Booking Party" Value="B"></asp:ListItem>
+                                            <asp:ListItem Text="Shipper" Value="S"></asp:ListItem>
+                                            <asp:ListItem Selected="True" Text="Booking Party" Value="B"></asp:ListItem>
                                         </asp:RadioButtonList>
                                 </td>
                             </tr>

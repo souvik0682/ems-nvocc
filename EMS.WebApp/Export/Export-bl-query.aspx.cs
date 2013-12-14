@@ -140,7 +140,7 @@ namespace EMS.WebApp.Transaction
                     FrtInvButton = false;
                 if (dtDetail.Rows[0]["ppcc"].ToString() == "T")
                     FrtInvButton = false;
-                if (dtDetail.Rows[0]["BILABLE"].ToInt() == 0)
+                if (dtDetail.Rows[0]["ShipmentType"].ToInt()==0 && dtDetail.Rows[0]["BILABLE"].ToInt() == 0)
                     FrtInvButton = false;
 
                 if (FrtInvButton == false)
@@ -427,7 +427,7 @@ namespace EMS.WebApp.Transaction
                 IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
 
                 string ss = string.Format("ReportPrint2('{0}','{1}','{2}','{3}','{4}','{5}');",
-                "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("CreditNote"),
+                "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("ExpCreditNote"),
                 "&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text),
                 "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue),
                 "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(user.FirstName + " " + user.LastName),

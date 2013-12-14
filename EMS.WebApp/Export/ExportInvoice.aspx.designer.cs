@@ -166,13 +166,13 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.TextBox txtROff;
         
         /// <summary>
-        /// rdoHazardousCargo control.
+        /// rdoAllInFreight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdoHazardousCargo;
+        protected global::System.Web.UI.WebControls.RadioButtonList rdoAllInFreight;
         
         /// <summary>
         /// txtUSDExRate control.

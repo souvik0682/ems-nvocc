@@ -40,12 +40,13 @@ namespace EMS.WebApp.Export
         {
             RetriveParameters();
             //CheckUserAccess();
-            SetAttributes();
+            
             _userId = UserBLL.GetLoggedInUserId();
             _userLocation = UserBLL.GetUserLocation();
 
             if (!IsPostBack)
             {
+                SetAttributes();
                 PopulateControls();
                 CheckUserAccess();
                 //LoadContainerList();
@@ -97,7 +98,8 @@ namespace EMS.WebApp.Export
 
         protected void ddlYard_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadContainerList();
+            if (rdoStockLease.SelectedIndex == 0)
+                LoadContainerList();
         }
 
         protected void gvwList_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -248,10 +250,11 @@ namespace EMS.WebApp.Export
         {
             Int64 bookingId = Convert.ToInt64(ddlBooking.SelectedValue);
             Int32 emptyYardId = Convert.ToInt32(ddlYard.SelectedValue);
+            Int32 LeaseNo = (rdoStockLease.SelectedIndex==0) ? 0 : ddlLease.SelectedValue.ToInt();
 
             if (bookingId > 0 && emptyYardId > 0)
             {
-                List<IDeliveryOrderContainer> lstCntr = DOBLL.GetDeliveryOrderContriner(bookingId, emptyYardId);
+                List<IDeliveryOrderContainer> lstCntr = DOBLL.GetDeliveryOrderContriner(bookingId, emptyYardId, rdoStockLease.SelectedIndex, LeaseNo);
 
                 gvwList.DataSource = lstCntr;
                 gvwList.DataBind();
@@ -271,6 +274,7 @@ namespace EMS.WebApp.Export
             deliveryOrder.EmptyYardId = Convert.ToInt32(ddlYard.SelectedValue);
             deliveryOrder.BookingId = Convert.ToInt64(ddlBooking.SelectedValue);
             deliveryOrder.DeliveryOrderDate = Convert.ToDateTime(txtDoDate.Text.Trim(), _culture);
+            deliveryOrder.LeaseID = Convert.ToInt32(ddlLease.SelectedValue);
         }
 
         private void BuildContainerEntity(List<DeliveryOrderContainerEntity> lstContainer)
@@ -385,6 +389,55 @@ namespace EMS.WebApp.Export
         {
             if (ddlNVOCC.SelectedIndex != -1 && ddlLocation.SelectedIndex != -1)
                 PopulateBookingNo(ddlLocation.SelectedValue.ToInt(), ddlNVOCC.SelectedValue.ToInt());
+        }
+
+        protected void ddlLease_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LeaseYard();
+        }
+
+        protected void rdoStockLease_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvwList.DataSource = null;
+            gvwList.DataBind();
+            
+            if (rdoStockLease.SelectedIndex == 1)
+            {
+                ddlLease.Enabled = true;
+                ddlYard.Enabled = false;
+                ddlYard.SelectedIndex = -1;
+                PopulateLease();
+            }
+
+            else
+            {
+                ddlLease.Enabled = false;
+                ddlYard.Enabled = true;
+                ddlLease.SelectedIndex = -1;
+            }
+        }
+
+        private void PopulateLease()
+        {
+            //DataTable dt = DOBLL.GetEmptyYard(_userId);
+            DataTable dt = DOBLL.GetPendingLease(ddlLocation.SelectedValue.ToInt(), ddlNVOCC.SelectedValue.ToInt());
+
+            if (!ReferenceEquals(dt, null))
+            {
+                ddlLease.DataValueField = "fk_LeaseId";
+                ddlLease.DataTextField = "LeaseNo";
+                ddlLease.DataSource = dt;
+                ddlLease.DataBind();
+                ddlLease.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
+            }
+        }
+
+        private void LeaseYard()
+        {
+            int YardID = DOBLL.GetLeaseYard(ddlLease.SelectedValue.ToInt());
+            ddlYard.SelectedValue = YardID.ToString();
+            LoadContainerList();
+
         }
     }
 }

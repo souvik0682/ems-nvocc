@@ -406,7 +406,7 @@
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="ddlShipmentType" runat="server" Width="250" CssClass="dropdownlist"
-                                            TabIndex="14">
+                                            TabIndex="14" AutoPostBack="True" onselectedindexchanged="ddlShipmentType_SelectedIndexChanged">
                                             <%--<asp:ListItem Value="0" Text="--Select--"></asp:ListItem>--%>
                                         </asp:DropDownList>
                                     </td>

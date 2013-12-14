@@ -28,6 +28,23 @@
                             <asp:DropDownList ID="ddlBooking" runat="server" AutoPostBack="true" CssClass="dropdownlist" OnSelectedIndexChanged="ddlBooking_SelectedIndexChanged"><asp:ListItem Value="0" Text="--Select--"></asp:ListItem></asp:DropDownList>
                             <br /><asp:RequiredFieldValidator ID="rfvBooking" runat="server" ControlToValidate="ddlBooking" InitialValue="0" ErrorMessage="This field is required*" CssClass="errormessage" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
                         </td>
+                        <td style="width: 18%;padding-bottom:5px;">Stock / Leased<span class="errormessage">*</span></td>
+                        <td>
+                            <asp:RadioButtonList ID="rdoStockLease" runat="server" TabIndex="19" RepeatDirection="Horizontal"
+                                OnSelectedIndexChanged="rdoStockLease_SelectedIndexChanged" AutoPostBack="True" Enabled="true">
+                                <asp:ListItem Selected="True" Text="Stock" Value="Stock"></asp:ListItem>
+                                <asp:ListItem Text="Leased" Value="Leased"></asp:ListItem>
+                            </asp:RadioButtonList>
+                        </td>
+                    </tr>
+                    <tr>
+                       
+                         <td>Lease No<span class="errormessage">*</span></td>
+                         <td style="width: 32%;padding-bottom:5px;">
+                            <asp:DropDownList ID="ddlLease" runat="server" AutoPostBack="true" Enabled="false" CssClass="dropdownlist" OnSelectedIndexChanged="ddlLease_SelectedIndexChanged"><asp:ListItem Value="0" Text="--Select--"></asp:ListItem></asp:DropDownList>
+                            <%--<br />--%>
+                            <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="ddlNVOCC" InitialValue="0" ErrorMessage="This field is required*" CssClass="errormessage" ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>--%>
+                        </td>
                         <td style="width: 18%;padding-bottom:5px;">Empty Yard<span class="errormessage">*</span></td>
                         <td style="width: 32%;padding-bottom:5px;">
                             <asp:DropDownList ID="ddlYard" runat="server" AutoPostBack="true" CssClass="dropdownlist" OnSelectedIndexChanged="ddlYard_SelectedIndexChanged"><asp:ListItem Value="0" Text="--Select--"></asp:ListItem></asp:DropDownList>

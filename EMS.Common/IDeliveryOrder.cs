@@ -19,5 +19,6 @@ namespace EMS.Common
         DateTime DeliveryOrderDate { get; set; }
         int EmptyYardId { get; set; }
         String Containers { get; set; }
+        int LeaseID { get; set; }
     }
 }

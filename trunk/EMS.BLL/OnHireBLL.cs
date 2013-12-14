@@ -36,5 +36,16 @@ namespace EMS.BLL
             return EMS.DAL.OnHireDAL.SaveOnHire(eqpOnHire);
         }
         public int UpdateOnHire(EMS.Common.IEqpOnHire eqpOnHire) { return EMS.DAL.OnHireDAL.UpdateOnHire(eqpOnHire); }
+
+        public static DataTable GetLeaseRefList(int Loc, int Line)
+        {
+            return EMS.DAL.OnHireDAL.GetLeaseRefList(Loc, Line);
+        }
+
+        public static DataTable GetLeaseForOnhire(int LeaseID)
+        {
+            return EMS.DAL.OnHireDAL.GetLeaseForOnhire(LeaseID);
+            
+        }
     }
 }

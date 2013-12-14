@@ -33,9 +33,9 @@ namespace EMS.BLL
             return ContainerTranDAL.DeleteTransaction(TransactionId);
         }
 
-        public static DataTable GetBookingList(int Loc, int Line)
+        public static DataTable GetBookingList(int Loc, int Line, int EmptyYard)
         {
-            return ContainerTranDAL.GetBookingList(Loc, Line);
+            return ContainerTranDAL.GetBookingList(Loc, Line, EmptyYard);
         }
 
         public DataTable GetExpBLno(string Initial)

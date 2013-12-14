@@ -54,7 +54,7 @@ namespace EMS.DAL
             return Result;
         }
 
-        public static List<IDeliveryOrderContainer> GetDeliveryOrderContriner(Int64 bookingId, int emptyYardId)
+        public static List<IDeliveryOrderContainer> GetDeliveryOrderContriner(Int64 bookingId, int emptyYardId, int StockOrLease, Int32 LeaseID)
         {
             string strExecution = "[exp].[uspGetContainerForDO]";
             List<IDeliveryOrderContainer> lstCntr = new List<IDeliveryOrderContainer>();
@@ -63,6 +63,8 @@ namespace EMS.DAL
             {
                 oDq.AddBigIntegerParam("@BookingId", bookingId);
                 oDq.AddIntegerParam("@EmptyYardId", emptyYardId);
+                oDq.AddIntegerParam("@StockOrLease", StockOrLease);
+                oDq.AddIntegerParam("@LeaseID", LeaseID);
                 DataTableReader reader = oDq.GetTableReader();
 
                 while (reader.Read())
@@ -94,6 +96,7 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@ModifiedBy", modifiedBy);
                 oDq.AddBigIntegerParam("@NewDOId", newDOId, QueryParameterDirection.Output);
                 oDq.AddVarcharParam("@DONumber", 50, newDONo, QueryParameterDirection.Output);
+                oDq.AddBigIntegerParam("@fk_LeaseID", deliveryOrder.LeaseID);
                 result = oDq.RunActionQuery();
                 deliveryOrder.DeliveryOrderId = newDOId;
                 deliveryOrder.DeliveryOrderNumber = newDONo;
@@ -129,6 +132,34 @@ namespace EMS.DAL
             }
 
             return myDataTable;
+        }
+
+        public static DataTable GetPendingLease(int LocID, int LineID)
+        {
+            string strExecution = "[exp].[uspGetLeaseForDO]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@LocId", LocID);
+                oDq.AddIntegerParam("@LineId", LineID);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+
+        public static int GetLeaseYard(int LeaseID)
+        {
+            string strExecution = "[exp].[uspGetYardFromLease]";
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@LeaseId", LeaseID);
+                oDq.AddIntegerParam("@Result", 0, QueryParameterDirection.Output);
+                oDq.RunActionQuery();
+                return Convert.ToInt32(oDq.GetParaValue("@Result"));
+                //myDataTable = oDq.GetTable();
+            }
         }
     }
 }

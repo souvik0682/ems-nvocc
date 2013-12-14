@@ -24,7 +24,6 @@ namespace EMS.DAL
                     DataSet ds = oDq.GetTables();
                     if (ds != null && ds.Tables != null && ds.Tables.Count > 0)
                     {
-
                         var bLPrint = ds.Tables[0].DataTableToType<BLPrint>();
                         var itemDetails = ds.Tables[1].DataTableToCollectionType<ItemDetail>();
                         if (bLPrint == null) { return (BLPrintModel)null; }

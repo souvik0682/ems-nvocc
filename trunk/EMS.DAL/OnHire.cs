@@ -97,6 +97,7 @@ namespace EMS.DAL
                
                 oDq.AddCharParam("@OnOffHire", 1, eqpOnHire.OnOffHire);
                 oDq.AddIntegerParam("@NVOCCID", eqpOnHire.NVOCCID);
+                oDq.AddIntegerParam("@LeaseID", eqpOnHire.LeaseID);
                 oDq.AddIntegerParam("@CompanyID", eqpOnHire.CompanyID);
                 oDq.AddIntegerParam("@LocationID", eqpOnHire.LocationID);
                 oDq.AddVarcharParam("@HireReference", 20, eqpOnHire.HireReference);
@@ -169,6 +170,37 @@ namespace EMS.DAL
                 return oDq.GetTable();
             }
             // return (DataTable)null;
+        }
+
+        public static DataTable GetLeaseRefList(int Loc, int Line)
+        {
+            string strExecution = "[dbo].[uspGetPendingLeaseList]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@LocID", Loc);
+                oDq.AddIntegerParam("@LineID", Line);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+
+        public static DataTable GetLeaseForOnhire(int LeaseID)
+        {
+            string strExecution = "[dbo].[prcGetLeaseList]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@pk_LeaseID", LeaseID);
+                oDq.AddVarcharParam("@SortExpression", 30, "");
+                oDq.AddVarcharParam("@SortDirection", 4, "");  
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
         }
     }
 }

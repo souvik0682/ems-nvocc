@@ -105,7 +105,7 @@ namespace EMS.DAL
             return Result;
         }
 
-        public static DataTable GetBookingList(int Loc, int Line)
+        public static DataTable GetBookingList(int Loc, int Line, int EmptyYard)
         {
             string strExecution = "[exp].[uspGetBookingListForEqp]";
             DataTable myDataTable;
@@ -114,6 +114,7 @@ namespace EMS.DAL
             {
                 oDq.AddIntegerParam("@LocID", Loc);
                 oDq.AddIntegerParam("@LineID", Line);
+                oDq.AddIntegerParam("@EmptyYardID", EmptyYard);
                 myDataTable = oDq.GetTable();
             }
 

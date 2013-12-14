@@ -378,8 +378,8 @@ namespace EMS.WebApp.Equipment
             {
                 ddlBookingNo.Enabled = true;
                 ddlDONo.Enabled = true;
-                if (ddlFromLocation.SelectedIndex != 0 && ddlLine.SelectedIndex != 0)
-                    PopulateBookingNo(ddlFromLocation.SelectedValue.ToInt(), ddlLine.SelectedValue.ToInt());
+                if (ddlFromLocation.SelectedIndex != 0 && ddlLine.SelectedIndex != 0 && ddlEmptyYard.SelectedIndex != 0)
+                    PopulateBookingNo(ddlFromLocation.SelectedValue.ToInt(), ddlLine.SelectedValue.ToInt(), ddlEmptyYard.SelectedIndex.ToInt());
 
                 //PopulateDropDown((int)Enums.DropDownPopulationFor.Booking, ddlBookingNo, Convert.ToInt32(ddlFromLocation.SelectedValue), 0);
                 //ddlBookingNo.Items.Insert(0, Li);
@@ -649,8 +649,12 @@ namespace EMS.WebApp.Equipment
 
         protected void ddlEmptyYard_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlFromStatus.SelectedItem.Text == "RCVE")
+            if (ddlFromStatus.SelectedItem.Text == "RCVE" && ddlToStatus.SelectedItem.Text == "SNTS")
             {
+                ddlBookingNo.Enabled = true;
+                ddlDONo.Enabled = true;
+                if (ddlFromLocation.SelectedIndex != 0 && ddlLine.SelectedIndex != 0 && ddlEmptyYard.SelectedIndex != 0)
+                    PopulateBookingNo(ddlFromLocation.SelectedValue.ToInt(), ddlLine.SelectedValue.ToInt(), ddlEmptyYard.SelectedValue.ToInt());
                 //fillContainer(Convert.ToInt32(ddlEmptyYard.SelectedValue));
                 //btnShow.Enabled = true;
                 //btnShow.Attributes.Add("style", "background-color:transparent;cursor:pointer;");
@@ -689,7 +693,7 @@ namespace EMS.WebApp.Equipment
         private void ActionOnLocLineChange()
         {
             
-            if (ddlFromLocation.SelectedIndex > 0 && ddlLine.SelectedIndex > 0)
+            if (ddlFromLocation.SelectedIndex > 0 && ddlLine.SelectedIndex > 0 && ddlEmptyYard.SelectedIndex > 0 )
 
                 if (ddlToStatus.SelectedItem.Text == "SNTS" && ddlFromStatus.SelectedItem.Text == "RCVE")
                 {
@@ -697,7 +701,7 @@ namespace EMS.WebApp.Equipment
                     ddlDONo.Enabled = true;
                     //ListItem Lx = new ListItem("Select", "0");
                     //PopulateDropDown((int)Enums.DropDownPopulationFor.Booking, ddlBookingNo, Convert.ToInt32(ddlFromLocation.SelectedValue), 0);
-                    PopulateBookingNo(ddlFromLocation.SelectedValue.ToInt(), ddlLine.SelectedValue.ToInt());
+                    PopulateBookingNo(ddlFromLocation.SelectedValue.ToInt(), ddlLine.SelectedValue.ToInt(), ddlEmptyYard.SelectedValue.ToInt());
                     //ddlBookingNo.Items.Insert(0, Lx);
 
                 }
@@ -921,9 +925,9 @@ namespace EMS.WebApp.Equipment
 
         }
 
-        private void PopulateBookingNo(int Loc, int Line)
+        private void PopulateBookingNo(int Loc, int Line, int EmptyYard)
         {
-            DataTable dt = ContainerTranBLL.GetBookingList(Loc, Line);
+            DataTable dt = ContainerTranBLL.GetBookingList(Loc, Line, EmptyYard);
 
             if (!ReferenceEquals(dt, null))
             {

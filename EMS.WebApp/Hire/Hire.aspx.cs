@@ -208,5 +208,10 @@ namespace EMS.WebApp.Hire
 
             }
         }
+
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Hire/AddEditHire.aspx");
+        }
     }
 }

@@ -76,7 +76,9 @@
                         <asp:ListItem Text="100" Value="100" />
                     </asp:DropDownList>
                     &nbsp;&nbsp;
-                    <asp:Button ID="btnAdd" runat="server" Text="Add New" Width="130px" PostBackUrl="~/Hire/AddEditHire.aspx" />
+                    <asp:Button ID="btnAdd" runat="server" Text="Add Hire" Width="130px"
+                        OnClick="btnAdd_Click" />
+                   <%-- <asp:Button ID="btnAdd" runat="server" Text="Add New" Width="130px" PostBackUrl="~/Hire/AddEditHire.aspx" />--%>
                 </div>
                 <div style="height: 30px;">
                     &nbsp; <span class="errormessage" style="display: none;">* Indicates Inactive Location(s)</span>
@@ -102,7 +104,7 @@
                                     <asp:TemplateField HeaderText="Sl#" ItemStyle-Width="2%">
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" HorizontalAlign="Right"/>
- <ItemTemplate>
+                                        <ItemTemplate>
                                             <%=counter++%>
                                         </ItemTemplate>
                                     </asp:TemplateField>

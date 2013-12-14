@@ -77,7 +77,7 @@ namespace EMS.WebApp.Export
         }
         private void PopulateVoyage()
         {
-            DataSet ds = BookingBLL.GetExportVoyages(ddlVessel.SelectedValue.ToInt());
+            DataSet ds = BookingBLL.GetExportVoyages(ddlVessel.SelectedValue.ToInt(), ddlLoc.SelectedValue.ToInt());
             ddlVoyage.DataValueField = "VoyageID";
             ddlVoyage.DataTextField = "VoyageNo";
             ddlVoyage.DataSource = ds;

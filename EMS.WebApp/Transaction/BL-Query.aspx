@@ -948,7 +948,7 @@
                                             </div>
                                         </div>
                                     </asp:Panel>
-                                    <asp:GridView ID="gvwInvoice" runat="server" AutoGenerateColumns="false" AllowPaging="true"
+                                    <asp:GridView ID="gvwInvoice" runat="server" AutoGenerateColumns="false" AllowPaging="false"
                                         BorderStyle="None" BorderWidth="0" Width="100%" OnRowDataBound="gvwInvoice_RowDataBound">
                                         <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
                                         <EmptyDataTemplate>

@@ -49,7 +49,6 @@ namespace EMS.WebApp.Transaction
                     btnSave.Enabled = false;
                     btnAdd.Enabled = false;
 
-          
                 }
 
                 if (!ReferenceEquals(Request.QueryString["InvoiceId"], null))
@@ -126,7 +125,12 @@ namespace EMS.WebApp.Transaction
 
             ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Record saved successfully!');</script>", false);
 
-            Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(txtBLRef.Text));
+            if (txtExpImp.Text == "IMPORT")
+                Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(txtBLRef.Text));
+            else
+                Response.Redirect("~/Export/Export-bl-query.aspx?BLNumber=" + GeneralFunctions.EncryptQueryString(txtBLRef.Text));
+
+            //Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(txtBLRef.Text));
         }
 
         protected void gvwCreditNote_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -184,7 +188,10 @@ namespace EMS.WebApp.Transaction
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(txtBLRef.Text));
+            if (txtExpImp.Text == "IMPORT")
+                Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(txtBLRef.Text));
+            else
+                Response.Redirect("~/Export/Export-bl-query.aspx?BLNumber=" + GeneralFunctions.EncryptQueryString(txtBLRef.Text));
         }
 
         protected void txtCNAmount_TextChanged(object sender, EventArgs e)
@@ -243,6 +250,7 @@ namespace EMS.WebApp.Transaction
                 txtInvoiceDate.Text = creditNote.InvoiceDate.ToShortDateString();
                 txtBLRef.Text = creditNote.BLNumber;
                 txtCNDate.Text = DateTime.Now.ToShortDateString();
+                txtExpImp.Text = creditNote.ExportImport;
                 ViewState["INVOICETYPE_ID"] = creditNote.InvoiceTypeID;
             }
         }

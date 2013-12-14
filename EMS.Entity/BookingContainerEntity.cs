@@ -89,8 +89,21 @@ namespace EMS.Entity
 
         public BookingContainerEntity(DataTableReader reader)
         {
-            this.BookingID = Convert.ToInt32(reader["fk_BookingID"]);
-            this.BookingContainerID = Convert.ToInt32(reader["pk_BookingCntrID"]);
+            if (ColumnExists(reader, "fk_BookingID"))
+                if (reader["fk_BookingID"] != DBNull.Value)
+                    this.BookingID = Convert.ToInt32(reader["fk_BookingID"]);
+
+            if (ColumnExists(reader, "pk_BookingCntrID"))
+                if (reader["pk_BookingCntrID"] != DBNull.Value)
+                    this.BookingContainerID = Convert.ToInt32(reader["pk_BookingCntrID"]);
+
+            if (ColumnExists(reader, "fk_LeaseID"))
+                if (reader["fk_LeaseID"] != DBNull.Value)
+                    this.BookingID = Convert.ToInt32(reader["fk_LeaseID"]);
+
+            if (ColumnExists(reader, "pk_LeaseCntrID"))
+                if (reader["pk_LeaseCntrID"] != DBNull.Value)
+                    this.BookingContainerID = Convert.ToInt32(reader["pk_LeaseCntrID"]);
 
             if (ColumnExists(reader, "fk_ContainerTypeID"))
                 if (reader["fk_ContainerTypeID"] != DBNull.Value)

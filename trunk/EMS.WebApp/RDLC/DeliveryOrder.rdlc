@@ -144,6 +144,10 @@
           <DataField>BookingDate</DataField>
           <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
+        <Field Name="LeaseNo">
+          <DataField>LeaseNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>EMSBLL</DataSourceName>
@@ -516,7 +520,8 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>****</Value>
+                <Label>LeaseNo</Label>
+                <Value>=First(Fields!LeaseNo.Value, "dsDeliveryOrder")</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>11pt</FontSize>

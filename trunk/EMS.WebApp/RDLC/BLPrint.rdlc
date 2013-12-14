@@ -82,8 +82,8 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <rd:DataSetInfo>
-        <rd:DataSetName>dsBLPrinting</rd:DataSetName>
-        <rd:SchemaPath>E:\Project\VTS\ems-nvocc\old\ems-nvocc\EMS.WebApp\dsBLPrinting.xsd</rd:SchemaPath>
+        <rd:DataSetName>dsBLPrintingContainerTopFive</rd:DataSetName>
+        <rd:SchemaPath>E:\ems\EMS.WebApp\dsBLPrintingContainerTopFive.xsd</rd:SchemaPath>
         <rd:TableName>prcGetBLPrintingContainer</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
@@ -271,6 +271,10 @@
         <Field Name="CBM">
           <DataField>CBM</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="BLClauseDate">
+          <DataField>BLClauseDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
       </Fields>
       <Query>
@@ -1593,18 +1597,7 @@
                   <Style>
                     <FontFamily>Calibri</FontFamily>
                     <FontSize>9pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>----------------------</Value>
-                  <Style>
-                    <FontFamily>Calibri</FontFamily>
-                    <FontSize>9pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
               </TextRuns>
@@ -1679,7 +1672,7 @@
           <Top>0.77639cm</Top>
           <Left>0.89112cm</Left>
           <Height>2.46062cm</Height>
-          <Width>6.61458cm</Width>
+          <Width>8.61458cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1707,12 +1700,25 @@
               </TextRuns>
               <Style />
             </Paragraph>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Label>BLClauseDate</Label>
+                  <Value>=Format(First(Fields!BLClauseDate.Value, "DSBLPrinting"), "dd-MM-yyyy")</Value>
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>9pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox59</rd:DefaultName>
           <Top>3.37812cm</Top>
           <Left>0.89112cm</Left>
           <Height>0.6cm</Height>
-          <Width>6.61458cm</Width>
+          <Width>8.61458cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>

@@ -170,12 +170,13 @@ namespace EMS.DAL
             return Result;
         }
 
-        public static DataSet GetExportVoyages(int Vessel)
+        public static DataSet GetExportVoyages(int Vessel, int LocationID)
         {
             string ProcName = "[exp].[spGetVoyageByVesselID]";
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
 
             dquery.AddIntegerParam("@Vessel", Vessel);
+            dquery.AddIntegerParam("@LocationID", LocationID);
 
             return dquery.GetTables();
         }

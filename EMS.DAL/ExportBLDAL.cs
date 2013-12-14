@@ -174,8 +174,8 @@ namespace EMS.DAL
                         oDq.AddVarcharParam("@ContainerSize", 2, container.ContainerSize);
                         oDq.AddIntegerParam("@ContainerTypeId", container.ContainerTypeId);
                         oDq.AddVarcharParam("@SealNumber", 15, container.SealNumber);
-                        oDq.AddDecimalParam("@GrossWeight", 12, 2, container.GrossWeight);
-                        oDq.AddDecimalParam("@TareWeight", 12, 2, container.TareWeight);
+                        oDq.AddDecimalParam("@GrossWeight", 12, 3, container.GrossWeight);
+                        oDq.AddDecimalParam("@TareWeight", 12, 3, container.TareWeight);
                         oDq.AddIntegerParam("@Package", container.Package);
                         oDq.AddBooleanParam("@Part", container.Part);
                         oDq.AddVarcharParam("@ShippingBillNumber", 50, container.ShippingBillNumber);
@@ -213,7 +213,7 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@Consignee", 300, objBL.Consignee);
                 oDq.AddVarcharParam("@NotifyPartyName", 100, objBL.NotifyPartyName);
                 oDq.AddVarcharParam("@NotifyParty", 300, objBL.NotifyParty);
-                oDq.AddVarcharParam("@GoodDesc", 1000, objBL.GoodDesc);
+                oDq.AddVarcharParam("@GoodDesc", 2000, objBL.GoodDesc);
                 oDq.AddVarcharParam("@MarksNumnbers", 300, objBL.MarksNumnbers);
                 oDq.AddIntegerParam("@ShipmentMode", objBL.ShipmentMode);
                 oDq.AddIntegerParam("@AgentId", objBL.AgentId);

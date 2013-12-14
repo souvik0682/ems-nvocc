@@ -202,7 +202,7 @@ namespace EMS.DAL
             return ExchangeRate;
         }
 
-        public static decimal GetExchangeRateByDate(DateTime Dt)
+        public static decimal GetExchangeRateByDate(DateTime Dt, int line)
         {
             string strExecution = "[exp].[usp_Invoice_GetExchangeRateByDate]";
             decimal ExchangeRate = 0;
@@ -211,6 +211,7 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddDateTimeParam("@Dt", Dt);
+                oDq.AddIntegerParam("@Line", line);
 
                 ExchangeRate = Convert.ToDecimal(oDq.GetScalar());
             }
@@ -481,7 +482,7 @@ namespace EMS.DAL
                     oDq.AddBigIntegerParam("@InvoiceChargeID", cRate.InvoiceChargeId);
 
                 oDq.AddIntegerParam("@ChargeID", cRate.ChargesID);
-
+                oDq.AddIntegerParam("@ChargeRateID", cRate.ChargesRateID);
                 oDq.AddDecimalParam("@RatePerUnit", 12, 2, cRate.RatePerBL);
                 oDq.AddDecimalParam("@RatePerTEU", 12, 2, cRate.RatePerTEU);
                 oDq.AddDecimalParam("@RatePerFEU", 12, 2, cRate.RatePerFEU);

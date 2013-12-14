@@ -108,5 +108,15 @@ namespace EMS.DAL
 
             }
         }
+
+        public static DataSet GetExportVoyages(int Vessel)
+        {
+            string ProcName = "[exp].[spGetTranVoyageByVesselID]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            dquery.AddIntegerParam("@Vessel", Vessel);
+        
+            return dquery.GetTables();
+        }
     }
 }

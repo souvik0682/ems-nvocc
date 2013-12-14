@@ -61,10 +61,14 @@ namespace EMS.WebApp.Export
         protected void ddlBLClause_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlBLClause.SelectedValue == "R")
+            {
                 txtBLReleaseDate.Enabled = true;
+                //rfvBLReleaseDate.Enabled = true;
+            }
             else
             {
                 txtBLReleaseDate.Text = "";
+                //rfvBLReleaseDate.Enabled = false;
                 txtBLReleaseDate.Enabled = false;
             }
         }
@@ -442,11 +446,26 @@ namespace EMS.WebApp.Export
                     txtBLReleaseDate.Text = exportBL.BLReleaseDate.ToString();
                     //txtBLReleaseDate.Text = exportBL.BLReleaseDate.ToString("dd-MM-yyyy");
                     if (hdnBLThruEdge.Value == "" || hdnBLThruEdge.Value == "0")
-                    //if (exportBL.BLthruEdge == false)
+                    {
+                        //if (exportBL.BLthruEdge == false)
                         txtBLNo.Enabled = true;
+                        rfvShipperName.Enabled = false;
+                        rfvConsigneeName.Enabled = false;
+                        rfvGoodsDescription.Enabled = false;
+                        rfvMarks.Enabled = false;
+                        rfvNotify.Enabled = false;
+                        rfvAgent.Enabled = false;
+                    }
                     else
+                    {
                         txtBLNo.Enabled = false;
-
+                        rfvShipperName.Enabled = true;
+                        rfvConsigneeName.Enabled = true;
+                        rfvGoodsDescription.Enabled = true;
+                        rfvMarks.Enabled = true;
+                        rfvNotify.Enabled = true;
+                        rfvAgent.Enabled = true;
+                    }
                     txtShipperName.Text = exportBL.ShipperName;
                     txtShipper.Text = exportBL.Shipper;
                     txtConsignee.Text = exportBL.Consignee;
@@ -554,6 +573,9 @@ namespace EMS.WebApp.Export
                     _userLocation = 0;
                     //ddlLocation.Enabled = true;
                 }
+                
+                if (!_canEdit)
+                    btnSave.Visible = false;
             }
             else
             {
@@ -565,6 +587,11 @@ namespace EMS.WebApp.Export
         {
             IExportBL objBL = new ExportBLEntity();
             long exportBLId = 0;
+            if (ddlBLClause.SelectedValue == "R" && txtBLReleaseDate.Text == string.Empty)
+            {
+                lblErr.Text = "RFS date is compulsory";
+                return 0;
+            }
 
             if (!Convert.ToBoolean(ViewState["ISEDIT"]))
                 objBL.BLId = 0;
@@ -612,7 +639,7 @@ namespace EMS.WebApp.Export
             objBL.NetWeight = Convert.ToDecimal(TxtNtWt.Text.Trim());
             //objBL.NetWeight = Convert.ToDecimal(txtNetWt.Text.Trim());
             if (ddlBLClause.SelectedValue == "R")
-                objBL.BLReleaseDate = Convert.ToDateTime(txtBLReleaseDate.Text.Trim());
+                objBL.BLReleaseDate = Convert.ToDateTime(txtBLDate.Text.Trim());
             else
                 objBL.BLReleaseDate = null;
 

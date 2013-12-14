@@ -25,6 +25,7 @@ namespace EMS.WebApp.Export
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            long voyageId = 0;
             //GeneralFunctions.PopulateDropDownList(ddlVessel, dbinteract.PopulateDDLDS("trnVessel", "pk_VesselID", "VesselName"));
             RetriveParameters();
             if (!Page.IsPostBack)
@@ -34,7 +35,7 @@ namespace EMS.WebApp.Export
                 LoadTerminalDDL();
                 if (!ReferenceEquals(Request.QueryString["VoyageID"], null))
                 {
-                    long voyageId = 0;
+                   
                     Int64.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["VoyageID"].ToString()), out voyageId);
                     lblSailingDate.Visible = false;
                     txtSailingDateTime.Visible = false;
@@ -46,6 +47,7 @@ namespace EMS.WebApp.Export
                     }
                 }
             }
+            CheckUserAccess(voyageId);
 
         }
         private void LoadForEdit(long voyageId)
@@ -288,6 +290,41 @@ namespace EMS.WebApp.Export
             GeneralFunctions.PopulateDropDownList(ddlTerminalID, dbinteract.PopulateDDLDS("mstTerminal", "pk_TerminalID", "TerminalName] + '-' + [terminal", "Where fk_LocationID=" + loc));
             //GeneralFunctions.PopulateDropDownList(ddlLoc, dbinteract.PopulateDDLDS("DSR.dbo.mstLocation", "pk_LocID", "LocName", true),false);
             //ddlLoc.SelectedValue = loc;
+        }
+            
+        private void CheckUserAccess(long xID)
+        {
+            if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+            {
+                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+
+                if (ReferenceEquals(user, null) || user.Id == 0)
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
+
+                btnSave.Visible = true;
+
+                if (!_canAdd && !_canEdit)
+                    btnSave.Visible = false;
+                else
+                {
+
+                    if (!_canEdit && xID != -1)
+                    {
+                        btnSave.Visible = false;
+                    }
+                    else if (!_canAdd && xID == -1)
+                    {
+                        btnSave.Visible = false;
+                    }
+                }
+
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
+            }
         }
     }
 }

@@ -283,7 +283,7 @@ namespace EMS.WebApp.Export
         {
             decimal ExRate;
 
-            ExRate = new InvoiceBLL().GetExchangeRateByDate(Convert.ToDateTime(txtInvoiceDate.Text)).ToDecimal();
+            ExRate = new InvoiceBLL().GetExchangeRateByDate(Convert.ToDateTime(txtInvoiceDate.Text), ddlNvocc.SelectedValue.ToInt()).ToDecimal();
             txtUSDExRate.Text = ExRate.ToString();
         }
 
@@ -1068,6 +1068,11 @@ namespace EMS.WebApp.Export
             invoice.Account = rdblAccountFor.SelectedValue;
             invoice.AddedOn = DateTime.Now;
 
+            if (rdoAllInFreight.SelectedValue == "Yes")
+                invoice.AllInFreight = true;
+            else
+                invoice.AllInFreight = false;
+
             /*
             if (rdblAllinFreight.SelectedValue == "0")
                 invoice.AllInFreight = false;
@@ -1075,7 +1080,7 @@ namespace EMS.WebApp.Export
                 invoice.AllInFreight = true;
              */
 
-            invoice.AllInFreight = false;
+            //invoice.AllInFreight = false;
 
             invoice.BLID = Convert.ToInt64(ddlBLno.SelectedValue);
 
@@ -1509,7 +1514,7 @@ namespace EMS.WebApp.Export
                 .Select(d =>
                     {
                         d.ExchgRate = System.Math.Round(Convert.ToDecimal(txtUSDExRate.Text),2);
-                        d.GrossAmount = System.Math.Round((d.ExchgRate * d.RatePerTEU) + (d.ExchgRate * d.RatePerFEU) + (d.ExchgRate * d.RatePerTON) + (d.ExchgRate * d.RatePerUnit),0);
+                        d.GrossAmount = System.Math.Round((d.ExchgRate * d.RatePerTEU) + (d.ExchgRate * d.RatePerFEU) + (d.ExchgRate * d.RatePerTON) + (d.ExchgRate * d.RatePerUnit) + (d.ExchgRate * d.RatePerCBM), 2);
                         DataTable Charge = new InvoiceBLL().ChargeEditable(d.ChargesID);
                         if (Convert.ToBoolean(Charge.Rows[0]["ServiceTax"].ToString()))
                         {

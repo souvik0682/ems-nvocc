@@ -203,7 +203,15 @@
                                                 Height="16" Width="16" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
+
                                     <asp:TemplateField>
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                        <ItemTemplate>
+                                            <asp:ImageButton ID="btnRemove" runat="server" CommandName="RemoveData" ImageUrl="~/Images/remove.png" Height="16" Width="16" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <%--<asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="10%" />
                                         <HeaderTemplate>
@@ -212,7 +220,7 @@
                                         <ItemTemplate>
                                             <asp:LinkButton ID="lnkStatus" runat="server" Text="Active/Inactive" CommandName="Status"></asp:LinkButton>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
+                                    </asp:TemplateField>--%>
                                 </Columns>
                             </asp:GridView>
                         </ContentTemplate>

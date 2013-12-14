@@ -69,7 +69,8 @@ namespace EMS.WebApp.Export
                 else
                 {
                     FillBooking(Convert.ToInt32(hdnBookingID.Value));
-                    FillBookingContainer(Convert.ToInt32(hdnBookingID.Value));
+                    if (ddlShipmentType.SelectedIndex == 0)
+                        FillBookingContainer(Convert.ToInt32(hdnBookingID.Value));
                     FillBookingTranshipment(Convert.ToInt32(hdnBookingID.Value));
                     CheckForBookingCharges(Convert.ToInt32(hdnBookingID.Value));
                     LoadModalPortDDL();
@@ -215,7 +216,7 @@ namespace EMS.WebApp.Export
             txtBookingDate.Text = oBooking.BookingDate.ToShortDateString();
             txtBookingNo.Text = oBooking.BookingNo.ToString();
             txtCommodity.Text = oBooking.Commodity.ToString();
-            txtGrossWeight.Text = oBooking.GrossWt.ToString();
+            //txtGrossWeight.Text = oBooking.GrossWt.ToString();
             txtCbm.Text = oBooking.CBM.ToString();
             txtFPOD.Text = oBooking.FPOD.ToString();
             txtPOD.Text = oBooking.POD.ToString();
@@ -249,6 +250,11 @@ namespace EMS.WebApp.Export
             txtTempMax.Text = oBooking.TempMax.ToString();
             txtTempMin.Text = oBooking.TempMin.ToString();
             hdnBookingID.Value = Convert.ToString(oBooking.BookingID);
+            if (ddlShipmentType.SelectedIndex != 0)
+                txtGrossWeight.Enabled = true;
+            else
+                txtGrossWeight.Enabled = false;
+
 
         }
 
@@ -506,6 +512,13 @@ namespace EMS.WebApp.Export
                     lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00078");
                     return;
                 }
+
+                if (ddlShipmentType.SelectedValue.ToInt() != 0 && txtGrossWeight.Text.ToDecimal() == 0)
+                {
+                    lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00078");
+                    return;
+                }
+                   
                 oBookingBll = new BookingBLL();
                 oBookingEntity = new BookingEntity();
                 //oUserEntity = (UserEntity)Session[Constants.SESSION_USER_INFO]; // This section has been commented temporarily
@@ -722,7 +735,7 @@ namespace EMS.WebApp.Export
         private void PopulateVoyage(int vesselID)
         {
             //BLL.DBInteraction dbinteract = new BLL.DBInteraction();
-            DataSet ds = BookingBLL.GetExportVoyages(vesselID);
+            DataSet ds = BookingBLL.GetExportVoyages(vesselID, ddlLocation.SelectedValue.ToInt());
             ddlLoadingVoyage.DataValueField = "VoyageID";
             ddlLoadingVoyage.DataTextField = "VoyageNo";
             ddlLoadingVoyage.DataSource = ds;
@@ -1347,6 +1360,20 @@ namespace EMS.WebApp.Export
                 ddlModalPort.DataTextField = "PortName";
                 ddlModalPort.DataSource = dt;
                 ddlModalPort.DataBind();
+            }
+        }
+
+        protected void ddlShipmentType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlShipmentType.SelectedIndex != 0)
+            {
+                lnkContainerDtls.Enabled = false;
+                txtGrossWeight.Enabled = true;
+            }
+            else
+            {
+                lnkContainerDtls.Enabled = true;
+                txtGrossWeight.Enabled = false;
             }
         }
     }

@@ -12,6 +12,7 @@ namespace EMS.Common
         int CompanyID { get; set; }
         DateTime? EditedOn { get; set; }
         int? FEUs { get; set; }
+        int LeaseID { get; set; }
         long HireID { get; set; }
         string HireReference { get; set; }
         DateTime? HireReferenceDate { get; set; }

@@ -150,6 +150,11 @@ namespace EMS.WebApp.Export
                 IExportBLContainer cntr = e.Row.DataItem as IExportBLContainer;
                 ddlPart.SelectedValue = cntr.Part.ToString();
 
+                if (cntr.Part)
+                    ddlPart.Enabled = false;
+                else
+                    ddlPart.Enabled = true;
+
                 //Unit
                 List<Unit> lstUnit = new List<Unit>();
                 DataTable dtUnits = ExportBLBLL.GetUnitsForExportBlContainer();

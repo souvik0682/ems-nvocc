@@ -103,7 +103,7 @@
                 <legend>Export BL List</legend>
                 <div style="float: right; padding-bottom: 5px;">
                     Results Per Page:<asp:DropDownList ID="ddlPaging" runat="server" Width="50px" 
-                        onselectedindexchanged="ddlPaging_SelectedIndexChanged">
+                        onselectedindexchanged="ddlPaging_SelectedIndexChanged" AutoPostBack="true">
                         <asp:ListItem Text="10" Value="10" />
                         <asp:ListItem Text="30" Value="30" />
                         <asp:ListItem Text="50" Value="50" />

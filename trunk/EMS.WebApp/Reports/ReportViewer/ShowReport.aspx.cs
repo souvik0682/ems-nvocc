@@ -271,13 +271,13 @@ namespace EMS.WebApp.Reports.ReportViewer
                         }
                     }
                 }
-                else if (ReportName.ToLower().Equals("expcreditnote"))
+                else if (ReportName.ToLower().Equals("creditnoteexport"))
                 {
                     using (WebClient myWebClient = new WebClient())
                     {
                         myWebClient.DownloadDataCompleted += new DownloadDataCompletedEventHandler(myWebClient_DownloadDataCompleted);
                         myWebClient.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["UserName"], ConfigurationManager.AppSettings["Password"]);
-                        path = HttpContext.Current.Server.MapPath("~/Download/" + "expcreditnote_" + DateTime.Now.Ticks.ToString() + ".pdf");
+                        path = HttpContext.Current.Server.MapPath("~/Download/" + "creditnoteexport_" + DateTime.Now.Ticks.ToString() + ".pdf");
                         myWebClient.DownloadFile(GetUrl(ReportName, reportParma).Replace(ConfigurationManager.AppSettings["ReplaceString"], "http://localhost"), path);
                         if (!string.IsNullOrEmpty(path))
                         {
@@ -311,13 +311,13 @@ namespace EMS.WebApp.Reports.ReportViewer
                         }
                     }
                 }
-                else if (ReportName.ToLower().Equals("emid"))
+                else if (ReportName.ToLower().Equals("midexp"))
                 {
                     using (WebClient myWebClient = new WebClient())
                     {
                         myWebClient.DownloadDataCompleted += new DownloadDataCompletedEventHandler(myWebClient_DownloadDataCompleted);
                         myWebClient.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["UserName"], ConfigurationManager.AppSettings["Password"]);
-                        path = HttpContext.Current.Server.MapPath("~/Download/" + "emid" + DateTime.Now.Ticks.ToString() + ".pdf");
+                        path = HttpContext.Current.Server.MapPath("~/Download/" + "midexp" + DateTime.Now.Ticks.ToString() + ".pdf");
                         myWebClient.DownloadFile(GetUrl(ReportName, reportParma).Replace(ConfigurationManager.AppSettings["ReplaceString"], "http://localhost"), path);
                         if (!string.IsNullOrEmpty(path))
                         {
@@ -438,7 +438,7 @@ namespace EMS.WebApp.Reports.ReportViewer
                     btnPrint.Visible = true;
                     ddlLocation.SelectedIndexChanged += ddlLocation_SelectedIndexChanged_Invoice;
                     break;
-                case "expcreditnote":
+                case "creditnoteexport":
                     trInvoice.Visible = true;
                     btnPrint.Visible = true;
                     ddlLocation.SelectedIndexChanged += ddlLocation_SelectedIndexChanged_Invoice;
@@ -511,7 +511,7 @@ namespace EMS.WebApp.Reports.ReportViewer
                 case "creditnote":
                     litHeader.Text = "CREDIT NOTE";
                     break;
-                case "expcreditnote":
+                case "creditnoteexport":
                     litHeader.Text = "EXPORT CREDIT NOTE";
                     break;
                 case "onoffhire":
@@ -558,7 +558,7 @@ namespace EMS.WebApp.Reports.ReportViewer
                     case "creditnote":
                         ddlLocation_SelectedIndexChanged_Invoice(null, null);
                         break;
-                    case "expcreditnote":
+                    case "creditnoteexport":
                         ddlLocation_SelectedIndexChanged_Invoice(null, null);
                         break;
                     case "crnregister":
@@ -681,7 +681,7 @@ namespace EMS.WebApp.Reports.ReportViewer
                     rptParameters[3] = new ReportParameter("InvoiceId", ddlInvoice.SelectedValue);
                     rptParameters[4] = new ReportParameter("CrnId", ddlInvoice.SelectedValue);
                     break;
-                case "expcreditnote":
+                case "creditnoteexport":
                     //litHeader.Text = "INVOICE DEVELOPER";
                     rptParameters = new ReportParameter[5];
                     rptParameters[0] = new ReportParameter("LineBLNo", ddlLocation.SelectedItem.Text);

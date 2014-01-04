@@ -56,6 +56,13 @@ namespace EMS.Entity
         }
 
         [XmlAnyElement]
+        public int NoofContainersPrev
+        {
+            get;
+            set;
+        }
+
+        [XmlAnyElement]
         public decimal wtPerCntr
         {
             get;
@@ -116,6 +123,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "Nos"))
                 if (reader["Nos"] != DBNull.Value)
                     this.NoofContainers = Convert.ToChar(reader["Nos"]);
+
+            if (ColumnExists(reader, "PrevNos"))
+                if (reader["PrevNos"] != DBNull.Value)
+                    this.NoofContainersPrev = Convert.ToChar(reader["PrevNos"]);
 
             if (ColumnExists(reader, "wtPerCntr"))
                 if (reader["wtPerCntr"] != DBNull.Value)

@@ -202,10 +202,10 @@ namespace EMS.WebApp.Transaction
                     dtExcel.Columns.Remove("VoyageNo");
                     dtExcel.Columns.Remove("ExpBLDate");
                     //dtExcel.Columns.Remove("AddrName");
-                    dtExcel.Columns.Remove("Charged");
+                    //dtExcel.Columns.Remove("Charged");
                     dtExcel.Columns.Remove("Manifest");
                     dtExcel.Columns.Remove("Diff");
-                    dtExcel.Columns.Remove("Commper");
+                    //dtExcel.Columns.Remove("Commper");
                     dtExcel.Columns.Remove("Shipper");
                     dtExcel.Columns.Remove("Commodity");
                     dtExcel.Columns.Remove("Gross");
@@ -214,6 +214,8 @@ namespace EMS.WebApp.Transaction
                     dtExcel.Columns.Remove("InvoiceDate");
                     dtExcel.Columns.Remove("RefAmt");
                     dtExcel.Columns.Remove("RefundTo");
+                    dtExcel.Columns.Remove("invCur");
+                    dtExcel.Columns.Remove("Brokerage");
                 }
                 else if (val == 2)
                 {
@@ -224,8 +226,8 @@ namespace EMS.WebApp.Transaction
                     dtExcel.Columns.Remove("Brok");
                     //dtExcel.Columns.Remove("actual");
                     dtExcel.Columns.Remove("BasicFreight");
-                    //dtExcel.Columns.Remove("Commper");
-                    //dtExcel.Columns.Remove("CommAmt");
+                    //dtExcel.Columns.Remove("BrkgPer");
+                    //dtExcel.Columns.Remove("BrkgAmt");
                     dtExcel.Columns.Remove("Brokerage");
                     dtExcel.Columns.Remove("Gross");
                     dtExcel.Columns.Remove("Stax");
@@ -244,7 +246,7 @@ namespace EMS.WebApp.Transaction
                     dtExcel.Columns.Remove("Brok");
                     //dtExcel.Columns.Remove("Charged");
                     dtExcel.Columns.Remove("BasicFreight");
-                    dtExcel.Columns.Remove("Commper");
+                    dtExcel.Columns.Remove("CommPer");
                     dtExcel.Columns.Remove("CommAmt");
                     dtExcel.Columns.Remove("Brokerage");
                     dtExcel.Columns.Remove("Shipper");
@@ -267,7 +269,7 @@ namespace EMS.WebApp.Transaction
                     dtExcel.Columns.Remove("Manifest");
                     dtExcel.Columns.Remove("Diff");
                     dtExcel.Columns.Remove("BasicFreight");
-                    dtExcel.Columns.Remove("Commper");
+                    dtExcel.Columns.Remove("CommPer");
                     dtExcel.Columns.Remove("CommAmt");
                     dtExcel.Columns.Remove("Shipper");
                     dtExcel.Columns.Remove("Brokerage");
@@ -285,7 +287,7 @@ namespace EMS.WebApp.Transaction
 
         protected void txtVessel_TextChanged(object sender, EventArgs e)
         {
-            Filler.FillData(ddlVoyage, CommonBLL.GetExpVoyages(hdnVessel.Value.ToString(), ddlLine.SelectedValue.ToString()), "VoyageNo", "VoyageID", "Voyage");
+            Filler.FillData(ddlVoyage, CommonBLL.GetExpVoyages(hdnVessel.Value.ToString(), ddlLoc.SelectedValue.ToString()), "VoyageNo", "VoyageID", "Voyage");
         }
     }
 }

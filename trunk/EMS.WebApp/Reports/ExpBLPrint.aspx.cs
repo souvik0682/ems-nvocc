@@ -110,7 +110,11 @@ namespace EMS.WebApp.Reports
                 ddlBlNo.SelectedValue 
             //"MUM/UA/13-14/000001"
             };
-           
+            string Original="D";
+
+            if (ExpBLPrintingBLL.CheckDraftOrOriginal(ddlBlNo.SelectedValue))
+                Original = "O";
+
             var temp = ExpBLPrintingBLL.GetxpBLPrintingDS(iSearchCriteria);
             DataSet dsBLPrinting = new DataSet();
             DataTable dtBLPrintingCons = null;
@@ -143,7 +147,7 @@ namespace EMS.WebApp.Reports
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintingContainerTopFive", dtBLPrintingCons5));
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintingContainer", dtBLPrintingCons));
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintDesc", dtBLPrintingDesc));
-                //viewer.LocalReport.SetParameters(new ReportParameter("ImageShow", "true"));
+                viewer.LocalReport.SetParameters(new ReportParameter("ReportType", Original));
                 Warning[] warnings;
                 string[] streamIds;
                 string mimeType = string.Empty;

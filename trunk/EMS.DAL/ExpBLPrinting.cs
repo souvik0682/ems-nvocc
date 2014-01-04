@@ -100,5 +100,20 @@ namespace EMS.DAL
 
             return ds;
         }
+
+        public static bool CheckDraftOrOriginal(string expBLNo)
+        {
+            string strExecution = "[exp].[spBLDraftorOriginal]";
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+
+                oDq.AddVarcharParam("@Blno", 60, expBLNo);
+                oDq.AddBooleanParam("@Result", false, QueryParameterDirection.Output);
+                oDq.RunActionQuery();
+                return Convert.ToBoolean(oDq.GetParaValue("@Result"));
+            }
+        }
     }
 }

@@ -104,6 +104,29 @@ namespace EMS.DAL
             return invoiceTypes;
         }
 
+        public static List<InvoiceTypeEntity> GetExpInvoiceTypes()
+        {
+            string strExecution = "[exp].[uspGetInvoiceTypes]";
+            List<InvoiceTypeEntity> invoiceTypes = new List<InvoiceTypeEntity>();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    InvoiceTypeEntity invoiceType = new InvoiceTypeEntity();
+                    invoiceType.InvoiceTypeId = Convert.ToInt32(reader["DocTypeId"]);
+                    invoiceType.InvoiceTypeName = reader["DocName"].ToString();
+                    invoiceTypes.Add(invoiceType);
+                }
+
+                reader.Close();
+            }
+
+            return invoiceTypes;
+        }
+
         public static List<InvoiceDetailsEntity> GetInvoiceDetails(int invoiceTypeId)
         {
             string strExecution = "[dbo].[uspGetInvoiceDetails]";

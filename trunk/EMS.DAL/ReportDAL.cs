@@ -232,6 +232,33 @@ namespace EMS.DAL
             return lstEntity;
         }
 
+        public static List<ImpInvRegisterEntity> GetExportInvoiceRegister(int lineId, int locId, int billType, DateTime dtFrom, DateTime dtTo)
+        {
+            string strExecution = "[exp].[uspGetExportInvoiceRegister]";
+            List<ImpInvRegisterEntity> lstEntity = new List<ImpInvRegisterEntity>();
+            ImpInvRegisterEntity entity = null;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@LocationID", locId);
+                oDq.AddIntegerParam("@LineID", lineId);
+                oDq.AddIntegerParam("@BillType", billType);
+                oDq.AddDateTimeParam("@StartDate", dtFrom);
+                oDq.AddDateTimeParam("@EndDate", dtTo);
+
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    entity = new ImpInvRegisterEntity(reader);
+                    lstEntity.Add(entity);
+                }
+            }
+
+
+            return lstEntity;
+        }
+
         //public static List<ImportInvoiceEntity> GetImportInvoicePrint(int lineId, int locId, int billType, DateTime dtFrom, DateTime dtTo)
         //{
         //    string strExecution = "[report].[uspRptInvoiceDateRange]";

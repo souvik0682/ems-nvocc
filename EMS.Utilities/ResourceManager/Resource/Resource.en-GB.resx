@@ -375,4 +375,7 @@
   <data name="ERR00085" xml:space="preserve">
     <value>Freight Payable At is Compulsory field</value>
   </data>
+  <data name="ERR00086" xml:space="preserve">
+    <value>Adding new container type need charges to Delete</value>
+  </data>
 </root>

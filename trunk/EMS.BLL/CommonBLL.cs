@@ -509,6 +509,12 @@ namespace EMS.BLL
             return CommonDAL.GetExpLine(Location);
         }
 
+        public static DataTable GetExpPOL(string Location, string line, string vessel, string voyage)
+        {
+
+            return CommonDAL.GetExpPOL(Location, line, vessel, voyage);
+        }
+
         public static DataTable GetExpBLHeaderByBLNo(long Location)
         {
 

@@ -86,6 +86,11 @@ namespace EMS.BLL
             return MoneyReceiptDAL.GetInvoiceTypes();
         }
 
+        public List<InvoiceTypeEntity> GetExpInvoiceTypes()
+        {
+            return MoneyReceiptDAL.GetExpInvoiceTypes();
+        }
+
         public List<InvoiceDetailsEntity> GetInvoiceDetails(int invoiceTypeId)
         {
             return MoneyReceiptDAL.GetInvoiceDetails(invoiceTypeId);

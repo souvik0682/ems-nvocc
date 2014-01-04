@@ -10,9 +10,9 @@ namespace EMS.BLL
 {
     public class TerminalDispatchBLL 
     {
-        public DataTable GetTerminalDispatchStatement(int VesselID, long POLID, int LineID, int LocationID)
+        public DataTable GetTerminalDispatchStatement(int VesselID, long POLID, int LineID, int LocationID, int VoyageID)
         {
-            return TerminalDiapatchDAL.GetTerminalDispatch(VesselID, POLID, LineID, LocationID);
+            return TerminalDiapatchDAL.GetTerminalDispatch(VesselID, POLID, LineID, LocationID, VoyageID);
         }
         //public static ITerminalDispatch GetVessel(int ID)
         //{

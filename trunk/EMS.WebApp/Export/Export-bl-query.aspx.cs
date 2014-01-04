@@ -427,7 +427,7 @@ namespace EMS.WebApp.Transaction
                 IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
 
                 string ss = string.Format("ReportPrint2('{0}','{1}','{2}','{3}','{4}','{5}');",
-                "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("ExpCreditNote"),
+                "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("CreditNoteExport"),
                 "&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text),
                 "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue),
                 "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(user.FirstName + " " + user.LastName),
@@ -479,10 +479,6 @@ namespace EMS.WebApp.Transaction
             if (e.CommandName == "Status")
             {
                 DeleteInvoice(Convert.ToInt32(e.CommandArgument));
-                //if (e.Row.RowType == DataControlRowType.DataRow)
-                //{
-                //    gvwInvoice.Columns[6].Visible = false;
-                //}
             }
         }
 
@@ -502,9 +498,13 @@ namespace EMS.WebApp.Transaction
 
         protected void lnkDownload_Click(object sender, EventArgs e)
         {
-
-            string fileName = Server.MapPath("~/Export/ChargesFile/") + lnkDownload.CommandArgument;
-            DownloadFile(fileName, true);
+            if (!string.IsNullOrEmpty(lnkDownload.CommandArgument))
+            {
+                string fileName = Server.MapPath("~/Export/ChargesFile/") + lnkDownload.CommandArgument;
+                DownloadFile(fileName, true);
+            }
+            else
+                lblMessageBLQuery.Text = "Nothing to Download";
             
         }
 

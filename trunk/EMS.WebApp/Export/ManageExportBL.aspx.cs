@@ -591,6 +591,7 @@ namespace EMS.WebApp.Export
         private long SaveExportBLHeaderDetails()
         {
             IExportBL objBL = new ExportBLEntity();
+            
             long exportBLId = 0;
             if (ddlBLClause.SelectedValue == "R" && txtBLReleaseDate.Text == string.Empty)
             {
@@ -642,9 +643,10 @@ namespace EMS.WebApp.Export
             objBL.BLType = rdoBLType.SelectedValue;
             objBL.NoOfBL = Convert.ToInt32(rdoOriginal.SelectedValue);
             objBL.NetWeight = Convert.ToDecimal(TxtNtWt.Text.Trim());
+   
             //objBL.NetWeight = Convert.ToDecimal(txtNetWt.Text.Trim());
             if (ddlBLClause.SelectedValue == "R")
-                objBL.BLReleaseDate = Convert.ToDateTime(txtBLDate.Text.Trim());
+                objBL.BLReleaseDate = Convert.ToDateTime(txtBLReleaseDate.Text.Trim());
             else
                 objBL.BLReleaseDate = null;
 

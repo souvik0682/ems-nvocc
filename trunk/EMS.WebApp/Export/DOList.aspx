@@ -84,7 +84,7 @@
                     <asp:UpdatePanel ID="upList" runat="server" UpdateMode="Conditional">
                         <Triggers>
                             <asp:AsyncPostBackTrigger ControlID="btnSearch" EventName="Click" />
-                            <asp:AsyncPostBackTrigger ControlID="btnReset" EventName="Click" />
+                           <%-- <asp:AsyncPostBackTrigger ControlID="btnReset" EventName="Click" />--%>
                             <asp:AsyncPostBackTrigger ControlID="ddlPaging" EventName="SelectedIndexChanged" />
                         </Triggers>
                         <ContentTemplate>

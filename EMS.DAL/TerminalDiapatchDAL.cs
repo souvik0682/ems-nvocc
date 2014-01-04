@@ -10,7 +10,7 @@ namespace EMS.DAL
 {
    public class TerminalDiapatchDAL
     {
-       public static DataTable GetTerminalDispatch(int VesselID, long POLID, int LineID, int LocationID)
+       public static DataTable GetTerminalDispatch(int VesselID, long POLID, int LineID, int LocationID, int VoyageID)
         {
             string strExecution = "[exp].[rptTerminalDespatchReport]";
             DataTable dt = new DataTable();
@@ -20,6 +20,7 @@ namespace EMS.DAL
                 oDq.AddBigIntegerParam("@POLID", POLID);
                 oDq.AddIntegerParam("@LineID", LineID);
                 oDq.AddIntegerParam("@LocationID", LocationID);
+                oDq.AddIntegerParam("@VoyageID", VoyageID);
 
                 dt = oDq.GetTable();
             }

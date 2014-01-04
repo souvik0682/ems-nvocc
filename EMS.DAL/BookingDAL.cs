@@ -43,6 +43,20 @@ namespace EMS.DAL
             return Result;
         }
 
+        public static int CheckBookingCharges(int BookingId)
+        {
+            string strExecution = "[exp].[uspCheckBookingCharges]";
+            int Result = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@BookingID", BookingId);
+                oDq.AddIntegerParam("@RESULT", Result, QueryParameterDirection.Output);
+                Result = oDq.RunActionQuery();
+            }
+            return Result;
+        }
+
         public static List<IBooking> GetBooking(SearchCriteria searchCriteria, int ID, string CalledFrom)
         {
             string strExecution = "[exp].[prcGetBookingList]";
@@ -177,6 +191,17 @@ namespace EMS.DAL
 
             dquery.AddIntegerParam("@Vessel", Vessel);
             dquery.AddIntegerParam("@LocationID", LocationID);
+
+            return dquery.GetTables();
+        }
+
+        public static DataSet GetExportVoyagesWithPOL(int Vessel, int POLID)
+        {
+            string ProcName = "[exp].[spGetVoyageByVesselnPOL]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            dquery.AddIntegerParam("@Vessel", Vessel);
+            dquery.AddIntegerParam("@POL", POLID);
 
             return dquery.GetTables();
         }

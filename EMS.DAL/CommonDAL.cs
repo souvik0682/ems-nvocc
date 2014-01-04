@@ -847,6 +847,24 @@ namespace EMS.DAL
             return myDataTable;
         }
 
+        public static DataTable GetExpPOL(string Location, string Line, string Vessel, string Voyage)
+        {
+            string strExecution = "[exp].[rptUspGetPOL]";
+            DataTable myDataTable;
+            //if (Location == "All")
+            //    Location = "0";
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@Location", Location.ToInt());
+                oDq.AddIntegerParam("@Line", Line.ToInt());
+                oDq.AddIntegerParam("@Vessel", Vessel.ToInt());
+                oDq.AddIntegerParam("@Voyage", Voyage.ToInt());
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+
         public static DataTable GetLineForHire(string Location)
         {
             string strExecution = "rptUspGetLineByLocForHireContainer";
@@ -888,15 +906,15 @@ namespace EMS.DAL
             return myDataTable;
         }
 
-        public static DataTable GetExpVoyages(string Vessel, string Line)
+        public static DataTable GetExpVoyages(string Vessel, string Location)
         {
             string strExecution = "[exp].[spGetVoyageByVesselID]";
             DataTable myDataTable;
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                oDq.AddIntegerParam("@Vessel", Vessel.ToInt()); 
-                //oDq.AddIntegerParam("@line", Line.ToInt());
+                oDq.AddIntegerParam("@Vessel", Vessel.ToInt());
+                oDq.AddIntegerParam("@LocationID", Location.ToInt());
                 myDataTable = oDq.GetTable();
             }
 

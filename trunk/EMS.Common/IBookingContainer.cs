@@ -16,6 +16,6 @@ namespace EMS.Common
         decimal wtPerCntr { get; set; }
         bool BkCntrStatus { get; set; }
         string ContainerType { get; set; }
-
+        int NoofContainersPrev { get; set; }
     }
 }

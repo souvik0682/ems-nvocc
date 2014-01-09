@@ -1802,7 +1802,7 @@
                 </TextRun>
                 <TextRun>
                   <Label>ExpBLDate</Label>
-                  <Value>=Format(First(Fields!ExpBLDate.Value, "DSBLPrinting"), "dd-MM-yyyy")</Value>
+                  <Value>=IIf(First(Fields!BLClause.Value, "DSBLPrinting") = "S", Format(First(Fields!ExpBLDate.Value, "DSBLPrinting"), "dd-MM-yyyy"), First(Fields!BLClauseDate.Value, "DSBLPrinting"))</Value>
                   <Style>
                     <FontFamily>Calibri</FontFamily>
                     <FontSize>9pt</FontSize>

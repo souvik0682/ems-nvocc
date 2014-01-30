@@ -26,6 +26,8 @@ namespace EMS.Common
         decimal ServiceTaxCess { get; set; }
         decimal ServiceTaxACess { get; set; }
         decimal Roff { get; set; }
+        DateTime BLDate { get; set; }
+        string BookingNo { get; set; }
         int UserAdded { get; set; }
         int UserLastEdited { get; set; }
         DateTime AddedOn { get; set; }

@@ -20,5 +20,6 @@ namespace EMS.Common
         int EmptyYardId { get; set; }
         String Containers { get; set; }
         int LeaseID { get; set; }
+        bool CloseVoyage { get; set; }
     }
 }

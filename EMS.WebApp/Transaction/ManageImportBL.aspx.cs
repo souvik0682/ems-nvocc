@@ -565,7 +565,15 @@ namespace EMS.WebApp.Transaction
                         }
                         else
                         {
-                            errContainer.Text = "Please enter unique Container No";
+                            if (Convert.ToBoolean(ViewState["LCLDuplicate"]))
+                            {
+                                if (Convert.ToString(ViewState[EDITBLFOOTER]) == "")
+                                    AddBLFooterDetails();
+                                else
+                                    EditFooterDetails();
+                            }
+                            else
+                                errContainer.Text = "Please enter unique Container No";
                         }
                     }
                 }

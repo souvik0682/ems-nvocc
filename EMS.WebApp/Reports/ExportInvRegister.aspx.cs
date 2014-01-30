@@ -247,7 +247,7 @@ namespace EMS.WebApp.Reports
         }
 
         #endregion
-
+        # region Record Selection
         protected void ddlLoc_SelectedIndexChanged(object sender, EventArgs e)
         {
             GenerateNavigationLink();
@@ -272,5 +272,6 @@ namespace EMS.WebApp.Reports
         {
             GenerateNavigationLink();
         }
+        # endregion
     }
 }

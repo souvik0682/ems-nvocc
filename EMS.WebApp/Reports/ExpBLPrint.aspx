@@ -50,7 +50,8 @@
                         Line / NVOCC:<span class="errormessage" style="width: 10%">*</span>
                     </td>
                     <td align="left" style="width: 35%">
-                        <asp:DropDownList ID="ddlLocation" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged" Width="70px">
+                        <asp:DropDownList ID="ddlLocation" runat="server" AutoPostBack="true" 
+                            OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged" Width="106px">
                             <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="errormessage"
@@ -74,7 +75,9 @@
                         Voyage:<span class="errormessage" style="width: 10%">*</span>
                     </td>
                     <td align="left" style="width: 35%">
-                        <asp:DropDownList ID="ddlVoyage" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlVoyage_SelectedIndexChanged" Width="70px">
+                        <asp:DropDownList ID="ddlVoyage" runat="server" AutoPostBack="true" 
+                            OnSelectedIndexChanged="ddlVoyage_SelectedIndexChanged" Width="150px" 
+                            Height="22px">
                             <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="rfvVoyage" runat="server" CssClass="errormessage"
@@ -99,7 +102,9 @@
                     <td colspan="4" align="left" style="padding: 5px 5px 5px 0">
                         <asp:Button ID="btnReport" runat="server" Text="View Report" ValidationGroup="Report"
                             OnClick="btnReport_Click" />
-                        <asp:Button ID="btnPrint" runat="server" Visible="true" Text="Print" ValidationGroup="Report" OnClientClick="return Print()" />
+                        <asp:Button ID="btnPrint" runat="server" Visible="true" Text="Print" 
+                            ValidationGroup="Report" OnClientClick="return Print()" 
+                            onclick="btnPrint_Click" />
                     </td>
                 </tr>
             </table>

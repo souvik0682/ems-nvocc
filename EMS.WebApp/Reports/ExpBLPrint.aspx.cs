@@ -86,8 +86,12 @@ namespace EMS.WebApp.Reports
                 //foreach (DataRow dr in Next5){   
                 //    dtBLPrintingCons.ImportRow(dr);
                 //}
+                string rptName;
                 LocalReportManager reportManager = new LocalReportManager(rptViewer, "BLPrint", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
-                string rptName = "BLPrint.rdlc";
+                if (ddlLine.SelectedValue == "ILE")
+                    rptName = "BLPrintILE.rdlc";
+                else
+                    rptName = "BLPrint.rdlc";
 
                 rptViewer.Reset();
                 rptViewer.LocalReport.Dispose();
@@ -142,7 +146,10 @@ namespace EMS.WebApp.Reports
 
                 var viewer = new Microsoft.Reporting.WebForms.ReportViewer();
                 viewer.ProcessingMode = ProcessingMode.Local;
-                viewer.LocalReport.ReportPath =  this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + "BLPrint.rdlc";
+                if (ddlLocation.SelectedItem.Text == "ILE")
+                    viewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + "BLPrintILE.rdlc";
+                else
+                    viewer.LocalReport.ReportPath =  this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + "BLPrint.rdlc";
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DSBLPrinting", temp.Tables[0]));
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintingContainerTopFive", dtBLPrintingCons5));
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintingContainer", dtBLPrintingCons));
@@ -214,6 +221,11 @@ namespace EMS.WebApp.Reports
                     Filler.FillData(ddlBlNo, CommonBLL.GetExpBL(lng, lng1, lng2), "ExpBLNo", "ExpBLNo", "Bl. No.");
                 }
             }
+        }
+
+        protected void btnPrint_Click(object sender, EventArgs e)
+        {
+
         }
 
         

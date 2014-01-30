@@ -77,5 +77,6 @@ namespace EMS.Common
         string VoyageNo { get; set; }
         int Customer { get; set; }
         string CustomerERAS { get; set; }
+        bool CloseVoyage { get; set; }
     }
 }

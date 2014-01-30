@@ -39,5 +39,6 @@ namespace EMS.Common
         long UserAdded { get; set; }
         long UserEdited { get; set; }
         bool VoyageStatus { get; set; }
+        bool CloseVoyage { get; set; }
     }
 }

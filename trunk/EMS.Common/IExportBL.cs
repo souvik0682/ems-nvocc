@@ -62,5 +62,6 @@ namespace EMS.Common
         string EdgeBLNumber { get; set; }
         string RefBLNumber { get; set; }
         bool BLStatus { get; set; }
+        bool CloseVoyage { get; set; }
     }
 }

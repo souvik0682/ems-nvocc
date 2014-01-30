@@ -713,8 +713,18 @@ namespace EMS.WebApp.Export
                 hdnFPOD.Value = hdnPOD.Value;
                 txtFPOD.Text = txtPOD.Text;
                 PopulateSevices(ddlNvocc.SelectedValue.ToInt(), Convert.ToInt32(hdnFPOD.Value));
-                ddlService.SelectedIndex = 0;
-                LoadModalPortDDL();
+                if (ddlService.Items.Count.ToInt() > 0)
+                {
+                    ddlService.SelectedIndex = 0;
+                    LoadModalPortDDL();
+                    //checkTransitRoot();
+                    lblError.Text = "";
+                }
+                else
+                    lblError.Text = "Liner+Service+FPOD not Valid";
+
+                //ddlService.SelectedIndex = 0;
+                //LoadModalPortDDL();
             }
             checkTransitRoot();
         }
@@ -765,15 +775,28 @@ namespace EMS.WebApp.Export
 
         protected void txtFPOD_TextChanged(object sender, EventArgs e)
         {
+            
             PopulateSevices(ddlNvocc.SelectedValue.ToInt(), Convert.ToInt32(hdnFPOD.Value));
-            ddlService.SelectedIndex = 0;
-            LoadModalPortDDL();
-            checkTransitRoot();
+            if (ddlService.Items.Count.ToInt() > 0)
+            {
+                ddlService.SelectedIndex = 0;
+                LoadModalPortDDL();
+                checkTransitRoot();
+                lblError.Text = "";
+            }
+            else
+                lblError.Text = "Liner+Service+FPOD not Valid";
         }
 
         protected void ddlNvocc_SelectedIndexChanged(object sender, EventArgs e)
         {
             //ddlLocation_SelectedIndexChanged(null, null);
+            ddlService.Items.Clear();
+            txtPOD.Text = "";
+            txtFPOD.Text = "";
+            txtVessel.Text = "";
+            ddlLoadingVoyage.Items.Clear();
+           
             if (hdnFPOD.Value != "")
                 PopulateSevices(ddlNvocc.SelectedValue.ToInt(), Convert.ToInt32(hdnFPOD.Value));
 
@@ -1021,10 +1044,8 @@ namespace EMS.WebApp.Export
 
                 if (Containers.Count > 0)
                 {
-                    //dt = (DataTable)otabSelItems;
                     Containers.RemoveAt(RowIndex);
-                    //dt.Rows.RemoveAt(RowIndex);
-                    //dt.AcceptChanges();
+
                     foreach (BookingContainerEntity obj in Containers)
                     {
                         _TotWeight = _TotWeight + obj.NoofContainers.ToDecimal() * obj.wtPerCntr.ToDecimal();
@@ -1037,7 +1058,6 @@ namespace EMS.WebApp.Export
 
                     ViewState["BookingCntr"] = gvContainer.DataSource = Containers;
 
-                    //ModalPopupExtender1.Show();
                 }
             }
         }

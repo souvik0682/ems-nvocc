@@ -25,6 +25,7 @@ namespace EMS.WebApp.Export
         private bool _canEdit = false;
         private bool _canDelete = false;
         private bool _canView = false;
+        private int _isedit = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -55,18 +56,18 @@ namespace EMS.WebApp.Export
                 {
                     long invoiveId = 0;
                     Int64.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["invid"].ToString()), out invoiveId);
-
+                    _isedit = 1;
                     if (invoiveId > 0)
                         LoadForEdit(invoiveId);
 
-                    btnSave.Enabled = false;
+                    //btnSave.Enabled = false;
                 }
                 if (!ReferenceEquals(Request.QueryString["p1"], null))
                 {
                     string blNo = string.Empty;
                     int docTypeId = 0;
                     string misc = string.Empty;
-
+                    _isedit = 0;
                     blNo = GeneralFunctions.DecryptQueryString(Request.QueryString["p1"].ToString());
                     Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["p3"].ToString()), out docTypeId);
                     misc = GeneralFunctions.DecryptQueryString(Request.QueryString["p4"].ToString());
@@ -145,7 +146,7 @@ namespace EMS.WebApp.Export
         {
             try
             {
-                DataTable dt = new InvoiceBLL().GetInvoiceType();
+                DataTable dt = new InvoiceBLL().GetExpInvoiceType();
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
@@ -199,7 +200,6 @@ namespace EMS.WebApp.Export
                 throw;
             }
         }
-
 
         private void GrossWeight(string BLNo)
         {
@@ -996,9 +996,10 @@ namespace EMS.WebApp.Export
             List<IChargeRate> chargeRate = ViewState["CHARGERATE"] as List<IChargeRate>;
 
 
-            misc = GeneralFunctions.DecryptQueryString(Request.QueryString["p4"].ToString());
+            //misc = GeneralFunctions.DecryptQueryString(Request.QueryString["p4"].ToString());
+
             //Add-Update
-            long invoiceID = new InvoiceBLL().SaveInvoiceExp(invoice, misc, chargeRate);
+            long invoiceID = new InvoiceBLL().SaveInvoiceExp(invoice, misc, chargeRate, _isedit);
 
             if (invoiceID == 0)
             {
@@ -1238,19 +1239,19 @@ namespace EMS.WebApp.Export
         private void LoadForEdit(long InvoiceId)
         {
             //For Invoice
-            IInvoice invoice = new InvoiceBLL().GetInvoiceById(InvoiceId);
+            IInvoice invoice = new InvoiceBLL().GetExpInvoiceById(InvoiceId);
 
             ViewState["InvoiceID"] = invoice.InvoiceID;
 
 
             // rdblAccountFor.SelectedValue = invoice.Account;
 
-            /*
+            
             if (invoice.AllInFreight)
-                rdblAllinFreight.SelectedValue = "1";
+                rdoAllInFreight.SelectedValue = "Yes";
             else
-                rdblAllinFreight.SelectedValue = "0";
-             */
+                rdoAllInFreight.SelectedValue = "No";
+             
 
             ddlBLno.SelectedValue = Convert.ToString(invoice.BLID);
 
@@ -1261,6 +1262,10 @@ namespace EMS.WebApp.Export
             txtGrossAmount.Text = invoice.GrossAmount.ToString();
              */
 
+
+            txtBLDate.Text = invoice.BLDate.ToShortDateString();
+            txtBooking.Text = invoice.BookingNo;
+            
             txtInvoiceDate.Text = invoice.InvoiceDate.ToShortDateString();
             txtInvoiceNo.Text = invoice.InvoiceNo;
             ddlInvoiceType.SelectedValue = invoice.InvoiceTypeID.ToString();
@@ -1291,6 +1296,11 @@ namespace EMS.WebApp.Export
             List<IChargeRate> chargeRates = new InvoiceBLL().GetExpInvoiceChargesById(InvoiceId);
 
             ViewState["CHARGERATE"] = chargeRates;
+            txtInvoiceDate.Enabled = false;
+            txtUSDExRate.Enabled = false;
+            btnAdd.Enabled = false;
+            txtROff.Text = (Math.Round(chargeRates.Sum(cr => cr.TotalAmount), 0) - chargeRates.Sum(cr => cr.TotalAmount)).ToString();
+            txtTotalAmount.Text = Math.Round(chargeRates.Sum(cr => cr.TotalAmount), 0).ToString();
 
             gvwInvoice.DataSource = chargeRates;
             gvwInvoice.DataBind();
@@ -1356,7 +1366,7 @@ namespace EMS.WebApp.Export
 
             LoadChargeDDL(DocType);
 
-            if (DocType == 3)
+            if (DocType == 9)
             {
 
                 ddlFChargeName.Enabled = true;

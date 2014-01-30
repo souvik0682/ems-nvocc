@@ -238,7 +238,8 @@ namespace EMS.WebApp.Transaction
                     aMoneyRecpt.Visible = false;
                     CrnLnk.Visible = false;
                     RcvdLnk.Visible = false;
-                    e.Row.Cells[0].ForeColor = System.Drawing.Color.Red;
+                    e.Row.ForeColor = System.Drawing.Color.Red;
+                    //e.Row.Cells[0].ForeColor = System.Drawing.Color.Red;
                 }
                 else
                 {
@@ -292,7 +293,7 @@ namespace EMS.WebApp.Transaction
         {
             
             Response.Redirect("~/Export/ExportInvoice.aspx?p1=" + GeneralFunctions.EncryptQueryString(txtBlNo.Text)
-                + "&p3=" + GeneralFunctions.EncryptQueryString("1")
+                + "&p3=" + GeneralFunctions.EncryptQueryString("19")
                 + "&p4="+ GeneralFunctions.EncryptQueryString("1")
             +"&p5=" + GeneralFunctions.EncryptQueryString(txtBookingNo.Text)
                  + "&p6=" + GeneralFunctions.EncryptQueryString(txtBLDate.Text)
@@ -305,7 +306,7 @@ namespace EMS.WebApp.Transaction
         {
             
             Response.Redirect("~/Export/ExportInvoice.aspx?p1=" + GeneralFunctions.EncryptQueryString(txtBlNo.Text)
-                + "&p3=" + GeneralFunctions.EncryptQueryString("3")
+                + "&p3=" + GeneralFunctions.EncryptQueryString("9")
                 + "&p4="+ GeneralFunctions.EncryptQueryString("3")
             +"&p5=" + GeneralFunctions.EncryptQueryString(txtBookingNo.Text)
                  + "&p6=" + GeneralFunctions.EncryptQueryString(txtBLDate.Text)

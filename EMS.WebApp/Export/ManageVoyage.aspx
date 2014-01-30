@@ -377,6 +377,9 @@
                     &nbsp;&nbsp;
                     <asp:Button ID="btnCancel" runat="server" CssClass="button" Text="Cancel" OnClick="btnBack_Click"
                         OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
+                    &nbsp;&nbsp;
+                    <asp:Button ID="btnVslClose" runat="server" CssClass="button" Text="Close Voyage" OnClick="btnClose_Click"
+                        OnClientClick="javascript:if(!confirm('Want to Close Voyage? No operation will be poosible after Closure.')) return false;" />
                     <br />
                     <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
                 </td>

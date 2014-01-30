@@ -153,12 +153,12 @@ namespace EMS.BLL
 
             return invoiceId;
         }
-        public long SaveInvoiceExp(IInvoice invoice, string misc, List<IChargeRate> expInvoiceCharge)
+        public long SaveInvoiceExp(IInvoice invoice, string misc, List<IChargeRate> expInvoiceCharge, int isedit)
         {
             long invoiceId = 0;
             int invoiceChargeId = 0;
 
-            invoiceId = InvoiceDAL.SaveExpInvoice(invoice, misc);
+            invoiceId = InvoiceDAL.SaveExpInvoice(invoice, misc, isedit);
 
             if (invoiceId > 0)
             {
@@ -177,6 +177,11 @@ namespace EMS.BLL
         public IInvoice GetInvoiceById(long InvoiceId)
         {
             return InvoiceDAL.GetInvoiceById(InvoiceId);
+        }
+
+        public IInvoice GetExpInvoiceById(long InvoiceId)
+        {
+            return InvoiceDAL.GetExpInvoiceById(InvoiceId);
         }
 
         public string GetInvoiceNoById(long InvoiceId)

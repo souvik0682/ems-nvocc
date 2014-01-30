@@ -9,9 +9,9 @@ namespace EMS.BLL
 {
   public  class ExportMonthlyReportBLL
     {
-      public DataTable GetExportMonthlyReport(int LocationID, int LineID, int VesselID, long VoyageID, DateTime StartDate, DateTime EndDate)
+      public DataTable GetExportMonthlyReport(int LocationID, int LineID, int VesselID, long VoyageID, DateTime StartDate, DateTime EndDate, int Val)
         {
-            return ExportMonthlyReportDAL.GetExportMonthlyReport(LocationID, LineID, VesselID, VoyageID, StartDate, EndDate);
+            return ExportMonthlyReportDAL.GetExportMonthlyReport(LocationID, LineID, VesselID, VoyageID, StartDate, EndDate, Val);
         }
     }
 }

@@ -21,6 +21,13 @@ namespace EMS.BLL
             voyageid = expVoyageDAL.SaveVoyage(voyage,isedit);            
             return voyageid;
         }
+
+        public long CloseVoyage(IexpVoyage voyage)
+        {
+            long ErrVal = 0;
+            ErrVal = expVoyageDAL.CloseVoyage(voyage);
+            return ErrVal;
+        }
         public int DeleteVoyage(int voyageid)
         {
             return expVoyageDAL.DeleteVoyage(voyageid);    

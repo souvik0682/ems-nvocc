@@ -314,6 +314,15 @@ namespace EMS.WebApp.Export
                     //ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
                     btnRemove.Visible = false;
                 }
+
+                if (DataBinder.Eval(e.Row.DataItem, "CloseVoyage").ToInt() == 1 && _roleId != 2)
+                {
+                    btnRemove.Visible = false;
+                    btnEdit.Visible  =false;
+                    e.Row.ForeColor = System.Drawing.Color.Red;
+                    //e.Row.Cells[0].ForeColor = System.Drawing.Color.Red;
+                }
+
             }
         }
       

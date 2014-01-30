@@ -34,7 +34,7 @@ namespace EMS.WebApp.Export
                 {
                     int BookingId = 0;
                     Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["BookingId"].ToString()), out BookingId);
-
+                    CheckUserAccess(BookingId);
                     //BookingId = 1; //For testing
 
                     if (BookingId > 0)
@@ -265,35 +265,47 @@ namespace EMS.WebApp.Export
             //UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
         }
 
-        private void CheckUserAccess()
+        private void CheckUserAccess(Int32 BookingID)
         {
-            if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+            // check for invoice existance
+            if (BookingBLL.GetExpInvoiceExists(BookingID) == true)
             {
-                IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
-
-                if (ReferenceEquals(user, null) || user.Id == 0)
-                {
-                    Response.Redirect("~/Login.aspx");
-                }
-
-                if (_canView == false)
-                {
-                    Response.Redirect("~/Unauthorized.aspx");
-                }
-
-                if (user.UserRole.Id != (int)UserRole.Admin)
-                {
-                    //ddlLocation.Enabled = false;
-                }
-                else
-                {
-                    //ddlLocation.Enabled = true;
-                }
+                btnSave.Visible = false;
+                btnDel.Visible = false;
             }
             else
             {
-                Response.Redirect("~/Login.aspx");
+                btnSave.Visible = true;
+                btnDel.Visible = true;
             }
+
+            //if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+            //{
+            //    IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+
+            //    if (ReferenceEquals(user, null) || user.Id == 0)
+            //    {
+            //        Response.Redirect("~/Login.aspx");
+            //    }
+
+            //    if (_canView == false)
+            //    {
+            //        Response.Redirect("~/Unauthorized.aspx");
+            //    }
+
+            //    if (user.UserRole.Id != (int)UserRole.Admin)
+            //    {
+            //        //ddlLocation.Enabled = false;
+            //    }
+            //    else
+            //    {
+            //        //ddlLocation.Enabled = true;
+            //    }
+            //}
+            //else
+            //{
+            //    Response.Redirect("~/Login.aspx");
+            //}
         }
 
         private void SaveBookingHeaderDetails(long BookingId)
@@ -478,7 +490,16 @@ namespace EMS.WebApp.Export
                     else
                     {
                         objData = BookingBLL.GetBookingChargesForEdit(bookingId);
-                        btnDel.Visible = true;
+                        if (BookingBLL.GetExpInvoiceExists(bookingId) == true)
+                        {
+                            btnDel.Visible = false;
+                        }
+                        else
+                        {
+                            btnDel.Visible = true;
+                        }
+
+                        //btnDel.Visible = true;
                     }
                 }
 

@@ -27,7 +27,7 @@ namespace EMS.WebApp.Export
 
         private int _userId = 0;
         private IUser oUser = null;
-        private bool _hasEditAccess = true;
+        private int _roleId = 0;
         private bool _canAdd = false;
         private bool _canEdit = false;
         private bool _canDelete = false;
@@ -202,7 +202,6 @@ namespace EMS.WebApp.Export
                 e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "FPOD"));
                 e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "SMAN"));
 
-
                 // Edit link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
                 btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00013");
@@ -212,7 +211,6 @@ namespace EMS.WebApp.Export
                 ImageButton btnStatus = (ImageButton)e.Row.FindControl("btnStatus");
                 btnStatus.ToolTip = ResourceManager.GetStringWithoutName("ERR00084");
                 btnStatus.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookingID"));
-
 
                 //Status link
                 ImageButton btnCharges = (ImageButton)e.Row.FindControl("btnCharges");
@@ -226,7 +224,6 @@ namespace EMS.WebApp.Export
                     btnStatus.ToolTip = ResourceManager.GetStringWithoutName("ERR00084");
                     btnCharges.ToolTip = ResourceManager.GetStringWithoutName("ERR00082");
                     //btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLID"));
-
                 }
                 else
                 {
@@ -242,12 +239,19 @@ namespace EMS.WebApp.Export
                 else
                 {
                     btnStatus.Visible = false;
-                    
                     //btnStatus.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
                 }
 
                 if (CalledFrom == 1)   // Sales Man
                     btnCharge.Enabled = false;
+
+               if (DataBinder.Eval(e.Row.DataItem, "CloseVoyage").ToInt() == 1 && _roleId != 2)
+               {
+                   btnCharge.Visible = false;
+                   btnEdit.Visible = false;
+                   e.Row.ForeColor = System.Drawing.Color.Red;
+                   //e.Row.Cells[0].ForeColor = System.Drawing.Color.Red;
+               }
                 //btnStatus.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
                 //btnCharges.OnClientClick = "javascript:alert('" + ResourceManager.GetStringWithoutName("ERR00008") + "');return false;";
                 
@@ -291,9 +295,18 @@ namespace EMS.WebApp.Export
         private void RetriveParameters()
         {
             _userId = UserBLL.GetLoggedInUserId();
-
+            IUser user = new UserBLL().GetUser(_userId);
             //Get user permission.
+            if (!ReferenceEquals(user, null))
+            {
+                if (!ReferenceEquals(user.UserRole, null))
+                {
+                    _roleId = user.UserRole.Id;
+                }
+
+            }
             UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+ 
         }
 
         private void CheckUserAccess()

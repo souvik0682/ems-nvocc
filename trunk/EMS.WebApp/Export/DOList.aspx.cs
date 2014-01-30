@@ -23,6 +23,7 @@ namespace EMS.WebApp.Export
         #region Private Member Variables
 
         private int _userId = 0;
+        private int _roleId = 0;
         private bool _canAdd = false;
         private bool _canEdit = false;
         private bool _canDelete = false;
@@ -151,6 +152,14 @@ namespace EMS.WebApp.Export
                 {
                     btnRemove.Style["display"] = "none";
                 }
+                if (DataBinder.Eval(e.Row.DataItem, "CloseVoyage").ToInt() == 1 && _roleId != 2)
+                {
+                    //btnCharge.Visible = false;
+                    btnEdit.Visible = false;
+                    btnRemove.Visible = false;
+                    e.Row.ForeColor = System.Drawing.Color.Red;
+                    //e.Row.Cells[0].ForeColor = System.Drawing.Color.Red;
+                }
 
                 // Print link
 
@@ -187,7 +196,16 @@ namespace EMS.WebApp.Export
         private void RetriveParameters()
         {
             _userId = UserBLL.GetLoggedInUserId();
+            IUser user = new UserBLL().GetUser(_userId);
 
+            if (!ReferenceEquals(user, null))
+            {
+                if (!ReferenceEquals(user.UserRole, null))
+                {
+                    _roleId = user.UserRole.Id;
+                }
+
+            }
             //Get user permission.
             UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
         }

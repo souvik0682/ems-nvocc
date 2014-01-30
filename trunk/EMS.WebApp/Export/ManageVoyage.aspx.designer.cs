@@ -400,6 +400,15 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.Button btnCancel;
         
         /// <summary>
+        /// btnVslClose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVslClose;
+        
+        /// <summary>
         /// lblMessage control.
         /// </summary>
         /// <remarks>

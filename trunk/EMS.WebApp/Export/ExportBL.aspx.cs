@@ -187,6 +187,15 @@ namespace EMS.WebApp.Export
                 ImageButton btnDashboard = (ImageButton)e.Row.FindControl("btnDashboard");
                 btnDashboard.ToolTip = "Go to Dashboard";
                 btnDashboard.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLNumber"));
+
+                if (DataBinder.Eval(e.Row.DataItem, "CloseVoyage").ToInt() == 1 && _roleId != 2)
+                {
+                    btnDashboard.Visible = false;
+                    btnEdit.Visible = false;
+                    btnRemove.Visible = false;
+                    e.Row.ForeColor = System.Drawing.Color.Red;
+                    //e.Row.Cells[0].ForeColor = System.Drawing.Color.Red;
+                }
             }
         }
 
@@ -224,6 +233,9 @@ namespace EMS.WebApp.Export
                     {
                         btnAdd.Visible = false;
                     }
+
+                    if (user.UserlocationSpecific == false)
+                        _userLocation = 0;
                 }
                 else
                     _userLocation = 0;

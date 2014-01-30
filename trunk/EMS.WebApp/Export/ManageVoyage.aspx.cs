@@ -44,6 +44,10 @@ namespace EMS.WebApp.Export
                         LoadForEdit(voyageId);
                         lblSailingDate.Visible = true;
                         txtSailingDateTime.Visible = true;
+                        if (txtSailingDateTime.Text == string.Empty)
+                        {
+                            btnVslClose.Visible = false;
+                        }
                     }
                 }
             }
@@ -120,7 +124,6 @@ namespace EMS.WebApp.Export
             //    ddlLocation.DataSource = dt;
             //    ddlLocation.DataBind();
             //}
-
         }
 
         private void LoadTerminalDDL()
@@ -238,9 +241,9 @@ namespace EMS.WebApp.Export
         private void BuildInvoiceEntity(IexpVoyage voyage)
         {           
             if (ViewState["VoyageID"] == null)                
-            voyage.VoyageID = 0;
+                voyage.VoyageID = 0;
             else
-            voyage.VoyageID = Convert.ToInt64(ViewState["VoyageID"]);
+                voyage.VoyageID = Convert.ToInt64(ViewState["VoyageID"]);
             //voyage.GatewayPort =Convert.ToInt32(hdnGateWayPort.Value);
             voyage.VesselID = Convert.ToInt32(ddlVessel.SelectedValue);
             //voyage.POD = Convert.ToInt32(hdnPOD.Value);
@@ -268,7 +271,6 @@ namespace EMS.WebApp.Export
             voyage.dtEdited = DateTime.Now;
             voyage.UserEdited = _userId;
             voyage.UserAdded = _userId;          
-
         }
         protected void btnBack_Click(object sender, EventArgs e)
         {
@@ -325,6 +327,28 @@ namespace EMS.WebApp.Export
             {
                 Response.Redirect("~/Login.aspx");
             }
+        }
+
+        protected void btnClose_Click(object sender, EventArgs e)
+        {
+            IexpVoyage voyage = new expVoyageEntity();
+            BuildInvoiceEntity(voyage);
+            long ErrVal = new expVoyageBLL().CloseVoyage(voyage);
+            if (ErrVal == 1)
+                lblMessage.Text = "Booking Charges Missing. Voyage not closed";
+
+            if (ErrVal == 2)
+                lblMessage.Text = "Container Mismatch Between Booking and BL. Voyage not closed";
+
+            if (ErrVal == 3)
+                lblMessage.Text = "Equipment and Booking Mismatch. Voyage not closed";
+
+            if (ErrVal == 4)
+                lblMessage.Text = "Freight Invoice Not Generated against BL. Voyage not closed";
+
+            if (ErrVal == 5)
+                lblMessage.Text = "No Booking against Vessel & Voyage. Voyage not closed";
+            
         }
     }
 }

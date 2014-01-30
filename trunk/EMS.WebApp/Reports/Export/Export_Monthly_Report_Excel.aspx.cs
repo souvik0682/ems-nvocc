@@ -68,8 +68,7 @@ namespace EMS.WebApp.Transaction
                 dt2 = Convert.ToDateTime(txtEndDt.Text.Trim());
                 if (hdnVessel.Value == "")
                     hdnVessel.Value = "0";
-                dtExcel = cls.GetExportMonthlyReport( Convert.ToInt32(ddlLoc.SelectedValue),Convert.ToInt32(ddlLine.SelectedValue),
-                Convert.ToInt32(hdnVessel.Value), Convert.ToInt64(ddlVoyage.SelectedValue),dt1,dt2);
+
                 int val=0;
                 string strFileName = string.Empty;
                 if (ddlReport.SelectedValue.ToString() == "Brokerage")
@@ -92,6 +91,8 @@ namespace EMS.WebApp.Transaction
                      val = 4;
                      strFileName = "Export_Monthly_Reports_STax.xls";
                 }
+                dtExcel = cls.GetExportMonthlyReport(Convert.ToInt32(ddlLoc.SelectedValue), Convert.ToInt32(ddlLine.SelectedValue),
+                Convert.ToInt32(hdnVessel.Value), Convert.ToInt64(ddlVoyage.SelectedValue), dt1, dt2, val);
                 removerows(dtExcel, val);
                 #region alldata
                 //dtExcel.Columns.Remove("fk_LocationID");
@@ -216,6 +217,8 @@ namespace EMS.WebApp.Transaction
                     dtExcel.Columns.Remove("RefundTo");
                     dtExcel.Columns.Remove("invCur");
                     dtExcel.Columns.Remove("Brokerage");
+                    dtExcel.Columns.Remove("ExpCommPer");
+                    dtExcel.Columns.Remove("ExpComm");
                 }
                 else if (val == 2)
                 {
@@ -236,6 +239,9 @@ namespace EMS.WebApp.Transaction
                     dtExcel.Columns.Remove("RefAmt");
                     dtExcel.Columns.Remove("Commodity");
                     dtExcel.Columns.Remove("RefundTo");
+                    dtExcel.Columns.Remove("CommPer");
+                    dtExcel.Columns.Remove("CommAmt");
+                    //dtExcel.Columns.Remove("ReceiptAmt");
                 }
                 else if (val == 3)
                 {
@@ -255,7 +261,9 @@ namespace EMS.WebApp.Transaction
                     dtExcel.Columns.Remove("Stax");
                     dtExcel.Columns.Remove("InvoiceNo");
                     dtExcel.Columns.Remove("InvoiceDate");
-                    dtExcel.Columns.Remove("ReceiptAmt");
+                    //dtExcel.Columns.Remove("ReceiptAmt");
+                    dtExcel.Columns.Remove("ExpCommPer");
+                    dtExcel.Columns.Remove("ExpComm");
                     //dtExcel.Columns.Remove("RefundTo");
                 }
                 else if (val == 4)
@@ -277,6 +285,8 @@ namespace EMS.WebApp.Transaction
                     dtExcel.Columns.Remove("ROE");
                     dtExcel.Columns.Remove("RefAmt");
                     dtExcel.Columns.Remove("RefundTo");
+                    dtExcel.Columns.Remove("ExpCommPer");
+                    dtExcel.Columns.Remove("ExpComm");
                 }
             }
         }

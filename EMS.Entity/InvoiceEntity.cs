@@ -35,6 +35,7 @@ namespace EMS.Entity
         public string BLNo { get; set; }
         public DateTime BLDate { get; set; }
         public decimal BillAmount { get; set; }
+        public string BookingNo { get; set; }
 
         public List<IChargeRate> ChargeRates { get; set; }
 
@@ -139,13 +140,17 @@ namespace EMS.Entity
                 if (reader["BLNo"] != DBNull.Value)
                     BLNo = Convert.ToString(reader["BLNo"]);
 
-            if (ColumnExists(reader, "BLDate"))
-                if (reader["BLDate"] != DBNull.Value)
-                    BLDate = Convert.ToDateTime(reader["BLDate"]);
+            if (ColumnExists(reader, "ExpBLDate"))
+                if (reader["ExpBLDate"] != DBNull.Value)
+                    BLDate = Convert.ToDateTime(reader["ExpBLDate"]);
 
             if (ColumnExists(reader, "BillAmount"))
                 if (reader["BillAmount"] != DBNull.Value)
                     BillAmount = Convert.ToDecimal(reader["BillAmount"]);
+
+            if (ColumnExists(reader, "BookingNo"))
+                if (reader["BookingNo"] != DBNull.Value)
+                    BookingNo = Convert.ToString(reader["BookingNo"]);
         }
 
         public bool ColumnExists(IDataReader reader, string columnName)

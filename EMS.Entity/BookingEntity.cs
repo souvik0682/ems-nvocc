@@ -350,6 +350,7 @@ namespace EMS.Entity
 
         public int Customer { get; set; }
         public string CustomerERAS { get; set; }
+        public bool CloseVoyage { get; set; }
 
         public BookingEntity(DataTableReader reader)
         {
@@ -489,6 +490,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "BookingParty"))
                 if (reader["BookingParty"] != DBNull.Value)
                     this.BookingParty = Convert.ToString(reader["BookingParty"]);
+
+            if (ColumnExists(reader, "CloseVoyage"))
+                if (reader["CloseVoyage"] != DBNull.Value)
+                    this.CloseVoyage = Convert.ToBoolean(reader["CloseVoyage"]);
 
             //this.NVOCC = Convert.ToString(reader["LineName"]);
             //this.FPOD = Convert.ToString(reader["FPortName"]);

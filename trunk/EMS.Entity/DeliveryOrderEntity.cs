@@ -88,6 +88,7 @@ namespace EMS.Entity
             get;
             set;
         }
+        public bool CloseVoyage { get; set; }
         #endregion
 
         #region Constructors
@@ -112,6 +113,9 @@ namespace EMS.Entity
             if (ColumnExists(reader, "LeaseID"))
                 if (reader["LeaseID"] != DBNull.Value)
                     this.LeaseID = Convert.ToInt32(reader["LeaseID"]);
+            if (ColumnExists(reader, "CloseVoyage"))
+                if (reader["CloseVoyage"] != DBNull.Value)
+                    CloseVoyage = Convert.ToBoolean(reader["CloseVoyage"]);
 
         }
 

@@ -45,6 +45,7 @@ namespace EMS.Entity
         public DateTime ? BLReleaseDate { get; set; }
         public int fk_FPOD { get; set; }
         public bool BLthruEdge { get; set; }
+        public bool CloseVoyage { get; set; }
 
         //Other Information Tab
         public string ShipperName { get; set; }
@@ -314,6 +315,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "BLStatus"))
                 if (reader["BLStatus"] != DBNull.Value)
                     BLStatus = Convert.ToBoolean(reader["BLStatus"]);
+
+            if (ColumnExists(reader, "CloseVoyage"))
+                if (reader["CloseVoyage"] != DBNull.Value)
+                    CloseVoyage = Convert.ToBoolean(reader["CloseVoyage"]);
         }
 
         public bool ColumnExists(IDataReader reader, string columnName)

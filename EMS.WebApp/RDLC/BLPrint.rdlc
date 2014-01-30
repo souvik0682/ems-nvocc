@@ -1585,6 +1585,40 @@
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
+        <Textbox Name="Textbox15">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Label>Pages</Label>
+                  <Value>="Page(s): " + trim(cStr(Globals!PageNumber)) + "/" + trim(cStr(Globals!TotalPages))</Value>
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>9pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox15</rd:DefaultName>
+          <Top>1.60549cm</Top>
+          <Left>13.93508cm</Left>
+          <Height>0.6cm</Height>
+          <Width>4.25139cm</Width>
+          <ZIndex>10</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
       </ReportItems>
       <Style>
         <Border>
@@ -1735,6 +1769,9 @@
           <Height>0.6cm</Height>
           <Width>8.61458cm</Width>
           <ZIndex>1</ZIndex>
+          <Visibility>
+            <Hidden>=Parameters!ReportType.Value="D"</Hidden>
+          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1802,7 +1839,7 @@
                 </TextRun>
                 <TextRun>
                   <Label>ExpBLDate</Label>
-                  <Value>=IIf(First(Fields!BLClause.Value, "DSBLPrinting") = "S", Format(First(Fields!ExpBLDate.Value, "DSBLPrinting"), "dd-MM-yyyy"), First(Fields!BLClauseDate.Value, "DSBLPrinting"))</Value>
+                  <Value>=IIf(First(Fields!BLClause.Value, "DSBLPrinting")="SHIPPED ON BOARD", Format(First(Fields!ExpBLDate.Value, "DSBLPrinting"), "dd-MM-yyyy"), Format(First(Fields!BLClauseDate.Value, "DSBLPrinting"), "dd-MM-yyyy"))</Value>
                   <Style>
                     <FontFamily>Calibri</FontFamily>
                     <FontSize>9pt</FontSize>
@@ -1818,6 +1855,9 @@
           <Height>0.54709cm</Height>
           <Width>5.10646cm</Width>
           <ZIndex>3</ZIndex>
+          <Visibility>
+            <Hidden>=Parameters!ReportType.Value="D"</Hidden>
+          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1887,6 +1927,9 @@
           <Height>0.6cm</Height>
           <Width>4.39249cm</Width>
           <ZIndex>5</ZIndex>
+          <Visibility>
+            <Hidden>true</Hidden>
+          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>

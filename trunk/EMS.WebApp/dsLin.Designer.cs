@@ -373,6 +373,8 @@ namespace EMS.WebApp {
             
             private global::System.Data.DataColumn columnCntrtype;
             
+            private global::System.Data.DataColumn columnPPCC;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public rptFrieghtManifestDataTable() {
@@ -784,6 +786,14 @@ namespace EMS.WebApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PPCCColumn {
+                get {
+                    return this.columnPPCC;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -866,7 +876,8 @@ namespace EMS.WebApp {
                         string ManifestRateCC, 
                         string CurrencyCode, 
                         string CntrSize, 
-                        string Cntrtype) {
+                        string Cntrtype, 
+                        string PPCC) {
                 rptFrieghtManifestRow rowrptFrieghtManifestRow = ((rptFrieghtManifestRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         fk_LocationID,
@@ -915,7 +926,8 @@ namespace EMS.WebApp {
                         ManifestRateCC,
                         CurrencyCode,
                         CntrSize,
-                        Cntrtype};
+                        Cntrtype,
+                        PPCC};
                 rowrptFrieghtManifestRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowrptFrieghtManifestRow);
                 return rowrptFrieghtManifestRow;
@@ -985,6 +997,7 @@ namespace EMS.WebApp {
                 this.columnCurrencyCode = base.Columns["CurrencyCode"];
                 this.columnCntrSize = base.Columns["CntrSize"];
                 this.columnCntrtype = base.Columns["Cntrtype"];
+                this.columnPPCC = base.Columns["PPCC"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1084,6 +1097,8 @@ namespace EMS.WebApp {
                 base.Columns.Add(this.columnCntrSize);
                 this.columnCntrtype = new global::System.Data.DataColumn("Cntrtype", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCntrtype);
+                this.columnPPCC = new global::System.Data.DataColumn("PPCC", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPPCC);
                 this.columnfk_LocationID.AllowDBNull = false;
                 this.columnLocationName.ReadOnly = true;
                 this.columnLocationName.MaxLength = 50;
@@ -1151,6 +1166,7 @@ namespace EMS.WebApp {
                 this.columnCntrSize.MaxLength = 1000;
                 this.columnCntrtype.ReadOnly = true;
                 this.columnCntrtype.MaxLength = 1000;
+                this.columnPPCC.MaxLength = 1;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2015,6 +2031,22 @@ namespace EMS.WebApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string PPCC {
+                get {
+                    try {
+                        return ((string)(this[this.tablerptFrieghtManifest.PPCCColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PPCC\' in table \'rptFrieghtManifest\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablerptFrieghtManifest.PPCCColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsLocationNameNull() {
                 return this.IsNull(this.tablerptFrieghtManifest.LocationNameColumn);
             }
@@ -2504,6 +2536,18 @@ namespace EMS.WebApp {
             public void SetCntrtypeNull() {
                 this[this.tablerptFrieghtManifest.CntrtypeColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPPCCNull() {
+                return this.IsNull(this.tablerptFrieghtManifest.PPCCColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPPCCNull() {
+                this[this.tablerptFrieghtManifest.PPCCColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -2712,6 +2756,7 @@ namespace EMS.WebApp.dsLinTableAdapters {
             tableMapping.ColumnMappings.Add("CurrencyCode", "CurrencyCode");
             tableMapping.ColumnMappings.Add("CntrSize", "CntrSize");
             tableMapping.ColumnMappings.Add("Cntrtype", "Cntrtype");
+            tableMapping.ColumnMappings.Add("PPCC", "PPCC");
             this._adapter.TableMappings.Add(tableMapping);
         }
         

@@ -20,9 +20,9 @@ namespace EMS.WebApp {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("DSBLPrinting")]
+    [global::System.Xml.Serialization.XmlRootAttribute("dsBLPrinting")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class DSBLPrinting : global::System.Data.DataSet {
+    public partial class dsBLPrinting : global::System.Data.DataSet {
         
         private prcGetBLPrintingDataTable tableprcGetBLPrinting;
         
@@ -30,7 +30,7 @@ namespace EMS.WebApp {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public DSBLPrinting() {
+        public dsBLPrinting() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace EMS.WebApp {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected DSBLPrinting(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected dsBLPrinting(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -127,7 +127,7 @@ namespace EMS.WebApp {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            DSBLPrinting cln = ((DSBLPrinting)(base.Clone()));
+            dsBLPrinting cln = ((dsBLPrinting)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -199,9 +199,9 @@ namespace EMS.WebApp {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "DSBLPrinting";
+            this.DataSetName = "dsBLPrinting";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/DSBLPrinting.xsd";
+            this.Namespace = "http://tempuri.org/dsBLPrinting.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableprcGetBLPrinting = new prcGetBLPrintingDataTable();
@@ -225,7 +225,7 @@ namespace EMS.WebApp {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            DSBLPrinting ds = new DSBLPrinting();
+            dsBLPrinting ds = new dsBLPrinting();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -321,6 +321,8 @@ namespace EMS.WebApp {
             
             private global::System.Data.DataColumn columnAgentAddress;
             
+            private global::System.Data.DataColumn columnPhoneFax;
+            
             private global::System.Data.DataColumn columnVesselName;
             
             private global::System.Data.DataColumn columnVoyageNo;
@@ -333,13 +335,19 @@ namespace EMS.WebApp {
             
             private global::System.Data.DataColumn columnShipmentMode;
             
-            private global::System.Data.DataColumn columnContainers;
+            private global::System.Data.DataColumn columnShipmentModePrint;
+            
+            private global::System.Data.DataColumn columnCntr;
             
             private global::System.Data.DataColumn columnNoofBLs;
             
             private global::System.Data.DataColumn columnGRWT;
             
             private global::System.Data.DataColumn columnNetWt;
+            
+            private global::System.Data.DataColumn columnCBM;
+            
+            private global::System.Data.DataColumn columnBLClauseDate;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -544,6 +552,14 @@ namespace EMS.WebApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PhoneFaxColumn {
+                get {
+                    return this.columnPhoneFax;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn VesselNameColumn {
                 get {
                     return this.columnVesselName;
@@ -592,9 +608,17 @@ namespace EMS.WebApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ContainersColumn {
+            public global::System.Data.DataColumn ShipmentModePrintColumn {
                 get {
-                    return this.columnContainers;
+                    return this.columnShipmentModePrint;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CntrColumn {
+                get {
+                    return this.columnCntr;
                 }
             }
             
@@ -619,6 +643,22 @@ namespace EMS.WebApp {
             public global::System.Data.DataColumn NetWtColumn {
                 get {
                     return this.columnNetWt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CBMColumn {
+                get {
+                    return this.columnCBM;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BLClauseDateColumn {
+                get {
+                    return this.columnBLClauseDate;
                 }
             }
             
@@ -681,16 +721,20 @@ namespace EMS.WebApp {
                         string FreightPrePayToPay, 
                         string AgentName, 
                         string AgentAddress, 
+                        string PhoneFax, 
                         string VesselName, 
                         string VoyageNo, 
                         string FreightPayableAt, 
                         string BLClause, 
                         string ShipmentType, 
                         string ShipmentMode, 
-                        string Containers, 
+                        string ShipmentModePrint, 
+                        string Cntr, 
                         string NoofBLs, 
                         decimal GRWT, 
-                        decimal NetWt) {
+                        decimal NetWt, 
+                        decimal CBM, 
+                        System.DateTime BLClauseDate) {
                 prcGetBLPrintingRow rowprcGetBLPrintingRow = ((prcGetBLPrintingRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         fk_LocationID,
@@ -714,16 +758,20 @@ namespace EMS.WebApp {
                         FreightPrePayToPay,
                         AgentName,
                         AgentAddress,
+                        PhoneFax,
                         VesselName,
                         VoyageNo,
                         FreightPayableAt,
                         BLClause,
                         ShipmentType,
                         ShipmentMode,
-                        Containers,
+                        ShipmentModePrint,
+                        Cntr,
                         NoofBLs,
                         GRWT,
-                        NetWt};
+                        NetWt,
+                        CBM,
+                        BLClauseDate};
                 rowprcGetBLPrintingRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowprcGetBLPrintingRow);
                 return rowprcGetBLPrintingRow;
@@ -767,16 +815,20 @@ namespace EMS.WebApp {
                 this.columnFreightPrePayToPay = base.Columns["FreightPrePayToPay"];
                 this.columnAgentName = base.Columns["AgentName"];
                 this.columnAgentAddress = base.Columns["AgentAddress"];
+                this.columnPhoneFax = base.Columns["PhoneFax"];
                 this.columnVesselName = base.Columns["VesselName"];
                 this.columnVoyageNo = base.Columns["VoyageNo"];
                 this.columnFreightPayableAt = base.Columns["FreightPayableAt"];
                 this.columnBLClause = base.Columns["BLClause"];
                 this.columnShipmentType = base.Columns["ShipmentType"];
                 this.columnShipmentMode = base.Columns["ShipmentMode"];
-                this.columnContainers = base.Columns["Containers"];
+                this.columnShipmentModePrint = base.Columns["ShipmentModePrint"];
+                this.columnCntr = base.Columns["Cntr"];
                 this.columnNoofBLs = base.Columns["NoofBLs"];
                 this.columnGRWT = base.Columns["GRWT"];
                 this.columnNetWt = base.Columns["NetWt"];
+                this.columnCBM = base.Columns["CBM"];
+                this.columnBLClauseDate = base.Columns["BLClauseDate"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -824,6 +876,8 @@ namespace EMS.WebApp {
                 base.Columns.Add(this.columnAgentName);
                 this.columnAgentAddress = new global::System.Data.DataColumn("AgentAddress", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAgentAddress);
+                this.columnPhoneFax = new global::System.Data.DataColumn("PhoneFax", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPhoneFax);
                 this.columnVesselName = new global::System.Data.DataColumn("VesselName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVesselName);
                 this.columnVoyageNo = new global::System.Data.DataColumn("VoyageNo", typeof(string), null, global::System.Data.MappingType.Element);
@@ -836,14 +890,20 @@ namespace EMS.WebApp {
                 base.Columns.Add(this.columnShipmentType);
                 this.columnShipmentMode = new global::System.Data.DataColumn("ShipmentMode", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnShipmentMode);
-                this.columnContainers = new global::System.Data.DataColumn("Containers", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnContainers);
+                this.columnShipmentModePrint = new global::System.Data.DataColumn("ShipmentModePrint", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnShipmentModePrint);
+                this.columnCntr = new global::System.Data.DataColumn("Cntr", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCntr);
                 this.columnNoofBLs = new global::System.Data.DataColumn("NoofBLs", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNoofBLs);
                 this.columnGRWT = new global::System.Data.DataColumn("GRWT", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnGRWT);
                 this.columnNetWt = new global::System.Data.DataColumn("NetWt", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNetWt);
+                this.columnCBM = new global::System.Data.DataColumn("CBM", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCBM);
+                this.columnBLClauseDate = new global::System.Data.DataColumn("BLClauseDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBLClauseDate);
                 this.columnfk_LocationID.AllowDBNull = false;
                 this.columnLocationName.ReadOnly = true;
                 this.columnLocationName.MaxLength = 50;
@@ -862,11 +922,13 @@ namespace EMS.WebApp {
                 this.columnPlaceofDischarge.MaxLength = 25;
                 this.columnFinalDelivery.MaxLength = 25;
                 this.columnMarksNumbers.MaxLength = 300;
-                this.columnGoodsDescription.MaxLength = 300;
+                this.columnGoodsDescription.MaxLength = 3000;
                 this.columnFreightPrePayToPay.MaxLength = 1;
                 this.columnAgentName.AllowDBNull = false;
-                this.columnAgentName.MaxLength = 50;
+                this.columnAgentName.MaxLength = 100;
                 this.columnAgentAddress.MaxLength = 300;
+                this.columnPhoneFax.ReadOnly = true;
+                this.columnPhoneFax.MaxLength = 213;
                 this.columnVesselName.ReadOnly = true;
                 this.columnVesselName.MaxLength = 2147483647;
                 this.columnVoyageNo.ReadOnly = true;
@@ -878,11 +940,13 @@ namespace EMS.WebApp {
                 this.columnShipmentType.ReadOnly = true;
                 this.columnShipmentType.MaxLength = 7;
                 this.columnShipmentMode.MaxLength = 10;
-                this.columnContainers.ReadOnly = true;
-                this.columnContainers.MaxLength = 400;
+                this.columnShipmentModePrint.MaxLength = 10;
+                this.columnCntr.ReadOnly = true;
+                this.columnCntr.MaxLength = 400;
                 this.columnNoofBLs.ReadOnly = true;
                 this.columnNoofBLs.MaxLength = 8;
                 this.columnGRWT.ReadOnly = true;
+                this.columnBLClauseDate.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -950,7 +1014,7 @@ namespace EMS.WebApp {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DSBLPrinting ds = new DSBLPrinting();
+                dsBLPrinting ds = new dsBLPrinting();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1336,6 +1400,22 @@ namespace EMS.WebApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string PhoneFax {
+                get {
+                    try {
+                        return ((string)(this[this.tableprcGetBLPrinting.PhoneFaxColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PhoneFax\' in table \'prcGetBLPrinting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableprcGetBLPrinting.PhoneFaxColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string VesselName {
                 get {
                     try {
@@ -1432,17 +1512,33 @@ namespace EMS.WebApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Containers {
+            public string ShipmentModePrint {
                 get {
                     try {
-                        return ((string)(this[this.tableprcGetBLPrinting.ContainersColumn]));
+                        return ((string)(this[this.tableprcGetBLPrinting.ShipmentModePrintColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Containers\' in table \'prcGetBLPrinting\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ShipmentModePrint\' in table \'prcGetBLPrinting\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableprcGetBLPrinting.ContainersColumn] = value;
+                    this[this.tableprcGetBLPrinting.ShipmentModePrintColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Cntr {
+                get {
+                    try {
+                        return ((string)(this[this.tableprcGetBLPrinting.CntrColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Cntr\' in table \'prcGetBLPrinting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableprcGetBLPrinting.CntrColumn] = value;
                 }
             }
             
@@ -1491,6 +1587,38 @@ namespace EMS.WebApp {
                 }
                 set {
                     this[this.tableprcGetBLPrinting.NetWtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal CBM {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableprcGetBLPrinting.CBMColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CBM\' in table \'prcGetBLPrinting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableprcGetBLPrinting.CBMColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime BLClauseDate {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableprcGetBLPrinting.BLClauseDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BLClauseDate\' in table \'prcGetBLPrinting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableprcGetBLPrinting.BLClauseDateColumn] = value;
                 }
             }
             
@@ -1688,6 +1816,18 @@ namespace EMS.WebApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPhoneFaxNull() {
+                return this.IsNull(this.tableprcGetBLPrinting.PhoneFaxColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPhoneFaxNull() {
+                this[this.tableprcGetBLPrinting.PhoneFaxColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsVesselNameNull() {
                 return this.IsNull(this.tableprcGetBLPrinting.VesselNameColumn);
             }
@@ -1760,14 +1900,26 @@ namespace EMS.WebApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsContainersNull() {
-                return this.IsNull(this.tableprcGetBLPrinting.ContainersColumn);
+            public bool IsShipmentModePrintNull() {
+                return this.IsNull(this.tableprcGetBLPrinting.ShipmentModePrintColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetContainersNull() {
-                this[this.tableprcGetBLPrinting.ContainersColumn] = global::System.Convert.DBNull;
+            public void SetShipmentModePrintNull() {
+                this[this.tableprcGetBLPrinting.ShipmentModePrintColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCntrNull() {
+                return this.IsNull(this.tableprcGetBLPrinting.CntrColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCntrNull() {
+                this[this.tableprcGetBLPrinting.CntrColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1804,6 +1956,30 @@ namespace EMS.WebApp {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNetWtNull() {
                 this[this.tableprcGetBLPrinting.NetWtColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCBMNull() {
+                return this.IsNull(this.tableprcGetBLPrinting.CBMColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCBMNull() {
+                this[this.tableprcGetBLPrinting.CBMColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsBLClauseDateNull() {
+                return this.IsNull(this.tableprcGetBLPrinting.BLClauseDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetBLClauseDateNull() {
+                this[this.tableprcGetBLPrinting.BLClauseDateColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1842,7 +2018,7 @@ namespace EMS.WebApp {
         }
     }
 }
-namespace EMS.WebApp.DSBLPrintingTableAdapters {
+namespace EMS.WebApp.dsBLPrintingTableAdapters {
     
     
     /// <summary>
@@ -1993,10 +2169,15 @@ namespace EMS.WebApp.DSBLPrintingTableAdapters {
             tableMapping.ColumnMappings.Add("BLClause", "BLClause");
             tableMapping.ColumnMappings.Add("ShipmentType", "ShipmentType");
             tableMapping.ColumnMappings.Add("ShipmentMode", "ShipmentMode");
-            tableMapping.ColumnMappings.Add("Containers", "Containers");
+            tableMapping.ColumnMappings.Add("ShipmentModePrint", "ShipmentModePrint");
+            tableMapping.ColumnMappings.Add("Cntr", "Cntr");
             tableMapping.ColumnMappings.Add("NoofBLs", "NoofBLs");
             tableMapping.ColumnMappings.Add("GRWT", "GRWT");
             tableMapping.ColumnMappings.Add("NetWt", "NetWt");
+            tableMapping.ColumnMappings.Add("PHONEFAX", "PHONEFAX");
+            tableMapping.ColumnMappings.Add("PhoneFax", "PhoneFax");
+            tableMapping.ColumnMappings.Add("CBM", "CBM");
+            tableMapping.ColumnMappings.Add("BLClauseDate", "BLClauseDate");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -2013,7 +2194,7 @@ namespace EMS.WebApp.DSBLPrintingTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "exp.prcGetBLPrinting";
+            this._commandCollection[0].CommandText = "exp.prcGetBLPrintingCL";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BLID", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -2023,7 +2204,7 @@ namespace EMS.WebApp.DSBLPrintingTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DSBLPrinting.prcGetBLPrintingDataTable dataTable, string BLID) {
+        public virtual int Fill(dsBLPrinting.prcGetBLPrintingDataTable dataTable, string BLID) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((BLID == null)) {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
@@ -2042,7 +2223,7 @@ namespace EMS.WebApp.DSBLPrintingTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DSBLPrinting.prcGetBLPrintingDataTable GetData(string BLID) {
+        public virtual dsBLPrinting.prcGetBLPrintingDataTable GetData(string BLID) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((BLID == null)) {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
@@ -2050,7 +2231,7 @@ namespace EMS.WebApp.DSBLPrintingTableAdapters {
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = ((string)(BLID));
             }
-            DSBLPrinting.prcGetBLPrintingDataTable dataTable = new DSBLPrinting.prcGetBLPrintingDataTable();
+            dsBLPrinting.prcGetBLPrintingDataTable dataTable = new dsBLPrinting.prcGetBLPrintingDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -2124,7 +2305,7 @@ namespace EMS.WebApp.DSBLPrintingTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateUpdatedRows(DSBLPrinting dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(dsBLPrinting dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -2134,7 +2315,7 @@ namespace EMS.WebApp.DSBLPrintingTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateInsertedRows(DSBLPrinting dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(dsBLPrinting dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -2144,7 +2325,7 @@ namespace EMS.WebApp.DSBLPrintingTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateDeletedRows(DSBLPrinting dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(dsBLPrinting dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             return result;
         }
@@ -2178,7 +2359,7 @@ namespace EMS.WebApp.DSBLPrintingTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public virtual int UpdateAll(DSBLPrinting dataSet) {
+        public virtual int UpdateAll(dsBLPrinting dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }

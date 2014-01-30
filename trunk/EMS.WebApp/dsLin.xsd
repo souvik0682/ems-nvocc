@@ -9,7 +9,7 @@
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="rptFrieghtManifestTableAdapter" GeneratorDataComponentClassName="rptFrieghtManifestTableAdapter" Name="rptFrieghtManifest" UserDataComponentName="rptFrieghtManifestTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="DbConnectionString (Web.config)" DbObjectName="Liner09112013.exp.rptFrieghtManifest" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="DbConnectionString (Web.config)" DbObjectName="Liner20112013.exp.rptFrieghtManifest" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>exp.rptFrieghtManifest</CommandText>
@@ -69,6 +69,7 @@
               <Mapping SourceColumn="CurrencyCode" DataSetColumn="CurrencyCode" />
               <Mapping SourceColumn="CntrSize" DataSetColumn="CntrSize" />
               <Mapping SourceColumn="Cntrtype" DataSetColumn="Cntrtype" />
+              <Mapping SourceColumn="PPCC" DataSetColumn="PPCC" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -313,6 +314,13 @@
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PPCC" msprop:Generator_ColumnVarNameInTable="columnPPCC" msprop:Generator_ColumnPropNameInRow="PPCC" msprop:Generator_ColumnPropNameInTable="PPCCColumn" msprop:Generator_UserColumnName="PPCC" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

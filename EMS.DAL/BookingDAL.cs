@@ -576,6 +576,25 @@ namespace EMS.DAL
 
          }
 
+        public static bool GetExpInvoiceExists(int BookingID)
+        {
+            string ProcName = "[exp].[prcExpInvoiceExist]";
+            bool exi = true;
+            //DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+            //string Result = "";
+
+            using (DbQuery oDq = new DbQuery(ProcName))
+            {
+                oDq.AddIntegerParam("@BookingID", BookingID);
+                oDq.AddIntegerParam("@RESULT", 0, QueryParameterDirection.Output);
+
+                exi = Convert.ToBoolean(oDq.GetScalar());
+            }
+
+            return exi;
+
+        }
+
         public static string GetBLFromEDGE(int NVOCCID)
         {
             string ProcName = "[exp].[prcGetBLFromEDGE]";

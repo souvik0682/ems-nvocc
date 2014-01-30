@@ -75,6 +75,28 @@ namespace EMS.DAL
 
             return voyageid;
         }
+
+        public static long CloseVoyage(IexpVoyage voyage)
+        {
+            string strExecution = "[exp].[prcCloseVoyage]";
+            long ErrVal = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@userID", voyage.UserAdded);
+                oDq.AddBigIntegerParam("@pk_VoyageID", voyage.VoyageID);
+                oDq.AddBigIntegerParam("@fk_VesselID", voyage.VesselID);
+                oDq.AddIntegerParam("@fk_LocationID", voyage.LocationID);
+                oDq.AddBigIntegerParam("@fk_LoadPortID", voyage.POL);
+                oDq.AddIntegerParam("@Result", 0, QueryParameterDirection.Output);
+                oDq.RunActionQuery();
+                ErrVal = Convert.ToInt32(oDq.GetParaValue("@RESULT"));
+                //voyageid = Convert.ToInt64(oDq.GetScalar());
+            }
+
+            return ErrVal;
+        }
+
         public static DataTable GetTerminals(long LocationId)
         {
             string strExecution = "[exp].[usp_Voyage_GetTerminals]";

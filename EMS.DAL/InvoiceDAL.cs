@@ -389,7 +389,7 @@ namespace EMS.DAL
         }
 
 
-        public static long SaveExpInvoice(IInvoice invoice, string misc)
+        public static long SaveExpInvoice(IInvoice invoice, string misc, int isedit)
         {
             string strExecution = "[exp].[usp_Exp_Invoice_Save]";
             long invoiceId = 0;
@@ -425,7 +425,7 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@UserLastEdited", invoice.UserLastEdited);
                 oDq.AddDateTimeParam("@AddedOn", invoice.AddedOn);
                 oDq.AddDateTimeParam("@EditedOn", invoice.EditedOn);
-
+               
                 invoiceId = Convert.ToInt64(oDq.GetScalar());
             }
 
@@ -507,6 +507,28 @@ namespace EMS.DAL
         public static IInvoice GetInvoiceById(long InvoiceId)
         {
             string strExecution = "usp_Invoice_GetInvoiceById";
+            IInvoice invoice = null;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@InvoiceID", InvoiceId);
+
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    invoice = new InvoiceEntity(reader);
+                }
+
+                reader.Close();
+            }
+
+            return invoice;
+        }
+
+        public static IInvoice GetExpInvoiceById(long InvoiceId)
+        {
+            string strExecution = "exp.usp_Invoice_GetExpInvoiceById";
             IInvoice invoice = null;
 
             using (DbQuery oDq = new DbQuery(strExecution))
@@ -703,7 +725,7 @@ namespace EMS.DAL
         public static List<IChargeRate> GetExpInvoiceCharges(long BlId, int ChargeID, int TerminalID, int DocTypeId, DateTime InvoiceDate)
         {
             string strExecution;
-            if (DocTypeId == 1)
+            if (DocTypeId == 19)
                 strExecution = "[exp].[usp_ExpInvFrt_Charge]";
             else
                 strExecution = "[exp].[usp_ExpInvoice_Charge]";

@@ -106,7 +106,7 @@
                     Voyage:<span class="errormessage" style="width: 10%">*</span>
                 </td>
                 <td align="left" style="width: 35%">
-                    <asp:DropDownList ID="ddlVoyage" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlVoyage_SelectedIndexChanged" Width="70px">
+                    <asp:DropDownList ID="ddlVoyage" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlVoyage_SelectedIndexChanged" Width="135px">
                         <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                     </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="rfvVoyage" runat="server" CssClass="errormessage"

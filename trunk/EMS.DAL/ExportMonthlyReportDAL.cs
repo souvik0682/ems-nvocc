@@ -9,7 +9,7 @@ namespace EMS.DAL
 {
    public class ExportMonthlyReportDAL
     {
-       public static DataTable GetExportMonthlyReport(int LocationID, int LineID, int VesselID, long VoyageID, DateTime StartDate, DateTime EndDate)
+       public static DataTable GetExportMonthlyReport(int LocationID, int LineID, int VesselID, long VoyageID, DateTime StartDate, DateTime EndDate, int Val)
         {
             string strExecution = "[exp].[prcExpMonthlyReport]";
             DataTable dt = new DataTable();
@@ -21,6 +21,7 @@ namespace EMS.DAL
                 oDq.AddBigIntegerParam("@VOYAGEID", VoyageID);
                 oDq.AddDateTimeParam("@StartDate", StartDate);
                 oDq.AddDateTimeParam("@EndDate", EndDate);
+                oDq.AddIntegerParam("@ReportType", Val);
                 dt = oDq.GetTable();
             }
             return dt;

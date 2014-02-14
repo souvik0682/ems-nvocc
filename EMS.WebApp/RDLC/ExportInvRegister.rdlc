@@ -1027,11 +1027,12 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!NetAmt.Value</Value>
+                              <Value>=IIf(Fields!NetAmt.Value=0, "CANCELLED", Fields!NetAmt.Value)</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
+                                <Color>=IIf(Fields!NetAmt.Value=0, "Red", "Black")</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1682,6 +1683,8 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <RepeatRowHeaders>true</RepeatRowHeaders>
+        <KeepTogether>true</KeepTogether>
         <DataSetName>RptDataSet</DataSetName>
         <Top>0.81958in</Top>
         <Height>0.73958in</Height>

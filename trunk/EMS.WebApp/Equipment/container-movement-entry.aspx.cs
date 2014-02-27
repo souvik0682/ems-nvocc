@@ -421,6 +421,20 @@ namespace EMS.WebApp.Equipment
             int i;
             int j;
             bool RecFound = false;
+            
+            // desabling all controls 
+
+            ddlBookingNo.Enabled = false;
+            ddlDONo.Enabled = false;
+            ddlEmptyYard.Enabled = false;
+            ddlFromLocation.Enabled = false;
+            ddlFromStatus.Enabled = false;
+            ddlLine.Enabled = false;
+            ddlTolocation.Enabled = false;
+            ddlToStatus.Enabled = false;
+            txtDate.Enabled = false;
+            txtNarration.Enabled = false;
+
 
             lblMessage.Text = string.Empty;
 
@@ -893,6 +907,19 @@ namespace EMS.WebApp.Equipment
             hdnContainerTransactionId.Value = "0";
             hdnTranCode.Value = string.Empty;
             //lblTranCode.Text = string.Empty;
+
+            // enable all controls
+
+            ddlBookingNo.Enabled = true;
+            ddlDONo.Enabled = true;
+            ddlEmptyYard.Enabled = true;
+            ddlFromLocation.Enabled = true;
+            ddlFromStatus.Enabled = true;
+            ddlLine.Enabled = true;
+            ddlTolocation.Enabled = true;
+            ddlToStatus.Enabled = true;
+            txtDate.Enabled = true;
+            txtNarration.Enabled = true;
 
             DataTable Dt = CreateDataTable();
             DataRow dr = Dt.NewRow();

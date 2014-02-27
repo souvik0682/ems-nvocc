@@ -378,4 +378,13 @@
   <data name="ERR00086" xml:space="preserve">
     <value>Adding new container type need charges to Delete</value>
   </data>
+  <data name="ERR00087" xml:space="preserve">
+    <value>Invalid Service Name</value>
+  </data>
+  <data name="ERR00088" xml:space="preserve">
+    <value>Invalid Input</value>
+  </data>
+  <data name="ERR00089" xml:space="preserve">
+    <value>Invalid Voyage </value>
+  </data>
 </root>

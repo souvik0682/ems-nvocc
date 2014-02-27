@@ -810,6 +810,19 @@ namespace EMS.DAL
             return ds;
         }
 
+        public static DataSet GetCSFIStat(Int32 BLNo)
+        {
+            string strExecution = "usp_CheckForCFSI";
+            DataSet ds = new DataSet();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@BLID", BLNo);
+                ds = oDq.GetTables();
+            }
+
+            return ds;
+        }
         public static int SaveBLQActivity(string Activity, int BLID)
         {
             string strExecution = "[trn].[ImpBLActivityAddEdit]";

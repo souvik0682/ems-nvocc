@@ -215,6 +215,11 @@ namespace EMS.BLL
             return ImportBLDAL.GetBLQuery(ImpBLNo, ActivityType);
         }
 
+        public DataSet GetCSFIStat(Int32 ImpBLNo)
+        {
+            return ImportBLDAL.GetCSFIStat(ImpBLNo);
+        }
+
         public int SaveBLQActivity(string Activity, int BLID)
         {
             return ImportBLDAL.SaveBLQActivity(Activity, BLID);

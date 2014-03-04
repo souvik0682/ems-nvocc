@@ -276,6 +276,10 @@
           <DataField>BLClauseDate</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
+        <Field Name="BLType">
+          <DataField>BLType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>dsBLPrinting</DataSourceName>
@@ -551,146 +555,31 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Tablix Name="Tablix2">
-                      <TablixBody>
-                        <TablixColumns>
-                          <TablixColumn>
-                            <Width>0.76273in</Width>
-                          </TablixColumn>
-                          <TablixColumn>
-                            <Width>0.49189in</Width>
-                          </TablixColumn>
-                          <TablixColumn>
-                            <Width>0.62731in</Width>
-                          </TablixColumn>
-                        </TablixColumns>
-                        <TablixRows>
-                          <TablixRow>
-                            <Height>0.24288in</Height>
-                            <TablixCells>
-                              <TablixCell>
-                                <CellContents>
-                                  <Textbox Name="Textbox15">
-                                    <CanGrow>true</CanGrow>
-                                    <KeepTogether>true</KeepTogether>
-                                    <Paragraphs>
-                                      <Paragraph>
-                                        <TextRuns>
-                                          <TextRun>
-                                            <Label>cntrno</Label>
-                                            <Value>=First(Fields!ContainerNo.Value, "dsBLPrintingContainerTopFive")</Value>
-                                            <Style>
-                                              <FontFamily>Calibri</FontFamily>
-                                              <FontSize>8pt</FontSize>
-                                            </Style>
-                                          </TextRun>
-                                        </TextRuns>
-                                        <Style />
-                                      </Paragraph>
-                                    </Paragraphs>
-                                    <rd:DefaultName>Textbox15</rd:DefaultName>
-                                    <Style>
-                                      <Border>
-                                        <Style>None</Style>
-                                      </Border>
-                                      <PaddingLeft>2pt</PaddingLeft>
-                                      <PaddingRight>2pt</PaddingRight>
-                                      <PaddingTop>2pt</PaddingTop>
-                                      <PaddingBottom>2pt</PaddingBottom>
-                                    </Style>
-                                  </Textbox>
-                                </CellContents>
-                              </TablixCell>
-                              <TablixCell>
-                                <CellContents>
-                                  <Textbox Name="Textbox17">
-                                    <CanGrow>true</CanGrow>
-                                    <KeepTogether>true</KeepTogether>
-                                    <Paragraphs>
-                                      <Paragraph>
-                                        <TextRuns>
-                                          <TextRun>
-                                            <Label>szty</Label>
-                                            <Value>=First(Fields!CntrSize.Value, "dsBLPrintingContainerTopFive")+"'"+First(Fields!CntrType.Value, "dsBLPrintingContainerTopFive")</Value>
-                                            <Style>
-                                              <FontFamily>Calibri</FontFamily>
-                                              <FontSize>8pt</FontSize>
-                                            </Style>
-                                          </TextRun>
-                                        </TextRuns>
-                                        <Style />
-                                      </Paragraph>
-                                    </Paragraphs>
-                                    <rd:DefaultName>Textbox17</rd:DefaultName>
-                                    <Style>
-                                      <Border>
-                                        <Style>None</Style>
-                                      </Border>
-                                      <PaddingLeft>2pt</PaddingLeft>
-                                      <PaddingRight>2pt</PaddingRight>
-                                      <PaddingTop>2pt</PaddingTop>
-                                      <PaddingBottom>2pt</PaddingBottom>
-                                    </Style>
-                                  </Textbox>
-                                </CellContents>
-                              </TablixCell>
-                              <TablixCell>
-                                <CellContents>
-                                  <Textbox Name="Textbox22">
-                                    <CanGrow>true</CanGrow>
-                                    <KeepTogether>true</KeepTogether>
-                                    <Paragraphs>
-                                      <Paragraph>
-                                        <TextRuns>
-                                          <TextRun>
-                                            <Label>seal</Label>
-                                            <Value>=First(Fields!SealNo.Value, "dsBLPrintingContainerTopFive")</Value>
-                                            <Style>
-                                              <FontFamily>Calibri</FontFamily>
-                                              <FontSize>8pt</FontSize>
-                                            </Style>
-                                          </TextRun>
-                                        </TextRuns>
-                                        <Style />
-                                      </Paragraph>
-                                    </Paragraphs>
-                                    <rd:DefaultName>Textbox22</rd:DefaultName>
-                                    <Style>
-                                      <Border>
-                                        <Style>None</Style>
-                                      </Border>
-                                      <PaddingLeft>2pt</PaddingLeft>
-                                      <PaddingRight>2pt</PaddingRight>
-                                      <PaddingTop>2pt</PaddingTop>
-                                      <PaddingBottom>2pt</PaddingBottom>
-                                    </Style>
-                                  </Textbox>
-                                </CellContents>
-                              </TablixCell>
-                            </TablixCells>
-                          </TablixRow>
-                        </TablixRows>
-                      </TablixBody>
-                      <TablixColumnHierarchy>
-                        <TablixMembers>
-                          <TablixMember />
-                          <TablixMember />
-                          <TablixMember />
-                        </TablixMembers>
-                      </TablixColumnHierarchy>
-                      <TablixRowHierarchy>
-                        <TablixMembers>
-                          <TablixMember>
-                            <Group Name="Details2" />
-                          </TablixMember>
-                        </TablixMembers>
-                      </TablixRowHierarchy>
+                    <Textbox Name="Textbox53">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox53</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
                         </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                    </Tablix>
+                    </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -821,8 +710,154 @@
           </Border>
         </Style>
       </Tablix>
+      <Tablix Name="Tablix2">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>0.76273in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.49189in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.62731in</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.24288in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="ContainerNo">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Label>ContainerNo</Label>
+                              <Value>=Fields!ContainerNo.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>ContainerNo</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox17">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Label>szty</Label>
+                              <Value>=First(Fields!CntrSize.Value, "dsBLPrintingContainerTopFive")+"'"+First(Fields!CntrType.Value, "dsBLPrintingContainerTopFive")</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox17</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox22">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Label>seal</Label>
+                              <Value>=First(Fields!SealNo.Value, "dsBLPrintingContainerTopFive")</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox22</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details2" />
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>dsBLPrintingContainerTopFive</DataSetName>
+        <Top>1.79828cm</Top>
+        <Left>0.53424cm</Left>
+        <Height>0.61692cm</Height>
+        <Width>4.7801cm</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
     </ReportItems>
-    <Height>0.69368in</Height>
+    <Height>0.99576in</Height>
     <Style>
       <Border>
         <Style>None</Style>
@@ -840,7 +875,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>7.96115in</Width>
+  <Width>7.58615in</Width>
   <Page>
     <PageHeader>
       <Height>13.60854cm</Height>
@@ -879,7 +914,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>3.11994cm</Top>
+          <Top>2.48494cm</Top>
           <Left>0.4766cm</Left>
           <Height>2.33778cm</Height>
           <Width>11.13896cm</Width>
@@ -958,7 +993,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>5.843cm</Top>
+          <Top>5.208cm</Top>
           <Left>0.4889cm</Left>
           <Height>2.43417cm</Height>
           <Width>11.13896cm</Width>
@@ -1005,7 +1040,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>8.53055cm</Top>
+          <Top>7.89555cm</Top>
           <Left>0.4766cm</Left>
           <Height>1.66688cm</Height>
           <Width>11.13896cm</Width>
@@ -1035,7 +1070,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>10.85382cm</Top>
+          <Top>10.53632cm</Top>
           <Left>0.60008cm</Left>
           <Height>0.6cm</Height>
           <Width>5.01827cm</Width>
@@ -1069,7 +1104,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>10.85382cm</Top>
+          <Top>10.53632cm</Top>
           <Left>5.8618cm</Left>
           <Height>0.6cm</Height>
           <Width>5.74146cm</Width>
@@ -1118,7 +1153,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>11.75305cm</Top>
+          <Top>11.43555cm</Top>
           <Left>0.53424cm</Left>
           <Height>0.6cm</Height>
           <Width>5.08411cm</Width>
@@ -1152,7 +1187,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>11.75305cm</Top>
+          <Top>11.43555cm</Top>
           <Left>5.8741cm</Left>
           <Height>0.6cm</Height>
           <Width>5.74146cm</Width>
@@ -1194,7 +1229,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>12.52944cm</Top>
+          <Top>12.21194cm</Top>
           <Left>0.53424cm</Left>
           <Height>0.6cm</Height>
           <Width>5.01827cm</Width>
@@ -1228,7 +1263,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>12.52944cm</Top>
+          <Top>12.21194cm</Top>
           <Left>5.87cm</Left>
           <Height>0.6cm</Height>
           <Width>5.74146cm</Width>
@@ -1325,7 +1360,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>4.2235cm</Top>
+          <Top>4.8585cm</Top>
           <Left>0.60008cm</Left>
           <Height>1.4552cm</Height>
           <Width>10.22235cm</Width>
@@ -1374,7 +1409,7 @@
           <Top>0.96188cm</Top>
           <Left>11.60674cm</Left>
           <Height>0.6cm</Height>
-          <Width>8.21771cm</Width>
+          <Width>7.39521cm</Width>
           <ZIndex>1</ZIndex>
           <Visibility>
             <Hidden>true</Hidden>
@@ -1396,8 +1431,8 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Label>FreightPayableAt</Label>
-                  <Value>=First(Fields!FreightPayableAt.Value, "DSBLPrinting")</Value>
+                  <Label>FreightToPay</Label>
+                  <Value>=IIf(First(Fields!FreightPrePayToPay.Value, "DSBLPrinting")="T", First(Fields!FreightPayableAt.Value, "DSBLPrinting"), "")</Value>
                   <Style>
                     <FontFamily>Calibri</FontFamily>
                     <FontSize>9pt</FontSize>
@@ -1408,11 +1443,14 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox60</rd:DefaultName>
-          <Top>2.38433cm</Top>
+          <Top>2.70183cm</Top>
           <Left>6.02404cm</Left>
           <Height>0.6cm</Height>
           <Width>5.15937cm</Width>
           <ZIndex>2</ZIndex>
+          <Visibility>
+            <Hidden>=IIf(First(Fields!FreightPrePayToPay.Value, "DSBLPrinting")="P", true, false)</Hidden>
+          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1457,10 +1495,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox70</rd:DefaultName>
-          <Top>2.38433cm</Top>
+          <Top>2.70183cm</Top>
           <Left>11.60674cm</Left>
           <Height>0.54709cm</Height>
-          <Width>8.2177cm</Width>
+          <Width>7.39521cm</Width>
           <ZIndex>3</ZIndex>
           <Style>
             <Border>
@@ -1480,7 +1518,7 @@
               <TextRuns>
                 <TextRun>
                   <Label>NoofBLs</Label>
-                  <Value>=First(Fields!NoofBLs.Value, "DSBLPrinting")</Value>
+                  <Value>=IIf(First(Fields!BLType.Value, "DSBLPrinting")="O", First(Fields!NoofBLs.Value, "DSBLPrinting"), IIf(First(Fields!BLType.Value, "DSBLPrinting")="S", "SEAWAY", "EXPRESS"))</Value>
                   <Style>
                     <FontFamily>Calibri</FontFamily>
                     <FontSize>9pt</FontSize>
@@ -1491,10 +1529,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox69</rd:DefaultName>
-          <Top>3.33711cm</Top>
+          <Top>3.65461cm</Top>
           <Left>6.02404cm</Left>
           <Height>0.6cm</Height>
-          <Width>3.21708cm</Width>
+          <Width>5.15937cm</Width>
           <ZIndex>4</ZIndex>
           <Style>
             <Border>
@@ -1527,7 +1565,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox12</rd:DefaultName>
           <Top>4.65121cm</Top>
-          <Left>15.43196cm</Left>
+          <Left>14.60946cm</Left>
           <Height>0.6cm</Height>
           <Width>4.39249cm</Width>
           <ZIndex>5</ZIndex>
@@ -1569,6 +1607,38 @@
           <Height>0.6cm</Height>
           <Width>6.79979cm</Width>
           <ZIndex>6</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="FreightPayablePrepaid">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=IIf(First(Fields!FreightPrePayToPay.Value, "DSBLPrinting")="P", First(Fields!FreightPayableAt.Value, "DSBLPrinting"), "")</Value>
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>9pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <Top>2.70183cm</Top>
+          <Left>0.4766cm</Left>
+          <Height>0.6cm</Height>
+          <Width>5.07591cm</Width>
+          <ZIndex>7</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>

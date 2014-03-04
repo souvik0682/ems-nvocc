@@ -276,6 +276,10 @@
           <DataField>BLClauseDate</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
+        <Field Name="BLType">
+          <DataField>BLType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>dsBLPrinting</DataSourceName>
@@ -1876,7 +1880,7 @@
               <TextRuns>
                 <TextRun>
                   <Label>NoofBLs</Label>
-                  <Value>=First(Fields!NoofBLs.Value, "DSBLPrinting")</Value>
+                  <Value>=IIf(First(Fields!BLType.Value, "DSBLPrinting")="O", First(Fields!NoofBLs.Value, "DSBLPrinting"), IIf(First(Fields!BLType.Value, "DSBLPrinting")="S", "SEAWAY", "EXPRESS"))</Value>
                   <Style>
                     <FontFamily>Calibri</FontFamily>
                     <FontSize>9pt</FontSize>

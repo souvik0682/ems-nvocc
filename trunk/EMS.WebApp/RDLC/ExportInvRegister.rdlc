@@ -88,8 +88,8 @@
       <rd:DataSetInfo>
         <rd:DataSetName>EMS.BLL</rd:DataSetName>
         <rd:TableName>ReportBLL</rd:TableName>
-        <rd:ObjectDataSourceSelectMethod>GetImportInvoiceRegister</rd:ObjectDataSourceSelectMethod>
-        <rd:ObjectDataSourceSelectMethodSignature>System.Collections.Generic.List`1[EMS.Entity.Report.ImpInvRegisterEntity] GetImportInvoiceRegister(Int32, Int32, Int32, System.DateTime, System.DateTime)</rd:ObjectDataSourceSelectMethodSignature>
+        <rd:ObjectDataSourceSelectMethod>GetExportInvoiceRegister</rd:ObjectDataSourceSelectMethod>
+        <rd:ObjectDataSourceSelectMethodSignature>System.Collections.Generic.List`1[EMS.Entity.Report.ImpInvRegisterEntity] GetExportInvoiceRegister(Int32, Int32, Int32, System.DateTime, System.DateTime)</rd:ObjectDataSourceSelectMethodSignature>
         <rd:ObjectDataSourceType>EMS.BLL.ReportBLL, EMS.BLL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
@@ -421,7 +421,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.6in</Width>
+              <Width>1.41874in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.62814in</Width>
@@ -448,10 +448,10 @@
               <Width>0.67188in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.44792in</Width>
+              <Width>0.51042in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.49271in</Width>
+              <Width>0.61148in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.47394in</Width>
@@ -680,7 +680,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>IGM B/L.</Value>
+                              <Value>Booking No</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -748,7 +748,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>GLD</Value>
+                              <Value>SLD</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -992,7 +992,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Format(Fields!InvoiceDate.Value, "dd/MM/yyyy")</Value>
+                              <Value>=Format(Fields!InvoiceDate.Value, "dd/MM/yy")</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
@@ -1237,7 +1237,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Format(Fields!GLD.Value,"dd/MM/yyyy")</Value>
+                              <Value>=Format(Fields!GLD.Value,"dd/MM/yy")</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
@@ -1520,7 +1520,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Consignee:</Value>
+                              <Value>Shipper:</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -1587,7 +1587,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Shipper:</Value>
+                              <Value>Booking Party:</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -1688,7 +1688,7 @@
         <DataSetName>RptDataSet</DataSetName>
         <Top>0.81958in</Top>
         <Height>0.73958in</Height>
-        <Width>10.49999in</Width>
+        <Width>10.5in</Width>
         <ZIndex>10</ZIndex>
         <Style>
           <Border>

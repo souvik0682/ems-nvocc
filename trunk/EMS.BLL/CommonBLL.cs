@@ -538,5 +538,11 @@ namespace EMS.BLL
         {
             return CommonDAL.GetCompanyDetails(companyId);
         }
+
+        public DataTable GenerateImpInvExcel(string Location, string Vessel, string Line, string Voyage)
+        { return CommonDAL.GenerateImpInvExcel(Location, Vessel, Line, Voyage); }
+
+        public DataTable GenerateExpInvExcel(string Location, string Vessel, string Line, string Voyage)
+        { return CommonDAL.GenerateExpInvExcel(Location, Vessel, Line, Voyage); }
     }
 }

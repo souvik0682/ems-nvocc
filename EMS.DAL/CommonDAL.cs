@@ -778,6 +778,38 @@ namespace EMS.DAL
             //return false;
         }
 
+        public static DataTable GenerateImpInvExcel(string Location, string Vessel, string Line, string Voyage)
+        {
+            string strExecution = "[report].[uspGetImportInvoiceOutstanding]";
+            DataTable dt = new DataTable();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@LocationID", 60, Location);
+                oDq.AddVarcharParam("@VesselID", 60, Vessel);
+                oDq.AddVarcharParam("@LineID", 60, Line);
+                oDq.AddVarcharParam("@VoyageID", 60, Voyage);
+                dt = oDq.GetTable();
+            }
+            return dt;
+        }
+
+        public static DataTable GenerateExpInvExcel(string Location, string Vessel, string Line, string Voyage)
+        {
+            string strExecution = "[exp].[uspGetExportInvoiceOutstanding]";
+            DataTable dt = new DataTable();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@LocationID", 60, Location);
+                oDq.AddVarcharParam("@VesselID", 60, Vessel);
+                oDq.AddVarcharParam("@LineID", 60, Line);
+                oDq.AddVarcharParam("@VoyageID", 60, Voyage);
+                dt = oDq.GetTable();
+            }
+            return dt;
+        }
+
         public static bool GenerateTxt(string filename, int Location, int Vessel, int PortOfDischarge, int Line, int Voyage, int VIANo)
         {
             string strExecution = "[trn].[GenAdvanceContList]";

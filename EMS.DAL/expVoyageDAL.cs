@@ -76,9 +76,9 @@ namespace EMS.DAL
             return voyageid;
         }
 
-        public static long CloseVoyage(IexpVoyage voyage)
+        public static long CheckCloseVoyage(IexpVoyage voyage)
         {
-            string strExecution = "[exp].[prcCloseVoyage]";
+            string strExecution = "[exp].[prcCheckCloseVoyage]";
             long ErrVal = 0;
 
             using (DbQuery oDq = new DbQuery(strExecution))
@@ -91,6 +91,24 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@Result", 0, QueryParameterDirection.Output);
                 oDq.RunActionQuery();
                 ErrVal = Convert.ToInt32(oDq.GetParaValue("@RESULT"));
+                //voyageid = Convert.ToInt64(oDq.GetScalar());
+            }
+
+            return ErrVal;
+        }
+
+        public static long CloseVoyage(IexpVoyage voyage)
+        {
+            string strExecution = "[exp].[prcCloseVoyage]";
+            long ErrVal = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@userID", voyage.UserAdded);
+                oDq.AddBigIntegerParam("@pk_VoyageID", voyage.VoyageID);
+                oDq.AddIntegerParam("@Result", 0, QueryParameterDirection.Output);
+                oDq.RunActionQuery();
+                //ErrVal = Convert.ToInt32(oDq.GetParaValue("@RESULT"));
                 //voyageid = Convert.ToInt64(oDq.GetScalar());
             }
 

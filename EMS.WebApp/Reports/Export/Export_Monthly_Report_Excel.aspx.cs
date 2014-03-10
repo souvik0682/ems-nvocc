@@ -218,7 +218,10 @@ namespace EMS.WebApp.Transaction
                     dtExcel.Columns.Remove("invCur");
                     dtExcel.Columns.Remove("Brokerage");
                     dtExcel.Columns.Remove("ExpCommPer");
-                    dtExcel.Columns.Remove("ExpComm");
+                    dtExcel.Columns.Remove("ExpCommUSD");
+                    dtExcel.Columns.Remove("SrvTax");
+                    dtExcel.Columns.Remove("EduCess");
+
                 }
                 else if (val == 2)
                 {
@@ -263,8 +266,10 @@ namespace EMS.WebApp.Transaction
                     dtExcel.Columns.Remove("InvoiceDate");
                     //dtExcel.Columns.Remove("ReceiptAmt");
                     dtExcel.Columns.Remove("ExpCommPer");
-                    dtExcel.Columns.Remove("ExpComm");
+                    dtExcel.Columns.Remove("ExpCommUSD");
                     //dtExcel.Columns.Remove("RefundTo");
+                    dtExcel.Columns.Remove("SrvTax");
+                    dtExcel.Columns.Remove("EduCess");
                 }
                 else if (val == 4)
                 {
@@ -286,7 +291,9 @@ namespace EMS.WebApp.Transaction
                     dtExcel.Columns.Remove("RefAmt");
                     dtExcel.Columns.Remove("RefundTo");
                     dtExcel.Columns.Remove("ExpCommPer");
-                    dtExcel.Columns.Remove("ExpComm");
+                    dtExcel.Columns.Remove("ExpCommUSD");
+                    dtExcel.Columns.Remove("SrvTax");
+                    dtExcel.Columns.Remove("EduCess");
                 }
             }
         }

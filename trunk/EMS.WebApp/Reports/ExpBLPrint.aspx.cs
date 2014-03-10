@@ -90,6 +90,8 @@ namespace EMS.WebApp.Reports
                 LocalReportManager reportManager = new LocalReportManager(rptViewer, "BLPrint", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
                 if (ddlLine.SelectedValue == "ILE")
                     rptName = "BLPrintILE.rdlc";
+                else if (ddlLine.SelectedValue == "KESTREL")
+                    rptName = "BLPrintKestrel.rdlc";
                 else
                     rptName = "BLPrint.rdlc";
 
@@ -148,6 +150,8 @@ namespace EMS.WebApp.Reports
                 viewer.ProcessingMode = ProcessingMode.Local;
                 if (ddlLocation.SelectedItem.Text == "ILE")
                     viewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + "BLPrintILE.rdlc";
+                else if (ddlLocation.SelectedItem.Text == "KESTREL")
+                    viewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + "BLPrintKestrel.rdlc";
                 else
                     viewer.LocalReport.ReportPath =  this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + "BLPrint.rdlc";
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DSBLPrinting", temp.Tables[0]));
@@ -162,7 +166,6 @@ namespace EMS.WebApp.Reports
                 string extension = string.Empty;
 
                 byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
 
                 // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
                 Response.Buffer = true;

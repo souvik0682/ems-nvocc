@@ -160,7 +160,8 @@ namespace EMS.WebApp.Reports
             ddlType.DataTextField = "InvoiceTypeName";
             ddlType.DataSource = lstLoc;
             ddlType.DataBind();
-            ddlType.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
+            ddlType.Items.Insert(0, new ListItem("All", "0"));
+            //ddlType.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
         }
 
         private bool ValidateData(out string message)

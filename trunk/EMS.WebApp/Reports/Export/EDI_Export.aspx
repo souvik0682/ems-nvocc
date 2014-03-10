@@ -4,7 +4,11 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
-<fieldset style="width: 964px; height: 85x;">
+    <div id="headercaption">
+         EDI TEXT FILE GENERATION 
+    </div>
+    <center>
+    <fieldset style="width: 964px; height: 85x;">
         <table>
             <tr>
                 <td class="label" style="padding-right: 50px; vertical-align: top;">
@@ -75,4 +79,5 @@
             </tr>
         </table>
     </fieldset>
+    </center>
 </asp:Content>

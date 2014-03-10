@@ -11,7 +11,11 @@
         }
     </style>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
+   <div id="headercaption">
+         TERMINAL DISPATCH REPORT </div>
+    <center>
     <script type="text/javascript">
         function AutoCompleteItemSelected(sender, e) {
             if (sender._id == "AutoCompleteEx") {

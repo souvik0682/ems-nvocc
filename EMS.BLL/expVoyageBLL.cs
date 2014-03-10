@@ -18,8 +18,15 @@ namespace EMS.BLL
         public long SaveVoyage(IexpVoyage voyage,bool isedit)
         {
             long voyageid = 0;      
-            voyageid = expVoyageDAL.SaveVoyage(voyage,isedit);            
+            voyageid = expVoyageDAL.SaveVoyage(voyage, isedit);            
             return voyageid;
+        }
+
+        public long CheckCloseVoyage(IexpVoyage voyage)
+        {
+            long ErrVal = 0;
+            ErrVal = expVoyageDAL.CheckCloseVoyage(voyage);
+            return ErrVal;
         }
 
         public long CloseVoyage(IexpVoyage voyage)
@@ -28,6 +35,7 @@ namespace EMS.BLL
             ErrVal = expVoyageDAL.CloseVoyage(voyage);
             return ErrVal;
         }
+
         public int DeleteVoyage(int voyageid)
         {
             return expVoyageDAL.DeleteVoyage(voyageid);    

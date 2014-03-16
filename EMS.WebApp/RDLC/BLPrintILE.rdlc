@@ -795,7 +795,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox22">
+                    <Textbox Name="SealNo">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -803,7 +803,7 @@
                           <TextRuns>
                             <TextRun>
                               <Label>seal</Label>
-                              <Value>=First(Fields!SealNo.Value, "dsBLPrintingContainerTopFive")</Value>
+                              <Value>=Fields!SealNo.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -813,7 +813,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox22</rd:DefaultName>
+                      <rd:DefaultName>SealNo</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -824,6 +824,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1284,8 +1285,8 @@
           <Style>None</Style>
         </Border>
         <BackgroundImage>
-          <Source>External</Source>
-          <Value>=IIf(Parameters!ReportType.Value = "D", "DraftBackGround", Nothing)</Value>
+          <Source>Embedded</Source>
+          <Value>=IIf(Parameters!ReportType.Value="D", "DraftBackGround", nothing)</Value>
         </BackgroundImage>
       </Style>
     </PageHeader>

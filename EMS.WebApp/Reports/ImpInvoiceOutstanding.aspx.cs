@@ -73,7 +73,10 @@ namespace EMS.WebApp.Reports
             HttpContext.Current.Response.Buffer = true;
             HttpContext.Current.Response.ContentType = "application/ms-excel";
             HttpContext.Current.Response.Write(@"<!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.0 Transitional//EN"">");
-            HttpContext.Current.Response.AddHeader("Content-Disposition", "attachment;filename=AdvanceContainerList.xls");
+            if (ddlReportType.SelectedIndex == 1)
+                HttpContext.Current.Response.AddHeader("Content-Disposition", "attachment;filename=OutstandingListImp.xls");
+            else
+                HttpContext.Current.Response.AddHeader("Content-Disposition", "attachment;filename=OutstandingListExp.xls");
             HttpContext.Current.Response.Charset = "utf-8";
             HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.GetEncoding("windows-1250");
             HttpContext.Current.Response.Write("<font style='font-size:10.0pt; font-family:Calibri;'>");

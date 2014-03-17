@@ -466,14 +466,16 @@ namespace EMS.WebApp.Reports.ReportViewer
         private void FillData()
         {
             Filler.FillData<ILocation>(ddlLine, new CommonBLL().GetActiveLocation(), "Name", "Id", "Location");
-            if (ViewState["strReportName"].ToString().ToLower() != "cargoarrivalnotice")
+            if (ViewState["strReportName"].ToString().ToLower() != "cargoarrivalnotice" && ViewState["strReportName"].ToString().ToLower() != "collectionregister")
             {
                 Filler.FillData<ILocation>(ddlLine, new CommonBLL().GetActiveLocation(), "Name", "Id", "Location");
             }
-
-            if (ViewState["strReportName"].ToString().ToLower() == "collectionregister")
+            else if (ViewState["strReportName"].ToString().ToLower() == "collectionregister")
             {
-                ddlLine.Items.Insert(1, new ListItem("All", "All"));
+                //RequiredFieldValidator1.Enabled = false;
+                Filler.FillData<ILocation>(ddlLine, new CommonBLL().GetActiveLocation(), "Name", "Id", "Location");
+                //ddlLine.Items.Remove(ddlLocation.Items.FindByText("Location"));
+                //ddlLine.Items.Insert(0, new ListItem("All", "All"));
             }
 
             switch (strReportName.ToLower())
@@ -702,8 +704,8 @@ namespace EMS.WebApp.Reports.ReportViewer
                 case "pendingdelivaryorder":
                     //litHeader.Text = "PENDING DELIVERY ORDER";
                     rptParameters = new ReportParameter[2];
-                    rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
-                    rptParameters[0] = new ReportParameter("line", ddlLocation.SelectedValue);
+                    rptParameters[0] = new ReportParameter("Location", ddlLine.SelectedValue);
+                    rptParameters[1] = new ReportParameter("line", ddlLocation.SelectedValue);
                     //rptParameters[2] = new ReportParameter("DOFinalBill", txtDoFinal.Text);
                     break;
                 case "collectionregister":
@@ -798,13 +800,14 @@ namespace EMS.WebApp.Reports.ReportViewer
                 {
                     Filler.FillData(ddlLocation, CommonBLL.GetLineForHire(ddlLine.SelectedValue), "ProspectName", "ProspectID", "Line");
                 }
-                else
+                else if (ViewState["strReportName"].ToString().ToLower() != "collectionregister")
                 {
                     Filler.FillData(ddlLocation, CommonBLL.GetLine(ddlLine.SelectedValue), "ProspectName", "ProspectID", "Line");
-                    if (ViewState["strReportName"].ToString().ToLower() == "collectionregister")
-                    {
-                        ddlLocation.Items.Insert(1, new ListItem("All", "All"));
-                    }
+                }
+                else 
+                {
+                    RequiredFieldValidator3.Enabled = false;
+                    Filler.FillData(ddlLocation, CommonBLL.GetLine(ddlLine.SelectedValue), "ProspectName", "ProspectID", "All");
                 }
             }
         }

@@ -36,78 +36,78 @@ namespace EMS.WebApp.Reports
         {
             string fileName = string.Empty;
             FileUtil t = null;
+            CommonBLL cls = new CommonBLL();
+            DataTable dtExcel = new DataTable();
+            dtExcel = cls.GenerateExcel(ddlLine.SelectedValue, ddlVessel.SelectedValue, hdnReturn.Value, ddlLocation.SelectedValue, ddlVoyage.SelectedValue, txtVIANo.Text);
+            ExporttoExcel(dtExcel);
 
-            switch (CommonBLL.GetTerminalType(Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(hdnReturn.Value)))
-            {
-                case "NSICT":
-                    {
-                        CommonBLL cls = new CommonBLL();
 
-                        try
-                        {
-                            //DateTime dt = Convert.ToDateTime(txtdtStock.Text.Trim());
-                            DataTable dtExcel = new DataTable();
 
-                            dtExcel = cls.GenerateExcel(ddlLine.SelectedValue, ddlVessel.SelectedValue, hdnReturn.Value, ddlLocation.SelectedValue, ddlVoyage.SelectedValue, txtVIANo.Text);
-                            ExporttoExcel(dtExcel);
-                        }
-                        catch (Exception ex)
-                        {
-                        }
-                    }
-                    //fileName = Server.MapPath("~/Download/" + DateTime.Now.Ticks.ToString() + ".xlsx");
-                    //t = new FileUtil(Server.MapPath("~/FileTemplate/Template.xlsx"), fileName);
-                    //if (CommonBLL.GenerateExcel(fileName, ddlLine.SelectedValue, ddlVessel.SelectedValue, hdnReturn.Value, ddlLocation.SelectedValue, ddlVoyage.SelectedValue, txtVIANo.Text))
-                    //{
-                    //    t.Download(Response);
-                    //}
-                    break;
+            //switch (CommonBLL.GetTerminalType(Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(hdnReturn.Value)))
+            //{
+            //    case "NSICT":
+            //        {
+            //            CommonBLL cls = new CommonBLL();
 
-                case "JNPT":
-                     fileName = Server.MapPath("~/Download/ContainerList.txt");
+            //            try
+            //            {
+            //                //DateTime dt = Convert.ToDateTime(txtdtStock.Text.Trim());
+            //                DataTable dtExcel = new DataTable();
 
-                    if (File.Exists(fileName))
-                        File.Delete(fileName);
+            //                dtExcel = cls.GenerateExcel(ddlLine.SelectedValue, ddlVessel.SelectedValue, hdnReturn.Value, ddlLocation.SelectedValue, ddlVoyage.SelectedValue, txtVIANo.Text);
+            //                ExporttoExcel(dtExcel);
+            //            }
+            //            catch (Exception ex)
+            //            {
+            //            }
+            //        }
+ 
+            //        break;
 
-                    t = new FileUtil(Server.MapPath("~/FileTemplate/ContainerList.txt"), fileName);
-                    if (CommonBLL.GenerateText(fileName, Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(hdnReturn.Value), Convert.ToInt32(ddlLocation.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(txtVIANo.Text)))
-                    {                        
-                        t.Download(Response);
-                    }
+            //    case "JNPT":
+            //         fileName = Server.MapPath("~/Download/ContainerList.txt");
 
-                    break;
+            //        if (File.Exists(fileName))
+            //            File.Delete(fileName);
 
-                case "GTI":
-                    fileName = Server.MapPath("~/Download/ContainerList.txt");
+            //        t = new FileUtil(Server.MapPath("~/FileTemplate/ContainerList.txt"), fileName);
+            //        if (CommonBLL.GenerateText(fileName, Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(hdnReturn.Value), Convert.ToInt32(ddlLocation.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(txtVIANo.Text)))
+            //        {                        
+            //            t.Download(Response);
+            //        }
 
-                    if (File.Exists(fileName))
-                        File.Delete(fileName);
+            //        break;
 
-                    t = new FileUtil(Server.MapPath("~/FileTemplate/ContainerList.txt"), fileName);
-                    if (CommonBLL.GenerateText(fileName, Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(hdnReturn.Value), Convert.ToInt32(ddlLocation.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(txtVIANo.Text)))
-                    {                        
-                        t.Download(Response);
-                    }
+            //    case "GTI":
+            //        fileName = Server.MapPath("~/Download/ContainerList.txt");
 
-                    break;
-                default:
-                    {
-                        CommonBLL cls = new CommonBLL();
+            //        if (File.Exists(fileName))
+            //            File.Delete(fileName);
 
-                        try
-                        {
-                            //DateTime dt = Convert.ToDateTime(txtdtStock.Text.Trim());
-                            DataTable dtExcel = new DataTable();
+            //        t = new FileUtil(Server.MapPath("~/FileTemplate/ContainerList.txt"), fileName);
+            //        if (CommonBLL.GenerateText(fileName, Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlVessel.SelectedValue), Convert.ToInt32(hdnReturn.Value), Convert.ToInt32(ddlLocation.SelectedValue), Convert.ToInt32(ddlVoyage.SelectedValue), Convert.ToInt32(txtVIANo.Text)))
+            //        {                        
+            //            t.Download(Response);
+            //        }
 
-                            dtExcel = cls.GenerateExcel(ddlLine.SelectedValue, ddlVessel.SelectedValue, hdnReturn.Value, ddlLocation.SelectedValue, ddlVoyage.SelectedValue, txtVIANo.Text);
-                            ExporttoExcel(dtExcel);
-                        }
-                        catch (Exception ex)
-                        {
-                        }
-                    }
-                    break;
-            }
+            //        break;
+            //    default:
+            //        {
+            //            CommonBLL cls = new CommonBLL();
+
+            //            try
+            //            {
+            //                DataTable dtExcel = new DataTable();
+
+            //                dtExcel = cls.GenerateExcel(ddlLine.SelectedValue, ddlVessel.SelectedValue, hdnReturn.Value, ddlLocation.SelectedValue, ddlVoyage.SelectedValue, txtVIANo.Text);
+            //                ExporttoExcel(dtExcel);
+            //            }
+            //            catch (Exception ex)
+            //            {
+            //            }
+            //        }
+            //        break;
+            //}
         }
         protected void ddlLocation_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -403,8 +403,8 @@ namespace EMS.WebApp.Export
             }
             else
             {
-                sortExpression = "BookingNo";
-                sortDirection = "ASC";
+                sortExpression = "BookingDate";
+                sortDirection = "DESC";
             }
 
             criteria.SortExpression = sortExpression;

@@ -515,7 +515,19 @@ namespace EMS.WebApp.Export
 
                 if (ddlShipmentType.SelectedValue.ToInt() != 0 && txtGrossWeight.Text.ToDecimal() == 0)
                 {
-                    lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00078");
+                    lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00088");
+                    return;
+                }
+
+                if (ddlService.SelectedIndex == -1)
+                {
+                    lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00087");
+                    return;
+                }
+
+                if (ddlLoadingVoyage.SelectedIndex == -1)
+                {
+                    lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00089");
                     return;
                 }
                    
@@ -1335,6 +1347,8 @@ namespace EMS.WebApp.Export
 
         protected void txtPOL_TextChanged(object sender, EventArgs e)
         {
+            txtVessel.Text = "";
+            ddlLoadingVoyage.Items.Clear();
             checkTransitRoot();
         }
 

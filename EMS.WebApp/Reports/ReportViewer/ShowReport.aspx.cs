@@ -566,6 +566,9 @@ namespace EMS.WebApp.Reports.ReportViewer
                     case "crnregister":
                         ddlLine_SelectedIndexChanged1(null, null);
                         break;
+                    case "pendingdelivaryorder":
+                        ddlLine_SelectedIndexChanged1(null, null);
+                        break;
                     default:
                         ddlLine_SelectedIndexChanged(null, null);
                         break;

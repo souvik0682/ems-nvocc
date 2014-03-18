@@ -306,6 +306,7 @@ namespace EMS.WebApp.Export
                 IExportBL exportBL = ExportBLBLL.GetExportBLHeaderInfoForAdd(BookingNumber);
 
                 if (!ReferenceEquals(exportBL, null))
+                    if (exportBL.BookingId != 0)
                 {
                     ViewState["BOOKINGID"] = exportBL.BookingId;
                     txtBookingDate.Text = exportBL.BookingDate.ToString("dd-MM-yyyy");

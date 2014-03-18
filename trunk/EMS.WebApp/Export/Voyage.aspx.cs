@@ -315,13 +315,18 @@ namespace EMS.WebApp.Export
                     btnRemove.Visible = false;
                 }
 
-                if (DataBinder.Eval(e.Row.DataItem, "CloseVoyage").ToInt() == 1 && _roleId != 2)
+                if (DataBinder.Eval(e.Row.DataItem, "CloseVoyage").ToInt() == 1)
                 {
-                    btnRemove.Visible = false;
-                    btnEdit.Visible  =false;
+                    if (_roleId != 2)
+                    {
+                        btnRemove.Visible = false;
+                        btnEdit.Visible = false;
+                    }
                     e.Row.ForeColor = System.Drawing.Color.Red;
                     //e.Row.Cells[0].ForeColor = System.Drawing.Color.Red;
                 }
+
+
 
             }
         }

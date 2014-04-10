@@ -210,6 +210,17 @@
                             ControlToValidate="ddlHire" InitialValue="0" ValidationGroup="Report" Display="Dynamic"
                             ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                     </td>
+                    <td align="left" style="width: 15%">
+                        Lease No:<span class="errormessage">*</span>
+                    </td>
+                    <td align="left" style="width: 15%">
+                        <asp:TextBox ID="txtLeaseNo" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator
+                            ID="RequiredFieldValidator6" runat="server" CssClass="errormessage" ControlToValidate="txtPrintedBy"
+                            ValidationGroup="Report" Display="Dynamic" ErrorMessage="[Required]">
+                         </asp:RequiredFieldValidator>
+                    </td>
+
                 </tr>
                   <tr id="trPendingDO" runat="server">
                    <%-- <td align="left" style="width: 15%">

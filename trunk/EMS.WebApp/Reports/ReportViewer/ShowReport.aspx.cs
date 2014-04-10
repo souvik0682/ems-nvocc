@@ -697,12 +697,13 @@ namespace EMS.WebApp.Reports.ReportViewer
                     break;
                 case "onoffhire":
                     //litHeader.Text = "ON/OFF REGISTER FROM";
-                    rptParameters = new ReportParameter[5];
+                    rptParameters = new ReportParameter[6];
                     rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
                     rptParameters[0] = new ReportParameter("line", ddlLocation.SelectedValue);
                     rptParameters[2] = new ReportParameter("refDateS", txtSDate.Text);
                     rptParameters[3] = new ReportParameter("refDateE", txtEDate.Text);
                     rptParameters[4] = new ReportParameter("onOffhire", ddlHire.SelectedValue);
+                    rptParameters[5] = new ReportParameter("Lease", txtLeaseNo.Text);
                     break;
                 case "pendingdelivaryorder":
                     //litHeader.Text = "PENDING DELIVERY ORDER";
@@ -716,20 +717,20 @@ namespace EMS.WebApp.Reports.ReportViewer
                     rptParameters = new ReportParameter[4];
                     if (ddlLine.SelectedValue == "All")
                     {
-                        rptParameters[1] = new ReportParameter("Location", "0");
+                        rptParameters[0] = new ReportParameter("Location", "0");
                     }
                     else
                     {
-                        rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
+                        rptParameters[0] = new ReportParameter("Location", ddlLine.SelectedValue);
                     }
 
                     if (ddlLocation.SelectedValue == "All")
                     {
-                        rptParameters[0] = new ReportParameter("line", "0");
+                        rptParameters[1] = new ReportParameter("line", "0");
                     }
                     else
                     {
-                        rptParameters[0] = new ReportParameter("line", ddlLocation.SelectedValue);
+                        rptParameters[1] = new ReportParameter("line", ddlLocation.SelectedValue);
                     }
                     rptParameters[2] = new ReportParameter("refDateS", txtSDate.Text);
                     rptParameters[3] = new ReportParameter("refDateE", txtEDate.Text);

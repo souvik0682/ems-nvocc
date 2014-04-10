@@ -13,6 +13,7 @@ namespace EMS.Common
         DateTime AddedOn { get; set; }
         string CntrSize { get; set; }
         string ContainerNo { get; set; }
+        string ContainerAbbr { get; set; }
         int? ContainerTypeID { get; set; }
         DateTime? EditedOn { get; set; }
         long HireContainerID { get; set; }

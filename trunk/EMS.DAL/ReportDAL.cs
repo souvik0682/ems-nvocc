@@ -327,7 +327,30 @@ namespace EMS.DAL
             return dt;
         }
 
+        public static DataTable GetGroundRentLOLOStatement(string Line, string Loc, string Stat, string StartDate, string EndDate, int EmptyYard)
+        {
 
+            DataTable dt = new DataTable();
+            DateTime dt1 = string.IsNullOrEmpty(EndDate) ? DateTime.Now : Convert.ToDateTime(EndDate);
+            DateTime dt2 = string.IsNullOrEmpty(StartDate) ? DateTime.Now : Convert.ToDateTime(StartDate);
+            string strExecution = "prcRptStockDetail";
+            //DateTime dt1 = string.IsNullOrEmpty(StockDate) ? DateTime.Now : Convert.ToDateTime(StockDate);
+            //DataSet ds = new DataSet();
+            using (DbQuery oDq = new DbQuery(strExecution))
+
+            //using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@Line", 80, Line);
+                oDq.AddVarcharParam("@Loc", 100, Loc);
+                oDq.AddVarcharParam("@Stat", 100, Stat);
+                oDq.AddDateTimeParam("@StartDate", dt2);
+                oDq.AddDateTimeParam("@StockDate", dt1);
+                oDq.AddIntegerParam("@EmptyYard", EmptyYard);
+                dt = oDq.GetTable();
+            }
+
+            return dt;
+        }
 
         public static DataTable GetDetentionReport(string vord, DateTime StartDate, DateTime EndDate, string VoyageID, string VesselID, string LineId, string LocationId)
         {
@@ -368,6 +391,21 @@ namespace EMS.DAL
             return dt;
         }
 
+        public static DataTable GetExchangeRate(DateTime StartDate, DateTime EndDate)
+        {
+            string strExecution = "prcRptExchangeRate";
+            DataTable dt = new DataTable();
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddDateTimeParam("@StartDate", StartDate);
+                oDq.AddDateTimeParam("@EndDate", EndDate);
+                dt = oDq.GetTable();
+            }
+
+            return dt;
+        }
         #endregion
 
         #region Private Methods

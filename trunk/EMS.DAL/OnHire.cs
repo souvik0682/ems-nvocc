@@ -202,5 +202,18 @@ namespace EMS.DAL
 
             return myDataTable;
         }
+
+        public static DataTable GetContainerType(int ContainerTypeID)
+        {
+            string strExecution = "[mst].[getContainerType]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@ContainerTypeID", ContainerTypeID);
+                myDataTable = oDq.GetTable();
+            }
+            return myDataTable;
+        }
     }
 }

@@ -21,6 +21,8 @@ namespace EMS.Entity
 
         private string _ContainerNo;
 
+        private string _ContainerAbbr;
+
         private System.Nullable<System.DateTime> _ValidTill;
 
         private System.Nullable<long> _fk_ReturnPortID;
@@ -57,6 +59,7 @@ namespace EMS.Entity
                     HireID = dr["HireID"].ToLong(),
                     ContainerNo = dr["ContainerNo"].ToString(),
                     ContainerTypeID = dr["ContainerTypeID"].ToNullInt(),
+                    //ContainerAbbr = dr["ContainerAbbr"].ToString(),
                     CntrSize = dr["CntrSize"].ToString(),
                     ActualOnHireDate = dr["ActualOnHireDate"].ToNullDateTime(),                    
                     IGMDate = dr["IGMDate"].ToNullDateTime(),
@@ -133,6 +136,23 @@ namespace EMS.Entity
                 if ((this._ContainerNo != value))
                 {
                     this._ContainerNo = value;
+                }
+            }
+        }
+
+
+        [DataMember]
+        public string ContainerAbbr
+        {
+            get
+            {
+                return this._ContainerAbbr;
+            }
+            set
+            {
+                if ((this._ContainerAbbr != value))
+                {
+                    this._ContainerAbbr = value;
                 }
             }
         }

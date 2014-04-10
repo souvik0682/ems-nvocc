@@ -717,7 +717,10 @@
               <Width>0.76273in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.49189in</Width>
+              <Width>0.27314in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.24468in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.62731in</Width>
@@ -762,15 +765,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox17">
+                    <Textbox Name="tysz">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Label>szty</Label>
-                              <Value>=First(Fields!CntrSize.Value, "dsBLPrintingContainerTopFive")+"'"+First(Fields!CntrType.Value, "dsBLPrintingContainerTopFive")</Value>
+                              <Value>=Fields!CntrSize.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>'</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -780,7 +789,38 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox17</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="CntrType">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!CntrType.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>CntrType</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -824,7 +864,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -833,6 +872,7 @@
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -849,7 +889,7 @@
         <Top>1.79828cm</Top>
         <Left>0.53424cm</Left>
         <Height>0.61692cm</Height>
-        <Width>4.7801cm</Width>
+        <Width>4.84597cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>

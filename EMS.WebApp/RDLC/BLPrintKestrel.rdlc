@@ -1284,8 +1284,8 @@
           <Style>None</Style>
         </Border>
         <BackgroundImage>
-          <Source>External</Source>
-          <Value>=IIf(Parameters!ReportType.Value = "D", "DraftBackGround", Nothing)</Value>
+          <Source>Embedded</Source>
+          <Value>=IIf(Parameters!ReportType.Value="D", "DraftBackGround", nothing)</Value>
         </BackgroundImage>
       </Style>
     </PageHeader>

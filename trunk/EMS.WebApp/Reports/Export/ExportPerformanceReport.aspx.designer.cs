@@ -22,24 +22,6 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.WebControls.DropDownList ddlLoc;
         
         /// <summary>
-        /// rfvLoc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLoc;
-        
-        /// <summary>
-        /// ValidatorCalloutExtender1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender1;
-        
-        /// <summary>
         /// ddlLine control.
         /// </summary>
         /// <remarks>
@@ -65,6 +47,15 @@ namespace EMS.WebApp.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender3;
+        
+        /// <summary>
+        /// ddlServices control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlServices;
         
         /// <summary>
         /// DateRange control.

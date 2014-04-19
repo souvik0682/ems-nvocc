@@ -33,19 +33,20 @@
                 </td>
                 <td style="padding-right: 20px; vertical-align: top;">
                     <asp:DropDownList ID="ddlLoc" runat="server" AutoPostBack="True" Width="135px">
-                        <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
+                        <asp:ListItem Value="0" Text="All Locations"></asp:ListItem>
                     </asp:DropDownList>
-                     <asp:RequiredFieldValidator ID="rfvLoc" runat="server" ErrorMessage="Please select Location"
+                    <%-- <asp:RequiredFieldValidator ID="rfvLoc" runat="server" ErrorMessage="Please select Location"
                         ControlToValidate="ddlLoc"  InitialValue="0"  ForeColor="#CC3300"></asp:RequiredFieldValidator>
                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server" TargetControlID="rfvLoc"
                         WarningIconImageUrl="">
-                    </cc1:ValidatorCalloutExtender>
+                    </cc1:ValidatorCalloutExtender>--%>
                 </td>
                 <td class="label" style="padding-right: 50px; vertical-align: top;">
                     Line / NVOCC:<span class="errormessage">*</span>
                 </td>
                 <td style="padding-right: 20px; vertical-align: top;">
-                    <asp:DropDownList ID="ddlLine" runat="server" AutoPostBack="True" Width="135px">
+                    <asp:DropDownList ID="ddlLine" runat="server" AutoPostBack="True" Width="135px" 
+                        onselectedindexchanged="ddlLine_SelectedIndexChanged">
                         <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                     </asp:DropDownList>
                      <asp:RequiredFieldValidator ID="rfvLine" runat="server" ErrorMessage="Please select Line"
@@ -57,6 +58,24 @@
                 </td>               
            
             </tr>
+            <tr>
+                <td class="label" style="padding-right: 50px; vertical-align: top;">
+                    Services:
+                </td>
+                <td style="padding-right: 20px; vertical-align: top;">
+                    <asp:DropDownList ID="ddlServices" runat="server" AutoPostBack="True" Width="135px">
+                        <asp:ListItem Value="0" Text="All Services"></asp:ListItem>
+                    </asp:DropDownList>
+<%--                     <asp:RequiredFieldValidator ID="rfvLoc" runat="server" ErrorMessage="Please select Location"
+                        ControlToValidate="ddlLoc"  InitialValue="0"  ForeColor="#CC3300"></asp:RequiredFieldValidator>
+                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server" TargetControlID="rfvLoc"
+                        WarningIconImageUrl="">
+                    </cc1:ValidatorCalloutExtender>--%>
+                </td>
+                         
+           
+            </tr>
+
             <tr id="DateRange" runat="server">
                 <td class="label" style="padding-right: 50px; vertical-align: top;">
                     <asp:Label ID="lblStartDt" runat="server" Text="Start Date"></asp:Label>

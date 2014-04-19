@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using EMS.Common;
+using EMS.Entity;
 using EMS.Utilities;
 using EMS.BLL;
 
@@ -13,6 +14,7 @@ namespace EMS.WebApp.Transaction
 {
     public partial class ExportPerformanceReport : System.Web.UI.Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -39,7 +41,21 @@ namespace EMS.WebApp.Transaction
             ddlLoc.DataTextField = "Name";
             ddlLoc.DataSource = lstLoc;
             ddlLoc.DataBind();
-            ddlLoc.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
+            ddlLoc.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_ALL_TEXT, Constants.DROPDOWNLIST_ALL_TEXT));
+        }
+        private void PopulateServices(int LineID)
+        {
+            //List<IService> lstService = new ServiceBLL()
+
+            //ServiceEntity oService = (ServiceEntity)ServiceBLL.GetServiceWithLine(LineID);
+            BLL.DBInteraction dbinteract = new BLL.DBInteraction();
+            DataSet ds = dbinteract.GetServiceForLine(LineID);
+
+            ddlServices.DataValueField = "fk_ServiceNameID";
+            ddlServices.DataTextField = "Servicename";
+            ddlServices.DataSource = ds;
+            ddlServices.DataBind();
+            ddlServices.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_ALL_TEXT, Constants.DROPDOWNLIST_ALL_TEXT));
         }
         private void GenerateReport()
         {
@@ -129,6 +145,11 @@ namespace EMS.WebApp.Transaction
         protected void btnShow_Click(object sender, EventArgs e)
         {
             GenerateReport();
+        }
+
+        protected void ddlLine_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateServices(ddlLine.SelectedValue.ToInt());
         }
     }
 }

@@ -326,7 +326,7 @@
                                                             </td>
                                                             <td>
                                                                 <cc2:CustomTextBox ID="txtFrightToCollect" runat="server" CssClass="numerictextbox"
-                                                                    Width="250px" TabIndex="18" Type="Decimal" Enabled="False"
+                                                                    Width="250px" TabIndex="18" Type="Decimal" Enabled="True"
                                                                     MaxLength="13" Precision="10" Scale="2" ></cc2:CustomTextBox>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvFrightToCollect" runat="server" ControlToValidate="txtFrightToCollect"

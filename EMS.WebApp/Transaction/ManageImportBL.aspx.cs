@@ -616,7 +616,7 @@ namespace EMS.WebApp.Transaction
         {
             if (rdoFrightType.SelectedValue == "PP")
             {
-                txtFrightToCollect.Enabled = false;
+                txtFrightToCollect.Enabled = true;
                 //txtFreightPayable.Enabled = false;
                 ((TextBox)AC_Port5.FindControl("txtPort")).Enabled = false;
                 ((TextBox)AC_Port5.FindControl("txtPort")).Text = "";
@@ -710,8 +710,10 @@ namespace EMS.WebApp.Transaction
 
                 rdoCargoType.Enabled = true;
                 rdoCargoType.SelectedValue = "F";
-
+                tpFooter.Enabled = true;
                 btnAddRow.Enabled = true;
+                rfvSurveyor.Enabled = true;
+                ddlSurveyor.Enabled = true;
             }
             else
             {
@@ -721,7 +723,9 @@ namespace EMS.WebApp.Transaction
                 txtFEU.Text = "";
                 rfvTEU.Visible = false;
                 rfvFEU.Visible = false;
-
+                tpFooter.Enabled = false;
+                rfvSurveyor.Enabled = false;
+                ddlSurveyor.Enabled = false;
                 rdoCargoType.Enabled = false;
                 rdoCargoType.SelectedValue = "N";
 
@@ -1774,7 +1778,7 @@ namespace EMS.WebApp.Transaction
                 }
             }
 
-            if (rdoCargoType.SelectedValue != "E")
+            if (rdoCargoType.SelectedValue != "E" && rdoCargoType.SelectedValue != "N")
             {
                 if (footers != null || footers.Count > 0)
                 {
@@ -1801,22 +1805,25 @@ namespace EMS.WebApp.Transaction
             if (txtFEU.Text != string.Empty)
                 feu = Convert.ToInt32(txtFEU.Text);
 
-            if ((teu + feu) == 0)
+            if ((teu + feu) == 0 && rdoCargoType.SelectedValue == "C")
             {
                 IsValid = false;
                 lblErr.Text = "Total number of (TEU + FEU) should be greater than 0";
             }
 
             //Container in Header & Footer should be same
-            if (footers != null || footers.Count > 0)
+            if (footers != null)
             {
-                int footerTeu = (footers.Where(f => f.CntrSize == "20").Sum(f => Convert.ToInt32(f.CntrSize)) / 20);
-                int footerFeu = (footers.Where(f => f.CntrSize == "40").Sum(f => Convert.ToInt32(f.CntrSize)) / 40);
-
-                if ((teu != footerTeu) || (feu != footerFeu))
+                if (footers.Count > 0)
                 {
-                    IsValid = false;
-                    lblErr.Text = "Total TEU & FEU in header should be equal to B/L Footer";
+                    int footerTeu = (footers.Where(f => f.CntrSize == "20").Sum(f => Convert.ToInt32(f.CntrSize)) / 20);
+                    int footerFeu = (footers.Where(f => f.CntrSize == "40").Sum(f => Convert.ToInt32(f.CntrSize)) / 40);
+
+                    if ((teu != footerTeu) || (feu != footerFeu))
+                    {
+                        IsValid = false;
+                        lblErr.Text = "Total TEU & FEU in header should be equal to B/L Footer";
+                    }
                 }
             }
 
@@ -2012,6 +2019,21 @@ namespace EMS.WebApp.Transaction
             rdoCargoType.SelectedValue = header.CargoType;
             txtDestFreeDays.Text = Convert.ToString(header.DetentionFree);
             rdoDestSlab.SelectedValue = header.DetentionSlabType;
+
+            if (rdoNatureCargo.SelectedValue != "C")
+            {
+                tpFooter.Enabled = false;
+                rfvSurveyor.Enabled = false;
+                ddlSurveyor.Enabled = false;
+                rdoCargoType.Enabled = false;
+            }
+            else
+            {
+                tpFooter.Enabled = true;
+                rfvSurveyor.Enabled = true;
+                ddlSurveyor.Enabled = true;
+                rdoCargoType.Enabled = true;
+            }
 
             if (header.DOLock == true)
                 rdoLockDO.SelectedValue = "Yes";

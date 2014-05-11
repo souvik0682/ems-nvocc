@@ -63,7 +63,7 @@
                         <td>
                             <asp:TextBox ID="txtVessel" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender7" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
-                                FilterMode="InvalidChars" ValidChars=" " TargetControlID="txtVessel">
+                                FilterMode="InvalidChars" TargetControlID="txtVessel">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender7" runat="server" TargetControlID="txtVessel"
                                 WatermarkText="Vessel Name">
@@ -72,7 +72,7 @@
                         <td>
                             <asp:TextBox ID="txtPOD" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender9" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
-                                FilterMode="InvalidChars" ValidChars=" " TargetControlID="txtPOD">
+                                FilterMode="InvalidChars" TargetControlID="txtPOD">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender9" runat="server" TargetControlID="txtPOD"
                                 WatermarkText="Port of Discharge">
@@ -81,7 +81,7 @@
                         <td>
                             <asp:TextBox ID="txtPOL" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender10" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
-                                FilterMode="InvalidChars" ValidChars=" " TargetControlID="txtPOL">
+                                FilterMode="InvalidChars" TargetControlID="txtPOL">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender10" runat="server" TargetControlID="txtPOL"
                                 WatermarkText="Port of Loading">

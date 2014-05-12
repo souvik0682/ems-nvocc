@@ -9,9 +9,9 @@ namespace EMS.BLL
 {
    public class ExportPerformanceBLL
     {
-        public DataTable GetExportPerformanceStatement(int LineID, int LocationID, DateTime StartDate, DateTime EndDate)
+        public DataTable GetExportPerformanceStatement(int LineID, int LocationID, DateTime StartDate, DateTime EndDate, int ServiceID)
         {
-            return ExportPerformanceDAL.GetExportPerformance(LineID, LocationID,StartDate, EndDate);
+            return ExportPerformanceDAL.GetExportPerformance(LineID, LocationID,StartDate, EndDate, ServiceID);
         }
     }
 }

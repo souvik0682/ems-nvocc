@@ -47,5 +47,10 @@ namespace EMS.BLL
             return EMS.DAL.OnHireDAL.GetLeaseForOnhire(LeaseID);
             
         }
+
+        public static DataTable GetContainerType(int containerType)
+        {
+            return EMS.DAL.OnHireDAL.GetContainerType(containerType);
+        }
     }
 }

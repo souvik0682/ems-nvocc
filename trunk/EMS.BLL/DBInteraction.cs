@@ -150,6 +150,7 @@ namespace EMS.BLL
 
         }
 
+
         #endregion
 
         #region Port
@@ -551,6 +552,24 @@ namespace EMS.BLL
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
             dquery.AddIntegerParam("@pk_mainLineVoyageID", VoyageId);
             dquery.RunActionQuery();
+        }
+
+        public DataSet GetServiceForLine(int pk_NVOCCID)
+        {
+            string ProcName = "[exp].[prcGetServicesListForLine]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            dquery.AddIntegerParam("@LineID", pk_NVOCCID);
+
+            return dquery.GetTables();
+        }
+
+        public void UpdateMUSTRecord()
+        {
+            string ProcName = "[exp].[sp_UpdateShipsoft]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+            dquery.RunActionQuery();
+
         }
     }
 }

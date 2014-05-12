@@ -15,6 +15,8 @@ using EMS.Common;
 using EMS.Entity;
 using System.Collections.Specialized;
 using EMS.Utilities.Cryptography;
+using EMS.Utilities.ReportManager;
+using System.Data;
 
 namespace EMS.WebApp.Reports.ReportViewer
 {
@@ -200,7 +202,7 @@ namespace EMS.WebApp.Reports.ReportViewer
                                 HttpContext.Current.Response.End();
                             }
                         }
-                        catch(Exception ex) {  System.IO.File.AppendAllText(@"C:\Exception.txt", ex.Message+"\n"+ex.StackTrace);}
+                        catch (Exception ex) { System.IO.File.AppendAllText(@"C:\Exception.txt", ex.Message + "\n" + ex.StackTrace); }
                     }
                 }
                 else if (ReportName.ToLower().Equals("exportinvoice"))
@@ -365,7 +367,7 @@ namespace EMS.WebApp.Reports.ReportViewer
 
     public partial class ShowReport : System.Web.UI.Page
     {
-      
+
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
@@ -392,7 +394,7 @@ namespace EMS.WebApp.Reports.ReportViewer
             //PendingDelivaryOrder
             switch (strReportName.ToLower())
             {
-                    
+
 
                 case "cargoarrivalnotice":
                     ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1;
@@ -420,9 +422,23 @@ namespace EMS.WebApp.Reports.ReportViewer
                     TrHire.Visible = true;
                     TrHire1.Visible = false;
                     lblLine.Text = "Line";
+                    BtnMoneyRecipts.Visible = true;
                     ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1;
                     break;
                 case "crnregister":
+                    TrHire.Visible = true;
+                    TrHire1.Visible = false;
+                    lblLine.Text = "Line";
+                    BtnCreditNotes.Visible = true;
+                    ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1;
+                    break;
+                case "crnwithindates":
+                    TrHire.Visible = true;
+                    TrHire1.Visible = false;
+                    lblLine.Text = "Line";
+                    ddlLine.SelectedIndexChanged += ddlLine_SelectedIndexChanged1;
+                    break;
+                case "rptmoneyrcptnowithindates":
                     TrHire.Visible = true;
                     TrHire1.Visible = false;
                     lblLine.Text = "Line";
@@ -451,8 +467,23 @@ namespace EMS.WebApp.Reports.ReportViewer
 
         }
 
+        //
+        // Summary:
+        //     Raises the System.Web.UI.Page.LoadComplete event at the end of the page load
+        //     stage.
+        //
+        // Parameters:
+        //   e:
+        //     An System.EventArgs that contains the event data.
+        //protected override void OnLoadComplete(EventArgs e) {
+        //    if (ViewState["strReportName"].ToString().ToLower() == "rptmoneyrcptnowithindates")
+        //    {
+        //          rptViewer.ServerReport.Refresh();
+        //    }
+        //}
         IUser user = null;
         ReportParameter[] reportParameter = null;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             user = (IUser)Session[Constants.SESSION_USER_INFO];
@@ -463,6 +494,7 @@ namespace EMS.WebApp.Reports.ReportViewer
             }
 
         }
+
         private void FillData()
         {
             Filler.FillData<ILocation>(ddlLine, new CommonBLL().GetActiveLocation(), "Name", "Id", "Location");
@@ -528,7 +560,13 @@ namespace EMS.WebApp.Reports.ReportViewer
                 case "crnregister":
                     litHeader.Text = "CREDIT NOTE REGISTER";
                     break;
-                //PendingDelivaryOrder
+                case "crnwithindates":
+                    litHeader.Text = "CREDIT NOTES WITHIN DATES";
+                    break;
+                case "rptmoneyrcptnowithindates":
+                    litHeader.Text = "MONEY RECIPTS WITHIN DATES";
+                    break;
+                //PendingDelivaryOrder rptmoneyrcptnowithindates
                 default: strReportName = string.Empty; break;
             }
             if (user.UserRole.Id != 2)
@@ -565,6 +603,13 @@ namespace EMS.WebApp.Reports.ReportViewer
                         break;
                     case "crnregister":
                         ddlLine_SelectedIndexChanged1(null, null);
+                      
+                        break;
+                    case "crnwithindates":
+                        ddlLine_SelectedIndexChanged1(null, null);
+                        break;
+                    case "rptmoneyrcptnowithindates":
+                        ddlLine_SelectedIndexChanged1(null, null);
                         break;
                     case "pendingdelivaryorder":
                         ddlLine_SelectedIndexChanged1(null, null);
@@ -577,6 +622,7 @@ namespace EMS.WebApp.Reports.ReportViewer
             //Filler.FillData<IContainerType>(ddlEmptyYard, );
 
         }
+
         public void SetDefault()
         {
             if (strReportName.ToLower() != "gang")
@@ -743,11 +789,43 @@ namespace EMS.WebApp.Reports.ReportViewer
                     rptParameters[2] = new ReportParameter("refDateS", txtSDate.Text);
                     rptParameters[3] = new ReportParameter("refDateE", txtEDate.Text);
                     break;
-                //PendingDelivaryOrder
+                case "crnwithindates":
+                    //litHeader.Text = "ON/OFF REGISTER FROM";      
+                    rptParameters = new ReportParameter[5];
+                    rptParameters[1] = new ReportParameter("Location", ddlLine.SelectedValue);
+                    rptParameters[0] = new ReportParameter("line", ddlLocation.SelectedValue);
+                    rptParameters[2] = new ReportParameter("refDateS", GetDateInYYYYMMDD(txtSDate.Text));
+                    rptParameters[3] = new ReportParameter("refDateE", GetDateInYYYYMMDD(txtEDate.Text));
+                    rptParameters[4] = new ReportParameter("LoginUserName", user.FirstName + " " + user.LastName);
+
+                    break;
                 default: strReportName = string.Empty; break;
             }
             return rptParameters;
         }
+
+        private string GetDateInYYYYMMDD(string str)
+        {
+
+            if (string.IsNullOrEmpty(str))
+            {
+                throw new Exception("Str is Empty");
+            }
+
+
+            var v = str.Split('-');
+            if (v.Length != 3) { throw new Exception("Str is in incorrrect format"); }
+
+            if (v[0].Length == 2 && v[1].Length == 2 && v[2].Length == 4)
+            {
+
+                return v[2] + "-" + v[1] + "-" + v[0];
+            }
+
+            throw new Exception("Str is in incorrrect format");
+
+        }
+
 
         private void LoadReport()
         {
@@ -796,6 +874,7 @@ namespace EMS.WebApp.Reports.ReportViewer
         public string parameter1 { get; set; }
 
         public string parameter2 { get; set; }
+
         protected void ddlLine_SelectedIndexChanged1(object sender, EventArgs e)
         {
             if (ddlLine.SelectedIndex > 0)
@@ -804,14 +883,15 @@ namespace EMS.WebApp.Reports.ReportViewer
                 {
                     Filler.FillData(ddlLocation, CommonBLL.GetLineForHire(ddlLine.SelectedValue), "ProspectName", "ProspectID", "Line");
                 }
-                else if (ViewState["strReportName"].ToString().ToLower() != "collectionregister")
+                else 
                 {
                     Filler.FillData(ddlLocation, CommonBLL.GetLine(ddlLine.SelectedValue), "ProspectName", "ProspectID", "Line");
                 }
-                else 
+                if (ViewState["strReportName"].ToString().ToLower() == "collectionregister" || ViewState["strReportName"].ToString().ToLower() == "crnregister")
                 {
                     RequiredFieldValidator3.Enabled = false;
-                    Filler.FillData(ddlLocation, CommonBLL.GetLine(ddlLine.SelectedValue), "ProspectName", "ProspectID", "All");
+                    ddlLocation.Items.RemoveAt(0);
+                    //Filler.FillData(ddlLocation, CommonBLL.GetLine(ddlLine.SelectedValue), "ProspectName", "ProspectID", "All");
                 }
             }
         }
@@ -830,8 +910,22 @@ namespace EMS.WebApp.Reports.ReportViewer
             strReportName = ViewState["strReportName"].ToString();
             if (!string.IsNullOrEmpty(strReportName))
             {
-                reportParameter = BindParameter(strReportName);
-                LoadReport();
+
+                if (strReportName.ToLower() == "rptmoneyrcptnowithindates")
+                {
+
+                    GenerateReport();
+                    rptViewer.LocalReport.Refresh();
+                }
+                else
+                {
+                    rptViewer.Reset();
+
+                    rptViewer.LocalReport.Dispose();
+                    rptViewer.LocalReport.DataSources.Clear();
+                    reportParameter = BindParameter(strReportName);
+                    LoadReport();
+                }
             }
         }
         //Get invoice
@@ -842,6 +936,7 @@ namespace EMS.WebApp.Reports.ReportViewer
                 Filler.FillData(ddlInvoice, CommonBLL.GetInvoiceByBLNo(ddlLocation.SelectedValue), "InvoiceNo", "InvoiceID", "Invoice");
             }
         }
+
         protected void ddlLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlLocation.SelectedIndex > 0)
@@ -869,5 +964,97 @@ namespace EMS.WebApp.Reports.ReportViewer
                 }
             }
         }
+
+        static DataSet DataSetMain = new DataSet();
+        static long loopValue = 0;
+        static int index = 0;
+        string Address = "";
+        protected void SubreportEventHandler(object sender, SubreportProcessingEventArgs e)
+        {
+
+            if (DataSetMain.Tables[0].Rows.Count > index)
+            {
+                try
+                {
+                    var v = DataSetMain.Tables[0].Rows[index++][0];
+                    loopValue = Convert.ToInt64(v);
+                    DataSet ds = EMS.BLL.BLLReport.GetMoneyRcptDetails(loopValue);
+
+                    e.DataSources.Clear();
+
+                    e.DataSources.Add(new ReportDataSource("DataSet3", ds.Tables[0]));
+
+                }
+                catch { }
+
+            }
+
+        }
+
+        private void GenerateReport()
+        {
+            string rptName = "RptMoneyRcptNoWithInDates.rdlc";
+            index = 0;
+            DataSetMain = BLLReport.GetMoneyRcptNoWithDates(Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlLocation.SelectedValue), Convert.ToDateTime(txtSDate.Text), Convert.ToDateTime(txtEDate.Text));
+            rptViewer.Reset();
+
+            rptViewer.LocalReport.Dispose();
+            rptViewer.LocalReport.DataSources.Clear();
+            rptViewer.LocalReport.ShowDetailedSubreportMessages = true;
+            rptViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(SubreportEventHandler);
+            rptViewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + rptName;
+            rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", DataSetMain.Tables[0]));
+            if (DataSetMain.Tables[0].Rows.Count > 0)
+            {
+                var v = DataSetMain.Tables[0].Rows[0][0];
+                loopValue = Convert.ToInt64(v);
+                DataSet ds = EMS.BLL.BLLReport.GetMoneyRcptDetails(loopValue);
+                Address = ds.Tables[0].Rows[0]["locationaddress"].ToString();
+            }
+            rptViewer.LocalReport.SetParameters(new ReportParameter("CompanyName", "BEN LINE AGENCIES (INDIA) PVT. LTD."));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("StDate", GetDateInYYYYMMDD(txtSDate.Text)));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("EdDate", GetDateInYYYYMMDD(txtEDate.Text)));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("Location", ddlLine.SelectedValue));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("Line", ddlLocation.SelectedValue));
+            rptViewer.LocalReport.SetParameters(new ReportParameter("LocationName", Address));
+
+            rptViewer.LocalReport.SetParameters(new ReportParameter("RCPTID", "495"));
+            //rptViewer.ShowCredentialPrompts = false;       
+            //rptViewer.ShowPrintButton = true;
+            //rptViewer.ShowParameterPrompts = false;
+            //rptViewer.ShowPromptAreaButton = false;
+            //rptViewer.ShowToolBar = true;
+            //rptViewer.ZoomPercent = 300;
+            //rptViewer.ShowReportBody = true;
+            //rptViewer.Visible = true;
+            rptViewer.LocalReport.Refresh();
+
+        }
+
+        protected void BtnMoneyRecipts_Click(object sender, EventArgs e)
+        {
+           
+
+                    GenerateReport();
+                    rptViewer.LocalReport.Refresh();
+        }
+
+        protected void BtnCreditNotes_Click(object sender, EventArgs e)
+        {
+            rptViewer.Reset();
+
+            rptViewer.LocalReport.Dispose();
+            rptViewer.LocalReport.DataSources.Clear();
+            ViewState["strReportName1"] = ViewState["strReportName"];
+            ViewState["strReportName"] = "CrnWithinDates";
+            strReportName = ViewState["strReportName"].ToString();
+            if (!string.IsNullOrEmpty(strReportName))
+            {
+                    reportParameter = BindParameter(strReportName);
+                    LoadReport();
+            }
+            ViewState["strReportName"] = ViewState["strReportName1"];
+        }
+
     }
 }

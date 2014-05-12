@@ -41,7 +41,7 @@ namespace EMS.WebApp.Transaction
             ddlLoc.DataTextField = "Name";
             ddlLoc.DataSource = lstLoc;
             ddlLoc.DataBind();
-            ddlLoc.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_ALL_TEXT, Constants.DROPDOWNLIST_ALL_TEXT));
+            ddlLoc.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_ALL_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
         }
         private void PopulateServices(int LineID)
         {
@@ -55,7 +55,7 @@ namespace EMS.WebApp.Transaction
             ddlServices.DataTextField = "Servicename";
             ddlServices.DataSource = ds;
             ddlServices.DataBind();
-            ddlServices.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_ALL_TEXT, Constants.DROPDOWNLIST_ALL_TEXT));
+            ddlServices.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_ALL_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
         }
         private void GenerateReport()
         {
@@ -70,7 +70,7 @@ namespace EMS.WebApp.Transaction
 
 
 
-                dtExcel = cls.GetExportPerformanceStatement(Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue), dt1, dt2);
+                dtExcel = cls.GetExportPerformanceStatement(Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue), dt1, dt2, Convert.ToInt32(ddlServices.SelectedValue));
 
                 dtExcel.Columns.Remove("fk_NVOCCID");
                 dtExcel.Columns.Remove("fk_MainLineVesselID");

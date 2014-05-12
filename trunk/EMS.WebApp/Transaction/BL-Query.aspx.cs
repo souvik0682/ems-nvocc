@@ -128,6 +128,7 @@ namespace EMS.WebApp.Transaction
         {
             if (txtBlNo.Text != string.Empty)
             {
+                txtFreightToCollect.Text = string.Empty;
                 PopulateAllData();
                 UpdatePanel2.Update();
             }
@@ -143,6 +144,11 @@ namespace EMS.WebApp.Transaction
             DisableAllServiceControls();
             BLDataSet = oImportBLL.GetBLQuery(txtBlNo.Text.Trim(), (int)EMS.Utilities.Enums.BLActivity.DOE);
             txtBlNo.Text = string.Empty;
+            int t40;
+            int t20;
+            int rcve40;
+            int rcve20;
+
             if (BLDataSet.Tables[0].Rows.Count > 0)
             {
                 fillBLDetail(BLDataSet.Tables[0]);
@@ -167,6 +173,7 @@ namespace EMS.WebApp.Transaction
 
                         chkFreightToCollect.Enabled = true;
                         txtFreightToCollect.Text = BLDataSet.Tables[0].Rows[0]["FREIGHTTOCOLLECT"].ToString();
+
                     }
                 }
                 else
@@ -203,23 +210,54 @@ namespace EMS.WebApp.Transaction
                     //EnableDisableServiceRequestSection();
                     //imgBtnFinalDo.Enabled = true;
                     tdFinalDo.Visible = true;
+                    tdCarting.Visible = true;
+                    tdCustLetter.Visible = true;
+                    tdEmpty.Visible = true;
+
                     tdExmDo.Attributes.Add("colspan", "1");
+                    tdExmDo.Visible = false;
                 }
                 else
                 {
                     tdFinalDo.Visible = false;
+                    tdCarting.Visible = false;
+                    tdCustLetter.Visible = false;
+                    tdEmpty.Visible = false;
                     tdExmDo.Attributes.Add("colspan", "2");
+                    tdExmDo.Visible = false;
                 }
 
 
+                if (Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["FSTINVGENERATED"]) == true && Convert.ToBoolean(BLDataSet.Tables[0].Rows[0]["RECPTCHECK"].ToString()) == false && BLDataSet.Tables[0].Rows[0]["FREIGHTTYPE"].ToString().ToLower() != "pp")
+                {
+                    txtFreightToCollect.ForeColor = Color.Red;
+                    chkFreightToCollect.Enabled = false;
+                    chkDetensionExtension.Enabled = true;
+                    chkPGRExtension.Enabled = true;
+                    chkSecurityInv.Enabled = true;
+                    chkFinalInvoice.Enabled = true;
+                    chkOtherInv.Enabled = true;
 
+                }
                 fillServiceRequest(BLDataSet.Tables[0]);
                 FillUploadedDocument(BLDataSet.Tables[1]);
                 FillSubmittedDocument(BLDataSet.Tables[2]);
                 FillInvoiceStatus(Convert.ToInt64(hdnBLId.Value));
                 FillDoExtension(BLDataSet.Tables[3]);
+                if (BLDataSet.Tables[0].Rows[0]["CargoMovement"].ToString().ToUpper() == "TI")
+                    CheckForCFSI(hdnBLId.Value.ToInt());
+                t40 = BLDataSet.Tables[0].Rows[0]["TTFC"].ToInt();
+                rcve40 = BLDataSet.Tables[0].Rows[0]["TFC"].ToInt();
+                t20 = BLDataSet.Tables[0].Rows[0]["TFFC"].ToInt();
+                rcve20 = BLDataSet.Tables[0].Rows[0]["FFC"].ToInt();
 
 
+                if (t40 == rcve40 && t20 == rcve20)
+                {
+                    chkDetensionExtension.Enabled = false;
+                    chkPGRExtension.Enabled = false;
+                }
+                
             }
         }
 
@@ -246,8 +284,8 @@ namespace EMS.WebApp.Transaction
             txtVessel.Text = dtDetail.Rows[0]["VESSEL"].ToString();
             txtVoyage.Text = dtDetail.Rows[0]["VOYAGE"].ToString();
             txtDetentionFreeDays.Text = dtDetail.Rows[0]["DTNFREEDAYS"].ToString();
-            txtPGRFreedays.Text = dtDetail.Rows[0]["IGMNO"].ToString();
-            txtPGRTill.Text = dtDetail.Rows[0]["ITEMLINENO"].ToString();
+            txtPGRFreedays.Text = dtDetail.Rows[0]["IGMNO"].ToString() + " / " + dtDetail.Rows[0]["ITEMLINENO"].ToString();
+            txtPGRTill.Text = dtDetail.Rows[0]["TTFC"].ToString() + "/" + dtDetail.Rows[0]["TFC"].ToString() + " " + dtDetail.Rows[0]["TFFC"].ToString() + "/" + dtDetail.Rows[0]["FFC"].ToString();
             // txtPGRFreedays.Text = dtDetail.Rows[0]["PGRFREEDAYS"].ToString();
 
             //if (Convert.ToDateTime(dtDetail.Rows[0]["PGRTILL"].ToString()) > Convert.ToDateTime("01/01/1950"))
@@ -283,6 +321,22 @@ namespace EMS.WebApp.Transaction
             //        txtPGRTill.Text = Convert.ToDateTime(txtLandingDate.Text).AddDays(Convert.ToDouble(txtPGRFreedays.Text) - 1).ToShortDateString();
             //}
         }
+
+        void CheckForCFSI(Int32 BLNo)
+        {
+            DataSet TIDataSet = new DataSet();
+            int TotCFSI;
+            int TotCont;
+            TIDataSet = oImportBLL.GetCSFIStat(BLNo);
+            TotCFSI = TIDataSet.Tables[0].Rows[0]["CFSI"].ToInt();
+            TotCont = TIDataSet.Tables[0].Rows[0]["CONTTOT"].ToInt();
+
+
+            if (TotCont != TotCFSI)
+                lnkGenInvFinalDo.Visible = false;
+
+        }
+
 
         void fillServiceRequest(DataTable dtDetail)
         {
@@ -1191,7 +1245,7 @@ namespace EMS.WebApp.Transaction
             rfvEFD.Enabled = false;
             rfvEFP.Enabled = false;
 
-            txtFreightToCollect.Text = string.Empty;
+            //txtFreightToCollect.Text = string.Empty;
             ddlDestuffing.SelectedIndex = 0;
             txtExtensionForDetention.Text = string.Empty;
             txtExtensionForPGR.Text = string.Empty;
@@ -1252,6 +1306,7 @@ namespace EMS.WebApp.Transaction
             chkCopyOfBill.Checked = false;
             chkConsoldatorNOC.Checked = false;
             chkCHSSA.Checked = false;
+            lnkGenInvFinalDo.Visible = true;
 
             dvDoc.InnerHtml = string.Empty;
             //gvwVendor
@@ -1445,12 +1500,40 @@ namespace EMS.WebApp.Transaction
 
             imgBtnFinalDo.Attributes.Add("onclick", string.Format("return ReportPrint('{0}','{1}','{2}','{3}');", "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("DeliveryOrder"),
                 "&invBLHeader=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue), 'f'));
+
+            imgBtnCust.Attributes.Add("onclick", string.Format("return ReportPrint3('{0}','{1}','{2}');", "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("custom"),
+                "&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue)));
+
+            imgBtnEmpty.Attributes.Add("onclick", string.Format("return ReportPrint3('{0}','{1}','{2}');", "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("dropoff"),
+                "&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue)));
+
+            imgBtnCarting.Attributes.Add("onclick", string.Format("return ReportPrint4('{0}','{1}','{2}','{3}');", "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("carting"),
+              "&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text), "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(ddlLocation.SelectedValue), "&Shift="+EMS.Utilities.GeneralFunctions.EncryptQueryString("0")));
+
+        }
+
+        protected void GenCust(object sender, EventArgs e)
+        {
+            //oImportBLL.SaveDestuffing(Convert.ToInt32(ddlDestuffing.SelectedIndex), Convert.ToInt64(hdnBLId.Value));
+            //mpeDo.Show();
         }
 
         protected void GenDo(object sender, EventArgs e)
         {
             oImportBLL.SaveDestuffing(Convert.ToInt32(ddlDestuffing.SelectedIndex), Convert.ToInt64(hdnBLId.Value));
             mpeDo.Show();
+        }
+
+        protected void GenEmpty(object sender, EventArgs e)
+        {
+            //oImportBLL.SaveDestuffing(Convert.ToInt32(ddlDestuffing.SelectedIndex), Convert.ToInt64(hdnBLId.Value));
+            //mpeDo.Show();
+        }
+
+        protected void GenCarting(object sender, EventArgs e)
+        {
+            //oImportBLL.SaveDestuffing(Convert.ToInt32(ddlDestuffing.SelectedIndex), Convert.ToInt64(hdnBLId.Value));
+            //mpeDo.Show();
         }
 
         protected void gvwInvoice_RowDataBound(object sender, GridViewRowEventArgs e)

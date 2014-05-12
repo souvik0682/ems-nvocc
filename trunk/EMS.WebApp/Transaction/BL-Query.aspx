@@ -14,6 +14,18 @@
             return false;
         }
 
+        function ReportPrint3(a, b, c) {
+            window.open('../Popup/Report.aspx?' + a + b + c, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
+
+            return false;
+        }
+
+        function ReportPrint4(a, b, c, d) {
+            window.open('../Popup/Report.aspx?' + a + b + c + d, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
+
+            return false;
+        }
+
 
         function ReportPrint1(a, b, c, d, e) {
             window.open('../Popup/Report.aspx?' + a + b + c + d + e, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
@@ -220,7 +232,7 @@
                                     <asp:TextBox ID="txtDetentionFreeDays" runat="server" Width="100" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td style="width: 11%;">
-                                    IGM No :
+                                    IGM / Line No :
                                 </td>
                                 <td style="width: 10%;">
                                     <%--<asp:RequiredFieldValidator ID="rfvWashing" runat="server" ErrorMessage="Please select your choice"
@@ -262,7 +274,7 @@
                                     <asp:TextBox ID="tstDetentionTill" runat="server" Width="100" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td>
-                                    Line No. :
+                                    Status 20' 40' (Total / RCVE):
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtPGRTill" runat="server" Width="100" Enabled="false"></asp:TextBox>
@@ -427,7 +439,7 @@
                                         BackgroundCssClass="ModalPopupBG" CancelControlID="imgClose">
                                     </cc1:ModalPopupExtender>
                                     <asp:Panel ID="pnlDo" runat="server" Style="display: none;">
-                                        <table style="width: 300px; height: 80px; background-color: White; text-align: center;"
+                                        <table style="width: 500px; height: 80px; background-color: White; text-align: center;"
                                             border="0" cellspacing="0">
                                             <%-- <tr>
                                                 <td colspan="2" align="right">
@@ -443,19 +455,43 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td id="tdExmDo" runat="server" width="50%" style="padding-top: 10px;">
+                                                <td id="tdExmDo" runat="server" width="10%" style="padding-top: 10px;" Enabled="false">
                                                     <asp:ImageButton ID="imgBtnExaminationDo" runat="server" ImageUrl="~/Images/p1.jpeg"
                                                         ToolTip="Print Examination Do" Height="45" Width="45" AlternateText="Print Examination Do" />
                                                     <br />
                                                     Print Examination Do
                                                 </td>
-                                                <td id="tdFinalDo" runat="server" width="50%" style="padding-top: 10px;">
+                                                <td id="tdFinalDo" runat="server" width="10%" style="padding-top: 10px;">
                                                     <asp:Button ID="btnGenDoNo" runat="server" OnClick="GenDo" Style="display: none;" />
                                                     <asp:ImageButton ID="imgBtnFinalDo" runat="server" ImageUrl="~/Images/p2.jpeg" ToolTip="Print Final Do"
                                                         Height="45" Width="45" AlternateText="Print Final Do" />
                                                     <br />
                                                     <span id="spnPrintFinalDo" runat="server"></span>
                                                 </td>
+                                                <td id="tdCustLetter" runat="server" width="10%" style="padding-top: 10px;">
+                                                    <asp:Button ID="btnGenCust" runat="server" OnClick="GenCust" Style="display: none;" />
+                                                    <asp:ImageButton ID="imgBtnCust" runat="server" ImageUrl="~/Images/p2.jpeg" ToolTip="Print Customs Letter"
+                                                        Height="45" Width="45" AlternateText="Print Customs Letter" />
+                                                    <br />
+                                                    Customs Letter
+                                                    <span id="spnPrintCustRepot" runat="server"></span>
+                                                </td>
+                                                <td id="tdEmpty" runat="server" width="10%" style="padding-top: 10px;">
+                                                    <asp:Button ID="btnEmpty" runat="server" OnClick="GenEmpty" Style="display: none;" />
+                                                    <asp:ImageButton ID="imgBtnEmpty" runat="server" ImageUrl="~/Images/p2.jpeg" ToolTip="Print Empty Letter"
+                                                        Height="45" Width="45" AlternateText="Print Empty Letter" />
+                                                    <br />
+                                                    Empty letter
+                                                    <span id="Span1" runat="server"></span>
+                                                </td>   
+                                                <td id="tdCarting" runat="server" width="10%" style="padding-top: 10px;">
+                                                    <asp:Button ID="btnCarting" runat="server" OnClick="GenCarting" Style="display: none;" />
+                                                    <asp:ImageButton ID="imgBtnCarting" runat="server" ImageUrl="~/Images/p2.jpeg" ToolTip="Print Carting Letter"
+                                                        Height="45" Width="45" AlternateText="Print Empty Letter" />
+                                                    <br />
+                                                    Carting letter
+                                                    <span id="Span2" runat="server"></span>
+                                                </td>   
                                             </tr>
                                             <tr>
                                                 <td colspan="2" height="30px">

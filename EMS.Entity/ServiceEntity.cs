@@ -95,7 +95,7 @@ namespace EMS.Entity
         {
             this.ServiceID = Convert.ToInt32(reader["pk_ServiceID"]);
             this.ServiceName = Convert.ToString(reader["ServiceName"]);
-            this.LinerID = Convert.ToInt32(reader["fk_LIneID"]);
+            this.LinerID = Convert.ToInt32(reader["fk_LineID"]);
             this.ServiceStatus = Convert.ToBoolean(reader["ServiceStatus"]);
             this.NVOCC = Convert.ToString(reader["NVOCC"]);
             this.FPOD = Convert.ToString(reader["PortName"]);

@@ -44,7 +44,7 @@
                             style="width: 15%">*</span>
                     </td>
                     <td align="left" style="width: 35%">
-                        <asp:DropDownList ID="ddlLocation" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged">
+                        <asp:DropDownList ID="ddlLocation" runat="server" AutoPostBack="true"  OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged">
                             <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="errormessage"
@@ -174,7 +174,7 @@
                             TargetControlID="txtSDate">
                         </cc1:CalendarExtender>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" CssClass="errormessage"
-                            ControlToValidate="txtSDate" InitialValue="0" ValidationGroup="Report" Display="Dynamic"
+                            ControlToValidate="txtSDate" ValidationGroup="Report" Display="Dynamic"
                             ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ControlToValidate="txtSDate" ID="RegularExpressionValidator2"
                             runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]"
@@ -185,11 +185,11 @@
                     </td>
                     <td align="left" style="width: 15%">
                         <asp:TextBox ID="txtEDate" runat="server" Width="113"></asp:TextBox>
-                        <cc1:CalendarExtender Format="dd/MM/yyyy" ID="CalendarExtender4" runat="server" PopupButtonID="txtEDate"
+                        <cc1:CalendarExtender Format="dd-MM-yyyy" ID="CalendarExtender4" runat="server" PopupButtonID="txtEDate"
                             TargetControlID="txtEDate">
                         </cc1:CalendarExtender>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" CssClass="errormessage"
-                            ControlToValidate="txtEDate" InitialValue="0" ValidationGroup="Report" Display="Dynamic"
+                            ControlToValidate="txtEDate"  ValidationGroup="Report" Display="Dynamic"
                             ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ControlToValidate="txtEDate" ID="RegularExpressionValidator3"
                             runat="server" CssClass="errormessage" ErrorMessage="[Please check the input]"
@@ -201,7 +201,7 @@
                         Report Type:<span class="errormessage">*</span>
                     </td>
                     <td align="left" colspan="2">
-                        <asp:DropDownList ID="ddlHire" runat="server" Width="120">
+                        <asp:DropDownList ID="ddlHire" runat="server" Width="113">
                             <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                             <asp:ListItem Text="On-Hire" Value="N"></asp:ListItem>
                             <asp:ListItem Text="Off-Hire" Value="F"></asp:ListItem>
@@ -211,14 +211,14 @@
                             ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                     </td>
                     <td align="left" style="width: 15%">
-                        Lease No:<span class="errormessage">*</span>
+                        Lease No:<%--<span class="errormessage">*</span>--%>
                     </td>
                     <td align="left" style="width: 15%">
                         <asp:TextBox ID="txtLeaseNo" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator
+                        <%--<asp:RequiredFieldValidator
                             ID="RequiredFieldValidator6" runat="server" CssClass="errormessage" ControlToValidate="txtPrintedBy"
                             ValidationGroup="Report" Display="Dynamic" ErrorMessage="[Required]">
-                         </asp:RequiredFieldValidator>
+                         </asp:RequiredFieldValidator>--%>
                     </td>
 
                 </tr>
@@ -234,11 +234,17 @@
                     </td>--%>
                     </tr>
                 <tr>
-                    <td colspan="4" align="left" style="padding: 5px 5px 5px 0">
-                        <asp:Button ID="btnReport" runat="server" Text="View Report" ValidationGroup="Report"
+                    <td  align="left" colspan="3"  style="padding: 5px 5px 5px 0">
+                        <asp:Button ID="btnReport" runat="server" Text="View Report" ValidationGroup="Report" CausesValidation="true"
                             OnClick="btnReport_Click" />
-                        <asp:Button ID="btnPrint" runat="server" Text="Print" ValidationGroup="Report" OnClientClick="return Print()" />
+                        <asp:Button ID="btnPrint" runat="server" Text="Print" ValidationGroup="Report" OnClientClick="return Print()"  />
                     </td>
+                     <td  id ="GenMR" align="left" style="padding: 5px 5px 5px 0">  <asp:Button ID="BtnMoneyRecipts"  CausesValidation="true"
+                             runat="server" Text="View Money Recipts" Visible="false" ValidationGroup="Report" onclick="BtnMoneyRecipts_Click"
+                             />  </td>
+                    <td id = "GenCrn" align="left" style="padding: 5px 5px 5px 0">  <asp:Button ID="BtnCreditNotes"  Visible="false" CausesValidation="true"
+                            runat="server" Text="View Credit Notes" ValidationGroup="Report" onclick="BtnCreditNotes_Click"
+                            />  </td>
                 </tr>
             </table>
         </fieldset>

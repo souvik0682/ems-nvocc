@@ -728,7 +728,6 @@ namespace EMS.WebApp.Transaction
                 ddlSurveyor.Enabled = false;
                 rdoCargoType.Enabled = false;
                 rdoCargoType.SelectedValue = "N";
-
                 btnAddRow.Enabled = false;
             }
 

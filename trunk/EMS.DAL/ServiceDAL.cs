@@ -93,5 +93,24 @@ namespace EMS.DAL
             return Result;
         }
 
+        public static List<IService> GetServiceWithLine(int LineID)
+        {
+            string strExecution = "[exp].[prcGetServicesListForLine]";
+            List<IService> lstServ = new List<IService>();
+            //IService oIH = null;
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@LineID", LineID);
+                DataTableReader reader = oDq.GetTableReader();
+                while (reader.Read())
+                {
+                    IService loc = new ServiceEntity(reader);
+                    lstServ.Add(loc);
+                }
+
+                reader.Close();
+            }
+            return lstServ;
+        }
     }
 }

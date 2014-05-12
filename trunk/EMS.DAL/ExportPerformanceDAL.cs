@@ -9,7 +9,7 @@ namespace EMS.DAL
 {
    public class ExportPerformanceDAL
     {
-        public static DataTable GetExportPerformance(int LineID, int LocationID,DateTime StartDate, DateTime EndDate)
+        public static DataTable GetExportPerformance(int LineID, int LocationID,DateTime StartDate, DateTime EndDate, int ServiceID)
         {
             string strExecution = "[exp].[rptExportPerformanceReport]";
             DataTable dt = new DataTable();
@@ -19,6 +19,7 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@LocationID", LocationID);
                 oDq.AddDateTimeParam("@StartDate", StartDate);
                 oDq.AddDateTimeParam("@EndDate", EndDate);
+                oDq.AddIntegerParam("@ServiceID", ServiceID);
                 dt = oDq.GetTable();
             }
             return dt;

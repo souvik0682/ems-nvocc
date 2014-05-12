@@ -23,6 +23,22 @@ namespace EMS.DAL
             return ds;
         }
 
+        public static System.Data.DataSet GetMoneyRcptNoWithDates(int Location, int Line, DateTime StDt, DateTime EdDt)
+        {
+            DataSet ds = new DataSet();
+
+            using (DbQuery dq = new DbQuery("prcRptMoneyRcptNoWithInDates"))
+            {
+                //dq.AddVarcharParam("@invNo", 20, invNo);
+                dq.AddBigIntegerParam("@Location", Location);
+                dq.AddBigIntegerParam("@Line", Line);
+                dq.AddDateTimeParam("@StDate", StDt);
+                dq.AddDateTimeParam("@EdDate", EdDt);
+                ds = dq.GetTables();
+            }
+            return ds;
+        }
+
         public static System.Data.DataSet GetMoneyRcptDetailsAccounts(string Location, string Line, DateTime Stdt, DateTime Endt)
         {
             DataSet ds = new DataSet();

@@ -60,9 +60,29 @@ namespace EMS.BLL
             return ReportDAL.GetMonthlyImportStatement(StartDate, EndDate, LineId, LocationId);
         }
 
+        public DataTable GetExchangeRate(DateTime StartDate, DateTime EndDate)
+        {
+            return ReportDAL.GetExchangeRate(StartDate, EndDate);
+        }
+
         public DataTable GetContainerStockDetail(string Line, string Loc, string Stat, string CntrType, string StockDate, int EmptyYard)
         {
             return ReportDAL.GetContainerStockDetail(Line, Loc, Stat, CntrType, StockDate, EmptyYard);
+        }
+
+        public DataTable GetGroundRentLOLOStatement(string Line, string Loc, string Stat, string StartDate, string EndDate, int EmptyYard)
+        {
+            return ReportDAL.GetGroundRentLOLOStatement(Line, Loc, Stat, StartDate, EndDate, EmptyYard);
+        }
+
+        public DataTable GetEmptyMovementStatement(string Line, string Loc, string StartDate, string EndDate)
+        {
+            return ReportDAL.GetEmptyMovementStatement(Line, Loc, StartDate, EndDate);
+        }
+
+        public DataTable GetRepairingStatement(string Line, string Loc, string StartDate, string EndDate)
+        {
+            return ReportDAL.GetRepairingStatement(Line, Loc, StartDate, EndDate);
         }
 
         public static DataSet GetBooking(string Initial)

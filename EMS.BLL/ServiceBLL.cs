@@ -5,8 +5,12 @@ using System.Text;
 using EMS.DAL;
 using EMS.Common;
 using EMS.Entity;
+using EMS.Utilities.ResourceManager;
 using EMS.Utilities;
+using EMS.Utilities.Cryptography;
+using System.Net.Mail;
 using System.Data;
+using System.Web.UI.WebControls;
 
 namespace EMS.BLL
 {
@@ -36,6 +40,11 @@ namespace EMS.BLL
         public static DataTable GetAllPort(string Initial)
         {
             return ImportHaulageDAL.GetAllPort(Initial);
+        }
+
+        public static List<IService> GetServiceWithLine(int ID)
+        {
+            return ServiceDAL.GetServiceWithLine(ID);
         }
     }
 }

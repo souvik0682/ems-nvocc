@@ -333,7 +333,7 @@ namespace EMS.DAL
             DataTable dt = new DataTable();
             DateTime dt1 = string.IsNullOrEmpty(EndDate) ? DateTime.Now : Convert.ToDateTime(EndDate);
             DateTime dt2 = string.IsNullOrEmpty(StartDate) ? DateTime.Now : Convert.ToDateTime(StartDate);
-            string strExecution = "prcRptStockDetail";
+            string strExecution = "prcRptLOLO";
             //DateTime dt1 = string.IsNullOrEmpty(StockDate) ? DateTime.Now : Convert.ToDateTime(StockDate);
             //DataSet ds = new DataSet();
             using (DbQuery oDq = new DbQuery(strExecution))
@@ -346,6 +346,52 @@ namespace EMS.DAL
                 oDq.AddDateTimeParam("@StartDate", dt2);
                 oDq.AddDateTimeParam("@StockDate", dt1);
                 oDq.AddIntegerParam("@EmptyYard", EmptyYard);
+                dt = oDq.GetTable();
+            }
+
+            return dt;
+        }
+
+        public static DataTable GetEmptyMovementStatement(string Line, string Loc, string StartDate, string EndDate)
+        {
+
+            DataTable dt = new DataTable();
+            DateTime dt1 = string.IsNullOrEmpty(EndDate) ? DateTime.Now : Convert.ToDateTime(EndDate);
+            DateTime dt2 = string.IsNullOrEmpty(StartDate) ? DateTime.Now : Convert.ToDateTime(StartDate);
+            string strExecution = "prcRptEmptyMovement";
+            //DateTime dt1 = string.IsNullOrEmpty(StockDate) ? DateTime.Now : Convert.ToDateTime(StockDate);
+            //DataSet ds = new DataSet();
+            using (DbQuery oDq = new DbQuery(strExecution))
+
+            //using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@Line", 80, Line);
+                oDq.AddVarcharParam("@Loc", 100, Loc);
+                oDq.AddDateTimeParam("@StartDate", dt2);
+                oDq.AddDateTimeParam("@EndDate", dt1);
+                dt = oDq.GetTable();
+            }
+
+            return dt;
+        }
+
+        public static DataTable GetRepairingStatement(string Line, string Loc, string StartDate, string EndDate)
+        {
+
+            DataTable dt = new DataTable();
+            DateTime dt1 = string.IsNullOrEmpty(EndDate) ? DateTime.Now : Convert.ToDateTime(EndDate);
+            DateTime dt2 = string.IsNullOrEmpty(StartDate) ? DateTime.Now : Convert.ToDateTime(StartDate);
+            string strExecution = "prcRptRepairing";
+            //DateTime dt1 = string.IsNullOrEmpty(StockDate) ? DateTime.Now : Convert.ToDateTime(StockDate);
+            //DataSet ds = new DataSet();
+            using (DbQuery oDq = new DbQuery(strExecution))
+
+            //using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@Line", 80, Line);
+                oDq.AddVarcharParam("@Loc", 100, Loc);
+                oDq.AddDateTimeParam("@StartDate", dt2);
+                oDq.AddDateTimeParam("@EndDate", dt1);
                 dt = oDq.GetTable();
             }
 

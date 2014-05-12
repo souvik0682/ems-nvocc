@@ -14,5 +14,7 @@
 <li><a href="../../Popup/Report.aspx?ReportName=InvoiceDeveloper&LineBLNo=UAFLMJN/NHV01&Location=1&LoginUserName=1&InvoiceId=1">Invoice</a></li>
 <li><a href="ShowReport.aspx?reportName=OnOffHire">On/Off-Hire</a></li>
 <li><a href="ShowReport.aspx?reportName=PendingDelivaryOrder">PendingDelivaryOrder</a></li>
+<li><a href="ShowReport.aspx?reportName=RptMoneyRcptNoWithInDates">RptMoneyRcptNoWithInDates</a></li>
+<li><a href="ShowReport.aspx?reportName=CrnWithinDates">CrnWithinDates</a></li>
 </ul>
 </asp:Content>

@@ -11,10 +11,9 @@ using System.Configuration;
 using System.Data;
 using EMS.Common;
 using Microsoft.Reporting.WebForms;
-
 namespace EMS.WebApp.Reports
 {
-    public partial class GrRentLOLOReport : System.Web.UI.Page
+    public partial class Repairing : System.Web.UI.Page
     {
         private bool _canAdd = false;
         private bool _canEdit = false;
@@ -32,18 +31,17 @@ namespace EMS.WebApp.Reports
                 GeneralFunctions.PopulateDropDownList(ddlLoc, dbinteract.PopulateDDLDS("DSR.dbo.mstLocation", "pk_LocID", "LocAbbr", true), true);
                 //GeneralFunctions.PopulateDropDownList(ddlStatus, EMS.BLL.EquipmentBLL.DDLGetStatus());
                 //GeneralFunctions.PopulateDropDownList(ddlContainerType, EMS.BLL.EquipmentBLL.DDLGetContainerType());
-                ddlEmptyYard.Enabled = false;
+                //ddlEmptyYard.Enabled = false;
                 //GeneralFunctions.PopulateDropDownList(ddlEmptyYard, EMS.BLL.EquipmentBLL.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt()));
 
                 //GenerateReport();
             }
-
         }
+
         private void RetriveParameters()
         {
             _userId = UserBLL.GetLoggedInUserId();
 
-            //Get user permission.
             UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
         }
 
@@ -62,7 +60,7 @@ namespace EMS.WebApp.Reports
             {
                 //DateTime dt = Convert.ToDateTime(txtdtStock.Text.Trim());
                 DataTable dtExcel = new DataTable();
-                dtExcel = cls.GetGroundRentLOLOStatement(ddlLine.SelectedValue, ddlLoc.SelectedValue, ddlStatus.SelectedValue, txtStartDate.Text.Trim(), txtdtStock.Text.Trim(), ddlEmptyYard.SelectedValue.ToInt());
+                dtExcel = cls.GetRepairingStatement(ddlLine.SelectedValue, ddlLoc.SelectedValue, txtStartDate.Text.Trim(), txtdtStock.Text.Trim());
                 ExporttoExcel(dtExcel);
             }
             catch (Exception ex)
@@ -77,7 +75,7 @@ namespace EMS.WebApp.Reports
             HttpContext.Current.Response.Buffer = true;
             HttpContext.Current.Response.ContentType = "application/ms-excel";
             HttpContext.Current.Response.Write(@"<!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.0 Transitional//EN"">");
-            HttpContext.Current.Response.AddHeader("Content-Disposition", "attachment;filename=GrRentLOLO.xls");
+            HttpContext.Current.Response.AddHeader("Content-Disposition", "attachment;filename=Repairing.xls");
             HttpContext.Current.Response.Charset = "utf-8";
             HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.GetEncoding("windows-1250");
             HttpContext.Current.Response.Write("<font style='font-size:10.0pt; font-family:Calibri;'>");
@@ -114,52 +112,15 @@ namespace EMS.WebApp.Reports
             HttpContext.Current.Response.End();
         }
 
-        protected void ddlLoc_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //GeneralFunctions.PopulateDropDownList(ddlEmptyYard, EMS.BLL.EquipmentBLL.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt()));
-            ddlEmptyYard.Enabled = true;
-            //GeneralFunctions.PopulateDropDownList(ddlEmptyYard, EMS.BLL.EquipmentBLL.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt()));
-
-            BLL.EquipmentBLL GetEmptyYard = new BLL.EquipmentBLL();
-            DataSet ds = EMS.BLL.EquipmentBLL.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt());
-            //DataSet ds = GetEmptyYard.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt());
-            ddlEmptyYard.DataValueField = "ListItemValue";
-            ddlEmptyYard.DataTextField = "ListItemText";
-            ddlEmptyYard.DataSource = ds;
-            ddlEmptyYard.DataBind();
-            ddlEmptyYard.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_ALL_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
-            
-        }
-
-        protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //ddlEmptyYard.Enabled = true;
-            ////GeneralFunctions.PopulateDropDownList(ddlEmptyYard, EMS.BLL.EquipmentBLL.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt()));
-
-            //BLL.EquipmentBLL GetEmptyYard = new BLL.EquipmentBLL();
-            //DataSet ds = EMS.BLL.EquipmentBLL.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt());
-            ////DataSet ds = GetEmptyYard.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt());
-            //ddlEmptyYard.DataValueField = "ListItemValue";
-            //ddlEmptyYard.DataTextField = "ListItemText";
-            //ddlEmptyYard.DataSource = ds;
-            //ddlEmptyYard.DataBind();
-            //ddlEmptyYard.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_ALL_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
-            
-        }
-
         protected void ddlLine_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        protected void ddlEmptyYard_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlLoc_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        //protected void btnSave_Click(object sender, EventArgs e)
-        //{
-
-        //}
     }
 }

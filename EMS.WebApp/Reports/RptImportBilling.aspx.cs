@@ -108,6 +108,7 @@ namespace EMS.WebApp.Reports
         private void GenerateReport()
         {
             lblMsg.Text = "";
+
             ReportBLL cls = new ReportBLL();
 
             LocalReportManager reportManager = new LocalReportManager(rptViewer, "ImpBilling", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
@@ -165,6 +166,7 @@ namespace EMS.WebApp.Reports
                 rptName = "RptImpBillAnnex.rdlc";
                 string BlRefNo = ((TextBox)autoComplete1.FindControl("txtBlNo")).Text;
                 DataSet ds = EMS.BLL.BLLReport.GetImpBillAnne(hdnBLId.Value, txtdtBill.Text);
+
                 try
                 {
                     string compname = Convert.ToString(ConfigurationManager.AppSettings["CompanyName"]);
@@ -176,6 +178,7 @@ namespace EMS.WebApp.Reports
                     rptViewer.LocalReport.SetParameters(new ReportParameter("Address", EMS.BLL.BLLReport.GetAddByCompName(compname)));
                     rptViewer.LocalReport.SetParameters(new ReportParameter("tillDate", txtdtBill.Text));
                     rptViewer.LocalReport.SetParameters(new ReportParameter("BL_Ref", txtBlNo.Text));
+                    //rptViewer.LocalReport.SetParameters(new ReportParameter("DetentionDays", detentiondays));
                     rptViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", ds.Tables[0]));
                     rptViewer.LocalReport.Refresh();
 

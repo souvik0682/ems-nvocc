@@ -22,7 +22,7 @@
          GROUND RENT & LOLO </div>
     <center>
         <fieldset style="width:1000px; ">
-            <legend> Container Stock Details </legend>
+            <legend> Ground Rent & L.O.L.O </legend>
 <%--             <asp:UpdatePanel ID="upLoc" runat="server" UpdateMode="Conditional">--%>
 
          <ContentTemplate>
@@ -71,7 +71,7 @@
                        <td style="text-align:left" >Start Date:</td>
                     <td>
                         <asp:TextBox ID="txtStartDate" runat="server" CssClass="textboxuppercase" Width="150"></asp:TextBox>
-                        <cc2:CalendarExtender ID="CalendarExtender2" Format="dd/MM/yyyy" TargetControlID="txtdtStock" runat="server" />
+                        <cc2:CalendarExtender ID="CalendarExtender2" Format="dd/MM/yyyy" TargetControlID="txtStartDate" runat="server" />
                     </td>
                     <td style="text-align:left" >End Date:</td>
                     <td>

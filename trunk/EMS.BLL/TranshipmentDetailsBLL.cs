@@ -12,10 +12,16 @@ namespace EMS.BLL
 {
     public class TranshipmentDetailsBLL
     {
-        public DataSet GetTranshipmentHeader(int ExpBLId)
+        public DataSet GetTranshipmentHeader(int ExpBLId, Int32 CountID)
         {
-            return TranshipmentDetailsDAL.GetTranshipmentHeader(ExpBLId);
+            return TranshipmentDetailsDAL.GetTranshipmentHeader(ExpBLId, CountID);
         }
+
+        public DateTime TranshipmentStatus(int ExpBlID, ref bool VoyageStatus, ref int CountID)
+        {
+            return TranshipmentDetailsDAL.TranshipmentStatus(ExpBlID, ref VoyageStatus, ref CountID);
+        }
+
         public DataSet GetBookingTranshipment(int BookingId)
         {
             return TranshipmentDetailsDAL.GetBookingTranshipment(BookingId);
@@ -40,6 +46,11 @@ namespace EMS.BLL
         public static DataSet GetExportVoyages(int Vessel)
         {
             return TranshipmentDetailsDAL.GetExportVoyages(Vessel);
+        }
+
+        public static DataSet GetExportMainlineVoyages(int Vessel)
+        {
+            return TranshipmentDetailsDAL.GetExportMainlineVoyages(Vessel);
         }
     }
 }

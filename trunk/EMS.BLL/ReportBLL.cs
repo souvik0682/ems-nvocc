@@ -80,9 +80,9 @@ namespace EMS.BLL
             return ReportDAL.GetEmptyMovementStatement(Line, Loc, StartDate, EndDate);
         }
 
-        public DataTable GetRepairingStatement(string Line, string Loc, string StartDate, string EndDate)
+        public DataTable GetRepairingStatement(string Line, string Loc, string StartDate, string EndDate, string EmptyYard)
         {
-            return ReportDAL.GetRepairingStatement(Line, Loc, StartDate, EndDate);
+            return ReportDAL.GetRepairingStatement(Line, Loc, StartDate, EndDate, EmptyYard);
         }
 
         public static DataSet GetBooking(string Initial)

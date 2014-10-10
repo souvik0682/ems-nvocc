@@ -57,6 +57,11 @@ namespace EMS.BLL
             return ExportBLDAL.SaveExportBLHeader(objBL);
         }
 
+        public static void CloseOpenBL(long Blid, int Userid, string Action)
+        {
+            ExportBLDAL.CloseOpenBL(Blid, Userid, Action);
+        }
+
         public static List<IExportBL> GetExportBLForListing(SearchCriteria searchCriteria)
         {
             return ExportBLDAL.GetExportBLForListing(searchCriteria);
@@ -75,6 +80,11 @@ namespace EMS.BLL
         public static bool CheckBookingLocation(string BookingNo, int Loc)
         {
             return ExportBLDAL.CheckBookingLocation(BookingNo, Loc);
+        }
+
+        public static bool CheckBookingBLContainer(long BookingNo, int Status)
+        {
+            return ExportBLDAL.CheckBookingBLContainer(BookingNo, Status);
         }
 
         public static int CheckExpBLExistance(string BookingNo)

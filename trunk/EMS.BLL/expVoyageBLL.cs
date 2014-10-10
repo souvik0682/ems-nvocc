@@ -15,6 +15,11 @@ namespace EMS.BLL
         {
             return expVoyageDAL.GetVoyage(searchCriteria);
         }
+
+        public List<IexpVoyage> GetVoyageList(SearchCriteria searchCriteria)
+        {
+            return expVoyageDAL.GetVoyageList(searchCriteria);
+        }
         public long SaveVoyage(IexpVoyage voyage,bool isedit)
         {
             long voyageid = 0;      
@@ -22,12 +27,12 @@ namespace EMS.BLL
             return voyageid;
         }
 
-        public long CheckCloseVoyage(IexpVoyage voyage)
-        {
-            long ErrVal = 0;
-            ErrVal = expVoyageDAL.CheckCloseVoyage(voyage);
-            return ErrVal;
-        }
+        //public long CheckCloseVoyage(IexpVoyage voyage)
+        //{
+        //    long ErrVal = 0;
+        //    ErrVal = expVoyageDAL.CheckCloseVoyage(voyage);
+        //    return ErrVal;
+        //}
 
         public long CloseVoyage(IexpVoyage voyage)
         {

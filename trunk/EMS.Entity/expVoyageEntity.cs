@@ -43,6 +43,7 @@ namespace EMS.Entity
         public long UserEdited { get; set; }
         public bool VoyageStatus { get; set; }
         public bool CloseVoyage { get; set; }
+        public bool DisplayDelete { get; set; }
         public expVoyageEntity()
         {
         }
@@ -55,6 +56,10 @@ namespace EMS.Entity
              if (ColumnExists(reader, "CloseVoyage"))
                 if (reader["CloseVoyage"] != DBNull.Value)
                     CloseVoyage = Convert.ToBoolean(reader["CloseVoyage"]);
+
+             if (ColumnExists(reader, "DisplayDelete"))
+                 if (reader["DisplayDelete"] != DBNull.Value)
+                     DisplayDelete = Convert.ToBoolean(reader["DisplayDelete"]);
 
             if (ColumnExists(reader, "fk_CompanyID"))
                 if (reader["fk_CompanyID"] != DBNull.Value)

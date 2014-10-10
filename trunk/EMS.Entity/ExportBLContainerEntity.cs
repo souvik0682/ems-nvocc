@@ -125,6 +125,8 @@ namespace EMS.Entity
             if (ColumnExists(reader, "Unit"))
                 if (reader["Unit"] != DBNull.Value)
                     Unit = Convert.ToString(reader["Unit"]);
+                else
+                    Unit = "0";
         }
 
         public bool ColumnExists(IDataReader reader, string columnName)

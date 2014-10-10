@@ -46,7 +46,7 @@ namespace EMS.Entity
         public int fk_OSID { get; set; }
         public decimal EstPayable { get; set; }
         public decimal EstReceivable { get; set; }
-        public char Action { get; set; }
+        public char JobActive { get; set; }
 
         public int CreatedBy
         {

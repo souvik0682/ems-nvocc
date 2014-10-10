@@ -13,7 +13,7 @@ namespace EMS.Entity
 
         public string LineName { get; set; }
 
-        public bool LineActive { get; set; }
+        public bool LineStatus { get; set; }
 
         public string LineType { get; set; }
 
@@ -54,6 +54,8 @@ namespace EMS.Entity
             this.LineName = Convert.ToString(reader["LineName"]);
             this.LineType = Convert.ToString(reader["LineType"]);
             this.Prefix = Convert.ToString(reader["Prefix"]);
+            this.CreatedBy = Convert.ToInt32(reader["UserID"]);
+            this.LineStatus = Convert.ToBoolean(reader["LineStatus"]);
         }
     }
 }

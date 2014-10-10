@@ -175,7 +175,7 @@ namespace EMS.WebApp.Transaction
                     Response.Redirect("~/Login.aspx");
                 }
 
-                if (user.UserRole.Id != (int)UserRole.Admin)
+                if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.Manager)
                 {
 
                     if (_canView == false)

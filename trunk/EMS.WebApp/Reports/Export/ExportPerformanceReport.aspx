@@ -18,6 +18,14 @@
         }
         return true;
     }
+
+    function AutoCompleteItemSelected(sender, e) {
+        if (sender._id == "AutoCompleteEx") {
+            var hdnVessel = $get('<%=hdnVessel.ClientID %>');
+            hdnVessel.value = e.get_value();
+        }
+
+    }
     </script>
 
 </asp:Content>
@@ -47,14 +55,14 @@
                 <td style="padding-right: 20px; vertical-align: top;">
                     <asp:DropDownList ID="ddlLine" runat="server" AutoPostBack="True" Width="135px" 
                         onselectedindexchanged="ddlLine_SelectedIndexChanged">
-                        <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
+                        <asp:ListItem Value="0" Text="--All--"></asp:ListItem>
                     </asp:DropDownList>
-                     <asp:RequiredFieldValidator ID="rfvLine" runat="server" ErrorMessage="Please select Line"
+<%--                     <asp:RequiredFieldValidator ID="rfvLine" runat="server" ErrorMessage="Please select Line"
                        ControlToValidate="ddlLine"
                         InitialValue="0" ForeColor="#CC3300"></asp:RequiredFieldValidator>
                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender3" runat="server" TargetControlID="rfvLine"
                         WarningIconImageUrl="">
-                    </cc1:ValidatorCalloutExtender>
+                    </cc1:ValidatorCalloutExtender>--%>
                 </td>               
            
             </tr>
@@ -72,10 +80,123 @@
                         WarningIconImageUrl="">
                     </cc1:ValidatorCalloutExtender>--%>
                 </td>
-                         
+                <td class="label" style="padding-right: 50px; vertical-align: top;">
+                    Status:<span class="errormessage">*</span>
+                </td>
+                <td style="padding-right: 20px; vertical-align: top;">
+                    <asp:DropDownList ID="ddlStatus" runat="server" Width="135px" >
+                        <asp:ListItem Text="Actual" Value="A"></asp:ListItem>
+                        <asp:ListItem Text="Pending" Value="P"></asp:ListItem>
+                    </asp:DropDownList>
+                </td>               
+           
            
             </tr>
+             <tr>
+                <td class="label" style="padding-right: 50px; vertical-align: top;">
+                    Vessel :
+                </td>
+                <td style="padding-right: 20px; vertical-align: top;">
+                    <asp:HiddenField ID="hdnVessel" runat="server" />
+                    <asp:TextBox ID="txtVessel" runat="server" CssClass="textbox" Width="180" autocomplete="off"
+                        AutoPostBack="True" ontextchanged="txtVessel_TextChanged">
+                    </asp:TextBox>
+             <%--       <asp:RequiredFieldValidator ID="rqfVessel" runat="server" 
+                        ErrorMessage="Please Enter Vessel" ControlToValidate="txtVessel" 
+                        ForeColor="#CC3300"></asp:RequiredFieldValidator>
+                    <cc1:ValidatorCalloutExtender ID="vceVessel" runat="server" TargetControlID="rqfVessel">
+                    </cc1:ValidatorCalloutExtender>--%>
+                    <cc1:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" BehaviorID="AutoCompleteEx"
+                        TargetControlID="txtVessel" ServicePath="~/GetLocation.asmx" ServiceMethod="GetVesselList"
+                        MinimumPrefixLength="1" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
+                        CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
+                        CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";,:"
+                        ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected">
+                        <Animations>
+                            <OnShow>
+                                <Sequence>
+                                    <OpacityAction Opacity="0" />
+                                    <HideAction Visible="true" />                           
+                                    <ScriptAction Script="
+                                        // Cache the size and setup the initial size
+                                        var behavior = $find('AutoCompleteEx');
+                                        if (!behavior._height) {
+                                            var target = behavior.get_completionList();
+                                            behavior._height = target.offsetHeight - 2;
+                                            target.style.height = '0px';
+                                        }" />
+                                    <Parallel Duration=".4">
+                                        <FadeIn />
+                                        <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteEx')._height" />
+                                    </Parallel>
+                                </Sequence>
+                            </OnShow>
+                            <OnHide>                                            
+                                <Parallel Duration=".4">
+                                    <FadeOut />
+                                    <Length PropertyKey="height" StartValueScript="$find('AutoCompleteEx')._height" EndValue="0" />
+                                </Parallel>
+                            </OnHide>
+                        </Animations>
+                    </cc1:AutoCompleteExtender>
+                </td>
 
+                <td class="label" style="padding-right: 50px; vertical-align: top;">
+                    Voyage :
+                </td>
+                <td style="padding-right:20px;vertical-align:top;">
+                        <asp:DropDownList ID="ddlVoyage" runat="server">
+                            <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
+                        </asp:DropDownList>
+                </td>
+<%--                <td style="padding-right: 20px; vertical-align: top;">
+                    <asp:HiddenField ID="hdnVoyage" runat="server" />
+                    <asp:TextBox ID="txtVoyage" runat="server" CssClass="textbox" Width="180" autocomplete="off"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rqfVoyage" runat="server" 
+                        ErrorMessage="Please Enter Voyage" ControlToValidate="txtVoyage" 
+                        ForeColor="#CC3300"></asp:RequiredFieldValidator>
+                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender2" runat="server" TargetControlID="rqfVoyage">
+                    </cc1:ValidatorCalloutExtender>
+                    <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx2" ID="autoComplete2"
+                        TargetControlID="txtVoyage" ServicePath="~/GetLocation.asmx" ServiceMethod="GetVoyageList"
+                        MinimumPrefixLength="2" CompletionInterval="100" EnableCaching="true" CompletionSetCount="20"
+                        CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
+                        CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
+                        ShowOnlyCurrentWordInCompletionListItem="true" OnClientItemSelected="AutoCompleteItemSelected">
+                        <Animations>
+                                <OnShow>
+                                    <Sequence>
+                                       
+                                        <OpacityAction Opacity="0" />
+                                        <HideAction Visible="true" />
+                            
+                                        <ScriptAction Script="
+                                            // Cache the size and setup the initial size
+                                            var behavior = $find('AutoCompleteEx2');
+                                            if (!behavior._height) {
+                                                var target = behavior.get_completionList();
+                                                behavior._height = target.offsetHeight - 2;
+                                                target.style.height = '0px';
+                                            }" />
+                            
+                                        <Parallel Duration=".4">
+                                            <FadeIn />
+                                            <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteEx2')._height" />
+                                        </Parallel>
+                                    </Sequence>
+                                </OnShow>
+                                <OnHide>
+                                   
+                                    <Parallel Duration=".4">
+                                        <FadeOut />
+                                        <Length PropertyKey="height" StartValueScript="$find('AutoCompleteEx2')._height" EndValue="0" />
+                                    </Parallel>
+                                </OnHide>
+                        </Animations>
+                    </cc1:AutoCompleteExtender>
+                </td>--%>
+
+            </tr>
             <tr id="DateRange" runat="server">
                 <td class="label" style="padding-right: 50px; vertical-align: top;">
                     <asp:Label ID="lblStartDt" runat="server" Text="Start Date"></asp:Label>

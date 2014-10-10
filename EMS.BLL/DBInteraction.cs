@@ -564,10 +564,12 @@ namespace EMS.BLL
             return dquery.GetTables();
         }
 
-        public void UpdateMUSTRecord()
+        public void UpdateMUSTRecord(string mn, string yr)
         {
             string ProcName = "[exp].[sp_UpdateShipsoft]";
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+            dquery.AddVarcharParam("@mn", 2, mn);
+            dquery.AddVarcharParam("@yr", 4, yr);
             dquery.RunActionQuery();
 
         }

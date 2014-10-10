@@ -73,6 +73,7 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@SchVoyageNo", 100, searchCriteria.Voyage);
                 oDq.AddVarcharParam("@SchLocation", 100, searchCriteria.Location);
                 oDq.AddVarcharParam("@SchLineName", 100, searchCriteria.LineName);
+                oDq.AddIntegerParam("@Status", searchCriteria.IntegerOption1);
                 oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
                 oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
                 DataTableReader reader = oDq.GetTableReader();

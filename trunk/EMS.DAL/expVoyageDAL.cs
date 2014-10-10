@@ -37,6 +37,33 @@ namespace EMS.DAL
             return lstVoyage;
         }
 
+        public static List<IexpVoyage> GetVoyageList(SearchCriteria searchCriteria)
+        {
+            string strExecution = "[exp].[prcGetVoyageList]";
+            List<IexpVoyage> lstVoyage = new List<IexpVoyage>();
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@pk_VoyageID", searchCriteria.VoyageID);
+                oDq.AddVarcharParam("@vesselName", 70, searchCriteria.Vessel);
+                oDq.AddVarcharParam("@VoyageNo", 10, searchCriteria.Voyage);
+                oDq.AddVarcharParam("@Location", 100, searchCriteria.Location);
+                oDq.AddIntegerParam("@locationid", searchCriteria.LocationID);
+                oDq.AddVarcharParam("@Terminal", 100, searchCriteria.Terminal);
+                oDq.AddIntegerParam("@Status", searchCriteria.IntegerOption1);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    IexpVoyage ivoyage = new expVoyageEntity(reader);
+                    lstVoyage.Add(ivoyage);
+                }
+
+                reader.Close();
+            }
+            return lstVoyage;
+        }
+
+
         public static long SaveVoyage(IexpVoyage voyage,bool isedit)
         {
             string strExecution = "[exp].[prcAddEditVoyage]";
@@ -76,26 +103,26 @@ namespace EMS.DAL
             return voyageid;
         }
 
-        public static long CheckCloseVoyage(IexpVoyage voyage)
-        {
-            string strExecution = "[exp].[prcCheckCloseVoyage]";
-            long ErrVal = 0;
+        //public static long CheckCloseVoyage(IexpVoyage voyage)
+        //{
+        //    string strExecution = "[exp].[prcCheckCloseVoyage]";
+        //    long ErrVal = 0;
 
-            using (DbQuery oDq = new DbQuery(strExecution))
-            {
-                oDq.AddBigIntegerParam("@userID", voyage.UserAdded);
-                oDq.AddBigIntegerParam("@pk_VoyageID", voyage.VoyageID);
-                oDq.AddBigIntegerParam("@fk_VesselID", voyage.VesselID);
-                oDq.AddIntegerParam("@fk_LocationID", voyage.LocationID);
-                oDq.AddBigIntegerParam("@fk_LoadPortID", voyage.POL);
-                oDq.AddIntegerParam("@Result", 0, QueryParameterDirection.Output);
-                oDq.RunActionQuery();
-                ErrVal = Convert.ToInt32(oDq.GetParaValue("@RESULT"));
-                //voyageid = Convert.ToInt64(oDq.GetScalar());
-            }
+        //    using (DbQuery oDq = new DbQuery(strExecution))
+        //    {
+        //        oDq.AddBigIntegerParam("@userID", voyage.UserAdded);
+        //        oDq.AddBigIntegerParam("@pk_VoyageID", voyage.VoyageID);
+        //        oDq.AddBigIntegerParam("@fk_VesselID", voyage.VesselID);
+        //        oDq.AddIntegerParam("@fk_LocationID", voyage.LocationID);
+        //        oDq.AddBigIntegerParam("@fk_LoadPortID", voyage.POL);
+        //        oDq.AddIntegerParam("@Result", 0, QueryParameterDirection.Output);
+        //        oDq.RunActionQuery();
+        //        ErrVal = Convert.ToInt32(oDq.GetParaValue("@RESULT"));
+        //        //voyageid = Convert.ToInt64(oDq.GetScalar());
+        //    }
 
-            return ErrVal;
-        }
+        //    return ErrVal;
+        //}
 
         public static long CloseVoyage(IexpVoyage voyage)
         {
@@ -108,7 +135,7 @@ namespace EMS.DAL
                 oDq.AddBigIntegerParam("@pk_VoyageID", voyage.VoyageID);
                 oDq.AddIntegerParam("@Result", 0, QueryParameterDirection.Output);
                 oDq.RunActionQuery();
-                //ErrVal = Convert.ToInt32(oDq.GetParaValue("@RESULT"));
+                ErrVal = Convert.ToInt32(oDq.GetParaValue("@Result"));
                 //voyageid = Convert.ToInt64(oDq.GetScalar());
             }
 

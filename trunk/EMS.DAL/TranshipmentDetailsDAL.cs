@@ -13,14 +13,42 @@ namespace EMS.DAL
     {
         private TranshipmentDetailsDAL(){ }
 
-        public static DataSet GetTranshipmentHeader(int ExpBLId)
+        public static DataSet GetTranshipmentHeader(int ExpBLId, int CountID)
         {
             string ProcName = "[exp].[prcGetTranshipmentDetailsByBLNo]";
             DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
 
             dquery.AddIntegerParam("@ExpBLId", ExpBLId);
+            dquery.AddIntegerParam("@CountID", CountID);
 
             return dquery.GetTables();
+        }
+
+        public static DateTime TranshipmentStatus(int ExpBLId, ref bool VoyageStatus, ref int CountID)
+        {
+          
+            DateTime Result;
+            string TempString;
+            bool ClsVoyage = false;
+            int Count = 0;
+            string ProcName = "[exp].[prcTranshipmentStatus]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            dquery.AddIntegerParam("@ExpBLId", ExpBLId);
+            dquery.AddDateTimeParam("@RESULT", null, QueryParameterDirection.Output);
+            dquery.AddBooleanParam("@closeVoyage", ClsVoyage, QueryParameterDirection.Output);
+            dquery.AddIntegerParam("@CountID", Count, QueryParameterDirection.Output);
+
+            dquery.RunActionQuery();
+            TempString = Convert.ToString(dquery.GetParaValue("@Result"));
+            if (TempString == null || TempString == "")
+                Result = default(DateTime);
+            else
+                Result = Convert.ToDateTime(dquery.GetParaValue("@Result"));
+            //Result = Convert.ToDateTime(dquery.GetParaValue("@SailDate"));
+            VoyageStatus = Convert.ToBoolean(dquery.GetParaValue("@CloseVoyage"));
+            CountID = Convert.ToInt32(dquery.GetParaValue("@CountID"));
+            return Result;
         }
 
         public static DataSet GetBookingTranshipment(int BookingId)
@@ -116,6 +144,16 @@ namespace EMS.DAL
 
             dquery.AddIntegerParam("@Vessel", Vessel);
         
+            return dquery.GetTables();
+        }
+
+        public static DataSet GetExportMainlineVoyages(int Vessel)
+        {
+            string ProcName = "[exp].[spGetMainlineVoyageByVesselID]";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            dquery.AddIntegerParam("@Vessel", Vessel);
+
             return dquery.GetTables();
         }
     }

@@ -375,11 +375,11 @@ namespace EMS.DAL
             return dt;
         }
 
-        public static DataTable GetRepairingStatement(string Line, string Loc, string StartDate, string EndDate)
+        public static DataTable GetRepairingStatement(string Line, string Loc, string StartDate, string EndDate, string EmptyYard)
         {
 
             DataTable dt = new DataTable();
-            DateTime dt1 = string.IsNullOrEmpty(EndDate) ? DateTime.Now : Convert.ToDateTime(EndDate);
+            DateTime dt1 = string.IsNullOrEmpty(EndDate) ? DateTime.Now : Convert.ToDateTime(EndDate); 
             DateTime dt2 = string.IsNullOrEmpty(StartDate) ? DateTime.Now : Convert.ToDateTime(StartDate);
             string strExecution = "prcRptRepairing";
             //DateTime dt1 = string.IsNullOrEmpty(StockDate) ? DateTime.Now : Convert.ToDateTime(StockDate);
@@ -392,6 +392,7 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@Loc", 100, Loc);
                 oDq.AddDateTimeParam("@StartDate", dt2);
                 oDq.AddDateTimeParam("@EndDate", dt1);
+                oDq.AddVarcharParam("@EmptyYard", 100, EmptyYard);
                 dt = oDq.GetTable();
             }
 

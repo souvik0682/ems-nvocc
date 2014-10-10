@@ -43,6 +43,6 @@ namespace EMS.Common
         int fk_OSID { get; set; }
         decimal EstPayable { get; set; }
         decimal EstReceivable { get; set; }
-        char Action { get; set; }
+        char JobActive { get; set; }
     }
 }

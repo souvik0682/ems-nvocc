@@ -9,7 +9,7 @@ namespace EMS.Common
     {
         int LineID { get; set; }
         string LineName { get; set; }
-        bool LineActive { get; set; }
+        bool LineStatus { get; set; }
         string LineType { get; set; }
         string Prefix { get; set; }
     }

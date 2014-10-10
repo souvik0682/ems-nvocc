@@ -387,4 +387,13 @@
   <data name="ERR00089" xml:space="preserve">
     <value>Invalid Voyage </value>
   </data>
+  <data name="ERR00090" xml:space="preserve">
+    <value>Empty CBM not accepted for LCL</value>
+  </data>
+  <data name="ERR00091" xml:space="preserve">
+    <value>Accepts Date Less than or Equals to Current Date</value>
+  </data>
+  <data name="ERR00092" xml:space="preserve">
+    <value>Mainline Voyage Mandatory against Mainline Vessel</value>
+  </data>
 </root>

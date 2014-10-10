@@ -118,6 +118,7 @@ namespace EMS.WebApp.Equipment
                 GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 7);
 
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
+                bool EditPossible = false;
 
                 e.Row.Cells[0].Text = ((gvwContainerTran.PageSize * gvwContainerTran.PageIndex) + e.Row.RowIndex + 1).ToString();
 
@@ -140,25 +141,35 @@ namespace EMS.WebApp.Equipment
                 //btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00008");
                 btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerTranID"));
 
-                if (oUser.UserRole.Id == 6 || oUser.UserRole.Id == 2)
-                    btnEdit.Visible = true;
-                else
-                    btnEdit.Visible = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Editable"));
+                btnEdit.Visible = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Editable"));
 
+                if (Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "BLClose")) == true)
+                {
+                    btnEdit.Visible = false;
+                    _canDelete = false;
+                    e.Row.ForeColor = System.Drawing.Color.Red;
+                }
+                else
+                {
+                    if (oUser.UserRole.Id == 6 || oUser.UserRole.Id == 2)
+                        btnEdit.Visible = true;
+                    else
+                        btnEdit.Visible = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Editable"));
+                }
                 //Delete link
                 ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
                 //btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00007");
                 btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerTranID"));
                 btnRemove.Visible = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Editable"));
 
-                if (_canDelete == true)
+                if (_canDelete == true &&  Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Editable")) == true)
                 {
                     //ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
                     btnRemove.Visible = true;
                     btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00007");
                     //btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLID"));
 
-                }
+                } 
                 else
                 {
                     //ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");

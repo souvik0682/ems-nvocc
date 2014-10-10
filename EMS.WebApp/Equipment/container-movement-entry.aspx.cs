@@ -945,7 +945,7 @@ namespace EMS.WebApp.Equipment
             if (ddlBookingNo.SelectedIndex > 0)
             {
                 ListItem Li = new ListItem("Select", "0");
-                PopulateDropDown((int)Enums.DropDownPopulationFor.DO, ddlDONo, Convert.ToInt32(ddlBookingNo.SelectedValue), 3);
+                PopulateDropDown((int)Enums.DropDownPopulationFor.DO, ddlDONo, Convert.ToInt32(ddlBookingNo.SelectedValue), Convert.ToInt32(ddlEmptyYard.SelectedValue));
                 ddlDONo.Items.Insert(0, Li);
                 ddlDONo.SelectedIndex = 0;
             }

@@ -145,6 +145,8 @@ namespace EMS.Entity
 
         public string EdgeBLNumber { get; set; }
         public string RefBLNumber { get; set; }
+        public int PartyID { get; set; }
+        public string PartyName { get; set; }
 
         #endregion
 
@@ -192,6 +194,8 @@ namespace EMS.Entity
             this.DONumber = string.Empty;
             this.EdgeBLNumber = string.Empty;
             this.RefBLNumber = string.Empty;
+            this.PartyID = 0;
+            this.PartyName = string.Empty;
         }
 
         #endregion      

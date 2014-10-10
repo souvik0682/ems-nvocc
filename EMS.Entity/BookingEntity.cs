@@ -491,9 +491,9 @@ namespace EMS.Entity
                 if (reader["BookingParty"] != DBNull.Value)
                     this.BookingParty = Convert.ToString(reader["BookingParty"]);
 
-            if (ColumnExists(reader, "CloseVoyage"))
-                if (reader["CloseVoyage"] != DBNull.Value)
-                    this.CloseVoyage = Convert.ToBoolean(reader["CloseVoyage"]);
+            if (ColumnExists(reader, "BLClose"))
+                if (reader["BLClose"] != DBNull.Value)
+                    this.CloseVoyage = Convert.ToBoolean(reader["BLClose"]);
 
             //this.NVOCC = Convert.ToString(reader["LineName"]);
             //this.FPOD = Convert.ToString(reader["FPortName"]);

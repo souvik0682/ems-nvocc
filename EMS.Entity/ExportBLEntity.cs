@@ -42,10 +42,13 @@ namespace EMS.Entity
         public int BLIssuePlaceId { get; set; }
         public string BLIssuePlace { get; set; }
         public decimal NetWeight { get; set; }
+        public decimal GrossWeight { get; set; }
         public DateTime ? BLReleaseDate { get; set; }
         public int fk_FPOD { get; set; }
         public bool BLthruEdge { get; set; }
         public bool CloseVoyage { get; set; }
+        public bool CloseBL { get; set; } 
+        public int ShipmentType { get; set; }
 
         //Other Information Tab
         public string ShipperName { get; set; }
@@ -156,6 +159,10 @@ namespace EMS.Entity
                 if (reader["BLThruApp"] != DBNull.Value)
                     BLthruEdge = Convert.ToBoolean(reader["BLThruApp"]);
 
+            if (ColumnExists(reader, "ShipmentType"))
+                if (reader["ShipmentType"] != DBNull.Value)
+                    ShipmentType = Convert.ToInt32(reader["ShipmentType"]);
+
             if (ColumnExists(reader, "PORDesc"))
             {
                 if (reader["PORDesc"] != DBNull.Value)
@@ -242,6 +249,10 @@ namespace EMS.Entity
                 if (reader["NetWeight"] != DBNull.Value)
                     NetWeight = Convert.ToDecimal(reader["NetWeight"]);
 
+            if (ColumnExists(reader, "GrossWeight"))
+                if (reader["GrossWeight"] != DBNull.Value)
+                    GrossWeight = Convert.ToDecimal(reader["GrossWeight"]);
+
             if (ColumnExists(reader, "BLReleaseDate"))
                 if (reader["BLReleaseDate"] != DBNull.Value)
                     BLReleaseDate = Convert.ToDateTime(reader["BLReleaseDate"]);
@@ -319,6 +330,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "CloseVoyage"))
                 if (reader["CloseVoyage"] != DBNull.Value)
                     CloseVoyage = Convert.ToBoolean(reader["CloseVoyage"]);
+
+            if (ColumnExists(reader, "BLClose"))
+                if (reader["BLClose"] != DBNull.Value)
+                    CloseBL = Convert.ToBoolean(reader["BLClose"]);
         }
 
         public bool ColumnExists(IDataReader reader, string columnName)

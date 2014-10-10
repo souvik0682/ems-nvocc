@@ -172,6 +172,7 @@ namespace EMS.WebApp.Hire
         private void ClearFieldUpper()
         {
             //txtHireReference.Text = string.Empty;
+            txtContainerNo.Text = string.Empty;
             txtLGNo.Text = string.Empty;
             txtIGMNo.Text = string.Empty;
             //ddlLocation.SelectedValue = "0";
@@ -183,7 +184,9 @@ namespace EMS.WebApp.Hire
         {
 
             if (ddlType.SelectedIndex > 0) return ddlType.Items.FindByValue(val).Text;
-            return "";
+            DataTable dt = OnHireBLL.GetContainerType(val.ToInt());
+            return dt.Rows[0]["ContainerAbbr"].ToString();
+           
         }
 
         protected bool IsValidContainerNo()

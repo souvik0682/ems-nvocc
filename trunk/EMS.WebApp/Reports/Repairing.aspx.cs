@@ -60,7 +60,7 @@ namespace EMS.WebApp.Reports
             {
                 //DateTime dt = Convert.ToDateTime(txtdtStock.Text.Trim());
                 DataTable dtExcel = new DataTable();
-                dtExcel = cls.GetRepairingStatement(ddlLine.SelectedValue, ddlLoc.SelectedValue, txtStartDate.Text.Trim(), txtdtStock.Text.Trim());
+                dtExcel = cls.GetRepairingStatement(ddlLine.SelectedValue, ddlLoc.SelectedValue, txtStartDate.Text.Trim(), txtdtStock.Text.Trim(), ddlEmptyYard.SelectedValue);
                 ExporttoExcel(dtExcel);
             }
             catch (Exception ex)
@@ -118,6 +118,21 @@ namespace EMS.WebApp.Reports
         }
 
         protected void ddlLoc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlEmptyYard.Enabled = true;
+            //GeneralFunctions.PopulateDropDownList(ddlEmptyYard, EMS.BLL.EquipmentBLL.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt()));
+
+            BLL.EquipmentBLL GetEmptyYard = new BLL.EquipmentBLL();
+            DataSet ds = EMS.BLL.EquipmentBLL.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt());
+            //DataSet ds = GetEmptyYard.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt());
+            ddlEmptyYard.DataValueField = "ListItemValue";
+            ddlEmptyYard.DataTextField = "ListItemText";
+            ddlEmptyYard.DataSource = ds;
+            ddlEmptyYard.DataBind();
+            ddlEmptyYard.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_ALL_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
+        }
+
+        protected void ddlEmptyYard_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

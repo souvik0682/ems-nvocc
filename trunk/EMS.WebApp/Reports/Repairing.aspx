@@ -6,24 +6,15 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
-    <%--<asp:UpdateProgress ID="uProgressLoc" runat="server" AssociatedUpdatePanelID="upLoc">
-        <ProgressTemplate>
-            <div class="progress">
-                <div id="image">
-                    <img src="../../Images/PleaseWait.gif" alt="" /></div>
-                <div id="text">
-                    Please Wait...</div>
-            </div>
-        </ProgressTemplate>
-    </asp:UpdateProgress>--%>
+    <%--             <asp:UpdatePanel ID="upLoc" runat="server" UpdateMode="Conditional">--%>
     <center>
 
  <div id="headercaption">
-        EMPTY MOVEMENT LIST </div>
+        REPAIRING REPORT </div>
     <center>
         <fieldset style="width:900px; ">
-            <legend> Empty Movement List </legend>
-<%--             <asp:UpdatePanel ID="upLoc" runat="server" UpdateMode="Conditional">--%>
+            <legend> Reparing Report </legend>
+            <%--&nbsp;&nbsp;--%>
 
          <ContentTemplate>
             <table border="0" cellpadding="2" cellspacing="3" width="100%">
@@ -34,7 +25,7 @@
                      <tr>
                         <td style="text-align:left">Line:</td>
                         <td>
-                            <asp:DropDownList ID="ddlLine" runat="server" Width="250" 
+                            <asp:DropDownList ID="ddlLine" runat="server" Width="150" 
                                 onselectedindexchanged="ddlLine_SelectedIndexChanged" > 
                             </asp:DropDownList>
                         </td>
@@ -42,6 +33,11 @@
                         <td style="text-align:left">Location:<span class="errormessage1">*</span></td>
                         <td>
                             <asp:DropDownList ID="ddlLoc" runat="server" Width="150" OnSelectedIndexChanged="ddlLoc_SelectedIndexChanged"
+                                            AutoPostBack="true"></asp:DropDownList>
+                        </td>
+                        <td style="text-align:left">Yard:<span class="errormessage1">*</span></td>
+                        <td>
+                            <asp:DropDownList ID="ddlEmptyYard" runat="server" Width="250" OnSelectedIndexChanged="ddlEmptyYard_SelectedIndexChanged"
                                             AutoPostBack="true"></asp:DropDownList>
                         </td>
 
@@ -57,13 +53,14 @@
                             <asp:TextBox ID="txtdtStock" runat="server" CssClass="textboxuppercase" Width="150"></asp:TextBox>
                             <cc2:CalendarExtender ID="CalendarExtender1" Format="dd/MM/yyyy" TargetControlID="txtdtStock" runat="server" />
                         </td>
+                        <td colspan="2" style="text-align:right; width:5%">
+                            <asp:Button ID="Button1" runat="server" onclick="btnExcel_Click" Text="Generate Excel" 
+                            ValidationGroup="Excel" />
+                            <%--       </asp:UpdatePanel>--%>
+                    </td>
                      </tr>                    
                   </table>
-                    <td colspan="2" style="text-align:right; width:5%">
-                        <asp:Button ID="btnExcel" runat="server" onclick="btnExcel_Click" Text="Generate Excel" 
-                            ValidationGroup="Excel" />
-                        <%--&nbsp;&nbsp;--%>
-                    </td>
+                   
                 </tr>
             </table>
             </ContentTemplate>

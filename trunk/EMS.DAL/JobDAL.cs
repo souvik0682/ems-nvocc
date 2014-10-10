@@ -49,7 +49,7 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@userID", Jobs.CreatedBy);
                 oDq.AddIntegerParam("@fk_FinYearID", 1);
                 oDq.AddIntegerParam("@fk_CompanyID", CompanyId);
-                oDq.AddCharParam("@Mode", 1, Jobs.Action);
+                oDq.AddCharParam("@Mode", 1, Jobs.JobActive);
                 oDq.AddBigIntegerParam("@JobId", Jobs.JobID);
                 oDq.AddDateTimeParam("@JobDate", Jobs.JobDate);
                 oDq.AddIntegerParam("@fk_JobTypeID", Jobs.JobTypeID);

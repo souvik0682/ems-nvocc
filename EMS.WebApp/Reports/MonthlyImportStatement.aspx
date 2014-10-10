@@ -60,7 +60,7 @@
                     <td style="padding-right:20px;vertical-align:top;">
                         <asp:DropDownList ID="ddlLoc" runat="server" AutoPostBack="True" 
                             onselectedindexchanged="ddlLoc_SelectedIndexChanged" Width="135px">
-                            <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
+                            <asp:ListItem Value="0" Text="--All--"></asp:ListItem>
                         </asp:DropDownList>
                     </td>
                     <td class="label" style="padding-right:50px;vertical-align:top;">
@@ -69,7 +69,7 @@
                     <td style="padding-right:20px;vertical-align:top;">
                         <asp:DropDownList ID="ddlLine" runat="server" AutoPostBack="True" 
                             onselectedindexchanged="ddlLine_SelectedIndexChanged" Width="135px">
-                            <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
+                            <asp:ListItem Value="0" Text="--All--"></asp:ListItem>
                         </asp:DropDownList>
                     </td>
               <%--      <td class="label" style="padding-right:5px;vertical-align:top;">

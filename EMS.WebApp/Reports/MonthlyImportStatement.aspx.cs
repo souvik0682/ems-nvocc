@@ -144,7 +144,7 @@ namespace EMS.WebApp.Reports
             ddlLoc.DataTextField = "Name";
             ddlLoc.DataSource = lstLoc;
             ddlLoc.DataBind();
-            ddlLoc.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
+            ddlLoc.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_ALL_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
         }
 
         private void PopulateLine()
@@ -155,7 +155,7 @@ namespace EMS.WebApp.Reports
             ddlLine.DataTextField = "NVOCCName";
             ddlLine.DataSource = ds;
             ddlLine.DataBind();
-            ddlLine.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
+            ddlLine.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_ALL_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
         }
 
 

@@ -62,9 +62,9 @@
                             OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged">
                             <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                         </asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="errormessage"
+<%--                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="errormessage"
                             ControlToValidate="ddlLocation" InitialValue="0" ValidationGroup="Report" Display="Dynamic"
-                            ErrorMessage="[Required]"></asp:RequiredFieldValidator>
+                            ErrorMessage="[Required]"></asp:RequiredFieldValidator>--%>
                     </td>
                 </tr>
                 <tr runat="server" id="trCar">

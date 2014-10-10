@@ -33,9 +33,6 @@ namespace EMS.WebApp.Reports
                 //GeneralFunctions.PopulateDropDownList(ddlStatus, EMS.BLL.EquipmentBLL.DDLGetStatus());
                 //GeneralFunctions.PopulateDropDownList(ddlContainerType, EMS.BLL.EquipmentBLL.DDLGetContainerType());
                 ddlEmptyYard.Enabled = false;
-                //GeneralFunctions.PopulateDropDownList(ddlEmptyYard, EMS.BLL.EquipmentBLL.DDLGetEmptyYard(ddlLoc.SelectedValue.ToInt()));
-
-                //GenerateReport();
             }
 
         }
@@ -60,7 +57,6 @@ namespace EMS.WebApp.Reports
 
             try
             {
-                //DateTime dt = Convert.ToDateTime(txtdtStock.Text.Trim());
                 DataTable dtExcel = new DataTable();
                 dtExcel = cls.GetGroundRentLOLOStatement(ddlLine.SelectedValue, ddlLoc.SelectedValue, ddlStatus.SelectedValue, txtStartDate.Text.Trim(), txtdtStock.Text.Trim(), ddlEmptyYard.SelectedValue.ToInt());
                 ExporttoExcel(dtExcel);

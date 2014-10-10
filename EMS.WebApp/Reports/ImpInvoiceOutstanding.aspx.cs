@@ -28,7 +28,7 @@ namespace EMS.WebApp.Reports
         {
             if (ddlLine.SelectedIndex > 0)
             {
-                Filler.FillData(ddlLocation, CommonBLL.GetLine(ddlLine.SelectedValue), "ProspectName", "ProspectID", "Line");
+                Filler.FillData(ddlLocation, CommonBLL.GetLine(ddlLine.SelectedValue), "ProspectName", "ProspectID", "All");
             }
         }
 

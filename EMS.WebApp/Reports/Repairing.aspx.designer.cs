@@ -31,6 +31,15 @@ namespace EMS.WebApp.Reports {
         protected global::System.Web.UI.WebControls.DropDownList ddlLoc;
         
         /// <summary>
+        /// ddlEmptyYard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlEmptyYard;
+        
+        /// <summary>
         /// txtStartDate control.
         /// </summary>
         /// <remarks>
@@ -67,12 +76,12 @@ namespace EMS.WebApp.Reports {
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
         
         /// <summary>
-        /// btnExcel control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExcel;
+        protected global::System.Web.UI.WebControls.Button Button1;
     }
 }

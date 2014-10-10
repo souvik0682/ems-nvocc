@@ -31,7 +31,7 @@ namespace EMS.WebApp.Transaction
             ddlLine.DataTextField = "NVOCCName";
             ddlLine.DataSource = ds;
             ddlLine.DataBind();
-            ddlLine.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
+            ddlLine.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_ALL_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
         }
         private void PopulateLocation()
         {
@@ -65,12 +65,15 @@ namespace EMS.WebApp.Transaction
                 DateTime dt1 = DateTime.Today;
                 DateTime dt2 = DateTime.Today;
                 DataTable dtExcel = new DataTable();
-                dt1 = Convert.ToDateTime(txtStartDt.Text.Trim());
-                dt2 = Convert.ToDateTime(txtEndDt.Text.Trim());
+                if (ddlStatus.SelectedIndex == 0)
+                {
+                    dt1 = Convert.ToDateTime(txtStartDt.Text.Trim());
+                    dt2 = Convert.ToDateTime(txtEndDt.Text.Trim());
+                }
+                if (hdnVessel.Value == "")
+                    hdnVessel.Value = "0";
 
-
-
-                dtExcel = cls.GetExportPerformanceStatement(Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue), dt1, dt2, Convert.ToInt32(ddlServices.SelectedValue));
+                dtExcel = cls.GetExportPerformanceStatement(Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue), dt1, dt2, Convert.ToInt32(ddlServices.SelectedValue), ddlStatus.SelectedValue.ToString(), Convert.ToInt32(hdnVessel.Value), Convert.ToInt64(ddlVoyage.SelectedValue));
 
                 dtExcel.Columns.Remove("fk_NVOCCID");
                 dtExcel.Columns.Remove("fk_MainLineVesselID");
@@ -150,6 +153,14 @@ namespace EMS.WebApp.Transaction
         protected void ddlLine_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateServices(ddlLine.SelectedValue.ToInt());
+        }
+
+        protected void txtVessel_TextChanged(object sender, EventArgs e)
+        {
+            ddlVoyage.Items.Clear();
+            if (txtVessel.Text == "")
+                hdnVessel.Value = "0";
+            Filler.FillData(ddlVoyage, CommonBLL.GetExpVoyages(hdnVessel.Value.ToString(), ddlLoc.SelectedValue.ToString()), "VoyageNo", "VoyageID", "Voyage");
         }
     }
 }

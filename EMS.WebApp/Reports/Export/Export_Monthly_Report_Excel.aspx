@@ -37,6 +37,7 @@
                 <td style="padding-right: 20px; vertical-align: top;">
                     &nbsp;</td>               
             </tr>
+            <tr>
                 <td class="label" style="padding-right: 50px; vertical-align: top;">
                     Location:<span class="errormessage">*</span>
                 </td>

@@ -907,7 +907,6 @@ namespace EMS.DAL
             string strExecution = "[trn].[GetInvoiceStatus]";
             DataTable dt = new DataTable();
 
-
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddBigIntegerParam("@BlId", BLId);

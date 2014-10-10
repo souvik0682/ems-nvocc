@@ -227,11 +227,27 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@BLType", 20, objBL.BLType);
                 oDq.AddIntegerParam("@NoOfBL", objBL.NoOfBL);
                 oDq.AddDecimalParam("@NetWeight", 12, 3, objBL.NetWeight);
+                oDq.AddDecimalParam("@GrossWeight", 12, 3, objBL.GrossWeight);
                 oDq.AddDateTimeParam("@BLReleaseDate", objBL.BLReleaseDate);
                 oDq.AddBooleanParam("@BLThruEdge", objBL.BLthruEdge);
 
                 exportBLId = Convert.ToInt64(oDq.GetScalar());
                 return exportBLId;
+            }
+        }
+
+        public static void CloseOpenBL(long BLID, int UserID, string Action)
+        {
+  
+            string strExecution = "[exp].[CloseRFSBL]";
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@ExpBLId", BLID);
+                oDq.AddIntegerParam("@fk_UserID", UserID);
+                oDq.AddVarcharParam("@Action", 10, Action);
+                oDq.RunActionQuery();
+                //exportBLId = Convert.ToInt64(oDq.GetScalar());
+                //return exportBLId;
             }
         }
 
@@ -248,9 +264,10 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@POL", 100, searchCriteria.POL);
                 oDq.AddVarcharParam("@Line", 100, searchCriteria.LineName);
                 oDq.AddVarcharParam("@Location", 100, searchCriteria.Location);
+                oDq.AddIntegerParam("@Status", searchCriteria.IntegerOption1);
                 oDq.AddVarcharParam("@SortExpression", 100, searchCriteria.SortExpression);
                 oDq.AddVarcharParam("@SortDirection", 100, searchCriteria.SortDirection);
-
+                
                 DataTableReader reader = oDq.GetTableReader();
 
                 while (reader.Read())
@@ -294,6 +311,22 @@ namespace EMS.DAL
 
                 oDq.AddNVarcharParam("@BookingNo", 50, BookingNo);
                 oDq.AddIntegerParam("@Loc", Loc);
+                oDq.AddBooleanParam("@Result", false, QueryParameterDirection.Output);
+                oDq.RunActionQuery();
+                return Convert.ToBoolean(oDq.GetParaValue("@Result"));
+            }
+        }
+
+        public static bool CheckBookingBLContainer(long BookingID, int Status)
+        {
+            string strExecution = "[exp].[usp_GetExpBLContainerForAddCount]";
+
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+
+                oDq.AddBigIntegerParam("@BookingId", BookingID);
+                oDq.AddIntegerParam("@Status", Status);
                 oDq.AddBooleanParam("@Result", false, QueryParameterDirection.Output);
                 oDq.RunActionQuery();
                 return Convert.ToBoolean(oDq.GetParaValue("@Result"));

@@ -882,12 +882,11 @@
   <Width>7.48108in</Width>
   <Page>
     <PageHeader>
-      <Height>13.37041cm</Height>
+      <Height>13.05833cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
         <Textbox Name="Textbox2">
-          <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
@@ -918,10 +917,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>2.27618cm</Top>
-          <Left>0.4643cm</Left>
-          <Height>2.33778cm</Height>
-          <Width>11.13896cm</Width>
+          <Top>2.36618cm</Top>
+          <Left>0.4766cm</Left>
+          <Height>2.04674cm</Height>
+          <Width>10.34521cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -950,10 +949,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox11</rd:DefaultName>
-          <Top>2.17618cm</Top>
-          <Left>15.32424cm</Left>
+          <Top>2.31618cm</Top>
+          <Left>15.00674cm</Left>
           <Height>0.6cm</Height>
-          <Width>3.67771cm</Width>
+          <Width>3.99521cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -966,7 +965,6 @@
           </Style>
         </Textbox>
         <Textbox Name="Textbox1">
-          <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
@@ -997,10 +995,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>5.208cm</Top>
-          <Left>0.4889cm</Left>
-          <Height>2.43417cm</Height>
-          <Width>11.13896cm</Width>
+          <Top>4.87389cm</Top>
+          <Left>0.4643cm</Left>
+          <Height>2.19604cm</Height>
+          <Width>10.34521cm</Width>
           <ZIndex>2</ZIndex>
           <Style>
             <Border>
@@ -1013,7 +1011,6 @@
           </Style>
         </Textbox>
         <Textbox Name="Textbox4">
-          <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
@@ -1044,10 +1041,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>7.81856cm</Top>
+          <Top>7.52632cm</Top>
           <Left>0.4643cm</Left>
-          <Height>1.66688cm</Height>
-          <Width>11.13896cm</Width>
+          <Height>1.70688cm</Height>
+          <Width>10.34521cm</Width>
           <ZIndex>3</ZIndex>
           <Style>
             <Border>
@@ -1078,7 +1075,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>9.82778cm</Top>
+          <Top>10.12549cm</Top>
           <Left>0.28258cm</Left>
           <Height>0.6cm</Height>
           <Width>4.71426cm</Width>
@@ -1112,7 +1109,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>9.82778cm</Top>
+          <Top>10.12549cm</Top>
           <Left>5.2268cm</Left>
           <Height>0.6cm</Height>
           <Width>4.96063cm</Width>
@@ -1161,7 +1158,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>10.70417cm</Top>
+          <Top>11.15188cm</Top>
           <Left>0.20444cm</Left>
           <Height>0.6cm</Height>
           <Width>4.7924cm</Width>
@@ -1195,7 +1192,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>10.70417cm</Top>
+          <Top>11.15188cm</Top>
           <Left>5.2268cm</Left>
           <Height>0.6cm</Height>
           <Width>4.96063cm</Width>
@@ -1229,8 +1226,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>10.70417cm</Top>
-          <Left>10.43909cm</Left>
+          <Top>11.15188cm</Top>
+          <Left>10.58903cm</Left>
           <Height>0.6cm</Height>
           <Width>5.23875cm</Width>
           <ZIndex>8</ZIndex>
@@ -1263,11 +1260,96 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox69</rd:DefaultName>
-          <Top>10.70417cm</Top>
-          <Left>15.93361cm</Left>
+          <Top>11.15188cm</Top>
+          <Left>15.96889cm</Left>
           <Height>0.6cm</Height>
           <Width>2.75084cm</Width>
           <ZIndex>9</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox3">
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Label>AgentName</Label>
+                  <Value>=First(Fields!AgentName.Value, "DSBLPrinting")</Value>
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Label>AgentAddress</Label>
+                  <Value>=First(Fields!AgentAddress.Value, "DSBLPrinting")</Value>
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Label>PhoneFax</Label>
+                  <Value />
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value />
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Label>FreightPrePayToPay</Label>
+                  <Value />
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <Top>7.52632cm</Top>
+          <Left>10.95062cm</Left>
+          <Height>1.70688cm</Height>
+          <Width>6.48672cm</Width>
+          <ZIndex>10</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1290,94 +1372,10 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>6.46812cm</Height>
+      <Height>8.38875cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
-        <Textbox Name="Textbox3">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Label>AgentName</Label>
-                  <Value>=First(Fields!AgentName.Value, "DSBLPrinting")</Value>
-                  <Style>
-                    <FontFamily>Calibri</FontFamily>
-                    <FontSize>9pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Label>AgentAddress</Label>
-                  <Value>=First(Fields!AgentAddress.Value, "DSBLPrinting")</Value>
-                  <Style>
-                    <FontFamily>Calibri</FontFamily>
-                    <FontSize>9pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Label>PhoneFax</Label>
-                  <Value />
-                  <Style>
-                    <FontFamily>Calibri</FontFamily>
-                    <FontSize>9pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value />
-                  <Style>
-                    <FontFamily>Calibri</FontFamily>
-                    <FontSize>9pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Label>FreightPrePayToPay</Label>
-                  <Value />
-                  <Style>
-                    <FontFamily>Calibri</FontFamily>
-                    <FontWeight>Bold</FontWeight>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>4.8585cm</Top>
-          <Left>0.60008cm</Left>
-          <Height>1.4552cm</Height>
-          <Width>10.22235cm</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
         <Textbox Name="Textbox59">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
@@ -1414,7 +1412,6 @@
           <Left>11.60674cm</Left>
           <Height>0.6cm</Height>
           <Width>7.39521cm</Width>
-          <ZIndex>1</ZIndex>
           <Visibility>
             <Hidden>true</Hidden>
           </Visibility>
@@ -1451,7 +1448,7 @@
           <Left>6.02404cm</Left>
           <Height>0.6cm</Height>
           <Width>5.15937cm</Width>
-          <ZIndex>2</ZIndex>
+          <ZIndex>1</ZIndex>
           <Visibility>
             <Hidden>true</Hidden>
           </Visibility>
@@ -1499,11 +1496,11 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox70</rd:DefaultName>
-          <Top>1.59716cm</Top>
+          <Top>3.10183cm</Top>
           <Left>12.69153cm</Left>
           <Height>0.54709cm</Height>
           <Width>6.31042cm</Width>
-          <ZIndex>3</ZIndex>
+          <ZIndex>2</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1538,7 +1535,7 @@
           <Left>14.60946cm</Left>
           <Height>0.6cm</Height>
           <Width>4.39249cm</Width>
-          <ZIndex>4</ZIndex>
+          <ZIndex>3</ZIndex>
           <Visibility>
             <Hidden>true</Hidden>
           </Visibility>
@@ -1573,7 +1570,7 @@
           <Left>0.4766cm</Left>
           <Height>0.6cm</Height>
           <Width>5.07591cm</Width>
-          <ZIndex>5</ZIndex>
+          <ZIndex>4</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1591,7 +1588,7 @@
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>30cm</PageHeight>
+    <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
     <LeftMargin>1cm</LeftMargin>
     <RightMargin>0cm</RightMargin>

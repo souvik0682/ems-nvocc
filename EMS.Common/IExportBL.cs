@@ -40,8 +40,10 @@ namespace EMS.Common
         int BLIssuePlaceId { get; set; }
         string BLIssuePlace { get; set; }
         decimal NetWeight { get; set; }
+        decimal GrossWeight { get; set; }
         DateTime ? BLReleaseDate { get; set; }
         bool BLthruEdge { get; set; }
+        int ShipmentType { get; set; }
 
         string ShipperName { get; set; }
         string Shipper { get; set; }
@@ -63,5 +65,6 @@ namespace EMS.Common
         string RefBLNumber { get; set; }
         bool BLStatus { get; set; }
         bool CloseVoyage { get; set; }
+        bool CloseBL { get; set; }
     }
 }

@@ -1112,7 +1112,7 @@ namespace EMS.WebApp.Transaction
                 }
 
 
-                if (user.UserRole.Id != (int)UserRole.Admin)
+                if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.Manager)
                 {
                     ddlLocation.Enabled = false;
                 }

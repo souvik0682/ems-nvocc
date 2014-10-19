@@ -44,5 +44,7 @@ namespace EMS.Common
         decimal EstPayable { get; set; }
         decimal EstReceivable { get; set; }
         char JobActive { get; set; }
+        char CargoSource { get; set; }
+        int JobScopeID { get; set; }
     }
 }

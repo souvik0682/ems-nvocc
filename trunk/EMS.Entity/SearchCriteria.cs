@@ -148,6 +148,10 @@ namespace EMS.Entity
         public int PartyID { get; set; }
         public string PartyName { get; set; }
 
+        public string JobNo { get; set; }
+        public string JobType { get; set; }
+        public string OperationalControl { get; set; }
+        public string Customer { get; set; }
         #endregion
 
         #region Constructor

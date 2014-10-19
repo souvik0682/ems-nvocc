@@ -67,6 +67,7 @@
     <Compile Include="ImportHaulageBLL.cs" />
     <Compile Include="ChargeBLL.cs" />
     <Compile Include="InvoiceBLL.cs" />
+    <Compile Include="JobBLL.cs" />
     <Compile Include="LBCntrBLL.cs" />
     <Compile Include="LeaseBLL.cs" />
     <Compile Include="LogisticReportBLL.cs" />

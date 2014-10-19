@@ -19,12 +19,18 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@JobId", ID);
-                oDq.AddVarcharParam("@JobType", 1, JobType);
-                oDq.AddVarcharParam("@SchJobNo", 100, searchCriteria.StringOption1);
-                oDq.AddVarcharParam("@SchLineName", 100, searchCriteria.LineName);
-                oDq.AddVarcharParam("@SchLocationName", 100, searchCriteria.Location);
-                oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
-                oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
+
+                if (ID > 0)
+                {
+                    oDq.AddVarcharParam("@JobActive", 1, JobType);
+                    oDq.AddVarcharParam("@SchJobNo", 100, searchCriteria.JobNo);
+                    oDq.AddVarcharParam("@SchLineName", 100, searchCriteria.LineName);
+                    oDq.AddVarcharParam("@Customer", 100, searchCriteria.Customer);
+                    oDq.AddVarcharParam("@SchOpsLoc", 100, searchCriteria.OperationalControl);
+                    oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
+                    oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
+                }
+
                 DataTableReader reader = oDq.GetTableReader();
 
 
@@ -38,7 +44,7 @@ namespace EMS.DAL
             return lstJob;
         }
 
-        public static int AddEditJob(IJob Jobs, int CompanyId, ref int JobId)
+        public static int AddEditJob(IJob Jobs, int CompanyId)
         {
             string strExecution = "[fwd].[uspManageJob]";
             int Result = 0;
@@ -78,18 +84,19 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@fk_CustID", Jobs.fk_CustAgentID);
                 oDq.AddIntegerParam("@fk_TransID", Jobs.fk_TransID);
                 oDq.AddIntegerParam("@fk_OSID", Jobs.fk_OSID);
+                oDq.AddCharParam("@CargoSource", 1, Jobs.CargoSource);
+                oDq.AddIntegerParam("@JobScopeID", Jobs.JobScopeID);
                 oDq.AddIntegerParam("@RESULT", Result, QueryParameterDirection.Output);
-                //oDq.AddIntegerParam("@LeaseId", outBookingId, QueryParameterDirection.Output);
+
                 oDq.RunActionQuery();
                 Result = Convert.ToInt32(oDq.GetParaValue("@RESULT"));
-                //JobId = Convert.ToInt32(oDq.GetParaValue("@JobId"));
             }
             return Result;
         }
 
-        public static int DeleteJob(int JobID, int UserID, int CompanyID)
+        public static int DeleteJob(int JobID, int UserID)
         {
-            string strExecution = "[fwd].[prcDeleteVoyage]";
+            string strExecution = "[fwd].[uspManageJob]";
             int ret = 0;
             using (DbQuery oDq = new DbQuery(strExecution))
             {

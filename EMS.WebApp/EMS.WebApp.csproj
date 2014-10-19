@@ -13,6 +13,7 @@
     <RootNamespace>EMS.WebApp</RootNamespace>
     <AssemblyName>EMS.WebApp</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -91,7 +92,6 @@
     <Content Include="Export\Booking.aspx" />
     <Content Include="Export\BookingCharges.aspx" />
     <Content Include="Export\ContainerTranshipment.aspx" />
-    <Content Include="Export\ContainerTranshipmentEntry.aspx" />
     <Content Include="Export\DOEdit.aspx" />
     <Content Include="Export\DOList.aspx" />
     <Content Include="Export\Export-bl-query.aspx" />
@@ -106,11 +106,14 @@
     <Content Include="Export\ManageSlotOperator.aspx" />
     <Content Include="Export\ManageVoyage.aspx" />
     <Content Include="Export\Voyage.aspx" />
+    <Content Include="Farwarding\Transaction\Job.aspx" />
+    <Content Include="Farwarding\Transaction\JobList.aspx" />
     <Content Include="FileNotFound.aspx" />
     <Content Include="FileTemplate\ContainerList.txt" />
     <Content Include="GetLocation.asmx" />
     <Content Include="Hire\AddEditHire.aspx" />
     <Content Include="Hire\Hire.aspx" />
+    <Content Include="Images\add.jpeg" />
     <Content Include="Images\bg.jpg" />
     <Content Include="Images\BLA-logo.bmp" />
     <Content Include="Images\Close-Button.bmp" />
@@ -124,6 +127,7 @@
     <Content Include="Images\MUST_PIC1.jpg" />
     <Content Include="Images\PleaseWait.gif" />
     <Content Include="Images\remove.png" />
+    <Content Include="Images\status.jpg" />
     <Content Include="Images\trash_icon.gif" />
     <Content Include="Import\EDI_Custom.aspx" />
     <Content Include="Login.aspx" />
@@ -365,13 +369,6 @@
     <Compile Include="Export\ContainerTranshipment.aspx.designer.cs">
       <DependentUpon>ContainerTranshipment.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Export\ContainerTranshipmentEntry.aspx.cs">
-      <DependentUpon>ContainerTranshipmentEntry.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Export\ContainerTranshipmentEntry.aspx.designer.cs">
-      <DependentUpon>ContainerTranshipmentEntry.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Export\DOEdit.aspx.cs">
       <DependentUpon>DOEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -469,6 +466,20 @@
     </Compile>
     <Compile Include="Export\Voyage.aspx.designer.cs">
       <DependentUpon>Voyage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Farwarding\Transaction\Job.aspx.cs">
+      <DependentUpon>Job.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Farwarding\Transaction\Job.aspx.designer.cs">
+      <DependentUpon>Job.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Farwarding\Transaction\JobList.aspx.cs">
+      <DependentUpon>JobList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Farwarding\Transaction\JobList.aspx.designer.cs">
+      <DependentUpon>JobList.aspx</DependentUpon>
     </Compile>
     <Compile Include="LinerInvoiceDataset.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1352,30 +1363,6 @@
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="RDLC\BLPrint.rdlc" />
-    <EmbeddedResource Include="RDLC\CargoArrivalNotice.rdlc" />
-    <EmbeddedResource Include="RDLC\CntrStockDetail.rdlc" />
-    <EmbeddedResource Include="RDLC\CntrStockSummery.rdlc" />
-    <EmbeddedResource Include="RDLC\CntrWiseStock.rdlc" />
-    <EmbeddedResource Include="RDLC\DeliveryOrder.rdlc" />
-    <EmbeddedResource Include="RDLC\ExpManifestEdge.rdlc" />
-    <EmbeddedResource Include="RDLC\ExportEDI.rdlc" />
-    <EmbeddedResource Include="RDLC\ExportEDIContainer.rdlc" />
-    <EmbeddedResource Include="RDLC\FileLandingGurantee.rdlc" />
-    <EmbeddedResource Include="RDLC\IGMCargoDesc.rdlc" />
-    <EmbeddedResource Include="RDLC\IGMForm2.rdlc" />
-    <EmbeddedResource Include="RDLC\IGMFormC.rdlc" />
-    <EmbeddedResource Include="RDLC\ImpBLChkLst.rdlc" />
-    <EmbeddedResource Include="RDLC\ImportInvoice.rdlc" />
-    <EmbeddedResource Include="RDLC\ImportInvRegister.rdlc" />
-    <EmbeddedResource Include="RDLC\ImportRegister.rdlc" />
-    <EmbeddedResource Include="RDLC\ImportSummary.rdlc" />
-    <EmbeddedResource Include="RDLC\MoneyReciept.rdlc" />
-    <EmbeddedResource Include="RDLC\RptImpBill.rdlc" />
-    <EmbeddedResource Include="RDLC\RptImpBillAnnex.rdlc" />
-    <EmbeddedResource Include="RDLC\YearlyMIS.rdlc" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ContainerStockSummary.xsc">
       <DependentUpon>ContainerStockSummary.xsd</DependentUpon>
     </None>
@@ -1509,7 +1496,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>36844</DevelopmentServerPort>
+          <DevelopmentServerPort>49676</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

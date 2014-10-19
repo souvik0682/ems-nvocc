@@ -69,6 +69,7 @@
     <Compile Include="IexpVoyage.cs" />
     <Compile Include="IIGMReport.cs" />
     <Compile Include="IInvoice.cs" />
+    <Compile Include="IJob.cs" />
     <Compile Include="ILease.cs" />
     <Compile Include="ILine.cs" />
     <Compile Include="IRoleMenu.cs" />

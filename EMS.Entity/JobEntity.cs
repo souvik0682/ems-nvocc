@@ -47,6 +47,9 @@ namespace EMS.Entity
         public decimal EstPayable { get; set; }
         public decimal EstReceivable { get; set; }
         public char JobActive { get; set; }
+        public char CargoSource { get; set; }
+        public int JobScopeID { get; set; }
+        public decimal EstProfit { get; set; }
 
         public int CreatedBy
         {
@@ -227,6 +230,16 @@ namespace EMS.Entity
             if (ColumnExists(reader, "JobStatus"))
                 if (reader["VoyageStatus"] != DBNull.Value)
                     JobStatus = Convert.ToBoolean(reader["JobStatus"]);
+
+            if (ColumnExists(reader, "fk_JobScopeID"))
+                if (reader["fk_JobScopeID"] != DBNull.Value)
+                    fk_TransID = Convert.ToInt32(reader["fk_JobScopeID"]);
+
+            if (ColumnExists(reader, "CargoSource"))
+                if (reader["CargoSource"] != DBNull.Value)
+                    CargoSource = Convert.ToChar(reader["CargoSource"]);
+
+            EstProfit = (EstReceivable - EstPayable);
         }
 
         public bool ColumnExists(IDataReader reader, string columnName)

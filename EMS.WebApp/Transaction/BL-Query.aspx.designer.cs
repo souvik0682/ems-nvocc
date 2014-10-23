@@ -49,7 +49,7 @@ namespace EMS.WebApp.Transaction {
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
-        /// ddlLocation control.
+        /// txtLo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.

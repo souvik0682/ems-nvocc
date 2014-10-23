@@ -37,6 +37,7 @@ namespace EMS.WebApp.Export
         private int _CompanyId = 1;
         private int _userLocation = 0;
         private decimal _TotWeight = 0;
+        private int _CalledFrom = 0;
 
         #endregion
 
@@ -107,7 +108,7 @@ namespace EMS.WebApp.Export
                     }
                 }
 
-                if (user.UserRole.Id != (int)UserRole.Admin)
+                if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.Manager)
                 {
                     ddlLocation.SelectedValue = _userLocation.ToString();
                     ddlLocation.Enabled = false;
@@ -255,6 +256,8 @@ namespace EMS.WebApp.Export
             else
                 txtGrossWeight.Enabled = false;
 
+            if (oBooking.CloseVoyage == true)
+                btnSave.Visible = false;
 
         }
 
@@ -370,13 +373,14 @@ namespace EMS.WebApp.Export
                 hdnBookingID.Value = _locId.ToString();
             }
             _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
-
+            _CalledFrom = Request.QueryString["frmod"].ToInt();
+ 
             EMS.BLL.UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Export/Booking.aspx");
+            Response.Redirect("~/Export/Booking.aspx?frmod=" + _CalledFrom);
         }
 
         protected void rdoHazardousCargo_SelectedIndexChanged(object sender, EventArgs e)
@@ -530,6 +534,18 @@ namespace EMS.WebApp.Export
                     lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00089");
                     return;
                 }
+
+                if (ddlShipmentType.SelectedValue.ToInt() == 1 && txtCbm.Text.ToDecimal() == 0)
+                {
+                    lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00090");
+                    return;
+                }
+
+                if (hdnMainLineVessel.Value != hdnVessel.Value && ddlMainLineVoyage.SelectedIndex == -1)
+                {
+                    lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00092");
+                    return;
+                }
                    
                 oBookingBll = new BookingBLL();
                 oBookingEntity = new BookingEntity();
@@ -680,7 +696,7 @@ namespace EMS.WebApp.Export
                     }
                     
                 }
-                Response.Redirect("~/Export/Booking.aspx");
+                Response.Redirect("~/Export/Booking.aspx?frmod=" + _CalledFrom);
             }
         }
 

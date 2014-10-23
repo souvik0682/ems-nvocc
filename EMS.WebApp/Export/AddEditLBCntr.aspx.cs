@@ -358,6 +358,8 @@ namespace EMS.WebApp.Export
             //txtBookingDate.Text = ds.Tables[0].Rows[0]["BookingDate"].ToString();
             lblParty.Text = ds.Tables[0].Rows[0]["CustName"].ToString();
             lblLoadPort.Text = ds.Tables[0].Rows[0]["PortCode"].ToString();
+            lblVessel.Text = ds.Tables[0].Rows[0]["VesselName"].ToString();
+            lblVoyage.Text = ds.Tables[0].Rows[0]["VoyageNo"].ToString();
             ddlVessel.SelectedIndex = -1;
             ddlVoyage.Items.Clear();
      

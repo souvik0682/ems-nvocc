@@ -642,7 +642,7 @@
                                     </td>
                                     <td>
                                         <cc2:CustomTextBox ID="txtTempMin" runat="server" CssClass="numerictextbox" TabIndex="27"
-                                            Width="250px" Type="Decimal" MaxLength="7" Precision="4" Scale="2"></cc2:CustomTextBox>
+                                            Width="250px" Type="Decimal" MaxLength="10" Precision="4" Scale="2"></cc2:CustomTextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -658,7 +658,7 @@
                                     </td>
                                     <td>
                                         <cc2:CustomTextBox ID="txtTempMax" runat="server" CssClass="numerictextbox" TabIndex="28"
-                                            Width="250px" Type="Decimal" MaxLength="7" Precision="4" Scale="2"></cc2:CustomTextBox>
+                                            Width="250px" Type="Decimal" MaxLength="10" Precision="4" Scale="2"></cc2:CustomTextBox>
                                     </td>
                                 </tr>
                                 <tr>

@@ -97,6 +97,21 @@
                             </tr>
                             <tr>
                                 <td>
+                                    Current Vessel:
+                                </td>
+                                <td>
+                                   <asp:Label ID="lblVessel" runat="server" Width="150"></asp:Label>
+                                </td>
+                                <td>
+                                    Current Voyage:
+                                </td>
+                                <td>
+                                    <asp:Label ID="lblVoyage" runat="server" Width="150"></asp:Label>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
                                     Assigned Vessel <span class="errormessage1">*</span>:
                                 </td>
                                 <td>

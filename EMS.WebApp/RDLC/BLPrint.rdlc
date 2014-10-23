@@ -1247,7 +1247,7 @@
               <TextRuns>
                 <TextRun>
                   <Label>ExpBLNo</Label>
-                  <Value>=First(Fields!ExpBLNo.Value, "DSBLPrinting")</Value>
+                  <Value>=IIf(Globals!PageNumber = 1, First(Fields!ExpBLNo.Value, "DSBLPrinting"), "Continued..."+cStr(Globals!PageNumber))</Value>
                   <Style>
                     <FontWeight>Bold</FontWeight>
                   </Style>

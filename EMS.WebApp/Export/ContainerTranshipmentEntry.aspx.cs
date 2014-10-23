@@ -64,7 +64,35 @@ namespace EMS.WebApp.Export
         {
             if (!string.IsNullOrEmpty(hdnExpBL.Value.Trim()))
             {
-                DataSet ds = new TranshipmentDetailsBLL().GetTranshipmentHeader(Convert.ToInt32(hdnExpBL.Value.Trim()));
+                DateTime? dt = null;
+                bool VoyageStatus = false;
+                int CountID = 0;
+
+                dt = new TranshipmentDetailsBLL().TranshipmentStatus(Convert.ToInt32(hdnExpBL.Value.Trim()), ref VoyageStatus, ref CountID);
+                if (VoyageStatus == false)
+                {
+                    //lblMessage.Text = "Voyage not Closed";
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Voyage Not Closed');</script>", false);
+                    return;
+                }
+                //else
+                //    lblMessage.Text = "";
+                if (dt.HasValue && Convert.ToDateTime(dt).ToString("dd/MM/yyyy") != "01/01/0001")
+                {
+                    txtDateofDeparture.Text = Convert.ToDateTime(dt).ToString("dd/MM/yyyy");
+                    txtDateofDeparture.Enabled = false;
+                    txtVessel.Enabled = false;
+                    ddlVoyage.Enabled = false;
+                }
+                else
+                {
+                    txtDateofDeparture.Enabled = true;
+                    txtVessel.Enabled = true;
+                    ddlVoyage.Enabled = true;
+                }
+
+
+                DataSet ds = new TranshipmentDetailsBLL().GetTranshipmentHeader(Convert.ToInt32(hdnExpBL.Value.Trim()), CountID);
 
                 lblBLDate.Text = Convert.ToDateTime(ds.Tables[0].Rows[0]["ExpBLDate"]).ToString("dd/MM/yyyy");
                 hdnBookingId.Value = ds.Tables[0].Rows[0]["fk_BookingID"].ToString();
@@ -73,7 +101,10 @@ namespace EMS.WebApp.Export
                 txtVessel.Text = ds.Tables[0].Rows[0]["VesselName"].ToString();
                 //hdnVoyageId.Value = ds.Tables[0].Rows[0]["fk_VoyageID"].ToString();
                 //txtVoyage.Text = ds.Tables[0].Rows[0]["VoyageNo"].ToString();
-                PopulateVoyage(Convert.ToInt32(hdnVessel.Value.Trim()));
+                if (CountID == 0)
+                    PopulateVoyage(Convert.ToInt32(hdnVessel.Value.Trim()));
+                else
+                    PopulateMainlineVoyage(Convert.ToInt32(hdnVessel.Value.Trim()));
                 ddlVoyage.SelectedValue = ds.Tables[0].Rows[0]["fk_VoyageID"].ToString();
 
                 PopulatePort(Convert.ToInt32(hdnBookingId.Value.Trim()));
@@ -92,6 +123,17 @@ namespace EMS.WebApp.Export
         {
             //BLL.DBInteraction dbinteract = new BLL.DBInteraction();
             DataSet ds = TranshipmentDetailsBLL.GetExportVoyages(vesselID);
+            ddlVoyage.DataValueField = "VoyageID";
+            ddlVoyage.DataTextField = "VoyageNo";
+            ddlVoyage.DataSource = ds;
+            ddlVoyage.DataBind();
+            //ddlLoadingVoyage.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
+        }
+
+        private void PopulateMainlineVoyage(int vesselID)
+        {
+            //BLL.DBInteraction dbinteract = new BLL.DBInteraction();
+            DataSet ds = TranshipmentDetailsBLL.GetExportMainlineVoyages(vesselID);
             ddlVoyage.DataValueField = "VoyageID";
             ddlVoyage.DataTextField = "VoyageNo";
             ddlVoyage.DataSource = ds;

@@ -49,6 +49,15 @@ namespace EMS.WebApp.Export {
         protected global::System.Web.UI.WebControls.HiddenField hdnBLThruEdge;
         
         /// <summary>
+        /// hdnShipmentType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnShipmentType;
+        
+        /// <summary>
         /// txtBookingNo control.
         /// </summary>
         /// <remarks>
@@ -307,7 +316,7 @@ namespace EMS.WebApp.Export {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNetWt;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtNetWt;
         
         /// <summary>
         /// ddlBLClause control.
@@ -596,6 +605,15 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnBack;
+        
+        /// <summary>
+        /// btnClose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClose;
         
         /// <summary>
         /// lblErr control.

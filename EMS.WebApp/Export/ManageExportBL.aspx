@@ -83,6 +83,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:HiddenField ID="hdnBLThruEdge" runat="server" />
+                                                                <asp:HiddenField ID="hdnShipmentType" runat="server" />
                                                                 <asp:TextBox ID="txtBookingNo" runat="server" CssClass="textboxuppercase" MaxLength="60"
                                                                     Width="250px" TabIndex="11" AutoPostBack="True"></asp:TextBox>
                                                                 <br />
@@ -337,8 +338,8 @@
                                                                 Gross Weight:<span class="errormessage">*</span>
                                                             </td>
                                                             <td style="width: 28%;">
-                                                                <asp:TextBox ID="txtNetWt" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13" Enabled="False"></asp:TextBox>
+                                                                <cc2:CustomTextBox ID="txtNetWt" runat="server" CssClass="numerictextbox" TabIndex="13"
+                                                                    Width="250px" Type="Decimal" MaxLength="15" Precision="6" Scale="3"></cc2:CustomTextBox>
                                                                 <br />
                                                             </td>
                                                             <td>
@@ -374,7 +375,7 @@
                                                             </td>
                                                             <td style="width: 28%;">
                                                                 <asp:TextBox ID="txtBLReleaseDate" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                                                    Width="250px" TabIndex="13"></asp:TextBox>
+                                                                    Width="250px" TabIndex="13" AutoPostBack="True" OnTextChanged="txtBLReleaseDate_TextChanged"></asp:TextBox >
                                                                 <cc1:CalendarExtender ID="ceReleaseDate" TargetControlID="txtBLReleaseDate" runat="server"
                                                                     Format="dd-MM-yyyy" Enabled="True" />
                                                                 <br />
@@ -692,7 +693,9 @@
                                         <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" 
                                             TabIndex="70" onclick="btnSave_Click" />&nbsp;&nbsp;
                                         <asp:Button ID="btnBack" runat="server" CssClass="button" TabIndex="71" OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;"
-                                            Text="Back" onclick="btnBack_Click" />
+                                            Text="Back" onclick="btnBack_Click" />&nbsp;&nbsp;
+                                        <asp:Button ID="btnClose" runat="server" CssClass="button" TabIndex="71" OnClientClick="javascript:if(!confirm('Want to Close?')) return false;"
+                                            Text="Close" onclick="btnClose_Click" />
                                         <br />
                                         <asp:Label ID="lblErr" runat="server" CssClass="errormessage"></asp:Label>
                                     </td>

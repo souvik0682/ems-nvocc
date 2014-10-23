@@ -463,6 +463,12 @@ namespace EMS.WebApp.Export
                     hdnFilePath.Value = objBooking.UploadPath;
                     ddlSlot.SelectedValue = Convert.ToString(objBooking.SlotOperatorId);
                     ddlPpCc.SelectedValue = Convert.ToString(objBooking.PpCc);
+
+                    if (objBooking.CloseVoyage == true)
+                    {
+                        btnSave.Visible = false;
+                        btnDel.Visible = false;
+                    }
                 }
             }
         }

@@ -188,10 +188,10 @@ namespace EMS.WebApp.Export
                 btnDashboard.ToolTip = "Go to Dashboard";
                 btnDashboard.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLNumber"));
 
-                if (DataBinder.Eval(e.Row.DataItem, "CloseVoyage").ToInt() == 1 && _roleId != 2)
+                if (DataBinder.Eval(e.Row.DataItem, "CloseBL").ToInt() == 1)
                 {
-                    btnDashboard.Visible = false;
-                    btnEdit.Visible = false;
+                    //btnDashboard.Visible = false;
+                    //btnEdit.Visible = false;
                     btnRemove.Visible = false;
                     e.Row.ForeColor = System.Drawing.Color.Red;
                     //e.Row.Cells[0].ForeColor = System.Drawing.Color.Red;
@@ -221,7 +221,7 @@ namespace EMS.WebApp.Export
                     Response.Redirect("~/Login.aspx");
                 }
 
-                if (user.UserRole.Id != (int)UserRole.Admin)
+                if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.Manager)
                 {
 
                     if (_canView == false)
@@ -339,6 +339,7 @@ namespace EMS.WebApp.Export
             criteria.RefBLNumber = (txtRefBLNo.Text == "") ? string.Empty : txtRefBLNo.Text.Trim();
             criteria.POL = (txtPOL.Text == "") ? string.Empty : txtPOL.Text.Trim();
             criteria.LineName = (txtLine.Text == "") ? string.Empty : txtLine.Text.Trim();
+            criteria.IntegerOption1 = ddlStatus.SelectedIndex;
             if (_userLocation != 0)
                 criteria.Location = new BookingBLL().GetLocation(_userId);
             else
@@ -370,6 +371,7 @@ namespace EMS.WebApp.Export
                         txtPOL.Text = criteria.POL;
                         txtLine.Text = criteria.LineName;
                         txtLocation.Text = criteria.Location;
+                        ddlStatus.SelectedIndex = criteria.IntegerOption1;
 
                         gvExportBL.PageIndex = criteria.PageIndex;
                         gvExportBL.PageSize = criteria.PageSize;
@@ -392,6 +394,7 @@ namespace EMS.WebApp.Export
             string sortDirection = "ASC";
 
             criteria.CurrentPage = PageName.ExportBL;
+            ddlStatus.SelectedIndex = 0;
             criteria.PageSize = Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]);
             criteria.SortExpression = sortExpression;
             criteria.SortDirection = sortDirection;
@@ -426,5 +429,12 @@ namespace EMS.WebApp.Export
         }
 
         #endregion
+
+        protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SaveNewPageIndex(0);
+            LoadExportBL();
+            upBL.Update();
+        }
     }
 }

@@ -60,6 +60,11 @@
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
+                            <asp:DropDownList ID="ddlStatus" runat="server" ForeColor="#747862" AutoPostBack="true" onselectedindexchanged="ddlStatus_SelectedIndexChanged">
+                            <asp:ListItem Text="Open" Value="O"></asp:ListItem>
+                            <asp:ListItem Text="Closed" Value="C"></asp:ListItem>
+                            <asp:ListItem Text="All" Value="A"></asp:ListItem>
+                            </asp:DropDownList>
                         </td>
                         <td colspan="3">
                             <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" 

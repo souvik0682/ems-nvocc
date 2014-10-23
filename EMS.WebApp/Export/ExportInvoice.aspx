@@ -3,14 +3,18 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="EMS.WebApp" Namespace="EMS.WebApp.CustomControls" TagPrefix="cc2" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
     <div>
         <div id="headercaption">
             ADD/EDIT EXPORT INVOICE
         </div>
         <center>
+
             <fieldset style="width: 85%;">
                 <legend>Add / Edit Invoice</legend>
                 <asp:UpdatePanel ID="upInvoice" runat="server" UpdateMode="Always">
@@ -43,8 +47,10 @@
                                         OnTextChanged="txtInvoiceDate_TextChanged" AutoPostBack="true" Width="250px"></asp:TextBox>
                                     <cc1:CalendarExtender ID="cbeInvoiceDate" TargetControlID="txtInvoiceDate" runat="server"
                                         Format="dd-MM-yyyy" Enabled="True" />
+<%--                                    <asp:RangeValidator ID ="rvDate" runat ="server" ControlToValidate="txtInvoiceDate" ErrorMessage="Invalid Date" 
+                                        Type="Date" MinimumValue="01/01/1900" CssClass="errormessage"></asp:RangeValidator>--%>
                                     <asp:RequiredFieldValidator ID="rfvLineBLDate" runat="server" ControlToValidate="txtInvoiceDate"
-                                        ValidationGroup="vgSave" ErrorMessage="This field is required*" CssClass="errormessage"
+                                        ValidationGroup="vgSave" ErrorMessage="This field is required*" CssClass="errormessage" 
                                         Display="Dynamic"></asp:RequiredFieldValidator>
                                 </td>
                                 <td>

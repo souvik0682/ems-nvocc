@@ -22,10 +22,6 @@
         {
             width: 230px;
         }
-        .style4
-        {
-            width: 86px;
-        }
         .style5
         {
             width: 200px;
@@ -241,19 +237,6 @@
                             </tr>
                             <tr>
                                 <td class="style3">
-                                    Date of Arrival<span class="errormessage1">*</span> :
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="txtDateofArrival" runat="server" Width="150"></asp:TextBox>
-                                    <cc1:CalendarExtender ID="ceDateofArrival" runat="server" PopupButtonID="txtDateofArrival"
-                                        Format="dd/MM/yyyy" TargetControlID="txtDateofArrival">
-                                    </cc1:CalendarExtender>
-                                    <asp:RequiredFieldValidator ID="rfvDateofArrival" runat="server" ErrorMessage="Please enter date of arrival"
-                                        ControlToValidate="txtDateofArrival" Display="None" ValidationGroup="Select"></asp:RequiredFieldValidator>
-                                    <cc1:ValidatorCalloutExtender ID="vceDateofArrival" runat="server" TargetControlID="rfvDateofArrival">
-                                    </cc1:ValidatorCalloutExtender>
-                                </td>
-                                <td class="style5">
                                     Date of Departure<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
@@ -265,6 +248,20 @@
                                         ControlToValidate="txtDateofDeparture" Display="None" ValidationGroup="Select"></asp:RequiredFieldValidator>
                                     <cc1:ValidatorCalloutExtender ID="vceDateofDeparture" runat="server" TargetControlID="rfvDateofDeparture">
                                     </cc1:ValidatorCalloutExtender>
+                                </td>
+                                <td class="style5">
+                                    Date of Arrival<span class="errormessage1">*</span> :
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtDateofArrival" runat="server" Width="150"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="ceDateofArrival" runat="server" PopupButtonID="txtDateofArrival"
+                                        Format="dd/MM/yyyy" TargetControlID="txtDateofArrival">
+                                    </cc1:CalendarExtender>
+                                    <asp:RequiredFieldValidator ID="rfvDateofArrival" runat="server" ErrorMessage="Please enter date of arrival"
+                                        ControlToValidate="txtDateofArrival" Display="None" ValidationGroup="Select"></asp:RequiredFieldValidator>
+                                    <cc1:ValidatorCalloutExtender ID="vceDateofArrival" runat="server" TargetControlID="rfvDateofArrival">
+                                    </cc1:ValidatorCalloutExtender>
+                                    
                                 </td>
                             </tr>
                         </table>
@@ -360,8 +357,8 @@
                         </td>--%>
                         <td style="padding-left: 23%;">
                             <%--<asp:HiddenField ID="hdnChargeID" runat="server" Value="0" />--%>
-                            <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Select" OnClick="btnSave_Click" />&nbsp;&nbsp;<asp:Button
-                                ID="btnBack" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
+                            <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Select" OnClick="btnSave_Click" />&nbsp;&nbsp;
+                            <asp:Button ID="btnBack" runat="server" CssClass="button" Text="Back" ValidationGroup="vgUnknown"
                                 OnClick="btnBack_Click" OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;" />
                             <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
                         </td>

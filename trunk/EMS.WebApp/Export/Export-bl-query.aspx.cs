@@ -147,7 +147,6 @@ namespace EMS.WebApp.Transaction
                     btnAddFreightInvoice.Visible = false;
                 else
                     btnAddFreightInvoice.Visible = true;
-
                 
                 switch (dtDetail.Rows[0]["Shipmenttype"].ToString())
                 {
@@ -166,7 +165,6 @@ namespace EMS.WebApp.Transaction
                     case "3": // Per TON
                         txtShipmentType.Text = "BREAK BULK";
                         break;
-
                 }
 
                 ListItem Li = null;

@@ -17,6 +17,7 @@ namespace EMS.WebApp.Export
     public partial class ManageVoyage : System.Web.UI.Page
     {
         private int _userId = 0;
+        private int _roleId = 0;
         private bool _canAdd = false;
         private bool _canEdit = false;
         private bool _canDelete = false;
@@ -28,6 +29,7 @@ namespace EMS.WebApp.Export
             long voyageId = 0;
             //GeneralFunctions.PopulateDropDownList(ddlVessel, dbinteract.PopulateDDLDS("trnVessel", "pk_VesselID", "VesselName"));
             RetriveParameters();
+            CheckUserAccess(voyageId);
             if (!Page.IsPostBack)
             {
                 LoadLocationDDL();
@@ -39,51 +41,59 @@ namespace EMS.WebApp.Export
                     Int64.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["VoyageID"].ToString()), out voyageId);
                     lblSailingDate.Visible = false;
                     txtSailingDateTime.Visible = false;
+                    btnVslClose.Visible = false;
                     if (voyageId > 0)
                     {
                         LoadForEdit(voyageId);
                         lblSailingDate.Visible = true;
                         txtSailingDateTime.Visible = true;
-                        if (txtSailingDateTime.Text == string.Empty)
+                        if (txtSailingDateTime.Text != string.Empty && (_roleId == 2 || _roleId == 6))
                         {
-                            btnVslClose.Visible = false;
+                            btnVslClose.Visible = true;
                         }
                     }
                 }
             }
-            CheckUserAccess(voyageId);
+            
 
         }
         private void LoadForEdit(long voyageId)
         {
-                IexpVoyage voyage = new expVoyageBLL().GetVoyageById(voyageId);
-                ViewState["VoyageID"] = voyage.VoyageID;           
-                //txtGatewayPort.Text= voyage.GatewayPort.ToString();
-                ddlVessel.SelectedValue=voyage.VesselID.ToString();
-                ddlLocation.SelectedValue = voyage.LocationID.ToString();
-                hdnPOL.Value = voyage.POL.ToString();
-                hdnNextPortCall.Value = voyage.NextPortID.ToString();
-                //txtPOD.Text= voyage.POD.ToString();
-                txtVoyageNo.Text= voyage.VoyageNo;
-                txtAgentcode.Text = voyage.AgentCode.ToString();
-                //txtAgentcode.Text = voyage.AgentCode.ToString();
-                txtPOL.Text = voyage.LoadPort.ToString();
-                txtLinecode.Text=voyage.LineCode;
-                txtETD.Text = voyage.ETD.ToString();
-                txtPCCNo.Text= voyage.PCCNo;
-                ddlTerminalID.SelectedValue = voyage.TerminalID.ToString();
-                ddlLocation.SelectedValue = voyage.LocationID.ToString();
-                txtPCCDate.Text = voyage.PCCDate.ToString();
-                txtNextportcall.Text = voyage.NextPort.ToString();
-                txtETA.Text = voyage.ETA.ToString();
-                txtETANextPort.Text = voyage.ETANextPort.ToString();
-                txtVIA.Text= voyage.VIA;
-                txtVCNNo.Text= voyage.VCNNo;
-                txtRotationNo.Text= voyage.RotationNo;
-                txtSailingDateTime.Text = voyage.SailDate.ToString();
-                txtRotationDate.Text = voyage.RotationDate.ToString();
-                txtVesselcutoffDate.Text = voyage.VesselCutOffDate.ToString();
-                txtlstsiDockscutoffDate.Text = voyage.DocsCutOffDate.ToString();                      
+            IexpVoyage voyage = new expVoyageBLL().GetVoyageById(voyageId);
+            ViewState["VoyageID"] = voyage.VoyageID;           
+            //txtGatewayPort.Text= voyage.GatewayPort.ToString();
+            ddlVessel.SelectedValue=voyage.VesselID.ToString();
+            ddlLocation.SelectedValue = voyage.LocationID.ToString();
+            hdnPOL.Value = voyage.POL.ToString();
+            hdnNextPortCall.Value = voyage.NextPortID.ToString();
+            //txtPOD.Text= voyage.POD.ToString();
+            txtVoyageNo.Text= voyage.VoyageNo;
+            txtAgentcode.Text = voyage.AgentCode.ToString();
+            //txtAgentcode.Text = voyage.AgentCode.ToString();
+            txtPOL.Text = voyage.LoadPort.ToString();
+            txtLinecode.Text=voyage.LineCode;
+            txtETD.Text = voyage.ETD.ToString();
+            txtPCCNo.Text= voyage.PCCNo;
+            ddlTerminalID.SelectedValue = voyage.TerminalID.ToString();
+            ddlLocation.SelectedValue = voyage.LocationID.ToString();
+            txtPCCDate.Text = voyage.PCCDate.ToString();
+            txtNextportcall.Text = voyage.NextPort.ToString();
+            txtETA.Text = voyage.ETA.ToString();
+            txtETANextPort.Text = voyage.ETANextPort.ToString();
+            txtVIA.Text= voyage.VIA;
+            txtVCNNo.Text= voyage.VCNNo;
+            txtRotationNo.Text= voyage.RotationNo;
+            txtSailingDateTime.Text = voyage.SailDate.ToString();
+            txtRotationDate.Text = voyage.RotationDate.ToString();
+            txtVesselcutoffDate.Text = voyage.VesselCutOffDate.ToString();
+            txtlstsiDockscutoffDate.Text = voyage.DocsCutOffDate.ToString();
+            if (voyage.CloseVoyage == true)
+            {
+                btnVslClose.Text = "Open Voyage";
+                btnSave.Visible = false;
+            }
+            else
+                btnVslClose.Text = "Close Voyage";
         }
         public void loaddata()
         {
@@ -154,9 +164,20 @@ namespace EMS.WebApp.Export
         private void RetriveParameters()
         {
             _userId = UserBLL.GetLoggedInUserId();
+            IUser user = new UserBLL().GetUser(_userId);
+
+            if (!ReferenceEquals(user, null))
+            {
+                if (!ReferenceEquals(user.UserRole, null))
+                {
+                    _roleId = user.UserRole.Id;
+                }
+
+            }
             //Get user permission.
             UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
         }
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
             try
@@ -341,14 +362,29 @@ namespace EMS.WebApp.Export
                 lblMessage.Text = "Container Mismatch Between Booking and BL. Voyage not closed";
 
             if (ErrVal == 3)
-                lblMessage.Text = "Equipment and Booking Mismatch. Voyage not closed";
+                lblMessage.Text = "Freight Invoice Not Generated against BL. Voyage not closed";
 
             if (ErrVal == 4)
-                lblMessage.Text = "Freight Invoice Not Generated against BL. Voyage not closed";
+                lblMessage.Text = "Equipment and Booking Mismatch. Voyage not closed";
 
             if (ErrVal == 5)
                 lblMessage.Text = "No Booking against Vessel & Voyage. Voyage not closed";
-            
+
+            if (ErrVal == 6)
+                lblMessage.Text = "No Export BL against Vessel & Voyage. Voyage not closed";
+
+            if (ErrVal == -1)
+            {
+                lblMessage.Text = "Voyage Closed Successfully";
+                Response.Redirect("~/Export/Voyage.aspx");
+            }
+
+            if (ErrVal == -2)
+            {
+                lblMessage.Text = "Voyage Opened Successfully";
+                Response.Redirect("~/Export/Voyage.aspx");
+            }
+
         }
     }
 }

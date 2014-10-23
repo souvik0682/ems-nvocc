@@ -34,6 +34,7 @@ namespace EMS.WebApp.Export
               
             }
         }
+
         private void RetrieveSearchCriteria()
         {
             bool isCriteriaExists = false;
@@ -44,7 +45,7 @@ namespace EMS.WebApp.Export
 
                 if (!ReferenceEquals(criteria, null))
                 {
-                    if (criteria.CurrentPage != PageName.Invoice)
+                    if (criteria.CurrentPage != PageName.Voyage)
                     {
                         criteria.Clear();
                         SetDefaultSearchCriteria(criteria);
@@ -57,6 +58,7 @@ namespace EMS.WebApp.Export
                         txtTerminal.Text = criteria.Terminal;
                         gvVoyage.PageIndex = criteria.PageIndex;
                         gvVoyage.PageSize = criteria.PageSize;
+                        ddlStatus.SelectedIndex = criteria.IntegerOption1;
                         ddlPaging.SelectedValue = criteria.PageSize.ToString();
                         isCriteriaExists = true;
                     }
@@ -69,17 +71,20 @@ namespace EMS.WebApp.Export
                 SetDefaultSearchCriteria(newcriteria);
             }
         }
+
         private void SetDefaultSearchCriteria(SearchCriteria criteria)
         {
             string sortExpression = "VoyageNo";
             string sortDirection = "ASC";
-            criteria.CurrentPage = PageName.ImportBL;
+            criteria.CurrentPage = PageName.Voyage;
             criteria.PageSize = Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]);
+            criteria.IntegerOption1 = 0;
             criteria.SortExpression = sortExpression;
             criteria.SortDirection = sortDirection;
 
             Session[Constants.SESSION_SEARCH_CRITERIA] = criteria;
-        }      
+        }
+      
         private void BuildSearchCriteria(SearchCriteria criteria)
         {
             string sortExpression = string.Empty;
@@ -104,6 +109,7 @@ namespace EMS.WebApp.Export
             criteria.Voyage = (txtVoyageNo.Text == "") ? string.Empty : txtVoyageNo.Text.Trim();
             criteria.Location = (txtLocation.Text == "") ? string.Empty : txtLocation.Text.Trim();
             criteria.Terminal = (txtTerminal.Text == "") ? string.Empty : txtTerminal.Text.Trim();
+            criteria.IntegerOption1 = ddlStatus.SelectedIndex;
 
             Session[Constants.SESSION_SEARCH_CRITERIA] = criteria;
         }
@@ -133,11 +139,12 @@ namespace EMS.WebApp.Export
 
                 if (!ReferenceEquals(searchCriteria, null))
                 {
+
                     BuildSearchCriteria(searchCriteria);
                     gvVoyage.PageIndex = searchCriteria.PageIndex;
                     searchCriteria.VoyageID = -1;
                     if (searchCriteria.PageSize > 0) gvVoyage.PageSize = searchCriteria.PageSize;
-                    gvVoyage.DataSource = new expVoyageBLL().GetVoyage(searchCriteria);
+                    gvVoyage.DataSource = new expVoyageBLL().GetVoyageList(searchCriteria);
                     gvVoyage.DataBind();
                 }
             }
@@ -291,7 +298,7 @@ namespace EMS.WebApp.Export
                 e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "NextPort"));
                 e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "TerminalName"));
 
-                ////Edit Link
+                //Edit Link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
                 btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00070");
                 btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "VoyageID"));
@@ -307,7 +314,6 @@ namespace EMS.WebApp.Export
                     btnRemove.Visible = true;
                     btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00007");
                     //btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLID"));
-
                 }
                 else
                 {
@@ -326,46 +332,19 @@ namespace EMS.WebApp.Export
                     //e.Row.Cells[0].ForeColor = System.Drawing.Color.Red;
                 }
 
-
-
+                if (DataBinder.Eval(e.Row.DataItem, "DisplayDelete").ToInt() == 1)
+                {
+                    btnRemove.Visible = false;
+                }
             }
         }
-      
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-      
-      
-        
-        
-      
+        protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SaveNewPageIndex(0);
+            LoadVoyage();
+            upVoyage.Update();
+        }
     }
 
 }

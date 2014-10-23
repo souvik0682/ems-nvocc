@@ -166,42 +166,6 @@ namespace EMS.WebApp.Export {
         protected global::AjaxControlToolkit.ValidatorCalloutExtender vceVoyage;
         
         /// <summary>
-        /// txtDateofArrival control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDateofArrival;
-        
-        /// <summary>
-        /// ceDateofArrival control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender ceDateofArrival;
-        
-        /// <summary>
-        /// rfvDateofArrival control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDateofArrival;
-        
-        /// <summary>
-        /// vceDateofArrival control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender vceDateofArrival;
-        
-        /// <summary>
         /// txtDateofDeparture control.
         /// </summary>
         /// <remarks>
@@ -236,6 +200,42 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.ValidatorCalloutExtender vceDateofDeparture;
+        
+        /// <summary>
+        /// txtDateofArrival control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDateofArrival;
+        
+        /// <summary>
+        /// ceDateofArrival control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender ceDateofArrival;
+        
+        /// <summary>
+        /// rfvDateofArrival control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDateofArrival;
+        
+        /// <summary>
+        /// vceDateofArrival control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ValidatorCalloutExtender vceDateofArrival;
         
         /// <summary>
         /// btnShow control.

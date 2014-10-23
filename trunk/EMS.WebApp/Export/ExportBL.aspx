@@ -80,6 +80,13 @@
                     </tr>
                     <tr>
                         <td>
+                            <asp:DropDownList ID="ddlStatus" runat="server" ForeColor="#747862" AutoPostBack="true" onselectedindexchanged="ddlStatus_SelectedIndexChanged">
+                            <asp:ListItem Text="Open" Value="O"></asp:ListItem>
+                            <asp:ListItem Text="Closed" Value="C"></asp:ListItem>
+                            <asp:ListItem Text="All" Value="A"></asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+                        <td>
                             <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" 
                                 Width="100px" onclick="btnSearch_Click" />
                             &nbsp;&nbsp;&nbsp;

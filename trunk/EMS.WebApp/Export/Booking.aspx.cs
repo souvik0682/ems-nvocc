@@ -49,6 +49,20 @@ namespace EMS.WebApp.Export
             RetriveParameters();
             CheckUserAccess();
             SetAttributes();
+            if (!ReferenceEquals(Request.QueryString["frmod"], null))
+            {
+                CalledFrom = Request.QueryString["frmod"].ToInt();
+
+                //Int64.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["frmod"].ToString()), out CalledFrom);
+
+                //if (invoiveId > 0)
+                //    LoadForEdit(invoiveId);
+
+                //btnSave.Enabled = false;
+                if (CalledFrom == 2)   // Sales Man
+                    btnAdd.Visible = false;
+            }
+
 
             if (!IsPostBack)
             {
@@ -58,24 +72,10 @@ namespace EMS.WebApp.Export
 
      
                 //if (CalledFrom > 0)
-                if (!ReferenceEquals(Request.QueryString["frmod"], null))
-                {
-                    CalledFrom = Request.QueryString["frmod"].ToInt();
-
-                    //Int64.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["frmod"].ToString()), out CalledFrom);
-
-                    //if (invoiveId > 0)
-                    //    LoadForEdit(invoiveId);
-
-                    //btnSave.Enabled = false;
-                    if (CalledFrom == 2)   // Sales Man
-                        btnAdd.Visible = false;
-                }
+               
                 LoadBooking();
                 
             }
-
-           
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
@@ -179,28 +179,21 @@ namespace EMS.WebApp.Export
 
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
 
-                //e.Row.Cells[0].Text = ((gvBooking.PageSize * gvBooking.PageIndex) + e.Row.RowIndex + 1).ToString();
-                //e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Abbreviation"));
-
-                //e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LocationName"));
-
-                //e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "NVOCC"));
-
                 e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookingNo"));
 
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookingDate")).Split(' ')[0];
                 e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "refBookingNo"));
-
+                e.Row.Cells[3].Text = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "BLExist"))?"Yes":"No";
                 //e.Row.Cells[4].Text = Convert.ToString(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "WeightFrom")));
 
                 //e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "WeightTo"));
 
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "VesselName"));
+                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "VesselName"));
 
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "VoyageNo"));
+                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "VoyageNo"));
 
-                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "FPOD"));
-                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "SMAN"));
+                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "FPOD"));
+                e.Row.Cells[7].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "SMAN"));
 
                 // Edit link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
@@ -216,6 +209,16 @@ namespace EMS.WebApp.Export
                 ImageButton btnCharges = (ImageButton)e.Row.FindControl("btnCharges");
                 btnCharges.ToolTip = ResourceManager.GetStringWithoutName("ERR00082");
                 btnCharges.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookingID"));
+
+                // Check close BL
+                if (DataBinder.Eval(e.Row.DataItem, "CloseVoyage").ToInt() == 1)
+                {
+                    //btnDashboard.Visible = false;
+                    //btnEdit.Visible = false;
+                    btnStatus.Visible = false;
+                    e.Row.ForeColor = System.Drawing.Color.Red;
+                    //e.Row.Cells[0].ForeColor = System.Drawing.Color.Red;
+                }
 
                 if (_canEdit == true)
                 {
@@ -245,10 +248,10 @@ namespace EMS.WebApp.Export
                 if (CalledFrom == 1)   // Sales Man
                     btnCharge.Enabled = false;
 
-               if (DataBinder.Eval(e.Row.DataItem, "CloseVoyage").ToInt() == 1 && _roleId != 2)
+               if (DataBinder.Eval(e.Row.DataItem, "CloseVoyage").ToInt() == 1)
                {
-                   btnCharge.Visible = false;
-                   btnEdit.Visible = false;
+                   //btnCharge.Visible = false;
+                   //btnEdit.Visible = false;
                    e.Row.ForeColor = System.Drawing.Color.Red;
                    //e.Row.Cells[0].ForeColor = System.Drawing.Color.Red;
                }
@@ -320,7 +323,7 @@ namespace EMS.WebApp.Export
                     Response.Redirect("~/Login.aspx");
                 }
 
-                if (user.UserRole.Id != (int)UserRole.Admin)
+                if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.Manager)
                 {
                     if (_canView == false)
                     {
@@ -382,7 +385,7 @@ namespace EMS.WebApp.Export
         private void RedirecToAddEditPage(int id)
         {
             string encryptedId = GeneralFunctions.EncryptQueryString(id.ToString());
-            Response.Redirect("~/Export/ManageBooking.aspx?id=" + encryptedId);
+            Response.Redirect("~/Export/ManageBooking.aspx?id=" + encryptedId + "&frmod=" + CalledFrom);
         }
 
         private void RedirecToChargePage(int id)
@@ -413,6 +416,7 @@ namespace EMS.WebApp.Export
             criteria.StringOption1 = txtBookingRef.Text.Trim();
             criteria.StringOption2 = txtCustomer.Text.Trim();
             criteria.LineName = txtLine.Text.Trim();
+            criteria.IntegerOption1 = ddlStatus.SelectedIndex;
 
             if (_userLocation != 0)
                 criteria.Location = new BookingBLL().GetLocation(_userId);
@@ -451,6 +455,7 @@ namespace EMS.WebApp.Export
                         gvBooking.PageIndex = criteria.PageIndex;
                         gvBooking.PageSize = criteria.PageSize;
                         ddlPaging.SelectedValue = criteria.PageSize.ToString();
+                        ddlStatus.SelectedIndex = criteria.IntegerOption1;
                         isCriteriaExists = true;
                     }
                 }
@@ -471,6 +476,7 @@ namespace EMS.WebApp.Export
             criteria.SortExpression = sortExpression;
             criteria.SortDirection = sortDirection;
             criteria.CurrentPage = PageName.Booking;
+            criteria.IntegerOption1 = 0;
             criteria.PageSize = Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]);
             Session[Constants.SESSION_SEARCH_CRITERIA] = criteria;
         }
@@ -502,6 +508,13 @@ namespace EMS.WebApp.Export
         }
 
         #endregion
+
+        protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SaveNewPageIndex(0);
+            LoadBooking();
+            upBooking.Update();
+        }
     }
 
         //protected void Page_Load(object sender, EventArgs e)

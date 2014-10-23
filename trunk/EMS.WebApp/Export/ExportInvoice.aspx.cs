@@ -35,7 +35,7 @@ namespace EMS.WebApp.Export
 
             if (!Page.IsPostBack)
             {
-               
+                //Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "setMinDateOnSecondControl", "function setMinDateOnSecondControl(e) { document.getElementById('" + txtInvoiceDate.ClientID + "').dateSelectionChanged += function x(e) { alert(e);} ; }", true);
                 string strProcessScript = "this.value='Processing...';this.disabled=true;";
                 btnSave.Attributes.Add("onclick", strProcessScript + ClientScript.GetPostBackEventReference(btnSave, "").ToString());
                 FillCurrency();
@@ -44,7 +44,10 @@ namespace EMS.WebApp.Export
                 LoadInvoiceTypeDDL();
                 LoadLocationDDL();
                 LoadNvoccDDL();
-
+                //rngInvoiceDate.MaximumValue = DateTime.Now.Date.ToString("dd-MM-yy");
+                //rngInvoiceDate.MaximumValue = DateTime.Now.ToShortDateString();
+                //rvDate.MaximumValue = DateTime.Now.ToShortDateString();
+    
                 /*
                 LoadCHADDL();
                  */
@@ -969,26 +972,45 @@ namespace EMS.WebApp.Export
                 }
                 else
                 {
-                    //Delete link
-                    ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
-                    btnRemove.Visible = true;
-                    btnRemove.ToolTip = "Remove";
-                    btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceChargeId"));
+                    if (Convert.ToInt32(ddlInvoiceType.SelectedValue) == 19)
+                    {
+                        ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                        ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
+                        btnRemove.Visible = false;
+                        btnEdit.Visible = false;
+                    }
+                    else
+                    {
+                        //Delete link
+                        ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                        btnRemove.Visible = true;
+                        btnRemove.ToolTip = "Remove";
+                        btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceChargeId"));
 
 
-                    //Edit link
-                    ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
-                    btnEdit.Visible = true;
-                    btnEdit.ToolTip = "Edit";
-                    btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceChargeId"));
+                        //Edit link
+                        ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
+                        btnEdit.Visible = true;
+                        btnEdit.ToolTip = "Edit";
+                        btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceChargeId"));
 
-                    btnRemove.OnClientClick = "javascript:return confirm('Are you sure about delete?');";
+                        btnRemove.OnClientClick = "javascript:return confirm('Are you sure about delete?');";
+                    }
                 }
             }
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+
+            DateTime todaydate = DateTime.Now;
+            DateTime dtSuppliedDate = DateTime.Parse(txtInvoiceDate.Text);
+            if (dtSuppliedDate > todaydate)
+            {
+                lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00091");
+                return;
+            }
+            
             string misc = string.Empty;
             IInvoice invoice = new InvoiceEntity();
             BuildInvoiceEntity(invoice);
@@ -1199,12 +1221,24 @@ namespace EMS.WebApp.Export
             txtGrossAmount.Text = "0.00";
             custTxtConvRate.Text = "0.00";
             ddlCurrency.SelectedIndex = 0;
-            txtRatePerTEU.Enabled = true;
-            txtRateperFEU.Enabled = true;
-            txtRatePerBL.Enabled = true;
-            txtRatePerCBM.Enabled = true;
-            txtRatePerTon.Enabled = true;
-            ddlFChargeName.Enabled = true;
+            if (Convert.ToInt32(ddlInvoiceType.SelectedValue) == 19)
+            {
+                txtRatePerTEU.Enabled = false;
+                txtRateperFEU.Enabled = false;
+                txtRatePerBL.Enabled = false;
+                txtRatePerCBM.Enabled = false;
+                txtRatePerTon.Enabled = false;
+                ddlFChargeName.Enabled = false;
+            }
+            else
+            {
+                txtRatePerTEU.Enabled = true;
+                txtRateperFEU.Enabled = true;
+                txtRatePerBL.Enabled = true;
+                txtRatePerCBM.Enabled = true;
+                txtRatePerTon.Enabled = true;
+                ddlFChargeName.Enabled = true;
+            }
         }
 
         private void RemoveChargeRate(int InvoiceChargeId)
@@ -1526,11 +1560,14 @@ namespace EMS.WebApp.Export
                         d.ExchgRate = System.Math.Round(Convert.ToDecimal(txtUSDExRate.Text),2);
                         d.GrossAmount = System.Math.Round((d.ExchgRate * d.RatePerTEU) + (d.ExchgRate * d.RatePerFEU) + (d.ExchgRate * d.RatePerTON) + (d.ExchgRate * d.RatePerUnit) + (d.ExchgRate * d.RatePerCBM), 2);
                         DataTable Charge = new InvoiceBLL().ChargeEditable(d.ChargesID);
-                        if (Convert.ToBoolean(Charge.Rows[0]["ServiceTax"].ToString()))
+                        if (Convert.ToBoolean(Charge.Rows.Count.ToInt() > 0))
                         {
-                            d.ServiceTax = Math.Round((d.GrossAmount * TaxPer) / 100, 0);
-                            d.ServiceTaxCessAmount = Math.Round((d.ServiceTax * TaxCess) / 100, 0);
-                            d.ServiceTaxACess = Math.Round((d.ServiceTax * TaxAddCess) / 100, 0);
+                            if (Convert.ToBoolean(Charge.Rows[0]["ServiceTax"].ToString()))
+                            {
+                                d.ServiceTax = Math.Round((d.GrossAmount * TaxPer) / 100, 0);
+                                d.ServiceTaxCessAmount = Math.Round((d.ServiceTax * TaxCess) / 100, 0);
+                                d.ServiceTaxACess = Math.Round((d.ServiceTax * TaxAddCess) / 100, 0);
+                            };
                         };
                         d.TotalAmount = Math.Round(d.GrossAmount + d.ServiceTax + d.ServiceTaxCessAmount + d.ServiceTaxACess,0);
                         return d;
@@ -1547,8 +1584,20 @@ namespace EMS.WebApp.Export
 
         protected void txtInvoiceDate_TextChanged(object sender, EventArgs e)
         {
+        
             LoadExchangeRate();
             txtUSDExRate_TextChanged(null, null);
         }
+
+        //protected void valDateRange_ServerValidate(object source, ServerValidateEventArgs args)
+        //{
+        //    DateTime minDate = DateTime.Parse("2000/12/28");
+        //    DateTime maxDate = DateTime.Now.Date;
+        //    DateTime dt;
+
+        //    args.IsValid = (DateTime.TryParse(args.Value, out dt)
+        //                    && dt <= maxDate
+        //                    && dt >= minDate);
+        //}
     }
 }

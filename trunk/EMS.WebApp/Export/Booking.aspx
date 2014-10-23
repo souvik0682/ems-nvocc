@@ -68,6 +68,13 @@
                                 WatermarkText="Voyage">
                             </cc1:TextBoxWatermarkExtender>
                         </td>
+                        <td>
+                            <asp:DropDownList ID="ddlStatus" runat="server" ForeColor="#747862" AutoPostBack="true" onselectedindexchanged="ddlStatus_SelectedIndexChanged">
+                            <asp:ListItem Text="Open" Value="O"></asp:ListItem>
+                            <asp:ListItem Text="Closed" Value="C"></asp:ListItem>
+                            <asp:ListItem Text="All" Value="A"></asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -177,6 +184,14 @@
                                         <ItemStyle CssClass="gridviewitem" Width="14%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkRefBookingNo" runat="server" CommandName="Sort" CommandArgument="RefBookingNo" Text="Ref Bkng No"></asp:LinkButton>
+                                        </HeaderTemplate>
+                                    </asp:TemplateField>
+
+                                    <asp:TemplateField>
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="4%" />
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lnkBLExist" runat="server" CommandName="Sort" CommandArgument="BLExist" Text="B/L"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
 

@@ -49,7 +49,7 @@ namespace EMS.WebApp.Export
                 else
                 {
                     ViewState["ISEDIT"] = false;
-                    
+                    btnClose.Visible = false;
                 }
             }
 
@@ -70,6 +70,7 @@ namespace EMS.WebApp.Export
                 txtBLReleaseDate.Text = "";
                 //rfvBLReleaseDate.Enabled = false;
                 txtBLReleaseDate.Enabled = false;
+                txtBLDate.Text = txtCBLDate.Text;
             }
         }
 
@@ -80,7 +81,7 @@ namespace EMS.WebApp.Export
 
         void txtBLDate_TextChanged(object sender, EventArgs e)
         {
-            txtCBLDate.Text = txtBLDate.Text;
+            //txtCBLDate.Text = txtBLDate.Text;
         }
 
         void txtBookingNo_TextChanged(object sender, EventArgs e)
@@ -169,8 +170,8 @@ namespace EMS.WebApp.Export
                 ddlUnit.DataValueField = "Value";
                 ddlUnit.DataSource = lstUnit;
                 ddlUnit.DataBind();
-
-                ddlUnit.SelectedValue = cntr.Unit.ToString();
+                if (cntr.Unit.ToString() != null)
+                    ddlUnit.SelectedValue = cntr.Unit.ToString();
 
                 ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
 
@@ -270,7 +271,16 @@ namespace EMS.WebApp.Export
                 else
                 {
                     if (!isEdit)
+                    {
                         objData = ExportBLBLL.GetExportBLContainersForAdd(BookingId, Status);
+                        if (ExportBLBLL.CheckBookingBLContainer(BookingId, Status) == false && objData.Count() > 0)
+                            btnSave.Visible = false;
+                        else
+                            if (_canEdit == true)
+                                btnSave.Visible = true;
+                            else
+                                btnSave.Visible = false;
+                    }
                     else
                         objData = ExportBLBLL.GetExportBLContainersForEdit(BLId);
                 }
@@ -288,8 +298,9 @@ namespace EMS.WebApp.Export
                 {
                     lstUnit.Add(new Unit { Value = dr[0].ToString(), Text = dr[1].ToString() });
                 }
+                if (hdnShipmentType.Value.ToString() == "0")
+                    txtNetWt.Text = objData.Where(o => o.IsDeleted == false).Sum(o => o.GrossWeight).ToString(); // + " " + lstUnit.Where(u => u.Value == objData[0].Unit).ToList()[0].Text;
 
-                txtNetWt.Text = objData.Where(o => o.IsDeleted == false).Sum(o => o.GrossWeight).ToString(); // + " " + lstUnit.Where(u => u.Value == objData[0].Unit).ToList()[0].Text;
                 txtContainers.Text = objData.Where(o => o.IsDeleted == false).Where(o => o.ContainerSize == "20").Count().ToString() + " x 20 - " + objData.Where(o => o.IsDeleted == false).Where(o => o.ContainerSize == "40").Count().ToString() + " x 40";
             }
             catch (Exception ex)
@@ -332,6 +343,7 @@ namespace EMS.WebApp.Export
                     txtFPOD.Text = exportBL.FPOD;
                     txtFPodDesc.Text = exportBL.FPODDesc;
                     txtCommodity.Text = exportBL.Commodity;
+                    hdnShipmentType.Value = exportBL.ShipmentType.ToString();
                     LoadDeliveryAgentDDL(exportBL.fk_FPOD);
                     txtBLReleaseDate.Enabled = false;
 
@@ -348,8 +360,6 @@ namespace EMS.WebApp.Export
                         rfvNotify.Enabled = false;
                         //rfvNotifyName.Enabled = false;
                         rfvAgent.Enabled = false;
-
-
                     }
                     else
                     {
@@ -368,7 +378,11 @@ namespace EMS.WebApp.Export
                     txtCBookingNo.Text = exportBL.BookingNumber;
                     txtCBookingDate.Text = exportBL.BookingDate.ToString("dd-MM-yyyy");
                     txtCBLDate.Text = txtBLDate.Text;
-
+                    if (exportBL.ShipmentType != 0)
+                    {
+                        txtNetWt.Enabled = true;
+                        txtNetWt.Text = exportBL.GrossWeight.ToString();
+                    }
                     if (exportBL.TotalTon != null)
                         txtTon.Text = exportBL.TotalTon;
                     else
@@ -436,24 +450,48 @@ namespace EMS.WebApp.Export
                     txtCommodity.Text = exportBL.Commodity;
                     txtContainers.Text = exportBL.Containers;
                     rdoOriginal.SelectedValue = exportBL.NoOfBL.ToString();
+                    hdnShipmentType.Value = exportBL.ShipmentType.ToString();
+                    ddlBLClause.SelectedValue = exportBL.BLClause;
 
+                    if (exportBL.ShipmentType != 0)
+                    {
+                        txtNetWt.Enabled = true;
+                        txtNetWt.Text = exportBL.GrossWeight.ToString();
+                    }
                     if (ddlBLClause.SelectedValue == "R")
+                    {
+                        if (!ReferenceEquals(Session[Constants.SESSION_USER_INFO], null))
+                        {
+                            IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
+                            if (user.UserRole.Id == (int)UserRole.Admin)
+                            {
+                                btnClose.Visible = true;
+                                if (exportBL.CloseBL == true)
+                                    btnClose.Text = "Open";
+                                else
+                                    btnClose.Text = "Close";
+                            }
+                            else
+                            {
+                                btnClose.Visible = false;
+                            }
+                        }
                         txtBLReleaseDate.Enabled = true;
+                    }
                     else
+                    {
                         txtBLReleaseDate.Enabled = false;
+                        btnClose.Visible = false;
+                    }
 
-                    //rdoOriginal.SelectedIndex = exportBL.NoOfBL.ToInt();
                     rdoBLType.SelectedValue = exportBL.BLType;
                     ddlShipmentMode.SelectedValue = exportBL.ShipmentMode.ToString();
                     ((TextBox)txtIssuePlace.FindControl("txtPort")).Text = exportBL.BLIssuePlace;
                     ViewState["BLISSUEID"] = exportBL.BLIssuePlaceId;
                     TxtNtWt.Text = exportBL.NetWeight.ToString();
-                    //txtNetWt.Text = exportBL.NetWeight.ToString();
                     txtBLReleaseDate.Text = exportBL.BLReleaseDate.ToString();
-                    //txtBLReleaseDate.Text = exportBL.BLReleaseDate.ToString("dd-MM-yyyy");
                     if (hdnBLThruEdge.Value == "" || hdnBLThruEdge.Value == "0")
                     {
-                        //if (exportBL.BLthruEdge == false)
                         txtBLNo.Enabled = true;
                         rfvShipperName.Enabled = false;
                         rfvConsigneeName.Enabled = false;
@@ -478,7 +516,7 @@ namespace EMS.WebApp.Export
                     txtConsigneeName.Text = exportBL.ConsigneeName;
                     txtNotify.Text = exportBL.NotifyParty;
                     txtNotifyName.Text = exportBL.NotifyPartyName;
-                    ddlBLClause.SelectedValue = exportBL.BLClause;
+                    
                     txtGoodsDescription.Text = exportBL.GoodDesc;
                     txtMarks.Text = exportBL.MarksNumnbers;
                     ddlAgent.SelectedValue = exportBL.AgentId.ToString();
@@ -499,6 +537,12 @@ namespace EMS.WebApp.Export
                         txtFeu.Text = exportBL.TotalFEU.ToString();
                     else
                         txtFeu.Text = "0";
+
+                    if (exportBL.CloseVoyage == true)
+                        btnSave.Visible = false;
+
+                    if (exportBL.CloseBL == true)
+                        btnSave.Visible = false;
 
                     LoadExportBLContainers(0, exportBL.BLId,0);
                 }
@@ -569,7 +613,7 @@ namespace EMS.WebApp.Export
                     Response.Redirect("~/Unauthorized.aspx");
                 }
 
-                if (user.UserRole.Id != (int)UserRole.Admin)
+                if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.Manager)
                 {
                    
                     //ddlLocation.Enabled = false;
@@ -577,7 +621,6 @@ namespace EMS.WebApp.Export
                 else
                 {
                     _userLocation = 0;
-                    //ddlLocation.Enabled = true;
                 }
                 
                 if (!_canEdit)
@@ -644,7 +687,8 @@ namespace EMS.WebApp.Export
             objBL.BLType = rdoBLType.SelectedValue;
             objBL.NoOfBL = Convert.ToInt32(rdoOriginal.SelectedValue);
             objBL.NetWeight = Convert.ToDecimal(TxtNtWt.Text.Trim());
-   
+            objBL.GrossWeight = Convert.ToDecimal(txtNetWt.Text.Trim());
+
             //objBL.NetWeight = Convert.ToDecimal(txtNetWt.Text.Trim());
             if (ddlBLClause.SelectedValue == "R")
                 objBL.BLReleaseDate = Convert.ToDateTime(txtBLReleaseDate.Text.Trim());
@@ -766,6 +810,26 @@ namespace EMS.WebApp.Export
             }
             ViewState["DataSource"] = lstData;
             LoadExportBLContainers(0, 0, 0);
+        }
+
+        protected void btnClose_Click(object sender, EventArgs e)
+        {
+         
+            long exportBLId = 0;
+     
+            exportBLId = Convert.ToInt64(ViewState["BLID"]);
+
+            ExportBLBLL.CloseOpenBL(exportBLId, _userId, btnClose.Text);
+            Response.Redirect("~/Export/ExportBL.aspx");
+   
+        }
+
+        protected void txtBLReleaseDate_TextChanged(object sender, EventArgs e)
+        {
+            if (ddlBLClause.SelectedValue == "R")
+                txtBLDate.Text = txtBLReleaseDate.Text;
+            else
+                txtBLDate.Text = txtCBLDate.Text;
         }
     }
 

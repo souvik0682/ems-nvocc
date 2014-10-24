@@ -31,6 +31,7 @@ namespace EMS.WebApp.View
             Finance = 40,
             Logistic = 66,
             Export = 92,
+            Forwarding = 146,
             Change_Password = 110
         };
 
@@ -87,6 +88,14 @@ namespace EMS.WebApp.View
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 PopulateControlsForGridView(gvwExp, e.Row);
+            }
+        }
+
+        protected void gvwFwd_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                PopulateControlsForGridView(gvwFwd, e.Row);
             }
         }
 
@@ -221,6 +230,9 @@ namespace EMS.WebApp.View
 
             gvwExp.DataSource = userBll.GetMenuByRole(_roleId, (int)MainMenuItem.Export);
             gvwExp.DataBind();
+
+            gvwFwd.DataSource = userBll.GetMenuByRole(_roleId, (int)MainMenuItem.Forwarding);
+            gvwFwd.DataBind();
         }
 
         private void SaveRole()

@@ -7,7 +7,7 @@ using System.Data;
 
 namespace EMS.Entity
 {
-     public class fwLineEntity : IFwLine
+    public class fwLineEntity : IFwLine
     {
         public int LineID { get; set; }
 
@@ -54,8 +54,27 @@ namespace EMS.Entity
             this.LineName = Convert.ToString(reader["LineName"]);
             this.LineType = Convert.ToString(reader["LineType"]);
             this.Prefix = Convert.ToString(reader["Prefix"]);
-            this.CreatedBy = Convert.ToInt32(reader["UserID"]);
-            this.LineStatus = Convert.ToBoolean(reader["LineStatus"]);
+
+            if (ColumnExists(reader, "UserID"))
+                if (reader["UserID"] != DBNull.Value)
+                    this.CreatedBy = Convert.ToInt32(reader["UserID"]);
+
+            if (ColumnExists(reader, "LineStatus"))
+                if (reader["LineStatus"] != DBNull.Value)
+                    this.LineStatus = Convert.ToBoolean(reader["LineStatus"]);
+        }
+
+        public bool ColumnExists(IDataReader reader, string columnName)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                if (reader.GetName(i).ToUpper() == columnName.ToUpper())
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

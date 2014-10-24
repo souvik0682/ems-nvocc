@@ -130,6 +130,24 @@ namespace EMS.WebApp.View {
         protected global::System.Web.UI.WebControls.GridView gvwExp;
         
         /// <summary>
+        /// tpFwd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel tpFwd;
+        
+        /// <summary>
+        /// gvwFwd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvwFwd;
+        
+        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>

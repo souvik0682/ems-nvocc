@@ -56,6 +56,7 @@ namespace EMS.Entity
         public int LocationID { get; set; }
         public IList<string> StringParams { get; set; }
 
+
         public string DONumber { get; set; }
         public string BookingRef { get; set; }
 
@@ -152,6 +153,9 @@ namespace EMS.Entity
         public string JobType { get; set; }
         public string OperationalControl { get; set; }
         public string Customer { get; set; }
+
+        public int LineID { get; set; }
+ 
         #endregion
 
         #region Constructor
@@ -200,7 +204,9 @@ namespace EMS.Entity
             this.RefBLNumber = string.Empty;
             this.PartyID = 0;
             this.PartyName = string.Empty;
-        }
+            this.LineID = 0;
+            this.LineName = string.Empty;
+            }
 
         #endregion      
     }

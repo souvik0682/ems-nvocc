@@ -7,7 +7,7 @@ using System.Data;
 
 namespace EMS.Entity
 {
-    public class UnitEntity
+    public class UnitEntity : IUnit
     {
         public long UnitTypeID { get; set; }
         public int CompanyID { get; set; }
@@ -23,6 +23,7 @@ namespace EMS.Entity
         public UnitEntity()
         {
         }
+
         public UnitEntity(DataTableReader reader)
         {
             if (ColumnExists(reader, "pk_UnitTypeID"))
@@ -63,6 +64,43 @@ namespace EMS.Entity
             return false;
         }
 
+
+
+        public DateTime CreatedOn
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public int ModifiedBy
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public DateTime ModifiedOn
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 
 

@@ -36,7 +36,7 @@ namespace EMS.DAL
             return lstUnit;
         }
 
-        public static int AddEditJob(IUnit Units, int CompanyId)
+        public static int AddEditJob(IUnit Units, int CompanyId, string Mode)
         {
             string strExecution = "[fwd].[uspManageUnitType]";
             int Result = 0;
@@ -44,6 +44,7 @@ namespace EMS.DAL
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
+                oDq.AddVarcharParam("@Mode", 1, Mode);
                 oDq.AddIntegerParam("@userID", Units.CreatedBy);
                 oDq.AddIntegerParam("@fk_CompanyID", CompanyId);
                 oDq.AddBigIntegerParam("@UnitTypeId", Units.UnitTypeID);

@@ -11,55 +11,68 @@ namespace EMS.DAL
 {
     public class PartyDAL
     {
-         public static List<IParty> GetParty(SearchCriteria searchCriteria)
+        public static List<IParty> GetParty(ISearchCriteria searchCriteria)
          {
              string strExecution = "[fwd].[uspGetParty]";
              List<IParty> lstParty = new List<IParty>();
              using (DbQuery oDq = new DbQuery(strExecution))
              {
                  oDq.AddBigIntegerParam("@PartyId", searchCriteria.PartyID);
-                 oDq.AddVarcharParam("@SchLocAbbr", 70, searchCriteria.LocAbbr);
-                 oDq.AddVarcharParam("@SchPartyName", 10, searchCriteria.PartyName);
+                 oDq.AddVarcharParam("@SchLocAbbr", 3, searchCriteria.LocAbbr);
+                 oDq.AddVarcharParam("@SchPartyName", 60, searchCriteria.PartyName);
+                 oDq.AddVarcharParam("@SchPhoneNo", 10, searchCriteria.StringParams[1]);
+                 oDq.AddVarcharParam("@SchPartyType", 1, searchCriteria.StringParams[0]);
                  oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
                  oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
-                 DataTableReader reader = oDq.GetTableReader();
+                 DataSet reader = oDq.GetTables();
 
-                 while (reader.Read())
+                 if (reader != null && reader.Tables.Count > 0 && reader.Tables[0].Rows.Count > 0)
                  {
-                     IParty iParty = new PartyEntity(reader);
-                     lstParty.Add(iParty);
+                     
+                     for (int i = 0; i < reader.Tables[0].Rows.Count; i++) {
+                         IParty iParty = new PartyEntity(reader.Tables[0].Rows[i]);
+                         lstParty.Add(iParty);
+                     }
                  }
-
-                 reader.Close();
              }
              return lstParty;
          }
 
-         public static long SaveParty(IParty Party, string Mode)
+         public static int SaveParty(IParty Party, string Mode)
          {
-             string strExecution = "[fwd].[uspGetParty]";
-             long Partyid = 0;
+             string strExecution = "[fwd].[uspManageParty]";
+             int Partyid = 0;
 
              using (DbQuery oDq = new DbQuery(strExecution))
              {
                  oDq.AddVarcharParam("@Mode", 1, Mode);
-                 oDq.AddIntegerParam("@userID", Party.UserID);
-                 oDq.AddIntegerParam("@PartyID", Party.FwPartyID);
+                 oDq.AddIntegerParam("@PartyId", Party.FwPartyID);
                  oDq.AddIntegerParam("@fk_CompanyID", Party.CompanyID);
+
                  oDq.AddIntegerParam("@LocId", Party.LocID);
-                 oDq.AddIntegerParam("@fk_CountryID", Party.CountryID);
                  oDq.AddVarcharParam("@PartyType", 1, Party.PartyType);
                  oDq.AddVarcharParam("@PartyName", 60, Party.PartyName);
+
                  oDq.AddVarcharParam("@PartyAddress", 500, Party.PartyAddress);
+                 oDq.AddIntegerParam("@fk_CountryID", Party.CountryID);
                  oDq.AddIntegerParam("@fk_FlineID", Party.fLineID);
+
                  oDq.AddVarcharParam("@Fax", 100, Party.FAX);
                  oDq.AddVarcharParam("@Phone", 100, Party.Phone);
                  oDq.AddVarcharParam("@ContactPerson", 100, Party.ContactPerson);
+
                  oDq.AddVarcharParam("@PAN", 100, Party.PAN);
                  oDq.AddVarcharParam("@TAN", 100, Party.TAN);
                  oDq.AddVarcharParam("@EmailID", 100, Party.emailID);
-                 oDq.AddBigIntegerParam("@fk_PrincipalID", Party.PrincipalID);
-                 Partyid = Convert.ToInt64(oDq.GetScalar());
+
+                 oDq.AddBigIntegerParam("@fk_PrincipalID", Party.PrincipalID);                 
+                 oDq.AddIntegerParam("@UserID", Party.UserID);
+                 int result = 0;
+                 oDq.AddIntegerParam("@Result",result, QueryParameterDirection.Output);
+                 Partyid = Convert.ToInt32(oDq.GetScalar());
+                 if (Mode != "A") {
+                     return 1;
+                 }
              }
              return Partyid;
          }
@@ -70,9 +83,31 @@ namespace EMS.DAL
              int ret = 0;
              using (DbQuery oDq = new DbQuery(strExecution))
              {
-                 oDq.AddBigIntegerParam("@PartyId", PartyID);
                  oDq.AddVarcharParam("@Mode", 1, "D");
-                 oDq.AddBigIntegerParam("@UserID", UserID);
+                 oDq.AddIntegerParam("@PartyId", PartyID);
+                 oDq.AddIntegerParam("@fk_CompanyID", CompanyID);
+
+                 oDq.AddIntegerParam("@LocId", 0);
+                 oDq.AddVarcharParam("@PartyType", 1, "");
+                 oDq.AddVarcharParam("@PartyName", 60,"");
+
+                 oDq.AddVarcharParam("@PartyAddress", 500, "");
+                 oDq.AddIntegerParam("@fk_CountryID", 0);
+                 oDq.AddIntegerParam("@fk_FlineID", 0);
+
+                 oDq.AddVarcharParam("@Fax", 100, "");
+                 oDq.AddVarcharParam("@Phone", 100,"");
+                 oDq.AddVarcharParam("@ContactPerson", 100,"");
+
+                 oDq.AddVarcharParam("@PAN", 100, "");
+                 oDq.AddVarcharParam("@TAN", 100,"");
+                 oDq.AddVarcharParam("@EmailID", 100, "");
+
+                 oDq.AddBigIntegerParam("@fk_PrincipalID", 0);
+                 oDq.AddIntegerParam("@UserID", UserID);
+                 int result = 0;
+                 oDq.AddIntegerParam("@Result", result, QueryParameterDirection.Output);
+                                
 
                  ret = Convert.ToInt32(oDq.GetScalar());
              }

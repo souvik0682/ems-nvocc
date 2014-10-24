@@ -14,6 +14,15 @@ namespace EMS.Common
         string StringOption3 { get; set; }
         string StringOption4 { get; set; }
         IList<string> StringParams { get; set; }
+        int PartyID { get; set; }
+        string LocAbbr { get; set; }
+        // string Phone { get; set; }
+        string PartyName { get; set; }
+        int LineID { get; set; }
+        string LineName { get; set; }
+        
+        // string PartyType { get; set; }
+
         int PageIndex
         {
             get;

@@ -14,6 +14,7 @@ namespace EMS.Common
         string PartyName { get; set; }
         string PartyType { get; set; }
         string PartyAddress { get; set; }
+        string CountryName { get; set; }
         int CountryID { get; set; }
         int fLineID { get; set; }
         string LineName { get; set; }

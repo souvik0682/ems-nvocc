@@ -18,6 +18,5 @@ namespace EMS.Common
         int CompanyID { get; set; }
         int CreditDays { get; set; }
         decimal Charges { get; set; }
-        int CreatedBy { get; set; }
     }
 }

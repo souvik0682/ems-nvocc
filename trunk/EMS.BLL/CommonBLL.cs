@@ -544,5 +544,8 @@ namespace EMS.BLL
 
         public DataTable GenerateExpInvExcel(string Location, string Vessel, string Line, string Voyage)
         { return CommonDAL.GenerateExpInvExcel(Location, Vessel, Line, Voyage); }
+
+        public List<IFwLine> GetfwLineByType(SearchCriteria searchCriteria)
+        { return fwLineDAL.GetfwLineByType(searchCriteria); }
     }
 }

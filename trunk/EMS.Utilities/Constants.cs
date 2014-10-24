@@ -63,7 +63,8 @@ namespace EMS.Utilities
         ServiceMaster = 203,
         Booking = 250,
         ExportBL = 270,
-        DeliveryOrder = 271
+        DeliveryOrder = 271,
+        FwdLine = 301
     };
 
     public enum UserRole

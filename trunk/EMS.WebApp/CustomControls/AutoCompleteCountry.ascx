@@ -2,7 +2,20 @@
     Inherits="EMS.WebApp.CustomControls.AutoCompleteExtender" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
+<script type="text/javascript" language="javascript">
+    function SetMaxLength(obj, maxLen) {
+        return (obj.value.length < maxLen);
+    }
 
+    function CountryAutoCompleteItemSelected(sender, e) {
+
+        if (sender._id == "AutoCompleteEx1Country") {
+            var hdnFromLocation = $get('<%=hdnCountryId.ClientID %>');
+            hdnFromLocation.value = e.get_value();
+            //  alert(hdnFromLocation.value);
+        }
+    }
+    </script>
 
 <style type="text/css" >
    
@@ -15,12 +28,14 @@
     <cc1:TextBoxWatermarkExtender ID="txtWMEName" runat="server" TargetControlID="txtCountry"
         WatermarkText="TYPE COUNTRY" WatermarkCssClass="watermark">
     </cc1:TextBoxWatermarkExtender>
-    <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx1" ID="autoCompleteCopuntry"
-        TargetControlID="txtCountry" ServicePath="AutoComplete.asmx" ServiceMethod="GetCountryList"
+      <asp:HiddenField ID="hdnCountryId" runat="server" Value="0" />
+    <cc1:AutoCompleteExtender runat="server" BehaviorID="AutoCompleteEx1Country" ID="autoCompleteCopuntry"
+        TargetControlID="txtCountry" ServicePath="AutoComplete.asmx" ServiceMethod="GetCountryListWithId"
         MinimumPrefixLength="2" CompletionInterval="1000" EnableCaching="true" CompletionSetCount="20"
         CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem"
         CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" DelimiterCharacters=";, :"
-        ShowOnlyCurrentWordInCompletionListItem="true">
+         OnClientItemSelected="CountryAutoCompleteItemSelected" ShowOnlyCurrentWordInCompletionListItem="true"
+        >
         <Animations>
                     <OnShow>
                         <Sequence>
@@ -32,7 +47,7 @@
                                 the animation is played and then set it to zero --%>
                             <ScriptAction Script="
                                 // Cache the size and setup the initial size
-                                var behavior = $find('AutoCompleteEx1');
+                                var behavior = $find('AutoCompleteEx1Country');
                                 if (!behavior._height) {
                                     var target = behavior.get_completionList();
                                     behavior._height = target.offsetHeight - 2;
@@ -42,7 +57,7 @@
                             <%-- Expand from 0px to the appropriate size while fading in --%>
                             <Parallel Duration=".4">
                                 <FadeIn />
-                                <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteEx1')._height" />
+                                <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteEx1Country')._height" />
                             </Parallel>
                         </Sequence>
                     </OnShow>
@@ -50,7 +65,7 @@
                         <%-- Collapse down to 0px and fade out --%>
                         <Parallel Duration=".4">
                             <FadeOut />
-                            <Length PropertyKey="height" StartValueScript="$find('AutoCompleteEx1')._height" EndValue="0" />
+                            <Length PropertyKey="height" StartValueScript="$find('AutoCompleteEx1Country')._height" EndValue="0" />
                         </Parallel>
                     </OnHide>
         </Animations>

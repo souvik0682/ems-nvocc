@@ -3,6 +3,8 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="EMS.WebApp" Namespace="EMS.WebApp.CustomControls" TagPrefix="cc2" %>
+<%@ Register Src="~/CustomControls/AC_Port.ascx" TagName="AC_Port" TagPrefix="uc7" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
@@ -70,7 +72,8 @@ SELECT pk_JobScopeID, JobScope FROM fwd.mstJobScope"></asp:SqlDataSource>
                                     </td>
                                     <td style="width: 28%;">
                                         <asp:TextBox ID="txtJobNo" runat="server" CssClass="textboxuppercase" MaxLength="8"
-                                            Width="250px" TabIndex="13" Enabled="False" BackColor="Gray" ForeColor="White" Text="000000"></asp:TextBox>
+                                            Width="250px" TabIndex="13" Enabled="False" BackColor="Gray" ForeColor="White"
+                                            Text="000000"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -259,16 +262,9 @@ SELECT pk_PrDocID, DocName FROM fwd.mstPrimeDocs"></asp:SqlDataSource>
                                         Port of Loading:<span class="errormessage">*</span>
                                     </td>
                                     <td>
-                                        <asp:DropDownList ID="ddlPortLoading" runat="server" CssClass="dropdownlist" TabIndex="60"
-                                            DataSourceID="POLDs" DataTextField="PortName" DataValueField="pk_PortID">
-                                        </asp:DropDownList>
-                                        <asp:SqlDataSource ID="POLDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbDSRConnectionString %>"
-                                            SelectCommand="SELECT 0 [pk_PortID], '-- Select --' [PortName]
-UNION
-SELECT pk_PortID, PortName FROM mstPort"></asp:SqlDataSource>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="ddlPortLoading"
-                                            ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
-                                            ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                                        <uc7:ac_port id="AC_Port2" runat="server" />
+                                        <asp:Label ID="errPortOfLoading" runat="server" CssClass="errormessage"></asp:Label>
+                                        <asp:HiddenField ID="hdnPortLoading" runat="server" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -276,16 +272,9 @@ SELECT pk_PortID, PortName FROM mstPort"></asp:SqlDataSource>
                                         Port of Discharge:<span class="errormessage">*</span>
                                     </td>
                                     <td>
-                                        <asp:DropDownList ID="ddlPortDischarge" runat="server" CssClass="dropdownlist" TabIndex="60"
-                                            DataSourceID="PODDs" DataTextField="PortName" DataValueField="pk_PortID">
-                                        </asp:DropDownList>
-                                        <asp:SqlDataSource ID="PODDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbDSRConnectionString %>"
-                                            SelectCommand="SELECT 0 [pk_PortID], '-- Select --' [PortName]
-UNION
-SELECT pk_PortID, PortName FROM mstPort"></asp:SqlDataSource>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="ddlPortDischarge"
-                                            ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
-                                            ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                                        <uc7:ac_port id="AC_Port3" runat="server" />
+                                        <asp:Label ID="errPortOfDischarge" runat="server" CssClass="errormessage"></asp:Label>
+                                        <asp:HiddenField ID="hdnPortDischarge" runat="server" />
                                     </td>
                                 </tr>
                                 <tr>

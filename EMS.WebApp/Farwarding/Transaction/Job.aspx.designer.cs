@@ -391,58 +391,58 @@ namespace EMS.WebApp.Farwarding.Transaction {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator22;
         
         /// <summary>
-        /// ddlPortLoading control.
+        /// AC_Port2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPortLoading;
+        protected global::EMS.WebApp.CustomControls.AC_Port AC_Port2;
         
         /// <summary>
-        /// POLDs control.
+        /// errPortOfLoading control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource POLDs;
+        protected global::System.Web.UI.WebControls.Label errPortOfLoading;
         
         /// <summary>
-        /// RequiredFieldValidator7 control.
+        /// hdnPortLoading control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
+        protected global::System.Web.UI.WebControls.HiddenField hdnPortLoading;
         
         /// <summary>
-        /// ddlPortDischarge control.
+        /// AC_Port3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPortDischarge;
+        protected global::EMS.WebApp.CustomControls.AC_Port AC_Port3;
         
         /// <summary>
-        /// PODDs control.
+        /// errPortOfDischarge control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource PODDs;
+        protected global::System.Web.UI.WebControls.Label errPortOfDischarge;
         
         /// <summary>
-        /// RequiredFieldValidator8 control.
+        /// hdnPortDischarge control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
+        protected global::System.Web.UI.WebControls.HiddenField hdnPortDischarge;
         
         /// <summary>
         /// txtDelivery control.

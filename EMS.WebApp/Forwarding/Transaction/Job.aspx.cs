@@ -10,7 +10,7 @@ using EMS.BLL;
 using EMS.Common;
 using EMS.Entity;
 
-namespace EMS.WebApp.Farwarding.Transaction
+namespace EMS.WebApp.Forwarding.Transaction
 {
     public partial class Job : System.Web.UI.Page
     {
@@ -247,7 +247,7 @@ namespace EMS.WebApp.Farwarding.Transaction
             int CompanyId = 0;
             int jobId = JobBLL.AddEditJob(job, CompanyId);
 
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('Record saved successfully!'); window.location='" + string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.ServerVariables["HTTP_HOST"], (HttpContext.Current.Request.ApplicationPath.Equals("/")) ? string.Empty : HttpContext.Current.Request.ApplicationPath) + "/Farwarding/Transaction/JobList.aspx';", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('Record saved successfully!'); window.location='" + string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.ServerVariables["HTTP_HOST"], (HttpContext.Current.Request.ApplicationPath.Equals("/")) ? string.Empty : HttpContext.Current.Request.ApplicationPath) + "/Forwarding/Transaction/JobList.aspx';", true);
         }
 
         private bool ValidateSave()
@@ -273,7 +273,17 @@ namespace EMS.WebApp.Farwarding.Transaction
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Farwarding/Transaction/JobList.aspx");
+            Response.Redirect("~/Forwarding/Transaction/JobList.aspx");
+        }
+
+        protected void ddlJobType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlOpsControlled_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

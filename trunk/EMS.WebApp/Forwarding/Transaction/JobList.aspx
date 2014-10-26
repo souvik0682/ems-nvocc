@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="JobList.aspx.cs" Inherits="EMS.WebApp.Farwarding.Transaction.JobList" %>
+    CodeBehind="JobList.aspx.cs" Inherits="EMS.WebApp.Forwarding.Transaction.JobList" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -40,8 +40,7 @@
                                 WatermarkText="Job Type">
                             </cc1:TextBoxWatermarkExtender>
                         </td>
-                    </tr>
-                    <tr>
+
                         <td>
                             <asp:TextBox ID="txtOpControl" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender8" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
@@ -51,6 +50,8 @@
                                 WatermarkText="Operational Control">
                             </cc1:TextBoxWatermarkExtender>
                         </td>
+                    </tr>
+                    <tr>
                         <td>
                             <asp:TextBox ID="txtCustomer" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender7" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
@@ -60,8 +61,7 @@
                                 WatermarkText="Customer">
                             </cc1:TextBoxWatermarkExtender>
                         </td>
-                    </tr>
-                    <tr>
+
                         <td>
                             <asp:TextBox ID="txtLine" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
@@ -70,6 +70,7 @@
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtLine"
                                 WatermarkText="Line Name">
                             </cc1:TextBoxWatermarkExtender>
+                        </td>
                     </tr>
                     <tr>
                         <td>

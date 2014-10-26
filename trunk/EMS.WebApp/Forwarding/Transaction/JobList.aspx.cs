@@ -11,7 +11,7 @@ using EMS.BLL;
 using System.Configuration;
 using EMS.Entity;
 
-namespace EMS.WebApp.Farwarding.Transaction
+namespace EMS.WebApp.Forwarding.Transaction
 {
     public partial class JobList : System.Web.UI.Page
     {
@@ -277,7 +277,7 @@ namespace EMS.WebApp.Farwarding.Transaction
         private void RedirecToAddEditPage(int id)
         {
             string encryptedId = GeneralFunctions.EncryptQueryString(id.ToString());
-            Response.Redirect("~/Farwarding/Transaction/Job.aspx?JobId=" + encryptedId);
+            Response.Redirect("~/Forwarding/Transaction/Job.aspx?JobId=" + encryptedId);
         }
 
         private void BuildSearchCriteria(SearchCriteria criteria)

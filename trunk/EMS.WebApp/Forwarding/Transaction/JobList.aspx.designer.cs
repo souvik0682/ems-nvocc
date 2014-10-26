@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EMS.WebApp.Farwarding.Transaction {
+namespace EMS.WebApp.Forwarding.Transaction {
     
     
     public partial class JobList {

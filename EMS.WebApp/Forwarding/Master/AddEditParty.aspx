@@ -17,7 +17,7 @@
                     <td>
                       <asp:DropDownList ID="ddlPartyType" runat="server"  CssClass="dropdownlist" >
                       <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
-                       <asp:ListItem Text="Custom Agent" Value="C"></asp:ListItem>
+                       <asp:ListItem Text="Custom Agent" Value="A"></asp:ListItem>
                         <asp:ListItem Text="Transporter" Value="T"></asp:ListItem>
                         <asp:ListItem Text="Overseas Agent" Value="O"></asp:ListItem>
                          <asp:ListItem Text="Debtors" Value="D"></asp:ListItem>

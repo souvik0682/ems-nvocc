@@ -4,9 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
-    <link rel="stylesheet" href="../../Styles/bootstrap.min.css">
-    <link rel="stylesheet" href="../../Styles/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="../../Styles/style.css">
+    
     <div id="headercaption">
         ADD / EDIT JOB</div>
     <center>

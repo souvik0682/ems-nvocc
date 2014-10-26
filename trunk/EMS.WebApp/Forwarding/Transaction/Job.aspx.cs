@@ -10,7 +10,7 @@ using EMS.BLL;
 using EMS.Common;
 using EMS.Entity;
 
-namespace EMS.WebApp.Forwarding.Transaction
+namespace EMS.WebApp.Farwarding.Transaction
 {
     public partial class Job : System.Web.UI.Page
     {
@@ -53,6 +53,62 @@ namespace EMS.WebApp.Forwarding.Transaction
                     }
                 }
             }
+
+            AC_Port2.TextChanged += new EventHandler(AC_Port2_TextChanged);
+            AC_Port3.TextChanged += new EventHandler(AC_Port3_TextChanged);
+        }
+
+        // PortOfDischarge
+        void AC_Port3_TextChanged(object sender, EventArgs e)
+        {
+            string dischargePort = ((TextBox)AC_Port3.FindControl("txtPort")).Text;
+
+            if (dischargePort != string.Empty)
+            {
+                if (dischargePort.Split('|').Length > 1)
+                {
+
+                    string portCode = dischargePort.Split('|')[1].Trim();
+                    int portId = new ImportBLL().GetPortId(portCode);
+                    ViewState["PORTOFDISCHARGEID"] = portId;
+
+                    hdnPortDischarge.Value = dischargePort.Split('|')[0].Trim();
+                }
+                else
+                {
+                    ViewState["PORTOFDISCHARGEID"] = null;
+                }
+            }
+            else
+            {
+                ViewState["PORTOFDISCHARGEID"] = null;
+            }
+        }
+
+        //PortOfLoading
+        void AC_Port2_TextChanged(object sender, EventArgs e)
+        {
+            string loadingPort = ((TextBox)AC_Port2.FindControl("txtPort")).Text;
+
+            if (loadingPort != string.Empty)
+            {
+                if (loadingPort.Split('|').Length > 1)
+                {
+                    string portCode = loadingPort.Split('|')[1].Trim();
+                    int portId = new ImportBLL().GetPortId(portCode);
+                    ViewState["PORTOFLOADINGID"] = portId;
+
+                    hdnPortLoading.Value = loadingPort.Split('|')[0].Trim();
+                }
+                else
+                {
+                    ViewState["PORTOFLOADINGID"] = null;
+                }
+            }
+            else
+            {
+                ViewState["PORTOFLOADINGID"] = null;
+            }
         }
 
         private void LoadJob()
@@ -75,8 +131,22 @@ namespace EMS.WebApp.Forwarding.Transaction
             txtCBMVolume.Text = job.volCBM.ToString();
             txtRevenue.Text = job.RevTon.ToString();
             txtPlaceReciept.Text = job.PlaceOfReceipt;
-            ddlPortLoading.SelectedValue = job.fk_LportID.ToString();
-            ddlPortDischarge.SelectedValue = job.fk_DportID.ToString();
+            //ddlPortLoading.SelectedValue = job.fk_LportID.ToString();
+            //ddlPortDischarge.SelectedValue = job.fk_DportID.ToString();
+
+            //Port of Discharge
+            string dischargePort = new ImportBLL().GetPortNameById(job.fk_DportID);
+            hdnPortDischarge.Value = dischargePort.Split('|')[0].Trim();
+            ((TextBox)AC_Port3.FindControl("txtPort")).Text = dischargePort;
+
+            //Port of Loading
+            string loadingPort = new ImportBLL().GetPortNameById(job.fk_LportID);
+            hdnPortLoading.Value = loadingPort.Split('|')[0].Trim();
+            ((TextBox)AC_Port2.FindControl("txtPort")).Text = loadingPort;
+
+            ViewState["PORTOFDISCHARGEID"] = job.fk_DportID;
+            ViewState["PORTOFLOADINGID"] = job.fk_LportID;
+
             txtDelivery.Text = job.PlaceOfDelivery;
             ddlShippingLine.SelectedValue = job.FLineID.ToString();
             ddlCustomer.SelectedValue = job.fk_CustID.ToString();
@@ -162,8 +232,10 @@ namespace EMS.WebApp.Forwarding.Transaction
             job.volCBM = Convert.ToDecimal(txtCBMVolume.Text);
             job.RevTon = Convert.ToDecimal(txtRevenue.Text);
             job.PlaceOfReceipt = txtPlaceReciept.Text;
-            job.fk_LportID = ddlPortLoading.SelectedValue.ToInt();
-            job.fk_DportID = ddlPortDischarge.SelectedValue.ToInt();
+            //job.fk_LportID = ddlPortLoading.SelectedValue.ToInt();
+            //job.fk_DportID = ddlPortDischarge.SelectedValue.ToInt();
+            job.fk_DportID = Convert.ToInt32(ViewState["PORTOFDISCHARGEID"]);
+            job.fk_LportID = Convert.ToInt32(ViewState["PORTOFLOADINGID"]);
             job.PlaceOfDelivery = txtDelivery.Text;
             job.FLineID = ddlShippingLine.SelectedValue.ToInt();
             job.fk_CustID = ddlCustomer.SelectedValue.ToInt();
@@ -175,17 +247,33 @@ namespace EMS.WebApp.Forwarding.Transaction
             int CompanyId = 0;
             int jobId = JobBLL.AddEditJob(job, CompanyId);
 
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('Record saved successfully!'); window.location='" + string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.ServerVariables["HTTP_HOST"], (HttpContext.Current.Request.ApplicationPath.Equals("/")) ? string.Empty : HttpContext.Current.Request.ApplicationPath) + "/Forwarding/Transaction/JobList.aspx';", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('Record saved successfully!'); window.location='" + string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.ServerVariables["HTTP_HOST"], (HttpContext.Current.Request.ApplicationPath.Equals("/")) ? string.Empty : HttpContext.Current.Request.ApplicationPath) + "/Farwarding/Transaction/JobList.aspx';", true);
+        }
+
+        private bool ValidateSave()
+        {
+            bool IsValid = true;
+            errPortOfLoading.Text = "";
+            errPortOfDischarge.Text = "";
+
+            if (Convert.ToString(ViewState["PORTOFLOADINGID"]) == string.Empty || Convert.ToString(ViewState["PORTOFLOADINGID"]) == "0")
+            {
+                IsValid = false;
+                errPortOfLoading.Text = "This field is required";
+            }
+
+            if (Convert.ToString(ViewState["PORTOFDISCHARGEID"]) == string.Empty || Convert.ToString(ViewState["PORTOFDISCHARGEID"]) == "0")
+            {
+                IsValid = false;
+                errPortOfDischarge.Text = "This field is required";
+            }
+
+            return IsValid;
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Forwarding/Transaction/JobList.aspx");
-        }
-
-        protected void ddlJobType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            Response.Redirect("~/Farwarding/Transaction/JobList.aspx");
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="JobList.aspx.cs" Inherits="EMS.WebApp.Forwarding.Transaction.JobList" %>
+    CodeBehind="JobList.aspx.cs" Inherits="EMS.WebApp.Farwarding.Transaction.JobList" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

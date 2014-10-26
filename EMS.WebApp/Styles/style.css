@@ -1,0 +1,60 @@
+/* -------------------general CSS------------------------- */
+body{
+    margin: 0 auto;
+	color: #333;
+	min-height: 24px;
+	font: normal 13px/17px Arial, Helvetica, sans-serif;
+	background: url(../images/bg_01.png) left top repeat-x ;
+}
+.curve{
+	width: 100%;
+	height: auto;
+	background: #f3f3f3;
+	behavior:url(js/PIE.htc);
+	position:relative;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius:5px;
+	border: 1px solid #d7d7d7;
+}
+
+.right_align{text-align: right;}
+.center_align{text-align: center;}
+.clear{	clear: both; height: 0px; line-height: 0px;}
+.left{float: left;}
+.right{float: right;}
+.font11{font-size: 11px;}
+.font12{font-size: 12px;}
+.font13{font-size: 13px;}
+.font14{font-size: 14px;}
+.font15{font-size: 15px;}
+.font16{font-size: 16px;}
+.font17{font-size: 17px;}
+.font18{font-size: 18px;}
+.wrapper{width: 100%; height: auto; overflow:hidden;}
+
+/* ------------------maincontainer CSS--------------------- */
+div.maincontainer{
+	width: 90%;
+	height: auto;
+	clear: both;
+	float: none;
+	margin: 0 auto;
+}
+h3{
+	margin-top: 10px;
+}
+.panel-heading {
+	padding: 8px 15px;
+}
+.table {
+width: 100%;
+max-width: 100%;
+margin-bottom: 10px;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+padding: 5px;
+line-height: 1.42857143;
+vertical-align: top;
+border-top: 1px solid #ddd;
+}

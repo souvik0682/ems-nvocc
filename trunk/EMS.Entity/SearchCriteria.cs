@@ -29,7 +29,7 @@ namespace EMS.Entity
         public DateTime? Date { get; set; }
 
         public string ChargeName { get; set; }
-        public char ChargeType { get; set; }
+        public char ? ChargeType { get; set; }
         public string LineName { get; set; }
 
         public string IGMBLNo { get; set; }
@@ -59,6 +59,11 @@ namespace EMS.Entity
 
         public string DONumber { get; set; }
         public string BookingRef { get; set; }
+
+        public int AdvAdjID { get; set; }
+        public string AdvanceNo { get; set; }
+        public string JobNo { get; set; }
+        public string PartyType { get; set; }
 
         public string LocAbbr
         {
@@ -149,7 +154,6 @@ namespace EMS.Entity
         public int PartyID { get; set; }
         public string PartyName { get; set; }
 
-        public string JobNo { get; set; }
         public string JobType { get; set; }
         public string OperationalControl { get; set; }
         public string Customer { get; set; }
@@ -206,6 +210,7 @@ namespace EMS.Entity
             this.PartyName = string.Empty;
             this.LineID = 0;
             this.LineName = string.Empty;
+            this.JobNo = string.Empty;
             }
 
         #endregion      

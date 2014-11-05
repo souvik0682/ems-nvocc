@@ -46,7 +46,8 @@
             <tr>
                 <td colspan="2">
                     <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" OnClick="btnSave_Click" />
-                    &nbsp;&nbsp;<asp:Button ID="btnCancel" runat="server" CssClass="button" Text="Cancel" />
+                    &nbsp;&nbsp;<asp:Button ID="btnCancel" runat="server" CssClass="button" 
+                        Text="Cancel" onclick="btnCancel_Click" />
                 </td>
             </tr>
         </table>

@@ -57,7 +57,7 @@
                         <asp:ListItem Text="100" Value="100" />
                     </asp:DropDownList>
                     &nbsp;&nbsp;
-                    <asp:Button ID="btnAdd" runat="server" Text="Add Job" Width="130px" PostBackUrl="~/Forwarding/Master/AddEditUnit.aspx"
+                    <asp:Button ID="btnAdd" runat="server" Text="Add Unit" Width="130px" PostBackUrl="~/Forwarding/Master/AddEditUnit.aspx"
                          />
                 </div>
                 <div style="height: 30px;">

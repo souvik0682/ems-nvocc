@@ -174,5 +174,10 @@ namespace EMS.WebApp.Forwarding.Master
 
 
         #endregion
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Forwarding/Master/ManageUnits.aspx");
+        }
     }
 }

@@ -46,5 +46,6 @@ namespace EMS.Common
         char JobActive { get; set; }
         char CargoSource { get; set; }
         int JobScopeID { get; set; }
+        int CreditDays { get; set; }
     }
 }

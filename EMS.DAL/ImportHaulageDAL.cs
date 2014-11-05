@@ -56,6 +56,7 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@HaulageChgID", ID);
                 oDq.AddVarcharParam("@SchLocFrom", 100, searchCriteria.LocationFrom);
                 oDq.AddVarcharParam("@SchLocTo", 100, searchCriteria.LocationTo);
+                oDq.AddVarcharParam("@SchLine", 100, searchCriteria.LineName);
                 oDq.AddVarcharParam("@SchContSize", 2, searchCriteria.ContainerSize);
                 oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
                 oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);

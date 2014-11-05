@@ -53,7 +53,8 @@ namespace EMS.WebApp.Forwarding.Transaction
         {
             txtCustomer.Text = "";
             txtJobNo.Text = "";
-            txtJobType.Text = "";
+            ddlJobStatus.SelectedValue = "P";
+            //txtJobType.Text = "";
             txtOpControl.Text = "";
             txtLine.Text = "";
 
@@ -110,6 +111,11 @@ namespace EMS.WebApp.Forwarding.Transaction
             {
                 DeleteImportBL(Convert.ToInt32(e.CommandArgument));
             }
+            else if (e.CommandName == "Dashboard")
+            {
+                string encryptedId = GeneralFunctions.EncryptQueryString(Convert.ToInt32(e.CommandArgument).ToString());
+                Response.Redirect("~/Forwarding/Transaction/Dashboard.aspx?JobId=" + encryptedId);
+            }
         }
 
         protected void gvImportBL_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -120,7 +126,7 @@ namespace EMS.WebApp.Forwarding.Transaction
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
 
                 e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "JobNo"));
-                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "JobDate"));
+                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "JobDate")).Split(' ')[0];
                 e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "JobType"));
                 e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PlaceOfReceipt"));
                 e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PlaceOfDelivery"));
@@ -303,7 +309,8 @@ namespace EMS.WebApp.Forwarding.Transaction
             criteria.SortDirection = sortDirection;
             criteria.Customer = (txtCustomer.Text == "") ? string.Empty : txtCustomer.Text.Trim();
             criteria.JobNo = (txtJobNo.Text == "") ? string.Empty : txtJobNo.Text.Trim();
-            criteria.JobType = (txtJobType.Text == "") ? string.Empty : txtJobType.Text.Trim();
+            criteria.JobType = ddlJobStatus.SelectedValue.ToString();
+            //criteria.JobType = (txtJobType.Text == "") ? string.Empty : txtJobType.Text.Trim();
             criteria.OperationalControl = (txtOpControl.Text == "") ? string.Empty : txtOpControl.Text.Trim();
             criteria.LineName = (txtLine.Text == "") ? string.Empty : txtLine.Text.Trim();
 
@@ -330,7 +337,8 @@ namespace EMS.WebApp.Forwarding.Transaction
                         //txtContainerNo.Text = criteria.ContainerNo;
                         txtCustomer.Text = criteria.Customer;
                         txtJobNo.Text = criteria.JobNo;
-                        txtJobType.Text = criteria.JobType;
+                        ddlJobStatus.SelectedValue = criteria.JobType;
+                        //txtJobType.Text = criteria.JobType;
                         txtOpControl.Text = criteria.OperationalControl;
                         txtLine.Text = criteria.LineName;
 
@@ -389,5 +397,12 @@ namespace EMS.WebApp.Forwarding.Transaction
         }
 
         #endregion
+
+        protected void ddlJobStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SaveNewPageIndex(0);
+            LoadImportBL();
+            upBL.Update();
+        }
     }
 }

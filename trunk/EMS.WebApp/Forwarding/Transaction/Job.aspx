@@ -23,8 +23,10 @@
                                         Job Type:<span class="errormessage">*</span>
                                     </td>
                                     <td>
-                                        <asp:DropDownList ID="ddlJobType" runat="server" CssClass="dropdownlist" TabIndex="60"
-                                            DataSourceID="JobTypeDs" DataTextField="JobType" DataValueField="pk_JobTypeID">
+                                        <asp:DropDownList ID="ddlJobType" runat="server" CssClass="dropdownlist" TabIndex="60" AutoPostBack="true"
+                                            DataSourceID="JobTypeDs" DataTextField="JobType" 
+                                            DataValueField="pk_JobTypeID" 
+                                            onselectedindexchanged="ddlJobType_SelectedIndexChanged1">
                                         </asp:DropDownList>
                                         <asp:SqlDataSource ID="JobTypeDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
                                             SelectCommand="SELECT 0 [pk_JobTypeID], '-- Select --' [JobType]
@@ -156,105 +158,7 @@ SELECT pk_PrDocID, DocName FROM fwd.mstPrimeDocs"></asp:SqlDataSource>
                                             ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
                                             ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
                                     </td>
-
-                                    <td>
-                                        Customer:<span class="errormessage">*</span>
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList ID="ddlCustomer" runat="server" CssClass="dropdownlist" TabIndex="60"
-                                            DataSourceID="CustomerDs" DataTextField="CustName" DataValueField="pk_CustID">
-                                        </asp:DropDownList>
-                                        <asp:SqlDataSource ID="CustomerDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbDSRConnectionString %>"
-                                            SelectCommand="SELECT 0 [pk_CustID], '-- Select --' [CustName]
-UNION
-SELECT pk_CustID, CustName FROM mstCustomer"></asp:SqlDataSource>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="ddlCustomer"
-                                            ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
-                                            ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 20%;">
-                                        TTL 20&#39;:<span class="errormessage">*</span>
-                                    </td>
-                                    <td style="width: 28%;">
-                                        <cc2:CustomTextBox ID="txtTTL20" runat="server" CssClass="numerictextbox" TabIndex="13"
-                                            Width="250px" Type="Numeric" MaxLength="5"></cc2:CustomTextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" CssClass="errormessage"
-                                            ErrorMessage="This field is required" ControlToValidate="txtTTL20" ValidationGroup="Save"
-                                            Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </td>
-
-                                    <td style="width: 20%;">
-                                        TTL 40&#39;:<span class="errormessage">*</span>
-                                    </td>
-                                    <td style="width: 28%;">
-                                        <cc2:CustomTextBox ID="txtTTL40" runat="server" CssClass="numerictextbox" TabIndex="13"
-                                            Width="250px" Type="Numeric" MaxLength="5"></cc2:CustomTextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" CssClass="errormessage"
-                                            ErrorMessage="This field is required" ControlToValidate="txtTTL40" ValidationGroup="Save"
-                                            Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 20%;">
-                                        Gr. Weight (Kg):<span class="errormessage">*</span>
-                                    </td>
-                                    <td style="width: 28%;">
-                                        <cc2:CustomTextBox ID="txtGrossWeight" runat="server" CssClass="numerictextbox" TabIndex="13"
-                                            Width="250px" Type="Decimal" Precision="10" Scale="3" MaxLength="14"></cc2:CustomTextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server" CssClass="errormessage"
-                                            ErrorMessage="This field is required" ControlToValidate="txtGrossWeight" ValidationGroup="Save"
-                                            Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </td>
-
-                                    <td style="width: 20%;">
-                                        Vol. Weight (KG):<span class="errormessage">*</span>
-                                    </td>
-                                    <td style="width: 28%;">
-                                        <cc2:CustomTextBox ID="txtVolumeWeight" runat="server" CssClass="numerictextbox"
-                                            TabIndex="13" Width="250px" Type="Decimal" Precision="10" Scale="3" MaxLength="14"></cc2:CustomTextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server" CssClass="errormessage"
-                                            ErrorMessage="This field is required" ControlToValidate="txtVolumeWeight" ValidationGroup="Save"
-                                            Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 20%;">
-                                        Weight (MT):<span class="errormessage">*</span>
-                                    </td>
-                                    <td style="width: 28%;">
-                                        <cc2:CustomTextBox ID="txtMTWeight" runat="server" CssClass="numerictextbox" TabIndex="13"
-                                            Width="250px" Type="Decimal" Precision="10" Scale="3" MaxLength="14"></cc2:CustomTextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator19" runat="server" CssClass="errormessage"
-                                            ErrorMessage="This field is required" ControlToValidate="txtMTWeight" ValidationGroup="Save"
-                                            Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </td>
-
-                                    <td style="width: 20%;">
-                                        Volume (CBM):<span class="errormessage">*</span>
-                                    </td>
-                                    <td style="width: 28%;">
-                                        <cc2:CustomTextBox ID="txtCBMVolume" runat="server" CssClass="numerictextbox" TabIndex="13"
-                                            Width="250px" Type="Decimal" Precision="10" Scale="3" MaxLength="14"></cc2:CustomTextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator20" runat="server" CssClass="errormessage"
-                                            ErrorMessage="This field is required" ControlToValidate="txtCBMVolume" ValidationGroup="Save"
-                                            Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 20%;">
-                                        Revenue Ton:<span class="errormessage">*</span>
-                                    </td>
-                                    <td style="width: 28%;">
-                                        <cc2:CustomTextBox ID="txtRevenue" runat="server" CssClass="numerictextbox" TabIndex="13"
-                                            Width="250px" Type="Decimal" Precision="10" Scale="3" MaxLength="14"></cc2:CustomTextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator21" runat="server" CssClass="errormessage"
-                                            ErrorMessage="This field is required" ControlToValidate="txtRevenue" ValidationGroup="Save"
-                                            Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </td>
-
-                                    <td>
+                                     <td>
                                         Shipping Line / Airlines:<span class="errormessage">*</span>
                                     </td>
                                     <td>
@@ -268,6 +172,127 @@ SELECT pk_FLineID, LineName FROM fwd.mstFLine"></asp:SqlDataSource>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="ddlShippingLine"
                                             ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
                                             ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Customer:<span class="errormessage">*</span>
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList ID="ddlCustomer" runat="server" CssClass="dropdownlist" TabIndex="60" Width="250px"
+                                            DataSourceID="CustomerDs" DataTextField="CustName" DataValueField="pk_CustID">
+                                        </asp:DropDownList>
+                                        <asp:SqlDataSource ID="CustomerDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbDSRConnectionString %>"
+                                            SelectCommand="SELECT 0 [pk_CustID], '-- Select --' [CustName]
+UNION
+SELECT pk_CustID, CustName FROM mstCustomer WHERE fk_custtypeid = 3 ORDER BY CustName"></asp:SqlDataSource>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="ddlCustomer"
+                                            ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
+                                            ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    </td>
+                                    <td style="width: 20%;">
+                                        Credit Period
+                                    </td>
+                                    <td style="width: 28%;">
+                                        <cc2:CustomTextBox ID="txtCreditDays" runat="server" CssClass="numerictextbox" TabIndex="13"
+                                            Width="250px" Type="Numeric" MaxLength="5"></cc2:CustomTextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%;">
+                                        TTL 20&#39;:<span class="errormessage">*</span>
+                                    </td>
+                                    <td style="width: 28%;">
+                                        <cc2:CustomTextBox ID="txtTTL20" runat="server" CssClass="numerictextbox" TabIndex="13"
+                                            Width="250px" Type="Numeric" MaxLength="5"></cc2:CustomTextBox>
+<%--                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" CssClass="errormessage"
+                                            ErrorMessage="This field is required" ControlToValidate="txtTTL20" ValidationGroup="Save"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>--%>
+                                    </td>
+
+                                    <td style="width: 20%;">
+                                        TTL 40&#39;:<span class="errormessage">*</span>
+                                    </td>
+                                    <td style="width: 28%;">
+                                        <cc2:CustomTextBox ID="txtTTL40" runat="server" CssClass="numerictextbox" TabIndex="13"
+                                            Width="250px" Type="Numeric" MaxLength="5"></cc2:CustomTextBox>
+<%--                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" CssClass="errormessage"
+                                            ErrorMessage="This field is required" ControlToValidate="txtTTL40" ValidationGroup="Save"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>--%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%;">
+                                        Gr. Weight (Kg):<span class="errormessage">*</span>
+                                    </td>
+                                    <td style="width: 28%;">
+                                        <cc2:CustomTextBox ID="txtGrossWeight" runat="server" CssClass="numerictextbox" TabIndex="13"
+                                            Width="250px" Type="Decimal" Precision="10" Scale="3" MaxLength="14"></cc2:CustomTextBox>
+                                        <asp:RequiredFieldValidator ID="rfvGrossWeight" runat="server" CssClass="errormessage"
+                                            ErrorMessage="This field is required" ControlToValidate="txtGrossWeight" ValidationGroup="Save"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>
+                                    </td>
+
+                                    <td style="width: 20%;">
+                                        Vol. Weight (KG):<span class="errormessage">*</span>
+                                    </td>
+                                    <td style="width: 28%;">
+                                        <cc2:CustomTextBox ID="txtVolumeWeight" runat="server" CssClass="numerictextbox"
+                                            TabIndex="13" Width="250px" Type="Decimal" Precision="10" Scale="3" MaxLength="14"></cc2:CustomTextBox>
+                                        <asp:RequiredFieldValidator ID="rfvVolumeWeight" runat="server" CssClass="errormessage"
+                                            ErrorMessage="This field is required" ControlToValidate="txtVolumeWeight" ValidationGroup="Save"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%;">
+                                        Weight (MT):<span class="errormessage">*</span>
+                                    </td>
+                                    <td style="width: 28%;">
+                                        <cc2:CustomTextBox ID="txtMTWeight" runat="server" CssClass="numerictextbox" TabIndex="13"
+                                            Width="250px" Type="Decimal" Precision="10" Scale="3" MaxLength="14"></cc2:CustomTextBox>
+                                        <asp:RequiredFieldValidator ID="rfvMTWeight" runat="server" CssClass="errormessage"
+                                            ErrorMessage="This field is required" ControlToValidate="txtMTWeight" ValidationGroup="Save"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>
+                                    </td>
+
+                                    <td style="width: 20%;">
+                                        Volume (CBM):<span class="errormessage">*</span>
+                                    </td>
+                                    <td style="width: 28%;">
+                                        <cc2:CustomTextBox ID="txtCBMVolume" runat="server" CssClass="numerictextbox" TabIndex="13"
+                                            Width="250px" Type="Decimal" Precision="10" Scale="3" MaxLength="14"></cc2:CustomTextBox>
+                                        <asp:RequiredFieldValidator ID="rfvCBMVolume" runat="server" CssClass="errormessage"
+                                            ErrorMessage="This field is required" ControlToValidate="txtCBMVolume" ValidationGroup="Save"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%;">
+                                        Revenue Ton:<span class="errormessage">*</span>
+                                    </td>
+                                    <td style="width: 28%;">
+                                        <cc2:CustomTextBox ID="txtRevenue" runat="server" CssClass="numerictextbox" TabIndex="13"
+                                            Width="250px" Type="Decimal" Precision="10" Scale="3" MaxLength="14"></cc2:CustomTextBox>
+                                        <asp:RequiredFieldValidator ID="rfvRevenue" runat="server" CssClass="errormessage"
+                                            ErrorMessage="This field is required" ControlToValidate="txtRevenue" ValidationGroup="Save"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>
+                                    </td>
+
+                                   <td>
+                                        Print HBL
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox ID="chkPrintHBL" runat="server" AutoPostBack="true"
+                                            oncheckedchanged="chkPrintHBL_CheckedChanged" />
+        
+                                        <asp:DropDownList ID="ddlHblFormat" runat="server" CssClass="dropdownlist" TabIndex="60">
+                                            <asp:ListItem Text="None" Value="0"></asp:ListItem>
+                                            <asp:ListItem Text="Format 1" Value="1"></asp:ListItem>
+                                            <asp:ListItem Text="Format 2" Value="2"></asp:ListItem>
+                                        </asp:DropDownList>
+                                        
                                     </td>
                                 </tr>
                                 <tr>
@@ -286,7 +311,7 @@ SELECT pk_FLineID, LineName FROM fwd.mstFLine"></asp:SqlDataSource>
                                         Port of Loading:<span class="errormessage">*</span>
                                     </td>
                                     <td>
-                                        <uc7:ac_port id="AC_Port2" runat="server" />
+                                        <uc7:ac_port id="AC_Port2" runat="server" TabIndex="13"/>
                                         <asp:Label ID="errPortOfLoading" runat="server" CssClass="errormessage"></asp:Label>
                                         <asp:HiddenField ID="hdnPortLoading" runat="server" />
                                     </td>
@@ -296,7 +321,7 @@ SELECT pk_FLineID, LineName FROM fwd.mstFLine"></asp:SqlDataSource>
                                         Port of Discharge:<span class="errormessage">*</span>
                                     </td>
                                     <td>
-                                        <uc7:ac_port id="AC_Port3" runat="server" />
+                                        <uc7:ac_port id="AC_Port3" runat="server" TabIndex="13"/>
                                         <asp:Label ID="errPortOfDischarge" runat="server" CssClass="errormessage"></asp:Label>
                                         <asp:HiddenField ID="hdnPortDischarge" runat="server" />
                                     </td>

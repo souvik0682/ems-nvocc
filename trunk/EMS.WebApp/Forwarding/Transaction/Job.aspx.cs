@@ -50,6 +50,7 @@ namespace EMS.WebApp.Forwarding.Transaction
                     else
                     {
                         ViewState["JOBID"] = null;
+                        ddlHblFormat.Enabled = false;
                     }
                 }
             }
@@ -220,17 +221,26 @@ namespace EMS.WebApp.Forwarding.Transaction
             job.JobScopeID = ddlJobScope.SelectedValue.ToInt();
             job.JobDate = Convert.ToDateTime(txtJobDate.Text);
             job.OpsLocID = ddlOpsControlled.SelectedValue.ToInt();
+            job.jobLocID = ddlDocControlled.SelectedValue.ToInt();
             //job. = ddlDocControlled.SelectedValue.ToInt();
             job.SalesmanID = ddlSalesControlled.SelectedValue.ToInt();
             job.SmodeID = ddlShipmentMode.SelectedValue.ToInt();
             job.PrDocID = ddlPrimeDocs.SelectedValue.ToInt();
-            job.ttl20 = Convert.ToInt32(txtTTL20.Text);
-            job.ttl40 = Convert.ToInt32(txtTTL40.Text);
-            job.grwt = Convert.ToDecimal(txtGrossWeight.Text);
-            job.VolWt = Convert.ToDecimal(txtVolumeWeight.Text);
-            job.weightMT = Convert.ToDecimal(txtMTWeight.Text);
-            job.volCBM = Convert.ToDecimal(txtCBMVolume.Text);
-            job.RevTon = Convert.ToDecimal(txtRevenue.Text);
+            job.PrintHBL = chkPrintHBL.Checked;
+            job.HBLFormatID = ddlHblFormat.SelectedValue.ToInt();
+            if (ddlJobType.SelectedIndex == 0 || ddlJobType.SelectedIndex == 1)
+            {
+                job.ttl20 = Convert.ToInt32(txtTTL20.Text);
+                job.ttl40 = Convert.ToInt32(txtTTL40.Text);
+                job.weightMT = Convert.ToDecimal(txtMTWeight.Text);
+                job.volCBM = Convert.ToDecimal(txtCBMVolume.Text);
+                job.RevTon = Convert.ToDecimal(txtRevenue.Text);
+            }
+            else
+            {
+                job.grwt = Convert.ToDecimal(txtGrossWeight.Text);
+                job.VolWt = Convert.ToDecimal(txtVolumeWeight.Text);
+            }
             job.PlaceOfReceipt = txtPlaceReciept.Text;
             //job.fk_LportID = ddlPortLoading.SelectedValue.ToInt();
             //job.fk_DportID = ddlPortDischarge.SelectedValue.ToInt();
@@ -243,8 +253,9 @@ namespace EMS.WebApp.Forwarding.Transaction
             job.fk_TransID = ddlTransporter.SelectedValue.ToInt();
             job.fk_OSID = ddlOverseasAgent.SelectedValue.ToInt();
             job.CargoSource = Convert.ToChar(ddlCargoSource.SelectedValue);
+            job.CreditDays = Convert.ToInt32(txtCreditDays.Text);
 
-            int CompanyId = 0;
+            int CompanyId = 1;
             int jobId = JobBLL.AddEditJob(job, CompanyId);
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('Record saved successfully!'); window.location='" + string.Format("{0}://{1}{2}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.ServerVariables["HTTP_HOST"], (HttpContext.Current.Request.ApplicationPath.Equals("/")) ? string.Empty : HttpContext.Current.Request.ApplicationPath) + "/Forwarding/Transaction/JobList.aspx';", true);
@@ -284,6 +295,74 @@ namespace EMS.WebApp.Forwarding.Transaction
         protected void ddlOpsControlled_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void chkPrintHBL_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPrintHBL.Checked)
+            {
+                ddlHblFormat.Enabled = true;
+                ListItem i = ddlHblFormat.Items.FindByValue("0");
+                //i.Attributes.Add("style", "color:gray;");
+                i.Attributes.Add("disabled", "true");
+                i.Value = "-1";
+                ddlHblFormat.SelectedIndex = 1;
+            }
+            else
+            {
+                ListItem i = ddlHblFormat.Items.FindByValue("-1");
+                //i.Attributes.Add("style", "color:gray;");
+                i.Attributes.Add("disabled", "false");
+                i.Value = "0";
+                ddlHblFormat.SelectedIndex = 0;
+                ddlHblFormat.Enabled = false;
+            }
+        }
+
+        protected void ddlJobType_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+            if (ddlJobType.SelectedIndex == 0 || ddlJobType.SelectedIndex == 1)
+            {
+                txtGrossWeight.Enabled = false;
+                txtVolumeWeight.Enabled = false;
+                rfvGrossWeight.Enabled = false;
+                rfvVolumeWeight.Enabled = false;
+                txtGrossWeight.Text = "";
+                txtVolumeWeight.Text = "";
+
+                txtMTWeight.Enabled = true;
+                rfvMTWeight.Enabled = true;
+                txtCBMVolume.Enabled = true;
+                rfvCBMVolume.Enabled = true;
+                txtRevenue.Enabled = true;
+                rfvRevenue.Enabled = true;
+
+                txtTTL20.Enabled = true;
+                txtTTL40.Enabled = true;
+
+            }
+            else
+            {
+                txtGrossWeight.Enabled = true;
+                txtVolumeWeight.Enabled = true;
+                rfvGrossWeight.Enabled = true;
+                rfvVolumeWeight.Enabled = true;
+
+                txtMTWeight.Enabled = false;
+                rfvMTWeight.Enabled = false;
+                txtCBMVolume.Enabled = false;
+                rfvCBMVolume.Enabled = false;
+                txtRevenue.Enabled = false;
+                rfvRevenue.Enabled = false;
+                txtMTWeight.Text = "";
+                txtCBMVolume.Text = "";
+                txtCBMVolume.Text = "";
+
+                txtTTL20.Text = "";
+                txtTTL40.Text = "";
+                txtTTL20.Enabled = false;
+                txtTTL40.Enabled = false;
+            }
         }
     }
 }

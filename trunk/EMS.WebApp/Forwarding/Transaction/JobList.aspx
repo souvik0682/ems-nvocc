@@ -32,13 +32,21 @@
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
-                            <asp:TextBox ID="txtJobType" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
+                            <asp:DropDownList ID="ddlJobStatus" runat="server" Width="155" AutoPostBack="true"
+                                onselectedindexchanged="ddlJobStatus_SelectedIndexChanged">
+                                <asp:ListItem Selected="True" Text="Proforma Jobs" Value="P"></asp:ListItem>
+                                <asp:ListItem Text="Open Jobs" Value="O"></asp:ListItem>
+                                <asp:ListItem Text="Closed Jobs" Value="C"></asp:ListItem>
+                                <asp:ListItem Text="All Jobs" Value="X"></asp:ListItem>
+                            </asp:DropDownList>
+
+<%--                            <asp:TextBox ID="txtJobType" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
                                 FilterMode="InvalidChars" ValidChars=" " TargetControlID="txtJobType">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender5" runat="server" TargetControlID="txtJobType"
                                 WatermarkText="Job Type">
-                            </cc1:TextBoxWatermarkExtender>
+                            </cc1:TextBoxWatermarkExtender>--%>
                         </td>
 
                         <td>
@@ -130,21 +138,21 @@
                                 <Columns>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="5%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="20%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkJobNo" runat="server" CommandName="Sort" CommandArgument="JobNo" Text="Job No"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkDate" runat="server" CommandName="Sort" CommandArgument="JobDate" Text="Date"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkJobType" runat="server" CommandName="Sort" CommandArgument="JobType" Text="Job Type"></asp:LinkButton>
                                         </HeaderTemplate>

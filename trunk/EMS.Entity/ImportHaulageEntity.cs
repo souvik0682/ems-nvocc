@@ -38,6 +38,13 @@ namespace EMS.Entity
             get;
             set;
         }
+
+        public string LinerName
+        {
+            get;
+            set;
+        }
+
         public decimal WeightFrom
         {
             get;
@@ -124,8 +131,10 @@ namespace EMS.Entity
             this.WeightTo = Convert.ToDecimal(reader["WeightTo"]);
             this.LFCode = Convert.ToString(reader["LFCode"]);
             this.LTCode = Convert.ToString(reader["LTCode"]);
+            this.LinerName = Convert.ToString(reader["LinerName"]);
             if (!String.IsNullOrEmpty(Convert.ToString(reader["EDate"])))
                 this.EffectDate = Convert.ToDateTime(reader["EDate"]);
+
         }
 
 

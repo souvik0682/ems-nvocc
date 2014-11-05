@@ -50,6 +50,7 @@ namespace EMS.Entity
         public char CargoSource { get; set; }
         public int JobScopeID { get; set; }
         public decimal EstProfit { get; set; }
+        public int CreditDays { get; set; }
 
         public int CreatedBy
         {
@@ -238,6 +239,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "CargoSource"))
                 if (reader["CargoSource"] != DBNull.Value)
                     CargoSource = Convert.ToChar(reader["CargoSource"]);
+            
+            if (ColumnExists(reader, "CreditDays"))
+                if (reader["CreditDays"] != DBNull.Value)
+                    CreditDays = Convert.ToInt32(reader["CreditDays"]);
 
             EstProfit = (EstReceivable - EstPayable);
         }

@@ -11,6 +11,7 @@ namespace EMS.Common
         string LocationFrom { get; set; }
         string LFCode { get; set; }
         string LocationTo { get; set; }
+        string LinerName { get; set; }
         string LTCode { get; set; }
         string ContainerSize { get; set; }
         decimal WeightFrom { get; set; }

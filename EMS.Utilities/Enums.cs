@@ -25,8 +25,9 @@ namespace EMS.Utilities
             ContainerType = 10,
             Service = 11,
             ExpCurrency = 105,
-            DO = 106
-
+            DO = 106,
+            fwLocation = 201,
+            fwLine = 202
 
         }
 
@@ -54,6 +55,16 @@ namespace EMS.Utilities
             PER_CBM = 52,
             PER_TON = 53,
             TYPE_SIZE = 54
+
+        }
+
+        public enum ForwardingChargeType
+        {
+            PER_UNIT = 70,
+            PER_DOCUMENT = 71,
+            PER_CBM = 72,
+            PER_TON = 73,
+            TYPE_SIZE = 74
 
         }
 

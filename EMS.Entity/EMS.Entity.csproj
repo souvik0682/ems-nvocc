@@ -71,6 +71,7 @@
     <Compile Include="ExportBLContainerEntity.cs" />
     <Compile Include="ExportBLEntity.cs" />
     <Compile Include="expVoyageEntity.cs" />
+    <Compile Include="fwLineEntity.cs" />
     <Compile Include="InvoiceEntity.cs" />
     <Compile Include="JobEntity.cs" />
     <Compile Include="LeaseEntity.cs" />

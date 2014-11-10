@@ -4,13 +4,21 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
-    
+    <script type="text/javascript">
+        function popWin(id) {
+            alert("test");
+            window.open("FileUpload.aspx?Id=" + id, "", "height=300px,toolbar=0,menubar=0,resizable=1,status=1,scrollbars=1"); return false;
+        }
+        function update(val) {
+            alert("File: " + val + " successfully uploaded!");
+        }
+    </script>
     <div id="headercaption">
-        ADD / EDIT JOB</div>
+        DASHBOARD</div>
     <center>
         <div style="width: 100%">
             <fieldset style="width: 80%;">
-                <legend>Add / Edit Job</legend>
+                <legend>Dashboard</legend>
                 <asp:UpdatePanel ID="upBooking" runat="server" UpdateMode="Always">
                     <ContentTemplate>
                         <div class="maincontainer">
@@ -26,7 +34,7 @@
                                                     Job Date
                                                 </td>
                                                 <td>
-                                                    20-06-2014
+                                                    <asp:Label ID="lblJobDate" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -34,7 +42,7 @@
                                                     Job Number
                                                 </td>
                                                 <td>
-                                                    SEA13120005
+                                                    <asp:Label ID="lblJobNumber" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -42,7 +50,7 @@
                                                     Cargo Source
                                                 </td>
                                                 <td>
-                                                    Nomination
+                                                    <asp:Label ID="lblCargoSource" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -50,7 +58,7 @@
                                                     Ops. Controlled by
                                                 </td>
                                                 <td>
-                                                    Mumbai
+                                                    <asp:Label ID="lblOps" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -58,7 +66,15 @@
                                                     Doc. Controlled by
                                                 </td>
                                                 <td>
-                                                    &nbsp;
+                                                    <asp:Label ID="lblDoc" runat="server"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Sales Controlled by
+                                                </td>
+                                                <td>
+                                                    <asp:Label ID="lblSales" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -66,7 +82,7 @@
                                                     Approver
                                                 </td>
                                                 <td>
-                                                    Display name
+                                                    <asp:Label ID="lblApprover" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -74,7 +90,7 @@
                                                     Closed By
                                                 </td>
                                                 <td>
-                                                    Display name
+                                                    <asp:Label ID="lblClosed" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                         </table>
@@ -86,7 +102,7 @@
                                                     Job Type
                                                 </td>
                                                 <td>
-                                                    Sea Export
+                                                    <asp:Label ID="lblJobType" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -94,15 +110,23 @@
                                                     Job Scope
                                                 </td>
                                                 <td>
-                                                    Port-to-Port
+                                                    <asp:Label ID="lblJobScope" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    Shipping Mode :
+                                                    Shipping Mode
                                                 </td>
                                                 <td>
-                                                    Master Bill of Lading
+                                                    <asp:Label ID="lblShipping" runat="server"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Prime Docs
+                                                </td>
+                                                <td>
+                                                    <asp:Label ID="lblPrimeDocs" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -118,10 +142,10 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                &nbsp;
+                                                                <asp:Label ID="lblTTL20" runat="server"></asp:Label>
                                                             </td>
                                                             <td>
-                                                                1
+                                                                <asp:Label ID="lblTTL40" runat="server"></asp:Label>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -138,10 +162,10 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                &nbsp;
+                                                                <asp:Label ID="lblWeight" runat="server"></asp:Label>
                                                             </td>
                                                             <td>
-                                                                1.00
+                                                                <asp:Label ID="lblRevenue" runat="server"></asp:Label>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -156,13 +180,13 @@
                                                     Place of Recv.
                                                 </td>
                                                 <td>
-                                                    NHAVA SHEVA
+                                                    <asp:Label ID="lblPlaceReceive" runat="server"></asp:Label>
                                                 </td>
                                                 <td>
                                                     POL
                                                 </td>
                                                 <td>
-                                                    INNSA1
+                                                    <asp:Label ID="lblPOL" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -170,13 +194,13 @@
                                                     Place of Delv.
                                                 </td>
                                                 <td>
-                                                    NHAVA SHEVA
+                                                    <asp:Label ID="lblPlaceDelivery" runat="server"></asp:Label>
                                                 </td>
                                                 <td>
                                                     POD
                                                 </td>
                                                 <td>
-                                                    SNTIM
+                                                    <asp:Label ID="lblPOD" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -184,7 +208,7 @@
                                                     Carrier
                                                 </td>
                                                 <td colspan="3">
-                                                    &nbsp;
+                                                    <asp:Label ID="lblCarrier" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -192,7 +216,7 @@
                                                     Customer
                                                 </td>
                                                 <td colspan="3">
-                                                    &nbsp;
+                                                    <asp:Label ID="lblCustomer" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -200,7 +224,7 @@
                                                     Customs Ag
                                                 </td>
                                                 <td colspan="3">
-                                                    &nbsp;
+                                                    <asp:Label ID="lblCustomerAgent" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -208,7 +232,7 @@
                                                     Transporter
                                                 </td>
                                                 <td colspan="3">
-                                                    &nbsp;
+                                                    <asp:Label ID="lblTransporter" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -216,7 +240,7 @@
                                                     Overseas Ag
                                                 </td>
                                                 <td colspan="3">
-                                                    &nbsp;
+                                                    <asp:Label ID="lblOverseas" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                         </table>
@@ -232,7 +256,7 @@
                                                     Total Estimate Payable (INR)
                                                 </td>
                                                 <td>
-                                                    &nbsp;
+                                                    <asp:Label ID="lblTotalEstimatePayable" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -240,7 +264,7 @@
                                                     Total Paid (INR)
                                                 </td>
                                                 <td>
-                                                    &nbsp;
+                                                    <asp:Label ID="lblTotalPaid" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                         </table>
@@ -249,10 +273,10 @@
                                         <table class="table table-bordered">
                                             <tr>
                                                 <td>
-                                                    Total Estimate Payable (INR)
+                                                    Total Estimate Recieveable (INR)
                                                 </td>
                                                 <td>
-                                                    &nbsp;
+                                                    <asp:Label ID="lblTotalEstimateReceiveable" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -260,7 +284,7 @@
                                                     Total Received (INR)
                                                 </td>
                                                 <td>
-                                                    &nbsp;
+                                                    <asp:Label ID="lblTotalReceived" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                         </table>
@@ -272,8 +296,7 @@
                                                     Projected Gross Profit
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-primary btn-xs">
-                                                        Advance Payment</button>
+                                                    <asp:Label ID="lblProjectedGrossProfit" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -281,8 +304,23 @@
                                                     Achieved Gross Profit
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-primary btn-xs">
-                                                        Advance Payment</button>
+                                                    <asp:Label ID="lblArchievedGrossProfit" runat="server"></asp:Label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <td>
+                                                    <asp:Button ID="btnApprove" runat="server" Text="Approve" CssClass="btn btn-primary btn-xs"
+                                                        OnClick="btnApprove_Click" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Button ID="btnCloseJob" runat="server" Text="Close Job" CssClass="btn btn-primary btn-xs"
+                                                        OnClick="btnCloseJob_Click" />
                                                 </td>
                                             </tr>
                                         </table>
@@ -301,171 +339,110 @@
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-sm-4 col-sm-offset-8 text-right">
-                                                            <button type="button" class="btn btn-primary">
-                                                                Advance Payment</button>
-                                                            <button type="button" class="btn btn-primary">
-                                                                Add Payable</button>
+                                                            <asp:Button ID="btnAdvPayment" runat="server" Text="Advance Payment" CssClass="btn btn-primary"
+                                                                OnClick="btnAdvPayment_Click" />
+                                                            <asp:Button ID="btnAddPayable" runat="server" Text="Add Payable" CssClass="btn btn-primary"
+                                                                OnClick="btnAddPayable_Click" />
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <table class="table table-hover">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>
-                                                                        Unit Type
-                                                                    </th>
-                                                                    <th>
-                                                                        Tot Units
-                                                                    </th>
-                                                                    <th>
-                                                                        Bill From
-                                                                    </th>
-                                                                    <th>
-                                                                        Currency
-                                                                    </th>
-                                                                    <th>
-                                                                        Charge Amt
-                                                                    </th>
-                                                                    <th>
-                                                                        ROE
-                                                                    </th>
-                                                                    <th>
-                                                                        Payment By
-                                                                    </th>
-                                                                    <th>
-                                                                        Amount (INR)
-                                                                    </th>
-                                                                    <th>
-                                                                        Bill Receipt
-                                                                    </th>
-                                                                    <th>
-                                                                        Upload
-                                                                    </th>
-                                                                    <th>
-                                                                        Edit
-                                                                    </th>
-                                                                    <th>
-                                                                        Delete
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                                                    <div class="row" style="overflow-x:auto;">
+                                                        <asp:GridView ID="gvEstimatePayable" runat="server" AutoGenerateColumns="false" AllowPaging="false"
+                                                            BorderStyle="None" BorderWidth="0" Width="100%" OnRowDataBound="gvEstimatePayable_RowDataBound"
+                                                            OnRowCommand="gvEstimatePayable_RowCommand">
+                                                            <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
+                                                            <EmptyDataTemplate>
+                                                                No Record(s) Found</EmptyDataTemplate>
+                                                            <Columns>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblUnitType" runat="server" Text="Unit Type"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblTotalUnit" runat="server" Text="Total Units"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblBillFrom" runat="server" Text="Bill From"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblCurrency" runat="server" Text="Currency"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblChargeAmt" runat="server" Text="Charge Amount"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblRoe" runat="server" Text="ROE"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblPaymentBy" runat="server" Text="Payment By"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblAmt" runat="server" Text="Amount"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <ItemTemplate>
+                                                                        <asp:ImageButton ID="btnBillReceipt" runat="server" CommandName="BillReceipt" ImageUrl="~/Images/status.jpg"
+                                                                            Height="16" Width="16" />
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <ItemTemplate>
+                                                                        <asp:ImageButton ID="btnUpload" runat="server" CommandName="Upload" ImageUrl="~/Images/add.jpeg"
+                                                                            Height="16" Width="16"/>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <ItemTemplate>
+                                                                        <asp:ImageButton ID="btnEdit" runat="server" CommandName="Edit" ImageUrl="~/Images/edit.png"
+                                                                            Height="16" Width="16" />
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <ItemTemplate>
+                                                                        <asp:ImageButton ID="btnRemove" runat="server" CommandName="Remove" ImageUrl="~/Images/remove.png"
+                                                                            Height="16" Width="16"  OnClientClick="javascript:return confirm('Are you sure about delete?');"/>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                            </Columns>
+                                                        </asp:GridView>
                                                     </div>
                                                 </div>
                                             </div>
@@ -481,171 +458,110 @@
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-sm-4 col-sm-offset-8 text-right">
-                                                            <button type="button" class="btn btn-primary">
-                                                                Advance Payment</button>
-                                                            <button type="button" class="btn btn-primary">
-                                                                Add Payable</button>
+                                                            <asp:Button ID="btnAdvanceReceipt" runat="server" Text="Advance Receipt" CssClass="btn btn-primary"
+                                                                OnClick="btnAdvanceReceipt_Click" />
+                                                            <asp:Button ID="btnAddRecovery" runat="server" Text="Add Recovery" CssClass="btn btn-primary"
+                                                                OnClick="btnAddRecovery_Click" />
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <table class="table table-hover">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>
-                                                                        Unit Type
-                                                                    </th>
-                                                                    <th>
-                                                                        Tot Units
-                                                                    </th>
-                                                                    <th>
-                                                                        Bill From
-                                                                    </th>
-                                                                    <th>
-                                                                        Currency
-                                                                    </th>
-                                                                    <th>
-                                                                        Charge Amt
-                                                                    </th>
-                                                                    <th>
-                                                                        ROE
-                                                                    </th>
-                                                                    <th>
-                                                                        Payment By
-                                                                    </th>
-                                                                    <th>
-                                                                        Amount (INR)
-                                                                    </th>
-                                                                    <th>
-                                                                        Bill Receipt
-                                                                    </th>
-                                                                    <th>
-                                                                        Upload
-                                                                    </th>
-                                                                    <th>
-                                                                        Edit
-                                                                    </th>
-                                                                    <th>
-                                                                        Delete
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                                                    <div class="row" style="overflow-x:auto;">
+                                                        <asp:GridView ID="gvEstimateReceivable" runat="server" AutoGenerateColumns="false"
+                                                            AllowPaging="false" BorderStyle="None" BorderWidth="0" Width="100%" OnRowDataBound="gvEstimateReceivable_RowDataBound"
+                                                            OnRowCommand="gvEstimateReceivable_RowCommand">
+                                                            <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
+                                                            <EmptyDataTemplate>
+                                                                No Record(s) Found</EmptyDataTemplate>
+                                                            <Columns>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblUnitType" runat="server" Text="Unit Type"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblTotalUnit" runat="server" Text="Total Units"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblBillFrom" runat="server" Text="Bill From"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblCurrency" runat="server" Text="Currency"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblChargeAmt" runat="server" Text="Charge Amount"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblRoe" runat="server" Text="ROE"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblPaymentBy" runat="server" Text="Payment By"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblAmt" runat="server" Text="Amount"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <ItemTemplate>
+                                                                        <asp:ImageButton ID="btnGenInv" runat="server" CommandName="GenInv" ImageUrl="~/Images/status.jpg"
+                                                                            Height="16" Width="16" />
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <ItemTemplate>
+                                                                        <asp:ImageButton ID="btnUpload" runat="server" CommandName="Upload" ImageUrl="~/Images/add.jpeg"
+                                                                            Height="16" Width="16"/>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <ItemTemplate>
+                                                                        <asp:ImageButton ID="btnEdit" runat="server" CommandName="Edit" ImageUrl="~/Images/edit.png"
+                                                                            Height="16" Width="16" />
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <ItemTemplate>
+                                                                        <asp:ImageButton ID="btnRemove" runat="server" CommandName="Remove" ImageUrl="~/Images/remove.png"
+                                                                            Height="16" Width="16"  OnClientClick="javascript:return confirm('Are you sure about delete?');"/>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                            </Columns>
+                                                        </asp:GridView>
                                                     </div>
                                                 </div>
                                             </div>
@@ -660,171 +576,85 @@
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-sm-4 col-sm-offset-8 text-right">
-                                                            <button type="button" class="btn btn-primary">
-                                                                Advance Payment</button>
-                                                            <button type="button" class="btn btn-primary">
-                                                                Add Payable</button>
+                                                            <asp:Button ID="btnAddInvoiceCred" runat="server" Text="Add Invoice" CssClass="btn btn-primary"
+                                                                OnClick="btnAddInvoiceCred_Click" />
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <table class="table table-hover">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>
-                                                                        Unit Type
-                                                                    </th>
-                                                                    <th>
-                                                                        Tot Units
-                                                                    </th>
-                                                                    <th>
-                                                                        Bill From
-                                                                    </th>
-                                                                    <th>
-                                                                        Currency
-                                                                    </th>
-                                                                    <th>
-                                                                        Charge Amt
-                                                                    </th>
-                                                                    <th>
-                                                                        ROE
-                                                                    </th>
-                                                                    <th>
-                                                                        Payment By
-                                                                    </th>
-                                                                    <th>
-                                                                        Amount (INR)
-                                                                    </th>
-                                                                    <th>
-                                                                        Bill Receipt
-                                                                    </th>
-                                                                    <th>
-                                                                        Upload
-                                                                    </th>
-                                                                    <th>
-                                                                        Edit
-                                                                    </th>
-                                                                    <th>
-                                                                        Delete
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                                                    <div class="row" style="overflow-x:auto;">
+                                                        <asp:GridView ID="gvCreditors" runat="server" AutoGenerateColumns="false" AllowPaging="false"
+                                                            BorderStyle="None" BorderWidth="0" Width="100%" OnRowDataBound="gvCreditors_RowDataBound"
+                                                            OnRowCommand="gvCreditors_RowCommand">
+                                                            <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
+                                                            <EmptyDataTemplate>
+                                                                No Record(s) Found</EmptyDataTemplate>
+                                                            <Columns>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblPartyName" runat="server" Text="Party Name"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblInvoiceType" runat="server" Text="Invoice Type"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblInvoiceNo" runat="server" Text="Invoice No"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblInvoiceDate" runat="server" Text="Invoice Date"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblInvoiceAmt" runat="server" Text="Invoice Amount"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblROE" runat="server" Text="ROE"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblINRAmt" runat="server" Text="INR Amount"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <ItemTemplate>
+                                                                        <asp:ImageButton ID="btnRemove" runat="server" CommandName="Remove" ImageUrl="~/Images/remove.png"
+                                                                            Height="16" Width="16" OnClientClick="javascript:return confirm('Are you sure about delete?');" />
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <ItemTemplate>
+                                                                        <asp:ImageButton ID="btnPayment" runat="server" CommandName="Payment" ImageUrl="~/Images/edit.png"
+                                                                            Height="16" Width="16" />
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                            </Columns>
+                                                        </asp:GridView>
                                                     </div>
                                                 </div>
                                             </div>
@@ -839,171 +669,94 @@
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-sm-4 col-sm-offset-8 text-right">
-                                                            <button type="button" class="btn btn-primary">
-                                                                Advance Payment</button>
-                                                            <button type="button" class="btn btn-primary">
-                                                                Add Payable</button>
+                                                            <asp:Button ID="btnAddInvoiceDebt" runat="server" Text="Add Invoice" CssClass="btn btn-primary"
+                                                                OnClick="btnAddInvoiceDebt_Click" />
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <table class="table table-hover">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>
-                                                                        Unit Type
-                                                                    </th>
-                                                                    <th>
-                                                                        Tot Units
-                                                                    </th>
-                                                                    <th>
-                                                                        Bill From
-                                                                    </th>
-                                                                    <th>
-                                                                        Currency
-                                                                    </th>
-                                                                    <th>
-                                                                        Charge Amt
-                                                                    </th>
-                                                                    <th>
-                                                                        ROE
-                                                                    </th>
-                                                                    <th>
-                                                                        Payment By
-                                                                    </th>
-                                                                    <th>
-                                                                        Amount (INR)
-                                                                    </th>
-                                                                    <th>
-                                                                        Bill Receipt
-                                                                    </th>
-                                                                    <th>
-                                                                        Upload
-                                                                    </th>
-                                                                    <th>
-                                                                        Edit
-                                                                    </th>
-                                                                    <th>
-                                                                        Delete
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                    <td>
-                                                                        icon
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                                                    <div class="row" style="overflow-x:auto;">
+                                                        <asp:GridView ID="gvDebtors" runat="server" AutoGenerateColumns="false" AllowPaging="false"
+                                                            BorderStyle="None" BorderWidth="0" Width="100%" OnRowDataBound="gvDebtors_RowDataBound"
+                                                            OnRowCommand="gvDebtors_RowCommand">
+                                                            <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
+                                                            <EmptyDataTemplate>
+                                                                No Record(s) Found</EmptyDataTemplate>
+                                                            <Columns>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblInvoiceType" runat="server" Text="Invoice Type"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <ItemTemplate>
+                                                                        <asp:LinkButton ID="lnkInvoice" runat="server" CommandName="Invoice" ImageUrl="~/Images/remove.png"
+                                                                            Height="16" Width="16" />
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblInvoiceDate" runat="server" Text="Invoice Date"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblInvoiceAmt" runat="server" Text="Invoice Amt"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblReceivedAmt" runat="server" Text="Received Amount"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblCRNAmt" runat="server" Text="CRN Amount"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblBalanceAmt" runat="server" Text="Balance Amount"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <ItemTemplate>
+                                                                        <asp:ImageButton ID="btnPrint" runat="server" CommandName="Print" ImageUrl="~/Images/remove.png"
+                                                                            Height="16" Width="16" />
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <ItemTemplate>
+                                                                        <asp:ImageButton ID="btnAddMR" runat="server" CommandName="AddMR" ImageUrl="~/Images/edit.png"
+                                                                            Height="16" Width="16" />
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <ItemTemplate>
+                                                                        <asp:ImageButton ID="btnAddCRN" runat="server" CommandName="AddCRN" ImageUrl="~/Images/edit.png"
+                                                                            Height="16" Width="16" />
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                            </Columns>
+                                                        </asp:GridView>
                                                     </div>
                                                 </div>
                                             </div>

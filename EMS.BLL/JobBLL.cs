@@ -26,5 +26,25 @@ namespace EMS.BLL
         {
             return JobDAL.DeleteJob(JobID, UserID);
         }
+
+        public static DataSet GetDashBoard(int JobId)
+        {
+            return JobDAL.GetDashBoard(JobId);
+        }
+
+        public static void UpdateJobStatus(int JobId, string Type, int UserId)
+        {
+            JobDAL.UpdateJobStatus(JobId, Type, UserId);
+        }
+
+        public static void SaveEstimateFile(int EstimateId, string FileName, string OriginalFileName)
+        {
+            JobDAL.SaveEstimateFile(EstimateId, FileName, OriginalFileName);
+        }
+
+        public static void DeleteDashBoardData(int Id, string Type)
+        {
+            JobDAL.DeleteDashBoardData(Id, Type);
+        }
     }
 }

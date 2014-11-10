@@ -67,6 +67,7 @@
     <Compile Include="IExportBL.cs" />
     <Compile Include="IExportBLContainer.cs" />
     <Compile Include="IexpVoyage.cs" />
+    <Compile Include="IFwLine.cs" />
     <Compile Include="IIGMReport.cs" />
     <Compile Include="IInvoice.cs" />
     <Compile Include="IJob.cs" />

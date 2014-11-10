@@ -108,6 +108,57 @@ namespace EMS.DAL
             return ret;
         }
 
-        
+        public static DataSet GetDashBoard(int JobId)
+        {
+            string strExecution = "[fwd].[uspGetDashboardData]";
+            List<IJob> lstJob = new List<IJob>();
+            DataSet dsDashboard = new DataSet();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@JobId", JobId);
+
+                dsDashboard = oDq.GetTables();
+            }
+            return dsDashboard;
+        }
+
+        public static void UpdateJobStatus(int JobId, string Type, int UserId)
+        {
+            string strExecution = "[fwd].[uspUpdateJobStatus]";
+            
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@JobId", JobId);
+                oDq.AddVarcharParam("@type", 10, Type);
+                oDq.AddIntegerParam("@UserId", UserId);
+                oDq.RunActionQuery();
+            }
+        }
+
+        public static void SaveEstimateFile(int EstimateId, string FileName, string OriginalFileName)
+        {
+            string strExecution = "[fwd].[SaveEstimateFile]";
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@EstimateId", EstimateId);
+                oDq.AddVarcharParam("@FileName", 50, FileName);
+                oDq.AddVarcharParam("@OriginalFileName", 50, OriginalFileName);
+                oDq.RunActionQuery();
+            }
+        }
+
+        public static void DeleteDashBoardData(int Id, string Type)
+        {
+            string strExecution = "[fwd].[RemoveDashboardData]";
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@Id", Id);
+                oDq.AddVarcharParam("@Type", 50, Type);
+                oDq.RunActionQuery();
+            }
+        }
     }
 }

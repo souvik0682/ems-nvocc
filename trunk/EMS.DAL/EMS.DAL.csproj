@@ -61,6 +61,7 @@
     <Compile Include="ExportPerformanceDAL.cs" />
     <Compile Include="expVoyageDAL.cs" />
     <Compile Include="ExpSlotCost.cs" />
+    <Compile Include="fwLineDAL.cs" />
     <Compile Include="IGMReportDAL.cs" />
     <Compile Include="ImportBLDAL.cs" />
     <Compile Include="ImportHaulageDAL.cs" />

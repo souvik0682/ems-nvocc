@@ -5,22 +5,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <link rel="stylesheet" href="Styles/bootstrap.min.css">
-    <link rel="stylesheet" href="Styles/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="Styles/style.css">
-    <script src="Scripts/jquery.min.js"></script>
-    <script src="Scripts/bootstrap.min.js"></script>
-    <style type="text/css">
-        .bs-example
-        {
-            margin: 20px;
-        }
-    </style>
-    <script>
-        $('.carousel').carousel({
-            interval: 5000
-        })
-                        </script>
     <link href="Styles/EMS.css" rel="stylesheet" type="text/css" />
     <link href="Styles/StyleSheet.css" rel="Stylesheet" type="text/css" />
     <link <%# string.Format("href='{0}'", Page.ResolveClientUrl("~/Scripts/css/jquery-ui-1.8.20.custom.css"))%>

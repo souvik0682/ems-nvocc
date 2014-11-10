@@ -108,13 +108,8 @@
     <Content Include="Export\Voyage.aspx" />
     <Content Include="FileNotFound.aspx" />
     <Content Include="FileTemplate\ContainerList.txt" />
-    <Content Include="Forwarding\Master\AddEditFLine.aspx" />
-    <Content Include="Forwarding\Master\AddEditParty.aspx" />
-    <Content Include="Forwarding\Master\AddEditUnit.aspx" />
-    <Content Include="Forwarding\Master\ManageFLine.aspx" />
-    <Content Include="Forwarding\Master\ManageParties.aspx" />
-    <Content Include="Forwarding\Master\ManageUnits.aspx" />
     <Content Include="Forwarding\Transaction\Dashboard.aspx" />
+    <Content Include="Forwarding\Transaction\FileUpload.aspx" />
     <Content Include="Forwarding\Transaction\Job.aspx" />
     <Content Include="Forwarding\Transaction\JobList.aspx" />
     <Content Include="GetLocation.asmx" />
@@ -207,6 +202,8 @@
     <Content Include="Reports\ReportViewer\ShowReport.aspx" />
     <Content Include="Reports\RptImportBilling.aspx" />
     <Content Include="Reports\YearlyMIS.aspx" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Common.js" />
     <Content Include="Scripts\css\ellipsis-xbl.xml" />
     <Content Include="Scripts\css\images\ui-icons_222222_256x240.png" />
@@ -259,6 +256,7 @@
     <Content Include="Scripts\jquery-ui-1.8.11.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.14.custom.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
     <Content Include="Styles\bootstrap-theme.css" />
     <Content Include="Styles\bootstrap-theme.min.css" />
     <Content Include="Styles\bootstrap.css" />
@@ -481,48 +479,19 @@
     <Compile Include="Export\Voyage.aspx.designer.cs">
       <DependentUpon>Voyage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Forwarding\Master\AddEditFLine.aspx.cs">
-      <DependentUpon>AddEditFLine.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Forwarding\Master\AddEditFLine.aspx.designer.cs">
-      <DependentUpon>AddEditFLine.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Forwarding\Master\AddEditParty.aspx.cs">
-      <DependentUpon>AddEditParty.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Forwarding\Master\AddEditParty.aspx.designer.cs">
-      <DependentUpon>AddEditParty.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Forwarding\Master\AddEditUnit.aspx.cs">
-      <DependentUpon>AddEditUnit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Forwarding\Master\AddEditUnit.aspx.designer.cs">
-      <DependentUpon>AddEditUnit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Forwarding\Master\ManageFLine.aspx.cs">
-      <DependentUpon>ManageFLine.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Forwarding\Master\ManageFLine.aspx.designer.cs">
-      <DependentUpon>ManageFLine.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Forwarding\Master\ManageParties.aspx.cs">
-      <DependentUpon>ManageParties.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Forwarding\Master\ManageParties.aspx.designer.cs">
-      <DependentUpon>ManageParties.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Forwarding\Master\ManageUnits.aspx.cs">
-      <DependentUpon>ManageUnits.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Forwarding\Master\ManageUnits.aspx.designer.cs">
-      <DependentUpon>ManageUnits.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Forwarding\Transaction\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Forwarding\Transaction\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forwarding\Transaction\FileUpload.aspx.cs">
+      <DependentUpon>FileUpload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forwarding\Transaction\FileUpload.aspx.designer.cs">
+      <DependentUpon>FileUpload.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forwarding\Transaction\Job.aspx.cs">
       <DependentUpon>Job.aspx</DependentUpon>
@@ -1393,6 +1362,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Download\" />
     <Folder Include="Finance\" />
+    <Folder Include="Forwarding\Transaction\EstimateFiles\" />
     <Folder Include="Import\EDIFile\" />
   </ItemGroup>
   <ItemGroup>

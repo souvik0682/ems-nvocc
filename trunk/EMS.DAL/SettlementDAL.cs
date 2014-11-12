@@ -90,6 +90,9 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@PayRcv", 50, Settlement.PayRcvd);
                 oDq.AddVarcharParam("@BankName", 100, Settlement.BankName);
                 oDq.AddVarcharParam("@ChequeDetail", 100, Settlement.ChequeDetail);
+                oDq.AddDateTimeParam("@ChequeDate", Settlement.ChequeDate);
+                oDq.AddVarcharParam("@RRPathName", 100, Settlement.RRFileUploadPath);
+                oDq.AddVarcharParam("@CLPathName", 100, Settlement.CLFileUploadPath);
                 Settlementid = Convert.ToInt64(oDq.GetScalar());
 
             }

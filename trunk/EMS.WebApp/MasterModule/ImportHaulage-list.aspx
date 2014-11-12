@@ -21,7 +21,7 @@
                 <table>
                     <tr>
                         <td>
-                            <asp:TextBox ID="txtFrom" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
+                            <asp:TextBox ID="txtFrom" runat="server" CssClass="watermark" ForeColor="#747862" Width="190px" ></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters"
                                 FilterMode="ValidChars" ValidChars=" " TargetControlID="txtFrom">
                             </cc1:FilteredTextBoxExtender>
@@ -30,7 +30,7 @@
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
-                            <asp:TextBox ID="txtTo" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
+                            <asp:TextBox ID="txtTo" runat="server" CssClass="watermark" ForeColor="#747862" Width="190px"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
                                 FilterMode="ValidChars" ValidChars=" " TargetControlID="txtTo">
                             </cc1:FilteredTextBoxExtender>
@@ -39,7 +39,16 @@
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
-                            <asp:TextBox ID="txtSize" runat="server" CssClass="watermark" ForeColor="#747862" ></asp:TextBox>
+                            <asp:TextBox ID="txtLiner" runat="server" CssClass="watermark" ForeColor="#747862" Width="150px"></asp:TextBox>
+                            <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
+                                FilterMode="ValidChars" ValidChars="" TargetControlID="txtLiner">
+                            </cc1:FilteredTextBoxExtender>
+                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender4" runat="server" TargetControlID="txtLiner"
+                                WatermarkText="Liner">
+                            </cc1:TextBoxWatermarkExtender>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtSize" runat="server" CssClass="watermark" ForeColor="#747862" Width="100px"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
                                 FilterMode="ValidChars" ValidChars=" " TargetControlID="txtSize">
                             </cc1:FilteredTextBoxExtender>
@@ -125,30 +134,40 @@
                                             <asp:Label ID="lblLocationTo" runat="server"></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <HeaderStyle CssClass="gridviewheader" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lnkHLine" runat="server" CommandName="Sort" CommandArgument="Liner"
+                                                Text="Liner"></asp:LinkButton></HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblLine" runat="server"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:TemplateField ItemStyle-HorizontalAlign="Right" >
                                         <HeaderStyle CssClass="gridviewheader_num" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%"  />
+                                        <ItemStyle CssClass="gridviewitem" Width="7%"  />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHContainerSize" runat="server" CommandName="Sort" CommandArgument="ContainerSize"
-                                                Text="Container Size"></asp:LinkButton></HeaderTemplate>
+                                                Text="Cntr Size"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField  ItemStyle-HorizontalAlign="Right" >
                                         <HeaderStyle CssClass="gridviewheader_num" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHWeightFrom" runat="server" CommandName="Sort" CommandArgument="WeightFrom"
-                                                Text="Weight From"></asp:LinkButton></HeaderTemplate>
+                                                Text="Wt From"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Address"  ItemStyle-HorizontalAlign="Right" >
                                         <HeaderStyle CssClass="gridviewheader_num" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHWeightTo" runat="server" CommandName="Sort" CommandArgument="WeightTo"
-                                                Text="Weight To"></asp:LinkButton></HeaderTemplate>
+                                                Text="Wt To"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Address"  ItemStyle-HorizontalAlign="Right" >
                                         <HeaderStyle CssClass="gridviewheader_num" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHRate" runat="server" CommandName="Sort" CommandArgument="HaulageRate"
                                                 Text="Rate"></asp:LinkButton></HeaderTemplate>
@@ -177,4 +196,5 @@
             </fieldset>
         </div>
     </center>
+                </table>
 </asp:Content>

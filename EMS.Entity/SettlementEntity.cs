@@ -110,9 +110,17 @@ namespace EMS.Entity
             set;
         }
 
+        public DateTime? ChequeDate
+        {
+            get;
+            set;
+        }
+
         public string PayRcvd { get; set; }
         public string ChequeDetail { get; set; }
         public string BankName { get; set; }
+        public string RRFileUploadPath { get; set; }
+        public string CLFileUploadPath { get; set; }
 
         public SettlementEntity()
         {
@@ -144,6 +152,15 @@ namespace EMS.Entity
             if (ColumnExists(reader, "BankName"))
                 if (reader["BankName"] != DBNull.Value)
                     this.BankName = Convert.ToString(reader["BankName"]);
+            if (ColumnExists(reader, "ChequeDate"))
+                if (reader["ChequeDate"] != DBNull.Value)
+                    this.ChequeDate = Convert.ToDateTime(reader["ChequeDate"]);
+            if (ColumnExists(reader, "RRFileUploadPath"))
+                if (reader["RRFileUploadPath"] != DBNull.Value)
+                    this.BankName = Convert.ToString(reader["RRFileUploadPath"]);
+            if (ColumnExists(reader, "CLFileUploadPath"))
+                if (reader["CLFileUploadPath"] != DBNull.Value)
+                    this.BankName = Convert.ToString(reader["CLFileUploadPath"]);
 
         }
 

@@ -10,6 +10,7 @@ namespace EMS.Entity
     public class EstimateEntity
     {
         public long EstimateID { get; set; }
+        public int PartyID { get; set; }
         public bool EstimateStatus { get; set; }
         public DateTime EstimateDate { get; set; }
         public string EstimateNo { get; set; }
@@ -50,6 +51,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "fk_CompanyID"))
                 if (reader["fk_CompanyID"] != DBNull.Value)
                     CompanyID = Convert.ToInt32(reader["fk_CompanyID"]);
+
+            if (ColumnExists(reader, "fk_PartyID"))
+                if (reader["fk_PartyID"] != DBNull.Value)
+                    PartyID = Convert.ToInt32(reader["fk_PartyID"]);
 
             if (ColumnExists(reader, "fk_JobID"))
                 if (reader["fk_JobID"] != DBNull.Value)

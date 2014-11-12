@@ -138,7 +138,6 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@userID", Booking.CreatedBy);
-                oDq.AddIntegerParam("@fk_FinYearID", 1);
                 oDq.AddIntegerParam("@fk_CompanyID", CompanyId);
                 oDq.AddBooleanParam("@isedit", Booking.Action);
                 oDq.AddBigIntegerParam("@pk_BookingID", Booking.BookingID);

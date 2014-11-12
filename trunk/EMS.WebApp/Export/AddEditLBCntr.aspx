@@ -3,6 +3,24 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <script type="text/javascript" language="javascript">
+
+        function validateData() {
+
+            if (document.getElementById('<%=txtBookingNo.ClientID %>').value == '') {
+                alert('Please enter Booking No.');
+                return false;
+            }
+            return true;
+        }
+
+        //        function AutoCompleteItemSelected(sender, e) {
+        //            if (sender._id == "AutoCompleteBookingNo") {
+        //                var hdnBookingNo = $get('<%=hdnBookingNo.ClientID %>');
+        //                hdnBookingNo.value = e.get_value();
+        //            }
+
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
 
@@ -45,7 +63,19 @@
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
                             </tr>
-                            
+                            <tr>
+                                <td class="label" style="padding-right: 50px; vertical-align: top;">
+                                    Booking No.:<span class="errormessage">*</span>
+                                </td>
+                                <td>
+                                    <asp:HiddenField ID="hdnBookingNo" runat="server" />
+                                    <asp:TextBox ID="txtBookingNo" runat="server" CssClass="textboxuppercase" MaxLength="60" AutoPostBack="true" OnTextChanged="txtBookingNo_TextChanged"
+                                        Width="250px" TabIndex="4"></asp:TextBox><br />
+                                    <asp:RequiredFieldValidator ID="rfvBookingNo" runat="server" ControlToValidate="txtBookingNo"
+                                        ErrorMessage="This field is required*" CssClass="errormessage" ValidationGroup="Save"
+                                        Display="Dynamic"></asp:RequiredFieldValidator>
+                                </td>
+ <%--                           </tr>
                             <tr>
                                 <td>
                                     Booking No:
@@ -59,7 +89,7 @@
                                         Enabled="false"></asp:RequiredFieldValidator>
                                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender10" runat="server" TargetControlID="rfvBookingNo">
                                     </cc1:ValidatorCalloutExtender>
-                                </td>
+                                </td>--%>
                                 <td>
                                     Load Port:
                                 </td>

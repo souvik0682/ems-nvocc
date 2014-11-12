@@ -94,13 +94,22 @@ namespace EMS.WebApp.Export {
         protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender12;
         
         /// <summary>
-        /// ddlBookingNo control.
+        /// hdnBookingNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlBookingNo;
+        protected global::System.Web.UI.WebControls.HiddenField hdnBookingNo;
+        
+        /// <summary>
+        /// txtBookingNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBookingNo;
         
         /// <summary>
         /// rfvBookingNo control.
@@ -110,15 +119,6 @@ namespace EMS.WebApp.Export {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBookingNo;
-        
-        /// <summary>
-        /// ValidatorCalloutExtender10 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender10;
         
         /// <summary>
         /// lblLoadPort control.

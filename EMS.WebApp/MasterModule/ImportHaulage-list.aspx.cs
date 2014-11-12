@@ -61,6 +61,7 @@ namespace EMS.WebApp.MasterModule
             txtFrom.Text = string.Empty;
             txtTo.Text = string.Empty;
             txtSize.Text = string.Empty;
+            txtLiner.Text = string.Empty;
             LoadImportHaulage();
         }
 
@@ -123,14 +124,16 @@ namespace EMS.WebApp.MasterModule
 
                 e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LocationTo"));// +"<br/><font style='font-size:x-small;font-weight:bold;'>CODE : (" + Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LTCode")) + ")</font>";
 
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerSize"));
+                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LinerName"));
 
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "WeightFrom"));
+                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerSize"));
+
+                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "WeightFrom"));
                 //e.Row.Cells[4].Text = Convert.ToString(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "WeightFrom")));
 
-                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "WeightTo"));
+                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "WeightTo"));
 
-                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "HaulageRate"));
+                e.Row.Cells[7].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "HaulageRate"));
 
                 // Edit link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
@@ -304,6 +307,7 @@ namespace EMS.WebApp.MasterModule
             criteria.SortDirection = sortDirection;
             criteria.LocationFrom = txtFrom.Text.Trim();
             criteria.LocationTo = txtTo.Text.Trim();
+            criteria.LineName = txtLiner.Text.Trim();
             criteria.ContainerSize = txtSize.Text.Trim();
             Session[Constants.SESSION_SEARCH_CRITERIA] = criteria;
         }
@@ -328,6 +332,7 @@ namespace EMS.WebApp.MasterModule
                         txtFrom.Text = criteria.LocationFrom;
                         txtTo.Text = criteria.LocationTo;
                         txtSize.Text = criteria.ContainerSize;
+                        txtLiner.Text = criteria.LineName;
                         gvwImportHaulage.PageIndex = criteria.PageIndex;
                         gvwImportHaulage.PageSize = criteria.PageSize;
                         ddlPaging.SelectedValue = criteria.PageSize.ToString();

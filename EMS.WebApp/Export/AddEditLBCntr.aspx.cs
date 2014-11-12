@@ -71,9 +71,11 @@ namespace EMS.WebApp.Export
 
         void DisableHeaderSection()
         {
-            ddlBookingNo.Enabled = false;
+            //ddlBookingNo.Enabled = false;
+            txtBookingNo.Enabled = false;
             ddlVessel.Enabled = false;
             ddlVoyage.Enabled = false;
+            
             rfvBookingNo.Enabled = false;
             //rfvTeus.Enabled = false;
             rfvDate.Enabled = false;
@@ -156,7 +158,8 @@ namespace EMS.WebApp.Export
 
                 //ddlLocation.SelectedValue = dt.Rows[0]["fk_LocationID"].ToString();
                 //ActionOnFromLocationChange();
-                ddlBookingNo.SelectedValue = dt.Rows[0]["fk_BookingID"].ToString();
+                //ddlBookingNo.SelectedValue = dt.Rows[0]["fk_BookingID"].ToString();
+                hdnBookingNo.Value = dt.Rows[0]["fk_BookingID"].ToString();
                 txtBookingDate.Text = Convert.ToDateTime(dt.Rows[0]["BookingDate"].ToString()).ToShortDateString();
                 lblParty.Text =  dt.Rows[0]["PartyName"].ToString();
                 ddlVessel.SelectedValue = dt.Rows[0]["fk_VesselID"].ToString();
@@ -229,13 +232,13 @@ namespace EMS.WebApp.Export
             ////ddlFromStatus.Items.Remove(ddlFromStatus.Items.FindByText());
             //#endregion
 
-            #region Booking
+            //#region Booking
 
-            Li = new ListItem("Select", "0");
-            PopulateDropDown((int)Enums.DropDownPopulationFor.Booking, ddlBookingNo, 0, 0);
-            ddlBookingNo.Items.Insert(0, Li);
+            //Li = new ListItem("Select", "0");
+            //PopulateDropDown((int)Enums.DropDownPopulationFor.Booking, ddlBookingNo, 0, 0);
+            //ddlBookingNo.Items.Insert(0, Li);
 
-            #endregion
+            //#endregion
 
             //#region Booking
 
@@ -351,7 +354,7 @@ namespace EMS.WebApp.Export
         {
             DataSet ds = new DataSet();
             LBCntrBLL oBookingDetailBLL = new LBCntrBLL();
-            ds = oBookingDetailBLL.GetBookingDetail(Convert.ToInt32(ddlBookingNo.SelectedValue));
+            ds = oBookingDetailBLL.GetBookingDetail(Convert.ToInt32(hdnBookingNo.Value));
             hdnLineID.Value = ds.Tables[0].Rows[0]["fk_NVOCCID"].ToString();
             txtBookingDate.Text = Convert.ToDateTime(ds.Tables[0].Rows[0]["BookingDate"].ToString()).ToShortDateString();
             lblLoadPort.Text = ds.Tables[0].Rows[0]["BookingNo"].ToString();
@@ -367,7 +370,7 @@ namespace EMS.WebApp.Export
 
         protected void btnShow_Click(object sender, EventArgs e)
         {
-            fillContainer(Convert.ToInt32(ddlBookingNo.SelectedValue));
+            fillContainer(Convert.ToInt32(hdnBookingNo.Value));
             //if (ddlFromStatus.SelectedItem.Text == "RCVE")
             //{
             //    fillContainer(Convert.ToInt32(ddlEmptyYard.SelectedValue));
@@ -409,7 +412,7 @@ namespace EMS.WebApp.Export
                     return;
                 }
 
-                int BookingID = Convert.ToInt32(ddlBookingNo.SelectedValue);
+                int BookingID = Convert.ToInt32(hdnBookingNo.Value);
                 int VesselID = Convert.ToInt32(ddlVessel.SelectedValue);
                 int VoyageID = Convert.ToInt32(ddlVoyage.SelectedValue);
 
@@ -473,13 +476,17 @@ namespace EMS.WebApp.Export
         {
             //txtDate.Text = string.Empty;
             txtBookingDate.Text = string.Empty;
+            txtBookingNo.Text = string.Empty;
+            lblVessel.Text = string.Empty;
+            lblVoyage.Text = string.Empty;
+
             txtDate.Text = string.Empty;
             lblLoadPort.Text = string.Empty;
             lblParty.Text = string.Empty;
             lblLoadPort.Text = string.Empty;
 
             //ddlFromLocation.SelectedIndex = 0;
-            ddlBookingNo.SelectedIndex = 0;
+            hdnBookingNo.Value = "";
             ddlVessel.SelectedIndex = 0;
             ddlVoyage.SelectedIndex = -1;
 
@@ -521,6 +528,14 @@ namespace EMS.WebApp.Export
 
         protected void ddlBookingNo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ActionOnBookingChange();
+        }
+
+        protected void txtBookingNo_TextChanged(object sender, EventArgs e)
+        {
+            DataSet ds = new DataSet();
+            ds = ReportBLL.GetBooking(txtBookingNo.Text);
+            hdnBookingNo.Value = Convert.ToString(ds.Tables[0].Rows[0]["pk_BookingID"]);
             ActionOnBookingChange();
         }
 

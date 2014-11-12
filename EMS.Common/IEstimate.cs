@@ -8,6 +8,7 @@ namespace EMS.Common
     public interface IEstimate : ICommon
     {
         long EstimateID { get; set; }
+        int PartyID { get; set; }
         bool EstimateStatus { get; set; }
         string TransactionType { get; set; }
         DateTime EstimateDate { get; set; }

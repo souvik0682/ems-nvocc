@@ -23,6 +23,9 @@ namespace EMS.Common
         string PayRcvd { get; set; }
         string ChequeDetail { get; set; }
         string BankName { get; set; }
+        DateTime? ChequeDate { get; set; }
+        string RRFileUploadPath { get; set; }
+        string CLFileUploadPath { get; set; }
 
     }
 }

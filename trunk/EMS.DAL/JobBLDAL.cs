@@ -11,10 +11,10 @@ namespace EMS.DAL
 {
     public class JobBLDAL
     {
-        public static IFwdBL GetJobBLHeaderInfoForAdd(string JobNo)
+        public static IJobBL GetJobBLHeaderInfoForAdd(string JobNo)
         {
             string strExecution = "[fwd].[usp_GetJobBLForAdd]";
-            IFwdBL objHeader = new FwdBLEntity();
+            IJobBL objHeader = new JobBLEntity();
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
@@ -24,7 +24,7 @@ namespace EMS.DAL
 
                 while (reader.Read())
                 {
-                    objHeader = new FwdBLEntity(reader);
+                    objHeader = new JobBLEntity(reader);
                 }
 
                 reader.Close();
@@ -33,10 +33,10 @@ namespace EMS.DAL
             return objHeader;
         }
 
-        public static IFwdBL GetExportBLHeaderInfoForEdit(string BLNo)
+        public static IJobBL GetExportBLHeaderInfoForEdit(string BLNo)
         {
             string strExecution = "[fwd].[usp_GetJobBLForEdit]";
-            IFwdBL objHeader = new FwdBLEntity();
+            IJobBL objHeader = new JobBLEntity();
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
@@ -46,7 +46,7 @@ namespace EMS.DAL
 
                 while (reader.Read())
                 {
-                    objHeader = new FwdBLEntity(reader);
+                    objHeader = new JobBLEntity(reader);
                 }
 
                 reader.Close();
@@ -190,7 +190,7 @@ namespace EMS.DAL
             }
         }
 
-        public static long SaveFwdBLHeader(IFwdBL objBL)
+        public static long SaveFwdBLHeader(IJobBL objBL)
         {
             long exportBLId = 0;
             string strExecution = "[fwd].[usp_fwdBLHeader_Save]";
@@ -250,10 +250,10 @@ namespace EMS.DAL
         //    }
         //}
 
-        public static List<IFwdBL> GetFwdBLForListing(SearchCriteria searchCriteria)
+        public static List<IJobBL> GetFwdBLForListing(SearchCriteria searchCriteria)
         {
             string strExecution = "[fwd].[usp_GetFwdBLForListing]";
-            List<IFwdBL> lstBL = new List<IFwdBL>();
+            List<IJobBL> lstBL = new List<IJobBL>();
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
@@ -270,7 +270,7 @@ namespace EMS.DAL
 
                 while (reader.Read())
                 {
-                    IFwdBL bl = new FwdBLEntity(reader);
+                    IJobBL bl = new JobBLEntity(reader);
                     lstBL.Add(bl);
                 }
 

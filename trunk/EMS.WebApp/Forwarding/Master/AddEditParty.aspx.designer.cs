@@ -58,22 +58,13 @@ namespace EMS.WebApp.Forwarding.Master {
         protected global::EMS.WebApp.CustomControls.AutoCompleteExtender AutoCompleteCountry1;
         
         /// <summary>
-        /// ddlLine control.
+        /// txtAddress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlLine;
-        
-        /// <summary>
-        /// rfvddlLine control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvddlLine;
+        protected global::System.Web.UI.WebControls.TextBox txtAddress;
         
         /// <summary>
         /// txtContactPerson control.
@@ -85,15 +76,6 @@ namespace EMS.WebApp.Forwarding.Master {
         protected global::System.Web.UI.WebControls.TextBox txtContactPerson;
         
         /// <summary>
-        /// rfvtxtContactPerson control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtContactPerson;
-        
-        /// <summary>
         /// txtPhone control.
         /// </summary>
         /// <remarks>
@@ -101,15 +83,6 @@ namespace EMS.WebApp.Forwarding.Master {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPhone;
-        
-        /// <summary>
-        /// rfvtxtPhone control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtPhone;
         
         /// <summary>
         /// txtFAX control.
@@ -139,15 +112,6 @@ namespace EMS.WebApp.Forwarding.Master {
         protected global::System.Web.UI.WebControls.TextBox txtPAN;
         
         /// <summary>
-        /// rfvtxtPAN control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtPAN;
-        
-        /// <summary>
         /// txtTAN control.
         /// </summary>
         /// <remarks>
@@ -155,15 +119,6 @@ namespace EMS.WebApp.Forwarding.Master {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTAN;
-        
-        /// <summary>
-        /// rfvtxtTAN control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtTAN;
         
         /// <summary>
         /// ddlPrincipal control.
@@ -175,13 +130,13 @@ namespace EMS.WebApp.Forwarding.Master {
         protected global::System.Web.UI.WebControls.DropDownList ddlPrincipal;
         
         /// <summary>
-        /// RequiredFieldValidator1 control.
+        /// rfvPrincipal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPrincipal;
         
         /// <summary>
         /// btnSave control.

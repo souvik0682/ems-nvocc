@@ -4,11 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 using EMS.Utilities;
 using EMS.Common;
 using EMS.BLL;
 using EMS.Entity;
 using EMS.WebApp.CustomControls;
+using System.Globalization;
+using System.Configuration;
+using EMS.Utilities.ResourceManager;
 
 namespace EMS.WebApp.Forwarding.Master
 {
@@ -43,6 +47,8 @@ namespace EMS.WebApp.Forwarding.Master
             if (!IsPostBack)
             {
                 LoadDefault();
+                ddlPrincipal.Enabled = false;
+                rfvPrincipal.Enabled = false;
                 if (Request.QueryString["PartyId"] != string.Empty)
                 {
 
@@ -120,18 +126,36 @@ namespace EMS.WebApp.Forwarding.Master
 
         private void LoadDefault()
         {
-            var line = new CommonBLL().GetfwLineByType(new SearchCriteria { StringOption1 = "S,A" });
+            //var line = new CommonBLL().GetfwLineByType(new SearchCriteria { StringOption1 = "S,A" });
             var principal = new CommonBLL().GetfwLineByType(new SearchCriteria { StringOption1 = "O" });
-            ddlLine.DataSource = line;
-            ddlLine.DataTextField = "LineName";
-            ddlLine.DataValueField = "LineID";
-            ddlLine.DataBind();
-            ddlLine.Items.Insert(0, new ListItem("--Select--", "0"));
+            DataTable PartyType = new CommonBLL().GetfwdPartyType();
+
+            //dr["pk_DocTypeID"] = "0";
+            //dr["DocName"] = "--Select--";
+            //dt.Rows.InsertAt(dr, 0);
+            //ddlInvoiceType.DataValueField = "pk_DocTypeID";
+            //ddlInvoiceType.DataTextField = "DocName";
+            //ddlInvoiceType.DataSource = dt;
+            //ddlInvoiceType.DataBind();
+
+            //ddlLine.DataSource = line;
+            //ddlLine.DataTextField = "LineName";
+            //ddlLine.DataValueField = "LineID";
+            //ddlLine.DataBind();
+            //ddlLine.Items.Insert(0, new ListItem("--Select--", "0"));
+
             ddlPrincipal.DataSource = principal;
             ddlPrincipal.DataTextField = "LineName";
             ddlPrincipal.DataValueField = "LineID";
             ddlPrincipal.DataBind();
             ddlPrincipal.Items.Insert(0, new ListItem("--Select--", "0"));
+
+            ddlPartyType.DataSource = PartyType;
+            ddlPartyType.DataTextField = "PartyType";
+            ddlPartyType.DataValueField = "pk_PartyTypeID";
+            ddlPartyType.DataBind();
+            ddlPartyType.Items.Insert(0, new ListItem("--Select--", "0"));
+
         }
         private void LoadData(int id)
         {
@@ -141,12 +165,13 @@ namespace EMS.WebApp.Forwarding.Master
                 var party = src.FirstOrDefault();
                 txtEmailID.Text = party.emailID;
                 txtContactPerson.Text = party.ContactPerson;
+                txtAddress.Text = party.PartyAddress;
                 txtFAX.Text = party.FAX;
                 txtPAN.Text = party.PAN;
                 txtPartyName.Text = party.PartyName;
                 txtPhone.Text = party.Phone;
                 txtTAN.Text = party.TAN;
-                ddlLine.SelectedValue = party.fLineID.ToString();
+                //ddlLine.SelectedValue = party.fLineID.ToString();
                 ddlPartyType.SelectedValue = party.PartyType;
                 ddlPrincipal.SelectedValue = party.PrincipalID.ToString();
                 AutoCompleteCountry1.CountryId = party.CountryID.ToString();
@@ -162,7 +187,8 @@ namespace EMS.WebApp.Forwarding.Master
             txtPartyName.Text = string.Empty;
             txtPhone.Text = string.Empty;
             txtTAN.Text = string.Empty;
-            ddlLine.SelectedValue = "0";
+            txtAddress.Text = string.Empty;
+            //ddlLine.SelectedValue = "0";
             ddlPartyType.SelectedValue = "0";
             ddlPrincipal.SelectedValue = "0";
 
@@ -202,14 +228,16 @@ namespace EMS.WebApp.Forwarding.Master
                 PAN = txtPAN.Text,//
                 PartyName = txtPartyName.Text,//
                 Phone = txtPhone.Text,//
-
+                
                 TAN = txtTAN.Text,//
-                fLineID = Convert.ToInt32(ddlLine.SelectedValue),
+                //fLineID = Convert.ToInt32(ddlLine.SelectedValue),
                 PartyType = ddlPartyType.SelectedValue,//
+               
+                
 
                 PrincipalID = Convert.ToInt32(ddlPrincipal.SelectedValue),//
                 FwPartyID = PartyId,//
-                PartyAddress = "",//
+                PartyAddress = txtAddress.Text,//
 
                 CompanyID = 1,//
 
@@ -248,5 +276,28 @@ namespace EMS.WebApp.Forwarding.Master
         {
 
         }
+
+        protected void ddlPartyType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlPartyType.SelectedValue.ToInt() == 3)
+            {
+                ddlPrincipal.Enabled = true;
+                rfvPrincipal.Enabled = true;
+            }
+            else
+            {
+                ddlPrincipal.Enabled = false;
+                rfvPrincipal.Enabled = false;
+            }
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Forwarding/Master/ManageParties.aspx");
+        }
+
+      
+
+
     }
 }

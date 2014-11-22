@@ -12,7 +12,7 @@ namespace EMS.Common
         int LocID { get; set; }
         string LocName { get; set; }
         string PartyName { get; set; }
-        string PartyType { get; set; }
+        int PartyType { get; set; }
         string PartyAddress { get; set; }
         string CountryName { get; set; }
         int CountryID { get; set; }
@@ -27,5 +27,6 @@ namespace EMS.Common
         int PrincipalID { get; set; }
         int UserID { get; set; }
         bool PartyStatus { get; set; }
+        string PartyTypeName { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace EMS.Entity
 
         public bool LineStatus { get; set; }
 
-        public string LineType { get; set; }
+        //public string LineType { get; set; }
 
         public string Prefix { get; set; }
 
@@ -52,7 +52,7 @@ namespace EMS.Entity
 
             this.LineID = Convert.ToInt32(reader["pk_FLineID"]);
             this.LineName = Convert.ToString(reader["LineName"]);
-            this.LineType = Convert.ToString(reader["LineType"]);
+            //this.LineType = Convert.ToString(reader["LineType"]);
             this.Prefix = Convert.ToString(reader["Prefix"]);
 
             if (ColumnExists(reader, "UserID"))

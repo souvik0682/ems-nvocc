@@ -16,16 +16,9 @@ namespace EMS.Entity
         public int LocID { get; set; }
         public string LocName { get; set; }
         public string PartyName { get; set; }
-        public string PartyType
-        {
-            get { return _partyType; }
-            set
-            {
-                _partyType=value;
-                try { PartyTypeName = PartyTypeDic[PartyType]; }
-                catch { }
-            }
-        }
+        public int PartyType { get; set;}
+        public string PartyTypeName {get; set;}
+       
         public string PartyAddress { get; set; }
         public int CountryID { get; set; }
         public string CountryName { get; set; }
@@ -40,24 +33,24 @@ namespace EMS.Entity
         public int PrincipalID { get; set; }
         public int UserID { get; set; }
         public bool PartyStatus { get; set; }
-        public string PartyTypeName { get; set; }
-        Dictionary<string, string> PartyTypeDic = null;
-        private void Initalize()
-        {
-            PartyTypeDic = new Dictionary<string, string>();
-            PartyTypeDic.Add("A", "Custome Agent");
-            PartyTypeDic.Add("T", "Transporter");
-            PartyTypeDic.Add("O", "Overseas Agent");
-            PartyTypeDic.Add("D", "Debtors");
-            PartyTypeDic.Add("C", "Creditors");
-        }
+        //public string PartyTypeName { get; set; }
+        //Dictionary<string, string> PartyTypeDic = null;
+        //private void Initalize()
+        //{
+        //    PartyTypeDic = new Dictionary<string, string>();
+        //    PartyTypeDic.Add("A", "Custome Agent");
+        //    PartyTypeDic.Add("T", "Transporter");
+        //    PartyTypeDic.Add("O", "Overseas Agent");
+        //    PartyTypeDic.Add("D", "Debtors");
+        //    PartyTypeDic.Add("C", "Creditors");
+        //}
         public PartyEntity()
         {
-            Initalize();
+            //Initalize();
         }
         public PartyEntity(DataTableReader reader)
         {
-            Initalize();
+            //Initalize();
             if (ColumnExists(reader, "CustID"))
                 if (reader["CustID"] != DBNull.Value)
                     FwPartyID = Convert.ToInt32(reader["CustID"]);
@@ -83,7 +76,11 @@ namespace EMS.Entity
 
             if (ColumnExists(reader, "PartyType"))
                 if (reader["PartyType"] != DBNull.Value)
-                    PartyType = Convert.ToString(reader["PartyType"]);
+                    PartyType = Convert.ToInt32(reader["PartyType"]);
+
+            if (ColumnExists(reader, "PartyTypeName"))
+                if (reader["PartyTypeName"] != DBNull.Value)
+                    PartyTypeName = Convert.ToString(reader["PartyTypeName"]);
 
             if (ColumnExists(reader, "PartyAddress"))
                 if (reader["PartyAddress"] != DBNull.Value)
@@ -140,7 +137,7 @@ namespace EMS.Entity
 
         public PartyEntity(DataRow reader)
         {
-            Initalize();
+            //Initalize();
             if (ColumnExists(reader, "CustID"))
                 if (reader["CustID"] != DBNull.Value)
                     FwPartyID = Convert.ToInt32(reader["CustID"]);
@@ -166,7 +163,11 @@ namespace EMS.Entity
 
             if (ColumnExists(reader, "PartyType"))
                 if (reader["PartyType"] != DBNull.Value)
-                    PartyType = Convert.ToString(reader["PartyType"]);
+                    PartyType = Convert.ToInt32(reader["PartyType"]);
+
+            if (ColumnExists(reader, "PartyTypeName"))
+                if (reader["PartyTypeName"] != DBNull.Value)
+                    PartyTypeName = Convert.ToString(reader["PartyTypeName"]);
 
             if (ColumnExists(reader, "PartyAddress"))
                 if (reader["PartyAddress"] != DBNull.Value)

@@ -80,9 +80,13 @@ namespace EMS.Entity
         }
         public JobEntity(DataTableReader reader)
         {
-            if (ColumnExists(reader, "pk_JobID"))
+             if (ColumnExists(reader, "pk_JobID"))
                 if (reader["pk_JobID"] != DBNull.Value)
                     JobID = Convert.ToInt64(reader["pk_JobID"]);
+
+             if (ColumnExists(reader, "fk_JobTypeID"))
+                 if (reader["fk_JobTypeID"] != DBNull.Value)
+                     JobTypeID = Convert.ToInt32(reader["fk_JobTypeID"]);
 
              if (ColumnExists(reader, "JobType"))
                  if (reader["JobType"] != DBNull.Value)
@@ -132,9 +136,9 @@ namespace EMS.Entity
                 if (reader["fk_SmodeID"] != DBNull.Value)
                     SmodeID = Convert.ToInt32(reader["fk_SmodeID"]);
 
-            if (ColumnExists(reader, "PrDocID"))
-                if (reader["PrDocID"] != DBNull.Value)
-                    PrDocID = Convert.ToInt32(reader["PrDocID"]);
+            if (ColumnExists(reader, "fk_prDocID"))
+                if (reader["fk_prDocID"] != DBNull.Value)
+                    PrDocID = Convert.ToInt32(reader["fk_prDocID"]);
 
             if (ColumnExists(reader, "ShippingMode"))
                 if (reader["ShippingMode"] != DBNull.Value)
@@ -234,12 +238,12 @@ namespace EMS.Entity
 
             if (ColumnExists(reader, "fk_JobScopeID"))
                 if (reader["fk_JobScopeID"] != DBNull.Value)
-                    fk_TransID = Convert.ToInt32(reader["fk_JobScopeID"]);
+                    JobScopeID = Convert.ToInt32(reader["fk_JobScopeID"]);
 
             if (ColumnExists(reader, "CargoSource"))
                 if (reader["CargoSource"] != DBNull.Value)
                     CargoSource = Convert.ToChar(reader["CargoSource"]);
-            
+
             if (ColumnExists(reader, "CreditDays"))
                 if (reader["CreditDays"] != DBNull.Value)
                     CreditDays = Convert.ToInt32(reader["CreditDays"]);

@@ -109,9 +109,11 @@
     <Content Include="FileNotFound.aspx" />
     <Content Include="FileTemplate\ContainerList.txt" />
     <Content Include="Forwarding\Transaction\Dashboard.aspx" />
+    <Content Include="Forwarding\Transaction\JobBL.aspx" />
     <Content Include="Forwarding\Transaction\FileUpload.aspx" />
     <Content Include="Forwarding\Transaction\Job.aspx" />
     <Content Include="Forwarding\Transaction\JobList.aspx" />
+    <Content Include="Forwarding\Transaction\ManageJobBL.aspx" />
     <Content Include="GetLocation.asmx" />
     <Content Include="Hire\AddEditHire.aspx" />
     <Content Include="Hire\Hire.aspx" />
@@ -486,6 +488,13 @@
     <Compile Include="Forwarding\Transaction\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Forwarding\Transaction\JobBL.aspx.cs">
+      <DependentUpon>JobBL.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forwarding\Transaction\JobBL.aspx.designer.cs">
+      <DependentUpon>JobBL.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Forwarding\Transaction\FileUpload.aspx.cs">
       <DependentUpon>FileUpload.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -506,6 +515,13 @@
     </Compile>
     <Compile Include="Forwarding\Transaction\JobList.aspx.designer.cs">
       <DependentUpon>JobList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forwarding\Transaction\ManageJobBL.aspx.cs">
+      <DependentUpon>ManageJobBL.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forwarding\Transaction\ManageJobBL.aspx.designer.cs">
+      <DependentUpon>ManageJobBL.aspx</DependentUpon>
     </Compile>
     <Compile Include="LinerInvoiceDataset.Designer.cs">
       <AutoGen>True</AutoGen>

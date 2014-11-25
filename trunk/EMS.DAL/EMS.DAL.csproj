@@ -70,6 +70,7 @@
     <Compile Include="DBManager\DbManagerBase.cs" />
     <Compile Include="DBManager\DbQuery.cs" />
     <Compile Include="InvoiceDAL.cs" />
+    <Compile Include="JobBLDAL.cs" />
     <Compile Include="JobDAL.cs" />
     <Compile Include="LBCntrDAL.cs" />
     <Compile Include="LeaseDAL.cs" />

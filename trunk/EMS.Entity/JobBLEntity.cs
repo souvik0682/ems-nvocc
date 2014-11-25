@@ -9,25 +9,29 @@ namespace EMS.Entity
 {
     public  class JobBLEntity : IJobBL
     {
-        public string JobNo { get; set; }
-        public long JobId { get; set; }
-        public DateTime JobDate { get; set; }
+     //General TAB
+        public string BookingNumber { get; set; }
+        public long BookingId { get; set; }
+        public DateTime BookingDate { get; set; }
         public string BLNumber { get; set; }
         public long BLId { get; set; }
         public DateTime BLDate { get; set; }
-        public string Party { get; set; }
+        public string BookingParty { get; set; }
+        public string RefBookingNumber { get; set; }
         public string Location { get; set; }
         public int LocationId { get; set; }
         public string Nvocc { get; set; }
         public int NvoccId { get; set; }
+        public int VesselId { get; set; }
         public string Vessel { get; set; }
+        public int VoyageId { get; set; }
         public string Voyage { get; set; }
         public string POR { get; set; }
         public string POL { get; set; }
         public string PORDesc { get; set; }
         public string POLDesc { get; set; }
         public string POD { get; set; }
-        //public string FPOD { get; set; }
+        public string FPOD { get; set; }
         public string PODDesc { get; set; }
         public string FPODDesc { get; set; }
         public int NoOfBL { get; set; }
@@ -40,9 +44,9 @@ namespace EMS.Entity
         public decimal NetWeight { get; set; }
         public decimal GrossWeight { get; set; }
         public DateTime ? BLReleaseDate { get; set; }
-        //public int fk_FPOD { get; set; }
+        public int fk_FPOD { get; set; }
         public bool BLthruEdge { get; set; }
-        //public bool CloseVoyage { get; set; }
+        public bool CloseVoyage { get; set; }
         public bool CloseBL { get; set; } 
         public int ShipmentType { get; set; }
 
@@ -79,17 +83,17 @@ namespace EMS.Entity
         }
         public JobBLEntity(DataTableReader reader)
         {
-            if (ColumnExists(reader, "JobNo"))
-                if (reader["JobNo"] != DBNull.Value)
-                    JobNo = Convert.ToString(reader["JobNo"]);
+            if (ColumnExists(reader, "BookingNumber"))
+                if (reader["BookingNumber"] != DBNull.Value)
+                    BookingNumber = Convert.ToString(reader["BookingNumber"]);
 
-            if (ColumnExists(reader, "JobId"))
-                if (reader["JobId"] != DBNull.Value)
-                    JobId = Convert.ToInt64(reader["JobId"]);
+            if (ColumnExists(reader, "BookingId"))
+                if (reader["BookingId"] != DBNull.Value)
+                    BookingId = Convert.ToInt64(reader["BookingId"]);
 
-            if (ColumnExists(reader, "JobDate"))
-                if (reader["JobDate"] != DBNull.Value)
-                    JobDate = Convert.ToDateTime(reader["JobDate"]);
+            if (ColumnExists(reader, "BookingDate"))
+                if (reader["BookingDate"] != DBNull.Value)
+                    BookingDate = Convert.ToDateTime(reader["BookingDate"]);
 
             if (ColumnExists(reader, "BLNumber"))
                 if (reader["BLNumber"] != DBNull.Value)
@@ -103,13 +107,13 @@ namespace EMS.Entity
                 if (reader["BLDate"] != DBNull.Value)
                     BLDate = Convert.ToDateTime(reader["BLDate"]);
 
-            if (ColumnExists(reader, "Party"))
-                if (reader["Party"] != DBNull.Value)
-                    Party = Convert.ToString(reader["Party"]);
+            if (ColumnExists(reader, "BookingParty"))
+                if (reader["BookingParty"] != DBNull.Value)
+                    BookingParty = Convert.ToString(reader["BookingParty"]);
 
-            //if (ColumnExists(reader, "RefBookingNumber"))
-            //    if (reader["RefBookingNumber"] != DBNull.Value)
-            //        RefBookingNumber = Convert.ToString(reader["RefBookingNumber"]);
+            if (ColumnExists(reader, "RefBookingNumber"))
+                if (reader["RefBookingNumber"] != DBNull.Value)
+                    RefBookingNumber = Convert.ToString(reader["RefBookingNumber"]);
 
             if (ColumnExists(reader, "Location"))
                 if (reader["Location"] != DBNull.Value)
@@ -131,9 +135,17 @@ namespace EMS.Entity
                 if (reader["Vessel"] != DBNull.Value)
                     Vessel = Convert.ToString(reader["Vessel"]);
 
+            if (ColumnExists(reader, "VesselId"))
+                if (reader["VesselId"] != DBNull.Value)
+                    VesselId = Convert.ToInt32(reader["VesselId"]);
+
             if (ColumnExists(reader, "Voyage"))
                 if (reader["Voyage"] != DBNull.Value)
                     Voyage = Convert.ToString(reader["Voyage"]);
+
+            if (ColumnExists(reader, "VoyageId"))
+                if (reader["VoyageId"] != DBNull.Value)
+                    VoyageId = Convert.ToInt32(reader["VoyageId"]);
 
             if (ColumnExists(reader, "POR"))
                 if (reader["POR"] != DBNull.Value)
@@ -175,29 +187,35 @@ namespace EMS.Entity
                 if (reader["POD"] != DBNull.Value)
                     POD = Convert.ToString(reader["POD"]);
 
-            //if (ColumnExists(reader, "FPOD"))
-            //    if (reader["FPOD"] != DBNull.Value)
-            //        FPOD = Convert.ToString(reader["FPOD"]);
+            if (ColumnExists(reader, "FPOD"))
+                if (reader["FPOD"] != DBNull.Value)
+                    FPOD = Convert.ToString(reader["FPOD"]);
 
             if (ColumnExists(reader, "PODDesc"))
             {
                 if (reader["PODDesc"] != DBNull.Value)
                     PODDesc = Convert.ToString(reader["PODDesc"]);
             }
-  
+            else
+            {
+                PODDesc = POD;
+            }
 
             if (ColumnExists(reader, "FPODDesc"))
             {
                 if (reader["FPODDesc"] != DBNull.Value)
                     FPODDesc = Convert.ToString(reader["FPODDesc"]);
             }
-   
+            else
+            {
+                FPODDesc = FPOD;
+            }
 
-            //if (ColumnExists(reader, "fk_FPOD"))
-            //{
-            //    if (reader["fk_FPOD"] != DBNull.Value)
-            //        fk_FPOD = Convert.ToInt32(reader["fk_FPOD"]);
-            //}
+            if (ColumnExists(reader, "fk_FPOD"))
+            {
+                if (reader["fk_FPOD"] != DBNull.Value)
+                    fk_FPOD = Convert.ToInt32(reader["fk_FPOD"]);
+            }
 
             if (ColumnExists(reader, "NoOfBLs"))
                 if (reader["NoOfBLs"] != DBNull.Value)
@@ -309,9 +327,9 @@ namespace EMS.Entity
                 if (reader["BLStatus"] != DBNull.Value)
                     BLStatus = Convert.ToBoolean(reader["BLStatus"]);
 
-            //if (ColumnExists(reader, "CloseVoyage"))
-            //    if (reader["CloseVoyage"] != DBNull.Value)
-            //        CloseVoyage = Convert.ToBoolean(reader["CloseVoyage"]);
+            if (ColumnExists(reader, "CloseVoyage"))
+                if (reader["CloseVoyage"] != DBNull.Value)
+                    CloseVoyage = Convert.ToBoolean(reader["CloseVoyage"]);
 
             if (ColumnExists(reader, "BLClose"))
                 if (reader["BLClose"] != DBNull.Value)

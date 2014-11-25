@@ -48,6 +48,7 @@
     <Compile Include="BookingBLL.cs" />
     <Compile Include="CommonBLL.cs" />
     <Compile Include="ContainerTranBLL.cs" />
+    <Compile Include="JobBLBLL.cs" />
     <Compile Include="CreditNoteBLL.cs" />
     <Compile Include="DBInteraction.cs" />
     <Compile Include="DOBLL.cs" />

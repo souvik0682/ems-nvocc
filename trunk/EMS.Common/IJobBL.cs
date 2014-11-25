@@ -7,28 +7,31 @@ namespace EMS.Common
 {
     public interface IJobBL : ICommon
     {
-        string JobNo { get; set; }
-        long JobId { get; set; }
-        DateTime JobDate { get; set; }
+        string BookingNumber { get; set; }
+        long BookingId { get; set; }
+        DateTime BookingDate { get; set; }
         string BLNumber { get; set; }
         long BLId { get; set; }
         DateTime BLDate { get; set; }
-        string Party { get; set; }
+        string BookingParty { get; set; }
+        string RefBookingNumber { get; set; }
         string Location { get; set; }
         int LocationId { get; set; }
         string Nvocc { get; set; }
         int NvoccId { get; set; }
         string Vessel { get; set; }
+        int VesselId { get; set; }
         string Voyage { get; set; }
+        int VoyageId { get; set; }
         string POR { get; set; }
         string POL { get; set; }
         string PORDesc { get; set; }
         string POLDesc { get; set; }
         string POD { get; set; }
-        //string FPOD { get; set; }
+        string FPOD { get; set; }
         string PODDesc { get; set; }
         string FPODDesc { get; set; }
-        //int fk_FPOD { get; set; }
+        int fk_FPOD { get; set; }
         int NoOfBL { get; set; }
         string BLType { get; set; }
         int ShipmentMode { get; set; }
@@ -61,7 +64,7 @@ namespace EMS.Common
         string EdgeBLNumber { get; set; }
         string RefBLNumber { get; set; }
         bool BLStatus { get; set; }
-        //bool CloseVoyage { get; set; }
+        bool CloseVoyage { get; set; }
         bool CloseBL { get; set; }
     }
 }

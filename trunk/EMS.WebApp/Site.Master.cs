@@ -17,7 +17,7 @@ namespace EMS.WebApp
     {
         protected void Page_Init(object sender, EventArgs e)
         {
-            InitialMethod();
+            //InitialMethod();
         }
 
         private void InitialMethod()

@@ -239,5 +239,11 @@ namespace EMS.BLL
         {
             return MoneyReceiptDAL.GetInvoiceDetailForMoneyReceipt(InvoiceId);
         }
+
+
+        public DataTable GetInvoiceDetailForCrePayment(Int64 InvoiceId, Int32 JobID, string InvType)
+        {
+            return MoneyReceiptDAL.GetInvoiceDetailForCrePayment(InvoiceId, JobID, InvType);
+        }
     }
 }

@@ -107,6 +107,11 @@ namespace EMS.BLL
             return InvoiceDAL.GetAllExpCharges(docTypeId, LocationID, LineID, BookingNo);
         }
 
+        public List<ICharge> GetAllFwdCharges()
+        {
+            return InvoiceDAL.GetAllFwdCharges();
+        }
+
         public DataTable GetTerminals(long LocationId)
         {
             return InvoiceDAL.GetTerminals(LocationId);
@@ -231,6 +236,13 @@ namespace EMS.BLL
         {
             return InvoiceDAL.GetExpInvoiceCharges(BlId, ChargesID, TerminalID, DocTypeId, InvoiceDate);
         }
+
+
+        public List<IChargeRate> GetfwdInvoiceCharges(int JobId, int ChargesID, int EstimateID, int DocTypeId, DateTime InvoiceDate)
+        {
+            return InvoiceDAL.GetfwdInvoiceCharges(JobId, EstimateID, ChargesID, DocTypeId, InvoiceDate);
+        }
+
         public DataTable ChargeEditable(int ChargeId)
         {
             return InvoiceDAL.ChargeEditable(ChargeId);

@@ -31,15 +31,6 @@ namespace EMS.WebApp.Forwarding.Transaction {
         protected global::System.Web.UI.WebControls.DropDownList ddlJobType;
         
         /// <summary>
-        /// JobTypeDs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource JobTypeDs;
-        
-        /// <summary>
         /// RequiredFieldValidator1 control.
         /// </summary>
         /// <remarks>
@@ -202,15 +193,6 @@ namespace EMS.WebApp.Forwarding.Transaction {
         protected global::System.Web.UI.WebControls.DropDownList ddlShipmentMode;
         
         /// <summary>
-        /// ShipmentDs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource ShipmentDs;
-        
-        /// <summary>
         /// RequiredFieldValidator6 control.
         /// </summary>
         /// <remarks>
@@ -256,15 +238,6 @@ namespace EMS.WebApp.Forwarding.Transaction {
         protected global::System.Web.UI.WebControls.DropDownList ddlShippingLine;
         
         /// <summary>
-        /// LineDs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource LineDs;
-        
-        /// <summary>
         /// RequiredFieldValidator9 control.
         /// </summary>
         /// <remarks>
@@ -281,15 +254,6 @@ namespace EMS.WebApp.Forwarding.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCustomer;
-        
-        /// <summary>
-        /// CustomerDs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource CustomerDs;
         
         /// <summary>
         /// RequiredFieldValidator10 control.
@@ -434,6 +398,15 @@ namespace EMS.WebApp.Forwarding.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlHblFormat;
+        
+        /// <summary>
+        /// LineDs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource LineDs;
         
         /// <summary>
         /// txtPlaceReciept control.

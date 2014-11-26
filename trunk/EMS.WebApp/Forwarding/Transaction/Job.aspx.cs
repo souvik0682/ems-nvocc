@@ -24,9 +24,13 @@ namespace EMS.WebApp.Forwarding.Transaction
         {
             RetriveParameters();
             CheckUserAccess();
+            
 
             if (!IsPostBack)
             {
+                FillDebtors();
+                FillJobType();
+                FillShipmentMode();
                 if (!ReferenceEquals(Request.QueryString["JobId"], null))
                 {
                     int JobId = 0;
@@ -36,14 +40,14 @@ namespace EMS.WebApp.Forwarding.Transaction
                     {
                         ViewState["JOBID"] = JobId;
 
-                        DataSet ds = new DataSet();
-                        BookingBLL oBookChgBLL = new BookingBLL();
+                        //DataSet ds = new DataSet();
+                        //BookingBLL oBookChgBLL = new BookingBLL();
 
-                        ds = oBookChgBLL.GetBookingChargesList(JobId);
-                        if (ds.Tables[0].Rows.Count > 0)
-                            ViewState["ISEDIT"] = "True";
-                        else
-                            ViewState["ISEDIT"] = "False";
+                        //ds = oBookChgBLL.GetBookingChargesList(JobId);
+                        //if (ds.Tables[0].Rows.Count > 0)
+                        //    ViewState["ISEDIT"] = "True";
+                        //else
+                        //    ViewState["ISEDIT"] = "False";
 
                         LoadJob();
                     }
@@ -59,7 +63,38 @@ namespace EMS.WebApp.Forwarding.Transaction
             AC_Port3.TextChanged += new EventHandler(AC_Port3_TextChanged);
         }
 
+        void FillJobType()
+        {
+            DataTable JobType = new CommonBLL().GetfwdJobType();
+            ddlJobType.DataSource = JobType;
+            ddlJobType.DataTextField = "JobType";
+            ddlJobType.DataValueField = "pk_JobTypeID";
+            ddlJobType.DataBind();
+            ddlJobType.Items.Insert(0, new ListItem("--Select--", "0"));
+        }
+
+        void FillDebtors()
+        {
+            DataTable principal = new CommonBLL().GetfwdPartyByType("D");
+            ddlCustomer.DataSource = principal;
+            ddlCustomer.DataTextField = "LineName";
+            ddlCustomer.DataValueField = "LineID";
+            ddlCustomer.DataBind();
+            ddlCustomer.Items.Insert(0, new ListItem("--Select--", "0"));
+        }
+
+        void FillShipmentMode()
+        {
+            DataTable principal = new CommonBLL().GetfwdShipmentMode();
+            ddlShipmentMode.DataSource = principal;
+            ddlShipmentMode.DataTextField = "ModeName";
+            ddlShipmentMode.DataValueField = "ModeId";
+            ddlShipmentMode.DataBind();
+            ddlShipmentMode.Items.Insert(0, new ListItem("--Select--", "0"));
+        }
+        
         // PortOfDischarge
+
         void AC_Port3_TextChanged(object sender, EventArgs e)
         {
             string dischargePort = ((TextBox)AC_Port3.FindControl("txtPort")).Text;
@@ -114,13 +149,18 @@ namespace EMS.WebApp.Forwarding.Transaction
 
         private void LoadJob()
         {
-            IJob job = JobBLL.GetJobs(null, Convert.ToInt32(ViewState["JOBID"]), null).SingleOrDefault();
+            SearchCriteria newcriteria = new SearchCriteria();
+            SetDefaultSearchCriteria(newcriteria);
+
+            IJob job = JobBLL.GetJobs(newcriteria, Convert.ToInt32(ViewState["JOBID"]), null).SingleOrDefault();
+            DisplayJobType(job.JobTypeID);
             ddlJobType.SelectedValue = job.JobTypeID.ToString();
+            //ddlJobType.SelectedValue = job.JobTypeID.ToString();
             ddlJobScope.SelectedValue = job.JobScopeID.ToString();
             txtJobDate.Text = job.JobDate.ToShortDateString();
             txtJobNo.Text = job.JobNo;
             ddlOpsControlled.SelectedValue = job.OpsLocID.ToString();
-            //ddlDocControlled.SelectedValue = job.
+            ddlDocControlled.SelectedValue = job.jobLocID.ToString();
             ddlSalesControlled.SelectedValue = job.SalesmanID.ToString();
             ddlShipmentMode.SelectedValue = job.SmodeID.ToString();
             ddlPrimeDocs.SelectedValue = job.PrDocID.ToString();
@@ -132,6 +172,7 @@ namespace EMS.WebApp.Forwarding.Transaction
             txtCBMVolume.Text = job.volCBM.ToString();
             txtRevenue.Text = job.RevTon.ToString();
             txtPlaceReciept.Text = job.PlaceOfReceipt;
+            txtCreditDays.Text = job.CreditDays.ToString();
             //ddlPortLoading.SelectedValue = job.fk_LportID.ToString();
             //ddlPortDischarge.SelectedValue = job.fk_DportID.ToString();
 
@@ -155,6 +196,18 @@ namespace EMS.WebApp.Forwarding.Transaction
             ddlTransporter.SelectedValue = job.fk_TransID.ToString();
             ddlOverseasAgent.SelectedValue = job.fk_OSID.ToString();
             ddlCargoSource.SelectedValue = job.CargoSource.ToString();
+
+            //ddlJobType_SelectedIndexChanged1(ddlJobType, new EventArgs());
+        }
+
+        private void SetDefaultSearchCriteria(SearchCriteria criteria)
+        {
+            string sortExpression = "JobNo";
+            string sortDirection = "ASC";
+
+            criteria.SortExpression = sortExpression;
+            criteria.SortDirection = sortDirection;
+
         }
 
         private void RetriveParameters()
@@ -228,7 +281,7 @@ namespace EMS.WebApp.Forwarding.Transaction
             job.PrDocID = ddlPrimeDocs.SelectedValue.ToInt();
             job.PrintHBL = chkPrintHBL.Checked;
             job.HBLFormatID = ddlHblFormat.SelectedValue.ToInt();
-            if (ddlJobType.SelectedIndex == 0 || ddlJobType.SelectedIndex == 1)
+            if (ddlJobType.SelectedIndex == 1 || ddlJobType.SelectedIndex == 2)
             {
                 job.ttl20 = Convert.ToInt32(txtTTL20.Text);
                 job.ttl40 = Convert.ToInt32(txtTTL40.Text);
@@ -287,11 +340,6 @@ namespace EMS.WebApp.Forwarding.Transaction
             Response.Redirect("~/Forwarding/Transaction/JobList.aspx");
         }
 
-        protected void ddlJobType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         protected void ddlOpsControlled_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -319,9 +367,11 @@ namespace EMS.WebApp.Forwarding.Transaction
             }
         }
 
-        protected void ddlJobType_SelectedIndexChanged1(object sender, EventArgs e)
+       
+
+        void DisplayJobType(int typeID)
         {
-            if (ddlJobType.SelectedIndex == 0 || ddlJobType.SelectedIndex == 1)
+            if (typeID == 1 || typeID == 2)
             {
                 txtGrossWeight.Enabled = false;
                 txtVolumeWeight.Enabled = false;
@@ -339,6 +389,23 @@ namespace EMS.WebApp.Forwarding.Transaction
 
                 txtTTL20.Enabled = true;
                 txtTTL40.Enabled = true;
+                ddlShipmentMode.Enabled = true;
+                ddlShipmentMode.Items[6].Enabled = false;
+                ddlShipmentMode.Items[0].Enabled = true;
+                ddlShipmentMode.Items[1].Enabled = true;
+                ddlShipmentMode.Items[2].Enabled = true;
+                ddlShipmentMode.Items[3].Enabled = true;
+                ddlShipmentMode.Items[4].Enabled = true;
+                ddlShipmentMode.Items[5].Enabled = true;
+
+                var principal = new CommonBLL().GetfwLineByType(new SearchCriteria { StringOption1 = "O" });
+
+                ddlShippingLine.DataSource = principal;
+                ddlShippingLine.DataTextField = "LineName";
+                ddlShippingLine.DataValueField = "LineID";
+                ddlShippingLine.DataBind();
+                ddlShippingLine.Items.Insert(0, new ListItem("--Select--", "0"));
+
 
             }
             else
@@ -362,7 +429,116 @@ namespace EMS.WebApp.Forwarding.Transaction
                 txtTTL40.Text = "";
                 txtTTL20.Enabled = false;
                 txtTTL40.Enabled = false;
+                ddlShipmentMode.Items[0].Enabled = false;
+                ddlShipmentMode.Items[1].Enabled = false;
+                ddlShipmentMode.Items[2].Enabled = false;
+                ddlShipmentMode.Items[3].Enabled = false;
+                ddlShipmentMode.Items[4].Enabled = false;
+                ddlShipmentMode.Items[5].Enabled = false;
+                ddlShipmentMode.Items[6].Enabled = true;
+                //ddlShipmentMode.SelectedIndex = 6;
+                ddlShipmentMode.Enabled = false;
+
+                DataTable principal = new CommonBLL().GetfwdPartyByType("A");
+
+                ddlShippingLine.DataSource = principal;
+                ddlShippingLine.DataTextField = "LineName";
+                ddlShippingLine.DataValueField = "LineID";
+                ddlShippingLine.DataBind();
+                ddlShippingLine.Items.Insert(0, new ListItem("--Select--", "0"));
+
+
+
             }
+        }
+
+        protected void txtDelivery_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlJobType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisplayJobType(ddlJobType.SelectedIndex);
+            //if (ddlJobType.SelectedIndex == 1 || ddlJobType.SelectedIndex == 2)
+            //{
+            //    txtGrossWeight.Enabled = false;
+            //    txtVolumeWeight.Enabled = false;
+            //    rfvGrossWeight.Enabled = false;
+            //    rfvVolumeWeight.Enabled = false;
+            //    txtGrossWeight.Text = "";
+            //    txtVolumeWeight.Text = "";
+
+            //    txtMTWeight.Enabled = true;
+            //    rfvMTWeight.Enabled = true;
+            //    txtCBMVolume.Enabled = true;
+            //    rfvCBMVolume.Enabled = true;
+            //    txtRevenue.Enabled = true;
+            //    rfvRevenue.Enabled = true;
+
+            //    txtTTL20.Enabled = true;
+            //    txtTTL40.Enabled = true;
+            //    ddlShipmentMode.Enabled = true;
+            //    ddlShipmentMode.Items[6].Enabled = false;
+            //    ddlShipmentMode.Items[0].Enabled = true;
+            //    ddlShipmentMode.Items[1].Enabled = true;
+            //    ddlShipmentMode.Items[2].Enabled = true;
+            //    ddlShipmentMode.Items[3].Enabled = true;
+            //    ddlShipmentMode.Items[4].Enabled = true;
+            //    ddlShipmentMode.Items[5].Enabled = true;
+
+            //    var principal = new CommonBLL().GetfwLineByType(new SearchCriteria { StringOption1 = "O" });
+
+            //    ddlShippingLine.DataSource = principal;
+            //    ddlShippingLine.DataTextField = "LineName";
+            //    ddlShippingLine.DataValueField = "LineID";
+            //    ddlShippingLine.DataBind();
+            //    ddlShippingLine.Items.Insert(0, new ListItem("--Select--", "0"));
+
+
+            //}
+            //else
+            //{
+            //    txtGrossWeight.Enabled = true;
+            //    txtVolumeWeight.Enabled = true;
+            //    rfvGrossWeight.Enabled = true;
+            //    rfvVolumeWeight.Enabled = true;
+
+            //    txtMTWeight.Enabled = false;
+            //    rfvMTWeight.Enabled = false;
+            //    txtCBMVolume.Enabled = false;
+            //    rfvCBMVolume.Enabled = false;
+            //    txtRevenue.Enabled = false;
+            //    rfvRevenue.Enabled = false;
+            //    txtMTWeight.Text = "";
+            //    txtCBMVolume.Text = "";
+            //    txtCBMVolume.Text = "";
+
+            //    txtTTL20.Text = "";
+            //    txtTTL40.Text = "";
+            //    txtTTL20.Enabled = false;
+            //    txtTTL40.Enabled = false;
+            //    ddlShipmentMode.Items[0].Enabled = false;
+            //    ddlShipmentMode.Items[1].Enabled = false;
+            //    ddlShipmentMode.Items[2].Enabled = false;
+            //    ddlShipmentMode.Items[3].Enabled = false;
+            //    ddlShipmentMode.Items[4].Enabled = false;
+            //    ddlShipmentMode.Items[5].Enabled = false;
+            //    ddlShipmentMode.Items[6].Enabled = true;
+            //    //ddlShipmentMode.SelectedIndex = 6;
+            //    ddlShipmentMode.Enabled = false;
+
+            //    DataTable principal = new CommonBLL().GetfwdPartyByType("A");
+
+            //    ddlShippingLine.DataSource = principal;
+            //    ddlShippingLine.DataTextField = "LineName";
+            //    ddlShippingLine.DataValueField = "LineID";
+            //    ddlShippingLine.DataBind();
+            //    ddlShippingLine.Items.Insert(0, new ListItem("--Select--", "0"));
+
+
+
+            //}
         }
     }
 }

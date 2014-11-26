@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Data;
 using System.Web.UI.WebControls;
+using EMS.Utilities.ResourceManager;
 using EMS.Utilities;
 using EMS.Entity;
 using EMS.Common;
@@ -49,6 +51,14 @@ namespace EMS.WebApp.Forwarding.Master
 
         private void SetDeafaultSetting()
         {
+            DataTable PartyType = new CommonBLL().GetfwdPartyType();
+            ddlPartyType.DataSource = PartyType;
+            ddlPartyType.DataTextField = "PartyType";
+            ddlPartyType.DataValueField = "pk_PartyTypeID";
+            ddlPartyType.DataBind();
+            ddlPartyType.Items.Insert(0, new ListItem("--Select--", "0"));
+
+
             SearchCriteria searchCriteria = new SearchCriteria
             {
                 PageIndex = 0,
@@ -211,6 +221,7 @@ namespace EMS.WebApp.Forwarding.Master
                     ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
 
                     btnRemove.Visible = true; //btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLID"));
+                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
 
                 }
                 else

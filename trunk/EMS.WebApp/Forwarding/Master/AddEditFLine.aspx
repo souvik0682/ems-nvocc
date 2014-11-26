@@ -14,7 +14,7 @@
     <style type="text/css">
         .style1
         {
-            width: 474px;
+            width: 770px;
         }
         .style2
         {
@@ -25,30 +25,26 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
     <div>
         <div id="headercaption">
-            ADD / EDIT FORWARDING LINE</div>
+            ADD / EDIT FORWARDING PRINCIPALS</div>
         <center>
             <fieldset style="width: 400px;">
-                <legend>Add / Edit Forwarding Line</legend>
+                <legend>Add / Edit Forwarding Principal</legend>
                 <table border="0" cellpadding="2" cellspacing="3">
-                     <tr>
+<%--                     <tr>
                         <td class="style1">
                             Line Type<span class="errormessage1">*</span> :
                         </td>
                         <td class="style2">
-                            <%--<asp:HiddenField ID="hdnLine" runat="server" />--%>
                             <asp:DropDownList ID="ddlLineType" runat="server"  CssClass="dropdownlist">
-        <%--                    <asp:ListItem Text="Select" Value="0"></asp:ListItem>--%>
                             <asp:ListItem Text="Sea" Value="S"></asp:ListItem>
                             <asp:ListItem Text="Air" Value="A"></asp:ListItem>
                             <asp:ListItem Text="Agent" Value="O"></asp:ListItem>
                             </asp:DropDownList>
-                            <%-- Make the completion list transparent and then show it --%>
-                            
                         </td>
-                    </tr>
+                    </tr>--%>
                     <tr>
                         <td class="style1">
-                            Line Name<span class="errormessage1">*</span> :
+                            Principal Name<span class="errormessage1">*</span> :
                         </td>
                         <td class="style2">
                             <asp:TextBox ID="txtLine" runat="server" CssClass="textboxuppercase" MaxLength="50" Width="250"></asp:TextBox><br />

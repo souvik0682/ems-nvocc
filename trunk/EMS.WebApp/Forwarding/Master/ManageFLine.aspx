@@ -13,7 +13,7 @@
         </div>
     </div>
     <div id="headercaption">
-        MANAGE FORWARDING LINES
+        MANAGE FORWARDING PRINCIPALS
     </div>
     <center>
         <div style="width: 880px; ">
@@ -21,14 +21,14 @@
                 <legend>Search</legend>
                 <table>
                     <tr>
-                        <td>
+<%--                        <td>
                             <asp:DropDownList ID="ddlLineType" runat="server"  CssClass="dropdownlist"  OnSelectedIndexChanged="ddlLineType_SelectedIndexChanged">
                             <asp:ListItem Text=" All" Value="0"></asp:ListItem>
                             <asp:ListItem Text="Sea" Value="C"></asp:ListItem>
                             <asp:ListItem Text="Air" Value="T"></asp:ListItem>
                             <asp:ListItem Text="Agent" Value="O"></asp:ListItem>
                             </asp:DropDownList>
-                        </td>
+                        </td>--%>
                         <td>
                             <asp:TextBox ID="txtLine" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters,Numbers"
@@ -59,7 +59,7 @@
                 </ProgressTemplate>
             </asp:UpdateProgress>
             <fieldset id="Fieldset1" runat="server" style="width: 100%; min-height: 100px;">
-                <legend>Forwarding Line List</legend>
+                <legend>Forwarding Principal List</legend>
                 <div style="float: right; padding-bottom: 5px;">
                     Results Per Page:<asp:DropDownList ID="ddlPaging" runat="server" Width="50px" AutoPostBack="true"
                         OnSelectedIndexChanged="ddlPaging_SelectedIndexChanged">
@@ -69,7 +69,7 @@
                         <asp:ListItem Text="100" Value="100" />
                     </asp:DropDownList>
                     &nbsp;&nbsp;
-                    <asp:Button ID="btnAdd" runat="server" Text="Add Line" Width="150px"
+                    <asp:Button ID="btnAdd" runat="server" Text="Add Principal" Width="150px"
                         OnClick="btnAdd_Click" />
                 </div>
                 <div>
@@ -98,7 +98,7 @@
                                         <ItemStyle CssClass="gridviewitem" Width="4%" />
                                     </asp:TemplateField>
                                     
-                                    <asp:TemplateField>
+<%--                                    <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="6%" />
                                         <HeaderTemplate>
@@ -107,11 +107,11 @@
                                         <ItemTemplate>
                                             <asp:Label ID="lblLineType" runat="server"></asp:Label>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
+                                    </asp:TemplateField>--%>
 
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="6%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="15%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHLine" runat="server" CommandName="Sort" CommandArgument="Line Name"
                                                 Text="Line"></asp:LinkButton></HeaderTemplate>
@@ -122,7 +122,7 @@
 
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="6%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHPrefix" runat="server" CommandName="Sort" CommandArgument="Prefix"
                                                 Text="Prefix"></asp:LinkButton></HeaderTemplate>

@@ -172,7 +172,7 @@ namespace EMS.WebApp.Forwarding.Master
                 txtPhone.Text = party.Phone;
                 txtTAN.Text = party.TAN;
                 //ddlLine.SelectedValue = party.fLineID.ToString();
-                ddlPartyType.SelectedValue = party.PartyType;
+                ddlPartyType.SelectedValue = party.PartyType.ToString();
                 ddlPrincipal.SelectedValue = party.PrincipalID.ToString();
                 AutoCompleteCountry1.CountryId = party.CountryID.ToString();
                 AutoCompleteCountry1.CountryName = party.CountryName;
@@ -231,7 +231,7 @@ namespace EMS.WebApp.Forwarding.Master
                 
                 TAN = txtTAN.Text,//
                 //fLineID = Convert.ToInt32(ddlLine.SelectedValue),
-                PartyType = ddlPartyType.SelectedValue,//
+                PartyType = ddlPartyType.SelectedValue.ToInt(),//
                
                 
 

@@ -114,11 +114,12 @@ namespace EMS.WebApp.Forwarding.Master
                 e.Row.Cells[0].Text = ((gvwLine.PageSize * gvwLine.PageIndex) + e.Row.RowIndex + 1).ToString();
                 //e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Abbreviation"));
 
-                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LineType"));// +"<br/><font style='font-size:x-small;font-weight:bold;'>CODE : (" + Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LFCode")) + ")</font>";
+                //e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LineType"));
+                // +"<br/><font style='font-size:x-small;font-weight:bold;'>CODE : (" + Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LFCode")) + ")</font>";
 
-                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LineName"));// +"<br/><font style='font-size:x-small;font-weight:bold;'>CODE : (" + Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LTCode")) + ")</font>";
+                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LineName"));// +"<br/><font style='font-size:x-small;font-weight:bold;'>CODE : (" + Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LTCode")) + ")</font>";
 
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Prefix"));
+                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Prefix"));
 
                 //e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Phone"));
                 ////e.Row.Cells[4].Text = Convert.ToString(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "WeightFrom")));
@@ -171,7 +172,7 @@ namespace EMS.WebApp.Forwarding.Master
         protected void btnRefresh_Click(object sender, EventArgs e)
         {
             txtLine.Text = string.Empty;
-            ddlLineType.SelectedIndex = -1;
+            //ddlLineType.SelectedIndex = -1;
             LoadFLine();
         }
 
@@ -277,7 +278,7 @@ namespace EMS.WebApp.Forwarding.Master
             criteria.SortDirection = sortDirection;
             //criteria.POD = txtPort.Text.Trim();
             criteria.LineName = txtLine.Text.Trim();
-            criteria.ChargeType = Convert.ToChar(ddlLineType.SelectedValue);
+            //criteria.ChargeType = Convert.ToChar(ddlLineType.SelectedValue);
 
             Session[Constants.SESSION_SEARCH_CRITERIA] = criteria;
         }

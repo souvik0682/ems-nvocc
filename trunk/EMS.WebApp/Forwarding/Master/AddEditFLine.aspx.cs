@@ -81,7 +81,7 @@ namespace EMS.WebApp.Forwarding.Master
 
             //ddlFromLocation.SelectedIndex = Convert.ToInt32(ddlFromLocation.Items.IndexOf(ddlFromLocation.Items.FindByValue(oImportHaulage.LocationFrom)));
             //hdnFLineID.Value = oLine.LineID.ToString();
-            ddlLineType.SelectedValue = oLine.LineType.ToString();
+            //ddlLineType.SelectedValue = oLine.LineType.ToString();
             txtLine.Text = Convert.ToString(oLine.LineName);
             txtPrefix.Text = Convert.ToString(oLine.Prefix);
         }
@@ -102,7 +102,7 @@ namespace EMS.WebApp.Forwarding.Master
                 mode = "U";
                 if (hdnFLineID.Value.ToInt() == 0)
                     mode = "A";
-                oLineEntity.LineType = ddlLineType.SelectedValue.ToString();
+                //oLineEntity.LineType = ddlLineType.SelectedValue.ToString();
                 oLineEntity.LineName = txtLine.Text.ToString();
                 oLineEntity.LineID = hdnFLineID.ToInt();
                 oLineEntity.Prefix = txtPrefix.Text;
@@ -137,7 +137,7 @@ namespace EMS.WebApp.Forwarding.Master
 
         void ClearAll()
         {
-            ddlLineType.SelectedIndex = 0;
+            //ddlLineType.SelectedIndex = 0;
             txtPrefix.Text = string.Empty;
             txtLine.Text = string.Empty;
             hdnFLineID.Value = "0";

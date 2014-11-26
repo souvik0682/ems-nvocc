@@ -547,5 +547,25 @@ namespace EMS.BLL
 
         public List<IFwLine> GetfwLineByType(SearchCriteria searchCriteria)
         { return fwLineDAL.GetfwLineByType(searchCriteria); }
+
+        public DataTable GetfwdPartyType()
+        {
+            return CommonDAL.GetfwdPartyType();
+        }
+
+        public DataTable GetfwdPartyByType(string pType)
+        {
+            return CommonDAL.GetfwdPartyByType(pType);
+        }
+
+        public DataTable GetfwdJobType()
+        {
+            return CommonDAL.GetfwdJobType();
+        }
+
+        public DataTable GetfwdShipmentMode()
+        {
+            return CommonDAL.GetfwdShipmentMode();
+        }
     }
 }

@@ -130,7 +130,7 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@JobId", JobId);
-                oDq.AddVarcharParam("@type", 10, Type);
+                oDq.AddVarcharParam("@type", 1, Type);
                 oDq.AddIntegerParam("@UserId", UserId);
                 oDq.RunActionQuery();
             }

@@ -15,7 +15,7 @@ namespace EMS.DAL
         {
         }
 
-        #region User
+        #region MoneyReceipt
         public static List<MoneyReceiptEntity> GetMoneyReceiptsRearranged(SearchCriteria searchCriteria)
         {
             List<MoneyReceiptEntity> lstMoneyReceipts = GetMoneyReceipts(searchCriteria);
@@ -231,7 +231,23 @@ namespace EMS.DAL
             return myDataTable;
         }
 
+        #endregion
 
+        #region CreditorPayment
+        public static DataTable GetInvoiceDetailForCrePayment(Int64 InvoiceId, Int32 JobID, string InvType)
+        {
+            string strExecution = "[fwd].[GetJobDetailForPayment]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@InvoiceId", InvoiceId);
+                oDq.AddIntegerParam("@JobID", JobID);
+                oDq.AddVarcharParam("@InvType", 1, InvType);
+                myDataTable = oDq.GetTable();
+            }
+            return myDataTable;
+        }
 
 
         #endregion

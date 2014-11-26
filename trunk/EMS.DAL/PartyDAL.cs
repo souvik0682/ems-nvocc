@@ -50,7 +50,7 @@ namespace EMS.DAL
                  oDq.AddIntegerParam("@fk_CompanyID", Party.CompanyID);
 
                  oDq.AddIntegerParam("@LocId", Party.LocID);
-                 oDq.AddVarcharParam("@PartyType", 1, Party.PartyType);
+                 oDq.AddIntegerParam("@PartyType", Party.PartyType);
                  oDq.AddVarcharParam("@PartyName", 60, Party.PartyName);
 
                  oDq.AddVarcharParam("@PartyAddress", 500, Party.PartyAddress);

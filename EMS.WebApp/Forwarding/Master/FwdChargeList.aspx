@@ -41,13 +41,13 @@
                                 WatermarkText="Service">
                             </cc1:TextBoxWatermarkExtender>
                         </td>--%>
-                        <td>
+                       <%-- <td>
                             <asp:DropDownList ID="ddlLocation" runat="server" Width="200">
                             </asp:DropDownList>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+                        </td>--%>
+<%--                    </tr>
+                    <tr>--%>
+                        <%--<td>
                             <asp:TextBox ID="txtLine" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
                             <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" FilterType="Custom,UppercaseLetters,LowercaseLetters"
                                 FilterMode="ValidChars" ValidChars=" " TargetControlID="txtLine">
@@ -55,7 +55,7 @@
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender3" runat="server" TargetControlID="txtLine"
                                 WatermarkText="LINE">
                             </cc1:TextBoxWatermarkExtender>
-                        </td>
+                        </td>--%>
                         <td>
                             <%--  <asp:DropDownList ID="ddlLine" runat="server" Width="200">
                             </asp:DropDownList>--%>
@@ -139,28 +139,28 @@
                                         <ItemStyle CssClass="gridviewitem" Width="13%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHType" runat="server" CommandName="Sort" CommandArgument="Type"
-                                                Text="Charge Basis"></asp:LinkButton></HeaderTemplate>
+                                                Text="Abbreviation"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHLocation" runat="server" CommandName="Sort" CommandArgument="Location"
-                                                Text="Location"></asp:LinkButton></HeaderTemplate>
+                                                Text="Eff Date"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHLine" runat="server" CommandName="Sort" CommandArgument="Line"
-                                                Text="Line"></asp:LinkButton></HeaderTemplate>
+                                                Text="Service Tax"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="8%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHDate" runat="server" CommandName="Sort" CommandArgument="Date"
-                                                Text="Up To Date"></asp:LinkButton></HeaderTemplate>
+                                                Text="Chg. Currency"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
 <%--                                    <asp:TemplateField HeaderText="Service">
                                         <HeaderStyle CssClass="gridviewheader" HorizontalAlign="Left" />

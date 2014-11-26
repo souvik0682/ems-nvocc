@@ -1,10 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="FwdChargeAddEdit.aspx.cs" Inherits="EMS.WebApp.Forwarding.Master.FwdChargeAddEdit" %>
-    
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="EMS.WebApp" Namespace="EMS.WebApp.CustomControls" TagPrefix="cc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-   
+    <script language="javascript" type="text/javascript">
+        function checkDate(sender, args) {
+
+        }
+
+    </script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
@@ -12,13 +17,13 @@
         <div id="headercaption">
             ADD / EDIT EXPORT CHARGE</div>
         <center>
-            <fieldset style="width: 90%;">
+            <fieldset style="width: 70%;">
                 <legend>Add / Edit Export Charge</legend>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <table border="0" cellpadding="2" cellspacing="3" width="100%">
                             <tr>
-                                <td style="width: 18%;">
+                                <td style="width: 8%;">
                                 </td>
                                 <td style="width: 15%;">
                                     Charge Name<span class="errormessage1">*</span> :
@@ -30,89 +35,13 @@
                                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender11" runat="server" TargetControlID="rfvChargeTitle">
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
-                                <%--<td style="width: 19%;">
-                                    Terminal Specific<span class="errormessage1">*</span>
-                                </td>
-                                <td>
-                                    <asp:RadioButtonList ID="rdbTerminalRequired" runat="server" RepeatDirection="Horizontal"
-                                        RepeatLayout="Flow" AutoPostBack="true" OnSelectedIndexChanged="rdbTerminalRequired_SelectedIndexChanged">
-                                        <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
-                                        <asp:ListItem Text="No" Value="0" ></asp:ListItem>
-                                    </asp:RadioButtonList>
-                                    <asp:RequiredFieldValidator ID="rfvTR" runat="server" ErrorMessage="Please select your choice"
-                                        Display="None" ControlToValidate="rdbTerminalRequired" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
-                                </td>--%>
+                                
                             </tr>
+                            
                             <tr>
                                 <td>
-                                </td>
-                                <td>
-                                    Line<span class="errormessage1"></span> :
-                                </td>
-                                <td>
-                                    <asp:DropDownList ID="ddlLine" runat="server" Width="155" 
-                                        OnSelectedIndexChanged="ddlLine_SelectedIndexChanged" AutoPostBack="True">
-                                    </asp:DropDownList>
-                                </td>
-
-                                <td>
-                                    Location<span class="errormessage1">*</span> :
-                                </td>
-                                <td>
-                                    <asp:DropDownList ID="ddlHeaderLocation" runat="server" AutoPostBack="true" Width="155"
-                                        OnSelectedIndexChanged="ddlHeaderLocation_SelectedIndexChanged">
-                                    </asp:DropDownList>
-                                    <asp:RequiredFieldValidator ID="rfvHeaderLocation" runat="server" ControlToValidate="ddlHeaderLocation"
-                                        Display="None" ErrorMessage="Please select location" InitialValue="0" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
-                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender14" runat="server" TargetControlID="rfvHeaderLocation">
-                                    </cc1:ValidatorCalloutExtender>
                                 </td>
                                 <%--<td>
-                                    Destination Charge :
-                                </td>
-                                <td>
-                                    <asp:RadioButtonList ID="rdbDestinationCharge" AutoPostBack="true" runat="server"
-                                        RepeatDirection="Horizontal" RepeatLayout="Flow" OnSelectedIndexChanged="rdbDestinationCharge_SelectedIndexChanged">
-                                        <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
-                                        <asp:ListItem Text="No" Value="0"></asp:ListItem>
-                                    </asp:RadioButtonList>
-                                    <asp:RequiredFieldValidator ID="rfvFreight" runat="server" ErrorMessage="Please select your choice"
-                                        Display="None" ControlToValidate="rdbDestinationCharge" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
-                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender19" runat="server" TargetControlID="rfvFreight">
-                                    </cc1:ValidatorCalloutExtender>
-                                </td>--%>
-                            </tr>
-                    
-                            <tr>
-                                <td>
-                                </td>
-                                
-                                <td>
-                                    Invoice Link :
-                                </td>
-                                <td>
-                                    <asp:DropDownList ID="ddlInvLink" runat="server" Width="155">
-                                        <asp:ListItem Selected="True" Text="Forwarding Invoice" Value="1"></asp:ListItem>
-<%--                                         <asp:ListItem Text="Freight Related" Value="2"></asp:ListItem>
-                                        <asp:ListItem Text="Other Invoice" Value="3"></asp:ListItem>--%>
-                                    </asp:DropDownList>
-                                </td>
-                                <td>
-                                    Charge Abbr<span class="errormessage1">*</span> :
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="txtChgAbbr" runat="server" Width="150" Style="text-transform: uppercase;"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="rfvChgAbbr" runat="server" ErrorMessage="Please enter charge Abbreviation"
-                                        ControlToValidate="txtChgAbbr" Display="None" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
-                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender2" runat="server" TargetControlID="rfvChgAbbr">
-                                    </cc1:ValidatorCalloutExtender>
-                               
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                </td>
-                                <td>
                                     Charge Basis<span class="errormessage1">*</span> :
                                 </td>
                                 <td>
@@ -123,9 +52,8 @@
                                         Display="None" ControlToValidate="ddlChargeType" ValidationGroup="vgCharge" InitialValue="0"></asp:RequiredFieldValidator>
                                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender15" runat="server" TargetControlID="rfvChargeType">
                                     </cc1:ValidatorCalloutExtender>
-                                </td>
+                                </td>--%>
                                 <td>
-                                    <%--Is Freight Component ?<span class="errormessage1">*</span> :--%>
                                     Effective Date <span class="errormessage1">*</span>
                                 </td>
                                 <td>
@@ -155,6 +83,11 @@
                                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender12" runat="server" TargetControlID="rfvCurrency">
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
+                                
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
                                 <td>
                                     Service Tax<span class="errormessage1">*</span> :
                                 </td>
@@ -170,15 +103,27 @@
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
                             </tr>
-<%--                            <tr>
+                            <tr>
                                 <td>
                                 </td>
-                          
                                 <td>
+                                    Charge Abbr<span class="errormessage1">*</span> :
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtChgAbbr" runat="server" Width="150" Style="text-transform: uppercase;"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="rfvChgAbbr" runat="server" ErrorMessage="Please enter charge Abbreviation"
+                                        ControlToValidate="txtChgAbbr" Display="None" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
+                                    <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender2" runat="server" TargetControlID="rfvChgAbbr">
+                                    </cc1:ValidatorCalloutExtender>
+                               
+                                </td>
+                            </tr>
+                            <tr>
+<%--                                <td>
                                     Allow Rate Change<span class="errormessage1">*</span> :
-                                </td>
+                                </td>--%>
                                 <td>
-                                    <asp:RadioButtonList ID="rdbRateChange" runat="server" RepeatDirection="Horizontal"
+                                    <asp:RadioButtonList ID="rdbRateChange" runat="server" RepeatDirection="Horizontal" Visible="false"
                                         RepeatLayout="Flow">
                                         <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
                                         <asp:ListItem Text="No" Value="0"></asp:ListItem>
@@ -188,12 +133,12 @@
                                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender17" runat="server" TargetControlID="rfvRateChange">
                                     </cc1:ValidatorCalloutExtender>
                                 </td>
-                            </tr>--%>
+                            </tr>
                             <tr>
                                 <td colspan="5" style="padding-top: 30px; border: none;" align="center">
                                     <%-- <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                         <ContentTemplate>--%>
-                                    <asp:GridView ID="dgChargeRates" runat="server" AutoGenerateColumns="false" ShowFooter="false"
+                                    <asp:GridView ID="dgChargeRates" runat="server" AutoGenerateColumns="false" ShowFooter="false" Visible="false"
                                         Font-Names="Calibri" Font-Size="11pt" OnRowDataBound="dgChargeRates_RowDataBound"
                                         OnRowCommand="dgChargeRates_RowCommand" 
                                         ondatabound="dgChargeRates_DataBound">
@@ -412,3 +357,4 @@
         </center>
     </div>
 </asp:Content>
+

@@ -52,14 +52,14 @@ namespace EMS.WebApp.Forwarding.Master
             //ddlChargeType.Items.Insert(0, Li);
 
 
-            #region Location
-            //
-            PopulateDropDown((int)Enums.DropDownPopulationFor.fwLocation, ddlLocation, 0);
-            Li = new ListItem("SELECT LOCATION", "0");
-            ddlLocation.Items.Insert(0, Li);
-            Li = new ListItem("ALL", "-1");
-            ddlLocation.Items.Insert(1, Li);
-            #endregion
+            //#region Location
+            ////
+            //PopulateDropDown((int)Enums.DropDownPopulationFor.fwLocation, ddlLocation, 0);
+            //Li = new ListItem("SELECT LOCATION", "0");
+            //ddlLocation.Items.Insert(0, Li);
+            //Li = new ListItem("ALL", "-1");
+            //ddlLocation.Items.Insert(1, Li);
+            //#endregion
 
 
             #region Line
@@ -94,9 +94,9 @@ namespace EMS.WebApp.Forwarding.Master
         protected void btnRefresh_Click(object sender, EventArgs e)
         {
             txtChargeName.Text = string.Empty;
-            txtLine.Text = string.Empty;
+            //txtLine.Text = string.Empty;
             //ddlChargeType.SelectedIndex = 0;
-            ddlLocation.SelectedIndex = 0;
+            //ddlLocation.SelectedIndex = 0;
             txtEfectDate.Text = string.Empty;
             //txtService.Text = string.Empty;
             LoadCharge();
@@ -159,17 +159,19 @@ namespace EMS.WebApp.Forwarding.Master
 
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChargeName"));
 
-                if (!string.IsNullOrEmpty(Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChargeType"))))
-                    e.Row.Cells[2].Text = ((Enums.ExportChargeType)Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "ChargeType"))).ToString();
+                //if (!string.IsNullOrEmpty(Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChargeType"))))
+                //    e.Row.Cells[2].Text = ((Enums.ExportChargeType)Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "ChargeType"))).ToString();
 
-                string Loc = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Location"));
-                if (Loc != "0")
-                    e.Row.Cells[3].Text = ddlLocation.Items.FindByValue(Loc).Text;
+                //string Loc = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Location"));
+                //if (Loc != "0")
+                //    e.Row.Cells[3].Text = ddlLocation.Items.FindByValue(Loc).Text;
 
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Line"));
+                //e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Line"));
+                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChargeAbbr"));
 
-                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EffectDate"));
-
+                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EffectDate"));
+                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "STaxApplicable"));
+                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CurrencyCode"));
                 //e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Service"));
 
                 // Edit link
@@ -340,9 +342,9 @@ namespace EMS.WebApp.Forwarding.Master
             criteria.SortDirection = sortDirection;
             criteria.ChargeName = txtChargeName.Text.Trim();
             //criteria.ChargeType = Convert.ToChar(ddlChargeType.SelectedValue);
-            criteria.LineName = txtLine.Text.Trim();
+            //criteria.LineName = txtLine.Text.Trim();
             criteria.ChargeType = null;
-            criteria.Location = ddlLocation.SelectedValue;
+            //criteria.Location = ddlLocation.SelectedValue;
             //criteria.StringOption1 = txtService.Text.Trim();
 
             if (!String.IsNullOrEmpty(txtEfectDate.Text))
@@ -371,14 +373,12 @@ namespace EMS.WebApp.Forwarding.Master
                     else
                     {
                         txtChargeName.Text = criteria.ChargeName;
-                        txtLine.Text = criteria.LineName;
+                        //txtLine.Text = criteria.LineName;
                         //ddlChargeType.SelectedIndex = ddlChargeType.Items.IndexOf(ddlChargeType.Items.FindByValue(criteria.ChargeType.ToString()));
 
                         if (criteria.Date.HasValue)
                             txtEfectDate.Text = criteria.Date.Value.ToString("dd/MM/yyyy");
-                        ddlLocation.SelectedValue = criteria.Location;
-
-
+                        //ddlLocation.SelectedValue = criteria.Location;
                         gvwCharge.PageIndex = criteria.PageIndex;
                         gvwCharge.PageSize = criteria.PageSize;
                         ddlPaging.SelectedValue = criteria.PageSize.ToString();

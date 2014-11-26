@@ -15,7 +15,7 @@
               <tr>
                     <td>Party Type:<span class="errormessage1">*</span></td>
                     <td>
-                      <asp:DropDownList ID="ddlPartyType" runat="server"  CssClass="dropdownlist" 
+                      <asp:DropDownList ID="ddlPartyType" runat="server"  CssClass="dropdownlist" AutoPostBack="true"
                             onselectedindexchanged="ddlPartyType_SelectedIndexChanged" >
                             <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
                             <%--<asp:ListItem Text="Custom Agent" Value="A"></asp:ListItem>

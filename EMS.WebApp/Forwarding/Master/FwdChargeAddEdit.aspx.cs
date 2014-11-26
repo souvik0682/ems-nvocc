@@ -31,6 +31,7 @@ namespace EMS.WebApp.Forwarding.Master
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             RetriveParameters();
             if (!Page.IsPostBack)
             {
@@ -41,9 +42,9 @@ namespace EMS.WebApp.Forwarding.Master
                 {
                     FillChargeDetails(Convert.ToInt32(hdnChargeID.Value));
                     FillChargeRate(Convert.ToInt32(hdnChargeID.Value));
-                    ActionOnLocationChange(ddlHeaderLocation as object);
+                    //ActionOnLocationChange(ddlHeaderLocation as object);
                     //WashingSelection(rdbWashing);
-                    ShowHideControlofFooter(ddlChargeType);
+                    //ShowHideControlofFooter(ddlChargeType);
 
                     DisableAllField();
                 }
@@ -65,8 +66,8 @@ namespace EMS.WebApp.Forwarding.Master
 
             }
             CheckUserAccess(hdnChargeID.Value);
-
         }
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
@@ -95,7 +96,7 @@ namespace EMS.WebApp.Forwarding.Master
 
                 oChargeEntity.ChargeActive = true;
                 oChargeEntity.ChargeDescr = txtChargeName.Text.Trim();
-                oChargeEntity.ChargeType = Convert.ToInt32(ddlChargeType.SelectedValue);
+                //oChargeEntity.ChargeType = Convert.ToInt32(ddlChargeType.SelectedValue);
 
                 //This ID will be the companyid of the currently loggedin user
                 //IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
@@ -105,10 +106,10 @@ namespace EMS.WebApp.Forwarding.Master
                 oChargeEntity.IEC = 'F';
                 //oChargeEntity.IsTerminal = Convert.ToBoolean(Convert.ToInt32(rdbTerminalRequired.SelectedItem.Value));
                 //oChargeEntity.IsWashing = Convert.ToBoolean(Convert.ToInt32(rdbWashing.SelectedItem.Value));
-                oChargeEntity.NVOCCID = Convert.ToInt32(ddlLine.SelectedValue);
-                oChargeEntity.RateChangeable = false; // Convert.ToBoolean(Convert.ToInt32(rdbRateChange.SelectedItem.Value));
+                //oChargeEntity.NVOCCID = Convert.ToInt32(ddlLine.SelectedValue);
+                oChargeEntity.RateChangeable = Convert.ToBoolean(Convert.ToInt32(rdbRateChange.SelectedItem.Value));
                 oChargeEntity.ServiceTax = Convert.ToBoolean(Convert.ToInt32(rdbServiceTaxApplicable.SelectedItem.Value));
-                oChargeEntity.Location = Convert.ToInt32(ddlHeaderLocation.SelectedValue);
+                //oChargeEntity.Location = Convert.ToInt32(ddlHeaderLocation.SelectedValue);
                 oChargeEntity.ChgAbbr = txtChgAbbr.Text;
 
                 //if (ddlService.SelectedIndex > 0)
@@ -117,8 +118,8 @@ namespace EMS.WebApp.Forwarding.Master
                 //oChargeEntity.DestinationCharge = Convert.ToBoolean(rdbDestinationCharge.SelectedValue == "1" ? true : false);
                 //oChargeEntity.FPOD = hdnFPOD.Value;
 
-                if (ddlInvLink.Items != null)
-                    oChargeEntity.DocumentType = Convert.ToInt32(ddlInvLink.SelectedValue);
+                //if (ddlInvLink.Items != null)
+                //    oChargeEntity.DocumentType = Convert.ToInt32(ddlInvLink.SelectedValue);
 
                 oChargeEntity.DeliveryMode = '0';
 
@@ -133,7 +134,7 @@ namespace EMS.WebApp.Forwarding.Master
 
                     if (Convert.ToInt32(hdnChargeID.Value) > 0)
                     {
-                        AddRates();
+                        //AddRates();
                         lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00009");
                         ClearAll();
                         EnableAllField();
@@ -280,7 +281,7 @@ namespace EMS.WebApp.Forwarding.Master
                 ViewState["ChargeRates"] = Rates;
                 FillRates();
                 DisableAllField();
-                ShowHideControlofFooter(ddlChargeType);
+                //ShowHideControlofFooter(ddlChargeType);
 
             }
 
@@ -342,7 +343,7 @@ namespace EMS.WebApp.Forwarding.Master
                 Rates.RemoveAt(Row.RowIndex);
                 ViewState["ChargeRates"] = Rates;
                 FillRates();
-                ShowHideControlofFooter(ddlChargeType);
+                //ShowHideControlofFooter(ddlChargeType);
             }
             #endregion
 
@@ -379,7 +380,7 @@ namespace EMS.WebApp.Forwarding.Master
 
                 hdnFId.Value = "0";
                 hdnFSlno.Value = "-1";
-                ShowHideControlofFooter(ddlChargeType);
+                //ShowHideControlofFooter(ddlChargeType);
             }
             #endregion
 
@@ -390,14 +391,14 @@ namespace EMS.WebApp.Forwarding.Master
 
         }
 
-        protected void rdbTerminalRequired_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //RadioButtonList rdl = (RadioButtonList)sender;
-            //TerminalSelection(rdl);
+        //protected void rdbTerminalRequired_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    //RadioButtonList rdl = (RadioButtonList)sender;
+        //    //TerminalSelection(rdl);
 
-            ////TerminalSelection
-            ActionOnLocationChange(ddlHeaderLocation as object);
-        }
+        //    ////TerminalSelection
+        //    ActionOnLocationChange(ddlHeaderLocation as object);
+        //}
 
 
         private void ShowHideControlofFooter(DropDownList ddlChargeType)
@@ -450,7 +451,7 @@ namespace EMS.WebApp.Forwarding.Master
 
             switch (ddlChargeType.SelectedValue)
             {
-                case "104": // Per Unit TYPE & SIZE
+                case "54": // Per Unit TYPE & SIZE
                     ddlType.Enabled = true;
                     rfvType.Enabled = true;
 
@@ -461,22 +462,22 @@ namespace EMS.WebApp.Forwarding.Master
                     rfvRatePerUnit.Enabled = true;
                     break;
 
-                case "101": // Per Document
+                case "51": // Per Document
                     txtRatePerDoc.Enabled = true;
                     rfvRatePerDoc.Enabled = true;
                     break;
 
-                case "102": // Per CBM
+                case "52": // Per CBM
                     txtRatePerCBM.Enabled = true;
                     rfvRatePerCBM.Enabled = true;
                     break;
 
-                case "103": // Per TON
+                case "53": // Per TON
                     txtRatePerTON.Enabled = true;
                     rfvRatePerTON.Enabled = true;
                     break;
 
-                case "100": // Per Unit 
+                case "50": // Per Unit 
                     ddlType.Enabled = false;
                     rfvType.Enabled = false;
 
@@ -493,16 +494,16 @@ namespace EMS.WebApp.Forwarding.Master
 
         void DefaultSelection()
         {
-            //rdbRateChange.SelectedIndex = 1;
+            rdbRateChange.SelectedIndex = 1;
             rdbServiceTaxApplicable.SelectedIndex = 1;
             //rdbDestinationCharge.SelectedIndex = 1;
             //rdbTerminalRequired.SelectedIndex = 1;
-            ddlLine.SelectedIndex = -1;
+            //ddlLine.SelectedIndex = -1;
             //ddlService.Items.Clear();
             //rfvFPOD.Enabled = false;
             //txtFPOD.Text = string.Empty;
             //hdnFPOD.Value = "0";
-            ddlInvLink.SelectedIndex = 0;
+            //ddlInvLink.SelectedIndex = 0;
             hdnChargeID.Value = "0";
 
         }
@@ -510,24 +511,17 @@ namespace EMS.WebApp.Forwarding.Master
         {
             ListItem Li = null;
 
-            #region Location
-            //
-            PopulateDropDown((int)Enums.DropDownPopulationFor.fwLocation, ddlHeaderLocation, 0, 0);
-            Li = new ListItem("SELECT", "0");
-            ddlHeaderLocation.Items.Insert(0, Li);
-            Li = new ListItem("ALL", "-1");
-            ddlHeaderLocation.Items.Insert(1, Li);
-            #endregion
+           
 
-            #region ChargeType
-            foreach (Enums.ChargeType r in Enum.GetValues(typeof(Enums.ForwardingChargeType)))
-            {
-                Li = new ListItem("SELECT", "0");
-                ListItem item = new ListItem(Enum.GetName(typeof(Enums.ForwardingChargeType), r).Replace('_', ' '), ((int)r).ToString());
-                ddlChargeType.Items.Add(item);
-            }
-            ddlChargeType.Items.Insert(0, Li);
-            #endregion
+            //#region ChargeType
+            //foreach (Enums.ChargeType r in Enum.GetValues(typeof(Enums.ExportChargeType)))
+            //{
+            //    Li = new ListItem("SELECT", "0");
+            //    ListItem item = new ListItem(Enum.GetName(typeof(Enums.ExportChargeType), r).Replace('_', ' '), ((int)r).ToString());
+            //    ddlChargeType.Items.Add(item);
+            //}
+            //ddlChargeType.Items.Insert(0, Li);
+            //#endregion
 
             #region Currency
 
@@ -552,12 +546,12 @@ namespace EMS.WebApp.Forwarding.Master
             //ddlImportExportGeneral.Items.Insert(0, Li);
             #endregion
 
-            #region Line
+            //#region Line
 
-            PopulateDropDown((int)Enums.DropDownPopulationFor.fwLine, ddlLine, 0, 0);
-            Li = new ListItem("NA", "0");
-            ddlLine.Items.Insert(0, Li);
-            #endregion
+            //PopulateDropDown((int)Enums.DropDownPopulationFor.Line, ddlLine, 0, 0);
+            //Li = new ListItem("NA", "0");
+            //ddlLine.Items.Insert(0, Li);
+            //#endregion
 
             #region Service
 
@@ -570,18 +564,18 @@ namespace EMS.WebApp.Forwarding.Master
             #region Master list of Location, Terminal, WashinfType
 
             Li = new ListItem("ALL", "-1");
-            //PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlMLocation, 0, 0);
-            //ddlMLocation.Items.Insert(0, Li);
+            PopulateDropDown((int)Enums.DropDownPopulationFor.Location, ddlMLocation, 0, 0);
+            ddlMLocation.Items.Insert(0, Li);
 
-            //Li = new ListItem("ALL", "-1");
-            //PopulateDropDown((int)Enums.DropDownPopulationFor.TerminalCode, ddlMTerminal, 0, 0);
-            //ddlMTerminal.Items.Insert(0, Li);
-            ////PopulateDropDown((int)Enums.DropDownPopulationFor.Wa, ddlMWashingType, 0);
+            Li = new ListItem("ALL", "-1");
+            PopulateDropDown((int)Enums.DropDownPopulationFor.TerminalCode, ddlMTerminal, 0, 0);
+            ddlMTerminal.Items.Insert(0, Li);
+            //PopulateDropDown((int)Enums.DropDownPopulationFor.Wa, ddlMWashingType, 0);
 
 
-            //Li = new ListItem("Select", "0");
-            //PopulateDropDown((int)Enums.DropDownPopulationFor.ContainerType, ddlMType, 0, 0);
-            //ddlMType.Items.Insert(0, Li);
+            Li = new ListItem("Select", "0");
+            PopulateDropDown((int)Enums.DropDownPopulationFor.ContainerType, ddlMType, 0, 0);
+            ddlMType.Items.Insert(0, Li);
 
             #endregion
 
@@ -596,20 +590,20 @@ namespace EMS.WebApp.Forwarding.Master
 
             //oChargeEntity.ChargeActive = true;
             txtChargeName.Text = oChargeEntity.ChargeDescr;
-            ddlChargeType.SelectedIndex = ddlChargeType.Items.IndexOf(ddlChargeType.Items.FindByValue(oChargeEntity.ChargeType.ToString()));
+            //ddlChargeType.SelectedIndex = ddlChargeType.Items.IndexOf(ddlChargeType.Items.FindByValue(oChargeEntity.ChargeType.ToString()));
             txtChgAbbr.Text = oChargeEntity.ChgAbbr;
 
             ddlCurrency.SelectedIndex = ddlCurrency.Items.IndexOf(ddlCurrency.Items.FindByValue(oChargeEntity.Currency.ToString()));
             txtEffectDate.Text = oChargeEntity.EffectDt.ToShortDateString();
-            ddlInvLink.SelectedIndex = ddlInvLink.Items.IndexOf(ddlInvLink.Items.FindByValue(oChargeEntity.DocumentType.ToString()));
-            ddlLine.SelectedIndex = ddlLine.Items.IndexOf(ddlLine.Items.FindByValue(oChargeEntity.NVOCCID.ToString()));
-            ddlHeaderLocation.SelectedIndex = ddlHeaderLocation.Items.IndexOf(ddlHeaderLocation.Items.FindByValue(oChargeEntity.Location.ToString()));
+            //ddlInvLink.SelectedIndex = ddlInvLink.Items.IndexOf(ddlInvLink.Items.FindByValue(oChargeEntity.DocumentType.ToString()));
+            //ddlLine.SelectedIndex = ddlLine.Items.IndexOf(ddlLine.Items.FindByValue(oChargeEntity.NVOCCID.ToString()));
+            //ddlHeaderLocation.SelectedIndex = ddlHeaderLocation.Items.IndexOf(ddlHeaderLocation.Items.FindByValue(oChargeEntity.Location.ToString()));
 
 
 
             rdbServiceTaxApplicable.Items.FindByValue(oChargeEntity.ServiceTax.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
             //rdbTerminalRequired.Items.FindByValue(oChargeEntity.IsTerminal.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
-            //rdbRateChange.Items.FindByValue(oChargeEntity.RateChangeable.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
+            rdbRateChange.Items.FindByValue(oChargeEntity.RateChangeable.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
             //rdbDestinationCharge.Items.FindByValue(oChargeEntity.DestinationCharge.ToString().ToLower() == "true" ? "1" : "0").Selected = true;
 
             //hdnFPOD.Value = oChargeEntity.FPOD;
@@ -655,18 +649,18 @@ namespace EMS.WebApp.Forwarding.Master
             txtEffectDate.Enabled = false;
             //txtFPOD.Enabled = false;
             //rfvFPOD.Enabled = false;
-            ddlChargeType.Enabled = false;
+            //ddlChargeType.Enabled = false;
             ddlCurrency.Enabled = false;
-            ddlLine.Enabled = false;
-            ddlHeaderLocation.Enabled = false;
+            //ddlLine.Enabled = false;
+            //ddlHeaderLocation.Enabled = false;
             //ddlService.Enabled = false;
 
-            //rdbRateChange.Enabled = false;
+            rdbRateChange.Enabled = false;
             rdbServiceTaxApplicable.Enabled = false;
             //rdbTerminalRequired.Enabled = false;
             //rdbDestinationCharge.Enabled = false;
 
-            ddlInvLink.Enabled = false;
+            //ddlInvLink.Enabled = false;
 
         }
         void EnableAllField()
@@ -675,28 +669,28 @@ namespace EMS.WebApp.Forwarding.Master
             txtEffectDate.Enabled = true;
             //txtFPOD.Enabled = true;
             //rfvFPOD.Enabled = true;
-            ddlChargeType.Enabled = true;
+            //ddlChargeType.Enabled = true;
             ddlCurrency.Enabled = true;
-            ddlLine.Enabled = true;
-            ddlHeaderLocation.Enabled = true;
+            //ddlLine.Enabled = true;
+            //ddlHeaderLocation.Enabled = true;
 
-            //rdbRateChange.Enabled = true;
+            rdbRateChange.Enabled = true;
             rdbServiceTaxApplicable.Enabled = true;
             //rdbTerminalRequired.Enabled = true;
             //rdbDestinationCharge.Enabled = true;
             //rdbWashing.Enabled = true;
-            ddlInvLink.Enabled = true;
+            //ddlInvLink.Enabled = true;
             //ddlService.Enabled = true;
         }
         void ClearAll()
         {
             hdnChargeID.Value = "0";
-            ddlChargeType.SelectedIndex = 0;
+            //ddlChargeType.SelectedIndex = 0;
             ddlCurrency.SelectedIndex = 0;
-            ddlLine.SelectedIndex = 0;
-            //ddlMLocation.SelectedIndex = 0;
-            //ddlMTerminal.SelectedIndex = 0;
-            ddlHeaderLocation.SelectedIndex = 0;
+            //ddlLine.SelectedIndex = 0;
+            ddlMLocation.SelectedIndex = 0;
+            ddlMTerminal.SelectedIndex = 0;
+            //ddlHeaderLocation.SelectedIndex = 0;
 
             txtChargeName.Text = string.Empty;
             txtEffectDate.Text = string.Empty;
@@ -913,16 +907,16 @@ namespace EMS.WebApp.Forwarding.Master
 
         //protected void rdbDestinationCharge_SelectedIndexChanged(object sender, EventArgs e)
         //{
-        //    if (rdbDestinationCharge.SelectedValue == "1")
-        //    {
-        //        txtFPOD.Enabled = true;
-        //        rfvFPOD.Enabled = true;
-        //    }
-        //    else
-        //    {
-        //        txtFPOD.Enabled = false;
-        //        rfvFPOD.Enabled = false;
-        //    }
+        //    //if (rdbDestinationCharge.SelectedValue == "1")
+        //    //{
+        //    //    txtFPOD.Enabled = true;
+        //    //    rfvFPOD.Enabled = true;
+        //    //}
+        //    //else
+        //    //{
+        //    //    txtFPOD.Enabled = false;
+        //    //    rfvFPOD.Enabled = false;
+        //    //}
         //}
 
         protected void ddlHeaderLocation_SelectedIndexChanged1(object sender, EventArgs e)
@@ -930,37 +924,38 @@ namespace EMS.WebApp.Forwarding.Master
 
         }
 
-        protected void ddlLine_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //FillServices();
-        }
-
-        //private void FillServices()
-        //{
-        //    if (ddlLine.SelectedIndex > 0) // && Convert.ToInt32(hdnFPOD.Value) > 0)
-        //    {
-        //        ListItem Li;
-        //        PopulateDropDown((int)Enums.DropDownPopulationFor.Service, ddlService, Convert.ToInt32(ddlLine.SelectedValue), 0);
-
-        //        Li = new ListItem("ALL", "0");
-        //        ddlService.Items.Insert(0, Li);
-        //    }
-        //    else
-        //    {
-        //        ddlService.Items.Clear();
-        //    }
-        //}
-
-        //protected void txtFPOD_TextChanged(object sender, EventArgs e)
+        //protected void ddlLine_SelectedIndexChanged(object sender, EventArgs e)
         //{
         //    FillServices();
         //}
 
+        private void FillServices()
+        {
+            //if (ddlLine.SelectedIndex > 0) // && Convert.ToInt32(hdnFPOD.Value) > 0)
+            //{
+            //    ListItem Li;
+            //    PopulateDropDown((int)Enums.DropDownPopulationFor.Service, ddlService, Convert.ToInt32(ddlLine.SelectedValue), 0);
+
+            //    Li = new ListItem("ALL", "0");
+            //    ddlService.Items.Insert(0, Li);
+            //}
+            //else
+            //{
+            //    ddlService.Items.Clear();
+            //}
+        }
+
+        protected void txtFPOD_TextChanged(object sender, EventArgs e)
+        {
+            FillServices();
+        }
+
         protected void dgChargeRates_DataBound(object sender, EventArgs e)
         {
             //ShowHideControlofFooter(ddlChargeType);
-            ActionOnLocationChange(ddlHeaderLocation as object);
+            //ActionOnLocationChange(ddlHeaderLocation as object);
         }
 
+       
     }
 }

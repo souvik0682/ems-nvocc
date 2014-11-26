@@ -19,30 +19,33 @@
         <div style="width: 850px;">
              <fieldset style="width:100%;">
             <legend>Search Party</legend>
-            <table width="100%">
+            <table width="100%" style="height: 69px">
                 <tr>
                     <td align="justify" style="width:33%">
                       <asp:DropDownList ID="ddlPartyType" runat="server"  CssClass="dropdownlist"  >
-                      <asp:ListItem Text=" Party Type" Value="0"></asp:ListItem>
+<%--                      <asp:ListItem Text=" Party Type" Value="0"></asp:ListItem>
                        <asp:ListItem Text="Custome Agent" Value="C"></asp:ListItem>
                         <asp:ListItem Text="Transporter" Value="T"></asp:ListItem>
                         <asp:ListItem Text="Overseas Agent" Value="O"></asp:ListItem>
                          <asp:ListItem Text="Debtors" Value="D"></asp:ListItem>
-                          <asp:ListItem Text="Creditors" Value="C"></asp:ListItem>
+                          <asp:ListItem Text="Creditors" Value="C"></asp:ListItem>--%>
                       </asp:DropDownList>
-                    </td><td style="width:33%">
-                        <asp:TextBox ID="txtPartyName" runat="server" CssClass="watermark" ForeColor="#747862"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtPartyName" runat="server" CssClass="watermark" 
+                            ForeColor="#747862" Height="17px" Width="100%"></asp:TextBox>
                         <cc1:textboxwatermarkextender ID="wmetxtPartyName" runat="server" 
                             TargetControlID="txtPartyName" WatermarkText="Type Party Name" 
                             WatermarkCssClass="watermark"></cc1:textboxwatermarkextender>
                         
                     </td>
-                    <td style="width:33%"><asp:TextBox ID="txtPhoneNo" runat="server" CssClass="watermark" ForeColor="#747862" ></asp:TextBox>
+                    <td style="width:33%"><asp:TextBox ID="txtPhoneNo" runat="server" 
+                            CssClass="watermark" ForeColor="#747862" Height="20px" Width="264px" ></asp:TextBox>
                         <cc1:textboxwatermarkextender ID="wmetxtPhoneNo" runat="server" 
                             TargetControlID="txtPhoneNo" WatermarkText="Type Phone No" 
                             WatermarkCssClass="watermark"></cc1:textboxwatermarkextender>
                     </td></tr> <tr>
-                    <td colspan="3" align="right"><asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" OnClick="btnSearch_Click" />
+                    <td colspan="3" align="center"><asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" OnClick="btnSearch_Click" />
                      <%--<asp:Button ID="btnRefresh" runat="server" Text="Reset" CssClass="button" Width="100px" onclick="btnRefresh_Click"  />--%></td>
                 </tr>
                
@@ -103,11 +106,11 @@
                                             <%=counter++%>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:BoundField  HeaderText="Party Type" DataField="PartyTypeName"  HeaderStyle-CssClass="gridviewheader" SortExpression="PartyType" ItemStyle-CssClass="gridviewitem"/>
-                                <asp:BoundField  HeaderText="Party Name" DataField="PartyName"  HeaderStyle-CssClass="gridviewheader"  SortExpression="PartyName" ItemStyle-CssClass="gridviewitem"/>
-                                <asp:BoundField  HeaderText="Country" DataField="CountryName"  HeaderStyle-CssClass="gridviewheader"  SortExpression="fk_CompanyID" ItemStyle-CssClass="gridviewitem"/>
-                                <asp:BoundField  HeaderText="Phone" DataField="Phone" HeaderStyle-CssClass="gridviewheader"  SortExpression="Phone" ItemStyle-CssClass="gridviewitem"/>
-                                <asp:BoundField  HeaderText="Contact Person" HeaderStyle-CssClass="gridviewheader" DataField="ContactPerson"  SortExpression="ContactPerson" ItemStyle-CssClass="gridviewitem"/>
+                                    <asp:BoundField  HeaderText="Party Type" DataField="PartyTypeName"  HeaderStyle-CssClass="gridviewheader" SortExpression="PartyTypeName" ItemStyle-CssClass="gridviewitem"/>
+                                    <asp:BoundField  HeaderText="Party Name" DataField="PartyName"  HeaderStyle-CssClass="gridviewheader"  SortExpression="PartyName" ItemStyle-CssClass="gridviewitem"/>
+                                    <asp:BoundField  HeaderText="Country" DataField="CountryName"  HeaderStyle-CssClass="gridviewheader"  SortExpression="fk_CountryID" ItemStyle-CssClass="gridviewitem"/>
+                                    <asp:BoundField  HeaderText="Phone" DataField="Phone" HeaderStyle-CssClass="gridviewheader"  SortExpression="Phone" ItemStyle-CssClass="gridviewitem"/>
+                                    <asp:BoundField  HeaderText="Contact Person" HeaderStyle-CssClass="gridviewheader" DataField="ContactPerson"  SortExpression="ContactPerson" ItemStyle-CssClass="gridviewitem"/>
                                
                                     <asp:TemplateField ItemStyle-Width="8%">
                                         <HeaderStyle CssClass="gridviewheader" />

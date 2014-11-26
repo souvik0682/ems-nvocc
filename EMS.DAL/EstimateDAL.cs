@@ -166,6 +166,16 @@ namespace EMS.DAL
             return Estimateid;
         }
 
+        public static DataSet GetParty()
+        {
+            string strExecution = "[fwd].[prcGetCreditor]";
+            DataSet reader = new DataSet();
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                reader = oDq.GetTables();
+            }
+            return reader;
+        }
         ////  public static int DeleteEstimate(int EstimateID, int UserID, int CompanyID)
         //  {
         //      string strExecution = "[fwd].[uspManageEstimate]";

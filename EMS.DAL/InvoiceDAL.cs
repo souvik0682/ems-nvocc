@@ -242,6 +242,59 @@ namespace EMS.DAL
             }
             return lstCharges;
         }
+
+        public static List<ICharge> GetAllFwdCharges()
+        {
+            string strExecution = "[fwd].[uspFwd_Invoice_GetAllCharges]";
+
+            List<ICharge> lstCharges = new List<ICharge>();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                //oDq.AddBigIntegerParam("@DocTypeId", docTypeId);
+                //oDq.AddBigIntegerParam("@LineId", LineID);
+                //oDq.AddBigIntegerParam("@LocationId", LocationID);
+                //oDq.AddVarcharParam("@JobNo", 40, JobNo);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    ICharge charge = new ChargeEntity(reader);
+                    lstCharges.Add(charge);
+                }
+                reader.Close();
+            }
+            return lstCharges;
+        }
+
+        public static List<IChargeRate> GetfwdInvoiceCharges(Int32 JobID, int EstimateID, int ChargeID, int DocTypeId, DateTime InvoiceDate)
+        {
+            string strExecution;
+            strExecution = "[fwd].[usp_fwdInvoice_Charge]";
+  
+            List<IChargeRate> lstRates = new List<IChargeRate>();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@JobID", JobID);
+                oDq.AddIntegerParam("@fk_EstimateID", EstimateID);
+                oDq.AddIntegerParam("@chargeid", ChargeID);
+                oDq.AddDateTimeParam("@InvoiceDate", InvoiceDate);
+
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    IChargeRate chargeRate = new ChargeRateEntity(reader);
+                    lstRates.Add(chargeRate);
+                }
+
+                reader.Close();
+            }
+
+            return lstRates;
+        }
+
         public static List<ICharge> GetAllCharges(int docTypeId)
         {
             string strExecution = "usp_Invoice_GetAllCharges";

@@ -1020,5 +1020,57 @@ namespace EMS.DAL
             dquery.AddIntegerParam("@CompanyId", companyId);
             return dquery.GetTables();
         }
+
+        public static DataTable GetfwdPartyType()
+        {
+            string strExecution = "[fwd].[uspGetPartyType]";
+            DataTable myDataTable;
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                //oDq.AddIntegerParam("@Location", Location.ToInt());
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+
+        public static DataTable GetfwdPartyByType(string pType)
+        {
+            string strExecution = "[fwd].[uspGetPartyByType]";
+            DataTable myDataTable;
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@PartyType", 1, pType);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+
+        public static DataTable GetfwdJobType()
+        {
+            string strExecution = "[fwd].[usp_GetJobType]";
+            DataTable myDataTable;
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                //oDq.AddVarcharParam("@PartyType", 1, pType);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+
+        public static DataTable GetfwdShipmentMode()
+        {
+            string strExecution = "[fwd].[usp_GetShipmentModes]";
+            DataTable myDataTable;
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                //oDq.AddVarcharParam("@PartyType", 1, pType);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
     }
 }

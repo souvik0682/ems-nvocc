@@ -56,11 +56,12 @@ namespace EMS.WebApp.Farwarding.Transaction
 
             //Jpb Details & Job Summary
             DataTable dtJob = dsDashboard.Tables[0];
+            
 
             if (!ReferenceEquals(dtJob, null) && dtJob.Rows.Count > 0)
             {
                 if (dtJob.Rows[0]["JobDate"] != DBNull.Value)
-                    lblJobDate.Text = Convert.ToString(dtJob.Rows[0]["JobDate"]);
+                    lblJobDate.Text = Convert.ToString(dtJob.Rows[0]["JobDate"]).Split(' ')[0];
                 if (dtJob.Rows[0]["JobNo"] != DBNull.Value)
                     lblJobNumber.Text = Convert.ToString(dtJob.Rows[0]["JobNo"]);
                 if (dtJob.Rows[0]["CargoSource"] != DBNull.Value)
@@ -117,6 +118,26 @@ namespace EMS.WebApp.Farwarding.Transaction
                     lblProjectedGrossProfit.Text = (Convert.ToDecimal(dtJob.Rows[0]["EstREceivable"]) - Convert.ToDecimal(dtJob.Rows[0]["EstPayable"])).ToString();
                 if (dtJob.Rows[0]["TotReceived"] != DBNull.Value && dtJob.Rows[0]["TotPaid"] != DBNull.Value)
                     lblArchievedGrossProfit.Text = (Convert.ToDecimal(dtJob.Rows[0]["TotReceived"]) - Convert.ToDecimal(dtJob.Rows[0]["TotPaid"])).ToString();
+                if (dtJob.Rows[0]["LoadPort"] != DBNull.Value)
+                    lblPOL.Text = Convert.ToString(dtJob.Rows[0]["LoadPort"]);
+                if (dtJob.Rows[0]["DischPort"] != DBNull.Value)
+                    lblPOD.Text = Convert.ToString(dtJob.Rows[0]["DischPort"]);
+                hdnCustID.Value = dtJob.Rows[0]["fk_CustID"].ToString();
+                if (dtJob.Rows[0]["JobActive"].ToString() != "P")
+                {
+                    btnApprove.Enabled = false;
+                    btnCloseJob.Enabled = true;
+                }
+                else
+                {
+                    btnApprove.Enabled = true;
+                    btnCloseJob.Enabled = true;
+                }
+                lblTotalEstimatePayable.Text = dsDashboard.Tables[5].Rows[0]["Payable"].ToString();
+                lblTotalEstimateReceiveable.Text = dsDashboard.Tables[6].Rows[0]["Receivable"].ToString();
+                lblProjectedGrossProfit.Text = (dsDashboard.Tables[6].Rows[0]["Receivable"].ToDecimal() - dsDashboard.Tables[5].Rows[0]["Payable"].ToDecimal()).ToString();
+
+
             }
 
             //Estimate Payable
@@ -202,14 +223,15 @@ namespace EMS.WebApp.Farwarding.Transaction
                 GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 6);
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
 
-                e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "UnitName"));
+                //e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "UnitName"));
+                e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BillFrom"));
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Qty"));
-                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BillFrom"));
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CurrencyName"));
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChgAmt"));
-                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ROE"));
-                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PaymentBy"));
-                e.Row.Cells[7].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "INRAmount"));
+
+                //e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CurrencyName"));
+                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChgAmt"));
+                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ROE"));
+                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PaymentBy"));
+                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "INRAmount"));
 
                 string EstimateId = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "pk_EstimateID"));
 
@@ -235,7 +257,6 @@ namespace EMS.WebApp.Farwarding.Transaction
                     btnRemove.ToolTip = "Delete";
                     btnRemove.CommandArgument = EstimateId;
                     //btnRemove.Attributes.Add("onclick", "javascript:return confirm('Are you sure about delete?');");
-
                 }
                 else
                 {
@@ -271,14 +292,15 @@ namespace EMS.WebApp.Farwarding.Transaction
                 GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 6);
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
 
-                e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "UnitName"));
+                //e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "UnitName"));
+                e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BillFrom"));
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Qty"));
-                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BillFrom"));
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CurrencyName"));
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChgAmt"));
-                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ROE"));
-                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PaymentBy"));
-                e.Row.Cells[7].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "INRAmount"));
+
+                //e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CurrencyName"));
+                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChgAmt"));
+                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ROE"));
+                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PaymentBy"));
+                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "INRAmount"));
 
                 string EstimateId = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "INRAmount"));
 
@@ -325,6 +347,7 @@ namespace EMS.WebApp.Farwarding.Transaction
             }
             else if (e.CommandName == "GenInv")
             {
+
             }
             else if (e.CommandName == "Upload")
             {
@@ -443,22 +466,32 @@ namespace EMS.WebApp.Farwarding.Transaction
 
         protected void btnAdvPayment_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("~/Forwarding/Transaction/CreditorPayment.aspx?jobid=" + GeneralFunctions.EncryptQueryString(Convert.ToInt32(ViewState["JOBID"]).ToString())
+            + "&paymenttype=" + GeneralFunctions.EncryptQueryString("A")
+        );
         }
 
         protected void btnAddPayable_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("~/Forwarding/Transaction/AddEditEstimate.aspx?jobid=" + GeneralFunctions.EncryptQueryString(Convert.ToInt32(ViewState["JOBID"]).ToString())
+                + "&IsPayment=" + GeneralFunctions.EncryptQueryString("1")
+            + "&DlName=" + GeneralFunctions.EncryptQueryString(lblCustomer.Text)
+                 + "&DlValues=" + GeneralFunctions.EncryptQueryString(hdnCustID.Value)
+                );
         }
 
         protected void btnAdvanceReceipt_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void btnAddRecovery_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("~/Forwarding/Transaction/AddEditEstimate.aspx?jobid=" + GeneralFunctions.EncryptQueryString(Convert.ToInt32(ViewState["JOBID"]).ToString())
+                  + "&IsPayment=" + GeneralFunctions.EncryptQueryString("0")
+              + "&DlName=" + GeneralFunctions.EncryptQueryString(lblCustomer.Text)
+                   + "&DlValues=" + GeneralFunctions.EncryptQueryString(hdnCustID.Value)
+                  );
         }
 
         protected void btnAddInvoiceCred_Click(object sender, EventArgs e)

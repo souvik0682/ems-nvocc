@@ -65,7 +65,7 @@ namespace EMS.WebApp.Forwarding.Transaction
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            RedirecToAddEditPage(-1);
+            Response.Redirect("~/Forwarding/Transaction/Job.aspx");
         }
 
         protected void ddlPaging_SelectedIndexChanged(object sender, EventArgs e)

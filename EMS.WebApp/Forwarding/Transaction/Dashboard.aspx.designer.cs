@@ -121,6 +121,15 @@ namespace EMS.WebApp.Farwarding.Transaction {
         protected global::System.Web.UI.WebControls.Label lblShipping;
         
         /// <summary>
+        /// hdnCustID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnCustID;
+        
+        /// <summary>
         /// lblPrimeDocs control.
         /// </summary>
         /// <remarks>
@@ -319,6 +328,24 @@ namespace EMS.WebApp.Farwarding.Transaction {
         protected global::System.Web.UI.WebControls.Button btnCloseJob;
         
         /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
+        
+        /// <summary>
+        /// Button2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button2;
+        
+        /// <summary>
         /// btnAdvPayment control.
         /// </summary>
         /// <remarks>
@@ -344,6 +371,24 @@ namespace EMS.WebApp.Farwarding.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvEstimatePayable;
+        
+        /// <summary>
+        /// Button3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button3;
+        
+        /// <summary>
+        /// Button4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button4;
         
         /// <summary>
         /// btnAdvanceReceipt control.
@@ -373,6 +418,15 @@ namespace EMS.WebApp.Farwarding.Transaction {
         protected global::System.Web.UI.WebControls.GridView gvEstimateReceivable;
         
         /// <summary>
+        /// Button5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button5;
+        
+        /// <summary>
         /// btnAddInvoiceCred control.
         /// </summary>
         /// <remarks>
@@ -389,6 +443,15 @@ namespace EMS.WebApp.Farwarding.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvCreditors;
+        
+        /// <summary>
+        /// Button6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button6;
         
         /// <summary>
         /// btnAddInvoiceDebt control.

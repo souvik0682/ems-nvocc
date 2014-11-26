@@ -28,6 +28,11 @@ namespace EMS.Common
         decimal Roff { get; set; }
         DateTime BLDate { get; set; }
         string BookingNo { get; set; }
+        string JobNo { get; set; }
+        int JobID { get; set; }
+        int EstimateID { get; set; }
+        DateTime JobDate { get; set; }
+        string EstimateNo { get; set; }
         int UserAdded { get; set; }
         int UserLastEdited { get; set; }
         DateTime AddedOn { get; set; }

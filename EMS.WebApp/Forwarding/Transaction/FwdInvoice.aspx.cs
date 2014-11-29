@@ -157,13 +157,13 @@ namespace EMS.WebApp.Forwarding.Transaction
             ddlLocation.SelectedValue = lstLocation[0].DefaultLocation.ToString();
         }
 
-        private void GrossWeight(string BLNo)
-        {
-            DataTable dt = new InvoiceBLL().ExpGrossWeight(BLNo);
-            ViewState["GROSSWEIGHT"] = dt.Rows[0]["GrossWeight"].ToString();
-            ViewState["VOLUME"] = dt.Rows[0]["Volume"].ToString();
+        //private void GrossWeight(string BLNo)
+        //{
+        //    DataTable dt = new InvoiceBLL().ExpGrossWeight(BLNo);
+        //    ViewState["GROSSWEIGHT"] = dt.Rows[0]["GrossWeight"].ToString();
+        //    ViewState["VOLUME"] = dt.Rows[0]["Volume"].ToString();
 
-        }
+        //}
 
         private void TEU(string BLNo)
         {
@@ -271,25 +271,25 @@ namespace EMS.WebApp.Forwarding.Transaction
             ViewState["STAX"] = serviceTax;
         }
 
-        protected void txtRatePerTEU_TextChanged(object sender, EventArgs e)
-        {
-            CalculateCharge();
-        }
+        //protected void txtRatePerTEU_TextChanged(object sender, EventArgs e)
+        //{
+        //    CalculateCharge();
+        //}
 
-        protected void txtRateperFEU_TextChanged(object sender, EventArgs e)
-        {
-            CalculateCharge();
-        }
+        //protected void txtRateperFEU_TextChanged(object sender, EventArgs e)
+        //{
+        //    CalculateCharge();
+        //}
 
         protected void txtRatePerBL_TextChanged(object sender, EventArgs e)
         {
             CalculateCharge();
         }
 
-        protected void txtRatePerCBM_TextChanged(object sender, EventArgs e)
-        {
-            CalculateCharge();
-        }
+        //protected void txtRatePerCBM_TextChanged(object sender, EventArgs e)
+        //{
+        //    CalculateCharge();
+        //}
         #region Currency
         private void FillCurrency()
         {
@@ -303,10 +303,10 @@ namespace EMS.WebApp.Forwarding.Transaction
 
         }
         #endregion
-        protected void txtRatePerTon_TextChanged(object sender, EventArgs e)
-        {
-            CalculateCharge();
-        }
+        //protected void txtRatePerTon_TextChanged(object sender, EventArgs e)
+        //{
+        //    CalculateCharge();
+        //}
         protected void ddlChargeName_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<IChargeRate> chargeRates = new InvoiceBLL().GetfwdInvoiceCharges(Convert.ToInt32(ddlJobNo.SelectedValue), Convert.ToInt32(ddlEstimateNo.SelectedValue), Convert.ToInt32(ddlFChargeName.SelectedValue), Convert.ToInt32(0), Convert.ToDateTime(txtInvoiceDate.Text));

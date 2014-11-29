@@ -47,11 +47,11 @@
         }
     </script>
     <div id="headercaption">
-        ADD / EDIT EXPORT BL</div>
+        ADD / EDIT FORWARDING BL</div>
     <center>
         <div style="width: 100%">
             <fieldset style="width: 80%;">
-                <legend>Add / Edit Export B/L</legend>
+                <legend>Add / Edit Forwarding B/L</legend>
                 <asp:UpdatePanel ID="upExportBL" runat="server" UpdateMode="Always">
                     <ContentTemplate>
                         <div>

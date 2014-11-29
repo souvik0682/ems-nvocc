@@ -116,6 +116,12 @@ namespace EMS.WebApp.Forwarding.Transaction
                 string encryptedId = GeneralFunctions.EncryptQueryString(Convert.ToInt32(e.CommandArgument).ToString());
                 Response.Redirect("~/Forwarding/Transaction/Dashboard.aspx?JobId=" + encryptedId);
             }
+            else if (e.CommandName == "HblEntry")
+            {
+                string encryptedId = GeneralFunctions.EncryptQueryString(Convert.ToInt32(e.CommandArgument).ToString());
+                Response.Redirect("~/Forwarding/Transaction/ManageJobBL.aspx?JobId=" + encryptedId);
+            }
+            
         }
 
         protected void gvImportBL_RowDataBound(object sender, GridViewRowEventArgs e)

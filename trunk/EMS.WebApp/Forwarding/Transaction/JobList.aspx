@@ -204,7 +204,7 @@
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                         <ItemTemplate>
-                                            <asp:ImageButton ID="btnHBLEntry" runat="server" CommandName="Edit" ImageUrl="~/Images/add.jpeg"
+                                            <asp:ImageButton ID="btnHBLEntry" runat="server" CommandName="HblEntry" ImageUrl="~/Images/add.jpeg"
                                                 Height="16" Width="16" />
                                         </ItemTemplate>
                                     </asp:TemplateField>

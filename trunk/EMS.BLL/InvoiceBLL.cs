@@ -26,6 +26,26 @@ namespace EMS.BLL
         {
             return InvoiceDAL.GetExpInvoiceType();
         }
+
+        public DataTable GetFwdInvoiceType()
+        {
+            return InvoiceDAL.GetFwdInvoiceType();
+        }
+
+        public DataTable GetFwdLocation(int UserId)
+        {
+            return InvoiceDAL.GetFwdLocation(UserId);
+        }
+
+        public static DataTable GetFwdParty()
+        {
+            return InvoiceDAL.GetFwdParty();
+        }
+
+        public static DataTable GetFwdEstimate(int EstimateId)
+        {
+            return InvoiceDAL.GetFwdEstimate(EstimateId);
+        }
         #endregion
 
         #region Location
@@ -179,6 +199,29 @@ namespace EMS.BLL
 
             return invoiceId;
         }
+
+        public long SaveFwdInvoice(IInvoice invoice, string misc, List<IChargeRate> expInvoiceCharge, int isedit)
+        {
+            long invoiceId = 0;
+            int invoiceChargeId = 0;
+
+            invoiceId = InvoiceDAL.SaveFwdInvoice(invoice, misc, isedit);
+
+            if (invoiceId > 0)
+            {
+                if (!ReferenceEquals(expInvoiceCharge, null))
+                {
+                    foreach (IChargeRate cRate in expInvoiceCharge)
+                    {
+                        cRate.InvoiceId = invoiceId;
+                        invoiceChargeId = InvoiceDAL.SaveInvoiceChargesExp(cRate);
+                    }
+                }
+            }
+
+            return invoiceId;
+        }
+
         public IInvoice GetInvoiceById(long InvoiceId)
         {
             return InvoiceDAL.GetInvoiceById(InvoiceId);
@@ -187,6 +230,11 @@ namespace EMS.BLL
         public IInvoice GetExpInvoiceById(long InvoiceId)
         {
             return InvoiceDAL.GetExpInvoiceById(InvoiceId);
+        }
+
+        public IInvoice GetFwdInvoiceById(long InvoiceId)
+        {
+            return InvoiceDAL.GetFwdInvoiceById(InvoiceId);
         }
 
         public string GetInvoiceNoById(long InvoiceId)
@@ -227,6 +275,10 @@ namespace EMS.BLL
         {
             return InvoiceDAL.GetExpLineLocation(BLNo);
         }
+        public DataTable GetFwdLineLocation(string JobNo)
+        {
+            return InvoiceDAL.GetFwdLineLocation(JobNo);
+        }
 
         public List<IChargeRate> GetInvoiceCharges_New(long BlId, int ChargesID, int TerminalID, decimal ExchangeRate, int DocTypeId, string Param3, DateTime InvoiceDate)
         {
@@ -251,6 +303,11 @@ namespace EMS.BLL
         public decimal GetExchangeRateForExport(long BlId)
         {
             return InvoiceDAL.GetExchangeRateForExport(BlId);
+        }
+
+        public decimal GetExchangeRateForForwarding(long CurrencyId, DateTime CurrentDate)
+        {
+            return InvoiceDAL.GetExchangeRateForForwarding(CurrencyId, CurrentDate);
         }
 
         public List<IChargeRate> GetExpInvoiceChargesById(long InvoiceId)

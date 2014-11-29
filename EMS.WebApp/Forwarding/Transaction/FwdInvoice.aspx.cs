@@ -29,8 +29,7 @@ namespace EMS.WebApp.Forwarding.Transaction
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            RetriveParameters();
-            int NewType = 0;
+            //RetriveParameters();
             //CheckUserAccess();
 
             if (!Page.IsPostBack)
@@ -43,6 +42,7 @@ namespace EMS.WebApp.Forwarding.Transaction
 
                 LoadInvoiceTypeDDL();
                 LoadLocationDDL();
+                LoadPartyDDL();
                 //LoadNvoccDDL();
 
                 if (!ReferenceEquals(Request.QueryString["invid"], null))
@@ -53,24 +53,23 @@ namespace EMS.WebApp.Forwarding.Transaction
                     if (invoiveId > 0)
                         LoadForEdit(invoiveId);
                 }
-                if (!ReferenceEquals(Request.QueryString["p1"], null))
+
+                if (!ReferenceEquals(Request.QueryString["jobNo"], null))
                 {
-                    string blNo = string.Empty;
                     int docTypeId = 0;
-                    string misc = string.Empty;
                     _isedit = 0;
-                    blNo = GeneralFunctions.DecryptQueryString(Request.QueryString["p1"].ToString());
-                    Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["p3"].ToString()), out docTypeId);
-                    misc = GeneralFunctions.DecryptQueryString(Request.QueryString["p4"].ToString());
-                    var JobNo = GeneralFunctions.DecryptQueryString(Request.QueryString["p5"].ToString());
-                    var BLDate = GeneralFunctions.DecryptQueryString(Request.QueryString["p6"].ToString());
-                    var JobDate = GeneralFunctions.DecryptQueryString(Request.QueryString["p7"].ToString());
-                    var Containers = GeneralFunctions.DecryptQueryString(Request.QueryString["p8"].ToString());
-                    txtBLDate.Text = BLDate;
+
+                    Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["docTypeId"].ToString()), out docTypeId);
+                    string JobNo = GeneralFunctions.DecryptQueryString(Request.QueryString["jobNo"].ToString());
+                    string EstimateId = GeneralFunctions.DecryptQueryString(Request.QueryString["estimateId"].ToString());
+                    string Containers = GeneralFunctions.DecryptQueryString(Request.QueryString["containers"].ToString());
+                    
                     ddlJobNo.SelectedValue = JobNo;
                     txtContainers.Text = Containers;
+                    ddlEstimateNo.SelectedValue = EstimateId;
 
-                    LoadForBLQuery(blNo, docTypeId, misc);
+                    LoadEstimateDDL(Convert.ToInt32(EstimateId));
+                    LoadForBLQuery(JobNo, docTypeId);
                     LoadChargeDDL(docTypeId);
                     btnSave.Enabled = true;
                 }
@@ -125,7 +124,7 @@ namespace EMS.WebApp.Forwarding.Transaction
         {
             try
             {
-                DataTable dt = new InvoiceBLL().GetExpInvoiceType();
+                DataTable dt = new InvoiceBLL().GetFwdInvoiceType();
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
@@ -149,12 +148,86 @@ namespace EMS.WebApp.Forwarding.Transaction
 
         private void LoadLocationDDL()
         {
-            List<ILocation> lstLocation = new ImportBLL().GetLocation(_userId, true);  //Replace with UserId
-            ddlLocation.DataValueField = "Id";
-            ddlLocation.DataTextField = "Name";
-            ddlLocation.DataSource = lstLocation;
-            ddlLocation.DataBind();
-            ddlLocation.SelectedValue = lstLocation[0].DefaultLocation.ToString();
+            try
+            {
+                DataTable dt = new InvoiceBLL().GetFwdLocation(_userId);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataRow dr = dt.NewRow();
+                    //dr["pk_LocID"] = "0";
+                    //dr["DocName"] = "--Select--";
+                    //dt.Rows.InsertAt(dr, 0);
+                    ddlInvoiceType.DataValueField = "pk_LocID";
+                    ddlInvoiceType.DataTextField = "LocName";
+                    ddlInvoiceType.DataSource = dt;
+                    ddlInvoiceType.DataBind();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+<<<<<<< .mine
+        private void LoadPartyDDL()
+        {
+            try
+            {
+                DataTable dt = InvoiceBLL.GetFwdParty();
+=======
+        //private void GrossWeight(string BLNo)
+        //{
+        //    DataTable dt = new InvoiceBLL().ExpGrossWeight(BLNo);
+        //    ViewState["GROSSWEIGHT"] = dt.Rows[0]["GrossWeight"].ToString();
+        //    ViewState["VOLUME"] = dt.Rows[0]["Volume"].ToString();
+>>>>>>> .r1614
+
+<<<<<<< .mine
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataRow dr = dt.NewRow();
+                    ddlInvoiceType.DataValueField = "PartyId";
+                    ddlInvoiceType.DataTextField = "PartyName";
+                    ddlInvoiceType.DataSource = dt;
+                    ddlInvoiceType.DataBind();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+=======
+        //}
+>>>>>>> .r1614
+
+        private void LoadEstimateDDL(int EstimateId)
+        {
+            try
+            {
+                DataTable dt = InvoiceBLL.GetFwdEstimate(EstimateId);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataRow dr = dt.NewRow();
+                    dr["pk_EstimateId"] = "0";
+                    dr["EstimateNo"] = "--Select--";
+                    dt.Rows.InsertAt(dr, 0);
+                    ddlEstimateNo.DataValueField = "pk_EstimateId";
+                    ddlEstimateNo.DataTextField = "EstimateNo";
+                    ddlEstimateNo.DataSource = dt;
+                    ddlEstimateNo.DataBind();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         //private void GrossWeight(string BLNo)
@@ -162,7 +235,6 @@ namespace EMS.WebApp.Forwarding.Transaction
         //    DataTable dt = new InvoiceBLL().ExpGrossWeight(BLNo);
         //    ViewState["GROSSWEIGHT"] = dt.Rows[0]["GrossWeight"].ToString();
         //    ViewState["VOLUME"] = dt.Rows[0]["Volume"].ToString();
-
         //}
 
         private void TEU(string BLNo)
@@ -217,7 +289,7 @@ namespace EMS.WebApp.Forwarding.Transaction
         //    }
         //}
 
-     
+
         private void CalculateCharge()
         {
             decimal grossAmount = 0;
@@ -276,37 +348,58 @@ namespace EMS.WebApp.Forwarding.Transaction
         //    CalculateCharge();
         //}
 
+<<<<<<< .mine
         //protected void txtRateperFEU_TextChanged(object sender, EventArgs e)
         //{
         //    CalculateCharge();
         //}
+        //protected void txtRatePerCBM_TextChanged(object sender, EventArgs e)
+        //{
+        //    CalculateCharge();
+        //}
+        //protected void txtRatePerTon_TextChanged(object sender, EventArgs e)
+        //{
+        //    CalculateCharge();
+        //}
+=======
+        //protected void txtRateperFEU_TextChanged(object sender, EventArgs e)
+        //{
+        //    CalculateCharge();
+        //}
+>>>>>>> .r1614
 
         protected void txtRatePerBL_TextChanged(object sender, EventArgs e)
         {
             CalculateCharge();
         }
 
+<<<<<<< .mine
+=======
         //protected void txtRatePerCBM_TextChanged(object sender, EventArgs e)
         //{
         //    CalculateCharge();
         //}
         #region Currency
+>>>>>>> .r1614
         private void FillCurrency()
         {
-
             var cur = CommonBLL.GetAllCurrency();
             ddlCurrency.DataValueField = "pk_CurrencyID";
             ddlCurrency.DataTextField = "CurrencyCode";
             ddlCurrency.DataSource = cur;
             ddlCurrency.DataBind();
             ddlCurrency.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
+        }
 
+<<<<<<< .mine
+=======
         }
         #endregion
         //protected void txtRatePerTon_TextChanged(object sender, EventArgs e)
         //{
         //    CalculateCharge();
         //}
+>>>>>>> .r1614
         protected void ddlChargeName_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<IChargeRate> chargeRates = new InvoiceBLL().GetfwdInvoiceCharges(Convert.ToInt32(ddlJobNo.SelectedValue), Convert.ToInt32(ddlEstimateNo.SelectedValue), Convert.ToInt32(ddlFChargeName.SelectedValue), Convert.ToInt32(0), Convert.ToDateTime(txtInvoiceDate.Text));
@@ -316,6 +409,8 @@ namespace EMS.WebApp.Forwarding.Transaction
             if (Charge != null && Charge.Rows.Count > 0)
             {
                 txtRatePerBL.Enabled = true;
+
+                #region Commented
                 //if (Convert.ToBoolean(Charge.Rows[0]["RateChangeable"].ToString()))
                 //{
                 //    int ChargeType = Convert.ToInt32(Charge.Rows[0]["ChargeType"].ToString());
@@ -374,6 +469,7 @@ namespace EMS.WebApp.Forwarding.Transaction
                 //    txtRatePerCBM.Enabled = false;
                 //    txtRatePerTon.Enabled = false;
                 //}
+                #endregion
 
                 string currency = Charge.Rows[0]["Currency"].ToString();
                 ddlCurrency.SelectedValue = currency;
@@ -385,7 +481,7 @@ namespace EMS.WebApp.Forwarding.Transaction
                 }
                 else if (ddlCurrency.SelectedValue == "2")
                 {
-                    decimal exchangeRate = new InvoiceBLL().GetExchangeRateForExport(Convert.ToInt64(0));
+                    decimal exchangeRate = new InvoiceBLL().GetExchangeRateForForwarding(Convert.ToInt64(ddlCurrency.SelectedValue), Convert.ToDateTime(txtInvoiceDate.Text));
                     custTxtConvRate.Enabled = true;
                     custTxtConvRate.Text = exchangeRate.ToString();
                 }
@@ -400,9 +496,10 @@ namespace EMS.WebApp.Forwarding.Transaction
             {
                 //txtRatePerTEU.Text = chargeRates[0].RatePerTEU.ToString();
                 //txtRateperFEU.Text = chargeRates[0].RatePerFEU.ToString();
-                txtRatePerBL.Text = chargeRates[0].RatePerBL.ToString();
                 //txtRatePerCBM.Text = chargeRates[0].RatePerCBM.ToString();
                 //txtRatePerTon.Text = chargeRates[0].RatePerTON.ToString();
+
+                txtRatePerBL.Text = chargeRates[0].RatePerBL.ToString();
                 txtGrossAmount.Text = chargeRates[0].GrossAmount.ToString();
                 txtServiceTax.Text = (chargeRates[0].ServiceTax + chargeRates[0].ServiceTaxCessAmount + chargeRates[0].ServiceTaxACess).ToString();
                 txtTotal.Text = (chargeRates[0].TotalAmount).ToString();
@@ -414,10 +511,11 @@ namespace EMS.WebApp.Forwarding.Transaction
             {
                 //txtRatePerTEU.Text = "0.00";
                 //txtRateperFEU.Text = "0.00";
-                txtRatePerBL.Text = "0.00";
                 //txtRatePerCBM.Text = "0.00";
                 //txtRatePerTon.Text = "0.00";
-                //  txtUSD.Text = "0.00";
+                //txtUSD.Text = "0.00";
+
+                txtRatePerBL.Text = "0.00";
                 txtGrossAmount.Text = "0.00";
                 txtServiceTax.Text = "0.00";
                 txtTotal.Text = "0.00";
@@ -431,7 +529,6 @@ namespace EMS.WebApp.Forwarding.Transaction
             }
         }
 
-
         protected void ddlCurrency_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlCurrency.SelectedValue == "1")
@@ -441,7 +538,7 @@ namespace EMS.WebApp.Forwarding.Transaction
             }
             else if (ddlCurrency.SelectedValue == "2")
             {
-                decimal exchangeRate = new InvoiceBLL().GetExchangeRateForExport(Convert.ToInt64(0));
+                decimal exchangeRate = new InvoiceBLL().GetExchangeRateForForwarding(Convert.ToInt64(ddlCurrency.SelectedValue), Convert.ToDateTime(txtInvoiceDate.Text)); ;
                 custTxtConvRate.Enabled = true;
                 custTxtConvRate.Text = exchangeRate.ToString();
             }
@@ -476,6 +573,7 @@ namespace EMS.WebApp.Forwarding.Transaction
             }
             return "";
         }
+
         protected void gvwInvoice_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -484,10 +582,12 @@ namespace EMS.WebApp.Forwarding.Transaction
 
                 e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChargeName"));
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "RatePerBL"));
+
                 //e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "RatePerTEU"));
                 //e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "RateperFEU"));
                 //e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "RatePerCBM"));
                 //e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "RatePerTON"));
+
                 e.Row.Cells[2].Text = Convert.ToString(GetCurrencyCode(Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "fk_CurrencyID"))));
                 e.Row.Cells[3].Text = Convert.ToString(Math.Round(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ExchgRate")), 2));
                 e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "GrossAmount"));
@@ -549,7 +649,7 @@ namespace EMS.WebApp.Forwarding.Transaction
 
             List<IChargeRate> chargeRate = ViewState["CHARGERATE"] as List<IChargeRate>;
 
-            long invoiceID = new InvoiceBLL().SaveInvoiceExp(invoice, misc, chargeRate, _isedit);
+            long invoiceID = new InvoiceBLL().SaveFwdInvoice(invoice, misc, chargeRate, _isedit);
 
             if (invoiceID == 0)
             {
@@ -561,19 +661,18 @@ namespace EMS.WebApp.Forwarding.Transaction
 
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Record saved successfully! Invoice Number: " + invoiceNo + "');</script>", false);
             }
-            Response.Redirect("~/Forwarding/Transaction/Dashboard.aspx?JobID=" + GeneralFunctions.EncryptQueryString(""));
+            Response.Redirect("~/Forwarding/Transaction/Dashboard.aspx");
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Forwarding/Transaction/Dashboard.aspx?JobID=" + GeneralFunctions.EncryptQueryString(""));
+            Response.Redirect("~/Forwarding/Transaction/Dashboard.aspx");
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             AddChargesRate();
         }
-
 
         private void AddChargesRate()
         {
@@ -608,18 +707,13 @@ namespace EMS.WebApp.Forwarding.Transaction
                 invoice.InvoiceID = Convert.ToInt64(ViewState["InvoiceID"]);
 
             invoice.AddedOn = DateTime.Now;
-
-            invoice.BLID = Convert.ToInt64(0);
-
+            invoice.BLID = 0;
             invoice.CHAID = 0;
-
             invoice.CompanyID = 1;
             invoice.EditedOn = DateTime.Now;
             invoice.ExportImport = "F";
             invoice.GrossAmount = chargeRate.Sum(c => c.GrossAmount);
-
             invoice.InvoiceDate = Convert.ToDateTime(txtInvoiceDate.Text);
-
             invoice.InvoiceTypeID = Convert.ToInt32(ddlInvoiceType.SelectedValue);
             invoice.JobID = Convert.ToInt32(ddlJobNo.SelectedValue);
             invoice.EstimateID = Convert.ToInt32(ddlEstimateNo.SelectedValue);
@@ -627,11 +721,10 @@ namespace EMS.WebApp.Forwarding.Transaction
             invoice.ServiceTaxACess = chargeRate.Sum(c => c.ServiceTaxACess);
             invoice.ServiceTaxCess = chargeRate.Sum(c => c.ServiceTaxCessAmount);
             invoice.Roff = Convert.ToDecimal(txtROff.Text);
-
             invoice.UserAdded = _userId;
             invoice.UserLastEdited = _userId;
-
             invoice.InvoiceNo = txtInvoiceNo.Text;
+            invoice.PartyId = Convert.ToInt32(ddlParty.SelectedValue);
         }
 
         private void BuildChargesRate(IChargeRate charge)
@@ -662,14 +755,11 @@ namespace EMS.WebApp.Forwarding.Transaction
             charge.ChargesID = Convert.ToInt32(ddlFChargeName.SelectedValue);
             charge.GrossAmount = Convert.ToDecimal(txtGrossAmount.Text);
             charge.RatePerBL = Convert.ToDecimal(txtRatePerBL.Text);
-            //charge.RatePerCBM = Convert.ToDecimal(txtRatePerCBM.Text);
-            //charge.RatePerFEU = Convert.ToDecimal(txtRateperFEU.Text);
-            //charge.RatePerTEU = Convert.ToDecimal(txtRatePerTEU.Text);
-            //charge.RatePerTON = Convert.ToDecimal(txtRatePerTon.Text);
             charge.fk_CurrencyID = Convert.ToInt32(ddlCurrency.SelectedValue);
             charge.ExchgRate = Math.Round(Convert.ToDecimal(custTxtConvRate.Text), 2);
+
             if (ViewState["STAX"] != null)
-                charge.ServiceTax = Convert.ToDecimal(ViewState["STAX"]);  //Convert.ToDecimal(txtServiceTax.Text);
+                charge.ServiceTax = Convert.ToDecimal(ViewState["STAX"]);
 
             if (ViewState["CESSAMOUNT"] != null)
                 charge.ServiceTaxCessAmount = Convert.ToDecimal(ViewState["CESSAMOUNT"]);
@@ -677,6 +767,11 @@ namespace EMS.WebApp.Forwarding.Transaction
                 charge.ServiceTaxACess = Convert.ToDecimal(ViewState["ADDCESS"]);
 
             charge.TotalAmount = Convert.ToDecimal(txtTotal.Text);
+
+            //charge.RatePerCBM = Convert.ToDecimal(txtRatePerCBM.Text);
+            //charge.RatePerFEU = Convert.ToDecimal(txtRateperFEU.Text);
+            //charge.RatePerTEU = Convert.ToDecimal(txtRatePerTEU.Text);
+            //charge.RatePerTON = Convert.ToDecimal(txtRatePerTon.Text);
         }
 
         private void ClearChargesRate()
@@ -684,17 +779,18 @@ namespace EMS.WebApp.Forwarding.Transaction
             ddlFChargeName.SelectedValue = "0";
             txtGrossAmount.Text = "0.00";
             txtRatePerBL.Text = "0.00";
-            //txtRatePerCBM.Text = "0.00";
-            //txtRateperFEU.Text = "0.00";
-            //txtRatePerTEU.Text = "0.00";
-            //txtRatePerTon.Text = "0.00";
             txtTotal.Text = "0.00";
-
             txtServiceTax.Text = "0.00";
             txtGrossAmount.Text = "0.00";
             custTxtConvRate.Text = "0.00";
             ddlCurrency.SelectedIndex = 0;
             txtRatePerBL.Enabled = true;
+
+            //txtRatePerCBM.Text = "0.00";
+            //txtRateperFEU.Text = "0.00";
+            //txtRatePerTEU.Text = "0.00";
+            //txtRatePerTon.Text = "0.00";
+
             //if (Convert.ToInt32(ddlInvoiceType.SelectedValue) == 19)
             //{
             //    txtRatePerTEU.Enabled = false;
@@ -747,17 +843,20 @@ namespace EMS.WebApp.Forwarding.Transaction
         private void LoadForEdit(long InvoiceId)
         {
             //For Invoice
-            IInvoice invoice = new InvoiceBLL().GetExpInvoiceById(InvoiceId);
+            IInvoice invoice = new InvoiceBLL().GetFwdInvoiceById(InvoiceId);
 
             ViewState["InvoiceID"] = invoice.InvoiceID;
 
             txtBLDate.Text = invoice.BLDate.ToShortDateString();
+            txtBLNo.Text = invoice.BLNo;
             ddlJobNo.Text = invoice.JobNo;
-
             txtInvoiceDate.Text = invoice.InvoiceDate.ToShortDateString();
             txtInvoiceNo.Text = invoice.InvoiceNo;
             ddlInvoiceType.SelectedValue = invoice.InvoiceTypeID.ToString();
             ddlJobNo.SelectedValue = invoice.JobID.ToString();
+            ddlParty.SelectedValue = invoice.PartyId.ToString();
+
+            LoadEstimateDDL(invoice.EstimateID);
             ddlEstimateNo.SelectedValue = invoice.EstimateID.ToString();
 
             //long nvoccId = Convert.ToInt64(ddlNvocc.SelectedValue);
@@ -769,8 +868,8 @@ namespace EMS.WebApp.Forwarding.Transaction
 
             //For Charge Rates
             List<IChargeRate> chargeRates = new InvoiceBLL().GetExpInvoiceChargesById(InvoiceId);
-
             ViewState["CHARGERATE"] = chargeRates;
+
             txtInvoiceDate.Enabled = false;
             txtUSDExRate.Enabled = false;
             btnAdd.Enabled = false;
@@ -781,22 +880,30 @@ namespace EMS.WebApp.Forwarding.Transaction
             gvwInvoice.DataBind();
         }
 
-        private void LoadForBLQuery(string BlNo, int DocType, string Misc)
+        private void LoadForBLQuery(string JobNo, int DocType)
         {
-            DataTable dt = new InvoiceBLL().GetExpLineLocation(BlNo);
+            DataTable dt = new InvoiceBLL().GetFwdLineLocation(JobNo);
 
-            int line = Convert.ToInt32(dt.Rows[0]["fk_NVOCCID"]);
+            //int line = Convert.ToInt32(dt.Rows[0]["fk_flineId"]);
             int location = Convert.ToInt32(dt.Rows[0]["fk_LocationID"]);
-            long blId = Convert.ToInt64(dt.Rows[0]["pk_ExpBLID"]);
+            string BlNo = Convert.ToString(dt.Rows[0]["BLNo"]);
+            int JobId = Convert.ToInt32(dt.Rows[0]["pk_JobId"]);
+            int PartyId = Convert.ToInt32(dt.Rows[0]["PartyId"]);
+            string BLDate = Convert.ToString(dt.Rows[0]["BLDate"]);
 
+            txtJobDate.Text = Convert.ToDateTime(dt.Rows[0]["JobDate"]).ToShortDateString();
             txtInvoiceDate.Text = DateTime.Now.ToShortDateString();
             ddlInvoiceType.SelectedValue = DocType.ToString();
             ddlLocation.SelectedValue = location.ToString();
+            txtBLNo.Text = BlNo;
+            txtBLDate.Text = BLDate;
+            ddlParty.SelectedValue = PartyId.ToString();
             //ddlNvocc.SelectedValue = line.ToString();
             //LoadBLNoDDL(line, location);
             //ddlBLno.SelectedValue = blId.ToString();
-            List<IChargeRate> chargeRates = new InvoiceBLL().GetExpInvoiceCharges(0, Convert.ToInt32(ddlFChargeName.SelectedValue), 0, DocType, Convert.ToDateTime(txtInvoiceDate.Text));
 
+            List<IChargeRate> chargeRates = new InvoiceBLL().GetfwdInvoiceCharges(JobId, Convert.ToInt32(ddlFChargeName.SelectedValue),
+                Convert.ToInt32(ddlEstimateNo.SelectedValue), DocType, Convert.ToDateTime(txtInvoiceDate.Text));
             ViewState["CHARGERATE"] = chargeRates;
 
             if (chargeRates != null && chargeRates.Count > 0)
@@ -814,23 +921,10 @@ namespace EMS.WebApp.Forwarding.Transaction
                 ViewState["INVOICECHARGEID"] = null;
             }
 
-
-
             LoadChargeDDL(DocType);
-
-            if (DocType == 9)
-            {
-
-                ddlFChargeName.Enabled = true;
-            }
-            else
-            {
-                ddlFChargeName.Enabled = false;
-            }
 
             gvwInvoice.DataSource = chargeRates;
             gvwInvoice.DataBind();
-
 
             //Update Invoice Amount
             txtROff.Text = (Math.Round(chargeRates.Sum(cr => cr.TotalAmount), 0) - chargeRates.Sum(cr => cr.TotalAmount)).ToString();
@@ -839,22 +933,22 @@ namespace EMS.WebApp.Forwarding.Transaction
 
         private void EditChargeRate(int InvoiceChargeId)
         {
-            ddlFChargeName.Enabled = false;
-
             List<IChargeRate> chargeRates = null;
 
             if (ViewState["CHARGERATE"] != null)
                 chargeRates = ViewState["CHARGERATE"] as List<IChargeRate>;
 
             IChargeRate chargeRate = chargeRates.Single(c => c.InvoiceChargeId == InvoiceChargeId);
-
             DataTable Charge = new InvoiceBLL().ChargeEditable(chargeRate.ChargesID);
+
             if (Charge != null && Charge.Rows.Count > 0)
             {
                 if (Convert.ToBoolean(Charge.Rows[0]["RateChangeable"].ToString()))
                 {
                     int ChargeType = Convert.ToInt32(Charge.Rows[0]["ChargeType"].ToString());
                     txtRatePerBL.Enabled = true;
+
+                    #region Commented
                     //if (ChargeType == (int)Enums.ExportChargeType.PER_UNIT)
                     //{
                     //    txtRatePerTEU.Enabled = true;
@@ -900,45 +994,40 @@ namespace EMS.WebApp.Forwarding.Transaction
                     //    txtRatePerCBM.Enabled = false;
                     //    txtRatePerTon.Enabled = false;
                     //}
+                    #endregion
                 }
-                else
-                {
-                    //txtRatePerTEU.Enabled = false;
-                    //txtRateperFEU.Enabled = false;
-                    //txtRatePerBL.Enabled = false;
-                    //txtRatePerCBM.Enabled = false;
-                    //txtRatePerTon.Enabled = false;
-                }
+                //else
+                //{
+                //    txtRatePerTEU.Enabled = false;
+                //    txtRateperFEU.Enabled = false;
+                //    txtRatePerBL.Enabled = false;
+                //    txtRatePerCBM.Enabled = false;
+                //    txtRatePerTon.Enabled = false;
+                //}
             }
 
-           
             ddlFChargeName.SelectedValue = chargeRate.ChargesID.ToString();
             txtGrossAmount.Text = chargeRate.GrossAmount.ToString();
             txtRatePerBL.Text = chargeRate.RatePerBL.ToString();
-            //txtRatePerCBM.Text = chargeRate.RatePerCBM.ToString();
-            //txtRateperFEU.Text = chargeRate.RatePerFEU.ToString();
-            //txtRatePerTEU.Text = chargeRate.RatePerTEU.ToString();
-            //txtRatePerTon.Text = chargeRate.RatePerTON.ToString();
             txtServiceTax.Text = (chargeRate.STax + chargeRate.ServiceTaxCessAmount + chargeRate.ServiceTaxACess).ToString();
             ddlCurrency.SelectedValue = chargeRate.fk_CurrencyID.ToString();
 
             if (chargeRate.fk_CurrencyID.ToString() == "1")
-            {
                 custTxtConvRate.Enabled = false;
-            }
             else
-            {
                 custTxtConvRate.Enabled = true;
-            }
 
             custTxtConvRate.Text = chargeRate.ExchgRate.ToString("0.00");
             ViewState["STAX"] = chargeRate.STax;
             ViewState["CESSAMOUNT"] = chargeRate.ServiceTaxCessAmount;
             ViewState["ADDCESS"] = chargeRate.ServiceTaxACess;
-
             txtTotal.Text = chargeRate.TotalAmount.ToString();
-
             ViewState["EDITINVOICECHARGEID"] = chargeRate.InvoiceChargeId;
+
+            //txtRatePerCBM.Text = chargeRate.RatePerCBM.ToString();
+            //txtRateperFEU.Text = chargeRate.RatePerFEU.ToString();
+            //txtRatePerTEU.Text = chargeRate.RatePerTEU.ToString();
+            //txtRatePerTon.Text = chargeRate.RatePerTON.ToString();
         }
 
         protected void txtUSDExRate_TextChanged(object sender, EventArgs e)
@@ -987,7 +1076,6 @@ namespace EMS.WebApp.Forwarding.Transaction
 
         protected void txtInvoiceDate_TextChanged(object sender, EventArgs e)
         {
-
             LoadExchangeRate();
             txtUSDExRate_TextChanged(null, null);
         }

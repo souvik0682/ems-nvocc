@@ -16,6 +16,7 @@ namespace EMS.Entity
         public int InvoiceTypeID { get; set; }
         public long BookingID { get; set; }
         public long BLID { get; set; }
+        public string BLNo { get; set; }
         public string ExportImport { get; set; }
         public decimal XchangeRate { get; set; }
         public string InvoiceNo { get; set; }
@@ -41,6 +42,7 @@ namespace EMS.Entity
         public string EstimateNo { get; set; }
         public int JobID { get; set; }
         public int EstimateID { get; set; }
+        public int PartyId { get; set; }
 
         public List<IChargeRate> ChargeRates { get; set; }
 
@@ -56,6 +58,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "CompanyID"))
                 if (reader["CompanyID"] != DBNull.Value)
                     CompanyID = Convert.ToInt32(reader["CompanyID"]);
+
+            if (ColumnExists(reader, "PartyId"))
+                if (reader["PartyId"] != DBNull.Value)
+                    CompanyID = Convert.ToInt32(reader["PartyId"]);
 
             if (ColumnExists(reader, "LocationID"))
                 if (reader["LocationID"] != DBNull.Value)
@@ -76,6 +82,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "BLID"))
                 if (reader["BLID"] != DBNull.Value)
                     BLID = Convert.ToInt64(reader["BLID"]);
+
+            if (ColumnExists(reader, "fwdBLNo"))
+                if (reader["fwdBLNo"] != DBNull.Value)
+                    ExportImport = Convert.ToString(reader["fwdBLNo"]);
 
             if (ColumnExists(reader, "ExportImport"))
                 if (reader["ExportImport"] != DBNull.Value)

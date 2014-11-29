@@ -14,6 +14,7 @@ namespace EMS.Common
         int InvoiceTypeID { get; set; }
         long BookingID { get; set; }
         long BLID { get; set; }
+        string BLNo { get; set; }
         string ExportImport { get; set; }
         decimal XchangeRate { get; set; }
         string InvoiceNo { get; set; }
@@ -38,5 +39,6 @@ namespace EMS.Common
         DateTime AddedOn { get; set; }
         DateTime EditedOn { get; set; }
         List<IChargeRate> ChargeRates { get; set; }
+        int PartyId { get; set; }
     }
 }

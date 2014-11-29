@@ -33,7 +33,6 @@ namespace EMS.Entity
         public int UserLastEdited { get; set; }
         public DateTime AddedOn { get; set; }
         public DateTime EditedOn { get; set; }
-        public string BLNo { get; set; }
         public DateTime BLDate { get; set; }
         public decimal BillAmount { get; set; }
         public string BookingNo { get; set; }

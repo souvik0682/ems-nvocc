@@ -23,6 +23,7 @@ namespace EMS.WebApp.Farwarding.Transaction
         private bool _canDelete = false;
         private bool _canView = false;
         private bool _LocationSpecific = true;
+        private static string DocumentTypeIdForDr = "37";
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -56,7 +57,7 @@ namespace EMS.WebApp.Farwarding.Transaction
 
             //Jpb Details & Job Summary
             DataTable dtJob = dsDashboard.Tables[0];
-            
+
 
             if (!ReferenceEquals(dtJob, null) && dtJob.Rows.Count > 0)
             {
@@ -347,7 +348,17 @@ namespace EMS.WebApp.Farwarding.Transaction
             }
             else if (e.CommandName == "GenInv")
             {
+                string docTypeId = DocumentTypeIdForDr;
+                string jobNo = lblJobNumber.Text;
+                string estimateId = Convert.ToString(e.CommandArgument);
+                string containers = lblTTL20.Text + " x 20' & " + lblTTL40 + " x 40'";
 
+
+                Response.Redirect("~/Forwarding/Transaction/FwdInvoice.aspx?docTypeId=" + GeneralFunctions.EncryptQueryString(docTypeId)
+                        + "&jobNo=" + GeneralFunctions.EncryptQueryString(jobNo)
+                        + "&estimateId=" + GeneralFunctions.EncryptQueryString(estimateId)
+                        + "&containers=" + GeneralFunctions.EncryptQueryString(containers)
+                      );
             }
             else if (e.CommandName == "Upload")
             {
@@ -432,6 +443,10 @@ namespace EMS.WebApp.Farwarding.Transaction
                 ImageButton btnAddCRN = (ImageButton)e.Row.FindControl("btnAddCRN");
                 btnAddCRN.ToolTip = "Add CRN";
                 btnAddCRN.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceID"));
+
+                ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
+                btnEdit.ToolTip = "Edit Invoice";
+                btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceID"));
             }
         }
         protected void gvDebtors_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -447,6 +462,10 @@ namespace EMS.WebApp.Farwarding.Transaction
             else if (e.CommandName == "AddCRN")
             {
 
+            }
+            else if (e.CommandName == "Edit")
+            {
+                Response.Redirect("~/Forwarding/Transaction/FwdInvoice.aspx?invid=" + GeneralFunctions.EncryptQueryString(e.CommandArgument.ToString()));
             }
         }
 
@@ -482,7 +501,7 @@ namespace EMS.WebApp.Farwarding.Transaction
 
         protected void btnAdvanceReceipt_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void btnAddRecovery_Click(object sender, EventArgs e)
@@ -496,12 +515,22 @@ namespace EMS.WebApp.Farwarding.Transaction
 
         protected void btnAddInvoiceCred_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void btnAddInvoiceDebt_Click(object sender, EventArgs e)
         {
+            string docTypeId = DocumentTypeIdForDr;
+            string jobNo = lblJobNumber.Text;
+            string estimateId = "0";
+            string containers = lblTTL20.Text + " x 20' & " + lblTTL40 + " x 40'";
 
+
+            Response.Redirect("~/Forwarding/Transaction/FwdInvoice.aspx?docTypeId=" + GeneralFunctions.EncryptQueryString(docTypeId)
+                    + "&jobNo=" + GeneralFunctions.EncryptQueryString(jobNo)
+                    + "&estimateId=" + GeneralFunctions.EncryptQueryString(estimateId)
+                    + "&containers=" + GeneralFunctions.EncryptQueryString(containers)
+                  );
         }
     }
 }

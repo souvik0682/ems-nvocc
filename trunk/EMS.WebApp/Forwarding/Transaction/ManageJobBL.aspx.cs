@@ -51,13 +51,14 @@ namespace EMS.WebApp.Farwarding.Transaction
                     Int32 JobID = 0;
                     JobID = Convert.ToInt32(GeneralFunctions.DecryptQueryString(Request.QueryString["JobId"].ToString()));
                     txtBookingNo.Text = JobBLL.GetJobNoFromJobID(JobID);
+                    LoadJobBL(txtBookingNo.Text);
                     ViewState["ISEDIT"] = false;
                     btnClose.Visible = false;
                 }
             }
 
             txtIssuePlace.TextChanged += new EventHandler(txtIssuePlace_TextChanged);
-            txtBookingNo.TextChanged += new EventHandler(txtBookingNo_TextChanged);
+            //txtBookingNo.TextChanged += new EventHandler(txtBookingNo_TextChanged);
             txtBLDate.TextChanged += new EventHandler(txtBLDate_TextChanged);
         }
 
@@ -88,17 +89,17 @@ namespace EMS.WebApp.Farwarding.Transaction
             //txtCBLDate.Text = txtBLDate.Text;
         }
 
-        void txtBookingNo_TextChanged(object sender, EventArgs e)
+        private void LoadJobBL(string JobNo)
         {
             int Status;
-            if (!string.IsNullOrEmpty(txtBookingNo.Text))
+            if (!string.IsNullOrEmpty(JobNo))
             {
-                if (JobBLBLL.CheckBookingLocation(txtBookingNo.Text, _userLocation) == true)
+                if (JobBLBLL.CheckBookingLocation(JobNo, _userLocation) == true)
                 {
-                    Status = JobBLBLL.CheckExpBLExistance(txtBookingNo.Text);
+                    Status = JobBLBLL.CheckExpBLExistance(JobNo);
                     if (Status != 0)
                     {
-                        LoadExportBLHeaderForAdd(txtBookingNo.Text, Status);
+                        LoadExportBLHeaderForAdd(JobNo, Status);
                         lblErr.Text = "";
                     }
                     else

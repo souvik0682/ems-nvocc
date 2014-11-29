@@ -84,7 +84,7 @@
                                                                 <asp:HiddenField ID="hdnBLThruEdge" runat="server" />
                                                                 <asp:HiddenField ID="hdnShipmentType" runat="server" />
                                                                 <asp:TextBox ID="txtBookingNo" runat="server" CssClass="textboxuppercase" MaxLength="60"
-                                                                    Width="250px" TabIndex="11" AutoPostBack="True"></asp:TextBox>
+                                                                    Width="250px" TabIndex="11" Enabled="false"></asp:TextBox>
                                                                 <br />
                                                                 <asp:RequiredFieldValidator ID="rfvBookingNo" runat="server" CssClass="errormessage"
                                                                     ErrorMessage="This field is required" ControlToValidate="txtBookingNo" ValidationGroup="Save"

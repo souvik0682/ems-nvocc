@@ -28,7 +28,7 @@ namespace EMS.WebApp.Farwarding.Transaction
             RetriveParameters();
             _userId = UserBLL.GetLoggedInUserId();
             _userLocation = UserBLL.GetUserLocation();
-            //CheckUserAccess();
+            CheckUserAccess();
 
 
             if (!IsPostBack)

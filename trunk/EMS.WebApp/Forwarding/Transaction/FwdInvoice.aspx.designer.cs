@@ -175,13 +175,13 @@ namespace EMS.WebApp.Forwarding.Transaction {
         protected global::System.Web.UI.WebControls.TextBox txtROff;
         
         /// <summary>
-        /// TextBox1 control.
+        /// ddlParty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.DropDownList ddlParty;
         
         /// <summary>
         /// txtUSDExRate control.

@@ -138,8 +138,9 @@
                                     Party Name
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="TextBox1" runat="server" CssClass="textboxuppercase" MaxLength="50"
-                                        Width="350px" Enabled="false"></asp:TextBox>
+                                    <asp:DropDownList ID="ddlParty" runat="server" Enabled="false">
+                                        <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
+                                    </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
@@ -214,8 +215,7 @@
                                             <tr>
                                                 <td class="gridviewitem" style="width:20%;">
                                                     <asp:DropDownList ID="ddlFChargeName" runat="server" Width="255px" AutoPostBack="true"
-                                                        OnSelectedIndexChanged="ddlChargeName_SelectedIndexChanged" 
-                                                        Enabled="false" Height="17px">
+                                                        OnSelectedIndexChanged="ddlChargeName_SelectedIndexChanged" Height="17px">
                                                         <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                                     </asp:DropDownList>
                                                     <br />

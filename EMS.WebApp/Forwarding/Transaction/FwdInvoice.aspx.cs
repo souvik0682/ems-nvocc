@@ -171,21 +171,11 @@ namespace EMS.WebApp.Forwarding.Transaction
             }
         }
 
-<<<<<<< .mine
         private void LoadPartyDDL()
         {
             try
             {
                 DataTable dt = InvoiceBLL.GetFwdParty();
-=======
-        //private void GrossWeight(string BLNo)
-        //{
-        //    DataTable dt = new InvoiceBLL().ExpGrossWeight(BLNo);
-        //    ViewState["GROSSWEIGHT"] = dt.Rows[0]["GrossWeight"].ToString();
-        //    ViewState["VOLUME"] = dt.Rows[0]["Volume"].ToString();
->>>>>>> .r1614
-
-<<<<<<< .mine
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     DataRow dr = dt.NewRow();
@@ -201,9 +191,6 @@ namespace EMS.WebApp.Forwarding.Transaction
                 throw;
             }
         }
-=======
-        //}
->>>>>>> .r1614
 
         private void LoadEstimateDDL(int EstimateId)
         {
@@ -348,7 +335,6 @@ namespace EMS.WebApp.Forwarding.Transaction
         //    CalculateCharge();
         //}
 
-<<<<<<< .mine
         //protected void txtRateperFEU_TextChanged(object sender, EventArgs e)
         //{
         //    CalculateCharge();
@@ -361,26 +347,21 @@ namespace EMS.WebApp.Forwarding.Transaction
         //{
         //    CalculateCharge();
         //}
-=======
         //protected void txtRateperFEU_TextChanged(object sender, EventArgs e)
         //{
         //    CalculateCharge();
         //}
->>>>>>> .r1614
 
         protected void txtRatePerBL_TextChanged(object sender, EventArgs e)
         {
             CalculateCharge();
         }
 
-<<<<<<< .mine
-=======
         //protected void txtRatePerCBM_TextChanged(object sender, EventArgs e)
         //{
         //    CalculateCharge();
         //}
         #region Currency
->>>>>>> .r1614
         private void FillCurrency()
         {
             var cur = CommonBLL.GetAllCurrency();
@@ -391,15 +372,12 @@ namespace EMS.WebApp.Forwarding.Transaction
             ddlCurrency.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
         }
 
-<<<<<<< .mine
-=======
-        }
         #endregion
         //protected void txtRatePerTon_TextChanged(object sender, EventArgs e)
         //{
         //    CalculateCharge();
         //}
->>>>>>> .r1614
+
         protected void ddlChargeName_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<IChargeRate> chargeRates = new InvoiceBLL().GetfwdInvoiceCharges(Convert.ToInt32(ddlJobNo.SelectedValue), Convert.ToInt32(ddlEstimateNo.SelectedValue), Convert.ToInt32(ddlFChargeName.SelectedValue), Convert.ToInt32(0), Convert.ToDateTime(txtInvoiceDate.Text));

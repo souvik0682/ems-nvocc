@@ -29,8 +29,8 @@ namespace EMS.WebApp.Forwarding.Transaction
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //RetriveParameters();
-            //CheckUserAccess();
+            RetriveParameters();
+            CheckUserAccess();
 
             if (!Page.IsPostBack)
             {

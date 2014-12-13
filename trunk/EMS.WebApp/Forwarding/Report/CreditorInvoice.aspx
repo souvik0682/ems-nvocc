@@ -18,7 +18,7 @@
                         From Date:<span class="errormessage">*</span>
                     </td>
                     <td style="padding-right:20px;vertical-align:top;">
-                        <asp:TextBox ID="txtFromDt" runat="server" CssClass="textbox" Width="80"></asp:TextBox>
+                        <asp:TextBox ID="txtFromDt" runat="server" CssClass="textbox" Width="80" Format="dd-MM-yyyy"></asp:TextBox>
                         <cc1:CalendarExtender ID="cbeFromDt" runat="server" TargetControlID="txtFromDt" />
                         <asp:RequiredFieldValidator ID="req1" runat="server" ControlToValidate="txtFromDt" Display="Dynamic" 
                         ErrorMessage="From Date is required" ValidationGroup="vgReport" CssClass="errormessage"></asp:RequiredFieldValidator>
@@ -28,7 +28,7 @@
                     </td>
                     <td style="padding-right:20px;vertical-align:top;">
                         <asp:TextBox ID="txtToDt" runat="server" CssClass="textbox" Width="80"></asp:TextBox>
-                        <cc1:CalendarExtender ID="cbeToDt" runat="server" TargetControlID="txtToDt" />
+                        <cc1:CalendarExtender ID="cbeToDt" runat="server" TargetControlID="txtToDt" Format="dd-MM-yyyy"/>
                         <asp:RequiredFieldValidator ID="req2" runat="server" ControlToValidate="txtToDt" Display="Dynamic" 
                         ErrorMessage="To Date is required" ValidationGroup="vgReport" CssClass="errormessage"></asp:RequiredFieldValidator>
                     </td>

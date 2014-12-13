@@ -59,21 +59,19 @@ where AssociatedWith &lt;&gt; 'D'">
             <rsweb:ReportViewer ID="rptViewer" runat="server" Width="100%" 
                 Font-Names="Verdana" Font-Size="8pt" InteractiveDeviceInfos="(Collection)" 
                 WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt">
-                <LocalReport ReportPath="RDLC\CredInvoice1.rdlc">
+                <LocalReport ReportPath="RDLC\CreditorInvoice.rdlc">
                     <DataSources>
-                        <rsweb:ReportDataSource DataSourceId="odsCredInv" Name="CredInvDs" />
+                        <rsweb:ReportDataSource DataSourceId="odsCredInvoice" Name="CredInvDs" />
                     </DataSources>
                 </LocalReport>
-            </rsweb:ReportViewer>    
-            <asp:ObjectDataSource ID="odsCredInv" runat="server" 
-                SelectMethod="GetCredInvoice" TypeName="EMS.BLL.ReportBLL">
+            </rsweb:ReportViewer>
+            <asp:ObjectDataSource ID="odsCredInvoice" runat="server" 
+                SelectMethod="GetCredInvoice" TypeName="EMS.BLL.ReportBLL" 
+                onselecting="odsCredInvoice_Selecting">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="ddlCreditor" DefaultValue="0" 
-                        Name="CreditorId" PropertyName="SelectedValue" Type="Int32" />
-                    <asp:ControlParameter ControlID="txtFromDt" DefaultValue="" Name="StartDate" 
-                        PropertyName="Text" Type="DateTime" />
-                    <asp:ControlParameter ControlID="txtToDt" Name="EndDate" PropertyName="Text" 
-                        Type="DateTime" />
+                    <asp:Parameter Name="CreditorId" Type="Int32" />
+                    <asp:Parameter Name="StartDate" Type="DateTime" />
+                    <asp:Parameter Name="EndDate" Type="DateTime" />
                 </SelectParameters>
             </asp:ObjectDataSource>
         </div>    

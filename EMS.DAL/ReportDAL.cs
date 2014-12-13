@@ -675,33 +675,36 @@ namespace EMS.DAL
         #endregion
 
 
-        public static List<rptCredInvEntity> GetCredInvoice(int CreditorId, DateTime StartDate, DateTime EndDate)
+        public static List<rptCredInvEntity> GetCredInvoice(int CreditorId, DateTime? StartDate, DateTime? EndDate)
         {
             string strExecution = "[fwd].[spRptCreInvoiceList]";
             List<rptCredInvEntity> lstEntity = new List<rptCredInvEntity>();
             rptCredInvEntity entity = null;
 
-            using (DbQuery oDq = new DbQuery(strExecution))
+            if (StartDate.HasValue && EndDate.HasValue)
             {
-                oDq.AddIntegerParam("@CreditorId", CreditorId);
-                oDq.AddDateTimeParam("@StartDate", StartDate);
-                oDq.AddDateTimeParam("@EndDate", EndDate);
-                DataTableReader reader = oDq.GetTableReader();
-
-                while (reader.Read())
+                using (DbQuery oDq = new DbQuery(strExecution))
                 {
-                    entity = new rptCredInvEntity();
+                    oDq.AddIntegerParam("@CreditorId", CreditorId);
+                    oDq.AddDateTimeParam("@StartDate", StartDate.Value);
+                    oDq.AddDateTimeParam("@EndDate", EndDate.Value);
+                    DataTableReader reader = oDq.GetTableReader();
 
-                    entity.InvoiceNo = Convert.ToString(reader["InvoiceNo"]);
-                    entity.JobNo = Convert.ToString(reader["JobNo"]);
-                    entity.InvoiceDate = Convert.ToDateTime(reader["InvoiceDate"]);
-                    entity.JobDate = Convert.ToDateTime(reader["JobDate"]);
-                    if (reader["PayableAmount"] != DBNull.Value) entity.PayableAmount = Convert.ToDecimal(reader["PayableAmount"]);
-                    if (reader["PaymentAmount"] != DBNull.Value) entity.PaymentAmount = Convert.ToDecimal(reader["PaymentAmount"]);
-                    if (reader["ServiceTax"] != DBNull.Value) entity.ServiceTax = Convert.ToDecimal(reader["ServiceTax"]);
-                    if (reader["BillValue"] != DBNull.Value) entity.BillValue = Convert.ToDecimal(reader["BillValue"]);
-                    
-                    lstEntity.Add(entity);
+                    while (reader.Read())
+                    {
+                        entity = new rptCredInvEntity();
+
+                        entity.InvoiceNo = Convert.ToString(reader["InvoiceNo"]);
+                        entity.JobNo = Convert.ToString(reader["JobNo"]);
+                        entity.InvoiceDate = Convert.ToDateTime(reader["InvoiceDate"]);
+                        entity.JobDate = Convert.ToDateTime(reader["JobDate"]);
+                        if (reader["PayableAmount"] != DBNull.Value) entity.PayableAmount = Convert.ToDecimal(reader["PayableAmount"]);
+                        if (reader["PaymentAmount"] != DBNull.Value) entity.PaymentAmount = Convert.ToDecimal(reader["PaymentAmount"]);
+                        if (reader["ServiceTax"] != DBNull.Value) entity.ServiceTax = Convert.ToDecimal(reader["ServiceTax"]);
+                        if (reader["BillValue"] != DBNull.Value) entity.BillValue = Convert.ToDecimal(reader["BillValue"]);
+
+                        lstEntity.Add(entity);
+                    }
                 }
             }
             return lstEntity;

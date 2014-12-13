@@ -99,6 +99,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleEntity.cs" />
     <Compile Include="RoleMenuEntity.cs" />
+    <Compile Include="rptCredInvEntity.cs" />
     <Compile Include="SearchCriteria.cs" />
     <Compile Include="ServiceEntity.cs" />
     <Compile Include="SLOTCOST.cs" />

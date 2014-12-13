@@ -134,7 +134,7 @@ namespace EMS.BLL
         }
         #endregion
 
-        public static List<rptCredInvEntity> GetCredInvoice(int CreditorId, DateTime StartDate, DateTime EndDate)
+        public static List<rptCredInvEntity> GetCredInvoice(int CreditorId, DateTime? StartDate, DateTime? EndDate)
         {
             return ReportDAL.GetCredInvoice(CreditorId, StartDate, EndDate);
         }

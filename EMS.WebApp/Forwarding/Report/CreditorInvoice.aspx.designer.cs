@@ -103,12 +103,12 @@ namespace EMS.WebApp.Forwarding.Report {
         protected global::Microsoft.Reporting.WebForms.ReportViewer rptViewer;
         
         /// <summary>
-        /// odsCredInv control.
+        /// odsCredInvoice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource odsCredInv;
+        protected global::System.Web.UI.WebControls.ObjectDataSource odsCredInvoice;
     }
 }

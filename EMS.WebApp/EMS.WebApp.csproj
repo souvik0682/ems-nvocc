@@ -108,7 +108,9 @@
     <Content Include="Export\Voyage.aspx" />
     <Content Include="FileNotFound.aspx" />
     <Content Include="FileTemplate\ContainerList.txt" />
+    <Content Include="Forwarding\Report\CreditorInvoice.aspx" />
     <Content Include="Forwarding\Transaction\Dashboard.aspx" />
+    <Content Include="Forwarding\Transaction\FwdInvoice.aspx" />
     <Content Include="Forwarding\Transaction\JobBL.aspx" />
     <Content Include="Forwarding\Transaction\FileUpload.aspx" />
     <Content Include="Forwarding\Transaction\Job.aspx" />
@@ -172,6 +174,7 @@
     <Content Include="MasterModule\vendor-add-edit.aspx" />
     <Content Include="MasterModule\vendor-list.aspx" />
     <Content Include="Popup\Report.aspx" />
+    <Content Include="RDLC\New Text Document.txt" />
     <Content Include="Reports\AdvanceContainerList.aspx" />
     <Content Include="Reports\CargoArrivalNotice.aspx" />
     <Content Include="Reports\CntrStockDetail.aspx" />
@@ -181,6 +184,7 @@
     <Content Include="Reports\DetentionStatement.aspx" />
     <Content Include="Reports\ExpBLPrint.aspx" />
     <Content Include="Reports\ExportEDI.aspx" />
+    <Content Include="Reports\ExportInvRegister.aspx" />
     <Content Include="Reports\Export\EDI_Export.aspx" />
     <Content Include="Reports\Export\ExpCntrStatus.aspx" />
     <Content Include="Reports\Export\ExpManifestEdge.aspx" />
@@ -481,12 +485,26 @@
     <Compile Include="Export\Voyage.aspx.designer.cs">
       <DependentUpon>Voyage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Forwarding\Report\CreditorInvoice.aspx.cs">
+      <DependentUpon>CreditorInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forwarding\Report\CreditorInvoice.aspx.designer.cs">
+      <DependentUpon>CreditorInvoice.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Forwarding\Transaction\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Forwarding\Transaction\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forwarding\Transaction\FwdInvoice.aspx.cs">
+      <DependentUpon>FwdInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forwarding\Transaction\FwdInvoice.aspx.designer.cs">
+      <DependentUpon>FwdInvoice.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forwarding\Transaction\JobBL.aspx.cs">
       <DependentUpon>JobBL.aspx</DependentUpon>
@@ -1028,6 +1046,13 @@
     <Compile Include="Reports\ExportEDI.aspx.designer.cs">
       <DependentUpon>ExportEDI.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\ExportInvRegister.aspx.cs">
+      <DependentUpon>ExportInvRegister.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ExportInvRegister.aspx.designer.cs">
+      <DependentUpon>ExportInvRegister.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Export\EDI_Export.aspx.cs">
       <DependentUpon>EDI_Export.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1516,6 +1541,7 @@
     <None Include="linerMRDataset.xss">
       <DependentUpon>linerMRDataset.xsd</DependentUpon>
     </None>
+    <None Include="RDLC\IGMCargoDesc.rdl" />
     <None Include="Scripts\css\themes\base\images\Thumbs.db" />
     <None Include="Scripts\jquery-ui-1.8.14.custom.min.js.Prev" />
     <Content Include="Transaction\DocDownload.ashx" />
@@ -1532,6 +1558,38 @@
     </None>
     <None Include="Styles\bootstrap-theme.css.map" />
     <None Include="Styles\bootstrap.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="RDLC\BLPrint.rdlc" />
+    <EmbeddedResource Include="RDLC\BLPrintILE.rdlc" />
+    <EmbeddedResource Include="RDLC\BLPrintKestrel.rdlc" />
+    <EmbeddedResource Include="RDLC\CargoArrivalNotice.rdlc" />
+    <EmbeddedResource Include="RDLC\CntrStockDetail.rdlc" />
+    <EmbeddedResource Include="RDLC\CntrStockSummery.rdlc" />
+    <EmbeddedResource Include="RDLC\CntrWiseStock.rdlc" />
+    <EmbeddedResource Include="RDLC\ContainerStockSummary.rdlc" />
+    <EmbeddedResource Include="RDLC\CreditorInvoice.rdlc" />
+    <EmbeddedResource Include="RDLC\DeliveryOrder.rdlc" />
+    <EmbeddedResource Include="RDLC\ExpManifestEdge.rdlc" />
+    <EmbeddedResource Include="RDLC\ExportEDI.rdlc" />
+    <EmbeddedResource Include="RDLC\ExportEDIContainer.rdlc" />
+    <EmbeddedResource Include="RDLC\ExportInvRegister.rdlc" />
+    <EmbeddedResource Include="RDLC\FileLandingGurantee.rdlc" />
+    <EmbeddedResource Include="RDLC\IGMCargoDesc.rdlc" />
+    <EmbeddedResource Include="RDLC\IGMForm2.rdlc" />
+    <EmbeddedResource Include="RDLC\IGMFormC.rdlc" />
+    <EmbeddedResource Include="RDLC\ImpBLChkLst.rdlc" />
+    <EmbeddedResource Include="RDLC\ImportInvoice.rdlc" />
+    <EmbeddedResource Include="RDLC\ImportInvRegister.rdlc" />
+    <EmbeddedResource Include="RDLC\ImportRegister.rdlc" />
+    <EmbeddedResource Include="RDLC\ImportSummary.rdlc" />
+    <EmbeddedResource Include="RDLC\MME.rdlc" />
+    <EmbeddedResource Include="RDLC\MoneyReciept.rdlc" />
+    <EmbeddedResource Include="RDLC\MoneyReciept1.rdlc" />
+    <EmbeddedResource Include="RDLC\RptImpBill.rdlc" />
+    <EmbeddedResource Include="RDLC\RptImpBillAnnex.rdlc" />
+    <EmbeddedResource Include="RDLC\RptMoneyRcptNoWithInDates.rdlc" />
+    <EmbeddedResource Include="RDLC\YearlyMIS.rdlc" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

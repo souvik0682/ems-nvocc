@@ -695,6 +695,7 @@ namespace EMS.DAL
                         entity = new rptCredInvEntity();
 
                         entity.InvoiceNo = Convert.ToString(reader["InvoiceNo"]);
+                        entity.Creditor = Convert.ToString(reader["Creditor"]);
                         entity.JobNo = Convert.ToString(reader["JobNo"]);
                         entity.InvoiceDate = Convert.ToDateTime(reader["InvoiceDate"]);
                         entity.JobDate = Convert.ToDateTime(reader["JobDate"]);

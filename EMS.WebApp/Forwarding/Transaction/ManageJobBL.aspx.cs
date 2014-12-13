@@ -50,7 +50,7 @@ namespace EMS.WebApp.Farwarding.Transaction
                 {
                     Int32 JobID = 0;
                     JobID = Convert.ToInt32(GeneralFunctions.DecryptQueryString(Request.QueryString["JobId"].ToString()));
-                    txtBookingNo.Text = JobBLL.GetJobNoFromJobID(JobID);
+                    //txtBookingNo.Text = JobBLL.GetJobNoFromJobID(JobID);
                     LoadJobBL(txtBookingNo.Text);
                     ViewState["ISEDIT"] = false;
                     btnClose.Visible = false;

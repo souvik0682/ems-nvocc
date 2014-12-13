@@ -55,7 +55,7 @@ where AssociatedWith &lt;&gt; 'D'">
                 </tr>
             </table>
         </fieldset>
-        <div style="padding-left:5px;width:980px;">
+        <div style="padding-left:5px;width:86%;">
             <rsweb:ReportViewer ID="rptViewer" runat="server" Width="100%" 
                 Font-Names="Verdana" Font-Size="8pt" InteractiveDeviceInfos="(Collection)" 
                 WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt">
@@ -67,7 +67,8 @@ where AssociatedWith &lt;&gt; 'D'">
             </rsweb:ReportViewer>
             <asp:ObjectDataSource ID="odsCredInvoice" runat="server" 
                 SelectMethod="GetCredInvoice" TypeName="EMS.BLL.ReportBLL" 
-                onselecting="odsCredInvoice_Selecting">
+                onselecting="odsCredInvoice_Selecting" 
+                OldValuesParameterFormatString="original_{0}">
                 <SelectParameters>
                     <asp:Parameter Name="CreditorId" Type="Int32" />
                     <asp:Parameter Name="StartDate" Type="DateTime" />

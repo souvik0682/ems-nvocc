@@ -7,7 +7,8 @@ namespace EMS.Entity
 {
     public class rptCredInvEntity
     {
-        public String JobNo { get; set; }
+        public string JobNo { get; set; }
+        public string Creditor { get; set; }
         public DateTime JobDate { get; set; }
         public string InvoiceNo { get; set; }
         public DateTime InvoiceDate { get; set; }

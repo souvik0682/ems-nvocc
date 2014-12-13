@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="CreditorInvoice.aspx.cs" Inherits="EMS.WebApp.Forwarding.Report.CreditorInvoice" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" CodeBehind="CreditorInvoice.aspx.cs" Inherits="EMS.WebApp.Forwarding.Report.CreditorInvoice" %>
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
@@ -18,8 +18,8 @@
                         From Date:<span class="errormessage">*</span>
                     </td>
                     <td style="padding-right:20px;vertical-align:top;">
-                        <asp:TextBox ID="txtFromDt" runat="server" CssClass="textbox" Width="80" Format="dd-MM-yyyy"></asp:TextBox>
-                        <cc1:CalendarExtender ID="cbeFromDt" runat="server" TargetControlID="txtFromDt" />
+                        <asp:TextBox ID="txtFromDt" runat="server" CssClass="textbox" Width="80"></asp:TextBox>
+                        <cc1:CalendarExtender ID="cbeFromDt" runat="server" TargetControlID="txtFromDt" Format="dd-MM-yyyy" />
                         <asp:RequiredFieldValidator ID="req1" runat="server" ControlToValidate="txtFromDt" Display="Dynamic" 
                         ErrorMessage="From Date is required" ValidationGroup="vgReport" CssClass="errormessage"></asp:RequiredFieldValidator>
                     </td>
@@ -43,7 +43,9 @@
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="CreditorDataSource" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:DbConnectionString %>" 
-                            SelectCommand="select pk_fwPartyID [CreditorId], PartyName [CreditorName] from fwd.mstparty where partytype &lt;&gt; 'D'">
+                            SelectCommand="select p.pk_fwPartyID [CreditorId], p.PartyName [CreditorName] 
+from fwd.mstparty p inner join fwd.mstPartyType pt on p.PartyType = pt.pk_PartyTypeID
+where AssociatedWith &lt;&gt; 'D'">
                         </asp:SqlDataSource>
                     </td>
                     <td style="vertical-align:top;">    
@@ -57,13 +59,13 @@
             <rsweb:ReportViewer ID="rptViewer" runat="server" Width="100%" 
                 Font-Names="Verdana" Font-Size="8pt" InteractiveDeviceInfos="(Collection)" 
                 WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt">
-                <LocalReport ReportPath="RDLC\CredInvoice.rdlc">
+                <LocalReport ReportPath="RDLC\CredInvoice1.rdlc">
                     <DataSources>
-                        <rsweb:ReportDataSource DataSourceId="odsInvoice" Name="CredInvDs" />
+                        <rsweb:ReportDataSource DataSourceId="odsCredInv" Name="CredInvDs" />
                     </DataSources>
                 </LocalReport>
-            </rsweb:ReportViewer>
-            <asp:ObjectDataSource ID="odsInvoice" runat="server" 
+            </rsweb:ReportViewer>    
+            <asp:ObjectDataSource ID="odsCredInv" runat="server" 
                 SelectMethod="GetCredInvoice" TypeName="EMS.BLL.ReportBLL">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="ddlCreditor" DefaultValue="0" 

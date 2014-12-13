@@ -6,6 +6,7 @@ using EMS.Common;
 using EMS.DAL;
 using EMS.Entity.Report;
 using System.Data;
+using EMS.Entity;
 
 namespace EMS.BLL
 {
@@ -132,5 +133,10 @@ namespace EMS.BLL
             return ReportDAL.GetPOD(VesselID, VoyageID, Line);
         }
         #endregion
+
+        public static List<rptCredInvEntity> GetCredInvoice(int CreditorId, DateTime StartDate, DateTime EndDate)
+        {
+            return ReportDAL.GetCredInvoice(CreditorId, StartDate, EndDate);
+        }
     }
 }

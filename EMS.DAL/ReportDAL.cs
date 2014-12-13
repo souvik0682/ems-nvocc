@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using EMS.DAL.DbManager;
 using EMS.Entity.Report;
+using EMS.Entity;
 
 namespace EMS.DAL
 {
@@ -672,5 +673,40 @@ namespace EMS.DAL
             return dquery.GetTables();
         }
         #endregion
+
+
+        public static List<rptCredInvEntity> GetCredInvoice(int CreditorId, DateTime StartDate, DateTime EndDate)
+        {
+            string strExecution = "[fwd].[spRptCreInvoiceList]";
+            List<rptCredInvEntity> lstEntity = new List<rptCredInvEntity>();
+            rptCredInvEntity entity = null;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@CreditorId", CreditorId);
+                oDq.AddDateTimeParam("@StartDate", StartDate);
+                oDq.AddDateTimeParam("@EndDate", EndDate);
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    entity = new rptCredInvEntity();
+
+                    entity.InvoiceNo = Convert.ToString(reader["InvoiceNo"]);
+                    entity.JobNo = Convert.ToString(reader["JobNo"]);
+                    entity.InvoiceDate = Convert.ToDateTime(reader["InvoiceDate"]);
+                    entity.JobDate = Convert.ToDateTime(reader["JobDate"]);
+                    if (reader["PayableAmount"] != DBNull.Value) entity.PayableAmount = Convert.ToDecimal(reader["PayableAmount"]);
+                    if (reader["PaymentAmount"] != DBNull.Value) entity.PaymentAmount = Convert.ToDecimal(reader["PaymentAmount"]);
+                    if (reader["ServiceTax"] != DBNull.Value) entity.ServiceTax = Convert.ToDecimal(reader["ServiceTax"]);
+                    if (reader["BillValue"] != DBNull.Value) entity.BillValue = Convert.ToDecimal(reader["BillValue"]);
+                    
+                    lstEntity.Add(entity);
+                }
+            }
+            return lstEntity;
+        }
+
+
     }
 }

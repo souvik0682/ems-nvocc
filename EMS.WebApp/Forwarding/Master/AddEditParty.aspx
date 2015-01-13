@@ -6,6 +6,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
+
     <div id="headercaption">
         ADD / EDIT PARTY</div>
     <center>
@@ -13,6 +14,7 @@
             <legend>Add / Edit Party</legend>
             <table border="0" cellpadding="2" cellspacing="3">
               <tr>
+                    <asp:HiddenField ID="hdnKYCPath" runat="server" Value="0" />
                     <td>Party Type:<span class="errormessage1">*</span></td>
                     <td>
                       <asp:DropDownList ID="ddlPartyType" runat="server"  CssClass="dropdownlist" AutoPostBack="true"
@@ -32,12 +34,19 @@
                 </tr>
 
                 <tr>
-                    <td style="width:100px;">Party Name<span class="errormessage1">*</span></td>
+                    <td style="width:100px;">Short Name<span class="errormessage1">*</span></td>
                     <td><asp:TextBox ID="txtPartyName" runat="server" CssClass="textboxuppercase" MaxLength="60" Width="300"></asp:TextBox><br />
                         <asp:RequiredFieldValidator ID="rfvtxtPartyName" runat="server" CssClass="errormessage" 
                             ControlToValidate="txtPartyName" Display="Dynamic" ErrorMessage="[Required]" ValidationGroup="Save"></asp:RequiredFieldValidator></td>
                 </tr>
                 
+                <tr>
+                    <td style="width:100px;">Full Name<span class="errormessage1">*</span></td>
+                    <td><asp:TextBox ID="txtFullName" runat="server" CssClass="textboxuppercase" MaxLength="60" Width="300"></asp:TextBox><br />
+                        <asp:RequiredFieldValidator ID="rfvFullName" runat="server" CssClass="errormessage" 
+                            ControlToValidate="txtFullName" Display="Dynamic" ErrorMessage="[Required]" ValidationGroup="Save"></asp:RequiredFieldValidator></td>
+                </tr>
+
                 <tr>
                     <td>Country:<span class="errormessage1">*</span></td>
                     <td style="width:50%">                      
@@ -66,7 +75,7 @@
                 
                   <tr>
                     <td>Phone:</td>
-                    <td><asp:TextBox ID="txtPhone" runat="server" CssClass="textboxuppercase" MaxLength="10"
+                    <td><asp:TextBox ID="txtPhone" runat="server" CssClass="textboxuppercase" MaxLength="100"
                            Width="300" TextMode="SingleLine"></asp:TextBox>
 <%--                            <br />
                             <asp:RequiredFieldValidator ID="rfvtxtPhone" runat="server" CssClass="errormessage"
@@ -84,27 +93,54 @@
                 
                   <tr>
                     <td>Email ID:</td>
-                    <td><asp:TextBox ID="txtEmailID" runat="server" Width="250" TextMode="SingleLine"></asp:TextBox><br />
+                    <td><asp:TextBox ID="txtEmailID" runat="server" Width="300" TextMode="SingleLine"></asp:TextBox><br />
                    </td>
                 </tr>
 
                 <tr>
                     <td>PAN:</td>
                     <td><asp:TextBox ID="txtPAN" runat="server" CssClass="textboxuppercase" 
-                           Width="300" TextMode="SingleLine"></asp:TextBox><br />
+                           Width="100" TextMode="SingleLine"></asp:TextBox><br />
 <%--                     <asp:RequiredFieldValidator ID="rfvtxtPAN" runat="server" CssClass="errormessage" 
                         ControlToValidate="txtPAN" Display="Dynamic" ErrorMessage="[Required]" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
                    </td>
                 </tr>
 
                 <tr>
-                    <td>TAN:</td>
+                    <td>CIN:</td>
                     <td><asp:TextBox ID="txtTAN" runat="server" CssClass="textboxuppercase" 
                            Width="300" TextMode="SingleLine"></asp:TextBox><br />
 <%--                        <asp:RequiredFieldValidator ID="rfvtxtTAN" runat="server" CssClass="errormessage" 
                         ControlToValidate="txtTAN" Display="Dynamic" ErrorMessage="[Required]" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
                    </td>
                 </tr> 
+                <tr>
+                    <%--<td>
+                        Upload KYC
+                    </td>--%>
+                    <td>
+                        Upload File
+                    </td>
+
+                    <td>            
+                        <asp:FileUpload ID="KYCUpload" runat="server" width="200"/>
+<%--                        <asp:RequiredFieldValidator ID="rfvRRUpload" runat="server" ControlToValidate="KYCUpload"
+                            ErrorMessage="This field is required*" CssClass="errormessage" ValidationGroup="Save"
+                            Display="Dynamic">
+                        </asp:RequiredFieldValidator>--%>
+                    </td>
+                </tr>
+                <tr id="UploadFileName" runat="server" >
+                    <td>
+                        Download File
+                    </td>
+                    <td>
+                        <asp:LinkButton ID="lnkKYCUpload" runat="server" Text="KYC Form"
+                            ForeColor="Blue" Enabled="false" OnClick="lnkKYCUpload_Click"></asp:LinkButton>
+                        <%--<asp:Label ID="lblUploadedFileName" runat="server" Text="" Width="200px"></asp:Label>--%>
+                    </td>
+                    
+                </tr>
                 <tr>
                     <td>Principal:</td>
                     <td><asp:DropDownList ID="ddlPrincipal" runat="server" CssClass="dropdownlist" Width="250" 
@@ -113,7 +149,8 @@
                         <asp:RequiredFieldValidator ID="rfvPrincipal" runat="server" CssClass="errormessage" 
                         ControlToValidate="ddlPrincipal" Display="Dynamic" ErrorMessage="[Required]" InitialValue="0" ValidationGroup="Save"></asp:RequiredFieldValidator>
                    </td>
-                </tr>                
+                </tr>
+                                
                 <tr>
                     <td colspan="2">
                         <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" OnClick="btnSave_Click" />

@@ -31,14 +31,14 @@
                         Width="250"></asp:TextBox><br />
                 </td>
             </tr>--%>
-            <tr style="display:none">
+            <tr>
                 <td>
-                    Status:<span class="errormessage1">*</span>
+                    Unit Type:<span class="errormessage1">*</span>
                 </td>
                 <td style="width: 50%">
                     <asp:RadioButtonList ID="rdoStatus" runat="server" RepeatDirection="Horizontal" >
-                    <asp:ListItem Text="Acitve" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="Inacitve" ></asp:ListItem>
+                    <asp:ListItem Text="Non Equipment" Selected="True" Value="N"></asp:ListItem>
+                    <asp:ListItem Text="Equipment" Value="E"></asp:ListItem>
                     </asp:RadioButtonList>
                     
                 </td>

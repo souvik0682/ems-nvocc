@@ -40,22 +40,22 @@ namespace EMS.WebApp.Forwarding.Master {
         protected global::AjaxControlToolkit.TextBoxWatermarkExtender wmetxtPartyName;
         
         /// <summary>
-        /// txtPhoneNo control.
+        /// txtFullName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPhoneNo;
+        protected global::System.Web.UI.WebControls.TextBox txtFullName;
         
         /// <summary>
-        /// wmetxtPhoneNo control.
+        /// wmetxtFullName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender wmetxtPhoneNo;
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender wmetxtFullName;
         
         /// <summary>
         /// btnSearch control.

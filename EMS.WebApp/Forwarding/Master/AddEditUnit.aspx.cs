@@ -126,13 +126,17 @@ namespace EMS.WebApp.Forwarding.Master
         }
         private void LoadData(int id)
         {
-            var src = new UnitBLL().GetJobs(new SearchCriteria() { StringParams = new List<string>() { "" } }, id, companyId);
+            var src = new UnitBLL().GetUnits(new SearchCriteria() { StringParams = new List<string>() { "" } }, id, companyId);
             if (src != null && src.Count() > 0)
             {
                 var unit = src.FirstOrDefault();
                 txtUnit.Text = unit.UnitName;
                 //txtPrefix.Text = unit.Prefix;
-                rdoStatus.SelectedIndex = unit.UnitStatus?0:1;
+                //rdoStatus.SelectedIndex = unit.UnitStatus?0:1;
+                if (unit.UnitType == "NA")
+                    rdoStatus.SelectedIndex = 0;
+                else
+                    rdoStatus.SelectedIndex = 1;
             }
         }
         private void ClearText()
@@ -149,7 +153,7 @@ namespace EMS.WebApp.Forwarding.Master
             {
                 UnitName = txtUnit.Text,//
                 //Prefix = txtPrefix.Text,//
-                UnitStatus = rdoStatus.SelectedIndex==0?true:false,//
+                UnitType = rdoStatus.SelectedIndex==0?"N":"E",//
                 UnitTypeID=UnitId,
                 CompanyID =companyId,//
                 CreatedBy = _userId//
@@ -160,7 +164,7 @@ namespace EMS.WebApp.Forwarding.Master
         private void SaveUnit()
         {
 
-            var result = new UnitBLL().AddEditJob(ExtractData(), companyId, Mode);
+            var result = new UnitBLL().AddEditUnit(ExtractData(), companyId, Mode);
             if (result > 0)
             {
                 UnitId = result;

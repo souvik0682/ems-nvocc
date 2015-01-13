@@ -91,8 +91,15 @@
                                             <%=counter++%>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                <asp:BoundField  HeaderText="Unit Name" DataField="UnitName"  
+                                    <asp:BoundField  HeaderText="Unit Name" DataField="UnitName"  
                                         HeaderStyle-CssClass="gridviewheader"  SortExpression="UnitName" 
+                                        ItemStyle-CssClass="gridviewitem">
+                                    <HeaderStyle CssClass="gridviewheader" />
+                                    <ItemStyle CssClass="gridviewitem" />
+                                    </asp:BoundField>
+
+                                    <asp:BoundField  HeaderText="Container" DataField="UnitType"  
+                                        HeaderStyle-CssClass="gridviewheader"  SortExpression="UnitType" 
                                         ItemStyle-CssClass="gridviewitem">
                                     <HeaderStyle CssClass="gridviewheader" />
                                     <ItemStyle CssClass="gridviewitem" />

@@ -51,6 +51,13 @@ namespace EMS.Entity
         public int JobScopeID { get; set; }
         public decimal EstProfit { get; set; }
         public int CreditDays { get; set; }
+        public string DocumentNo { get; set; }
+        public string Vessel { get; set; }
+        public string Voyage { get; set; }
+        public string JobNote1 { get; set; }
+        public string JobNote2 { get; set; }
+        public string POL { get; set; }
+        public string POD { get; set; }
 
         public int CreatedBy
         {
@@ -200,6 +207,14 @@ namespace EMS.Entity
                 if (reader["fk_DPortID"] != DBNull.Value)
                     fk_DportID = Convert.ToInt32(reader["fk_DPortID"]);
 
+            if (ColumnExists(reader, "POL"))
+                if (reader["POL"] != DBNull.Value)
+                    POL = Convert.ToString(reader["POL"]);
+
+            if (ColumnExists(reader, "POD"))
+                if (reader["POD"] != DBNull.Value)
+                    POD = Convert.ToString(reader["POD"]);
+
             if (ColumnExists(reader, "fk_CustID"))
                 if (reader["fk_CustID"] != DBNull.Value)
                     fk_CustID = Convert.ToInt32(reader["fk_CustID"]);
@@ -247,6 +262,26 @@ namespace EMS.Entity
             if (ColumnExists(reader, "CreditDays"))
                 if (reader["CreditDays"] != DBNull.Value)
                     CreditDays = Convert.ToInt32(reader["CreditDays"]);
+
+            if (ColumnExists(reader, "DocumentNo"))
+                if (reader["DocumentNo"] != DBNull.Value)
+                    DocumentNo = Convert.ToString(reader["DocumentNo"]);
+            
+            if (ColumnExists(reader, "Vessel"))
+                if (reader["Vessel"] != DBNull.Value)
+                    Vessel = Convert.ToString(reader["Vessel"]);
+
+            if (ColumnExists(reader, "Voyage"))
+                if (reader["Voyage"] != DBNull.Value)
+                    Voyage = Convert.ToString(reader["Voyage"]);
+
+            if (ColumnExists(reader, "JobNote1"))
+                if (reader["JobNote1"] != DBNull.Value)
+                    JobNote1 = Convert.ToString(reader["JobNote1"]);
+
+            if (ColumnExists(reader, "JobNote2"))
+                if (reader["JobNote2"] != DBNull.Value)
+                    JobNote2 = Convert.ToString(reader["JobNote2"]);
 
             EstProfit = (EstReceivable - EstPayable);
         }

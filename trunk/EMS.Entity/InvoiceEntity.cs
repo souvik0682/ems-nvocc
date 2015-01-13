@@ -42,6 +42,9 @@ namespace EMS.Entity
         public int JobID { get; set; }
         public int EstimateID { get; set; }
         public int PartyId { get; set; }
+        public int PartyTypeID { get; set; }
+        public int TEUS { get; set; }
+        public int FEUS { get; set; }
 
         public List<IChargeRate> ChargeRates { get; set; }
 
@@ -60,7 +63,7 @@ namespace EMS.Entity
 
             if (ColumnExists(reader, "PartyId"))
                 if (reader["PartyId"] != DBNull.Value)
-                    CompanyID = Convert.ToInt32(reader["PartyId"]);
+                    PartyId = Convert.ToInt32(reader["PartyId"]);
 
             if (ColumnExists(reader, "LocationID"))
                 if (reader["LocationID"] != DBNull.Value)
@@ -185,6 +188,18 @@ namespace EMS.Entity
             if (ColumnExists(reader, "EstimateID"))
                 if (reader["EstimateID"] != DBNull.Value)
                     EstimateID = Convert.ToInt32(reader["EstimateID"]);
+
+            if (ColumnExists(reader, "PartyTypeID"))
+                if (reader["PartyTypeID"] != DBNull.Value)
+                    PartyTypeID = Convert.ToInt32(reader["PartyTypeID"]);
+
+            if (ColumnExists(reader, "TEUS"))
+                if (reader["TEUS"] != DBNull.Value)
+                    TEUS = Convert.ToInt32(reader["TEUS"]);
+
+            if (ColumnExists(reader, "FEUS"))
+                if (reader["FEUS"] != DBNull.Value)
+                    FEUS = Convert.ToInt32(reader["FEUS"]);
         }
 
         public bool ColumnExists(IDataReader reader, string columnName)
@@ -199,5 +214,413 @@ namespace EMS.Entity
 
             return false;
         }
+
+        //long IInvoice.InvoiceID
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //int IInvoice.CompanyID
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //int IInvoice.LocationID
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //int IInvoice.NVOCCID
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //int IInvoice.InvoiceTypeID
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //long IInvoice.BookingID
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //long IInvoice.BLID
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //string IInvoice.BLNo
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //string IInvoice.ExportImport
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //decimal IInvoice.XchangeRate
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //string IInvoice.InvoiceNo
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //DateTime IInvoice.InvoiceDate
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //int IInvoice.CHAID
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //string IInvoice.Account
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //bool IInvoice.AllInFreight
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //decimal IInvoice.GrossAmount
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //decimal IInvoice.ServiceTax
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //decimal IInvoice.ServiceTaxCess
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //decimal IInvoice.ServiceTaxACess
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //decimal IInvoice.Roff
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //DateTime IInvoice.BLDate
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //string IInvoice.BookingNo
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //string IInvoice.JobNo
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //int IInvoice.JobID
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //int IInvoice.EstimateID
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //DateTime IInvoice.JobDate
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //string IInvoice.EstimateNo
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //int IInvoice.UserAdded
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //int IInvoice.UserLastEdited
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //DateTime IInvoice.AddedOn
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //DateTime IInvoice.EditedOn
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //List<IChargeRate> IInvoice.ChargeRates
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //int IInvoice.PartyId
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //int IInvoice.PartyTypeID
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
     }
 }

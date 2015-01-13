@@ -568,6 +568,7 @@ namespace EMS.Entity
         public string PortOfDischarge { get; set; }
 
         public Int64 CHAId { get; set; }
+        public bool blClosed { get; set; } 
 
         public BLHeaderEntity()
         {
@@ -685,6 +686,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "CHAId"))
                 if (reader["CHAId"] != DBNull.Value)
                     this.CHAId = Convert.ToInt64(reader["CHAId"]);
+
+            if (ColumnExists(reader, "blClosed"))
+                if (reader["blClosed"] != DBNull.Value)
+                    blClosed = Convert.ToBoolean(reader["blClosed"]);
         }
 
         public bool ColumnExists(IDataReader reader, string columnName)

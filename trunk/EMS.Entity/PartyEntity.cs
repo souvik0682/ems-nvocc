@@ -18,6 +18,7 @@ namespace EMS.Entity
         public string PartyName { get; set; }
         public int PartyType { get; set;}
         public string PartyTypeName {get; set;}
+        public string FullName { get; set; }
        
         public string PartyAddress { get; set; }
         public int CountryID { get; set; }
@@ -70,6 +71,7 @@ namespace EMS.Entity
             if (ColumnExists(reader, "LocName"))
                 if (reader["LocName"] != DBNull.Value)
                     LocName = Convert.ToString(reader["LocName"]);
+
             if (ColumnExists(reader, "PartyName"))
                 if (reader["PartyName"] != DBNull.Value)
                     PartyName = Convert.ToString(reader["PartyName"]);
@@ -77,6 +79,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "PartyType"))
                 if (reader["PartyType"] != DBNull.Value)
                     PartyType = Convert.ToInt32(reader["PartyType"]);
+
+            if (ColumnExists(reader, "PartyTypeName"))
+                if (reader["PartyTypeName"] != DBNull.Value)
+                    PartyTypeName = Convert.ToString(reader["PartyTypeName"]);
 
             if (ColumnExists(reader, "PartyTypeName"))
                 if (reader["PartyTypeName"] != DBNull.Value)
@@ -157,9 +163,14 @@ namespace EMS.Entity
             if (ColumnExists(reader, "LocName"))
                 if (reader["LocName"] != DBNull.Value)
                     LocName = Convert.ToString(reader["LocName"]);
+
             if (ColumnExists(reader, "PartyName"))
                 if (reader["PartyName"] != DBNull.Value)
                     PartyName = Convert.ToString(reader["PartyName"]);
+
+            if (ColumnExists(reader, "FullName"))
+                if (reader["FullName"] != DBNull.Value)
+                    FullName = Convert.ToString(reader["FullName"]);
 
             if (ColumnExists(reader, "PartyType"))
                 if (reader["PartyType"] != DBNull.Value)

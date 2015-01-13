@@ -11,6 +11,7 @@ namespace EMS.Entity
     {
         public long UnitTypeID { get; set; }
         public int CompanyID { get; set; }
+        public string UnitType { get; set; }
         public string UnitName { get; set; }
         public string Prefix { get; set; }
         public bool UnitStatus { get; set; }
@@ -37,6 +38,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "Prefix"))
                 if (reader["Prefix"] != DBNull.Value)
                     Prefix = Convert.ToString(reader["Prefix"]);
+
+            if (ColumnExists(reader, "UnitType"))
+                if (reader["UnitType"] != DBNull.Value)
+                    UnitType = Convert.ToString(reader["UnitType"]);
 
             if (ColumnExists(reader, "fk_CompanyID"))
                 if (reader["fk_CompanyID"] != DBNull.Value)

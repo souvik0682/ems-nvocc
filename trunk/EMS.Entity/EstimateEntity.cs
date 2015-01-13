@@ -17,6 +17,7 @@ namespace EMS.Entity
         public string PorR { get; set; }
         public string TransactionType { get; set; }
         public int fk_JobID { get; set; }
+        public string JobNo { get; set; }
         public int fk_BillFromID { get; set; }
         public int CompanyID { get; set; }
         public int CreditDays { get; set; }
@@ -59,6 +60,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "fk_JobID"))
                 if (reader["fk_JobID"] != DBNull.Value)
                     fk_JobID = Convert.ToInt32(reader["fk_JobID"]);
+
+            if (ColumnExists(reader, "JobNo"))
+                if (reader["JobNo"] != DBNull.Value)
+                    JobNo = Convert.ToString(reader["JobNo"]);
 
             if (ColumnExists(reader, "fk_BillFromID"))
                 if (reader["fk_BillFromID"] != DBNull.Value)

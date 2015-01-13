@@ -196,6 +196,9 @@ namespace EMS.Entity
         public decimal TotalAmount { get; set; }
         public int InvoiceChargeId { get; set; }
         public long InvoiceId { get; set; }
+        public decimal Units { get; set; }
+        public int UnitTypeID { get; set; }
+        public string UnitType { get; set; }
 
         public List<IChargeRate> ConvertXMLToList(string XMLString)
         {
@@ -212,19 +215,42 @@ namespace EMS.Entity
             if (ColumnExists(reader, "ChargesRateID"))
                 if (reader["ChargesRateID"] != DBNull.Value)
                     this.ChargesRateID = Convert.ToInt32(reader["ChargesRateID"]);
-
-            this.High = Convert.ToInt32(reader["SlabHigh"]);
-            this.LocationId = Convert.ToInt32(reader["LocationID"]);
-            this.Low = Convert.ToInt32(reader["SlabLow"]);
-            this.RateActive = Convert.ToBoolean(reader["RateActive"]);
-            this.RatePerBL = Convert.ToDecimal(reader["RatePerBL"]);
-            this.RatePerCBM = Convert.ToDecimal(reader["RatePerCBM"]);
-            this.RatePerFEU = Convert.ToDecimal(reader["RatePerFEU"]);
-            this.RatePerTEU = Convert.ToDecimal(reader["RatePerTEU"]);
-            this.RatePerTON = Convert.ToDecimal(reader["RatePerTon"]);
-            this.SharingBL = Convert.ToDecimal(reader["PRatePerBL"]);
-            this.SharingFEU = Convert.ToDecimal(reader["PRatePerFEU"]);
-            this.SharingTEU = Convert.ToDecimal(reader["PRatePerTEU"]);
+            if (ColumnExists(reader, "SlabHigh"))
+                if (reader["SlabHigh"] != DBNull.Value)
+                    this.High = Convert.ToInt32(reader["SlabHigh"]);
+            if (ColumnExists(reader, "LocationID"))
+                if (reader["LocationID"] != DBNull.Value)
+                    this.LocationId = Convert.ToInt32(reader["LocationID"]);
+            if (ColumnExists(reader, "SlabLow"))
+                if (reader["SlabLow"] != DBNull.Value)
+                    this.Low = Convert.ToInt32(reader["SlabLow"]);
+            if (ColumnExists(reader, "RateActive"))
+                if (reader["RateActive"] != DBNull.Value)
+                    this.RateActive = Convert.ToBoolean(reader["RateActive"]);
+            if (ColumnExists(reader, "RatePerBL"))
+                if (reader["RatePerBL"] != DBNull.Value)
+                    this.RatePerBL = Convert.ToDecimal(reader["RatePerBL"]);
+            if (ColumnExists(reader, "RatePerCBM"))
+                if (reader["RatePerCBM"] != DBNull.Value)
+                    this.RatePerCBM = Convert.ToDecimal(reader["RatePerCBM"]);
+            if (ColumnExists(reader, "RatePerFEU"))
+                if (reader["RatePerFEU"] != DBNull.Value)
+                    this.RatePerFEU = Convert.ToDecimal(reader["RatePerFEU"]);
+            if (ColumnExists(reader, "RatePerTEU"))
+                if (reader["RatePerTEU"] != DBNull.Value)
+                    this.RatePerTEU = Convert.ToDecimal(reader["RatePerTEU"]);
+            if (ColumnExists(reader, "RatePerTon"))
+                if (reader["RatePerTon"] != DBNull.Value)
+                    this.RatePerTON = Convert.ToDecimal(reader["RatePerTon"]);
+            if (ColumnExists(reader, "PRatePerBL"))
+                if (reader["PRatePerBL"] != DBNull.Value)
+                    this.SharingBL = Convert.ToDecimal(reader["PRatePerBL"]);
+            if (ColumnExists(reader, "PRatePerFEU"))
+                if (reader["PRatePerFEU"] != DBNull.Value)
+                    this.SharingFEU = Convert.ToDecimal(reader["PRatePerFEU"]);
+            if (ColumnExists(reader, "PRatePerTEU"))
+                if (reader["PRatePerTEU"] != DBNull.Value)
+                    this.SharingTEU = Convert.ToDecimal(reader["PRatePerTEU"]);
             if (ColumnExists(reader, "TerminalID"))
                 if (reader["TerminalID"] != DBNull.Value)
                     this.TerminalId = Convert.ToInt32(reader["TerminalID"]);
@@ -309,6 +335,23 @@ namespace EMS.Entity
             if (ColumnExists(reader, "ExchgRate"))
                 if (reader["ExchgRate"] != DBNull.Value)
                     this.ExchgRate = Convert.ToDecimal(reader["ExchgRate"]);
+
+            if (ColumnExists(reader, "Units"))
+                if (reader["Units"] != DBNull.Value)
+                    this.Units = Convert.ToDecimal(reader["Units"]);
+
+            if (ColumnExists(reader, "UnitTypeID"))
+                if (reader["UnitTypeID"] != DBNull.Value)
+                    this.UnitTypeID = Convert.ToInt32(reader["UnitTypeID"]);
+
+            if (ColumnExists(reader, "CntrSize"))
+                if (reader["CntrSize"] != DBNull.Value)
+                    this.Size = Convert.ToString(reader["CntrSize"]);
+
+            if (ColumnExists(reader, "UnitType"))
+                if (reader["UnitType"] != DBNull.Value)
+                    this.UnitType = Convert.ToString(reader["UnitType"]);
+
         }
 
         //public string ConvertListToXML(List<ChargeRateEntity> Items)

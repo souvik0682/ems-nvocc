@@ -39,10 +39,10 @@
                             WatermarkCssClass="watermark"></cc1:textboxwatermarkextender>
                         
                     </td>
-                    <td style="width:33%"><asp:TextBox ID="txtPhoneNo" runat="server" 
+                    <td style="width:33%"><asp:TextBox ID="txtFullName" runat="server" 
                             CssClass="watermark" ForeColor="#747862" Height="20px" Width="264px" ></asp:TextBox>
-                        <cc1:textboxwatermarkextender ID="wmetxtPhoneNo" runat="server" 
-                            TargetControlID="txtPhoneNo" WatermarkText="Type Phone No" 
+                        <cc1:textboxwatermarkextender ID="wmetxtFullName" runat="server" 
+                            TargetControlID="txtFullName" WatermarkText="Party Short Name" 
                             WatermarkCssClass="watermark"></cc1:textboxwatermarkextender>
                     </td></tr> <tr>
                     <td colspan="3" align="center"><asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="button" Width="100px" OnClick="btnSearch_Click" />
@@ -107,11 +107,11 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField  HeaderText="Party Type" DataField="PartyTypeName"  HeaderStyle-CssClass="gridviewheader" SortExpression="PartyTypeName" ItemStyle-CssClass="gridviewitem"/>
-                                    <asp:BoundField  HeaderText="Party Name" DataField="PartyName"  HeaderStyle-CssClass="gridviewheader"  SortExpression="PartyName" ItemStyle-CssClass="gridviewitem"/>
-                                    <asp:BoundField  HeaderText="Country" DataField="CountryName"  HeaderStyle-CssClass="gridviewheader"  SortExpression="fk_CountryID" ItemStyle-CssClass="gridviewitem"/>
-                                    <asp:BoundField  HeaderText="Phone" DataField="Phone" HeaderStyle-CssClass="gridviewheader"  SortExpression="Phone" ItemStyle-CssClass="gridviewitem"/>
+                                    <asp:BoundField  HeaderText="Short Name" DataField="PartyName"  HeaderStyle-CssClass="gridviewheader"  SortExpression="PartyName" ItemStyle-CssClass="gridviewitem"/>
+                                    <asp:BoundField  HeaderText="Full Name" DataField="FullName"  HeaderStyle-CssClass="gridviewheader"  SortExpression="FullName" ItemStyle-CssClass="gridviewitem"/>
+                 <%--                   <asp:BoundField  HeaderText="Phone" DataField="Phone" HeaderStyle-CssClass="gridviewheader"  SortExpression="Phone" ItemStyle-CssClass="gridviewitem"/>
                                     <asp:BoundField  HeaderText="Contact Person" HeaderStyle-CssClass="gridviewheader" DataField="ContactPerson"  SortExpression="ContactPerson" ItemStyle-CssClass="gridviewitem"/>
-                               
+                               --%>
                                     <asp:TemplateField ItemStyle-Width="8%">
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem"  HorizontalAlign="Center" VerticalAlign="Middle" />

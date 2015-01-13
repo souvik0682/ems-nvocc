@@ -10,204 +10,159 @@
 namespace EMS.WebApp.Forwarding.Master {
     
     
-    public partial class AddEditParty {
+    public partial class ManageFwdAgent {
         
         /// <summary>
-        /// hdnKYCPath control.
+        /// txtPort control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnKYCPath;
+        protected global::System.Web.UI.WebControls.TextBox txtPort;
         
         /// <summary>
-        /// ddlPartyType control.
+        /// FilteredTextBoxExtender1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPartyType;
+        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender1;
         
         /// <summary>
-        /// RequiredFieldValidator2 control.
+        /// TextBoxWatermarkExtender1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender1;
         
         /// <summary>
-        /// txtPartyName control.
+        /// txtLine control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPartyName;
+        protected global::System.Web.UI.WebControls.TextBox txtLine;
         
         /// <summary>
-        /// rfvtxtPartyName control.
+        /// FilteredTextBoxExtender2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtPartyName;
+        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender2;
         
         /// <summary>
-        /// txtFullName control.
+        /// TextBoxWatermarkExtender2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFullName;
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender2;
         
         /// <summary>
-        /// rfvFullName control.
+        /// txtAgent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFullName;
+        protected global::System.Web.UI.WebControls.TextBox txtAgent;
         
         /// <summary>
-        /// AutoCompleteCountry1 control.
+        /// FilteredTextBoxExtender3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::EMS.WebApp.CustomControls.AutoCompleteExtender AutoCompleteCountry1;
+        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender3;
         
         /// <summary>
-        /// txtAddress control.
+        /// TextBoxWatermarkExtender3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAddress;
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender3;
         
         /// <summary>
-        /// txtContactPerson control.
+        /// btnSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtContactPerson;
+        protected global::System.Web.UI.WebControls.Button btnSearch;
         
         /// <summary>
-        /// txtPhone control.
+        /// btnRefresh control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPhone;
+        protected global::System.Web.UI.WebControls.Button btnRefresh;
         
         /// <summary>
-        /// txtFAX control.
+        /// uProgressLoc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFAX;
+        protected global::System.Web.UI.UpdateProgress uProgressLoc;
         
         /// <summary>
-        /// txtEmailID control.
+        /// fsList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmailID;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fsList;
         
         /// <summary>
-        /// txtPAN control.
+        /// ddlPaging control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPAN;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPaging;
         
         /// <summary>
-        /// txtTAN control.
+        /// btnAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTAN;
+        protected global::System.Web.UI.WebControls.Button btnAdd;
         
         /// <summary>
-        /// KYCUpload control.
+        /// upLoc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload KYCUpload;
+        protected global::System.Web.UI.UpdatePanel upLoc;
         
         /// <summary>
-        /// UploadFileName control.
+        /// gvwAgent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow UploadFileName;
-        
-        /// <summary>
-        /// lnkKYCUpload control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkKYCUpload;
-        
-        /// <summary>
-        /// ddlPrincipal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPrincipal;
-        
-        /// <summary>
-        /// rfvPrincipal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPrincipal;
-        
-        /// <summary>
-        /// btnSave control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
-        
-        /// <summary>
-        /// btnCancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.GridView gvwAgent;
     }
 }

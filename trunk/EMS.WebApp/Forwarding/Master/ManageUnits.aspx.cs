@@ -112,7 +112,7 @@ namespace EMS.WebApp.Forwarding.Master
             counter = 1;
             gvwHire.PageSize = SearchCriteriaProp.PageSize;
             int companyId=1;
-            gvwHire.DataSource = new BLL.UnitBLL().GetJobs(SearchCriteriaProp, 0, companyId).ToList();
+            gvwHire.DataSource = new BLL.UnitBLL().GetUnits(SearchCriteriaProp, 0, companyId).ToList();
             gvwHire.DataBind();
             upLoc.Update();
         }
@@ -215,7 +215,7 @@ namespace EMS.WebApp.Forwarding.Master
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Hire/AddEditUnit.aspx");
+            Response.Redirect("~/Forwarding/Master/AddEditUnit.aspx");
         }
     }
 }

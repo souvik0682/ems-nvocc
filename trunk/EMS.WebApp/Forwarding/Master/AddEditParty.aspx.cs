@@ -13,6 +13,8 @@ using EMS.WebApp.CustomControls;
 using System.Globalization;
 using System.Configuration;
 using EMS.Utilities.ResourceManager;
+using Microsoft.Win32;
+using System.IO;
 
 namespace EMS.WebApp.Forwarding.Master
 {
@@ -49,6 +51,9 @@ namespace EMS.WebApp.Forwarding.Master
                 LoadDefault();
                 ddlPrincipal.Enabled = false;
                 rfvPrincipal.Enabled = false;
+                lnkKYCUpload.Text = "";
+                //lblUploadedFileName.Text = "";
+
                 if (Request.QueryString["PartyId"] != string.Empty)
                 {
 
@@ -171,11 +176,31 @@ namespace EMS.WebApp.Forwarding.Master
                 txtPartyName.Text = party.PartyName;
                 txtPhone.Text = party.Phone;
                 txtTAN.Text = party.TAN;
+                txtFullName.Text = party.FullName;
+                hdnKYCPath.Value = "KYC" + PartyId.ToString().TrimEnd();
                 //ddlLine.SelectedValue = party.fLineID.ToString();
                 ddlPartyType.SelectedValue = party.PartyType.ToString();
                 ddlPrincipal.SelectedValue = party.PrincipalID.ToString();
                 AutoCompleteCountry1.CountryId = party.CountryID.ToString();
                 AutoCompleteCountry1.CountryName = party.CountryName;
+
+                var path = Server.MapPath("~/Forwarding/KYCUploads");
+                var newFileName = "KYC" + PartyId.ToString().TrimEnd();  //  Guid.NewGuid().ToString();
+
+                if (!string.IsNullOrEmpty(path))
+                {
+                    path += @"\" + newFileName + ".pdf"; 
+                    //System.IO.Path.GetExtension(fileName);
+                    hdnKYCPath.Value = path;
+                    if (File.Exists(path))
+                    {
+                        lnkKYCUpload.Enabled = true;
+                        lnkKYCUpload.Text = newFileName + ".pdf";
+                        //lblUploadedFileName.Text = newFileName;
+                        //lblUploadedFileName.Visible = true;
+                    }
+                }
+
             }
         }
         private void ClearText()
@@ -228,13 +253,12 @@ namespace EMS.WebApp.Forwarding.Master
                 PAN = txtPAN.Text,//
                 PartyName = txtPartyName.Text,//
                 Phone = txtPhone.Text,//
-                
+                FullName = txtFullName.Text,
+
                 TAN = txtTAN.Text,//
                 //fLineID = Convert.ToInt32(ddlLine.SelectedValue),
                 PartyType = ddlPartyType.SelectedValue.ToInt(),//
                
-                
-
                 PrincipalID = Convert.ToInt32(ddlPrincipal.SelectedValue),//
                 FwPartyID = PartyId,//
                 PartyAddress = txtAddress.Text,//
@@ -251,11 +275,31 @@ namespace EMS.WebApp.Forwarding.Master
         }
         private void SaveParty()
         {
+            
           
             var result = new PartyBLL().SaveParty(ExtractData(), Mode);     
             if (result > 0)
             {
                 PartyId = result;
+                if (KYCUpload.HasFile)
+                {
+                    var fileName = KYCUpload.FileName;
+                    var filext = fileName.Substring(fileName.LastIndexOf(".") + 1);
+                    if (filext.ToLower() != "pdf")
+                    {
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Only pdf file is accepted!');</script>", false);
+                        return;
+                    }
+                    var path = Server.MapPath("~/Forwarding/KYCUploads");
+                    var newFileName = "KYC" + PartyId.ToString().TrimEnd();  //  Guid.NewGuid().ToString();
+
+                    if (!string.IsNullOrEmpty(path))
+                    {
+                        path += @"\" + newFileName + System.IO.Path.GetExtension(fileName);
+                        hdnKYCPath.Value = path;
+                        KYCUpload.PostedFile.SaveAs(path);
+                    }
+                }
                 Response.Redirect("~/Forwarding/Master/ManageParties.aspx");
             }
             else
@@ -296,8 +340,38 @@ namespace EMS.WebApp.Forwarding.Master
             Response.Redirect("~/Forwarding/Master/ManageParties.aspx");
         }
 
-      
+        protected void lnkKYCUpload_Click(object sender, EventArgs e)
+        {
+            //var filename = Convert.ToString(src.Tables[0].Rows[0]["LinkedFileName"]);
+            var documentName = hdnKYCPath.Value;
+            var ext = System.IO.Path.GetExtension(hdnKYCPath.Value);
+            string filePath = string.Format(hdnKYCPath.Value);
+            System.IO.FileInfo file = new System.IO.FileInfo(filePath);
 
+            if (file.Exists)
+            {
+                Response.Clear();
+                Response.AddHeader("Content-Length", file.Length.ToString());
+                Response.Buffer = true;
+                Response.ContentType = MimeType(ext);
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}.{1}", documentName, ext));
+                Response.WriteFile(filePath);
+                Response.End();
+            }
+        }
+
+        private static string MimeType(string Extension)
+        {
+            string mime = "application/octetstream";
+            if (string.IsNullOrEmpty(Extension))
+                return mime;
+
+            string ext = Extension.ToLower();
+            RegistryKey rk = Registry.ClassesRoot.OpenSubKey(ext);
+            if (rk != null && rk.GetValue("Content Type") != null)
+                mime = rk.GetValue("Content Type").ToString();
+            return mime;
+        }
 
     }
 }

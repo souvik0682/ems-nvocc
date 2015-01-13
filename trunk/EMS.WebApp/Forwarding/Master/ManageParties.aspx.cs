@@ -69,7 +69,7 @@ namespace EMS.WebApp.Forwarding.Master
                 PartyID = 0,
                 LocAbbr = "",
                 PartyName = txtPartyName.Text,
-                StringParams = new List<string>() { ddlPartyType.SelectedValue == "0" ? "" : ddlPartyType.SelectedValue, txtPhoneNo.Text }
+                StringParams = new List<string>() { ddlPartyType.SelectedValue == "0" ? "" : ddlPartyType.SelectedValue, txtFullName.Text }
             
             };
             Session["SearchCriteria"] = searchCriteria;
@@ -138,11 +138,11 @@ namespace EMS.WebApp.Forwarding.Master
         {
             ISearchCriteria searchCriteria = SearchCriteriaProp;
             string partyName = string.IsNullOrEmpty(txtPartyName.Text) ? "" : txtPartyName.Text.Trim();
-            string phoneNo = string.IsNullOrEmpty(txtPhoneNo.Text) ? "" : txtPhoneNo.Text.Trim();
+            string FullName = string.IsNullOrEmpty(txtFullName.Text) ? "" : txtFullName.Text.Trim();
             string partyType = ddlPartyType.SelectedValue == "0" ? "" : ddlPartyType.SelectedValue;
             searchCriteria.PartyID = 0;
             searchCriteria.PartyName = partyName;
-            searchCriteria.StringParams = new List<string>() { partyType, phoneNo };
+            searchCriteria.StringParams = new List<string>() { partyType, FullName };
             SearchCriteriaProp = searchCriteria;
             FillData();
         }

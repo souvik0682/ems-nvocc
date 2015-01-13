@@ -123,13 +123,13 @@ namespace EMS.Entity
                 if (reader["LocationId"] != DBNull.Value)
                     LocationId = Convert.ToInt32(reader["LocationId"]);
 
-            if (ColumnExists(reader, "Nvocc"))
-                if (reader["Nvocc"] != DBNull.Value)
-                    Nvocc = Convert.ToString(reader["Nvocc"]);
+            if (ColumnExists(reader, "LineName"))
+                if (reader["LineName"] != DBNull.Value)
+                    Nvocc = Convert.ToString(reader["LineName"]);
 
-            if (ColumnExists(reader, "NvoccId"))
-                if (reader["NvoccId"] != DBNull.Value)
-                    NvoccId = Convert.ToInt32(reader["NvoccId"]);
+            if (ColumnExists(reader, "LineID"))
+                if (reader["LineID"] != DBNull.Value)
+                    NvoccId = Convert.ToInt32(reader["LineID"]);
 
             if (ColumnExists(reader, "Vessel"))
                 if (reader["Vessel"] != DBNull.Value)

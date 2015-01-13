@@ -14,7 +14,7 @@ namespace EMS.Entity
         public int PartyId { get; set; }
         public string PartyType { get; set; }
         public int PartyTypeId { get; set; }
-        public string UnitType { get; set; }
+        //public string UnitType { get; set; }
         public int UnitTypeId { get; set; }
         public string BillFrom { get; set; }
         public int BillFromId { get; set; }
@@ -30,9 +30,9 @@ namespace EMS.Entity
         public DateTime? EstimateDate { get; set; }
 
         public string EstimateNo { get; set; }
-
+        public decimal ROE { get; set; }
         public int JobID { get; set; }
-
+        public string JobNo { get; set; }
         public string PorR { get; set; }
 
         public string TransactionType { get; set; }
@@ -47,9 +47,15 @@ namespace EMS.Entity
         public int ChargeMasterId { get; set; }
         public string ChargeMasterName { get; set; }
         public string ChargeType { get; set; }
-        public int Unit { get; set; }
+        public string CntrSize { get; set; }
+        public string UnitType { get; set; }
+        public double Unit { get; set; }
         public double Rate { get; set; }
         public string  Currency { get; set; }
+        public int StaxExists { get; set; }
+        public double STax { get; set; }
+        public double STaxCess { get; set; }
+        public double STaxACess { get; set; }
         public int CurrencyId { get; set; }
         public double ROE { get; set; }
         public int UnitId { get; set; }

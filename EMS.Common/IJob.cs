@@ -47,5 +47,12 @@ namespace EMS.Common
         char CargoSource { get; set; }
         int JobScopeID { get; set; }
         int CreditDays { get; set; }
+        string DocumentNo { get; set; }
+        string Vessel { get; set; }
+        string Voyage { get; set; }
+        string JobNote1 { get; set; }
+        string JobNote2 { get; set; }
+        string POL { get; set; }
+        string POD { get; set; }
     }
 }

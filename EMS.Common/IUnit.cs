@@ -11,5 +11,6 @@ namespace EMS.Common
         string UnitName { get; set; }
         string Prefix { get; set; }
         bool UnitStatus { get; set; }
+        string UnitType { get; set; }
     }
 }

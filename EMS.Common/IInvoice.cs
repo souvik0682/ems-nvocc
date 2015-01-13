@@ -40,5 +40,8 @@ namespace EMS.Common
         DateTime EditedOn { get; set; }
         List<IChargeRate> ChargeRates { get; set; }
         int PartyId { get; set; }
+        int PartyTypeID { get; set; }
+        int TEUS { get; set; }
+        int FEUS { get; set; }
     }
 }

@@ -39,6 +39,9 @@ namespace EMS.Common
         long InvoiceId { get; set; }
         int fk_CurrencyID { get; set; }
         decimal ExchgRate { get; set; }
+        decimal Units { get; set; }
+        int UnitTypeID { get; set; }
+        string UnitType { get; set; }
 
         int Type
         {

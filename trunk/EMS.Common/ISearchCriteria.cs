@@ -13,6 +13,7 @@ namespace EMS.Common
         string StringOption2 { get; set; }
         string StringOption3 { get; set; }
         string StringOption4 { get; set; }
+        DateTime? Date { get; set; }
         IList<string> StringParams { get; set; }
         int PartyID { get; set; }
         string LocAbbr { get; set; }

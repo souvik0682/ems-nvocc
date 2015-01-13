@@ -324,7 +324,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <strong>Paid (INR)</strong>
+                                                    <strong>Actual Payable (INR)</strong>
                                                 </td>
                                                 <td style="text-align:right;">
                                                     <asp:Label ID="lblTotalPaid" runat="server"></asp:Label>
@@ -344,7 +344,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <strong>Received (INR)</strong>
+                                                    <strong>Actual Recieveable (INR)</strong>
                                                 </td>
                                                 <td style="text-align:right;">
                                                     <asp:Label ID="lblTotalReceived" runat="server"></asp:Label>

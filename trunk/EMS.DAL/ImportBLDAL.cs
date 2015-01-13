@@ -638,6 +638,7 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@Vessel", 100, searchCriteria.Vessel);
                 oDq.AddVarcharParam("@Line", 100, searchCriteria.LineName);
                 oDq.AddVarcharParam("@Location", 100, searchCriteria.Location);
+                oDq.AddIntegerParam("@Status", searchCriteria.IntegerOption1);
 
                 if (locationId > 0)
                     oDq.AddIntegerParam("@LocationId", locationId);

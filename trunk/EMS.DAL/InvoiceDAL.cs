@@ -55,13 +55,15 @@ namespace EMS.DAL
 
         public static DataTable GetFwdLocation(int UserId)
         {
-            string strExecution = "fwd.GetLocation";
+            string strExecution = "fwd.uspGetLocation";
             DataTable dt = new DataTable();
-
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                oDq.AddIntegerParam("@UserId", UserId);
+                oDq.AddIntegerParam("@LocId", UserId);
+                oDq.AddVarcharParam("@SortExpression", 1, "");
+                oDq.AddVarcharParam("@SortDirection", 1, "");
+                
                 dt = oDq.GetTable();
             }
 
@@ -83,12 +85,14 @@ namespace EMS.DAL
 
         public static DataTable GetFwdEstimate(int EstimateId)
         {
-            string strExecution = "spGetEstimate";
+            string strExecution = "fwd.spGetEstimate";
             DataTable dt = new DataTable();
             
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                oDq.AddIntegerParam("@EstimateId", EstimateId);
+                oDq.AddIntegerParam("@pk_EstimateID", EstimateId);
+                oDq.AddIntegerParam("@Result", 0);
+
                 dt = oDq.GetTable();
             }
             return dt;
@@ -206,6 +210,19 @@ namespace EMS.DAL
         public static DataTable ExpBLContainers(string BLno)
         {
             string strExecution = "[exp].[usp_Invoice_GetContainers]";
+            DataTable dt = new DataTable();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@BLno", 60, BLno);
+                dt = oDq.GetTable();
+            }
+            return dt;
+        }
+
+        public static DataTable FwdJobContainers(string BLno)
+        {
+            string strExecution = "[fwd].[usp_Invoice_GetContainers]";
             DataTable dt = new DataTable();
 
             using (DbQuery oDq = new DbQuery(strExecution))
@@ -421,6 +438,19 @@ namespace EMS.DAL
             return dt;
         }
 
+        public static DataTable GetCreChargeDetails(int ChargeID)
+        {
+            string strExecution = "[fwd].[usp_fwdCreInvCharge]";
+            DataTable dt = new DataTable();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@chargeid", ChargeID);
+                dt = oDq.GetTable();
+            }
+            return dt;
+        }
+
         public static int GetNumberOfContainer(int BlId)
         {
             string strExecution = "usp_Invoice_GetNumberOfContainer";
@@ -542,14 +572,18 @@ namespace EMS.DAL
 
         public static long SaveFwdInvoice(IInvoice invoice, string misc, int isedit)
         {
-            string strExecution = "[exp].[usp_Fwd_Invoice_Save]";
+            string strExecution = "[fwd].[usp_Fwd_Invoice_Save]";
             long invoiceId = 0;
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                if (invoice.InvoiceID != 0)
-                    oDq.AddBigIntegerParam("@InvoiceID", invoice.InvoiceID);
 
+                if (invoice.InvoiceID != 0)
+                {
+                    oDq.AddBigIntegerParam("@InvoiceID", invoice.InvoiceID);
+                    oDq.AddVarcharParam("@InvoiceNo", 30, invoice.InvoiceNo);
+                }
+                oDq.AddIntegerParam("@isedit", isedit);
                 oDq.AddVarcharParam("@Misc", 20, misc);
                 oDq.AddIntegerParam("@CompanyID", invoice.CompanyID);
                 oDq.AddIntegerParam("@LocationID", invoice.LocationID);
@@ -557,6 +591,9 @@ namespace EMS.DAL
 
                 if (invoice.InvoiceTypeID != 0)
                     oDq.AddIntegerParam("@InvoiceTypeID", invoice.InvoiceTypeID);
+
+                if (invoice.PartyId != 0)
+                    oDq.AddIntegerParam("@fk_PartyID", invoice.PartyId);
 
                 if (invoice.JobID != 0)
                     oDq.AddBigIntegerParam("@BookingID", invoice.JobID);
@@ -579,7 +616,7 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@UserLastEdited", invoice.UserLastEdited);
                 oDq.AddDateTimeParam("@AddedOn", invoice.AddedOn);
                 oDq.AddDateTimeParam("@EditedOn", invoice.EditedOn);
-                oDq.AddIntegerParam("@PartyId", invoice.PartyId);
+                //oDq.AddVarcharParam("@InvoiceNo", 30, invoice.InvoiceNo);
 
                 invoiceId = Convert.ToInt64(oDq.GetScalar());
             }
@@ -659,6 +696,47 @@ namespace EMS.DAL
 
             return invoiceChargeId;
         }
+
+        public static int SaveInvoiceChargesFwd(IChargeRate cRate)
+        {
+            string strExecution = "[fwd].[uspFwd_Invoice_Charges_Save]";
+            int invoiceChargeId = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@InvoiceID", cRate.InvoiceId);
+
+                if (cRate.InvoiceChargeId > 0)
+                    oDq.AddBigIntegerParam("@InvoiceChargeID", cRate.InvoiceChargeId);
+
+                oDq.AddIntegerParam("@ChargeID", cRate.ChargesID);
+                oDq.AddIntegerParam("@ChargeRateID", cRate.ChargesRateID);
+                oDq.AddDecimalParam("@RatePerUnit", 12, 2, cRate.RatePerBL);
+                oDq.AddDecimalParam("@Units", 12, 2, cRate.Units);
+                oDq.AddVarcharParam("@Size", 2, cRate.Size);
+                oDq.AddIntegerParam("@UnitType", cRate.UnitTypeID);
+
+                //oDq.AddDecimalParam("@RatePerTEU", 12, 2, cRate.RatePerTEU);
+                //oDq.AddDecimalParam("@RatePerFEU", 12, 2, cRate.RatePerFEU);
+                //oDq.AddDecimalParam("@RatePerCBM", 12, 2, cRate.RatePerCBM);
+                //oDq.AddDecimalParam("@RatePerTon", 12, 2, cRate.RatePerTON);
+                oDq.AddDecimalParam("@RateUSD", 12, 2, 0);
+                oDq.AddDecimalParam("@GrossAmount", 12, 2, cRate.GrossAmount);
+                oDq.AddDecimalParam("@ServiceTaxAmount", 12, 2, cRate.ServiceTax);
+                oDq.AddDecimalParam("@ServiceTaxCessAmount", 12, 2, cRate.ServiceTaxCessAmount);
+                oDq.AddDecimalParam("@ServiceTaxACess", 12, 2, cRate.ServiceTaxACess);
+                //oDq.AddBigIntegerParam("@TerminalId", cRate.TerminalId);
+                //oDq.AddDecimalParam("@SharingBL", 12, 2, 0);
+                //oDq.AddDecimalParam("@SharingTEU", 12, 2, 0);
+                //oDq.AddDecimalParam("@SharingFEU", 12, 2, 0);
+                oDq.AddIntegerParam("@CurId", cRate.fk_CurrencyID);
+                oDq.AddDecimalParam("@ExchgRt", 12, 2, cRate.ExchgRate);
+                invoiceChargeId = Convert.ToInt32(oDq.GetScalar());
+            }
+
+            return invoiceChargeId;
+        }
+
 
         public static IInvoice GetInvoiceById(long InvoiceId)
         {
@@ -856,7 +934,7 @@ namespace EMS.DAL
 
         public static DataTable GetFwdLineLocation(string JobNo)
         {
-            string strExecution = "[exp].[uspExp_Invoice_GetFwdLineLocation]";
+            string strExecution = "[fwd].[usp_Invoice_GetfwdLineLocation]";
             DataTable dt = new DataTable();
 
             using (DbQuery oDq = new DbQuery(strExecution))
@@ -1023,6 +1101,29 @@ namespace EMS.DAL
         public static List<IChargeRate> GetExpInvoiceChargesById(long InvoiceId)
         {
             string strExecution = "[exp].[usp_Invoice_GetChargesById]";
+            List<IChargeRate> lstRates = new List<IChargeRate>();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@InvoiceID", InvoiceId);
+
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    IChargeRate footer = new ChargeRateEntity(reader);
+                    lstRates.Add(footer);
+                }
+
+                reader.Close();
+            }
+
+            return lstRates;
+        }
+
+        public static List<IChargeRate> GetFwdInvoiceChargesById(long InvoiceId)
+        {
+            string strExecution = "[fwd].[usp_Invoice_GetChargesById]";
             List<IChargeRate> lstRates = new List<IChargeRate>();
 
             using (DbQuery oDq = new DbQuery(strExecution))

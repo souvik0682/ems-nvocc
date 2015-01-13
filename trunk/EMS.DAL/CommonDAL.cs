@@ -1034,6 +1034,19 @@ namespace EMS.DAL
             return myDataTable;
         }
 
+        public static DataTable GetfwdShippingLineByType(string pType)
+        {
+            string strExecution = "[fwd].[uspGetShippingLine]";
+            DataTable myDataTable;
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@Type", 1, pType);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+
         public static DataTable GetfwdPartyByType(string pType)
         {
             string strExecution = "[fwd].[uspGetPartyByType]";
@@ -1047,9 +1060,36 @@ namespace EMS.DAL
             return myDataTable;
         }
 
+
+        public static DataTable GetfwdPartyByTypeid(int PartyTypeID)
+        {
+            string strExecution = "[fwd].[uspGetPartyByTypeID]";
+            DataTable myDataTable;
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@PartyTypeid", PartyTypeID);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+
         public static DataTable GetfwdJobType()
         {
             string strExecution = "[fwd].[usp_GetJobType]";
+            DataTable myDataTable;
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                //oDq.AddVarcharParam("@PartyType", 1, pType);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+
+        public static DataTable GetfwdContainerType()
+        {
+            string strExecution = "[fwd].[usp_GetContainerType]";
             DataTable myDataTable;
             using (DbQuery oDq = new DbQuery(strExecution))
             {

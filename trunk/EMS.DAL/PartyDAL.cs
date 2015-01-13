@@ -20,7 +20,7 @@ namespace EMS.DAL
                  oDq.AddBigIntegerParam("@PartyId", searchCriteria.PartyID);
                  oDq.AddVarcharParam("@SchLocAbbr", 3, searchCriteria.LocAbbr);
                  oDq.AddVarcharParam("@SchPartyName", 60, searchCriteria.PartyName);
-                 oDq.AddVarcharParam("@SchPhoneNo", 10, searchCriteria.StringParams[1]);
+                 oDq.AddVarcharParam("@SchShortName", 10, searchCriteria.StringParams[1]);
                  oDq.AddVarcharParam("@SchPartyType", 1, searchCriteria.StringParams[0]);
                  oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
                  oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
@@ -52,6 +52,7 @@ namespace EMS.DAL
                  oDq.AddIntegerParam("@LocId", Party.LocID);
                  oDq.AddIntegerParam("@PartyType", Party.PartyType);
                  oDq.AddVarcharParam("@PartyName", 60, Party.PartyName);
+                 oDq.AddVarcharParam("@FullName", 60, Party.FullName);
 
                  oDq.AddVarcharParam("@PartyAddress", 500, Party.PartyAddress);
                  oDq.AddIntegerParam("@fk_CountryID", Party.CountryID);
@@ -71,7 +72,7 @@ namespace EMS.DAL
                  oDq.AddIntegerParam("@Result",result, QueryParameterDirection.Output);
                  Partyid = Convert.ToInt32(oDq.GetScalar());
                  if (Mode != "A") {
-                     return 1;
+                     return Party.FwPartyID;
                  }
              }
              return Partyid;

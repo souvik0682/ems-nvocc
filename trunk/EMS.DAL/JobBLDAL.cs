@@ -112,7 +112,7 @@ namespace EMS.DAL
 
         public static DataTable GetDeliveryAgents(int fk_FPOD)
         {
-            string ProcName = "[exp].[usp_GetDeliveryAgents]";
+            string ProcName = "[fwd].[usp_GetDeliveryAgents]";
             DbQuery dquery = new DbQuery(ProcName);
             dquery.AddIntegerParam("@FPOD", fk_FPOD);
             return dquery.GetTable();
@@ -257,7 +257,7 @@ namespace EMS.DAL
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                oDq.AddVarcharParam("@JobNo", 100, searchCriteria.JobNo);
+                oDq.AddVarcharParam("@JobNumber", 100, searchCriteria.JobNo);
                 oDq.AddVarcharParam("@BLNo", 100, searchCriteria.EdgeBLNumber);
                 oDq.AddVarcharParam("@POL", 100, searchCriteria.POL);
                 oDq.AddVarcharParam("@Line", 100, searchCriteria.LineName);
@@ -353,7 +353,7 @@ namespace EMS.DAL
             }
         }
 
-        public static int CheckExpBLExistance(string BookingNo)
+        public static int CheckFwdBLExistance(string BookingNo)
         {
             string strExecution = "[fwd].[usp_CheckFwdBLExistance]";
 

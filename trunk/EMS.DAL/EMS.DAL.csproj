@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdvAdjDAL.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AdvAdjustmentDAL.cs" />
     <Compile Include="AgentDAL.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -48,10 +52,13 @@
     <Compile Include="CommonDAL.cs" />
     <Compile Include="ContainerTranDAL.cs" />
     <Compile Include="CreditNoteDAL.cs" />
+    <Compile Include="CreditorInvoiceDAL.cs" />
+    <Compile Include="CreInvoiceDAL.cs" />
     <Compile Include="DALReport.cs" />
     <Compile Include="DODAL.cs" />
     <Compile Include="EDIDAL.cs" />
     <Compile Include="EquipmentDAL.cs" />
+    <Compile Include="EstimateDAL.cs" />
     <Compile Include="ExpBLPrinting.cs" />
     <Compile Include="ExportBLDAL.cs" />
     <Compile Include="ExportBLQueryDAL.cs" />
@@ -61,7 +68,9 @@
     <Compile Include="ExportPerformanceDAL.cs" />
     <Compile Include="expVoyageDAL.cs" />
     <Compile Include="ExpSlotCost.cs" />
+    <Compile Include="fwdAgentDAL.cs" />
     <Compile Include="fwLineDAL.cs" />
+    <Compile Include="fwLocationDAL.cs" />
     <Compile Include="IGMReportDAL.cs" />
     <Compile Include="ImportBLDAL.cs" />
     <Compile Include="ImportHaulageDAL.cs" />
@@ -77,12 +86,16 @@
     <Compile Include="LogisticReportDAL.cs" />
     <Compile Include="MoneyReceiptsDAL.cs" />
     <Compile Include="OnHire.cs" />
+    <Compile Include="PartyDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportDAL.cs" />
     <Compile Include="ServiceDAL.cs" />
+    <Compile Include="SettlementDAL.cs" />
     <Compile Include="SlotDAL.cs" />
     <Compile Include="TerminalDiapatchDAL.cs" />
     <Compile Include="TranshipmentDetailsDAL.cs" />
+    <Compile Include="UnitDAL.cs" />
+    <Compile Include="UnitTypeDAL.cs" />
     <Compile Include="UserDAL.cs" />
     <Compile Include="VendorDAL.cs" />
     <Compile Include="VoyageDAL.cs" />
@@ -100,6 +113,9 @@
       <Project>{96CE34FB-822A-4470-8919-130E02839431}</Project>
       <Name>EMS.Utilities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="dbBackup\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

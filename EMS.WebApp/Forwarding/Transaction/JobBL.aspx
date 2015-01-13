@@ -14,7 +14,7 @@
         </div>
     </div>
     <div id="headercaption">
-        MANAGE EXPORT BL</div>
+        MANAGE FORWARDING BL</div>
     <center>
         <div style="width: 850px; ">
             <fieldset style="width: 100%;">
@@ -27,7 +27,7 @@
                                 FilterMode="InvalidChars" ValidChars=" " TargetControlID="txtBookingNo">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="tbwBookingNo" runat="server" TargetControlID="txtBookingNo"
-                                WatermarkText="Booking No">
+                                WatermarkText="Job No">
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
@@ -107,7 +107,7 @@
                 </ProgressTemplate>
             </asp:UpdateProgress>
             <fieldset id="fsList" runat="server" style="width: 100%; min-height: 100px;">
-                <legend>Export BL List</legend>
+                <legend>Forwarding BL List</legend>
                 <div style="float: right; padding-bottom: 5px;">
                     Results Per Page:<asp:DropDownList ID="ddlPaging" runat="server" Width="50px" 
                         onselectedindexchanged="ddlPaging_SelectedIndexChanged" AutoPostBack="true">
@@ -141,13 +141,13 @@
                                 <EmptyDataTemplate>
                                     No Record(s) Found</EmptyDataTemplate>
                                 <Columns>
-                                    <asp:TemplateField>
+                                    <%--<asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="5%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkLine" runat="server" CommandName="Sort" CommandArgument="Line" Text="Line"></asp:LinkButton>
                                         </HeaderTemplate>
-                                    </asp:TemplateField>
+                                    </asp:TemplateField>--%>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="8%" />

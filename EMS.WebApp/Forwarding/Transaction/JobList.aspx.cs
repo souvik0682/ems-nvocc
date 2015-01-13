@@ -134,8 +134,8 @@ namespace EMS.WebApp.Forwarding.Transaction
                 e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "JobNo"));
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "JobDate")).Split(' ')[0];
                 e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "JobType"));
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PlaceOfReceipt"));
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PlaceOfDelivery"));
+                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "POL"));
+                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "POD"));
                 e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EstPayable"));
                 e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EstReceivable"));
                 e.Row.Cells[7].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EstProfit"));
@@ -316,6 +316,7 @@ namespace EMS.WebApp.Forwarding.Transaction
             criteria.Customer = (txtCustomer.Text == "") ? string.Empty : txtCustomer.Text.Trim();
             criteria.JobNo = (txtJobNo.Text == "") ? string.Empty : txtJobNo.Text.Trim();
             criteria.JobType = ddlJobStatus.SelectedValue.ToString();
+            criteria.StringOption1 = ddlJobType.SelectedValue.ToString();
             //criteria.JobType = (txtJobType.Text == "") ? string.Empty : txtJobType.Text.Trim();
             criteria.OperationalControl = (txtOpControl.Text == "") ? string.Empty : txtOpControl.Text.Trim();
             criteria.LineName = (txtLine.Text == "") ? string.Empty : txtLine.Text.Trim();
@@ -405,6 +406,13 @@ namespace EMS.WebApp.Forwarding.Transaction
         #endregion
 
         protected void ddlJobStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SaveNewPageIndex(0);
+            LoadImportBL();
+            upBL.Update();
+        }
+
+        protected void ddlJobType_SelectedIndexChanged(object sender, EventArgs e)
         {
             SaveNewPageIndex(0);
             LoadImportBL();

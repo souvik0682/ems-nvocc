@@ -27,8 +27,10 @@ namespace EMS.WebApp.Forwarding.Transaction
                 try
                 {
                     string originalFilename = Path.GetFileName(FileUploadControl.FileName);
-                    string filename = new Guid().ToString();
-                    FileUploadControl.SaveAs(Server.MapPath("~/Forwarding/Transaction/EstimateFiles/") + filename);
+                    string extension = Path.GetExtension(FileUploadControl.FileName);
+                    string filename = Guid.NewGuid().ToString();
+
+                    FileUploadControl.SaveAs(Server.MapPath("~/Forwarding/Transaction/EstimateFiles/") + filename+"."+extension);
                     hdnFileName.Value = filename;
 
                     //Update file name in database

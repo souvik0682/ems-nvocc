@@ -140,13 +140,13 @@ namespace EMS.WebApp.Farwarding.Transaction
                 GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 6);
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
 
-                e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Nvocc"));
-                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Location"));
-                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookingNumber"));
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EdgeBLNumber"));
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "RefBLNumber"));
-                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "POD"));
-                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "POL"));
+                //e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Nvocc"));
+                e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Location"));
+                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookingNumber"));
+                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EdgeBLNumber"));
+                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "RefBLNumber"));
+                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "POD"));
+                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "POL"));
 
                 // Delete link
                 ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");

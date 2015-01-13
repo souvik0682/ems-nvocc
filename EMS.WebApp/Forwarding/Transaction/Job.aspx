@@ -119,7 +119,7 @@ SELECT pk_LocID, LocName FROM fwd.mstFLocation"></asp:SqlDataSource>
                                         <asp:SqlDataSource ID="SalesDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
                                             SelectCommand="SELECT 0 [pk_UserID], '-- Select --' [UserName]
 UNION
-SELECT pk_UserID, FirstName + ' ' + LastName + '(' + UserName + ')' AS UserName FROM mstUsers WHERE (fk_RoleID = 4)"></asp:SqlDataSource>
+SELECT pk_UserID, FirstName + ' ' + LastName + '(' + UserName + ')' AS UserName FROM dsr.dbo.mstUser WHERE (fk_RoleID = 4)"></asp:SqlDataSource>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="ddlSalesControlled"
                                             ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
                                             ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -129,7 +129,8 @@ SELECT pk_UserID, FirstName + ' ' + LastName + '(' + UserName + ')' AS UserName 
                                         Shipment Mode:<span class="errormessage">*</span>
                                     </td>
                                     <td>
-                                        <asp:DropDownList ID="ddlShipmentMode" runat="server" CssClass="dropdownlist" TabIndex="60">
+                                        <asp:DropDownList ID="ddlShipmentMode" runat="server" CssClass="dropdownlist" 
+                                            TabIndex="60" AutoPostBack="True" onselectedindexchanged="ddlShipmentMode_SelectedIndexChanged">
                                            <%-- DataSourceID="ShipmentDs" DataTextField="ShippingMode" DataValueField="pk_SModeID">--%>
                                         </asp:DropDownList>
 <%--                                        <asp:SqlDataSource ID="ShipmentDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
@@ -157,7 +158,16 @@ SELECT pk_PrDocID, DocName FROM fwd.mstPrimeDocs"></asp:SqlDataSource>
                                             ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
                                             ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
                                     </td>
-                                     <td>
+                                    <td style="width: 20%;">
+                                        Prime Docs No:<span class="errormessage">*</span>
+                                    </td>
+                                    <td style="width: 28%;">
+                                        <asp:TextBox ID="txtDocumentNo" runat="server" CssClass="textboxuppercase" MaxLength="300" Width="250px" TabIndex="13">
+                                        </asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         Shipping Line / Airlines:<span class="errormessage">*</span>
                                     </td>
                                     <td>
@@ -172,8 +182,15 @@ SELECT pk_FLineID, LineName FROM fwd.mstFLine"></asp:SqlDataSource>--%>
                                             ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
                                             ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
                                     </td>
-                                    
+                                    <td style="width: 20%;">
+                                        Ves. & Voy./ Flight No:<span class="errormessage">*</span>
+                                    </td>
+                                    <td style="width: 28%;">
+                                        <asp:TextBox ID="txtVoyageNo" runat="server" CssClass="textboxuppercase" MaxLength="300" Width="250px" TabIndex="13">
+                                        </asp:TextBox>
+                                    </td>
                                 </tr>
+
                                 <tr>
                                     <td>
                                         Customer:<span class="errormessage">*</span>
@@ -197,36 +214,25 @@ SELECT pk_fwPartyID pk_CustID, PartyName CustName FROM fwd.mstParty WHERE (Party
                                         <cc2:CustomTextBox ID="txtCreditDays" runat="server" CssClass="numerictextbox" TabIndex="13"
                                             Width="250px" Type="Numeric" MaxLength="5"></cc2:CustomTextBox>
                                     </td>
+
                                 </tr>
                                 <tr>
-                                    <td style="width: 20%;">
-                                        TTL 20&#39;:<span class="errormessage">*</span>
+                                    <td>
+                                        <asp:LinkButton ID="lnkContainerDtls" runat="server" Text="Container Details" OnClick="lnkContainerDtls_Click"></asp:LinkButton>
                                     </td>
-                                    <td style="width: 28%;">
-                                        <cc2:CustomTextBox ID="txtTTL20" runat="server" CssClass="numerictextbox" TabIndex="13"
-                                            Width="250px" Type="Numeric" MaxLength="5"></cc2:CustomTextBox>
-<%--                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" CssClass="errormessage"
-                                            ErrorMessage="This field is required" ControlToValidate="txtTTL20" ValidationGroup="Save"
-                                            Display="Dynamic"></asp:RequiredFieldValidator>--%>
+                                    <td>
+                                        <asp:TextBox ID="txtContainerDtls" runat="server" CssClass="textboxuppercase" Width="250px"
+                                            Enabled="False" Height="50px" TextMode="MultiLine"></asp:TextBox>
                                     </td>
-
-                                    <td style="width: 20%;">
-                                        TTL 40&#39;:<span class="errormessage">*</span>
-                                    </td>
-                                    <td style="width: 28%;">
-                                        <cc2:CustomTextBox ID="txtTTL40" runat="server" CssClass="numerictextbox" TabIndex="13"
-                                            Width="250px" Type="Numeric" MaxLength="5"></cc2:CustomTextBox>
-<%--                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" CssClass="errormessage"
-                                            ErrorMessage="This field is required" ControlToValidate="txtTTL40" ValidationGroup="Save"
-                                            Display="Dynamic"></asp:RequiredFieldValidator>--%>
-                                    </td>
+                                   
+                                    
                                 </tr>
                                 <tr>
                                     <td style="width: 20%;">
                                         Gr. Weight (Kg):<span class="errormessage">*</span>
                                     </td>
                                     <td style="width: 28%;">
-                                        <cc2:CustomTextBox ID="txtGrossWeight" runat="server" CssClass="numerictextbox" TabIndex="13"
+                                        <cc2:CustomTextBox ID="txtGrossWeight" runat="server" CssClass="numerictextbox" TabIndex="13" 
                                             Width="250px" Type="Decimal" Precision="10" Scale="3" MaxLength="14"></cc2:CustomTextBox>
                                         <asp:RequiredFieldValidator ID="rfvGrossWeight" runat="server" CssClass="errormessage"
                                             ErrorMessage="This field is required" ControlToValidate="txtGrossWeight" ValidationGroup="Save"
@@ -249,7 +255,7 @@ SELECT pk_fwPartyID pk_CustID, PartyName CustName FROM fwd.mstParty WHERE (Party
                                         Weight (MT):<span class="errormessage">*</span>
                                     </td>
                                     <td style="width: 28%;">
-                                        <cc2:CustomTextBox ID="txtMTWeight" runat="server" CssClass="numerictextbox" TabIndex="13"
+                                        <cc2:CustomTextBox ID="txtMTWeight" runat="server" CssClass="numerictextbox" TabIndex="13" AutoPostBack="True" OnTextChanged="txtMTWeight_TextChanged"
                                             Width="250px" Type="Decimal" Precision="10" Scale="3" MaxLength="14"></cc2:CustomTextBox>
                                         <asp:RequiredFieldValidator ID="rfvMTWeight" runat="server" CssClass="errormessage"
                                             ErrorMessage="This field is required" ControlToValidate="txtMTWeight" ValidationGroup="Save"
@@ -260,7 +266,7 @@ SELECT pk_fwPartyID pk_CustID, PartyName CustName FROM fwd.mstParty WHERE (Party
                                         Volume (CBM):<span class="errormessage">*</span>
                                     </td>
                                     <td style="width: 28%;">
-                                        <cc2:CustomTextBox ID="txtCBMVolume" runat="server" CssClass="numerictextbox" TabIndex="13"
+                                        <cc2:CustomTextBox ID="txtCBMVolume" runat="server" CssClass="numerictextbox" TabIndex="13" AutoPostBack="True" OnTextChanged="txtCBMVolume_TextChanged"
                                             Width="250px" Type="Decimal" Precision="10" Scale="3" MaxLength="14"></cc2:CustomTextBox>
                                         <asp:RequiredFieldValidator ID="rfvCBMVolume" runat="server" CssClass="errormessage"
                                             ErrorMessage="This field is required" ControlToValidate="txtCBMVolume" ValidationGroup="Save"
@@ -343,7 +349,7 @@ SELECT pk_FLineID, LineName FROM fwd.mstFLine"></asp:SqlDataSource>
       
                                 <tr>
                                     <td>
-                                        Customs Agent:<span class="errormessage">*</span>
+                                        Customs Agent:
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="ddlCustomsAgent" runat="server" CssClass="dropdownlist" TabIndex="60"
@@ -353,13 +359,13 @@ SELECT pk_FLineID, LineName FROM fwd.mstFLine"></asp:SqlDataSource>
                                             SelectCommand="SELECT 0 [pk_fwPartyID], '-- Select --' [PartyName]
 UNION
 SELECT pk_fwPartyID, PartyName FROM fwd.mstParty WHERE (PartyType = '2')"></asp:SqlDataSource>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="ddlCustomsAgent"
+<%--                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="ddlCustomsAgent"
                                             ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
-                                            ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                                            ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                     </td>
 
                                     <td>
-                                        Transporter:<span class="errormessage">*</span>
+                                        Transporter
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="ddlTransporter" runat="server" CssClass="dropdownlist" TabIndex="60"
@@ -369,14 +375,14 @@ SELECT pk_fwPartyID, PartyName FROM fwd.mstParty WHERE (PartyType = '2')"></asp:
                                             SelectCommand="SELECT 0 [pk_fwPartyID], '-- Select --' [PartyName]
 UNION
 SELECT pk_fwPartyID, PartyName FROM fwd.mstParty WHERE (PartyType = '1')"></asp:SqlDataSource>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="ddlTransporter"
+<%--                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="ddlTransporter"
                                             ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
-                                            ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                                            ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        Overseas Agent:<span class="errormessage">*</span>
+                                        Overseas Agent
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="ddlOverseasAgent" runat="server" CssClass="dropdownlist" TabIndex="60"
@@ -386,13 +392,13 @@ SELECT pk_fwPartyID, PartyName FROM fwd.mstParty WHERE (PartyType = '1')"></asp:
                                             SelectCommand="SELECT 0 [pk_fwPartyID], '-- Select --' [PartyName]
 UNION
 SELECT pk_fwPartyID, PartyName FROM fwd.mstParty WHERE (PartyType = '3')"></asp:SqlDataSource>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="ddlOverseasAgent"
+<%--                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="ddlOverseasAgent"
                                             ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
-                                            ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                                            ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                     </td>
 
                                     <td>
-                                        Cargo Source:<span class="errormessage">*</span>
+                                        Cargo Source
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="ddlCargoSource" runat="server" CssClass="dropdownlist" TabIndex="60">
@@ -402,7 +408,25 @@ SELECT pk_fwPartyID, PartyName FROM fwd.mstParty WHERE (PartyType = '3')"></asp:
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td style="width: 20%;">
+                                        Job Notes 1
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="txtJobNote1" runat="server" CssClass="textboxuppercase" 
+                                            Width="250px" Height="50px" TextMode="MultiLine"></asp:TextBox>
+                                    </td>
+                                    <td style="width: 20%;">
+                                        Job Notes 2
+                                    </td>
+                                    <td style="width: 28%;">
+                                        <asp:TextBox ID="txtJobNote2" runat="server" CssClass="textboxuppercase" 
+                                            Width="250px" Height="50px" TextMode="MultiLine"></asp:TextBox>
+                                    </td>
+                                </tr>
+
+                                <tr>
                                     <td colspan="2" style="padding-top: 10px;">
+                                        <asp:HiddenField ID="hdnJobID" runat="server" Value="0" />
                                         <asp:Label ID="lblMessage" runat="server"></asp:Label>
                                         <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" TabIndex="70"
                                             OnClick="btnSave_Click" />&nbsp;&nbsp;
@@ -416,6 +440,139 @@ SELECT pk_fwPartyID, PartyName FROM fwd.mstParty WHERE (PartyType = '3')"></asp:
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
+
+                <!-- Modal Popup Container Details -->
+                <table border="0" cellpadding="2" cellspacing="3" width="100%" 
+                    style="height: 206px">
+                    <tr>
+                        <td>
+                            <asp:Button ID="Button1" runat="server" Style="display: none;" />
+                            <cc1:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="Button1"
+                                Enabled="true" PopupControlID="pnlContainer" Drag="true" BackgroundCssClass="ModalPopupBG"
+                                CancelControlID="btnCancelContainer">
+                            </cc1:ModalPopupExtender>
+                            <asp:Panel ID="pnlContainer" runat="server" Style="height: 360px; width: 450px; background-color: White;">
+                                <fieldset>
+                                    <legend>Container Breakup</legend>
+                                    <center>
+                                        <asp:UpdatePanel ID="udpContainer" runat="server">
+                                            <ContentTemplate>
+                                                <asp:HiddenField ID="hdnBookingContainerID" runat="server" Value="0" />
+                                                <asp:HiddenField ID="hdnIndex" runat="server" />
+                                                <div style="overflow: auto; height: 90px; width: 420px;">
+                                                    <table>
+                                                        <tr>
+                                                            <td style="width: 20%;">
+                                                                <asp:Label ID="lblType" Text="Type" runat="server"></asp:Label><span class="errormessage">*</span>
+                                                            </td>
+                                                            <td style="width: 20%;">
+                                                                <asp:Label ID="lblSize" Text="Size" runat="server"></asp:Label><span class="errormessage">*</span>
+                                                            </td>
+                                                            <td style="width: 20%;">
+                                                                <asp:Label ID="lblUnit" Text="Unit" runat="server"></asp:Label><span class="errormessage">*</span>
+                                                            </td>
+<%--                                                            <td style="width: 20%;">
+                                                                <asp:Label ID="lblWt" Text="Wt/Cont" runat="server"></asp:Label><span class="errormessage">*</span>
+                                                            </td>--%>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 20%;">
+                                                                <asp:DropDownList ID="ddlCntrType" runat="server" CssClass="dropdownlist" Width="80px">
+                                                                </asp:DropDownList>
+                                                            </td>
+                                                            <td style="width: 20%;">
+                                                                <asp:DropDownList ID="ddlSize" runat="server" CssClass="dropdownlist" Width="80px">
+                                                                    <asp:ListItem Text="20" Value="20" Selected="True"></asp:ListItem>
+                                                                    <asp:ListItem Text="40" Value="40"></asp:ListItem>
+                                                                </asp:DropDownList>
+                                                            </td>
+                                                            <td style="width: 20%;">
+                                                                <cc2:CustomTextBox ID="txtNos" runat="server" CssClass="numerictextbox" Width="77px"
+                                                                    Type="Numeric" MaxLength="8" Precision="10" Scale="2">
+                                                                </cc2:CustomTextBox>
+                                                                <%--<asp:TextBox ID="txtNos" runat="server" Width="77px"></asp:TextBox>--%>
+                                                            </td>
+                                                            <%--<td style="width: 20%;">
+                                                                <cc2:CustomTextBox ID="txtWtPerCntr" runat="server" CssClass="numerictextbox" Width="82px"
+                                                                    Type="Decimal" MaxLength="13" Precision="10" Scale="2">
+                                                                </cc2:CustomTextBox>
+                                                            </td>--%>
+                                                            <td style="width: 20%;">
+                                                                <asp:ImageButton ID="btnimgSave" runat="server" ImageUrl="~/Images/action_add2.gif"
+                                                                    Height="16" Width="16" OnClick="btnimgSave_Click" CausesValidation="true" ValidationGroup="Container" />&nbsp;&nbsp;
+                                                                <asp:ImageButton ID="btnimgReset" runat="server" ImageUrl="~/Images/Undo.gif" Height="16"
+                                                                    Width="16" OnClick="btnimgReset_Click" CausesValidation="false" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="5">
+                                                                <asp:RequiredFieldValidator ID="rfvType" runat="server" CssClass="errormessage" ErrorMessage="Please Select Type"
+                                                                    ControlToValidate="ddlCntrType" InitialValue="0" ValidationGroup="Container"
+                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                <asp:RequiredFieldValidator ID="rfvNos" runat="server" CssClass="errormessage" ErrorMessage="Please Enter Unit"
+                                                                    ControlToValidate="txtNos" ValidationGroup="Container" Display="Dynamic"></asp:RequiredFieldValidator>
+<%--                                                                <asp:RequiredFieldValidator ID="rfvwt" runat="server" CssClass="errormessage" ErrorMessage="Please Enter Wt/Cont"
+                                                                    ControlToValidate="txtWtPerCntr" ValidationGroup="Container" Display="Dynamic"></asp:RequiredFieldValidator>--%>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div style="overflow: auto; height: 120px; width: 420px;">
+                                                    <asp:GridView ID="gvContainer" runat="server" AutoGenerateColumns="false" AllowPaging="false"
+                                                        BorderStyle="None" BorderWidth="0" Width="100%" Style="margin-right: 0px" ShowHeader="False"
+                                                        OnRowCommand="gvContainer_RowCommand" OnDataBound="gvContainer_DataBound" OnRowDataBound="gvContainer_OnRowDataBound">
+                                                        <PagerSettings Mode="NumericFirstLast" Position="TopAndBottom" />
+                                                        <PagerStyle CssClass="gridviewpager" />
+                                                        <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
+                                                        <Columns>
+                                                            <asp:TemplateField>
+                                                                <ItemTemplate>
+                                                                    <asp:HiddenField ID="gvhdnBookingContainerID" runat="server" Value='<%# Eval("BookingContainerID") %>' />
+                                                                    <asp:HiddenField ID="gvhdnContainerTypeId" runat="server" Value='<%# Eval("ContainerTypeID") %>' />
+                                                                    <asp:Label ID="lblContainerType" runat="server" Text='<%# Eval("ContainerType")%>'></asp:Label>
+                                                                </ItemTemplate>
+                                                                <ItemStyle CssClass="gridviewitem" Width="20%" />
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField>
+                                                                <ItemStyle CssClass="gridviewitem" Width="20%" HorizontalAlign="Right" />
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblContainerSize" runat="server" Text='<%# Eval("CntrSize")%>'></asp:Label>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField>
+                                                                <ItemStyle CssClass="gridviewitem" Width="20%" HorizontalAlign="Right" />
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblUnit" runat="server" Text='<%# Eval("NoofContainers")%>'></asp:Label>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+
+                                                            <asp:TemplateField>
+                                                                <HeaderStyle CssClass="gridviewheader" />
+                                                                <ItemStyle CssClass="gridviewitem" Width="20%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                <ItemTemplate>
+                                                                    <asp:ImageButton ID="btnEdit" runat="server" CommandName="EditGrid" ImageUrl="~/Images/EditInGrid.gif"
+                                                                        Height="16" Width="16" CausesValidation="false" />&nbsp;&nbsp;
+                                                                    <asp:ImageButton ID="btnRemove" runat="server" CommandName="Remove" ImageUrl="~/Images/trash_icon.gif"
+                                                                        Height="16" Width="16" CausesValidation="false" OnClientClick="javascript:if(!confirm('Want to Delete this Container?')) return false;" />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                        </Columns>
+                                                    </asp:GridView>
+                                                </div>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                        <br />
+                                        <%--<asp:Button ID="btnSaveContainer" runat="server" Text="Save" CausesValidation="false" />--%>
+                                        <asp:Button ID="btnCancelContainer" runat="server" Text="Close" 
+                                            CausesValidation="false" />
+                                    </center>
+                                </fieldset>
+                            </asp:Panel>
+                        </td>
+                    </tr>
+                </table>
+                <!-- Modal Popup Container Details -->
+
             </fieldset>
             <asp:UpdateProgress ID="uProgressBooking" runat="server" AssociatedUpdatePanelID="upBooking">
                 <ProgressTemplate>

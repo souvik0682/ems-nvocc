@@ -12,7 +12,8 @@ using EMS.Entity;
 using EMS.WebApp.CustomControls;
 using System.Data;
 using System.Web.UI.HtmlControls;
-
+using Microsoft.Win32;
+using System.IO;
 
 namespace EMS.WebApp.Forwarding.Master
 {
@@ -21,7 +22,6 @@ namespace EMS.WebApp.Forwarding.Master
         #region Private Member Variables
 
         private int _userId = 0;
-        private string countryId = "";
         private string companyId = "1";
         private bool _canAdd = true;
         private bool _canEdit = true;
@@ -36,6 +36,20 @@ namespace EMS.WebApp.Forwarding.Master
 
 
         #region Protected Event Handler
+        
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            //lnkQuoUpload.Text = "";
+
+            RetriveParameters();
+            if (!IsPostBack)
+            {
+                LoadDefault();
+                PopulateUnitType();
+            }
+
+            //   CheckUserAccess(countryId);
+        }
 
         protected void grvCharges_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -74,12 +88,27 @@ namespace EMS.WebApp.Forwarding.Master
                 dllC.DataValueField = "pk_CurrencyID";
                 dllC.DataBind();
                 dllC.Items.Insert(0, new ListItem("--Select--", "0"));
-                //var txt2 = (TextBox)e.Row.FindControl("txtROE");
-                //var txt1 = (TextBox)e.Row.FindControl("txtRate");
-                //var txt3 = (TextBox)e.Row.FindControl("txtUnit");
-                //if (txt1 != null) { txt1.Attributes.Add("onblur", "CalculateINR(this)"); }
-                //if (txt3 != null) { txt3.Attributes.Add("onblur", "CalculateINR(this)"); }
-                //if (txt2 != null) { txt2.Attributes.Add("onblur", "CalculateINR(this)"); }
+
+                //var dllU = (DropDownList)e.Row.FindControl("ddlUnitType");
+                //DataSet dllUs = new DataSet();
+                //if (ViewState["ddlUnitType"] == null)
+                //{
+                //    dllUs = new EstimateBLL().GetUnitMaster(new SearchCriteria { StringOption1 = companyId, StringOption2 = lblShippingMode.Text });
+                //    ViewState["ddlUnitType"] = dllUs;
+                //}
+                //else
+                //{
+                //    dllUs = (DataSet)ViewState["ddlUnitType"];
+                //}
+
+                ////var units = new EstimateBLL().GetUnitMaster(new SearchCriteria { StringOption1 = companyId });
+                //dllU.DataSource = dllUs;
+                //dllU.DataTextField = "UnitName";
+                //dllU.DataValueField = "pk_UnitTypeID";
+                //dllU.DataBind();
+                //dllU.Items.Insert(0, new ListItem("--Select--", "0"));
+
+              
             }
             else if (e.Row.RowType == DataControlRowType.DataRow && IsEmptyGrid)
             {
@@ -92,46 +121,49 @@ namespace EMS.WebApp.Forwarding.Master
 
         protected void ddlCurrency_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-           
             var ddlCurrency = (DropDownList)grvCharges.FooterRow.FindControl("ddlCurrency");
             var txtROE = (TextBox)grvCharges.FooterRow.FindControl("txtROE");
             if (ddlCurrency != null)
             {
-                var ex = new EstimateBLL().GetExchange(new SearchCriteria() { StringOption1 = ddlCurrency.SelectedValue });
+                var ex = new EstimateBLL().GetExchange(new SearchCriteria() { StringOption1 = ddlCurrency.SelectedValue, Date = lblJobDate.Text.ToDateTime() });
 
                 txtROE.Text = "0";
                 if (ex != null && ex.Tables.Count > 0 && ex.Tables[0].Rows.Count > 0)
                 {
-                    txtROE.Text = Convert.ToString(ex.Tables[0].Rows[0]["USDXchRate"]);
+                    //txtROE.Text = Convert.ToString(ex.Tables[0].Rows[0]["USDXchRate"]);
+                    txtROE.Text = txtExRate.Text;
                 }
                 txtROE.Enabled = true;
-                if (ddlCurrency.SelectedValue == "1") { 
+                if (ddlCurrency.SelectedValue == "1" || ddlCurrency.SelectedValue == "2") { 
                     
                     txtROE.Enabled = false;
-                    txtROE.Text = "1";
+                    if (ddlCurrency.SelectedValue == "1")
+                        txtROE.Text = "1";
                 }
             }
             CalculateAndAssign();
-
-
         }
 
         private void CalculateAndAssign()
         {
+            DataSet ds = new DataSet();
             var txtUnit = (TextBox)grvCharges.FooterRow.FindControl("txtUnit");
             var txtRate = (TextBox)grvCharges.FooterRow.FindControl("txtRate");
             var txtROE = (TextBox)grvCharges.FooterRow.FindControl("txtROE");
-            var spINR = (Label)grvCharges.FooterRow.FindControl("lblINR");
+            //var spINR = (Label)grvCharges.FooterRow.FindControl("lblINR");
+            var spINR = (TextBox)grvCharges.FooterRow.FindControl("lblINR");
+            var spSTAX = (TextBox)grvCharges.FooterRow.FindControl("lblStax");
+            var ddlChargeID = (DropDownList)grvCharges.FooterRow.FindControl("ddlCharges");
 
-
-            var unit = 0;
+            var unit = 0.0;
             var rate = 0.0;
             var roe = 0.0;
+            var stax = 0.0;
+            int ChargeID = ddlChargeID.SelectedValue.ToInt();
 
             try
             {
-                unit = Convert.ToInt32(txtUnit.Text);
+                unit = Convert.ToDouble(txtUnit.Text);
             }
             catch
             {
@@ -153,32 +185,189 @@ namespace EMS.WebApp.Forwarding.Master
             {
                 roe = 0;
             }
+            try
+            {
+                ds = new EstimateBLL().GetServiceTax(lblJobDate.Text.ToDateTime(), (unit * rate * roe).ToDecimal(), ChargeID);
+                if (ds.Tables[1].Rows[0]["ServiceTax"].ToInt() == 1) 
+                {
+                    spSTAX.Text = (ds.Tables[0].Rows[0]["stax"].ToDecimal() + ds.Tables[0].Rows[0]["CessAmt"].ToDecimal() + ds.Tables[0].Rows[0]["AddCess"].ToDecimal()).ToString("#######0.00");
+                    stax = Convert.ToDouble(spSTAX.Text);
+                }
+                else
+                {
+                    spSTAX.Text = "0";
+                    stax = 0;
+                }
+                //stax = Convert.ToDouble(txtROE.Text);
+            }
+            catch
+            {
+                stax = 0;
+            }
+
             if (spINR != null)
             {
-                spINR.Text = (unit * rate * roe).ToString();
+                spINR.Text = ((unit * rate * roe)+stax).ToString("#######0.00");
             }
         }
 
         protected void Text_TextChanged(object sender, EventArgs e)
         {
             CalculateAndAssign();
+          
+        }
+
+        protected void lblStax_TextChanged(object sender, EventArgs e)
+        {
+            var txtUnit = (TextBox)grvCharges.FooterRow.FindControl("txtUnit");
+            var txtRate = (TextBox)grvCharges.FooterRow.FindControl("txtRate");
+            var txtROE = (TextBox)grvCharges.FooterRow.FindControl("txtROE");
+            var spINR = (TextBox)grvCharges.FooterRow.FindControl("lblINR");
+            var spSTAX = (TextBox)grvCharges.FooterRow.FindControl("lblStax");
+            var unit = 0.0;
+            var rate = 0.0;
+            var roe = 0.0;
+            var stax = 0.0;
+            try
+            {
+                unit = Convert.ToDouble(txtUnit.Text);
+            }
+            catch
+            {
+                unit = 0;
+            }
+            try
+            {
+                rate = Convert.ToDouble(txtRate.Text);
+            }
+            catch
+            {
+                rate = 0;
+            }
+            try
+            {
+                roe = Convert.ToDouble(txtROE.Text);
+            }
+            catch
+            {
+                roe = 0;
+            }
+            try
+            {
+                stax = Convert.ToDouble(spSTAX.Text);
+            }
+            catch
+            {
+                stax = 0;
+            }
+            spINR.Text = ((unit * rate * roe) + stax).ToString("#######0.00");
+        }
+
+        protected void ddlCharges_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            var ddlChargeID = (DropDownList)grvCharges.FooterRow.FindControl("ddlCharges");
+            var ddlCurrency = (DropDownList)grvCharges.FooterRow.FindControl("ddlCurrency");
+            DataSet ds = new DataSet();
+            ds = new EstimateBLL().GetSelectedCharge(ddlChargeID.SelectedValue.ToInt());
+            ddlCurrency.SelectedValue = ds.Tables[0].Rows[0]["Currency"].ToString();
+            //StaxExist = ds.Tables[0].Rows[0]["ServiceTax"].ToInt();
+            ddlCurrency_SelectedIndexChanged(null, null);
+            //List<IChargeRate> chargeRates = new InvoiceBLL().GetInvoiceCharges_New(Convert.ToInt64(ddlBLno.SelectedValue), Convert.ToInt32(ddlFChargeName.SelectedValue), Convert.ToInt32(ddlFTerminal.SelectedValue), Convert.ToDecimal(txtExchangeRate.Text), 0, "", Convert.ToDateTime(txtInvoiceDate.Text));
+            //List<IExpChargeRate> chargeRates = new InvoiceBLL().GetExpInvoiceCharges_New(Convert.ToInt64(ddlBLno.SelectedValue), Convert.ToInt32(ddlFChargeName.SelectedValue), Convert.ToInt32(ddlFTerminal.SelectedValue), Convert.ToDecimal(0), 0, "", Convert.ToDateTime(txtInvoiceDate.Text));
+
+        }
+
+        protected void ddlUnitType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataSet ds = new DataSet();
+
+            var ddlUnitTypeID = (DropDownList)grvCharges.FooterRow.FindControl("ddlUnitType");
+            ds = new EstimateBLL().GetSingleUnitType(ddlUnitTypeID.SelectedValue.ToInt(), ViewState["jobId"].ToInt());
+            var ddlSizeID = (DropDownList)grvCharges.FooterRow.FindControl("ddlSize");
+            //var rfvSize = (RequiredFieldValidator)grvCharges.FooterRow.FindControl("rfvSize");
+            var txtUnit = (TextBox)grvCharges.FooterRow.FindControl("txtUnit");
+            //ds = new EstimateBLL().GetSelectedCharge(ddlChargeID.SelectedValue.ToInt());
+            if (ds.Tables[0].Rows[0]["UnitType"].ToString() == "N")
+            {
+                //ddlSizeID.Enabled = false;
+                //rfvSize.Enabled = false;
+                if (ds.Tables[0].Rows[0]["UnitName"].ToString() == "CBM")
+                    txtUnit.Text = ds.Tables[1].Rows[0]["volcbm"].ToString();
+                else if (ds.Tables[0].Rows[0]["UnitName"].ToString() == "M.TON")
+                    txtUnit.Text = ds.Tables[1].Rows[0]["weightMT"].ToString();
+                else if (ds.Tables[0].Rows[0]["UnitName"].ToString() == "REV.TON")
+                    txtUnit.Text = ds.Tables[1].Rows[0]["revton"].ToString();
+                else if (ds.Tables[0].Rows[0]["UnitName"].ToString() == "CHRG. WT.(KGS)")
+                    txtUnit.Text = ds.Tables[1].Rows[0]["ChargeWt"].ToString();
+            }
+            else 
+                CheckContainer();
+            
+            //var ddlUnitTypeID = (DropDownList)grvCharges.FooterRow.FindControl("ddlUnitType");
+            //var ddlSizeID = (DropDownList)grvCharges.FooterRow.FindControl("ddlSize");
+            //var txtUnit = (TextBox)grvCharges.FooterRow.FindControl("txtUnit");
+
+            //if (ddlUnitTypeID.SelectedIndex <> -1 && ddlSizeID.SelectedIndex != -1)
+            //{
+            //    DataSet ds = new DataSet();
+            //    ds = new EstimateBLL().GetContainers(ddlUnitTypeID.SelectedValue.ToString(), ddlSizeID.SelectedValue.ToString());
+            //    txtUnit.Text = ds.Tables[0].Rows[0]["Unit"].ToString();
+            //}
+       
+        }
+
+        protected void ddlSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateUnitType();
+            CheckContainer();
+
+            //var ddlUnitTypeID = (DropDownList)grvCharges.FooterRow.FindControl("ddlUnitType");
+            //var ddlSizeID = (DropDownList)grvCharges.FooterRow.FindControl("ddlSize");
+            //var txtUnit = (TextBox)grvCharges.FooterRow.FindControl("txtUnit");
+
+            //if (ddlUnitTypeID.SelectedIndex != -1 && ddlSizeID.SelectedIndex != -1)
+            //{
+            //    DataSet ds = new DataSet();
+            //    ds = new EstimateBLL().GetContainers(ddlUnitTypeID.SelectedValue.ToString(), ddlSizeID.SelectedValue.ToString());
+            //    txtUnit.Text = ds.Tables[0].Rows[0]["Unit"].ToString();
+            //}
+        }
+
+        private void CheckContainer()
+        {
+            var ddlUnitTypeID = (DropDownList)grvCharges.FooterRow.FindControl("ddlUnitType");
+            var ddlSizeID = (DropDownList)grvCharges.FooterRow.FindControl("ddlSize");
+            var txtUnit = (TextBox)grvCharges.FooterRow.FindControl("txtUnit");
+
+            if (ddlUnitTypeID.SelectedIndex != 0 && ddlSizeID.SelectedIndex != 0)
+            {
+                DataSet ds = new DataSet();
+                ds = new EstimateBLL().GetContainers(ddlUnitTypeID.SelectedValue.ToInt(), ddlSizeID.SelectedValue.ToString(), ViewState["jobId"].ToInt());
+                if (ds.Tables[0].Rows.Count > 0)
+                    txtUnit.Text = ds.Tables[0].Rows[0]["Nos"].ToString();
+                else
+                    txtUnit.Text = "0.00";
+            }
         }
 
         protected void grvCharges_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             List<Charge> charges = null;
+            DataSet ds = new DataSet();
+            if (ViewState["Charges"] != null)
+            {
+                charges = (List<Charge>)ViewState["Charges"];
+            }
+            else
+            {
+                charges = new List<Charge>();
+            }
             if (e.CommandName == "Add")
             {
                 var estimate = new Estimate();
 
-                if (ViewState["Charges"] != null)
-                {
-                    charges = (List<Charge>)ViewState["Charges"];
-                }
-                else
-                {
-                    charges = new List<Charge>();
-                }
+             
 
                 if (grvCharges.FooterRow != null)
                 {
@@ -189,81 +378,112 @@ namespace EMS.WebApp.Forwarding.Master
                       id=  charges.Max(f => f.ChargeId);
                     }
                     var ddlCharges = (DropDownList)grvCharges.FooterRow.FindControl("ddlCharges");
+                    var ddlUnitType = (DropDownList)grvCharges.FooterRow.FindControl("ddlUnitType");
                     var txtUnit = (TextBox)grvCharges.FooterRow.FindControl("txtUnit");
                     var txtRate = (TextBox)grvCharges.FooterRow.FindControl("txtRate");
                     var ddlCurrency = (DropDownList)grvCharges.FooterRow.FindControl("ddlCurrency");
                     var txtROE = (TextBox)grvCharges.FooterRow.FindControl("txtROE");
+                    var ddlSize = (DropDownList)grvCharges.FooterRow.FindControl("ddlSize");
+                    //var hdnServiceTaxExists = ((HiddenField)grvCharges.FooterRow.FindControl("hdnServiceTaxExists")).ToInt(); 
+                    var lblStax = (TextBox)grvCharges.FooterRow.FindControl("lblStax");
                     charge.ChargeMasterId = Convert.ToInt32(ddlCharges.SelectedValue);
                     charge.ChargeMasterName = ddlCharges.SelectedItem.Text;
                     charge.CurrencyId = Convert.ToInt32(ddlCurrency.SelectedValue);
                     charge.Currency = ddlCurrency.SelectedItem.Text;
+                    charge.UnitType = ddlUnitType.SelectedItem.Text;
+                    charge.CntrSize = ddlSize.SelectedValue;
+                    
                     charge.ChargeId = id + 1;
                     charge.ChargeType = rdoPayment.SelectedValue;
+                    
                     try
                     {
-                        charge.Unit = Convert.ToInt32(txtUnit.Text);
+                        charge.Unit = Convert.ToDouble(txtUnit.Text);
                     }
                     catch { ScriptManager.RegisterStartupScript(this, this.GetType(), DateTime.Now.Ticks.ToString(), "alert('Please provide Numeric Unit value');", true); return; }
-                     try
+                    try
                     {
                          charge.Rate = Convert.ToDouble(txtRate.Text);
                     }
-                     catch { ScriptManager.RegisterStartupScript(this, this.GetType(), DateTime.Now.Ticks.ToString(), "alert('Please provide Numeric Rate value');", true); return; }
-                     try
+                    catch { ScriptManager.RegisterStartupScript(this, this.GetType(), DateTime.Now.Ticks.ToString(), "alert('Please provide Numeric Rate value');", true); return; }
+                    try
                     {
                          charge.CurrencyId = Convert.ToInt32(ddlCurrency.SelectedValue);
                     }
                     catch { }
-                     try
-                     {
-                         charge.ROE = Convert.ToDouble(txtROE.Text);
-                     }
-                     catch { ScriptManager.RegisterStartupScript(this, this.GetType(), DateTime.Now.Ticks.ToString(), "alert('Please provide Numeric ROE value');", true); return; }
+                    try
+                    {
+                        charge.ROE = Convert.ToDouble(txtROE.Text);
+                    }
+                    catch { ScriptManager.RegisterStartupScript(this, this.GetType(), DateTime.Now.Ticks.ToString(), "alert('Please provide Numeric ROE value');", true); return; }
 
-                     try { charge.INR = charge.Unit * charge.Rate * charge.ROE; }
-                     catch { }
+                    try { charge.INR = charge.Unit * charge.Rate * charge.ROE; }
+                    catch { }
+
+                    try
+                    {
+                        charge.UnitId =  Convert.ToInt32(ddlUnitType.SelectedValue);
+                    }
+                    catch { ScriptManager.RegisterStartupScript(this, this.GetType(), DateTime.Now.Ticks.ToString(), "alert('Please provide Numeric ROE value');", true); return; }
+                    
+                   
+                    try 
+                    {
+                        charge.STax = lblStax.Text.ToDouble();
+                    }
+                    catch { }
+
+                    try 
+                    { 
+                        charge.INR = (charge.Unit * charge.Rate * charge.ROE) + charge.STax;
+         
+                    }
+                    catch { }
+
+
                     charges.Add(charge);
 
-                    lblCharges.Text = charges.Sum(m => m.INR).ToString();
-
-                    lblTotalUnit.Text = charges.Sum(m => m.Unit).ToString();
+                    lblCharges.Text = charges.Sum(m => m.INR).ToString("#########0.00");
+                    PopulateUnitType();
+                    //lblTotalUnit.Text = charges.Sum(m => m.Unit).ToString();
                 }
             }
             else if (e.CommandName == "Remove")
+       
+            //charges.Remove(charges.FindAll(f => f.ChargeId.ToString().Equals(e.CommandArgument)).FirstOrDefault());
             {
-                charges.Remove(charges.FindAll(f => f.ChargeId.ToString().Equals(e.CommandArgument)).FirstOrDefault());
+                try
+                {
+                    var t = charges.FindAll(f => f.ChargeId.ToString().Equals(e.CommandArgument)).FirstOrDefault();
+                    if (t != null)
+                    {
+                        charges.Remove(t);
+                        var sum = charges.Sum(m => m.INR);
+                        lblCharges.Text = sum.ToString("##########0.00");
+                    }
+                }
+                catch { }
             }
+          
 
             if (charges.Count == 0)
             {
                 SetEmptyGrid();
+                PopulateUnitType();
             }
             else
             {
                 ViewState["Charges"] = charges;
                 grvCharges.DataSource = charges;
                 grvCharges.DataBind();
+                PopulateUnitType();
             }
         }
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-            RetriveParameters();
-            if (!IsPostBack)
-            {
-                LoadDefault();
-            }
-
-            //   CheckUserAccess(countryId);
-        }
-
+       
         private void RetriveParameters()
         {
             _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
-
-            //Get user permission.
-            //  EMS.BLL.UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
         }
 
         private void CheckUserAccess(string xID)
@@ -299,16 +519,19 @@ namespace EMS.WebApp.Forwarding.Master
             {
                 Response.Redirect("~/Login.aspx");
             }
-
-
         }
 
         protected void rdoPayment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            trChargesInDays.Visible = false;
             if (rdoPayment.SelectedValue == "C")
             {
-                trChargesInDays.Visible = true;
+                txtCreditInDays.Enabled = true;
+                RequiredFieldValidator3.Enabled = true;
+            }
+            else
+            {
+                txtCreditInDays.Enabled = false;
+                RequiredFieldValidator3.Enabled = false;
             }
         }
 
@@ -322,7 +545,7 @@ namespace EMS.WebApp.Forwarding.Master
 
         #region Private Methods
 
-        private void GetPartyValuesSetToDdl()
+        private void GetPartyValuesSetToDdl(int PartyType)
         {
             ddlParty.Items.Clear();
             ddlParty.Items.Add(new ListItem("--Select--", "0"));
@@ -330,28 +553,22 @@ namespace EMS.WebApp.Forwarding.Master
             {
                 if (ViewState["IsPayment"].ToInt() == 0)
                 {
-                    var value = GeneralFunctions.DecryptQueryString(Request.QueryString["DlName"]);
-                    var id = GeneralFunctions.DecryptQueryString(Request.QueryString["DlValues"]);
-                    if (string.IsNullOrEmpty(value) || string.IsNullOrEmpty(id) || value.Trim().Length == 0 || id.Trim().Length == 0)
-                    {
-                        throw new Exception("Please provide Party Data");
-                    }
-                    var ids = id.Split(',');
-                    var values = value.Split(',');
 
-                    if (ids != null && values != null && ids.Length == values.Length)
-                    {
-                        for (int i = 0; i < ids.Length; i++)
-                        {
-                            ddlParty.Items.Add(new ListItem(values[i], ids[i]));
-                        }
-                    }
+                    DataSet dll = new DataSet();
+
+                    dll = new EstimateBLL().GetAllParty(PartyType);
+
+                    ddlParty.DataSource = dll;
+                    ddlParty.DataTextField = "PartyName";
+                    ddlParty.DataValueField = "pk_fwPartyID";
+                    ddlParty.DataBind();
+                    ddlParty.Items.Insert(0, new ListItem("--Select--", "0"));
                 }
                 else
                 {
                     DataSet dllCreditor = new DataSet();
 
-                    dllCreditor = new EstimateBLL().GetParty();
+                    dllCreditor = new EstimateBLL().GetParty(PartyType);
 
                     ddlParty.DataSource = dllCreditor;
                     ddlParty.DataTextField = "PartyName";
@@ -359,6 +576,19 @@ namespace EMS.WebApp.Forwarding.Master
                     ddlParty.DataBind();
                     ddlParty.Items.Insert(0, new ListItem("--Select--", "0"));
                 }
+            }
+            else
+            {
+                DataSet dll = new DataSet();
+
+                dll = new EstimateBLL().GetAllParty(PartyType);
+
+                ddlParty.DataSource = dll;
+                ddlParty.DataTextField = "PartyName";
+                ddlParty.DataValueField = "pk_fwPartyID";
+                ddlParty.DataBind();
+                ddlParty.Items.Insert(0, new ListItem("--Select--", "0"));
+               
             }
         }
 
@@ -370,18 +600,18 @@ namespace EMS.WebApp.Forwarding.Master
                 estimateId = GeneralFunctions.DecryptQueryString(Request.QueryString["EstimateId"]);
 
             ViewState["Id"] = estimateId;
-            var units = new EstimateBLL().GetUnitMaster(new SearchCriteria { StringOption1 = companyId });
-            ddlUnitType.DataSource = units;
-            ddlUnitType.DataTextField = "UnitName";
-            ddlUnitType.DataValueField = "pk_UnitTypeID";
-            ddlUnitType.DataBind();
-            ddlUnitType.Items.Insert(0, new ListItem("--Select--", "0"));
+            //var units = new EstimateBLL().GetUnitMaster(new SearchCriteria { StringOption1 = companyId });
+            //ddlUnitType.DataSource = units;
+            //ddlUnitType.DataTextField = "UnitName";
+            //ddlUnitType.DataValueField = "pk_UnitTypeID";
+            //ddlUnitType.DataBind();
+            //ddlUnitType.Items.Insert(0, new ListItem("--Select--", "0"));
 
-            var billingFrom = new EstimateBLL().GetBillingGroupMaster((ISearchCriteria)null);
-            ddlBillingFrom.DataSource = billingFrom;
+            var partyType = new EstimateBLL().GetBillingGroupMaster((ISearchCriteria)null);
+            ddlBillingFrom.DataSource = partyType;
 
-            ddlBillingFrom.DataTextField = "BillFrom";
-            ddlBillingFrom.DataValueField = "pk_BillFromID";
+            ddlBillingFrom.DataTextField = "PartyType";
+            ddlBillingFrom.DataValueField = "pk_PartyTypeID";
             ddlBillingFrom.DataBind();
             ddlBillingFrom.Items.Insert(0, new ListItem("--Select--", "0"));
 
@@ -390,9 +620,9 @@ namespace EMS.WebApp.Forwarding.Master
                 var estimate = new EstimateBLL().GetEstimate(new SearchCriteria { StringOption1 = estimateId });
                 var temp = new List<Charge>();
 
-                ViewState["IsPayment"] = estimate.TransactionType == "P" ? 1 : 0;
+                ViewState["IsPayment"] = estimate.PorR == "P" ? 1 : 0;
                 ViewState["jobId"] = estimate.JobID;
-
+                
                 if (estimate != null)
                 {
                     if (estimate.Charges != null)
@@ -409,16 +639,54 @@ namespace EMS.WebApp.Forwarding.Master
                     ddlParty.SelectedValue = estimate.PartyId.ToString();
                     if(temp!=null && temp.Count>0){
                         estimate.UnitTypeId = temp.FirstOrDefault().UnitId;
+                        
                     }
 
-                    ddlUnitType.SelectedValue = estimate.UnitTypeId.ToString();
-                    rdoPayment.SelectedValue = estimate.PorR.ToString();
-                    txtChargesInDays.Text = estimate.CreditDays.ToString();
-                    lblTotalUnit.Text = temp.Sum(x => x.Unit).ToString();
-                    lblCharges.Text = temp.Sum(x => x.INR).ToString();
+                    txtExRate.Text = estimate.ROE.ToString();
+                    //ddlUnitType.SelectedValue = estimate.UnitTypeId.ToString();
+                    rdoPayment.SelectedValue = estimate.TransactionType.ToString();
+                    txtCreditInDays.Text = estimate.CreditDays.ToString();
+                    lblJobNo.Text = estimate.JobNo.ToString();
+
+                    txtEstimateDate.Text = estimate.EstimateDate.ToString().Split(' ')[0];
+                    lblEstimateNo.Text = estimate.EstimateNo.ToString();
+                    hdnQuoPath.Value = "Quotation" + estimateId.ToString().TrimEnd();
+                    //lblTotalUnit.Text = temp.Sum(x => x.Unit).ToString();
+                    lblCharges.Text = temp.Sum(x => x.INR).ToString("#########0.00");
                     grvCharges.DataSource = temp;
                     grvCharges.DataBind();
                     ViewState["Charges"] = temp;
+                    var path = Server.MapPath("~/Forwarding/QuoUpload");
+                    var newFileName = "Quotation" + estimateId.ToString().TrimEnd();  //  Guid.NewGuid().ToString();
+
+                    //if (!string.IsNullOrEmpty(path))
+                    //{
+                    //    path += @"\" + hdnQuoPath.Value + ".pdf";
+                    //    //System.IO.Path.GetExtension(fileName);
+                    //    hdnQuoPath.Value = path;
+                    //    if (File.Exists(path))
+                    //    {
+                    //        lnkQuoUpload.Enabled = true;
+                    //        lnkQuoUpload.Text = newFileName + ".pdf";
+                    //        //lblUploadedFileName.Text = newFileName;
+                    //        //lblUploadedFileName.Visible = true;
+                    //    }
+                    //}
+
+                    var jobId = GeneralFunctions.DecryptQueryString(Request.QueryString["jobId"]);
+                    
+                    ViewState["jobId"] = jobId;
+
+                    var reader = new CreditorInvoiceBLL().GetJobForCreInv(new SearchCriteria { StringOption1 = jobId });
+                    if (reader != null && reader.Tables.Count > 0 && reader.Tables[0].Rows.Count > 0)
+                    {
+                        var dr = reader.Tables[0].Rows[0];
+                        lblJobDate.Text = Convert.ToDateTime(dr["JobDate"]).ToShortDateString();
+                        lblJobNo.Text = dr["JobNo"].ToString();
+                        lblShippingMode.Text = dr["ShippingMode"].ToString();
+                        txtEstimateDate.Text = Convert.ToDateTime(dr["JobDate"]).ToShortDateString();
+                    }
+                    PopulateUnitType();
                 }
                 else
                 {
@@ -432,13 +700,15 @@ namespace EMS.WebApp.Forwarding.Master
             
             if (Mode == "A")
             {
+                txtCreditInDays.Enabled = false;
+                RequiredFieldValidator3.Enabled = false;
                 var value = GeneralFunctions.DecryptQueryString(Request.QueryString["IsPayment"]);
                 if (string.IsNullOrEmpty(value) || !(value == "1" || value == "0"))
                 {
                     throw new Exception("Invalid Request Transaction type");
                 }
                 ViewState["IsPayment"] = value;
-
+                txtEstimateDate.Text = DateTime.Today.ToShortDateString();
            
                 var jobId = GeneralFunctions.DecryptQueryString(Request.QueryString["jobId"]);
                 if (string.IsNullOrEmpty(jobId))
@@ -446,8 +716,22 @@ namespace EMS.WebApp.Forwarding.Master
                     throw new Exception("Invalid jobId");
                 }
                 ViewState["jobId"] = jobId;
-               
-                GetPartyValuesSetToDdl();
+
+                var reader = new CreditorInvoiceBLL().GetJobForCreInv(new SearchCriteria { StringOption1 = jobId });
+                if (reader != null && reader.Tables.Count > 0 && reader.Tables[0].Rows.Count > 0)
+                {
+                    var dr = reader.Tables[0].Rows[0];
+                    lblJobDate.Text = Convert.ToDateTime(dr["JobDate"]).ToShortDateString();
+                    lblJobNo.Text = dr["JobNo"].ToString();
+                    lblShippingMode.Text = dr["ShippingMode"].ToString();
+                    txtEstimateDate.Text = Convert.ToDateTime(dr["JobDate"]).ToShortDateString();
+                }
+                var ex = new EstimateBLL().GetExchange(new SearchCriteria() { StringOption1 = "2", Date = lblJobDate.Text.ToDateTime() });
+                txtExRate.Text = Convert.ToString(ex.Tables[0].Rows[0]["USDXchRate"]);
+                PopulateUnitType();
+
+                //lblJobNo.Text = GeneralFunctions.DecryptQueryString(Request.QueryString["JobNo"]);
+                //GetPartyValuesSetToDdl();
 
             }
            
@@ -457,37 +741,40 @@ namespace EMS.WebApp.Forwarding.Master
 
         private Estimate ExtractData()
         {
-            var unitId= Convert.ToInt32(ddlUnitType.SelectedValue);
+            //var unitId = Convert.ToInt32(ddlUnitType.SelectedValue);
             var est= new Estimate
             {
                 EstimateId = EstmateId,
                 BillFromId = Convert.ToInt32(ddlBillingFrom.SelectedValue),
                 PartyId = Convert.ToInt32(ddlParty.SelectedValue),
-                UnitTypeId = unitId,
+                //UnitTypeId = unitId,
                 PaymentIn = rdoPayment.SelectedValue,
-                CreditDays = string.IsNullOrEmpty(txtChargesInDays.Text)?(int?)null: Convert.ToInt32(txtChargesInDays.Text),
+                CreditDays = string.IsNullOrEmpty(txtCreditInDays.Text) ? (int?)null : Convert.ToInt32(txtCreditInDays.Text),
                 Charges = (List<Charge>)ViewState["Charges"],
-                PorR=rdoPayment.SelectedValue,
+                EstimateDate = txtEstimateDate.Text.ToDateTime(),
+                TransactionType = rdoPayment.SelectedValue,
+                ROE = txtExRate.Text.ToDecimal(),
+                EstimateNo = lblEstimateNo.Text,
                 CompanyID = 1,
                 TotalCharges=Convert.ToDouble(lblCharges.Text),
-                TransactionType= TransactionType,
                 UserID = _userId,
-                EstimateDate=DateTime.Now,
+                PorR = ViewState["IsPayment"].ToInt() == 1 ? "P" : "R",
+                //EstimateDate=DateTime.Now,
                 JobID = JobID
 
             };
-            est.Charges.ForEach(x => x.UnitId = unitId);
+            //est.Charges.ForEach(x => x.UnitId = unitId);
             return est;
 
         }
-        public string TransactionType { get {
-            if (ViewState["IsPayment"] != null) {
-                var t = Convert.ToInt32(ViewState["IsPayment"]);
-                if (t == 1)
-                    return "P";
-            }
-            return "R";
-        } }
+        //public string TransactionType { get {
+        //    if (ViewState["IsPayment"] != null) {
+        //        var t = Convert.ToInt32(ViewState["IsPayment"]);
+        //        if (t == 1)
+        //            return "P";
+        //    }
+        //    return "R";
+        //} }
 
         public int JobID
         {
@@ -504,18 +791,71 @@ namespace EMS.WebApp.Forwarding.Master
         {
             var data = ExtractData();
 
+            hdnLastNo.Value = new EstimateBLL().SaveEstimate(data, Mode).ToString();
 
-            var result = new EstimateBLL().SaveEstimate(data, Mode);
-            if (result > 0)
+            if (hdnLastNo.Value.ToInt() > 0)
             {
-                string encryptedId = GeneralFunctions.EncryptQueryString(Convert.ToInt32(ViewState["jobId"]).ToString());
-                Response.Redirect("~/Forwarding/Transaction/Dashboard.aspx?JobId=" + encryptedId);
+                ModalPopupExtender1.Show();
             }
+            //{
+            //    if (QuotationUpload.HasFile)
+            //    {
+            //        var fileName = QuotationUpload.FileName;
+            //        var filext = fileName.Substring(fileName.LastIndexOf(".") + 1);
+            //        if (filext.ToLower() != "pdf")
+            //        {
+            //            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Only pdf file is accepted!');</script>", false);
+            //            return;
+            //        }
+            //        var path = Server.MapPath("~/Forwarding/QuoUpload");
+            //        var newFileName = "Quotation" + result.ToString().TrimEnd();  //  Guid.NewGuid().ToString();
+
+            //        if (!string.IsNullOrEmpty(path))
+            //        {
+            //            path += @"\" + newFileName + System.IO.Path.GetExtension(fileName);
+            //            QuotationUpload.PostedFile.SaveAs(path);
+            //        }
+            //    }
+
+
+            //}
             else
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), DateTime.Now.Ticks.ToString(), "alert('Error Occured');", true);
             }
 
+        }
+
+        private void PopulateUnitType()
+        {
+            var dllU = (DropDownList)grvCharges.FooterRow.FindControl("ddlUnitType");
+            //var dllU = (DropDownList)e.Row.FindControl("ddlUnitType");
+            var curtype = "E";
+            
+            DataSet dllUs = new DataSet();
+
+
+            if (ViewState["dllUs"] == null)
+            {
+                var ddlSize = (DropDownList)grvCharges.FooterRow.FindControl("ddlSize");
+                if (ddlSize.SelectedValue.ToInt() == 0)
+                    curtype = "N";
+                else
+                    curtype = "E";
+                dllUs = new EstimateBLL().GetUnitMaster(new SearchCriteria { StringOption1 = companyId, StringOption2 = curtype, SortExpression = "UnitName" });
+                ViewState["ddlUnitType"] = dllUs;
+            }
+            else
+            {
+                dllUs = (DataSet)ViewState["ddlUnitType"];
+            }
+
+            //var units = new EstimateBLL().GetUnitMaster(new SearchCriteria { StringOption1 = companyId });
+            dllU.DataSource = dllUs;
+            dllU.DataTextField = "UnitName";
+            dllU.DataValueField = "pk_UnitTypeID";
+            dllU.DataBind();
+            dllU.Items.Insert(0, new ListItem("--Select--", "0"));
         }
 
         private void SetEmptyGrid()
@@ -532,7 +872,124 @@ namespace EMS.WebApp.Forwarding.Master
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             string encryptedId = GeneralFunctions.EncryptQueryString(Convert.ToInt32(ViewState["jobId"]).ToString());
+            //var jobId = GeneralFunctions.DecryptQueryString(Request.QueryString["jobId"]);
             Response.Redirect("~/Forwarding/Transaction/Dashboard.aspx?JobId=" + encryptedId);
+        }
+
+        protected void ddlBillingFrom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GetPartyValuesSetToDdl(ddlBillingFrom.SelectedValue.ToInt());
+        }
+
+        protected void lnkQuoUpload_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtender1.Show();
+
+            //var documentName = hdnQuoPath.Value;
+            //var ext = System.IO.Path.GetExtension(hdnQuoPath.Value);
+            //string filePath = string.Format(hdnQuoPath.Value);
+            //System.IO.FileInfo file = new System.IO.FileInfo(filePath);
+
+            //if (file.Exists)
+            //{
+            //    Response.Clear();
+            //    Response.AddHeader("Content-Length", file.Length.ToString());
+            //    Response.Buffer = true;
+            //    Response.ContentType = MimeType(ext);
+            //    Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}.{1}", documentName, ext));
+            //    Response.WriteFile(filePath);
+            //    Response.End();
+            //}
+        }
+
+        private static string MimeType(string Extension)
+        {
+            string mime = "application/octetstream";
+            if (string.IsNullOrEmpty(Extension))
+                return mime;
+
+            string ext = Extension.ToLower();
+            RegistryKey rk = Registry.ClassesRoot.OpenSubKey(ext);
+            if (rk != null && rk.GetValue("Content Type") != null)
+                mime = rk.GetValue("Content Type").ToString();
+            return mime;
+        }
+
+        protected void btnCancelContainer_Click(object sender, EventArgs e)
+        {
+            if (QuotationUpload.HasFile)
+            {
+                var fileName = QuotationUpload.FileName;
+                var filext = fileName.Substring(fileName.LastIndexOf(".") + 1);
+                if (filext.ToLower() != "pdf")
+                {
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Only pdf file is accepted!');</script>", false);
+                    return;
+                }
+                var path = Server.MapPath("~/Forwarding/QuoUpload");
+                var newFileName = "Quotation" + hdnLastNo.Value.TrimEnd();  //  Guid.NewGuid().ToString();
+
+                if (!string.IsNullOrEmpty(path))
+                {
+                    path += @"\" + newFileName + System.IO.Path.GetExtension(fileName);
+                    QuotationUpload.PostedFile.SaveAs(path);
+                }
+                string encryptedId = GeneralFunctions.EncryptQueryString(Convert.ToInt32(ViewState["jobId"]).ToString());
+                Response.Redirect("~/Forwarding/Transaction/Dashboard.aspx?JobId=" + encryptedId);
+            }
+            else
+            {
+                string encryptedId = GeneralFunctions.EncryptQueryString(Convert.ToInt32(ViewState["jobId"]).ToString());
+                Response.Redirect("~/Forwarding/Transaction/Dashboard.aspx?JobId=" + encryptedId);
+            }
+            //if (QuotationUpload.HasFile)
+            //{
+            //    var fileName = QuotationUpload.FileName;
+            //    lnkQuoUpload.Text = fileName;
+            //    var filext = fileName.Substring(fileName.LastIndexOf(".") + 1);
+            //    if (filext.ToLower() != "pdf")
+            //    {
+            //        ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Only pdf file is accepted!');</script>", false);
+            //        fileName = "";
+            //        return;
+            //    }
+            //    else
+            //        fileName += filext;
+
+            //}
+        }
+
+        protected void TextEx_TextChanged(object sender, EventArgs e)
+        {
+            List<Charge> charges = null;
+            DataSet ds = new DataSet();
+            var estimate = new Estimate();
+            charges = (List<Charge>)ViewState["Charges"];
+            if (charges.Count > 0)
+            {
+                for (int count = 0; count < charges.Count; count++)
+                {
+                    if (charges[count].CurrencyId.ToInt() == 2)
+                    {
+                        charges[count].ROE = txtExRate.Text.ToDouble();
+                        ds = new EstimateBLL().GetServiceTax(lblJobDate.Text.ToDateTime(), (charges[count].Unit * charges[count].Rate * charges[count].ROE).ToDecimal(), charges[count].ChargeMasterId);
+                        if (ds.Tables[1].Rows[0]["ServiceTax"].ToInt() == 1)
+                        {
+                            charges[count].STax = (ds.Tables[0].Rows[0]["stax"].ToDecimal() + ds.Tables[0].Rows[0]["CessAmt"].ToDecimal() + ds.Tables[0].Rows[0]["AddCess"].ToDecimal()).ToDouble();
+                        }
+                        else
+                        {
+                            charges[count].STax = 0;
+                        }
+                        charges[count].INR = (charges[count].Unit * charges[count].Rate * charges[count].ROE) + charges[count].STax;
+                    }
+                }
+                lblCharges.Text = charges.Sum(m => m.INR).ToString("#########0.00");
+                ViewState["Charges"] = charges;
+                grvCharges.DataSource = charges;
+                grvCharges.DataBind();
+                PopulateUnitType();
+            }
         }
     }
 }

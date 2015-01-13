@@ -6,11 +6,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
     <script type="text/javascript">
         function popWin(id) {
-            alert("test");
             window.open("FileUpload.aspx?Id=" + id, "", "height=300px,toolbar=0,menubar=0,resizable=1,status=1,scrollbars=1"); return false;
         }
         function update(val) {
-            alert("File: " + val + " successfully uploaded!");
+//            alert("File: " + val + " successfully uploaded!");
         }
     </script>
     <!-- Le styles -->
@@ -63,7 +62,7 @@
         <div style="width: 100%">
             <fieldset style="width: 80%;">
                 <!--legend>Dashboard</legend-->
-                <asp:UpdatePanel ID="upBooking" runat="server" UpdateMode="Always">
+               
                     <ContentTemplate>
                         <div class="maincontainer">
                             <!--start body-->
@@ -176,6 +175,14 @@
                                             </tr>
                                             <tr>
                                                 <td>
+                                                    <strong>Prime Doc No</strong>
+                                                </td>
+                                                <td>
+                                                    <asp:Label ID="lblPrimeDocNo" runat="server"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
                                                     <table class="table" style="margin-bottom: 0px;">
                                                         <tr>
                                                             <td style="border: 0px;">
@@ -186,10 +193,10 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>
+                                                            <td style="text-align:center;">
                                                                 <asp:Label ID="lblTTL20" runat="server"></asp:Label>
                                                             </td>
-                                                            <td>
+                                                            <td style="text-align:center;">
                                                                 <asp:Label ID="lblTTL40" runat="server"></asp:Label>
                                                             </td>
                                                         </tr>
@@ -198,18 +205,18 @@
                                                 <td>
                                                     <table class="table" style="margin-bottom: 0px;">
                                                         <tr>
-                                                            <td style="border: 0px;">
+                                                            <td style="border: 0px; text-align:right;">
                                                                 <strong>Weight (Kgs.)</strong>
                                                             </td>
-                                                            <td style="border: 0px;">
+                                                            <td style="border: 0px; text-align:right;">
                                                                 <strong>Revenue Ton</strong>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>
+                                                            <td style="text-align:right;">
                                                                 <asp:Label ID="lblWeight" runat="server"></asp:Label>
                                                             </td>
-                                                            <td>
+                                                            <td style="text-align:right;">
                                                                 <asp:Label ID="lblRevenue" runat="server"></asp:Label>
                                                             </td>
                                                         </tr>
@@ -222,7 +229,7 @@
                                         <table class="table table-bordere" style="width:auto;"> 
                                             <tr>
                                                 <td>
-                                                    <strong>Place of Recv.</strong>
+                                                    <strong>POR</strong>
                                                 </td>
                                                 <td>
                                                     <asp:Label ID="lblPlaceReceive" runat="server"></asp:Label>
@@ -236,16 +243,17 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <strong>Place of Delv.</strong>
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="lblPlaceDelivery" runat="server"></asp:Label>
-                                                </td>
-                                                <td>
                                                     <strong>POD</strong>
                                                 </td>
                                                 <td>
                                                     <asp:Label ID="lblPOD" runat="server"></asp:Label>
+                                                </td>
+                                               
+                                                <td>
+                                                    <strong>FPOD</strong>
+                                                </td>
+                                                <td>
+                                                    <asp:Label ID="lblPlaceDelivery" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -266,7 +274,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <strong>Customs Ag</strong>
+                                                    <strong>CHA</strong>
                                                 </td>
                                                 <td colspan="3">
                                                     <asp:Label ID="lblCustomerAgent" runat="server"></asp:Label>
@@ -282,7 +290,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <strong>Overseas Ag</strong>
+                                                    <strong>O.S. Agent</strong>
                                                 </td>
                                                 <td colspan="3">
                                                     <asp:Label ID="lblOverseas" runat="server"></asp:Label>
@@ -291,8 +299,18 @@
                                         </table>
                                     </div>
                                 </div>
+                                <div class="row">
+                                
+                                <div class="col-sm-11">
                                 <h3>
-                                    Job Summary</h3>
+                                   Job Summary</h3>
+                                   </div>
+
+                                   <div class="col-sm-1 text-right">
+                                   <asp:Button ID="btnback" runat="server" Text="Back" CssClass="btn btn-primary btn_close btn-xs col-sm-12" OnClick="btnback_Click"/>
+                                   </div>
+                                   </div>
+
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <table class="table table-bordered">
@@ -300,15 +318,15 @@
                                                 <td>
                                                     <strong>Estimate Payable (INR)</strong>
                                                 </td>
-                                                <td width="35%">
-                                                    <asp:Label ID="lblTotalEstimatePayable" runat="server"></asp:Label>
+                                                <td width="35%" style="text-align:right;">
+                                                    <asp:Label ID="lblTotalEstimatePayable" runat="server" style="text-align: right"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <strong>Paid (INR)</strong>
                                                 </td>
-                                                <td>
+                                                <td style="text-align:right;">
                                                     <asp:Label ID="lblTotalPaid" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
@@ -320,7 +338,7 @@
                                                 <td>
                                                     <strong>Estimate Recieveable (INR)</strong>
                                                 </td>
-                                                <td width="35%">
+                                                <td width="35%" style="text-align:right;">
                                                     <asp:Label ID="lblTotalEstimateReceiveable" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
@@ -328,7 +346,7 @@
                                                 <td>
                                                     <strong>Received (INR)</strong>
                                                 </td>
-                                                <td>
+                                                <td style="text-align:right;">
                                                     <asp:Label ID="lblTotalReceived" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
@@ -340,7 +358,7 @@
                                                 <td>
                                                     <strong>Projected Gross Profit</strong>
                                                 </td>
-                                                <td width="35%">
+                                                <td width="35%" style="text-align:right;">
                                                     <asp:Label ID="lblProjectedGrossProfit" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
@@ -348,7 +366,7 @@
                                                 <td>
                                                     <strong>Achieved Gross Profit</strong>
                                                 </td>
-                                                <td>
+                                                <td style="text-align:right;">
                                                     <asp:Label ID="lblArchievedGrossProfit" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
@@ -409,13 +427,20 @@
                                                             <EmptyDataTemplate>
                                                                 No Record(s) Found</EmptyDataTemplate>
                                                             <Columns>
- <%--                                                               <asp:TemplateField>
+                                                                <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
                                                                     <HeaderTemplate>
-                                                                        <asp:Label ID="lblUnitType" runat="server" Text="Unit Type"></asp:Label>
+                                                                        <asp:Label ID="lblEstimateNo" runat="server" Text="Estimate No"></asp:Label>
                                                                     </HeaderTemplate>
-                                                                </asp:TemplateField>--%>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblEstimateDate" runat="server" Text="Date"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="15%" />
@@ -425,66 +450,64 @@
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="25%"/>
                                                                     <HeaderTemplate>
-                                                                        <asp:Label ID="lblTotalUnit" runat="server" Text="Total Units"></asp:Label>
+                                                                        <asp:Label ID="lblTotalUnit" runat="server" Text="Creditor"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>
-                                                                
 <%--                                                                <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="10%" />
                                                                     <HeaderTemplate>
-                                                                        <asp:Label ID="lblCurrency" runat="server" Text="Currency"></asp:Label>
+                                                                        <asp:Label ID="lblChargeAmt" runat="server" Text="Charge Amount" HorizontalAlign="Right"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>--%>
                                                                 <asp:TemplateField>
-                                                                    <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderStyle CssClass="gridviewheaderright" HorizontalAlign="Right"/>
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Right"/>
                                                                     <HeaderTemplate>
-                                                                        <asp:Label ID="lblChargeAmt" runat="server" Text="Charge Amount"></asp:Label>
+                                                                        <asp:Label ID="lblAmt" runat="server" Text="Basic" ></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
-                                                                    <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderStyle CssClass="gridviewheaderright" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%"  HorizontalAlign="Right"/>
                                                                     <HeaderTemplate>
-                                                                        <asp:Label ID="lblRoe" runat="server" Text="ROE"></asp:Label>
+                                                                        <asp:Label ID="lblStax" runat="server" Text="S.Tax" HorizontalAlign="Right"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
-                                                                    <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderStyle CssClass="gridviewheaderright" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%"  HorizontalAlign="Right"/>
                                                                     <HeaderTemplate>
-                                                                        <asp:Label ID="lblPaymentBy" runat="server" Text="Payment By"></asp:Label>
+                                                                        <asp:Label ID="lblTotal" runat="server" Text="Total" HorizontalAlign="Right"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>
-                                                                <asp:TemplateField>
-                                                                    <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
-                                                                    <HeaderTemplate>
-                                                                        <asp:Label ID="lblAmt" runat="server" Text="Amount"></asp:Label>
-                                                                    </HeaderTemplate>
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField>
+                                                                <%--<asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                                                     <ItemTemplate>
                                                                         <asp:ImageButton ID="btnBillReceipt" runat="server" CommandName="BillReceipt" ImageUrl="~/Images/status.jpg"
                                                                             Height="16" Width="16" />
                                                                     </ItemTemplate>
-                                                                </asp:TemplateField>
+                                                                </asp:TemplateField>--%>
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                     <HeaderTemplate>
+                                                                        Download
+                                                                    </HeaderTemplate>
                                                                     <ItemTemplate>
-                                                                        <asp:ImageButton ID="btnUpload" runat="server" CommandName="Upload" ImageUrl="~/Images/add.jpeg"
+                                                                        <asp:ImageButton ID="btnUpload" runat="server" CommandName="Upload" ImageUrl="~/Images/FileDownloads.ico"
                                                                             Height="16" Width="16"/>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                     <HeaderTemplate>
+                                                                        Edit
+                                                                    </HeaderTemplate>
                                                                     <ItemTemplate>
                                                                         <asp:ImageButton ID="btnEdit" runat="server" CommandName="Edit" ImageUrl="~/Images/edit.png"
                                                                             Height="16" Width="16" />
@@ -493,6 +516,9 @@
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                     <HeaderTemplate>
+                                                                        Delete
+                                                                    </HeaderTemplate>
                                                                     <ItemTemplate>
                                                                         <asp:ImageButton ID="btnRemove" runat="server" CommandName="Remove" ImageUrl="~/Images/remove.png"
                                                                             Height="16" Width="16"  OnClientClick="javascript:return confirm('Are you sure about delete?');"/>
@@ -540,13 +566,20 @@
                                                             <EmptyDataTemplate>
                                                                 No Record(s) Found</EmptyDataTemplate>
                                                             <Columns>
-<%--                                                                <asp:TemplateField>
+                                                                <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
                                                                     <HeaderTemplate>
-                                                                        <asp:Label ID="lblUnitType" runat="server" Text="Unit Type"></asp:Label>
+                                                                        <asp:Label ID="lblEstimateNo" runat="server" Text="Estimate No"></asp:Label>
                                                                     </HeaderTemplate>
-                                                                </asp:TemplateField>--%>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblEstimateDate" runat="server" Text="Date"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="15%" />
@@ -556,66 +589,64 @@
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="25%"/>
                                                                     <HeaderTemplate>
-                                                                        <asp:Label ID="lblTotalUnit" runat="server" Text="Total Units"></asp:Label>
+                                                                        <asp:Label ID="lblTotalUnit" runat="server" Text="Creditor"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>
-
 <%--                                                                <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="10%" />
                                                                     <HeaderTemplate>
-                                                                        <asp:Label ID="lblCurrency" runat="server" Text="Currency"></asp:Label>
+                                                                        <asp:Label ID="lblChargeAmt" runat="server" Text="Charge Amount" HorizontalAlign="Right"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>--%>
                                                                 <asp:TemplateField>
-                                                                    <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderStyle CssClass="gridviewheaderright" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Right"/>
                                                                     <HeaderTemplate>
-                                                                        <asp:Label ID="lblChargeAmt" runat="server" Text="Charge Amount"></asp:Label>
+                                                                        <asp:Label ID="lblAmt" runat="server" Text="Basic" HorizontalAlign="Right"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
-                                                                    <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderStyle CssClass="gridviewheaderright" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%"  HorizontalAlign="Right"/>
                                                                     <HeaderTemplate>
-                                                                        <asp:Label ID="lblRoe" runat="server" Text="ROE"></asp:Label>
+                                                                        <asp:Label ID="lblStax" runat="server" Text="S.Tax" HorizontalAlign="Right"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
-                                                                    <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderStyle CssClass="gridviewheaderright" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%"  HorizontalAlign="Right"/>
                                                                     <HeaderTemplate>
-                                                                        <asp:Label ID="lblPaymentBy" runat="server" Text="Payment By"></asp:Label>
+                                                                        <asp:Label ID="lblTotal" runat="server" Text="Total" HorizontalAlign="Right"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>
-                                                                <asp:TemplateField>
-                                                                    <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
-                                                                    <HeaderTemplate>
-                                                                        <asp:Label ID="lblAmt" runat="server" Text="Amount"></asp:Label>
-                                                                    </HeaderTemplate>
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField>
+                                                                <%--<asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                                                     <ItemTemplate>
-                                                                        <asp:ImageButton ID="btnGenInv" runat="server" CommandName="GenInv" ImageUrl="~/Images/status.jpg"
+                                                                        <asp:ImageButton ID="btnBillReceipt" runat="server" CommandName="BillReceipt" ImageUrl="~/Images/status.jpg"
                                                                             Height="16" Width="16" />
                                                                     </ItemTemplate>
-                                                                </asp:TemplateField>
+                                                                </asp:TemplateField>--%>
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                     <HeaderTemplate>
+                                                                        Download
+                                                                    </HeaderTemplate>
                                                                     <ItemTemplate>
-                                                                        <asp:ImageButton ID="btnUpload" runat="server" CommandName="Upload" ImageUrl="~/Images/add.jpeg"
+                                                                        <asp:ImageButton ID="btnUpload" runat="server" CommandName="Upload" ImageUrl="~/Images/FileDownloads.ico"
                                                                             Height="16" Width="16"/>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                     <HeaderTemplate>
+                                                                        Edit
+                                                                    </HeaderTemplate>
                                                                     <ItemTemplate>
                                                                         <asp:ImageButton ID="btnEdit" runat="server" CommandName="Edit" ImageUrl="~/Images/edit.png"
                                                                             Height="16" Width="16" />
@@ -624,6 +655,9 @@
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                     <HeaderTemplate>
+                                                                        Delete
+                                                                    </HeaderTemplate>
                                                                     <ItemTemplate>
                                                                         <asp:ImageButton ID="btnRemove" runat="server" CommandName="Remove" ImageUrl="~/Images/remove.png"
                                                                             Height="16" Width="16"  OnClientClick="javascript:return confirm('Are you sure about delete?');"/>
@@ -668,56 +702,90 @@
                                                             <Columns>
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="20%" />
                                                                     <HeaderTemplate>
                                                                         <asp:Label ID="lblPartyName" runat="server" Text="Party Name"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>
-                                                                <asp:TemplateField>
+ <%--                                                               <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" />
                                                                     <HeaderTemplate>
                                                                         <asp:Label ID="lblInvoiceType" runat="server" Text="Invoice Type"></asp:Label>
                                                                     </HeaderTemplate>
+                                                                </asp:TemplateField>--%>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblPartyInvNo" runat="server" Text="Party Inv.No."></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblInvoiceDate" runat="server" Text="Date"></asp:Label>
+                                                                    </HeaderTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="15%" />
                                                                     <HeaderTemplate>
-                                                                        <asp:Label ID="lblInvoiceNo" runat="server" Text="Invoice No"></asp:Label>
+                                                                        <asp:Label ID="lblInvoiceNo" runat="server" Text="Ref No"></asp:Label>
+                                                                    </HeaderTemplate>
+                                                                </asp:TemplateField>
+                                                               
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheaderright" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%"  HorizontalAlign="Right"/>
+                                                                    <HeaderTemplate>
+                                                                        <asp:Label ID="lblINRAmt" runat="server" Text="Invoice Amount"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
-                                                                    <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderStyle CssClass="gridviewheaderright" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%"  HorizontalAlign="Right"/>
                                                                     <HeaderTemplate>
-                                                                        <asp:Label ID="lblInvoiceDate" runat="server" Text="Invoice Date"></asp:Label>
+                                                                        <asp:Label ID="lblServiceTax" runat="server" Text="Service Tax"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
-                                                                    <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderStyle CssClass="gridviewheaderright" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="10%"  HorizontalAlign="Right"/>
                                                                     <HeaderTemplate>
-                                                                        <asp:Label ID="lblInvoiceAmt" runat="server" Text="Invoice Amount"></asp:Label>
+                                                                        <asp:Label ID="lblTotalAmount" runat="server" Text="Total Amount"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>
+
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
-                                                                    <HeaderTemplate>
-                                                                        <asp:Label ID="lblROE" runat="server" Text="ROE"></asp:Label>
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                     <HeaderTemplate>
+                                                                        Download
                                                                     </HeaderTemplate>
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField>
-                                                                    <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
-                                                                    <HeaderTemplate>
-                                                                        <asp:Label ID="lblINRAmt" runat="server" Text="INR Amount"></asp:Label>
-                                                                    </HeaderTemplate>
+                                                                    <ItemTemplate>
+                                                                        <asp:ImageButton ID="btnUpload" runat="server" CommandName="Upload" ImageUrl="~/Images/FileDownloads.ico"
+                                                                            Height="16" Width="16"/>
+                                                                    </ItemTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                     <HeaderTemplate>
+                                                                        Edit
+                                                                    </HeaderTemplate>
+                                                                    <ItemTemplate>
+                                                                        <asp:ImageButton ID="btnEdit" runat="server" CommandName="Edit" ImageUrl="~/Images/edit.png"
+                                                                            Height="16" Width="16" />
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                     <HeaderTemplate>
+                                                                        Delete
+                                                                    </HeaderTemplate>
                                                                     <ItemTemplate>
                                                                         <asp:ImageButton ID="btnRemove" runat="server" CommandName="Remove" ImageUrl="~/Images/remove.png"
                                                                             Height="16" Width="16" OnClientClick="javascript:return confirm('Are you sure about delete?');" />
@@ -726,8 +794,11 @@
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <HeaderTemplate>
+                                                                        Payment
+                                                                    </HeaderTemplate>
                                                                     <ItemTemplate>
-                                                                        <asp:ImageButton ID="btnPayment" runat="server" CommandName="Payment" ImageUrl="~/Images/edit.png"
+                                                                        <asp:ImageButton ID="btnPayment" runat="server" CommandName="Payment" ImageUrl="~/Images/ADD.JPG"
                                                                             Height="16" Width="16" />
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
@@ -768,85 +839,109 @@
                                                             <EmptyDataTemplate>
                                                                 No Record(s) Found</EmptyDataTemplate>
                                                             <Columns>
-                                                                <asp:TemplateField>
+                                                                <%--<asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="5%" />
                                                                     <HeaderTemplate>
                                                                         <asp:Label ID="lblInvoiceType" runat="server" Text="Invoice Type"></asp:Label>
                                                                     </HeaderTemplate>
-                                                                </asp:TemplateField>
+                                                                </asp:TemplateField>--%>
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="12%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <HeaderTemplate>
+                                                                        Invoice No.
+                                                                    </HeaderTemplate>
                                                                     <ItemTemplate>
-                                                                        <asp:LinkButton ID="lnkInvoice" runat="server" CommandName="Invoice" ImageUrl="~/Images/remove.png"
-                                                                            Height="16" Width="16" />
+<%--                                                                        <asp:LinkButton ID="lnkInvoice" runat="server" Text="Invoice No" CommandName="Invoice" ImageUrl="~/Images/remove.png"
+                                                                            Height="16" Width="16" />--%>
+                                                                        <a id="aInvoice" runat="server" href='<%# "FwdInvoice.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'>
+                                                                                <%# Eval("InvoiceNo")%></a>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
+
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="15%" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="8%" />
                                                                     <HeaderTemplate>
                                                                         <asp:Label ID="lblInvoiceDate" runat="server" Text="Invoice Date"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>
+
                                                                 <asp:TemplateField>
-                                                                    <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
-                                                                    <HeaderTemplate>
+                                                                    <HeaderStyle CssClass="gridviewheaderright" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right"/>
+                                                                    <HeaderTemplate >
                                                                         <asp:Label ID="lblInvoiceAmt" runat="server" Text="Invoice Amt"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>
+
                                                                 <asp:TemplateField>
-                                                                    <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderStyle CssClass="gridviewheaderright" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right"/>
                                                                     <HeaderTemplate>
                                                                         <asp:Label ID="lblReceivedAmt" runat="server" Text="Received Amount"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>
+
                                                                 <asp:TemplateField>
-                                                                    <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                                    <HeaderStyle CssClass="gridviewheaderright" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right"/>
                                                                     <HeaderTemplate>
                                                                         <asp:Label ID="lblCRNAmt" runat="server" Text="CRN Amount"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>
+
                                                                 <asp:TemplateField>
-                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <HeaderStyle CssClass="gridviewheaderright" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="10%" />
                                                                     <HeaderTemplate>
                                                                         <asp:Label ID="lblBalanceAmt" runat="server" Text="Balance Amount"></asp:Label>
                                                                     </HeaderTemplate>
                                                                 </asp:TemplateField>
+
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <HeaderTemplate>
+                                                                        Print Invoice
+                                                                    </HeaderTemplate>
                                                                     <ItemTemplate>
-                                                                        <asp:ImageButton ID="btnPrint" runat="server" CommandName="Print" ImageUrl="~/Images/remove.png"
+                                                                        <asp:ImageButton ID="btnPrint" runat="server" CommandName="Print" ImageUrl="~/Images/Print.png"
+                                                                            Height="16" Width="16" />
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+
+                                                                <asp:TemplateField>
+                                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <HeaderTemplate>
+                                                                        Add MR
+                                                                    </HeaderTemplate>
+                                                                    <ItemTemplate>
+                                                                        <asp:ImageButton ID="btnAddMR" runat="server" CommandName="AddMR" ImageUrl="~/Images/ADD.JPG"
                                                                             Height="16" Width="16" />
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <HeaderTemplate>
+                                                                        Add Crn
+                                                                    </HeaderTemplate>
                                                                     <ItemTemplate>
-                                                                        <asp:ImageButton ID="btnAddMR" runat="server" CommandName="AddMR" ImageUrl="~/Images/edit.png"
+                                                                        <asp:ImageButton ID="btnAddCRN" runat="server" CommandName="AddCRN" ImageUrl="~/Images/ADD.JPG"
                                                                             Height="16" Width="16" />
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                    <HeaderTemplate>
+                                                                        Delete Invoice
+                                                                    </HeaderTemplate>
                                                                     <ItemTemplate>
-                                                                        <asp:ImageButton ID="btnAddCRN" runat="server" CommandName="AddCRN" ImageUrl="~/Images/edit.png"
-                                                                            Height="16" Width="16" />
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField>
-                                                                    <HeaderStyle CssClass="gridviewheader" />
-                                                                    <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
-                                                                    <ItemTemplate>
-                                                                        <asp:ImageButton ID="btnEdit" runat="server" CommandName="Edit" ImageUrl="~/Images/edit.png"
+                                                                        <asp:ImageButton ID="btnEdit" runat="server" CommandName="Delete" ImageUrl="~/Images/remove.png"
                                                                             Height="16" Width="16" />
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
@@ -870,9 +965,8 @@
       </script>
                         </div>
                     </ContentTemplate>
-                </asp:UpdatePanel>
             </fieldset>
-            <asp:UpdateProgress ID="uProgressBooking" runat="server" AssociatedUpdatePanelID="upBooking">
+            <%--<asp:UpdateProgress ID="uProgressBooking" runat="server" AssociatedUpdatePanelID="upBooking">
                 <ProgressTemplate>
                     <div class="progress">
                         <div id="image">
@@ -881,7 +975,7 @@
                             Please Wait...</div>
                     </div>
                 </ProgressTemplate>
-            </asp:UpdateProgress>
+            </asp:UpdateProgress>--%>
         </div>
     </center>
 </asp:Content>

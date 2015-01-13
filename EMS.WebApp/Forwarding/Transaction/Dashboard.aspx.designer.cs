@@ -13,15 +13,6 @@ namespace EMS.WebApp.Farwarding.Transaction {
     public partial class Dashboard {
         
         /// <summary>
-        /// upBooking control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upBooking;
-        
-        /// <summary>
         /// lblJobDate control.
         /// </summary>
         /// <remarks>
@@ -139,6 +130,15 @@ namespace EMS.WebApp.Farwarding.Transaction {
         protected global::System.Web.UI.WebControls.Label lblPrimeDocs;
         
         /// <summary>
+        /// lblPrimeDocNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPrimeDocNo;
+        
+        /// <summary>
         /// lblTTL20 control.
         /// </summary>
         /// <remarks>
@@ -193,15 +193,6 @@ namespace EMS.WebApp.Farwarding.Transaction {
         protected global::System.Web.UI.WebControls.Label lblPOL;
         
         /// <summary>
-        /// lblPlaceDelivery control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPlaceDelivery;
-        
-        /// <summary>
         /// lblPOD control.
         /// </summary>
         /// <remarks>
@@ -209,6 +200,15 @@ namespace EMS.WebApp.Farwarding.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblPOD;
+        
+        /// <summary>
+        /// lblPlaceDelivery control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPlaceDelivery;
         
         /// <summary>
         /// lblCarrier control.
@@ -254,6 +254,15 @@ namespace EMS.WebApp.Farwarding.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblOverseas;
+        
+        /// <summary>
+        /// btnback control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnback;
         
         /// <summary>
         /// lblTotalEstimatePayable control.
@@ -470,14 +479,5 @@ namespace EMS.WebApp.Farwarding.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvDebtors;
-        
-        /// <summary>
-        /// uProgressBooking control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress uProgressBooking;
     }
 }

@@ -558,9 +558,24 @@ namespace EMS.BLL
             return CommonDAL.GetfwdPartyByType(pType);
         }
 
+        public DataTable GetfwdPartyByTypeid(int TypeID)
+        {
+            return CommonDAL.GetfwdPartyByTypeid(TypeID);
+        }
+
+        public DataTable GetfwdShippingLineByType(string pType)
+        {
+            return CommonDAL.GetfwdShippingLineByType(pType);
+        }
+
         public DataTable GetfwdJobType()
         {
             return CommonDAL.GetfwdJobType();
+        }
+        
+        public DataTable GetfwdContainerType()
+        {
+            return CommonDAL.GetfwdContainerType();
         }
 
         public DataTable GetfwdShipmentMode()

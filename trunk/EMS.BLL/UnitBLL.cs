@@ -10,14 +10,14 @@ namespace EMS.BLL
 {
     public class UnitBLL
     {
-        public  List<IUnit> GetJobs(SearchCriteria searchCriteria, int ID, int CompanyID)
+        public  List<IUnit> GetUnits(SearchCriteria searchCriteria, int ID, int CompanyID)
         {
-            return UnitDAL.GetJobs(searchCriteria, ID, CompanyID);
+            return UnitDAL.GetUnits(searchCriteria, ID, CompanyID);
         }
 
-        public  int AddEditJob(IUnit Units, int CompanyId,string Mode)
+        public  int AddEditUnit(IUnit Units, int CompanyId,string Mode)
         {
-            return UnitDAL.AddEditJob(Units, CompanyId, Mode);
+            return UnitDAL.AddEditUnit(Units, CompanyId, Mode);
 
         }
 

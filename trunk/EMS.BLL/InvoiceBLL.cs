@@ -147,6 +147,11 @@ namespace EMS.BLL
             return InvoiceDAL.GetServiceTax(InvoiceDate);
         }
 
+        public DataTable GetCreChargeDetails(int ChargeID)
+        {
+            return InvoiceDAL.GetCreChargeDetails(ChargeID);
+        }
+
         public int GetNumberOfContainer(int BlId)
         {
             return InvoiceDAL.GetNumberOfContainer(BlId);
@@ -214,7 +219,7 @@ namespace EMS.BLL
                     foreach (IChargeRate cRate in expInvoiceCharge)
                     {
                         cRate.InvoiceId = invoiceId;
-                        invoiceChargeId = InvoiceDAL.SaveInvoiceChargesExp(cRate);
+                        invoiceChargeId = InvoiceDAL.SaveInvoiceChargesFwd(cRate);
                     }
                 }
             }
@@ -313,6 +318,11 @@ namespace EMS.BLL
         public List<IChargeRate> GetExpInvoiceChargesById(long InvoiceId)
         {
             return InvoiceDAL.GetExpInvoiceChargesById(InvoiceId);
+        }
+
+        public List<IChargeRate> GetFwdInvoiceChargesById(long InvoiceId)
+        {
+            return InvoiceDAL.GetFwdInvoiceChargesById(InvoiceId);
         }
     }
 }

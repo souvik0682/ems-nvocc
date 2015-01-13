@@ -11,7 +11,7 @@ namespace EMS.DAL
 {
     public sealed class UnitDAL
     {
-        public static List<IUnit> GetJobs(SearchCriteria searchCriteria, int ID, int CompanyID)
+        public static List<IUnit> GetUnits(SearchCriteria searchCriteria, int ID, int CompanyID)
         {
             string strExecution = "[fwd].[uspGetUnitType]";
             List<IUnit> lstUnit = new List<IUnit>();
@@ -36,7 +36,7 @@ namespace EMS.DAL
             return lstUnit;
         }
 
-        public static int AddEditJob(IUnit Units, int CompanyId, string Mode)
+        public static int AddEditUnit(IUnit Units, int CompanyId, string Mode)
         {
             string strExecution = "[fwd].[uspManageUnitType]";
             int Result = 0;
@@ -48,6 +48,7 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@userID", Units.CreatedBy);
                 oDq.AddIntegerParam("@fk_CompanyID", CompanyId);
                 oDq.AddBigIntegerParam("@UnitTypeId", Units.UnitTypeID);
+                oDq.AddVarcharParam("@UnitType", 1, Units.UnitType);
                 oDq.AddVarcharParam("@UnitName", 20, Units.UnitName);
                 oDq.AddIntegerParam("@RESULT", Result, QueryParameterDirection.Output);
                 //oDq.AddIntegerParam("@LeaseId", outBookingId, QueryParameterDirection.Output);

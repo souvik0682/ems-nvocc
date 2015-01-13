@@ -67,7 +67,7 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@UserID", Line.CreatedBy);
                 oDq.AddIntegerParam("@CompanyID", CompanyId);
                 oDq.AddIntegerParam("@fLineId", Line.LineID);
-                oDq.AddVarcharParam("@fLineName", 20, Line.LineName);
+                oDq.AddVarcharParam("@fLineName", 50, Line.LineName);
                 //oDq.AddVarcharParam("@fLineType", 20, Line.LineType);
                 oDq.AddVarcharParam("@Prefix", 20, Line.Prefix);
                 oDq.AddBooleanParam("@LineStatus", Line.LineStatus);

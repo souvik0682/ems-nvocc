@@ -19,6 +19,7 @@ namespace EMS.DAL
             {
                 oDq.AddIntegerParam("@UnitTypeId", 0);
                 oDq.AddIntegerParam("@CompanyID", Convert.ToInt32(searchCriteria.StringOption1));
+                oDq.AddVarcharParam("@UnitType", 10, Convert.ToString(searchCriteria.StringOption2));
                 oDq.AddVarcharParam("@SchUnitName", 50, "");
                 oDq.AddVarcharParam("@SortExpression", 30, "");
                 oDq.AddVarcharParam("@SortDirection", 4, "");
@@ -27,9 +28,43 @@ namespace EMS.DAL
 
             return reader;
         }
+
+        public static DataSet GetSingleUnitType(int UnitID, int JobID)
+        {
+            string strExecution = "[fwd].[uspGetUnitTypeWithCharges]";
+            DataSet reader = new DataSet();
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@UnitTypeId", UnitID);
+                oDq.AddIntegerParam("@JobID", JobID);
+                reader = oDq.GetTables();
+            }
+
+            return reader;
+        }
+
+        public static DataSet GetSelectedUnitType(int UnitID)
+        {
+            string strExecution = "[fwd].[uspGetUnitType]";
+            DataSet reader = new DataSet();
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@UnitTypeId", UnitID);
+                //oDq.AddIntegerParam("@CompanyID", Convert.ToInt32(searchCriteria.StringOption1));
+                //oDq.AddVarcharParam("@CalledFrom", 1, Convert.ToString(searchCriteria.StringOption2));
+                oDq.AddVarcharParam("@SchUnitName", 50, "");
+                oDq.AddVarcharParam("@SortExpression", 30, "");
+                oDq.AddVarcharParam("@SortDirection", 4, "");
+                reader = oDq.GetTables();
+            }
+
+            return reader;
+        }
+
         public static DataSet GetBillingGroupMaster(ISearchCriteria searchCriteria)
         {
-            string strExecution = "[fwd].[usp_GetBillFrom]";
+            //string strExecution = "[fwd].[usp_GetBillFrom]";
+            string strExecution = "[fwd].[uspGetPartyType]";
             DataSet reader = new DataSet();
             using (DbQuery oDq = new DbQuery(strExecution))
             {
@@ -51,6 +86,50 @@ namespace EMS.DAL
             return reader;
         }
 
+        public static DataSet GetSelectedCharge(int ChargeID)
+        {
+            string strExecution = "[fwd].[usp_GetSelectedCharge]";
+            DataSet reader = new DataSet();
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@ChargesID", ChargeID);
+                reader = oDq.GetTables();
+            }
+
+            return reader;
+        }
+
+        public static DataSet GetServiceTax(DateTime AsOnDate, decimal BasicValue, int ChargeID)
+        {
+            string strExecution = "[fwd].[usp_GetServiceTax]";
+            DataSet reader = new DataSet();
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddDateTimeParam("@AsOnDate", AsOnDate);
+                oDq.AddDecimalParam("@TotCharges", 12, 2, BasicValue);
+                oDq.AddIntegerParam("@ChargesID", ChargeID);
+
+                reader = oDq.GetTables();
+            }
+
+            return reader;
+        }
+
+        public static DataSet GetContainers(int UnitTypeID, string Size, int JobID)
+        {
+            string strExecution = "[fwd].[usp_GetJobContainer]";
+            DataSet reader = new DataSet();
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@UnitTypeID", UnitTypeID);
+                oDq.AddVarcharParam("@Size", 2, Size);
+                oDq.AddIntegerParam("@JobID", JobID);
+                reader = oDq.GetTables();
+            }
+
+            return reader;
+        }
+
         public static Estimate GetEstimate(ISearchCriteria searchCriteria)
         {
             Estimate estimate = null;
@@ -65,9 +144,6 @@ namespace EMS.DAL
 
                 if (reader != null && reader.Tables.Count > 1)
                 {
-
-
-
                     var tblEst = reader.Tables[0].AsEnumerable().Select(x => new Estimate
                     {
                         PorR = Convert.ToString(x["PorR"].GetType() == typeof(DBNull) ? "" : x["PorR"]),
@@ -76,10 +152,13 @@ namespace EMS.DAL
                         TransactionType = Convert.ToString(x["TransactionType"].GetType() == typeof(DBNull) ? "" : x["TransactionType"]),
                         BillFromId = Convert.ToInt32(x["fk_BillFromID"].GetType() == typeof(DBNull) ? 0 : x["fk_BillFromID"]),
                         CreditDays = Convert.ToInt32(x["CreditDays"].GetType() == typeof(DBNull) ? 0 : x["CreditDays"]),
+                        JobNo = Convert.ToString(x["JobNo"].GetType() == typeof(DBNull) ? "" : x["JobNo"]),
                         PartyId = Convert.ToInt32(x["fk_PartyID"].GetType() == typeof(DBNull) ? 0 : x["fk_PartyID"]),
+                        PartyTypeId = Convert.ToInt32(x["PartyTypeID"].GetType() == typeof(DBNull) ? 0 : x["PartyTypeID"]),
                         PartyName = Convert.ToString(x["PartyName"].GetType() == typeof(DBNull) ? "" : x["PartyName"]),
-                        UnitTypeId = Convert.ToInt32(x["fk_UnitTypeID"].GetType() == typeof(DBNull) ? 0 : x["fk_UnitTypeID"])
-
+                        UnitTypeId = Convert.ToInt32(x["fk_UnitTypeID"].GetType() == typeof(DBNull) ? 0 : x["fk_UnitTypeID"]),
+                        JobID = Convert.ToInt32(x["fk_JobID"].GetType() == typeof(DBNull) ? 0 : x["fk_JobID"]),
+                        ROE = Convert.ToDecimal(x["ROE"].GetType() == typeof(DBNull) ? 0 : x["ROE"])
                     });
 
                     estimate = tblEst.FirstOrDefault();
@@ -87,15 +166,20 @@ namespace EMS.DAL
                     estimate.Charges = reader.Tables[1].AsEnumerable().Select(x => new Charge
                     {
                         ChargeId = Convert.ToInt32(x["pk_ChargeRateID"].GetType() == typeof(DBNull) ? 0 : x["pk_ChargeRateID"]),
-                        Unit = Convert.ToInt32(x["Nos"].GetType() == typeof(DBNull) ? 0 : x["Nos"]),
+                        Unit = Convert.ToDouble(x["Nos"].GetType() == typeof(DBNull) ? 0 : x["Nos"]),
                         ChargeMasterId = Convert.ToInt32(x["fk_ChargeID"].GetType() == typeof(DBNull) ? 0 : x["fk_ChargeID"]),
                         ChargeMasterName = Convert.ToString(x["ChargeIDName"].GetType() == typeof(DBNull) ? "" : x["ChargeIDName"]),
+                        CntrSize = Convert.ToString(x["CntrSize"].GetType() == typeof(DBNull) ? "" : x["CntrSize"]),
                         CurrencyId = Convert.ToInt32(x["fk_CurrencyID"].GetType() == typeof(DBNull) ? 0 : x["fk_CurrencyID"]),
                         Currency = Convert.ToString(x["CurrencyName"].GetType() == typeof(DBNull) ? "" : x["CurrencyName"]),
-                        ROE = Convert.ToInt32(x["ROE"].GetType() == typeof(DBNull) ? 0 : x["ROE"]),
-                        Rate = Convert.ToInt32(x["ChargeAmount"].GetType() == typeof(DBNull) ? 0 : x["ChargeAmount"]),
-                        INR = Convert.ToInt32(x["INRAmount"].GetType() == typeof(DBNull) ? 0 : x["INRAmount"]),
-                        UnitId = Convert.ToInt32(x["fk_UnitID"].GetType() == typeof(DBNull) ? 0 : x["fk_UnitID"]),
+                        ROE = Convert.ToDouble(x["ROE"].GetType() == typeof(DBNull) ? 0 : x["ROE"]),
+                        Rate = Convert.ToDouble(x["ChargeAmount"].GetType() == typeof(DBNull) ? 0 : x["ChargeAmount"]),
+                        INR = Convert.ToDouble(x["INRAmount"].GetType() == typeof(DBNull) ? 0 : x["INRAmount"]),
+                        STax = Convert.ToDouble(x["StaxAmount"].GetType() == typeof(DBNull) ? 0 : x["StaxAmount"]),
+                        //UnitType = Convert.ToString(x["UnitType"].GetType() == typeof(DBNull) ? 0 : x["UnitType"]),
+                        UnitType = Convert.ToString(x["ContainerAbbr"].GetType() == typeof(DBNull) ? 0 : x["ContainerAbbr"]),
+                        UnitId = Convert.ToInt32(x["fk_UnitTypeID"].GetType() == typeof(DBNull) ? 0 : x["fk_UnitTypeID"]),
+                        ChargeType = Convert.ToString(x["ChargeType"].GetType() == typeof(DBNull) ? 0 : x["ChargeType"]),
 
                     }).ToList();
 
@@ -125,7 +209,9 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddBigIntegerParam("@CurrID", Convert.ToInt64(searchCriteria.StringOption1));
-                oDq.AddDateTimeParam("@CurrDate", (DateTime?)null);
+                //oDq.AddDateTimeParam("@CurrDate", (DateTime?)null);
+                oDq.AddDateTimeParam("@CurrDate", searchCriteria.Date);
+                
                 reader = oDq.GetTables();
             }
             return reader;
@@ -135,7 +221,7 @@ namespace EMS.DAL
         {
             string strExecution = "[fwd].[uspManageEstimate]";
             int Estimateid = 0;
-
+            var Xmltext = "";
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddVarcharParam("@mode", 1, Mode);
@@ -152,7 +238,9 @@ namespace EMS.DAL
 
                 oDq.AddVarcharParam("@TransactionType", 1, estimate.TransactionType);
                 oDq.AddIntegerParam("@CreditDays", estimate.CreditDays);
+                oDq.AddDecimalParam("@ExchRate", 12, 2, estimate.ROE);
                 oDq.AddVarcharParam("@Charges", int.MaxValue, Utilities.GeneralFunctions.SerializeWithXmlTag(estimate.Charges).Replace("?<?xml version=\"1.0\" encoding=\"utf-16\"?>", ""));
+                Xmltext = Utilities.GeneralFunctions.SerializeWithXmlTag(estimate.Charges).Replace("?<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
 
                 oDq.AddIntegerParam("@UserID", estimate.UserID);
                 int result = 0;
@@ -166,12 +254,25 @@ namespace EMS.DAL
             return Estimateid;
         }
 
-        public static DataSet GetParty()
+        public static DataSet GetParty(int PartyType)
         {
             string strExecution = "[fwd].[prcGetCreditor]";
             DataSet reader = new DataSet();
             using (DbQuery oDq = new DbQuery(strExecution))
             {
+                oDq.AddIntegerParam("@PartyTypeID", PartyType);
+                reader = oDq.GetTables();
+            }
+            return reader;
+        }
+
+        public static DataSet GetAllParty(int PartyType)
+        {
+            string strExecution = "[fwd].[prcGetAllParty]";
+            DataSet reader = new DataSet();
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@PartyTypeID", PartyType);
                 reader = oDq.GetTables();
             }
             return reader;

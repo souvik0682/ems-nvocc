@@ -769,7 +769,7 @@ namespace EMS.WebApp.Forwarding.Transaction
             ddlCurrency.SelectedIndex = 0;
             txtRatePerBL.Enabled = true;
             ddlSize.SelectedIndex = 0;
-            ddlUnitType.SelectedIndex = 0;
+            //ddlUnitType.SelectedIndex = 0;
 
             //txtRatePerCBM.Text = "0.00";
             //txtRateperFEU.Text = "0.00";

@@ -147,9 +147,30 @@ namespace EMS.WebApp.Farwarding.Transaction
                     btnApprove.Enabled = true;
                     btnCloseJob.Enabled = true;
                 }
-                lblTotalEstimatePayable.Text = dsDashboard.Tables[5].Rows[0]["Payable"].ToString();
-                lblTotalEstimateReceiveable.Text = dsDashboard.Tables[6].Rows[0]["Receivable"].ToString();
-                lblProjectedGrossProfit.Text = (dsDashboard.Tables[6].Rows[0]["Receivable"].ToDecimal() - dsDashboard.Tables[5].Rows[0]["Payable"].ToDecimal()).ToString();
+
+                lblTotalEstimatePayable.Text = "0";
+                lblTotalEstimateReceiveable.Text = "0";
+                lblTotalPaid.Text = "0";
+                lblTotalReceived.Text = "0";
+                    
+                if (dsDashboard.Tables[5].Rows.Count > 0)
+                    lblTotalEstimatePayable.Text = dsDashboard.Tables[5].Rows[0]["Payable"].ToString();
+
+                if (dsDashboard.Tables[6].Rows.Count > 0)
+                    lblTotalEstimateReceiveable.Text = dsDashboard.Tables[6].Rows[0]["Receivable"].ToString();
+
+
+                lblProjectedGrossProfit.Text = (lblTotalEstimateReceiveable.Text.ToDecimal() - lblTotalEstimatePayable.Text.ToDecimal()).ToString();
+                //(dsDashboard.Tables[6].Rows[0]["Receivable"].ToDecimal() - dsDashboard.Tables[5].Rows[0]["Payable"].ToDecimal()).ToString();
+
+                if (dsDashboard.Tables[7].Rows.Count > 0)
+                    lblTotalPaid.Text = dsDashboard.Tables[7].Rows[0]["CreInvTotal"].ToString();
+
+                if (dsDashboard.Tables[8].Rows.Count > 0)
+                    lblTotalReceived.Text = (dsDashboard.Tables[8].Rows[0]["DrInvTotal"].ToDecimal() - dsDashboard.Tables[8].Rows[0]["CNAmt"].ToDecimal()).ToString();
+
+                lblArchievedGrossProfit.Text = (lblTotalReceived.Text.ToDecimal() - lblTotalPaid.Text.ToDecimal()).ToString();
+                //lblArchievedGrossProfit.Text = (dsDashboard.Tables[8].Rows[0]["DrInvTotal"].ToDecimal() - dsDashboard.Tables[8].Rows[0]["CNAmt"].ToDecimal() - dsDashboard.Tables[7].Rows[0]["CreInvTotal"].ToDecimal()).ToString();
 
                 if (lblTotalEstimatePayable.Text.ToDecimal() < lblTotalEstimateReceiveable.Text.ToDecimal())
                 {
@@ -161,7 +182,6 @@ namespace EMS.WebApp.Farwarding.Transaction
                     btnApprove.Enabled = false;
                     btnCloseJob.Enabled = false;
                 }
-
             }
 
             //Estimate Payable

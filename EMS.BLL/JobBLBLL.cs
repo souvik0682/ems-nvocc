@@ -97,9 +97,9 @@ namespace EMS.BLL
             return JobBLDAL.CheckBookingBLContainer(BookingNo, Status);
         }
 
-        public static int CheckExpBLExistance(string BookingNo)
+        public static int CheckFwdBLExistance(string BookingNo)
         {
-            return JobBLDAL.CheckExpBLExistance(BookingNo);
+            return JobBLDAL.CheckFwdBLExistance(BookingNo);
         }
     }
 }

@@ -17,9 +17,9 @@ namespace EMS.BLL
             return JobDAL.GetJobs(searchCriteria, ID, JobType);
         }
 
-        public static int AddEditJob(IJob Jobs, int CompanyId)
+        public static int AddEditJob(IJob Jobs, int CompanyId, ref int JobId)
         {
-            return JobDAL.AddEditJob(Jobs, CompanyId);
+            return JobDAL.AddEditJob(Jobs, CompanyId, ref JobId);
         }
 
         public static int DeleteJob(int JobID, int UserID)
@@ -46,5 +46,26 @@ namespace EMS.BLL
         {
             JobDAL.DeleteDashBoardData(Id, Type);
         }
+
+        public static DataTable GetJobNoFromJobID(int JobID)
+        {
+            return JobDAL.GetJobNoFromJobID(JobID);
+        }
+
+        public void DeactivateAllContainersAgainstJobId(int JobId)
+        {
+            JobDAL.DeactivateAllContainersAgainstJobId(JobId);
+
+        }
+        public int AddEditJobContainer(IBookingContainer Containers)
+        {
+            return JobDAL.AddEditJobContainer(Containers);
+        }
+
+        public List<IBookingContainer> GetJobContainers(int JobID)
+        {
+            return JobDAL.GetJobContainers(JobID);
+        }
+
     }
 }

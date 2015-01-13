@@ -16,6 +16,11 @@ namespace EMS.BLL
             return EstimateDAL.GetUnitMaster(searchCriteria);
         }
 
+        public DataSet GetSingleUnitType(int UnitID, int JobID)
+        {
+            return EstimateDAL.GetSingleUnitType(UnitID, JobID);
+        }
+
         public  Estimate GetEstimate(ISearchCriteria searchCriteria)
         { return EstimateDAL.GetEstimate(searchCriteria); }
         public  DataSet GetBillingGroupMaster(ISearchCriteria searchCriteria)
@@ -26,6 +31,21 @@ namespace EMS.BLL
         public  DataSet GetCharges(ISearchCriteria searchCriteria)
         {
             return EstimateDAL.GetCharges(searchCriteria);
+        }
+
+        public DataSet GetSelectedCharge(int ChargeID)
+        {
+            return EstimateDAL.GetSelectedCharge(ChargeID);
+        }
+
+        public DataSet GetServiceTax(DateTime EstimateDate, decimal BasicValue, int ChargeID)
+        {
+            return EstimateDAL.GetServiceTax(EstimateDate, BasicValue, ChargeID);
+        }
+
+        public DataSet GetContainers(int UnitTypeID, string Size, int JobID)
+        {
+            return EstimateDAL.GetContainers(UnitTypeID, Size, JobID);
         }
 
         public  DataSet GetCurrency(ISearchCriteria searchCriteria)
@@ -43,9 +63,14 @@ namespace EMS.BLL
             return EstimateDAL.SaveEstimate(estimate, Mode);
         }
 
-        public DataSet GetParty()
+        public DataSet GetParty(int PartyType)
         {
-            return EstimateDAL.GetParty();
+            return EstimateDAL.GetParty(PartyType);
+        }
+
+        public DataSet GetAllParty(int PartyType)
+        {
+            return EstimateDAL.GetAllParty(PartyType);
         }
     }
 }

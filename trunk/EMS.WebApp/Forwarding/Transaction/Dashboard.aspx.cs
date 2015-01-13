@@ -9,6 +9,8 @@ using EMS.Common;
 using EMS.Utilities;
 using System.Data;
 using EMS.Utilities.ResourceManager;
+using Microsoft.Win32;
+using System.IO;
 
 namespace EMS.WebApp.Farwarding.Transaction
 {
@@ -24,6 +26,7 @@ namespace EMS.WebApp.Farwarding.Transaction
         private bool _canView = false;
         private bool _LocationSpecific = true;
         private static string DocumentTypeIdForDr = "37";
+        private static string DocumentTypeIdForCr = "38";
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -61,10 +64,14 @@ namespace EMS.WebApp.Farwarding.Transaction
 
             if (!ReferenceEquals(dtJob, null) && dtJob.Rows.Count > 0)
             {
+                lblTTL20.CssClass = "right_align";
+                lblTTL40.CssClass = "right_align";
+                
+
                 if (dtJob.Rows[0]["JobDate"] != DBNull.Value)
                     lblJobDate.Text = Convert.ToString(dtJob.Rows[0]["JobDate"]).Split(' ')[0];
-                if (dtJob.Rows[0]["JobNo"] != DBNull.Value)
-                    lblJobNumber.Text = Convert.ToString(dtJob.Rows[0]["JobNo"]);
+                if (dtJob.Rows[0]["FJobNo"] != DBNull.Value)
+                    lblJobNumber.Text = Convert.ToString(dtJob.Rows[0]["FJobNo"]);
                 if (dtJob.Rows[0]["CargoSource"] != DBNull.Value)
                     lblCargoSource.Text = Convert.ToString(dtJob.Rows[0]["CargoSource"]);
                 if (dtJob.Rows[0]["OpsLoc"] != DBNull.Value)
@@ -85,6 +92,12 @@ namespace EMS.WebApp.Farwarding.Transaction
                     lblShipping.Text = Convert.ToString(dtJob.Rows[0]["ShippingMode"]);
                 if (dtJob.Rows[0]["DocName"] != DBNull.Value)
                     lblPrimeDocs.Text = Convert.ToString(dtJob.Rows[0]["DocName"]);
+                if (dtJob.Rows[0]["DocumentNo"] != DBNull.Value)
+                    lblPrimeDocNo.Text = Convert.ToString(dtJob.Rows[0]["DocumentNo"]);
+                if (dtJob.Rows[0]["Revton"] != DBNull.Value)
+                    lblRevenue.Text = Convert.ToString(dtJob.Rows[0]["Revton"]);
+                if (dtJob.Rows[0]["wtKG"] != DBNull.Value)
+                    lblWeight.Text = Convert.ToString(dtJob.Rows[0]["wtKG"]);
                 if (dtJob.Rows[0]["ttl20"] != DBNull.Value)
                     lblTTL20.Text = Convert.ToString(dtJob.Rows[0]["ttl20"]);
                 if (dtJob.Rows[0]["ttl40"] != DBNull.Value)
@@ -127,9 +140,9 @@ namespace EMS.WebApp.Farwarding.Transaction
                 if (dtJob.Rows[0]["JobActive"].ToString() != "P")
                 {
                     btnApprove.Enabled = false;
-                    btnCloseJob.Enabled = true;
+                    btnCloseJob.Enabled = false;
                 }
-                else
+                else 
                 {
                     btnApprove.Enabled = true;
                     btnCloseJob.Enabled = true;
@@ -138,6 +151,16 @@ namespace EMS.WebApp.Farwarding.Transaction
                 lblTotalEstimateReceiveable.Text = dsDashboard.Tables[6].Rows[0]["Receivable"].ToString();
                 lblProjectedGrossProfit.Text = (dsDashboard.Tables[6].Rows[0]["Receivable"].ToDecimal() - dsDashboard.Tables[5].Rows[0]["Payable"].ToDecimal()).ToString();
 
+                if (lblTotalEstimatePayable.Text.ToDecimal() < lblTotalEstimateReceiveable.Text.ToDecimal())
+                {
+                    btnApprove.Enabled = true;
+                    btnCloseJob.Enabled = true;
+                }
+                else
+                {
+                    btnApprove.Enabled = false;
+                    btnCloseJob.Enabled = false;
+                }
 
             }
 
@@ -225,25 +248,27 @@ namespace EMS.WebApp.Farwarding.Transaction
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
 
                 //e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "UnitName"));
-                e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BillFrom"));
-                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Qty"));
 
-                //e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CurrencyName"));
-                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChgAmt"));
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ROE"));
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PaymentBy"));
-                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "INRAmount"));
+                e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EstimateNo"));
+                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EstimateDate")).Split(' ')[0];
+                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BillFrom"));
+                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PartyName"));
+
+                e.Row.Cells[4].Text = Convert.ToString(Math.Round(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "INRAmount")), 2));
+                //e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "INRAmount"));
+                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "StaxAmount"));
+                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "TotalAmount"));
 
                 string EstimateId = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "pk_EstimateID"));
 
-                ImageButton btnDashboard = (ImageButton)e.Row.FindControl("btnBillReceipt");
-                btnDashboard.ToolTip = "Bill Reciept";
-                btnDashboard.CommandArgument = EstimateId;
+                //ImageButton btnDashboard = (ImageButton)e.Row.FindControl("btnBillReceipt");
+                //btnDashboard.ToolTip = "Bill Reciept";
+                //btnDashboard.CommandArgument = EstimateId;
 
                 ImageButton btnUpload = (ImageButton)e.Row.FindControl("btnUpload");
-                btnUpload.ToolTip = "Upload";
+                btnUpload.ToolTip = "Download";
                 btnUpload.CommandArgument = EstimateId;
-                btnUpload.Attributes.Add("onclick", "javascript:popWin('" + EstimateId + "');");
+                //btnUpload.Attributes.Add("onclick", "javascript:popWin('" + EstimateId + "');");
 
                 //Edit Link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
@@ -270,6 +295,15 @@ namespace EMS.WebApp.Farwarding.Transaction
         {
             if (e.CommandName == "Edit")
             {
+                string estimateId = Convert.ToString(e.CommandArgument);
+                Response.Redirect("~/Forwarding/Transaction/AddEditEstimate.aspx?jobid=" + GeneralFunctions.EncryptQueryString(Convert.ToInt32(ViewState["JOBID"]).ToString())
+                + "&IsPayment=" + GeneralFunctions.EncryptQueryString("1")
+                + "&DlName=" + GeneralFunctions.EncryptQueryString(lblCustomer.Text)
+                + "&DlValues=" + GeneralFunctions.EncryptQueryString(hdnCustID.Value)
+                + "&JobNo=" + GeneralFunctions.EncryptQueryString(lblJobNumber.Text)
+                + "&EstimateId=" + GeneralFunctions.EncryptQueryString(estimateId)
+                + "&ShippingMode=" + GeneralFunctions.EncryptQueryString(lblShipping.Text)
+                );
                 //RedirecToAddEditPage(Convert.ToInt32(e.CommandArgument));
             }
             else if (e.CommandName == "Remove")
@@ -282,6 +316,25 @@ namespace EMS.WebApp.Farwarding.Transaction
             }
             else if (e.CommandName == "Upload")
             {
+
+                var path = Server.MapPath("~/Forwarding/QuoUpload/" + "Quotation" + Convert.ToString(e.CommandArgument) + ".pdf");
+                var filename = "Quotation" + Convert.ToString(e.CommandArgument) + ".pdf";
+                    //"Quotation" + Convert.ToString(e.CommandArgument)+".pdf";
+
+                var ext = System.IO.Path.GetExtension(filename);
+                string filePath = string.Format(path);
+                System.IO.FileInfo file = new System.IO.FileInfo(path);
+
+                if (file.Exists)
+                {
+                    Response.Clear();
+                    Response.AddHeader("Content-Length", file.Length.ToString());
+                    Response.Buffer = true;
+                    Response.ContentType = MimeType(ext);
+                    Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}.{1}", filename, ""));
+                    Response.WriteFile(filePath);
+                    Response.End();
+                }
                 //ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:popWin('" + e.CommandArgument.ToString() + "');</script>", false);
             }
         }
@@ -294,25 +347,27 @@ namespace EMS.WebApp.Farwarding.Transaction
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
 
                 //e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "UnitName"));
-                e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BillFrom"));
-                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Qty"));
 
-                //e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CurrencyName"));
-                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChgAmt"));
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ROE"));
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PaymentBy"));
-                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "INRAmount"));
+                e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EstimateNo"));
+                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EstimateDate")).Split(' ')[0];
+                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BillFrom"));
+                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PartyName"));
 
-                string EstimateId = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "INRAmount"));
+                e.Row.Cells[4].Text = Convert.ToString(Math.Round(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "INRAmount")), 2));
+                //e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "INRAmount"));
+                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "StaxAmount"));
+                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "TotalAmount"));
 
-                ImageButton btnDashboard = (ImageButton)e.Row.FindControl("btnGenInv");
-                btnDashboard.ToolTip = "Generate Invoice";
-                btnDashboard.CommandArgument = EstimateId;
+                string EstimateId = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "pk_EstimateID"));
+
+                //ImageButton btnDashboard = (ImageButton)e.Row.FindControl("btnBillReceipt");
+                //btnDashboard.ToolTip = "Bill Reciept";
+                //btnDashboard.CommandArgument = EstimateId;
 
                 ImageButton btnUpload = (ImageButton)e.Row.FindControl("btnUpload");
-                btnUpload.ToolTip = "Upload";
+                btnUpload.ToolTip = "Download";
                 btnUpload.CommandArgument = EstimateId;
-                btnUpload.Attributes.Add("onclick", "javascript:popWin('" + EstimateId + "');");
+                //btnUpload.Attributes.Add("onclick", "javascript:popWin('" + EstimateId + "');");
 
                 //Edit Link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
@@ -334,34 +389,156 @@ namespace EMS.WebApp.Farwarding.Transaction
                     btnRemove.Visible = false;
                 }
             }
+            //if (e.Row.RowType == DataControlRowType.DataRow)
+            //{
+            //    GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 6);
+            //    ScriptManager sManager = ScriptManager.GetCurrent(this);
+
+            //    //e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "UnitName"));
+            //    e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EstimateNo"));
+            //    e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EstimateDate")).Split(' ')[0];
+            //    e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BillFrom"));
+            //    e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PartyName"));
+
+            //    //e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CurrencyName"));
+            //    //e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChgAmt"));
+            //    //e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ROE"));
+            //    //e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PaymentBy"));
+            //    e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "INRAmount"));
+            //    e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "StaxAmount"));
+            //    e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "TotalAmount"));
+            //    string EstimateId = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "pk_EstimateID"));
+
+            //    //ImageButton btnDashboard = (ImageButton)e.Row.FindControl("btnGenInv");
+            //    //btnDashboard.ToolTip = "Generate Invoice";
+            //    //btnDashboard.CommandArgument = EstimateId;
+
+            //    //ImageButton btnUpload = (ImageButton)e.Row.FindControl("btnUpload");
+            //    //btnUpload.ToolTip = "Upload";
+            //    //btnUpload.CommandArgument = EstimateId;
+            //    //btnUpload.Attributes.Add("onclick", "javascript:popWin('" + EstimateId + "');");
+
+            //    //Edit Link
+            //    ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
+            //    btnEdit.ToolTip = "Edit";
+            //    btnEdit.CommandArgument = EstimateId;
+
+            //    //Delete link
+            //    if (_canDelete == true)
+            //    {
+            //        ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+            //        btnRemove.Visible = true;
+            //        btnRemove.ToolTip = "Delete";
+            //        btnRemove.CommandArgument = EstimateId;
+            //        //btnRemove.Attributes.Add("onclick", "javascript:return confirm('Are you sure about delete?');");
+            //    }
+            //    else
+            //    {
+            //        ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+            //        btnRemove.Visible = false;
+            //    }
+            //}
         }
         protected void gvEstimateReceivable_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            //if (e.CommandName == "Edit")
+            //{
+            //    string estimateId = Convert.ToString(e.CommandArgument);
+            //    Response.Redirect("~/Forwarding/Transaction/AddEditEstimate.aspx?jobid=" + GeneralFunctions.EncryptQueryString(Convert.ToInt32(ViewState["JOBID"]).ToString())
+            //    + "&IsPayment=" + GeneralFunctions.EncryptQueryString("0")
+            //    + "&DlName=" + GeneralFunctions.EncryptQueryString(lblCustomer.Text)
+            //    + "&DlValues=" + GeneralFunctions.EncryptQueryString(hdnCustID.Value)
+            //    + "&JobNo=" + GeneralFunctions.EncryptQueryString(lblJobNumber.Text)
+            //    + "&EstimateId=" + GeneralFunctions.EncryptQueryString(estimateId)
+            //    + "&ShippingMode=" + GeneralFunctions.EncryptQueryString(lblShipping.Text)
+            //    );
+            //    //RedirecToAddEditPage(Convert.ToInt32(e.CommandArgument));
+            //}
+            //else if (e.CommandName == "Remove")
+            //{
+            //    JobBLL.DeleteDashBoardData(Convert.ToInt32(e.CommandArgument), "Estimate");
+            //    ScriptManager.RegisterStartupScript(this, typeof(Page), "alert3", "<script>javascript:void alert('Record deleted successfully!');</script>", false);
+            //}
+            //else if (e.CommandName == "GenInv")
+            //{
+
+            //    string docTypeId = DocumentTypeIdForDr;
+            //    string jobNo = lblJobNumber.Text;
+            //    string estimateId = Convert.ToString(e.CommandArgument);
+            //    string containers = lblTTL20.Text + " x 20' / " + lblTTL40 + " x 40'";
+
+
+            //    Response.Redirect("~/Forwarding/Transaction/FwdInvoice.aspx?docTypeId=" + GeneralFunctions.EncryptQueryString(docTypeId)
+            //            + "&jobNo=" + GeneralFunctions.EncryptQueryString(jobNo)
+            //            + "&estimateId=" + GeneralFunctions.EncryptQueryString(estimateId)
+            //            + "&containers=" + GeneralFunctions.EncryptQueryString(containers)
+            //          );
+            //}
+            //else if (e.CommandName == "Upload")
+            //{
+            //    var path = Server.MapPath("~/Forwarding/QuoUpload/" + "Quotation" + Convert.ToString(e.CommandArgument) + ".pdf");
+            //    var filename = "Quotation" + Convert.ToString(e.CommandArgument) + ".pdf";
+            //    //"Quotation" + Convert.ToString(e.CommandArgument)+".pdf";
+
+            //    var ext = System.IO.Path.GetExtension(filename);
+            //    string filePath = string.Format(path);
+            //    System.IO.FileInfo file = new System.IO.FileInfo(path);
+
+            //    if (file.Exists)
+            //    {
+            //        Response.Clear();
+            //        Response.AddHeader("Content-Length", file.Length.ToString());
+            //        Response.Buffer = true;
+            //        Response.ContentType = MimeType(ext);
+            //        Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}.{1}", filename, ""));
+            //        Response.WriteFile(filePath);
+            //        Response.End();
+            //    }
+            //    //ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:popWin('" + e.CommandArgument.ToString() + "');</script>", false);
+            //}
+
             if (e.CommandName == "Edit")
             {
+                string estimateId = Convert.ToString(e.CommandArgument);
+                Response.Redirect("~/Forwarding/Transaction/AddEditEstimate.aspx?jobid=" + GeneralFunctions.EncryptQueryString(Convert.ToInt32(ViewState["JOBID"]).ToString())
+                + "&IsPayment=" + GeneralFunctions.EncryptQueryString("1")
+                + "&DlName=" + GeneralFunctions.EncryptQueryString(lblCustomer.Text)
+                + "&DlValues=" + GeneralFunctions.EncryptQueryString(hdnCustID.Value)
+                + "&JobNo=" + GeneralFunctions.EncryptQueryString(lblJobNumber.Text)
+                + "&EstimateId=" + GeneralFunctions.EncryptQueryString(estimateId)
+                + "&ShippingMode=" + GeneralFunctions.EncryptQueryString(lblShipping.Text)
+                );
                 //RedirecToAddEditPage(Convert.ToInt32(e.CommandArgument));
             }
             else if (e.CommandName == "Remove")
             {
                 JobBLL.DeleteDashBoardData(Convert.ToInt32(e.CommandArgument), "Estimate");
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "alert3", "<script>javascript:void alert('Record deleted successfully!');</script>", false);
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alert4", "<script>javascript:void alert('Record deleted successfully!');</script>", false);
             }
-            else if (e.CommandName == "GenInv")
+            else if (e.CommandName == "BillReceipt")
             {
-                string docTypeId = DocumentTypeIdForDr;
-                string jobNo = lblJobNumber.Text;
-                string estimateId = Convert.ToString(e.CommandArgument);
-                string containers = lblTTL20.Text + " x 20' & " + lblTTL40 + " x 40'";
-
-
-                Response.Redirect("~/Forwarding/Transaction/FwdInvoice.aspx?docTypeId=" + GeneralFunctions.EncryptQueryString(docTypeId)
-                        + "&jobNo=" + GeneralFunctions.EncryptQueryString(jobNo)
-                        + "&estimateId=" + GeneralFunctions.EncryptQueryString(estimateId)
-                        + "&containers=" + GeneralFunctions.EncryptQueryString(containers)
-                      );
             }
             else if (e.CommandName == "Upload")
             {
+
+                var path = Server.MapPath("~/Forwarding/QuoUpload/" + "Quotation" + Convert.ToString(e.CommandArgument) + ".pdf");
+                var filename = "Quotation" + Convert.ToString(e.CommandArgument) + ".pdf";
+                //"Quotation" + Convert.ToString(e.CommandArgument)+".pdf";
+
+                var ext = System.IO.Path.GetExtension(filename);
+                string filePath = string.Format(path);
+                System.IO.FileInfo file = new System.IO.FileInfo(path);
+
+                if (file.Exists)
+                {
+                    Response.Clear();
+                    Response.AddHeader("Content-Length", file.Length.ToString());
+                    Response.Buffer = true;
+                    Response.ContentType = MimeType(ext);
+                    Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}.{1}", filename, ""));
+                    Response.WriteFile(filePath);
+                    Response.End();
+                }
                 //ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:popWin('" + e.CommandArgument.ToString() + "');</script>", false);
             }
         }
@@ -375,17 +552,28 @@ namespace EMS.WebApp.Farwarding.Transaction
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
 
                 e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PartyName"));
-                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Payable"));
-                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLARefNo"));
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLARefDate"));
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChgAmt"));
-                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ROE"));
-                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "INRAmt"));
+                //e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvType"));
+                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceNo"));
+                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceDate"));
+                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLARefNo"));
+                //e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLARefDate")).Split(' ')[0];
+                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "INRAmt"));
+
+                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Stax"));
+                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Total"));
+
+                // download link
+                ImageButton btnUpload = (ImageButton)e.Row.FindControl("btnUpload");
+                btnUpload.ToolTip = "Download";
+                btnUpload.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "pk_CInvoiceID"));
 
                 //Edit Link
-                ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnPayment");
-                btnEdit.ToolTip = "Payment";
+                ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
+                btnEdit.ToolTip = "Edit";
                 btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "pk_CInvoiceID"));
+
+               
+                //btnUpload.Attributes.Add("onclick", "javascript:popWin('" + EstimateId + "');");
 
                 //Delete link
                 if (_canDelete == true)
@@ -401,18 +589,62 @@ namespace EMS.WebApp.Farwarding.Transaction
                     ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
                     btnRemove.Visible = false;
                 }
+
+                ImageButton btnPayment = (ImageButton)e.Row.FindControl("btnPayment");
+                btnPayment.ToolTip = "Payment";
+                btnPayment.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "pk_CInvoiceID"));
             }
         }
         protected void gvCreditors_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Payment")
             {
+                string CInvoiceId = Convert.ToString(e.CommandArgument);
+                string docTypeId = DocumentTypeIdForCr;
+                string jobNo = lblJobNumber.Text;
+                Response.Redirect("~/Forwarding/Transaction/CreditorPayment.aspx?invid=" + GeneralFunctions.EncryptQueryString(CInvoiceId)
+                    + "&JobID=" + GeneralFunctions.EncryptQueryString(Convert.ToInt32(ViewState["JOBID"]).ToString())
+                  );
+            }
+            else if (e.CommandName == "Edit")
+            {
+                string CInvoiceId = Convert.ToString(e.CommandArgument);
+                string docTypeId = DocumentTypeIdForCr;
+                string jobNo = lblJobNumber.Text;
+
+                Response.Redirect("~/Forwarding/Transaction/CreInvoice.aspx?docTypeId=" + GeneralFunctions.EncryptQueryString(docTypeId)
+                        + "&JobID=" + GeneralFunctions.EncryptQueryString(Convert.ToInt32(ViewState["JOBID"]).ToString())
+                        + "&CreInvoiceId=" + GeneralFunctions.EncryptQueryString(CInvoiceId)
+                      );
+
                 //RedirecToAddEditPage(Convert.ToInt32(e.CommandArgument));
             }
             else if (e.CommandName == "Remove")
             {
                 JobBLL.DeleteDashBoardData(Convert.ToInt32(e.CommandArgument), "Credit");
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "alert2", "<script>javascript:void alert('Record deleted successfully!');</script>", false);
+            }
+            else if (e.CommandName == "Upload")
+            {
+                var path = Server.MapPath("~/Forwarding/QuoUpload/CreInvoice" + Convert.ToString(e.CommandArgument) + ".pdf");
+                var filename = "CreInvoice" + Convert.ToString(e.CommandArgument) + ".pdf";
+                //"Quotation" + Convert.ToString(e.CommandArgument)+".pdf";
+
+                var ext = System.IO.Path.GetExtension(filename);
+                string filePath = string.Format(path);
+                System.IO.FileInfo file = new System.IO.FileInfo(path);
+
+                if (file.Exists)
+                {
+                    Response.Clear();
+                    Response.AddHeader("Content-Length", file.Length.ToString());
+                    Response.Buffer = true;
+                    Response.ContentType = MimeType(ext);
+                    Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}.{1}", filename, ""));
+                    Response.WriteFile(filePath);
+                    Response.End();
+                }
+                //ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:popWin('" + e.CommandArgument.ToString() + "');</script>", false);
             }
         }
 
@@ -424,12 +656,12 @@ namespace EMS.WebApp.Farwarding.Transaction
                 GeneralFunctions.ApplyGridViewAlternateItemStyle(e.Row, 6);
                 ScriptManager sManager = ScriptManager.GetCurrent(this);
 
-                e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceType"));
-                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceNo"));
-                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceDate"));
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Amount"));
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ReceivedAmt"));
-                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CNAmt"));
+                //e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceType"));
+                //e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceNo"));
+                e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceDate")).Split(' ')[0];
+                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Amount"));
+                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ReceivedAmt"));
+                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CNAmt"));
                 //e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "")); //balance amt missing
 
                 ImageButton btnPrint = (ImageButton)e.Row.FindControl("btnPrint");
@@ -463,9 +695,13 @@ namespace EMS.WebApp.Farwarding.Transaction
             {
 
             }
-            else if (e.CommandName == "Edit")
+            else if (e.CommandName == "Delete")
             {
-                Response.Redirect("~/Forwarding/Transaction/FwdInvoice.aspx?invid=" + GeneralFunctions.EncryptQueryString(e.CommandArgument.ToString()));
+                JobBLL.DeleteDashBoardData(Convert.ToInt32(e.CommandArgument), "Debtor");
+                //ScriptManager.RegisterStartupScript(this, typeof(Page), "alert2", "<script>javascript:void alert('Record deleted successfully!');</script>", false);
+
+
+                //Response.Redirect("~/Forwarding/Transaction/FwdInvoice.aspx?invid=" + GeneralFunctions.EncryptQueryString(e.CommandArgument.ToString()));
             }
         }
 
@@ -496,6 +732,7 @@ namespace EMS.WebApp.Farwarding.Transaction
                 + "&IsPayment=" + GeneralFunctions.EncryptQueryString("1")
             + "&DlName=" + GeneralFunctions.EncryptQueryString(lblCustomer.Text)
                  + "&DlValues=" + GeneralFunctions.EncryptQueryString(hdnCustID.Value)
+                 + "&JobNo=" +GeneralFunctions.EncryptQueryString(lblJobNumber.Text)
                 );
         }
 
@@ -510,12 +747,20 @@ namespace EMS.WebApp.Farwarding.Transaction
                   + "&IsPayment=" + GeneralFunctions.EncryptQueryString("0")
               + "&DlName=" + GeneralFunctions.EncryptQueryString(lblCustomer.Text)
                    + "&DlValues=" + GeneralFunctions.EncryptQueryString(hdnCustID.Value)
+                   + "&JobNo=" + GeneralFunctions.EncryptQueryString(lblJobNumber.Text)
                   );
         }
 
         protected void btnAddInvoiceCred_Click(object sender, EventArgs e)
         {
-            
+            string docTypeId = DocumentTypeIdForCr;
+            string jobNo = lblJobNumber.Text;
+            string estimateId = "0";
+
+            Response.Redirect("~/Forwarding/Transaction/CreInvoice.aspx?docTypeId=" + GeneralFunctions.EncryptQueryString(docTypeId)
+                    + "&JobID=" + GeneralFunctions.EncryptQueryString(Convert.ToInt32(ViewState["JOBID"]).ToString())
+                    + "&EstimateID=" + GeneralFunctions.EncryptQueryString(estimateId)
+                  );
         }
 
         protected void btnAddInvoiceDebt_Click(object sender, EventArgs e)
@@ -523,14 +768,35 @@ namespace EMS.WebApp.Farwarding.Transaction
             string docTypeId = DocumentTypeIdForDr;
             string jobNo = lblJobNumber.Text;
             string estimateId = "0";
-            string containers = lblTTL20.Text + " x 20' & " + lblTTL40 + " x 40'";
+            string containers = lblTTL20.Text + " x 20' / " + lblTTL40.Text + " x 40'";
 
 
-            Response.Redirect("~/Forwarding/Transaction/FwdInvoice.aspx?docTypeId=" + GeneralFunctions.EncryptQueryString(docTypeId)
-                    + "&jobNo=" + GeneralFunctions.EncryptQueryString(jobNo)
-                    + "&estimateId=" + GeneralFunctions.EncryptQueryString(estimateId)
-                    + "&containers=" + GeneralFunctions.EncryptQueryString(containers)
-                  );
+            //Response.Redirect("~/Forwarding/Transaction/FwdInvoice.aspx?docTypeId=" + GeneralFunctions.EncryptQueryString(docTypeId)
+            //        + "&jobNo=" + GeneralFunctions.EncryptQueryString(jobNo)
+            //        + "&estimateId=" + GeneralFunctions.EncryptQueryString(estimateId)
+            //        + "&containers=" + GeneralFunctions.EncryptQueryString(containers)
+            //      );
+            Response.Redirect("~/Forwarding/Transaction/FwdInvoice.aspx?jobNo=" + GeneralFunctions.EncryptQueryString(jobNo)
+
+      );
+        }
+
+        protected void btnback_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Forwarding/Transaction/JobList.aspx");
+        }
+
+        private static string MimeType(string Extension)
+        {
+            string mime = "application/octetstream";
+            if (string.IsNullOrEmpty(Extension))
+                return mime;
+
+            string ext = Extension.ToLower();
+            RegistryKey rk = Registry.ClassesRoot.OpenSubKey(ext);
+            if (rk != null && rk.GetValue("Content Type") != null)
+                mime = rk.GetValue("Content Type").ToString();
+            return mime;
         }
     }
 }

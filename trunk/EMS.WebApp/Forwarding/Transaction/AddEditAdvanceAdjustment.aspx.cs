@@ -451,8 +451,6 @@ namespace EMS.WebApp.Forwarding.Transaction
                 CompanyID = 1,
                 UserID = _userId,
                 AdjustmentPk = AdvAdjInvID
-
-
             };
 
         }

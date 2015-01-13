@@ -22,6 +22,35 @@
                     <ContentTemplate>
                         <table style="width: 100%;">
                             <tr>
+                            <td>
+                                Party Type:<span class="errormessage1">*</span>
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="ddlPartyType" runat="server" CssClass="dropdownlist"
+                                AutoPostBack="true" OnSelectedIndexChanged="ddlPartyType_SelectedIndexChanged">
+                                    <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
+                                </asp:DropDownList>
+                                <br />
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" CssClass="errormessage"
+                                    ControlToValidate="ddlPartyType" ValidationGroup="Save" Display="Dynamic" InitialValue="0"
+                                    ErrorMessage="[Required]"></asp:RequiredFieldValidator>
+                            </td>
+                            <td width="140">
+                                Party:<span class="errormessage1">*</span>
+                            </td>
+                            <td width="300">
+                                <asp:DropDownList ID="ddlParty" runat="server" CssClass="dropdownlist" Width="300px">
+                                    <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
+                                </asp:DropDownList>
+                                <br />
+                                <asp:RequiredFieldValidator ID="rvfddlParty" runat="server" CssClass="errormessage"
+                                    ControlToValidate="ddlParty" ValidationGroup="Save" Display="Dynamic" InitialValue="0"
+                                    ErrorMessage="[Required]"></asp:RequiredFieldValidator>
+                            </td>
+
+                        </tr>   
+                            
+                            <tr>
                                 <td>
                                     Invoice No
                                 </td>
@@ -32,8 +61,10 @@
                                    Job Number<span class="errormessage1">*</span>
                                 </td>
                                 <td>
-                                   <asp:DropDownList ID="ddlJobNo" runat="server" Enabled="false">
-                                   </asp:DropDownList>
+                                    <asp:HiddenField ID="hdnJobID" runat="server"/>
+                                    <asp:TextBox ID="txtJobNo" runat="server" Width="250px" Enabled="false"></asp:TextBox>
+                                   <%--<asp:DropDownList ID="ddlJobNo" runat="server" Enabled="false">
+                                   </asp:DropDownList>--%>
                                 </td>
                             </tr>
                             <tr>
@@ -66,7 +97,7 @@
                                         Display="Dynamic"></asp:RequiredFieldValidator>
                                 </td>
                             </tr>
-                            <tr>
+                           <%-- <tr>
                                 <td>
                                     B/L No
                                 </td>
@@ -84,8 +115,8 @@
                                     </asp:DropDownList>
                                 </td>
                             
-                            </tr>
-                            <tr>
+                            </tr>--%>
+                            <%--<tr>
                                 <td>
                                     BL Date
                                 </td>
@@ -97,18 +128,9 @@
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtBLDate"
                                         ValidationGroup="vgSave" ErrorMessage="This field is required*" CssClass="errormessage"
                                         Display="Dynamic"></asp:RequiredFieldValidator>
-                                </td>
 
-                                    <td>
-                                    Invoice Type
-                                </td>
-                                <td>
-                                    <asp:DropDownList ID="ddlInvoiceType" runat="server" Enabled="false">
-                                        <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
-                                    </asp:DropDownList>
-                                </td>
                                
-                            </tr>
+                            </tr>--%>
                             <tr>
                                 <td>
                                     Invoice amount
@@ -135,33 +157,37 @@
                                     <asp:TextBox ID="txtROff" runat="server" Width="250px" Enabled="false" Style="text-align: right;"></asp:TextBox>
                                 </td>
                                 <td>
-                                    Party Name
+                                    Location
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlParty" runat="server" Enabled="false">
-                                        <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
+                                    <asp:DropDownList ID="ddlLocation" runat="server">
+                                            <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
                             </tr>
+
                             <tr>
                                 <td>
                                     USD Exchange Rate
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtUSDExRate" runat="server" Width="250px" Style="text-align: right;"
+                                    <cc2:CustomTextBox ID="txtExRate" runat="server" Width="78px" Type="Decimal" MaxLength="6"
+                                            Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
+                                        OnTextChanged="TextEx_TextChanged" AutoPostBack="true" ></cc2:CustomTextBox>
+                                </td>
+                                
+                            </tr>
+                            <%--<tr>
+                                <td>
+                                    USD Exchange Rate
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtUSDExRate" runat="server" Width="250px" Style="text-align: right;" visible="false"
                                         OnTextChanged="txtUSDExRate_TextChanged" AutoPostBack="true">
                                     </asp:TextBox>
                                 </td>
-                                <td>
-                                    Location
-                                </td>
-                                <td>
-                                    <asp:DropDownList ID="ddlLocation" runat="server" OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged"
-                                            AutoPostBack="true" Enabled="true">
-                                            <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
-                                    </asp:DropDownList>
-                                </td>
-                            </tr>
+                                
+                            </tr>--%>
 
                             <tr>
                                 <td colspan="4" style="padding-top: 10; border: none;">
@@ -173,11 +199,17 @@
                                                 <td style="font-weight:bold">
                                                     Charge Name
                                                 </td>
-<%--                                                <td style="font-weight:bold">
-                                                    Terminal
-                                                </td>--%>
+                                                <td style="font-weight:bold">
+                                                    Size
+                                                </td>
+                                                <td style="text-align: left;font-weight:bold">
+                                                    Unit Type
+                                                </td>
                                                 <td style="text-align: right;font-weight:bold">
                                                     Rate / Unit
+                                                </td>
+                                                <td style="text-align: right;font-weight:bold">
+                                                    Unit
                                                 </td>
                                                 <%--<td style="text-align: right;font-weight:bold">
                                                     TEU
@@ -214,28 +246,48 @@
                                           
                                             <tr>
                                                 <td class="gridviewitem" style="width:20%;">
-                                                    <asp:DropDownList ID="ddlFChargeName" runat="server" Width="255px" AutoPostBack="true"
+                                                    <asp:DropDownList ID="ddlFChargeName" runat="server" Width="200px" AutoPostBack="true"
                                                         OnSelectedIndexChanged="ddlChargeName_SelectedIndexChanged" Height="17px">
                                                         <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                                     </asp:DropDownList>
                                                     <br />
-                                                    <asp:RequiredFieldValidator ID="rfvChargeName" runat="server" ErrorMessage="Required"
+                                                    <asp:RequiredFieldValidator ID="rfvChargeName" runat="server" ErrorMessage="Required" 
                                                         CssClass="errormessage" ValidationGroup="vgAdd" ControlToValidate="ddlFChargeName"
                                                         InitialValue="0"></asp:RequiredFieldValidator>
                                                 </td>
-<%--                                                <td>
-                                                    <asp:DropDownList ID="ddlFTerminal" runat="server" Width="150" Enabled="false">
+                                                <td>
+                                                    <asp:DropDownList ID="ddlSize" runat="server" Width="90" Enabled="true" AutoPostBack="true" 
+                                                        OnSelectedIndexChanged="ddlSize_SelectedIndexChanged"> 
                                                         <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
+<%--                                                        <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>--%>
+                                                        <asp:ListItem Text="20" Value="20"></asp:ListItem>
+                                                        <asp:ListItem Text="40" Value="40"></asp:ListItem>
                                                     </asp:DropDownList>
                                                     <br />
-                                                    <asp:RequiredFieldValidator ID="rfvTerminal" runat="server" ErrorMessage="Required"
-                                                        CssClass="errormessage" ValidationGroup="vgAdd" ControlToValidate="ddlFTerminal"
-                                                        InitialValue="0"></asp:RequiredFieldValidator>
+<%--                                                    <asp:RequiredFieldValidator ID="rfvsize" runat="server" ErrorMessage="Required"
+                                                        CssClass="errormessage" ValidationGroup="vgAdd" ControlToValidate="ddlSize"
+                                                        InitialValue="0"></asp:RequiredFieldValidator>--%>
                                                     &nbsp;
-                                                </td>   --%>                                          
+                                                </td>
+                                                <td class="gridviewitem" style="width:20%;">
+                                                    <asp:DropDownList ID="ddlUnitType" runat="server" Width="150px" AutoPostBack="true"
+                                                        OnSelectedIndexChanged="ddlUnitType_SelectedIndexChanged" Height="17px">
+                                                        <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                    <br />
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Required" 
+                                                        CssClass="errormessage" ValidationGroup="vgAdd" ControlToValidate="ddlUnitType"
+                                                        InitialValue="0"></asp:RequiredFieldValidator>
+                                                </td>                                     
                                                 <td class="gridviewitem" style="width:8%;">
                                                     <cc2:CustomTextBox ID="txtRatePerBL" runat="server" Width="89px" Type="Decimal" MaxLength="12"
-                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00" Enabled="false"
+                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00" 
+                                                        OnTextChanged="txtRatePerBL_TextChanged" AutoPostBack="true" ></cc2:CustomTextBox><br />
+                                                    &nbsp;
+                                                </td>
+                                                 <td class="gridviewitem" style="width:8%;">
+                                                    <cc2:CustomTextBox ID="txtUnit" runat="server" Width="78px" Type="Decimal" MaxLength="6"
+                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00" 
                                                         OnTextChanged="txtRatePerBL_TextChanged" AutoPostBack="true" ></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
@@ -286,7 +338,7 @@
                                                        ></asp:RequiredFieldValidator>
                                                 </td>
                                                 <td class="gridviewitem"  style="width:8%">
-                                                    <cc2:CustomTextBox ID="txtGrossAmount" runat="server" Width="91px" 
+                                                    <cc2:CustomTextBox ID="txtGrossAmount" runat="server" Width="80px" 
                                                         Type="Decimal" MaxLength="10" Enabled="false"
                                                           Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox><br />
                                                     &nbsp;
@@ -325,14 +377,22 @@
                                                     <HeaderStyle CssClass="gridviewheader" />
                                                     <ItemStyle CssClass="gridviewitem" Width="20%" />
                                                 </asp:TemplateField>
-<%--                                                        <asp:TemplateField HeaderText="Terminal">
+                                                <asp:TemplateField HeaderText="Size">
                                                     <HeaderStyle CssClass="gridviewheader" />
                                                     <ItemStyle CssClass="gridviewitem" Width="10%" />
-                                                </asp:TemplateField>--%>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Unit Type">
+                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                    <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Left"/>
+                                                </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Rate / Unit">
                                                     <HeaderStyle CssClass="gridviewheader" />
-                                                    <ItemStyle CssClass="gridviewitem" Width="8%" />
-                                                </asp:TemplateField>                                                      
+                                                    <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right"/>
+                                                </asp:TemplateField>       
+                                                <asp:TemplateField HeaderText="Unit">
+                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                    <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right"/>
+                                                </asp:TemplateField>                                                
                                                 <%--<asp:TemplateField HeaderText="TEU">
                                                     <HeaderStyle CssClass="gridviewheader_num" />
                                                     <ItemStyle CssClass="gridviewitem" Width="6%" HorizontalAlign="Right" />

@@ -35,7 +35,7 @@
                             <asp:DropDownList ID="ddlJobStatus" runat="server" Width="155" AutoPostBack="true"
                                 onselectedindexchanged="ddlJobStatus_SelectedIndexChanged">
                                 <asp:ListItem Selected="True" Text="Proforma Jobs" Value="P"></asp:ListItem>
-                                <asp:ListItem Text="Open Jobs" Value="O"></asp:ListItem>
+                                <asp:ListItem Text="Approved Jobs" Value="O"></asp:ListItem>
                                 <asp:ListItem Text="Closed Jobs" Value="C"></asp:ListItem>
                                 <asp:ListItem Text="All Jobs" Value="X"></asp:ListItem>
                             </asp:DropDownList>
@@ -76,8 +76,17 @@
                                 FilterMode="InvalidChars" ValidChars=" " TargetControlID="txtLine">
                             </cc1:FilteredTextBoxExtender>
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtLine"
-                                WatermarkText="Line Name">
+                                WatermarkText="Sales Control">
                             </cc1:TextBoxWatermarkExtender>
+
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlJobType" runat="server" Width="155" AutoPostBack="true"
+                                onselectedindexchanged="ddlJobType_SelectedIndexChanged">
+                                <asp:ListItem Selected="True" Text="All" Value="B"></asp:ListItem>
+                                <asp:ListItem Text="Pending Approval" Value="P"></asp:ListItem>
+                                <asp:ListItem Text="Approved" Value="A"></asp:ListItem>
+                            </asp:DropDownList>
                         </td>
                     </tr>
                     <tr>
@@ -161,33 +170,35 @@
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="10%" />
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkPlaceOfReceipt" runat="server" CommandName="Sort" CommandArgument="PlaceOfReceipt" Text="Place Of Receipt"></asp:LinkButton>
+                                            <asp:LinkButton ID="lnkPlaceOfReceipt" runat="server" CommandName="Sort" CommandArgument="PlaceOfReceipt" Text="POL"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="10%" />
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkPlaceOfDelivery" runat="server" CommandName="Sort" CommandArgument="PlaceOfDelivery" Text="Place Of Delivery"></asp:LinkButton>
+                                            <asp:LinkButton ID="lnkPlaceOfDelivery" runat="server" CommandName="Sort" CommandArgument="PlaceOfDelivery" Text="POD"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                    <asp:TemplateField HeaderStyle-HorizontalAlign="Right">
+                                        <HeaderStyle CssClass="gridviewheaderright" />
+                                        <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Right"/>
                                         <HeaderTemplate>
-                                            <asp:LinkButton ID="lnkEstPayable" runat="server" CommandName="Sort" CommandArgument="EstPayable" Text="Est. Payable"></asp:LinkButton>
+                                            <asp:LinkButton ID="lnkEstPayable" runat="server" CommandName="Sort" CommandArgument="EstPayable" 
+                                                Text="Est. Payable">
+                                            </asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                    <asp:TemplateField HeaderStyle-HorizontalAlign="Right">
+                                        <HeaderStyle CssClass="gridviewheaderright" />
+                                        <ItemStyle CssClass="gridviewitem" Width="10%"  HorizontalAlign="Right"/>
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkEstReceivable" runat="server" CommandName="Sort" CommandArgument="EstReceivable" Text="Est. Receivable"></asp:LinkButton>
                                         </HeaderTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                    <asp:TemplateField HeaderStyle-HorizontalAlign="Right">
+                                        <HeaderStyle CssClass="gridviewheaderright" />
+                                        <ItemStyle CssClass="gridviewitem" Width="10%"  HorizontalAlign="Right"/>
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkEstProfit" runat="server" CommandName="Sort" CommandArgument="EstProfit" Text="Est. Profit"></asp:LinkButton>
                                         </HeaderTemplate>
@@ -196,7 +207,7 @@
                                         <HeaderStyle CssClass="gridviewheader" />
                                         <ItemStyle CssClass="gridviewitem" Width="5%" HorizontalAlign="Center" VerticalAlign="Middle" />
                                         <ItemTemplate>
-                                            <asp:ImageButton ID="btnDashboard" runat="server" CommandName="Dashboard" ImageUrl="~/Images/status.jpg"
+                                            <asp:ImageButton ID="btnDashboard" runat="server" CommandName="Dashboard" ImageUrl="~/Images/dashboard.ico"
                                                 Height="16" Width="16" />
                                         </ItemTemplate>
                                     </asp:TemplateField>

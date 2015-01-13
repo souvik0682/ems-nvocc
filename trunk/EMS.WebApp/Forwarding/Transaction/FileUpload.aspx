@@ -7,7 +7,8 @@
     <title></title>
     <script type="text/javascript">
         function sendValue() {
-            window.opener.update(document.getElementById('<%=hdnFileName.ClientID %>').value);
+            //            window.opener.update(document.getElementById('<%=hdnFileName.ClientID %>').value);
+            alert("File :" + document.getElementById('<%=hdnFileName.ClientID %>').Value + " Successfully Updated!");
             window.close();
         }
     </script>

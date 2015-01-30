@@ -160,7 +160,7 @@
                             <td>
 <%--                                <ccs:CustomTextBox ID="txtExRate" data='1' TextBoxType="2"  runat="server" CssClass="numerictextbox" MaxLength="80"
                                 Width="100" AutoPostBack="true" OnTextChanged="Text_TextChanged"></ccs:CustomTextBox>--%>
-
+                                <asp:HiddenField ID="hdnExRate" runat="server" Value="0" />
                                 <ccs:CustomTextBox ID="txtExRate"  data='3' runat="server" AutoPostBack="true" OnTextChanged="TextEx_TextChanged"
                                     CssClass="numerictextbox" Type="Decimal" MaxLength="15" Precision="12" Scale="2" Width="70">
                                 </ccs:CustomTextBox>

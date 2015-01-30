@@ -1,6 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreditorPayment.aspx.cs"
-    Inherits="EMS.WebApp.Forwarding.Transaction.CreditorPayment" MasterPageFile="~/Site.Master"
-    Title=":: Liner :: Add / Edit Money Receipts" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Advance.aspx.cs"
+    Inherits="EMS.WebApp.Forwarding.Transaction.Advance" MasterPageFile="~/Site.Master"
+    Title=":: Liner :: Add / Edit Advance" %>
 
 <%@ Register Assembly="EMS.WebApp" Namespace="EMS.WebApp.CustomControls" TagPrefix="cc2" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
@@ -53,35 +53,7 @@
 
         }
 
-        function ValidateTotal() {
-            debugger;
-            if (parseFloat(document.getElementById('<%= txtPendingAmt.ClientID %>').value, 10) < parseFloat(document.getElementById('<%= txtCurrentAmount.ClientID %>').value, 10)) {
-                alert("Pay amount can not be greater than penfing amount");
-                return false;
-            }
-            else
-                if (document.getElementById('<%= txtDate.ClientID %>').value == "") {
-                    document.getElementById('<%= rfvDate.ClientID %>').style.display = "block";
-                    return false;
-                }
-                else {
-                    return true;
-                }
-
-        }
-
-
-        function checkDate(sender, args) {
-            var invDate = document.getElementById('<%= hdnInvDt.ClientID %>').value;
-
-            if (sender._selectedDate < new Date(invDate)) {
-                alert("Date should be greater than Invoice date!");
-                sender._selectedDate = new Date();
-                // set the date back to the current date
-                //sender._textbox.set_Value(sender._selectedDate.format(sender._format))
-                sender._textbox.set_Value("")
-            }
-        }
+       
 
     
     </script>
@@ -96,14 +68,15 @@
         </div>
     </div>
     <div id="headercaption">
-        ADD / EDIT PAYMENT</div>
+        <asp:Literal ID="litHeader" runat="server"></asp:Literal>      </div>
+<%--        ADD / EDIT ADVACE</div>--%>
     <center>
         <fieldset style="width: 60%;">
-            <legend>Add / Edit Creditors Payment</legend>
+            <legend>Add / Edit Advance</legend>
             <table border="0" width="100%">
                 <tr>
                     <td style="width: 15%;">
-                        Payment No:
+                        Advance No:
                     </td>
                     <td style="width: 15%;">
                         <asp:TextBox ID="txtMRNo" runat="server" CssClass="textboxuppercase" MaxLength="10"
@@ -115,8 +88,7 @@
                     </td>
                     <td style="width: 15%;">
                         <asp:TextBox ID="txtDate" runat="server" Width="150px"></asp:TextBox>
-                        <cc1:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy" TargetControlID="txtDate"
-                            OnClientDateSelectionChanged="checkDate">
+                        <cc1:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy" TargetControlID="txtDate">
                         </cc1:CalendarExtender>
                         <asp:RequiredFieldValidator ID="rfvDate" runat="server" ErrorMessage="Please enter receipt date"
                             ControlToValidate="txtDate" ValidationGroup="vgMoneyRecpt" Display="None"></asp:RequiredFieldValidator>
@@ -144,13 +116,13 @@
                 </tr>
                 <tr>
                     <td>
-                        Payment To
+                        Party Type
                     </td>
                     <td>
-                         <asp:RadioButtonList ID="rdoPayment" runat="server" AutoPostBack="true" OnSelectedIndexChanged="rdoPayment_SelectedIndexChanged" RepeatDirection="Horizontal">
-                                    <asp:ListItem Text="Advance" Value="A" Selected="True"></asp:ListItem>
-                                    <asp:ListItem Text="Against Invoice" Value="C"></asp:ListItem>
-                                </asp:RadioButtonList>                    
+                        <asp:DropDownList ID="ddlPartyType" runat="server" CssClass="dropdownlist"
+                        AutoPostBack="true" OnSelectedIndexChanged="ddlPartyType_SelectedIndexChanged">
+                            <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
+                        </asp:DropDownList>                   
                     </td>
                     <td>
                         Party:
@@ -166,44 +138,20 @@
         <fieldset style="width: 60%;">
             <legend>Payment Details</legend>
             <table style="width: 100%;" border="0">
-                <tr>
-                    <td style="width: 15%;">
-                        Invoice No.:
-                    </td>
-                    <td style="width: 15%;">
-                        <asp:TextBox ID="txtInvoiceNo" runat="server" Width="180px" Enabled="false"></asp:TextBox>
-                    </td>
-                    <td style="width: 10%;">
-                        Invoice Amount:
-                    </td>
-                    <td style="width: 15%;">
-                        <cc2:CustomTextBox ID="txtInvoiceAmount" runat="server" Width="150" Type="Decimal"
-                            MaxLength="13" Precision="10" Scale="2" Style="text-align: right;" Enabled="false"></cc2:CustomTextBox>
-                    </td>
-                </tr>
+               
+                
                 <tr>
                     <td>
-                        Invoice Type:
+                        Cheque Payment
                     </td>
                     <td>
-                        <asp:TextBox ID="txtInvoiceType" runat="server" Width="180px" Enabled="false"></asp:TextBox>
-                    </td>
-                    <td>
-                        Pending Amount
-                    </td>
-                    <td>
-                        <cc2:CustomTextBox ID="txtPendingAmt" runat="server" Width="150" Type="Decimal" MaxLength="13"
-                            Precision="10" Scale="2" Style="text-align: right;" onblur="AddTotal();" Enabled="false"></cc2:CustomTextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Invoice Date:
-                    </td>
-                    <td>
-                        <asp:HiddenField ID="hdnInvDt" runat="server" />
-                        <asp:TextBox ID="txtInvoiceDate" runat="server" CssClass="textboxuppercase" MaxLength="100"
-                            Width="180px" Enabled="false"></asp:TextBox>
+                        <%-- <cc2:CustomTextBox ID="txtChequeAmt" runat="server" Width="150" Type="Decimal" MaxLength="13"
+                            Precision="10" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>--%>
+                        <asp:TextBox ID="txtChequeAmt" runat="server" Width="180" MaxLength="13" Style="text-align: right;"
+                            onblur="CheckTotal();" AutoPostBack="false"></asp:TextBox>
+                        <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" TargetControlID="txtChequeAmt"
+                            FilterMode="ValidChars" FilterType="Numbers,Custom" ValidChars=".">
+                        </cc1:FilteredTextBoxExtender>
                     </td>
                     <td>
                         Cash Payment:
@@ -226,16 +174,16 @@
                         <asp:TextBox ID="txtChqNo" runat="server" Width="180px" Enabled="false"></asp:TextBox>
                     </td>
                     <td>
-                        Cheque Payment
+                        Cheque Date
                     </td>
                     <td>
-                        <%-- <cc2:CustomTextBox ID="txtChequeAmt" runat="server" Width="150" Type="Decimal" MaxLength="13"
-                            Precision="10" Scale="2" Style="text-align: right;"></cc2:CustomTextBox>--%>
-                        <asp:TextBox ID="txtChequeAmt" runat="server" Width="150" MaxLength="13" Style="text-align: right;"
-                            onblur="CheckTotal();" AutoPostBack="false"></asp:TextBox>
-                        <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" TargetControlID="txtChequeAmt"
-                            FilterMode="ValidChars" FilterType="Numbers,Custom" ValidChars=".">
-                        </cc1:FilteredTextBoxExtender>
+                        <asp:TextBox ID="txtChqDate" Width="150" runat="server" Enabled="false"></asp:TextBox>
+                        <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtChqDate">
+                        </cc1:CalendarExtender>
+
+<%--                        <cc1:CalendarExtender ID="CalendarExtender2" runat="server" PopupButtonID="txtChqDate"
+                            TargetControlID="txtChqDate" Format="dd/MM/yyyy">
+                        </cc1:CalendarExtender>--%>
                     </td>
                 </tr>
                 <tr>
@@ -261,13 +209,8 @@
                 </tr>
                 <tr>
                     <td>
-                        Cheque Date
                     </td>
                     <td>
-                        <asp:TextBox ID="txtChqDate" Width="180" runat="server" Enabled="false"></asp:TextBox>
-                        <cc1:CalendarExtender ID="CalendarExtender2" runat="server" PopupButtonID="txtChqDate"
-                            TargetControlID="txtChqDate" Format="dd/MM/yyyy">
-                        </cc1:CalendarExtender>
                     </td>
                     <td>
                         Net Amount:<span class="errormessage1">*</span>

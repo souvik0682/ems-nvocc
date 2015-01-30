@@ -14,7 +14,7 @@ using System.Data;
 
 namespace EMS.WebApp.Forwarding.Transaction
 {
-    public partial class CreditorPayment : System.Web.UI.Page
+    public partial class Advance : System.Web.UI.Page
     {
         #region Private Member Variables
 
@@ -31,24 +31,40 @@ namespace EMS.WebApp.Forwarding.Transaction
         #endregion
 
         #region Protected Event Handler
-
         protected void Page_Load(object sender, EventArgs e)
         {
-
             RetriveParameters();
             //CheckUserAccess();
 
 
             if (!IsPostBack)
             {
-                GetPartyValuesSetToDdl();
+                //GetPartyValuesSetToDdl();
+                if (_PaymentType == "C")
+                    litHeader.Text = "ADD / EDIT ADVACE PAID";
+                else
+                    litHeader.Text = "ADD / EDIT ADVACE RECEIVED";
                 string strProcessScript = "this.value='Processing...';this.disabled=true;";
                 btnSave.Attributes.Add("onclick", strProcessScript + ClientScript.GetPostBackEventReference(btnSave, "").ToString());
-
+                LoadPartyTypeDDl();
                 LoadData();
             }
+        }
 
-            //   CheckUserAccess(countryId);
+        private void LoadData()
+        {
+            MoneyReceiptsBLL mrBll = new MoneyReceiptsBLL();
+            DataTable dt = mrBll.GetInvoiceDetailForAdvance(_InvoiceId, _jobid, _PaymentType);
+
+            txtDate.Text = DateTime.Now.ToShortDateString();
+            txtJobNo.Text = dt.Rows[0]["JOBNO"].ToString();
+            txtJobDate.Text = Convert.ToDateTime(dt.Rows[0]["JOBDATE"].ToString()).ToString("dd/MM/yyyy");
+            //if (_PaymentType == "C")
+            //{
+            //    ddlParty.SelectedValue = Convert.ToString(dt.Rows[0]["fk_CreditorID"]);
+            //    ddlParty.Enabled = false;
+            //}
+
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -64,32 +80,26 @@ namespace EMS.WebApp.Forwarding.Transaction
             if (!String.IsNullOrEmpty(txtTDS.Text))
                 Tds = Convert.ToDecimal(txtTDS.Text);
 
-            if ((rdoPayment.SelectedValue == "C" && Convert.ToDecimal(txtPendingAmt.Text) >= (Cash + Chq + Tds)) || rdoPayment.SelectedValue == "A")
-                SaveMoneyReceipts();
-            else
-            {
-                Label lbl = new Label();
-                lbl.Text = "<script type='text/javascript'>alert('Payment Amount can not be more than O/s Amount');</script>";
-                Page.Controls.Add(lbl);
-            }
+            SaveMoneyReceipts();
+
         }
 
         #endregion
 
         #region Private Methods
 
-        private void GetPartyValuesSetToDdl()
-        {
-            //ddlParty.Items.Clear();
-            //var creditorInvoice = new CreditorInvoiceBLL().GetCreditor((ISearchCriteria)null);
+        //private void GetPartyValuesSetToDdl()
+        //{
+        //    //ddlParty.Items.Clear();
+        //    //var creditorInvoice = new CreditorInvoiceBLL().GetCreditor((ISearchCriteria)null);
 
-            var creditorInvoice = new EstimateBLL().GetAllParty(0);
-            ddlParty.DataSource = creditorInvoice;
-            ddlParty.DataTextField = "PartyName";
-            ddlParty.DataValueField = "pk_fwPartyID";
-            ddlParty.DataBind();
-            ddlParty.Items.Insert(0, new ListItem("--Select--", "0"));
-        }
+        //    var creditorInvoice = new EstimateBLL().GetAllParty(0);
+        //    ddlParty.DataSource = creditorInvoice;
+        //    ddlParty.DataTextField = "PartyName";
+        //    ddlParty.DataValueField = "pk_fwPartyID";
+        //    ddlParty.DataBind();
+        //    ddlParty.Items.Insert(0, new ListItem("--Select--", "0"));
+        //}
 
         private void RetriveParameters()
         {
@@ -102,8 +112,8 @@ namespace EMS.WebApp.Forwarding.Transaction
             //{
             if (Request.QueryString["invid"] != null)
                 Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["invid"].ToString()), out _InvoiceId);
-                Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["jobid"].ToString()), out _jobid);
-                _PaymentType = GeneralFunctions.DecryptQueryString(Request.QueryString["paymenttype"].ToString());
+            Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["jobid"].ToString()), out _jobid);
+            _PaymentType = GeneralFunctions.DecryptQueryString(Request.QueryString["paymenttype"].ToString());
             //}
         }
 
@@ -137,37 +147,7 @@ namespace EMS.WebApp.Forwarding.Transaction
             //}
         }
 
-        private void LoadData()
-        {
-            MoneyReceiptsBLL mrBll = new MoneyReceiptsBLL();
-            DataTable dt = mrBll.GetInvoiceDetailForCrePayment(_InvoiceId, _jobid, _PaymentType);
-
-            txtDate.Text = DateTime.Now.ToShortDateString();
-            txtJobNo.Text = dt.Rows[0]["JOBNO"].ToString();
-            txtJobDate.Text = Convert.ToDateTime(dt.Rows[0]["JOBDATE"].ToString()).ToString("dd/MM/yyyy");
-            txtInvoiceNo.Text = "";
-            txtInvoiceDate.Text = "";
-            if (_PaymentType == "C")
-            {
-                rdoPayment.SelectedValue = _PaymentType;
-                ddlParty.SelectedValue = Convert.ToString(dt.Rows[0]["fk_CreditorID"]);
-                ddlParty.Enabled = false;
-            }
-            //txtLocation.Text = dt.Rows[0]["LOCATION"].ToString();
-            //ddlExportImport.SelectedValue = dt.Rows[0]["EXPIMP"].ToString();
-            if (_PaymentType == "C")
-            {
-                txtInvoiceNo.Text = dt.Rows[0]["INVNO"].ToString();
-                txtInvoiceType.Text = dt.Rows[0]["DOCTYPE"].ToString();
-                txtInvoiceDate.Text = Convert.ToDateTime(dt.Rows[0]["INVDT"].ToString()).ToString("dd/MM/yyyy");
-            }
-
-            //hdnInvDt.Value = Convert.ToDateTime(dt.Rows[0]["INVDT"].ToString()).ToString("MM/dd/yyyy");
-            txtInvoiceAmount.Text = dt.Rows[0]["INVAMT"].ToString();
-            txtPendingAmt.Text = dt.Rows[0]["PENDING"].ToString();
-            //hdnLocationID.Value = dt.Rows[0]["LOCID"].ToString();
-            //hdnNvoccId.Value = dt.Rows[0]["LINEID"].ToString();
-        }
+      
 
         private void SaveMoneyReceipts()
         {
@@ -182,7 +162,7 @@ namespace EMS.WebApp.Forwarding.Transaction
             moneyReceipt.MRDate = Convert.ToDateTime(txtDate.Text);
             moneyReceipt.ChequeNo = txtChqNo.Text;
             moneyReceipt.ChequeBank = txtBankName.Text.ToUpper();
-            moneyReceipt.CHA = rdoPayment.SelectedValue.ToString();
+            //moneyReceipt.CHA = rdoPayment.SelectedValue.ToString();
             if (!string.IsNullOrEmpty(txtChqDate.Text))
                 moneyReceipt.ChequeDate = Convert.ToDateTime(txtChqDate.Text);
 
@@ -197,13 +177,14 @@ namespace EMS.WebApp.Forwarding.Transaction
 
             moneyReceipt.NvoccId = _jobid;
             moneyReceipt.CREID = ddlParty.SelectedValue.ToInt();
+            moneyReceipt.NvoccId = ddlPartyType.SelectedValue.ToInt();
             moneyReceipt.UserAddedId = _userId;
             moneyReceipt.UserEditedId = _userId;
             moneyReceipt.UserAddedOn = DateTime.Now.Date;
             moneyReceipt.UserEditedOn = DateTime.Now.Date;
             moneyReceipt.Status = true;
 
-            switch (mrBll.SaveCrePayment(moneyReceipt))
+            switch (mrBll.SaveAdvance(moneyReceipt))
             {
                 case 0: lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00011");
                     break;
@@ -214,22 +195,46 @@ namespace EMS.WebApp.Forwarding.Transaction
 
         }
 
+        protected void ddlPartyType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GetPartyValuesSetToDdl(ddlPartyType.SelectedValue.ToInt());
+        }
 
+        private void GetPartyValuesSetToDdl(int PartyType)
+        {
+            ddlParty.Items.Clear();
+
+            DataSet dll = new DataSet();
+
+            dll = new EstimateBLL().GetAllParty(PartyType);
+
+            ddlParty.DataSource = dll;
+            ddlParty.DataTextField = "PartyName";
+            ddlParty.DataValueField = "pk_fwPartyID";
+            ddlParty.DataBind();
+            ddlParty.Items.Insert(0, new ListItem("--Select--", "0"));
+        }
+
+        private void LoadPartyTypeDDl()
+        {
+            var partyType = new EstimateBLL().GetBillingGroupMaster((ISearchCriteria)null);
+            ddlPartyType.DataSource = partyType;
+
+            ddlPartyType.DataTextField = "PartyType";
+            ddlPartyType.DataValueField = "pk_PartyTypeID";
+            ddlPartyType.DataBind();
+            ddlPartyType.Items.Insert(0, new ListItem("--Select--", "0"));
+
+        }
 
         #endregion
-
-
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Forwarding/Transaction/Dashboard.aspx?JobId=" + GeneralFunctions.EncryptQueryString(_jobid.ToString()));
-          
-        }
-
-        protected void rdoPayment_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
         }
 
+        
     }
 }

@@ -7,100 +7,73 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EMS.WebApp.Forwarding.Master {
+namespace EMS.WebApp.Forwarding.Transaction {
     
     
-    public partial class CreInvoice {
+    public partial class FwdCreditNote {
         
         /// <summary>
-        /// uProgressLoc control.
+        /// upCreditNote control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress uProgressLoc;
+        protected global::System.Web.UI.UpdatePanel upCreditNote;
         
         /// <summary>
-        /// upLoc control.
+        /// txtLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upLoc;
+        protected global::System.Web.UI.WebControls.TextBox txtLocation;
         
         /// <summary>
-        /// ddlPartyType control.
+        /// txtLine control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPartyType;
+        protected global::System.Web.UI.WebControls.TextBox txtLine;
         
         /// <summary>
-        /// hdnLastNo control.
+        /// txtCreditNoteNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnLastNo;
+        protected global::System.Web.UI.WebControls.TextBox txtCreditNoteNo;
         
         /// <summary>
-        /// rfvPartyType control.
+        /// txtInvoiceType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPartyType;
+        protected global::System.Web.UI.WebControls.TextBox txtInvoiceType;
         
         /// <summary>
-        /// ddlCreditorName control.
+        /// txtInvoiceRef control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCreditorName;
+        protected global::System.Web.UI.WebControls.TextBox txtInvoiceRef;
         
         /// <summary>
-        /// RequiredFieldValidator1 control.
+        /// txtCNDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
-        
-        /// <summary>
-        /// txtCreInvoiceNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCreInvoiceNo;
-        
-        /// <summary>
-        /// rfvtxtAdjustmentDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtAdjustmentDate;
-        
-        /// <summary>
-        /// txtCreInvoiceDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCreInvoiceDate;
+        protected global::System.Web.UI.WebControls.TextBox txtCNDate;
         
         /// <summary>
         /// CalendarExtender1 control.
@@ -112,157 +85,121 @@ namespace EMS.WebApp.Forwarding.Master {
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
         
         /// <summary>
-        /// RequiredFieldValidator2 control.
+        /// RequiredFieldValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
-        /// lblOurInvoiceRef control.
+        /// txtContainers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOurInvoiceRef;
+        protected global::System.Web.UI.WebControls.TextBox txtContainers;
         
         /// <summary>
-        /// txtReferenceDate control.
+        /// txtInvoiceDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReferenceDate;
+        protected global::System.Web.UI.WebControls.TextBox txtInvoiceDate;
         
         /// <summary>
-        /// CalendarExtender2 control.
+        /// txtBLRef control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender2;
+        protected global::System.Web.UI.WebControls.TextBox txtBLRef;
         
         /// <summary>
-        /// RequiredFieldValidator3 control.
+        /// txtExpImp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
+        protected global::System.Web.UI.WebControls.TextBox txtExpImp;
         
         /// <summary>
-        /// lblJobNumber control.
+        /// ddlFChargeName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblJobNumber;
+        protected global::System.Web.UI.WebControls.DropDownList ddlFChargeName;
         
         /// <summary>
-        /// lblJobDate control.
+        /// rfvChargeName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblJobDate;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvChargeName;
         
         /// <summary>
-        /// txtExRate control.
+        /// txtChargeInvoice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::EMS.WebApp.CustomControls.CustomTextBox txtExRate;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtChargeInvoice;
         
         /// <summary>
-        /// chkRoff control.
+        /// txtChargeServiceTax control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkRoff;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtChargeServiceTax;
         
         /// <summary>
-        /// txtRoff control.
+        /// txtCNAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::EMS.WebApp.CustomControls.CustomTextBox txtRoff;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtCNAmount;
         
         /// <summary>
-        /// lblLocation control.
+        /// txtCNServiceTax control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLocation;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtCNServiceTax;
         
         /// <summary>
-        /// lblInvoiceAmount control.
+        /// btnAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblInvoiceAmount;
+        protected global::System.Web.UI.WebControls.Button btnAdd;
         
         /// <summary>
-        /// hdnInvoiceAmount control.
+        /// gvwCreditNote control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnInvoiceAmount;
-        
-        /// <summary>
-        /// chkApproved control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkApproved;
-        
-        /// <summary>
-        /// txtComment control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtComment;
-        
-        /// <summary>
-        /// rfvComment control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvComment;
-        
-        /// <summary>
-        /// grvInvoice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvInvoice;
+        protected global::System.Web.UI.WebControls.GridView gvwCreditNote;
         
         /// <summary>
         /// btnSave control.
@@ -274,57 +211,30 @@ namespace EMS.WebApp.Forwarding.Master {
         protected global::System.Web.UI.WebControls.Button btnSave;
         
         /// <summary>
-        /// btnCancel control.
+        /// btnBack control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.Button btnBack;
         
         /// <summary>
-        /// Button1 control.
+        /// lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Label lblMessage;
         
         /// <summary>
-        /// ModalPopupExtender1 control.
+        /// uProgressCreditNote control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender1;
-        
-        /// <summary>
-        /// pnlContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlContainer;
-        
-        /// <summary>
-        /// InvoiceUpload control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload InvoiceUpload;
-        
-        /// <summary>
-        /// btnCancelContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelContainer;
+        protected global::System.Web.UI.UpdateProgress uProgressCreditNote;
     }
 }

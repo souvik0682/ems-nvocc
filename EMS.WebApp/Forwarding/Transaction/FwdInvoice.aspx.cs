@@ -62,9 +62,11 @@ namespace EMS.WebApp.Forwarding.Transaction
                 {
                     int docTypeId = 0;
                     _isedit = 0;
-
+                    int JobID = 0;
                     //Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["docTypeId"].ToString()), out docTypeId);
                     string JobNo = GeneralFunctions.DecryptQueryString(Request.QueryString["jobNo"].ToString());
+                    Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["jobID"].ToString()), out JobID);
+                    
                     //string EstimateId = GeneralFunctions.DecryptQueryString(Request.QueryString["estimateId"].ToString());
                     //string Containers = GeneralFunctions.DecryptQueryString(Request.QueryString["containers"].ToString());
                     
@@ -74,7 +76,7 @@ namespace EMS.WebApp.Forwarding.Transaction
 
                     //LoadEstimateDDL(Convert.ToInt32(EstimateId));
                     ddlSize_SelectedIndexChanged(null, null);
-                    LoadForBLQuery(JobNo, docTypeId);
+                    LoadForBLQuery(JobID, docTypeId);
                     LoadChargeDDL(docTypeId);
                     btnSave.Enabled = true;
                 }
@@ -693,7 +695,8 @@ namespace EMS.WebApp.Forwarding.Transaction
             invoice.ExportImport = "F";
             invoice.GrossAmount = chargeRate.Sum(c => c.GrossAmount);
             invoice.InvoiceDate = Convert.ToDateTime(txtInvoiceDate.Text);
-            invoice.InvoiceTypeID = 37;
+            invoice.InvoiceTypeID = 38;
+            invoice.XchangeRate = txtExRate.Text.ToDecimal();
             //invoice.InvoiceTypeID = Convert.ToInt32(ddlInvoiceType.SelectedValue);
             //invoice.JobID = Convert.ToInt32(ddlJobNo.SelectedValue);
             invoice.JobID = hdnJobID.Value.ToInt();
@@ -844,7 +847,7 @@ namespace EMS.WebApp.Forwarding.Transaction
             txtJobDate.Text = invoice.JobDate.ToString();
             txtInvoiceDate.Text = invoice.InvoiceDate.ToShortDateString();
             txtInvoiceNo.Text = invoice.InvoiceNo;
-
+            txtExRate.Text = invoice.XchangeRate.ToString();
             //ddlInvoiceType.SelectedValue = invoice.InvoiceTypeID.ToString();
             //ddlJobNo.SelectedValue = invoice.JobID.ToString();
             
@@ -890,9 +893,9 @@ namespace EMS.WebApp.Forwarding.Transaction
             ddlPartyType.Items.Insert(0, new ListItem("--Select--", "0"));
 
         }
-        private void LoadForBLQuery(string JobNo, int DocType)
+        private void LoadForBLQuery(int JobID, int DocType)
         {
-            DataTable dt = new InvoiceBLL().GetFwdLineLocation(JobNo);
+            DataTable dt = new InvoiceBLL().GetFwdLineLocation(JobID);
             LoadPartyTypeDDl();
             //var partyType = new EstimateBLL().GetBillingGroupMaster((ISearchCriteria)null);
             //ddlPartyType.DataSource = partyType;

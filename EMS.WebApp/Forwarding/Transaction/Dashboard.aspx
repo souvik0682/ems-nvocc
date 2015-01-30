@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="Dashboard.aspx.cs" Inherits="EMS.WebApp.Farwarding.Transaction.Dashboard" %>
-
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
@@ -12,6 +12,20 @@
 //            alert("File: " + val + " successfully uploaded!");
         }
     </script>
+
+    <script type="text/javascript">
+         function ReportPrint1(a, b, c) {
+             window.open('../../Popup/Report.aspx?' + a + b + c, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
+             return false;
+         }
+
+         function ReportPrint2(a, b, c, d, e, f) {
+             window.open('../Popup/Report.aspx?' + a + b + c + d + e + f, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
+             return false;
+         }
+
+    </script>
+
     <!-- Le styles -->
       <link rel="stylesheet" href="css/bootstrap.min.css">
       <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -74,6 +88,28 @@
                                         <table class="table table-bordered">
                                             <tr>
                                                 <td>
+                                                <asp:Button ID="btnTemp11" runat="server" Style="display: none;" />
+                                                    <cc1:ModalPopupExtender ID="mpeMoneyReceivedDetail" runat="server" PopupControlID="pnlMoneyReceived"
+                                                        TargetControlID="btnTemp11" BackgroundCssClass="ModalPopupBG" CancelControlID="imgCloseMoneyReceived">
+                                                    </cc1:ModalPopupExtender>
+                                                    <asp:Panel ID="pnlMoneyReceived" runat="server" Style="display: none;">
+                                                        <div style="height: 300; width: 600px; overflow: auto;">
+                                                            <div style="background-color: #328DC4; padding-top: 5px;">
+                                                                <div id="headerTest" runat="server" style="width: 89%; text-align: left; font-weight: bold;
+                                                                    color: White; font-size: 12pt; padding-left: 15px; float: left;">
+                                                                </div>
+                                                                <div style="float: left;">
+                                                                    <asp:ImageButton ID="imgCloseMoneyReceived" runat="server" ImageUrl="~/Images/close-icon.png"
+                                                                        Style="display: block;" /></div>
+                                                                <div style="clear: both;">
+                                                                </div>
+                                                            </div>
+                                                            <div id="dvMoneyReceived" runat="server" style="width: 100%; height: 300px; overflow: auto;
+                                                                background-color: White; padding-top: 15px; text-align: center;">
+                                                                No records found.
+                                                            </div>
+                                                        </div>
+                                                    </asp:Panel>
                                                     <strong> Job Date </strong>
                                                 </td>
                                                 <td>
@@ -401,8 +437,8 @@
                                                 </h4>
                                                </div>                
                                                 <div class="col-sm-4 text-right">
-                                                    <asp:Button ID="Button1" runat="server" Text="Advance Payment" CssClass="btn btn-primary"
-                                                        OnClick="btnAdvPayment_Click" />
+<%--                                                    <asp:Button ID="Button1" runat="server" Text="Advance Payment" CssClass="btn btn-primary"
+                                                        OnClick="btnAdvPayment_Click" />--%>
                                                     <asp:Button ID="Button2" runat="server" Text="Add Payable" CssClass="btn btn-primary"
                                                         OnClick="btnAddPayable_Click" />
                                                   </div>
@@ -540,8 +576,8 @@
                                                 </h4>
                                                </div>                
                                                 <div class="col-sm-4 text-right">
-                                                    <asp:Button ID="Button3" runat="server" Text="Advance Receipt" CssClass="btn btn-primary"
-                                                                OnClick="btnAdvanceReceipt_Click" />
+<%--                                                    <asp:Button ID="Button3" runat="server" Text="Advance Receipt" CssClass="btn btn-primary"
+                                                                OnClick="btnAdvanceReceipt_Click" />--%>
                                                             <asp:Button ID="Button4" runat="server" Text="Add Recovery" CssClass="btn btn-primary"
                                                                 OnClick="btnAddRecovery_Click" />
                                                   </div>
@@ -678,8 +714,11 @@
                                                 </h4>
                                                </div>                
                                                 <div class="col-sm-4 text-right">
+                                                    <asp:Button ID="Button1" runat="server" Text="Advance Payment" CssClass="btn btn-primary"
+                                                        OnClick="btnAdvPayment_Click" />
                                                     <asp:Button ID="Button5" runat="server" Text="Add Invoice" CssClass="btn btn-primary"
                                                                 OnClick="btnAddInvoiceCred_Click" />
+
                                                   </div>
                                                </div>
                                                 
@@ -817,6 +856,8 @@
                                                 </h4>
                                                </div>                
                                                 <div class="col-sm-4 text-right">
+                                                    <asp:Button ID="Button3" runat="server" Text="Advance Receipt" CssClass="btn btn-primary"
+                                                                OnClick="btnAdvanceReceipt_Click" />
                                                     <asp:Button ID="Button6" runat="server" Text="Add Invoice" CssClass="btn btn-primary"
                                                                 OnClick="btnAddInvoiceDebt_Click" />
                                                   </div>
@@ -879,9 +920,18 @@
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheaderright" />
                                                                     <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right"/>
-                                                                    <HeaderTemplate>
+<%--                                                                    <HeaderTemplate>
                                                                         <asp:Label ID="lblReceivedAmt" runat="server" Text="Received Amount"></asp:Label>
+                                                                    </HeaderTemplate>--%>
+                                                                    <HeaderTemplate>
+                                                                        Received Amount
                                                                     </HeaderTemplate>
+                                                                    <ItemTemplate>
+                                                                        <asp:HiddenField ID="hdnInvID" runat="server" Value='<%# Eval("InvoiceID")%>' />
+                                                                        <asp:HiddenField ID="hdnInvDate" runat="server" Value='<%# Eval("InvoiceDate")%>' />
+                                                                        <a href="#" runat="server" onserverclick="ShowReceivedAmt">
+                                                                            <%# Eval("ReceivedAmt")%></a>
+                                                                    </ItemTemplate>
                                                                 </asp:TemplateField>
 
                                                                 <asp:TemplateField>
@@ -906,9 +956,13 @@
                                                                     <HeaderTemplate>
                                                                         Print Invoice
                                                                     </HeaderTemplate>
-                                                                    <ItemTemplate>
+<%--                                                                    <ItemTemplate>
                                                                         <asp:ImageButton ID="btnPrint" runat="server" CommandName="Print" ImageUrl="~/Images/Print.png"
                                                                             Height="16" Width="16" />
+                                                                    </ItemTemplate>--%>
+                                                                    <ItemTemplate>
+                                                                        <a id="aPrint" runat="server" style="cursor: pointer;">
+                                                                            <img src="../../Images/Print.png" /></a>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
 
@@ -919,9 +973,14 @@
                                                                         Add MR
                                                                     </HeaderTemplate>
                                                                     <ItemTemplate>
+                                                                        <a id="aMoneyRecpt" runat="server" href='<%# "~/Transaction/AddEditMoneyReceipts.aspx?invid=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'
+                                                                            style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Amount")) ? "display:block;": "display:none;" %>'>
+                                                                            <img alt="Add" src="../../Images/ADD.JPG" /></a>
+                                                                    </ItemTemplate>
+<%--                                                                    <ItemTemplate>
                                                                         <asp:ImageButton ID="btnAddMR" runat="server" CommandName="AddMR" ImageUrl="~/Images/ADD.JPG"
                                                                             Height="16" Width="16" />
-                                                                    </ItemTemplate>
+                                                                    </ItemTemplate>--%>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
                                                                     <HeaderStyle CssClass="gridviewheader" />
@@ -929,9 +988,17 @@
                                                                     <HeaderTemplate>
                                                                         Add Crn
                                                                     </HeaderTemplate>
-                                                                    <ItemTemplate>
+<%--                                                                    <ItemTemplate>
                                                                         <asp:ImageButton ID="btnAddCRN" runat="server" CommandName="AddCRN" ImageUrl="~/Images/ADD.JPG"
                                                                             Height="16" Width="16" />
+                                                                    </ItemTemplate>--%>
+                                                                    <ItemTemplate>
+                                                                        <%-- <a href="#">
+                                                                            <img alt="Add" src="../Images/ADD.JPG" /></a>--%>
+                                                                        <a id="aAddCrdtNote" runat="server" href='<%# "FwdCreditNote.aspx?InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(Eval("InvoiceID").ToString()) %>'
+                                                                            style='<%# Convert.ToDecimal(Eval("Amount"))>0 ? "display:block;": "display:none;" %>'>
+                                                                            <img alt="Add" src="../../Images/ADD.JPG" /></a>
+                                                                        <%--style='<%# Convert.ToDecimal(Eval("ReceivedAmt")) < Convert.ToDecimal(Eval("Ammount")) ? "display:block;": "display:none;" %>'>--%>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>

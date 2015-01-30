@@ -577,6 +577,7 @@ namespace EMS.WebApp.Forwarding.Master
             chkRoff.Checked = false;
             txtRoff.Enabled = false;
             txtRoff.Text = "";
+            rfvComment.Enabled = false;
 
             if (!string.IsNullOrEmpty(creInvoiceId))
             {
@@ -646,6 +647,14 @@ namespace EMS.WebApp.Forwarding.Master
                     else
                         chkRoff.Checked = true;
 
+                    if (creditorInvoice.approved)
+                    {
+                        chkApproved.Checked = true;
+                        txtComment.Text = creditorInvoice.comment;
+                    }
+                    else
+                        txtComment.Text = "";
+
                     lblJobNumber.Text        = creditorInvoice.JobNumber;
                    // lblLocation.Text         = creditorInvoice.Location;
                     lblOurInvoiceRef.Text    = creditorInvoice.OurInvoiceRef;
@@ -705,7 +714,9 @@ namespace EMS.WebApp.Forwarding.Master
                 RoundingOff = Convert.ToDouble(txtRoff.Text),
                 UserID = _userId,
                 CreInvoiceDate = Convert.ToDateTime(txtCreInvoiceDate.Text),
-                JobNumber = JobID
+                JobNumber = JobID,
+                approved = chkApproved.Checked,
+                comment = txtComment.Text
 
             };
             return est;
@@ -789,7 +800,7 @@ namespace EMS.WebApp.Forwarding.Master
             var curtype = "E";
 
             DataSet dllUs = new DataSet();
-
+           
 
             if (ViewState["dllUs"] == null)
             {
@@ -1001,8 +1012,21 @@ namespace EMS.WebApp.Forwarding.Master
                 gross = 0;
             }
             lblGTotal.Text = gross.ToString();
+        }
 
-            
+        protected void chkApproved_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkApproved.Checked)
+            {
+                txtComment.Enabled = true;
+                rfvComment.Enabled = true;
+            }
+            else
+            {
+                txtComment.Enabled = false;
+                rfvComment.Enabled = false;
+                txtComment.Text = "";
+            }
         }
     }
 }

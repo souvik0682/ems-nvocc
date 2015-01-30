@@ -280,9 +280,9 @@ namespace EMS.BLL
         {
             return InvoiceDAL.GetExpLineLocation(BLNo);
         }
-        public DataTable GetFwdLineLocation(string JobNo)
+        public DataTable GetFwdLineLocation(int JobID)
         {
-            return InvoiceDAL.GetFwdLineLocation(JobNo);
+            return InvoiceDAL.GetFwdLineLocation(JobID);
         }
 
         public List<IChargeRate> GetInvoiceCharges_New(long BlId, int ChargesID, int TerminalID, decimal ExchangeRate, int DocTypeId, string Param3, DateTime InvoiceDate)

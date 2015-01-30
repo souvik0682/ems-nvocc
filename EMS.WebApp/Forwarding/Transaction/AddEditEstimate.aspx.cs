@@ -659,6 +659,9 @@ namespace EMS.WebApp.Forwarding.Master
                     var path = Server.MapPath("~/Forwarding/QuoUpload");
                     var newFileName = "Quotation" + estimateId.ToString().TrimEnd();  //  Guid.NewGuid().ToString();
 
+                    if (estimate.JobActive != "P")
+                        btnSave.Visible = false;
+
                     //if (!string.IsNullOrEmpty(path))
                     //{
                     //    path += @"\" + hdnQuoPath.Value + ".pdf";
@@ -727,6 +730,7 @@ namespace EMS.WebApp.Forwarding.Master
                     txtEstimateDate.Text = Convert.ToDateTime(dr["JobDate"]).ToShortDateString();
                 }
                 var ex = new EstimateBLL().GetExchange(new SearchCriteria() { StringOption1 = "2", Date = lblJobDate.Text.ToDateTime() });
+                hdnExRate.Value = Convert.ToString(ex.Tables[0].Rows[0]["USDXchRate"]);
                 txtExRate.Text = Convert.ToString(ex.Tables[0].Rows[0]["USDXchRate"]);
                 PopulateUnitType();
 
@@ -964,6 +968,11 @@ namespace EMS.WebApp.Forwarding.Master
             List<Charge> charges = null;
             DataSet ds = new DataSet();
             var estimate = new Estimate();
+            if (txtExRate.Text.ToDecimal() < hdnExRate.Value.ToDecimal())
+            {
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Invalid Exchange Rate!');</script>", false);
+                txtExRate.Text = hdnExRate.Value;
+            }
             charges = (List<Charge>)ViewState["Charges"];
             if (charges.Count > 0)
             {

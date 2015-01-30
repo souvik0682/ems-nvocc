@@ -108,9 +108,19 @@ namespace EMS.BLL
 
         }
 
+        public int SaveCrePayment(MoneyReceiptEntity moneyReceipt)
+        {
+            return MoneyReceiptDAL.SaveCrePayment(moneyReceipt);
+
+        }
         public void DeleteMoneyReceipts(string MRNo)
         {
             MoneyReceiptDAL.DeleteMoneyReceipts(MRNo);
+
+        }
+        public int SaveAdvance(MoneyReceiptEntity moneyReceipt)
+        {
+            return MoneyReceiptDAL.SaveAdvance(moneyReceipt);
 
         }
         #endregion
@@ -244,6 +254,11 @@ namespace EMS.BLL
         public DataTable GetInvoiceDetailForCrePayment(Int64 InvoiceId, Int32 JobID, string InvType)
         {
             return MoneyReceiptDAL.GetInvoiceDetailForCrePayment(InvoiceId, JobID, InvType);
+        }
+
+        public DataTable GetInvoiceDetailForAdvance(Int64 InvoiceId, Int32 JobID, string InvType)
+        {
+            return MoneyReceiptDAL.GetInvoiceDetailForAdvance(InvoiceId, JobID, InvType);
         }
     }
 }

@@ -52,6 +52,11 @@ namespace EMS.BLL
             return JobDAL.GetJobNoFromJobID(JobID);
         }
 
+        public static DataTable GetContainerCountFromJobID(int JobID)
+        {
+            return JobDAL.GetContainerCountFromJobID(JobID);
+        }
+
         public void DeactivateAllContainersAgainstJobId(int JobId)
         {
             JobDAL.DeactivateAllContainersAgainstJobId(JobId);

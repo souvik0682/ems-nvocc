@@ -17,9 +17,9 @@ namespace EMS.BLL
         {
             return AdvAdjustmentDAL.GetDetailFromJob(JobId, DorC);
         }
-        public DataSet GetInvoiceFromJob(int? JobId = null, char? DorC = null)
+        public DataSet GetInvoiceFromJob(int? JobId = null, char? DorC = null, char? NorAdj = null)
         {
-            return AdvAdjustmentDAL.GetInvoiceFromJob(JobId, DorC);
+            return AdvAdjustmentDAL.GetInvoiceFromJob(JobId, DorC, NorAdj);
         }
         public List<AdjustmentModel> GetAdjustmentModel(ISearchCriteria searchCriteria)
         {

@@ -21,6 +21,10 @@ namespace EMS.BLL
             return EMS.DAL.ExpBLPrintingDAL.GetxpBLPrintingDS(searchCriteria);
         }
 
+        public static DataSet GetfwdBLPrintingDS(ISearchCriteria searchCriteria)
+        {
+            return EMS.DAL.ExpBLPrintingDAL.GetfwdBLPrintingDS(searchCriteria);
+        }
         public static bool CheckDraftOrOriginal(string expBLNo)
         {
             return EMS.DAL.ExpBLPrintingDAL.CheckDraftOrOriginal(expBLNo);

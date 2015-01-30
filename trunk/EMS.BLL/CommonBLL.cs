@@ -525,6 +525,11 @@ namespace EMS.BLL
         {
             return CommonDAL.GetExpBL(Location, Line, Voyage);
         }
+
+        public static DataTable GetfwdBL(long Line)
+        {
+            return CommonDAL.GetFwdBL(Line);
+        }
         #endregion
 
         #region Currency

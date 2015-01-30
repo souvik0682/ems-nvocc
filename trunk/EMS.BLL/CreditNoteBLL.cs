@@ -15,10 +15,21 @@ namespace EMS.BLL
             return CreditNoteDAL.GetHeaderInformation(LineId, LocationId, InvoiceId);
         }
 
+        public ICreditNote GetfwdCrnHeaderInformation(int InvoiceId)
+        {
+            return CreditNoteDAL.GetfwdCrnHeaderInformation(InvoiceId);
+        }
+
         public DataTable GetAllCharges(string InvoiceNo)
         {
             return CreditNoteDAL.GetAllCharges(InvoiceNo);
         }
+
+        public DataTable GetAllfwdCharges(string InvoiceNo)
+        {
+            return CreditNoteDAL.GetAllfwdCharges(InvoiceNo);
+        }
+
 
         public ICreditNoteCharge GetChargeDetails(int ChargeId, string InvoiceNo)
         {
@@ -26,6 +37,29 @@ namespace EMS.BLL
         }
 
         public long SaveCreditNote(ICreditNote CreditNote)
+        {
+            long creditNoteId = 0;
+            long creditNoteChargeId = 0;
+
+            creditNoteId = CreditNoteDAL.SaveCreditNoteHeader(CreditNote);
+
+            if (creditNoteId > 0)
+            {
+                if (!ReferenceEquals(CreditNote.CreditNoteCharges, null))
+                {
+                    foreach (ICreditNoteCharge cRate in CreditNote.CreditNoteCharges)
+                    {
+                        cRate.CRNID = creditNoteId;
+                        creditNoteChargeId = CreditNoteDAL.SaveCreditNoteFooter(cRate);
+                    }
+                }
+                creditNoteId = CreditNoteDAL.UpdateCRN(creditNoteId);
+            }
+
+            return creditNoteId;
+        }
+
+        public long SavefwdCreditNote(ICreditNote CreditNote)
         {
             long creditNoteId = 0;
             long creditNoteChargeId = 0;

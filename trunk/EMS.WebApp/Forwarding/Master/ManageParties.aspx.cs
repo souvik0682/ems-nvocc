@@ -69,7 +69,7 @@ namespace EMS.WebApp.Forwarding.Master
                 PartyID = 0,
                 LocAbbr = "",
                 PartyName = txtPartyName.Text,
-                StringParams = new List<string>() { ddlPartyType.SelectedValue == "0" ? "" : ddlPartyType.SelectedValue, txtFullName.Text }
+                StringParams = new List<string>() { ddlPartyType.SelectedValue == "0" ? "0" : ddlPartyType.SelectedValue, txtFullName.Text }
             
             };
             Session["SearchCriteria"] = searchCriteria;

@@ -22,6 +22,8 @@ namespace EMS.WebApp.View
         protected void btnShow_Click(object sender, EventArgs e)
         {
 
+            txtYear.Text = txtYear.Text.Substring(0,4);
+
             BLL.DBInteraction dbinteract = new BLL.DBInteraction();
             dbinteract.UpdateMUSTRecord(ddlMonth.SelectedValue, txtYear.Text);
             lblmsg.Text = "MUST Updated";

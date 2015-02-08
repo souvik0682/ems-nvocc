@@ -37,7 +37,7 @@
    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">
-   <%-- <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+    <%-- <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
         <ProgressTemplate>
             <div class="progress">
                 <div id="image">
@@ -135,7 +135,7 @@
                                     <asp:TextBox ID="txtSettlementNo" runat="server" Width="187px" Enabled="false"></asp:TextBox>
                                 </td>
                                 <td class="style10">
-                                    Payable Amount :
+                                    <asp:Label ID="lblPayable" runat="server" Text="Payable Amount :"></asp:Label>
                                 </td>
                                 <td style="width: 15%;">
                                     <asp:TextBox ID="txtOutstanding" runat="server" Width="147px" Enabled="false" 
@@ -229,7 +229,7 @@
                                         ForeColor="Blue" Enabled="false" OnClick="lnkRRUpload_Click"></asp:LinkButton>
                                 </td>
                                 <td>            
-                                    <asp:FileUpload ID="RRUpload" runat="server" />
+                                    <asp:FileUpload ID="RRUpload" runat="server" width="200"/>
                                     <asp:RequiredFieldValidator ID="rfvRRUpload" runat="server" ControlToValidate="RRUpload"
                                         ErrorMessage="This field is required*" CssClass="errormessage" ValidationGroup="Save"
                                         Display="Dynamic">
@@ -242,7 +242,7 @@
                                         ForeColor="Blue" Enabled="false" OnClick="lnkCLUpload_Click"></asp:LinkButton>
                                 </td>
                                 <td>            
-                                    <asp:FileUpload ID="CLUpload" runat="server"></asp:FileUpload> 
+                                    <asp:FileUpload ID="CLUpload" runat="server" width="200"></asp:FileUpload> 
                                     <asp:RequiredFieldValidator ID="rfvCNUpload" runat="server" ControlToValidate="CLUpload"
                                         ErrorMessage="This field is required*" CssClass="errormessage" ValidationGroup="Save"
                                         Display="Dynamic">

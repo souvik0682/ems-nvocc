@@ -91,6 +91,7 @@ namespace EMS.WebApp.Transaction
                 txtPayToRcvdFrom.Text = BLDataSet.Tables[0].Rows[0]["PartyName"].ToString();
                 hdnRRPath.Value = BLDataSet.Tables[0].Rows[0]["RefundRequestFile"].ToString();
                 hdnCLPath.Value = BLDataSet.Tables[0].Rows[0]["ConsigneeLetterFile"].ToString();
+                txtPayToRcvdFrom.Text = BLDataSet.Tables[0].Rows[0]["PayRcv"].ToString();
                 //hdnFilePath.Value = BLDataSet.Tables[0].Rows[0]["RefundRequestFile"].ToString();
                 fillBLDetail(BLDataSet.Tables[0]);
                 BLDataSet = oSettlementBLL.GetSettlementWithBL(hdnBLId.Value.ToInt());
@@ -98,15 +99,16 @@ namespace EMS.WebApp.Transaction
                 txtOutstanding.Text = Convert.ToString(Math.Abs(BLDataSet.Tables[2].Rows[0]["TotInv"].ToDecimal() - BLDataSet.Tables[2].Rows[0]["TotMR"].ToDecimal() - BLDataSet.Tables[2].Rows[0]["TotCrn"].ToDecimal()));
                 lnkCLUpload.Enabled = true;
                 lnkRRUpload.Enabled = true;
-                btnSave.Enabled = false;
+                btnSave.Visible = false;
                 RRUpload.Enabled = false;
                 CLUpload.Enabled = false;
- 
+                lblPayable.Text = "Paid Amount :"; 
                 //PopulateAllData();
             }
             else
             {
                 hdnSettlementID.Value = "0";
+                lblPayable.Text = "Payable Amount :"; 
             }
         }
 
@@ -151,8 +153,6 @@ namespace EMS.WebApp.Transaction
                     btnSave.Visible = false;
                 }
             }
-
-           
         }
 
         void ClearAll()
@@ -181,9 +181,9 @@ namespace EMS.WebApp.Transaction
           
             txtLocation.Text = dtDetail.Rows[0]["LocName"].ToString();
             txtLine.Text = dtDetail.Rows[0]["Line"].ToString();
-            txtPayToRcvdFrom.Text = dtDetail.Rows[0]["PartyName"].ToString();
+            //txtPayToRcvdFrom.Text = dtDetail.Rows[0]["PartyName"].ToString();
             hdnCustName.Value = dtDetail.Rows[0]["PartyName"].ToString();
-            //txtPayToRcvdFrom.Text = dtDetail.Rows[0]["PayRcv"].ToString();
+            txtPayToRcvdFrom.Text = dtDetail.Rows[0]["PartyName"].ToString();
             //txtChequeDetail.Text = dtDetail.Rows[0]["ChequeDetail"].ToString();
             //txtBankName.Text = dtDetail.Rows[0]["BankName"].ToString();
 
@@ -332,9 +332,15 @@ namespace EMS.WebApp.Transaction
                 }
 
 
-                if (RRUpload.HasFile)
+                if (RRUpload.HasFile)   
                 {
                     var fileName = RRUpload.FileName;
+                    var filext = fileName.Substring(fileName.LastIndexOf(".") + 1);
+                    if (filext.ToLower() != "pdf")
+                    {
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Only pdf file is accepted!');</script>", false);
+                        return;
+                    }
                     var path = Server.MapPath("~/Transaction/SettlementDocs");
                     var newFileName = "RR" + txtBlNo;  //  Guid.NewGuid().ToString();
 
@@ -349,6 +355,12 @@ namespace EMS.WebApp.Transaction
                 if (CLUpload.HasFile)
                 {
                     var fileName = CLUpload.FileName;
+                    var filext = fileName.Substring(fileName.LastIndexOf(".") + 1);
+                    if (filext.ToLower() != "pdf")
+                    {
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Only pdf file is accepted!');</script>", false);
+                        return;
+                    }
                     var path = Server.MapPath("~/Transaction/SettlementDocs");
                     var newFileName = "CL" + txtBlNo;  //  Guid.NewGuid().ToString();
 

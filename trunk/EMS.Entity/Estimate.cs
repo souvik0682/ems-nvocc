@@ -21,7 +21,7 @@ namespace EMS.Entity
         public string PaymentIn { get; set; }
         public int TotalUnit { get; set; }
         public double TotalCharges { get; set; }
-
+       
         public int CompanyID { get; set; }
         public int UserID { get; set; }
 
@@ -38,6 +38,7 @@ namespace EMS.Entity
         public string TransactionType { get; set; }
 
         public int? CreditDays { get; set; }
+        public string JobActive { get; set; }
     }
 
     [Serializable]

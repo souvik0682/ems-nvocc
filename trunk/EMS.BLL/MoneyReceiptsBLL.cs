@@ -260,5 +260,10 @@ namespace EMS.BLL
         {
             return MoneyReceiptDAL.GetInvoiceDetailForAdvance(InvoiceId, JobID, InvType);
         }
+
+        public DataTable GetAdvanceforEdit(Int64 InvoiceId, Int32 JobID, string InvType)
+        {
+            return MoneyReceiptDAL.GetAdvanceforEdit(InvoiceId, JobID, InvType);
+        }
     }
 }

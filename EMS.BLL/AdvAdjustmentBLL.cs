@@ -21,6 +21,12 @@ namespace EMS.BLL
         {
             return AdvAdjustmentDAL.GetInvoiceFromJob(JobId, DorC, NorAdj);
         }
+
+        public DataSet GetUnadjustedAdvances(int? JobId = null, char? DorC = null, int? PartyID = null)
+        {
+            return AdvAdjustmentDAL.GetUnadjustedAdvances(JobId, DorC, PartyID);
+        }
+
         public List<AdjustmentModel> GetAdjustmentModel(ISearchCriteria searchCriteria)
         {
             return AdvAdjustmentDAL.GetAdjustmentModel(searchCriteria);
@@ -35,5 +41,10 @@ namespace EMS.BLL
 
         public int DeleteAdjustment(int AdjustmentModelID, int UserID, int CompanyID)
         { return AdvAdjustmentDAL.DeleteAdjustment(AdjustmentModelID, UserID, CompanyID); }
+
+        public DataSet GetAdvaneDetail(int AdvanceId)
+        {
+            return AdvAdjustmentDAL.GetAdvaneDetail(AdvanceId);
+        }
     }
 }

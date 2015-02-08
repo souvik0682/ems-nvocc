@@ -72,6 +72,14 @@
           <DataField>ShipmentMode</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="cntr">
+          <DataField>cntr</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Packages">
+          <DataField>Packages</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>dsBLPrinting</DataSourceName>
@@ -204,6 +212,10 @@
           <DataField>CBM</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="freightType">
+          <DataField>freightType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>dsBLPrinting</DataSourceName>
@@ -225,21 +237,24 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.00368in</Width>
+              <Width>1.46851in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.40642in</Width>
+              <Width>1.34413in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.05555in</Width>
+              <Width>3.22734in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.77918in</Width>
+              <Width>0.77637in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.67501in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.36788in</Height>
+              <Height>0.3158in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -262,6 +277,40 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>MarksNumbers</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Packages">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Label>Packages</Label>
+                              <Value>=First(Fields!Packages.Value, "dsBLPrintDesc")</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Packages</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -372,7 +421,7 @@
                           <TextRuns>
                             <TextRun>
                               <Label>netWt</Label>
-                              <Value>=IIf(Sum(Fields!NetWt.Value, "dsBLPrintDesc")=0, "", "Nett Weight")</Value>
+                              <Value>=IIf(Fields!NetWt.Value=0, "", "NET WEIGHT")</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
@@ -385,7 +434,7 @@
                           <TextRuns>
                             <TextRun>
                               <Label>NetWt</Label>
-                              <Value>=IIf(Sum(Fields!NetWt.Value, "dsBLPrintDesc"), "", Sum(Fields!NetWt.Value, "dsBLPrintDesc"))</Value>
+                              <Value>=IIf(Fields!NetWt.Value=0, "", Fields!NetWt.Value)</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
@@ -475,7 +524,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.24288in</Height>
+              <Height>0.1908in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -486,8 +535,8 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Label>Freight</Label>
-                              <Value />
+                              <Label>ShipmentMode</Label>
+                              <Value>=Fields!ShipmentMode.Value + "/" + Fields!ShipmentMode.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
@@ -500,6 +549,39 @@
                       <rd:DefaultName>Textbox53</rd:DefaultName>
                       <Style>
                         <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="PaymentType">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=IIf(First(Fields!freightType.Value, "DSFWDBLPrinting")="P", "FREIGHT PRE PAY", "FREIGHT COLLECT")</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
                           <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
@@ -554,15 +636,6 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Label>ShipmentMode</Label>
-                              <Value>=First(Fields!ShipmentType.Value, "DSFWDBLPrinting")</Value>
-                              <Style>
-                                <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                            <TextRun>
                               <Value xml:space="preserve"> </Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
@@ -577,7 +650,7 @@
                           <TextRuns>
                             <TextRun>
                               <Label>OtherShipmentMode</Label>
-                              <Value>=First(Fields!ShipmentType.Value, "DSFWDBLPrinting")</Value>
+                              <Value />
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
@@ -614,6 +687,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -628,10 +702,10 @@
         </TablixRowHierarchy>
         <KeepTogether>true</KeepTogether>
         <DataSetName>dsBLPrintDesc</DataSetName>
-        <Top>0.17639cm</Top>
+        <Top>0.10583cm</Top>
         <Left>0.60008cm</Left>
-        <Height>1.55133cm</Height>
-        <Width>18.40187cm</Width>
+        <Height>1.28675cm</Height>
+        <Width>19.02804cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -642,13 +716,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.76273in</Width>
+              <Width>0.80896in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.49189in</Width>
+              <Width>0.53812in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.62731in</Width>
+              <Width>0.67354in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -771,10 +845,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>dsBLPrintingContainerTopFive</DataSetName>
-        <Top>1.79828cm</Top>
-        <Left>0.53424cm</Left>
+        <Top>1.60425cm</Top>
+        <Left>5.68943cm</Left>
         <Height>0.4317cm</Height>
-        <Width>4.7801cm</Width>
+        <Width>5.13238cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -801,10 +875,10 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>7.48108in</Width>
+  <Width>7.83525in</Width>
   <Page>
     <PageHeader>
-      <Height>13.05833cm</Height>
+      <Height>12.71437cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -872,9 +946,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox11</rd:DefaultName>
           <Top>2.31618cm</Top>
-          <Left>15.00674cm</Left>
+          <Left>15.96889cm</Left>
           <Height>0.6cm</Height>
-          <Width>3.99521cm</Width>
+          <Width>3.03306cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -997,10 +1071,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>10.12549cm</Top>
-          <Left>0.28258cm</Left>
+          <Top>9.75cm</Top>
+          <Left>6.46915cm</Left>
           <Height>0.6cm</Height>
-          <Width>4.71426cm</Width>
+          <Width>4.96063cm</Width>
           <ZIndex>4</ZIndex>
           <Style>
             <Border>
@@ -1031,8 +1105,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>10.12549cm</Top>
-          <Left>5.2268cm</Left>
+          <Top>9.75cm</Top>
+          <Left>0.19152cm</Left>
           <Height>0.6cm</Height>
           <Width>4.96063cm</Width>
           <ZIndex>5</ZIndex>
@@ -1065,10 +1139,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>11.15188cm</Top>
-          <Left>0.20444cm</Left>
+          <Top>10.59cm</Top>
+          <Left>0.19152cm</Left>
           <Height>0.6cm</Height>
-          <Width>4.7924cm</Width>
+          <Width>4.96063cm</Width>
           <ZIndex>6</ZIndex>
           <Style>
             <Border>
@@ -1099,8 +1173,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>11.15188cm</Top>
-          <Left>5.2268cm</Left>
+          <Top>10.59cm</Top>
+          <Left>6.46915cm</Left>
           <Height>0.6cm</Height>
           <Width>4.96063cm</Width>
           <ZIndex>7</ZIndex>
@@ -1133,10 +1207,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>11.15188cm</Top>
-          <Left>10.58903cm</Left>
+          <Top>11.417cm</Top>
+          <Left>0.19152cm</Left>
           <Height>0.6cm</Height>
-          <Width>5.23875cm</Width>
+          <Width>4.96063cm</Width>
           <ZIndex>8</ZIndex>
           <Style>
             <Border>
@@ -1167,10 +1241,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox69</rd:DefaultName>
-          <Top>11.15188cm</Top>
-          <Left>15.96889cm</Left>
+          <Top>9.75cm</Top>
+          <Left>16.57743cm</Left>
           <Height>0.6cm</Height>
-          <Width>2.75084cm</Width>
+          <Width>2.1423cm</Width>
           <ZIndex>9</ZIndex>
           <Style>
             <Border>
@@ -1286,10 +1360,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox15</rd:DefaultName>
-          <Top>3.09257cm</Top>
-          <Left>15.00674cm</Left>
-          <Height>0.6cm</Height>
-          <Width>3.99521cm</Width>
+          <Top>3.05729cm</Top>
+          <Left>15.96889cm</Left>
+          <Height>0.49417cm</Height>
+          <Width>3.03306cm</Width>
           <ZIndex>11</ZIndex>
           <Style>
             <Border>
@@ -1350,9 +1424,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox59</rd:DefaultName>
           <Top>0.45917cm</Top>
-          <Left>11.60674cm</Left>
+          <Left>15.30208cm</Left>
           <Height>0.6cm</Height>
-          <Width>7.39521cm</Width>
+          <Width>3.69986cm</Width>
           <Visibility>
             <Hidden>true</Hidden>
           </Visibility>
@@ -1442,6 +1516,9 @@
           <Height>0.54709cm</Height>
           <Width>6.31042cm</Width>
           <ZIndex>2</ZIndex>
+          <Visibility>
+            <Hidden>true</Hidden>
+          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1529,8 +1606,8 @@
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
+    <PageHeight>28cm</PageHeight>
+    <PageWidth>21.5cm</PageWidth>
     <LeftMargin>1cm</LeftMargin>
     <RightMargin>0cm</RightMargin>
     <TopMargin>0cm</TopMargin>

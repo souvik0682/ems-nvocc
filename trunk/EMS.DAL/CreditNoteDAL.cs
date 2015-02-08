@@ -35,9 +35,44 @@ namespace EMS.DAL
             return creditNote;
         }
 
+        public static ICreditNote GetfwdCrnHeaderInformation(int InvoiceId)
+        {
+            string strExecution = "[fwd].[usp_CN_GetHeaderInfo]";
+            ICreditNote creditNote = null;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@InvoiceId", InvoiceId);
+
+                DataTableReader reader = oDq.GetTableReader();
+
+                while (reader.Read())
+                {
+                    creditNote = new CreditNoteEntity(reader);
+                }
+
+                reader.Close();
+            }
+
+            return creditNote;
+        }
+
         public static DataTable GetAllCharges(string InvoiceNo)
         {
             string strExecution = "usp_CN_GetChargesForInvoice";
+            DataTable dt = new DataTable();
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddVarcharParam("@InvoiceNo", 30, InvoiceNo);
+                dt = oDq.GetTable();
+            }
+            return dt;
+        }
+
+        public static DataTable GetAllfwdCharges(string InvoiceNo)
+        {
+            string strExecution = "[fwd].[usp_CN_GetChargesForInvoice]";
             DataTable dt = new DataTable();
 
             using (DbQuery oDq = new DbQuery(strExecution))
@@ -72,6 +107,33 @@ namespace EMS.DAL
         }
 
         public static long SaveCreditNoteHeader(ICreditNote creditNote)
+        {
+            string strExecution = "usp_CN_SaveCreditNoteHeader";
+            long creditNoteId = 0;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                if (creditNote.CRNID != 0)
+                    oDq.AddBigIntegerParam("@CRNID", creditNote.CRNID);
+
+                //oDq.AddVarcharParam("@ExportImport", 1, creditNote.ExportImport);
+                oDq.AddDateTimeParam("@CrnDate", creditNote.CrnDate);
+                oDq.AddBigIntegerParam("@InvoiceID", creditNote.InvoiceID);
+                oDq.AddIntegerParam("@LocationID", creditNote.LocationID);
+                oDq.AddIntegerParam("@NVOCCID", creditNote.NVOCCID);
+                oDq.AddIntegerParam("@InvoiceTypeID", creditNote.InvoiceTypeID);
+                oDq.AddIntegerParam("@UserId", creditNote.UserAdded);
+
+                //if (creditNote.CrnNo != string.Empty)
+                //    oDq.AddVarcharParam("@CrnNumber", 40, creditNote.CrnNo);
+
+                creditNoteId = Convert.ToInt64(oDq.GetScalar());
+            }
+
+            return creditNoteId;
+        }
+
+        public static long SaveFwdCreditNoteHeader(ICreditNote creditNote)
         {
             string strExecution = "usp_CN_SaveCreditNoteHeader";
             long creditNoteId = 0;

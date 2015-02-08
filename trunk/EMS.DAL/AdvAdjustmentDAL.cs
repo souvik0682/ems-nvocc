@@ -19,15 +19,13 @@ namespace EMS.DAL
             {
                 oDq.AddBigIntegerParam("@AdvAdjId", Convert.ToInt16(searchCriteria.StringParams[0]));
                 oDq.AddVarcharParam("@AdjustmentNo", 3, searchCriteria.StringParams[1]);
-                oDq.AddVarcharParam("@InvoiceNo", 50, searchCriteria.StringParams[2]);
-                oDq.AddVarcharParam("@HBLNo", 50, searchCriteria.StringParams[3]);
-                oDq.AddVarcharParam("@JobNo", 50, searchCriteria.StringParams[4]);
+                oDq.AddVarcharParam("@JobNo", 50, searchCriteria.StringParams[2]);
+                oDq.AddVarcharParam("@InvoiceNo", 50, searchCriteria.StringParams[3]);
+                oDq.AddVarcharParam("@AdvOrAdj", 50, searchCriteria.StringParams[4]);
+                oDq.AddVarcharParam("@PartyType", 50, searchCriteria.StringParams[5]);
                 oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
                 oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
-                 reader = oDq.GetTables();
-
-               
-                
+                reader = oDq.GetTables();
             }
             return reader;
         }
@@ -40,8 +38,9 @@ namespace EMS.DAL
                 oDq.AddBigIntegerParam("@AdvAdjId", Convert.ToInt16(searchCriteria.StringParams[0]));
                 oDq.AddVarcharParam("@AdjustmentNo", 3, searchCriteria.StringParams[1]);
                 oDq.AddVarcharParam("@InvoiceNo", 50, searchCriteria.StringParams[2]);
-                oDq.AddVarcharParam("@HBLNo", 50, searchCriteria.StringParams[3]);
-                oDq.AddVarcharParam("@JobNo", 50, searchCriteria.StringParams[4]);
+                oDq.AddVarcharParam("@AdvOrAdj", 50, searchCriteria.StringParams[3]);
+                oDq.AddVarcharParam("@PartyType", 1, searchCriteria.StringParams[4]);
+                oDq.AddVarcharParam("@JobNo", 50, searchCriteria.StringParams[5]);
                 oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
                 oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
                 DataSet reader = oDq.GetTables();
@@ -67,7 +66,9 @@ namespace EMS.DAL
                         UserID = Convert.ToInt32(x["fk_UserAdded"]),
                         DebtorOrCreditorName = Convert.ToString(x["fk_PartyID"]),
                         PartyType = Convert.ToString(x["PartyType"]),
-                        PartyName = Convert.ToString(x["PartyName"])
+                        PartyName = Convert.ToString(x["PartyName"]),
+                        AdvanceID = Convert.ToInt32(x["fk_AdvanceID"]),
+                        AdvanceNo = Convert.ToString(x["AdvanceNo"])
                     
                     }).ToList();
                     foreach(var obj in adjustmentModel){
@@ -107,7 +108,19 @@ namespace EMS.DAL
             return  reader;
         }
 
-        public static DataSet GetInvoiceFromJob(int? JobId = null, char? DorC = null)
+        public static DataSet GetAdvaneDetail(int AdvanceID)
+        {
+            string strExecution = "[fwd].[uspGetAdvanceDetails]";
+            DataSet reader = new DataSet();
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@AdvanceId", AdvanceID);
+                reader = oDq.GetTables();
+            }
+            return reader;
+        }
+
+        public static DataSet GetInvoiceFromJob(int? JobId = null, char? DorC = null, char? NorAdj = null)
         {
             string strExecution = "[fwd].[uspGetInvoiceFromJob]";
             DataSet reader = new DataSet();
@@ -115,6 +128,21 @@ namespace EMS.DAL
             {
                 oDq.AddBigIntegerParam("@JobId", JobId);
                 oDq.AddCharParam("@DorC", 3, DorC);
+                oDq.AddCharParam("@NorAdj", 1, NorAdj);
+                reader = oDq.GetTables();
+            }
+            return reader;
+        }
+
+        public static DataSet GetUnadjustedAdvances(int? JobId = null, char? DorC = null, int? PartyID = null)
+        {
+            string strExecution = "[fwd].[uspGetUnadjustedAdvances]";
+            DataSet reader = new DataSet();
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@JobId", JobId);
+                oDq.AddCharParam("@DorC", 3, DorC);
+                oDq.AddIntegerParam("@PartyID", PartyID);
                 reader = oDq.GetTables();
             }
             return reader;
@@ -127,7 +155,7 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddVarcharParam("@Mode", 1, Mode);
-                oDq.AddIntegerParam("@pk_AdvAdjInvID", adjustmentModel.AdjustmentPk);
+                oDq.AddIntegerParam("@pk_AdvAdjID", adjustmentModel.AdjustmentPk);
                 oDq.AddIntegerParam("@fk_CompanyID", adjustmentModel.CompanyID);
 
                 oDq.AddIntegerParam("@fk_JobID", Convert.ToInt32(adjustmentModel.JobNo));
@@ -136,6 +164,7 @@ namespace EMS.DAL
 
                 oDq.AddVarcharParam("@AdjustmentNo", 60, adjustmentModel.AdjustmentNo);
                 oDq.AddDateTimeParam("@AdjustmentDate", adjustmentModel.AdjustmentDate);
+                oDq.AddIntegerParam("@AdvanceID", adjustmentModel.AdvanceID);
                // oDq.AddVarcharParam("@Adjustments", int.MaxValue, Utilities.Utilities.ConvertDTOToXML<InvoiceJobAdjustment>("Root", "Adjustment", adjustmentModel.LstInvoiceJobAdjustment));
                 oDq.AddVarcharParam("@Adjustments", int.MaxValue, Utilities.GeneralFunctions.SerializeWithXmlTag(adjustmentModel.LstInvoiceJobAdjustment).Replace("?<?xml version=\"1.0\" encoding=\"utf-16\"?>", ""));
 

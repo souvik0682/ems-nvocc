@@ -184,6 +184,20 @@ namespace EMS.DAL
             return dt;
         }
 
+        public static DataTable GetContainerCountFromJobID(int JobID)
+        {
+            string strExecution = "[fwd].[uspGetContainerCountFromJobID]";
+            DataTable dt = null;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@JobId", JobID);
+                dt = oDq.GetTable();
+            }
+            return dt;
+        }
+
+
         public static int AddEditJobContainer(IBookingContainer Container)
         {
             string strExecution = "[fwd].[spAddEditJobContainers]";

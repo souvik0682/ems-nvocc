@@ -21,7 +21,7 @@ namespace EMS.DAL
                  oDq.AddVarcharParam("@SchLocAbbr", 3, searchCriteria.LocAbbr);
                  oDq.AddVarcharParam("@SchPartyName", 60, searchCriteria.PartyName);
                  oDq.AddVarcharParam("@SchShortName", 10, searchCriteria.StringParams[1]);
-                 oDq.AddVarcharParam("@SchPartyType", 1, searchCriteria.StringParams[0]);
+                 oDq.AddIntegerParam("@SchPartyType", Convert.ToInt32(searchCriteria.StringParams[0]));
                  oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
                  oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
                  DataSet reader = oDq.GetTables();

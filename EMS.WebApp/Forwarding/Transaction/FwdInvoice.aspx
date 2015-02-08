@@ -353,7 +353,8 @@
                                                 <td class="gridviewitem"  style="width:10%">
                                                     <cc2:CustomTextBox ID="txtTotal" runat="server" Width="104px" Type="Decimal" 
                                                         MaxLength="10" Enabled="false"
-                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox><br />
+                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00">
+                                                    </cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <td class="gridviewitem"  style="width:20%">

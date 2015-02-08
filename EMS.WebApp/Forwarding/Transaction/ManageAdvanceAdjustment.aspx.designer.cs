@@ -13,22 +13,22 @@ namespace EMS.WebApp.Forwarding.Transaction {
     public partial class ManageAdvanceAdjustment {
         
         /// <summary>
-        /// ddlJobNo control.
+        /// ddlParyType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlJobNo;
+        protected global::System.Web.UI.WebControls.DropDownList ddlParyType;
         
         /// <summary>
-        /// txtHBLNo control.
+        /// txtJobNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHBLNo;
+        protected global::System.Web.UI.WebControls.TextBox txtJobNo;
         
         /// <summary>
         /// wmetxtHBLNo control.
@@ -74,6 +74,15 @@ namespace EMS.WebApp.Forwarding.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.TextBoxWatermarkExtender wmetxtAdjNo;
+        
+        /// <summary>
+        /// ddlAdvOrAdj control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAdvOrAdj;
         
         /// <summary>
         /// btnSearch control.

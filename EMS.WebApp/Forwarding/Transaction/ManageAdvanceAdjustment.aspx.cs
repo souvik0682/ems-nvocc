@@ -52,16 +52,18 @@ namespace EMS.WebApp.Forwarding.Transaction
 
         private void SetDeafaultSetting()
         {
-            var jobs = new AdvAdjustmentBLL().GetDetailFromJob();
-            ddlJobNo.DataSource = jobs;
-            ddlJobNo.DataTextField = "JobNo";
-            ddlJobNo.DataValueField = "pk_JobID";
-            ddlJobNo.DataBind();
-            ddlJobNo.Items.Insert(0, new ListItem("--JOB NUMBER.--", "0"));
-            string jobNo = ddlJobNo.SelectedValue == "0" ? "" : ddlJobNo.SelectedValue;
+            //var jobs = new AdvAdjustmentBLL().GetDetailFromJob();
+            //ddlJobNo.DataSource = jobs;
+            //ddlJobNo.DataTextField = "JobNo";
+            //ddlJobNo.DataValueField = "pk_JobID";
+            //ddlJobNo.DataBind();
+            //ddlJobNo.Items.Insert(0, new ListItem("--JOB NUMBER.--", "0"));
+            //string jobNo = ddlJobNo.SelectedValue == "0" ? "" : ddlJobNo.SelectedValue;
             string adjNo = string.IsNullOrEmpty(txtAdjNo.Text) ? "" : txtAdjNo.Text.Trim();
-            string hblNo = string.IsNullOrEmpty(txtHBLNo.Text) ? "" : txtHBLNo.Text.Trim();
+            string JobNo = string.IsNullOrEmpty(txtJobNo.Text) ? "" : txtJobNo.Text.Trim();
             string invoiceNo = string.IsNullOrEmpty(txtInvoiceNo.Text) ? "" : txtInvoiceNo.Text.Trim();
+            string AdvOrAdj = ddlAdvOrAdj.SelectedValue;
+            string PartyType = ddlParyType.SelectedValue;
             SearchCriteria searchCriteria = new SearchCriteria
             {
                 PageIndex = 0,
@@ -69,7 +71,7 @@ namespace EMS.WebApp.Forwarding.Transaction
                 SortDirection = "",
                 SortExpression = "",
 
-                StringParams = new List<string>() { "-1", adjNo, invoiceNo, hblNo, jobNo }
+                StringParams = new List<string>() { "-1", adjNo, JobNo, invoiceNo, AdvOrAdj, PartyType }
 
             };
             Session["SearchCriteria"] = searchCriteria;
@@ -80,8 +82,6 @@ namespace EMS.WebApp.Forwarding.Transaction
         {
             _userId = UserBLL.GetLoggedInUserId();
 
-            //Get user permission.
-            //    UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
         }
 
         private void CheckUserAccess()
@@ -106,7 +106,6 @@ namespace EMS.WebApp.Forwarding.Transaction
                     {
                         btnAdd.Visible = false;
                     }
-                    //Response.Redirect("~/Unauthorized.aspx");
                 }
             }
             else
@@ -137,11 +136,13 @@ namespace EMS.WebApp.Forwarding.Transaction
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             ISearchCriteria searchCriteria = SearchCriteriaProp;
-            string jobNo = ddlJobNo.SelectedValue == "0" ? "" : ddlJobNo.SelectedValue;
+            //string jobNo = ddlJobNo.SelectedValue == "0" ? "" : ddlJobNo.SelectedValue;
             string adjNo = string.IsNullOrEmpty(txtAdjNo.Text) ? "" : txtAdjNo.Text.Trim();
-            string hblNo = string.IsNullOrEmpty(txtHBLNo.Text) ? "" : txtHBLNo.Text.Trim();
+            string jobNo = string.IsNullOrEmpty(txtJobNo.Text) ? "" : txtJobNo.Text.Trim();
             string invoiceNo = string.IsNullOrEmpty(txtInvoiceNo.Text) ? "" : txtInvoiceNo.Text.Trim();
-            searchCriteria.StringParams = new List<string>() { "-1",adjNo,invoiceNo,hblNo,jobNo };
+            string AdvOrAdj = ddlAdvOrAdj.SelectedValue;
+            string PartyType = ddlParyType.SelectedValue;
+            searchCriteria.StringParams = new List<string>() { "-1", adjNo, jobNo, invoiceNo, AdvOrAdj, PartyType };
             SearchCriteriaProp = searchCriteria;
             FillData();
         }
@@ -157,7 +158,6 @@ namespace EMS.WebApp.Forwarding.Transaction
         {
             if (e.CommandName.Equals("Sort"))
             {
-
                 ISearchCriteria searchCriteria = SearchCriteriaProp;
 
                 if (searchCriteria.SortExpression == e.CommandArgument.ToString())
@@ -172,11 +172,29 @@ namespace EMS.WebApp.Forwarding.Transaction
                 searchCriteria.SortExpression = e.CommandArgument.ToString();
                 SearchCriteriaProp = searchCriteria;
                 FillData();
-
             }
             else if (e.CommandName == "Edit")
             {
-
+                if (ddlAdvOrAdj.SelectedValue == "A")
+                {
+                    string adjNo = string.IsNullOrEmpty(txtAdjNo.Text) ? "" : txtAdjNo.Text.Trim();
+                    string jobNo = string.IsNullOrEmpty(txtJobNo.Text) ? "" : txtJobNo.Text.Trim();
+                    string invoiceNo = string.IsNullOrEmpty(txtInvoiceNo.Text) ? "" : txtInvoiceNo.Text.Trim();
+                    string AdvOrAdj = ddlAdvOrAdj.SelectedValue;
+                    string PartyType = ddlParyType.SelectedValue;
+                    int AdvanceID = e.CommandArgument.ToInt();
+                    
+                    Response.Redirect("~/Forwarding/Transaction/Advance.aspx?&jobid=" + GeneralFunctions.EncryptQueryString(Convert.ToInt32("0").ToString())
+                        + "&AdvanceID=" + GeneralFunctions.EncryptQueryString(AdvanceID.ToString())
+                        + "&paymenttype=" + GeneralFunctions.EncryptQueryString("C")
+                    );
+                }
+                else
+                {
+                    int AdvanceAdjID = e.CommandArgument.ToInt();
+                    Response.Redirect("~/Forwarding/Transaction/AddEditAdvanceAdjustment.aspx?&AdvAdjId=" + GeneralFunctions.EncryptQueryString(Convert.ToInt32(AdvanceAdjID).ToString())
+                    );
+                }
             }
             else if (e.CommandName == "Remove")
             {
@@ -194,8 +212,6 @@ namespace EMS.WebApp.Forwarding.Transaction
             }
         }
 
-
-
         protected void ddlPaging_SelectedIndexChanged(object sender, EventArgs e)
         {
             int newPageSize = Convert.ToInt32(ddlPaging.SelectedValue);
@@ -205,8 +221,6 @@ namespace EMS.WebApp.Forwarding.Transaction
             SearchCriteriaProp = searchCriteria;
             gvwHire.PageSize = newPageSize;
             FillData();
-
-
         }
 
         protected void gvwHire_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -214,26 +228,53 @@ namespace EMS.WebApp.Forwarding.Transaction
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-
                 if (_canDelete == true)
                 {
                     ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
-
                     btnRemove.Visible = true; //btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLID"));
-
                 }
                 else
                 {
                     ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
                     btnRemove.Visible = false;
                 }
-
+                ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
+                btnEdit.ToolTip = "Edit";
+                btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "pk_AdvAdjInvID"));
             }
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Forwarding/Transaction/AddEditAdvanceAdjustment.aspx");
+        }
+
+        protected void ddlAdvOrAdj_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ISearchCriteria searchCriteria = SearchCriteriaProp;
+            //string jobNo = ddlJobNo.SelectedValue == "0" ? "" : ddlJobNo.SelectedValue;
+            string adjNo = string.IsNullOrEmpty(txtAdjNo.Text) ? "" : txtAdjNo.Text.Trim();
+            string jobNo = string.IsNullOrEmpty(txtJobNo.Text) ? "" : txtJobNo.Text.Trim();
+            string invoiceNo = string.IsNullOrEmpty(txtInvoiceNo.Text) ? "" : txtInvoiceNo.Text.Trim();
+            string AdvOrAdj = ddlAdvOrAdj.SelectedValue;
+            string PartyType = ddlParyType.SelectedValue;
+            searchCriteria.StringParams = new List<string>() { "-1", adjNo, jobNo, invoiceNo, AdvOrAdj, PartyType };
+            SearchCriteriaProp = searchCriteria;
+            FillData();
+        }
+
+        protected void ddlParyType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ISearchCriteria searchCriteria = SearchCriteriaProp;
+            //string jobNo = ddlJobNo.SelectedValue == "0" ? "" : ddlJobNo.SelectedValue;
+            string adjNo = string.IsNullOrEmpty(txtAdjNo.Text) ? "" : txtAdjNo.Text.Trim();
+            string jobNo = string.IsNullOrEmpty(txtJobNo.Text) ? "" : txtJobNo.Text.Trim();
+            string invoiceNo = string.IsNullOrEmpty(txtInvoiceNo.Text) ? "" : txtInvoiceNo.Text.Trim();
+            string AdvOrAdj = ddlAdvOrAdj.SelectedValue;
+            string PartyType = ddlParyType.SelectedValue;
+            searchCriteria.StringParams = new List<string>() { "-1", adjNo, jobNo, invoiceNo, AdvOrAdj, PartyType };
+            SearchCriteriaProp = searchCriteria;
+            FillData();
         }
     }
 }

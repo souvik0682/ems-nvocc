@@ -141,6 +141,7 @@ namespace EMS.WebApp.Farwarding.Transaction
                 hdnCustID.Value = dtJob.Rows[0]["fk_CustID"].ToString();
                 ViewState["JobActive"] = dtJob.Rows[0]["JobActive"].ToString();
 
+
                 if (dtJob.Rows[0]["JobActive"].ToString() == "O")
                 {
                     btnApprove.Enabled = false;
@@ -171,6 +172,13 @@ namespace EMS.WebApp.Farwarding.Transaction
                     Button5.Visible = false;
                     Button6.Visible = false;
                 }
+
+                if (_roleId == 23)
+                {
+                    btnApprove.Enabled = false;
+                    btnCloseJob.Enabled = false;
+                }
+
                 lblTotalEstimatePayable.Text = "0";
                 lblTotalEstimateReceiveable.Text = "0";
                 lblTotalPaid.Text = "0";
@@ -194,16 +202,18 @@ namespace EMS.WebApp.Farwarding.Transaction
 
                 lblArchievedGrossProfit.Text = (lblTotalReceived.Text.ToDecimal() - lblTotalPaid.Text.ToDecimal()).ToString();
                 //lblArchievedGrossProfit.Text = (dsDashboard.Tables[8].Rows[0]["DrInvTotal"].ToDecimal() - dsDashboard.Tables[8].Rows[0]["CNAmt"].ToDecimal() - dsDashboard.Tables[7].Rows[0]["CreInvTotal"].ToDecimal()).ToString();
-
-                if (lblTotalEstimatePayable.Text.ToDecimal() < lblTotalEstimateReceiveable.Text.ToDecimal())
+                if (dtJob.Rows[0]["JobActive"].ToString() == "P")
                 {
-                    btnApprove.Enabled = true;
-                    btnCloseJob.Enabled = true;
-                }
-                else
-                {
-                    btnApprove.Enabled = false;
-                    btnCloseJob.Enabled = false;
+                    if (lblTotalEstimatePayable.Text.ToDecimal() < lblTotalEstimateReceiveable.Text.ToDecimal())
+                    {
+                        btnApprove.Enabled = true;
+                        btnCloseJob.Enabled = true;
+                    }
+                    else
+                    {
+                        btnApprove.Enabled = false;
+                        btnCloseJob.Enabled = false;
+                    }
                 }
             }
 
@@ -239,7 +249,7 @@ namespace EMS.WebApp.Farwarding.Transaction
                     Response.Redirect("~/Login.aspx");
                 }
 
-                if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.Manager)
+                if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.fadmin && user.UserRole.Id != (int)UserRole.fmanager)
                 {
 
                     if (_canView == false)
@@ -704,7 +714,7 @@ namespace EMS.WebApp.Farwarding.Transaction
                     aPrint.Attributes.Add("onclick", string.Format("return ReportPrint1('{0}','{1}','{2}','{3}');",
                         "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("FwdInvoice"),
                         //"&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text),
-                        "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("0"),
+                        "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("1"),
                         "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(user.FirstName + " " + user.LastName),
                         "&InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(hdnInvID.Value)));
                 }

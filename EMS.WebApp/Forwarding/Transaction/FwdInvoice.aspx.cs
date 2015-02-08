@@ -613,12 +613,18 @@ namespace EMS.WebApp.Forwarding.Transaction
 
             DateTime todaydate = DateTime.Now;
             DateTime dtSuppliedDate = DateTime.Parse(txtInvoiceDate.Text);
+            DateTime dtJob = DateTime.Parse(txtJobDate.Text);
             if (dtSuppliedDate > todaydate)
             {
                 lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00091");
                 return;
             }
 
+            if (dtSuppliedDate < dtJob)
+            {
+                lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00093");
+                return;
+            }
             string misc = string.Empty;
             IInvoice invoice = new InvoiceEntity();
             BuildInvoiceEntity(invoice);
@@ -1258,7 +1264,7 @@ namespace EMS.WebApp.Forwarding.Transaction
                         {
                             charges[count].STax = 0;
                         }
-                        charges[count].TotalAmount = (charges[count].Units * charges[count].RatePerBL * charges[count].ExchgRate) + charges[count].STax;
+                        charges[count].TotalAmount = Math.Round((charges[count].Units * charges[count].RatePerBL * charges[count].ExchgRate) + charges[count].STax, 2);
                     }
                 }
                 txtTotalAmount.Text = charges.Sum(m => m.TotalAmount).ToString("##########0.00");

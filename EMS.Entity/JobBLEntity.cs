@@ -49,6 +49,8 @@ namespace EMS.Entity
         public bool CloseVoyage { get; set; }
         public bool CloseBL { get; set; } 
         public int ShipmentType { get; set; }
+        public string FreightType { get; set; }
+        public string Packages { get; set; }
 
         //Other Information Tab
         public string ShipperName { get; set; }
@@ -162,6 +164,14 @@ namespace EMS.Entity
             if (ColumnExists(reader, "ShipmentType"))
                 if (reader["ShipmentType"] != DBNull.Value)
                     ShipmentType = Convert.ToInt32(reader["ShipmentType"]);
+
+            if (ColumnExists(reader, "FreightType"))
+                if (reader["FreightType"] != DBNull.Value)
+                    FreightType = Convert.ToString(reader["FreightType"]);
+
+            if (ColumnExists(reader, "Packages"))
+                if (reader["Packages"] != DBNull.Value)
+                    Packages = Convert.ToString(reader["Packages"]);
 
             if (ColumnExists(reader, "PORDesc"))
             {

@@ -21,6 +21,8 @@ namespace EMS.Entity
         public List<InvoiceJobAdjustment> LstInvoiceJobAdjustment { get; set; }
         public string PartyType { get; set; }
         public string PartyName { get; set; }
+        public int AdvanceID { get; set; }
+        public string AdvanceNo { get; set; }
     }
 
     [Serializable]
@@ -28,6 +30,7 @@ namespace EMS.Entity
     {
         public long InvoiceJobAdjustmentPk { get; set; }
         public string InvoiceOrAdvNo { get; set; }
+        public int invOrAdvID { get; set; }
         public string InvOrAdv { get; set; }
         public DateTime InvoiceOrAdvDate { get; set; }
         public Double DrAmount{ get; set; }

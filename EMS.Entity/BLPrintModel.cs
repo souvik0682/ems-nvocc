@@ -69,6 +69,9 @@ namespace EMS.Entity
         public string GRWT { get; set; }
         public string NetWt { get; set; }
 
+        public string fwdBLNo { get; set; }
+        public string fwdBLDate { get; set; }
+
 
     }
     public class BLPrintModel

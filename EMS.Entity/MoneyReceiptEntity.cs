@@ -52,6 +52,7 @@ namespace EMS.Entity
         private char exportImport;
         private bool status;
         private string cha;
+        private int CreID;
      
         public string ChequeDetails
         {
@@ -106,6 +107,8 @@ namespace EMS.Entity
             this.chequeBank = reader["ChequeBank"].ToString();
             if (!reader.IsDBNull(reader.GetOrdinal("ChequeDate")))
                 this.chequeDate = Convert.ToDateTime(reader["ChequeDate"]);
+            if (!reader.IsDBNull(reader.GetOrdinal("fk_CreditorID")))
+                this.CreID = Convert.ToInt32(reader["CreditorID"]);
             this.chequeNo = reader["ChequeNo"].ToString();
             this.MRAmount = Convert.ToDecimal(reader["MRAmount"]);
             this.userAddedId = Convert.ToInt32(reader["UserAdded"]);
@@ -330,6 +333,12 @@ namespace EMS.Entity
         {
             get { return isDeleted; }
             set { isDeleted = value; }
+        }
+
+        public int CREID
+        {
+            get { return CreID; }
+            set { CreID = value; }
         }
 
         public List<ChargeDetails> ChargeDetails { get; set; }

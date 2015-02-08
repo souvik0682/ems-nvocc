@@ -102,6 +102,7 @@
                     </td>
                     <td>
                         <asp:HiddenField ID="hdnJobNo" runat="server" Value="0" />
+                        <asp:HiddenField ID="hdnJobID" runat="server" Value="0" />
                         <asp:TextBox ID="txtJobNo" runat="server" CssClass="textboxuppercase" MaxLength="30"
                             Width="150px" AutoPostBack="True" Enabled="false"></asp:TextBox>
                         <%--<asp:RequiredFieldValidator ID="rfvEmail" runat="server" CssClass="errormessage" ControlToValidate="txtEmail" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>

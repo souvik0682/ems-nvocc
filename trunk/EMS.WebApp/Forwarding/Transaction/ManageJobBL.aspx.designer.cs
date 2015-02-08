@@ -94,6 +94,15 @@ namespace EMS.WebApp.Farwarding.Transaction {
         protected global::System.Web.UI.WebControls.TextBox txtBLNo;
         
         /// <summary>
+        /// rfvBlNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBlNo;
+        
+        /// <summary>
         /// txtBLDate control.
         /// </summary>
         /// <remarks>
@@ -157,13 +166,13 @@ namespace EMS.WebApp.Farwarding.Transaction {
         protected global::System.Web.UI.WebControls.TextBox txtLine;
         
         /// <summary>
-        /// txtVessel control.
+        /// rdoFrightType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtVessel;
+        protected global::System.Web.UI.WebControls.RadioButtonList rdoFrightType;
         
         /// <summary>
         /// txtVoyage control.
@@ -533,6 +542,24 @@ namespace EMS.WebApp.Farwarding.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMarks;
+        
+        /// <summary>
+        /// txtPackage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPackage;
+        
+        /// <summary>
+        /// rfvPackages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPackages;
         
         /// <summary>
         /// tpFooter control.

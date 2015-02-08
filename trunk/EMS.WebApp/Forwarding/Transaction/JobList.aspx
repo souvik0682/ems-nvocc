@@ -81,7 +81,7 @@
 
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlJobType" runat="server" Width="155" AutoPostBack="true"
+                            <asp:DropDownList ID="ddlJobType" runat="server" Width="155" AutoPostBack="true" Visible="false"
                                 onselectedindexchanged="ddlJobType_SelectedIndexChanged">
                                 <asp:ListItem Selected="True" Text="All" Value="B"></asp:ListItem>
                                 <asp:ListItem Text="Pending Approval" Value="P"></asp:ListItem>

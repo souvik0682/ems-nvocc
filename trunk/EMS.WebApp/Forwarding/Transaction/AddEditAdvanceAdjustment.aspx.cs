@@ -15,6 +15,7 @@ namespace EMS.WebApp.Forwarding.Transaction
 {
     public partial class AddEditAdvanceAdjustment : System.Web.UI.Page
     {
+
         #region Private Member Variables
 
 
@@ -33,6 +34,30 @@ namespace EMS.WebApp.Forwarding.Transaction
 
 
         #region Protected Event Handler
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+            RetriveParameters();
+            if (!IsPostBack)
+            {
+                LoadDefault();
+                if (Request.QueryString["AdvAdjId"] != string.Empty)
+                {
+
+                    try
+                    {
+                        var id = GeneralFunctions.DecryptQueryString(Request.QueryString["AdvAdjId"]);
+                        var pid = Convert.ToInt32(id);
+                        if (pid > 0)
+                        {
+                            AdvAdjInvID = pid;
+                            LoadData(pid);
+                        }
+                    }
+                    catch { }
+                }
+            }
+        }
 
         protected void grvInvoice_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -41,7 +66,7 @@ namespace EMS.WebApp.Forwarding.Transaction
                 var dll = (DropDownList)e.Row.FindControl("ddlInvoiceOrAdvNo");
                 if (ViewState["ddlInvoiceOrAdvNo"] == null)
                 {
-                    var inv = new AdvAdjustmentBLL().GetInvoiceFromJob(ddlJobNo.SelectedValue.IntRequired(), 'c');
+                    var inv = new AdvAdjustmentBLL().GetInvoiceFromJob(ddlJobNo.SelectedValue.IntRequired(), rdoDbCr.SelectedValue[0], 'N');
                     ViewState["ddlInvoiceOrAdvNo"] = inv;
                 }
                 DataSet ds = (DataSet)ViewState["ddlInvoiceOrAdvNo"];
@@ -62,9 +87,7 @@ namespace EMS.WebApp.Forwarding.Transaction
                         }
                         catch { }
                     }
-
                 }
-
             }
             else if (e.Row.RowType == DataControlRowType.DataRow && IsEmptyGrid)
             {
@@ -96,7 +119,8 @@ namespace EMS.WebApp.Forwarding.Transaction
                     var drp = ((DropDownList)grvInvoice.FooterRow.FindControl("ddlInvoiceOrAdvNo"));
                     if (drp != null)
                     {
-                        invoiceJobAdjustment.InvoiceOrAdvNo = drp.SelectedValue;
+                        invoiceJobAdjustment.InvoiceOrAdvNo = drp.SelectedItem.ToString();
+                        invoiceJobAdjustment.invOrAdvID = drp.SelectedItem.Value.ToInt();
                     }
                     invoiceJobAdjustment.DrAmount = Convert.ToDouble(((TextBox)grvInvoice.FooterRow.FindControl("txtDrAmount")).Text);
                     invoiceJobAdjustment.CrAmount = Convert.ToDouble(((TextBox)grvInvoice.FooterRow.FindControl("txtCrAmount")).Text);
@@ -135,43 +159,11 @@ namespace EMS.WebApp.Forwarding.Transaction
                 grvInvoice.DataSource = lstInvoiceJobAdjustment;
                 grvInvoice.DataBind();
             }
-
-
-        }
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-            RetriveParameters();
-            if (!IsPostBack)
-            {
-                LoadDefault();
-                if (Request.QueryString["AdvAdjId"] != string.Empty)
-                {
-
-                    try
-                    {
-                        var id = GeneralFunctions.DecryptQueryString(Request.QueryString["AdvAdjId"]);
-                        var pid = Convert.ToInt32(id);
-                        if (pid > 0)
-                        {
-                            AdvAdjInvID = pid;
-                            LoadData(pid);
-                        }
-                    }
-                    catch { }
-                }
-            }
-
-            //   CheckUserAccess(countryId);
         }
 
         private void RetriveParameters()
         {
             _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
-
-            //Get user permission.
-            //  EMS.BLL.UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
         }
 
         private void CheckUserAccess(string xID)
@@ -207,8 +199,6 @@ namespace EMS.WebApp.Forwarding.Transaction
             {
                 Response.Redirect("~/Login.aspx");
             }
-
-
         }
 
         protected void ddlJobNo_SelectIndexChange(object sender, EventArgs e)
@@ -235,11 +225,11 @@ namespace EMS.WebApp.Forwarding.Transaction
                 if (row != null)
                 {
 
-                    try
-                    {
-                        lblHBLNo.Text = Convert.ToString(row["fwdBLNo"]);
-                    }
-                    catch { lblHBLNo.Text = ""; }
+                    //try
+                    //{
+                    //    lblAdjustmentAmt.Text = Convert.ToString(row["fwdBLNo"]);
+                    //}
+                    //catch { lblHBLNo.Text = ""; }
 
                     try
                     {
@@ -270,12 +260,11 @@ namespace EMS.WebApp.Forwarding.Transaction
 
                         if (ViewState["ddlInvoiceOrAdvNo"] != null)
                         {
-
                             DataSet ds = (DataSet)ViewState["ddlInvoiceOrAdvNo"];
-                            DataRow row = ds.Tables[0].AsEnumerable().Where(x => Convert.ToString(x["InvoiceNo"]).Equals(ddl.SelectedValue)).FirstOrDefault();
+                            DataRow row = ds.Tables[0].AsEnumerable().Where(x => Convert.ToString(x["pk_InvoiceID"]).Equals(ddl.SelectedValue)).FirstOrDefault();
+                            //txt.Text = Convert.ToString(row["InvoiceDate"]);
                             if (row != null)
                             {
-
                                 try
                                 {
                                     var type = Convert.ToString(row["Type"]);
@@ -359,14 +348,32 @@ namespace EMS.WebApp.Forwarding.Transaction
 
         #region Private Methods
 
-        private bool IsValid(List<InvoiceJobAdjustment> invoiceJobAdjustment)
+        private bool IsValid(List<InvoiceJobAdjustment> invoiceJobAdjustment, string DorC, double AdjustmentAmt)
         {
+            var sumOfDr = 0.00;
+            var sumOfCr = 0.00;
             if (invoiceJobAdjustment != null)
             {
-                var sumOfDr = invoiceJobAdjustment.Sum(x => x.DrAmount);
-                var sumOfCr = invoiceJobAdjustment.Sum(x => x.CrAmount);
-                return sumOfDr == sumOfCr;
-
+                //var sumOfDr = invoiceJobAdjustment.Sum(x => x.DrAmount);
+                //var sumOfCr = invoiceJobAdjustment.Sum(x => x.CrAmount);
+                //return sumOfDr == sumOfCr;
+                if (DorC == "D")
+                {
+                    sumOfDr = invoiceJobAdjustment.Sum(x => x.DrAmount);
+                    if (AdjustmentAmt <= sumOfDr)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    sumOfCr = invoiceJobAdjustment.Sum(x => x.CrAmount);
+                    if (AdjustmentAmt >= sumOfCr)
+                    {
+                        return true;
+                    }
+                }
+                
             }
             return false;
         }
@@ -388,14 +395,14 @@ namespace EMS.WebApp.Forwarding.Transaction
             ddlDrCrName.Enabled = false;
             txtAdjustmentDate.Text = DateTime.Now.ToShortDateString();
             lblAdjustmentId.Text = "Auto Generated Id";
-            lblHBLNo.Text = "";
+            lblAdjustmentAmt.Text = "";
             lblJobDate.Text = "";
             rdoDbCr.Enabled = false;
         }
 
         private void LoadData(int id)
         {
-            var src = new AdvAdjustmentBLL().GetAdjustmentModel(new SearchCriteria { StringParams = new List<string>() { id.ToString(), "", "", "", "" } });
+            var src = new AdvAdjustmentBLL().GetAdjustmentModel(new SearchCriteria { StringParams = new List<string>() { id.ToString(), "", "", "J", "", "" } });
             if (src != null && src.Count() > 0)
             {
                 var model = src.FirstOrDefault();
@@ -411,7 +418,11 @@ namespace EMS.WebApp.Forwarding.Transaction
                 ddlJobNo.Enabled = false;
                 ddlDrCrName.Enabled = false;
 
-                var inv = new AdvAdjustmentBLL().GetInvoiceFromJob(ddlJobNo.SelectedValue.IntRequired(), model.DOrC[0]);
+                ddlAdjustmentNo.Items.Insert(0, new ListItem(model.AdvanceNo, model.AdvanceID.ToString()));
+                //ddlAdjustmentNo.SelectedValue = model.AdvanceID.ToString();
+                ddlAdjustmentNo.SelectedIndex = 0;
+                ddlAdjustmentNo_SelectedIndexChanged(null, null);
+                var inv = new AdvAdjustmentBLL().GetInvoiceFromJob(ddlJobNo.SelectedValue.IntRequired(), model.DOrC[0], 'N');
                 ViewState["ddlInvoiceOrAdvNo"] = inv;
 
                 if (model.LstInvoiceJobAdjustment != null && model.LstInvoiceJobAdjustment.Count > 0) {
@@ -450,7 +461,8 @@ namespace EMS.WebApp.Forwarding.Transaction
                 LstInvoiceJobAdjustment = (List<InvoiceJobAdjustment>)ViewState["InvoiceJobAdjustment"],
                 CompanyID = 1,
                 UserID = _userId,
-                AdjustmentPk = AdvAdjInvID
+                AdjustmentPk = AdvAdjInvID,
+                AdvanceID = ddlAdjustmentNo.SelectedValue.ToInt()
             };
 
         }
@@ -458,7 +470,7 @@ namespace EMS.WebApp.Forwarding.Transaction
         private void SaveAdjustmentModel()
         {
             var data = ExtractData();
-            if (IsValid(data.LstInvoiceJobAdjustment))
+            if (IsValid(data.LstInvoiceJobAdjustment, data.DOrC, lblAdjustmentAmt.Text.ToDouble()))
             {
 
                 var result = new AdvAdjustmentBLL().SaveAdjustmentModel(data, Mode);
@@ -486,12 +498,28 @@ namespace EMS.WebApp.Forwarding.Transaction
             grvInvoice.DataSource = dr;
             grvInvoice.DataBind();
             ViewState["InvoiceJobAdjustment"] = new List<InvoiceJobAdjustment>();
+
+            DataSet inv = new AdvAdjustmentBLL().GetUnadjustedAdvances(ddlJobNo.SelectedValue.IntRequired(), rdoDbCr.SelectedValue[0], ddlDrCrName.SelectedValue.ToInt());
+
+            //DataSet ds = (DataSet)ViewState["ddlInvoiceOrAdvNo"];
+            ddlAdjustmentNo.DataSource = inv;
+            ddlAdjustmentNo.DataTextField = "pmtReference";
+            ddlAdjustmentNo.DataValueField = "pk_AdvanceID";
+            ddlAdjustmentNo.DataBind();
+            ddlAdjustmentNo.Items.Insert(0, new ListItem("--Select--", "0"));
         }
         #endregion
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Forwarding/Transaction/ManageAdvanceAdjustment.aspx");
+        }
+
+        protected void ddlAdjustmentNo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var Adv = new AdvAdjustmentBLL().GetAdvaneDetail(ddlAdjustmentNo.SelectedValue.ToInt());
+            lblAdjustmentAmt.Text = (Adv.Tables[0].Rows[0]["ChequePayment"].ToDecimal() + Adv.Tables[0].Rows[0]["ChequePayment"].ToDecimal()).ToString();
+
         }
     }
 }

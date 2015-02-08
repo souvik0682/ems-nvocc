@@ -56,14 +56,8 @@
                           <asp:Label ID="lblJobDate" runat="server" Text="Label"></asp:Label>                      
                    </td>
                 </tr>
-                
-               
-                  <tr>
-                    <td>HBL No:</td>
-                    <td>  <asp:Label ID="lblHBLNo" runat="server" Text="Label"></asp:Label>  
-                   </td>
-                </tr>
-                 <tr>
+
+                <tr>
                     <td>Debtor / Creditor:<span class="errormessage1">*</span></td>
                     <td> <asp:RadioButtonList ID="rdoDbCr" runat="server" RepeatDirection="Horizontal" AutoPostBack="true" OnSelectedIndexChanged="rdoDbCr_SelectIndexChange" >
                     <asp:ListItem Text="Debtor" Value="D" ></asp:ListItem>
@@ -72,7 +66,7 @@
                    </td>
                 </tr>
                 
-                  <tr>
+                <tr>
                     <td>Debtor / Creditor Name:<span class="errormessage1">*</span></td>
                     <td> <asp:DropDownList ID="ddlDrCrName" runat="server"  CssClass="dropdownlist" AutoPostBack="true"  OnSelectedIndexChanged="ddlDrCrName_SelectIndexChange">
                       <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
@@ -82,9 +76,28 @@
                                     ControlToValidate="ddlDrCrName" ValidationGroup="Save" Display="Dynamic"  InitialValue="0" ErrorMessage="[Required]"></asp:RequiredFieldValidator>
                             
                    </td>
+                </tr>
+                
+                <tr>
+                    <td>Adjustment No:<span class="errormessage1">*</span></td>
+                    <td> <asp:DropDownList ID="ddlAdjustmentNo" runat="server"  CssClass="dropdownlist" AutoPostBack="true" 
+                            Width="250" onselectedindexchanged="ddlAdjustmentNo_SelectedIndexChanged">
+                        <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
+                          </asp:DropDownList>
+                          <br />
+                        <asp:RequiredFieldValidator ID="rfvAdjustmentNo" runat="server" CssClass="errormessage"
+                                        ControlToValidate="ddlAdjustmentNo" ValidationGroup="Save" Display="Dynamic"  InitialValue="0" ErrorMessage="[Required]">
+                        </asp:RequiredFieldValidator>
+                   </td>
+                </tr>
+                <tr>
+                    <td>Pending Adjustment:</td>
+                    <td>  
+                        <asp:Label ID="lblAdjustmentAmt" runat="server" Text="Label"></asp:Label>  
+                   </td>
                 </tr>               
                 <tr>   
-                <td colspan="2">    
+                    <td colspan="2">    
                        <asp:GridView ShowFooter="True" ShowHeaderWhenEmpty="True" ID="grvInvoice" runat="server"
                             AutoGenerateColumns="False"  OnRowCommand="grvInvoice_RowCommand" OnRowDataBound="grvInvoice_RowDataBound" Width="100%" >
                             <HeaderStyle CssClass="gridviewheader"></HeaderStyle>
@@ -93,66 +106,76 @@
                                 <EmptyDataRowStyle CssClass="gridviewemptydatarow" />
                                  <emptydatatemplate>No Invoice(s)/Advance(s) Found</emptydatatemplate>
                             <Columns>
-                                <asp:TemplateField HeaderText="Invoice / Adv No"  ControlStyle-Width="205" >                                
+                                <asp:TemplateField HeaderText="Invoice No"  ControlStyle-Width="205" >                                
                              <ItemStyle CssClass="gridviewitem" HorizontalAlign="Left"/>
                                     <ItemTemplate>
                                         <%# Eval("InvoiceOrAdvNo")%>
                                     </ItemTemplate>
+                                    <HeaderStyle CssClass="gridviewheader" />
                                     <FooterTemplate >
-                                      <asp:DropDownList ID="ddlInvoiceOrAdvNo" runat="server"  CssClass="dropdownlist" Width="200" AutoPostBack="true" OnSelectedIndexChanged="ddlInvoiceOrAdvNo_SelectIndexChange" >
+                                    <asp:DropDownList ID="ddlInvoiceOrAdvNo" runat="server"  CssClass="dropdownlist" Width="200" AutoPostBack="true" OnSelectedIndexChanged="ddlInvoiceOrAdvNo_SelectIndexChange" >
                                             <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
                                             </asp:DropDownList>
                                             <br />
-                        <asp:RequiredFieldValidator ID="rfvddlInvoiceOrAdvNo" runat="server" CssClass="errormessage"
-                                    ControlToValidate="ddlInvoiceOrAdvNo" ValidationGroup="Add" Display="Dynamic"  InitialValue="0" ErrorMessage="[Required]"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="rfvddlInvoiceOrAdvNo" runat="server" CssClass="errormessage"
+                                    ControlToValidate="ddlInvoiceOrAdvNo" ValidationGroup="Add" Display="Dynamic"  InitialValue="0" ErrorMessage="[Required]">
+                                    </asp:RequiredFieldValidator>
                             
                                     </FooterTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Invoice / Adv Date" ControlStyle-Width="205">
+                                <asp:TemplateField HeaderText="Invoice Date" ControlStyle-Width="205">
                                 
                              <ItemStyle CssClass="gridviewitem" HorizontalAlign="Left"/>
-                                    <ItemTemplate>                                     
-                                        <%# string.Format("{0:dd/MM/yyyy}", Eval("InvoiceOrAdvDate"))%>
-                                    </ItemTemplate>
-                                    <FooterTemplate>
-                                       <asp:TextBox ID="txtInvoiceOrAdvDate" Enabled="false" runat="server" CssClass="textboxuppercase" MaxLength="60" Width="200"></asp:TextBox><br />
+                                <ItemTemplate>                                     
+                                    <%# string.Format("{0:dd/MM/yyyy}", Eval("InvoiceOrAdvDate"))%>
+                                </ItemTemplate>
+                                <HeaderStyle CssClass="gridviewheader" />
+                                <FooterTemplate>
+                                    <asp:TextBox ID="txtInvoiceOrAdvDate" Enabled="false" runat="server" CssClass="textboxuppercase" MaxLength="60" Width="200"></asp:TextBox><br />
                                          <cc1:CalendarExtender Format="dd/MM/yyyy" ID="CalendarExtender1" runat="server" PopupButtonID="txtReferenceDate"
-                                TargetControlID="txtInvoiceOrAdvDate"></cc1:CalendarExtender>
-                        <asp:RequiredFieldValidator ID="rfvtxtAdjustmentDate" runat="server" CssClass="errormessage" 
-                            ControlToValidate="txtInvoiceOrAdvDate" Display="Dynamic" ErrorMessage="*" ValidationGroup="Add"></asp:RequiredFieldValidator>
-                                    </FooterTemplate>
+                                        TargetControlID="txtInvoiceOrAdvDate"></cc1:CalendarExtender>
+                                    <asp:RequiredFieldValidator ID="rfvtxtAdjustmentDate" runat="server" CssClass="errormessage" 
+                                    ControlToValidate="txtInvoiceOrAdvDate" Display="Dynamic" ErrorMessage="*" ValidationGroup="Add"></asp:RequiredFieldValidator>
+                                </FooterTemplate>
                                 </asp:TemplateField> 
                                 <asp:TemplateField HeaderText="Dr Amount" ControlStyle-Width="205">
                                 
                              <ItemStyle CssClass="gridviewitem" HorizontalAlign="Right"/>
-                                    <ItemTemplate>                                     
-                                        <%# Eval("DrAmount")%>
-                                    </ItemTemplate>
-                                    <FooterTemplate>
-                                       <asp:TextBox ID="txtDrAmount" Enabled="false" runat="server" CssClass="textboxuppercase" MaxLength="60" Width="200"></asp:TextBox><br />
-                        <asp:RequiredFieldValidator ID="rfvtxtDrAmount" runat="server" CssClass="errormessage" 
-                            ControlToValidate="txtDrAmount" Display="Dynamic" ErrorMessage="[Required]" ValidationGroup="Add" InitialValue="0"></asp:RequiredFieldValidator>
-                                    </FooterTemplate>
+                                <ItemTemplate>                                     
+                                    <%# Eval("DrAmount")%>
+                                </ItemTemplate>
+                                <HeaderStyle CssClass="gridviewheader_num" />
+                                <FooterTemplate>
+                                    <asp:TextBox ID="txtDrAmount" Enabled="false" runat="server" CssClass="textboxuppercase" MaxLength="60" Width="200" Style="text-align: right;">
+                                    </asp:TextBox><br />
+                                <asp:RequiredFieldValidator ID="rfvtxtDrAmount" runat="server" CssClass="errormessage" 
+                                ControlToValidate="txtDrAmount" Display="Dynamic" ErrorMessage="[Required]" ValidationGroup="Add" InitialValue="0">
+                                </asp:RequiredFieldValidator>
+                                </FooterTemplate>
 
                                 </asp:TemplateField>  
                                 <asp:TemplateField HeaderText="Cr Amount" ControlStyle-Width="205">                                
-                             <ItemStyle CssClass="gridviewitem" HorizontalAlign="Right"/>
-                                    <ItemTemplate>                                     
-                                        <%# Eval("CrAmount")%>
-                                    </ItemTemplate>
-                                    <FooterTemplate>
-                                       <asp:TextBox ID="txtCrAmount" Enabled="false" runat="server" CssClass="textboxuppercase" MaxLength="60" Width="200"></asp:TextBox><br />
-                        <asp:RequiredFieldValidator ID="rfvtxtCrAmount" runat="server" CssClass="errormessage" 
-                            ControlToValidate="txtCrAmount" Display="Dynamic" ErrorMessage="[Required]" ValidationGroup="Add" InitialValue="0"></asp:RequiredFieldValidator>
-                                    </FooterTemplate>
+                            <ItemStyle CssClass="gridviewitem" HorizontalAlign="Right"/>
+                                <ItemTemplate>                                     
+                                    <%# Eval("CrAmount")%>
+                                </ItemTemplate>
+                                <HeaderStyle CssClass="gridviewheader_num" />
+                                <FooterTemplate>
+                                <asp:TextBox ID="txtCrAmount" Enabled="false" runat="server" CssClass="textboxuppercase" MaxLength="60" Width="200" Style="text-align: right;">
+                                </asp:TextBox><br />
+                                <asp:RequiredFieldValidator ID="rfvtxtCrAmount" runat="server" CssClass="errormessage" 
+                                ControlToValidate="txtCrAmount" Display="Dynamic" ErrorMessage="[Required]" ValidationGroup="Add" InitialValue="0">
+                                </asp:RequiredFieldValidator>
+                                </FooterTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField >
                                 
                              <ItemStyle  HorizontalAlign="Right"  />
                                     <ItemTemplate>
-                                        <asp:ImageButton runat="Server" Width="24" Height="24" ImageUrl="~/Images/Remove.jpeg" ID="Remove" ValidationGroup="Remove"
+                                        <asp:ImageButton runat="Server" Width="24" Height="24" ImageUrl="~/Images/remove.png" ID="Remove" ValidationGroup="Remove"
                                             CommandName="Remove" CommandArgument='<%# Eval("InvoiceJobAdjustmentPk") %>' AlternateText="Remove" />
                                     </ItemTemplate>
+                                    <HeaderStyle CssClass="gridviewheader" />
                                     <FooterTemplate >
                                         <asp:ImageButton runat="Server" Width="24" Height="24" ImageUrl="~/Images/add.jpeg" ValidationGroup="Add"
                                             ID="Add" CommandName="Add" AlternateText="Add" />
@@ -160,8 +183,8 @@
                                 </asp:TemplateField>
                             </Columns>
                         </asp:GridView>  
-                </td>
-                  </tr>        
+                    </td>
+                </tr>        
                 <tr>
                     <td colspan="2">
                         <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" OnClick="btnSave_Click" />

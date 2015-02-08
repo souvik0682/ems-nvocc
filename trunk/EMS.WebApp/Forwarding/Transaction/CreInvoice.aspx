@@ -379,6 +379,8 @@
                         <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="Save" OnClick="btnSave_Click" />
                         &nbsp;&nbsp;<asp:Button ID="btnCancel" runat="server" CssClass="button" 
                             Text="Cancel" onclick="btnCancel_Click" OnClientClick="javascript:if(!confirm('Want to Quit?')) return false;"/>
+                        <br />
+                        <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
                     </td>
                 </tr>
             </table>

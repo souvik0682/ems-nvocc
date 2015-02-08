@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using EMS.Utilities.ResourceManager;
 using EMS.BLL;
 using EMS.Entity;
 using EMS.Common;
@@ -745,9 +746,21 @@ namespace EMS.WebApp.Forwarding.Master
         }
         private void SaveAdjustmentModel()
         {
+            DateTime todaydate = DateTime.Now;
+            DateTime dtSuppliedDate = DateTime.Parse(txtCreInvoiceDate.Text);
+            DateTime dtJob = DateTime.Parse(lblJobDate.Text);
+            DateTime dtRef = DateTime.Parse(txtReferenceDate.Text);
+
+
+            if (dtSuppliedDate < dtJob)
+            {
+                lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00093");
+                return;
+            }
+
             var data = ExtractData();
 
-
+          
             hdnLastNo.Value = new CreditorInvoiceBLL().SaveCreditorInvoice(data, Mode).ToString();
             //if (result > 0)
             //{

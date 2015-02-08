@@ -14,16 +14,12 @@
     </script>
 
     <script type="text/javascript">
-         function ReportPrint1(a, b, c) {
-             window.open('../../Popup/Report.aspx?' + a + b + c, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
+         function ReportPrint1(a, b, c, d) {
+             window.open('../../Popup/Report.aspx?' + a + b + c + d, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
              return false;
          }
 
-         function ReportPrint2(a, b, c, d, e, f) {
-             window.open('../Popup/Report.aspx?' + a + b + c + d + e + f, 'mywindow', 'status=1,toolbar=1,location=no,height = 550, width = 800');
-             return false;
-         }
-
+       
     </script>
 
     <!-- Le styles -->

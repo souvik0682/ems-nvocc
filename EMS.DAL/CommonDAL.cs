@@ -733,6 +733,20 @@ namespace EMS.DAL
 
             return myDataTable;
         }
+
+        public static DataTable GetFwdBL(long LineID)
+        {
+            string strExecution = "[fwd].[uspGetfwdBLno]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@NVOCCId", LineID);
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
         #endregion
         //#region Export
         //public static DataTable GetExportVoyages(string Vessel)

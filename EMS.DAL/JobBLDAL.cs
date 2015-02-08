@@ -168,6 +168,7 @@ namespace EMS.DAL
                         oDq.AddBigIntegerParam("@ContainerId", container.ContainerId);
                         oDq.AddBigIntegerParam("@JobId", container.BookingId);
                         oDq.AddBigIntegerParam("@BLId", container.BLId);
+                        oDq.AddVarcharParam("@CntrNo", 11, container.HireContainerNumber);
                         //oDq.AddBigIntegerParam("@ImportBLFooterId", container.ImportBLFooterId);
                         //oDq.AddBigIntegerParam("@HireContainerId", container.HireContainerId);
                         //oDq.AddIntegerParam("@VesselId", container.VesselId);
@@ -229,7 +230,9 @@ namespace EMS.DAL
                 oDq.AddDecimalParam("@GrossWeight", 12, 3, objBL.GrossWeight);
                 oDq.AddDateTimeParam("@BLReleaseDate", objBL.BLReleaseDate);
                 oDq.AddBooleanParam("@BLThruEdge", objBL.BLthruEdge);
-
+                oDq.AddVarcharParam("@FreightType", 1, objBL.FreightType);
+                oDq.AddVarcharParam("@Packages", 300, objBL.Packages);
+                oDq.AddVarcharParam("@Commodity", 30, objBL.Commodity);
                 exportBLId = Convert.ToInt64(oDq.GetScalar());
                 return exportBLId;
             }

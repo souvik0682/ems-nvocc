@@ -56,8 +56,8 @@ namespace EMS.DAL
                         CreditorId = Convert.ToInt32(x["fk_CreditorID"]),
                         //CreditorName = Convert.ToString(x["pk_AdvAdjID"]),
                         JobNumber = Convert.ToString(x["fk_JobID"]),
-                        CreInvoiceNo = Convert.ToString(x["BLARefno"]),
-                        OurInvoiceRef = Convert.ToString(x["InvoiceNo"]),
+                        CreInvoiceNo = Convert.ToString(x["InvoiceNo"]),
+                        OurInvoiceRef = Convert.ToString(x["BLARefno"]),
                         PartyTypeID = Convert.ToInt32(x["fk_PartyTypeID"]),
                         //HouseBLNo = Convert.ToString(x["BLARefNo"]),
                         //Location = Convert.ToString(x["fk_UserAdded"]),
@@ -125,7 +125,7 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@InvoiceNo", 60, creditorInvoice.CreInvoiceNo);
 
                 oDq.AddDateTimeParam("@InvoiceDate",  creditorInvoice.CreInvoiceDate);
-                oDq.AddVarcharParam("@BLARefNo", 0, creditorInvoice.OurInvoiceRef);
+                oDq.AddVarcharParam("@BLARefNo", 30, creditorInvoice.OurInvoiceRef);
                
                 oDq.AddDateTimeParam("@BLARefDate", creditorInvoice.ReferenceDate);
                 var charge=creditorInvoice.CreditorInvoiceCharges.FirstOrDefault();                
@@ -133,6 +133,9 @@ namespace EMS.DAL
                 oDq.AddDecimalParam("@ROE", 12, 3, Convert.ToDecimal(charge.ConvRate));
                 oDq.AddDecimalParam("@Roff", 6, 2, Convert.ToDecimal(creditorInvoice.RoundingOff));
                 oDq.AddBooleanParam("@CreInvActive",true);
+                oDq.AddBooleanParam("@Approved", creditorInvoice.approved);
+                oDq.AddVarcharParam("@Comment", 300, creditorInvoice.comment);
+
                 oDq.AddVarcharParam("@Charges", int.MaxValue, Utilities.GeneralFunctions.SerializeWithXmlTag(creditorInvoice.CreditorInvoiceCharges).Replace("?<?xml version=\"1.0\" encoding=\"utf-16\"?>", ""));
 
                 oDq.AddIntegerParam("@UserID", creditorInvoice.UserID);

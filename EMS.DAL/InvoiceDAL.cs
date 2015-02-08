@@ -582,6 +582,7 @@ namespace EMS.DAL
                 {
                     oDq.AddBigIntegerParam("@InvoiceID", invoice.InvoiceID);
                     oDq.AddVarcharParam("@InvoiceNo", 30, invoice.InvoiceNo);
+                    isedit = 1;
                 }
                 oDq.AddIntegerParam("@isedit", isedit);
                 oDq.AddVarcharParam("@Misc", 20, misc);
@@ -932,14 +933,14 @@ namespace EMS.DAL
             return dt;
         }
 
-        public static DataTable GetFwdLineLocation(string JobNo)
+        public static DataTable GetFwdLineLocation(int JobID)
         {
             string strExecution = "[fwd].[usp_Invoice_GetfwdLineLocation]";
             DataTable dt = new DataTable();
 
             using (DbQuery oDq = new DbQuery(strExecution))
             {
-                oDq.AddVarcharParam("@JobNo", 60, JobNo);
+                oDq.AddIntegerParam("@JobID", JobID);
                 dt = oDq.GetTable();
             }
             return dt;

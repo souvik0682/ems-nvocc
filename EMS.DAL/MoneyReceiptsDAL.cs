@@ -207,6 +207,78 @@ namespace EMS.DAL
             return result;
         }
 
+        public static int SaveCrePayment(MoneyReceiptEntity moneyReceipt)
+        {
+            string strExecution = "[fwd].[AddCrePayment]";
+            int result = 0;
+            string MrNo = string.Empty;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@PaymentID", moneyReceipt.MoneyReceiptId);
+                oDq.AddBigIntegerParam("@InvoiceID", moneyReceipt.InvoiceId); //Just to avoid exception. Not actually in use.
+                oDq.AddBigIntegerParam("@CompanyID", 1);
+                oDq.AddIntegerParam("@CreditorID", moneyReceipt.CREID);
+                oDq.AddNVarcharParam("@pmtType", moneyReceipt.CHA);
+                oDq.AddIntegerParam("@JobID", moneyReceipt.NvoccId);
+                oDq.AddDateTimeParam("@MRDate", moneyReceipt.MRDate);
+                oDq.AddNVarcharParam("@ChequeNo", moneyReceipt.ChequeNo);
+                oDq.AddDateTimeParam("@ChequeDate", moneyReceipt.ChequeDate);
+                oDq.AddNVarcharParam("@ChequeBank", moneyReceipt.ChequeBank);
+                oDq.AddDecimalParam("@CashPayment", 12, 2, moneyReceipt.CashPayment);
+                oDq.AddDecimalParam("@ChequePayment", 12, 2, moneyReceipt.ChequePayment);
+                oDq.AddDecimalParam("@TDSDeducted", 12, 2, moneyReceipt.TdsDeducted);
+                oDq.AddIntegerParam("@UserAdded", moneyReceipt.UserAddedId);
+                oDq.AddIntegerParam("@UserLastEdited", moneyReceipt.UserEditedId);
+                oDq.AddDateTimeParam("@AddedOn", moneyReceipt.UserAddedOn);
+                oDq.AddDateTimeParam("@EditedOn", moneyReceipt.UserEditedOn);
+                oDq.AddBooleanParam("@MRStatus", moneyReceipt.Status);
+                oDq.AddIntegerParam("@Result", result, QueryParameterDirection.Output);
+                oDq.AddNVarcharParam("@MRNo", 40, MrNo, QueryParameterDirection.Output);
+                oDq.RunActionQuery();
+                result = Convert.ToInt32(oDq.GetParaValue("@Result"));
+                MrNo = Convert.ToString(oDq.GetParaValue("@MRNo"));
+            }
+            return result;
+        }
+
+        public static int SaveAdvance(MoneyReceiptEntity moneyReceipt)
+        {
+            string strExecution = "[fwd].[AddAdvance]";
+            int result = 0;
+            string MrNo = string.Empty;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@AdvanceID", moneyReceipt.MoneyReceiptId);
+                oDq.AddBigIntegerParam("@InvoiceID", moneyReceipt.InvoiceId); //Just to avoid exception. Not actually in use.
+                oDq.AddBigIntegerParam("@CompanyID", 1);
+                oDq.AddIntegerParam("@PartyID", moneyReceipt.CREID);
+                oDq.AddIntegerParam("@PartyTypeID", moneyReceipt.NvoccId);
+                oDq.AddNVarcharParam("@pmtType", moneyReceipt.CHA);
+                oDq.AddBigIntegerParam("@JobID", moneyReceipt.BLId);
+                oDq.AddDateTimeParam("@MRDate", moneyReceipt.MRDate);
+                oDq.AddNVarcharParam("@ChequeNo", moneyReceipt.ChequeNo);
+                oDq.AddDateTimeParam("@ChequeDate", moneyReceipt.ChequeDate);
+                oDq.AddNVarcharParam("@ChequeBank", moneyReceipt.ChequeBank);
+                oDq.AddDecimalParam("@CashPayment", 12, 2, moneyReceipt.CashPayment);
+                oDq.AddDecimalParam("@ChequePayment", 12, 2, moneyReceipt.ChequePayment);
+                oDq.AddDecimalParam("@TDSDeducted", 12, 2, moneyReceipt.TdsDeducted);
+                oDq.AddIntegerParam("@UserAdded", moneyReceipt.UserAddedId);
+                oDq.AddIntegerParam("@UserLastEdited", moneyReceipt.UserEditedId);
+                oDq.AddDateTimeParam("@AddedOn", moneyReceipt.UserAddedOn);
+                oDq.AddDateTimeParam("@EditedOn", moneyReceipt.UserEditedOn);
+                oDq.AddBooleanParam("@MRStatus", moneyReceipt.Status);
+                oDq.AddIntegerParam("@Result", result, QueryParameterDirection.Output);
+                oDq.AddNVarcharParam("@MRNo", 40, MrNo, QueryParameterDirection.Output);
+                oDq.RunActionQuery();
+                result = Convert.ToInt32(oDq.GetParaValue("@Result"));
+                MrNo = Convert.ToString(oDq.GetParaValue("@MRNo"));
+            }
+            return result;
+        }
+
+
         public static void DeleteMoneyReceipts(string mrNo)
         {
             string strExecution = "[dbo].[prcDeleteMoneyReceipts]";
@@ -250,6 +322,38 @@ namespace EMS.DAL
         }
 
 
+        #endregion
+
+        #region Advance
+        public static DataTable GetInvoiceDetailForAdvance(Int64 InvoiceId, Int32 JobID, string InvType)
+        {
+            string strExecution = "[fwd].[GetJobDetailForAdvance]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@InvoiceId", InvoiceId);
+                oDq.AddIntegerParam("@JobID", JobID);
+                oDq.AddVarcharParam("@InvType", 1, InvType);
+                myDataTable = oDq.GetTable();
+            }
+            return myDataTable;
+        }
+
+        public static DataTable GetAdvanceforEdit(Int64 InvoiceId, Int32 JobID, string InvType)
+        {
+            string strExecution = "[fwd].[GetAdvanceForEdit]";
+            DataTable myDataTable;
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddBigIntegerParam("@AdvanceId", InvoiceId);
+                oDq.AddIntegerParam("@JobID", JobID);
+                oDq.AddVarcharParam("@InvType", 1, InvType);
+                myDataTable = oDq.GetTable();
+            }
+            return myDataTable;
+        }
         #endregion
 
 

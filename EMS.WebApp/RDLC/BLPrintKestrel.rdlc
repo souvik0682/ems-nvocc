@@ -729,7 +729,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.24288in</Height>
+              <Height>0.16996in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -799,7 +799,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox22">
+                    <Textbox Name="SealNo">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -807,7 +807,7 @@
                           <TextRuns>
                             <TextRun>
                               <Label>seal</Label>
-                              <Value>=First(Fields!SealNo.Value, "dsBLPrintingContainerTopFive")</Value>
+                              <Value>=Fields!SealNo.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -817,7 +817,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox22</rd:DefaultName>
+                      <rd:DefaultName>SealNo</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -851,7 +851,7 @@
         <DataSetName>dsBLPrintingContainerTopFive</DataSetName>
         <Top>1.79828cm</Top>
         <Left>0.53424cm</Left>
-        <Height>0.61692cm</Height>
+        <Height>0.43171cm</Height>
         <Width>4.7801cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
@@ -1350,6 +1350,40 @@
           <Height>1.70688cm</Height>
           <Width>6.48672cm</Width>
           <ZIndex>10</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox15">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Label>Pages</Label>
+                  <Value>="Page(s): " + trim(cStr(Globals!PageNumber)) + "/" + trim(cStr(Globals!TotalPages))</Value>
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>9pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox15</rd:DefaultName>
+          <Top>3.09257cm</Top>
+          <Left>15.00674cm</Left>
+          <Height>0.6cm</Height>
+          <Width>3.99521cm</Width>
+          <ZIndex>11</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>

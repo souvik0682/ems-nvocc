@@ -2151,6 +2151,9 @@
                   </TablixMembers>
                 </TablixMember>
               </TablixMembers>
+              <Visibility>
+                <Hidden>true</Hidden>
+              </Visibility>
               <KeepWithGroup>Before</KeepWithGroup>
             </TablixMember>
           </TablixMembers>
@@ -2175,7 +2178,8 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Parameters!FromDate.Value</Value>
+                <Label>ToDate</Label>
+                <Value>=Parameters!ToDate.Value</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                   <FontWeight>Normal</FontWeight>

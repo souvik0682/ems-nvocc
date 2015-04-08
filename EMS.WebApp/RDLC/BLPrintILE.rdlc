@@ -889,7 +889,7 @@
         <Top>1.79828cm</Top>
         <Left>0.53424cm</Left>
         <Height>0.61692cm</Height>
-        <Width>4.84597cm</Width>
+        <Width>4.84596cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -1309,6 +1309,40 @@
           <Height>0.6cm</Height>
           <Width>5.74146cm</Width>
           <ZIndex>9</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox15">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Label>Pages</Label>
+                  <Value>="Page(s): " + trim(cStr(Globals!PageNumber)) + "/" + trim(cStr(Globals!TotalPages))</Value>
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>9pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox15</rd:DefaultName>
+          <Top>3.06469cm</Top>
+          <Left>15.32424cm</Left>
+          <Height>0.6cm</Height>
+          <Width>3.67771cm</Width>
+          <ZIndex>10</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>

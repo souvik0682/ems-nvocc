@@ -45,7 +45,7 @@
                     </td>
                     <td align="left" style="width: 35%">
                         <asp:DropDownList ID="ddlLocation" runat="server" AutoPostBack="true"  OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged">
-                            <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="All" Value="0"></asp:ListItem>
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="errormessage"
                             ControlToValidate="ddlLocation" InitialValue="0" ValidationGroup="Report" Display="Dynamic"

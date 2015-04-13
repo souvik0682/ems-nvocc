@@ -1048,6 +1048,21 @@ namespace EMS.DAL
             return myDataTable;
         }
 
+        public static DataTable GetfwdGroup()
+        {
+            string strExecution = "[fwd].[uspGetGroupCompany]";
+            DataTable myDataTable;
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@GroupId", 0);
+                oDq.AddVarcharParam("@SortExpression", 100, "");
+                oDq.AddVarcharParam("@SortDirection", 4, "");
+                myDataTable = oDq.GetTable();
+            }
+
+            return myDataTable;
+        }
+
         public static DataTable GetfwdShippingLineByType(string pType)
         {
             string strExecution = "[fwd].[uspGetShippingLine]";

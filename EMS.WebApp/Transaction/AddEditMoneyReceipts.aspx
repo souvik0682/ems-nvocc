@@ -126,7 +126,7 @@
                 </tr>
                 <tr>
                     <td>
-                        BL No:
+                        BL No/Job No.:
                     </td>
                     <td>
                         <asp:TextBox ID="txtBLNo" runat="server" CssClass="textboxuppercase" MaxLength="30"
@@ -134,7 +134,7 @@
                         <%--<asp:RequiredFieldValidator ID="rfvEmail" runat="server" CssClass="errormessage" ControlToValidate="txtEmail" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
                     </td>
                     <td>
-                        Line/NVOCC:
+                        Line/Party:
                     </td>
                     <td>
                         <asp:HiddenField ID="hdnNvoccId" runat="server" Value="0" />
@@ -144,13 +144,14 @@
                 </tr>
                 <tr>
                     <td>
-                        Export/Import:
+                        Export/Import/Forwarding:
                     </td>
                     <td>
                         <asp:DropDownList ID="ddlExportImport" runat="server" Enabled="false" Width="155px">
                             <asp:ListItem Value="0">None</asp:ListItem>
                             <asp:ListItem Value="E">Export</asp:ListItem>
                             <asp:ListItem Value="I">Import</asp:ListItem>
+                            <asp:ListItem Value="F">Forwarding</asp:ListItem>
                         </asp:DropDownList>
                         <%--<asp:RequiredFieldValidator ID="rfvRole" runat="server" CssClass="errormessage" ControlToValidate="ddlRole" InitialValue="0" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
                     </td>

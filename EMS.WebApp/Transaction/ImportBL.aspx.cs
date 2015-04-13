@@ -136,11 +136,13 @@ namespace EMS.WebApp.Transaction
                 btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00070");
                 btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLID"));
 
+
                 //Delete link
                 if (_canDelete == true)
                 {
                     ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
                     btnRemove.Visible = true;
+                    btnRemove.OnClientClick = "javascript:return confirm('" + ResourceManager.GetStringWithoutName("ERR00014") + "');";
                     btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00007");
                     btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BLID"));
 
@@ -149,6 +151,16 @@ namespace EMS.WebApp.Transaction
                 {
                     ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
                     btnRemove.Visible = false;
+                }
+
+                if (DataBinder.Eval(e.Row.DataItem, "blClosed").ToInt() == 1)
+                {
+                    ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                    //btnDashboard.Visible = false;
+                    //btnEdit.Visible = false;
+                    btnRemove.Visible = false;
+                    e.Row.ForeColor = System.Drawing.Color.Red;
+                    //e.Row.Cells[0].ForeColor = System.Drawing.Color.Red;
                 }
             }
         }
@@ -314,6 +326,7 @@ namespace EMS.WebApp.Transaction
             criteria.Voyage = (txtVoyageNo.Text == "") ? string.Empty : txtVoyageNo.Text.Trim();
             criteria.LineName = (txtSLine.Text == "") ? string.Empty : txtSLine.Text.Trim();
             criteria.Location = (txtSLocation.Text == "") ? string.Empty : txtSLocation.Text.Trim();
+            criteria.IntegerOption1 = ddlStatus.SelectedIndex;
 
             Session[Constants.SESSION_SEARCH_CRITERIA] = criteria;
         }
@@ -344,6 +357,7 @@ namespace EMS.WebApp.Transaction
                         txtVoyageNo.Text = criteria.Voyage;
                         txtSLocation.Text = criteria.Location;
                         txtSLine.Text = criteria.LineName;
+                        ddlStatus.SelectedIndex = criteria.IntegerOption1;
 
                         gvImportBL.PageIndex = criteria.PageIndex;
                         gvImportBL.PageSize = criteria.PageSize;
@@ -399,6 +413,12 @@ namespace EMS.WebApp.Transaction
             }
         }
 
+        protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SaveNewPageIndex(0);
+            LoadImportBL();
+            upBL.Update();
+        }
         #endregion
 
 

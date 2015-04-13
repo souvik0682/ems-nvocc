@@ -30,6 +30,8 @@ namespace EMS.WebApp.Transaction
         private bool _canView = false;
         private bool _LocationSpecific = true;
         private int _userLocation = 0;
+        private bool BLStat = false;
+        private DateTime? BLCloseDate;
 
         #endregion
 
@@ -148,10 +150,36 @@ namespace EMS.WebApp.Transaction
             int t20;
             int rcve40;
             int rcve20;
-
+            BLStat = false;
+            BLCloseDate = null;
             if (BLDataSet.Tables[0].Rows.Count > 0)
             {
                 fillBLDetail(BLDataSet.Tables[0]);
+                if (BLDataSet.Tables[0].Rows[0]["BLClosed"].ToInt() == 1)
+                {
+                    lnkDoExtension.ForeColor = Color.Red;
+                    lnkGenerateInvoiceDOE.ForeColor = Color.Red;
+                    txtVAlidityDate.ForeColor = Color.Red;
+
+                    lnkDoExtension.Text = "BL Closed";
+                    txtVAlidityDate.Text = BLDataSet.Tables[0].Rows[0]["ClosureDate"].ToString();
+                    lnkGenerateInvoiceDOE.Text = "Refund Amount: " + BLDataSet.Tables[0].Rows[0]["SettlementAmount"].ToString();
+                    lnkGenInvFreightToCollect.Visible = false;
+                    lnkGenerateInvoiceDo.Visible = false;
+                    lnkGenerateInvoiceSlotExtension.Visible = false;
+                    lnkGenInvPGR.Visible = false;
+                    lnkGenInvSecirity.Visible = false;
+                    lnkGenInvFinalDo.Visible = false;
+                    lnkPrintAmend.Visible = false;
+                    btnBondSave.Visible = false;
+                    BLStat = true;
+                    BLCloseDate = BLDataSet.Tables[0].Rows[0]["ClosureDate"].ToDateTime();
+                    DisableAllServiceControls();
+                }
+                else
+                {
+                    lnkGenerateInvoiceDOE.Visible = false;
+                }
 
                 if (Convert.ToDateTime(BLDataSet.Tables[0].Rows[0]["LANDINGDT"].ToString()) > Convert.ToDateTime("01/01/1950"))//
                 {
@@ -250,7 +278,31 @@ namespace EMS.WebApp.Transaction
                 rcve40 = BLDataSet.Tables[0].Rows[0]["TFC"].ToInt();
                 t20 = BLDataSet.Tables[0].Rows[0]["TFFC"].ToInt();
                 rcve20 = BLDataSet.Tables[0].Rows[0]["FFC"].ToInt();
+                //if (BLDataSet.Tables[0].Rows[0]["BLClosed"].ToInt() == 1)
+                //{
+                //    lnkDoExtension.ForeColor = Color.Red;
+                //    lnkGenerateInvoiceDOE.ForeColor = Color.Red;
+                //    txtVAlidityDate.ForeColor = Color.Red;
 
+                //    lnkDoExtension.Text = "BL Closed";
+                //    txtVAlidityDate.Text = BLDataSet.Tables[0].Rows[0]["ClosureDate"].ToString();
+                //    lnkGenerateInvoiceDOE.Text = "Refund Amount: " + BLDataSet.Tables[0].Rows[0]["SettlementAmount"].ToString();
+                //    lnkGenInvFreightToCollect.Visible = false;
+                //    lnkGenerateInvoiceDo.Visible = false;
+                //    lnkGenerateInvoiceSlotExtension.Visible = false;
+                //    lnkGenInvPGR.Visible = false;
+                //    lnkGenInvSecirity.Visible = false;
+                //    lnkGenInvFinalDo.Visible = false;
+                //    lnkPrintAmend.Visible = false;
+                //    btnBondSave.Visible = false;
+                //    BLStat = true;
+                //    BLCloseDate = BLDataSet.Tables[0].Rows[0]["ClosureDate"].ToDateTime();
+                //    DisableAllServiceControls();
+                //}
+                //else
+                //{
+                //    lnkGenerateInvoiceDOE.Visible = false;
+                //}
 
                 if (t40 == rcve40 && t20 == rcve20)
                 {
@@ -1249,7 +1301,7 @@ namespace EMS.WebApp.Transaction
             ddlDestuffing.SelectedIndex = 0;
             txtExtensionForDetention.Text = string.Empty;
             txtExtensionForPGR.Text = string.Empty;
-            txtVAlidityDate.Text = string.Empty;
+            //txtVAlidityDate.Text = string.Empty;
             ddlAmendmentFor.SelectedIndex = 0;
             txtBondCancellation.Text = string.Empty;
 
@@ -1542,6 +1594,7 @@ namespace EMS.WebApp.Transaction
             {
                 IUser user = (IUser)Session[Constants.SESSION_USER_INFO];
                 HiddenField hdnInvID = (HiddenField)e.Row.FindControl("hdnInvID");
+                HiddenField hdnInvDate = (HiddenField)e.Row.FindControl("hdnInvDate");
                 System.Web.UI.HtmlControls.HtmlAnchor aPrint = (System.Web.UI.HtmlControls.HtmlAnchor)e.Row.FindControl("aPrint");
 
                 aPrint.Attributes.Add("onclick", string.Format("return ReportPrint1('{0}','{1}','{2}','{3}','{4}');",
@@ -1551,6 +1604,20 @@ namespace EMS.WebApp.Transaction
                     "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(user.FirstName + " " + user.LastName),
                     "&InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(hdnInvID.Value)));
 
+                System.Web.UI.HtmlControls.HtmlAnchor aMoneyRecpt = (System.Web.UI.HtmlControls.HtmlAnchor)e.Row.FindControl("aMoneyRecpt");
+                //DateTime InvoiceDate = (DateTime)e.Row.FindControl("InvDate").ToDateTime();
+                if (hdnInvDate.Value.ToDateTime() <= BLCloseDate && BLStat == true)
+                {
+                    aMoneyRecpt.Visible = false;
+                }
+
+                System.Web.UI.HtmlControls.HtmlAnchor aAddCrdtNote = (System.Web.UI.HtmlControls.HtmlAnchor)e.Row.FindControl("aAddCrdtNote");
+
+                if (hdnInvDate.Value.ToDateTime() <= BLCloseDate && BLStat == true)
+                {
+                    aAddCrdtNote.Visible = false;
+                }
+                
             }
 
         }

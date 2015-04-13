@@ -72,8 +72,10 @@ namespace EMS.WebApp.Transaction
                 }
                 if (hdnVessel.Value == "")
                     hdnVessel.Value = "0";
-
-                dtExcel = cls.GetExportPerformanceStatement(Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue), dt1, dt2, Convert.ToInt32(ddlServices.SelectedValue), ddlStatus.SelectedValue.ToString(), Convert.ToInt32(hdnVessel.Value), Convert.ToInt64(ddlVoyage.SelectedValue));
+                if (ddlStatus.SelectedValue == "B")
+                    dtExcel = cls.GetExportPerformanceWithoutBL(Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue), dt1, dt2, Convert.ToInt32(ddlServices.SelectedValue), ddlStatus.SelectedValue.ToString(), Convert.ToInt32(hdnVessel.Value), Convert.ToInt64(ddlVoyage.SelectedValue));
+                else
+                    dtExcel = cls.GetExportPerformanceStatement(Convert.ToInt32(ddlLine.SelectedValue), Convert.ToInt32(ddlLoc.SelectedValue), dt1, dt2, Convert.ToInt32(ddlServices.SelectedValue), ddlStatus.SelectedValue.ToString(), Convert.ToInt32(hdnVessel.Value), Convert.ToInt64(ddlVoyage.SelectedValue));
 
                 dtExcel.Columns.Remove("fk_NVOCCID");
                 dtExcel.Columns.Remove("fk_MainLineVesselID");

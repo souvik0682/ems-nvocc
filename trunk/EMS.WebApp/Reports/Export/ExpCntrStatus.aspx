@@ -19,7 +19,7 @@
 //                var hdnBookingNo = $get('<%=hdnBookingNo.ClientID %>');
 //                hdnBookingNo.value = e.get_value();
 //            }
-        }
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="server">

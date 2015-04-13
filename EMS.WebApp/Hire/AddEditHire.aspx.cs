@@ -390,6 +390,7 @@ namespace EMS.WebApp.Hire
         private bool Validate()
         {
             var temCont = GetEqpOnHireContainers;
+            string[,] CnList;
             if (temCont == null || temCont.Count < 0)
             {
                 //Mes="Please add one or more On Hire Containers"
@@ -398,6 +399,16 @@ namespace EMS.WebApp.Hire
             if (!ReturnAt()) {
                     ScriptManager.RegisterStartupScript(this,this.GetType(),DateTime.Now.Ticks.ToString(),string.Format("alert('ReturnAt is not valid');"),true);
             }
+
+            for (int count = 0; count < temCont.Count; count++)
+            {
+                ////temCont[
+                ////temCont[count].ContainerNo
+                //DataTable dt = OnHireBLL.GetLeaseContainers(ddlHireReference.SelectedValue.ToInt(), temCont.Count, temCont.);
+            }
+
+
+
             return true;
         }
         private int CountFEU()
@@ -533,14 +544,30 @@ namespace EMS.WebApp.Hire
             }
             else
             {
-                if (rdTransactionType.SelectedValue == "F" )
+                if (rdTransactionType.SelectedValue == "F")
                 {
                     var dt = OnHireBLL.GetContainerInfo(txtContainerNo.Text);
-                     foreach(DataRow dr in dt.Rows) {
-                        ddlType.SelectedValue= dr["fk_ContainerTypeID"].ToString();
-                        ddlSize.SelectedValue= dr["CntrSize"].ToString();
-                         break;
-                     }
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        ddlType.SelectedValue = dr["fk_ContainerTypeID"].ToString();
+                        ddlSize.SelectedValue = dr["CntrSize"].ToString();
+                        break;
+                    }
+                }
+                else
+                {
+                    var temCont = GetEqpOnHireContainers;
+                    if (temCont != null)
+                    {
+                        for (int count = 0; count < temCont.Count; count++)
+                        {
+                            if (temCont[count].ContainerNo == txtContainerNo.Text)
+                            {
+                                txtContainerNo.Text = "";
+                                return;
+                            }
+                        }
+                    }
                 }
                  
             }

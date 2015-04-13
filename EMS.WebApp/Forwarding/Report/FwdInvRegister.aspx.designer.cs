@@ -10,34 +10,61 @@
 namespace EMS.WebApp.Forwarding.Report {
     
     
-    public partial class OutstandingAnalysis {
+    public partial class FwdInvRegister {
         
         /// <summary>
-        /// DateRange control.
+        /// hdnVessel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow DateRange;
+        protected global::System.Web.UI.WebControls.HiddenField hdnVessel;
         
         /// <summary>
-        /// lblStartDt control.
+        /// hdnVoyage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStartDt;
+        protected global::System.Web.UI.WebControls.HiddenField hdnVoyage;
         
         /// <summary>
-        /// txtStartDt control.
+        /// ddlLoc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStartDt;
+        protected global::System.Web.UI.WebControls.DropDownList ddlLoc;
+        
+        /// <summary>
+        /// ddlLine control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLine;
+        
+        /// <summary>
+        /// ddlType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlType;
+        
+        /// <summary>
+        /// txtFromDt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFromDt;
         
         /// <summary>
         /// cbeFromDt control.
@@ -49,49 +76,22 @@ namespace EMS.WebApp.Forwarding.Report {
         protected global::AjaxControlToolkit.CalendarExtender cbeFromDt;
         
         /// <summary>
-        /// msk1 control.
+        /// txtToDt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender msk1;
+        protected global::System.Web.UI.WebControls.TextBox txtToDt;
         
         /// <summary>
-        /// lblOutType control.
+        /// cbeToDt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOutType;
-        
-        /// <summary>
-        /// ddlReportType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlReportType;
-        
-        /// <summary>
-        /// ddlPartyType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPartyType;
-        
-        /// <summary>
-        /// ddlParty control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlParty;
+        protected global::AjaxControlToolkit.CalendarExtender cbeToDt;
         
         /// <summary>
         /// btnShow control.
@@ -103,6 +103,15 @@ namespace EMS.WebApp.Forwarding.Report {
         protected global::System.Web.UI.WebControls.Button btnShow;
         
         /// <summary>
+        /// btnInvoice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnInvoice;
+        
+        /// <summary>
         /// rptViewer control.
         /// </summary>
         /// <remarks>
@@ -110,14 +119,5 @@ namespace EMS.WebApp.Forwarding.Report {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.Reporting.WebForms.ReportViewer rptViewer;
-        
-        /// <summary>
-        /// odsOutstanding control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource odsOutstanding;
     }
 }

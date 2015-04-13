@@ -60,6 +60,51 @@
                 </td>
                
             </tr>
+
+            <tr id="Tr1" runat="server">
+                <td class="label" style="padding-right: 50px; vertical-align: top;">
+                    <asp:Label ID="lblLocation" runat="server" Text="Location"></asp:Label>
+                    &nbsp;
+                </td>
+                <td style="padding-right: 20px; vertical-align: top;">
+                    <asp:DropDownList ID="ddlLocation" runat="server" CssClass="dropdownlist" 
+                    TabIndex="60" DataSourceID="LocDs" DataTextField="LocName" DataValueField="pk_LocID">
+                    </asp:DropDownList>
+                    <asp:SqlDataSource ID="LocDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
+                    SelectCommand="SELECT 0 [pk_LocID], '-- All --' [LocName]
+                    UNION
+                    SELECT DISTINCT pk_LocID, LocName FROM dsr.dbo.mstLocation where Active = 'Y' AND IsDeleted = 0"></asp:SqlDataSource>
+                </td>
+                <td class="label" style="padding-right: 50px; vertical-align: top;">
+                    <asp:Label ID="lblJobType" runat="server" Text="Job Type"></asp:Label>
+                </td>
+                <td style="padding-right: 20px; vertical-align: top;">
+                    <asp:DropDownList ID="ddlJobType" runat="server" CssClass="dropdownlist" 
+                    TabIndex="60" DataSourceID="JobTypeDs" DataTextField="JobType" DataValueField="pk_JobTypeID">
+                    </asp:DropDownList>
+                    <asp:SqlDataSource ID="JobTypeDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
+                    SelectCommand="SELECT 0 [pk_JobTypeID], '-- All --' [JobType]
+UNION
+SELECT DISTINCT pk_JobTypeID, JobType FROM fwd.mstJobType"></asp:SqlDataSource>
+                </td>
+               
+            </tr>
+            <tr>
+                 <td class="label" style="padding-right: 50px; vertical-align: top;">
+                    <asp:Label ID="lblJobStatus" runat="server" Text="Job Status"></asp:Label>
+                    &nbsp;
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlJobStatus" runat="server" Width="155">
+                        <asp:ListItem Selected="True" Text="All Jobs" Value="X"></asp:ListItem>
+                        <asp:ListItem Text="Proforma Jobs" Value="P"></asp:ListItem>
+                        <asp:ListItem Text="Pending Approval" Value="A"></asp:ListItem>
+                        <asp:ListItem Text="Approved Jobs" Value="O"></asp:ListItem>
+                        <asp:ListItem Text="Closed Jobs" Value="C"></asp:ListItem>
+                        
+                    </asp:DropDownList>
+                </td>
+            </tr>
             <tr>
                 <td style="vertical-align: top;">
                     <asp:Button ID="btnShow" runat="server" Text="Generate Excel" CssClass="button" OnClick="btnShow_Click" />

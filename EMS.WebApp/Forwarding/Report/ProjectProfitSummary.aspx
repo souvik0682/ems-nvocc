@@ -70,24 +70,69 @@
                     </asp:DropDownList>
                     <asp:SqlDataSource ID="OpsDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
                         SelectCommand="SELECT 0 [pk_LocID], '-- All --' [LocName]
-UNION
-SELECT pk_LocID, LocName FROM fwd.mstFLocation"></asp:SqlDataSource>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="ddlLocation"
-                        ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
-                        ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                        UNION
+                        SELECT pk_LocID, LocName FROM fwd.mstFLocation"></asp:SqlDataSource>
                 </td>
                 <td>
                     Job Type:<span class="errormessage">*</span>
                 </td>
                 <td>
-                    <asp:DropDownList ID="ddlJobStatus" runat="server" Width="155">
-                        <asp:ListItem Selected="True" Text="All Jobs" Value="0"></asp:ListItem>
+                    <asp:DropDownList ID="ddlJobStatus" runat="server" Width="155" Enabled = "false">
+<%--                        <asp:ListItem Selected="True" Text="All Jobs" Value=""></asp:ListItem>
                         <asp:ListItem Text="Proforma Jobs" Value="P"></asp:ListItem>
-                        <asp:ListItem Text="Approved Jobs" Value="O"></asp:ListItem>
-                        <asp:ListItem Text="Closed Jobs" Value="C"></asp:ListItem>
-
+                        <asp:ListItem Text="Pending Approval" Value="A"></asp:ListItem>
+                        <asp:ListItem Text="Approved Jobs" Value="O"></asp:ListItem>--%>
+                        <asp:ListItem Selected="True" Text="Closed Jobs" Value="C"></asp:ListItem>
                     </asp:DropDownList>
-
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Principal:<span class="errormessage">*</span>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlPrincipal" runat="server" CssClass="dropdownlist" TabIndex="60"
+                        DataSourceID="PrincipalDs" DataTextField="LineName" DataValueField="pk_FLineID">
+                    </asp:DropDownList>
+                    <asp:SqlDataSource ID="PrincipalDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
+                        SelectCommand="SELECT 0 [pk_FLineID], '-- All --' [LineName]
+                        UNION
+                        SELECT pk_FLineID, LineName FROM fwd.mstFLine"></asp:SqlDataSource>
+                </td>
+                <td>
+                    Job Scope:<span class="errormessage">*</span>
+                </td>
+                 <td>
+                    <asp:DropDownList ID="ddlJobScope" runat="server" CssClass="dropdownlist" TabIndex="60"
+                        DataSourceID="ScopeDs" DataTextField="JobScope" DataValueField="pk_JobScopeID">
+                    </asp:DropDownList>
+                    <asp:SqlDataSource ID="ScopeDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
+                        SelectCommand="SELECT 0 [pk_JobScopeID], '-- All --' [JobScope]
+                        UNION
+                        SELECT pk_JobScopeID, JobScope FROM fwd.mstJobScope">
+                    </asp:SqlDataSource>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Sales:<span class="errormessage">*</span>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlSales" runat="server" CssClass="dropdownlist"
+                        TabIndex="60" DataSourceID="SalesDs" DataTextField="UserName" DataValueField="pk_UserID">
+                    </asp:DropDownList>
+                    <asp:SqlDataSource ID="SalesDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
+                        SelectCommand="SELECT 0 [pk_UserID], '-- Select --' [UserName]
+                        UNION
+                        SELECT pk_UserID, FirstName + ' ' + LastName + '(' + UserName + ')' AS UserName FROM dsr.dbo.mstUser WHERE (fk_RoleID in (2,4)) ORDER BY USERNAME">
+                    </asp:SqlDataSource>
+                </td>
+                <td>
+                    Booking Party:<span class="errormessage">*</span>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlCustomer" runat="server" CssClass="dropdownlist" TabIndex="60" Width="250px">
+                    </asp:DropDownList>
                 </td>
             </tr>
             <tr>
@@ -95,7 +140,6 @@ SELECT pk_LocID, LocName FROM fwd.mstFLocation"></asp:SqlDataSource>
                     <asp:Button ID="btnShow" runat="server" Text="Generate Excel" CssClass="button" OnClick="btnShow_Click" />
                 </td>
             </tr>
-    
             </table>
             </ContentTemplate>
 

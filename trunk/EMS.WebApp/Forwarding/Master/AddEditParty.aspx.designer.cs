@@ -76,6 +76,24 @@ namespace EMS.WebApp.Forwarding.Master {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFullName;
         
         /// <summary>
+        /// ddlGroup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlGroup;
+        
+        /// <summary>
+        /// rfvGroup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvGroup;
+        
+        /// <summary>
         /// AutoCompleteCountry1 control.
         /// </summary>
         /// <remarks>
@@ -110,6 +128,15 @@ namespace EMS.WebApp.Forwarding.Master {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPhone;
+        
+        /// <summary>
+        /// txtMob control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMob;
         
         /// <summary>
         /// txtFAX control.

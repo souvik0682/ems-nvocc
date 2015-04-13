@@ -46,6 +46,7 @@ namespace EMS.WebApp.Forwarding.Master
         {
 
             RetriveParameters();
+            
             if (!IsPostBack)
             {
                 LoadDefault();
@@ -70,6 +71,7 @@ namespace EMS.WebApp.Forwarding.Master
                     catch { }
                 }
             }
+            CheckUserAccess(PartyId.ToString());
            
          //   CheckUserAccess(countryId);
         }
@@ -79,7 +81,7 @@ namespace EMS.WebApp.Forwarding.Master
             _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
 
             //Get user permission.
-          //  EMS.BLL.UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+            EMS.BLL.UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
         }
 
         private void CheckUserAccess(string xID)
@@ -134,7 +136,7 @@ namespace EMS.WebApp.Forwarding.Master
             //var line = new CommonBLL().GetfwLineByType(new SearchCriteria { StringOption1 = "S,A" });
             var principal = new CommonBLL().GetfwLineByType(new SearchCriteria { StringOption1 = "O" });
             DataTable PartyType = new CommonBLL().GetfwdPartyType();
-
+            DataTable GroupCompany = new CommonBLL().GetfwdGroup();
             //dr["pk_DocTypeID"] = "0";
             //dr["DocName"] = "--Select--";
             //dt.Rows.InsertAt(dr, 0);
@@ -161,10 +163,16 @@ namespace EMS.WebApp.Forwarding.Master
             ddlPartyType.DataBind();
             ddlPartyType.Items.Insert(0, new ListItem("--Select--", "0"));
 
+            ddlGroup.DataSource = GroupCompany;
+            ddlGroup.DataTextField = "Name";
+            ddlGroup.DataValueField = "ID";
+            ddlGroup.DataBind();
+            ddlGroup.Items.Insert(0, new ListItem("--Select--", "0"));
+
         }
         private void LoadData(int id)
         {
-            var src = new PartyBLL().GetParty(new SearchCriteria() { PartyID = id, StringParams = new List<string>() { "",""} });
+            var src = new PartyBLL().GetParty(id, new SearchCriteria() { StringParams = new List<string>() { "0", "" } });
             if (src != null && src.Count() > 0)
             {
                 var party = src.FirstOrDefault();
@@ -175,14 +183,17 @@ namespace EMS.WebApp.Forwarding.Master
                 txtPAN.Text = party.PAN;
                 txtPartyName.Text = party.PartyName;
                 txtPhone.Text = party.Phone;
+                txtMob.Text = party.Mobile;
                 txtTAN.Text = party.TAN;
                 txtFullName.Text = party.FullName;
                 hdnKYCPath.Value = "KYC" + PartyId.ToString().TrimEnd();
                 //ddlLine.SelectedValue = party.fLineID.ToString();
                 ddlPartyType.SelectedValue = party.PartyType.ToString();
+                ddlGroup.SelectedValue = party.GroupID.ToString();
                 ddlPrincipal.SelectedValue = party.PrincipalID.ToString();
                 AutoCompleteCountry1.CountryId = party.CountryID.ToString();
                 AutoCompleteCountry1.CountryName = party.CountryName;
+
 
                 var path = Server.MapPath("~/Forwarding/KYCUploads");
                 var newFileName = "KYC" + PartyId.ToString().TrimEnd();  //  Guid.NewGuid().ToString();
@@ -216,7 +227,8 @@ namespace EMS.WebApp.Forwarding.Master
             //ddlLine.SelectedValue = "0";
             ddlPartyType.SelectedValue = "0";
             ddlPrincipal.SelectedValue = "0";
-
+            ddlGroup.SelectedValue = "0";
+            txtMob.Text = "";
 
         }
 
@@ -253,12 +265,13 @@ namespace EMS.WebApp.Forwarding.Master
                 PAN = txtPAN.Text,//
                 PartyName = txtPartyName.Text,//
                 Phone = txtPhone.Text,//
+                Mobile = txtMob.Text,
                 FullName = txtFullName.Text,
 
                 TAN = txtTAN.Text,//
                 //fLineID = Convert.ToInt32(ddlLine.SelectedValue),
                 PartyType = ddlPartyType.SelectedValue.ToInt(),//
-               
+                GroupID = ddlGroup.SelectedValue.ToInt(),
                 PrincipalID = Convert.ToInt32(ddlPrincipal.SelectedValue),//
                 FwPartyID = PartyId,//
                 PartyAddress = txtAddress.Text,//

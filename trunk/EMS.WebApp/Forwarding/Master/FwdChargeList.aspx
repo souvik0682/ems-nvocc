@@ -126,7 +126,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="25%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="20%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHName" runat="server" CommandName="Sort" CommandArgument="Name"
                                                 Text="Charge Title"></asp:LinkButton></HeaderTemplate>
@@ -136,10 +136,10 @@
                                     </asp:TemplateField> 
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />
-                                        <ItemStyle CssClass="gridviewitem" Width="13%" />
+                                        <ItemStyle CssClass="gridviewitem" Width="20%" />
                                         <HeaderTemplate>
                                             <asp:LinkButton ID="lnkHType" runat="server" CommandName="Sort" CommandArgument="Type"
-                                                Text="Abbreviation"></asp:LinkButton></HeaderTemplate>
+                                                Text="harge Description (Printable)"></asp:LinkButton></HeaderTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <HeaderStyle CssClass="gridviewheader" />

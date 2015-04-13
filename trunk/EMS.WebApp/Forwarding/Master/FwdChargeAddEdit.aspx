@@ -15,10 +15,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
     <div>
         <div id="headercaption">
-            ADD / EDIT EXPORT CHARGE</div>
+            ADD / EDIT FORWARDING CHARGE</div>
         <center>
             <fieldset style="width: 70%;">
-                <legend>Add / Edit Export Charge</legend>
+                <legend>Add / Edit Forwarding Charge</legend>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <table border="0" cellpadding="2" cellspacing="3" width="100%">

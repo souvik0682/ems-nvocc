@@ -4,24 +4,26 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 using EMS.Utilities;
 using EMS.Common;
 using EMS.BLL;
 using EMS.Entity;
 using EMS.WebApp.CustomControls;
-
+using System.Globalization;
+using System.Configuration;
+using EMS.Utilities.ResourceManager;
 
 namespace EMS.WebApp.Forwarding.Master
 {
-    public partial class AddEditUnit : System.Web.UI.Page
+    public partial class AddEditGroup : System.Web.UI.Page
     {
+        GroupEntity oPartyEntity;
         #region Private Member Variables
 
 
         private int _userId = 0;
         private string countryId = "";
-
-        private int companyId = 1;
         //private bool _canAdd = false;
         //private bool _canEdit = false;
         //private bool _canDelete = false;
@@ -31,40 +33,39 @@ namespace EMS.WebApp.Forwarding.Master
         private bool _canDelete = true;
         private bool _canView = true;
 
-        private int UnitId { get { if (ViewState["Id"] != null) { return Convert.ToInt32(ViewState["Id"]); } return 0; } set { ViewState["Id"] = value; } }
+        private int PartyId { get { if (ViewState["Id"] != null) { return Convert.ToInt32(ViewState["Id"]); } return 0; } set { ViewState["Id"] = value; } }
         private string Mode { get { if (ViewState["Id"] != null) { return "E"; } return "A"; } }
         #endregion
 
 
         #region Protected Event Handlers
-
         protected void Page_Load(object sender, EventArgs e)
         {
-
             RetriveParameters();
             if (!IsPostBack)
             {
                 LoadDefault();
-                if (Request.QueryString["UnitId"] != string.Empty)
+                //lblUploadedFileName.Text = "";
+
+                if (Request.QueryString["GroupId"] != string.Empty)
                 {
 
                     try
                     {
-                        var id = GeneralFunctions.DecryptQueryString(Request.QueryString["UnitId"]);
+                        var id = GeneralFunctions.DecryptQueryString(Request.QueryString["GroupId"]);
                         var pid = Convert.ToInt32(id);
                         if (pid > 0)
                         {
-                            UnitId = pid;
+                            PartyId = pid;
                             LoadData(pid);
                         }
                     }
                     catch { }
                 }
             }
-
-            CheckUserAccess(UnitId.ToString());
+            CheckUserAccess(PartyId.ToString());
+           
         }
-
         private void RetriveParameters()
         {
             _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
@@ -112,7 +113,7 @@ namespace EMS.WebApp.Forwarding.Master
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            SaveUnit();
+            SaveGroup();
 
         }
 
@@ -122,53 +123,51 @@ namespace EMS.WebApp.Forwarding.Master
 
         private void LoadDefault()
         {
-            rdoStatus.SelectedIndex = 0;
+            //var line = new CommonBLL().GetfwLineByType(new SearchCriteria { StringOption1 = "S,A" });
+  
+
         }
         private void LoadData(int id)
         {
-            var src = new UnitBLL().GetUnits(new SearchCriteria() { StringParams = new List<string>() { "" } }, id, companyId);
+            var src = new PartyBLL().GetGroup(id, new SearchCriteria() { StringParams = new List<string>() { "0", "" } });
             if (src != null && src.Count() > 0)
             {
-                var unit = src.FirstOrDefault();
-                txtUnit.Text = unit.UnitName;
-                //txtPrefix.Text = unit.Prefix;
-                //rdoStatus.SelectedIndex = unit.UnitStatus?0:1;
-                if (unit.UnitType == "NA")
-                    rdoStatus.SelectedIndex = 0;
-                else
-                    rdoStatus.SelectedIndex = 1;
-            }
+                var party = src.FirstOrDefault();
+                txtAddress.Text = party.GroupAddress;
+                txtPartyName.Text = party.GroupName;
+             }
         }
         private void ClearText()
         {
-            txtUnit.Text = string.Empty;
-            //txtPrefix.Text = string.Empty;
+            txtPartyName.Text = string.Empty;
+            txtAddress.Text = string.Empty;
         }
 
-        private UnitEntity ExtractData()
+        private GroupEntity ExtractData()
         {
-            //var party = 
+            
 
-            return new UnitEntity
+            return new GroupEntity
             {
-                UnitName = txtUnit.Text,//
-                //Prefix = txtPrefix.Text,//
-                UnitType = rdoStatus.SelectedIndex==0?"N":"E",//
-                UnitTypeID=UnitId,
-                CompanyID =companyId,//
-                CreatedBy = _userId//
+               
+                GroupName = txtPartyName.Text,//
+                GroupAddress = txtAddress.Text,//
+                UserID = _userId//
+
 
             };
 
         }
-        private void SaveUnit()
+        private void SaveGroup()
         {
 
-            var result = new UnitBLL().AddEditUnit(ExtractData(), companyId, Mode);
+
+            var result = new PartyBLL().SaveGroup(ExtractData(), Mode);
             if (result > 0)
             {
-                UnitId = result;
-                Response.Redirect("~/Forwarding/Master/ManageUnits.aspx");
+                PartyId = result;
+                
+                Response.Redirect("~/Forwarding/Master/ManageGroup.aspx");
             }
             else
             {
@@ -181,7 +180,8 @@ namespace EMS.WebApp.Forwarding.Master
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Forwarding/Master/ManageUnits.aspx");
+            Response.Redirect("~/Forwarding/Master/ManageGroup.aspx");
         }
+
     }
 }

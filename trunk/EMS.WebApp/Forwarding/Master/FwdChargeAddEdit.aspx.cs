@@ -36,6 +36,7 @@ namespace EMS.WebApp.Forwarding.Master
             if (!Page.IsPostBack)
             {
                 fillAllDropdown();
+                txtChgAbbr.MaxLength = 40;
                 //dgChargeRates.DataBind();
 
                 if (hdnChargeID.Value != "0")

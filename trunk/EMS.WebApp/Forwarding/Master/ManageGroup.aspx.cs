@@ -13,7 +13,7 @@ using EMS.BLL;
 
 namespace EMS.WebApp.Forwarding.Master
 {
-    public partial class ManageParties : System.Web.UI.Page
+    public partial class ManageGroup : System.Web.UI.Page
     {
         #region Private Member Variables
 
@@ -37,28 +37,22 @@ namespace EMS.WebApp.Forwarding.Master
 
         #endregion
         public int counter = 1;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             RetriveParameters();
             if (!IsPostBack)
             {
-               
-               // CheckUserAccess();
+
+                // CheckUserAccess();
                 SetDeafaultSetting();
                 FillData();
             }
+
         }
 
         private void SetDeafaultSetting()
         {
-            DataTable PartyType = new CommonBLL().GetfwdPartyType();
-            ddlPartyType.DataSource = PartyType;
-            ddlPartyType.DataTextField = "PartyType";
-            ddlPartyType.DataValueField = "pk_PartyTypeID";
-            ddlPartyType.DataBind();
-            ddlPartyType.Items.Insert(0, new ListItem("--Select--", "0"));
-
-
             SearchCriteria searchCriteria = new SearchCriteria
             {
                 PageIndex = 0,
@@ -69,8 +63,8 @@ namespace EMS.WebApp.Forwarding.Master
                 PartyID = 0,
                 LocAbbr = "",
                 PartyName = txtPartyName.Text,
-                StringParams = new List<string>() { ddlPartyType.SelectedValue == "0" ? "0" : ddlPartyType.SelectedValue, txtFullName.Text }
-            
+                StringParams = new List<string>() { txtPartyName.Text }
+
             };
             Session["SearchCriteria"] = searchCriteria;
 
@@ -124,25 +118,23 @@ namespace EMS.WebApp.Forwarding.Master
         {
             counter = 1;
             gvwHire.PageSize = SearchCriteriaProp.PageSize;
-            gvwHire.DataSource = new BLL.PartyBLL().GetParty(0, SearchCriteriaProp).ToList();
+            gvwHire.DataSource = new BLL.PartyBLL().GetGroup(0, SearchCriteriaProp).ToList();
             gvwHire.DataBind();
             upLoc.Update();
         }
 
         protected void gvwHire_OnSorting(object sender, GridViewSortEventArgs e)
         {
-           
+
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             ISearchCriteria searchCriteria = SearchCriteriaProp;
             string partyName = string.IsNullOrEmpty(txtPartyName.Text) ? "" : txtPartyName.Text.Trim();
-            string FullName = string.IsNullOrEmpty(txtFullName.Text) ? "" : txtFullName.Text.Trim();
-            string partyType = ddlPartyType.SelectedValue == "0" ? "0" : ddlPartyType.SelectedValue;
             searchCriteria.PartyID = 0;
             searchCriteria.PartyName = partyName;
-            searchCriteria.StringParams = new List<string>() { partyType, FullName };
+            searchCriteria.StringParams = new List<string>() { partyName };
             SearchCriteriaProp = searchCriteria;
             FillData();
         }
@@ -158,7 +150,7 @@ namespace EMS.WebApp.Forwarding.Master
         {
             if (e.CommandName.Equals("Sort"))
             {
-                
+
                 ISearchCriteria searchCriteria = SearchCriteriaProp;
 
                 if (searchCriteria.SortExpression == e.CommandArgument.ToString())
@@ -177,15 +169,14 @@ namespace EMS.WebApp.Forwarding.Master
             }
             else if (e.CommandName == "Edit")
             {
-               
+
             }
             else if (e.CommandName == "Remove")
             {
                 try
                 {
                     var tempId = GeneralFunctions.DecryptQueryString(e.CommandArgument.ToString());
-                    var companyId = 1;
-                    new BLL.PartyBLL().DeleteParty(tempId.IntRequired(), _userId,companyId);
+                    new BLL.PartyBLL().DeleteGroup(tempId.IntRequired(), _userId);
                     FillData();
                 }
                 catch
@@ -194,8 +185,6 @@ namespace EMS.WebApp.Forwarding.Master
                 }
             }
         }
-
-
 
         protected void ddlPaging_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -215,7 +204,7 @@ namespace EMS.WebApp.Forwarding.Master
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                
+
                 if (_canDelete == true)
                 {
                     ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
@@ -235,7 +224,7 @@ namespace EMS.WebApp.Forwarding.Master
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Forwarding/Master/AddEditParty.aspx");
+            Response.Redirect("~/Forwarding/Master/AddEditGroup.aspx");
         }
     }
 }

@@ -48,6 +48,20 @@
                 </tr>
 
                 <tr>
+                    <td>Group :<span class="errormessage1">*</span></td>
+                    <td>
+                      <asp:DropDownList ID="ddlGroup" runat="server"  CssClass="dropdownlist">
+                            <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>
+                      </asp:DropDownList>
+                      <br />
+                        <asp:RequiredFieldValidator ID="rfvGroup" runat="server" CssClass="errormessage" Width="300"
+                                    ControlToValidate="ddlGroup" ValidationGroup="Save" Display="Dynamic"  InitialValue="0" ErrorMessage="[Required]">
+                        </asp:RequiredFieldValidator>
+                            
+                    </td>
+                </tr>
+
+                <tr>
                     <td>Country:<span class="errormessage1">*</span></td>
                     <td style="width:50%">                      
                         <uc1:AutoCompleteCountry ID="AutoCompleteCountry1" runat="server"  />                       
@@ -83,7 +97,16 @@
                                     ErrorMessage="[Required]"></asp:RequiredFieldValidator>--%>
                    </td>
                 </tr>
-
+                <tr>
+                    <td>Mobile No:</td>
+                    <td><asp:TextBox ID="txtMob" runat="server" CssClass="textboxuppercase" MaxLength="100"
+                           Width="300" TextMode="SingleLine"></asp:TextBox>
+<%--                            <br />
+                            <asp:RequiredFieldValidator ID="rfvtxtPhone" runat="server" CssClass="errormessage"
+                                    ControlToValidate="txtPhone" ValidationGroup="Save" Display="Dynamic"  
+                                    ErrorMessage="[Required]"></asp:RequiredFieldValidator>--%>
+                   </td>
+                </tr>
                   <tr>
                     <td>FAX:</td>
                     <td><asp:TextBox ID="txtFAX" runat="server" CssClass="textboxuppercase" 

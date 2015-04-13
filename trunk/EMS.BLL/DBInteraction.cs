@@ -211,6 +211,28 @@ namespace EMS.BLL
             return dquery.GetTables();
         }
 
+        public DataSet GetFwdLine()
+        {
+            string ProcName = "fwd.prcGetFLine";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            //dquery.AddIntegerParam("@pk_NVOCCID", pk_FlineID);
+            //dquery.AddVarcharParam("@NVOCCName", 6, LineName);
+
+            return dquery.GetTables();
+        }
+
+        public DataSet GetFwdCurrency()
+        {
+            string ProcName = "fwd.prcGetCurrency";
+            DAL.DbManager.DbQuery dquery = new DAL.DbManager.DbQuery(ProcName);
+
+            //dquery.AddIntegerParam("@pk_NVOCCID", pk_FlineID);
+            //dquery.AddVarcharParam("@NVOCCName", 6, LineName);
+
+            return dquery.GetTables();
+        }
+
         public DataSet GetActiveOperator()
         {
             string ProcName = "[exp].[prcGetSlotOperatorList]";

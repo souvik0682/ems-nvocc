@@ -43,6 +43,11 @@ namespace EMS.BLL
             return EstimateDAL.GetServiceTax(EstimateDate, BasicValue, ChargeID);
         }
 
+        public DataSet GetServiceTaxPer(DateTime EstimateDate, int ChargeID)
+        {
+            return EstimateDAL.GetServiceTaxPer(EstimateDate, ChargeID);
+        }
+
         public DataSet GetContainers(int UnitTypeID, string Size, int JobID)
         {
             return EstimateDAL.GetContainers(UnitTypeID, Size, JobID);

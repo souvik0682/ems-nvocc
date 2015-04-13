@@ -37,6 +37,11 @@ namespace EMS.BLL
             JobDAL.UpdateJobStatus(JobId, Type, UserId);
         }
 
+        public static void SendConfMail(int JobId, string Type, int UserId, decimal GP)
+        {
+            JobDAL.SendConfMail(JobId, Type, UserId, GP);
+        }
+
         public static void SaveEstimateFile(int EstimateId, string FileName, string OriginalFileName)
         {
             JobDAL.SaveEstimateFile(EstimateId, FileName, OriginalFileName);

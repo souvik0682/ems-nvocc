@@ -10,9 +10,9 @@ namespace EMS.BLL
 {
    public class PartyBLL
     {
-        public  List<IParty> GetParty(ISearchCriteria searchCriteria)
+        public  List<IParty> GetParty(int partyid, ISearchCriteria searchCriteria)
         {
-            return PartyDAL.GetParty(searchCriteria);
+            return PartyDAL.GetParty(partyid, searchCriteria);
         }
 
         public  int SaveParty(IParty Party, string Mode)
@@ -24,5 +24,21 @@ namespace EMS.BLL
         {
             return PartyDAL.DeleteParty(PartyID, UserID, CompanyID);
         }
+
+        public int DeleteGroup(int GroupID, int UserID)
+        {
+            return PartyDAL.DeleteGroup(GroupID, UserID);
+        }
+
+        public List<IGroup> GetGroup(int partyid, ISearchCriteria searchCriteria)
+        {
+            return PartyDAL.GetGroup(partyid, searchCriteria);
+        }
+
+        public int SaveGroup(IGroup Party, string Mode)
+        {
+            return PartyDAL.SaveGroup(Party, Mode);
+        }
+
     }
 }

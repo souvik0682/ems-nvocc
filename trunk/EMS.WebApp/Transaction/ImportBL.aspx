@@ -109,7 +109,11 @@
                             </cc1:TextBoxWatermarkExtender>
                         </td>
                         <td>
-                            &nbsp;
+                            <asp:DropDownList ID="ddlStatus" runat="server" ForeColor="#747862" AutoPostBack="true" onselectedindexchanged="ddlStatus_SelectedIndexChanged">
+                            <asp:ListItem Text="Open" Value="O"></asp:ListItem>
+                            <asp:ListItem Text="Closed" Value="C"></asp:ListItem>
+                            <asp:ListItem Text="All" Value="A"></asp:ListItem>
+                            </asp:DropDownList>
                         </td>
                     </tr>
 

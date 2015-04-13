@@ -635,9 +635,9 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtVAlidityDate" runat="server" Width="75" Enabled="false"></asp:TextBox>
-                                    <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtVAlidityDate"
+                                    <%--<cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="txtVAlidityDate"
                                         TargetControlID="txtValidityDate" Format="dd/MM/yyyy">
-                                    </cc1:CalendarExtender>
+                                    </cc1:CalendarExtender>--%>
                                     <asp:RequiredFieldValidator ControlToValidate="txtVAlidityDate" Enabled="false" ID="rfvDOE"
                                         runat="server" ErrorMessage="Please enter date" Display="None" ValidationGroup="vgInv"></asp:RequiredFieldValidator>
                                     <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender1" runat="server" TargetControlID="rfvDOE">
@@ -1034,6 +1034,7 @@
                                                     Received Amount</HeaderTemplate>
                                                 <ItemTemplate>
                                                     <asp:HiddenField ID="hdnInvID" runat="server" Value='<%# Eval("InvoiceID")%>' />
+                                                    <asp:HiddenField ID="hdnInvDate" runat="server" Value='<%# Eval("InvoiceDate")%>' />
                                                     <a href="#" runat="server" onserverclick="ShowReceivedAmt">
                                                         <%# Eval("ReceivedAmt")%></a>
                                                 </ItemTemplate>

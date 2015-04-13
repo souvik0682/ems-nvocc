@@ -2018,7 +2018,7 @@ namespace EMS.WebApp.Transaction
             rdoCargoType.SelectedValue = header.CargoType;
             txtDestFreeDays.Text = Convert.ToString(header.DetentionFree);
             rdoDestSlab.SelectedValue = header.DetentionSlabType;
-
+            
             if (rdoNatureCargo.SelectedValue != "C")
             {
                 tpFooter.Enabled = false;
@@ -2109,8 +2109,6 @@ namespace EMS.WebApp.Transaction
                 rdoTaxExempted.SelectedValue = "Yes";
             else
                 rdoTaxExempted.SelectedValue = "No";
-
-     
 
             //txtTPBondNo.Text = header.TPBondNo;
             rdoTransportMode.SelectedValue = header.TransportMode;
@@ -2236,7 +2234,6 @@ namespace EMS.WebApp.Transaction
             }
             else
             {
-
                 LoadCarrier();
                 ddlCarrier.SelectedValue = Convert.ToString(header.CarrierID);
                 ddlCarrier.Enabled = true;
@@ -2269,6 +2266,10 @@ namespace EMS.WebApp.Transaction
                 btnSave.Visible = false;
 
             }
+
+            if (header.blClosed == true)
+                btnSave.Visible = false;
+
         }
 
         private void CheckContainerNumber()

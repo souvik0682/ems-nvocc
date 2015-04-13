@@ -160,7 +160,7 @@ namespace EMS.WebApp.Transaction
             txtPendingAmt.Text = dt.Rows[0]["PENDING"].ToString();
 
             hdnLocationID.Value = dt.Rows[0]["LOCID"].ToString();
-            hdnNvoccId.Value = dt.Rows[0]["LINEID"].ToString();
+            hdnNvoccId.Value = dt.Rows[0]["LINEID"].ToString();  // forwarding this field is used as Jobid
         }
 
         private void SaveMoneyReceipts()
@@ -171,7 +171,7 @@ namespace EMS.WebApp.Transaction
 
             moneyReceipt.InvoiceId = Convert.ToInt64(_InvoiceId);
             moneyReceipt.LocationId = Convert.ToInt32(hdnLocationID.Value);
-            moneyReceipt.NvoccId = Convert.ToInt32(hdnNvoccId.Value);
+            moneyReceipt.NvoccId = Convert.ToInt32(hdnNvoccId.Value);  // forwarding this field is used as Jobid
             moneyReceipt.ExportImport = Convert.ToChar(ddlExportImport.SelectedValue);
             moneyReceipt.MRDate = Convert.ToDateTime(txtDate.Text);
             moneyReceipt.ChequeNo = txtChqNo.Text;
@@ -201,8 +201,10 @@ namespace EMS.WebApp.Transaction
                 case 1:
                     if (ddlExportImport.Text == "I")
                         Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(txtBLNo.Text));
-                    else
+                    else if (ddlExportImport.Text == "E")
                         Response.Redirect("~/Export/Export-bl-query.aspx?BLNumber=" + GeneralFunctions.EncryptQueryString(txtBLNo.Text));
+                    else if (ddlExportImport.Text == "F")
+                        Response.Redirect("~/Forwarding/Transaction/Dashboard.aspx?JobId=" + GeneralFunctions.EncryptQueryString(hdnNvoccId.Value));
                     break;
             }
 
@@ -218,8 +220,10 @@ namespace EMS.WebApp.Transaction
         {
             if (ddlExportImport.Text == "I")
                 Response.Redirect("~/Transaction/BL-Query.aspx?BlNo=" + GeneralFunctions.EncryptQueryString(txtBLNo.Text));
-            else
+            else if (ddlExportImport.Text == "E")
                 Response.Redirect("~/Export/Export-bl-query.aspx?BLNumber=" + GeneralFunctions.EncryptQueryString(txtBLNo.Text));
+            else if (ddlExportImport.Text == "F")
+                Response.Redirect("~/Forwarding/Transaction/Dashboard.aspx?JobId=" + GeneralFunctions.EncryptQueryString(hdnNvoccId.Value));
         }
 
     }

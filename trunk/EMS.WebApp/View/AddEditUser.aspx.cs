@@ -217,7 +217,7 @@ namespace EMS.WebApp.View
                 txtEmail.Text = user.EmailId;
                 ddlRole.SelectedValue = Convert.ToString(user.UserRole.Id);
                 ddlLoc.SelectedValue = Convert.ToString(user.UserLocation.Id);
-
+                txtManagerEmail.Text = user.ManagerEmailID; 
                 if (user.AllowMutipleLocation)
                     ddlMultiLoc.SelectedValue = "1";
                 else
@@ -327,7 +327,7 @@ namespace EMS.WebApp.View
             user.EmailId = txtEmail.Text.Trim().ToUpper();
             user.UserRole.Id = Convert.ToInt32(ddlRole.SelectedValue);
             user.UserLocation.Id = Convert.ToInt32(ddlLoc.SelectedValue);
-
+            user.ManagerEmailID = txtManagerEmail.Text;
             IRole role = new UserBLL().GetRole(Convert.ToInt32(ddlRole.SelectedValue));
 
             user.UserRole.LocationSpecific = false;

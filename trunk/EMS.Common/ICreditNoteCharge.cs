@@ -18,6 +18,7 @@ namespace EMS.Common
         decimal ServiceTaxCessAmount { get; set; }
         decimal ServiceTaxACess { get; set; }
         decimal TotalServiceTax { get; set; }
+        decimal STaxPer { get; set; }
 
         decimal ChargeAmount { get; set; }
         decimal ChargeServiceTax { get; set; }

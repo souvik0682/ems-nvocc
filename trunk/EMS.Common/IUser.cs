@@ -18,5 +18,6 @@ namespace EMS.Common
         bool IsActive { get; set; }
         bool AllowMutipleLocation { get; set; }
         bool UserlocationSpecific { get; set; }
+        string ManagerEmailID { get; set; }
      }
 }

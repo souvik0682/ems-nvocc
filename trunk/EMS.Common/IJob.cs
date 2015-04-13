@@ -54,5 +54,7 @@ namespace EMS.Common
         string JobNote2 { get; set; }
         string POL { get; set; }
         string POD { get; set; }
+        bool UserConfirmation { get; set; }
+        int CompID { get; set; }
     }
 }

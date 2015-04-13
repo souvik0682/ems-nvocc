@@ -19,6 +19,7 @@ namespace EMS.WebApp.Forwarding.Master
 
 
         private int _userId = 0;
+        private int _roleId = 0;
         private string countryId = "";
         private string companyId = "1";
         private bool _canAdd = true;
@@ -449,7 +450,16 @@ namespace EMS.WebApp.Forwarding.Master
         private void RetriveParameters()
         {
             _userId = EMS.BLL.UserBLL.GetLoggedInUserId();
+            IUser user = new UserBLL().GetUser(_userId);
 
+            if (!ReferenceEquals(user, null))
+            {
+                if (!ReferenceEquals(user.UserRole, null))
+                {
+                    _roleId = user.UserRole.Id;
+                    UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+                }
+            }
             //Get user permission.
             //  EMS.BLL.UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
         }
@@ -550,7 +560,9 @@ namespace EMS.WebApp.Forwarding.Master
         {
             var creInvoiceId = string.Empty;
             string EstimateId = "";
-            
+            if (_roleId == (int)UserRole.fuser)
+                trApproval.Visible = false;
+
             rdoPayment_SelectedIndexChanged(null, null);
             if (!ReferenceEquals(Request.QueryString["CreInvoiceId"], null))
             {
@@ -611,12 +623,26 @@ namespace EMS.WebApp.Forwarding.Master
                             dllCds = (DataSet)ViewState["ddlCurrency"];
                         }
 
+                        DataSet dllUs = new DataSet();
+                        if (ViewState["dllUs"] == null)
+                        {
+   
+                            dllUs = new EstimateBLL().GetUnitMaster(new SearchCriteria { StringOption1 = companyId, StringOption2 = "", SortExpression = "UnitName" });
+                            ViewState["ddlUnitType"] = dllUs;
+                        }
+                        else
+                        {
+                            dllUs = (DataSet)ViewState["ddlUnitType"];
+                        }
+               
                         foreach (var obj in creditorInvoice.CreditorInvoiceCharges) {
                            
                             DataRow t = ds.Tables[0].AsEnumerable().Where(x => x["ChargeId"].ToString() == obj.ChargeId.ToString()).FirstOrDefault();
                             obj.ChargeName = t["ChargeName"].ToString();
                             DataRow t1 = dllCds.Tables[0].AsEnumerable().Where(x => x["pk_CurrencyID"].ToString() == obj.CurrencyId.ToString()).FirstOrDefault();
                             obj.Currency = t1["CurrencyName"].ToString();
+                            DataRow t2 = dllUs.Tables[0].AsEnumerable().Where(x => x["pk_UnitTypeID"].ToString() == obj.UnitTypeID.ToString()).FirstOrDefault();
+                            obj.UnitType = t2["UnitName"].ToString();
                             try { obj.Total = obj.Rate * obj.Unit; }
                             catch { obj.Total = 0; }
                             }
@@ -647,14 +673,20 @@ namespace EMS.WebApp.Forwarding.Master
                         chkRoff.Checked = false;
                     else
                         chkRoff.Checked = true;
+                    rdbApproval.SelectedValue = creditorInvoice.approved.ToString();
 
-                    if (creditorInvoice.approved)
-                    {
-                        chkApproved.Checked = true;
-                        txtComment.Text = creditorInvoice.comment;
-                    }
-                    else
+                    if (creditorInvoice.approved.ToInt() == 0)
                         txtComment.Text = "";
+                    else
+                        txtComment.Text = creditorInvoice.comment;
+
+                    //if (!string.IsNullOrEmpty(creditorInvoice.approved.ToString()))
+                    //{
+                    //    rdbApproval.Items.FindByValue(creditorInvoice.approved.ToString().ToLower() == "Approve" ? "1" : "0").Selected = true;
+                    //    txtComment.Text = creditorInvoice.comment;
+                    //}
+                    //else
+                    //    txtComment.Text = "";
 
                     lblJobNumber.Text        = creditorInvoice.JobNumber;
                    // lblLocation.Text         = creditorInvoice.Location;
@@ -691,6 +723,8 @@ namespace EMS.WebApp.Forwarding.Master
               
                 var ex = new EstimateBLL().GetExchange(new SearchCriteria() { StringOption1 = "2", Date = lblJobDate.Text.ToDateTime() });
                 txtExRate.Text = Convert.ToString(ex.Tables[0].Rows[0]["USDXchRate"]);
+                rdbApproval.SelectedValue = "0";
+                
             }
 
             //grvInvoice.ShowFooter = false;
@@ -716,7 +750,8 @@ namespace EMS.WebApp.Forwarding.Master
                 UserID = _userId,
                 CreInvoiceDate = Convert.ToDateTime(txtCreInvoiceDate.Text),
                 JobNumber = JobID,
-                approved = chkApproved.Checked,
+                approved =  Convert.ToInt32(Convert.ToInt32(rdbApproval.SelectedItem.Value)),
+                //approved = chkApproved.Checked,
                 comment = txtComment.Text
 
             };
@@ -760,8 +795,13 @@ namespace EMS.WebApp.Forwarding.Master
 
             var data = ExtractData();
 
-          
-            hdnLastNo.Value = new CreditorInvoiceBLL().SaveCreditorInvoice(data, Mode).ToString();
+            if (Mode == "A")
+                hdnLastNo.Value = new CreditorInvoiceBLL().SaveCreditorInvoice(data, Mode).ToString();
+            else
+            {
+                hdnLastNo.Value = new CreditorInvoiceBLL().SaveCreditorInvoice(data, Mode).ToString();
+                hdnLastNo.Value = CreInvoiceId.ToString();
+            }
             //if (result > 0)
             //{
             if (hdnLastNo.Value.ToInt() > 0)
@@ -1022,24 +1062,24 @@ namespace EMS.WebApp.Forwarding.Master
             }
             catch
             {
-                gross = 0;
+                gtotal = 0;
             }
-            lblGTotal.Text = gross.ToString();
+            lblGTotal.Text = gtotal.ToString();
         }
 
-        protected void chkApproved_CheckedChanged(object sender, EventArgs e)
+        protected void rdbApproval_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (chkApproved.Checked)
+            if (rdbApproval.SelectedItem.Value.ToInt() == 0)
+            {
+                txtComment.Enabled = false;
+                rfvComment.Enabled = false;
+            }
+            else
             {
                 txtComment.Enabled = true;
                 rfvComment.Enabled = true;
             }
-            else
-            {
-                txtComment.Enabled = false;
-                rfvComment.Enabled = false;
-                txtComment.Text = "";
-            }
+        
         }
     }
 }

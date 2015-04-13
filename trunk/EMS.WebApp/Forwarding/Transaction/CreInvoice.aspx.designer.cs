@@ -229,13 +229,40 @@ namespace EMS.WebApp.Forwarding.Master {
         protected global::System.Web.UI.WebControls.HiddenField hdnInvoiceAmount;
         
         /// <summary>
-        /// chkApproved control.
+        /// trApproval control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkApproved;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trApproval;
+        
+        /// <summary>
+        /// rdbApproval control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rdbApproval;
+        
+        /// <summary>
+        /// rfvApproval control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvApproval;
+        
+        /// <summary>
+        /// ValidatorCalloutExtender16 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ValidatorCalloutExtender ValidatorCalloutExtender16;
         
         /// <summary>
         /// txtComment control.

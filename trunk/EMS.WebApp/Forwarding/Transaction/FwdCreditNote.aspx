@@ -110,6 +110,9 @@
                                                     CRN Amount
                                                 </td>
                                                 <td style="text-align: right;font-weight:bold">
+                                                    S/Tax %
+                                                </td>
+                                                <td style="text-align: right;font-weight:bold">
                                                     S/Tax
                                                 </td>
 
@@ -144,6 +147,12 @@
                                                     &nbsp;
                                                 </td>
                                                 <td>
+                                                    <cc2:CustomTextBox ID="txtStaxper" runat="server" Width="118" Type="Decimal" MaxLength="10"
+                                                        Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
+                                                        Enabled="false"></cc2:CustomTextBox><br />
+                                                    &nbsp;
+                                                </td>
+                                                <td>
                                                     <cc2:CustomTextBox ID="txtCNServiceTax" runat="server" Width="118" Type="Decimal" MaxLength="10"
                                                         Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
                                                         Enabled="false"></cc2:CustomTextBox><br />
@@ -174,11 +183,16 @@
                                                             <HeaderStyle CssClass="gridviewheader_num" />
                                                             <ItemStyle CssClass="gridviewitem" Width="75" HorizontalAlign="Right" />
                                                         </asp:TemplateField>
+
                                                         <asp:TemplateField HeaderText="S/Tax">
                                                             <HeaderStyle CssClass="gridviewheader_num" />
                                                             <ItemStyle CssClass="gridviewitem" Width="75" HorizontalAlign="Right" />
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="Credit Note Amount">
+                                                            <HeaderStyle CssClass="gridviewheader_num" />
+                                                            <ItemStyle CssClass="gridviewitem" Width="75" HorizontalAlign="Right" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="S/Tax %">
                                                             <HeaderStyle CssClass="gridviewheader_num" />
                                                             <ItemStyle CssClass="gridviewitem" Width="75" HorizontalAlign="Right" />
                                                         </asp:TemplateField>

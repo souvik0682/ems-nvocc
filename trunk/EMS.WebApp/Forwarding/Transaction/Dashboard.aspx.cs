@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
 using EMS.BLL;
 using EMS.Common;
 using EMS.Utilities;
@@ -42,7 +43,7 @@ namespace EMS.WebApp.Farwarding.Transaction
                 {
                     int JobId = 1;
                     Int32.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["JobId"].ToString()), out JobId);
-
+                    btnCloseJob.Attributes.Add("onclick", "javascript:return confirm('Are you sure to Open/Close Job?');");
                     if (JobId > 0)
                     {
                         ViewState["JOBID"] = JobId;
@@ -68,7 +69,9 @@ namespace EMS.WebApp.Farwarding.Transaction
             {
                 lblTTL20.CssClass = "right_align";
                 lblTTL40.CssClass = "right_align";
-                
+                lblClosed.Text = "";
+                lblApprover.Text = "";
+                btnCloseJob.Text = "Close Job";
 
                 if (dtJob.Rows[0]["JobDate"] != DBNull.Value)
                     lblJobDate.Text = Convert.ToString(dtJob.Rows[0]["JobDate"]).Split(' ')[0];
@@ -104,10 +107,10 @@ namespace EMS.WebApp.Farwarding.Transaction
                     lblTTL20.Text = Convert.ToString(dtJob.Rows[0]["ttl20"]);
                 if (dtJob.Rows[0]["ttl40"] != DBNull.Value)
                     lblTTL40.Text = Convert.ToString(dtJob.Rows[0]["ttl40"]);
-                if (dtJob.Rows[0]["grwt"] != DBNull.Value)
-                    lblWeight.Text = Convert.ToString(dtJob.Rows[0]["grwt"]);
-                if (dtJob.Rows[0]["RevTon"] != DBNull.Value)
-                    lblRevenue.Text = Convert.ToString(dtJob.Rows[0]["RevTon"]);
+                //if (dtJob.Rows[0]["grwt"] != DBNull.Value)
+                //    lblWeight.Text = Convert.ToString(dtJob.Rows[0]["grwt"]);
+                //if (dtJob.Rows[0]["RevTon"] != DBNull.Value)
+                //    lblRevenue.Text = Convert.ToString(dtJob.Rows[0]["RevTon"]);
                 if (dtJob.Rows[0]["PlaceOfReceipt"] != DBNull.Value)
                     lblPlaceReceive.Text = Convert.ToString(dtJob.Rows[0]["PlaceOfReceipt"]);
                 if (dtJob.Rows[0]["PlaceOfDelivery"] != DBNull.Value)
@@ -124,10 +127,21 @@ namespace EMS.WebApp.Farwarding.Transaction
                     lblOverseas.Text = Convert.ToString(dtJob.Rows[0]["OverseasAgent"]);
                 if (dtJob.Rows[0]["EstPayable"] != DBNull.Value)
                     lblTotalEstimatePayable.Text = Convert.ToString(dtJob.Rows[0]["EstPayable"]);
-                if (dtJob.Rows[0]["TotPaid"] != DBNull.Value)
-                    lblTotalPaid.Text = Convert.ToString(dtJob.Rows[0]["TotPaid"]);
-                if (dtJob.Rows[0]["TotReceived"] != DBNull.Value)
-                    lblTotalReceived.Text = Convert.ToString(dtJob.Rows[0]["TotReceived"]);
+
+                if (lblShipping.Text == "LCL" || lblShipping.Text == "BREAK-BULK" || lblShipping.Text == "FCL")
+                {
+                    lblwtText.Text = "Weight MT";
+                    lblRevText.Text = "Volume CBM";
+                }
+                else if (lblShipping.Text == "AIR CONSOLE")
+                {
+                    lblwtText.Text = "Weight (Kgs.)";
+                    lblRevText.Text = "Revenue Ton";
+                }
+                //if (dtJob.Rows[0]["TotPaid"] != DBNull.Value)
+                //    lblTotalPaid.Text = Convert.ToString(dtJob.Rows[0]["TotPaid"]);
+                //if (dtJob.Rows[0]["TotReceived"] != DBNull.Value)
+                //    lblTotalReceived.Text = Convert.ToString(dtJob.Rows[0]["TotReceived"]);
                 if (dtJob.Rows[0]["EstReceivable"] != DBNull.Value)
                     lblTotalEstimateReceiveable.Text = Convert.ToString(dtJob.Rows[0]["EstReceivable"]);
                 if (dtJob.Rows[0]["EstREceivable"] != DBNull.Value && dtJob.Rows[0]["EstPayable"] != DBNull.Value)
@@ -140,45 +154,19 @@ namespace EMS.WebApp.Farwarding.Transaction
                     lblPOD.Text = Convert.ToString(dtJob.Rows[0]["DischPort"]);
                 hdnCustID.Value = dtJob.Rows[0]["fk_CustID"].ToString();
                 ViewState["JobActive"] = dtJob.Rows[0]["JobActive"].ToString();
+                
+                
+                //if (_roleId == 23 && dtJob.Rows[0]["JobActive"].ToString() == "P")
+                //{
+                //    btnApprove.Enabled = true;
+                //    btnCloseJob.Enabled = false;
+                //}
 
-
-                if (dtJob.Rows[0]["JobActive"].ToString() == "O")
-                {
-                    btnApprove.Enabled = false;
-                    btnCloseJob.Enabled = true;
-                    //Button1.Visible = false;
-                    Button2.Visible = false;
-                    //Button3.Visible = false;
-                    Button4.Visible = false;
-                }
-                else if (dtJob.Rows[0]["JobActive"].ToString() == "P")
-                {
-                    btnApprove.Enabled = true;
-                    btnCloseJob.Enabled = true;
-
-                    Button5.Visible = false;
-                    Button6.Visible = false;
-                    Button1.Visible = false;
-                    Button3.Visible = false;
-                }
-                else if (dtJob.Rows[0]["JobActive"].ToString() == "C")
-                {
-                    btnApprove.Enabled = false;
-                    btnCloseJob.Enabled = false;
-                    Button1.Visible = false;
-                    Button2.Visible = false;
-                    Button3.Visible = false;
-                    Button4.Visible = false;
-                    Button5.Visible = false;
-                    Button6.Visible = false;
-                }
-
-                if (_roleId == 23)
-                {
-                    btnApprove.Enabled = false;
-                    btnCloseJob.Enabled = false;
-                }
-
+                //if (_roleId == 23 && dtJob.Rows[0]["JobActive"].ToString() == "P")
+                //{
+                //    btnApprove.Enabled = true;
+                //    btnCloseJob.Enabled = false;
+                //}
                 lblTotalEstimatePayable.Text = "0";
                 lblTotalEstimateReceiveable.Text = "0";
                 lblTotalPaid.Text = "0";
@@ -195,26 +183,146 @@ namespace EMS.WebApp.Farwarding.Transaction
                 //(dsDashboard.Tables[6].Rows[0]["Receivable"].ToDecimal() - dsDashboard.Tables[5].Rows[0]["Payable"].ToDecimal()).ToString();
 
                 if (dsDashboard.Tables[7].Rows.Count > 0)
-                    lblTotalPaid.Text = dsDashboard.Tables[7].Rows[0]["CreInvTotal"].ToString();
+                    lblTotalPaid.Text = (Convert.ToDecimal(dsDashboard.Tables[7].Rows[0]["CreInvTotal"]) - Convert.ToDecimal(dsDashboard.Tables[7].Rows[0]["CreStax"])).ToString();
 
                 if (dsDashboard.Tables[8].Rows.Count > 0)
-                    lblTotalReceived.Text = (dsDashboard.Tables[8].Rows[0]["DrInvTotal"].ToDecimal() - dsDashboard.Tables[8].Rows[0]["CNAmt"].ToDecimal()).ToString();
+                    lblTotalReceived.Text = (dsDashboard.Tables[8].Rows[0]["DrInvTotal"].ToDecimal() - dsDashboard.Tables[8].Rows[0]["CNAmt"].ToDecimal() - dsDashboard.Tables[8].Rows[0]["InvStax"].ToDecimal()).ToString();
 
                 lblArchievedGrossProfit.Text = (lblTotalReceived.Text.ToDecimal() - lblTotalPaid.Text.ToDecimal()).ToString();
-                //lblArchievedGrossProfit.Text = (dsDashboard.Tables[8].Rows[0]["DrInvTotal"].ToDecimal() - dsDashboard.Tables[8].Rows[0]["CNAmt"].ToDecimal() - dsDashboard.Tables[7].Rows[0]["CreInvTotal"].ToDecimal()).ToString();
-                if (dtJob.Rows[0]["JobActive"].ToString() == "P")
+
+                if (dtJob.Rows[0]["JobActive"].ToString() == "O")
                 {
-                    if (lblTotalEstimatePayable.Text.ToDecimal() < lblTotalEstimateReceiveable.Text.ToDecimal())
+                    btnApprove.Text = "Approve Job";
+                    if (_roleId == (int)UserRole.fuser)
+                        btnCloseJob.Enabled = false;
+                    else
+                        btnCloseJob.Enabled = true;
+                    Button2.Visible = false;
+                    Button4.Visible = false;
+                    btnApprove.Enabled = false;
+                    //if (dtJob.Rows[0]["UserConfirm"].ToInt() == 1 && _roleId != 23 && string.IsNullOrEmpty(lblApprover.Text))
+                    //{
+                    //    btnApprove.Enabled = true;
+                    //}
+                    //else
+                    //{
+                    //    btnApprove.Enabled = false;
+                    //}
+                }
+                else if (dtJob.Rows[0]["JobActive"].ToString() == "P" && (_roleId == (int)UserRole.fuser || _roleId == (int)UserRole.Admin))
+                {
+                    btnApprove.Enabled = true;
+                    btnCloseJob.Enabled = false;
+                    btnApprove.Text = "Conf Estimate";
+                    Button5.Visible = false;
+                    Button6.Visible = false;
+                    Button1.Visible = false;
+                    Button3.Visible = false;
+                    if (lblTotalEstimatePayable.Text.ToDecimal() < lblTotalEstimateReceiveable.Text.ToDecimal() && dtJob.Rows[0]["UserConfirm"].ToInt() == 0)
                     {
                         btnApprove.Enabled = true;
-                        btnCloseJob.Enabled = true;
+                        ViewState["NextStatus"] = "A";
                     }
                     else
                     {
                         btnApprove.Enabled = false;
-                        btnCloseJob.Enabled = false;
                     }
                 }
+                else if (dtJob.Rows[0]["JobActive"].ToString() == "P" && _roleId != (int)UserRole.fuser)
+                {
+                    btnApprove.Enabled = false;
+                    btnCloseJob.Enabled = false;
+                    btnApprove.Text = "Conf Estimate";
+                    Button5.Visible = false;
+                    Button6.Visible = false;
+                    Button1.Visible = false;
+                    Button3.Visible = false;
+                    if (lblTotalEstimatePayable.Text.ToDecimal() < lblTotalEstimateReceiveable.Text.ToDecimal() && dtJob.Rows[0]["UserConfirm"].ToInt() == 0)
+                    {
+                        btnApprove.Enabled = true;
+                        ViewState["NextStatus"] = "A";
+                    }
+                    else
+                    {
+                        btnApprove.Enabled = false;
+                    }
+                }
+                else if (dtJob.Rows[0]["JobActive"].ToString() == "A" && (_roleId == (int)UserRole.fuser))
+                {
+                    btnApprove.Enabled = false;
+                    btnCloseJob.Enabled = false;
+                    btnApprove.Text = "Approve Job";
+                    Button5.Visible = false;
+                    Button6.Visible = false;
+                    Button1.Visible = false;
+                    Button3.Visible = false;
+                    //if (lblTotalEstimatePayable.Text.ToDecimal() < lblTotalEstimateReceiveable.Text.ToDecimal() && dtJob.Rows[0]["UserConfirm"].ToInt() == 1 && string.IsNullOrEmpty(lblApprover.Text))
+                    //{
+                    //    btnApprove.Enabled = false;
+                    //    ViewState["NextStatus"] = "O";
+                    //}
+                    //else
+                    //{
+                    //    btnApprove.Enabled = false;
+                    //}
+                }
+                else if (dtJob.Rows[0]["JobActive"].ToString() == "A" && _roleId != (int)UserRole.fuser)
+                {
+                    btnApprove.Enabled = true;
+                    btnCloseJob.Enabled = false;
+                    btnApprove.Text = "Approve Job";
+                    Button5.Visible = false;
+                    Button6.Visible = false;
+                    Button1.Visible = false;
+                    Button3.Visible = false;
+                    if (lblTotalEstimatePayable.Text.ToDecimal() < lblTotalEstimateReceiveable.Text.ToDecimal() && dtJob.Rows[0]["UserConfirm"].ToInt() == 1 && string.IsNullOrEmpty(lblApprover.Text))
+                    {
+                        btnApprove.Enabled = true;
+                        ViewState["NextStatus"] = "O";
+                    }
+                    else
+                    {
+                        btnApprove.Enabled = false;
+                    }
+                }
+                else if (dtJob.Rows[0]["JobActive"].ToString() == "C" && _roleId != (int)UserRole.fuser)
+                {
+                    btnApprove.Enabled = false;
+                    btnCloseJob.Enabled = true;
+                    btnCloseJob.Text = "Open Job";
+                    Button1.Visible = false;
+                    Button2.Visible = false;
+                    Button3.Visible = false;
+                    Button4.Visible = false;
+                    Button5.Visible = false;
+                    Button6.Visible = false;
+                }
+                else if (dtJob.Rows[0]["JobActive"].ToString() == "C" && _roleId == (int)UserRole.fuser)
+                {
+                    btnApprove.Enabled = false;
+                    btnCloseJob.Enabled = false;
+                    Button1.Visible = false;
+                    Button2.Visible = false;
+                    Button3.Visible = false;
+                    Button4.Visible = false;
+                    Button5.Visible = false;
+                    Button6.Visible = false;
+                }
+
+                //lblArchievedGrossProfit.Text = (dsDashboard.Tables[8].Rows[0]["DrInvTotal"].ToDecimal() - dsDashboard.Tables[8].Rows[0]["CNAmt"].ToDecimal() - dsDashboard.Tables[7].Rows[0]["CreInvTotal"].ToDecimal()).ToString();
+                //if (dtJob.Rows[0]["JobActive"].ToString() == "P" && _roleId != 23)
+                //{
+                //    if (lblTotalEstimatePayable.Text.ToDecimal() < lblTotalEstimateReceiveable.Text.ToDecimal())
+                //    {
+                //        btnApprove.Enabled = true;
+                //        btnCloseJob.Enabled = true;
+                //    }
+                //    else
+                //    {
+                //        btnApprove.Enabled = false;
+                //        btnCloseJob.Enabled = false;
+                //    }
+                //}
             }
 
             //Estimate Payable
@@ -574,6 +682,7 @@ namespace EMS.WebApp.Farwarding.Transaction
 
                 e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Stax"));
                 e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Total"));
+                e.Row.Cells[7].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "PmtAmt"));
 
                 // download link
                 ImageButton btnUpload = (ImageButton)e.Row.FindControl("btnUpload");
@@ -604,15 +713,28 @@ namespace EMS.WebApp.Farwarding.Transaction
                 }
 
                 ImageButton btnPayment = (ImageButton)e.Row.FindControl("btnPayment");
+                //ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                //ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
                 btnPayment.ToolTip = "Payment";
                 btnPayment.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "pk_CInvoiceID"));
                 if (DataBinder.Eval(e.Row.DataItem, "Approved").ToInt() == 1)
                 {
+                    ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
                     //btnDashboard.Visible = false;
                     //btnEdit.Visible = false;
                     btnPayment.Visible = true;
                     e.Row.ForeColor = System.Drawing.Color.Green;
+                    btnEdit.Visible = false;
+                    btnRemove.Visible = false;
                     //e.Row.Cells[0].ForeColor = System.Drawing.Color.Red;
+                }
+                else if (DataBinder.Eval(e.Row.DataItem, "Approved").ToInt() == 2)
+                {
+                    ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                    e.Row.ForeColor = System.Drawing.Color.Red;
+                    btnEdit.Visible = true;
+                    btnRemove.Visible = true;
+                    btnPayment.Visible = false;
                 }
                 else
                     btnPayment.Visible = false;
@@ -684,9 +806,13 @@ namespace EMS.WebApp.Farwarding.Transaction
                 //e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceType"));
                 //e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceNo"));
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceDate")).Split(' ')[0];
-                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Amount"));
+                e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CurrencyCode"));
+                e.Row.Cells[3].Text = Convert.ToString(Math.Round(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Amount")) - Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "STAX")), 2));
+                e.Row.Cells[4].Text = Convert.ToString(Math.Round(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "STAX")), 2));
+                //e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Amount"));
                 //e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ReceivedAmt"));
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CNAmt"));
+                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CNAmt"));
+                e.Row.Cells[7].Text = Convert.ToString(Math.Round(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Amount")) - Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ReceivedAmt")) - Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CNAmt")), 2));
                 //e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "")); //balance amt missing
 
                 //ImageButton btnPrint = (ImageButton)e.Row.FindControl("btnPrint");
@@ -711,12 +837,24 @@ namespace EMS.WebApp.Farwarding.Transaction
                     HiddenField hdnInvID = (HiddenField)e.Row.FindControl("hdnInvID");
                     System.Web.UI.HtmlControls.HtmlAnchor aPrint = (System.Web.UI.HtmlControls.HtmlAnchor)e.Row.FindControl("aPrint");
                     //aPrint.Visible = false;
-                    aPrint.Attributes.Add("onclick", string.Format("return ReportPrint1('{0}','{1}','{2}','{3}');",
+                    if (Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "fk_CurrencyID")) == 1)
+                    {
+                        aPrint.Attributes.Add("onclick", string.Format("return ReportPrint1('{0}','{1}','{2}','{3}');",
                         "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("FwdInvoice"),
-                        //"&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text),
+                            //"&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text),
                         "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("1"),
                         "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(user.FirstName + " " + user.LastName),
                         "&InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(hdnInvID.Value)));
+                    }
+                    else
+                    {
+                        aPrint.Attributes.Add("onclick", string.Format("return ReportPrint1('{0}','{1}','{2}','{3}');",
+                       "reportName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("FwdInvoiceUSD"),
+                            //"&LineBLNo=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(txtBlNo.Text),
+                       "&Location=" + EMS.Utilities.GeneralFunctions.EncryptQueryString("1"),
+                       "&LoginUserName=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(user.FirstName + " " + user.LastName),
+                       "&InvoiceId=" + EMS.Utilities.GeneralFunctions.EncryptQueryString(hdnInvID.Value)));
+                    }
                 }
 
             }
@@ -755,7 +893,12 @@ namespace EMS.WebApp.Farwarding.Transaction
 
         protected void btnApprove_Click(object sender, EventArgs e)
         {
-            JobBLL.UpdateJobStatus(Convert.ToInt32(ViewState["JOBID"]), "O", _userId);
+            
+            //JobBLL.UpdateJobStatus(Convert.ToInt32(ViewState["JOBID"]), "O", _userId);
+            JobBLL.UpdateJobStatus(Convert.ToInt32(ViewState["JOBID"]), ViewState["NextStatus"].ToString(), _userId);
+            JobBLL.SendConfMail(Convert.ToInt32(ViewState["JOBID"]), ViewState["NextStatus"].ToString(), _userId, lblProjectedGrossProfit.Text.ToDecimal());
+            
+            //SendConfirmationMail(_userId, lblJobNumber.Text);
             ScriptManager.RegisterStartupScript(this, typeof(Page), "alert100", "<script>javascript:void alert('Approved successfully!');</script>", false);
             LoadDashboard();
         }
@@ -763,7 +906,10 @@ namespace EMS.WebApp.Farwarding.Transaction
         protected void btnCloseJob_Click(object sender, EventArgs e)
         {
             JobBLL.UpdateJobStatus(Convert.ToInt32(ViewState["JOBID"]), "C", _userId);
-            ScriptManager.RegisterStartupScript(this, typeof(Page), "alert101", "<script>javascript:void alert('Closed successfully!');</script>", false);
+            if (ViewState["JobActive"].ToString() == "O")
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alert101", "<script>javascript:void alert('Job Closed successfully!');</script>", false);
+            else
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alert101", "<script>javascript:void alert('Job Opened successfully!');</script>", false);
             LoadDashboard();
         }
 
@@ -999,6 +1145,28 @@ namespace EMS.WebApp.Farwarding.Transaction
 
         }
 
+        //private void SendConfirmationMail(int uId, string JobNo)
+        //{
+        //    IUser user = new UserBLL().GetUser(uId);
 
+        //    if (!ReferenceEquals(user, null))
+        //    {
+        //        if (!string.IsNullOrEmpty(user.ManagerEmailID))
+        //        {
+        //            string url = Convert.ToString(ConfigurationManager.AppSettings["ApplicationUrl"]);
+        //            string msgBody = "Hello " + user.UserFullName + "<br/>Your Approval is Required on Proforma Job No " + JobNo + ". <br/>Please click on following link to Login Application<br/><a href='" + url + "'>" + url + "</a>";
+
+        //            try
+        //            {
+        //                CommonBLL.SendMail(user.EmailId, user.UserFullName, user.ManagerEmailID, string.Empty, "Job Confirmation " + JobNo, msgBody, Convert.ToString(ConfigurationManager.AppSettings["MailServerIP"]), Convert.ToString(ConfigurationManager.AppSettings["MailUserAccount"]), Convert.ToString(ConfigurationManager.AppSettings["MailUserPwd"]));
+        //                ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('" + ResourceManager.GetStringWithoutName("ERR00071") + "');</script>", false);
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                CommonBLL.HandleException(ex, this.Server.MapPath(this.Request.ApplicationPath).Replace("/", "\\"));
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

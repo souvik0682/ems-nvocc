@@ -127,9 +127,9 @@ namespace EMS.BLL
             return InvoiceDAL.GetAllExpCharges(docTypeId, LocationID, LineID, BookingNo);
         }
 
-        public List<ICharge> GetAllFwdCharges()
+        public List<ICharge> GetAllFwdCharges(int Currency)
         {
-            return InvoiceDAL.GetAllFwdCharges();
+            return InvoiceDAL.GetAllFwdCharges(Currency);
         }
 
         public DataTable GetTerminals(long LocationId)

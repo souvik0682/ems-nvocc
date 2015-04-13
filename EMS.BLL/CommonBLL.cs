@@ -558,6 +558,11 @@ namespace EMS.BLL
             return CommonDAL.GetfwdPartyType();
         }
 
+        public DataTable GetfwdGroup()
+        {
+            return CommonDAL.GetfwdGroup();
+        }
+
         public DataTable GetfwdPartyByType(string pType)
         {
             return CommonDAL.GetfwdPartyByType(pType);

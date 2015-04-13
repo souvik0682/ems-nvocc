@@ -452,6 +452,10 @@ namespace EMS.WebApp.Export
                     rdoOriginal.SelectedValue = exportBL.NoOfBL.ToString();
                     hdnShipmentType.Value = exportBL.ShipmentType.ToString();
                     ddlBLClause.SelectedValue = exportBL.BLClause;
+                    if (exportBL.BLthruEdge == true)
+                        hdnBLThruEdge.Value = "1";
+                    else
+                        hdnBLThruEdge.Value = "0";
 
                     if (exportBL.ShipmentType != 0)
                     {

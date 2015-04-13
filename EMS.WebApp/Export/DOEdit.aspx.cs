@@ -116,7 +116,7 @@ namespace EMS.WebApp.Export
 
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerType"));
                 e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ContainerSize"));
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "AvailableUnit"));
+                                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "AvailableUnit"));
 
                 CustomTextBox txtReqUnit = (CustomTextBox)e.Row.Cells[4].FindControl("txtReqUnit");
                 txtReqUnit.Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "RequiredUnit"));

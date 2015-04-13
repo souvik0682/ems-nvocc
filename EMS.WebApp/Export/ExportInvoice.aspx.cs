@@ -895,6 +895,7 @@ namespace EMS.WebApp.Export
                 custTxtConvRate.Enabled = true;
                 custTxtConvRate.Text = "0.00";
             }
+            CalculateCharge();
         }
 
         /*
@@ -976,8 +977,10 @@ namespace EMS.WebApp.Export
                     {
                         ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
                         ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
+                        btnEdit.ToolTip = "Edit";
+                        btnEdit.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "InvoiceChargeId"));
                         btnRemove.Visible = false;
-                        btnEdit.Visible = false;
+                        btnEdit.Visible = true;
                     }
                     else
                     {
@@ -1533,6 +1536,21 @@ namespace EMS.WebApp.Export
 
             ddlFTerminal.SelectedValue = chargeRate.TerminalId.ToString();
             txtTotal.Text = chargeRate.TotalAmount.ToString();
+
+            if (Convert.ToInt32(ddlInvoiceType.SelectedValue) == 19)
+            {
+                txtRatePerTEU.Enabled = false;
+                txtRateperFEU.Enabled = false;
+                txtRatePerBL.Enabled = false;
+                txtRatePerCBM.Enabled = false;
+                txtRatePerTon.Enabled = false;
+                ddlCurrency.Enabled = false;
+                if (chargeRate.fk_CurrencyID.ToString() == "1" || chargeRate.fk_CurrencyID.ToString() == "2")
+                    custTxtConvRate.Enabled = false;
+                else
+                    custTxtConvRate.Enabled = true;
+
+             }
             //txtUSD.Text = chargeRate.Usd.ToString();
 
             ViewState["EDITINVOICECHARGEID"] = chargeRate.InvoiceChargeId;

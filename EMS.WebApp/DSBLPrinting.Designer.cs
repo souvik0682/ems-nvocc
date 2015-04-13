@@ -349,6 +349,8 @@ namespace EMS.WebApp {
             
             private global::System.Data.DataColumn columnBLClauseDate;
             
+            private global::System.Data.DataColumn columnBLType;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public prcGetBLPrintingDataTable() {
@@ -664,6 +666,14 @@ namespace EMS.WebApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BLTypeColumn {
+                get {
+                    return this.columnBLType;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -734,7 +744,8 @@ namespace EMS.WebApp {
                         decimal GRWT, 
                         decimal NetWt, 
                         decimal CBM, 
-                        System.DateTime BLClauseDate) {
+                        System.DateTime BLClauseDate, 
+                        string BLType) {
                 prcGetBLPrintingRow rowprcGetBLPrintingRow = ((prcGetBLPrintingRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         fk_LocationID,
@@ -771,7 +782,8 @@ namespace EMS.WebApp {
                         GRWT,
                         NetWt,
                         CBM,
-                        BLClauseDate};
+                        BLClauseDate,
+                        BLType};
                 rowprcGetBLPrintingRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowprcGetBLPrintingRow);
                 return rowprcGetBLPrintingRow;
@@ -829,6 +841,7 @@ namespace EMS.WebApp {
                 this.columnNetWt = base.Columns["NetWt"];
                 this.columnCBM = base.Columns["CBM"];
                 this.columnBLClauseDate = base.Columns["BLClauseDate"];
+                this.columnBLType = base.Columns["BLType"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -904,6 +917,8 @@ namespace EMS.WebApp {
                 base.Columns.Add(this.columnCBM);
                 this.columnBLClauseDate = new global::System.Data.DataColumn("BLClauseDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnBLClauseDate);
+                this.columnBLType = new global::System.Data.DataColumn("BLType", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBLType);
                 this.columnfk_LocationID.AllowDBNull = false;
                 this.columnLocationName.ReadOnly = true;
                 this.columnLocationName.MaxLength = 50;
@@ -947,6 +962,7 @@ namespace EMS.WebApp {
                 this.columnNoofBLs.MaxLength = 8;
                 this.columnGRWT.ReadOnly = true;
                 this.columnBLClauseDate.ReadOnly = true;
+                this.columnBLType.MaxLength = 1;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1624,6 +1640,22 @@ namespace EMS.WebApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string BLType {
+                get {
+                    try {
+                        return ((string)(this[this.tableprcGetBLPrinting.BLTypeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BLType\' in table \'prcGetBLPrinting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableprcGetBLPrinting.BLTypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsLocationNameNull() {
                 return this.IsNull(this.tableprcGetBLPrinting.LocationNameColumn);
             }
@@ -1981,6 +2013,18 @@ namespace EMS.WebApp {
             public void SetBLClauseDateNull() {
                 this[this.tableprcGetBLPrinting.BLClauseDateColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsBLTypeNull() {
+                return this.IsNull(this.tableprcGetBLPrinting.BLTypeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetBLTypeNull() {
+                this[this.tableprcGetBLPrinting.BLTypeColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -2178,6 +2222,7 @@ namespace EMS.WebApp.dsBLPrintingTableAdapters {
             tableMapping.ColumnMappings.Add("PhoneFax", "PhoneFax");
             tableMapping.ColumnMappings.Add("CBM", "CBM");
             tableMapping.ColumnMappings.Add("BLClauseDate", "BLClauseDate");
+            tableMapping.ColumnMappings.Add("BLType", "BLType");
             this._adapter.TableMappings.Add(tableMapping);
         }
         

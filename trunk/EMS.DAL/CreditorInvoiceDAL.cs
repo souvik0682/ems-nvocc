@@ -65,6 +65,8 @@ namespace EMS.DAL
                         ReferenceDate = Convert.ToDateTime(x["BLARefDate"]),
                         ROE = Convert.ToDouble(x["ROE"]),
                         RoundingOff = Convert.ToDouble(x["Roff"]),
+                        approved = Convert.ToInt32(x["Approved"]),
+                        comment = Convert.ToString(x["Comment"]),
                         //HouseBLDate = Convert.ToDateTime(x["BLARefDate"]),
                         //InvoiceAmount = Convert.ToDouble(x["ChargeAmount"]),
                         //RoundingOff = Convert.ToDouble(x["ChargeAmount"])
@@ -91,7 +93,7 @@ namespace EMS.DAL
                                     //Currency = Convert.ToString(x["DorC"]),
                                     ConvRate = Convert.ToDouble(x["CROE"]),
                                     Gross = Convert.ToDouble(x["INRAmount"]),
-                                    STaxPercentage = Convert.ToDouble(x["STPer"]),
+                                    //STaxPercentage = Convert.ToDouble(x["STPer"]),
                                     STax = Convert.ToDouble(x["STAmount"]),
                                     GTotal = Convert.ToDouble(x["ChargeAmount"])
 
@@ -133,7 +135,7 @@ namespace EMS.DAL
                 oDq.AddDecimalParam("@ROE", 12, 3, Convert.ToDecimal(charge.ConvRate));
                 oDq.AddDecimalParam("@Roff", 6, 2, Convert.ToDecimal(creditorInvoice.RoundingOff));
                 oDq.AddBooleanParam("@CreInvActive",true);
-                oDq.AddBooleanParam("@Approved", creditorInvoice.approved);
+                oDq.AddIntegerParam("@Approved", Convert.ToInt32(creditorInvoice.approved));
                 oDq.AddVarcharParam("@Comment", 300, creditorInvoice.comment);
 
                 oDq.AddVarcharParam("@Charges", int.MaxValue, Utilities.GeneralFunctions.SerializeWithXmlTag(creditorInvoice.CreditorInvoiceCharges).Replace("?<?xml version=\"1.0\" encoding=\"utf-16\"?>", ""));

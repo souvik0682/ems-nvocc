@@ -14,7 +14,7 @@ namespace EMS.DAL
         public static DataSet GetAdjustmentModelDataset(ISearchCriteria searchCriteria)
         {
             string strExecution = "[fwd].[uspGetAdvAdj]";
-           DataSet reader =new DataSet();
+            DataSet reader =new DataSet();
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddBigIntegerParam("@AdvAdjId", Convert.ToInt16(searchCriteria.StringParams[0]));

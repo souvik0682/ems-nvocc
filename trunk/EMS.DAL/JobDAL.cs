@@ -90,6 +90,7 @@ namespace EMS.DAL
                 oDq.AddVarcharParam("@Voyage", 100, Jobs.Voyage);
                 oDq.AddVarcharParam("@JobNote1", 100, Jobs.JobNote1);
                 oDq.AddVarcharParam("@JobNote2", 100, Jobs.JobNote2);
+                oDq.AddIntegerParam("@CompID", Jobs.CompID);
                 oDq.AddIntegerParam("@RESULT", Result, QueryParameterDirection.Output);
                 oDq.AddIntegerParam("@newJobId", outJobID, QueryParameterDirection.Output);
 
@@ -110,7 +111,7 @@ namespace EMS.DAL
             {
                 oDq.AddBigIntegerParam("@JobId", JobID);
                 oDq.AddVarcharParam("@Mode", 1, "D");
-                oDq.AddBigIntegerParam("@ModifiedBy", UserID);
+                oDq.AddBigIntegerParam("@UserID", UserID);
 
                 ret = Convert.ToInt32(oDq.GetScalar());
             }
@@ -142,6 +143,20 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@JobId", JobId);
                 oDq.AddVarcharParam("@type", 1, Type);
                 oDq.AddIntegerParam("@UserId", UserId);
+                oDq.RunActionQuery();
+            }
+        }
+
+        public static void SendConfMail(int JobId, string Type, int UserId, decimal GrossProfit)
+        {
+            string strExecution = "[fwd].[usp_SendConfEmail]";
+
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddIntegerParam("@JobId", JobId);
+                oDq.AddIntegerParam("@UserId", UserId);
+                oDq.AddVarcharParam("@Type", 1, Type);
+                oDq.AddDecimalParam("@GP", 12, 2, GrossProfit);
                 oDq.RunActionQuery();
             }
         }

@@ -113,7 +113,24 @@ namespace EMS.DAL
                 oDq.AddBooleanParam("@Result", false, QueryParameterDirection.Output);
                 oDq.RunActionQuery();
                 return Convert.ToBoolean(oDq.GetParaValue("@Result"));
+               
             }
+        }
+
+        public static DataSet GetfwdBLPrintingDS(ISearchCriteria searchCriteria = null)
+        {
+            DataSet ds = new DataSet();
+            if (searchCriteria != null)
+            {
+                string strExecution = "[fwd].[prcFwdGetBLPrinting]";
+                using (DbQuery oDq = new DbQuery(strExecution))
+                {
+                    oDq.AddVarcharParam("@BLID", 50, searchCriteria.StringParams[0]);
+                    ds = oDq.GetTables();
+                }
+            }
+
+            return ds;
         }
     }
 }

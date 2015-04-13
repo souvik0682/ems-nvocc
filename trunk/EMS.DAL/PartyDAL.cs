@@ -11,13 +11,13 @@ namespace EMS.DAL
 {
     public class PartyDAL
     {
-        public static List<IParty> GetParty(ISearchCriteria searchCriteria)
+        public static List<IParty> GetParty(int PartyID, ISearchCriteria searchCriteria)
          {
              string strExecution = "[fwd].[uspGetParty]";
              List<IParty> lstParty = new List<IParty>();
              using (DbQuery oDq = new DbQuery(strExecution))
              {
-                 oDq.AddBigIntegerParam("@PartyId", searchCriteria.PartyID);
+                 oDq.AddBigIntegerParam("@PartyId", PartyID);
                  oDq.AddVarcharParam("@SchLocAbbr", 3, searchCriteria.LocAbbr);
                  oDq.AddVarcharParam("@SchPartyName", 60, searchCriteria.PartyName);
                  oDq.AddVarcharParam("@SchShortName", 10, searchCriteria.StringParams[1]);
@@ -57,9 +57,11 @@ namespace EMS.DAL
                  oDq.AddVarcharParam("@PartyAddress", 500, Party.PartyAddress);
                  oDq.AddIntegerParam("@fk_CountryID", Party.CountryID);
                  oDq.AddIntegerParam("@fk_FlineID", Party.fLineID);
+                 oDq.AddIntegerParam("@GroupID", Party.GroupID);
 
                  oDq.AddVarcharParam("@Fax", 100, Party.FAX);
                  oDq.AddVarcharParam("@Phone", 100, Party.Phone);
+                 oDq.AddVarcharParam("@Mobile", 100, Party.Mobile);
                  oDq.AddVarcharParam("@ContactPerson", 100, Party.ContactPerson);
 
                  oDq.AddVarcharParam("@PAN", 100, Party.PAN);
@@ -114,6 +116,68 @@ namespace EMS.DAL
              }
 
              return ret;
+         }
+
+         public static int DeleteGroup(int GroupID, int UserID)
+         {
+             string strExecution = "[fwd].[uspDeleteGroupCompany]";
+             int ret = 0;
+             using (DbQuery oDq = new DbQuery(strExecution))
+             {
+                 oDq.AddIntegerParam("@GroupId", GroupID);
+                 oDq.AddIntegerParam("@UserID", UserID);
+                 ret = Convert.ToInt32(oDq.GetScalar());
+             }
+
+             return ret;
+         }
+
+         public static List<IGroup> GetGroup(int GroupID, ISearchCriteria searchCriteria)
+         {
+             string strExecution = "[fwd].[uspGetGroupCompany]";
+             List<IGroup> lstParty = new List<IGroup>();
+             using (DbQuery oDq = new DbQuery(strExecution))
+             {
+                 oDq.AddBigIntegerParam("@GroupId", GroupID);
+                 oDq.AddVarcharParam("@SchGroupName", 60, searchCriteria.PartyName);
+                 oDq.AddVarcharParam("@SortExpression", 50, searchCriteria.SortExpression);
+                 oDq.AddVarcharParam("@SortDirection", 4, searchCriteria.SortDirection);
+                 DataSet reader = oDq.GetTables();
+
+                 if (reader != null && reader.Tables.Count > 0 && reader.Tables[0].Rows.Count > 0)
+                 {
+
+                     for (int i = 0; i < reader.Tables[0].Rows.Count; i++)
+                     {
+                         IGroup iParty = new GroupEntity(reader.Tables[0].Rows[i]);
+                         lstParty.Add(iParty);
+                     }
+                 }
+             }
+             return lstParty;
+         }
+
+         public static int SaveGroup(IGroup Party, string Mode)
+         {
+             string strExecution = "[fwd].[uspSaveGroupCompany]";
+             int Partyid = 0;
+
+             using (DbQuery oDq = new DbQuery(strExecution))
+             {
+                 oDq.AddVarcharParam("@Mode", 1, Mode);
+                 oDq.AddIntegerParam("@GroupId", Party.GroupID);
+                 oDq.AddVarcharParam("@GroupName", 60, Party.GroupName);
+                 oDq.AddVarcharParam("@Address", 500, Party.GroupAddress);
+                 oDq.AddIntegerParam("@UserID", Party.UserID);
+                 int result = 0;
+                 oDq.AddIntegerParam("@Result", result, QueryParameterDirection.Output);
+                 Partyid = Convert.ToInt32(oDq.GetScalar());
+                 if (Mode != "A")
+                 {
+                     return Party.GroupID;
+                 }
+             }
+             return Partyid;
          }
     }
 }

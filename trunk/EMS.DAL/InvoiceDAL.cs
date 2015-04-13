@@ -315,7 +315,7 @@ namespace EMS.DAL
             return lstCharges;
         }
 
-        public static List<ICharge> GetAllFwdCharges()
+        public static List<ICharge> GetAllFwdCharges(int Currency)
         {
             string strExecution = "[fwd].[uspFwd_Invoice_GetAllCharges]";
 
@@ -325,7 +325,7 @@ namespace EMS.DAL
             {
                 //oDq.AddBigIntegerParam("@DocTypeId", docTypeId);
                 //oDq.AddBigIntegerParam("@LineId", LineID);
-                //oDq.AddBigIntegerParam("@LocationId", LocationID);
+                oDq.AddBigIntegerParam("@CurrencyId", Currency);
                 //oDq.AddVarcharParam("@JobNo", 40, JobNo);
                 DataTableReader reader = oDq.GetTableReader();
 
@@ -600,6 +600,7 @@ namespace EMS.DAL
                     oDq.AddBigIntegerParam("@BookingID", invoice.JobID);
 
                 oDq.AddIntegerParam("@EstimateId", invoice.EstimateID);
+                oDq.AddIntegerParam("@fk_PartyTypeID", invoice.PartyTypeID);
 
                 oDq.AddBigIntegerParam("@BLID", invoice.BLID);
                 oDq.AddVarcharParam("@ExportImport", 1, invoice.ExportImport);
@@ -617,7 +618,7 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@UserLastEdited", invoice.UserLastEdited);
                 oDq.AddDateTimeParam("@AddedOn", invoice.AddedOn);
                 oDq.AddDateTimeParam("@EditedOn", invoice.EditedOn);
-                //oDq.AddVarcharParam("@InvoiceNo", 30, invoice.InvoiceNo);
+                oDq.AddIntegerParam("@CurID", invoice.CurID);
 
                 invoiceId = Convert.ToInt64(oDq.GetScalar());
             }
@@ -726,6 +727,7 @@ namespace EMS.DAL
                 oDq.AddDecimalParam("@ServiceTaxAmount", 12, 2, cRate.ServiceTax);
                 oDq.AddDecimalParam("@ServiceTaxCessAmount", 12, 2, cRate.ServiceTaxCessAmount);
                 oDq.AddDecimalParam("@ServiceTaxACess", 12, 2, cRate.ServiceTaxACess);
+                oDq.AddDecimalParam("@ServTaxPer", 12, 2, cRate.STaxPer);
                 //oDq.AddBigIntegerParam("@TerminalId", cRate.TerminalId);
                 //oDq.AddDecimalParam("@SharingBL", 12, 2, 0);
                 //oDq.AddDecimalParam("@SharingTEU", 12, 2, 0);

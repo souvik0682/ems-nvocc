@@ -50,8 +50,6 @@ namespace EMS.DAL
             using (DbQuery oDq = new DbQuery(strExecution))
             {
                 oDq.AddIntegerParam("@UnitTypeId", UnitID);
-                //oDq.AddIntegerParam("@CompanyID", Convert.ToInt32(searchCriteria.StringOption1));
-                //oDq.AddVarcharParam("@CalledFrom", 1, Convert.ToString(searchCriteria.StringOption2));
                 oDq.AddVarcharParam("@SchUnitName", 50, "");
                 oDq.AddVarcharParam("@SortExpression", 30, "");
                 oDq.AddVarcharParam("@SortDirection", 4, "");
@@ -115,6 +113,21 @@ namespace EMS.DAL
             return reader;
         }
 
+        public static DataSet GetServiceTaxPer(DateTime AsOnDate, int ChargeID)
+        {
+            string strExecution = "[fwd].[usp_GetServiceTaxPer]";
+            DataSet reader = new DataSet();
+            using (DbQuery oDq = new DbQuery(strExecution))
+            {
+                oDq.AddDateTimeParam("@AsOnDate", AsOnDate);
+                oDq.AddIntegerParam("@ChargesID", ChargeID);
+
+                reader = oDq.GetTables();
+            }
+
+            return reader;
+        }
+
         public static DataSet GetContainers(int UnitTypeID, string Size, int JobID)
         {
             string strExecution = "[fwd].[usp_GetJobContainer]";
@@ -158,7 +171,8 @@ namespace EMS.DAL
                         PartyName = Convert.ToString(x["PartyName"].GetType() == typeof(DBNull) ? "" : x["PartyName"]),
                         UnitTypeId = Convert.ToInt32(x["fk_UnitTypeID"].GetType() == typeof(DBNull) ? 0 : x["fk_UnitTypeID"]),
                         JobID = Convert.ToInt32(x["fk_JobID"].GetType() == typeof(DBNull) ? 0 : x["fk_JobID"]),
-                        ROE = Convert.ToDecimal(x["ROE"].GetType() == typeof(DBNull) ? 0 : x["ROE"])
+                        ROE = Convert.ToDecimal(x["ROE"].GetType() == typeof(DBNull) ? 0 : x["ROE"]),
+                        JobActive = Convert.ToString(x["JobActive"].GetType() == typeof(DBNull) ? 0 : x["JobActive"])
                     });
 
                     estimate = tblEst.FirstOrDefault();
@@ -277,42 +291,6 @@ namespace EMS.DAL
             }
             return reader;
         }
-        ////  public static int DeleteEstimate(int EstimateID, int UserID, int CompanyID)
-        //  {
-        //      string strExecution = "[fwd].[uspManageEstimate]";
-        //      int ret = 0;
-        //      using (DbQuery oDq = new DbQuery(strExecution))
-        //      {
-        //          oDq.AddVarcharParam("@Mode", 1, "D");
-        //          oDq.AddIntegerParam("@EstimateId", EstimateID);
-        //          oDq.AddIntegerParam("@fk_CompanyID", CompanyID);
 
-        //          oDq.AddIntegerParam("@LocId", 0);
-        //          oDq.AddVarcharParam("@EstimateType", 1, "");
-        //          oDq.AddVarcharParam("@EstimateName", 60,"");
-
-        //          oDq.AddVarcharParam("@EstimateAddress", 500, "");
-        //          oDq.AddIntegerParam("@fk_CountryID", 0);
-        //          oDq.AddIntegerParam("@fk_FlineID", 0);
-
-        //          oDq.AddVarcharParam("@Fax", 100, "");
-        //          oDq.AddVarcharParam("@Phone", 100,"");
-        //          oDq.AddVarcharParam("@ContactPerson", 100,"");
-
-        //          oDq.AddVarcharParam("@PAN", 100, "");
-        //          oDq.AddVarcharParam("@TAN", 100,"");
-        //          oDq.AddVarcharParam("@EmailID", 100, "");
-
-        //          oDq.AddBigIntegerParam("@fk_PrincipalID", 0);
-        //          oDq.AddIntegerParam("@UserID", UserID);
-        //          int result = 0;
-        //          oDq.AddIntegerParam("@Result", result, QueryParameterDirection.Output);
-
-
-        //          ret = Convert.ToInt32(oDq.GetScalar());
-        //      }
-
-        //      return ret;
-        //  }
     }
 }

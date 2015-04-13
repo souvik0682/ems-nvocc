@@ -127,6 +127,7 @@ namespace EMS.DAL
                 oDq.AddIntegerParam("@RoleId", user.UserRole.Id);
                 oDq.AddIntegerParam("@LocId", user.UserLocation.Id);
                 oDq.AddVarcharParam("@EmailId", 50, user.EmailId);
+                oDq.AddVarcharParam("@ManagerEmailID", 100, user.ManagerEmailID);
                 oDq.AddBooleanParam("@IsActive", user.IsActive);
                 oDq.AddBooleanParam("@AllowMutipleLocation", user.AllowMutipleLocation);
                 oDq.AddIntegerParam("@CompanyId", companyId);

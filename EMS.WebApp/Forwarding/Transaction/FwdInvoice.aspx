@@ -4,7 +4,24 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="EMS.WebApp" Namespace="EMS.WebApp.CustomControls" TagPrefix="cc2" %>
 
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript" language="javascript">
+        window.onload = function () { HookUpEvent(); }
+
+        function HookUpEvent() {
+            var comboBox = document.getElementById("ddlCur");
+            comboBox.onchange = function () { OnComboSelected(this); }
+        }
+
+        function OnComboSelected(selectedElement) {
+            if (selectedElement.value == 'No') {
+                alert('Your warning message!');
+            }
+            return false;
+        }
+    </script>
 
 </asp:Content>
 
@@ -97,6 +114,31 @@
                                         Display="Dynamic"></asp:RequiredFieldValidator>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    Currency
+                                </td>
+                                <td>
+                                        <asp:DropDownList ID="ddlCur" runat="server" CssClass="dropdownlist" TabIndex="60"
+                                            AutoPostBack="true" OnSelectedIndexChanged="ddlCur_SelectedIndexChanged">
+                                        </asp:DropDownList>
+<%--                                        <asp:SqlDataSource ID="CurDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
+                                            SelectCommand="SELECT pk_CurrencyID, CurrencyName FROM mstCurrency"></asp:SqlDataSource>--%>
+<%--                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="ddlJobScope"
+                                            ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
+                                            ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>--%>
+                                    </td>
+                                <td>
+                                    USD Exchange Rate
+                                </td>
+                                <td>
+                                    <cc2:CustomTextBox ID="txtExRate" runat="server" Width="78px" Type="Decimal" MaxLength="6"
+                                            Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
+                                        OnTextChanged="TextEx_TextChanged" AutoPostBack="true" ></cc2:CustomTextBox>
+                                </td>
+                                
+                            </tr>
+
                            <%-- <tr>
                                 <td>
                                     B/L No
@@ -133,8 +175,7 @@
                             </tr>--%>
                             <tr>
                                 <td>
-                                    Invoice amount
-                                </td>
+                                    Invoice amount&nbsp; (INR)</td>
                                 <td>
                                     <asp:TextBox ID="txtTotalAmount" runat="server" Width="250px" Enabled="false" Style="text-align: right;"></asp:TextBox>
                                 </td>
@@ -151,10 +192,9 @@
                             
                             <tr>
                                 <td>
-                                    Rounding Off
-                                </td>
+                                    Invoice amount&nbsp; (FC)</td>
                                 <td>
-                                    <asp:TextBox ID="txtROff" runat="server" Width="250px" Enabled="false" Style="text-align: right;"></asp:TextBox>
+                                    <asp:TextBox ID="txtFCTot" runat="server" Width="250px" Enabled="false" Style="text-align: right;"></asp:TextBox>
                                 </td>
                                 <td>
                                     Location
@@ -168,15 +208,15 @@
 
                             <tr>
                                 <td>
-                                    USD Exchange Rate
+                                    Rounding Off
                                 </td>
                                 <td>
-                                    <cc2:CustomTextBox ID="txtExRate" runat="server" Width="78px" Type="Decimal" MaxLength="6"
-                                            Precision="8" Scale="2" Style="text-align: right;" Text="0.00"
-                                        OnTextChanged="TextEx_TextChanged" AutoPostBack="true" ></cc2:CustomTextBox>
+                                    <asp:TextBox ID="txtROff" runat="server" Width="250px" Enabled="false" Style="text-align: right;"></asp:TextBox>
                                 </td>
                                 
                             </tr>
+
+                            
                             <%--<tr>
                                 <td>
                                     USD Exchange Rate
@@ -206,11 +246,12 @@
                                                     Unit Type
                                                 </td>
                                                 <td style="text-align: right;font-weight:bold">
-                                                    Rate / Unit
-                                                </td>
-                                                <td style="text-align: right;font-weight:bold">
                                                     Unit
                                                 </td>
+                                                <td style="text-align: right;font-weight:bold">
+                                                    Rate / Unit
+                                                </td>
+
                                                 <%--<td style="text-align: right;font-weight:bold">
                                                     TEU
                                                 </td>
@@ -224,17 +265,19 @@
                                                 <td style="text-align: right;font-weight:bold">
                                                     Ton
                                                 </td>--%>
-
+                                                <td style="text-align: right;font-weight:bold">
+                                                    Gross
+                                                </td>
                                                 <td style="text-align: center;font-weight:bold">
                                                     Currency
                                                 </td>
                                                 <td style="text-align: right;font-weight:bold">
-                                                    Conv Rate
+                                                    ROE
                                                 </td>
+                                                
                                                 <td style="text-align: right;font-weight:bold">
-                                                    Gross (INR)
+                                                    S.Tax %
                                                 </td>
-
                                                 <td style="text-align: right;font-weight:bold">
                                                     S. Tax
                                                 </td>
@@ -256,9 +299,9 @@
                                                         InitialValue="0"></asp:RequiredFieldValidator>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlSize" runat="server" Width="90" Enabled="true" AutoPostBack="true" 
+                                                    <asp:DropDownList ID="ddlSize" runat="server" Width="70" Enabled="true" AutoPostBack="true" 
                                                         OnSelectedIndexChanged="ddlSize_SelectedIndexChanged"> 
-                                                        <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="-None-" Value="0" Selected="True"></asp:ListItem>
 <%--                                                        <asp:ListItem Text="--Select--" Value="0"></asp:ListItem>--%>
                                                         <asp:ListItem Text="20" Value="20"></asp:ListItem>
                                                         <asp:ListItem Text="40" Value="40"></asp:ListItem>
@@ -270,7 +313,7 @@
                                                     &nbsp;
                                                 </td>
                                                 <td class="gridviewitem" style="width:20%;">
-                                                    <asp:DropDownList ID="ddlUnitType" runat="server" Width="150px" AutoPostBack="true"
+                                                    <asp:DropDownList ID="ddlUnitType" runat="server" Width="130px" AutoPostBack="true"
                                                         OnSelectedIndexChanged="ddlUnitType_SelectedIndexChanged" Height="17px">
                                                         <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                                     </asp:DropDownList>
@@ -279,16 +322,23 @@
                                                         CssClass="errormessage" ValidationGroup="vgAdd" ControlToValidate="ddlUnitType"
                                                         InitialValue="0"></asp:RequiredFieldValidator>
                                                 </td>                                     
+                                                
+                                                 <td class="gridviewitem" style="width:8%;">
+                                                    <cc2:CustomTextBox ID="txtUnit" runat="server" Width="78px" Type="Decimal" MaxLength="6"
+                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00" 
+                                                        OnTextChanged="txtRatePerBL_TextChanged" AutoPostBack="true" ></cc2:CustomTextBox><br />
+                                                    &nbsp;
+                                                </td>
                                                 <td class="gridviewitem" style="width:8%;">
                                                     <cc2:CustomTextBox ID="txtRatePerBL" runat="server" Width="89px" Type="Decimal" MaxLength="12"
                                                           Precision="8" Scale="2" Style="text-align: right;" Text="0.00" 
                                                         OnTextChanged="txtRatePerBL_TextChanged" AutoPostBack="true" ></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
-                                                 <td class="gridviewitem" style="width:8%;">
-                                                    <cc2:CustomTextBox ID="txtUnit" runat="server" Width="78px" Type="Decimal" MaxLength="6"
-                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00" 
-                                                        OnTextChanged="txtRatePerBL_TextChanged" AutoPostBack="true" ></cc2:CustomTextBox><br />
+                                                <td class="gridviewitem"  style="width:8%">
+                                                    <cc2:CustomTextBox ID="txtGrossAmount" runat="server" Width="80px" 
+                                                        Type="Decimal" MaxLength="10" Enabled="false"
+                                                          Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
                                                 <%--<td class="gridviewitem" align="right" style="width:6%;">
@@ -318,10 +368,10 @@
                                                 </td>--%>
 
                                                 <td class="gridviewitem" style="width:10%">
-                                                   <asp:DropDownList ID="ddlCurrency" runat="server"  AutoPostBack="true"
+                                                   <asp:DropDownList ID="ddlCurrency" runat="server"  AutoPostBack="true" Enabled="false"
                                                         OnSelectedIndexChanged="ddlCurrency_SelectedIndexChanged" Height="18px" 
-                                                        Width="129px">
-                                                        <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
+                                                        Width="80px">
+                                                        <asp:ListItem Value="0" Text="-Select-"></asp:ListItem>
                                                     </asp:DropDownList>
                                                     <br />
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required"
@@ -329,7 +379,7 @@
                                                         InitialValue="0"></asp:RequiredFieldValidator>
                                                 </td>
                                                 <td class="gridviewitem"  style="width:8%">
-                                                    <cc2:CustomTextBox ID="custTxtConvRate" runat="server" Width="97px" 
+                                                    <cc2:CustomTextBox ID="custTxtConvRate" runat="server" Width="80px" 
                                                         Type="Decimal" MaxLength="10" Enabled="false"
                                                           Precision="8" Scale="2" Style="text-align: right;" Text="0.00"  
                                                         OnTextChanged="txtRatePerBL_TextChanged" AutoPostBack="true"></cc2:CustomTextBox><br />
@@ -337,13 +387,14 @@
                                                         CssClass="errormessage" ValidationGroup="vgAdd" ControlToValidate="custTxtConvRate"
                                                        ></asp:RequiredFieldValidator>
                                                 </td>
-                                                <td class="gridviewitem"  style="width:8%">
-                                                    <cc2:CustomTextBox ID="txtGrossAmount" runat="server" Width="80px" 
-                                                        Type="Decimal" MaxLength="10" Enabled="false"
+                                                
+                                                 <td class="gridviewitem" style="width:8%">
+                                                    <cc2:CustomTextBox ID="txtStaxPer" runat="server" Width="70px" 
+                                                        OnTextChanged="txtStaxPer_TextChanged" AutoPostBack="true"
+                                                        Type="Decimal" MaxLength="10" Enabled="true"
                                                           Precision="8" Scale="2" Style="text-align: right;" Text="0.00"></cc2:CustomTextBox><br />
                                                     &nbsp;
                                                 </td>
-
                                                 <td class="gridviewitem" style="width:8%">
                                                     <cc2:CustomTextBox ID="txtServiceTax" runat="server" Width="100px" 
                                                         Type="Decimal" MaxLength="10" Enabled="false"
@@ -376,23 +427,27 @@
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Charge Name">
                                                     <HeaderStyle CssClass="gridviewheader" />
-                                                    <ItemStyle CssClass="gridviewitem" Width="20%" />
+                                                    <ItemStyle CssClass="gridviewitem" Width="19%" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Size">
                                                     <HeaderStyle CssClass="gridviewheader" />
-                                                    <ItemStyle CssClass="gridviewitem" Width="10%" />
+                                                    <ItemStyle CssClass="gridviewitem" Width="7%" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Unit Type">
                                                     <HeaderStyle CssClass="gridviewheader" />
-                                                    <ItemStyle CssClass="gridviewitem" Width="10%" HorizontalAlign="Left"/>
+                                                    <ItemStyle CssClass="gridviewitem" Width="12%" HorizontalAlign="Left"/>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Unit">
+                                                    <HeaderStyle CssClass="gridviewheader_num" />
+                                                    <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right"/>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Rate / Unit">
-                                                    <HeaderStyle CssClass="gridviewheader" />
+                                                    <HeaderStyle CssClass="gridviewheader_num" />
                                                     <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right"/>
                                                 </asp:TemplateField>       
-                                                <asp:TemplateField HeaderText="Unit">
-                                                    <HeaderStyle CssClass="gridviewheader" />
-                                                    <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right"/>
+                                                <asp:TemplateField HeaderText="Gross">
+                                                    <HeaderStyle CssClass="gridviewheader_num" />
+                                                    <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right" />
                                                 </asp:TemplateField>                                                
                                                 <%--<asp:TemplateField HeaderText="TEU">
                                                     <HeaderStyle CssClass="gridviewheader_num" />
@@ -412,15 +467,16 @@
                                                 </asp:TemplateField>--%>
                                                 <asp:TemplateField HeaderText="Currency">
                                                     <HeaderStyle CssClass="gridviewheader" />
-                                                    <ItemStyle CssClass="gridviewitem" Width="11%" HorizontalAlign="Left" />
+                                                    <ItemStyle CssClass="gridviewitem" Width="7%" HorizontalAlign="Left" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Conv Rate">
                                                     <HeaderStyle CssClass="gridviewheader_num" />
                                                     <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right" />
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Gross (INR)">
+                                                
+                                                <asp:TemplateField HeaderText="S.Tax%">
                                                     <HeaderStyle CssClass="gridviewheader_num" />
-                                                    <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right" />
+                                                    <ItemStyle CssClass="gridviewitem" Width="7%" HorizontalAlign="Right" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="S. Tax">
                                                     <HeaderStyle CssClass="gridviewheader_num" />
@@ -428,7 +484,7 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Total Amt">
                                                     <HeaderStyle CssClass="gridviewheader_num" />
-                                                    <ItemStyle CssClass="gridviewitem" Width="8%" HorizontalAlign="Right" />
+                                                    <ItemStyle CssClass="gridviewitem" Width="15%" HorizontalAlign="Right" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField>
                                                         <HeaderStyle CssClass="gridviewheader" />

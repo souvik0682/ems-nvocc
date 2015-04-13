@@ -732,6 +732,7 @@ namespace EMS.WebApp.Forwarding.Master
                 var ex = new EstimateBLL().GetExchange(new SearchCriteria() { StringOption1 = "2", Date = lblJobDate.Text.ToDateTime() });
                 hdnExRate.Value = Convert.ToString(ex.Tables[0].Rows[0]["USDXchRate"]);
                 txtExRate.Text = Convert.ToString(ex.Tables[0].Rows[0]["USDXchRate"]);
+                //ddlCurrency_SelectedIndexChanged(null, null);
                 PopulateUnitType();
 
                 //lblJobNo.Text = GeneralFunctions.DecryptQueryString(Request.QueryString["JobNo"]);
@@ -771,14 +772,6 @@ namespace EMS.WebApp.Forwarding.Master
             return est;
 
         }
-        //public string TransactionType { get {
-        //    if (ViewState["IsPayment"] != null) {
-        //        var t = Convert.ToInt32(ViewState["IsPayment"]);
-        //        if (t == 1)
-        //            return "P";
-        //    }
-        //    return "R";
-        //} }
 
         public int JobID
         {
@@ -968,11 +961,11 @@ namespace EMS.WebApp.Forwarding.Master
             List<Charge> charges = null;
             DataSet ds = new DataSet();
             var estimate = new Estimate();
-            if (txtExRate.Text.ToDecimal() < hdnExRate.Value.ToDecimal())
-            {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Invalid Exchange Rate!');</script>", false);
-                txtExRate.Text = hdnExRate.Value;
-            }
+            //if (txtExRate.Text.ToDecimal() < hdnExRate.Value.ToDecimal())
+            //{
+            //    ScriptManager.RegisterStartupScript(this, typeof(Page), "alert", "<script>javascript:void alert('Invalid Exchange Rate!');</script>", false);
+            //    txtExRate.Text = hdnExRate.Value;
+            //}
             charges = (List<Charge>)ViewState["Charges"];
             if (charges.Count > 0)
             {

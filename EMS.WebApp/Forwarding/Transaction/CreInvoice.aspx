@@ -130,11 +130,24 @@
                         <asp:HiddenField ID="hdnInvoiceAmount" runat="server" Value="" />      
                    </td>
                 </tr>   
-                <tr>
-                    <td class="style1">Approved</td>
+                <tr id="trApproval" runat="server">
+                    <td class="style1">Status</td>
+                    <td>
+                        <asp:RadioButtonList ID="rdbApproval" runat="server" Width="255" RepeatDirection="Horizontal"  AutoPostBack="true" OnSelectedIndexChanged="rdbApproval_SelectedIndexChanged"
+                            RepeatLayout="Flow">
+                            <asp:ListItem Text="None" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="Approve" Value="1"></asp:ListItem>
+                            <asp:ListItem Text="Disapprove" Value="2"></asp:ListItem>
+                        </asp:RadioButtonList>
+                        <asp:RequiredFieldValidator ID="rfvApproval" runat="server" ErrorMessage="Please select your choice"
+                            Display="None" ControlToValidate="rdbApproval" ValidationGroup="vgCharge"></asp:RequiredFieldValidator>
+                        <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender16" runat="server" TargetControlID="rfvApproval">
+                        </cc1:ValidatorCalloutExtender>
+                    </td>
+<%--                    <td class="style1">Approved</td>
                     <td class="style2">
                         <asp:CheckBox ID="chkApproved" runat="server" AutoPostBack="true" oncheckedchanged="chkApproved_CheckedChanged"/>
-                    </td>
+                    </td>--%>
                     <td>Comment</td>
                     <td class="style3">
                         <asp:TextBox ID="txtComment" runat="server" CssClass="textboxuppercase" MaxLength="60" Width="250" Height="50" Enabled="false"></asp:TextBox><br />

@@ -86,7 +86,7 @@ SELECT pk_JobScopeID, JobScope FROM fwd.mstJobScope"></asp:SqlDataSource>
                                         <asp:SqlDataSource ID="OpsDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
                                             SelectCommand="SELECT 0 [pk_LocID], '-- Select --' [LocName]
 UNION
-SELECT pk_LocID, LocName FROM fwd.mstFLocation"></asp:SqlDataSource>
+SELECT pk_LocID, LocName FROM fwd.mstFLocation Order By LocName"></asp:SqlDataSource>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="ddlOpsControlled"
                                             ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
                                             ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -102,7 +102,7 @@ SELECT pk_LocID, LocName FROM fwd.mstFLocation"></asp:SqlDataSource>
                                         <asp:SqlDataSource ID="DocDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
                                             SelectCommand="SELECT 0 [pk_LocID], '-- Select --' [LocName]
 UNION
-SELECT pk_LocID, LocName FROM fwd.mstFLocation"></asp:SqlDataSource>
+SELECT pk_LocID, LocName FROM fwd.mstFLocation Order By LocName"></asp:SqlDataSource>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="ddlDocControlled"
                                             ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
                                             ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -119,7 +119,7 @@ SELECT pk_LocID, LocName FROM fwd.mstFLocation"></asp:SqlDataSource>
                                         <asp:SqlDataSource ID="SalesDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
                                             SelectCommand="SELECT 0 [pk_UserID], '-- Select --' [UserName]
 UNION
-SELECT pk_UserID, FirstName + ' ' + LastName + '(' + UserName + ')' AS UserName FROM dsr.dbo.mstUser WHERE (fk_RoleID = 4)"></asp:SqlDataSource>
+SELECT pk_UserID, FirstName + ' ' + LastName + '(' + UserName + ')' AS UserName FROM dsr.dbo.mstUser WHERE (fk_RoleID in (2,4)) ORDER BY USERNAME"></asp:SqlDataSource>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="ddlSalesControlled"
                                             ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
                                             ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -144,7 +144,7 @@ SELECT pk_SModeID, ShippingMode FROM fwd.mstShippingMode"></asp:SqlDataSource>--
                                 </tr>
                                 <tr>
                                     <td style="width: 20%;">
-                                        Prime Docs:<span class="errormessage">*</span>
+                                        Prime Docs:
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="ddlPrimeDocs" runat="server" CssClass="dropdownlist" TabIndex="60"
@@ -154,9 +154,9 @@ SELECT pk_SModeID, ShippingMode FROM fwd.mstShippingMode"></asp:SqlDataSource>--
                                             SelectCommand="SELECT 0 [pk_PrDocID], '-- Select --' [DocName]
 UNION
 SELECT pk_PrDocID, DocName FROM fwd.mstPrimeDocs"></asp:SqlDataSource>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="ddlPrimeDocs"
+<%--                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="ddlPrimeDocs"
                                             ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
-                                            ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
+                                            ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                     </td>
                                     <td style="width: 20%;">
                                         Prime Docs No:<span class="errormessage">*</span>
@@ -183,7 +183,7 @@ SELECT pk_FLineID, LineName FROM fwd.mstFLine"></asp:SqlDataSource>--%>
                                             ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>
                                     </td>
                                     <td style="width: 20%;">
-                                        Ves. & Voy./ Flight No:<span class="errormessage">*</span>
+                                        Vsl. & Voy./ Flight No:<span class="errormessage">*</span>
                                     </td>
                                     <td style="width: 28%;">
                                         <asp:TextBox ID="txtVoyageNo" runat="server" CssClass="textboxuppercase" MaxLength="300" Width="250px" TabIndex="13">
@@ -224,7 +224,20 @@ SELECT pk_fwPartyID pk_CustID, PartyName CustName FROM fwd.mstParty WHERE (Party
                                         <asp:TextBox ID="txtContainerDtls" runat="server" CssClass="textboxuppercase" Width="250px"
                                             Enabled="False" Height="50px" TextMode="MultiLine"></asp:TextBox>
                                     </td>
-                                   
+                                    <td>
+                                        Assigned Company 
+                                    </td>
+                                    <td>
+                                       <asp:DropDownList ID="ddlCompany" runat="server" CssClass="dropdownlist" TabIndex="60"
+                                            DataSourceID="CompanyDs" DataTextField="CompName" DataValueField="pk_CompID">
+                                        </asp:DropDownList>
+                                        <asp:SqlDataSource ID="CompanyDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
+                                            SelectCommand="SELECT 0 [pk_CompID], '-- Select --' [CompName]
+                                            UNION
+                                            SELECT pk_CompID, CompName FROM fwd.mstCompany">
+                                        </asp:SqlDataSource>
+
+                                    </td>
                                     
                                 </tr>
                                 <tr>
@@ -263,14 +276,14 @@ SELECT pk_fwPartyID pk_CustID, PartyName CustName FROM fwd.mstParty WHERE (Party
                                     </td>
 
                                     <td style="width: 20%;">
-                                        Volume (CBM):<span class="errormessage">*</span>
+                                        Volume (CBM):
                                     </td>
                                     <td style="width: 28%;">
                                         <cc2:CustomTextBox ID="txtCBMVolume" runat="server" CssClass="numerictextbox" TabIndex="13" AutoPostBack="True" OnTextChanged="txtCBMVolume_TextChanged"
                                             Width="250px" Type="Decimal" Precision="10" Scale="3" MaxLength="14"></cc2:CustomTextBox>
-                                        <asp:RequiredFieldValidator ID="rfvCBMVolume" runat="server" CssClass="errormessage"
+<%--                                        <asp:RequiredFieldValidator ID="rfvCBMVolume" runat="server" CssClass="errormessage"
                                             ErrorMessage="This field is required" ControlToValidate="txtCBMVolume" ValidationGroup="Save"
-                                            Display="Dynamic"></asp:RequiredFieldValidator>
+                                            Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                     </td>
                                 </tr>
                                 <tr>
@@ -299,7 +312,7 @@ SELECT pk_fwPartyID pk_CustID, PartyName CustName FROM fwd.mstParty WHERE (Party
                                         <asp:SqlDataSource ID="LineDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
                                             SelectCommand="SELECT 0 [pk_FLineID], '-- Select --' [LineName]
 UNION
-SELECT pk_FLineID, LineName FROM fwd.mstFLine"></asp:SqlDataSource>
+SELECT pk_FLineID, LineName FROM fwd.mstFLine ORDER BY LineName"></asp:SqlDataSource>
                                         
                                     </td>
                                 </tr>
@@ -319,7 +332,7 @@ SELECT pk_FLineID, LineName FROM fwd.mstFLine"></asp:SqlDataSource>
                                         Port of Loading:<span class="errormessage">*</span>
                                     </td>
                                     <td>
-                                        <uc7:ac_port id="AC_Port2" runat="server" TabIndex="13"/>
+                                        <uc7:ac_port id="AC_Port2" runat="server" TabIndex="14"/>
                                         <asp:Label ID="errPortOfLoading" runat="server" CssClass="errormessage"></asp:Label>
                                         <asp:HiddenField ID="hdnPortLoading" runat="server" />
                                     </td>
@@ -329,7 +342,7 @@ SELECT pk_FLineID, LineName FROM fwd.mstFLine"></asp:SqlDataSource>
                                         Port of Discharge:<span class="errormessage">*</span>
                                     </td>
                                     <td>
-                                        <uc7:ac_port id="AC_Port3" runat="server" TabIndex="13"/>
+                                        <uc7:ac_port id="AC_Port3" runat="server" TabIndex="15"/>
                                         <asp:Label ID="errPortOfDischarge" runat="server" CssClass="errormessage"></asp:Label>
                                         <asp:HiddenField ID="hdnPortDischarge" runat="server" />
                                     </td>
@@ -339,7 +352,7 @@ SELECT pk_FLineID, LineName FROM fwd.mstFLine"></asp:SqlDataSource>
                                     </td>
                                     <td style="width: 28%;">
                                         <asp:TextBox ID="txtDelivery" runat="server" CssClass="textboxuppercase" MaxLength="300"
-                                            Width="250px" TabIndex="13"></asp:TextBox>
+                                            Width="250px" TabIndex="16"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator23" runat="server" CssClass="errormessage"
                                             ErrorMessage="This field is required" ControlToValidate="txtDelivery" ValidationGroup="Save"
                                             Display="Dynamic"></asp:RequiredFieldValidator>
@@ -365,16 +378,16 @@ SELECT pk_fwPartyID, PartyName FROM fwd.mstParty WHERE (PartyType = '2')"></asp:
                                     </td>
 
                                     <td>
-                                        Transporter
+                                        Forwarder
                                     </td>
                                     <td>
-                                        <asp:DropDownList ID="ddlTransporter" runat="server" CssClass="dropdownlist" TabIndex="60"
-                                            DataSourceID="TransporterDs" DataTextField="PartyName" DataValueField="pk_fwPartyID">
+                                        <asp:DropDownList ID="ddlTransporter" runat="server" CssClass="dropdownlist" TabIndex="60">
+ <%--                                           DataSourceID="TransporterDs" DataTextField="PartyName" DataValueField="pk_fwPartyID"--%>
                                         </asp:DropDownList>
-                                        <asp:SqlDataSource ID="TransporterDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
+<%--                                        <asp:SqlDataSource ID="TransporterDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
                                             SelectCommand="SELECT 0 [pk_fwPartyID], '-- Select --' [PartyName]
 UNION
-SELECT pk_fwPartyID, PartyName FROM fwd.mstParty WHERE (PartyType = '1')"></asp:SqlDataSource>
+SELECT pk_fwPartyID, PartyName FROM fwd.mstParty WHERE (PartyType = '22')"></asp:SqlDataSource>--%>
 <%--                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="ddlTransporter"
                                             ErrorMessage="This field is required" InitialValue="0" CssClass="errormessage"
                                             ValidationGroup="Save" Display="Dynamic"></asp:RequiredFieldValidator>--%>
@@ -409,21 +422,20 @@ SELECT pk_fwPartyID, PartyName FROM fwd.mstParty WHERE (PartyType = '3')"></asp:
                                 </tr>
                                 <tr>
                                     <td style="width: 20%;">
-                                        Job Notes 1
+                                        Bill Info
                                     </td>
                                     <td>
                                         <asp:TextBox ID="txtJobNote1" runat="server" CssClass="textboxuppercase" 
                                             Width="250px" Height="50px" TextMode="MultiLine"></asp:TextBox>
                                     </td>
                                     <td style="width: 20%;">
-                                        Job Notes 2
+                                        Job Notes
                                     </td>
                                     <td style="width: 28%;">
                                         <asp:TextBox ID="txtJobNote2" runat="server" CssClass="textboxuppercase" 
                                             Width="250px" Height="50px" TextMode="MultiLine"></asp:TextBox>
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <td colspan="2" style="padding-top: 10px;">
                                         <asp:HiddenField ID="hdnJobID" runat="server" Value="0" />

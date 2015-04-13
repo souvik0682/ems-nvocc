@@ -89,6 +89,7 @@ namespace EMS.WebApp.Forwarding.Transaction
             {
                 txtChargeInvoice.Text = cnCharge.GrossCRNAmount.ToString();
                 txtChargeServiceTax.Text = cnCharge.ServiceTaxAmount.ToString();
+                txtStaxper.Text = cnCharge.STaxPer.ToString();
             }
         }
 
@@ -98,7 +99,7 @@ namespace EMS.WebApp.Forwarding.Transaction
             decimal chargeAmount = Convert.ToDecimal(txtChargeInvoice.Text);
             decimal cnAmount = Convert.ToDecimal(txtCNAmount.Text);
 
-            if (cnAmount > 0)
+            if (cnAmount == 0)
             {
                 if (chargeAmount >= cnAmount)
                 {
@@ -199,8 +200,9 @@ namespace EMS.WebApp.Forwarding.Transaction
 
         protected void txtCNAmount_TextChanged(object sender, EventArgs e)
         {
-            if (Convert.ToDecimal(txtCNAmount.Text) > 0)
-                CalculateServiceTax();
+            if (!string.IsNullOrEmpty(txtCNAmount.Text))
+                if (Convert.ToDecimal(txtCNAmount.Text) > 0)
+                    CalculateServiceTax();
         }
 
 
@@ -292,7 +294,8 @@ namespace EMS.WebApp.Forwarding.Transaction
 
             if (dtSTax != null && dtSTax.Rows.Count > 0)
             {
-                TaxPer = Convert.ToDecimal(dtSTax.Rows[0]["TaxPer"].ToString());
+                //TaxPer = Convert.ToDecimal(dtSTax.Rows[0]["TaxPer"].ToString());
+                TaxPer = txtStaxper.Text.ToDecimal();
                 TaxCess = Convert.ToDecimal(dtSTax.Rows[0]["TaxCess"].ToString());
                 TaxAddCess = Convert.ToDecimal(dtSTax.Rows[0]["TaxAddCess"].ToString());
             }
@@ -372,6 +375,7 @@ namespace EMS.WebApp.Forwarding.Transaction
             cnCharge.ServiceTaxACess = Convert.ToDecimal(ViewState["ADDCESS"]);
             cnCharge.ServiceTaxAmount = Convert.ToDecimal(ViewState["STAX"]);
             cnCharge.ServiceTaxCessAmount = Convert.ToDecimal(ViewState["CESSAMOUNT"]);
+            cnCharge.STaxPer = Convert.ToDecimal(txtStaxper.Text);
 
             cnCharge.CRNAmount = (cnCharge.GrossCRNAmount + cnCharge.TotalServiceTax);
         }
@@ -383,6 +387,7 @@ namespace EMS.WebApp.Forwarding.Transaction
             txtChargeInvoice.Text = "0.00";
             txtChargeServiceTax.Text = "0.00";
             txtCNServiceTax.Text = "0.00";
+            txtStaxper.Text = "0.00";
         }
 
         private void EditCreditNoteCharge(long cnChargeId)

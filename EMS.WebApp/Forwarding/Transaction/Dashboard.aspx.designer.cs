@@ -211,6 +211,24 @@ namespace EMS.WebApp.Farwarding.Transaction {
         protected global::System.Web.UI.WebControls.Label lblTTL40;
         
         /// <summary>
+        /// lblwtText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblwtText;
+        
+        /// <summary>
+        /// lblRevText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRevText;
+        
+        /// <summary>
         /// lblWeight control.
         /// </summary>
         /// <remarks>

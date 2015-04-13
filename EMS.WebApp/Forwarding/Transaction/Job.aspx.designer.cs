@@ -220,15 +220,6 @@ namespace EMS.WebApp.Forwarding.Transaction {
         protected global::System.Web.UI.WebControls.SqlDataSource PrimeDocsDs;
         
         /// <summary>
-        /// RequiredFieldValidator14 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator14;
-        
-        /// <summary>
         /// txtDocumentNo control.
         /// </summary>
         /// <remarks>
@@ -310,6 +301,24 @@ namespace EMS.WebApp.Forwarding.Transaction {
         protected global::System.Web.UI.WebControls.TextBox txtContainerDtls;
         
         /// <summary>
+        /// ddlCompany control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCompany;
+        
+        /// <summary>
+        /// CompanyDs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource CompanyDs;
+        
+        /// <summary>
         /// txtGrossWeight control.
         /// </summary>
         /// <remarks>
@@ -371,15 +380,6 @@ namespace EMS.WebApp.Forwarding.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::EMS.WebApp.CustomControls.CustomTextBox txtCBMVolume;
-        
-        /// <summary>
-        /// rfvCBMVolume control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCBMVolume;
         
         /// <summary>
         /// txtRevenue control.
@@ -542,15 +542,6 @@ namespace EMS.WebApp.Forwarding.Transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTransporter;
-        
-        /// <summary>
-        /// TransporterDs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource TransporterDs;
         
         /// <summary>
         /// ddlOverseasAgent control.

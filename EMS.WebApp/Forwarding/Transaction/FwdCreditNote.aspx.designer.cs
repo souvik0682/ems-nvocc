@@ -175,6 +175,15 @@ namespace EMS.WebApp.Forwarding.Transaction {
         protected global::EMS.WebApp.CustomControls.CustomTextBox txtCNAmount;
         
         /// <summary>
+        /// txtStaxper control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtStaxper;
+        
+        /// <summary>
         /// txtCNServiceTax control.
         /// </summary>
         /// <remarks>

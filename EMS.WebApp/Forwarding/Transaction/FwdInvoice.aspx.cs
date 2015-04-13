@@ -52,7 +52,9 @@ namespace EMS.WebApp.Forwarding.Transaction
                 {
                     long invoiveId = 0;
                     Int64.TryParse(GeneralFunctions.DecryptQueryString(Request.QueryString["invid"].ToString()), out invoiveId);
+                    ddlCur.SelectedIndex = 0;
                     LoadPartyTypeDDl();
+                    LoadChargeDDL(0);
                     _isedit = 1;
                     if (invoiveId > 0)
                         LoadForEdit(invoiveId);
@@ -100,7 +102,7 @@ namespace EMS.WebApp.Forwarding.Transaction
                     Response.Redirect("~/Login.aspx");
                 }
 
-                if (user.UserRole.Id != (int)UserRole.Admin)
+                if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.fadmin && user.UserRole.Id != (int)UserRole.fmanager && user.UserRole.Id != (int)UserRole.fuser)
                 {
                     Response.Redirect("~/Unauthorized.aspx");
                 }
@@ -118,7 +120,7 @@ namespace EMS.WebApp.Forwarding.Transaction
 
         private void LoadChargeDDL(int docTypeId)
         {
-            List<ICharge> lstCharge = new InvoiceBLL().GetAllFwdCharges();
+            List<ICharge> lstCharge = new InvoiceBLL().GetAllFwdCharges(ddlCur.SelectedValue.ToInt());
             Session["CHARGES"] = lstCharge;
             ddlFChargeName.DataValueField = "ChargesID";
             ddlFChargeName.DataTextField = "ChargeDescr";
@@ -157,7 +159,7 @@ namespace EMS.WebApp.Forwarding.Transaction
         {
             try
             {
-                DataTable dt = new InvoiceBLL().GetFwdLocation(_userId);
+                DataTable dt = new InvoiceBLL().GetFwdLocation(0);
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
@@ -291,6 +293,7 @@ namespace EMS.WebApp.Forwarding.Transaction
             decimal serviceTax = 0;
             decimal cessAmount = 0;
             decimal addCess = 0;
+            decimal TempTotal = 0;
 
             //decimal Teu = Convert.ToDecimal(txtRatePerTEU.Text);
             //decimal Feu = Convert.ToDecimal(txtRateperFEU.Text);
@@ -306,12 +309,13 @@ namespace EMS.WebApp.Forwarding.Transaction
             grossAmount = (BL*Unit);
             var convRate = Convert.ToDecimal(custTxtConvRate.Text);
             convRate = convRate > default(decimal) ? convRate : 1;
-            grossAmount = convRate * grossAmount;
+            TempTotal = convRate * grossAmount;
 
             DataTable dtSTax = new InvoiceBLL().GetServiceTax(Convert.ToDateTime(txtInvoiceDate.Text));
 
             if (dtSTax != null && dtSTax.Rows.Count > 0)
             {
+                txtStaxPer.Text = dtSTax.Rows[0]["TaxPer"].ToString();
                 TaxPer = Convert.ToDecimal(dtSTax.Rows[0]["TaxPer"].ToString());
                 TaxCess = Convert.ToDecimal(dtSTax.Rows[0]["TaxCess"].ToString());
                 TaxAddCess = Convert.ToDecimal(dtSTax.Rows[0]["TaxAddCess"].ToString());
@@ -321,15 +325,16 @@ namespace EMS.WebApp.Forwarding.Transaction
 
             if (Convert.ToBoolean(Charge.Rows[0]["ServiceTax"].ToString()))
             {
-                serviceTax = Math.Round((grossAmount * TaxPer) / 100, 2);
+                serviceTax = Math.Round((TempTotal * TaxPer) / 100, 2);
                 cessAmount = Math.Round((serviceTax * TaxCess) / 100, 2);
                 addCess = Math.Round((serviceTax * TaxAddCess) / 100, 2);
             }
 
-            totalAmount = (grossAmount + serviceTax + cessAmount + addCess);
+            totalAmount = (TempTotal + serviceTax + cessAmount + addCess);
 
 
-            txtGrossAmount.Text = Math.Round(grossAmount, 2).ToString();
+            //txtGrossAmount.Text = Math.Round(TempTotal, 2).ToString();
+            txtGrossAmount.Text = grossAmount.ToString();
             txtServiceTax.Text = Math.Round((serviceTax + cessAmount + addCess), 2).ToString();
             txtTotal.Text = Math.Round(totalAmount, 2).ToString();
 
@@ -378,6 +383,12 @@ namespace EMS.WebApp.Forwarding.Transaction
             ddlCurrency.DataSource = cur;
             ddlCurrency.DataBind();
             ddlCurrency.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
+
+            ddlCur.DataValueField = "pk_CurrencyID";
+            ddlCur.DataTextField = "CurrencyName";
+            ddlCur.DataSource = cur;
+            ddlCur.DataBind();
+            //ddlCur.Items.Insert(0, new ListItem(Constants.DROPDOWNLIST_DEFAULT_TEXT, Constants.DROPDOWNLIST_DEFAULT_VALUE));
         }
 
         #endregion
@@ -488,6 +499,7 @@ namespace EMS.WebApp.Forwarding.Transaction
                 txtRatePerBL.Text = chargeRates[0].RatePerBL.ToString();
                 txtGrossAmount.Text = chargeRates[0].GrossAmount.ToString();
                 txtServiceTax.Text = (chargeRates[0].ServiceTax + chargeRates[0].ServiceTaxCessAmount + chargeRates[0].ServiceTaxACess).ToString();
+                txtStaxPer.Text = chargeRates[0].STaxPer.ToString();
                 txtTotal.Text = (chargeRates[0].TotalAmount).ToString();
                 ViewState["CESSAMOUNT"] = chargeRates[0].ServiceTaxCessAmount;
                 ViewState["ADDCESS"] = chargeRates[0].ServiceTaxACess;
@@ -569,14 +581,15 @@ namespace EMS.WebApp.Forwarding.Transaction
                 e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChargeName"));
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Size"));
                 e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "UnitType"));
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "RatePerBL"));
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Units"));
-
-                e.Row.Cells[5].Text = Convert.ToString(GetCurrencyCode(Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "fk_CurrencyID"))));
-                e.Row.Cells[6].Text = Convert.ToString(Math.Round(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ExchgRate")), 2));
-                e.Row.Cells[7].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "GrossAmount"));
-                e.Row.Cells[8].Text = Convert.ToString(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ServiceTax")) + Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ServiceTaxCessAmount")) + Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ServiceTaxACess")));
-                e.Row.Cells[9].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "TotalAmount"));
+                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Units"));
+                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "RatePerBL"));
+                e.Row.Cells[5].Text = Convert.ToString(Math.Round(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "GrossAmount")),2));
+                e.Row.Cells[6].Text = Convert.ToString(GetCurrencyCode(Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "fk_CurrencyID"))));
+                e.Row.Cells[7].Text = Convert.ToString(Math.Round(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ExchgRate")), 2));
+                //e.Row.Cells[7].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "GrossAmount"));
+                e.Row.Cells[8].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "StaxPer"));
+                e.Row.Cells[9].Text = Convert.ToString(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ServiceTax")) + Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ServiceTaxCessAmount")) + Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ServiceTaxACess")));
+                e.Row.Cells[10].Text = Convert.ToString(Math.Round(Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "TotalAmount")),2));
 
                 if (!ReferenceEquals(Request.QueryString["invid"], null))
                 {
@@ -625,6 +638,19 @@ namespace EMS.WebApp.Forwarding.Transaction
                 lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00093");
                 return;
             }
+
+            if (ddlParty.SelectedIndex < 1)
+            {
+                lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00094");
+                return;
+            }
+
+            if (ddlPartyType.SelectedIndex < 1)
+            {
+                lblMessage.Text = ResourceManager.GetStringWithoutName("ERR00094");
+                return;
+            }
+
             string misc = string.Empty;
             IInvoice invoice = new InvoiceEntity();
             BuildInvoiceEntity(invoice);
@@ -679,6 +705,8 @@ namespace EMS.WebApp.Forwarding.Transaction
             //Update Invoice Amount
             txtROff.Text = (Math.Round(ChargeRates.Sum(cr => cr.TotalAmount), 0) - ChargeRates.Sum(cr => cr.TotalAmount)).ToString();
             txtTotalAmount.Text = Math.Round(ChargeRates.Sum(cr => cr.TotalAmount), 0).ToString();
+            if (ddlCur.SelectedValue.ToInt() != 1)
+                txtFCTot.Text = Math.Round(ChargeRates.Sum(cr => cr.Units * cr.RatePerBL), 0).ToString();
 
             ViewState["CHARGERATE"] = ChargeRates;
             ClearChargesRate();
@@ -717,6 +745,7 @@ namespace EMS.WebApp.Forwarding.Transaction
             invoice.LocationID = ddlLocation.SelectedValue.ToInt();
             invoice.PartyId = Convert.ToInt32(ddlParty.SelectedValue);
             invoice.PartyTypeID = Convert.ToInt32(ddlPartyType.SelectedValue);
+            invoice.CurID = Convert.ToInt32(ddlCur.SelectedValue);
         }
 
         private void BuildChargesRate(IChargeRate charge)
@@ -753,7 +782,7 @@ namespace EMS.WebApp.Forwarding.Transaction
             charge.UnitTypeID = Convert.ToInt32(ddlUnitType.SelectedValue);
             charge.UnitType = ddlUnitType.SelectedItem.Text;
             charge.Size = ddlSize.SelectedItem.Text;
-
+            charge.STaxPer = Math.Round(Convert.ToDecimal(txtStaxPer.Text),2);
             if (ViewState["STAX"] != null)
                 charge.ServiceTax = Convert.ToDecimal(ViewState["STAX"]);
 
@@ -778,6 +807,7 @@ namespace EMS.WebApp.Forwarding.Transaction
             ddlCurrency.SelectedIndex = 0;
             txtRatePerBL.Enabled = true;
             ddlSize.SelectedIndex = 0;
+            txtStaxPer.Text = "0.00";
             //ddlUnitType.SelectedIndex = 0;
 
             //txtRatePerCBM.Text = "0.00";
@@ -823,6 +853,9 @@ namespace EMS.WebApp.Forwarding.Transaction
             //Update Invoice Amount
             txtROff.Text = (Math.Round(ChargeRates.Sum(cr => cr.TotalAmount), 0) - ChargeRates.Sum(cr => cr.TotalAmount)).ToString();
             txtTotalAmount.Text = Math.Round(ChargeRates.Sum(cr => cr.TotalAmount), 0).ToString();
+            if (ddlCur.SelectedValue.ToInt() != 1)
+                txtFCTot.Text = Math.Round(ChargeRates.Sum(cr => cr.Units * cr.RatePerBL), 0).ToString();
+
         }
 
         private void RefreshGridView()
@@ -860,8 +893,13 @@ namespace EMS.WebApp.Forwarding.Transaction
             ddlPartyType.SelectedValue = invoice.PartyTypeID.ToString();
             GetPartyValuesSetToDdl(ddlPartyType.SelectedValue.ToInt());
             ddlParty.SelectedValue = invoice.PartyId.ToString();
-          
+            ddlLocation.SelectedValue = invoice.LocationID.ToString();
+            ddlCur.SelectedValue = invoice.CurID.ToString();
             //TEU(invoice.JobNo);
+            ddlCur.Enabled = false;
+            if (invoice.JobActive == "C")
+                btnSave.Visible = false;
+
             //LoadEstimateDDL(invoice.EstimateID);
             //ddlEstimateNo.SelectedValue = invoice.EstimateID.ToString();
 
@@ -878,11 +916,15 @@ namespace EMS.WebApp.Forwarding.Transaction
             List<IChargeRate> chargeRates = new InvoiceBLL().GetFwdInvoiceChargesById(InvoiceId);
             ViewState["CHARGERATE"] = chargeRates;
 
+            txtJobDate.Enabled = false;
             txtInvoiceDate.Enabled = false;
+
             //txtUSDExRate.Enabled = false;
             btnAdd.Enabled = false;
-            txtROff.Text = (Math.Round(chargeRates.Sum(cr => cr.TotalAmount), 0) - chargeRates.Sum(cr => cr.TotalAmount)).ToString();
+            txtROff.Text = (Math.Round(Math.Round(chargeRates.Sum(cr => cr.TotalAmount), 0) - chargeRates.Sum(cr => cr.TotalAmount),2)).ToString();
             txtTotalAmount.Text = Math.Round(chargeRates.Sum(cr => cr.TotalAmount), 0).ToString();
+            if (ddlCur.SelectedValue.ToInt() != 1)
+                txtFCTot.Text = Math.Round(chargeRates.Sum(cr => cr.Units * cr.RatePerBL), 0).ToString();
 
             gvwInvoice.DataSource = chargeRates;
             gvwInvoice.DataBind();
@@ -923,7 +965,7 @@ namespace EMS.WebApp.Forwarding.Transaction
 
             var ex = new EstimateBLL().GetExchange(new SearchCriteria() { StringOption1 = "2", Date = txtJobDate.Text.ToDateTime() });
             txtExRate.Text = Convert.ToString(ex.Tables[0].Rows[0]["USDXchRate"]);
-
+            ddlCur.SelectedValue = "1";
             
             txtInvoiceDate.Text = DateTime.Now.ToShortDateString();
             //ddlInvoiceType.SelectedValue = DocType.ToString();
@@ -963,6 +1005,9 @@ namespace EMS.WebApp.Forwarding.Transaction
             //Update Invoice Amount
             txtROff.Text = (Math.Round(chargeRates.Sum(cr => cr.TotalAmount), 0) - chargeRates.Sum(cr => cr.TotalAmount)).ToString();
             txtTotalAmount.Text = Math.Round(chargeRates.Sum(cr => cr.TotalAmount), 0).ToString();
+            if (ddlCur.SelectedValue.ToInt() != 1)
+                txtFCTot.Text = Math.Round(chargeRates.Sum(cr => cr.Units * cr.RatePerBL), 0).ToString();
+
         }
 
         private void EditChargeRate(int InvoiceChargeId)
@@ -1273,6 +1318,61 @@ namespace EMS.WebApp.Forwarding.Transaction
                 gvwInvoice.DataBind();
             }
         }
-        
+        protected void txtStaxPer_TextChanged(object sender, EventArgs e)
+        {
+            DataSet ds = new DataSet();
+            decimal Stax = 0;
+            decimal TaxCess = 0;
+            decimal TaxACess = 0;
+            decimal Basic = 0;
+            decimal StaxPer = 0;
+
+            ds = new EstimateBLL().GetServiceTaxPer(txtJobDate.Text.ToDateTime(), ddlFChargeName.SelectedValue.ToInt());
+            Basic = txtUnit.Text.ToDecimal() * txtRatePerBL.Text.ToDecimal() * custTxtConvRate.Text.ToDecimal();
+            StaxPer = txtStaxPer.Text.ToDecimal();
+            if (ds.Tables[1].Rows[0]["ServiceTax"].ToInt() == 1)
+            {
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    Stax = Basic * StaxPer / 100;
+                    TaxCess = Stax * ds.Tables[0].Rows[0]["Cessper"].ToDecimal() / 100;
+                    TaxACess = Stax * ds.Tables[0].Rows[0]["ACessPer"].ToDecimal() / 100;
+                    txtServiceTax.Text = (Stax + TaxCess + TaxACess).ToString("##########0.00");
+                }
+                else
+                {
+                    txtServiceTax.Text = "0.00";
+                }
+            }
+            else
+            {
+                txtServiceTax.Text = "0.00";
+            }
+
+            txtTotal.Text = (Basic + txtServiceTax.Text.ToDecimal()).ToString("##########0.00");
+            ViewState["CESSAMOUNT"] = Math.Round(TaxCess, 2);
+            ViewState["ADDCESS"] = Math.Round(TaxACess, 2);
+            ViewState["STAX"] = Math.Round(Stax ,2);
+        }
+
+        protected void ddlCur_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //if (ddlCur.SelectedValue.ToInt() != 1)
+            //    ddlCurrency.Enabled = false;
+            //else
+            //    ddlCurrency.Enabled = true;
+            //ddlCurrency.Enabled = false;
+            gvwInvoice.DataSource = null;
+            gvwInvoice.DataBind();
+            txtTotalAmount.Text = "";
+            txtFCTot.Text ="";
+            txtROff.Text = "";
+            ViewState["CHARGERATE"] = null;
+            ddlFChargeName.DataSource = null;
+            LoadChargeDDL(0);
+        }
+
+     
+         
     }
 }

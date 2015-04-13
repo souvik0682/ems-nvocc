@@ -24,6 +24,7 @@ namespace EMS.WebApp.Forwarding.Transaction
         private bool _canDelete = false;
         private bool _canView = false;
         private bool _LocationSpecific = true;
+        private int _userLocation = 0;
         //private int _locId = 0;
         //private bool _hasEditAccess = true;
 
@@ -31,6 +32,7 @@ namespace EMS.WebApp.Forwarding.Transaction
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            _userLocation = UserBLL.GetUserLocation();
             RetriveParameters();
             CheckUserAccess();
             SetAttributes();
@@ -134,20 +136,36 @@ namespace EMS.WebApp.Forwarding.Transaction
                 e.Row.Cells[0].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "JobNo"));
                 e.Row.Cells[1].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "JobDate")).Split(' ')[0];
                 e.Row.Cells[2].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "JobType"));
-                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "POL"));
-                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "POD"));
-                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EstPayable"));
-                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EstReceivable"));
-                e.Row.Cells[7].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EstProfit"));
+                e.Row.Cells[3].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LocName"));
+                e.Row.Cells[4].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "POL"));
+                e.Row.Cells[5].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "POD"));
+                e.Row.Cells[6].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EstPayable"));
+                e.Row.Cells[7].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EstReceivable"));
+                e.Row.Cells[8].Text = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "EstProfit"));
 
                 ImageButton btnDashboard = (ImageButton)e.Row.FindControl("btnDashboard");
                 btnDashboard.ToolTip = "Dashboard";
                 btnDashboard.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "JobId"));
 
-                ImageButton btnHBLEntry = (ImageButton)e.Row.FindControl("btnHBLEntry");
-                btnHBLEntry.ToolTip = "HBL Entry";
-                btnHBLEntry.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "JobId"));
-
+                // display HBL button only Open Job
+                if (ddlJobStatus.SelectedValue == "O")
+                {
+                    ImageButton btnHBLEntry = (ImageButton)e.Row.FindControl("btnHBLEntry");
+                    btnHBLEntry.ToolTip = "HBL Entry";
+                    if (Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "PrintHBL")))
+                    {
+                        btnHBLEntry.Visible = true;
+                        btnHBLEntry.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "JobId"));
+                    }
+                    else
+                        btnHBLEntry.Visible = false;
+                    
+                }
+                else
+                {
+                    ImageButton btnHBLEntry = (ImageButton)e.Row.FindControl("btnHBLEntry");
+                    btnHBLEntry.Visible = false;
+                }
                 //Edit Link
                 ImageButton btnEdit = (ImageButton)e.Row.FindControl("btnEdit");
                 btnEdit.ToolTip = ResourceManager.GetStringWithoutName("ERR00070");
@@ -160,10 +178,18 @@ namespace EMS.WebApp.Forwarding.Transaction
                     btnRemove.Visible = true;
                     btnRemove.ToolTip = ResourceManager.GetStringWithoutName("ERR00007");
                     btnRemove.CommandArgument = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "JobId"));
+                    btnRemove.Attributes.Add("onclick", "javascript:return confirm('Are you sure about delete?');");
 
                 }
                 else
                 {
+                    ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
+                    btnRemove.Visible = false;
+                }
+
+                if (Convert.ToString(DataBinder.Eval(e.Row.DataItem, "JobActive")) == "C")
+                {
+                    e.Row.ForeColor = System.Drawing.Color.Red;
                     ImageButton btnRemove = (ImageButton)e.Row.FindControl("btnRemove");
                     btnRemove.Visible = false;
                 }
@@ -192,7 +218,7 @@ namespace EMS.WebApp.Forwarding.Transaction
                     Response.Redirect("~/Login.aspx");
                 }
 
-                if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.Manager)
+                if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.Manager && user.UserRole.Id != (int)UserRole.fmanager)
                 {
 
                     if (_canView == false)
@@ -205,6 +231,9 @@ namespace EMS.WebApp.Forwarding.Transaction
                         btnAdd.Visible = false;
                     }
                 }
+                else
+                    if (!_LocationSpecific)
+                        _userLocation = 0;
 
                 //if (user.UserRole.Id != (int)UserRole.Admin && user.UserRole.Id != (int)UserRole.Manager && user.UserRole.Id != (int)UserRole.SalesExecutive)
                 //{
@@ -320,6 +349,10 @@ namespace EMS.WebApp.Forwarding.Transaction
             //criteria.JobType = (txtJobType.Text == "") ? string.Empty : txtJobType.Text.Trim();
             criteria.OperationalControl = (txtOpControl.Text == "") ? string.Empty : txtOpControl.Text.Trim();
             criteria.LineName = (txtLine.Text == "") ? string.Empty : txtLine.Text.Trim();
+            if (_userLocation != 0)
+                criteria.LineName = new BookingBLL().GetLocation(_userId);
+            else
+                criteria.LineName = txtOpControl.Text.Trim();
 
             Session[Constants.SESSION_SEARCH_CRITERIA] = criteria;
         }
@@ -354,6 +387,11 @@ namespace EMS.WebApp.Forwarding.Transaction
                         ddlPaging.SelectedValue = criteria.PageSize.ToString();
                         isCriteriaExists = true;
                     }
+
+                    if (_userLocation != 0)
+                        criteria.Location = new BookingBLL().GetLocation(_userId);
+                    else
+                        criteria.Location = txtOpControl.Text.Trim();
                 }
             }
 

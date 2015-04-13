@@ -139,6 +139,24 @@ namespace EMS.WebApp.Forwarding.Transaction {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
         
         /// <summary>
+        /// ddlCur control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCur;
+        
+        /// <summary>
+        /// txtExRate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtExRate;
+        
+        /// <summary>
         /// txtTotalAmount control.
         /// </summary>
         /// <remarks>
@@ -157,13 +175,13 @@ namespace EMS.WebApp.Forwarding.Transaction {
         protected global::System.Web.UI.WebControls.TextBox txtContainers;
         
         /// <summary>
-        /// txtROff control.
+        /// txtFCTot control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtROff;
+        protected global::System.Web.UI.WebControls.TextBox txtFCTot;
         
         /// <summary>
         /// ddlLocation control.
@@ -175,13 +193,13 @@ namespace EMS.WebApp.Forwarding.Transaction {
         protected global::System.Web.UI.WebControls.DropDownList ddlLocation;
         
         /// <summary>
-        /// txtExRate control.
+        /// txtROff control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::EMS.WebApp.CustomControls.CustomTextBox txtExRate;
+        protected global::System.Web.UI.WebControls.TextBox txtROff;
         
         /// <summary>
         /// ddlFChargeName control.
@@ -229,6 +247,15 @@ namespace EMS.WebApp.Forwarding.Transaction {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
         
         /// <summary>
+        /// txtUnit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtUnit;
+        
+        /// <summary>
         /// txtRatePerBL control.
         /// </summary>
         /// <remarks>
@@ -238,13 +265,13 @@ namespace EMS.WebApp.Forwarding.Transaction {
         protected global::EMS.WebApp.CustomControls.CustomTextBox txtRatePerBL;
         
         /// <summary>
-        /// txtUnit control.
+        /// txtGrossAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::EMS.WebApp.CustomControls.CustomTextBox txtUnit;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtGrossAmount;
         
         /// <summary>
         /// ddlCurrency control.
@@ -283,13 +310,13 @@ namespace EMS.WebApp.Forwarding.Transaction {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
-        /// txtGrossAmount control.
+        /// txtStaxPer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::EMS.WebApp.CustomControls.CustomTextBox txtGrossAmount;
+        protected global::EMS.WebApp.CustomControls.CustomTextBox txtStaxPer;
         
         /// <summary>
         /// txtServiceTax control.

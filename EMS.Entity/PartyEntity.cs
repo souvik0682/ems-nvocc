@@ -27,6 +27,7 @@ namespace EMS.Entity
         public string LineName { get; set; }
         public string ContactPerson { get; set; }
         public string Phone { get; set; }
+        public string Mobile { get; set; }
         public string FAX { get; set; }
         public string emailID { get; set; }
         public string PAN { get; set; }
@@ -34,6 +35,9 @@ namespace EMS.Entity
         public int PrincipalID { get; set; }
         public int UserID { get; set; }
         public bool PartyStatus { get; set; }
+        public int GroupID { get; set; }
+        public string GroupName { get; set; }
+
         //public string PartyTypeName { get; set; }
         //Dictionary<string, string> PartyTypeDic = null;
         //private void Initalize()
@@ -76,6 +80,14 @@ namespace EMS.Entity
                 if (reader["PartyName"] != DBNull.Value)
                     PartyName = Convert.ToString(reader["PartyName"]);
 
+            if (ColumnExists(reader, "GroupID"))
+                if (reader["GroupID"] != DBNull.Value)
+                    GroupID = Convert.ToInt32(reader["GroupID"]);
+
+            if (ColumnExists(reader, "GroupName"))
+                if (reader["GroupName"] != DBNull.Value)
+                    GroupName = Convert.ToString(reader["GroupName"]);
+
             if (ColumnExists(reader, "PartyType"))
                 if (reader["PartyType"] != DBNull.Value)
                     PartyType = Convert.ToInt32(reader["PartyType"]);
@@ -111,6 +123,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "Phone"))
                 if (reader["Phone"] != DBNull.Value)
                     Phone = Convert.ToString(reader["Phone"]);
+
+            if (ColumnExists(reader, "Mobile"))
+                if (reader["Mobile"] != DBNull.Value)
+                    Mobile = Convert.ToString(reader["Mobile"]);
 
             if (ColumnExists(reader, "FAX"))
                 if (reader["FAX"] != DBNull.Value)
@@ -172,6 +188,14 @@ namespace EMS.Entity
                 if (reader["FullName"] != DBNull.Value)
                     FullName = Convert.ToString(reader["FullName"]);
 
+            if (ColumnExists(reader, "fk_GroupID"))
+                if (reader["fk_GroupID"] != DBNull.Value)
+                    GroupID = Convert.ToInt32(reader["fk_GroupID"]);
+
+            if (ColumnExists(reader, "GroupName"))
+                if (reader["GroupName"] != DBNull.Value)
+                    GroupName = Convert.ToString(reader["GroupName"]);
+
             if (ColumnExists(reader, "PartyType"))
                 if (reader["PartyType"] != DBNull.Value)
                     PartyType = Convert.ToInt32(reader["PartyType"]);
@@ -203,6 +227,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "Phone"))
                 if (reader["Phone"] != DBNull.Value)
                     Phone = Convert.ToString(reader["Phone"]);
+
+            if (ColumnExists(reader, "Mobile"))
+                if (reader["Mobile"] != DBNull.Value)
+                    Mobile = Convert.ToString(reader["Mobile"]);
 
             if (ColumnExists(reader, "FAX"))
                 if (reader["FAX"] != DBNull.Value)

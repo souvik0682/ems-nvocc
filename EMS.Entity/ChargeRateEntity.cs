@@ -199,6 +199,7 @@ namespace EMS.Entity
         public decimal Units { get; set; }
         public int UnitTypeID { get; set; }
         public string UnitType { get; set; }
+        public decimal STaxPer { get; set; }
 
         public List<IChargeRate> ConvertXMLToList(string XMLString)
         {
@@ -274,6 +275,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "InvoiceId"))
                 if (reader["InvoiceId"] != DBNull.Value)
                     this.InvoiceId = Convert.ToInt64(reader["InvoiceId"]);
+
+            if (ColumnExists(reader, "STaxPer"))
+                if (reader["STaxPer"] != DBNull.Value)
+                    this.STaxPer = Convert.ToDecimal(reader["STaxPer"]);
 
             if (ColumnExists(reader, "ServiceTaxAmount"))
                 if (reader["ServiceTaxAmount"] != DBNull.Value)

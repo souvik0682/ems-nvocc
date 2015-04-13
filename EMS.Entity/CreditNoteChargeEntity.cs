@@ -67,6 +67,7 @@ namespace EMS.Entity
         }
 
         public decimal TotalServiceTax { get; set; }
+        public decimal STaxPer { get; set; }
 
         public decimal ChargeAmount { get; set; }
         public decimal ChargeServiceTax { get; set; }
@@ -107,6 +108,10 @@ namespace EMS.Entity
             if (ColumnExists(reader, "InvoiceServiceTax"))
                 if (reader["InvoiceServiceTax"] != DBNull.Value)
                     ChargeServiceTax = Convert.ToDecimal(reader["InvoiceServiceTax"]);
+
+            if (ColumnExists(reader, "ServTaxPer"))
+                if (reader["ServTaxPer"] != DBNull.Value)
+                    STaxPer = Convert.ToDecimal(reader["ServTaxPer"]);
 
         }
 

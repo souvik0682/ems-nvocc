@@ -43,5 +43,7 @@ namespace EMS.Common
         int PartyTypeID { get; set; }
         int TEUS { get; set; }
         int FEUS { get; set; }
+        int CurID { get; set; }
+        string JobActive { get; set; }
     }
 }

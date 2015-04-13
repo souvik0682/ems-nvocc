@@ -44,6 +44,8 @@ namespace EMS.Common
         DateTime? BLReleaseDate { get; set; }
         bool BLthruEdge { get; set; }
         int ShipmentType { get; set; }
+        string FreightType { get; set; }
+        string Packages { get; set; }
 
         string ShipperName { get; set; }
         string Shipper { get; set; }

@@ -32,6 +32,7 @@ namespace EMS.Common
         decimal Usd { get; set; }
         decimal GrossAmount { get; set; }
         decimal STax { get; set; }
+        decimal STaxPer { get; set; }
         decimal ServiceTaxCessAmount { get; set; }
         decimal ServiceTaxACess { get; set; }
         decimal TotalAmount { get; set; }

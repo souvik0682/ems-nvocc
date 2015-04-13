@@ -21,6 +21,7 @@ namespace EMS.Common
         string LineName { get; set; }
         string ContactPerson { get; set; }
         string Phone { get; set; }
+        string Mobile { get; set; }
         string FAX { get; set; }
         string emailID { get; set; }
         string PAN { get; set; }
@@ -29,5 +30,7 @@ namespace EMS.Common
         int UserID { get; set; }
         bool PartyStatus { get; set; }
         string PartyTypeName { get; set; }
+        int GroupID { get; set; }
+        string GroupName { get; set; }
     }
 }

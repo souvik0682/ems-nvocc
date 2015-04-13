@@ -40,6 +40,9 @@ namespace EMS.WebApp.Equipment
             //_userId = EMS.BLL.UserBLL.GetLoggedInUserId();
             if (!Page.IsPostBack)
             {
+                string strProcessScript = "this.value='Processing...';this.disabled=true;";
+                btnSave.Attributes.Add("onclick", strProcessScript + ClientScript.GetPostBackEventReference(btnSave, "").ToString());
+
                 fillAllDropdown();
                 CheckUserAccess(hdnContainerTransactionId.Value);
                 //if (lblTranCode.Text == string.Empty && hdnContainerTransactionId.Value == "0")

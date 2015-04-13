@@ -10,34 +10,16 @@
 namespace EMS.WebApp.Forwarding.Report {
     
     
-    public partial class ProjectProfitSummary {
+    public partial class UnitSummary {
         
         /// <summary>
-        /// DateRange control.
+        /// txtFromDt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow DateRange;
-        
-        /// <summary>
-        /// lblStartDt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStartDt;
-        
-        /// <summary>
-        /// txtStartDt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStartDt;
+        protected global::System.Web.UI.WebControls.TextBox txtFromDt;
         
         /// <summary>
         /// cbeFromDt control.
@@ -49,31 +31,22 @@ namespace EMS.WebApp.Forwarding.Report {
         protected global::AjaxControlToolkit.CalendarExtender cbeFromDt;
         
         /// <summary>
-        /// msk1 control.
+        /// req1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender msk1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator req1;
         
         /// <summary>
-        /// lblEndDt control.
+        /// txtToDt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEndDt;
-        
-        /// <summary>
-        /// txtEndDt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEndDt;
+        protected global::System.Web.UI.WebControls.TextBox txtToDt;
         
         /// <summary>
         /// cbeToDt control.
@@ -85,13 +58,22 @@ namespace EMS.WebApp.Forwarding.Report {
         protected global::AjaxControlToolkit.CalendarExtender cbeToDt;
         
         /// <summary>
-        /// msk2 control.
+        /// req2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender msk2;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator req2;
+        
+        /// <summary>
+        /// btnReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReport;
         
         /// <summary>
         /// ddlLocation control.
@@ -112,84 +94,48 @@ namespace EMS.WebApp.Forwarding.Report {
         protected global::System.Web.UI.WebControls.SqlDataSource OpsDs;
         
         /// <summary>
-        /// ddlJobStatus control.
+        /// lblError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlJobStatus;
+        protected global::System.Web.UI.WebControls.Label lblError;
         
         /// <summary>
-        /// ddlPrincipal control.
+        /// ddlLine control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPrincipal;
+        protected global::System.Web.UI.WebControls.DropDownList ddlLine;
         
         /// <summary>
-        /// PrincipalDs control.
+        /// LineDs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource PrincipalDs;
+        protected global::System.Web.UI.WebControls.SqlDataSource LineDs;
         
         /// <summary>
-        /// ddlJobScope control.
+        /// rptViewer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlJobScope;
+        protected global::Microsoft.Reporting.WebForms.ReportViewer rptViewer;
         
         /// <summary>
-        /// ScopeDs control.
+        /// odsRevSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource ScopeDs;
-        
-        /// <summary>
-        /// ddlSales control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSales;
-        
-        /// <summary>
-        /// SalesDs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SalesDs;
-        
-        /// <summary>
-        /// ddlCustomer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCustomer;
-        
-        /// <summary>
-        /// btnShow control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnShow;
+        protected global::System.Web.UI.WebControls.ObjectDataSource odsRevSummary;
     }
 }

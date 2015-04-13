@@ -46,16 +46,15 @@
                     </cc1:MaskedEditExtender>
                   
                 </td>
- <%--               <td class="label" style="padding-right: 50px; vertical-align: top;">
-                    <asp:Label ID="lblLocation" runat="server" Text="Location"></asp:Label>
-                </td>--%>
-               <%-- <td style="padding-right: 20px; vertical-align: top;">
-                    <asp:TextBox ID="txtEndDt" runat="server" CssClass="textbox" Width="180"></asp:TextBox>
-                    <cc1:CalendarExtender ID="cbeToDt" runat="server" TargetControlID="txtEndDt" Format="dd/MM/yyyy" />                   
-                    <cc1:MaskedEditExtender ID="msk2" runat="server" UserDateFormat="MonthDayYear" Mask="99/99/9999"
-                        TargetControlID="txtEndDt" ClearMaskOnLostFocus="False">
-                    </cc1:MaskedEditExtender>
-                </td>--%>
+                <td class="label" style="padding-right: 50px; vertical-align: top;">
+                    <asp:Label ID="lblOutType" runat="server" Text="Report Type"></asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlReportType" runat="server" Width="200">
+                        <asp:ListItem Selected="True" Text="Summary" Value="S"></asp:ListItem>
+                        <asp:ListItem Text="Details" Value="D"></asp:ListItem>
+                    </asp:DropDownList>
+                </td>
                
             </tr>
             <tr>
@@ -81,7 +80,7 @@
 
             <tr>
                 <td style="vertical-align: top;">
-                    <asp:Button ID="btnShow" runat="server" Text="Generate Excel" CssClass="button" OnClick="btnShow_Click" />
+                    <asp:Button ID="btnShow" runat="server" Text="Submit" CssClass="button" OnClick="btnShow_Click" />
                 </td>
             </tr>
     
@@ -89,6 +88,26 @@
             </ContentTemplate>
 
         </fieldset>
+        <div style="padding-left:5px;width:86%;">
+            <rsweb:ReportViewer ID="rptViewer" runat="server" Width="100%" 
+                Font-Names="Verdana" Font-Size="8pt" InteractiveDeviceInfos="(Collection)" 
+                WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt">
+                <LocalReport ReportPath="RDLC\ForwardingPartywiseOutstanding.rdlc">
+                    <DataSources>
+                        <rsweb:ReportDataSource DataSourceId="odsOutstanding" Name="OutstandingDs" />
+                    </DataSources>
+                </LocalReport>
+            </rsweb:ReportViewer>
+            <asp:ObjectDataSource ID="odsOutstanding" runat="server" 
+                SelectMethod="GetOutstanding" TypeName="EMS.BLL.ReportBLL" 
+                onselecting="odsParty_Selecting" 
+                OldValuesParameterFormatString="original_{0}">
+                <SelectParameters>
+                    <asp:Parameter Name="Creditor" Type="Int32" />
+                    <asp:Parameter Name="FromDate" Type="DateTime" />
+                </SelectParameters>
+            </asp:ObjectDataSource>
+        </div>    
     </center>
 
 </center>

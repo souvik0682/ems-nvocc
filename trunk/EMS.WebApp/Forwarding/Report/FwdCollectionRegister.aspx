@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" CodeBehind="CreditorInvoice.aspx.cs" Inherits="EMS.WebApp.Forwarding.Report.CreditorInvoice" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" CodeBehind="FwdCollectionRegister.aspx.cs" Inherits="EMS.WebApp.Forwarding.Report.FwdCollectionRegister" %>
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
@@ -45,9 +45,23 @@
                         <asp:RequiredFieldValidator ID="req2" runat="server" ControlToValidate="txtToDt" Display="Dynamic" 
                         ErrorMessage="To Date is required" ValidationGroup="vgReport" CssClass="errormessage"></asp:RequiredFieldValidator>
                     </td>
-                    <td class="label" style="padding-right:5px;vertical-align:top;">
+                    <td>
+                        Location:<span class="errormessage">*</span>
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlLocation" runat="server" CssClass="dropdownlist" TabIndex="60"
+                            DataSourceID="OpsDs" DataTextField="LocName" DataValueField="pk_LocID">
+                        </asp:DropDownList>
+                        <asp:SqlDataSource ID="OpsDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
+                            SelectCommand="SELECT 0 [pk_LocID], '-- All --' [LocName]
+                            UNION
+                            SELECT pk_LocID, LocName FROM fwd.mstFLocation"></asp:SqlDataSource>
+                    </td>
+
+                    <%--<td class="label" style="padding-right:5px;vertical-align:top;">
                         Creditor:
                     </td>
+                    
                     <td style="padding-right:20px;vertical-align:top;">
                         <asp:DropDownList ID="ddlCreditor" runat="server"
                             DataSourceID="CreditorDataSource" DataTextField="CreditorName" 
@@ -60,7 +74,7 @@
 from fwd.mstparty p inner join fwd.mstPartyType pt on p.PartyType = pt.pk_PartyTypeID
 where AssociatedWith &lt;&gt; 'D'">
                         </asp:SqlDataSource>
-                    </td>
+                    </td>--%>
                     <td style="vertical-align:top;">    
                         <asp:Button ID="btnReport" runat="server" Text="Show Report" CssClass="button" 
                             ValidationGroup="vgReport" onclick="btnReport_Click"/>
@@ -72,18 +86,18 @@ where AssociatedWith &lt;&gt; 'D'">
             <rsweb:ReportViewer ID="rptViewer" runat="server" Width="100%" 
                 Font-Names="Verdana" Font-Size="8pt" InteractiveDeviceInfos="(Collection)" 
                 WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt">
-                <LocalReport ReportPath="RDLC\CreditorInvoice.rdlc">
+                <LocalReport ReportPath="RDLC\fwdCollRegister.rdlc">
                     <DataSources>
-                        <rsweb:ReportDataSource DataSourceId="odsCredInvoice" Name="CredInvDs" />
+                        <rsweb:ReportDataSource DataSourceId="odsCollReg" Name="CollRegDs" />
                     </DataSources>
                 </LocalReport>
             </rsweb:ReportViewer>
-            <asp:ObjectDataSource ID="odsCredInvoice" runat="server" 
-                SelectMethod="GetCredInvoice" TypeName="EMS.BLL.ReportBLL" 
-                onselecting="odsCredInvoice_Selecting" 
+            <asp:ObjectDataSource ID="odsCollReg" runat="server" 
+                SelectMethod="GetFwdCollRegister" TypeName="EMS.BLL.ReportBLL" 
+                onselecting="odsCollReg_Selecting" 
                 OldValuesParameterFormatString="original_{0}">
                 <SelectParameters>
-                    <asp:Parameter Name="CreditorId" Type="Int32" />
+                    <asp:Parameter Name="LocationID" Type="Int32" />
                     <asp:Parameter Name="StartDate" Type="DateTime" />
                     <asp:Parameter Name="EndDate" Type="DateTime" />
                 </SelectParameters>

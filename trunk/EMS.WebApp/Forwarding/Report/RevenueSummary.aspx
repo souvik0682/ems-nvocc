@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" CodeBehind="CreditorInvoice.aspx.cs" Inherits="EMS.WebApp.Forwarding.Report.CreditorInvoice" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" CodeBehind="RevenueSummary.aspx.cs" Inherits="EMS.WebApp.Forwarding.Report.RevenueSummary" %>
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
@@ -8,12 +8,12 @@
         .style1
         {
             color: #000000;
-            width: 86px;
+            width: 100px;
         }
         .style2
         {
             color: #000000;
-            width: 62px;
+            width: 100px;
         }
     </style>
 
@@ -21,50 +21,61 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="container" runat="Server">
   <div id="headercaption">
-        CREDITOR INVOICE</div>
+        REVENUE SUMMARY</div>
 <center>
     <div style="padding-top: 10px;">
-        <fieldset style="width:964px;height:65px;">
+        <fieldset style="width:800px;height:65px;">
             <table>
                 <tr>
-                    <td class="style1" style="padding-right:5px;vertical-align:top;">
+                    <td class="style1" style="padding-right:8px;vertical-align:top;">
                         From Date:<span class="errormessage">*</span>
                     </td>
-                    <td style="padding-right:20px;vertical-align:top;">
+                    <td style="padding-right:30px;vertical-align:top;">
                         <asp:TextBox ID="txtFromDt" runat="server" CssClass="textbox" Width="80"></asp:TextBox>
                         <cc1:CalendarExtender ID="cbeFromDt" runat="server" TargetControlID="txtFromDt" Format="dd-MM-yyyy" />
                         <asp:RequiredFieldValidator ID="req1" runat="server" ControlToValidate="txtFromDt" Display="Dynamic" 
                         ErrorMessage="From Date is required" ValidationGroup="vgReport" CssClass="errormessage"></asp:RequiredFieldValidator>
                     </td>
-                    <td class="style2" style="padding-right:5px;vertical-align:top;">
+                    <td class="style2" style="padding-right:8px;vertical-align:top;">
                         To Date:<span class="errormessage">*</span>
                     </td>
-                    <td style="padding-right:20px;vertical-align:top;">
+                    <td style="padding-right:30px;vertical-align:top;">
                         <asp:TextBox ID="txtToDt" runat="server" CssClass="textbox" Width="80"></asp:TextBox>
                         <cc1:CalendarExtender ID="cbeToDt" runat="server" TargetControlID="txtToDt" Format="dd-MM-yyyy"/>
                         <asp:RequiredFieldValidator ID="req2" runat="server" ControlToValidate="txtToDt" Display="Dynamic" 
                         ErrorMessage="To Date is required" ValidationGroup="vgReport" CssClass="errormessage"></asp:RequiredFieldValidator>
                     </td>
-                    <td class="label" style="padding-right:5px;vertical-align:top;">
-                        Creditor:
-                    </td>
-                    <td style="padding-right:20px;vertical-align:top;">
-                        <asp:DropDownList ID="ddlCreditor" runat="server"
-                            DataSourceID="CreditorDataSource" DataTextField="CreditorName" 
-                            DataValueField="CreditorId" AppendDataBoundItems="true">
-                            <asp:ListItem Value="0" Text="--All--"></asp:ListItem>
-                        </asp:DropDownList>
-                        <asp:SqlDataSource ID="CreditorDataSource" runat="server" 
-                            ConnectionString="<%$ ConnectionStrings:DbConnectionString %>" 
-                            SelectCommand="select p.pk_fwPartyID [CreditorId], p.PartyName [CreditorName] 
-from fwd.mstparty p inner join fwd.mstPartyType pt on p.PartyType = pt.pk_PartyTypeID
-where AssociatedWith &lt;&gt; 'D'">
-                        </asp:SqlDataSource>
-                    </td>
                     <td style="vertical-align:top;">    
                         <asp:Button ID="btnReport" runat="server" Text="Show Report" CssClass="button" 
                             ValidationGroup="vgReport" onclick="btnReport_Click"/>
                     </td>
+                </tr>
+                <tr>
+                    <td>
+                    Location:<span class="errormessage">*</span>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlLocation" runat="server" CssClass="dropdownlist" TabIndex="60"
+                        DataSourceID="OpsDs" DataTextField="LocName" DataValueField="pk_LocID">
+                    </asp:DropDownList>
+                    <asp:SqlDataSource ID="OpsDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
+                        SelectCommand="SELECT 0 [pk_LocID], '-- All --' [LocName]
+UNION
+SELECT pk_LocID, LocName FROM fwd.mstFLocation"></asp:SqlDataSource>
+                </td>
+                <td>
+                    Line:<span class="errormessage">*</span>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlLine" runat="server" CssClass="dropdownlist" TabIndex="60"
+                        DataSourceID="LineDs" DataTextField="LineName" DataValueField="pk_fLineID">
+                    </asp:DropDownList>
+                    <asp:SqlDataSource ID="LineDs" runat="server" ConnectionString="<%$ ConnectionStrings:DbConnectionString %>"
+                        SelectCommand="SELECT 0 [pk_fLineID], '-- All --' [LineName]
+UNION
+SELECT pk_fLineID, LineName FROM fwd.mstFline"></asp:SqlDataSource>
+
+                </td>
                 </tr>
             </table>
         </fieldset>
@@ -72,20 +83,21 @@ where AssociatedWith &lt;&gt; 'D'">
             <rsweb:ReportViewer ID="rptViewer" runat="server" Width="100%" 
                 Font-Names="Verdana" Font-Size="8pt" InteractiveDeviceInfos="(Collection)" 
                 WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt">
-                <LocalReport ReportPath="RDLC\CreditorInvoice.rdlc">
+                <LocalReport ReportPath="RDLC\FwdRevSummary.rdlc">
                     <DataSources>
-                        <rsweb:ReportDataSource DataSourceId="odsCredInvoice" Name="CredInvDs" />
+                        <rsweb:ReportDataSource DataSourceId="odsRevSummary" Name="RevDs" />
                     </DataSources>
                 </LocalReport>
             </rsweb:ReportViewer>
-            <asp:ObjectDataSource ID="odsCredInvoice" runat="server" 
-                SelectMethod="GetCredInvoice" TypeName="EMS.BLL.ReportBLL" 
-                onselecting="odsCredInvoice_Selecting" 
+            <asp:ObjectDataSource ID="odsRevSummary" runat="server" 
+                SelectMethod="GetRevenueSummary" TypeName="EMS.BLL.ReportBLL" 
+                onselecting="odsRevSummary_Selecting" 
                 OldValuesParameterFormatString="original_{0}">
                 <SelectParameters>
-                    <asp:Parameter Name="CreditorId" Type="Int32" />
                     <asp:Parameter Name="StartDate" Type="DateTime" />
                     <asp:Parameter Name="EndDate" Type="DateTime" />
+                    <asp:Parameter Name="Line" Type="Int32" />
+                    <asp:Parameter Name="Location" Type="Int32" />
                 </SelectParameters>
             </asp:ObjectDataSource>
         </div>    

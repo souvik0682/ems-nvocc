@@ -90,10 +90,10 @@ namespace EMS.WebApp.Forwarding.Report
                 LocalReportManager reportManager = new LocalReportManager(rptViewer, "BLPrint", ConfigurationManager.AppSettings["ReportNamespace"].ToString(), ConfigurationManager.AppSettings["ReportPath"].ToString());
                 if (ddlLine.SelectedValue == "ABF")
                     rptName = "BLPrintFwdABF.rdlc";
-                else if (ddlLine.SelectedValue == "KESTREL")
-                    rptName = "BLPrintKestrel.rdlc";
+                else if (ddlLine.SelectedValue == "BLP")
+                    rptName = "BLPrintFwdBLPL.rdlc";
                 else
-                    rptName = "BLPrint.rdlc";
+                    rptName = "BLPrintFwdSim.rdlc";
 
                 rptViewer.Reset();
                 rptViewer.LocalReport.Dispose();
@@ -150,10 +150,10 @@ namespace EMS.WebApp.Forwarding.Report
                 viewer.ProcessingMode = ProcessingMode.Local;
                 if (ddlLine.SelectedItem.Text == "ABF")
                     viewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + "BLPrintFwdABF.rdlc";
-                //else if (ddlLocation.SelectedItem.Text == "KESTREL")
-                //    viewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + "BLPrintKestrel.rdlc";
+                else if (ddlLine.SelectedItem.Text == "BLP")
+                    viewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + "BLPrintFwdBLPL.rdlc";
                 else
-                    viewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + "BLPrint.rdlc";
+                    viewer.LocalReport.ReportPath = this.Server.MapPath(this.Request.ApplicationPath) + ConfigurationManager.AppSettings["ReportPath"].ToString() + "/" + "BLPrintFwdSim.rdlc";
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DSFWDBLPrinting", temp.Tables[0]));
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintingContainerTopFive", dtBLPrintingCons5));
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("dsBLPrintingContainer", dtBLPrintingCons));

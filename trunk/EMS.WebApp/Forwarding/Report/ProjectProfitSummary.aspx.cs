@@ -17,7 +17,7 @@ namespace EMS.WebApp.Forwarding.Report
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            FillDebtors();
         }
 
         private void GenerateReport()
@@ -91,6 +91,16 @@ namespace EMS.WebApp.Forwarding.Report
         protected void btnShow_Click(object sender, EventArgs e)
         {
             GenerateReport();
+        }
+
+        void FillDebtors()
+        {
+            DataTable principal = new CommonBLL().GetfwdPartyByType("D");
+            ddlCustomer.DataSource = principal;
+            ddlCustomer.DataTextField = "LineName";
+            ddlCustomer.DataValueField = "LineID";
+            ddlCustomer.DataBind();
+            ddlCustomer.Items.Insert(0, new ListItem("--Select--", "0"));
         }
     }
 }

@@ -29,7 +29,7 @@ namespace EMS.WebApp.Forwarding.Report
                 DataTable dtExcel = new DataTable();
                 dt1 = Convert.ToDateTime(txtStartDt.Text.Trim());
                 dt2 = Convert.ToDateTime(txtEndDt.Text.Trim());
-                dtExcel = cls.GetJobList(dt1, dt2);
+                dtExcel = cls.GetJobList(dt1, dt2, ddlJobType.SelectedValue.ToInt(), ddlLocation.SelectedValue.ToInt(), ddlJobStatus.SelectedValue);
 
                 ExporttoExcel(dtExcel);
             }

@@ -68,7 +68,7 @@ namespace EMS.WebApp.Forwarding.Master
             _userId = UserBLL.GetLoggedInUserId();
 
             //Get user permission.
-           // UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
+            UserBLL.GetUserPermission(out _canAdd, out _canEdit, out _canDelete, out _canView);
         }
 
         private void CheckUserAccess()

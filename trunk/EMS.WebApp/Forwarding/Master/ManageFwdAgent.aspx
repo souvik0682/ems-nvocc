@@ -13,7 +13,7 @@
         </div>
     </div>
     <div id="headercaption">
-        MANAGE EXPORT AGENT</div>
+        MANAGE DELIVERY AGENT</div>
     <center>
         <div style="width: 880px; ">
             <fieldset style="width: 100%;">

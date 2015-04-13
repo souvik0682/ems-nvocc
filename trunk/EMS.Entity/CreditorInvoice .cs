@@ -24,7 +24,7 @@ namespace EMS.Entity
         public double ROE { get; set; }
         public int PartyTypeID { get; set; }
         public string comment { get; set; }
-        public bool approved { get; set; }
+        public int? approved { get; set; }
 
         public List<CreditorInvoiceCharge> CreditorInvoiceCharges { get; set; }
 

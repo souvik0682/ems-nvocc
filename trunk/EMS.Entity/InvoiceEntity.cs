@@ -45,6 +45,8 @@ namespace EMS.Entity
         public int PartyTypeID { get; set; }
         public int TEUS { get; set; }
         public int FEUS { get; set; }
+        public int CurID { get; set; }
+        public string JobActive { get; set; }
 
         public List<IChargeRate> ChargeRates { get; set; }
 
@@ -200,6 +202,14 @@ namespace EMS.Entity
             if (ColumnExists(reader, "FEUS"))
                 if (reader["FEUS"] != DBNull.Value)
                     FEUS = Convert.ToInt32(reader["FEUS"]);
+
+            if (ColumnExists(reader, "fk_CurrencyID"))
+                if (reader["fk_CurrencyID"] != DBNull.Value)
+                    CurID = Convert.ToInt32(reader["fk_CurrencyID"]);
+
+            if (ColumnExists(reader, "JobActive"))
+                if (reader["JobActive"] != DBNull.Value)
+                    JobActive = Convert.ToString(reader["JobActive"]);
         }
 
         public bool ColumnExists(IDataReader reader, string columnName)

@@ -58,6 +58,9 @@ namespace EMS.Entity
         public string JobNote2 { get; set; }
         public string POL { get; set; }
         public string POD { get; set; }
+        public string LocName { get; set; }
+        public bool UserConfirmation { get; set; }
+        public int CompID { get; set; }
 
         public int CreatedBy
         {
@@ -155,9 +158,9 @@ namespace EMS.Entity
                 if (reader["PrintHBL"] != DBNull.Value)
                     PrintHBL = Convert.ToBoolean(reader["PrintHBL"]);
 
-            if (ColumnExists(reader, "HBLFormatID"))
-                if (reader["HBLFormatID"] != DBNull.Value)
-                    HBLFormatID = Convert.ToInt32(reader["HBLFormatID"]);
+            if (ColumnExists(reader, "fk_HBLFormatID"))
+                if (reader["fk_HBLFormatID"] != DBNull.Value)
+                    HBLFormatID = Convert.ToInt32(reader["fk_HBLFormatID"]);
 
             if (ColumnExists(reader, "ttl20"))
                 if (reader["ttl20"] != DBNull.Value)
@@ -282,6 +285,22 @@ namespace EMS.Entity
             if (ColumnExists(reader, "JobNote2"))
                 if (reader["JobNote2"] != DBNull.Value)
                     JobNote2 = Convert.ToString(reader["JobNote2"]);
+
+            if (ColumnExists(reader, "UserConfirmation"))
+                if (reader["UserConfirmation"] != DBNull.Value)
+                    UserConfirmation = Convert.ToBoolean(reader["UserConfirmation"]);
+
+            if (ColumnExists(reader, "fk_CompID"))
+                if (reader["fk_CompID"] != DBNull.Value)
+                    CompID = Convert.ToInt32(reader["fk_CompID"]);
+
+            if (ColumnExists(reader, "LocName"))
+                if (reader["LocName"] != DBNull.Value)
+                    LocName = Convert.ToString(reader["LocName"]);
+
+            if (ColumnExists(reader, "JobActive"))
+                if (reader["JobActive"] != DBNull.Value)
+                    JobActive = Convert.ToChar(reader["JobActive"]);
 
             EstProfit = (EstReceivable - EstPayable);
         }

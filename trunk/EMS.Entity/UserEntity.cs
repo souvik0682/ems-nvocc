@@ -68,6 +68,12 @@ namespace EMS.Entity
             set;
         }
 
+        public string ManagerEmailID 
+        { 
+            get; 
+            set; 
+        }
+
         #endregion
 
         #region IRole Members
@@ -161,6 +167,9 @@ namespace EMS.Entity
 
             if (reader["EmailId"] != DBNull.Value)
                 this.EmailId = Convert.ToString(reader["EmailId"]);
+
+            if (reader["ManagerEmailID"] != DBNull.Value)
+                this.ManagerEmailID = Convert.ToString(reader["ManagerEmailID"]);
 
             if (ColumnExists(reader, "UserActive") && reader["UserActive"] != DBNull.Value) this.IsActive = Convert.ToBoolean(reader["UserActive"]);
             if (ColumnExists(reader, "AllowMutipleLocation") && reader["AllowMutipleLocation"] != DBNull.Value) this.AllowMutipleLocation = Convert.ToBoolean(reader["AllowMutipleLocation"]);

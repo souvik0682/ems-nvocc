@@ -42,6 +42,15 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>Manager Email:</td>
+                    <td>
+                        <asp:TextBox ID="txtManagerEmail" runat="server" CssClass="textboxuppercase" MaxLength="100" Width="250"></asp:TextBox><br />
+                        <span id="Span1" runat="server" class="errormessage" style="display:none;"></span>
+                        <%--<asp:RequiredFieldValidator ID="rfvEmail" runat="server" CssClass="errormessage" ControlToValidate="txtEmail" Display="Dynamic" ValidationGroup="Save"></asp:RequiredFieldValidator>--%>
+                        <%--<asp:RegularExpressionValidator ID="revManageremail" runat="server" ControlToValidate="txtManagerEmail" CssClass="errormessage" ValidationGroup="Save" Display="Dynamic"></asp:RegularExpressionValidator>--%>
+                    </td>
+                </tr>
+                <tr>
                     <td>Role:<span class="errormessage1">*</span></td>
                     <td>
                         <asp:DropDownList ID="ddlRole" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlRole_SelectedIndexChanged"></asp:DropDownList><br />
